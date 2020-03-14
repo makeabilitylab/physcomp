@@ -15,6 +15,16 @@ has_toc: true # (on by default)
 {:toc}
 ---
 
+## Where to Ask Questions
+
+I *encourage* you to ask questions! There are so many people out there willing to help! Generally, however, it's expected to search if your question has already been asked and answered before posting.
+
+- **StackExchange**. The [Arduino](https://arduino.stackexchange.com/) and [Electronics](https://electronics.stackexchange.com/) StackExchange forums are extremely popular. 
+
+- **Reddit**. While Reddit is not generally known as a thoughtful, respectful community, the subreddits for [r/arduino](https://www.reddit.com/r/arduino/) and [r/diyelectronics](https://www.reddit.com/r/diyelectronics/) communities are helpful and supportive.
+
+- **Online Forums**. The most popular electronics and Arduino-based Q/A forums, include: [Adafruit](https://forums.adafruit.com/viewforum.php?f=37&sid=39a6c8dce50981dcc363bdd5b0a77b23), [Sparkfun](https://forum.sparkfun.com/index.php), [Arduino.cc](https://forum.arduino.cc/), and [EEVBlog](https://www.eevblog.com/forum/).
+
 ## Online Tutorials
 
 - [Adafruit's 18-Step Learn Arduino Guide](https://learn.adafruit.com/series/learn-arduino) is my most recommended "getting started" guide for Arduino. [Adafruit](https://www.adafruit.com), in general, has an extensive number of [online electronic tutorials](https://learn.adafruit.com/)—both for their own products and beyond.
@@ -57,16 +67,6 @@ I've gone through many electronics and microcontroller books. Here are some of m
 
 - Dan O'Sullivan and Tom Igoe, *Physical Computing: Sensing and Controlling the Physical World with Computers*, Thomson, 2004. [UW Library Print Book](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71142983320001451)
 
-## Where to Ask Questions
-
-I *encourage* you to ask questions! There are so many people out there willing to help! Generally, however, it's a good idea to search a forum to see if your question has already been asked and answered before posting.
-
-- **StackExchange**. The [Arduino](https://arduino.stackexchange.com/) and [Electronics](https://electronics.stackexchange.com/) StackExchange forums are extremely popular. 
-
-- **Reddit**. While Reddit is not generally known as a thoughtful, respectful community, the subreddits for [r/arduino](https://www.reddit.com/r/arduino/) and [r/diyelectronics](https://www.reddit.com/r/diyelectronics/) communities are helpful and supportive.
-
-- **Online Forums**. The most popular electronics and Arduino-based Q/A forums, include: [Adafruit](https://forums.adafruit.com/viewforum.php?f=37&sid=39a6c8dce50981dcc363bdd5b0a77b23), [Sparkfun](https://forum.sparkfun.com/index.php), [Arduino.cc](https://forum.arduino.cc/), and [EEVBlog](https://www.eevblog.com/forum/).
-
 ## Online Tools
 
 ### Circuit Simulators
@@ -77,7 +77,7 @@ I *encourage* you to ask questions! There are so many people out there willing t
 
 ### Circuit Design Tools
 
-- [Autodesk Tinkercad Circuits](https://www.tinkercad.com/circuits).Build, code, and debug circuits and Arduino microcontrollers in an online simulator
+- [Autodesk Tinkercad Circuits](https://www.tinkercad.com/circuits). Build, code, and debug circuits and Arduino microcontrollers in an online simulator
 
 - [Fritzing](https://fritzing.org/). Fritzing was the leading open-source circuit diagramming tool amongst the Maker community (and a tool I used extensively in my own teaching to create diagrams) but has struggled recently (see [*Future of Fritzing is Murky at Best*](https://hackaday.com/2019/02/14/the-future-of-fritzing-is-murky-at-best/) but evidently there is an attempt to revitalize it ([*Is Fritzing Back?*](https://hackaday.com/2019/04/30/fritzing-is-back-and-this-time-its-written-in-javascript/))
 

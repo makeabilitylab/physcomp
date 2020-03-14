@@ -18,6 +18,14 @@ This is the parent page for electronics!
 
 # TODO
 - Should we add voltage regulator? https://youtu.be/howQ05z4v7Q?
+- Switches?
+- Capacitors?
+- Transistors?
+- Rotary Encoders
+- Diode
+- Voltage Regulator
+- Power
+  - Batteries? https://learning.oreilly.com/library/view/hacking-electronics-an/9780071802369/ch05.html#ch5
 
 # Possible sections
 - [What is Electricity?](https://learn.sparkfun.com/tutorials/what-is-electricity)

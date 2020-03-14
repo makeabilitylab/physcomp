@@ -14,8 +14,14 @@ permalink: /
 - Embedding code from github repo into jekyll post
   - https://blog.revathskumar.com/2012/08/embed-files-from-github-repository-into-webpage.html
   - https://flowerinthenight.com/blog/2017/11/28/embed-github-code
+- Electronic prototyping kits
+- Have citation manager for references on each page?
+  - https://www.amirasiaee.com/dailyreport/jekyll-scholar/
+  - https://github.com/inukshuk/jekyll-scholar
+  - Unfortunately, Jekyll Scholar plugin is not compatible with GitHub Pages
 
 ## Possible H1 Content
 - Motors
 - Power
 - Sensors
+

@@ -39,9 +39,11 @@ I've gone through a large set of electronics and microcontroller books. Here are
 
 - Simon Monk, *Hacking Electronics: An Illustrated DIY Guide for Makers and Hobbyists*, McGraw-Hill, 2013. [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71297764200001451), [O'Reilly Online](https://learning.oreilly.com/library/view/hacking-electronics-an/9780071802369/)]
 
-### Advanced Electronics
+### (More) Advanced Electronics
 
-- Paul Scherz and Simon Monk, Practical Electronics for Inventors, 4th Edition, McGraw-Hill Education, 2016. [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71291894620001451), [O'Reilly Online](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559)]. This is a more advanced book, *e.g.,* the first chapter entitled *Theory* is 200+ pages long.
+- Paul Scherz and Simon Monk, *Practical Electronics for Inventors*, 4th Edition, McGraw-Hill Education, 2016. [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71291894620001451), [O'Reilly Online](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559)]. This is a more advanced book, *e.g.,* the first chapter entitled *Theory* is 200+ pages long.
+  
+- Michael F. Robbins, *Ultimate Electronics: Practical Circuit Design and Analysis*, [[Online Book](https://ultimateelectronicsbook.com/)]. [CircuitLab's](https://www.circuitlab.com/) free online textbook that includes over 134 interactive schematics and simulations.
 
 - Charles Platt, *Make: Encyclopedia of Electronic Components Volume 1: Resistors, Capacitors, Inductors, Switches, Encoders, Relays, Transistors*, O'Reilly, 2012. [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71290698970001451), [O'Reilly Online](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449333881/)]
 
@@ -66,7 +68,18 @@ I *encourage* you to ask questions! There are so many people out there willing t
 - **Online Forums**. The most popular electronics and Arduino-based Q/A forums, include: [Adafruit](https://forums.adafruit.com/viewforum.php?f=37&sid=39a6c8dce50981dcc363bdd5b0a77b23), [Sparkfun](https://forum.sparkfun.com/index.php), [Arduino.cc](https://forum.arduino.cc/), and [EEVBlog](https://www.eevblog.com/forum/).
 
 ## Online Tools
-TODO: 
+
+### Circuit Simulators
+
+- [CircuitLab](https://www.circuitlab.com/). The most popular online circuit simulator.
+
+- [CircuitJS](https://www.falstad.com/circuit/circuitjs.html). A free online circuit simulator written in JavaScript.
+
+### Circuit Design Tools
+
+- [Autodesk Tinkercad Circuits](https://www.tinkercad.com/circuits).Build, code, and debug circuits and Arduino microcontrollers in an online simulator
+
+- [Fritzing](https://fritzing.org/). Fritzing was the leading open-source circuit diagramming tool amongst the Maker community (and a tool I used extensively in my own teaching to create diagrams) but has struggled recently (see [*Future of Fritzing is Murky at Best*](https://hackaday.com/2019/02/14/the-future-of-fritzing-is-murky-at-best/) but evidently there is an attempt to revitalize it ([*Is Fritzing Back?*](https://hackaday.com/2019/04/30/fritzing-is-back-and-this-time-its-written-in-javascript/))
 
 ## Inspirations
 

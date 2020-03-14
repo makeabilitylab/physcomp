@@ -32,6 +32,10 @@ This is the parent page for arduino!
   - Multimeters
 - Using LEDs
 - Using RGB LEDs
+- Prototyping Electronic Kits
+  - littleBits
+  - Cubelets
+  - 
 
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
 {% highlight C %}

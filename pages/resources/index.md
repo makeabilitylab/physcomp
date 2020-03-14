@@ -31,7 +31,7 @@ has_toc: true # (on by default)
 
 ## Books
 
-I've gone through a large set of electronics and microcontroller books. Here are some of my favorites. I've attempted to supply EBook library links whenever possible.
+I've gone through many electronics and microcontroller books. Here are some of my favorites. I've attempted to provide EBook library links whenever possible.
 
 ### Electronics
 

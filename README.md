@@ -19,3 +19,19 @@ permalink: /
 - Motors
 - Power
 - Sensors
+
+## Buikd
+To build the docs,
+- Open iTerm in /physcomp/docs
+- `> bundle`
+- `> bundle exec jekyll serve`
+- Follow directions for web addie
+
+
+<!--
+## Ideas to Call This Repo and Site?
+- Physical Computing (or physcomp)
+- Ubiquitous Computing (or ubicomp)
+- Interactive Device Design (Bjoern's name)
+- Tangible Interactive Computing (name of my UMD course)
+- Prototyping Interactive Systems (name of my UW 599)-->

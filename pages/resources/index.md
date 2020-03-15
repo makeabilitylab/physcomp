@@ -77,7 +77,7 @@ I've gone through many electronics and microcontroller books. Here are some of m
 
 ### Circuit Design Tools
 
-- [Autodesk Tinkercad Circuits](https://www.tinkercad.com/circuits). Build, code, and debug circuits and Arduino microcontrollers in an online simulator
+- [Autodesk Tinkercad Circuits](https://www.tinkercad.com/circuits). Build, code, and debug circuits and Arduino microcontrollers in an online simulator.
 
 - [Fritzing](https://fritzing.org/). Fritzing was the leading open-source circuit diagramming tool amongst the Maker community (and a tool I used extensively in my own teaching to create diagrams) but has struggled recently (see [*Future of Fritzing is Murky at Best*](https://hackaday.com/2019/02/14/the-future-of-fritzing-is-murky-at-best/) but evidently there is an attempt to revitalize it ([*Is Fritzing Back?*](https://hackaday.com/2019/04/30/fritzing-is-back-and-this-time-its-written-in-javascript/))
 
@@ -87,6 +87,7 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
 
 ## TODO:
 
+- Look at my curriculum sheet
 - Add in design and design thinkg books like Sketching User Experiences.
 - Look at my resources list from [CMSC838f](https://web.archive.org/web/20170605201324/http:/cmsc838f-s15.wikispaces.com/)
 - Look at: http://ladyada.net/learn/arduino/

@@ -16,6 +16,8 @@ has_children: true
 ---
 This is the parent page for arduino!
 
+This is a test of an image copy/pasted
+
 # Things to add
 - The basics of microcontrollers
 - Digital Input

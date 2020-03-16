@@ -29,6 +29,8 @@ I *encourage* you to ask questions! There are so many people out there willing t
 
 - [Adafruit's 18-Step Learn Arduino Guide](https://learn.adafruit.com/series/learn-arduino) is my most recommended "getting started" guide for Arduino. [Adafruit](https://www.adafruit.com), in general, has an extensive number of [online electronic tutorials](https://learn.adafruit.com/)—both for their own products and beyond.
 
+<!-- The old version of the Adafruit Arduino tutorial is by Lady Ada herself: https://learn.adafruit.com/ladyadas-learn-arduino-lesson-number-0 -->
+
 - [Sparkfun's Tutorial Series](https://learn.sparkfun.com/tutorials). Similar to Adafruit, [Sparkfun](https://www.sparkfun.com/) creates a large number of tutorials and videos to help the electronic/maker community (and build demand for their products).
 
 - [NYU ITP's Physical Computing Course Website](https://itp.nyu.edu/physcomp/). Tom Igoe's Physical Computing course at NYU's ITP offers a significant amount of online tutorials such as an introductory overview of [Electricity](https://itp.nyu.edu/physcomp/lessons/electronics/electricity-the-basics/), [Sensors](https://itp.nyu.edu/physcomp/lessons/sensors-the-basics/) and [digital I/O](https://itp.nyu.edu/physcomp/lessons/microcontrollers/digital-input-output/). [Igoe](https://tigoe.com/) is one of the co-founders of Arduino and the author of [Physical Computing](https://www.amazon.com/Physical-Computing-Sensing-Controlling-Computers/dp/159200346X) and [Making Things Talk](http://shop.oreilly.com/product/9780596510510.do)
@@ -94,6 +96,8 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
 - Look at some related online courses:
 -- EdX IOT: https://courses.edx.org/courses/course-v1:UPValenciaX+IOT101.1x+3T2019a/course/
 -- https://www.coursera.org/specializations/iot
+-- https://www.coursera.org/learn/arduino-platform
+-- https://www.udemy.com/course/arduino-megacourse-learn-arduino-by-building-30-projects
 -- https://www.instructables.com/class/Arduino-Class/
 - Look at related academic courses
 -- E.g., Mayanks

@@ -11,7 +11,7 @@ This is the wires page
 - Multiplexers
 - Shift Registers
 - H-Bridges
-- 
+  
 
 ## Resources
 

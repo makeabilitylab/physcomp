@@ -1,12 +1,12 @@
 ---
 layout: default
 title: Basics
-nav_order: 3
+nav_order: 1
 has_children: true
 parent: Tutorials
 has_toc: true # (on by default)
 ---
-# Hook Up LED to Arduino (Always On)
+# Basics
 {: .no_toc }
 
 ## Table of Contents

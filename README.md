@@ -102,6 +102,10 @@ To build the docs with Jekyll,
 ## Python
 - [mkdocs.org](https://mkdocs.org).
 
+## Rust
+- [mdbook](https://rust-lang.github.io/mdBook/). Examples below:
+  - [Intro to Reverse Engineering](https://guyinatuxedo.github.io/)
+
 <!--
 ## Ideas to Call This Repo and Site?
 - Physical Computing (or physcomp)

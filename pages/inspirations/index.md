@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Inspirations
-nav_order: 10
+nav_order: 7
 has_children: true
 has_toc: true # (on by default)
 ---

@@ -91,7 +91,7 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
 
 - Look at my curriculum sheet
 - Add in design and design thinkg books like Sketching User Experiences.
-- Look at my resources list from [CMSC838f](https://web.archive.org/web/20170605201324/http:/cmsc838f-s15.wikispaces.com/)
+- Look at my resources list from [CMSC838f](https://web.archive.org/web/20170605201324/http:/cmsc838f-s15.wikispaces.com/). [Direct link](https://web.archive.org/web/20150709105051/http://cmsc838f-s15.wikispaces.com/Resources)
 - Look at: http://ladyada.net/learn/arduino/
 - Look at some related online courses:
 -- EdX IOT: https://courses.edx.org/courses/course-v1:UPValenciaX+IOT101.1x+3T2019a/course/

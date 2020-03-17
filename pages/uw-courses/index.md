@@ -1,7 +1,7 @@
 ---
 layout: default
 title: UW Courses
-nav_order: 7
+nav_order: 8
 has_toc: true # (on by default)
 ---
 # UW Physical Computing Courses

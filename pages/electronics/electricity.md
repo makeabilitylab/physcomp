@@ -6,3 +6,9 @@ parent: Electronics
 has_toc: false # on by default
 ---
 This is the resistor page.
+
+## TODO
+Add basic concepts:
+- Voltage
+- Current
+- Resistance

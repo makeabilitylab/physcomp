@@ -2,6 +2,7 @@
 layout: default
 title: Home
 nav_order: 0
+usemathjax: true
 description: "This is a description! UPDATE!!!"
 permalink: /
 ---
@@ -95,6 +96,12 @@ After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll te
 ```
 
 4. Still need to test that this works when deployed on GitHub.
+
+5. Because I'm forever a LaTeX n00b, I found this online WYSIWYG LaTeX math editor: https://www.mathcha.io/editor. See: https://tex.stackexchange.com/questions/57068/wysiwyg-latex-editor-for-maths
+
+Here's a test LaTeX equation. If it works, this should render correctly.
+
+$$\frac{\partial f(y)}{\partial x} = \frac{\partial f}{\partial y} \times \frac{\partial y}{\partial x}$$
 
 <!--
 ## Ideas to Call This Repo and Site?

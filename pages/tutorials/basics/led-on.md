@@ -53,6 +53,7 @@ For power, you can use a USB cable or a 9V battery. Either way, the Arduino supp
 | USB Power        | 9V Power          |
 |:-------------|:------------------|
 | ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower-Cropped.gif) | ![Animation showing a 9V battery plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_9VBattery-Cropped.gif) |
+| With USB power, the 5V pin supplies 5V | With a 9V battery, the 5V pin still supplies 5V |
 
 ## How can we make the LED less bright?
 
@@ -81,7 +82,7 @@ Let's compare the current and brightness between supplying 5V *vs.* 3.3V.
 </video> -->
 
 ## TODO
-- add alt text 
-- add caption
-- add 3.3V version
+- [done] add alt text 
+- [done] add caption
+- [done] add 3.3V version
 - Try other resistors. What happens?

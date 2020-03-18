@@ -15,6 +15,8 @@ remote_theme: pmarsceill/just-the-docs
 title: Physical Computing
 description: A learning resource for prototyping interactive digital-physical systems
 
+site.url: https://jonfroehlich.github.io/physcomp
+
 # Set a path/url to a logo that will be displayed instead of the title
 # logo: "/assets/images/logo.png"
 

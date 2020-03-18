@@ -77,6 +77,25 @@ To build the docs with Jekyll,
 - [mdbook](https://rust-lang.github.io/mdBook/). Examples below:
   - [Intro to Reverse Engineering](https://guyinatuxedo.github.io/)
 
+## Notes
+- To crop animated gifs, I use: https://ezgif.com/
+
+### Adding LaTeX Support
+After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll template and GitHub Pages. Steps:
+1. I largely followed the advice from this [blog post](https://alan97.github.io/random/mathjax/)
+2. Since I'm currently using `remote_theme: pmarsceill/just-the-docs`, I was a bit confused about how to make local configuration changes since most online blogs, forum posts talk about editing content in the `_includes` folder; however, I didn't have this in my local dev environment. So, what to do?
+3. I manually made a `_includes` folder with the filename `head_custom.html` and put in there:
+
+```Jekyll
+{% if page.usemathjax %}
+<script type="text/javascript" async
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+{% endif %}
+```
+
+4. Still need to test that this works when deployed on GitHub.
+
 <!--
 ## Ideas to Call This Repo and Site?
 - Physical Computing (or physcomp)

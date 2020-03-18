@@ -19,15 +19,13 @@ For our first activity, we are going to use Arduino to turn on an [LED](../../el
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower.gif)
 
-
-
 ## Materials
 You will need the following materials:
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
-| ![Arduino Uno](/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED](/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor](/assets/images/Resistor220_Fritzing.png) |
+| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 
 ## Hook up LED to Arduino 5V pin

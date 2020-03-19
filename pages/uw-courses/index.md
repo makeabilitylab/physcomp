@@ -36,10 +36,10 @@ There are a wide range of physical computing related courses at UW across many d
 
 ### Graduate
 
-- [**CSE 590: Ubiquitous Computing**](https://github.com/jonfroehlich/CSE590Sp2018) taught by [Jon Froehlich](https://homes.cs.washington.edu/~jonf)
+- [**CSE 590: Ubiquitous Computing**](https://github.com/jonfroehlich/CSE590Sp2018) taught by [Jon E. Froehlich](https://homes.cs.washington.edu/~jonf)
 
-- **CSE 599: Prototyping Interactive Systems** taught by [Jon Froehlich](https://homes.cs.washington.edu/~jonf)
+- **CSE 599: Prototyping Interactive Systems** taught by [Jon E. Froehlich](https://homes.cs.washington.edu/~jonf)
 
 - [**HCDE 539: Physical Computing**](https://www.washington.edu/students/crscat/hcde.html) taught by [Andy Davidson](https://www.hcde.washington.edu/davidson)
 
-- **HCID521: Prototyping Studio** co-taught by a variety of faculty across Art, Design, and Engineering. This course is closed enrollment (only offered to [M+HCID students](https://mhcid.washington.edu/))
+- **HCID521: Prototyping Studio** co-taught by a variety of faculty across Art, Design, and Engineering. This course is closed enrollment (only offered to [M+HCID students](https://mhcid.washington.edu/)). [Jon E. Froehlich](https://homes.cs.washington.edu/~jonf) has co-taught this course since 2018.

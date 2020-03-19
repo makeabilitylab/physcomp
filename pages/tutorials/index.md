@@ -78,3 +78,6 @@ The very thing that makes working with microcontrollers so exciting—combining 
   - Multimeter
   - Serial.println and serial console and plotter
   - Code debuggers?
+
+## TODO
+- Serial communication

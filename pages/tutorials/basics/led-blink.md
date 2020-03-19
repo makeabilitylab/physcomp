@@ -83,7 +83,7 @@ TODO:
 ## TODO:
 - Next step is fading the LED
 
-<span class="fs-8">
+<span class="fs-6">
 [Previous](led-on.md){: .btn .btn-outline }
 [Next](led-fade.md){: .btn .btn-outline }
 </span>

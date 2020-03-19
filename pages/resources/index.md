@@ -85,7 +85,7 @@ I *encourage* you to ask questions! There are so many people out there willing t
 
 ## Inspirations
 
-Searching for project ideas or some divine epiphany on what to work on next? Check out our [Inspirations]({% link pages/inspirations/index.md %}).
+Searching for project ideas or some divine epiphany on what to work on next? Check out our [Inspirations]({{ site.baseurl }}/pages/inspirations/index.md).
 
 ## TODO:
 

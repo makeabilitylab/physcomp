@@ -18,9 +18,10 @@ has_toc: true # (on by default)
 
 Learn how to gradually fade an LED on and off using `analogWrite()`.
 
-Two mini activities:
-1. Fade LED on (then immediately go back to zero)
-2. Fade LED on and then off
+Outline:
+1. Using a for loop: Fade LED on (then immediately go back to zero)
+2. Using a for loop: Fade LED on and then off
+3. Without a for loop: fade led on and off
 
 For both, show graph of what happens either via Tinkercad serial plotter or the oscilloscope (oscilloscope would show PWM...)
 

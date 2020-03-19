@@ -1,4 +1,4 @@
 {
     "pasteImage.showFilePathConfirmInputBox": true,
-    "pasteImage.path": "${currentFileDir}/images"
+    "pasteImage.path": "${currentFileDir}/assets/images"
 }

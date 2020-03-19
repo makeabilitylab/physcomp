@@ -29,6 +29,7 @@ permalink: /
 - Maybe have a top-level link for UW Courses?
 - How to hide headers in tables in markdown?
   - https://stackoverflow.com/questions/17536216/create-a-table-without-a-header-in-markdown
+- Make Next/Previous buttons same size like in Minimal Mistakes
 
 ## Possible H1 Content
 - Motors

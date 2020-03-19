@@ -28,7 +28,7 @@ You will need the following materials:
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 
-## Hook up LED to Arduino the 5V supply pin
+## Hook up LED to Arduino's 5V supply pin
 
 ### Step 1: Wrap resistor around LED leg
 
@@ -83,17 +83,17 @@ To determine the current through the circuit, we can use Ohm's Law ($$I = \frac{
 
 **NOTE:**
 
-As mentioned, If you want to make your LED dimmer (without writing microcontroller code), you can either (1) add more resistance or (2) reduce your supply voltage—both have the same effect: reducing current. This is sufficient conceptual knowledge to start building circuits; however, if you want to know more than this, read on!
+As mentioned, If you want to make your LED dimmer (without writing microcontroller code), you can either (1) add more resistance or (2) reduce your supply voltage—both have the same effect: reducing current. This is sufficient conceptual knowledge to start building circuits; however, if you want to know more, read on!
 {: .notice}
 
 ---
 
 To use Ohm's Law, we need to calculate the **voltage drop** across the resistor ($$V_R$$). For this, we need to know the LED's forward voltage $$V_f$$, which is the minimum voltage necessary to turn the LED on and allow current to pass. In this case, our forward voltage is 2V—a common $$V_f$$ for RED LEDs. From Kirchhoff's Voltage Law, we know that the total voltage drop between the LED ($$V_f$$) and resistor ($$V_R$$) must equal 3.3V. More formally:
 
-$$V_R + V_f = 3.3V \\
+$$V_R + V_f = V_{total} \\
+V_R + V_f = 3.3V \\
 V_R = 3.3V - V_f \\
 V_R = 3.3V - 2V\to1.3V$$
-
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif)
 

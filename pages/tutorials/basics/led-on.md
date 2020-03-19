@@ -88,18 +88,24 @@ As mentioned, If you want to make your LED dimmer (without writing microcontroll
 
 ---
 
-To use Ohm's Law, we need to calculate the **voltage drop** across the resistor ($$V_R$$). For this, we need to know the LED's forward voltage $$V_f$$, which is the minimum voltage necessary to turn the LED on and allow current to pass. In this case, our forward voltage is 2V—a common $$V_f$$ for RED LEDs. From Kirchhoff's Voltage Law, we know that the total voltage drop between the LED ($$V_f$$) and resistor ($$V_R$$) must equal 3.3V. More formally:
+To use Ohm's Law, we need to calculate the **voltage drop** across the resistor ($$V_R$$). For this, we need to know the LED's forward voltage $$V_f$$, which is the minimum voltage necessary to turn the LED on and allow current to pass. In this case, our forward voltage is 2V—a common $$V_f$$ for RED LEDs. From Kirchhoff's Voltage Law, we know that the total voltage drop in our circuit—between the LED ($$V_f$$) and resistor ($$V_R$$)—must equal the supply voltage $$V_s$$, which is 3.3V. More formally:
 
-$$V_R + V_f = V_{total} \\
-V_R + V_f = 3.3V \\
+$$V_{total} = V_R + V_f  \\
+3.3V = V_R + V_f \\
 V_R = 3.3V - V_f \\
 V_R = 3.3V - 2V\to1.3V$$
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif)
 
+To learn more about calculating the current through an LED, watch this video by NYU ITP's Jeff Feddersen and read our [LED guide]({{ site.baseurl }}//pages/electronics/leds.md):
+
+<div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/78674965" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ### Using higher value resistors
 
 Now, play around with higher-value resistors such as a 680Ω, 2.2KΩ, or 10KΩ. What happens?
+
+You should observe that the LED's brightness *decreases* as the resistance *increases*. 
 
 | Resistor | Resistor Image | Vs | Resulting Current |
 |:-------------|:-------------|:------------------|
@@ -116,3 +122,7 @@ Now, play around with higher-value resistors such as a 680Ω, 2.2KΩ, or 10KΩ. 
 ## TODO
 - Add physical pictures/videos
 - Fix Ohm's Law animations to use Vr, Vf nomenclature
+
+<span class="fs-6">
+[Next](led-blink.md){: .btn .btn-outline }
+</span>

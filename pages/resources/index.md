@@ -85,7 +85,7 @@ I *encourage* you to ask questions! There are so many people out there willing t
 
 ## Inspirations
 
-Searching for project ideas or some divine epiphany on what to work on next? Check out our [Inspirations]({% link pages/inspirations/index.md %}.
+Searching for project ideas or some divine epiphany on what to work on next? Check out our [Inspirations]({% link pages/inspirations/index.md %}).
 
 ## TODO:
 
@@ -94,19 +94,19 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
 - Look at my resources list from [CMSC838f](https://web.archive.org/web/20170605201324/http:/cmsc838f-s15.wikispaces.com/). [Direct link](https://web.archive.org/web/20150709105051/http://cmsc838f-s15.wikispaces.com/Resources)
 - Look at: http://ladyada.net/learn/arduino/
 - Look at some related online courses:
--- EdX IOT: https://courses.edx.org/courses/course-v1:UPValenciaX+IOT101.1x+3T2019a/course/
--- https://www.coursera.org/specializations/iot
--- https://www.coursera.org/learn/arduino-platform
--- https://www.udemy.com/course/arduino-megacourse-learn-arduino-by-building-30-projects
--- https://www.instructables.com/class/Arduino-Class/
+  - EdX IOT: https://courses.edx.org/courses/course-v1:UPValenciaX+IOT101.1x+3T2019a/course/
+  - https://www.coursera.org/specializations/iot
+  - https://www.coursera.org/learn/arduino-platform
+  - https://www.udemy.com/course/arduino-megacourse-learn-arduino-by-building-30-projects
+  - https://www.instructables.com/class/Arduino-Class/
 - Look at related academic courses
--- E.g., Mayanks
--- High-Low Tech stuff: http://highlowtech.org/?cat=21
--- Daniel Ashbrook
--- Sean Follmer (couldn't find link to his teaching site)
+  - E.g., Mayanks
+  - High-Low Tech stuff: http://highlowtech.org/?cat=21
+  - Daniel Ashbrook
+  - Sean Follmer (couldn't find link to his teaching site)
 - Places of inspiration
--- Hackaday
--- Instructables
+  - Hackaday
+  - Instructables
 - What content to add?
   - Logic gates: https://youtu.be/cdMJvFT-Afc
 

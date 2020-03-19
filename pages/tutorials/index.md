@@ -24,3 +24,7 @@ Call this activities or tutorials or making?
   - Turning On an LED
   - Turning On and Off an LED
   - Fading an LED
+- Debugging Arduino
+  - Multimeter
+  - Serial.println and serial console and plotter
+  - Code debuggers?

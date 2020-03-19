@@ -10,6 +10,11 @@ permalink: /
 
 - A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, co-founder of [BoingBoing](https://boingboing.net/), & former editor of MAKE Magazine)
 
+## About this website
+
+## Acknowledgments
+Diagrams, animations, pictures, and videos are created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), and [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview) by Jon E. Froehlich unless otherwise noted.
+
 ## TODO
 - Update format for blockquote in "just the docs" to https://codepen.io/cliftwalker/pen/XJaEXY
   - Need to modify the css style:
@@ -35,6 +40,7 @@ permalink: /
 - Motors
 - Power
 - Sensors
+- [Programming microcontrollers](https://itp.nyu.edu/physcomp/lessons/programming/programming-terms-and-programming-environments/)
 
 ## Markdown Tips
 
@@ -82,7 +88,36 @@ To build the docs with Jekyll,
 ## Notes
 - To crop animated gifs, I use: https://ezgif.com/
 
-### Adding LaTeX Support
+### Code highlighting
+<!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
+
+#### Using Jekyll's `highlight` functionality
+This is a test.
+{% highlight C %}
+void loop() {
+  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);               // wait for a second
+  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);               // wait for a second
+}
+{% endhighlight C %}
+
+#### Using Markdown's ` ```C``` `
+```C
+void loop() {
+  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);               // wait for a second
+  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);               // wait for a second
+}
+```
+
+### Using `gist-it.appspot.com` to embed code directly from GitHub
+<!-- <script src="http://gist-it.appspot.com/http://github.com/$file"></script> -->
+This is awesome! Can embed code directly!
+<script src="http://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
+
+### Adding LaTeX support
 After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll template and GitHub Pages. Steps:
 1. I largely followed the advice from this [blog post](https://alan97.github.io/random/mathjax/)
 2. Since I'm currently using `remote_theme: pmarsceill/just-the-docs`, I was a bit confused about how to make local configuration changes since most online blogs, forum posts talk about editing content in the `_includes` folder; however, I didn't have this in my local dev environment. So, what to do?

@@ -30,7 +30,7 @@ There are a wide range of physical computing related courses at UW across many d
 
 - [**DXARTS 490A: E-Textiles & Wearables for Art & Design**](https://canvas.uw.edu/courses/1301821) taught by [Afroditi Psarra](https://dxarts.washington.edu/people/afroditi-psarra) in Digital Arts and Experimental Media.
 
-- [**HCDE 439: Physical Computing**](https://www.washington.edu/students/crscat/hcde.html) taught by [Andy Davidson](https://www.hcde.washington.edu/davidson), [Brock Craft](http://www.brockcraft.com/), and [Tyler Fox](http://www.tylersfox.com/).
+- [**HCDE 439: Physical Computing**](https://www.washington.edu/students/crscat/hcde.html) taught by [Nadya Peek](https://www.hcde.washington.edu/peek), [Brock Craft](http://www.brockcraft.com/), and [Andy Davidson](https://www.hcde.washington.edu/davidson).
 
 - [**HCDE 440: Advanced Physical Computing**](https://www.washington.edu/students/crscat/hcde.html) taught by [Brock Craft](http://www.brockcraft.com/).
 

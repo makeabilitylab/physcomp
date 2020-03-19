@@ -37,6 +37,7 @@ Not sure what to call these yet...
 5. **Lesson 5: RGB LEDs.** Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
 
 #### Digital and Analog Input
+TODO: consider adding interrupts here? Like after Lesson 2?
 
 1. **Lesson 1: Turn on an LED with a button.** Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
 
@@ -51,6 +52,7 @@ Not sure what to call these yet...
 6. **Lesson 6: Smoothing analog input**. Smooths analog input.
 
 ### Making and sensing sound
+
 1. **Lesson 1: Playing tones**. Introduces tone(), piezo buzzer, square wave, etc.
 
 2. **Lesson 2: Making a piano**. Synthesizes previous tutorials to create something fun
@@ -61,6 +63,11 @@ Not sure what to call these yet...
 - Piezo buzzer
 - Actual speaker + DAC (like Due?)
 - Sensing sound
+- Processing sound?
+
+### Measuring distance
+- IR
+- Ultrasonic
 
 #### Arduino as a mouse, keyboard, or joystick
 TODO.
@@ -70,7 +77,7 @@ TODO.
 - Step
 - DC
 
-#### Debugging Arduino
+### Debugging Arduino
 The very thing that makes working with microcontrollers so exciting—combining the digital and physical worlds—is also a source of complexity and frustration. With Arduino, there are multiple points of failure from incorrectly wiring a circuit to writing flawed software code.
 
 ## Where to add?

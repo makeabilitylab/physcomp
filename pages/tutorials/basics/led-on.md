@@ -28,7 +28,7 @@ You will need the following materials:
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 
-## Hook up LED to Arduino 5V pin
+## Hook up LED to Arduino the 5V supply pin
 
 ### Step 1: Wrap resistor around LED leg
 
@@ -40,7 +40,7 @@ TODO: insert animated gif of twisting the resistor around LED.
 
 Insert the LED + resistor into the Arduino: the LED's cathode (short leg) to GND and the LED's anode (long leg) + resistor to 5V.
 
-![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/movies/InsertLEDAnimation.gif)
+![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/movies/Arduino_LEDOn_5VFixed_InsertLED.gif)
 
 ### Step 3: Connect your Arduino to power
 
@@ -60,12 +60,12 @@ LED brightness is controlled by **current**. So, to dim an LED, we need to reduc
 1. Decreasing **voltage**
 2. Increasing **resistance**
 
-In future tutorials, we'll show how you can **control voltage output programmatically** by writing code for the Arduino microcontroller. But, for now, let's dim the LED by first decreasing voltage using the Arduino's 3.3V pin (rather than the 5V pin) and then by using stronger resistors.
+In future tutorials, we'll show how you can **control voltage output programmatically** by writing code for the Arduino microcontroller. But, for now, let's dim the LED by first decreasing voltage using the Arduino's 3.3V pin (rather than the 5V pin) and then by using higher value resistors.
 
-### Hooking up the LED to 3.3V Pin
+### Hooking up the LED to the 3.3V supply pin
 Let's move the LED anode (long leg) from the 5V pin to the 3.3V pin. What do you observe? The LED should be less bright!
 
-![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif)
+![Animation showing current flowing through 3.3V LED circuit](assets/movies/Arduino_LEDOn_3.3VFixed_Current_USBPower.gif)
 
 Let's compare the current and brightness between supplying 5V *vs.* 3.3V.
 
@@ -74,13 +74,45 @@ Let's compare the current and brightness between supplying 5V *vs.* 3.3V.
 | ![Animation showing current flowing through 5V LED circuit](assets/movies/Arduino_LEDOn_5VFixed_Current_USBPower.gif) | ![Animation showing current flowing through 3.3V LED circuit](assets/movies/Arduino_LEDOn_3.3VFixed_Current_USBPower.gif) |
 | With a 5V supply, the voltage drop across the 220Ω is ~3V. Thus, $$I = \frac{3V}{220Ω}= 13.6mA $$ | With a 3.3V supply, the voltage drop across the 220Ω resistor is ~1.3V, thus $$I = \frac{1.3V}{220Ω}= 5.9mA $$|
 
+TODO: insert video of actual Arduino switching between 5V and 3.3V
+
+### How can we determine the current through the circuit?
+To determine the current through the circuit, we can use Ohm's Law ($$I = \frac{V}{R}$$) and Kirchhoff's Voltage Law. The key component here is the **resistor**, which limits the current in our circuit.
+
+---
+
+**NOTE:**
+
+As mentioned, If you want to make your LED dimmer (without writing microcontroller code), you can either (1) add more resistance or (2) reduce your supply voltage—both have the same effect: reducing current. This is sufficient conceptual knowledge to start building circuits; however, if you want to know more than this, read on!
+{: .notice}
+
+---
+
+To use Ohm's Law, we need to calculate the **voltage drop** across the resistor ($$V_R$$). For this, we need to know the LED's forward voltage $$V_f$$, which is the minimum voltage necessary to turn the LED on and allow current to pass. In this case, our forward voltage is 2V—a common $$V_f$$ for RED LEDs. From Kirchhoff's Voltage Law, we know that the total voltage drop between the LED ($$V_f$$) and resistor ($$V_R$$) must equal 3.3V. More formally:
+
+$$V_R + V_f = 3.3V \\
+V_R = 3.3V - V_f \\
+V_R = 3.3V - 2V\to1.3V$$
+
+
+![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif)
+
+### Using higher value resistors
+
+Now, play around with higher-value resistors such as a 680Ω, 2.2KΩ, or 10KΩ. What happens?
+
+| Resistor | Resistor Image | Vs | Resulting Current |
+|:-------------|:-------------|:------------------|
+| 220Ω |![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing_100w.png) | 5V | $$I = \frac{3V}{220Ω}= 13.6mA $$ |
+| 680Ω |![680 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor680_Fritzing_100w.png) | 5V | $$I = \frac{3V}{680Ω}= 4.4mA $$ |
+| 1KΩ |![1K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor1K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{1,000Ω}= 3mA $$ |
+| 2.2KΩ |![2.2K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor2.2K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{2,200Ω}= 1.4mA $$ |
+| 10KΩ |![10K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{10,000Ω}= 0.3mA $$ |
 
 <!-- <video width="640" controls="controls">
   <source src="images/Arduino_LEDOn_5VFixed.mp4" type="video/mp4">
 </video> -->
 
 ## TODO
-- [done] add alt text 
-- [done] add caption
-- [done] add 3.3V version
-- Try other resistors. What happens?
+- Add physical pictures/videos
+- Fix Ohm's Law animations to use Vr, Vf nomenclature

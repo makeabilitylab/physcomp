@@ -3,7 +3,6 @@ layout: default
 title: Blink LED
 nav_order: 2
 parent: Basics
-usemathjax: true
 has_toc: true # (on by default)
 ---
 # Programmatically Blinking an LED
@@ -218,10 +217,10 @@ The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) us
 
 ![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
 
-## TODO:
-- Next step is fading the LED
+## Next Lesson
+In the next lesson, we will learn how to control the output voltage between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
 
 <span class="fs-6">
-[Previous](led-on.md){: .btn .btn-outline }
-[Next](led-fade.md){: .btn .btn-outline }
+[Previous: Turning on an LED with Arduino](led-on.md){: .btn .btn-outline }
+[Next: Fading an LED with Arduino](led-fade.md){: .btn .btn-outline }
 </span>

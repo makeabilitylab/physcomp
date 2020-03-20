@@ -5,7 +5,7 @@ nav_order: 5
 has_children: true
 has_toc: true # (on by default)
 ---
-# Tutorials
+# Tutorials / Lessons / Labs / Activities
 {: .no_toc }
 
 ## Table of Contents
@@ -15,16 +15,9 @@ has_toc: true # (on by default)
 {:toc}
 ---
 
+## Intro to Arduino 
 
-## TODO
-Call this activities or tutorials or making?
-
-## Lessons / Labs / Activities
-Not sure what to call these yet...
-
-### Intro to Arduino Lessons
-
-#### Digital and Analog Output
+### Output
 
 1. **Lesson 1: Turning on an LED.** Introduces the Arduino power and ground pins, powering an initial LED circuit with a current limiting resistor, and plugging components into the Arduino.
 
@@ -36,7 +29,7 @@ Not sure what to call these yet...
 
 5. **Lesson 5: RGB LEDs.** Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
 
-#### Digital and Analog Input
+### Input
 TODO: consider adding interrupts here? Like after Lesson 2?
 
 1. **Lesson 1: Turn on an LED with a button.** Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
@@ -51,7 +44,7 @@ TODO: consider adding interrupts here? Like after Lesson 2?
 
 6. **Lesson 6: Smoothing analog input**. Smooths analog input.
 
-### Making and sensing sound
+## Making and sensing sound
 
 1. **Lesson 1: Playing tones**. Introduces tone(), piezo buzzer, square wave, etc.
 
@@ -71,19 +64,19 @@ TODO: consider adding interrupts here? Like after Lesson 2?
 - Sensing sound
 - Processing sound?
 
-### Measuring distance
+## Measuring distance
 - IR
 - Ultrasonic
 
-#### Arduino as a mouse, keyboard, or joystick
+## Arduino as a mouse, keyboard, or joystick
 TODO.
 
-#### Motors
+## Motors
 - Servos
 - Step
 - DC
 
-### Debugging Arduino
+## Debugging Arduino
 The very thing that makes working with microcontrollers so exciting—combining the digital and physical worlds—is also a source of complexity and frustration. With Arduino, there are multiple points of failure from incorrectly wiring a circuit to writing flawed software code.
 
 ## Where to add?

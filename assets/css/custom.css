@@ -3,3 +3,17 @@ video {
   max-width: 100%;
   height: auto;
 }
+
+blockquote{
+  margin: 2em 1em 2em 0;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-style: italic;
+  font-size: 22px;
+  border-left: 0.25em solid #6f777d;
+}
+
+cite{
+  text-align: right;
+  font-size: smaller;
+}

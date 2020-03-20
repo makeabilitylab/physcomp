@@ -7,8 +7,10 @@ description: "This is a description! UPDATE!!!"
 permalink: /
 ---
 > Joy is a well-made object, equaled only to the joy of making it.
+{: .v-align-bottom}
 
 - A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, co-founder of [BoingBoing](https://boingboing.net/), & former editor of MAKE Magazine)
+{: .fs-2 .pl-8}
 
 ## About this website
 

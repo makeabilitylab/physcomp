@@ -65,7 +65,7 @@ In future tutorials, we'll show how you can **control voltage output programmati
 ### Hooking up the LED to the 3.3V supply pin
 The Arduino Uno provides both a 5V power supply (which we just used) and a 3.3V power supply.
 
-![Close-up picture of the 5V and 3.3V power ports on the Arduino Uno](assets/images/Arduino_Power5Vand3.3V.png)
+![Close-up picture of the 5V and 3.3V power ports on the Arduino Uno](assets/images/Arduino_CloseUp_PowerPins.png)
 
 Let's move the LED anode (long leg) from the 5V pin to the 3.3V pin. What do you observe? The LED should be less bright!
 

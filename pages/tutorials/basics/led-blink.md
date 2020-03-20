@@ -17,15 +17,15 @@ has_toc: true # (on by default)
 ---
 In our [first activity](led-on.md), we directly hooked up an LED circuit to the Arduino's 5V pin. While this enabled learning about Arduino's supply voltage and GND pins and gave us practical experience wiring electrical components into the Arduino ports, it was admittedly, a toy exercise.
 
-In this activity, we are going to do something more exciting: use the Arduino to turn the LED on and off by programatically controlling the output voltage on one of Arduino's GPIO pins.
+In this activity, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programatically* controlling the output voltage on one of Arduino's GPIO pins.
 
 ![Animation showing an LED connected to Pin 3 on the Arduino blinking on and off](assets/movies/Arduino_LEDBlink_Pin3.gif)
 
-This begins our entrée into the two key parts of using microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
+This begins our entrée into the two facets of microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
 
 ## Materials
 
-You will use the same materials as before:
+You will use the same materials as before. You will also need the the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
@@ -34,13 +34,20 @@ You will use the same materials as before:
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 
 ## Making the circuit
-Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resistor-around-led-leg), plug the anode + resistor side into Pin 3 and the cathode into GND.
+
+Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resistor-around-led-leg), plug the anode + resistor side into Pin 3 and the cathode into GND. 
+
+---
+
+**TIP:** Double check to make sure that you've correctly connected GND and Pin 3—it's easy to be "off-by-one-pin" (a frustrating error!).
+
+---
 
 ![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit.png)
 
-Next, we'll write C code for the Arduino to turn on the LED from Pin 3 (which programmatically sets Pin 3 to 5V).
+Next, we'll write C code for the Arduino to turn on the LED from Pin 3, which programmatically sets Pin 3 to 5V.
 
-## Download, install, and open the Arduino IDE
+## Get the Arduino IDE
 
 But first, we need to download and install the Arduino IDE (if you haven't already).
 
@@ -52,8 +59,8 @@ Download and install the local Mac, Windows, or Linux version of the [Arduino ID
 
 After installation is complete, open the Arduino IDE. Notice that there are **two blocks** of code (called functions):
 
-1. The first block: `setup()`, which is called once and only once when the Arduino is turned on (or reset)
-2. And the second block: `loop()`, which is called as soon as `setup()` completes and, when finished, is automatically called again and again (until the Arduino is turned off).
+1. The first block: `setup()`, which is called once and only once when the Arduino is turned on
+2. And the second block: `loop()`, which is called as soon as `setup()` completes. When `loop()` completes, it's automatically called again and again (until the Arduino is turned off).
 
 ![Screenshot of the Arduino IDE](assets/images/ArduinoIDE_BlankAndAnnotated.png)
 
@@ -64,16 +71,115 @@ For those who have used [Processing](https://processing.org/)—a programming en
 | ![Screenshot of the Processing IDE](assets/images/ProcessingIDE_Blank.png) | ![Screenshot of p5js IDE](assets/images/p5jsIDE_Blank.png) |
 
 ## Turn on LED programatically via Pin 3
-TODO:
-- Simply shows how to program Pin 3 to turn on LED
+
+Now, we are going to write code to turn on our LED by setting Pin 3 to HIGH (or 5V). Then, we will modify this code to flash the LED both on *and* off.
+
+The Arduino Uno has 14 digital pins that can be used for general purpose digital I/O (input/output)—that is, to read or write digital information (HIGH or LOW) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but chose Pin 3.
+
+![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
+
+You can control any of these 14 digital I/O pins with three functions:
+
+1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`
+2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`.
+3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`.
+
+Let's write our program to set Pin 3 to HIGH (5V).
+
+### Step 1: Start a new sketch in the Arduino IDE
+Start a new sketch in the Arduino IDE:
+
+![Screenshot of the Arduino IDE showing a new empty sketch](assets/images/ArduinoIDE_FreshSketch.png)
+
+### Step 2: Set the pinMode for Pin 3
+Because the 14 digital I/O pins can used for either input or output, we need to specify that we want to use Pin 3 for *output*. We want the Arduino to output a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
+
+{% highlight C %}
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(3, OUTPUT);
+}
+{% endhighlight C %}
+
+### Step 3: Set Pin 3 HIGH
+
+Lastly, we need to actually set the Pin 3 signal to HIGH. For this, we use the  [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) command, which takes in a pin as the first parameter and a value (`HIGH` or `LOW`) as the second.
+
+{% highlight C %}
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(3, OUTPUT);
+  digitalWrite(3, HIGH); // turn LED on (output 5V)
+}
+{% endhighlight C %}
+
+### Step 4: Compile the code
+Compile the code by clicking on the "verify" checkmark button in the upper-left corner of the Arduino IDE. If you haven't already, the Arduino IDE will also ask you to save your sketch. If there are any syntax or other identifiable errors in the code, the Arduino IDE will print them out in the console window at the bottom.
+
+![Animation showing how to compile and save a sketch in the Arduino IDE](assets/movies/ArduinoIDE_Compile.gif)
+
+### Step 5: Upload the code to Arduino
+
+Finally, upload the code to the Arduino! Once complete, the code automatically runs.
+
+TODO: insert video.
+
 
 ## Turn on and off the LED programatically via Pin 3
 
-In this part, we will write a simple program for the Arduino that will turn on and off the LED programatically.
+Now, let's modify our code to turn on *and* off the LED programatically. More specifically, we will alternate between having the LED on for one second and having the LED off for one second. To do this, we'll use the [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/) function, which pauses the program for the specified amount of time (in milliseconds).
+
+### Step 1: Move the digitalWrite code from setup() to loop()
+
+First, move the digitalWrite code from `setup()` to `loop()`:
+
+{% highlight C %}
+void setup() {
+  // set Pin 3 to output
+  pinMode(3, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(3, HIGH);  // turn LED on (output 5V)
+}
+{% endhighlight C %}
+
+### Step 2: Add in delays and code to turn off LED
+
+Now, add in code to pause (for one second) and then turn off the LED (for one second). Remember, when `loop()` completes, it is automatically called again (making the LED blink continuously).
+
+{% highlight C %}
+void setup() {
+  // set Pin 3 to output
+  pinMode(3, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(3, HIGH);  // turn LED on (output 5V)
+  delay(1000);            // wait one second
+  digitalWrite(3, LOW);   // turn LED off (output 0V)
+  delay(1000);            // wait another second
+}
+{% endhighlight C %}
+
+### Step 3: Compile and upload
+TODO: compile, upload code. See it work!
+
+### Walking through the code
+How does this work? See the code walkthrough video below:
+
+<video width="640" controls="controls">
+  <source src="assets/movies/Arduino_BlinkWithCode_Pin3.mov" type="video/mp4">
+</video>
+
+## Use the built-in LED
 
 The full Blink code is below (from my [Arduino GitHub repository](https://github.com/jonfroehlich/arduino)).
 <script src="http://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
 
+TODO: [official Blink example](http://www.arduino.cc/en/Tutorial/Blink), which you can access directly in the Arduino IDE:
+
+![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
 
 ## Upload the code to the Arduino microcontroller
 TODO:

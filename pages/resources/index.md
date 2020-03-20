@@ -104,10 +104,13 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
   - High-Low Tech stuff: http://highlowtech.org/?cat=21
   - Daniel Ashbrook
   - Sean Follmer (couldn't find link to his teaching site)
+  - https://people.eecs.berkeley.edu/~boser/courses/49/
+    - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/index.html
 - Places of inspiration
   - Hackaday
   - Instructables
 - What content to add?
   - Logic gates: https://youtu.be/cdMJvFT-Afc
+  - IMU 9 DOF with bunny 3D orientation: https://www.adafruit.com/product/2472
 
 <!--  https://www.exploringarduino.com/resources/ -->

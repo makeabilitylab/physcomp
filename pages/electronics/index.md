@@ -26,6 +26,7 @@ This is the parent page for electronics!
 - Voltage Regulator
 - Power
   - Batteries? https://learning.oreilly.com/library/view/hacking-electronics-an/9780071802369/ch05.html#ch5
+- [NYU ITP's Physical Computing list of common electronic components](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/)
 
 # Possible sections
 - [What is Electricity?](https://learn.sparkfun.com/tutorials/what-is-electricity)

@@ -63,6 +63,10 @@ LED brightness is controlled by **current**. So, to dim an LED, we need to reduc
 In future tutorials, we'll show how you can **control voltage output programmatically** by writing code for the Arduino microcontroller. But, for now, let's dim the LED by first decreasing voltage using the Arduino's 3.3V pin (rather than the 5V pin) and then by using higher value resistors.
 
 ### Hooking up the LED to the 3.3V supply pin
+The Arduino Uno provides both a 5V power supply (which we just used) and a 3.3V power supply.
+
+![Close-up picture of the 5V and 3.3V power ports on the Arduino Uno](assets/images/Arduino_Power5Vand3.3V.png)
+
 Let's move the LED anode (long leg) from the 5V pin to the 3.3V pin. What do you observe? The LED should be less bright!
 
 ![Animation showing current flowing through 3.3V LED circuit](assets/movies/Arduino_LEDOn_3.3VFixed_Current_USBPower.gif)

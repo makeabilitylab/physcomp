@@ -18,6 +18,9 @@ This is the parent page for arduino!
 
 This is a test of an image copy/pasted
 
+## How to pick a microcontroller
+- NYU ITP's Physical Computing course website has a nice [guide](https://itp.nyu.edu/physcomp/resources/picking-a-microcontroller/)
+
 # Things to add
 - The basics of microcontrollers
 - Digital Input

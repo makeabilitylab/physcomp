@@ -57,8 +57,14 @@ TODO: consider adding interrupts here? Like after Lesson 2?
 
 2. **Lesson 2: Making a piano**. Synthesizes previous tutorials to create something fun
 
-3. **Lesson 3: Playing music**. Requires a DAC (check Feather)
+3. **Lesson 3: Making a theremin-like instrument**. Use distance sensor to generate tones kind of like a theremin. 
 
+4. **Lesson 3: Playing music**. Requires a DAC (check Feather)
+   - https://hackaday.com/2018/02/06/esp32-we-have-ways-to-make-you-talk/
+   - https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer
+   - https://www.xtronical.com/basics/audio/dacs-on-esp32/
+   - https://www.xtronical.com/dacaudio-hardware/
+ 
 - Tone()
 - Piezo buzzer
 - Actual speaker + DAC (like Due?)
@@ -88,3 +94,4 @@ The very thing that makes working with microcontrollers so exciting—combining 
 
 ## TODO
 - Serial communication
+- [Level shifting](https://itp.nyu.edu/physcomp/lessons/electronics/level-shifting/)

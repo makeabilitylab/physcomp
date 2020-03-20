@@ -6,7 +6,7 @@ parent: Basics
 usemathjax: true
 has_toc: true # (on by default)
 ---
-# Programmatically Blink an LED
+# Programmatically Blinking an LED
 {: .no_toc }
 
 ## Table of Contents
@@ -114,6 +114,8 @@ void setup() {
 {% endhighlight C %}
 
 ### Step 4: Compile the code
+We did it! Now it's time to compile and upload the code to Arduino.
+
 Compile the code by clicking on the "verify" checkmark button in the upper-left corner of the Arduino IDE. If you haven't already, the Arduino IDE will also ask you to save your sketch. If there are any syntax or other identifiable errors in the code, the Arduino IDE will print them out in the console window at the bottom.
 
 ![Animation showing how to compile and save a sketch in the Arduino IDE](assets/movies/ArduinoIDE_Compile.gif)
@@ -163,28 +165,58 @@ void loop() {
 {% endhighlight C %}
 
 ### Step 3: Compile and upload
-TODO: compile, upload code. See it work!
+
+We're done! Now, compile and upload the code and see it run!
+
+TODO: insert video
+
+### Step 4: Replace constants
+
+Typically, we want to limit the use of *literal constants* and replace them by variables. So, while the code below is functionally equivalent to that above, it's more maintainable (and less prone to errors). Here, we define our output pin as `LED_OUTPUT_PIN`.
+
+{% highlight C %}
+const int LED_OUTPUT_PIN = 3;
+void setup() {
+  // set Pin 3 to output
+  pinMode(LED_OUTPUT_PIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(LED_OUTPUT_PIN, HIGH);  // turn LED on (output 5V)
+  delay(1000);            // wait one second
+  digitalWrite(LED_OUTPUT_PIN, LOW);   // turn LED off (output 0V)
+  delay(1000);            // wait another second
+}
+{% endhighlight C %}
 
 ### Walking through the code
+
 How does this work? See the code walkthrough video below:
 
-<video width="640" controls="controls">
-  <source src="assets/movies/Arduino_BlinkWithCode_Pin3.mov" type="video/mp4">
+<video controls="controls">
+  <source src="assets/movies/Arduino_BlinkWithCode_Pin3.mp4" type="video/mp4">
 </video>
+
+### Mental model check: code is loaded and running on the Arduino
+
+As a quick mental model check, it's worth emphasizing that once you upload the code to your Arduino, you no longer need the USB cable. Instead, for example, you could run your Arduino off of a 9V battery using the barrel jack. The code is stored on your Arduino even when the Arduino loses power.
+
+<video controls="controls">
+  <source src="assets/movies/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">
+</video>
+
+### Our Blink code is in GitHub
+
+You can access our Blink code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). It's also displayed below:
+<script src="http://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
 
 ## Use the built-in LED
 
-The full Blink code is below (from my [Arduino GitHub repository](https://github.com/jonfroehlich/arduino)).
-<script src="http://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
+Finally, it's worth pointing out that Arduino has a built-in LED that's often useful for some quick debugging (*e.g.,* turn on the built-in LED to indicate some program state). On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write `digitalWrite(13, HIGH);` in your code, the built-in LED will turn on.
 
-TODO: [official Blink example](http://www.arduino.cc/en/Tutorial/Blink), which you can access directly in the Arduino IDE:
+The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) uses the built-in LED to demonstrate blinking. You can access this example directly in the Arduino IDE:
 
 ![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
-
-## Upload the code to the Arduino microcontroller
-TODO:
-- Show how to do this with screenshot of Arduino IDE
-- Show animation of the code working without being plugged into USB (e.g., with battery)
 
 ## TODO:
 - Next step is fading the LED

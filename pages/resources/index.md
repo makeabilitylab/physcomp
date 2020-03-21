@@ -90,7 +90,7 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
 ## TODO:
 
 - Look at my curriculum sheet
-- Add in design and design thinkg books like Sketching User Experiences.
+- Add in design and design thinking books like Sketching User Experiences.
 - Look at my resources list from [CMSC838f](https://web.archive.org/web/20170605201324/http:/cmsc838f-s15.wikispaces.com/). [Direct link](https://web.archive.org/web/20150709105051/http://cmsc838f-s15.wikispaces.com/Resources)
 - Look at: http://ladyada.net/learn/arduino/
 - Look at some related online courses:
@@ -103,6 +103,8 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
   - E.g., Mayanks
   - High-Low Tech stuff: http://highlowtech.org/?cat=21
   - Daniel Ashbrook
+    - http://fetlab.io/722-spring18/index.html
+    - http://fetlab.io/720-fall17/
   - Sean Follmer (couldn't find link to his teaching site)
   - https://people.eecs.berkeley.edu/~boser/courses/49/
     - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/index.html
@@ -112,5 +114,7 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
 - What content to add?
   - Logic gates: https://youtu.be/cdMJvFT-Afc
   - IMU 9 DOF with bunny 3D orientation: https://www.adafruit.com/product/2472
+- Electricity primer
+  - http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf
 
 <!--  https://www.exploringarduino.com/resources/ -->

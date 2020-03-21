@@ -18,14 +18,14 @@ permalink: /
 Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted and were created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), and [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview).
 
 ## TODO
-- Update format for blockquote in "just the docs" to https://codepen.io/cliftwalker/pen/XJaEXY
+- [Done] Update format for blockquote in "just the docs" to https://codepen.io/cliftwalker/pen/XJaEXY
   - Need to modify the css style:
   - See: https://aregsar.com/blog/2019/how-to-customize-your-github-pages-blog-style-in-five-minutes/
   - https://pmarsceill.github.io/just-the-docs/docs/customization/#override-styles
   - Here's miminimal mistakes version: https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/docs/_posts/2013-01-11-markup-html-tags-and-formatting.md
     - And the scss: https://github.com/mmistakes/minimal-mistakes/blob/0cf1a2e1144336b5e026d13b5fd87dc2af02fe8c/_sass/minimal-mistakes/_base.scss
 - Possible to add last modified date into file?
-- Embedding code from github repo into jekyll post
+- [Done] Embedding code from github repo into jekyll post
   - https://blog.revathskumar.com/2012/08/embed-files-from-github-repository-into-webpage.html
   - https://flowerinthenight.com/blog/2017/11/28/embed-github-code
 - Electronic prototyping kits section
@@ -50,7 +50,9 @@ Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherw
 - https://stackoverflow.com/questions/25654845/how-can-i-create-a-text-box-for-a-note-in-markdown
 
 ### Option 1
+
 ---
+
 **NOTE**
 
 It works with almost all markdown flavours (the below blank line matters). This is from [link](https://stackoverflow.com/a/41449789/388117).

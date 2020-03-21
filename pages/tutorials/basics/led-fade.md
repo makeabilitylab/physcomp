@@ -62,7 +62,7 @@ To gradually fade an LED, we are going to use the [`analogWrite(int pin, int val
 
 **SIDE NOTE:**
 
-The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a digital-to-analog converter (DAC). Instead, they use a method called Pulse-Width Modulation (PWM) to emulate analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform, like playing music, then you'll need to either find an Arduino micro-controller with a built-in DAC (like the Due) or connect your Uno to an external board.
+The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a digital-to-analog converter (DAC). Instead, they use a method called Pulse-Width Modulation (PWM) to emulate analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform, like playing music, then you'll need to either find an Arduino micro-controller with a built-in DAC (like the [Due](https://store.arduino.cc/usa/due); see this [SimpleAudioPlayer](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer) official Arduino Tutorial) or connect your Uno to an external board (like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all)).
 
 ---
 
@@ -162,8 +162,24 @@ void loop() {
 }
 {% endhighlight C %}
 
-TODO: 
-For both, show graph of what happens either via Tinkercad serial plotter or the oscilloscope (oscilloscope would show PWM...)
+## Visualizing the voltage output
+
+We can visualize the (effective) voltage output on Pin 3 using the Arduino IDE's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter).
+
+<video controls="controls">
+  <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
+</video>
+
+Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. TODO: verify these with multimeter because need to check when LED actually turns on due to Vf conditions being met.
+
+| Pin 3 Value | Pin 3 Voltage | Resistor | Resulting Current |
+|:-------------|:-------------|:-------------|:-------------|:------------------|
+| 0 | 0V | 220Ω | $$I = \frac{0V}{220Ω}= 0.0mA $$ |
+| 45 | 0.88V | 220Ω | $$I = TODO $$ |
+| 103 | 2.02V | 220Ω | $$I = TODO $$ |
+| 128 | 2.51V | 220Ω | $$I = TODO $$ |
+| 199 | 3.9V | 220Ω | $$I = TODO $$ |
+| 255 | 5V | 220Ω | $$I = TODO $$ |
 
 <span class="fs-6">
 [Previous: LED Blink](led-blink.md){: .btn .btn-outline }

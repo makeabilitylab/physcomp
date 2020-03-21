@@ -29,7 +29,10 @@ has_toc: true # (on by default)
 
 5. **Lesson 5: RGB LEDs.** Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
 
-TODO: blink no delay (where to put this?)
+TODO: 
+- blink no delay (where to put this?)
+- how to hook up multiple LEDS per port with Arduino
+- Where to put breadboard stuff?
 
 ### Input
 
@@ -37,15 +40,17 @@ TODO: consider adding interrupts here? Like after Lesson 2?
 
 1. **Lesson 1: Turn on an LED with a button.** Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
 
-2. **Lesson 2: Debouncing digital input.** Introduces [debouncing](https://www.arduino.cc/en/Tutorial/Debounce) and solutions.
+2. **Lesson 2: Limiting use of delays.** TODO: shows how to poll for input without delays. (Maybe also refer to interrupts here?)
 
-3. **Lesson 3: Controlling LED brightness via a potentiometer** Introduces analog input, the [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function, and using a potentiometer. TODO: potentially add in Serial monitor + plotter here?
+3. **Lesson 3: Debouncing digital input.** Introduces [debouncing](https://www.arduino.cc/en/Tutorial/Debounce) and solutions.
 
-4. **Lesson 4: Using force-sensitive resistors** Introduces variable resistors, demonstrates how to hook up a variable resistor to a microcontroller using a voltage divider, and shows how to control LED brightness via a force-sensitive resistor.
+4. **Lesson 4: Controlling LED brightness via a potentiometer** Introduces analog input, the [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function, and using a potentiometer. TODO: potentially add in Serial monitor + plotter here?
 
-5. **Lesson 5: Sensing light**. Adapts the previous force-sensitive resistor example to work with a photocell. Discusses calibration, etc.
+5. **Lesson 5: Using force-sensitive resistors** Introduces variable resistors, demonstrates how to hook up a variable resistor to a microcontroller using a voltage divider, and shows how to control LED brightness via a force-sensitive resistor.
 
-6. **Lesson 6: Smoothing analog input**. Smooths analog input.
+6. **Lesson 6: Sensing light**. Adapts the previous force-sensitive resistor example to work with a photocell. Discusses calibration, etc.
+
+7. **Lesson 7: Smoothing analog input**. Smooths analog input.
 
 ## Making and sensing sound
 

@@ -21,6 +21,8 @@ This is a test of an image copy/pasted
 ## How to pick a microcontroller
 - NYU ITP's Physical Computing course website has a nice [guide](https://itp.nyu.edu/physcomp/resources/picking-a-microcontroller/)
 
+- Chapter 1: Getting Started and Understanding the Arduino Landscape in Blum, *Exploring Arduino: Tools and Techniques for Engineering Wizardry*, 2nd Edition, Wiley, 2020. This is my favorite Arduino book and assumes no previous electronics knowledge! [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451), [Wiley Online](https://onlinelibrary-wiley-com.offcampus.lib.washington.edu/doi/book/10.1002/9781119405320)].
+
 # Things to add
 - The basics of microcontrollers
 - Digital Input

@@ -81,6 +81,7 @@ Let's compare the current and brightness between supplying 5V *vs.* 3.3V.
 TODO: insert video of actual Arduino switching between 5V and 3.3V
 
 ### How can we determine the current through the circuit?
+
 To determine the current through the circuit, we can use Ohm's Law ($$I = \frac{V}{R}$$) and Kirchhoff's Voltage Law. The key component here is the **resistor**, which limits the current in our circuit.
 
 ---

@@ -16,15 +16,13 @@ has_toc: true # (on by default)
 ---
 In our [first activity](led-on.md), we directly hooked up an LED circuit to the Arduino's 5V pin. While this enabled learning about Arduino's supply voltage and GND pins and gave us practical experience wiring electrical components into the Arduino ports, it was admittedly, a toy exercise.
 
-In this activity, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programatically* controlling the output voltage on one of Arduino's GPIO pins.
+In this activity, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programatically* controlling the output voltage on one of Arduino's GPIO pins. This begins our entrée into the two key aspects of making with microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
 
 ![Animation showing an LED connected to Pin 3 on the Arduino blinking on and off](assets/movies/Arduino_LEDBlink_Pin3.gif)
 
-This begins our entrée into the two facets of microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
-
 ## Materials
 
-You will use the same materials as before. You will also need the the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
+You will use the same materials as before. You will also need the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
@@ -73,7 +71,7 @@ For those who have used [Processing](https://processing.org/)—a programming en
 
 Now, we are going to write code to turn on our LED by setting Pin 3 to HIGH (or 5V). Then, we will modify this code to flash the LED both on *and* off.
 
-The Arduino Uno has 14 digital pins that can be used for general purpose digital I/O (input/output)—that is, to read or write digital information (HIGH or LOW) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but chose Pin 3.
+The Arduino Uno has 14 digital pins that can be used for general purpose digital I/O (input/output)—that is, to read or write digital information (HIGH or LOW) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but we chose Pin 3 (in part, because this will simplify a few of the future lessons).
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
@@ -218,7 +216,7 @@ The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) us
 ![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
 
 ## Next Lesson
-In the next lesson, we will learn how to control the output voltage between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
+In the next lesson, we will learn how to control the output voltage at levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
 
 <span class="fs-6">
 [Previous: Turning on an LED with Arduino](led-on.md){: .btn .btn-outline }

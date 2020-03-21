@@ -19,6 +19,6 @@ has_toc: true # (on by default)
 In this tutorial, we will learn the difference between **current sourcing** and **current sinking** by revisiting our [LED Blink](led-blink.md) example. We are going to 
 
 <span class="fs-6">
-[Previous](led-fade.md){: .btn .btn-outline }
-[Next](rgb-led.md){: .btn .btn-outline }
+[Previous: LED Fade](led-fade.md){: .btn .btn-outline }
+[Next: RGB LEDs](rgb-led.md){: .btn .btn-outline }
 </span>

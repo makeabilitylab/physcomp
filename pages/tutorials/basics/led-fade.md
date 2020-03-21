@@ -72,14 +72,14 @@ Start a new sketch in the Arduino IDE:
 
 ![Screenshot of the Arduino IDE showing a new empty sketch](assets/images/ArduinoIDE_FreshSketch.png)
 
-### Step 2: Write our initialization code
+### Step 2: Write initialization code
 
-Our initialization code is the same as for [LED blink](led-blink.md) except for the addition of `const int MAX_ANALOG_OUT = 255;`
+Our initialization code is the same as for [LED blink](led-blink.md) except for the addition of `const int MAX_ANALOG_OUT = 255;` and a constant for the delay amount of 30 milliseconds (`const int DELAY_MS = 30;`).
 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
-const int DELAY_MS = 30; 
+const int DELAY_MS = 30;
 
 void setup() {
   // set Pin 3 to output
@@ -94,30 +94,78 @@ Now, write code that outputs steadily increasing values for [`analogWrite`](http
 {% highlight C %}
 void loop(){
   // fade on
-  for(int i = 0; i <= 255; i += 1){
+  for(int i = 0; i <= MAX_ANALOG_OUT; i += 1){
     analogWrite(LED_OUTPUT_PIN, i);
-    delay(30);
+    delay(DELAY_MS);
   }
 
   //fade off
-  for(int i = 255; i >= 0; i -= 1){
+  for(int i = MAX_ANALOG_OUT; i >= 0; i -= 1){
     analogWrite(LED_OUTPUT_PIN, i);
-    delay(30);
+    delay(DELAY_MS);
   }
 }
 {% endhighlight C %}
 
+The full code is:
+<script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino?footer=minimal"></script>
+
+### Step 4: Compile, upload, and run!
+Now, compile, upload, and run the code.
+
+TODO: video of it running
 
 ## Improved Fading Approach
+Generally, we want to limit the use of `for` loops and `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now).
 
-Outline:
-1. Using a for loop: Fade LED on (then immediately go back to zero)
-2. Using a for loop: Fade LED on and then off
-3. Without a for loop: fade led on and off
+So, let's rewrite the fade example but without for loops. While the code below is different, the resulting LED fade behavior is the same (so you won't notice a difference if you try them both out).
 
+---
+
+**NOTE:**
+
+I have a habit of prefixing my global variables by `_` but this is just my own convention and helps me easily discern between local variables and global variables.
+
+---
+
+{% highlight C %}
+const int LED_OUTPUT_PIN = 3;
+const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
+const int DELAY_MS = 30;
+
+int _fadeAmount = 5;      // the amount to fade the LED by on each step
+int _curBrightness = 0;   // how bright the LED is
+
+// The setup function runs once when you press reset or power the board
+void setup() {
+  // set the LED pin to as an output
+  pinMode(LED_OUTPUT_PIN, OUTPUT);
+  Serial.begin(9600); // for using Serial.println
+}
+
+// The loop function runs over and over again forever
+void loop() {
+  
+  // set the brightness of the LED pin
+  analogWrite(LED_OUTPUT_PIN, _curBrightness);
+
+  // change the brightness for next time through the loop
+  _curBrightness = _curBrightness + _fadeAmount;
+
+  // reverse the direction of the fading at the end of each fade direction
+  if (_curBrightness <= 0 || _curBrightness >= MAX_BRIGHTNESS) {
+    _fadeAmount = -_fadeAmount; // reverses fade direction
+  }
+  
+  // wait for 30 milliseconds to see the dimming effect
+  delay(DELAY_MS);
+}
+{% endhighlight C %}
+
+TODO: 
 For both, show graph of what happens either via Tinkercad serial plotter or the oscilloscope (oscilloscope would show PWM...)
 
 <span class="fs-6">
-[Previous](led-blink.md){: .btn .btn-outline }
-[Next](led-blink2.md){: .btn .btn-outline }
+[Previous: LED Blink](led-blink.md){: .btn .btn-outline }
+[Next: LED Blink 2](led-blink2.md){: .btn .btn-outline }
 </span>

@@ -15,7 +15,7 @@ has_toc: true # (on by default)
 {:toc}
 ---
 
-## Intro to Arduino 
+## Intro to Arduino
 
 ### Output
 
@@ -25,11 +25,14 @@ has_toc: true # (on by default)
 
 3. **Lesson 3: Fading an LED.** Demonstrates how to gradually fade an LED on and off by using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)
 
-4. **Lesson 4: Blinking an LED Part 2.** Introduces the concept of using Arduino GPIO pins as either current sources or sinks by hooking up two LED circuit configurations.
+4. **Lesson 4: Blinking an LED Part 2.** Introduces the concept of using Arduino GPIO pins as either current sources or sinks by hooking up two LED circuit configurations: one circuit with the LED cathode towards GND and another with the LED anode towards GND.
 
 5. **Lesson 5: RGB LEDs.** Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
 
+TODO: blink no delay (where to put this?)
+
 ### Input
+
 TODO: consider adding interrupts here? Like after Lesson 2?
 
 1. **Lesson 1: Turn on an LED with a button.** Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.

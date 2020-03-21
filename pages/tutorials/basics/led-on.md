@@ -107,7 +107,7 @@ To learn more about calculating the current through an LED, watch this video by 
 
 ### Using higher value resistors
 
-Now, play around with higher-value resistors such as a 680Ω, 2.2KΩ, or 10KΩ. What happens?
+We just showed how reducing the supply voltage ($$V_s$$) proportionally reduces current and, therefore, the LED brightness. Now, let's play around with higher-value resistors such as a 680Ω, 2.2KΩ, or 10KΩ, and see their effect. What happens?
 
 You should observe that the LED's brightness *decreases* as the resistance *increases*. 
 

@@ -96,3 +96,4 @@ The very thing that makes working with microcontrollers so exciting—combining 
 ## TODO
 - Serial communication
 - [Level shifting](https://itp.nyu.edu/physcomp/lessons/electronics/level-shifting/)
+- Reading a datasheet. How to do it, etc.

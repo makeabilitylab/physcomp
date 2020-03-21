@@ -45,9 +45,14 @@ In this step, you'll wire up the exact same circuit used in our previous example
 
 ### Step 3: Wire up the second LED circuit
 
-In this step, you'll wire up the second LED circuit. This time, however, you're going to connect the LED cathode (short leg) to Pin 4
+In this step, you'll wire up the second LED circuit. This time, however, connect the LED cathode (short leg) to Pin 4 and the resistor to the 5V rail.
 
 ![Diagram showing the LED circuit with with LED cathode connected to Pin 4 and the resistor connected to the LED anode and then to GND](assets/images/ArduinoUno_LEDBlink2_Circuit_Step3.png)
+
+TODO: add schematic diagram?
+
+## Writing the code: blinking Pins 3 and 4
+TODO
 
 
 <span class="fs-6">

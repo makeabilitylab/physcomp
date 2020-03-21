@@ -29,17 +29,17 @@ You will use the same materials as [before](led-blink.md), including the [Arduin
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 
-## Fade Circuit
+## Making the fade LED circuit
 
 As noted in our previous lesson, the Arduino Uno has 14 digital I/O pins:
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
-However, **6** of the 14 I/O pins can also be used for analog output. These pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (*i.e.,* silkscreened on the Arduino's PCB).
+However, **6** of the 14 I/O pins can also be used for analog output. These pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (silkscreened directly on the Arduino's PCB).
 
 ![Close up of the Arduino Uno highlighting the six analog output pins](assets/images/ArduinoUno_CloseUp_AnalogOutputPins.png)
 
-So, we don't actually have to change our circuit at all! (Indeed, this is the reason why we selected Pin 3 in the first place).
+So, for this lesson, we don't actually have to change our circuit at all! You can keep the same circuit as the [LED Blink lesson](led-blink.md). Indeed, this is the reason why we selected Pin 3 in the first place.
 
 ![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDFade_Pin3Circuit.png)
 
@@ -54,13 +54,59 @@ We'll learn about analog output in this lesson (using [`analogWrite`](https://ww
 
 ---
 
-## Initial Fading Approach
+## Writing the fade LED code
+
+To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. This 8-bit value is directly proportional to the voltage output: so, 0 is 0V, 255 is 5V, 128 is 2.5V, 168 is 3.3V, *etc.* This means that the settable voltage granularity is ~0.0196V. TODO: come up with a figure to explain this.
+
+---
+
+**SIDE NOTE:**
+
+The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a digital-to-analog converter (DAC). Instead, they use a method called Pulse-Width Modulation (PWM) to emulate analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform, like playing music, then you'll need to either find an Arduino micro-controller with a built-in DAC (like the Due) or connect your Uno to an external board.
+
+---
 
 ### Step 1: Start a new sketch in the Arduino IDE
 
 Start a new sketch in the Arduino IDE:
 
 ![Screenshot of the Arduino IDE showing a new empty sketch](assets/images/ArduinoIDE_FreshSketch.png)
+
+### Step 2: Write our initialization code
+
+Our initialization code is the same as for [LED blink](led-blink.md) except for the addition of `const int MAX_ANALOG_OUT = 255;`
+
+{% highlight C %}
+const int LED_OUTPUT_PIN = 3;
+const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
+const int DELAY_MS = 30; 
+
+void setup() {
+  // set Pin 3 to output
+  pinMode(LED_OUTPUT_PIN, OUTPUT);
+}
+{% endhighlight C %}
+
+### Step 3: Write fade loop
+
+Now, write code that outputs steadily increasing values for [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) (to fade on) followed by steadily decreasing values (to fade off).
+
+{% highlight C %}
+void loop(){
+  // fade on
+  for(int i = 0; i <= 255; i += 1){
+    analogWrite(LED_OUTPUT_PIN, i);
+    delay(30);
+  }
+
+  //fade off
+  for(int i = 255; i >= 0; i -= 1){
+    analogWrite(LED_OUTPUT_PIN, i);
+    delay(30);
+  }
+}
+{% endhighlight C %}
+
 
 ## Improved Fading Approach
 

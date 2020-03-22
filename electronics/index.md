@@ -4,6 +4,7 @@ title: Electronics
 nav_order: 1
 has_children: true
 has_toc: false # on by default
+nav_exclude: true
 ---
 # Electronics
 {: .no_toc }

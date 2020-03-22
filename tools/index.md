@@ -4,6 +4,7 @@ title: Tools
 nav_order: 4
 has_children: true
 has_toc: true # (on by default)
+nav_exclude: true
 ---
 # Tools
 {: .no_toc }

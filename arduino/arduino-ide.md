@@ -2,8 +2,9 @@
 layout: default
 title: Arduino IDE
 parent: Intro to Arduino
-nav_order: 99
+nav_order: 15
 has_toc: true # (on by default)
+nav_exclude: true
 ---
 # Arduino
 {: .no_toc }

@@ -27,6 +27,8 @@ has_toc: true # (on by default)
 
 - [Arduino's Official Tutorials](https://www.arduino.cc/en/Tutorial/HomePage). Lots of tutorials from [foundational concepts](https://www.arduino.cc/en/Tutorial/Foundations) to explaining the built-in [Arduino IDE examples](https://www.arduino.cc/en/Tutorial/BuiltInExamples)
 
+<!-- Instructables also has an 'Intro to Arduino' tutorial series: https://www.instructables.com/class/Arduino-Class/ taught by Becky Stern -->
+
 ## Video Tutorials
 
 - [Physical Computing @ ITP/NYU](https://vimeo.com/channels/pcomp). This online video series by NYU ITP's Jeff Feddersen & Tom Igoe provides over 100 high-quality teaching videos about circuits, & Arduino
@@ -98,7 +100,8 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
   - https://www.coursera.org/specializations/iot
   - https://www.coursera.org/learn/arduino-platform
   - https://www.udemy.com/course/arduino-megacourse-learn-arduino-by-building-30-projects
-  - https://www.instructables.com/class/Arduino-Class/
+  - [Done] https://www.instructables.com/class/Arduino-Class/
+    - Lots of documentation, pictures, etc. Basically covers same thing as Blum book but also introduces NeoPixel strips.
 - Look at related academic courses
   - E.g., Mayanks
   - High-Low Tech stuff: http://highlowtech.org/?cat=21

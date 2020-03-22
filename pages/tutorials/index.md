@@ -52,20 +52,24 @@ TODO: consider adding interrupts here? Like after Lesson 2?
 
 7. **Lesson 7: Smoothing analog input**. Smooths analog input.
 
+TODO:
+- Add an auto-calibration example [like this one](http://www.arduino.cc/en/Tutorial/Calibration). Click button to start calibration. Click again to end calibration. Could use photocell for this... Maybe also use interrupt.
+
 ## Making and sensing sound
 
 1. **Lesson 1: Playing tones**. Introduces tone(), piezo buzzer, square wave, etc.
 
 2. **Lesson 2: Making a piano**. Synthesizes previous tutorials to create something fun
 
-3. **Lesson 3: Making a theremin-like instrument**. Use distance sensor to generate tones kind of like a theremin. 
+3. **Lesson 3: Making a theremin-like instrument**. Use distance sensor to generate tones kind of like a theremin.
 
 4. **Lesson 3: Playing music**. Requires a DAC (check Feather)
    - https://hackaday.com/2018/02/06/esp32-we-have-ways-to-make-you-talk/
    - https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer
    - https://www.xtronical.com/basics/audio/dacs-on-esp32/
    - https://www.xtronical.com/dacaudio-hardware/
- 
+
+Things to think about:
 - Tone()
 - Piezo buzzer
 - Actual speaker + DAC (like Due?)
@@ -87,11 +91,14 @@ TODO.
 ## Debugging Arduino
 The very thing that makes working with microcontrollers so exciting—combining the digital and physical worlds—is also a source of complexity and frustration. With Arduino, there are multiple points of failure from incorrectly wiring a circuit to writing flawed software code.
 
-## Where to add?
 - Debugging Arduino
   - Multimeter
   - Serial.println and serial console and plotter
   - Code debuggers?
+
+Some articles:
+- https://www.circuito.io/blog/arduino-debugging/
+- https://devblogs.microsoft.com/iotdev/debug-your-arduino-code-with-visual-studio-code/
 
 ## TODO
 - Serial communication

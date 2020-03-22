@@ -115,7 +115,8 @@ Now, compile, upload, and run the code.
 
 TODO: video of it running
 
-## Improved Fading Approach
+## Improved fading approach: limiting delays
+
 Generally, we want to limit the use of `for` loops and `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now).
 
 So, let's rewrite the fade example but without for loops. While the code below is different, the resulting LED fade behavior is the same (so you won't notice a difference if you try them both out).

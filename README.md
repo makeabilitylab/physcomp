@@ -75,6 +75,14 @@ It works with almost all markdown flavours (the below blank line matters). This 
 - Minimal Mistakes
 - "Just the Docs"
 
+## Just the Docs
+
+### Better support for grandchildren
+Looks like it was addressed here:
+- https://pdmosses.github.io/test-nav/docs/utilities
+- https://github.com/pmarsceill/just-the-docs/pull/192
+- See also: https://github.com/pmarsceill/just-the-docs/pull/252?
+
 ### To Build with Jekyll
 To build the docs with Jekyll,
 - Open iTerm in /physcomp/docs

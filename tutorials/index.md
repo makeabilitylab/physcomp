@@ -4,6 +4,7 @@ title: Tutorials
 nav_order: 5
 has_children: true
 has_toc: true # (on by default)
+nav_exclude: true
 ---
 # Tutorials / Lessons / Labs / Activities
 {: .no_toc }

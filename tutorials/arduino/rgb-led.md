@@ -1,12 +1,12 @@
 ---
 layout: default
-title: RGB LEDs
-nav_order: 1
-parent: Basics
+title: L5&#58; RGB LEDs
+# nav_order: 1
+parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 ---
-# RGB LEDs
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents

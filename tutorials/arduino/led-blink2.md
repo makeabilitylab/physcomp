@@ -1,12 +1,11 @@
 ---
 layout: default
-title: Blinking Two LEDs
-nav_order: 1
-parent: Basics
+title: L4&#58; Blinking Two LEDs
+parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 ---
-# Blinking Two LEDs
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents

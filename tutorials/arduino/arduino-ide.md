@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Arduino IDE
-nav_order: 1
-parent: Basics
+parent: Intro to Arduino
+nav_order: 99
 has_toc: true # (on by default)
 ---
 # Arduino

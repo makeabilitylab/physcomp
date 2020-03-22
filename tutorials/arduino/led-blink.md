@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Blink LED
+title: L2&#58; Blinking an LED
 nav_order: 2
-parent: Basics
+parent: Intro to Arduino
 has_toc: true # (on by default)
 ---
-# Programmatically Blinking an LED
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Inspirations
-nav_order: 7
-has_children: true
+nav_order: 1
+parent: Resources
 has_toc: true # (on by default)
 ---
 # Inspirations

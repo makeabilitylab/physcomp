@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Fading an LED
-nav_order: 1
-parent: Basics
+title: L3&#58; Fading an LED
+nav_order: 3
+parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 ---
-# Fading an LED
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents

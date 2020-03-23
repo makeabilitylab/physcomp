@@ -1,12 +1,11 @@
 ---
 layout: default
-title: Blinking Two LEDs
-nav_order: 1
-parent: Basics
+title: L4&#58; Blinking Two LEDs
+parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 ---
-# Blinking Two LEDs
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents
@@ -41,15 +40,13 @@ TODO: insert breadboard here.
 
 In this step, you'll wire up the exact same circuit used in our previous examples (*e.g.,* [LED Blink](led-blink.md) and [LED Fade](led-fade.md)) but this time using a breadboard. Make sure the LED anode (the long leg) is facing Pin 3.
 
-![Diagram showing the LED circuit with with LED anode connected to Pin 3 and the resistor connected to the LED cathode and then to GND](assets/images/ArduinoUno_LEDBlink2_Circuit_Step2.png)
+![Diagram showing the LED circuit with with LED anode connected to Pin 3 and the resistor connected to the LED cathode and then to GND](assets/images/ArduinoUnoLEDBlink2_Circuit_Step2WithSchematic.png)
 
 ### Step 3: Wire up the second LED circuit
 
 In this step, you'll wire up the second LED circuit. This time, however, connect the LED cathode (short leg) to Pin 4 and the resistor to the 5V rail.
 
-![Diagram showing the LED circuit with with LED cathode connected to Pin 4 and the resistor connected to the LED anode and then to GND](assets/images/ArduinoUno_LEDBlink2_Circuit_Step3.png)
-
-TODO: add schematic diagram?
+![Diagram showing the LED circuit with with LED cathode connected to Pin 4 and the resistor connected to the LED anode and then to GND](assets/images/ArduinoUno_LEDBlink2_Circuit_Step3WithSchematic.png.png)
 
 ## Writing the code: blinking Pins 3 and 4
 TODO

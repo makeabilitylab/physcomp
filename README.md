@@ -12,6 +12,9 @@ permalink: /
 - A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, co-founder of [BoingBoing](https://boingboing.net/), & former editor of MAKE Magazine)
 {: .fs-2 .pl-8}
 
+<!-- including other markdown pages: https://stackoverflow.com/a/41966993/388117>
+<!-- {% include_relative tutorials/index.md %} -->
+
 ## About this website
 
 ## Acknowledgments

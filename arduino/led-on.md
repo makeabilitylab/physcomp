@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Turn on LED
+title: L1&#58; Turn on an LED
 nav_order: 1
-parent: Basics
+parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 ---
-# Hook up an LED to Arduino (Always On)
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents

@@ -4,6 +4,7 @@ title: Microcontrollers
 nav_order: 2
 has_children: true
 # has_toc: false (on by default)
+nav_exclude: true
 ---
 # Microcontrollers
 {: .no_toc }

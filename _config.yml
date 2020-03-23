@@ -20,6 +20,10 @@ description: A learning resource for prototyping interactive digital-physical sy
 # See: https://stackoverflow.com/a/19173888/388117
 baseurl: /physcomp
 
+
+# custom site variables
+arduino_github_baseurl: "https://github.com/jonfroehlich/arduino"
+
 # Set a path/url to a logo that will be displayed instead of the title
 # logo: "/assets/images/logo.png"
 

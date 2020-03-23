@@ -15,20 +15,23 @@ has_toc: true # (on by default)
 {:toc}
 ---
 
-In this tutorial, we will learn the difference between **current sourcing** and **current sinking** by revisiting our [LED Blink](led-blink.md) example. We are going to TODO.
+In this tutorial, we will learn the difference between **current sourcing** and **current sinking** by revisiting our [LED Blink](led-blink.md) example. We are going to build two simple LED circuits:
 
-TODO: insert video of two LEDS blinking (alternatively). Should have annotations? Should have current animation?
+1. **LED Circuit 1** will be the exact same as before with the LED anode facing Pin 3 and the cathode facing ground. When we drive Pin 3 `HIGH` (5V), the current will travel through the LED to `GND`. In this circuit, Pin 3 is the current source.
+2. **LED Circuit 2** is similar but different. Here, we'll hook up a second LED with the anode facing *away* from Pin 4 (instead, towards 5V) and the cathode facing toward Pin 4. When we drive Pin 4 `HIGH` (5V), the LED will turn *off* (because no voltage difference exists). If we drive Pin 4 `LOW` (0V), the LED will turn on. In this circuit, Pin 4 is the current sink.
+
+In the animation below, pay attention to the current direction for each circuit.
+
+![Animation showing how driving Pin 3 and 4 HIGH will turn on LED Circuit 1 and off LED Circuit 2 and driving those pins LOW will turn off LED Circuit 1 and on LED Circuit 2](assets/movies/Arduino_Blink2Animation_Pins3And4-NoSchematic-Optimized.gif)
 
 ## Materials
 
-Our materials are *almost* the same as before but this time, we are going to make two separate LED circuits (with the same components). So, we need **two** red LEDs and **two** 220Ω resistors. Now that we're using more components, we'll also need a **breadboard**—which will make it easier to make a clean, organized circuit.
+Our materials are *almost* the same as before but this time, we are going to make two separate LED circuits (with the same components). So, we need **two** red LEDs and **two** 220Ω resistors. Now that we're using more components, we'll also need a **breadboard**—which will make it easier to make a clean, organized circuit. TODO: please read the breadboard tutorial before you start this lesson!
 
-| Arduino | LED | Resistor |
-|:-----:|:-----:|:-----:|
-| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
-| Arduino Uno, Leonardo, or similar  | **2** Red LEDs | **2** 220Ω Resistors |
-
-TODO: insert breadboard here.
+| Breadboard | Arduino | LED | Resistor |
+|:-----:|:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | **2** Red LEDs | **2** 220Ω Resistors |
 
 ## Making the circuit
 
@@ -38,19 +41,19 @@ TODO: insert breadboard here.
 
 ### Step 2: Wire up the first LED circuit
 
-In this step, you'll wire up the exact same circuit used in our previous examples (*e.g.,* [LED Blink](led-blink.md) and [LED Fade](led-fade.md)) but this time using a breadboard. Make sure the LED anode (the long leg) is facing Pin 3.
+Now wire up the exact same circuit as before (*e.g.,* [LED Blink](led-blink.md) and [LED Fade](led-fade.md)) but this time using a breadboard. Make sure the LED anode (the long leg) is facing Pin 3.
 
 ![Diagram showing the LED circuit with with LED anode connected to Pin 3 and the resistor connected to the LED cathode and then to GND](assets/images/ArduinoUnoLEDBlink2_Circuit_Step2WithSchematic.png)
 
 ### Step 3: Wire up the second LED circuit
 
-In this step, you'll wire up the second LED circuit. This time, however, connect the LED cathode (short leg) to Pin 4 and the resistor to the 5V rail.
+Now wire up the second LED circuit. This time, however, connect the LED cathode (short leg) to Pin 4 and the resistor to the 5V rail.
 
 ![Diagram showing the LED circuit with with LED cathode connected to Pin 4 and the resistor connected to the LED anode and then to GND](assets/images/ArduinoUno_LEDBlink2_Circuit_Step3WithSchematic.png.png)
 
 ## Writing the code: blinking Pins 3 and 4
 
-We are going to write code to blink the LEDs hooked up to Pins 3 and 4. The Pin 3 circuit (**LED Circuit 1** in our diagram) will turn ***on*** with `digitalWrite(3, HIGH)` whereas the Pin 4 circuit (**LED Circuit 2**) will turn ***off*** with `digitalWrite(4, HIGH)`.
+We are going to write code to blink the LEDs hooked up to Pins 3 and 4. The Pin 3 circuit (**LED Circuit 1** i) will turn ***on*** with `digitalWrite(3, HIGH)` whereas the Pin 4 circuit (**LED Circuit 2**) will turn ***off*** with `digitalWrite(4, HIGH)`. Why? Recall that current always flows from **high** voltage potential to **low** voltage potential. See the animation at the end of the code.
 
 ### Step 1: Write the setup and initialization code
 
@@ -68,6 +71,7 @@ void setup() {
 {% endhighlight C %}
 
 ### Step 2: Write the blink code in loop()
+
 {% highlight C %}
 // The loop function runs over and over again forever
 void loop() {
@@ -85,7 +89,16 @@ void loop() {
 
 ### Step 3: Compile, upload, and run the code!
 
-![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif)
+<!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
+
+<video controls="controls">
+  <source src="assets/movies/Arduino_Blink2Animation_Pins3And4.mp4" type="video/mp4">
+</video>
+
+## Our Blink2 code is in GitHub
+
+You can access our Blink2 code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). It's also displayed below:
+<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalWrite/Blink2LEDs/Blink2LEDs.ino?footer=minimal"></script>
 
 <span class="fs-6">
 [Previous: LED Fade](led-fade.md){: .btn .btn-outline }

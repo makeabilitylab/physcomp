@@ -182,6 +182,10 @@ Of course, it's the **current** through the LED that determines brightness. Agai
 | 199 | 3.9V | 220Ω | $$I = TODO $$ |
 | 255 | 5V | 220Ω | $$I = TODO $$ |
 
+## Next Lesson
+
+In the next lesson, we will learn about the difference between **current sources** and **current sinks** to help reinforce our understanding of how microcontrollers drive output.
+
 <span class="fs-6">
 [Previous: LED Blink](led-blink.md){: .btn .btn-outline }
 [Next: LED Blink 2](led-blink2.md){: .btn .btn-outline }

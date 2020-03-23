@@ -216,7 +216,8 @@ The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) us
 ![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
 
 ## Next Lesson
-In the next lesson, we will learn how to control the output voltage at levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
+
+In the next lesson, we will learn how to control the output voltage not just at `LOW` (0V) or `HIGH` (5V) but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
 
 <span class="fs-6">
 [Previous: Turning on an LED with Arduino](led-on.md){: .btn .btn-outline }

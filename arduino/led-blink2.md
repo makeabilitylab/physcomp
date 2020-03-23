@@ -99,7 +99,7 @@ void loop() {
 
 <!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
 
-## Our Blink2 code is in GitHub
+## Our Blink2 code on GitHub
 
 You can access our Blink2 code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). It's also displayed below:
 <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalWrite/Blink2LEDs/Blink2LEDs.ino?footer=minimal"></script>

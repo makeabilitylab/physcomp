@@ -28,6 +28,7 @@ Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherw
   - Here's miminimal mistakes version: https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/docs/_posts/2013-01-11-markup-html-tags-and-formatting.md
     - And the scss: https://github.com/mmistakes/minimal-mistakes/blob/0cf1a2e1144336b5e026d13b5fd87dc2af02fe8c/_sass/minimal-mistakes/_base.scss
 - Possible to add last modified date into file?
+- Update all arduino code in github to include link back to website
 - [Done] Embedding code from github repo into jekyll post
   - https://blog.revathskumar.com/2012/08/embed-files-from-github-repository-into-webpage.html
   - https://flowerinthenight.com/blog/2017/11/28/embed-github-code

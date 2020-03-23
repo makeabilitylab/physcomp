@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L1&#58; Turn on an LED
+title: L1&#58; Turning on an LED
 nav_order: 1
 parent: Intro to Arduino
 usemathjax: true

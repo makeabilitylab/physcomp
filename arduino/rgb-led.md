@@ -16,6 +16,8 @@ has_toc: true # (on by default)
 {:toc}
 ---
 
+![Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6](assets/movies/Arduino_RGBLED_CommonCathode-Optimized.gif)
+
 ## TODO:
 - Working with a cathode RGB LED
 - Now, let's do it with an anode RGB LED. Refer back to led-blink2 with current sink vs source

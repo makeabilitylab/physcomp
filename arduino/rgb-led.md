@@ -61,8 +61,15 @@ We're going to start with a Common Cathode circuit + code because it's more intu
 
 ### Making the circuit
 
-With a Common Cathode design, the 2nd leg needs to be hooked up 
+With a Common Cathode design, the 2nd leg needs to be hooked up to the `GND` pin and the 1st (red), 3rd (blue), and 4th (green) legs should connect to digital I/O pins (don't forget a current limiting resistor for each). We could have used any digital I/O pins; however, we chose Pins 6, 5, and 3 for red, blue, and green respectively.
 
+Here's the wiring without a breadboard:
+
+![Circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCircuit.png)
+
+And here's the wiring with a breadboard (the schematic on the right is the same either way):
+
+![Breadboard circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCircuitWithBreadboard.png)
 
 ### Writing the code
 

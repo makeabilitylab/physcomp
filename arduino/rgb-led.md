@@ -65,17 +65,41 @@ With a Common Cathode design, the 2nd leg needs to be hooked up to the `GND` pin
 
 Here's the wiring without a breadboard:
 
-![Circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCircuit.png)
+![Circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonCathode_WiringDiagram.png)
 
-And here's the wiring with a breadboard (the schematic on the right is the same either way):
+And here's the wiring with a breadboard (the schematic on the right is the same either way). Notice how the schematic highlights how the current flows from the I/O pins, through the resistors, into the RGB LED, and then down to ground. 
 
-![Breadboard circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCircuitWithBreadboard.png)
+![Breadboard circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonCathode_WiringDiagramWithBreadboard.png)
 
 ### Writing the code
 
+We are going to write code that flashes through a sequence of colors. Recall that the embedded red LED is hooked up to Pin 6, the blue LED to Pin 5, and the green LED to Pin 3. We will control the RGB LED color outputting `HIGH` (5V) using [`digitalWrite` ](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) to these pins.
+
+Specifically, we will flash the following sequence:
+
+| Color | Red, Green, Blue Pin Values
+|:----|:-----|
+| <span style="background-color:#FF0000">&nbsp;&nbsp;</span> Red | `HIGH`, `LOW`, `LOW` |
+| <span style="background-color:#00FF00">&nbsp;&nbsp;</span> Green | `LOW`, `HIGH`, `LOW` |
+| <span style="background-color:#0000FF">&nbsp;&nbsp;</span> Blue | `LOW`, `LOW`, `HIGH` |
+| <span style="background-color:#FF00FF">&nbsp;&nbsp;</span> Purple | `HIGH`, `LOW`, `HIGH` |
+| <span style="background-color:#00FFFF">&nbsp;&nbsp;</span> Turqoise | `HIGH`, `LOW`, `HIGH` |
+| <span style="background-color:#FFFFFF">&nbsp;&nbsp;</span> White | `HIGH`, `HIGH`, `HIGH` |
+
+---
+
+**NOTE:** For those familiar with html, this is very similar to html hexadecimal color codes where red is specified by <span style="background-color:#FF0000; color:white">#FF0000</span>, green by <span style="background-color:#00FF00; color:black">#0000FF</span>, 
+blue by <span style="background-color:#0000FF; color:white">#0000FF</span>, and so on.
+
+---
+
 ## Common Anode
 
+![Circuit wiring for an RGB LED Common Anode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonAnode_WiringDiagram.png)
+
 ### Making the circuit
+
+![Breadboard circuit wiring for an RGB LED Common Anode design where the anode is hooked to 5V](assets/images/ArduinoUno_RgbLEDCommonAnode_WiringDiagramWithBreadboard.png)
 TODO
 
 ### Writing the code

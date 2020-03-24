@@ -31,29 +31,38 @@ You'll need the following materials. Importantly, there are **two types** of RGB
 
 ### Common Anode vs. Common Cathode
 
-While capable of displaying thousands of color combinations, RGB LEDs are actually quite simple; they contain three LEDs in one package: red, green, and blue. Importantly but somewhat confusingly, there are two RGB LED designs, which differ in the leg shared between all three embedded LEDs: 
+While capable of displaying thousands of color combinations, RGB LEDs are actually quite simple; they contain three LEDs in one package: red, green, and blue. Importantly but somewhat confusingly, there are two RGB LED designs—the **Common Anode** and the **Common Cathode**—which differ in the leg shared between the three embedded LEDs.
 
-1. With the **Common Anode**, the three embedded LEDs share the anode leg. You must hook up the anode to the higher voltage source and set the red, green, and blue legs to lower voltages to control the color. For example, with a 5V voltage source, setting the red leg to 0V and the other two legs to 5V would turn the RGB LED red. Setting all three color legs to 5V would turn off the RGB LED.
+1. With the **Common Anode**, the three embedded LEDs share the anode leg. To control the RGB LED's color and drive current, you must hook up the anode to the higher voltage source and connect the red, green, and blue legs to lower voltage levels (*e.g.,* ground). 
 
-2. In contrast, the **Common Cathode** works much more like a typical LED (and like the red LED from our previous examples). Here, all three emedded LEDs share the cathode leg. So, you drive each individual color leg with a higher voltage source.
+<!-- For example, with a 5V voltage source connected to the common anode leg, setting the three other legs (red, green, blue) to 5V would, somewhat counterintuively, turn off the LED. In contrast, setting the red leg to 0V, for example, and the other two legs to 5V would turn the RGB LED red. -->
 
-![Image showing schematics of a common anode RGB LED and a common cathode RGB LED. With the common anode, the second leg of the RGB LED needs to be hooked up to the higher voltage source. With a common cathode, the second leg of the RGB LED needs to be hooked up to the lower voltage]({{ site.baseurl }}/assets/images/RGBLEDs_CommonAnodeVsCommonCathodepng.png)
+2. In contrast, the **Common Cathode** works much more like a typical LED (and like the red LED from our previous examples). Here, all three embedded LEDs share the cathode leg. So, you drive each individual color leg with a higher voltage source. 
 
-Images remixed from [os.mbed.com](https://os.mbed.com/users/4180_1/notebook/rgb-leds/) and [randomnerdtutorials.com](https://randomnerdtutorials.com/electronics-basics-how-do-rgb-leds-work/)
-{: .fs-1 }
+<!-- For example, to turn the Common Cathode RGB LED red, you would set the cathode leg to ground, the red leg to 5V -->
 
-Unfortunately, you cannot tell whether you have a Common Anode or Common Cathode RGB LED simply by looking at it. You can either look at the supplier website, the datasheet, or experiment with the LED yourself (remember, diodes only work in one directly so as long as you include your current limiting resistors, you should be fine!).
+![Image showing schematics of a common anode RGB LED and a common cathode RGB LED. With the common anode, the second leg of the RGB LED needs to be hooked up to the higher voltage source. With a common cathode, the second leg of the RGB LED needs to be hooked up to the lower voltage]({{ site.baseurl }}/assets/images/RgbLEDS_CommonAnodeVsCommonCathode.png)
+
+#### How can I tell if I have a Common Anode or Cathode RGB LED?
+You **cannot** tell whether you have a Common Anode or Common Cathode RGB LED by visual inspection. Instead, consult the supplier website, the datasheet, or experiment with the LED yourself (remember, diodes only work in one directly so as long as you include your current limiting resistors, you should be fine!).
 
 | Common Anode | Common Cathode |
 |:-----:|:-----:|
 | ![Picture of a Common Anode RGB LED]({{ site.baseurl }}/assets/images/RgbLED_CommonAnode_Adafruit.png) | ![Picture of a Common Anode RGB LED]({{ site.baseurl }}/assets/images/RgbLED_CommonCathode_Sparkfun.png) |
 | A diffused **Common Anode** RGB LED from [Adafruit](https://www.adafruit.com/product/159). It's called diffused because the epoxy casing is scratchy and not perfectly transparent | A clear **Common Cathode** RGB LED from [Sparkfun](https://www.sparkfun.com/products/105). |
 
+Here are two screenshots of supplier websites ([Sparkfun](https://sparkfun.com) and [Adafruit](https://adafruit.com)). Notice how the RGB LED type is clearly labeled.
+
+![Screenshots of Sparkfun and Adafruit websites showing RGB LEDs](assets/images/RgbLEDs_SparkfunAndAdafruitSupplierScreenshots.png)
+
 ## Common Cathode
+
+We're going to start with a Common Cathode circuit + code because it's more intuitive (and similar to our red LED tutorials) before covering the Common Anode version.
 
 ### Making the circuit
 
-We're going to start with a Common Cathode circuit + code because it's more intuitive before covering the Common Anode version.
+With a Common Cathode design, the 2nd leg needs to be hooked up 
+
 
 ### Writing the code
 

@@ -48,7 +48,7 @@ TODO:
 
 TODO: consider adding interrupts here? Like after Lesson 2?
 
-### Lesson 1: Turn on an LED with a button
+### Lesson 1: Using buttons
 
 Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
 

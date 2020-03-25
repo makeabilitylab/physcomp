@@ -73,15 +73,37 @@ It works with almost all markdown flavours (the below blank line matters). This 
     Hit tab twice, type up the content
     Your content should appear in a box. However, doesn't appear to now support markdown. For example, **this** should be bold. However, I can still use html it appears? For example, <b>this</b> is bold? Or maybe not! So, perhaps this is treated as a code block or something...
 
+## Notes
+- To crop animated gifs, I use: https://ezgif.com/
+
 # Static Site Generator Options
 
+## Python
+- [mkdocs.org](https://mkdocs.org).
+
+## Rust
+- [mdbook](https://rust-lang.github.io/mdBook/). Examples below:
+  - [Intro to Reverse Engineering](https://guyinatuxedo.github.io/)
+
 ## Jekyll
+
+### Installation
+
+#### Mac
+- Follow the [official installation guide](https://jekyllrb.com/docs/installation/)
+
+#### Windows
+- I used the Chocolatey Windows package manager ([installation instructions here](https://chocolatey.org/install)). Fastest way to open PowerShell with admin privilages is `Windows-X`
+- Then I followed the instructions [here](https://learn.cloudcannon.com/jekyll/install-jekyll-on-windows/).  
+
+### Templates
 - Minimal Mistakes
 - "Just the Docs"
 
-## Just the Docs
+### Just the Docs
+Probably my favorite template that I've evaluated so far
 
-### Better support for grandchildren
+#### Better support for grandchildren
 Looks like it was addressed here:
 - https://pdmosses.github.io/test-nav/docs/utilities
 - https://github.com/pmarsceill/just-the-docs/pull/192
@@ -93,16 +115,6 @@ To build the docs with Jekyll,
 - `> bundle`
 - `> bundle exec jekyll serve`
 - Follow directions for web addie
-
-## Python
-- [mkdocs.org](https://mkdocs.org).
-
-## Rust
-- [mdbook](https://rust-lang.github.io/mdBook/). Examples below:
-  - [Intro to Reverse Engineering](https://guyinatuxedo.github.io/)
-
-## Notes
-- To crop animated gifs, I use: https://ezgif.com/
 
 ### Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
@@ -147,13 +159,16 @@ After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll te
 {% endif %}
 ```
 
-4. Still need to test that this works when deployed on GitHub.
+4. Still need to test that this works when deployed on GitHub. Update: it does!
 
 5. Because I'm forever a LaTeX n00b, I found this online WYSIWYG LaTeX math editor: https://www.mathcha.io/editor. See: https://tex.stackexchange.com/questions/57068/wysiwyg-latex-editor-for-maths
 
 Here's a test LaTeX equation. If it works, this should render correctly.
 
 $$\frac{\partial f(y)}{\partial x} = \frac{\partial f}{\partial y} \times \frac{\partial y}{\partial x}$$
+
+## VS Code
+- TODO: add extensions used to help with markdown, etc.
 
 <!--
 ## Ideas to Call This Repo and Site?

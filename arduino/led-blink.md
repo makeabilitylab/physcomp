@@ -2,7 +2,7 @@
 layout: default
 title: L2&#58; Blinking an LED
 nav_order: 2
-parent: Intro to Arduino
+parent: Input
 has_toc: true # (on by default)
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
@@ -208,9 +208,27 @@ You can access our Blink code in our [Arduino GitHub repository](https://github.
 
 ## Use the built-in LED
 
-Finally, it's worth pointing out that Arduino has a built-in LED that's often useful for some quick debugging (*e.g.,* turn on the built-in LED to indicate some program state). On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write `digitalWrite(13, HIGH);` in your code, the built-in LED will turn on.
+Finally, the Arduino has a built-in LED (with an in-series resistor) that's often useful for some quick debugging (*e.g.,* turn on the built-in LED to indicate some program state). On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write `digitalWrite(13, HIGH);` in your code, the built-in LED will turn on. Because not all Arduino boards have the built-in LED at Pin 13, you can also use the constant `LED_BUILTIN`.
 
-The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) uses the built-in LED to demonstrate blinking. You can access this example directly in the Arduino IDE:
+The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) uses the built-in LED and the constant `LED_BUILTIN` to demonstrate blinking. 
+
+{% highlight C %}
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);                       // wait for a second
+}
+{% endhighlight C %}
+
+You can access this example directly in the Arduino IDE:
 
 ![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
 

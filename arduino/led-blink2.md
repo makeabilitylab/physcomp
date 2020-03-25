@@ -1,7 +1,7 @@
 ---
 layout: default
 title: L4&#58; Blinking Two LEDs
-parent: Intro to Arduino
+parent: Output
 usemathjax: true
 has_toc: true # (on by default)
 ---
@@ -96,6 +96,8 @@ void loop() {
 {% endhighlight C %}
 
 ### Step 3: Compile, upload, and run the code!
+
+TODO: insert video here
 
 <!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
 

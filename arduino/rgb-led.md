@@ -61,21 +61,35 @@ We're going to start with a Common Cathode circuit + code because it's more intu
 
 ### Making the circuit
 
-With a Common Cathode design, the 2nd leg needs to be hooked up to the `GND` pin and the 1st (red), 3rd (blue), and 4th (green) legs should connect to digital I/O pins (don't forget a current limiting resistor for each). We could have used any digital I/O pins; however, we chose Pins 6, 5, and 3 for red, blue, and green respectively.
+With a Common Cathode design, the 2nd leg needs to be hooked up to the `GND` pin and the 1st (red), 3rd (blue), and 4th (green) legs should connect to digital I/O pins (don't forget a current limiting resistor for each). We could have used any digital I/O pins; however, we chose Pins 6, 5, and 3 for red, blue, and green respectively (these pins support PWM and thus, we'll be able to use the same circuit for our next tutorial on [cross-fading colors with RGB LEDs](rgb-led-fade.md)).
 
-Here's the wiring without a breadboard:
+Here's the wiring without a breadboard (not recommended but perhaps easier to see the circuit itself):
 
 ![Circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonCathode_WiringDiagram.png)
 
-And here's the wiring with a breadboard (the schematic on the right is the same either way). Notice how the schematic highlights how the current flows from the I/O pins, through the resistors, into the RGB LED, and then down to ground. 
+And here's the wiring with a breadboard (the schematic on the right is the same either way). Notice how the schematic highlights how the current flows from the I/O pins, through the resistors, into the RGB LED, and then down to ground.
 
 ![Breadboard circuit wiring for an RGB LED Common Cathode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonCathode_WiringDiagramWithBreadboard.png)
 
 ### Writing the code
 
-We are going to write code that flashes through a sequence of colors. Recall that the embedded red LED is hooked up to Pin 6, the blue LED to Pin 5, and the green LED to Pin 3. We will control the RGB LED color outputting `HIGH` (5V) using [`digitalWrite` ](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) to these pins.
+We are going to write code that flashes through a sequence of colors. Recall that the embedded red LED is hooked up to Pin 6, the blue LED to Pin 5, and the green LED to Pin 3. We will control the RGB LED color by outputting `HIGH` (5V) or `LOW` (0V) using [`digitalWrite` ](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) to these pins.
 
-Specifically, we will flash the following sequence:
+For example, to make the RGB LED turn red, we would write:
+{% highlight C %}
+digitalWrite(RGB_RED_LED_PIN, HIGH);
+digitalWrite(RGB_GREEN_LED_PIN, LOW);
+digitalWrite(RGB_BLUE_LED_PIN, LOW);
+{% endhighlight C %}
+
+Similarly, to make the RGB LED turn green, we would write:
+{% highlight C %}
+digitalWrite(RGB_RED_LED_PIN, LOW);
+digitalWrite(RGB_GREEN_LED_PIN, HIGH);
+digitalWrite(RGB_BLUE_LED_PIN, LOW);
+{% endhighlight C %}
+
+In this example, we will flash the following sequence:
 
 | Color | Red, Green, Blue Pin Values
 |:----|:-----|
@@ -88,24 +102,134 @@ Specifically, we will flash the following sequence:
 
 ---
 
-**NOTE:** For those familiar with html, this is very similar to html hexadecimal color codes where red is specified by <span style="background-color:#FF0000; color:white">#FF0000</span>, green by <span style="background-color:#00FF00; color:black">#0000FF</span>, 
+**NOTE:** For those familiar with html, this is very similar to html hexadecimal color codes where red, for example, is specified by <span style="background-color:#FF0000; color:white">#FF0000</span>, green by <span style="background-color:#00FF00; color:black">#00FF00</span>, 
 blue by <span style="background-color:#0000FF; color:white">#0000FF</span>, and so on.
 
 ---
 
+#### Step 1: Write initialization code
+
+As usual, we introduce some constants for our literal assignments and then setup our pins as `OUTPUT`.
+
+{% highlight C %}
+const int DELAY_MS = 1000;       // delay between color changes in ms
+const int RGB_RED_LED_PIN = 6;   // indicated by orange wire
+const int RGB_BLUE_LED_PIN = 5;  // indicaed by blue wire
+const int RGB_GREEN_LED_PIN = 3; // indicated by green wire
+
+void setup()
+{
+  // Set the red, green, and blue RGB LED pins to output
+  pinMode(RGB_RED_LED_PIN, OUTPUT);
+  pinMode(RGB_BLUE_LED_PIN, OUTPUT);
+  pinMode(RGB_GREEN_LED_PIN, OUTPUT);
+}
+{% endhighlight C %}
+
+#### Step 2: Write a new helper function called setRgbLedColor
+
+To help set RGB LED colors, we are going to write a new function called `setRgbLedColor(int red, int green, int blue)`, which takes in either a `HIGH` or `LOW` for the red, green, and blue int parameters.
+
+{% highlight C %}
+// TODO: put in appropriate code comments
+void setRgbLedColor(int red, int green, int blue){
+  digitalWrite(RGB_RED_LED_PIN, red);
+  digitalWrite(RGB_GREEN_LED_PIN, green);
+  digitalWrite(RGB_BLUE_LED_PIN, blue);
+}
+{% endhighlight C %}
+
+#### Step 3: Write the color sequence
+
+Now, in `loop()`, we'll write the specific color sequence that we want:
+
+{% highlight C %}
+void loop()
+{
+  // red
+  setRgbLedColor(255, 0, 0);
+  delay(DELAY_MS);
+  
+  // green
+  setRgbLedColor(0, 255, 0);
+  delay(DELAY_MS);
+  
+  // blue
+  setRgbLedColor(0, 0, 255);
+  delay(DELAY_MS);
+  
+  // purple
+  setRgbLedColor(255, 0, 255);
+  delay(DELAY_MS);
+  
+  // turqoise
+  setRgbLedColor(0, 255, 255);
+  delay(DELAY_MS);
+  
+  // white
+  setRgbLedColor(255, 255, 255);
+  delay(DELAY_MS);
+}
+{% endhighlight C %}
+
+#### Step 4: Compile, upload, and run
+
+That's it. Now compile, upload, and run your code! 
+
+Below, we have a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current.
+
+<video controls="controls">
+  <source src="assets/movies/Arduino_RGBLED_CommonCathode.mp4" type="video/mp4">
+</video>
+
 ## Common Anode
 
-![Circuit wiring for an RGB LED Common Anode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonAnode_WiringDiagram.png)
+Now, let's work on the Common Anode version. The circuit wiring is almost the exact same as before: the 1st leg (red), 3rd leg (blue), and 4th leg (green) of the RGB LED should connect to digital I/O Pins 6, 5, and 3 respectively (along with a current limiting resistor for each); however, the 2nd leg is now a **common anode** and thus, should be connected to 5V.
+
+To drive current through our circuit and turn on an embedded LED—say the red LED—we counterintuitively have to set Pin 6 (the red LED leg) to `LOW` and Pins 5 and 3 to `HIGH`. The key here is to remember that current always flows from **high potential** to **low potential**. With a Common Anode, the 2nd leg is the anode (high potential or, in this case, 5V) so we must connect the other legs to lower potential to create a voltage difference and allow current to flow.
 
 ### Making the circuit
 
+As before, here's a circuit wiring diagram without a breadboard (which more cleanly shows connections but would be difficult, in practice, to reliably make):
+
+![Circuit wiring for an RGB LED Common Anode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonAnode_WiringDiagram.png)
+
+And here's the more practical breadboarded version:
+
 ![Breadboard circuit wiring for an RGB LED Common Anode design where the anode is hooked to 5V](assets/images/ArduinoUno_RgbLEDCommonAnode_WiringDiagramWithBreadboard.png)
-TODO
 
 ### Writing the code
-TODO
+
+The Common Anode RGB LED works completely opposite to the Common Cathode version For example, to make the RGB LED turn red, we would write:
+
+{% highlight C %}
+digitalWrite(RGB_RED_LED_PIN, LOW);
+digitalWrite(RGB_GREEN_LED_PIN, HIGH);
+digitalWrite(RGB_BLUE_LED_PIN, HIGH);
+{% endhighlight C %}
+
+Similarly, to make the RGB LED turn green, we would write:
+{% highlight C %}
+digitalWrite(RGB_RED_LED_PIN, HIGH);
+digitalWrite(RGB_GREEN_LED_PIN, LOW);
+digitalWrite(RGB_BLUE_LED_PIN, HIGH);
+{% endhighlight C %}
+
+We will flash the same sequence as before but again our `HIGH`s and `LOW`s are flipped:
+
+| Color | Red, Green, Blue Pin Values
+|:----|:-----|
+| <span style="background-color:#FF0000">&nbsp;&nbsp;</span> Red | `LOW`, `HIGH`, `HIGH` |
+| <span style="background-color:#00FF00">&nbsp;&nbsp;</span> Green | `HIGH`, `LOW`, `HIGH` |
+| <span style="background-color:#0000FF">&nbsp;&nbsp;</span> Blue | `HIGH`, `HIGH`, `LOW` |
+| <span style="background-color:#FF00FF">&nbsp;&nbsp;</span> Purple | `LOW`, `HIGH`, `LOW` |
+| <span style="background-color:#00FFFF">&nbsp;&nbsp;</span> Turqoise | `LOW`, `HIGH`, `LOW` |
+| <span style="background-color:#FFFFFF">&nbsp;&nbsp;</span> White | `LOW`, `LOW`, `LOW` |
+
+TODO: show code
 
 ## Coding for both Common Cathode and Anode
+TODO: modify setRgbLedColor to include a boolean of which type of RGB LED it is and invert the HIGH and LOW
 
 ## TODO:
 - Working with a cathode RGB LED

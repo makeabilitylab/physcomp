@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L6&#58; Fading an LED
+title: L6&#58; Crossfading a RGB LED
 parent: Intro to Arduino
 usemathjax: false
 has_toc: true # (on by default)

@@ -123,7 +123,6 @@ Finally, upload the code to the Arduino! Once complete, the code automatically r
 
 TODO: insert video.
 
-
 ## Turn on and off the LED programatically via Pin 3
 
 Now, let's modify our code to turn on *and* off the LED programatically. More specifically, we will alternate between having the LED on for one second and having the LED off for one second. To do this, we'll use the [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/) function, which pauses the program for the specified amount of time (in milliseconds).

@@ -15,6 +15,9 @@ permalink: /
 <!-- including other markdown pages: https://stackoverflow.com/a/41966993/388117>
 <!-- {% include_relative tutorials/index.md %} -->
 
+## Example Hardware Kits
+- CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
+
 ## About this website
 
 ## Acknowledgments
@@ -169,6 +172,13 @@ $$\frac{\partial f(y)}{\partial x} = \frac{\partial f}{\partial y} \times \frac{
 
 ## VS Code
 - TODO: add extensions used to help with markdown, etc.
+
+### Extensions
+I have the following extensions installed for VS Code:
+- Code Spell Check 1.8.0 (1.1m downloads)
+- Markdown All in One 2.7.0 (1.2m downloads)
+- markdownlint 0.34.0 (1.5, downloads)
+- Paste Image 1.0.4 (45K)
 
 <!--
 ## Ideas to Call This Repo and Site?

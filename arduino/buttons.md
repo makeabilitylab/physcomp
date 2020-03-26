@@ -31,7 +31,7 @@ For this lesson, we're going to use the Arduino's built in LED (`LED_BUILTIN`) s
 
 | Arduino | Button | Resistor |
 |:-----:|:-----:|:-----:|
-| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}assets/images/Button_12mmX12mm_Adafruit.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
+| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }/assets/images/Button_12mmX12mm_Adafruit.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Button (aka momentary switch) | 10KΩ Resistor |
 
 ## Digital I/O refresher
@@ -48,10 +48,10 @@ As previously noted, you can control any of these 14 digital I/O pins with three
 
 ### Digital input
 
-Digital input is any input that can be either **on** `HIGH` or **off** `LOW`. For example, a push button, a reed switch, or a binary tilt sensor.
+Digital input is any input that can be either **on** (`HIGH` or 5V) or **off** (`LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
 
 ![](assets/images/DigitalInput_ExampleGallery.png)
-Prices are from Sparkfun.com, Jan 2020; parts are cheaper in bulk and often cheaper from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
+Prices are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
 ## Outline
@@ -67,26 +67,26 @@ Prices are from Sparkfun.com, Jan 2020; parts are cheaper in bulk and often chea
 To use a digital input—say, a push button, a slider switch, a tilt switch, *etc.*—you need either a pull-down or pull-up resistor. Why? See below (right-click on the image and select 'Open Image in New Tab' for a enlarged version).
 
 ![Visual walkthrough of why a pull-down resistor setup of a button circuit is necessary](assets/images/Arduino_Button_PullDownResistor_Walkthrough.png)
-In this example, the button is hooked up to digital I/O pin 12 but any I/O pin should work!
+In this example, the button is hooked up to digital I/O pin 12 but any I/O pin will work.
 {: .fs-1 }
 
 While a **pull-down resistor** configuration biases the input pin to GND when a switch or button is in the open state, a **pull-up resistor** configuration does the opposite: in an open state, the microcontroller input pin reads `HIGH` (5V). When the switch is closed, the microcontroller reads `LOW` (0V).
 
 ![Difference between a pull-down vs. pull-up resistor](assets/images/Arduino_Button_PullDownVsPullUpResistor.png)
 
-Finally, many microcontrollers include an internal pull-up resistor that can be activated with software by writing: `pinMode(<pin>, INPUT_PULLIP);`. This eliminates the need for any external resistors (thus simplifying your circuit). 
+Finally, many microcontrollers include an internal pull-up resistor that can be activated with software. On the Arduino, we can configure an input pin with an internal pull-up resistor with: `pinMode(<pin>, INPUT_PULLIP);`. This eliminates the need for any external resistors (thus simplifying your circuit).
 
 ![Difference between a pull-down, pull-up, and internal pull-up resistor](assets/images/Arduino_Button_InternalPullUpResistor.png)
 
 We'll go through each of these circuit configurations below.
 
-### What value should I use for my pull-down or pull-up resistors
+### What value should I use for my pull-down or pull-up resistors?
 
 The official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between  50kΩ and 150kΩ.
 
 TODO: talk about tradeoffs in setting pull-up and pull-down resistor values
 
-### Dive deeper
+### Want to dive deeper?
 
 To learn more about pull-up and pull-down resistors, watch this fantastic video by NYU ITP's Jeff Feddersen:
 

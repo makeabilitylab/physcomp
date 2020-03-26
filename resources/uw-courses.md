@@ -18,6 +18,7 @@ has_toc: true # (on by default)
 There are a wide range of physical computing related courses at UW across many departments from Art to Engineering. Here's a sample (ordered alphabetically by course number).
 
 ### Undergrad
+Many of the 400 level courses are open to both ugrads and grads. In DXARTS, for example, the split is roughly 60% ugrad and 40% grad.
 
 - [**CSE 466: Software for Embedded Systems**](http://courses.cs.washington.edu/courses/cse466/) taught by [Bruce Hemingway](https://www.cs.washington.edu/people/faculty/bruceh).
   
@@ -27,7 +28,11 @@ There are a wide range of physical computing related courses at UW across many d
 
 - [**DESIGN 325: Physical Computing**](https://art.washington.edu/courses/2020/spring/design/325/a) taught by [Dominic Muren](https://art.washington.edu/people/dominic-muren) in the Schol of Art, Art History and Design.
 
-- [**DXARTS 471 A: Mechatronic Art, Design, and Fabrication**](https://dxarts.washington.edu/courses/2020/winter/dxarts/471/a) taught by [Afroditi Psarra](https://dxarts.washington.edu/people/afroditi-psarra) in Digital Arts and Experimental Media.
+- [**DXARTS 470: Sensing and Control for Interactive Environments**](https://dxarts.washington.edu/courses/2020/winter/dxarts/470) in Digital Arts and Experimental Media.
+
+- [**DXARTS 471: Mechatronic Art, Design, and Fabrication I**](https://dxarts.washington.edu/courses/2020/winter/dxarts/471/a) taught by [Afroditi Psarra](https://dxarts.washington.edu/people/afroditi-psarra) in Digital Arts and Experimental Media.
+
+- [**DXARTS 472: Mechatronic Art, Design, and Fabrication II**](https://dxarts.washington.edu/courses/2020/winter/dxarts/472) taught by [Afroditi Psarra](https://dxarts.washington.edu/people/afroditi-psarra) in Digital Arts and Experimental Media.
 
 - [**DXARTS 490A: E-Textiles & Wearables for Art & Design**](https://canvas.uw.edu/courses/1301821) taught by [Afroditi Psarra](https://dxarts.washington.edu/people/afroditi-psarra) in Digital Arts and Experimental Media.
 

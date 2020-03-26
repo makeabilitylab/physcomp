@@ -2,7 +2,7 @@
 layout: default
 title: L5&#58; RGB LEDs
 # nav_order: 1
-parent: Intro to Arduino
+parent: Output
 usemathjax: true
 has_toc: true # (on by default)
 ---
@@ -114,7 +114,7 @@ As usual, we introduce some constants for our literal assignments and then setup
 {% highlight C %}
 const int DELAY_MS = 1000;       // delay between color changes in ms
 const int RGB_RED_LED_PIN = 6;   // indicated by orange wire
-const int RGB_BLUE_LED_PIN = 5;  // indicaed by blue wire
+const int RGB_BLUE_LED_PIN = 5;  // indicated by blue wire
 const int RGB_GREEN_LED_PIN = 3; // indicated by green wire
 
 void setup()
@@ -147,46 +147,53 @@ Now, in `loop()`, we'll write the specific color sequence that we want:
 void loop()
 {
   // red
-  setRgbLedColor(255, 0, 0);
+  setRgbLedColor(HIGH, LOW, LOW);
   delay(DELAY_MS);
   
   // green
-  setRgbLedColor(0, 255, 0);
+  setRgbLedColor(LOW, HIGH, LOW);
   delay(DELAY_MS);
   
   // blue
-  setRgbLedColor(0, 0, 255);
+  setRgbLedColor(LOW, LOW, HIGH);
   delay(DELAY_MS);
   
   // purple
-  setRgbLedColor(255, 0, 255);
+  setRgbLedColor(255, LOW, HIGH);
   delay(DELAY_MS);
   
   // turqoise
-  setRgbLedColor(0, 255, 255);
+  setRgbLedColor(LOW, HIGH, HIGH);
   delay(DELAY_MS);
   
   // white
-  setRgbLedColor(255, 255, 255);
+  setRgbLedColor(HIGH, HIGH, HIGH);
   delay(DELAY_MS);
 }
 {% endhighlight C %}
 
 #### Step 4: Compile, upload, and run
 
-That's it. Now compile, upload, and run your code! 
+That's it. Now compile, upload, and run your code!
 
-Below, we have a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current.
+Below, we show a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current—it will flow in the opposite direction with the Common Anode design (covered next).
 
 <video controls="controls">
-  <source src="assets/movies/Arduino_RGBLED_CommonCathode.mp4" type="video/mp4">
+  <source src="assets/movies/Arduino_RGBLED_CommonCathode_Animation.mp4" type="video/mp4">
 </video>
 
 ## Common Anode
 
-Now, let's work on the Common Anode version. The circuit wiring is almost the exact same as before: the 1st leg (red), 3rd leg (blue), and 4th leg (green) of the RGB LED should connect to digital I/O Pins 6, 5, and 3 respectively (along with a current limiting resistor for each); however, the 2nd leg is now a **common anode** and thus, should be connected to 5V.
+Now, let's work on the Common Anode version. The circuit wiring is almost the exact same as before: the 1st leg (red), 3rd leg (blue), and 4th leg (green) of the RGB LED connect to digital I/O Pins 6, 5, and 3 respectively (along with a current limiting resistor for each); however, the 2nd leg is now a **common anode** and thus, should be connected to 5V (and not `GND` as it was for the common cathode). 
 
-To drive current through our circuit and turn on an embedded LED—say the red LED—we counterintuitively have to set Pin 6 (the red LED leg) to `LOW` and Pins 5 and 3 to `HIGH`. The key here is to remember that current always flows from **high potential** to **low potential**. With a Common Anode, the 2nd leg is the anode (high potential or, in this case, 5V) so we must connect the other legs to lower potential to create a voltage difference and allow current to flow.
+To drive current through our circuit and turn on an embedded LED—say the red LED—we counterintuitively have to set the corresponding LED pin to `LOW` (Pin 6, in this case) and the other LED pins to `HIGH` (Pins 5 and 3). Why? Remember that current always flows from **high potential** to **low potential**. With a Common Anode, the 2nd leg is the anode (high potential or, in this case, 5V) so we must connect the other legs to lower potential to create a voltage difference and allow current to flow. 
+
+---
+
+**Note:**
+Does this setup seem familiar? It should. With the Common Anode RGB LED, the digital I/O pins become *current sinks* just like LED Circuit 2 in the [LED Blink 2 tutorial](led-blink2.md).
+
+---
 
 ### Making the circuit
 
@@ -194,13 +201,13 @@ As before, here's a circuit wiring diagram without a breadboard (which more clea
 
 ![Circuit wiring for an RGB LED Common Anode design where the cathode is hooked to GND](assets/images/ArduinoUno_RgbLEDCommonAnode_WiringDiagram.png)
 
-And here's the more practical breadboarded version:
+And here's the more practical breadboarded version (again, the circuit diagram is the same in both the non-breadboard and breadboard version):
 
 ![Breadboard circuit wiring for an RGB LED Common Anode design where the anode is hooked to 5V](assets/images/ArduinoUno_RgbLEDCommonAnode_WiringDiagramWithBreadboard.png)
 
 ### Writing the code
 
-The Common Anode RGB LED works completely opposite to the Common Cathode version For example, to make the RGB LED turn red, we would write:
+The Common Anode RGB LED works **opposite** to the Common Cathode version—to turn on a particular color, we write out `LOW` rather than `HIGH`. For example, to make the RGB LED turn red, we would write:
 
 {% highlight C %}
 digitalWrite(RGB_RED_LED_PIN, LOW);
@@ -226,16 +233,82 @@ We will flash the same sequence as before but again our `HIGH`s and `LOW`s are f
 | <span style="background-color:#00FFFF">&nbsp;&nbsp;</span> Turqoise | `LOW`, `HIGH`, `LOW` |
 | <span style="background-color:#FFFFFF">&nbsp;&nbsp;</span> White | `LOW`, `LOW`, `LOW` |
 
-TODO: show code
+Here's an animation. Pay close attention to the current direction—it flows from 5V down through the LED, the current limiting resistors, and into the digital I/O pins.
+
+<video controls="controls">
+  <source src="assets/movies/Arduino_RGBLED_CommonAnode_Animation.mp4" type="video/mp4">
+</video>
+
+We're not going to include code specifically for the Common Anode RGB LED. Instead, we'll show how to adapt our previous Common Cathode code with only a few additional lines.
 
 ## Coding for both Common Cathode and Anode
-TODO: modify setRgbLedColor to include a boolean of which type of RGB LED it is and invert the HIGH and LOW
 
-## TODO:
-- Working with a cathode RGB LED
-- Now, let's do it with an anode RGB LED. Refer back to led-blink2 with current sink vs source
+Because the only difference between the Common Cathode code and the Common Anode code is inverting `HIGH`s and `LOW`s, we can simply update our previous Common Cathode code by adding in a `boolean` to check for which RGB LED version we are using. If a Common Anode then we will invert the `HIGH` and `LOW` signals—see the `setRgbLedColor` function.
+
+{% highlight C %}
+const int DELAY_MS = 1000;       // delay between color changes in ms
+const int RGB_RED_LED_PIN = 6;   // indicated by orange wire
+const int RGB_BLUE_LED_PIN = 5;  // indicated by blue wire
+const int RGB_GREEN_LED_PIN = 3; // indicated by green wire
+const boolean RGB_COMMON_CATHODE = false;
+
+void setup()
+{
+  // Set the red, green, and blue RGB LED pins to output
+  pinMode(RGB_RED_LED_PIN, OUTPUT);
+  pinMode(RGB_BLUE_LED_PIN, OUTPUT);
+  pinMode(RGB_GREEN_LED_PIN, OUTPUT);
+}
+
+// TODO: put in appropriate code comments
+// Set red to HIGH to turn on red, green to HIGH for green, 
+// and blue to HIGH for blue (etc.). If you are using a common
+// anode RGB LED, make sure to set RGB_COMMON_CATHODE to false
+void setRgbLedColor(int red, int green, int blue){
+  if(!RGB_COMMON_CATHODE){
+    red = !red;
+    green = !green;
+    blue = !blue;
+  }
+
+  digitalWrite(RGB_RED_LED_PIN, red);
+  digitalWrite(RGB_GREEN_LED_PIN, green);
+  digitalWrite(RGB_BLUE_LED_PIN, blue);
+}
+
+void loop()
+{
+  // red
+  setRgbLedColor(HIGH, LOW, LOW);
+  delay(DELAY_MS);
+  
+  // green
+  setRgbLedColor(LOW, HIGH, LOW);
+  delay(DELAY_MS);
+  
+  // blue
+  setRgbLedColor(LOW, LOW, HIGH);
+  delay(DELAY_MS);
+  
+  // purple
+  setRgbLedColor(255, LOW, HIGH);
+  delay(DELAY_MS);
+  
+  // turqoise
+  setRgbLedColor(LOW, HIGH, HIGH);
+  delay(DELAY_MS);
+  
+  // white
+  setRgbLedColor(HIGH, HIGH, HIGH);
+  delay(DELAY_MS);
+}
+{% endhighlight C %}
+
+TODO: 
+- add in gist link to code in github
+- add tinkercad circuit link for common cathode
 
 <span class="fs-6">
-[Previous](led-blink2.md){: .btn .btn-outline }
-[Next](TODO){: .btn .btn-outline }
+[Previous: LED Blink 2](led-blink2.md){: .btn .btn-outline }
+[Next: Cross-fading RGB LEDs](TODO){: .btn .btn-outline }
 </span>

@@ -2,7 +2,7 @@
 layout: default
 title: L3&#58; Fading an LED
 nav_order: 3
-parent: Intro to Arduino
+parent: Output
 usemathjax: true
 has_toc: true # (on by default)
 ---
@@ -29,7 +29,7 @@ You will use the same materials as [before](led-blink.md), including the [Arduin
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 
-## Making the fade LED circuit
+## Making the circuit
 
 As noted in our previous lesson, the Arduino Uno has 14 digital I/O pins:
 
@@ -54,7 +54,7 @@ We'll learn about analog output in this lesson (using [`analogWrite`](https://ww
 
 ---
 
-## Writing the fade LED code
+## Writing the code
 
 To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. This 8-bit value is directly proportional to the voltage output: so, 0 is 0V, 255 is 5V, 128 is 2.5V, 168 is 3.3V, *etc.* This means that the settable voltage granularity is ~0.0196V. TODO: come up with a figure to explain this.
 

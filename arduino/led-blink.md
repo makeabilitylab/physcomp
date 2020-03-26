@@ -42,6 +42,12 @@ Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resi
 
 ![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit.png)
 
+While it's not necessary to use a breadboard for this simple circuit, here are two functionally equivalent breadboard-based  wiring options. As our circuits get more complex, you will need to use a breadboard—so it's good to start building up familiarity. 
+
+| Breadboard Option 1 | Breadboard Option 2 |
+|:----:|:-----:|
+|![Breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard1.png) | ![Second breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard2.png) |
+
 Next, we'll write C code for the Arduino to turn on the LED from Pin 3, which programmatically sets Pin 3 to 5V.
 
 ## Get the Arduino IDE

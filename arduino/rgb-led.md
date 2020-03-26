@@ -31,7 +31,7 @@ You'll need the following materials. Importantly, there are **two types** of RGB
 
 ### Common Anode vs. Common Cathode
 
-While capable of displaying thousands of color combinations, RGB LEDs are actually quite simple; they contain three LEDs in one package: red, green, and blue. Importantly but somewhat confusingly, there are two RGB LED designs—the **Common Anode** and the **Common Cathode**—which differ in the leg shared between the three embedded LEDs.
+While capable of displaying thousands of color combinations, RGB LEDs are actually quite simple; they simply contain three individual LEDs in one package: red, green, and blue. Importantly but somewhat confusingly, there are two RGB LED designs—the **Common Anode** and the **Common Cathode**—which differ in the leg shared between the three embedded LEDs.
 
 1. With the **Common Anode**, the three embedded LEDs share the anode leg. To control the RGB LED's color and drive current, you must hook up the anode to the higher voltage source and connect the red, green, and blue legs to lower voltage levels (*e.g.,* ground). 
 

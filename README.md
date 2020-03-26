@@ -15,9 +15,6 @@ permalink: /
 <!-- including other markdown pages: https://stackoverflow.com/a/41966993/388117>
 <!-- {% include_relative tutorials/index.md %} -->
 
-## Example Hardware Kits
-- CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
-
 ## About this website
 
 ## Acknowledgments
@@ -97,7 +94,7 @@ It works with almost all markdown flavours (the below blank line matters). This 
 
 #### Windows
 - I used the Chocolatey Windows package manager ([installation instructions here](https://chocolatey.org/install)). Fastest way to open PowerShell with admin privilages is `Windows-X`
-- Then I followed the instructions [here](https://learn.cloudcannon.com/jekyll/install-jekyll-on-windows/).  
+- Then I followed the instructions [here](https://learn.cloudcannon.com/jekyll/install-jekyll-on-windows/) and [here](https://malekbenz.com/blog/2017/09/05/Install-Jekyll-on-Windows-with-Chocolatey).  
 
 ### Templates
 - Minimal Mistakes

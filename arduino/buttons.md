@@ -15,9 +15,9 @@ has_toc: true # (on by default)
 {:toc}
 ---
 
-This is the first lesson in the [**Intro to Arduino Input**](intro-input.md) lesson series. This series builds on knowledge gained in the [**Intro to Arduino Output**](intro-output.md) lesson series, so please complete that first!
+This is the first lesson in the [**Intro to Arduino Input**](intro-input.md) lesson series, which builds on knowledge gained in the [**Intro to Arduino Output**](intro-output.md) series, so please complete that first!
 
-In this lesson, we'll finally get to build something interactive: we are going to turn on an LED with a button. This lesson will cover buttons (aka momentary switches), how to use digital input with the [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
+In this lesson, we'll finally get to build something interactive: turning on an LED with a button. We'll cover buttons (aka momentary switches), how to use digital input with the [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
 
 TODO: show animation from Tinkercad-based circuit working and current flow
 

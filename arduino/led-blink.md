@@ -42,13 +42,13 @@ Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resi
 
 ![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit.png)
 
-While it's not necessary to use a breadboard for this simple circuit, here are two functionally equivalent breadboard-based  wiring options. As our circuits get more complex, you will need to use a breadboard—so it's good to start building up familiarity. 
+While it's not necessary to use a breadboard for this simple circuit, here are two functionally equivalent breadboard-based  wiring options. As our circuits get more complex, you will need to use a breadboard—so it's good to start building up familiarity. Which breadboarded design makes most sense to you? Use your finger to trace the flow current from Pin 3 to GND. To zoom in on the images, you can right click and select "Open Image in a New Tab."
 
 | Breadboard Option 1 | Breadboard Option 2 |
 |:----:|:-----:|
 |![Breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard1.png) | ![Second breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard2.png) |
 
-Next, we'll write C code for the Arduino to turn on the LED from Pin 3, which programmatically sets Pin 3 to 5V.
+Next, we'll write C code for the Arduino to turn on the LED from Pin 3, which will programmatically set Pin 3 to 5V.
 
 ## Get the Arduino IDE
 
@@ -67,7 +67,7 @@ After installation is complete, open the Arduino IDE. Notice that there are **tw
 
 ![Screenshot of the Arduino IDE](assets/images/ArduinoIDE_BlankAndAnnotated.png)
 
-For those who have used [Processing](https://processing.org/)—a programming environment for digital artists and creators—this code structure should seem familiar. Indeed, the Arduino IDE derives from Processing.
+For those who have used [Processing](https://processing.org/)—a programming environment for digital artists and creators (and a favorite of mine)—this code structure should seem familiar. Indeed, the Arduino IDE derives from Processing.
 
 | Processing | p5js |
 |----|----|

@@ -31,7 +31,7 @@ For this lesson, we're going to use the Arduino's built in LED (`LED_BUILTIN`) s
 
 | Arduino | Button | Resistor |
 |:-----:|:-----:|:-----:|
-| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }/assets/images/Button_12mmX12mm_Adafruit.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
+| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Button (aka momentary switch) | 10KΩ Resistor |
 
 ## Digital I/O refresher

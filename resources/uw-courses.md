@@ -48,4 +48,4 @@ Many of the 400 level courses are open to both ugrads and grads. In DXARTS, for 
 
 - [**HCDE 539: Physical Computing**](https://www.washington.edu/students/crscat/hcde.html) taught by [Andy Davidson](https://www.hcde.washington.edu/davidson)
 
-- **HCID521: Prototyping Studio** co-taught by a variety of faculty across Art, Design, and Engineering. This course is closed enrollment (only offered to [M+HCID students](https://mhcid.washington.edu/)). [Jon E. Froehlich](https://homes.cs.washington.edu/~jonf) has co-taught this course since 2018.
+- **HCID521: Prototyping Studio** co-taught by a variety of faculty across Art, Design, and Engineering, including [Andy Davidson](https://www.hcde.washington.edu/davidson) (HCDE), [Michael Smith](https://art.washington.edu/people/michael-smith) (Art, Art History, Design), [Jen Mankoff](https://www.cs.washington.edu/people/faculty/jmankoff), and [Jon E. Froehlich](https://homes.cs.washington.edu/~jonf). This course is closed enrollment (only offered to [M+HCID students](https://mhcid.washington.edu/)).

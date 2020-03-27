@@ -62,7 +62,9 @@ Introduces [debouncing](https://www.arduino.cc/en/Tutorial/Debounce) and solutio
 
 ### Lesson 4: Controlling LED brightness via a potentiometer
 
-Introduces analog input, the [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function, and using a potentiometer. TODO: potentially add in Serial monitor + plotter here?
+Introduces analog input, the [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function, and using a potentiometer. 
+- TODO: potentially add in Serial monitor + plotter here?
+- TODO: potentially add in independently controlling brightness and color with RGB LED here?
 
 ### Lesson 5: Using force-sensitive resistors
 

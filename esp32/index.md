@@ -46,6 +46,9 @@ Finally, select the appropriate port
 
 ![Screenshot showing how to select correct ESP32 port](assets/images/ArduinoIDE_SelectESP32Port.png)
 
+## Official ESP32 Documentation
+- [API Reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/index.html)
+- [API Guides](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/index.html)
 
 ## Application ideas
 - Connect to WiFi, get the time, print out on OLED. Create a clock?

@@ -119,5 +119,6 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
   - IMU 9 DOF with bunny 3D orientation: https://www.adafruit.com/product/2472
 - Electricity primer
   - http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf
+- Kalman filter on ESP32: http://www.iotsharing.com/2019/06/how-to-apply-kalman-filter-to-esp.html
 
 <!--  https://www.exploringarduino.com/resources/ -->

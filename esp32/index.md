@@ -46,9 +46,14 @@ Finally, select the appropriate port
 
 ![Screenshot showing how to select correct ESP32 port](assets/images/ArduinoIDE_SelectESP32Port.png)
 
-## Official ESP32 Documentation
+### Resources
+
+### Official ESP32 Documentation
 - [API Reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/index.html)
 - [API Guides](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/index.html)
+
+### Other
+- [Sparkfun's ESP32 Thing Hookup Guide](https://learn.sparkfun.com/tutorials/esp32-thing-hookup-guide/all). Written for Sparkfun's ESP32 Thing board but has relevant WiFi and BLE examples.
 
 ## Application ideas
 - Connect to WiFi, get the time, print out on OLED. Create a clock?

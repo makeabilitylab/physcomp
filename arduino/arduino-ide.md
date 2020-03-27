@@ -22,6 +22,12 @@ Download and install the [Arduino IDE](https://www.arduino.cc/en/main/software).
 ![Arduino IDE download screenshot](assets/images/ArduinoIDEDownloadScreenshot.png)
 
 
+## Install custom theme
+
+To use a dark theme in the Arduino IDE, [follow these steps](https://create.arduino.cc/projecthub/konradhtc/one-dark-arduino-modern-dark-theme-for-arduino-ide-2fca81). Note: I started investigating this when I noticed that the default Arduino theme was difficult to read over Zoom.
+
+![Screenshot of dark theme](assets/images/ArduinoIDE_DarkTheme.png)
+
 ## Troubleshooting
 
 ### Arduino Leonardo port doesn't show up

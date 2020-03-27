@@ -1,0 +1,5 @@
+Scan for I2C addresses:
+https://diyprojects.io/using-i2c-128x64-0-96-ssd1306-oled-display-arduino/#.Xn4zQ9NKh24
+
+If you need more RAM, can use the Sparkfun library instead:
+https://github.com/sparkfun/SparkFun_Micro_OLED_Arduino_Library

@@ -64,7 +64,7 @@ Prices are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppli
 
 ## Pull-down and pull-up resistors
 
-To use a digital input—say, a push button, a slider switch, a tilt switch, *etc.*—you need either a pull-down or pull-up resistor. Why? See below (right-click on the image and select 'Open Image in New Tab' for a enlarged version).
+To use a digital input—say, a push button, a slider switch, a tilt switch, *etc.*—you need either a pull-down or pull-up resistor. Why? See below (right-click on the image and select 'Open Image in New Tab' for an enlarged version).
 
 ![Visual walkthrough of why a pull-down resistor setup of a button circuit is necessary](assets/images/Arduino_Button_PullDownResistor_Walkthrough.png)
 In this example, the button is hooked up to digital I/O pin 12 but any I/O pin will work.

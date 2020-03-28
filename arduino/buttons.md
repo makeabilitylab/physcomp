@@ -27,11 +27,11 @@ TODO: show animation from Tinkercad-based circuit working and current flow
 
 ## Materials
 
-For this lesson, we're going to use the Arduino's built in LED (`LED_BUILTIN`) so we only need the following:
+For (most of) this lesson, we're only going to use the Arduino's built in LED (`LED_BUILTIN`) so we don't need an external LED or current limiting resistor. Instead, we need:
 
 | Arduino | Button | Resistor |
 |:-----:|:-----:|:-----:|
-| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
+| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Button (aka momentary switch) | 10KΩ Resistor |
 
 ## Digital I/O refresher
@@ -96,10 +96,23 @@ To learn more about pull-up and pull-down resistors, watch this fantastic video 
 
 ## Pull-down resistor configuration
 
+![Wiring diagram and schematic for a button with a pull-down resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagram.png)
+
+As with any circuit, there are lots of functionally equivalent ways of wiring up a pull-down resistor configuration with a button. Here are some examples—all are functionally equivalent. I tend to use the wiring shown on the far left.
+
+![Five separate wiring diagrams of a pull-down resistor configuration with a button wired to Pin 2 on the Arduino Uno](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagramGallery.png)
+
+## Pull-up resistor configuration
+
+## Internal pull-up resistor configuration
+
+## Putting it all together
+
 
 ## Notes:
 Things to remember:
 - [done] include Jeff Feddersen video of pull-up and pull-down
 - ITP has some good content on switches that we should link to
 - show calculation about pull-down and pull-up resistors (and the fact that they should be high to not waste current)
+- Talk about super high impedance on input pin?
 

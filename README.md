@@ -98,7 +98,9 @@ It works with almost all markdown flavours (the below blank line matters). This 
 
 #### Windows
 - I used the Chocolatey Windows package manager ([installation instructions here](https://chocolatey.org/install)). Fastest way to open PowerShell with admin privilages is `Windows-X`
-- Then I followed the instructions [here](https://learn.cloudcannon.com/jekyll/install-jekyll-on-windows/) and [here](https://malekbenz.com/blog/2017/09/05/Install-Jekyll-on-Windows-with-Chocolatey).  
+- Then I followed the instructions [here](https://learn.cloudcannon.com/jekyll/install-jekyll-on-windows/) and [here](https://malekbenz.com/blog/2017/09/05/Install-Jekyll-on-Windows-with-Chocolatey).
+- Note: I still haven't gotten Jekyll to run on Windows...
+
 
 ### Templates
 - Minimal Mistakes
@@ -117,8 +119,8 @@ Looks like it was addressed here:
 To build the docs with Jekyll,
 - Open iTerm in /physcomp/docs
 - `> bundle`
-- `> bundle exec jekyll serve`
-- Follow directions for web addie
+- `> bundle exec jekyll serve` (actually, use `> bundle exec jekyll serve --baseurl ''`)
+- Follow directions for web address, typically: `https://127.0.0.1:4000`
 
 ### Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->

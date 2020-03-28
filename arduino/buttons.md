@@ -98,7 +98,7 @@ To learn more about pull-up and pull-down resistors, watch this fantastic video 
 
 ![Wiring diagram and schematic for a button with a pull-down resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagram.png)
 
-As with any circuit, there are lots of functionally equivalent ways of wiring up a pull-down resistor configuration with a button. Here are some examples—all are functionally equivalent. I tend to use the wiring shown on the far left.
+As with any circuit, there are many ways to wire up a button with a pull-down resistor configuration. Here are some examples—all are functionally equivalent. I tend to use the wiring shown on the far left.
 
 ![Five separate wiring diagrams of a pull-down resistor configuration with a button wired to Pin 2 on the Arduino Uno](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagramGallery.png)
 

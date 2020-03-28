@@ -13,7 +13,7 @@ permalink: /
 {: .fs-2 .pl-8}
 
 <!-- including other markdown pages: https://stackoverflow.com/a/41966993/388117>
-<!-- {% include_relative tutorials/index.md %} -->
+<!-- {percent sign include_relative tutorials/index.md percent sign} -->
 
 ## Example Hardware Kits
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)

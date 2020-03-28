@@ -58,7 +58,11 @@ Finally, select the appropriate port
 ## Application ideas
 - Connect to WiFi, get the time, print out on OLED. Create a clock?
 - Connect to WiFi, download Covid-19 stats, print out on display
+- Evidently ESP32 may support Serial.printf? [See link](https://arduino.stackexchange.com/a/53751).
 
+### Sound / VUMeters
+
+- [Using the ESP32's built-in DAC](https://www.reddit.com/r/esp32/comments/bid08m/finally_got_audio_sampling_via_dma_with_no_cpu/)?
 
 
 

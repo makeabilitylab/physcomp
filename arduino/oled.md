@@ -29,3 +29,5 @@ Once the SSD1306 library and dependencies have been installed, wire up and test 
 - https://lastminuteengineers.com/oled-display-arduino-tutorial/
 - https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives
 
+## SPI vs. I2C
+- SPI is much faster: https://www.youtube.com/watch?v=SvOX-xs9v8M 

@@ -27,7 +27,7 @@ TODO: show animation from Tinkercad-based circuit working and current flow
 
 ## Materials
 
-For (most of) this lesson, we're only going to use the Arduino's built in LED (`LED_BUILTIN`) so we don't need an external LED or current limiting resistor. Instead, we need:
+For (most of) this lesson, we're only going to use the Arduino's built-in LED (`LED_BUILTIN`) so we don't need an external LED or current limiting resistor. Instead, we need:
 
 | Arduino | Button | Resistor |
 |:-----:|:-----:|:-----:|
@@ -50,35 +50,29 @@ As previously noted, you can control any of these 14 digital I/O pins with three
 
 Digital input is any input that can be either **on** (`HIGH` or 5V) or **off** (`LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
 
-![](assets/images/DigitalInput_ExampleGallery.png)
-Prices are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
+![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
+Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
-
-## Outline
-- The button is funky: why four legs? what's connected. Maybe show multimeter?
-- We are going to cover three separate circuit designs: pull-down resistor, pull-up resistor, internal pull-up resistor
-- Why do we need these resistors. Explain.
-- Make pull-down circuit + code
-- Make pull-up circuit + code
-- Show using internal pull-up + code
 
 ## Pull-down and pull-up resistors
 
-To use a digital input—say, a push button, a slider switch, a tilt switch, *etc.*—you need either a pull-down or pull-up resistor. Why? See below (right-click on the image and select 'Open Image in New Tab' for an enlarged version).
+To use a digital input with a microcontroller—say, a push button, a slider switch, or a tilt switch—you need either a pull-down or pull-up resistor. Why? See below (right-click on the image and select 'Open Image in New Tab' for an enlarged version).
 
 ![Visual walkthrough of why a pull-down resistor setup of a button circuit is necessary](assets/images/Arduino_Button_PullDownResistor_Walkthrough.png)
 In this example, the button is hooked up to digital I/O pin 12 but any I/O pin will work.
 {: .fs-1 }
 
-While a **pull-down resistor** configuration biases the input pin to GND when a switch or button is in the open state, a **pull-up resistor** configuration does the opposite: in an open state, the microcontroller input pin reads `HIGH` (5V). When the switch is closed, the microcontroller reads `LOW` (0V).
+While a **pull-down resistor** configuration biases the input pin to GND when a switch or button is in the open state, a **pull-up resistor** configuration does the opposite: in an open state, the microcontroller input pin reads `HIGH` (5V). When the switch is closed, the microcontroller reads `LOW` (0V). See figure below.
 
 ![Difference between a pull-down vs. pull-up resistor](assets/images/Arduino_Button_PullDownVsPullUpResistor.png)
 
-Finally, many microcontrollers include an internal pull-up resistor that can be activated with software. On the Arduino, we can configure an input pin with an internal pull-up resistor with: `pinMode(<pin>, INPUT_PULLIP);`. This eliminates the need for any external resistors (thus simplifying your circuit).
+Finally, many microcontrollers include an internal pull-up resistor that can be activated with software. On the Arduino, we can configure an input pin to use its internal pull-up resistor with: `pinMode(<pin>, INPUT_PULLUP);`. This eliminates the need for any external resistors (thus simplifying your circuit).
 
 ![Difference between a pull-down, pull-up, and internal pull-up resistor](assets/images/Arduino_Button_InternalPullUpResistor.png)
 
-We'll go through each of these circuit configurations below.
+<!-- TODO: fix syntax mistake; have its instead of it's in the diagram above -->
+
+We'll go through each of these circuit configurations below. But first, a bit more about pull-down and pull-up resistors.
 
 ### What value should I use for my pull-down or pull-up resistors?
 
@@ -94,6 +88,8 @@ To learn more about pull-up and pull-down resistors, watch this fantastic video 
 
 ## Tactile button (momentary switch)
 
+- The button is funky: why four legs? what's connected. Maybe show multimeter?
+
 ## Pull-down resistor configuration
 
 ![Wiring diagram and schematic for a button with a pull-down resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagram.png)
@@ -108,6 +104,13 @@ As with any circuit, there are lots of functionally equivalent ways of wiring up
 
 ## Putting it all together
 
+## Outline
+- The button is funky: why four legs? what's connected. Maybe show multimeter?
+- We are going to cover three separate circuit designs: pull-down resistor, pull-up resistor, internal pull-up resistor
+- Why do we need these resistors. Explain.
+- Make pull-down circuit + code
+- Make pull-up circuit + code
+- Show using internal pull-up + code
 
 ## Notes:
 Things to remember:

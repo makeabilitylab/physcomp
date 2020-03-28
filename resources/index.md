@@ -111,6 +111,7 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
   - Sean Follmer (couldn't find link to his teaching site)
   - https://people.eecs.berkeley.edu/~boser/courses/49/
     - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/index.html
+    - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/N_gpio.html#_analog_input_adc
 - Places of inspiration
   - Hackaday
   - Instructables
@@ -120,5 +121,6 @@ Searching for project ideas or some divine epiphany on what to work on next? Che
 - Electricity primer
   - http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf
 - Kalman filter on ESP32: http://www.iotsharing.com/2019/06/how-to-apply-kalman-filter-to-esp.html
+- [Beginners guide to ESP8266](https://tttapa.github.io/ESP8266/Chap01%20-%20ESP8266.html)
 
 <!--  https://www.exploringarduino.com/resources/ -->

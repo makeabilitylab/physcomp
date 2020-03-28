@@ -70,7 +70,7 @@ Finally, many microcontrollers include an internal pull-up resistor that can be 
 
 ![Difference between a pull-down, pull-up, and internal pull-up resistor](assets/images/Arduino_Button_InternalPullUpResistor.png)
 
-<!-- TODO: fix syntax mistake; have its instead of it's in the diagram above -->
+<!-- TODO: fix syntax mistake in figure; have its instead of it's in the diagram above -->
 
 We'll go through each of these circuit configurations below. But first, a bit more about pull-down and pull-up resistors.
 
@@ -79,6 +79,10 @@ We'll go through each of these circuit configurations below. But first, a bit mo
 The official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between  50kΩ and 150kΩ.
 
 TODO: talk about tradeoffs in setting pull-up and pull-down resistor values
+
+### Some microcontrollers have built-in pull-up and pull-down resistors
+
+Some Arduino boards use microcontrollers that have both pull-up and pull-down resistors. The popular ESP32 chip, for example, used in the [Adafruit Huzzah32](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview) has built-in pull-up and pull-down resistors on all GPIO pins except for GPIO34-GPIO39 (see [link](https://github.com/espressif/arduino-esp32/issues/316)). These can be enabled with either `pinMode(<pin>, INPUT_PULLUP);` or `pinMode(<pin>, INPUT_PULLDOWN);`
 
 ### Want to dive deeper?
 

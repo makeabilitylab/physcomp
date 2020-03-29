@@ -62,6 +62,8 @@ To use a digital input with a microcontroller—say, a push button, a slider swi
 In this example, the button is hooked up to digital I/O pin 12 but any I/O pin will work.
 {: .fs-1 }
 
+<!-- TODO: add in video of floating pin and effect. Use external resistor + LED. Have current video so reshooting could be low priority -->
+
 While a **pull-down resistor** configuration biases the input pin to GND when a switch or button is in the open state, a **pull-up resistor** configuration does the opposite: in an open state, the microcontroller input pin reads `HIGH` (5V). When the switch is closed, the microcontroller reads `LOW` (0V). See figure below.
 
 ![Difference between a pull-down vs. pull-up resistor](assets/images/Arduino_Button_PullDownVsPullUpResistor.png)

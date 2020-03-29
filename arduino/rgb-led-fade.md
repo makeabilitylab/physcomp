@@ -18,3 +18,4 @@ has_toc: true # (on by default)
 TODO: fade between colors
 - First with simple for loops
 - Then with HSL
+- Probably want to move this to some advanced section, so students can move on to input

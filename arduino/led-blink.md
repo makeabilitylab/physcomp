@@ -87,6 +87,14 @@ You can control any of these 14 digital I/O pins with three functions:
 2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`.
 3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`.
 
+---
+
+**NOTE:** The Arduino Uno and Leonardo both use the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 40 mA per digital I/O pin or about ~two LEDs in parallel (each with a forward current of 20mA) According to Section 28.1 in the ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) datasheet, anything beyond these limits "may cause permanent damage to the chip"; see Section 28.1 of the ATMega328P datasheet). The maximum total current across all I/O pins together is 200mA.
+
+<!-- TODO: add in a link to powering circuits via the 5V port directly or an external power source with a transistor -->
+
+---
+
 Let's write our program to set Pin 3 to HIGH (5V).
 
 ### Step 1: Start a new sketch in the Arduino IDE
@@ -95,7 +103,7 @@ Start a new sketch in the Arduino IDE:
 ![Screenshot of the Arduino IDE showing a new empty sketch](assets/images/ArduinoIDE_FreshSketch.png)
 
 ### Step 2: Set the pinMode for Pin 3
-Because the 14 digital I/O pins can used for either input or output, we need to specify that we want to use Pin 3 for *output*. We want the Arduino to output a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
+Because the 14 digital I/O pins can used for either input or output, we need to specify that Pin 3 should be used for *output*. That is, we want the Arduino to **output** a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
 
 {% highlight C %}
 void setup() {

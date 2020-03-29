@@ -27,12 +27,12 @@ TODO: show animation from Tinkercad-based circuit working and current flow
 
 ## Materials
 
-For (most of) this lesson, we're only going to use the Arduino's built-in LED (`LED_BUILTIN`) so we don't need an external LED or current limiting resistor. Instead, we need:
+For (most of) this lesson, we're only going to use the Arduino's built-in LED (`LED_BUILTIN`) to turn on and off with a button press. So, we'll need:
 
 | Arduino | Button | Resistor |
 |:-----:|:-----:|:-----:|
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
-| Arduino Uno, Leonardo, or similar  | Button (aka momentary switch) | 10KΩ Resistor |
+| Arduino Uno, Leonardo, or similar  | Button (aka momentary switch). We'll be using [these 12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) from Adafruit. | 10KΩ Resistor |
 
 ## Digital I/O refresher
 
@@ -42,13 +42,13 @@ Recall that the Arduino Uno and Leonardo have 14 digital I/O pins that can be us
 
 As previously noted, you can control any of these 14 digital I/O pins with three functions:
 
-1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`
+1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`. For our buttons, we'll be using `INPUT`.
 2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`.
 3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`.
 
 ### Digital input
 
-Digital input is any input that can be either **on** (`HIGH` or 5V) or **off** (`LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
+Digital input is any input that can be considered either **on** (`HIGH` or 5V) or **off** (`LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
 
 ![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).

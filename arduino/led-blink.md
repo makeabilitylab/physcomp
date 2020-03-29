@@ -89,7 +89,7 @@ You can control any of these 14 digital I/O pins with three functions:
 
 ---
 
-**NOTE:** The Arduino Uno and Leonardo both use the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 40 mA per digital I/O pin or about ~two LEDs in parallel (each with a forward current of 20mA) According to Section 28.1 in the ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) datasheet, anything beyond these limits "may cause permanent damage to the chip"; see Section 28.1 of the ATMega328P datasheet). The maximum total current across all I/O pins together is 200mA.
+**NOTE:** The Arduino Uno and Leonardo both use the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 40 mA per digital I/O pin or about ~two LEDs in parallel (each with a forward current of 20mA) According to Section 28.1 in the ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) datasheet, anything beyond these limits "may cause permanent damage to the chip" and that this is a "stress rating only".). The maximum total current across all I/O pins together is 200mA.
 
 <!-- TODO: add in a link to powering circuits via the 5V port directly or an external power source with a transistor -->
 

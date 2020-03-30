@@ -174,7 +174,7 @@ void loop() {
 
 ### Step 2: Add in delays and code to turn off LED
 
-Now, add in code to pause (for one second) and then turn off the LED (for one second). Remember, when `loop()` completes, it is automatically called again (making the LED blink continuously).
+Now, add in code to pause (for one second) and then turn off the LED (for one second) using `delay()`. Remember, when `loop()` completes, it is automatically called again (making the LED blink continuously).
 
 {% highlight C %}
 void setup() {
@@ -198,7 +198,7 @@ TODO: insert video
 
 ### Step 4: Replace constants
 
-Typically, we want to limit the use of *literal constants* and replace them by variables. In this case, let's replace `3` with `LED_OUTPUT_PIN` defined as a global variable at the top of our program (`const int LED_OUTPUT_PIN = 3;`). This will make our code more maintainable and less prone to accidental mistakes.
+Typically, we want to limit the use of *literal constants* in our code and replace them by variables. In this case, let's replace `3` with `LED_OUTPUT_PIN` defined as a global variable at the top of our program (`const int LED_OUTPUT_PIN = 3;`). This will make our code more maintainable and less prone to accidental mistakes.
 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;
@@ -225,7 +225,7 @@ How does this work? See the code walkthrough video below:
 
 ### Mental model check: code is loaded and running on the Arduino
 
-As a quick mental model check, it's worth emphasizing that once you upload the code to your Arduino, you no longer need the USB cable. Instead, for example, you could run your Arduino off of a 9V battery using the barrel jack. The code is stored on your Arduino even when the Arduino loses power.
+As a quick mental model check, it's worth emphasizing that once you upload the code to your Arduino, you no longer need the USB cable. Instead, you could use some other power source like a 9V battery plugged in to the barral jack port. Why? Because after you clikc `Upload` in the Arduino IDE, the code is stored **locally** on your Arduino and stays there even when the Arduino loses power.
 
 <video controls="controls">
   <source src="assets/movies/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">

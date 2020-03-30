@@ -29,7 +29,6 @@ You will use the same materials as before. You will also need the [Arduino IDE](
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
-| Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 

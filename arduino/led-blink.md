@@ -198,9 +198,12 @@ We're done! Now, compile and upload the code and see it run!
   <source src="assets/movies/BlinkWithCodeAndWorkbenchCamera.mp4" type="video/mp4">
 </video>
 
+**Note:** On my Windows machine, I use a [dark theme](https://create.arduino.cc/projecthub/konradhtc/one-dark-arduino-modern-dark-theme-for-arduino-ide-2fca81) for the Arduino IDE.
+{: .fs-1 }
+
 ### Step 4: Replace constants
 
-Typically, we want to limit the use of *literal constants* in our code and replace them by variables. In this case, let's replace `3` with `LED_OUTPUT_PIN` defined as a global variable at the top of our program (`const int LED_OUTPUT_PIN = 3;`). This will make our code more maintainable and less prone to accidental mistakes.
+Typically, we want to limit the use of *literal constants* in our code and replace them by variables. In this case, let's replace `3` with `LED_OUTPUT_PIN` defined as a global variable at the top of our program (`const int LED_OUTPUT_PIN = 3;`). This will make our code more maintainable and less prone to accidental mistakes. Try to do this for all literals in the future.
 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;

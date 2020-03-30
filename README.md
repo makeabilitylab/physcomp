@@ -44,7 +44,8 @@ Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherw
 - Maybe have a top-level link for UW Courses?
 - How to hide headers in tables in markdown?
   - https://stackoverflow.com/questions/17536216/create-a-table-without-a-header-in-markdown
-- Make Next/Previous buttons same size like in Minimal Mistakes
+- Make Next/Previous buttons same size like in Minimal Mistakes?
+- Make it so if you left-click on an image, it shows up as a pop-up with a description below?
 
 ## Possible H1 Content
 - Motors

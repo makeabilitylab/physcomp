@@ -101,9 +101,11 @@ V_R = 3.3V - 2V\to1.3V$$
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif)
 
-To learn more about calculating the current through an LED, watch this video by NYU ITP's Jeff Feddersen and read our [LED guide]({{ site.baseurl }}//pages/electronics/leds.md):
+To learn more about calculating the current through an LED, watch this video by NYU ITP's Jeff Feddersen:
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/78674965" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+<!-- TODO: and read our LED guide ... write the LED guide -->
 
 ### Using higher value resistors
 

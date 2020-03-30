@@ -194,7 +194,9 @@ void loop() {
 
 We're done! Now, compile and upload the code and see it run!
 
-TODO: insert video
+<video controls="controls">
+  <source src="assets/movies/BlinkWithCodeAndWorkbenchCamera.mp4" type="video/mp4">
+</video>
 
 ### Step 4: Replace constants
 

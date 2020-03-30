@@ -198,7 +198,7 @@ TODO: insert video
 
 ### Step 4: Replace constants
 
-Typically, we want to limit the use of *literal constants* and replace them by variables. So, while the code below is functionally equivalent to that above, it's more maintainable (and less prone to errors). Here, we define our output pin as `LED_OUTPUT_PIN`.
+Typically, we want to limit the use of *literal constants* and replace them by variables. So, while the code below is functionally equivalent to that above, it's more maintainable (and less prone to accidental mistakes). Here, we define our output pin as `LED_OUTPUT_PIN`.
 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;
@@ -209,9 +209,9 @@ void setup() {
 
 void loop() {
   digitalWrite(LED_OUTPUT_PIN, HIGH);  // turn LED on (output 5V)
-  delay(1000);            // wait one second
+  delay(1000);                         // wait one second
   digitalWrite(LED_OUTPUT_PIN, LOW);   // turn LED off (output 0V)
-  delay(1000);            // wait another second
+  delay(1000);                         // wait another second
 }
 {% endhighlight C %}
 

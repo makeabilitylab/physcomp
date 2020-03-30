@@ -29,7 +29,9 @@ A key pedagogical philosophy underlying this website is **learning by doing**. F
 
 ## About this website
 
-## Acknowledgments
+This website began as a response to teaching physical computing remotely due to Covid-19. Originally, my goal was simply to translate my lectures slides to more readable versions (to consult outside of lectures).
+
+### Acknowledgments
 
 Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted and were created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), and [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview).
 

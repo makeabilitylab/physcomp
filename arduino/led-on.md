@@ -18,6 +18,8 @@ has_toc: true # (on by default)
 For our first activity, we are going to use Arduino to turn on an [LED]({{ site.baseurl }}/pages/electronics/leds.md). We're *not* going to write any code. Instead, the goal here is to build some initial familiarity with Arduino hardware and connecting components to Arduino pins.
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower.gif)
+The movement of **current** in the circuit is illustrated by the animated yellow circles.
+{: .fs-1 }
 
 ## Materials
 You will need the following materials:
@@ -33,17 +35,21 @@ You will need the following materials:
 
 Grab a 220Ω resistor (or any resistor 220Ω or greater) and twist one leg around an LED leg. If you want to follow my example, connect the resistor to the LED's anode (long leg) but either leg will work.
 
-TODO: insert animated gif of twisting the resistor around LED.
+[!Animated gif of someone wrapping a 220Ohm resistor leg around the anode of an LED](assets/movies/WrappingResistorLegAroundLED_400w.gif)
 
 ### Step 2: Connect components to Arduino
 
-Insert the LED + resistor into the Arduino: the LED's cathode (short leg) to GND and the LED's anode (long leg) + resistor to 5V.
+Insert the LED + resistor into the Arduino: the LED's cathode (short leg) to GND and the LED's anode (long leg) + resistor to 5V. 
 
 ![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/movies/Arduino_LEDOn_5VFixed_InsertLED.gif)
 
 ### Step 3: Connect your Arduino to power
 
 Now connect your Arduino to power and the LED should light up. You did it!
+
+Here's a photo of the version I made. I found it easier to stretch the wiring across the Arduino from the 5V port to the GND on the opposite side.
+
+![Workbench photo of the the LED wired to the 5V port](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png)
 
 For power, you can use a USB cable or a 9V battery. Either way, the Arduino supplies 5V through the 5V pin.
 
@@ -62,6 +68,7 @@ LED brightness is controlled by **current**. So, to dim an LED, we need to reduc
 In future tutorials, we'll show how you can **control voltage output programmatically** by writing code for the Arduino microcontroller. But, for now, let's dim the LED by first decreasing voltage using the Arduino's 3.3V pin (rather than the 5V pin) and then by using higher value resistors.
 
 ### Hooking up the LED to the 3.3V supply pin
+
 The Arduino Uno provides both a 5V power supply (which we just used) and a 3.3V power supply.
 
 ![Close-up picture of the 5V and 3.3V power ports on the Arduino Uno](assets/images/Arduino_CloseUp_PowerPins.png)
@@ -77,7 +84,13 @@ Let's compare the current and brightness between supplying 5V *vs.* 3.3V.
 | ![Animation showing current flowing through 5V LED circuit](assets/movies/Arduino_LEDOn_5VFixed_Current_USBPower.gif) | ![Animation showing current flowing through 3.3V LED circuit](assets/movies/Arduino_LEDOn_3.3VFixed_Current_USBPower.gif) |
 | With a 5V supply, the voltage drop across the 220Ω is ~3V. Thus, $$I = \frac{3V}{220Ω}= 13.6mA $$ | With a 3.3V supply, the voltage drop across the 220Ω resistor is ~1.3V, thus $$I = \frac{1.3V}{220Ω}= 5.9mA $$|
 
-TODO: insert video of actual Arduino switching between 5V and 3.3V
+Here's a workbench photo of the LED wired to the 3.3V port:
+
+![Workbench photo of the the LED wired to the 3.3V port](assets/images/Arduino_LEDOn_3.3Fixed_WorkbenchPhoto.png)
+
+### Full video walkthrough
+
+<iframe width="736" src="https://www.youtube.com/embed/47DH_Odi068" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### How can we determine the current through the circuit?
 

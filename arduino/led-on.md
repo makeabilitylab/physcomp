@@ -90,6 +90,8 @@ Here's a workbench photo of the LED wired to the 3.3V port:
 
 ### Full video walkthrough
 
+Here's a full video walkthrough of wrapping the resistor around the LED anode leg, wiring the circuit to 5V and GND, and then switching from the 5V to the 3.3V supply.
+
 <iframe width="736" height="414" src="https://www.youtube.com/embed/47DH_Odi068" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### How can we determine the current through the circuit?

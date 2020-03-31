@@ -90,7 +90,7 @@ Here's a workbench photo of the LED wired to the 3.3V port:
 
 ### Full video walkthrough
 
-<iframe width="736" src="https://www.youtube.com/embed/47DH_Odi068" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/47DH_Odi068" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### How can we determine the current through the circuit?
 

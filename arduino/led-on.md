@@ -35,7 +35,7 @@ You will need the following materials:
 
 Grab a 220Ω resistor (or any resistor 220Ω or greater) and twist one leg around an LED leg. If you want to follow my example, connect the resistor to the LED's anode (long leg) but either leg will work.
 
-[!Animated gif of someone wrapping a 220Ohm resistor leg around the anode of an LED](assets/movies/WrappingResistorLegAroundLED_400w.gif)
+![Animated gif of someone wrapping a 220Ohm resistor leg around the anode of an LED](assets/movies/WrappingResistorLegAroundLED_400w.gif)
 
 ### Step 2: Connect components to Arduino
 
@@ -49,7 +49,7 @@ Now connect your Arduino to power and the LED should light up. You did it!
 
 Here's a photo of the version I made. I found it easier to stretch the wiring across the Arduino from the 5V port to the GND on the opposite side.
 
-![Workbench photo of the the LED wired to the 5V port](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png)
+![Workbench photo of the the LED wired to the 5V port](assets/images/![](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png).png)
 
 For power, you can use a USB cable or a 9V battery. Either way, the Arduino supplies 5V through the 5V pin.
 

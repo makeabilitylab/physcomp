@@ -10,22 +10,21 @@ permalink: /
 {: .v-align-bottom }
 
 A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, co-founder of [BoingBoing](https://boingboing.net/), & former editor of MAKE Magazine)
-{: .fs-2 .pl-10 .mt-1 }
+{: .fs-2 .mt-1 }
 
 ## Prerequisites
 
-- **Some coding experience.** For the introductory lessons, we assume comfort and familiarity with basic coding concepts such as functions, loops, variables, and conditionals. We'll be using `C/C++` to program our microcontrollers; however, you need no previous experience with this language. If you've programmed in Java, Python, Ruby, Processing, JavaScript, or other similar languages, you should be fine. Later lessons may require more advanced programming concepts such as memory management, library development, *etc.*
+- **Some coding experience.** For the introductory lessons, we assume comfort and familiarity with basic coding concepts such as functions, loops, variables, and conditionals. We'll be using `C/C++` to program our microcontrollers; however, you need no previous experience with this language. If you've programmed in Java, Python, Ruby, Processing, JavaScript, or other similar languages, you should be fine. Later lessons require more advanced programming concepts such as memory management, library development, *etc.*
 
 - **No previous experience with hardware.** In contrast, we assume no previous experience with electronics or microcontrollers.
 
 ## Learn by doing
 
-A key pedagogical philosophy underlying this website is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises.
+A key pedagogical philosophy underlying this website and our teaching approach in general is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises.
 
 ## Example Hardware Kits
 
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
-
 
 ## About this website
 

@@ -65,7 +65,9 @@ I've gone through many electronics and microcontroller books. Here are some of m
 
 ### Circuit Simulators
 
-- [CircuitLab](https://www.circuitlab.com/). The most popular online circuit simulator.
+- [EveryCircuit](http://everycircuit.com/). I've not used this but it's recommended by [Stanford's 'Intro to Arduino' course](https://web.stanford.edu/class/archive/engr/engr40m.1178/).
+
+- [CircuitLab](https://www.circuitlab.com/). A popular online circuit simulator (UMD has a site license; UW does not)
 
 - [CircuitJS](https://www.falstad.com/circuit/circuitjs.html). A free online circuit simulator written in JavaScript.
 

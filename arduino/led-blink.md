@@ -65,7 +65,7 @@ Download and install the local Mac, Windows, or Linux version of the [Arduino ID
 After installation is complete, open the Arduino IDE. Notice that there are **two blocks** of code (called functions):
 
 1. The first block: `setup()`, which is called once and only once when the Arduino is turned on
-2. And the second block: `loop()`, which is called as soon as `setup()` completes. When `loop()` completes, it's automatically called again and again (until the Arduino is turned off).
+2. And the second block: `loop()`, which is called as soon as `setup()` completes. When `loop()` completes, it's automatically called again and again (until the Arduino is turned off). Want to learn more, read [Inside Arduino](inside-arduino.md).
 
 ![Screenshot of the Arduino IDE](assets/images/ArduinoIDE_BlankAndAnnotated.png)
 
@@ -93,9 +93,7 @@ You can control any of these 14 digital I/O pins with three functions:
 
 **NOTE:** The Arduino Uno and Leonardo both use the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 40 mA per digital output pin or about ~two LEDs in parallel (each with a forward current of 20mA). According to Section 28.1 in the [ATmega328P datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf), anything beyond these limits "may cause permanent damage to the chip". The maximum total current draw **across all I/O pins** together should not exceed 200mA.
 
-In general, microcontroller digital output pins were designed to send **control signals** and not to act as **power supplies**. While these pins can supply enough current to use LEDs, piezo speakers, or control servo motors, if you need to control a high-current DC load such as a DC motor, you'll need to use a transistor. NYU's ITP course has a [nice tutorial](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-high-current-loads-with-an-arduino/) on using an Arduino and a transistor to drive a DC motor.
-
-<!-- In general, the digital I/O pins should be considered as *signal* pins. They were not designed to "power" anything. For this, use a link to external power... -->
+In general, microcontroller digital output pins were designed to send **control signals** and not to act as **power supplies**. While these pins can supply enough current to use LEDs, piezo speakers, or control servo motors, if you need to control a high-current DC load such as a DC motor, you'll need to use a transistor. NYU's ITP course has a [nice tutorial](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-high-current-loads-with-an-arduino/) using an Arduino and a transistor to drive a DC motor.
 
 <!-- TODO: add in a link to powering circuits via the 5V port directly or an external power source with a transistor -->
 

@@ -1,7 +1,7 @@
-
 ---
 layout: default
 title: Inside Arduino
+parent: Advanced Arduino
 has_toc: false # on by default
 nav_exclude: true
 ---

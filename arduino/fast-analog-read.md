@@ -1,3 +1,11 @@
+---
+layout: default
+title: Fast Analog Read
+parent: Advanced Arduino
+has_toc: false # on by default
+nav_exclude: true
+---
+
 ## How fast can we read data using analogRead and ATmega328? 
 
 Some great discussions online, including:

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Inside Arduino
+title: Website Dev Notes
 has_toc: false # on by default
 nav_exclude: true
 ---

@@ -35,7 +35,7 @@ has_toc: true # (on by default)
 
 ## Books
 
-I've gone through many electronics and microcontroller books. Here are some of my favorites. I've attempted to provide EBook library links whenever possible.
+I've gone through many electronics and microcontroller books. Here are some of my favorites. I've attempted to provide EBook library links whenever possible. If you click on the O'Reilly links, when the login prompt occurs, use your @uw.edu email and it should open the linked book and allow access.
 
 ### Electronics
 
@@ -67,7 +67,7 @@ I've gone through many electronics and microcontroller books. Here are some of m
 
 - [EveryCircuit](http://everycircuit.com/). I've not used this but it's recommended by [Stanford's 'Intro to Arduino' course](https://web.stanford.edu/class/archive/engr/engr40m.1178/).
 
-- [CircuitLab](https://www.circuitlab.com/). A popular online circuit simulator (UMD has a site license; UW does not)
+- [CircuitLab](https://www.circuitlab.com/). A popular online circuit simulator (UMD has a site license; UW does not). The Scherz and Monk book recommends this website.
 
 - [CircuitJS](https://www.falstad.com/circuit/circuitjs.html). A free online circuit simulator written in JavaScript.
 

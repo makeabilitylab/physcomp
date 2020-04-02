@@ -18,7 +18,7 @@ has_toc: true # (on by default)
 For our first activity, we are going to use Arduino to turn on an [LED]({{ site.baseurl }}/pages/electronics/leds.md). We're *not* going to write any code. Instead, the goal here is to build some initial familiarity with Arduino hardware and connecting components to Arduino pins.
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower.gif)
-The movement of **current** in the circuit is illustrated by the animated yellow circles.
+The movement of **current** in the circuit is illustrated by the animated yellow circles (but is a coarse abstraction).
 {: .fs-1 }
 
 ## Materials
@@ -49,7 +49,7 @@ Now connect your Arduino to power and the LED should light up. You did it!
 
 Here's a photo of the version I made. I found it easier to stretch the wiring across the Arduino from the 5V port to the GND on the opposite side.
 
-![Workbench photo of the the LED wired to the 5V port](assets/images/![](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png).png)
+![Workbench photo of the the LED wired to the 5V port](assets/images/![](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png)
 
 For power, you can use a USB cable or a 9V battery. Either way, the Arduino supplies 5V through the 5V pin.
 

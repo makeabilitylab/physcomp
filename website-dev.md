@@ -1,3 +1,10 @@
+---
+layout: default
+title: Inside Arduino
+has_toc: false # on by default
+nav_exclude: true
+---
+
 ## Website TODO
 - [Done] Update format for blockquote in "just the docs" to https://codepen.io/cliftwalker/pen/XJaEXY
   - Need to modify the css style:
@@ -6,6 +13,7 @@
   - Here's miminimal mistakes version: https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/docs/_posts/2013-01-11-markup-html-tags-and-formatting.md
     - And the scss: https://github.com/mmistakes/minimal-mistakes/blob/0cf1a2e1144336b5e026d13b5fd87dc2af02fe8c/_sass/minimal-mistakes/_base.scss
 - Add in 'info box` support like minimal mistakes
+- Add in auto-TOC (Table of contents) with sticky support: https://tscanlin.github.io/tocbot/
 - Add in figure captioning support (minimal mistakes also has this)
 - Possible to add last modified date into file?
 - Update all arduino code in github to include link back to website

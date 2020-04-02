@@ -43,3 +43,7 @@ void setup() {
 void loop() {
 }
 {% endhighlight C %}
+
+## Secrets of Arduino PWM
+
+- https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM

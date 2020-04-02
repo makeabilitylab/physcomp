@@ -69,7 +69,7 @@ After installation is complete, open the Arduino IDE. Notice that there are **tw
 
 ![Screenshot of the Arduino IDE](assets/images/ArduinoIDE_BlankAndAnnotated.png)
 
-For those who have used [Processing](https://processing.org/)—a programming environment for digital artists and creators (and a favorite of mine)—this code structure should seem familiar. Indeed, the Arduino IDE derives from Processing.
+For those who have used [Processing](https://processing.org/)—a programming environment for digital artists and creators (and a favorite of mine)—this code structure should seem familiar. Indeed, the Arduino IDE derives from Processing ([link](https://github.com/arduino/Arduino/tree/ee1967cd530ceb9a1d638875e385157e90d532e8/arduino-core/src/processing/app)).
 
 | Processing | p5js |
 |----|----|

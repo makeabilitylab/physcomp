@@ -59,3 +59,6 @@ The [ATmega datasheet](https://www.sparkfun.com/datasheets/Components/SMD/ATMega
 ![](assets/images/ATMegaDatasheet_ADCConversionResult.png)
 
 For most practical purposes, dividing by 1023 or 1024 won't matter. :)
+
+## What does delay(int ms) actually do?
+TODO:

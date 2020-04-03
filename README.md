@@ -34,7 +34,7 @@ This website began as a response to teaching physical computing remotely due to 
 
 Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted and were created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview), and [Microsoft PowerPoint](https://products.office.com/en-us/powerpoint).
 
-For course and content inspirations, see our [Resources](resources/index.md) page and our (Inspirations)[resources/inspirations.md] page.
+For course and content inspirations, see our [Resources](resources/index.md) page and our [Inspirations](resources/inspirations.md) page.
 
 <!--
 ## Ideas to Call This Repo and Site?

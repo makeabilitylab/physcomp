@@ -1,8 +1,18 @@
 ---
 layout: default
-title: Inside Arduino
+title: Website Dev Notes
 has_toc: false # on by default
 nav_exclude: true
+---
+
+# {{ page.title | replace_first:'L','Lesson '}}
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 ---
 
 ## Website TODO
@@ -156,6 +166,80 @@ After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll te
 Here's a test LaTeX equation. If it works, this should render correctly.
 
 $$\frac{\partial f(y)}{\partial x} = \frac{\partial f}{\partial y} \times \frac{\partial y}{\partial x}$$
+
+## Disqus
+
+I tried to get Disqus working with Jekyll by following their official instructions; however, it *just* wouldn't work and I didn't have significant time to try and troubleshoot/debug. I kept getting the non-help error printed out in Chrome's dev tool console:
+
+```
+Uncaught SyntaxError: Unexpected end of input   led-on.html:1
+```
+
+And in FireFox:
+
+```
+SyntaxError: missing } after function body led-on.html:1:754
+note: { opened at line 1, column 287  led-on.html:1:287
+```
+
+But I thought I'd try once more and I came across a [blog posting](https://disqus.com/home/discussion/channel-discussdisqus/why_does_the_disqus_not_work_in_jekyll/) that had the solution The "Universal Code" that Disqus has you embed on your website includes `// single line` comments and `/* multi-line */` comments. However, when Jekyll builds the website, it places the entire produced html on one line (read: not beautified), so the single-line comments disrupt the code. Here's the code that **doesn't work**.
+
+{% highlight HTML %}
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC 
+     *  VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     * https://disqus.com/admin/universalcode/#configuration-variables */
+    
+    var disqus_config = function () {
+        this.page.url = document.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = document.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+        s.src = 'https://physical-computing.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+</div>
+{% endhighlight HTML %}
+
+And here's the code that **does** work with the single line comments replaced with multi-line comments:
+
+{% highlight HTML %}
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC 
+     *  VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     * https://disqus.com/admin/universalcode/#configuration-variables */
+    
+    var disqus_config = function () {
+        this.page.url = document.location.href;  /* Replace PAGE_URL with your page's canonical URL variable */
+        this.page.identifier = document.location.pathname; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    
+    (function () { /* DON'T EDIT BELOW THIS LINE */
+        var d = document,
+            s = d.createElement('script');
+        s.src = 'https://physical-computing.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+</div>
+{% endhighlight HTML %}
+
 
 ## VS Code
 I've been using [VS Code](https://code.visualstudio.com/) with some popular markdown extensions to develop the website. 

@@ -35,18 +35,18 @@ As noted in our previous lesson, the Arduino Uno has 14 digital I/O pins:
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
-However, **6** of the 14 I/O pins can also be used for analog output. These pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (silkscreened directly on the Arduino's PCB).
+However, **6** of the 14 I/O pins can also be used for "analog" output—voltage output that is not just `HIGH` (5V) or `LOW` (0V) but between these two extremes. These analog output pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (silkscreened directly on the Arduino's PCB).
 
 ![Close up of the Arduino Uno highlighting the six analog output pins](assets/images/ArduinoUno_CloseUp_AnalogOutputPins.png)
 
-So, for this lesson, we don't actually have to change our circuit at all! You can keep the same circuit as the [LED Blink lesson](led-blink.md). Indeed, this is the reason why we selected Pin 3 in the first place.
+So, for this lesson, we **don't** have to change our circuit at all! You can keep the same circuit as the [LED Blink lesson](led-blink.md). Indeed, this is the reason why we selected Pin 3 in the first place.
 
 ![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDFade_Pin3Circuit.png)
 
 ---
 **IMPORTANT NOTE:**
 
-A common confusion amongst beginners is mixing up the analog **output** pins and the analog **input** pins. Whereas for digital I/O, the input and output pins are the same and configurable to `INPUT` or `OUTPUT` using the [`pinMode`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, the analog I/O pins are different!
+A common confusion amongst beginners is mixing up the analog **output** pins and the analog **input** pins. For the digital I/O, the input and output pins are the same and configurable to `INPUT` or `OUTPUT` using the [`pinMode`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, the analog I/O pins are different! See the figure below:
 
 ![Annotated image of an Arduino Uno showing the difference between analog input and output pins](assets/images/ArduinoUno_AnalogInputAndOutputPinsAreDifferent.png)
 
@@ -56,15 +56,23 @@ We'll learn about analog output in this lesson (using [`analogWrite`](https://ww
 
 ## Writing the code
 
-To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. This 8-bit value is directly proportional to the voltage output: so, 0 is 0V, 255 is 5V, 128 is 2.5V, 168 is 3.3V, *etc.* This means that the settable voltage granularity is ~0.0196V. TODO: come up with a figure to explain this.
+To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. This 8-bit value is directly proportional to the voltage output: so, 0 is 0V, 255 is 5V, 128 is 2.5V, 168 is 3.3V, *etc.* This means that the settable voltage granularity is `5V/255=~0.0196V`.
+
+<!-- TODO: come up with a figure to explain this. -->
 
 ---
 
 **SIDE NOTE:**
 
-The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a digital-to-analog converter (DAC). Instead, they use a method called Pulse-Width Modulation (PWM) to emulate analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform—a true analog output signal—like playing music, then you'll need to either find an Arduino microcontroller with a built-in DAC (like the [Due](https://store.arduino.cc/usa/due); see this [SimpleAudioPlayer tutorial](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer) or connect your Uno to an external DAC board (like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all)).
+The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a digital-to-analog converter (DAC). Instead, they use a method called Pulse-Width Modulation (PWM) to *emulate* analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform—a true analog output signal—like playing music, then you'll need to either find an Arduino microcontroller with a built-in DAC (like the [Due](https://store.arduino.cc/usa/due); see this [SimpleAudioPlayer tutorial](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer) or connect your Uno to an external DAC board (like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all)).
 
+If you want to learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and/or watch their "analog output" video:
+
+<!-- TODO: come up with a figure to explain this. -->
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/93554355" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 ---
+
+OK, so let's write some code!
 
 ### Step 1: Start a new sketch in the Arduino IDE
 
@@ -79,7 +87,7 @@ Our initialization code is the same as for [LED blink](led-blink.md) except for 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
-const int DELAY_MS = 30;
+const int DELAY_MS = 5;
 
 void setup() {
   // set Pin 3 to output
@@ -113,7 +121,7 @@ The full code is:
 ### Step 4: Compile, upload, and run!
 Now, compile, upload, and run the code.
 
-TODO: video of it running
+<iframe width:100%;height:100%; src="https://www.youtube.com/embed/Y0mSFmW7G4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Improved fading approach: limiting delays
 
@@ -132,7 +140,7 @@ I have a habit of prefixing my global variables by `_` but this is just my own c
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
-const int DELAY_MS = 30;
+const int DELAY_MS = 5;
 
 int _fadeAmount = 5;      // the amount to fade the LED by on each step
 int _curBrightness = 0;   // how bright the LED is

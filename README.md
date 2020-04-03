@@ -20,7 +20,7 @@ A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, 
 
 ## Learn by doing
 
-A key pedagogical philosophy underlying this website and our teaching approach in general is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises.
+A key pedagogical philosophy underlying this website and our teaching approach in general is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises. So, we we expect that you will build along with our guides and lessons.
 
 ## Example Hardware Kits
 
@@ -32,16 +32,9 @@ This website began as a response to teaching physical computing remotely due to 
 
 ### Acknowledgments
 
-Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted and were created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), and [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview).
+Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted and were created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview), and [Microsoft PowerPoint](https://products.office.com/en-us/powerpoint).
 
 For course and content inspirations, see our [Resources](resources/index.md) page and our (Inspirations)[resources/inspirations.md] page.
-
-## Possible H1 Content
-- Motors
-- Power
-- Sensors
-- [Programming microcontrollers](https://itp.nyu.edu/physcomp/lessons/programming/programming-terms-and-programming-environments/)
-- Electronic prototyping kits section
 
 <!--
 ## Ideas to Call This Repo and Site?

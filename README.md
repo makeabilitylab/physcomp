@@ -14,7 +14,7 @@ A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, 
 
 ## Prerequisites
 
-- **Some coding experience.** For the introductory lessons, we assume comfort and familiarity with basic coding concepts such as functions, loops, variables, and conditionals. We'll be using `C/C++` to program our microcontrollers; however, you need no previous experience with this language. If you've programmed in Java, Python, Ruby, Processing, JavaScript, or other similar languages, you should be fine. Later lessons require more advanced programming concepts such as memory management, library development, *etc.*
+- **Some coding experience.** For the [introductory lessons](arduino/index.md), we assume comfort and familiarity with basic coding concepts such as functions, loops, variables, and conditionals. We'll be using `C/C++` to program our microcontrollers; however, no previous `C/C++` experience is expected and, indeed, the language itself is rather unimportant. If you've programmed in a typed, compiled language like Java, Processing, C#, or other similar languages, you should be fine. If you've programmed in a dynamically-typed language like JavaScript, Python, or Ruby, using types and compiling may take some getting used to but the overflow structure of coding is not that different. Later lessons require more advanced programming concepts such as memory management, library development, *etc.*
 
 - **No previous experience with hardware.** In contrast, we assume no previous experience with electronics or microcontrollers.
 

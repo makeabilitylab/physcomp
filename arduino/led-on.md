@@ -154,9 +154,6 @@ You should observe that the LED's brightness *decreases* as the resistance *incr
 
 - Fix Ohm's Law animations to use Vr, Vf nomenclature
 
-<span class="fs-6">
-[Next](led-blink.md){: .btn .btn-outline }
-</span>
 
 ## Next Lesson
 

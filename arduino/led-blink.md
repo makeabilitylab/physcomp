@@ -65,7 +65,7 @@ Download and install the local Mac, Windows, or Linux version of the [Arduino ID
 After installation is complete, open the Arduino IDE. Notice that there are **two blocks** of code (called functions):
 
 1. The first block: `setup()`, which is called once and only once when the Arduino is turned on
-2. And the second block: `loop()`, which is called as soon as `setup()` completes. When `loop()` completes, it's automatically called again and again (until the Arduino is turned off). Want to learn more, read [Inside Arduino](inside-arduino.md).
+2. And the second block: `loop()`, which is called as soon as `setup()` completes. When `loop()` completes, it's automatically called again and again (until the Arduino is turned off). Want to learn more, read [Inside Arduino](inside-arduino.md#whats-calling-loop-and-how-fast).
 
 ![Screenshot of the Arduino IDE](assets/images/ArduinoIDE_BlankAndAnnotated.png)
 
@@ -75,11 +75,14 @@ For those who have used [Processing](https://processing.org/)—a programming en
 |----|----|
 | ![Screenshot of the Processing IDE](assets/images/ProcessingIDE_Blank.png) | ![Screenshot of p5js IDE](assets/images/p5jsIDE_Blank.png) |
 
+### Step 3: Select your Arduino board and port
+TODO
+
 ## Turn on LED programatically via Pin 3
 
 Now, we are going to write code to turn on our LED by setting Pin 3 to HIGH (or 5V). Then, we will modify this code to flash the LED both on *and* off.
 
-The Arduino Uno has 14 general-purpose input/output ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (HIGH or LOW) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but we chose Pin 3 (in part, because this will simplify a few of the future lessons).
+The Arduino Uno has 14 general-purpose input/output ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (HIGH or LOW) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but we chose Pin 3 (in part, because we want to use this same pin in the next lesson and using it now simplifies things!).
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
@@ -93,7 +96,9 @@ You can control any of these 14 digital I/O pins with three functions:
 
 **NOTE:** The Arduino Uno and Leonardo both use the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 40 mA per digital output pin or about ~two LEDs in parallel (each with a forward current of 20mA). According to Section 28.1 in the [ATmega328P datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf), anything beyond these limits "may cause permanent damage to the chip". The maximum total current draw **across all I/O pins** together should not exceed 200mA.
 
-In general, microcontroller digital output pins were designed to send **control signals** and not to act as **power supplies**. While these pins can supply enough current to use LEDs, piezo speakers, or control servo motors, if you need to control a high-current DC load such as a DC motor, you'll need to use a transistor. NYU's ITP course has a [nice tutorial](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-high-current-loads-with-an-arduino/) using an Arduino and a transistor to drive a DC motor.
+You may be thinking: "um, what?" That's OK. In our years of teaching, we have had very few Arduinos damaged due to current overdraw. And you won't need to worry about these limits for any of the introductory lessons.
+
+In general, microcontroller digital output pins were designed to send **control signals** and not to act as **power supplies**. While these pins can supply enough current to use LEDs, piezo speakers, or control servo motors, if you need to control a high-current DC load such as a DC motor, you'll need to use a transistor. NYU's ITP course has a [nice tutorial](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-high-current-loads-with-an-arduino/), which shows how to use a transistor, external power supply, and an Arduino to drive a DC motor.
 
 <!-- TODO: add in a link to powering circuits via the 5V port directly or an external power source with a transistor -->
 
@@ -120,7 +125,7 @@ void setup() {
 
 ### Step 3: Set Pin 3 HIGH
 
-Lastly, we need to actually set the Pin 3 signal to HIGH. For this, we use the  [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) command, which takes in a pin as the first parameter and a value (`HIGH` or `LOW`) as the second.
+Lastly, we need to actually set the Pin 3 signal to HIGH. For this, we use the  [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) command, which takes in a pin as the first parameter and a value (`HIGH` or `LOW`) as the second. We could do this either in `setup()` or in `loop()` but since we're not currently changing the output signal, there is no reason to put it in `loop()`, so let's put it in `setup()` like the `pinMode` code.
 
 {% highlight C %}
 void setup() {
@@ -140,7 +145,7 @@ Compile the code by clicking on the "verify" checkmark button in the upper-left 
 
 ### Step 5: Upload the code to Arduino
 
-Finally, upload the code to the Arduino by clicking on the "right arrow" button (next to verify).
+Finally, upload the code to the Arduino by clicking on the "right arrow" button (next to verify). Importantly, you must have already set your Arduino board and port in `Tools->Board` and `Tools->Port`, respectively.
 
 ![Screenshot showing where the upload button is (to the right of the verify button)](assets/images/ArduinoIDE_UploadCodeButton.png)
 

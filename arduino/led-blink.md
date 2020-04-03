@@ -163,6 +163,7 @@ Once uploading is complete, the code automatically runs on the Arduino and the L
 </video>
 
 Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`:
+
 ![Animation showing the LED on Pin 3 turning on)](assets/movies/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
 
 ## Turn on and off the LED programmatically via Pin 3

@@ -49,6 +49,7 @@ TODO:
 ## Intro to Input
 
 TODO: consider adding interrupts here? Like after Lesson 2?
+- Nick Gammon's blog is a nice resource for this: https://www.gammon.com.au/interrupts
 
 ### [Lesson 1: Using buttons](buttons.md)
 

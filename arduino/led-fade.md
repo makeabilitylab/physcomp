@@ -125,6 +125,25 @@ Now, compile, upload, and run the code.
 
 <iframe style="width:100%;height:100%;" src="https://www.youtube.com/embed/Y0mSFmW7G4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## Visualizing the voltage output
+
+We can visualize the (effective) voltage output on Pin 3 using the Arduino IDE's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter). In the video below, we see a simulation of our code + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time voltages output on Pin 3. Hopefully, this matches your intuition for how things work.
+
+<video controls="controls">
+  <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
+</video>
+
+Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. TODO: verify these with multimeter because need to check when LED actually turns on due to Vf conditions being met.
+
+| Pin 3 Value | Pin 3 Voltage | Resistor | Resulting Current |
+|:-------------|:-------------|:-------------|:-------------|:------------------|
+| 0 | 0V | 220Ω | $$I = \frac{0V}{220Ω}= 0.0mA $$ |
+| 45 | 0.88V | 220Ω | $$I = TODO $$ |
+| 103 | 2.02V | 220Ω | $$I = TODO $$ |
+| 128 | 2.51V | 220Ω | $$I = TODO $$ |
+| 199 | 3.9V | 220Ω | $$I = TODO $$ |
+| 255 | 5V | 220Ω | $$I = TODO $$ |
+
 ## Improved fading approach: limiting delays
 
 Generally, we want to limit the use of `for` loops and `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now).
@@ -172,25 +191,6 @@ void loop() {
   delay(DELAY_MS);
 }
 {% endhighlight C %}
-
-## Visualizing the voltage output
-
-We can visualize the (effective) voltage output on Pin 3 using the Arduino IDE's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter).
-
-<video controls="controls">
-  <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
-</video>
-
-Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. TODO: verify these with multimeter because need to check when LED actually turns on due to Vf conditions being met.
-
-| Pin 3 Value | Pin 3 Voltage | Resistor | Resulting Current |
-|:-------------|:-------------|:-------------|:-------------|:------------------|
-| 0 | 0V | 220Ω | $$I = \frac{0V}{220Ω}= 0.0mA $$ |
-| 45 | 0.88V | 220Ω | $$I = TODO $$ |
-| 103 | 2.02V | 220Ω | $$I = TODO $$ |
-| 128 | 2.51V | 220Ω | $$I = TODO $$ |
-| 199 | 3.9V | 220Ω | $$I = TODO $$ |
-| 255 | 5V | 220Ω | $$I = TODO $$ |
 
 ## Next Lesson
 

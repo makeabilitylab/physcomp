@@ -61,4 +61,22 @@ The [ATmega datasheet](https://www.sparkfun.com/datasheets/Components/SMD/ATMega
 For most practical purposes, dividing by 1023 or 1024 won't matter. :)
 
 ## What does delay(int ms) actually do?
-TODO:
+
+As you might expect—given our warnings about avoiding overuse of [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/)—the delay code consists of a `while` loop that simply waits for the given amount of delay time to pass. There is a `yield()` call within the `while` loop but this is, by default, an empty function—though you could implement it to create a "real cooperative scheduler." The code for `yield()` is [here](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/hooks.c).
+
+The [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/) function is found in [wiring.c](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/wiring.c) and is, in its entirety, copied below:
+
+{% highlight C %}
+void delay(unsigned long ms)
+{
+	uint32_t start = micros();
+
+	while (ms > 0) {
+		yield();
+		while ( ms > 0 && (micros() - start) >= 1000) {
+			ms--;
+			start += 1000;
+		}
+	}
+}
+{% endhighlight C %}

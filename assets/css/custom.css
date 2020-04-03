@@ -17,3 +17,8 @@ cite{
   text-align: right;
   font-size: smaller;
 }
+
+.js-toc{
+  z-index: 100;
+  position: absolute;
+}

@@ -5,6 +5,7 @@ title: L5&#58; RGB LEDs
 parent: Output
 usemathjax: true
 has_toc: true # (on by default)
+comments: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

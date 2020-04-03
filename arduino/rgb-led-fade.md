@@ -4,6 +4,7 @@ title: L6&#58; Crossfading RGB LEDs
 parent: Output
 usemathjax: false
 has_toc: true # (on by default)
+comments: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

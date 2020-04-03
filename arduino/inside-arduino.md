@@ -80,3 +80,8 @@ void delay(unsigned long ms)
 	}
 }
 {% endhighlight C %}
+
+## How does the Arduino Uno ADC work exactly?
+
+- http://www.gammon.com.au/adc
+- http://www.skillbank.co.uk/arduino/adc.htm

@@ -4,6 +4,7 @@ title: Intro to Arduino
 nav_order: 1
 has_toc: false # on by default
 has_children: false
+comments: true
 ---
 # {{ page.title }}
 {: .no_toc }
@@ -40,9 +41,10 @@ Introduces the concept of using Arduino GPIO pins as either current sources or s
 Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
 
 TODO: 
-- blink no delay (where to put this?)
-- how to hook up multiple LEDS per port with Arduino
-- Where to put breadboard stuff?
+- blink no delay (where to put this?). We do have a fade with no delay at end of led-fade.md
+  - But a blink no delay could also show how to blink multiple LEDs at different rates.
+- how to hook up multiple LEDS per port with Arduino (in parallel and why)
+- Where to put breadboard stuff? This should probably go in the basic electronics series but for now my focus is on Arduino stuff...
 
 ## Intro to Input
 

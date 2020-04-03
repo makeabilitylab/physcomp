@@ -5,6 +5,7 @@ parent: Intro to Arduino
 nav_order: 15
 has_toc: true # (on by default)
 nav_exclude: true
+comments: true
 ---
 # Arduino
 {: .no_toc }

@@ -4,6 +4,7 @@ title: L2&#58; Blinking an LED
 nav_order: 2
 parent: Output
 has_toc: true # (on by default)
+comments: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

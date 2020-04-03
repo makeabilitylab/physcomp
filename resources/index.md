@@ -29,6 +29,8 @@ has_toc: true # (on by default)
 
 <!-- Instructables also has an 'Intro to Arduino' tutorial series: https://www.instructables.com/class/Arduino-Class/ taught by Becky Stern -->
 
+- [Nick Gammon's Arduino blog](http://www.gammon.com.au/forum/index.php?bbtopic_id=123). [Nick Gammon](https://github.com/nickgammon) is a popular figure and [moderator](https://forum.arduino.cc/index.php?action=profile;u=36095) on the Arduino forums and [runs a helpful website on Arduino](http://www.gammon.com.au/forum/index.php?bbtopic_id=123). See his [Arduino Traps, Tips, and Style Guide](http://www.gammon.com.au/forum/?id=12153) for example.
+
 ## Video Tutorials
 
 - [Physical Computing @ ITP/NYU](https://vimeo.com/channels/pcomp). This online video series by NYU ITP's Jeff Feddersen & Tom Igoe provides over 100 high-quality teaching videos about circuits, & Arduino
@@ -86,6 +88,8 @@ I *encourage* you to ask questions! There are so many people out there willing t
 - **Reddit**. While Reddit is not generally known as a thoughtful, respectful community, the subreddits for [r/arduino](https://www.reddit.com/r/arduino/) and [r/diyelectronics](https://www.reddit.com/r/diyelectronics/) communities are helpful and supportive.
 
 - **Online Forums**. The most popular electronics and Arduino-based Q/A forums, include: [Adafruit](https://forums.adafruit.com/viewforum.php?f=37&sid=39a6c8dce50981dcc363bdd5b0a77b23), [Sparkfun](https://forum.sparkfun.com/index.php), [Arduino.cc](https://forum.arduino.cc/), and [EEVBlog](https://www.eevblog.com/forum/).
+
+<!-- Nick Gammon forum: https://www.gammon.com.au/forum/index.php?bbtopic_id=123 -->
 
 ## Inspirations
 

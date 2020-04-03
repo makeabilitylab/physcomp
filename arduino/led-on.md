@@ -23,6 +23,7 @@ The movement of **current** in the circuit is illustrated by the animated yellow
 {: .fs-1 }
 
 ## Materials
+
 You will need the following materials:
 
 | Arduino | LED | Resistor |
@@ -50,14 +51,22 @@ Now connect your Arduino to power and the LED should light up. You did it!
 
 Here's a photo of the version I made. I found it easier to stretch the wiring across the Arduino from the 5V port to the GND on the opposite side.
 
-![Workbench photo of the the LED wired to the 5V port](assets/images/![](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png)
+![Workbench photo of the the LED wired to the 5V port](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png)
 
-For power, you can use a USB cable or a 9V battery. Either way, the Arduino supplies 5V through the 5V pin.
+For power, you can use a USB cable (which supplies 5V) or a 9V battery (which supplies 9V). Either way, the Arduino **supplies 5V** through the 5V pin. How? Using a voltage regulator, which takes in input
 
 | USB Power        | 9V Power          |
 |:-------------|:------------------|
 | ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower-Cropped.gif) | ![Animation showing a 9V battery plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_9VBattery-Cropped.gif) |
 | With USB power, the 5V pin supplies 5V | With a 9V battery, the 5V pin still supplies 5V |
+
+---
+
+**MORE INFO:**
+
+If we use a 9V battery (which supplies ~9V) then how does the Arduino convert 9V to 5V? Using a component called a [voltage regular](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/#Voltage_Regulator), which can take in a range of DC voltages and step it down (but not up) to a stable constant voltage. You can buy and use voltage regulators in your own projects. If you want to learn more about more about the Arduino Uno's power supply sub-system, read this [technobyte blog post](https://www.technobyte.org/arduino-uno-power-supply-arduino-hardware-core/).
+
+---
 
 ## How can we make the LED less bright?
 
@@ -142,9 +151,17 @@ You should observe that the LED's brightness *decreases* as the resistance *incr
 </video> -->
 
 ## TODO
-- Add physical pictures/videos
+
 - Fix Ohm's Law animations to use Vr, Vf nomenclature
 
 <span class="fs-6">
 [Next](led-blink.md){: .btn .btn-outline }
+</span>
+
+## Next Lesson
+
+In the next lesson, we will learn how to programatically control the output voltage of a digital I/O pin to switch between `LOW` (0V) or `HIGH` (5V) using [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
+
+<span class="fs-6">
+[Next: Blinking an LED with Arduino](led-fade.md){: .btn .btn-outline }
 </span>

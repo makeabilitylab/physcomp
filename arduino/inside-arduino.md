@@ -47,3 +47,15 @@ void loop() {
 ## Secrets of Arduino PWM
 
 - https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM
+
+## Converting analogRead to voltages
+
+Interesting thread on [Arduino forums](https://forum.arduino.cc/index.php?topic=303189.msg2109121) discussing whether to convert Arduino Uno `analogRead` values to voltages using a divisor of 1023 or 1024. The maximum `analogRead` value is 1023; however, there are 1024 'steps' between 0 and 5V. The official [Arduino tutorial uses 1023](https://www.arduino.cc/en/Tutorial/ReadAnalogVoltage)--which effectively translates 0 - 1023 to 0 to 5V; however, others argue that this is wrong.
+
+I think the key here is to remember that an ADC conversion represents a range of values. `5V/1024 = 0.0048828125V`. So if `analogRead` returns 0, this is really a range of 0V to 0.0048828125V, and 1 is a range of 0.0048828125V to 0.009765625V, *etc.* In that regard, we would want to divide analogRead by 1024 and if analogRead returns 1023, 1023/1024 * 5V=4.9951171875V to 5V. 0.9990234375.
+
+The [ATmega datasheet](https://www.sparkfun.com/datasheets/Components/SMD/ATMega328.pdf) says:
+
+![](assets/images/ATMegaDatasheet_ADCConversionResult.png)
+
+For most practical purposes, dividing by 1023 or 1024 won't matter. :)

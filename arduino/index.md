@@ -25,7 +25,7 @@ Introduces the Arduino power and ground pins, powering an initial LED circuit wi
 
 ### [Lesson 2: Blinking an LED](led-blink.md)
 
-Introduces the Arduino IDE and the ability to programatically control Arduino GPIO pins to turn an LED on and off via [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
+Introduces the Arduino IDE and the ability to programmatically control Arduino GPIO pins to turn an LED on and off via [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
 
 ### [Lesson 3: Fading an LED](led-fade.md)
 

@@ -16,7 +16,7 @@ has_toc: true # (on by default)
 ---
 In our [first activity](led-on.md), we directly hooked up an LED circuit to the Arduino's 5V pin. While this enabled us to learn about Arduino's supply voltage and GND pins and gave us practical experience wiring electrical components into the Arduino ports, it was admittedly, a toy exercise.
 
-In this activity, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programatically* controlling the output voltage on one of Arduino's GPIO pins. This begins our entrée into the two key aspects of working with microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
+In this activity, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programmatically* controlling the output voltage on one of Arduino's GPIO pins. This begins our entrée into the two key aspects of working with microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
 
 ![Animation showing an LED connected to Pin 3 on the Arduino blinking on and off](assets/movies/Arduino_LEDBlink_Pin3.gif)
 
@@ -76,9 +76,16 @@ For those who have used [Processing](https://processing.org/)—a programming en
 | ![Screenshot of the Processing IDE](assets/images/ProcessingIDE_Blank.png) | ![Screenshot of p5js IDE](assets/images/p5jsIDE_Blank.png) |
 
 ### Step 3: Select your Arduino board and port
-TODO
 
-## Turn on LED programatically via Pin 3
+Select your Arduino board:
+
+![Screenshot showing how to select your Arduino board in the Arduino IDE by going to the file menu and then Tools->Board](assets/images/ArduinoIDE_SelectYourArduinoBoard.png)
+
+Then select your Arduino port (newer version of the Arduino IDE attempt to identify and highlight which Arduino you have plugged in and on which port but you still must explicitly select the port):
+
+![Screenshot showing how to select your Arduino port in the Arduino IDE by going to the file menu and then Tools->Port](assets/images/ArduinoIDE_SelectYourArduinoPort.png)
+
+## Turn on LED programmatically via Pin 3
 
 Now, we are going to write code to turn on our LED by setting Pin 3 to HIGH (or 5V). Then, we will modify this code to flash the LED both on *and* off.
 
@@ -149,15 +156,19 @@ Finally, upload the code to the Arduino by clicking on the "right arrow" button 
 
 ![Screenshot showing where the upload button is (to the right of the verify button)](assets/images/ArduinoIDE_UploadCodeButton.png)
 
-Once complete, the code automatically runs and the LED should turn on!
+Once uploading is complete, the code automatically runs on the Arduino and the LED should immediately turn on!
 
+<video controls="controls">
+  <source src="assets/movies/ArduinoUno_TurnOnLEDPin3_WorkbenchWithCode-Cropped.mov" type="video/mp4">
+</video>
+  
+  
+Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`:
 ![Animation showing the LED on Pin 3 turning on)](assets/movies/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
 
-TODO: insert real-world video of compiling code + arduino turning on pin 3. Maybe use the logicapture setup?
+## Turn on and off the LED programmatically via Pin 3
 
-## Turn on and off the LED programatically via Pin 3
-
-Now, let's modify our code to turn on *and* off the LED programatically. More specifically, we will alternate between having the LED on for one second and having the LED off for one second. To do this, we'll use the [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/) function, which pauses the program for the specified amount of time (in milliseconds).
+Now, let's modify our code to turn on *and* off the LED programmatically. More specifically, we will alternate between having the LED on for one second and having the LED off for one second. To do this, we'll use the [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/) function, which pauses the program for the specified amount of time (in milliseconds).
 
 ### Step 1: Move the digitalWrite code from setup() to loop()
 

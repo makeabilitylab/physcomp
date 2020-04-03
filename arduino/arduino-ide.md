@@ -21,7 +21,6 @@ Download and install the [Arduino IDE](https://www.arduino.cc/en/main/software).
 
 ![Arduino IDE download screenshot](assets/images/ArduinoIDEDownloadScreenshot.png)
 
-
 ## Install custom theme
 
 To use a dark theme in the Arduino IDE, [follow these steps](https://create.arduino.cc/projecthub/konradhtc/one-dark-arduino-modern-dark-theme-for-arduino-ide-2fca81). Note: I started investigating this when I noticed that the default Arduino theme was difficult to read over Zoom.
@@ -30,7 +29,13 @@ To use a dark theme in the Arduino IDE, [follow these steps](https://create.ardu
 
 ## Troubleshooting
 
-### Arduino Leonardo port doesn't show up
+### Couldn't find a Board on the selected port
+
+If you click the `upload` button but receive the following error, did you remember to set the correct Arduino board and port in `Tools->Board` and `Tools->Port`? See above.
+
+![](assets/images/ArduinoIDE_CouldntFindBoardOnSelectedPortpng.png)
+
+### Arduino Leonardo port doesn't show up in Tools->Port
 
 First, check to ensure that your USB cable provides both power + data. Some cheaper cables are power only.
 

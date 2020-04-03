@@ -81,7 +81,7 @@ Select your Arduino board:
 
 ![Screenshot showing how to select your Arduino board in the Arduino IDE by going to the file menu and then Tools->Board](assets/images/ArduinoIDE_SelectYourArduinoBoard.png)
 
-Then select your Arduino port (newer version of the Arduino IDE attempt to identify and highlight which Arduino you have plugged in and on which port but you still must explicitly select the port):
+Then select your Arduino port. **Note:** Newer Arduino IDE versions attempt to identify and highlight which Arduino you have plugged in and on which port but you still must explicitly select the port):
 
 ![Screenshot showing how to select your Arduino port in the Arduino IDE by going to the file menu and then Tools->Port](assets/images/ArduinoIDE_SelectYourArduinoPort.png)
 
@@ -161,8 +161,7 @@ Once uploading is complete, the code automatically runs on the Arduino and the L
 <video controls="controls">
   <source src="assets/movies/ArduinoUno_TurnOnLEDPin3_WorkbenchWithCode-Cropped.mov" type="video/mp4">
 </video>
-  
-  
+
 Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`:
 ![Animation showing the LED on Pin 3 turning on)](assets/movies/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
 

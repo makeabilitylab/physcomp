@@ -16,7 +16,9 @@ comments: true
 {:toc}
 ---
 
-These tutorials are interactive and designed to be completed **in order**.
+These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub](https://github.com/makeabilitylab/arduino).
+
+<!-- TODO: add in link to Tinkercad circuits here... -->
 
 ## Intro to Output
 

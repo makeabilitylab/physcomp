@@ -71,8 +71,11 @@ The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actu
 
 If you want to learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and/or watch their "analog output" video:
 
-<!-- TODO: come up with a figure to explain this. -->
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/93554355" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+<!-- TODO: in the future, it would be cool to hook up OLED to display analogOut value + show PWM signal on Oscilliscope with
+     top-down workbench camera. Could do two versions: (1) with the code running as written and another (2) with a pot
+     to control the PWM signal -->
 ---
 
 OK, so let's write some code!

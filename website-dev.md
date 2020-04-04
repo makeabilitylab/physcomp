@@ -22,8 +22,10 @@ nav_exclude: true
   - https://pmarsceill.github.io/just-the-docs/docs/customization/#override-styles
   - Here's miminimal mistakes version: https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/docs/_posts/2013-01-11-markup-html-tags-and-formatting.md
     - And the scss: https://github.com/mmistakes/minimal-mistakes/blob/0cf1a2e1144336b5e026d13b5fd87dc2af02fe8c/_sass/minimal-mistakes/_base.scss
+- [Done] Add in Discussion support. Update: OK, did this with disqus platform
 - Add in 'info box` support like minimal mistakes
-- Add in auto-TOC (Table of contents) with sticky support: https://tscanlin.github.io/tocbot/
+- Add in auto-TOC (Table of contents) with sticky support. 
+  - Working on this in a branch with: https://tscanlin.github.io/tocbot/
 - Add in figure captioning support (minimal mistakes also has this)
 - Possible to add last modified date into file?
 - Update all arduino code in github to include link back to website
@@ -39,6 +41,9 @@ nav_exclude: true
   - https://stackoverflow.com/questions/17536216/create-a-table-without-a-header-in-markdown
 - Make Next/Previous buttons same size like in Minimal Mistakes?
 - Make it so if you left-click on an image, it shows up as a pop-up with a description below?
+- Make YouTube videos responsive
+  - https://avexdesigns.com/responsive-youtube-embed/
+  - https://embedresponsively.com/
 
 ## Markdown Tips
 

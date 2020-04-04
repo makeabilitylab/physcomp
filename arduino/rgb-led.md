@@ -25,26 +25,26 @@ In this tutorial, we will flash through a sequence of colors using an RGB LED (R
 
 You'll need the following materials. Importantly, there are **two types** of RGB LEDs—described below—so make sure you **determine** which type of RGB LED you are using as it will affect how you configure your circuit. But don't worry, we'll walk through both RGB LED types.
 
-| Arduino | RGB LED | Resistor |
-|:-----:|:-----:|:-----:|
-| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![An RGB LED]({{ site.baseurl }}/assets/images/RgbLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
-| Arduino Uno, Leonardo, or similar  | RGB LED | **3** 220Ω Resistor |
+| Breadboard | Arduino | RGB LED | Resistors |
+|:-----:|:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![An RGB LED]({{ site.baseurl }}/assets/images/RgbLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | RGB LED (Either Common Cathode or Common Anode) | **Three** 220Ω Resistors |
 
 ### Common Anode vs. Common Cathode
 
-While capable of displaying thousands of color combinations, RGB LEDs are actually quite simple; they simply contain three individual LEDs in one package: red, green, and blue. Importantly but somewhat confusingly, there are two RGB LED designs—the **Common Anode** and the **Common Cathode**—which differ in the leg shared between the three embedded LEDs.
+While capable of displaying thousands of color combinations, RGB LEDs are actually quite simple; they contain three separate LEDs in one package: red, green, and blue. Importantly but somewhat confusingly, there are two RGB LED designs—the **Common Anode** and the **Common Cathode**—which differ in the leg shared between the three embedded LEDs.
 
-1. With the **Common Anode**, the three embedded LEDs share the anode leg. To control the RGB LED's color, you must hook up the anode to the higher voltage source and connect the red, green, and blue legs to lower voltage levels (*e.g.,* ground).
+1. With the **Common Anode**, the three embedded LEDs share the anode leg. To control the RGB LED's color, you must hook up the anode to the higher voltage source and connect the red, green, and blue legs to lower voltage levels (*e.g.,* ground). For example, with a 5V voltage source connected to the common anode leg, setting the three other legs (red, green, blue) to 5V would, somewhat counterintuively, **turn off** the LED. 
 
 <!-- For example, with a 5V voltage source connected to the common anode leg, setting the three other legs (red, green, blue) to 5V would, somewhat counterintuively, turn off the LED. In contrast, setting the red leg to 0V, for example, and the other two legs to 5V would turn the RGB LED red. -->
 
-2. In contrast, the **Common Cathode** works much more like a typical LED (*e.g.,* like the red LED from our previous examples). Here, all three embedded LEDs share the cathode leg. So, you drive each individual color leg with a higher voltage source. 
+2. In contrast, the **Common Cathode** works much more like a typical LED (*e.g.,* like the red LED from our previous lessons). Here, all three embedded LEDs share the cathode leg. So, you drive each individual color leg with a higher voltage source. 
 
 <!-- For example, to turn the Common Cathode RGB LED red, you would set the cathode leg to ground, the red leg to 5V -->
 
 ![Image showing schematics of a common anode RGB LED and a common cathode RGB LED. With the common anode, the second leg of the RGB LED needs to be hooked up to the higher voltage source. With a common cathode, the second leg of the RGB LED needs to be hooked up to the lower voltage]({{ site.baseurl }}/assets/images/RgbLEDS_CommonAnodeVsCommonCathode.png)
 
-#### How can I tell if I have a Common Anode or Cathode RGB LED?
+### How can I tell if I have a Common Anode or Cathode RGB LED?
 
 You **cannot** tell whether you have a Common Anode or Common Cathode RGB LED by visual inspection. Instead, consult the supplier website, the datasheet, or experiment with the LED yourself (remember, diodes only work in one directly so as long as you include your current limiting resistors, you should be fine!).
 
@@ -63,7 +63,7 @@ We're going to start with a Common Cathode circuit + code because it's more intu
 
 ### Making the circuit
 
-With a Common Cathode design, the 2nd leg needs to be hooked up to the `GND` pin and the 1st (red), 3rd (blue), and 4th (green) legs should connect to digital I/O pins (don't forget a current limiting resistor for each). We could have used any digital I/O pins; however, we chose Pins 6, 5, and 3 for red, blue, and green respectively (these pins support PWM and thus, we'll be able to use the same circuit for our next tutorial on [cross-fading colors with RGB LEDs](rgb-led-fade.md)).
+With a Common Cathode design, the 2nd leg needs to be hooked up to the `GND` pin and the 1st (red), 3rd (blue), and 4th (green) legs should connect to digital I/O pins (**don't forget** a current limiting resistor for each). We could have used any digital I/O pins; however, we chose Pins 6, 5, and 3 for red, blue, and green respectively (these pins support PWM and thus, we'll be able to use the same circuit for our next tutorial on [cross-fading colors with RGB LEDs](rgb-led-fade.md)).
 
 Here's the wiring without a breadboard (not recommended but perhaps easier to see the circuit itself):
 
@@ -178,6 +178,8 @@ void loop()
 
 That's it. Now compile, upload, and run your code!
 
+TODO: insert workbench video of it working.
+
 Below, we show a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current—it will flow in the opposite direction with the Common Anode design (covered next).
 
 <video controls="controls">
@@ -186,7 +188,7 @@ Below, we show a video animation of the code executing and resulting circuit beh
 
 ## Common Anode
 
-Now, let's work on the Common Anode version. The circuit wiring is almost the exact same as before: the 1st leg (red), 3rd leg (blue), and 4th leg (green) of the RGB LED connect to digital I/O Pins 6, 5, and 3 respectively (along with a current limiting resistor for each); however, the 2nd leg is now a **common anode** and thus, should be connected to 5V (and not `GND` as it was for the common cathode). 
+Now, let's work on the Common Anode version. The circuit wiring is almost the exact same as before: the 1st leg (red), 3rd leg (blue), and 4th leg (green) of the RGB LED connect to digital I/O Pins 6, 5, and 3 respectively (along with a current limiting resistor for each); however, the 2nd leg is now a **common anode** and thus, should be connected to 5V (and not `GND` as it was for the common cathode).
 
 To drive current through our circuit and turn on an embedded LED—say the red LED—we counterintuitively have to set the corresponding LED pin to `LOW` (Pin 6, in this case) and the other LED pins to `HIGH` (Pins 5 and 3). Why? Remember that current always flows from **high potential** to **low potential**. With a Common Anode, the 2nd leg is the anode (high potential or, in this case, 5V) so we must connect the other legs to lower potential to create a voltage difference and allow current to flow. 
 
@@ -216,7 +218,7 @@ digitalWrite(RGB_RED_LED_PIN, LOW);
 digitalWrite(RGB_GREEN_LED_PIN, HIGH);
 digitalWrite(RGB_BLUE_LED_PIN, HIGH);
 {% endhighlight C %}
-
+  
 Similarly, to make the RGB LED turn green, we would write:
 {% highlight C %}
 digitalWrite(RGB_RED_LED_PIN, HIGH);
@@ -306,11 +308,16 @@ void loop()
 }
 {% endhighlight C %}
 
-TODO: 
+## TODO: 
 - add in gist link to code in github
 - add tinkercad circuit link for common cathode
+- add in point about Vf being different for each color and thus the resistors for each leg should be different?
+
+## Next Lesson
+
+In the next lesson, we will learn how to fade between RGB colors and how to convert to the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness.
 
 <span class="fs-6">
 [Previous: LED Blink 2](led-blink2.md){: .btn .btn-outline }
-[Next: Cross-fading RGB LEDs](TODO){: .btn .btn-outline }
+[Next: Cross-fading RGB LEDs](rgb-led-fade.md){: .btn .btn-outline }
 </span>

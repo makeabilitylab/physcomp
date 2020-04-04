@@ -154,7 +154,6 @@ You should observe that the LED's brightness *decreases* as the resistance *incr
 
 - Fix Ohm's Law animations to use Vr, Vf nomenclature
 
-
 ## Next Lesson
 
 In the next lesson, we will learn how to programmatically control the output voltage of a digital I/O pin to switch between `LOW` (0V) or `HIGH` (5V) using [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).

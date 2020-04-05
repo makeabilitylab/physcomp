@@ -21,7 +21,7 @@ In this lesson, you will learn how to fade between RGB colors and how to use the
 ---
 **NOTE:**
 
-This is our most complex lesson yet. From a circuit standpoint, things are easy—it's the same circuit as [before](rgb-led.md) (yay!). From a coding standpoint, things are more complicated. If you don't have a coding background, it's OK if the code doesn't make sense. Try to read it and understand it given your current abilities. Certainly, feel free to copy the code and play with it on your own!
+This is our most complex lesson yet. From a circuit standpoint, things are easy—it's the same circuit as [before](rgb-led.md) (yay!). From a coding standpoint, things are more complicated. If you don't have a coding background, it's OK if the code doesn't make sense. Try to read it and understand it given your current abilities. Regardless of your comprehension level, feel free to copy the code and play with it on your own!
 
 ---
 
@@ -53,7 +53,7 @@ We are going to explore and implement two different RGB crossfade approaches.
 
 The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you should read and understand this code.
 
-At a high level, the code works by increasing one LED color value (from `0` to `255`) while decreasing another (from `255` to `0`). For example, the code begins by **decreasing** the red LED `analogWrite` value while **increasing** the green LED value. When the red LED value reaches `0`, the green LED will have reached `255`, so we begin decreasing the green LED value and shift to increasing the blue LED value, and so on.
+At a high level, the code works by increasing one LED color value (from `0` to `255`) while decreasing another (from `255` to `0`). For example, the code begins by **decreasing** the red LED `analogWrite` value while **increasing** the green LED value. When the red LED value reaches `0`, we begin decrementing the green LED value and begin incrementing the blue LED value, and so on.
 
 We have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`. So, our RGB LED will start red. 
 
@@ -61,7 +61,7 @@ We have an array `int _rgbLedValues[3]` that stores our `{int red, int green, in
 int _rgbLedValues[] = {255, 0, 0}; // Red, Green, Blue
 {% endhighlight C %}
 
-To help index into this array, we create an `enum` so that we can access our RGB LED values by writing `_rgbLedValues[RED]`, `_rgbLedValues[GREEN]`, and `_rgbLedValues[BLUE]` rather than `_rgbLedValues[0]`, `_rgbLedValues[1]`, and `_rgbLedValues[2]`:
+To help index into this array, we create an `enum` so that we can access our RGB LED values by writing `_rgbLedValues[RED]`, `_rgbLedValues[GREEN]`, and `_rgbLedValues[BLUE]` rather than `_rgbLedValues[0]`, `_rgbLedValues[1]`, and `_rgbLedValues[2]` (this enum is simply for code readability and to avoid needless array index errors):
 
 {% highlight C %}
 enum RGB{
@@ -72,7 +72,7 @@ enum RGB{
 };
 {% endhighlight C %}
 
-Our crossfade algorithm uses two `for` loops to simultaneously increase one color while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUp = GREEN;`) and (`enum RGB _curFadingDown = RED;`). Once we reach our maximum color value `255` for the current `_curFadingUp` color, we select the next color to increase (beginning with `RED` and then to `GREEN` then `BLUE` then back to `RED`). Similarly, once we reach our minimum color value `0` for `_curFadingDown`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
+Our crossfade algorithm uses two `for` loops to simultaneously increase one color while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUpColor = GREEN;`) and (`enum RGB _curFadingDownColor = RED;`). Once we reach our maximum color value `255` for the current `_curFadingUpColor`, we select the next color to increase (beginning with `RED` and then to `GREEN` then `BLUE` then back to `RED`). Similarly, once we reach our minimum color value `0` for `_curFadingDownColor`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
 
 {% highlight C %}
 void loop() {
@@ -113,7 +113,7 @@ void loop() {
 }
 {% endhighlight C %}
 
-In total, we crossfade between 768 color combinations (`3*256`) though this can be controlled with `const int FADE_STEP`—the total amount to step up and down the `analogWrite` LED values per loop iteration. It's set to `5` by default, which results in 156 color combinations.
+In total, we fade between 768 color combinations (`3*256`) though this can be controlled with `const int FADE_STEP`—the total amount to step up and down the `analogWrite` LED values per loop iteration. It's set to `5` by default, which results in 156 color combinations.
 
 Here's the code in its entirety:
 
@@ -127,7 +127,7 @@ And here's a video showing the code running in the Tinkercad simulator. You can 
 
 ### Crossfading in HSL color space
 
-The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its hue. It's much easier to do this using HSL and then converting to  RGB to set our RGB LED color. We perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. Now, our code isc omparatively much simpler, something like the following pseudocode:
+The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its **hue**. It's much easier to do this using HSL and then converting to RGB to set our RGB LED color. We perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. With this HSL approach, our code is comparatively much simpler, something like the following:
 
 {% highlight C %}
 // Basic overview of our approach (pseudocode)

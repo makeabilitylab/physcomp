@@ -53,7 +53,7 @@ We are going to explore and implement two different RGB crossfade approaches.
 
 The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you should read and understand this code.
 
-At a high level, the code works by increasing one LED color value (from `0` to `255`) while decreasing another (from `255` to `0`). For example, the code begins by **decreasing** the red LED `analogWrite` value while **increasing** the green LED value. When the red LED value reaches `0`, we begin decrementing the green LED value and begin incrementing the blue LED value, and so on.
+At a high level, the code works by **increasing** one LED color value (from `0` to `255`) while **decreasing** another (from `255` to `0`). For example, the code begins by decreasing the red LED `analogWrite` value while increasing the green LED value. When the red LED value reaches `0`, we begin decrementing the green LED value and begin incrementing the blue LED value, and so on.
 
 We have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`. So, our RGB LED will start red. 
 
@@ -144,7 +144,9 @@ loop(){
 }
 {% endhighlight C %}
 
-The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float``division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats have 6-7 decimal digits of precision). However, this won't matter for our program because we are not speed limited and don't need high-precision math. If you want to know more about *why* embedded programmers try to avoid floating point operations, read the note below. Otherwise, skip ahead.
+The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats have 6-7 decimal digits of precision). 
+
+However, these limitations won't matter for our program—or for any of our introductory lessons—because we are not speed limited and don't need high-precision math. If you want to know more about *why* embedded programmers try to avoid floating point operations, read the note below. Otherwise, skip ahead.
 
 ---
 **NOTE:**

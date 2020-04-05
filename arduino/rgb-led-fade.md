@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L6&#58; Crossfade RGB LEDs
+title: L6&#58; Crossfading RGB LEDs
 parent: Output
 usemathjax: false
 has_toc: true # (on by default)

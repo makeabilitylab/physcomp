@@ -181,15 +181,9 @@ CrossFadeHue
 
 ## Next Lesson
 
-For our next and final [Intro to Output](intro-output.md) lesson, we are going to learn how to blink multiple LEDs at different frequencies, which is one of the most common questions on the Arduino forums—perhaps because of the way the [official Arduino Blink tutorial](https://www.arduino.cc/en/tutorial/blink) uses `delay()` to control blinking rates (which is fine for one LED but doesn't scale). Before starting the lesson, it's worth thinking about how *you* would blink multiple frequencies at different rates. :)
+For our next and final [Intro to Output](intro-output.md) lesson, we are going to learn how to blink multiple LEDs at different frequencies, which is one of the most common questions on Arduino forums—perhaps because of the way the [official Arduino Blink tutorial](https://www.arduino.cc/en/tutorial/blink) uses `delay()` to control blinking rates (which is fine for one LED but doesn't scale). Before starting the lesson, it's worth thinking about how *you* would blink multiple frequencies at different rates. :)
 
 <span class="fs-6">
 [Previous: RGB LEDs](rgb-led.md){: .btn .btn-outline }
 [Next: Blinking Multiple LEDs at Different Rates](led-blink3.md){: .btn .btn-outline }
 </span>
-
-## TODO: fade between colors
-- First with simple for loops
-- Then with HSL
-- Probably want to move this to some advanced section, so students can move on to input
-

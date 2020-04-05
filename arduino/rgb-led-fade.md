@@ -148,9 +148,9 @@ The downside of this implementation is that we must use [`floats`](https://www.a
 
 ---
 **NOTE:**
-because** the ATmega328 chip (used by the Arduino Uno, Leonardo, etc.) does not natively support floating point (that is, there is no specialized hardware to speedup these floating point arithmetic)
+The ATmega328 chip (used by the Arduino Uno, Leonardo, etc.) does not natively support floating point (that is, there is no specialized hardware to speedup these floating point arithmetic).
 
-TODO: expand on why floats can be costly for embedded programming with microcontrollers.
+<!-- TODO: expand on why floats can be costly for embedded programming with microcontrollers. -->
 ---
 
 The full code for our HSL-based crossfader is below. **Importantly**, you cannot simply copy/paste this code into your Arduino IDE. You must have the RGBConverter code in sub-folder called `src` in your root sketch directory. Use the same directory structure as our [GitHub](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue).

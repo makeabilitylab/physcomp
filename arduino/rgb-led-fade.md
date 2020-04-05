@@ -21,7 +21,7 @@ In this lesson, you will learn how to fade between RGB colors and how to use the
 ---
 **NOTE:**
 
-This is our most complex lesson yet. From a circuit standpoint, things are easy--it's the same circuit as [before](rgb-led.md). From a coding standpoint, things are more complicated. If you don't have a coding background, it's OK if the code doesn't make sense. Try to read it and understand it given your current abilities. Certainly, feel free to copy the code and play with it on your own!
+This is our most complex lesson yet. From a circuit standpoint, things are easy—it's the same circuit as [before](rgb-led.md) (yay!). From a coding standpoint, things are more complicated. If you don't have a coding background, it's OK if the code doesn't make sense. Try to read it and understand it given your current abilities. Certainly, feel free to copy the code and play with it on your own!
 
 ---
 
@@ -51,37 +51,106 @@ We are going to explore and implement two different RGB crossfade approaches.
 
 ### Crossfading in RGB color space
 
-The code for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you should read and understand this code.
+The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you should read and understand this code.
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino?footer=minimal"></script>
+At a high level, the code works by increasing one LED color value (from `0` to `255`) while decreasing another (from `255` to `0`). For example, the code begins by **decreasing** the red LED `analogWrite` value while **increasing** the green LED value. When the red LED value reaches `0`, the green LED will have reached `255`, so we begin decreasing the green LED value and shift to increasing the blue LED value, and so on.
 
-In summary, we have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`—and then use two `for` loops to simultaneously increase one of the color values while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUp = GREEN;`) and (`enum RGB _curFadingDown = RED;`). Once we reach our maximum color value `255` for the current `_curFadingUp` color, we select the next color to increase (from `RED` to `GREEN` to `BLUE` then back to `RED`). Similarly, once we reach our minimum color value `0` for `_curFadingDown`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
+We have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`. So, our RGB LED will start red. 
+
+{% highlight C %}
+int _rgbLedValues[] = {255, 0, 0}; // Red, Green, Blue
+{% endhighlight C %}
+
+To help index into this array, we create an `enum` so that we can access our RGB LED values by writing `_rgbLedValues[RED]`, `_rgbLedValues[GREEN]`, and `_rgbLedValues[BLUE]` rather than `_rgbLedValues[0]`, `_rgbLedValues[1]`, and `_rgbLedValues[2]`:
+
+{% highlight C %}
+enum RGB{
+  RED,
+  GREEN,
+  BLUE,
+  NUM_COLORS
+};
+{% endhighlight C %}
+
+Our crossfade algorithm uses two `for` loops to simultaneously increase one color while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUp = GREEN;`) and (`enum RGB _curFadingDown = RED;`). Once we reach our maximum color value `255` for the current `_curFadingUp` color, we select the next color to increase (beginning with `RED` and then to `GREEN` then `BLUE` then back to `RED`). Similarly, once we reach our minimum color value `0` for `_curFadingDown`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
+
+{% highlight C %}
+void loop() {
+
+  // Increment and decrement the RGB LED values for the current
+  // fade up color and the current fade down color
+  _rgbLedValues[_curFadingUp] += FADE_STEP;
+  _rgbLedValues[_curFadingDown] -= FADE_STEP;
+
+  // Check to see if we've reached our maximum color value for fading up
+  // If so, go to the next fade up color (we go from RED to GREEN to BLUE
+  // as specified by the RGB enum)
+  // This fade code partially based on: https://gist.github.com/jamesotron/766994
+  if(_rgbLedValues[_curFadingUp] > MAX_COLOR_VALUE){
+    _rgbLedValues[_curFadingUp] = MAX_COLOR_VALUE;
+    _curFadingUp = (RGB)((int)_curFadingUp + 1);
+
+    if(_curFadingUp > (int)BLUE){
+      _curFadingUp = RED;
+    }
+  }
+
+  // Check to see if the current LED we are fading down has gotten to zero
+  // If so, select the next LED to start fading down (again, we go from RED to 
+  // GREEN to BLUE as specified by the RGB enum)
+  if(_rgbLedValues[_curFadingDown] < 0){
+    _rgbLedValues[_curFadingDown] = 0;
+    _curFadingDown = (RGB)((int)_curFadingDown + 1);
+
+    if(_curFadingDown > (int)BLUE){
+      _curFadingDown = RED;
+    }
+  }
+
+  // Set the color and then delay
+  setColor(_rgbLedValues[RED], _rgbLedValues[GREEN], _rgbLedValues[BLUE]);
+  delay(DELAY_MS);
+}
+{% endhighlight C %}
 
 In total, we crossfade between 768 color combinations (`3*256`) though this can be controlled with `const int FADE_STEP`—the total amount to step up and down the `analogWrite` LED values per loop iteration. It's set to `5` by default, which results in 156 color combinations.
 
-Here's a video showing the code running in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
+Here's the code in its entirety:
+
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino?footer=minimal"></script>
+
+And here's a video showing the code running in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ZyfHRQFwmeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!--TODO: add in a p5js that demonstrates how this works? And maybe let's reader play with different color values? -->
 
-## Crossfading in HSL color space
+### Crossfading in HSL color space
 
-The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL) color space](https://en.wikipedia.org/wiki/HSL_and_HSV). To change the "color" of the RGB LED, we are really talking about changing its hue. It's much easier to do this in the HSL color space and then convert back to the RGB color space to interact with the RGB LED. In fact, our code will be comparatively much simpler, something like the following pseudocode (we increment hue and keep saturation and lightness fixed):
+The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its hue. It's much easier to do this using HSL and then converting to  RGB set our RGB LED color. In fact, our code will be comparatively much simpler, something like the following pseudocode (we increment hue but keep saturation and lightness fixed):
 
-``` Pseudocode
-float hue, saturation, lightness;
+{% highlight C %}
+// Basic overview of our approach (pseudocode)
+float hue = 0, saturation = 0.8, lightness = 1.0;
+float stepValue = 0.1f;
+float MAX_HUE = 1.0f;
 loop(){
-    hue += stepValue;
-    RGB rgb = convertHslToRgb(hue, saturation, lightness)
-    setColor(rgb.red, rgb.green, rgb.blue);
-    if(hue > MAX_HUE){
+    hue += stepValue;  // increment hue
+    RGB rgb = convertHslToRgb(hue, saturation, lightness) // convert HSL to RGB
+    setColor(rgb.red, rgb.green, rgb.blue); // set the color
+    if(hue > MAX_HUE){ // reset hue to zero if MAX_HUE reached
         hue = 0;
     }
 }
-```
+{% endhighlight C %}
 
-The downside of this implementation is that we must use `floats` with the [RGBConverter](https://github.com/ratkins/RGBConverter) library. TODO: expand on why floats can be costly for embedded programming with microcontrollers
+The downside of this implementation is that we must use `floats` with the [RGBConverter](https://github.com/ratkins/RGBConverter) library. TODO: expand on why floats can be costly for embedded programming with microcontrollers.
+
+The full code from our GitHub is below. **Importantly**, you cannot simply copy/paste this code into your Arduino IDE. You must have the RGBConverter code in sub-folder called `src` in your root sketch directory. Use the same directory structure as our [GitHub](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue).
+
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeHue/CrossFadeHue.ino?footer=minimal"></script>
+
+<!-- TODO look up what the minimum step value is that makes sense with a 255 quantization -->
 
 ---
 **NOTE:**
@@ -90,14 +159,19 @@ There are multiple ways of loading external libraries in the Arduino IDE (see th
 
 ---
 
+<!-- Could be fun to write a p5js sketch that shows how the initial RGB LED naive code works and then the HSL version -->
 
+## Next Lesson
 
+For our next and final [Intro to Output](intro-output.md) lesson, we are going to learn how to blink multiple LEDs at different frequencies, which is, evidently, one of the most common questions on the Arduino forums—perhaps because of the way the [official Arduino Blink tutorial](https://www.arduino.cc/en/tutorial/blink) teaches beginners to use`delay()` to control blinking rates. Before starting the lesson, it's worth thinking about how *you* would blink multiple frequencies at different rates. :)
 
-
+<span class="fs-6">
+[Previous: RGB LEDs](rgb-led.md){: .btn .btn-outline }
+[Next: Blinking Multiple LEDs at Different Rates](led-blink3.md){: .btn .btn-outline }
+</span>
 
 ## TODO: fade between colors
 - First with simple for loops
 - Then with HSL
 - Probably want to move this to some advanced section, so students can move on to input
 
-<!-- Could be fun to write a p5js sketch that shows how the initial RGB LED naive code works and then the HSL version -->

@@ -163,7 +163,7 @@ The full code for our HSL-based crossfader is below. **Importantly**, you cannot
 
 ### Loading libraries in the Arduino IDE
 
-There are multiple ways of loading external libraries in the Arduino IDE (see this [official Arduino tutorial](https://www.arduino.cc/en/guide/libraries)); however, most are focused on **global libraries**—that is libraries that **all** of your sketches have access to. What if you want to load just a local library for the current sketch? 
+There are multiple ways of loading external libraries in the Arduino IDE (see this [official Arduino tutorial](https://www.arduino.cc/en/guide/libraries)); however, most are focused on **global libraries**—that is, libraries that **all** of your sketches have access to. What if you want to load just a local library for the current sketch? 
 
 Well, it turns out this fundamental "feature" has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). In short, there is a way to do this since the ~Arduino 1.6 release; however, you must put your "local" libraries  in a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within in your target sketch directory (the one which has the `.ino` file). Notice how this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
 

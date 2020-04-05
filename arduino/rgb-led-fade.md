@@ -127,12 +127,12 @@ And here's a video showing the code running in the Tinkercad simulator. You can 
 
 ### Crossfading in HSL color space
 
-The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its hue. It's much easier to do this using HSL and then converting to  RGB set our RGB LED color. In fact, our code will be comparatively much simpler, something like the following pseudocode (we increment hue but keep saturation and lightness fixed):
+The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its hue. It's much easier to do this using HSL and then converting to  RGB to set our RGB LED color. We perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. Now, our code isc omparatively much simpler, something like the following pseudocode:
 
 {% highlight C %}
 // Basic overview of our approach (pseudocode)
 float hue = 0, saturation = 0.8, lightness = 1.0;
-float stepValue = 0.1f;
+float hueStepValue = 0.1f; // increment hue but keep saturation and lightness fixed
 float MAX_HUE = 1.0f;
 loop(){
     hue += stepValue;  // increment hue
@@ -144,26 +144,40 @@ loop(){
 }
 {% endhighlight C %}
 
-The downside of this implementation is that we must use `floats` with the [RGBConverter](https://github.com/ratkins/RGBConverter) library. TODO: expand on why floats can be costly for embedded programming with microcontrollers.
+The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float``division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats have 6-7 decimal digits of precision). However, this won't matter for our program because we are not speed limited and don't need high-precision math. If you want to know more about *why* embedded programmers try to avoid floating point operations, read the note below. Otherwise, skip ahead.
 
-The full code from our GitHub is below. **Importantly**, you cannot simply copy/paste this code into your Arduino IDE. You must have the RGBConverter code in sub-folder called `src` in your root sketch directory. Use the same directory structure as our [GitHub](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue).
+---
+**NOTE:**
+because** the ATmega328 chip (used by the Arduino Uno, Leonardo, etc.) does not natively support floating point (that is, there is no specialized hardware to speedup these floating point arithmetic)
+
+TODO: expand on why floats can be costly for embedded programming with microcontrollers.
+---
+
+The full code for our HSL-based crossfader is below. **Importantly**, you cannot simply copy/paste this code into your Arduino IDE. You must have the RGBConverter code in sub-folder called `src` in your root sketch directory. Use the same directory structure as our [GitHub](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue).
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeHue/CrossFadeHue.ino?footer=minimal"></script>
 
 <!-- TODO look up what the minimum step value is that makes sense with a 255 quantization -->
 
----
-**NOTE:**
+### Loading libraries in the Arduino IDE
 
-There are multiple ways of loading external libraries in the Arduino IDE (see this [official Arduino tutorial](https://www.arduino.cc/en/guide/libraries)); however, most are focused on **global libraries**—that is libraries that **all** of your sketches have access to. What if you want to load just a local library for the current sketch? Well, it turns out this fundamental "feature" has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). In short, there is a way to do this since the ~Arduino 1.6 release; however, you must put all libraries in your target sketch folder (which has the `.ino` file) in a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)). Notice how this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`.
+There are multiple ways of loading external libraries in the Arduino IDE (see this [official Arduino tutorial](https://www.arduino.cc/en/guide/libraries)); however, most are focused on **global libraries**—that is libraries that **all** of your sketches have access to. What if you want to load just a local library for the current sketch? Well, it turns out this fundamental "feature" has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). In short, there is a way to do this since the ~Arduino 1.6 release; however, you must put all libraries in your target sketch folder (which has the `.ino` file) in a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)). Notice how this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
 
+```
+CrossFadeHue
+|-CrossFadeHue.ino
+|-src
+  |-RGBConverter
+    |-RGBConverter.cpp
+    |-RGBConverter.h
+```
 ---
 
 <!-- Could be fun to write a p5js sketch that shows how the initial RGB LED naive code works and then the HSL version -->
 
 ## Next Lesson
 
-For our next and final [Intro to Output](intro-output.md) lesson, we are going to learn how to blink multiple LEDs at different frequencies, which is, evidently, one of the most common questions on the Arduino forums—perhaps because of the way the [official Arduino Blink tutorial](https://www.arduino.cc/en/tutorial/blink) teaches beginners to use`delay()` to control blinking rates. Before starting the lesson, it's worth thinking about how *you* would blink multiple frequencies at different rates. :)
+For our next and final [Intro to Output](intro-output.md) lesson, we are going to learn how to blink multiple LEDs at different frequencies, which is one of the most common questions on the Arduino forums—perhaps because of the way the [official Arduino Blink tutorial](https://www.arduino.cc/en/tutorial/blink) uses `delay()` to control blinking rates (which is fine for one LED but doesn't scale). Before starting the lesson, it's worth thinking about how *you* would blink multiple frequencies at different rates. :)
 
 <span class="fs-6">
 [Previous: RGB LEDs](rgb-led.md){: .btn .btn-outline }

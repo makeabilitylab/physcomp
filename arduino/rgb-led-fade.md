@@ -39,14 +39,24 @@ The circuit is the same as the previous [RGB LED lesson](rgb-led.md). Make sure 
 
 We are going to explore and implement two different RGB crossfade approaches.
 
-1. First, we will use `for` loops to step through all possible dyadic combinations between red, green, and blue LED colors (note: we limit ourselves to powering **two** RGB LEDs simultaneously because powering all three would result in "white"). <!-- TODO: verify that this is correct -->
-2. Second, we are going to use the HSL color space to manipulate the hue—what colloquially we refer to as *color*—and then convert this back to the RGB color space for our `analogWrite` calls. This second approach far cleaner and less convoluted but requires using a [separate library](https://github.com/ratkins/RGBConverter) for doing the HSL to RGB conversion.
+1. First, we will use `for` loops to step through dyadic combinations between red, green, and blue LED colors (note: we limit ourselves to powering **two** RGB LEDs simultaneously because powering all three would result in "white"). 
+2. Second, we will use the HSL color space to manipulate **hue**—what colloquially we refer to as *color*—and then convert this to the RGB color space for our `analogWrite` calls. This approach is cleaner and less convoluted but requires using a [separate library](https://github.com/ratkins/RGBConverter) for the HSL-to-RGB conversion.
 
-## Crossfading in RGB color space
+### Crossfading in RGB color space
 
-The code below is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). In short, we have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We start with `{255, 0, 0}` and then use two `for` loops to simultaneously increase one of the color values while decreasing another. We start with increasing green as controlled by `enum RGB _curFadingUp = GREEN;`) while decreasing red (`enum RGB _curFadingDown = RED;`). Once we reach our maximum 
+The code for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you should read and understand this code.
 
-<!--TODO: add in a p5js that demonstrates how this work -->
+In short, we have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`—and then use two `for` loops to simultaneously increase one of the color values while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUp = GREEN;`) and (`enum RGB _curFadingDown = RED;`). Once we reach our maximum color value `255` for the current `_curFadingUp` color, we select the next color to increase (from `RED` to `GREEN` to `BLUE` then back to `RED`). Similarly, once we reach our minimum color value `0` for `_curFadingDown`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
+
+In total, we crossfade between 765 color combinations (`3*255`) though this can be controlled with `const int FADE_STEP`—the total amount to step up and down the `analogWrite` LED values per loop iteration. It's set to `5` by default.
+
+The code, in full, looks like this:
+
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino?footer=minimal"></script>
+
+
+
+<!--TODO: add in a p5js that demonstrates how this works? And maybe let's reader play with different color values? -->
 
 ## Crossfading in HSL color space
 

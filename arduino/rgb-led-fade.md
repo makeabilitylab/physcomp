@@ -46,7 +46,7 @@ The circuit is the same as the previous [RGB LED lesson](rgb-led.md). Make sure 
 
 We are going to explore and implement two different RGB crossfade approaches.
 
-1. First, we will use `for` loops to step through dyadic combinations between red, green, and blue LED colors (note: we limit ourselves to powering **two** RGB LEDs simultaneously because powering all three would result in "white"). 
+1. First, we will use `for` loops to step through dyadic combinations between red, green, and blue LED colors.
 2. Second, we will use the HSL color space to manipulate **hue**—what colloquially we refer to as *color*—and then convert this to the RGB color space for our `analogWrite` calls. This approach is cleaner and less convoluted but requires using a [separate library](https://github.com/ratkins/RGBConverter) for the HSL-to-RGB conversion.
 
 ### Crossfading in the RGB color space

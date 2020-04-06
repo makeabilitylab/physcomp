@@ -147,13 +147,19 @@ loop(){
 }
 {% endhighlight C %}
 
-The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats have 6-7 decimal digits of precision). 
+The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats can appear infinitely precise but on the ATmega328 have ~6-7 decimal digits of precision).
 
 However, these limitations won't matter for our program—or for any of our introductory lessons—because we are not speed limited and don't need high-precision math. If you want to know more about *why* embedded programmers try to avoid floating point operations, read the note below. Otherwise, skip ahead.
 
 ---
 **NOTE:**
-The ATmega328 chip (used by the Arduino Uno, Leonardo, etc.) does not natively support floating point (that is, there is no specialized hardware to speedup these floating point arithmetic).
+
+The ATmega328 chip (used by the Arduino Uno, Leonardo, etc.) does not natively support floating point (that is, there is no specialized hardware to speedup these floating point operations). This is a common limitation with microcontrollers. So, to avoid using floats while still computing the same mathematical operations, embedded programmers use [fixed-point arithmetic](https://en.wikipedia.org/wiki/Fixed-point_arithmetic).
+
+Some interesting discussions and examples, include:
+- [Sensor smoothing and optimized math on the Arduino](http://bleaklow.com/2012/06/20/sensor_smoothing_and_optimised_maths_on_the_arduino.html), Alan Burlison's blog
+- [AVR GCC Fixed-Point vs. Floating Point Comparison](https://ucexperiment.wordpress.com/2015/03/31/avr-gcc-fixed-point-vs-floating-point-comparison/), ucexperiment blog
+- [Speed of floating point operations](https://forum.arduino.cc/index.php?topic=40901.0), Arduino forums.
 
 <!-- TODO: expand on why floats can be costly for embedded programming with microcontrollers. -->
 ---
@@ -162,13 +168,13 @@ The full code for our HSL-based crossfader is below. **Importantly**, you cannot
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeHue/CrossFadeHue.ino?footer=minimal"></script>
 
-<!-- TODO look up what the minimum step value is that makes sense with a 255 quantization -->
+<!-- TODO look up what the minimum step value is that makes sense with a 256 quantization -->
 
 ### Loading libraries in the Arduino IDE
 
-There are multiple ways of loading external libraries in the Arduino IDE (see this [official Arduino tutorial](https://www.arduino.cc/en/guide/libraries)); however, most are focused on **global libraries**—that is, libraries that **all** of your sketches have access to. What if you want to load just a local library for the current sketch? 
+There are multiple ways of loading external libraries in the Arduino IDE (see this [official Arduino tutorial](https://www.arduino.cc/en/guide/libraries)); however, most are focused on **global libraries**—that is, libraries that **all** of your sketches have access to. What if you want to load just a local library for the current sketch?
 
-Well, it turns out this fundamental "feature" has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). In short, there is a way to do this since the ~Arduino 1.6 release; however, you must put your "local" libraries  in a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within in your target sketch directory (the one which has the `.ino` file). Notice how this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
+Well, it turns out this fundamental feature has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). In short, there is a way to do this since the ~Arduino 1.6 release; however, you must put your "local" libraries  in a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within in your target sketch directory (the one which has the `.ino` file). Notice how this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
 
 ```
 CrossFadeHue

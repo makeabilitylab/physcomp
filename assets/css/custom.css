@@ -18,3 +18,8 @@ cite{
   text-align: right;
   font-size: smaller;
 }
+
+/* to add a margin at the bottom of our code blocks */
+figure.highlight {
+  margin-bottom: 1em;
+} 

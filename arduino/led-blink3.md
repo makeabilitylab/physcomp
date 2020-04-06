@@ -16,7 +16,9 @@ comments: true
 {:toc}
 ---
 
-In this lesson, we will learn how to blink multiple LEDs at different rates and build our first [C/C++ class](http://www.cplusplus.com/doc/tutorial/classes/), which will greatly simplify our code and, bonus, reduce its size by eliminating code redundancy! As with our previous lesson on [crossfading RGB LEDs](rgb-led-fade.md), this lesson involves **simple circuits** but comparatively **complex code**. Often, when using microcontrollers, our code is the magic sauce—the circuits are often straightforward.
+In this lesson, we will learn how to blink multiple LEDs at different rates and build our first [C/C++ class](http://www.cplusplus.com/doc/tutorial/classes/), which will greatly simplify our code and, bonus, reduce its size by eliminating code redundancy! 
+
+As with our previous lesson on [crossfading RGB LEDs](rgb-led-fade.md), this lesson involves **simple circuits** but comparatively **complex code**. Often, when using microcontrollers, our code is the magic sauce—the circuits are often straightforward but the code is complicated.
 
 ## Background
 
@@ -53,8 +55,14 @@ You'll need **three LEDs**—we'll use red, blue, and yellow but you can use wha
 
 ## Circuit
 
-## TODO:
-- flashing three LEDs at different rates
+## Writing code
+TODO
+
+### Multi-rate blinking: a simple approach
+TODO
+
+### Multi-rate blinkg: an object-oriented approach
+TODO
 
 ## Exercises
 - **Morse code**. Try adapting the Blinker class to support a sequence of on and off intervals like [Morse code](https://en.wikipedia.org/wiki/Morse_code)

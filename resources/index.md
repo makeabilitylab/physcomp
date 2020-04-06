@@ -31,6 +31,12 @@ has_toc: true # (on by default)
 
 - [Nick Gammon's Arduino blog](http://www.gammon.com.au/forum/index.php?bbtopic_id=123). [Nick Gammon](https://github.com/nickgammon) is a popular figure and [moderator](https://forum.arduino.cc/index.php?action=profile;u=36095) on the Arduino forums and [runs a helpful website on Arduino](http://www.gammon.com.au/forum/index.php?bbtopic_id=123). See his [Arduino Traps, Tips, and Style Guide](http://www.gammon.com.au/forum/?id=12153) for example.
 
+### Lo-fi methods to create DIY electronics
+
+- The [KOBAKANT DIY Wearable Technology website](https://www.kobakant.at/DIY/) by Mika Satomi and Hannah Perner-Wilson has a wonderful set of resources for crafting your own electronic components, including [sensors](https://www.kobakant.at/DIY/?cat=26), [actuators](https://www.kobakant.at/DIY/?cat=28), [traces](https://www.kobakant.at/DIY/?cat=38), and [connectors](https://www.kobakant.at/DIY/?cat=32).
+
+- Similarly, the ["kit-of-no-parts" website ](http://konp.plusea.at/) describes multiple methods for handcrafting electronics and sensors.
+
 ## Video Tutorials
 
 - [Physical Computing @ ITP/NYU](https://vimeo.com/channels/pcomp). This online video series by NYU ITP's Jeff Feddersen & Tom Igoe provides over 100 high-quality teaching videos about circuits, & Arduino

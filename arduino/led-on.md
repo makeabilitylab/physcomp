@@ -175,5 +175,5 @@ If you want to know more about how to use a multimeter, here are a few "getting 
 In the next lesson, we will learn how to programmatically control the output voltage of a digital I/O pin to switch between `LOW` (0V) or `HIGH` (5V) using [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
 
 <span class="fs-6">
-[Next: Blinking an LED with Arduino](led-fade.md){: .btn .btn-outline }
+[Next: Blinking an LED with Arduino](led-blink.md){: .btn .btn-outline }
 </span>

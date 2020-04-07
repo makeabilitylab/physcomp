@@ -16,7 +16,9 @@ comments: true
 {:toc}
 ---
 
-In this lesson, you will learn how to fade between RGB colors and how to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness.
+In this lesson, you will learn how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) and how to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness.
+
+With `analogWrite`'s maximum output value of `255`, each embedded LED in the RGB LED (red, green, blue) can be set from `0` to `255`, which enables 16,777,216 combinations (256^3). However, only a small fraction of these are perceptually different. Indeed, in our first crossfade solution, by default, we only fade between 156 combinations.
 
 ---
 **NOTE:**
@@ -173,11 +175,36 @@ The full code for our HSL-based crossfader is below. **Importantly**, you cannot
 
 <!-- TODO: insert YouTube video of tis working -->
 
+<!-- TODO: Could be fun to write a p5js sketch that shows how the initial RGB LED naive code works and then the HSL version -->
+
 ### Loading libraries in the Arduino IDE
 
 There are multiple ways of loading external libraries in the Arduino IDE (see this [official Arduino tutorial](https://www.arduino.cc/en/guide/libraries)); however, most are focused on **global libraries**—that is, libraries that **all** of your sketches have access to. What if you want to load just a local library for the current sketch?
 
-Well, it turns out this fundamental feature has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). In short, there is a way to do this since the ~Arduino 1.6 release; however, you must put your "local" libraries  in a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within in your target sketch directory (the one which has the `.ino` file). Notice how this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
+Well, it turns out this fundamental feature has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). I have found three ways to load **local** `.h` and `.cpp` code:
+
+1. First and easiest, please all `.h` and `.cpp` files in your root sketch folder (where your `.ino` file resides)
+
+```
+CrossFadeHue
+|-CrossFadeHue.ino
+|-RGBConverter.cpp
+|-RGBConverter.h
+```
+---
+
+2. Second, place all `.h` and `.cpp` files in a sub-folder off or your root sketch folder with a name of your choosing (*e.g.,* `lib`)
+
+```
+CrossFadeHue
+|-CrossFadeHue.ino
+|-lib
+  |-RGBConverter.cpp
+  |-RGBConverter.h
+```
+---
+
+3. Third, if you have lots of `.h` and `.cpp` files and want to organize them into their own individual sub-folders, then without the following knowledge, this can be a frustrating head scratcher: In short, there is a way to do this since the ~Arduino 1.6 release; however, you must put these sub-folders into a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within your root sketch directory. Notice how this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
 
 ```
 CrossFadeHue
@@ -188,8 +215,6 @@ CrossFadeHue
     |-RGBConverter.h
 ```
 ---
-
-<!-- Could be fun to write a p5js sketch that shows how the initial RGB LED naive code works and then the HSL version -->
 
 ## Exercises
 

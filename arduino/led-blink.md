@@ -15,7 +15,7 @@ comments: true
 1. TOC
 {:toc}
 ---
-In our [first activity](led-on.md), we directly hooked up an LED circuit to the Arduino's 5V pin. While this enabled us to learn about Arduino's supply voltage and GND pins and gave us practical experience wiring electrical components into the Arduino ports, it was admittedly, a toy exercise.
+In our [first lesson](led-on.md), we directly hooked up an LED circuit to the Arduino's 5V and 3.3V pins. While this enabled us to learn about Arduino's supply voltage and GND pins and gave us practical experience wiring electrical components into the Arduino ports, it was admittedly, a toy exercise.
 
 In this activity, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programmatically* controlling the output voltage on one of Arduino's GPIO pins. This begins our entrée into the two key aspects of working with microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
 
@@ -26,7 +26,7 @@ In this activity, we are going to do something more exciting: use the Arduino to
 
 ## Materials
 
-You will use the same materials as before. You will also need the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
+You will use the same materials as [before](led-on.md), but you will also need the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
@@ -35,7 +35,9 @@ You will use the same materials as before. You will also need the [Arduino IDE](
 
 ## Making the circuit
 
-Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resistor-around-led-leg), plug the anode + resistor side into Pin 3 and the cathode into GND. 
+Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resistor-around-led-leg), plug the anode + resistor side into Pin 3 and the cathode into GND. See the wiring diagram below:
+
+![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit.png)
 
 ---
 
@@ -43,15 +45,13 @@ Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resi
 
 ---
 
-![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit.png)
-
 While it's not necessary to use a breadboard for this simple circuit, here are two functionally equivalent breadboard-based  wiring options. As our circuits get more complex, you will need to use a breadboard—so it's good to start building up familiarity. Which breadboarded design makes most sense to you? Use your finger to trace the flow current from Pin 3 to GND. To zoom in on the images, you can right click and select "Open Image in a New Tab."
 
 | Breadboard Option 1 | Breadboard Option 2 |
 |:----:|:-----:|
 |![Breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard1.png) | ![Second breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard2.png) |
 
-Next, we'll write C code for the Arduino to turn on the LED from Pin 3, which will programmatically set Pin 3 to 5V.
+Next, we'll write `C` code for the Arduino's microcontroller to turn on the LED from Pin 3, which will programmatically set Pin 3 to 5V.
 
 ## Get the Arduino IDE
 
@@ -290,7 +290,9 @@ Before moving on, it's worth emphasizing that, in general, long `delay()` calls 
 ---
 **NOTE:**
 
-It's OK to stop here and move on to the next lesson. It's sufficient to be **aware** that long `delay()` calls can be dangerous and should probably be avoided. However, if you're curious, you can read this sub-section to see a Blink example that works without delays. We will return to this concept for our final [Intro to Output](intro-output.md) lesson on [multi-rate blinking LEDs](led-blink3.md)
+It's OK to stop here and move on to the next lesson. It's sufficient to be **aware** that long `delay()` calls can be dangerous and should probably be avoided. However, if you're curious, you can read this sub-section to see a Blink example that works without delays. We will return to this concept for our final [Intro to Output](intro-output.md) lesson on [multi-rate blinking LEDs](led-blink3.md).
+
+If you want to know how `delay()` actually works, read ["What does delay() actually do"](#inside-arduino.md##what-does-delay-actually-do) in our [Inside Arduino guide](#inside-arduino) #what-does-delay-actually-do
 
 ---
 

@@ -32,7 +32,7 @@ int main(void)
 }
 {% endhighlight C %}
 
-Interestingly, this [Arduino forum post ](https://forum.arduino.cc/index.php?topic=615714.0)suggests that because `serialEventRun()` is weakly defined in the core, you can define it locally in your sketch to override the default definition, which, according to the OP, will "save a little memory and makes the loop() run a little faster too!"
+Interestingly, this [Arduino forum post ](https://forum.arduino.cc/index.php?topic=615714.0)suggests that because `serialEventRun()` is weakly defined in the core, you can define it locally in your sketch to override the default definition, which, according to the OP, will "save a little memory and makes the loop() run a little faster too!" You can do this if you don't need to user serial communication.
 
 {% highlight C %}
 void serialEventRun() {}
@@ -60,7 +60,7 @@ The [ATmega datasheet](https://www.sparkfun.com/datasheets/Components/SMD/ATMega
 
 For most practical purposes, dividing by 1023 or 1024 won't matter. :)
 
-## What does delay(int ms) actually do?
+## What does delay() actually do?
 
 As you might expect—given our warnings about avoiding overuse of [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/)—the delay code consists of a `while` loop that simply waits for the given amount of delay time to pass. There is a `yield()` call within the `while` loop but this is, by default, an empty function—though you could implement it to create a "real cooperative scheduler." The code for `yield()` is [here](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/hooks.c).
 

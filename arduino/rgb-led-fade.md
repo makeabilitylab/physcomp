@@ -16,9 +16,7 @@ comments: true
 {:toc}
 ---
 
-In this lesson, you will learn how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) and how to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness.
-
-With `analogWrite`'s maximum output value of `255`, each embedded LED in the RGB LED (red, green, blue) can be set from `0` to `255`, which enables 16,777,216 combinations (256^3). However, only a small fraction of these are perceptually different. Indeed, in our first crossfade solution, by default, we only fade between 156 combinations.
+In this lesson, you will learn how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), how to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and how to use and load local `C/C++` libraries.
 
 ---
 **NOTE:**

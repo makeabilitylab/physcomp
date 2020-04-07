@@ -257,7 +257,9 @@ You can access our Blink code in our [Arduino GitHub repository](https://github.
 
 ## Use the built-in LED
 
-Finally, the Arduino has a built-in LED (with an in-series resistor) that's often useful for some quick debugging (*e.g.,* turn on the built-in LED to indicate some program state). On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write `digitalWrite(13, HIGH);` in your code, the built-in LED will turn on. Because not all Arduino boards have the built-in LED at Pin 13, you can also use the constant `LED_BUILTIN`.
+The Arduino has a built-in LED with a built-in in-series resistor that's often useful for some quick debugging (*e.g.,* turn on the built-in LED to indicate some program state). On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write `digitalWrite(13, HIGH);` in your code, the built-in LED will turn on. Because not all Arduino boards have the built-in LED at Pin 13, you should use the constant `LED_BUILTIN` rather than a literal pin number.
+
+![Image showing the location of the built-in controllable LED on the Arduino Uno](assets/images/ArduinoUno_BuiltInLEDLocation.png)
 
 The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) uses the built-in LED and the constant `LED_BUILTIN` to demonstrate blinking. 
 
@@ -280,6 +282,27 @@ void loop() {
 You can access this example directly in the Arduino IDE:
 
 ![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
+
+## Blink without using delays()
+
+Before moving on, it's worth emphasizing that, in general, long `delay()` calls should be avoided. Why? Because while in a `delay()`, the Arduino is no longer responsive. So, for example, if you updated your Blink program to also react to a button press from the user, if they happened to press the button within the one second `delay()`, your program would never know! This is a problem.
+
+---
+**NOTE:**
+
+It's OK to stop here and move on to the next lesson. It's sufficient to be **aware** that long `delay()` calls can be dangerous and should probably be avoided. However, if you're curious, you can read on in this sub-section to see a Blink example that works without delays. We will return to this concept for our final [Intro to Output](intro-output.md) lesson on [multi-rate blinking LEDs](led-blink3.md)
+
+---
+
+Indeed, Arduino Blink publishes another official Blink example with a tutorial called [BlinkWithoutDelay](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay), which can again be accessed directly in the Arduino IDE:
+
+![Screenshot of accessing the official BlinkWithoutDelay example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkWithoutDelayExample.png)
+
+To avoid `delay()` calls, the code tracks **time** and waits for the blink interval to pass to toggle the LED on and off. There is no `delay()` and thus `loop()` is running as fast as possible—allowing us to, for example, check for user input (which we'll do in a future lesson).
+
+Here's our own BlinkWithoutDelay version available on [GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino):
+
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino?footer=minimal"></script>
 
 ## Next Lesson
 

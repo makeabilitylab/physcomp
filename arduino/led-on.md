@@ -152,7 +152,7 @@ We can verify these theoretical predictions using a multimeter to measure ($$V_s
 
 A few important notes:
 
-- Each electronic component that we use from the LED to the resistors to the supply voltage ($$V_s$$) are going to differ slightly from ideal. Our carbon film resistors, for example, have a tolerance of 5% (indicated by the gold band) and I measured our supply voltage on the Arduino Uno to be ($$V_s$$=4.902V) rather than 5V. 
+- Each electronic component that we use from the LED to the resistors to the supply voltage ($$V_s$$) are going to differ slightly from ideal. Our carbon film resistors, for example, have a tolerance of 5% (indicated by the gold band), and I measured our supply voltage on the Arduino Uno to be ($$V_s$$=4.902V) rather than 5V. 
 - The Fluke 115 provides three digits of precision. So, the multimeter reads 0.013A, 0.004A, *etc.* Thus, it's not possible to compare our theoretical predictions to the 4th digit of precision (which impacts our low current—milliamp—comparisons).
 
 Again, we assume a $$V_f=2V$$ for our red LED (we could also measure this directly in each circuit):

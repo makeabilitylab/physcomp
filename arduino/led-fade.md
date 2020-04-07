@@ -17,7 +17,7 @@ comments: true
 {:toc}
 ---
 
-In the [previous lesson](led-blink.md), we learned how to turn on and off an LED using [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)—which worked by alternatively setting Pin 3 to 5V (`HIGH`) and 0V (`LOW`). In this lesson, we'll learn how to programmatically control the output voltage at finer gradations using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). More specifically, we will gradually fade an LED on and off.
+In the [previous lesson](led-blink.md), we learned how to turn on and off an LED using [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)—which worked by alternatively setting Pin 3 to 5V (`HIGH`) and 0V (`LOW`). In this lesson, we'll learn how to programmatically control the output voltage at finer gradations using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). More specifically, we will gradually fade an LED on and off like the animation below illustrates.
 
 ![Animation showing the LED on Pin 3 gradually fading on and off](assets/movies/Arduino_LEDFade_Pin3.gif)
 This illustrative animation doesn't show current (the yellow circles) only due to my limited animation skills. But hopefully you can visualize (in your mind) how the LED varies in brightness with current just the same. :)
@@ -38,7 +38,7 @@ As noted in our previous lesson, the Arduino Uno has 14 digital I/O pins:
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
-However, **6** of the 14 I/O pins can also be used for "analog" output—voltage output that is not just `HIGH` (5V) or `LOW` (0V) but between these two extremes. These analog output pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (silkscreened directly on the Arduino's PCB).
+However, **6** of the 14 I/O pins can **also** be used for "analog" output—voltage output that is not just `HIGH` (5V) or `LOW` (0V) but between these two extremes. These analog output pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (silkscreened directly on the Arduino's PCB).
 
 ![Close up of the Arduino Uno highlighting the six analog output pins](assets/images/ArduinoUno_CloseUp_AnalogOutputPins.png)
 
@@ -46,8 +46,7 @@ So, for this lesson, we **don't** have to change our circuit at all! You can kee
 
 ![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDFade_Pin3Circuit.png)
 
----
-**IMPORTANT NOTE:**
+### A common confusion: analog I/O pins are different!
 
 A common confusion amongst beginners is mixing up the analog **output** pins and the analog **input** pins. For the digital I/O, the input and output pins are the same and configurable to `INPUT` or `OUTPUT` using the [`pinMode`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, the analog I/O pins are different! See the figure below:
 
@@ -55,19 +54,17 @@ A common confusion amongst beginners is mixing up the analog **output** pins and
 
 We'll learn about analog output in this lesson (using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)). In a future lesson, we will learn about analog input (using [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/))
 
----
-
 ## Writing the code
 
-To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. This 8-bit value is directly proportional to the voltage output: so, 0 is 0V, 255 is 5V, 128 is 2.5V, 168 is 3.3V, *etc.* This means that the settable voltage granularity is `5V/255=~0.0196V`.
+To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. This 8-bit value is directly proportional to the voltage output: so, 0 is 0V, 255 is 5V, 128 is 2.5V, 168 is 3.3V, *etc.* This means that the settable voltage granularity is $$\frac{5V}{255}=~0.0196V$$.
 
 <!-- TODO: come up with a figure to explain this. -->
 
 ---
 
-**SIDE NOTE:**
+**IMPORTANT SIDE NOTE:**
 
-The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a digital-to-analog converter (DAC). Instead, they use a method called Pulse-Width Modulation (PWM) to *emulate* analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform—a true analog output signal—like playing music, then you'll need to either find an Arduino microcontroller with a built-in DAC (like the [Due](https://store.arduino.cc/usa/due); see this [SimpleAudioPlayer tutorial](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer) or connect your Uno to an external DAC board (like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all)).
+The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a [digital-to-analog converter (DAC)](https://en.wikipedia.org/wiki/Digital-to-analog_converter). Instead, they use a method called Pulse-Width Modulation (PWM) to *emulate* analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform—a true analog output signal—like playing music, then you'll need to either find an Arduino microcontroller with a built-in DAC like the [Due](https://store.arduino.cc/usa/due) (see this [SimpleAudioPlayer tutorial](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer)) or connect your Uno to an external DAC board like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all).
 
 If you want to learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and/or watch their "analog output" video:
 
@@ -113,7 +110,7 @@ void loop(){
     delay(DELAY_MS);
   }
 
-  //fade off
+  // fade off
   for(int i = MAX_ANALOG_OUT; i >= 0; i -= 1){
     analogWrite(LED_OUTPUT_PIN, i);
     delay(DELAY_MS);
@@ -121,11 +118,12 @@ void loop(){
 }
 {% endhighlight C %}
 
-The full code is:
+The full code from our [GitHub repo](https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) is:
 <script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino?footer=minimal"></script>
 
 ### Step 4: Compile, upload, and run!
-Now, compile, upload, and run the code.
+
+Now, compile, upload, and run the code. After upload completes, the LED should immediately begin blinking. See video below.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/Y0mSFmW7G4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -137,20 +135,22 @@ We can visualize the (effective) voltage output on Pin 3 using the Arduino IDE's
   <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
 </video>
 
-Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. TODO: verify these with multimeter because need to check when LED actually turns on due to Vf conditions being met.
+Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. Recall that current does not pass through an LED until its forward voltage $$V_f$$ condition is met. With a red LED, a common forward voltage $$V_f=2V$$. With [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), the GPIO pin is still driven `HIGH` (5V) but only for a fraction of the time due to PWM (this fraction is called the duty cycle). So, our LED still turns on and our **eyes** perceive the LED on but it's actually flashing on/off imperceptibly quickly! 
 
-| Pin 3 Value | Pin 3 Voltage | Resistor | Resulting Current |
-|:-------------|:-------------|:-------------|:-------------|:------------------|
-| 0 | 0V | 220Ω | $$I = \frac{0V}{220Ω}= 0.0mA $$ |
-| 45 | 0.88V | 220Ω | $$I = TODO $$ |
-| 103 | 2.02V | 220Ω | $$I = TODO $$ |
-| 128 | 2.51V | 220Ω | $$I = TODO $$ |
-| 199 | 3.9V | 220Ω | $$I = TODO $$ |
-| 255 | 5V | 220Ω | $$I = TODO $$ |
+To calculate the current through our LED circuit with PWM, we can use the following equation: $$I = \frac{V_s - V_f}{R}DutyCycle_{fraction}$$. So, for example, if we `analogWrite` a `51` then our $$DutyCycle_{fraction}=\frac{51}{255}\to0.2$$. With a 220Ω, our current would be: $$I=\frac{5V - 2V}{220Ω}0.2\to2.7mA$$. See the table below.
+
+| Resistor | Pin 3 Voltage | Pin 3 Value | PWM Duty Cycle | Resulting Current |
+|:-------------|:-------------|:-------------|:-------------|:----------------|
+| 220Ω | 5V | 0 | $$\frac{0}{255}=0.0$$ | $$I = \frac{5V-2V}{220Ω}0.0=0.0mA $$ |
+| 220Ω | 5V | 45 | $$\frac{45}{255}=0.176$$ | $$I = \frac{5V-2V}{220Ω}0.176=2.4mA $$ |
+| 220Ω | 5V | 103 | $$\frac{103}{255}=0.404$$ | $$I = \frac{5V-2V}{220Ω}0.404=5.5mA $$ |
+| 220Ω | 5V | 128 | $$\frac{128}{255}=0.502$$ | $$I = \frac{5V-2V}{220Ω}0.780=6.8mA $$ |
+| 220Ω | 5V | 199 | $$\frac{199}{255}=0.780$$ | $$I = \frac{5V-2V}{220Ω}0.780=10.5mA $$ |
+| 220Ω | 5V | 255 | $$\frac{255}{255}=1.0$$ | $$I = \frac{5V-2V}{220Ω}1.0=13.4mA $$ |
 
 ## Improved fading approach: limiting delays
 
-Generally, we want to limit the use of `for` loops and long `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now).
+Recall that we want to limit the use of long `for` loops and long `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now).
 
 So, let's rewrite the fade example but without for loops and, instead, rely on the fact that `loop()` is already a `loop` :). While the code below is different, the resulting LED fade behavior is the same (so you won't notice a difference if you try them both out).
 
@@ -198,7 +198,7 @@ void loop() {
 
 ## Next Lesson
 
-In the next lesson, we will learn about the difference between **current sources** and **current sinks** to help reinforce our understanding of how microcontrollers drive output.
+In the [next lesson](led-blink2.md), we will learn about the difference between **current sources** and **current sinks** to help reinforce our understanding of how microcontrollers can control output.
 
 <span class="fs-6">
 [Previous: LED Blink](led-blink.md){: .btn .btn-outline }

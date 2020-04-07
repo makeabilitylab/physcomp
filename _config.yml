@@ -50,7 +50,7 @@ aux_links:
 heading_anchors: true
 
 # Footer content appears at the bottom of every page's main content
-footer_content: "By <a href=\"https://github.com/jonfroehlich\">Jon E. Froehlich</a>."
+footer_content: "Found an error? Make a comment below or file a <a href=\"https://github.com/makeabilitylab/physcomp\">GitHub issue</a>. Content by the <a href=\"https://makeabilitylab.cs.washington.edu\">Makeability Lab</a> and Professor <a href=\"https://github.com/jonfroehlich\">Jon E. Froehlich</a>."
 
 # Google Analytics Tracking (optional)
 # e.g, UA-1234567-89

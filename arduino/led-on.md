@@ -124,6 +124,8 @@ $$V_{total} = V_R + V_f  \\
 V_R = 3.3V - V_f \\
 V_R = 3.3V - 2V\to1.3V$$
 
+With ($$V_R=1.3V$$), we can now use Ohm's Law to calculate $$I$$: $$I = \frac{V}{R}\to\frac{1.3V}{220}\to5.9mA$$
+
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif)
 
 <!-- TODO: in future Fix Ohm's Law animations to use Vr, Vf nomenclature -->

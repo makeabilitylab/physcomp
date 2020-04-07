@@ -126,11 +126,13 @@ V_R = 3.3V - 2V\to1.3V$$
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif)
 
+<!-- TODO: in future Fix Ohm's Law animations to use Vr, Vf nomenclature -->
+
 To learn more about calculating the current through an LED, watch this video by NYU ITP's Jeff Feddersen:
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/78674965" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
-<!-- TODO: and read our LED guide ... write the LED guide -->
+<!-- TODO: and read our LED guide ... write the LED guide :) -->
 
 ### Using higher value resistors
 
@@ -138,21 +140,35 @@ We just showed how reducing the supply voltage ($$V_s$$) proportionally reduces 
 
 You should observe that the LED's brightness *decreases* as the resistance *increases*. 
 
-| Resistor | Resistor Image | Vs | Resulting Current |
-|:-------------|:-------------|:------------------|
+| Resistor | Resistor Image | Vs | Resulting Current | 
+|:-------------|:-------------|:-------------|:-------------|
 | 220Ω |![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing_100w.png) | 5V | $$I = \frac{3V}{220Ω}= 13.6mA $$ |
 | 680Ω |![680 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor680_Fritzing_100w.png) | 5V | $$I = \frac{3V}{680Ω}= 4.4mA $$ |
 | 1KΩ |![1K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor1K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{1,000Ω}= 3mA $$ |
 | 2.2KΩ |![2.2K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor2.2K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{2,200Ω}= 1.4mA $$ |
-| 10KΩ |![10K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{10,000Ω}= 0.3mA $$ |
+| 10KΩ |![10K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{10,000Ω}= 0.3mA $$ | 
 
-<!-- <video width="640" controls="controls">
-  <source src="images/Arduino_LEDOn_5VFixed.mp4" type="video/mp4">
-</video> -->
+We can verify these theoretical predictions using a multimeter to measure ($$V_s$$), the actual resistor values, and the current $$I$$. We conducted these measurements using a Fluke 115 True RMS Multimeter. 
 
-## TODO
+A few important notes:
 
-- Fix Ohm's Law animations to use Vr, Vf nomenclature
+- Each electronic component that we use from the LED to the resistors to the supply voltage ($$V_s$$) are going to differ slightly from ideal. Indeed, we are using carbon film resistors with a tolerance of 5% and I measured our supply voltage ($$V_s$$=4.902V) rather than 5V. 
+- The Fluke 115 provides three digits of precision. So, the multimeter reads 0.013A, 0.004A, *etc.* This particularly impacts low current measurements (in the small milliamps) as it's not possible to compare our theoretical predictions to the 4th digit of precision.
+
+Again, we assume a $$V_f=2V$$ for our red LED (we could also measure this directly in each circuit):
+
+| Resistor | Resistor Image | Measured Resistance | Measured Vs | Measured Current | Ohm's Law
+|:-------------|:-------------|:-------------|:-------------|:-------------|:-------------|
+| 220Ω |![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing_100w.png) | 218.8 | 4.902V | 13mA | $$I = \frac{2.902V}{218.8Ω}= 13.3mA $$ |
+| 680Ω |![680 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor680_Fritzing_100w.png) | 680Ω | 4.902V | 4mA | $$I = \frac{2.902V}{680Ω}= 4.3mA $$ |
+| 1KΩ |![1K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor1K_Fritzing_100w.png) | 994Ω | 4.902V | 3mA | $$I = \frac{2.902V}{994Ω}= 2.9mA $$ |
+| 2.2KΩ |![2.2K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor2.2K_Fritzing_100w.png) | 2.204KΩ | 4.902V | 1mA | $$I = \frac{2.902V}{2,204Ω}= 1.3mA $$ |
+| 10KΩ |![10K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | 9.92KΩ | 4.902V | < 0mA | $$I = \frac{2.902V}{9,920Ω}= 0.3mA $$ |
+
+If you want to know more about how to use a multimeter, here are a few recommended "getting started" guides:
+
+- [How to use a multimeter](https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter/all), Sparkfun Tutorials
+- [Multimeters](https://learn.adafruit.com/multimeters), Adafruit Learning
 
 ## Next Lesson
 

@@ -108,7 +108,13 @@ void loop() {
 
 ### Step 3: Compile, upload, and run the code!
 
-TODO: insert video here
+We did it! Now compile and upload the code.
+
+![Top-down workbench animated gif of the circuit working with Arduino](assets/movies/ArduinoUno_Blink2_Workbench.gif)
+
+And here's a top-down video with the code window:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/q6KcPYfum7c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
 

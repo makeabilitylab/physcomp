@@ -20,7 +20,7 @@ A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, 
 
 ## Learn by doing
 
-A key pedagogical philosophy underlying this website and our teaching approach in general is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises. So, we we expect that you will build along with our guides and lessons.
+A key pedagogical philosophy underlying this website is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises. So, we we expect that you will build along with our guides and lessons.
 
 ## Example Hardware Kits
 

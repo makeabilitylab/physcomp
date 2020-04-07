@@ -133,12 +133,14 @@ The code, in full, is below:
 
 ### Multi-rate blinking: an object-oriented approach
 
-Given the amount of code redundancy and shared logic and structure, our solution is a strong candidate for refactoring into functions or classes. We're going to define a new class, called `Blinker`, to help, which will greatly simplify our code, decrease redundancy (and the potential for human error), and even make our compiled code smaller. With `Blinker`, our code will reduce to:
+Given the amount of code redundancy and shared logic and structure, the above solution is a strong candidate for refactoring into functions or classes. So, let's do it! 
+
+We're going to define a new class, called `Blinker`, which will greatly simplify our code, decrease redundancy (and the potential for human error), and even make our compiled code smaller. For example, with `Blinker`, our code reduces to:
 
 {% highlight C++ %}
-Blinker _led1Blinker(2, 200);  // specify pin, blink interval
-Blinker _led2Blinker(5, 333);  // specify pin, blink interval
-Blinker _led3Blinker(9, 1111); // specify pin, blink interval
+Blinker _led1Blinker(2, 200);  // specify pin and blink interval (200ms)
+Blinker _led2Blinker(5, 333);  // specify pin and blink interval (333ms)
+Blinker _led3Blinker(9, 1111); // specify pin and blink interval (1111ms)
 
 // The setup function runs once when you press reset or power the board
 void setup() {
@@ -154,7 +156,8 @@ void loop() {
 {% endhighlight C++ %}
 
 #### Making the Blinker class
-If you're familiar with object-oriented programming and declaring and using classes in `Java`, `C#`, `Python`, and even, to some extent, `JavaScript` since [ECMAScript 2015](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), then `C++` classes will feel familiar. `C++` classes have a classname, member variables, member functions, and like `C#` and `Java`, access specifiers (*e.g.,* private, public). For a quick tutorial, see these links ([link1](https://www.geeksforgeeks.org/c-classes-and-objects/), [link2](http://www.cplusplus.com/doc/tutorial/classes/)).
+
+If you're familiar with object-oriented programming and declaring and using classes in `Java`, `C#`, `Python`, and even, to some extent, `JavaScript` since [ECMAScript 2015](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), then `C++` classes will feel familiar (but certainly have their own peculiarities). `C++` classes have a class name, member variables, member functions, and like `C#` and `Java`, access specifiers (*e.g.,* private, public). For a quick tutorial, see these links ([link1](https://www.geeksforgeeks.org/c-classes-and-objects/), [link2](http://www.cplusplus.com/doc/tutorial/classes/)).
 
 To build our Blinker class, recall that we need four things per LED:
 1. **Pin Number:** An integer value specifying the output pin.
@@ -202,15 +205,44 @@ Finally, we need two functions: a `constructor` and `update()`—the latter whic
     }
 {% endhighlight C++ %}
 
+In order to use the `Blinker` class (as shown above), it needs to be defined within your `.ino` sketch at the top of the file (before you try to instantiate a Blinker object). We'll also show how to create a class that exists in its own `.h` and `.cpp` files.
+
 #### Full Blinker code
 So, the entire code looks like this:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultipleWithInternalClass/BlinkMultipleWithInternalClass.ino?footer=minimal"></script>
 
+### Multi-rate blinking: using an external class
+
+In `C++`, you declare member variables and function signatures in a `.h` file and the the function implementations in a `.cpp` file. This is often a cleaner solution than embedding classes within the `.ino` file. Indeed, if we move `Blinker` into separate `.h` and `.cpp` files, then the main `.ino` sketch simply looks like:
+
+{% highlight C++ %}
+#include "Blinker.h"
+
+Blinker _led1Blinker(2, 200);  // specify pin and blink interval (200ms)
+Blinker _led2Blinker(5, 333);  // specify pin and blink interval (333ms)
+Blinker _led3Blinker(9, 1111); // specify pin and blink interval (1111ms)
+
+// The setup function runs once when you press reset or power the board
+void setup() {
+  // empty 
+}
+
+// The loop function runs over and over again forever
+void loop() {
+  _led1Blinker.update();
+  _led2Blinker.update();
+  _led3Blinker.update();
+}
+{% endhighlight C++ %}
+
+See the [code in our GitHub repository](https://github.com/makeabilitylab/arduino/tree/master/Basics/digitalWrite/BlinkMultipleWithExternalClass).
+
 ## Exercises
 
 Want to go further? Here are some design challenges to help improve your skills:
 
+- **Dynamically changing intervals.** What if we wanted to support dynamically changing blink intervals—that is, once the Blinker object was instantiated. How would you do this?
 - **Morse code**. Try adapting the Blinker class to support a sequence of on and off intervals like [Morse code](https://en.wikipedia.org/wiki/Morse_code)
 - **Fade**. What about *fading* the LEDs rather than flashing them. How would you do this? **Stuck?** Nick Gammon wrote a class for this on his [blog](https://www.gammon.com.au/blink) called LedFader but don't look at his solution until you've tried your own!
 

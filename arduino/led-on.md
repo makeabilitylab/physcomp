@@ -148,12 +148,12 @@ You should observe that the LED's brightness *decreases* as the resistance *incr
 | 2.2KΩ |![2.2K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor2.2K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{2,200Ω}= 1.4mA $$ |
 | 10KΩ |![10K Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | 5V | $$I = \frac{3V}{10,000Ω}= 0.3mA $$ | 
 
-We can verify these theoretical predictions using a multimeter to measure ($$V_s$$), the actual resistor values, and the current $$I$$. We conducted these measurements using a Fluke 115 True RMS Multimeter. 
+We can verify these theoretical predictions using a multimeter to measure ($$V_s$$), the actual resistor values, and the current $$I$$. We conducted these measurements using a [Fluke 115 True RMS Multimeter](https://www.fluke.com/en-us/product/electrical-testing/digital-multimeters/fluke-115).
 
 A few important notes:
 
-- Each electronic component that we use from the LED to the resistors to the supply voltage ($$V_s$$) are going to differ slightly from ideal. Indeed, we are using carbon film resistors with a tolerance of 5% and I measured our supply voltage ($$V_s$$=4.902V) rather than 5V. 
-- The Fluke 115 provides three digits of precision. So, the multimeter reads 0.013A, 0.004A, *etc.* This particularly impacts low current measurements (in the small milliamps) as it's not possible to compare our theoretical predictions to the 4th digit of precision.
+- Each electronic component that we use from the LED to the resistors to the supply voltage ($$V_s$$) are going to differ slightly from ideal. Our carbon film resistors, for example, have a tolerance of 5% (indicated by the gold band) and I measured our supply voltage on the Arduino Uno to be ($$V_s$$=4.902V) rather than 5V. 
+- The Fluke 115 provides three digits of precision. So, the multimeter reads 0.013A, 0.004A, *etc.* Thus, it's not possible to compare our theoretical predictions to the 4th digit of precision (which impacts our low current—milliamp—comparisons).
 
 Again, we assume a $$V_f=2V$$ for our red LED (we could also measure this directly in each circuit):
 

@@ -46,16 +46,16 @@ The circuit is the same as the previous [RGB LED lesson](rgb-led.md). Make sure 
 
 We are going to explore and implement two different RGB crossfade approaches.
 
-1. First, we will use `for` loops to step through dyadic combinations between red, green, and blue LED colors.
+1. First, we will use `for` loops to step through dyadic combinations between red, green, and blue LED colors. This approach is based on a [now-expired gist](https://gist.github.com/jamesotron/766994) by the user `jamesotron`.
 2. Second, we will use the HSL color space to manipulate **hue**—what colloquially we refer to as *color*—and then convert this to the RGB color space for our `analogWrite` calls. This approach is cleaner and less convoluted but requires using a [separate library](https://github.com/ratkins/RGBConverter) for the HSL-to-RGB conversion.
 
 ### Crossfading in the RGB color space
 
-The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you should read and understand this code.
+The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you are expected to read and understand this code.
 
-At a high level, the code works by **increasing** one LED color value (from `0` to `255`) while **decreasing** another (from `255` to `0`). For example, the code begins by decreasing the red LED value while increasing the green LED value. When the red LED value reaches `0`, we begin decrementing the green LED value and begin incrementing the blue LED value, and so on.
+At a high level, our crossfade method works by **increasing** one LED color value (from `0` to `255`) while **decreasing** another (from `255` to `0`). For example, the code begins by decreasing the red LED value while increasing the green LED value. When the red LED value reaches `0`, we begin decrementing another LED (green in this case). Similarly, when the green LED value reaches `255`, we begin incrementing the blue LED, and so on. 
 
-We have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`. So, our RGB LED will start red. 
+More specifically, we have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`. So, our RGB LED will start red. 
 
 {% highlight C %}
 int _rgbLedValues[] = {255, 0, 0}; // Red, Green, Blue
@@ -72,13 +72,14 @@ enum RGB{
 };
 {% endhighlight C %}
 
-This enum allows us to access our RGB LED values by writing `_rgbLedValues[RED]`, `_rgbLedValues[GREEN]`, and `_rgbLedValues[BLUE]` rather than `_rgbLedValues[0]`, `_rgbLedValues[1]`, and `_rgbLedValues[2]`. The enum doesn't just improve code readability and help avoid needless array index errors, it's also used to track state with `_curFadingUpColor` and `_curFadingDownColor`.  
+This enum allows us to access our RGB LED values by writing `_rgbLedValues[RED]`, `_rgbLedValues[GREEN]`, and `_rgbLedValues[BLUE]` rather than `_rgbLedValues[0]`, `_rgbLedValues[1]`, and `_rgbLedValues[2]`. The enum doesn't just improve code readability and help avoid needless array index errors, it's also used to track state with two state-tracking variables: `_curFadingUpColor` and `_curFadingDownColor`.  
 
 Our crossfade algorithm uses two `for` loops to simultaneously increase one color while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUpColor = GREEN;`) and (`enum RGB _curFadingDownColor = RED;`), respectively. Once we reach our maximum color value of `255` for the current `_curFadingUpColor`, we select the next color to increase (beginning with `RED` and then to `GREEN` then `BLUE` then back to `RED`). Similarly, once we reach our minimum color value of `0` for `_curFadingDownColor`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
 
 The full fade algorithm is captured in `loop()`:
 
 {% highlight C %}
+// Code based on https://gist.github.com/jamesotron/766994 (no longer available)
 void loop() {
 
   // Increment and decrement the RGB LED values for the current
@@ -130,7 +131,7 @@ And here's a video showing the code running in the Tinkercad simulator. You can 
 
 ### Crossfading in the HSL color space
 
-The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its **hue**. It's much easier to do this using HSL and then converting to RGB to set our RGB LED color. We perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. With this HSL approach, our code is comparatively much simpler, something like the following:
+The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its **hue**. It's much easier to do this using HSL and then converting to RGB to set our RGB LED color. We perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. With this HSL approach, our code is comparatively much simpler, something like the following pseudocode:
 
 {% highlight C %}
 // Basic overview of our approach (pseudocode)
@@ -147,7 +148,7 @@ loop(){
 }
 {% endhighlight C %}
 
-The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats can appear infinitely precise but on the ATmega328 have ~6-7 decimal digits of precision).
+The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats can appear infinitely precise given their use of decimals but on the ATmega328, floats have ~6-7 decimal digits of precision).
 
 However, these limitations won't matter for our program—or for any of our introductory lessons—because we are not speed limited and don't need high-precision math. If you want to know more about *why* embedded programmers try to avoid floating point operations, read the note below. Otherwise, skip ahead.
 
@@ -169,6 +170,8 @@ The full code for our HSL-based crossfader is below. **Importantly**, you cannot
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeHue/CrossFadeHue.ino?footer=minimal"></script>
 
 <!-- TODO look up what the minimum step value is that makes sense with a 256 quantization -->
+
+<!-- TODO: insert YouTube video of tis working -->
 
 ### Loading libraries in the Arduino IDE
 

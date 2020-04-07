@@ -53,7 +53,7 @@ Here's a photo of the version I made. I found it easier to stretch the wiring ac
 
 ![Workbench photo of the the LED wired to the 5V port](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png)
 
-For power, you can use a USB cable (which supplies 5V) or a 9V battery (which supplies 9V). Either way, the Arduino **supplies 5V** through the 5V pin. How? Using a voltage regulator, which takes in input
+For power, you can use a USB cable (which supplies 5V) or a 9V battery (which supplies 9V). Either way, the Arduino **supplies 5V** through the 5V pin. How? Using a [voltage regulator](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/).
 
 | USB Power        | 9V Power          |
 |:-------------|:------------------|

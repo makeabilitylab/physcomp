@@ -49,6 +49,8 @@ We are going to explore and implement two different RGB crossfade approaches.
 1. First, we will use `for` loops to step through dyadic combinations between red, green, and blue LED colors. This approach is based on a [now-expired gist](https://gist.github.com/jamesotron/766994) by the user `jamesotron`.
 2. Second, we will use the HSL color space to manipulate **hue**—what colloquially we refer to as *color*—and then convert this to the RGB color space for our `analogWrite` calls. This approach is cleaner and less convoluted but requires using a [separate library](https://github.com/ratkins/RGBConverter) for the HSL-to-RGB conversion.
 
+With `analogWrite`'s maximum output value of `255`, each embedded red, green, blue LED can be set from `0` to `255`, which enables 16,777,216 combinations (256^3). However, only a small fraction of these are perceptually different. Indeed, in our first crossfade solution, by default, we only fade between 156 combinations.
+
 ### Crossfading in the RGB color space
 
 The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you are expected to read and understand this code.

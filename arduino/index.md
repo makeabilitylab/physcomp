@@ -16,7 +16,7 @@ comments: true
 {:toc}
 ---
 
-These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub](https://github.com/makeabilitylab/arduino).
+These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
 <!-- TODO: add in link to Tinkercad circuits here... -->
 
@@ -36,21 +36,19 @@ Demonstrates how to gradually fade an LED on and off by using [`analogWrite`](ht
 
 ### [Lesson 4: Blinking an LED Part 2](led-blink2.md)
 
-Introduces the concept of using Arduino GPIO pins as either current sources or sinks by hooking up two LED circuit configurations: one circuit with the LED cathode towards GND and another with the LED anode towards GND.
+Introduces the concept of using Arduino GPIO pins as either current **sources** or **sinks** by hooking up two LED circuit configurations: one circuit with the LED cathode towards GND and another with the LED anode towards GND.
 
 ### [Lesson 5: RGB LEDs](rgb-led.md)
 
 Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
 
-TODO: 
-- blink no delay (where to put this?). We do have a fade with no delay at end of led-fade.md
-  - But a blink no delay could also show how to blink multiple LEDs at different rates.
-- how to hook up multiple LEDS per port with Arduino (in parallel and why)
-- Where to put breadboard stuff? This should probably go in the basic electronics series but for now my focus is on Arduino stuff...
-- Maybe add in sound?
-  - https://www.programmingelectronics.com/an-easy-way-to-make-noise-with-arduino-using-tone/
-  - https://www.cuidevices.com/blog/buzzer-basics-technologies-tones-and-driving-circuits#application-circuit-for-piezo-transducer
-  - https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/overview
+### [Lesson 6: Crossfading RGB LEDs](rgb-led-fade.md)
+
+Shows how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and to use and load local `C/C++` libraries
+
+### [Lesson 7: Rate Blinking Multiple LEDs](led-blink3.md)
+
+In this lesson, we will learn how to blink multiple LEDs at different rates and build our first [C/C++ class](http://www.cplusplus.com/doc/tutorial/classes/), which will greatly simplify our code and, as an added bonus, reduce its size by eliminating code redundancy.
 
 ## Intro to Input
 

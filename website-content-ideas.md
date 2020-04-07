@@ -58,4 +58,15 @@ nav_exclude: true
 - [Programming microcontrollers](https://itp.nyu.edu/physcomp/lessons/programming/programming-terms-and-programming-environments/)
 - Electronic prototyping kits section
 
+## Intro to Output TODOs
+TODO: 
+- [Done in led-blink.md] blink no delay (where to put this?). We do have a fade with no delay at end of led-fade.md
+  - [Done in led-blink3.md] But a blink no delay could also show how to blink multiple LEDs at different rates.
+- how to hook up multiple LEDS per port with Arduino (in parallel and why)
+- Where to put breadboard stuff? This should probably go in the basic electronics series but for now my focus is on Arduino stuff...
+- Maybe add in sound?
+  - https://www.programmingelectronics.com/an-easy-way-to-make-noise-with-arduino-using-tone/
+  - https://www.cuidevices.com/blog/buzzer-basics-technologies-tones-and-driving-circuits#application-circuit-for-piezo-transducer
+  - https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/overview
+
 <!--  https://www.exploringarduino.com/resources/ -->

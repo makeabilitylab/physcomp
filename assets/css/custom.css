@@ -23,3 +23,8 @@ cite{
 figure.highlight {
   margin-bottom: 1em;
 } 
+
+/* Without this, the gist it script's prettify font is too large */
+.gist-it-gist{
+  font-size: small;
+}

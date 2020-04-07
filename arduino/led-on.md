@@ -128,7 +128,7 @@ V_R = 3.3V - 2V\to1.3V$$
 
 <!-- TODO: in future Fix Ohm's Law animations to use Vr, Vf nomenclature -->
 
-To learn more about calculating the current through an LED, watch this video by NYU ITP's Jeff Feddersen:
+To learn more about calculating the current through an LED, watch [this video](https://vimeo.com/78674965) by NYU ITP's Jeff Feddersen:
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/78674965" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 

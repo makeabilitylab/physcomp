@@ -220,7 +220,7 @@ CrossFadeHue
   |-RGBConverter.h
 ```
 
-3. Third, if you have lots of `.h` and `.cpp` files and want to organize them into their own individual sub-folders, then... this can be frustrating! But there is a solution since the ~Arduino 1.6 release; however, you must put these sub-folders into a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within your root sketch directory. Indeed, this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
+3. Third, if you have lots of `.h` and `.cpp` files and want to organize them into their own individual sub-folders, then... this can be frustrating! But there is a solution since the ~Arduino 1.6 release: you must put these sub-folders into a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within your root sketch directory. Indeed, this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
 
 ```
 CrossFadeHue

@@ -22,6 +22,8 @@ These tutorials are interactive and designed to be completed **in order**. All A
 
 ## Intro to Output
 
+<!-- Consider adding a debugging with Serial Monitor lesson -- maybe after Lesson 3? -->
+
 ### [Lesson 1: Turning on an LED](led-on.md)
 
 Introduces the Arduino power and ground pins, powering an initial LED circuit with a current limiting resistor, and plugging components into the Arduino.

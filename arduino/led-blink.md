@@ -51,7 +51,14 @@ While it's not necessary to use a breadboard for this simple circuit, here are t
 |:----:|:-----:|
 |![Breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard1.png) | ![Second breadboard wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDBlink_Pin3Circuit_Breadboard2.png) |
 
-Next, we'll write `C` code for the Arduino's microcontroller to turn on the LED from Pin 3, which will programmatically set Pin 3 to 5V.
+Next, we'll write `C/C++` code for the Arduino's microcontroller to turn on the LED from Pin 3, which will programmatically set Pin 3 to 5V.
+
+---
+**NOTE:**
+
+The Arduino software is open source and consists of a development environment (called an IDE) and core libraries. The core libraries are written in the `C` and `C++` programming language and compiled using avr-gcc and AVR libc. The source code for Arduino is hosted on [GitHub](https://github.com/arduino). The libraries for AVR microcontrollers like the ATmega328 (which the Arduino Uno uses) is in [GitHub here](https://github.com/arduino/ArduinoCore-avr).
+
+---
 
 ## Get the Arduino IDE
 
@@ -70,7 +77,7 @@ After installation is complete, open the Arduino IDE. Notice that there are **tw
 
 ![Screenshot of the Arduino IDE](assets/images/ArduinoIDE_BlankAndAnnotated.png)
 
-For those who have used [Processing](https://processing.org/)—a programming environment for digital artists and creators (and a favorite of mine)—this code structure should seem familiar. Indeed, the Arduino IDE derives from Processing ([link](https://github.com/arduino/Arduino/tree/ee1967cd530ceb9a1d638875e385157e90d532e8/arduino-core/src/processing/app)).
+For those who have used [Processing](https://processing.org/)—a programming environment for digital artists and creators (and a favorite of mine)—this code structure should seem familiar. Indeed, the Arduino IDE is written in Java and derives from Processing ([link](https://github.com/arduino/Arduino/tree/ee1967cd530ceb9a1d638875e385157e90d532e8/arduino-core/src/processing/app)).
 
 | Processing | p5js |
 |----|----|

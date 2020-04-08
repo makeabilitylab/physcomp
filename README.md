@@ -14,6 +14,10 @@ A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, 
 
 This website is about exploring the materiality of computing, the physicality of humans, harnessing the wonderful expressivity and potential interplay of both. It is intended to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
 
+![Example projects from some physical computing-related courses taught by Jon E. Froehlich]({{ site.baseurl }}/assets/images/ExampleAssignmentsAndProjects.jpg)
+Example projects from Tangible Interactive Computing.
+{: .fs-1 }
+
 This is a particularly interesting time to survey and explore physical computing because of three, interrelated technology and social trends:
 
 - The DIY/Makers movement, which has led to widespread opportunities to interface and work with hardware that has rather low barriers of entry (*e.g.,* the Arduino), provides new opportunities for coupling form with computation (*e.g.,* through digital fabrication), and provides countless online materials/tutorials to help us along (see a resource list [here](resources/index.md)).
@@ -24,9 +28,9 @@ Enabled by the above three points, our goal is to explore new human-computer int
 
 And we are not alone, the content here is inspired by a rich set of courses, including [NYU's ITP Physical Computing](https://itp.nyu.edu/physcomp/), UC Berkeley's [Critical Making](http://make.berkeley.edu/) and [Interactive Device Design](http://web.archive.org/web/20150712080846/http://husk.eecs.berkeley.edu/courses/cs294-84-fall14/index.php/Main_Page). See [Inspirations](resources/inspirations.md) and the [Resource list](resources/index.md) for more.
 
-## Prerequisites
+## Prerequisite
 
-We make the following assumptions about your background:
+This website assumes the following background:
 
 - **Some coding experience.** For the [introductory lessons](arduino/index.md), we assume comfort and familiarity with basic coding concepts such as functions, loops, variables, and conditionals. We'll be using `C/C++` to program our microcontrollers; however, no previous `C/C++` experience is expected and, indeed, the language itself is rather unimportant. If you've programmed in a typed, compiled language like Java, Processing, C#, or other similar languages, you should be fine. If you've programmed in a dynamically-typed language like JavaScript, Python, or Ruby, then `C/C++` may take some getting used to but the overall structure of coding is not that different. Later lessons require more advanced programming concepts such as memory management, library development, *etc.*
 

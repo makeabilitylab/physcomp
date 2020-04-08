@@ -54,7 +54,7 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 This is a **draft** list of topics (and order may change).
 
-### [Lesson 1: Using buttons]
+### Lesson 1: Using buttons
 
 Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
 
@@ -84,9 +84,9 @@ Adapts the previous force-sensitive resistor example to work with a photocell. D
 
 Smooths analog input
 
-## Other possibilities
+<!-- ## Other possibilities
 - Debugging
   - Using VS Code
 - TODO: consider adding interrupts here? Like after Lesson 2?
   - Nick Gammon's blog is a nice resource for this: https://www.gammon.com.au/interrupts
-- When to introduce
+- When to introduce -->

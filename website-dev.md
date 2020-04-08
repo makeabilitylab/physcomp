@@ -24,6 +24,7 @@ nav_exclude: true
     - And the scss: https://github.com/mmistakes/minimal-mistakes/blob/0cf1a2e1144336b5e026d13b5fd87dc2af02fe8c/_sass/minimal-mistakes/_base.scss
 - [Done] Add in Discussion support. Update: OK, did this with disqus platform
 - Add in 'info box` support like minimal mistakes
+  - See: https://mmistakes.github.io/minimal-mistakes/docs/utility-classes/
 - Add in auto-TOC (Table of contents) with sticky support. 
   - Working on this in a branch with: https://tscanlin.github.io/tocbot/
 - Add in figure captioning support (minimal mistakes also has this)

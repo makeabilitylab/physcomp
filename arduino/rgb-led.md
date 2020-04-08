@@ -17,7 +17,7 @@ comments: true
 {:toc}
 ---
 
-In this tutorial, we will flash through a sequence of colors using an RGB LED (RGB stands for Red, Green, Blue) and learn about the difference between a Common Anode and Common Cathode RGB LED design.
+In this tutorial, we will use an RGB LED (RGB stands for Red, Green, Blue) to flash through a sequence of colors and learn about the difference between a Common Anode and Common Cathode RGB LED design.
 
 ![Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6](assets/movies/Arduino_RGBLED_CommonCathode-Optimized.gif)
 
@@ -178,7 +178,9 @@ void loop()
 
 That's it. Now compile, upload, and run your code!
 
-TODO: insert workbench video of it working.
+<iframe width="736" height="414" src="https://www.youtube.com/embed/ASez28rPjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+The yogurt container is used to diffuse the light. Kleenex, white paper, or a ping pong ball (with a hole in it for the LED) works well too!
+{: .fs-1 }
 
 Below, we show a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current—it will flow in the opposite direction with the Common Anode design (covered next).
 
@@ -190,7 +192,7 @@ Below, we show a video animation of the code executing and resulting circuit beh
 
 Now, let's work on the Common Anode version. The circuit wiring is almost the exact same as before: the 1st leg (red), 3rd leg (blue), and 4th leg (green) of the RGB LED connect to digital I/O Pins 6, 5, and 3 respectively (along with a current limiting resistor for each); however, the 2nd leg is now a **common anode** and thus, should be connected to 5V (and not `GND` as it was for the common cathode).
 
-To drive current through our circuit and turn on an embedded LED—say the red LED—we counterintuitively have to set the corresponding LED pin to `LOW` (Pin 6, in this case) and the other LED pins to `HIGH` (Pins 5 and 3). Why? Remember that current always flows from **high potential** to **low potential**. With a Common Anode, the 2nd leg is the anode (high potential or, in this case, 5V) so we must connect the other legs to lower potential to create a voltage difference and allow current to flow. 
+To drive current through our circuit and turn on an embedded LED—say the red LED—we counterintuitively have to set the corresponding red LED pin to `LOW` (Pin 6, in this case) and the other LED pins to `HIGH` (Pins 5 and 3). Why? Remember that current always flows from **high potential** to **low potential**. With a Common Anode, the 2nd leg is the anode (high potential or, in this case, 5V) so we must connect the other legs to lower potential to create a voltage difference and allow current to flow.
 
 ---
 
@@ -247,71 +249,12 @@ We're not going to include code specifically for the Common Anode RGB LED. Inste
 
 ## Coding for both Common Cathode and Anode
 
-Because the only difference between the Common Cathode code and the Common Anode code is inverting `HIGH`s and `LOW`s, we can simply update our previous Common Cathode code by adding in a `boolean` to check for which RGB LED version we are using. If a Common Anode then we will invert the `HIGH` and `LOW` signals—see the `setRgbLedColor` function.
+Because the only difference between the Common Cathode code and the Common Anode code is inverting `HIGH`s and `LOW`s, we can simply update our previous Common Cathode code by adding in a `boolean` to check for which RGB LED version we are using. If a Common Anode then we will invert the `HIGH` and `LOW` signals—see the `setRgbLedColor` function. The full code is on [GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkRGBSimple/BlinkRGBSimple.ino) and shown below:
 
-{% highlight C %}
-const int DELAY_MS = 1000;       // delay between color changes in ms
-const int RGB_RED_LED_PIN = 6;   // indicated by orange wire
-const int RGB_BLUE_LED_PIN = 5;  // indicated by blue wire
-const int RGB_GREEN_LED_PIN = 3; // indicated by green wire
-const boolean RGB_COMMON_CATHODE = false;
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkRGBSimple/BlinkRGBSimple.ino?footer=minimal"></script>
 
-void setup()
-{
-  // Set the red, green, and blue RGB LED pins to output
-  pinMode(RGB_RED_LED_PIN, OUTPUT);
-  pinMode(RGB_BLUE_LED_PIN, OUTPUT);
-  pinMode(RGB_GREEN_LED_PIN, OUTPUT);
-}
-
-// TODO: put in appropriate code comments
-// Set red to HIGH to turn on red, green to HIGH for green, 
-// and blue to HIGH for blue (etc.). If you are using a common
-// anode RGB LED, make sure to set RGB_COMMON_CATHODE to false
-void setRgbLedColor(int red, int green, int blue){
-  if(!RGB_COMMON_CATHODE){
-    red = !red;
-    green = !green;
-    blue = !blue;
-  }
-
-  digitalWrite(RGB_RED_LED_PIN, red);
-  digitalWrite(RGB_GREEN_LED_PIN, green);
-  digitalWrite(RGB_BLUE_LED_PIN, blue);
-}
-
-void loop()
-{
-  // red
-  setRgbLedColor(HIGH, LOW, LOW);
-  delay(DELAY_MS);
-  
-  // green
-  setRgbLedColor(LOW, HIGH, LOW);
-  delay(DELAY_MS);
-  
-  // blue
-  setRgbLedColor(LOW, LOW, HIGH);
-  delay(DELAY_MS);
-  
-  // purple
-  setRgbLedColor(255, LOW, HIGH);
-  delay(DELAY_MS);
-  
-  // turqoise
-  setRgbLedColor(LOW, HIGH, HIGH);
-  delay(DELAY_MS);
-  
-  // white
-  setRgbLedColor(HIGH, HIGH, HIGH);
-  delay(DELAY_MS);
-}
-{% endhighlight C %}
-
-## TODO: 
-- add in gist link to code in github
-- add tinkercad circuit link for common cathode
-- add in point about Vf being different for each color and thus the resistors for each leg should be different?
+<!-- TODO add tinkercad circuit link for common cathode -->
+<!-- add in point about Vf being different for each color and thus the resistors for each leg should be different? -->
 
 ## Next Lesson
 

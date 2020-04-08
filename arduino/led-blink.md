@@ -167,7 +167,7 @@ Once uploading is complete, the code automatically runs on the Arduino and the L
 **Note:** On my Windows machine, I use a [dark theme](https://create.arduino.cc/projecthub/konradhtc/one-dark-arduino-modern-dark-theme-for-arduino-ide-2fca81) for the Arduino IDE.
 {: .fs-1 }
 
-Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`:
+Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`—hopefully, this matches your conceptual understanding as well:
 
 ![Animation showing the LED on Pin 3 turning on)](assets/movies/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
 

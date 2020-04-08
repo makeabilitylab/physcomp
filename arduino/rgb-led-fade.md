@@ -55,7 +55,9 @@ With `analogWrite`'s maximum output value of `255`, each embedded red, green, bl
 
 The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you are expected to read and understand this code.
 
-At a high level, our crossfade method works by **increasing** one LED color value (from `0` to `255`) while **decreasing** another (from `255` to `0`). For example, the code begins by decreasing the red LED value while increasing the green LED value. When the red LED value reaches `0`, we begin decrementing another LED (green in this case). Similarly, when the green LED value reaches `255`, we begin incrementing the blue LED, and so on. 
+There are many different ways you could crossfade an RGB LED depending on which colors you want to illuminate and how quickly.
+
+Our particular crossfade method works by **increasing** one LED color value (from `0` to `255`) while **decreasing** another (from `255` to `0`). For example, the code begins by decreasing the red LED value while increasing the green LED value. When the red LED value reaches `0`, we begin decrementing another LED (green in this case). Similarly, when the green LED value reaches `255`, we begin incrementing another LED (the blue LED in this case), and so on. 
 
 More specifically, we have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`. So, our RGB LED will start red. 
 
@@ -76,7 +78,9 @@ enum RGB{
 
 This enum allows us to access our RGB LED values by writing `_rgbLedValues[RED]`, `_rgbLedValues[GREEN]`, and `_rgbLedValues[BLUE]` rather than `_rgbLedValues[0]`, `_rgbLedValues[1]`, and `_rgbLedValues[2]`. The enum doesn't just improve code readability and help avoid needless array index errors, it's also used to track state with two state-tracking variables: `_curFadingUpColor` and `_curFadingDownColor`.  
 
-Our crossfade algorithm uses two `for` loops to simultaneously increase one color while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUpColor = GREEN;`) and (`enum RGB _curFadingDownColor = RED;`), respectively. Once we reach our maximum color value of `255` for the current `_curFadingUpColor`, we select the next color to increase (beginning with `RED` and then to `GREEN` then `BLUE` then back to `RED`). Similarly, once we reach our minimum color value of `0` for `_curFadingDownColor`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
+Our crossfade algorithm uses two `for` loops to simultaneously increase one color while decreasing another. We start by **increasing green** and **decreasing red** as controlled by `enum RGB _curFadingUpColor = GREEN;`) and (`enum RGB _curFadingDownColor = RED;`), respectively. 
+
+Once we reach our maximum color value of `255` for the current `_curFadingUpColor`, we select the next color to increase (beginning with `RED` and then to `GREEN` then `BLUE` then back to `RED`). Similarly, once we reach our minimum color value of `0` for `_curFadingDownColor`, we select the next color to decrease (same order as before: from `RED` to `GREEN` to `BLUE` then back to `RED`).
 
 The full fade algorithm is captured in `loop()`:
 
@@ -121,13 +125,21 @@ void loop() {
 
 We control the fade step—the *amount* to fade on each `loop()` iteration—with `const int FADE_STEP`. With `FADE_STEP=1`, we fade between 768 color combinations (`3*256`). By default, `FADE_STEP=5`, which results in 156 color combinations.
 
+#### Full RGB-based crossfader code
+
 Here's the code in its entirety:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino?footer=minimal"></script>
 
-And here's a video showing the code running in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
+#### RGB-based crossfader videos
+
+Here are two videos showing the code running on an Arduino Uno. First, in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ZyfHRQFwmeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Second, a workbench video of the code running on an Arduino Uno:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/zL7xIWHqVaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!--TODO: add in a p5js that demonstrates how this works? And maybe let's reader play with different color values? -->
 
@@ -150,7 +162,7 @@ loop(){
 }
 {% endhighlight C %}
 
-The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 chip, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats can appear infinitely precise given their use of decimals but on the ATmega328, floats have ~6-7 decimal digits of precision).
+The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 microcontroller, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats can appear infinitely precise given their use of decimals but on the ATmega328, floats have ~6-7 decimal digits of precision).
 
 However, these limitations won't matter for our program—or for any of our introductory lessons—because we are not speed limited and don't need high-precision math. If you want to know more about *why* embedded programmers try to avoid floating point operations, read the note below. Otherwise, skip ahead.
 
@@ -164,16 +176,22 @@ Some interesting discussions and examples, include:
 - [AVR GCC Fixed-Point vs. Floating Point Comparison](https://ucexperiment.wordpress.com/2015/03/31/avr-gcc-fixed-point-vs-floating-point-comparison/), ucexperiment blog
 - [Speed of floating point operations](https://forum.arduino.cc/index.php?topic=40901.0), Arduino forums.
 
-<!-- TODO: expand on why floats can be costly for embedded programming with microcontrollers. -->
+<!-- TODO: expand on why floats can be costly for embedded programming with microcontrollers? -->
 ---
+
+#### Full HSL-based crossfader code
 
 The full code for our HSL-based crossfader is below. **Importantly**, you cannot simply copy/paste this code into your Arduino IDE. You must have the RGBConverter code in a sub-folder called `src` in your root sketch directory. Use the same directory structure as our [GitHub](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue). You can read more about loading libraries in the Arduino IDE below.
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeHue/CrossFadeHue.ino?footer=minimal"></script>
 
-<!-- TODO look up what the minimum step value is that makes sense with a 256 quantization -->
+#### Workbench video
 
-<!-- TODO: insert YouTube video of tis working -->
+Here's a workbench video of [CrossFadeHue.ino](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue) with a common cathode RGB LED.
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/ROfJge7bsfI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- TODO look up what the minimum step value that makes sense with our quantization -->
 
 <!-- TODO: Could be fun to write a p5js sketch that shows how the initial RGB LED naive code works and then the HSL version -->
 

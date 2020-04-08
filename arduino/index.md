@@ -22,6 +22,8 @@ These tutorials are interactive and designed to be completed **in order**. All A
 
 ## Intro to Output
 
+<!-- Consider adding a debugging with Serial Monitor lesson -- maybe after Lesson 3? -->
+
 ### [Lesson 1: Turning on an LED](led-on.md)
 
 Introduces the Arduino power and ground pins, powering an initial LED circuit with a current limiting resistor, and plugging components into the Arduino.
@@ -52,16 +54,15 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 ## Intro to Input
 
-TODO: consider adding interrupts here? Like after Lesson 2?
-- Nick Gammon's blog is a nice resource for this: https://www.gammon.com.au/interrupts
+This is a **draft** list of topics (and order may change).
 
-### [Lesson 1: Using buttons](buttons.md)
+### Lesson 1: Using buttons
 
 Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
 
 ### Lesson 2: Limiting use of delays
 
-TODO: shows how to poll for input without delays and the reasons for this (show first example with delays and how button is not responsive). (Maybe also refer to interrupts here?)
+Shows how to poll for input without delays and the reasons for this (show first example with delays and how button is not responsive). (Maybe also refer to interrupts here?)
 
 ### Lesson 3: Debouncing digital input
 
@@ -85,6 +86,9 @@ Adapts the previous force-sensitive resistor example to work with a photocell. D
 
 Smooths analog input
 
-## Other possibilities
+<!-- ## Other possibilities
 - Debugging
   - Using VS Code
+- TODO: consider adding interrupts here? Like after Lesson 2?
+  - Nick Gammon's blog is a nice resource for this: https://www.gammon.com.au/interrupts
+- When to introduce -->

@@ -20,6 +20,8 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 As with our previous lesson on [crossfading RGB LEDs](rgb-led-fade.md), this lesson involves **simple circuits** but comparatively **complex code**. Often, when using microcontrollers, our code is the magic sauce—the circuits are straightforward but the code can be complicated.
 
+![Animated gif of a workbench video recording showing BlinkMultiple.ino](assets/movies/ArduinoUno_BlinkMultiple_Workbench.gif)
+
 ## Background
 
 The canonical and beloved **first Arduino sketch**, [Blink](https://www.arduino.cc/en/tutorial/blink), enables beginners to quickly build and write code for a circuit. The code looks something like this, which we covered in our own [Blink lesson](led-blink.md):
@@ -55,9 +57,17 @@ You'll need **three LEDs**—we'll use red, blue, and yellow but you can use wha
 
 ## Circuit
 
-The circuit is the same as our basic [LED blink lesson](led-blink.md) but we duplicate it three times—once for each LED. By now, this should feel familiar. Indeed, you may not even need a wiring diagram like this to help!
+The circuit is the same as our basic [LED blink lesson](led-blink.md) but we duplicate it three times—once for each LED. We could use any of the Arduino's GPIO pins, and we chose Pins 2, 5, and 9 simply to space out the circuit and make it easier to read.
+
+By now, this circuit and wiring should feel familiar. Indeed, you may not even need a wiring diagram like this to help!
 
 ![Wiring diagram for three LEDs hooked up to Pins 2, 5, and 9 (with anodes facing pins and cathodes connected to GND with current limiting resistors)](assets/images/ArduinoUno_LEDBlink3_WiringDiagramWithSchematic.png)
+
+Recall that each LED color has a unique forward voltage Vf. In this case, our red LED has a Vf between 2.0-2.4V, our blue LED between 3.0-3.4V, and our yellow LED between 2.0-2.4V. To simplify things, we'll use the same value resistor for each LED circuit (220Ω); however, you could customize them to try and balance brightness levels.
+
+![Image of the Sparkfun multi-color LED pack showing different Vfs for the different LED colors](assets/images/SparkfunMulticolorLEDPack.png)
+**Note:** The [LED assorted pack ](https://www.sparkfun.com/products/12062) from Sparkfun.com.
+{: .fs-1 }
 
 ## Writing code
 
@@ -70,10 +80,12 @@ We are going to implement two approaches:
 
 For our initial approach, we need four things for each LED:
 
-1. **Pin Number:** An integer value specifying the output pin.
-2. **Blink Interval:** A per-LED *blink interval* that controls how long to turn on (`HIGH`) and off (`LOW`) the LED. 
-3. **Toggle Timestamp:** The *last time the LED was toggled* from `HIGH` to `LOW` or `LOW` to `HIGH`. 
-4. **Current LED State:** The *current LED state* (either `HIGH` or `LOW`), which is toggled every blink interval.
+1. **Pin number:** An integer value specifying the output pin.
+2. **Blink interval:** A per-LED *interval* that controls how long to turn on (`HIGH`) and off (`LOW`) the LED.
+3. **Toggle timestamp:** The *last time the LED was toggled* from `HIGH` to `LOW` or `LOW` to `HIGH`.
+4. **Current LED state:** The *current LED state* (either `HIGH` or `LOW`), which is toggled every blink interval.
+
+#### Blink interval
 
 For the **blink interval**, we'll use `const` variables like `LED1_BLINK_INTERVAL_MS`, `LED2_BLINK_INTERVAL_MS`, and `LED3_BLINK_INTERVAL_MS`
 
@@ -88,6 +100,8 @@ const int LED3_OUTPUT_PIN = 9;
 const int LED3_BLINK_INTERVAL_MS = 1111; // interval at which to blink LED3 (in milliseconds)
 {% endhighlight C %}
 
+#### Toggle timestamps and LED states
+
 For the **toggle timestamps** and **LED states**, we'll use variables like `_led1LastToggledTimestampMs` and `_led1State`. We can toggled `ledState` simply by: `ledState = !ledState`.
 
 {% highlight C %}
@@ -101,9 +115,11 @@ unsigned long _led3LastToggledTimestampMs = 0; // tracks the last time LED3 was 
 int _led3State = LOW; // will toggle between LOW and HIGH
 {% endhighlight C %}
 
-To capture timestamps, we use Arduino's [`millis()` ](https://www.arduino.cc/reference/en/language/functions/time/millis/) function, which returns "the number of **milliseconds** passed since the Arduino board began running the current program". On the Arduino, the `unsigned long` data type is 32 bits (4 bytes), which ranges from `0` to `4,294,967,295` (2^32 - 1). Thus, `millis()` will overflow—go back to zero and begin counting again—after `4,294,967,295` milliseconds  (or approximately 50 days). If you need more precise timing, you could use `micros()`, which provides **microsecond resolution** rather than millisecond resolution but `micros()` overflows every ~70 minutes.
+To capture timestamps, we'll use Arduino's [`millis()` ](https://www.arduino.cc/reference/en/language/functions/time/millis/) function, which returns "*the number of **milliseconds** passed since the Arduino board began running the current program*". On the Arduino, the `unsigned long` data type is 32 bits (4 bytes), which ranges from `0` to `4,294,967,295` (2^32 - 1). Thus, `millis()` will overflow—go back to zero and begin again—after `4,294,967,295` milliseconds (or approximately 50 days). If you need more precise timing, you could use `micros()`, which provides **microsecond resolution** rather than millisecond resolution but `micros()` overflows every ~70 minutes.
 
-We then use the same [BlinkWithoutDelay.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino) code as before for each LED:
+#### Blinking without delays logic
+
+We then use the same general logic as the "blinking without delays" [covered previously](led-blink#blink-without-using-delays) for each LED:
 
 {% highlight C %}
 unsigned long currentTimestampMs = millis();
@@ -125,17 +141,23 @@ if (currentTimestampMs - _led2LastToggledTimestampMs >= LED2_BLINK_INTERVAL_MS) 
 ... // and so on, copy the above block of code for each LED you're trying to blink
 {% endhighlight C %}
 
+#### The full code
+
 The code, in full, is below:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultiple/BlinkMultiple.ino?footer=minimal"></script>
 
-<!-- TODO: insert video -->
+#### Workbench video
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/8DHhmXr3mC8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Multi-rate blinking: an object-oriented approach
 
 Given the amount of code redundancy and shared logic and structure, the above solution is a strong candidate for refactoring into functions or classes. So, let's do it! 
 
-We're going to define a new class, called `Blinker`, which will greatly simplify our code, decrease redundancy (and the potential for human error), and even make our compiled code smaller. For example, with `Blinker`, our code reduces to:
+We're going to define a new class, called `Blinker`, which will greatly simplify our code, decrease redundancy (and the potential for human error), and even make our compiled code smaller (from 1,118 bytes to 1,042 bytes of program storage space). 
+
+With `Blinker`, our code reduces to:
 
 {% highlight C++ %}
 Blinker _led1Blinker(2, 200);  // specify pin and blink interval (200ms)
@@ -155,13 +177,15 @@ void loop() {
 }
 {% endhighlight C++ %}
 
+But we have to make the `Blinker` class first, which we do below!
+
 #### Making the Blinker class
 
 If you're familiar with object-oriented programming and declaring and using classes in `Java`, `C#`, `Python`, and even, to some extent, `JavaScript` since [ECMAScript 2015](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), then `C++` classes will feel familiar (but certainly have their own peculiarities). `C++` classes have a class name, member variables, member functions, and like `C#` and `Java`, access specifiers (*e.g.,* private, public). For a quick tutorial, see these links ([link1](https://www.geeksforgeeks.org/c-classes-and-objects/), [link2](http://www.cplusplus.com/doc/tutorial/classes/)).
 
 To build our Blinker class, recall that we need four things per LED:
 1. **Pin Number:** An integer value specifying the output pin.
-2. **Blink Interval:** A *blink interval* that controls how long to turn on (`HIGH`) and off (`LOW`) the LED. 
+2. **Blink Interval:** A *blink interval* that controls how long to turn on (`HIGH`) and off (`LOW`) each LED. 
 3. **Toggle Timestamp:** The *last time the LED was toggled* from `HIGH` to `LOW` or `LOW` to `HIGH`. 
 4. **Current LED State:** The *current LED state* (either `HIGH` or `LOW`), which is toggled every blink interval.
 
@@ -176,6 +200,8 @@ class Blinker{
 
     int _state;                     // current state (either HIGH OR LOW)
     unsigned long _lastToggledTimestamp; // last state toggle in ms
+
+  ... // more here
 {% endhighlight C++ %}
 
 Finally, we need two functions: a `constructor` and `update()`—the latter which handles our core logic and toggling code and is intended to be called once per `loop()` iteration. We are going to declare these in the class definition itself:
@@ -185,9 +211,9 @@ Finally, we need two functions: a `constructor` and `update()`—the latter whic
     Blinker(int pin, unsigned long blinkInterval) :
         _pin(pin), _interval(blinkInterval) // initialize const like this in C++
     {
-        _state = LOW;
-        _lastToggledTimestamp = 0;
-        pinMode(_pin, OUTPUT);
+      _state = LOW;
+      _lastToggledTimestamp = 0;
+      pinMode(_pin, OUTPUT);
     }
 
     /**
@@ -195,13 +221,13 @@ Finally, we need two functions: a `constructor` and `update()`—the latter whic
     * Call this function once per loop()
     */ 
     void update(){
-        unsigned long currentTimestampMs = millis();
+      unsigned long currentTimestampMs = millis();
         
-        if (currentTimestampMs - _lastToggledTimestamp >= _interval) {
+      if (currentTimestampMs - _lastToggledTimestamp >= _interval) {
         _lastToggledTimestamp = currentTimestampMs;
         _state = !_state;
         digitalWrite(_pin, _state);
-        }
+      }
     }
 {% endhighlight C++ %}
 
@@ -214,10 +240,12 @@ So, the entire code looks like this:
 
 ### Multi-rate blinking: using an external class
 
-In `C++`, you declare member variables and function signatures in a `.h` file and the the function implementations in a `.cpp` file. This is often a cleaner solution than embedding classes within the `.ino` file. Indeed, if we move `Blinker` into separate `.h` and `.cpp` files, then the main `.ino` sketch simply looks like:
+In `C++`, you declare member variables and function signatures in a `.h` file and the function implementations in a `.cpp` file. This is often a cleaner solution than embedding classes within the `.ino` file. 
+
+Indeed, if we move `Blinker` into separate `.h` and `.cpp` files, then the full `.ino` sketch simply looks like:
 
 {% highlight C++ %}
-#include "Blinker.h"
+#include "Blinker.h" // include the Blinker.h header
 
 Blinker _led1Blinker(2, 200);  // specify pin and blink interval (200ms)
 Blinker _led2Blinker(5, 333);  // specify pin and blink interval (333ms)
@@ -236,7 +264,13 @@ void loop() {
 }
 {% endhighlight C++ %}
 
+#### Full code with external class
+
 See the [code in our GitHub repository](https://github.com/makeabilitylab/arduino/tree/master/Basics/digitalWrite/BlinkMultipleWithExternalClass).
+
+#### Workbench video
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/vb5l8Tncedo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Exercises
 

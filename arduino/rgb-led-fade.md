@@ -201,7 +201,7 @@ There are multiple ways of loading external libraries in the Arduino IDE (see th
 
 Well, it turns out this fundamental feature has a long, sordid history in the Arduino community (for example: [link](https://stackoverflow.com/questions/4705790/keeping-all-libraries-in-the-arduino-sketch-directory), [link](https://arduino.stackexchange.com/questions/8651/loading-local-libraries)). I have found three ways to load **local** `.h` and `.cpp` code:
 
-1. First and easiest, place all `.h` and `.cpp` files in your root sketch folder (where your `.ino` file resides):
+**First** and easiest, place all `.h` and `.cpp` files in your root sketch folder (where your `.ino` file resides):
 
 ```
 CrossFadeHue
@@ -210,7 +210,7 @@ CrossFadeHue
 |-RGBConverter.h
 ```
 
-2. Second, place all `.h` and `.cpp` files in a sub-folder off or your root sketch folder with a dir name of your choosing (*e.g.,* `lib`):
+**Second**, place all `.h` and `.cpp` files in a sub-folder off or your root sketch folder with a dir name of your choosing (*e.g.,* `lib`):
 
 ```
 CrossFadeHue
@@ -220,7 +220,7 @@ CrossFadeHue
   |-RGBConverter.h
 ```
 
-3. Third, if you have lots of `.h` and `.cpp` files and want to organize them into their own individual sub-folders, then... this can be frustrating! But there is a solution since the ~Arduino 1.6 release: you must put these sub-folders into a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within your root sketch directory. Indeed, this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
+**Third**, if you have lots of `.h` and `.cpp` files and want to organize them into their own individual sub-folders, then... this can be frustrating! But there is a solution since the ~Arduino 1.6 release: you must put these sub-folders into a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within your root sketch directory. Indeed, this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
 
 ```
 CrossFadeHue

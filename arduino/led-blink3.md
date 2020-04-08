@@ -159,7 +159,7 @@ Given the amount of code redundancy and shared logic and structure, the above so
 
 We're going to define a new class, called `Blinker`, which will greatly simplify our code, decrease redundancy (and the potential for human error), and even make our compiled code smaller (from 1,118 to 1,042 bytes of program storage space). 
 
-With `Blinker`, our code reduces to:
+Once we've made the `Blinker` class, our main code reduces to:
 
 {% highlight C++ %}
 Blinker _led1Blinker(2, 200);  // specify pin and blink interval (200ms)
@@ -243,7 +243,7 @@ So, the entire code looks like this:
 
 ### Multi-rate blinking: using an external class
 
-In `C++`, you declare member variables and function signatures in a `.h` file and the function implementations in a `.cpp` file. This is often a cleaner solution than embedding classes within the `.ino` file. 
+In `C++`, you declare member variables and function signatures in a `.h` file and the function implementations in a `.cpp` file. This is often a cleaner solution than embedding classes within the `.ino` itself. 
 
 Indeed, if we move `Blinker` into separate `.h` and `.cpp` files, then the full `.ino` sketch simply looks like:
 

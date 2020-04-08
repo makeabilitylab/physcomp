@@ -52,16 +52,15 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 ## Intro to Input
 
-TODO: consider adding interrupts here? Like after Lesson 2?
-- Nick Gammon's blog is a nice resource for this: https://www.gammon.com.au/interrupts
+This is a **draft** list of topics (and order may change).
 
-### [Lesson 1: Using buttons](buttons.md)
+### [Lesson 1: Using buttons]
 
 Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
 
 ### Lesson 2: Limiting use of delays
 
-TODO: shows how to poll for input without delays and the reasons for this (show first example with delays and how button is not responsive). (Maybe also refer to interrupts here?)
+Shows how to poll for input without delays and the reasons for this (show first example with delays and how button is not responsive). (Maybe also refer to interrupts here?)
 
 ### Lesson 3: Debouncing digital input
 
@@ -88,3 +87,6 @@ Smooths analog input
 ## Other possibilities
 - Debugging
   - Using VS Code
+- TODO: consider adding interrupts here? Like after Lesson 2?
+  - Nick Gammon's blog is a nice resource for this: https://www.gammon.com.au/interrupts
+- When to introduce

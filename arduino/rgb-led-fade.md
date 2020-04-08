@@ -125,15 +125,19 @@ void loop() {
 
 We control the fade step—the *amount* to fade on each `loop()` iteration—with `const int FADE_STEP`. With `FADE_STEP=1`, we fade between 768 color combinations (`3*256`). By default, `FADE_STEP=5`, which results in 156 color combinations.
 
+#### Full RGB-based crossfader code
+
 Here's the code in its entirety:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino?footer=minimal"></script>
 
-And here's a video showing the code running in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
+#### RGB-based crossfader videos
+
+Here are two videos showing the code running on an Arduino Uno. First, in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ZyfHRQFwmeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Finally, here's a workbench video of the code running on an Arduino Uno:
+Second, a workbench video of the code running on an Arduino Uno:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/zL7xIWHqVaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -172,7 +176,7 @@ Some interesting discussions and examples, include:
 - [AVR GCC Fixed-Point vs. Floating Point Comparison](https://ucexperiment.wordpress.com/2015/03/31/avr-gcc-fixed-point-vs-floating-point-comparison/), ucexperiment blog
 - [Speed of floating point operations](https://forum.arduino.cc/index.php?topic=40901.0), Arduino forums.
 
-<!-- TODO: expand on why floats can be costly for embedded programming with microcontrollers. -->
+<!-- TODO: expand on why floats can be costly for embedded programming with microcontrollers? -->
 ---
 
 #### Full HSL-based crossfader code

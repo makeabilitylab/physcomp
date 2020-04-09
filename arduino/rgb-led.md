@@ -161,7 +161,7 @@ void loop()
   delay(DELAY_MS);
   
   // purple
-  setRgbLedColor(255, LOW, HIGH);
+  setRgbLedColor(HIGH, LOW, HIGH);
   delay(DELAY_MS);
   
   // turqoise

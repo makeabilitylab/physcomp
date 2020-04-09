@@ -308,7 +308,7 @@ Because `delay()` usage can be so troublesome, as part of their introductory tut
 
 ![Screenshot of accessing the official BlinkWithoutDelay example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkWithoutDelayExample.png)
 
-To avoid `delay()` calls, the code tracks **time**, **LED state changes** (when the LED switches from `HIGH` to `LOW` or `LOW` to `HIGH`), and **when** these state changes occur. The [BlinkWithoutDelay](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay) code is below. Notice that there are no `delay()` calls!  
+To avoid `delay()` calls, the code tracks **time**, **LED state changes** (when the LED switches from `HIGH` to `LOW` or `LOW` to `HIGH`), and **when** these state changes occur. The [BlinkWithoutDelay](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay) main loop is below. Notice that there are no `delay()` calls!
 
 {% highlight C %}
 void loop() {

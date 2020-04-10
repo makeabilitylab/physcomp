@@ -5,6 +5,7 @@ nav_order: 1
 parent: Input
 has_toc: true # (on by default)
 comments: true
+usemathjax: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
@@ -19,6 +20,14 @@ comments: true
 This is the first lesson in the [**Intro to Arduino Input**](intro-input.md) lesson series, which builds on knowledge gained in the [**Intro to Arduino Output**](intro-output.md) series, so please complete that first!
 
 In this lesson, we'll finally get to build something interactive: turning on an LED with a push button. We'll cover buttons (aka momentary switches), how to use digital input with the [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
+
+---
+
+**NOTE:**
+
+Switches themselves are conceptually easy to understand—they are either "closed" or "open". We use switches everyday when we turn on and off our light circuits in our home. However, we've found that students often struggle to understand why pull-up or pull-down resistors are necessary when using switches with microcontrollers. So, take your time with this lesson. Try to understand the **why**  and **how** of these resistors in your circuits.
+
+---
 
 TODO: show animation from Tinkercad-based circuit working and current flow
 
@@ -35,13 +44,23 @@ For (most of) this lesson, we're only going to use the Arduino's built-in LED (`
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Button (aka momentary switch). We'll be using [these 12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) from Adafruit. | 10KΩ Resistor |
 
+## Switches
+TODO
+
+### The four-leg button
+
+### Using a button without a microcontroller
+
+
+Now that we understand how this button works, let's move on to using switches/buttons with a microcontroller.
+
 ## Digital I/O refresher
 
 Recall that the Arduino Uno and Leonardo have 14 digital I/O pins that can be used either for input with [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) or output with [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. In our [**Intro to Arduino Output**](intro-output.md) lesson series, we covered output. Here, we'll cover input but the same 14 digital I/O pins apply:
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
-As previously noted, you can control any of these 14 digital I/O pins with three functions:
+As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 digital I/O pins with three functions:
 
 1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`. For our buttons, we'll be using `INPUT`.
 2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`.
@@ -49,11 +68,28 @@ As previously noted, you can control any of these 14 digital I/O pins with three
 
 ### Digital input
 
-Digital input is any input that can be considered either **on** (`HIGH` or 5V) or **off** (`LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
+Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
 
 ![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
+
+### High impedance input
+
+When you configure a pin as `INPUT` via `pinMode(<pin>, INPUT)`:
+- "Pins configured this way are said to be in a high-impedance state. Input pins make extremely small demands on the circuit that they are sampling, equivalent to a series resistor of 100 megohm in front of the pin. This means that it takes very little current to move the input pin from one state to another, and can make the pins useful for such tasks as implementing a capacitive touch sensor, reading an LED as a photodiode, or reading an analog sensor with a scheme such as RCTime." [DigitalPins](https://www.arduino.cc/en/Tutorial/DigitalPins)
+
+### Is it LOW or is it HIGH?
+
+As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{DD}$$ or 0V. The precise meaning of "close" varies between microcontrollers"
+
+For the ATmega328, the input voltage needs to be at least $$\cdot{0.6}{V_{DD}}\to\cdot{0.6}{5V}=3$$ to qualify as `HIGH` and between 0 and $$\cdot{0.3}{V_{DD}}\to\cdot{0.3}{5V}=1.5$$ to qualify as `LOW`. For the middle range $$\cdot{0.3}{V_{DD}}$$ to $$\cdot{0.6}{V_{DD}}$$, the behavior of the pin is undefined.
+
+Note that the value returned by digitalRead() is only well-defined when the input pin voltage
+is close to VDD or 0 V. The precise meaning of “close” varies between microcontrollers, but for the
+Adafruit Metro Mini1 as it’s used in our circuit, the input pin voltage needs to be at least 0.6VDD
+to qualify as HIGH, and at most 0.3VDD to qualify as LOW. In the middle (say, at 0.45VDD), the
+behavior of the pin is undefined
 
 ## Pull-down and pull-up resistors
 

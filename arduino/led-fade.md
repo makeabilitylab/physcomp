@@ -85,7 +85,7 @@ Start a new sketch in the Arduino IDE:
 
 ### Step 2: Write initialization code
 
-Our initialization code is the same as for [LED blink](led-blink.md) except for the addition of `const int MAX_ANALOG_OUT = 255;` and a constant for the delay amount of 30 milliseconds (`const int DELAY_MS = 30;`).
+Our initialization code is the same as for [LED blink](led-blink.md) except for the addition of `const int MAX_ANALOG_OUT = 255;` and a constant for the delay amount of 5 milliseconds (`const int DELAY_MS = 5;`).
 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;
@@ -135,7 +135,7 @@ We can visualize the (effective) voltage output on Pin 3 using the Arduino IDE's
   <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
 </video>
 
-Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. Recall that current does not pass through an LED until its forward voltage $$V_f$$ condition is met. With a red LED, a common forward voltage $$V_f=2V$$. With [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), the GPIO pin is still driven `HIGH` (5V) but only for a fraction of the time due to PWM (this fraction is called the duty cycle). So, our LED still turns on and our **eyes** perceive the LED on but it's actually flashing on/off imperceptibly quickly! 
+Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. Recall that current does not pass through an LED until its forward voltage $$V_f$$ condition is met. With a red LED, a common forward voltage is $$V_f=2V$$. With [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), the GPIO pin is still driven `HIGH` (5V) but only for a fraction of the time due to PWM (this fraction is called the duty cycle). So, the $$V_f$$ requirement is still met and our **eyes** perceive the LED on but it's actually flashing on/off imperceptibly quickly! 
 
 To calculate the current through our LED circuit with PWM, we can use the following equation: $$I = \frac{V_s - V_f}{R}DutyCycle_{fraction}$$. So, for example, if we `analogWrite` a `51` then our $$DutyCycle_{fraction}=\frac{51}{255}\to0.2$$. With a 220Ω, our current would be: $$I=\frac{5V - 2V}{220Ω}0.2\to2.7mA$$. See the table below.
 
@@ -191,7 +191,7 @@ void loop() {
     _fadeAmount = -_fadeAmount; // reverses fade direction
   }
   
-  // wait for 30 milliseconds to see the dimming effect
+  // wait for some milliseconds to see the dimming effect
   delay(DELAY_MS);
 }
 {% endhighlight C %}

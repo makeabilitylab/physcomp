@@ -143,6 +143,54 @@ if (currentTimestampMs - _led2LastToggledTimestampMs >= LED2_BLINK_INTERVAL_MS) 
 ... // and so on, copy the above block of code for each LED you're trying to blink
 {% endhighlight C %}
 
+#### Tracking timestamps and overflow
+
+This sub-section provides more background on tracking timestamps and overflow and is intended for those *already* familiar with overflow concepts and data types. So, feel free to skip this if you'd like.
+
+An important question to ask is: what happens if my Arduino needs to run for more than ~50 days and I'm relying on `millis()` to track time? Will the subtraction math (`currentTimestampMs - _lastToggledTimestampMs >= LED_BLINK_INTERVAL_MS`) still work? Even during an overflow condition?
+
+Great question! And yes, it will still work! And the reason is because we are using `unsigned` data types, which inform the compiler that these values can never be `< 0`. This is crucial.
+
+For example, imagine that `_lastToggledTimestampMs` is `4,294,967,290` or `0xFFFFFFFA` (32 bits), which is 5 milliseconds from overflow. And then imagine that `millis()` overflows (returns back to 0) and `currentTimestampMs` becomes, say, `1` or `0x00000001`. So, our subtraction is then: `0x00000001 - 0xFFFFFFFA`. There is `7` milliseconds difference between these two numbers, so we'd like the subtraction to result in `7`:
+
+```
+1. 0xFFFFFFFA
+2. 0xFFFFFFFB
+3. 0xFFFFFFFC
+4. 0xFFFFFFFD
+5. 0xFFFFFFFE
+-. (0xFFFFFFFF) <-- overflow
+6. 0x00000000
+7. 0x00000001
+```
+
+And this is what we get! Feel free to experiment with this yourself (see code below) and read [this article](https://www.baldengineer.com/arduino-millis-plus-addition-does-not-add-up.html) by James Lewis about `millis()`, overflow, and arithmetic for more background.  
+
+{% highlight C %}
+unsigned long _lastToggledTimestampMs = 4294967290; // change this to experiment with overflow
+
+void setup() {
+  Serial.begin(9600);
+  delay(2000);
+}
+
+void loop() {
+
+  unsigned long currentTimestampMs = 1;
+  unsigned long diff = currentTimestampMs - _lastToggledTimestampMs;
+
+  Serial.println("The subtraction between: currentTimestampMs - lastToggledTimestampMs is: ");
+  Serial.print(currentTimestampMs);
+  Serial.print(" - ");
+  Serial.print(_lastToggledTimestampMs);
+  Serial.print(" = ");
+  Serial.println(diff);
+  delay(1000);
+
+  _lastToggledTimestampMs++;
+}
+{% endhighlight C %}
+
 #### The full code
 
 The code, in full, is below:
@@ -237,6 +285,7 @@ Finally, we need two functions: a `constructor` and `update()`—the latter whic
 In order to use the `Blinker` class (as shown above), it needs to be defined within your `.ino` sketch at the top of the file (before you try to instantiate a Blinker object). Later, we'll also show how to create a class that exists in its own `.h` and `.cpp` files.
 
 #### Full Blinker code
+
 So, the entire code looks like this:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultipleWithInternalClass/BlinkMultipleWithInternalClass.ino?footer=minimal"></script>

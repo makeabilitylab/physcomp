@@ -145,7 +145,7 @@ if (currentTimestampMs - _led2LastToggledTimestampMs >= LED2_BLINK_INTERVAL_MS) 
 
 #### Tracking timestamps and overflow
 
-This sub-section provides more background on tracking timestamps and overflow and is intended for those *already* familiar with overflow concepts and data types. So, feel free to skip this if you'd like.
+This sub-section provides more background on tracking timestamps and overflow. Feel free to skip this if you'd like.
 
 An important question to ask is: what happens if my Arduino needs to run for more than ~50 days and I'm relying on `millis()` to track time? Will the subtraction math (`currentTimestampMs - _lastToggledTimestampMs >= LED_BLINK_INTERVAL_MS`) still work? Even during an overflow condition?
 

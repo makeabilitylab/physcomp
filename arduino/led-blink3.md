@@ -102,7 +102,7 @@ const int LED3_BLINK_INTERVAL_MS = 1111; // interval at which to blink LED3 (in 
 
 #### Toggle timestamps and LED states
 
-For the **toggle timestamps** and **LED states**, we'll use variables like `_led1LastToggledTimestampMs` and `_led1State`. We can toggled `ledState` simply by: `ledState = !ledState`.
+For the **toggle timestamps** and **LED states**, we'll use variables like `_led1LastToggledTimestampMs` and `_led1State`. We can toggle `ledState` simply by: `ledState = !ledState`.
 
 {% highlight C %}
 unsigned long _led1LastToggledTimestampMs = 0; // tracks the last time LED1 was updated

@@ -31,23 +31,25 @@ Animation shows the Arduino's built-in LED illuminating when the button on Pin 2
 
 ## What are Switches
 
+As noted above, switches are simple: they're either "open" (disconnected) or "closed" (closed). There are lots of different types of switches from momentary switches (aka buttons) to toggle or slide switches (which maintain their state) to switches that activate based on environmental conditions like a tilt switch or a reed switch.
+
 ![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
+In this lesson, we are going to focus on a four-leg push button (momentary switch). If you want to learn more about switches in general, see this [Switch basics](https://learn.sparkfun.com/tutorials/switch-basics/all) article by Sparkfun or this lab called [Lab 1: Switches and push buttons](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/) by ITP NYU.
+
 <!-- TODO: show animation of a switch -->
 
 <!-- TODO: add in schematic icons? Also, different types like SPST, DPST? -->
-
-### References
-- [Switch basics](https://learn.sparkfun.com/tutorials/switch-basics/all), Sparkfun 
-- [Lab 1: Switches and push buttons](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/), ITP NYU
 
 ## Making an initial button circuit
 
 We're going to start with learning how to use a button **without** a microcontroller. This will strengthen our understanding of buttons, in general, before switching over to digital input.
 
 ### Materials
+
+We'll need the following materials:
 
 | Breadboard | Arduino | LED | Resistor | Button |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
@@ -56,11 +58,16 @@ We're going to start with learning how to use a button **without** a microcontro
 
 ### The four-leg tactile buttons
 
+The four-leg push button is one of the most common button types; however, it's also a bit funky. You might be wondering: why **four legs** instead of two? How does this button work? 
+
 ![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
 <!-- TODO: in future, make this into a table with links for improved accessibility -->
 
-- The button is funky: why four legs? what's connected. Maybe show multimeter?
-- Show animation of how it works?
+We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first but you'll figure it out through building. In general, if you're confused about how to use a given electronic component, it's also a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf) but we'll tell you what you need to know here. :)
+
+![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif)
+
+
 
 
 

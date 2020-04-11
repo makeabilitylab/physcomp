@@ -41,7 +41,7 @@ Grab a 220Ω resistor (or any resistor 220Ω or greater) and twist one leg aroun
 
 ### Step 2: Connect components to Arduino
 
-Insert the LED + resistor into the Arduino: the LED's cathode (short leg) to GND and the LED's anode (long leg) + resistor to 5V. 
+Insert the LED + resistor into the Arduino: the LED's cathode (short leg) to GND and the LED's anode (long leg) + resistor to the Arduino's voltage supply, which you can access via the 5V pin. 
 
 ![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/movies/Arduino_LEDOn_5VFixed_InsertLED.gif)
 
@@ -53,7 +53,7 @@ Here's a photo of the version I made. I found it easier to stretch the wiring ac
 
 ![Workbench photo of the the LED wired to the 5V port](assets/images/Arduino_LEDOn_5VFixed_WorkbenchPhoto.png)
 
-For power, you can use a USB cable (which supplies 5V) or a 9V battery (which supplies 9V). Either way, the Arduino **supplies 5V** through the 5V pin. How? Using a [voltage regulator](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/).
+For power, you can use a USB cable (which supplies 5V) or a 9V battery (which supplies 9V). Either way, the Arduino **supplies 5V** through the 5V pin. How? Using a [voltage regulator](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/). See "More Info" below.
 
 | USB Power        | 9V Power          |
 |:-------------|:------------------|
@@ -64,7 +64,7 @@ For power, you can use a USB cable (which supplies 5V) or a 9V battery (which su
 
 **MORE INFO:**
 
-If we use a 9V battery (which supplies ~9V) then how does the Arduino convert 9V to 5V? Using a component called a [voltage regular](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/#Voltage_Regulator), which can take in a range of DC voltages and step it down (but not up) to a stable constant voltage. You can buy and use voltage regulators in your own projects. If you want to learn more about more about the Arduino Uno's power supply sub-system, read this [technobyte blog post](https://www.technobyte.org/arduino-uno-power-supply-arduino-hardware-core/).
+If we use a 9V battery (which supplies ~9V) then how does the Arduino convert 9V to 5V? Using a component called a [voltage regular](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/#Voltage_Regulator), which can take in a range of DC voltages and step it down (but not up) to a stable constant voltage. You can buy and use voltage regulators in your own projects. If you want to learn more about about the Arduino Uno's power supply sub-system, read this [technobyte blog post](https://www.technobyte.org/arduino-uno-power-supply-arduino-hardware-core/).
 
 ---
 

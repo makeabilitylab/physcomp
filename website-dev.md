@@ -55,6 +55,44 @@ Including other markdown pages: https://stackoverflow.com/a/41966993/388117.
 
 <!-- {percent sign include_relative tutorials/index.md percent sign} -->
 
+## Minimal Markdown Notices
+
+Call attention to a block of text.
+
+| Notice Type | Class              |
+| ----------- | -----              |
+| Default     | `.notice`          |
+| Primary     | `.notice--primary` |
+| Info        | `.notice--info`    |
+| Warning     | `.notice--warning` |
+| Success     | `.notice--success` |
+| Danger      | `.notice--danger`  |
+
+**Watch out!** This paragraph of text has been [emphasized](#) with the `{: .notice}` class.
+{: .notice}
+
+**Watch out!** This paragraph of text has been [emphasized](#) with the `{: .notice--primary}` class.
+{: .notice--primary}
+
+**Watch out!** This paragraph of text has been [emphasized](#) with the `{: .notice--info}` class.
+{: .notice--info}
+
+**Watch out!** This paragraph of text has been [emphasized](#) with the `{: .notice--warning}` class.
+{: .notice--warning}
+
+**Watch out!** This paragraph of text has been [emphasized](#) with the `{: .notice--success}` class.
+{: .notice--success}
+
+**Watch out!** This paragraph of text has been [emphasized](#) with the `{: .notice--danger}` class.
+{: .notice--danger}
+
+{% capture notice-text %}
+You can also add the `.notice` class to a `<div>` element.
+
+* Bullet point 1
+* Bullet point 2
+{% endcapture %}
+
 ### Make a Note (Call Out Box)
 - https://stackoverflow.com/questions/25654845/how-can-i-create-a-text-box-for-a-note-in-markdown
 

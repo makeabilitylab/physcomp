@@ -9,16 +9,16 @@
 
 //$body-font-family: -apple-system, BlinkMacSystemFont, "helvetica neue", helvetica, roboto, noto, "segoe ui", arial, sans-serif;
 //$mono-font-family: "SFMono-Regular", Menlo, Consolas, Monospace;
-$root-font-size: 26px;         // Base font-size for rems
-$body-line-height: 5.4;
-$content-line-height: 5.5;
+// $root-font-size: 26px;         // Base font-size for rems
+// $body-line-height: 5.4;
+// $content-line-height: 5.5;
 //$body-heading-line-height: 1.15;
 
 ////
 //// Colors
 ////
 
-$white: #ff00ff;
+// $white: #ff00ff;
 
 //$grey-dk-000: #959396;
 //$grey-dk-100: #5c5962;
@@ -148,12 +148,41 @@ $white: #ff00ff;
  *  </div>
  */
 
+ $serif: Georgia, Times, serif !default;
+ $sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
+   "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
+ $gray: #7a8288 !default;
+ $dark-gray: mix(#000, $gray, 50%) !default;
+ $darker-gray: mix(#000, $gray, 60%) !default;
+ $light-gray: mix(#fff, $gray, 50%) !default;
+ $lighter-gray: mix(#fff, $gray, 90%) !default;
+ $light-gray: mix(#fff, $gray, 50%) !default;
+ $primary-color: #6f777d !default;
+$success-color: #3fa63f !default;
+$warning-color: #d67f05 !default;
+$danger-color: #ee5f5b !default;
+$info-color: #3b9cba !default;
+$focus-color: $primary-color !default;
+$global-font-family: $sans-serif !default;
+$header-font-family: $sans-serif !default;
+$caption-font-family: $serif !default;
+
+/* type scale */
+$type-size-1: 2.441em !default; // ~39.056px
+$type-size-2: 1.953em !default; // ~31.248px
+$type-size-3: 1.563em !default; // ~25.008px
+$type-size-4: 1.25em !default; // ~20px
+$type-size-5: 1em !default; // ~16px
+$type-size-6: 0.75em !default; // ~12px
+$type-size-7: 0.6875em !default; // ~11px
+$type-size-8: 0.625em !default; // ~10px
+
  @mixin notice($notice-color) {
     margin: 2em 0 !important;  /* override*/
     padding: 1em;
     color: $dark-gray;
     font-family: $global-font-family;
-    font-size: $type-size-6 !important;
+    font-size: $type-size-5 !important;
     text-indent: initial; /* override*/
     background-color: mix(#fff, $notice-color, 90%);
     border-radius: $border-radius;
@@ -204,7 +233,7 @@ $white: #ff00ff;
       }
     }
   }
-  
+
   /* Default notice */
   
   .notice {

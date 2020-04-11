@@ -56,6 +56,9 @@ We're going to start with learning how to use a button **without** a microcontro
 
 ### The four-leg tactile buttons
 
+![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
+<!-- TODO: in future, make this into a table with links for improved accessibility -->
+
 - The button is funky: why four legs? what's connected. Maybe show multimeter?
 - Show animation of how it works?
 

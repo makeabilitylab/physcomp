@@ -44,6 +44,9 @@ TODO: add breadboard and LED.
 
 ### Tactile button (momentary switch)
 
+![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
+<!-- TODO: in future, make this into a table with links for improved accessibility -->
+
 - The button is funky: why four legs? what's connected. Maybe show multimeter?
 
 - [ITP NYU has a nice overview of buttons and switches with learning exercises](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/)

@@ -21,45 +21,50 @@ This is the first lesson in the [**Intro to Arduino Input**](intro-input.md) les
 
 In this lesson, we'll finally get to build something interactive: turning on an LED with a push button. We'll cover buttons (aka momentary switches), how to use digital input with the [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
 
----
+Switches themselves are conceptually easy to understand—they are either "closed" or "open". We use switches everyday when we turn on and off our light circuits in our home. However, when using switches with microcontrollers, we've found that students often struggle to understand why pull-up or pull-down resistors are necessary. So, take your time with this lesson. Try to understand the **why**  and **how** of these resistors in your circuits.
 
-**NOTE:**
+For example, in the animation below, we show a button circuit with a pull-down resistor hooked up to Pin 2. Importantly, notice **where** the current flows when the button is pressed—perhaps surprisingly, it does **not** flow into Pin 2. In fact, (virtually) no current flows into Pin 2! Why not? We'll talk about this and more in this lesson!
 
-Switches themselves are conceptually easy to understand—they are either "closed" or "open". We use switches everyday when we turn on and off our light circuits in our home. However, we've found that students often struggle to understand why pull-up or pull-down resistors are necessary when using switches with microcontrollers. So, take your time with this lesson. Try to understand the **why**  and **how** of these resistors in your circuits.
+![Animation showing a Arduino Uno and a button hooked up to Pin 2 with a pull-down resistor configuration. When the button is pressed, the animation shows the current going from Vcc through the button and down through the pull-down resistor](assets/movies/Arduino_Button_InternalLED_Animation_Edited.gif)
+Animation shows the Arduino's built-in LED illuminating when the button on Pin 2 is pressed. When the button is pressed, current flows from $$V_{CC}$$ through the pull-down resistor to GND. We'll learn more about this circuit in this lesson.
+{: .fs-1 }
 
----
+## What are Switches
 
-TODO: show animation from Tinkercad-based circuit working and current flow
+![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
+Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
+{: .fs-1 }
 
-## Tinkercad circuits
-- https://www.tinkercad.com/things/9skzhTypQRh-button-with-breadboard/
-- https://www.tinkercad.com/things/hlkxqsvSz2E-button-no-breadboard
+<!-- TODO: show animation of a switch -->
 
+<!-- TODO: add in schematic icons? Also, different types like SPST, DPST? -->
 
-## Materials for initial button circuit
+### References
+- [Switch basics](https://learn.sparkfun.com/tutorials/switch-basics/all), Sparkfun 
+- [Lab 1: Switches and push buttons](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/), ITP NYU
+
+## Making an initial button circuit
 
 We're going to start with learning how to use a button **without** a microcontroller. This will strengthen our understanding of buttons, in general, before switching over to digital input.
 
-TODO: add breadboard and LED.
+### Materials
 
-| Arduino | Button | Resistor |
-|:-----:|:-----:|:-----:|
-| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
-| Arduino Uno, Leonardo, or similar  | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) | 10KΩ Resistor |
+| Breadboard | Arduino | LED | Resistor | Button |
+|:-----:|:-----:|:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) |
 
-## Switches
-
-### Tactile button (momentary switch)
+### The four-leg tactile buttons
 
 - The button is funky: why four legs? what's connected. Maybe show multimeter?
+- Show animation of how it works?
 
-- [ITP NYU has a nice overview of buttons and switches with learning exercises](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/)
 
-###
+
 
 ## Materials for digital input
 
-To simplify things, for the rest of this lesson, we're only going to use the Arduino's built-in LED (`LED_BUILTIN`) rather than an external LED circuit. We'll turn off the built-in LED with a button press. So, we'll need:
+To simplify things, for the rest of this lesson, we're only going to use the Arduino's built-in LED (`LED_BUILTIN`) rather than an external LED circuit. We'll turn on/off the built-in LED with a button press. So, we'll need:
 
 | Arduino | Button | Resistor |
 |:-----:|:-----:|:-----:|
@@ -99,9 +104,7 @@ As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 di
 
 Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
 
-![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
-Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
-{: .fs-1 }
+
 
 
 ### High impedance input
@@ -111,9 +114,9 @@ When you configure a pin as `INPUT` via `pinMode(<pin>, INPUT)`:
 
 ### Is it LOW or is it HIGH?
 
-As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{DD}$$ or 0V. The precise meaning of "close" varies between microcontrollers"
+As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{CC}$$ or 0V. The precise meaning of "close" varies between microcontrollers"
 
-For the ATmega328, the input voltage needs to be at least $$\cdot{0.6}{V_{DD}}\to\cdot{0.6}{5V}=3$$ to qualify as `HIGH` and between 0 and $$\cdot{0.3}{V_{DD}}\to\cdot{0.3}{5V}=1.5$$ to qualify as `LOW`. For the middle range $$\cdot{0.3}{V_{DD}}$$ to $$\cdot{0.6}{V_{DD}}$$, the behavior of the pin is undefined.
+For the ATmega328, the input voltage needs to be at least $$0.6\cdotV_{CC}\to0.6\cdot5V=3$$ to qualify as `HIGH` and between 0 and $$0.3\cdotV_{CC}\to0.3\cdot5V=1.5$$ to qualify as `LOW`. For the middle range $$0.3\cdotV_{CC}$$ to $$0.6\cdotV_{CC}$$, the behavior of the pin is undefined.
 
 Note that the value returned by digitalRead() is only well-defined when the input pin voltage
 is close to VDD or 0 V. The precise meaning of “close” varies between microcontrollers, but for the
@@ -211,3 +214,7 @@ Things to remember:
 
 ## References
 - [Arduino Internal Pull-up Resistor Tutorial](https://www.baldengineer.com/arduino-internal-pull-up-resistor-tutorial.html), James Lewis
+
+## Tinkercad circuits
+- https://www.tinkercad.com/things/9skzhTypQRh-button-with-breadboard/
+- https://www.tinkercad.com/things/hlkxqsvSz2E-button-no-breadboard

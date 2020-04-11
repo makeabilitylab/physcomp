@@ -29,15 +29,15 @@ For example, in the animation below, we show a button circuit with a pull-down r
 Animation shows the Arduino's built-in LED illuminating when the button on Pin 2 is pressed. When the button is pressed, current flows from $$V_{CC}$$ through the pull-down resistor to GND. We'll learn more about this circuit in this lesson.
 {: .fs-1 }
 
-## What are Switches
+## Switches
 
-As noted above, switches are simple: they're either "open" (disconnected) or "closed" (closed). There are lots of different types of switches from momentary switches (aka buttons) to toggle or slide switches (which maintain their state) to switches that activate based on environmental conditions like a tilt switch or a reed switch.
+As noted above, switches are simple components: they're either "open" (disconnected) or "closed" (closed). There are lots of different types of switches from momentary switches (aka buttons) to toggle or slide switches (which maintain their state) to switches that activate based on environmental conditions like a tilt switch or a reed switch.
 
 ![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
-In this lesson, we are going to focus on a four-leg push button (momentary switch). If you want to learn more about switches in general, see this [Switch basics](https://learn.sparkfun.com/tutorials/switch-basics/all) article by Sparkfun or this lab called [Lab 1: Switches and push buttons](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/) by ITP NYU.
+In this lesson, we are going to use a four-legged push button (momentary switch). If you want to learn more about switches in general, see these articles by [Sparkfun](https://learn.sparkfun.com/tutorials/switch-basics/all) and [ITP NYU](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/).
 
 <!-- TODO: show animation of a switch -->
 
@@ -45,7 +45,7 @@ In this lesson, we are going to focus on a four-leg push button (momentary switc
 
 ## Making an initial button circuit
 
-We're going to start with learning how to use a button **without** a microcontroller. This will strengthen our understanding of buttons, in general, before switching over to digital input.
+We'll first learn how to use a button **without** a microcontroller. This will strengthen our understanding of buttons, in general, before switching over to digital input.
 
 ### Materials
 
@@ -56,19 +56,28 @@ We'll need the following materials:
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) |
 | Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) |
 
-### The four-leg tactile buttons
+### Four-legged tactile buttons
 
 The four-leg push button is one of the most common button types; however, it's also a bit funky. You might be wondering: why **four legs** instead of two? How does this button work? 
 
 ![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
 <!-- TODO: in future, make this into a table with links for improved accessibility -->
 
-We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first but you'll figure it out through building. In general, if you're confused about how to use a given electronic component, it's also a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf) but we'll tell you what you need to know here. :)
+We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first but you'll figure it out through building. In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf) but we'll tell you what you need to know here. :)
 
 ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif)
 
+### Using buttons without a microcontroller
 
+We'll show how to make two button circuits:
 
+1. If you have an external power source like a 9V battery with a snap connector, then we suggest using that (just to reinforce that we're not dependent on an Arduino here).
+2. If not, then you can use the Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson.
+
+| With 9V Battery | With Arduino 5V Pin |
+|-----------------|--------------|
+|![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) | ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) |
+{: .fs-1 } If you build the 9V battery circuit, then we suggest a 680Ω or 1KΩ resistor rather than a 220Ω resistor.
 
 
 

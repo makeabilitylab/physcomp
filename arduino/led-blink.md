@@ -110,9 +110,9 @@ You can control any of these 14 digital I/O pins with three functions:
 
 ### What do we mean by HIGH and LOW?
 
-An Arduino's supply voltage is often written as $$V_S$$, $$V_{CC}$$, and $$V_{DD}$$ in datasheets. Sadly, there does not appear to be a consistent naming convention ([link1](https://forum.arduino.cc/index.php?topic=374042.0), [link2](https://electronics.stackexchange.com/questions/17382/what-is-the-difference-between-v-cc-v-dd-v-ee-v-ss)). 
+An Arduino's supply voltage is often written as $$V_S$$, $$V_{CC}$$, and $$V_{DD}$$ in datasheets. Sadly, there does not appear to be a consistent naming convention ([link1](https://forum.arduino.cc/index.php?topic=374042.0), [link2](https://electronics.stackexchange.com/questions/17382/what-is-the-difference-between-v-cc-v-dd-v-ee-v-ss)). We'll try to consistently use $$V_{CC}$$.
 
-On the Arduino Uno and Leonardo, the supply voltage (let's call it $$V_CC$$) is **5V**. So, when a pin as configured as an output via `pinMode(<pin>, OUTPUT)`, the pin can provide either a `HIGH` voltage ($$V_CC$$) or a `LOW` voltage (0V). Some microcontrollers operate at 3.3V. In this case, a `HIGH` state would be 3.3V but a `LOW` state would still be 0V.
+On the Arduino Uno and Leonardo, the supply voltage ($$V_CC$$) is **5V**. So, when a pin as configured as an output via `pinMode(<pin>, OUTPUT)`, the pin can provide either a `HIGH` voltage ($$V_CC$$) or a `LOW` voltage (0V). Some microcontrollers operate at 3.3V. In this case, a `HIGH` state would be 3.3V but a `LOW` state would still be 0V.
 
 ### What can we use digital output pins for?
 

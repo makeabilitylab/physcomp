@@ -58,12 +58,12 @@ We'll need the following materials:
 
 ### Four-legged tactile buttons
 
-The four-leg push button is one of the most common button types for circuit breadboarding; however, it's also a bit funky. You might be wondering: why **four legs** instead of two? How does this button work? 
+The four-leg push button is one of the most common button types for breadboarding circuits; however, it's also a bit funky. You might be wondering: why **four legs** instead of two? How does this button work? 
 
 ![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
 <!-- TODO: in future, make this into a table with links for improved accessibility -->
 
-We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first but you'll figure it out with experience. 
+We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first. The best way to learn how to use it is to try it (and hopefully the animation will help).
 
 ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif)
 
@@ -73,7 +73,7 @@ In general, if you're confused about how to use a component, it's a good idea to
 
 ### Using buttons without a microcontroller
 
-We'll show how to make two button circuits: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—this circuit is completely independent of Arduino!
+We'll show how to make two button circuits: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—this circuit is, of course, completely independent of Arduino!
 
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|
@@ -106,7 +106,7 @@ As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 di
 
 ### What is digital input?
 
-Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). You would thus think that using digital input with microcontrollers would be easy—and it will be eventually for you—but it can be confusing inititially.
+Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). You would thus think that using digital input with microcontrollers would be easy—and it will be eventually once you gain familiarity—but it can be confusing initially.
 
 The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits. We cannot simply do this:
 

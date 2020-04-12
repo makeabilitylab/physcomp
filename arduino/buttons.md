@@ -17,7 +17,7 @@ usemathjax: true
 {:toc}
 ---
 
-This is the first lesson in the [**Intro to Arduino Input**](intro-input.md) lesson series, which builds on knowledge gained in the [**Intro to Arduino Output**](intro-output.md) series, so please complete that first!
+This is the first lesson in the [**Intro to Arduino Input**](intro-input.md) lesson series. We assume you've already completed the [**Intro to Arduino Output**](intro-output.md) series. If not, please complete that that first!
 
 In this lesson, we'll finally get to build something interactive: turning on an LED with a push button. We'll cover buttons (aka momentary switches), how to use digital input with the [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
 
@@ -73,7 +73,7 @@ In general, if you're confused about how to use a component, it's a good idea to
 
 ### Using buttons without a microcontroller
 
-We'll show how to make two button circuits: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—this circuit is, of course, completely independent of Arduino!
+We'll make a simple button-based circuit that turns on an LED when the button is pressed. Below, we've included two wiring diagrams: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion. Of course, even if you power your circuit with the Arduino 5V pin, this circuit is completely independent of Arduino!
 
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|
@@ -106,7 +106,7 @@ As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 di
 
 ### What is digital input?
 
-Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). You would thus think that using digital input with microcontrollers would be easy—and it will be eventually once you gain familiarity—but it can be confusing initially.
+Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). You would thus think that using digital input with microcontrollers would be easy—and it will be eventually—but it can be confusing initially.
 
 The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits. We cannot simply do this:
 

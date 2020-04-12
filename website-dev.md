@@ -46,6 +46,7 @@ nav_exclude: true
 - Make YouTube videos responsive
   - https://avexdesigns.com/responsive-youtube-embed/
   - https://embedresponsively.com/
+- Serve images responsively with jekyll plugin: https://github.com/rbuchberger/jekyll_picture_tag
 
 ## Markdown Tips
 

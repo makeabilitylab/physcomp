@@ -73,10 +73,7 @@ In general, if you're confused about how to use a component, it's a good idea to
 
 ### Using buttons without a microcontroller
 
-We'll show how to make two button circuits:
-
-1. If you have an external power source like a 9V battery with a snap connector, then we suggest using that (just to help reinforce that we're not dependent on an Arduino here).
-2. If not, then you can use the Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson.
+We'll show how to make two button circuits: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—this circuit is completely independent of Arduino!
 
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|

@@ -31,7 +31,7 @@ Animation shows the Arduino's built-in LED illuminating when the button on Pin 2
 
 ## Switches
 
-As noted above, switches are simple components: they're either "open" (disconnected) or "closed" (closed). There are lots of different types of switches from momentary switches (aka buttons) to toggle or slide switches (which maintain their state) to switches that activate based on environmental conditions like a tilt switch or a reed switch.
+As noted above, switches are simple components: they're either "open" (disconnected) or "closed" (connected). There are lots of different types of switches from **momentary switches** (aka buttons) to **toggle** or **slide** switches (which maintain their state) to switches that activate based on environmental conditions like a **tilt switch** or a **reed switch**.
 
 ![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
@@ -58,27 +58,32 @@ We'll need the following materials:
 
 ### Four-legged tactile buttons
 
-The four-leg push button is one of the most common button types; however, it's also a bit funky. You might be wondering: why **four legs** instead of two? How does this button work? 
+The four-leg push button is one of the most common button types for circuit breadboarding; however, it's also a bit funky. You might be wondering: why **four legs** instead of two? How does this button work? 
 
 ![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
 <!-- TODO: in future, make this into a table with links for improved accessibility -->
 
-We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first but you'll figure it out through building. In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf) but we'll tell you what you need to know here. :)
+We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first but you'll figure it out with experience. 
 
 ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif)
+
+In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter to check for continuity between the four legs.
+
+<!-- TODO video of using a multimeter to figure out how the four legs are hooked up -->
 
 ### Using buttons without a microcontroller
 
 We'll show how to make two button circuits:
 
-1. If you have an external power source like a 9V battery with a snap connector, then we suggest using that (just to reinforce that we're not dependent on an Arduino here).
+1. If you have an external power source like a 9V battery with a snap connector, then we suggest using that (just to help reinforce that we're not dependent on an Arduino here).
 2. If not, then you can use the Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson.
 
 | With 9V Battery | With Arduino 5V Pin |
-|-----------------|--------------|
-|![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) | ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) |
+|:-------------:|:-----------:|
+| ![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) | ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) |
 {: .fs-1 } If you build the 9V battery circuit, then we suggest a 680Ω or 1KΩ resistor rather than a 220Ω resistor.
 
+That's it! Once you've created the circuit, give it a try by pushing the button and the LED should turn on. See the animation below.
 
 
 ## Materials for digital input

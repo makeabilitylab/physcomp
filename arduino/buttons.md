@@ -78,7 +78,9 @@ We'll show how to make two button circuits: one using an external power source l
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|
 | ![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) | ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) |
-{: .fs-1 } If you build the 9V battery circuit, then we suggest a 680Ω or 1KΩ resistor rather than a 220Ω resistor.
+
+If you build the 9V battery circuit, then we suggest a 680Ω or 1KΩ resistor rather than a 220Ω resistor.
+{: .fs-1 }
 
 That's it! Once you've created the circuit, give it a try by pushing the button and the LED should turn on. See the animation below.
 
@@ -104,7 +106,17 @@ As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 di
 
 ### What is digital input?
 
-Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V).
+Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). You would thus think that using digital input with microcontrollers would be easy—and it will be eventually for you—but it can be confusing inititially.
+
+The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits. We cannot simply do this:
+
+TODO: insert diagram of incorrect button circuit (and schematic).
+
+Instead, we have to do something like this:
+
+TODO: insert proper button circuit with schematic.
+
+Why?
 
 ### High impedance input
 
@@ -157,7 +169,7 @@ We'll go through each of these circuit configurations below. But first, a bit mo
 
 ### What value should I use for my pull-down or pull-up resistors?
 
-The official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between  50kΩ and 150kΩ.
+The official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
 
 TODO: talk about tradeoffs in setting pull-up and pull-down resistor values
 
@@ -208,7 +220,7 @@ The schematic is for illustrative purposes. The internal software controlled swi
 ## Notes:
 Things to remember:
 - [done] include Jeff Feddersen video of pull-up and pull-down
-- ITP has some good content on switches that we should link to
+- [done] ITP has some good content on switches that we should link to
 - show calculation about pull-down and pull-up resistors (and the fact that they should be high to not waste current)
 - Talk about super high impedance on input pin?
 

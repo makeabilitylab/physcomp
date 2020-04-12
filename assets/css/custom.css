@@ -28,3 +28,12 @@ figure.highlight {
 .gist-it-gist{
   font-size: small;
 }
+
+/* image align center */
+/* See: https://mmistakes.github.io/minimal-mistakes/docs/utility-classes/
+/* https://github.com/mmistakes/minimal-mistakes/blob/a2385e25840f38d573d057f427396eaf09f41e81/_sass/minimal-mistakes/_utilities.scss */
+.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -85,3 +85,7 @@ void delay(unsigned long ms)
 
 - http://www.gammon.com.au/adc
 - http://www.skillbank.co.uk/arduino/adc.htm
+
+The ATmega328 datasheet says that the analog input resistance is 100 megohms:
+
+![Screenshot of Table 29-16 in ATmega328 datasheet describing the ADC](assets/images/ATmega328_Datasheet_Screenshot_ADCCharacteristics.png)

@@ -82,36 +82,17 @@ We'll show how to make two button circuits: one using an external power source l
 
 That's it! Once you've created the circuit, give it a try by pushing the button and the LED should turn on. See the animation below.
 
-
-## Materials for digital input
-
-To simplify things, for the rest of this lesson, we're only going to use the Arduino's built-in LED (`LED_BUILTIN`) rather than an external LED circuit. We'll turn on/off the built-in LED with a button press. So, we'll need:
-
-| Arduino | Button | Resistor |
-|:-----:|:-----:|:-----:|
-| ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) | ![10 KOhm Resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing.png) |
-| Arduino Uno, Leonardo, or similar  | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) | 10KΩ Resistor |
-
-
-## Switches
-TODO
-
-### The four-leg button
-
-### Using a button without a microcontroller
-
+![Animation showing both the 9V battery and Arduino 5V power LED circuits with four-legged button working](assets/movies/FourLeggedTactileButton_LEDCircuitBreadboard_Animation.gif)
 
 Now that we understand how this button works, let's move on to using switches/buttons with a microcontroller.
 
-## Digital I/O refresher
-
 ## Intro to digital input
 
-In our [Blink](led-blink.md) lesson, we introduced [digital I/O](led-blink.md#introducing-digital-output) and **digital output** more specifically. Here, we are going to talk about **digital input**, which is a bit more complicated.
+In our [Blink](led-blink.md) lesson, we introduced [digital I/O](led-blink.md#introducing-digital-output) with a specific focus on **digital output**. Here, we are going to talk about **digital input**, which is a bit more complicated.
 
 ### Digital I/O refresher
 
-Recall that the Arduino Uno and Leonardo have 14 digital I/O pins that can be used either for input with [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) or output with [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. 
+Recall that the Arduino Uno and Leonardo have 14 digital I/O pins that can be used either for input with [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) or output with [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively.
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
@@ -123,21 +104,19 @@ As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 di
 
 ### What is digital input?
 
-Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). For example, a push button, a reed switch, or a binary tilt sensor.
-
-
-
+Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V).
 
 ### High impedance input
 
 When you configure a pin as `INPUT` via `pinMode(<pin>, INPUT)`:
-- "Pins configured this way are said to be in a high-impedance state. Input pins make extremely small demands on the circuit that they are sampling, equivalent to a series resistor of 100 megohm in front of the pin. This means that it takes very little current to move the input pin from one state to another, and can make the pins useful for such tasks as implementing a capacitive touch sensor, reading an LED as a photodiode, or reading an analog sensor with a scheme such as RCTime." [DigitalPins](https://www.arduino.cc/en/Tutorial/DigitalPins)
+
+From Arduino's [DigitalPins](https://www.arduino.cc/en/Tutorial/DigitalPins) tutorial: "Pins configured this way are said to be in a high-impedance state. Input pins make extremely small demands on the circuit that they are sampling, equivalent to a series resistor of 100 megohm in front of the pin. This means that it takes very little current to move the input pin from one state to another, and can make the pins useful for such tasks as implementing a capacitive touch sensor, reading an LED as a photodiode, or reading an analog sensor with a scheme such as RCTime." 
 
 ### Is it LOW or is it HIGH?
 
 As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{CC}$$ or 0V. The precise meaning of "close" varies between microcontrollers"
 
-For the ATmega328, the input voltage needs to be at least $$0.6\cdotV_{CC}\to0.6\cdot5V=3$$ to qualify as `HIGH` and between 0 and $$0.3\cdotV_{CC}\to0.3\cdot5V=1.5$$ to qualify as `LOW`. For the middle range $$0.3\cdotV_{CC}$$ to $$0.6\cdotV_{CC}$$, the behavior of the pin is undefined.
+For the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3$$ to qualify as `HIGH` and between 0 and $$0.3\cdot V_{CC}\to 0.3\cdot 5V=1.5$$ to qualify as `LOW`. For the middle range $$0.3\cdot V_{CC}$$ to $$0.6\cdot V_{CC}$$, the behavior of the pin is undefined.
 
 Note that the value returned by digitalRead() is only well-defined when the input pin voltage
 is close to VDD or 0 V. The precise meaning of “close” varies between microcontrollers, but for the

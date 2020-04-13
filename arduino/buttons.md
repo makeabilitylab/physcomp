@@ -31,13 +31,18 @@ Animation shows the Arduino's built-in LED illuminating when the button on Pin 2
 
 ## Switches
 
-As noted above, switches are simple components: they're either "open" (disconnected) or "closed" (connected). There are lots of different types of switches from **momentary switches** (aka buttons) to **toggle** or **slide** switches (which maintain their state) to switches that activate based on environmental conditions like a **tilt switch** or a **reed switch**.
+As noted above, switches are simple components: they're typically either "open" (disconnected) or "closed" (connected). There are lots of different types of switches from **momentary switches** (aka buttons) to **toggle** or **slide** switches (which maintain their state) to switches that activate based on environmental conditions like a **tilt switch** or a **reed switch**.
 
 ![Picture showing a variety of digital inputs, including tactile buttons, arcade buttons, SMD push buttons, slide switches, rocker switches, reed switches, and tilt switches](assets/images/DigitalInput_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
-In this lesson, we are going to use a four-legged push button (momentary switch). If you want to learn more about switches in general, see these articles by [Sparkfun](https://learn.sparkfun.com/tutorials/switch-basics/all) and [ITP NYU](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/).
+In this lesson, we are going to use a **four-legged push button** (momentary switch), which looks like this:
+
+![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
+<!-- TODO: in future, make this into a table with links for improved accessibility -->
+
+If you want to learn more about switches in general, see these articles by [Sparkfun](https://learn.sparkfun.com/tutorials/switch-basics/all) and [ITP NYU](https://itp.nyu.edu/physcomp/labs/labs-electronics/switches/).
 
 <!-- TODO: show animation of a switch -->
 
@@ -53,19 +58,18 @@ We'll need the following materials:
 
 | Breadboard | Arduino | LED | Resistor | Button |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_100w.png) |
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_40w.png) |
 | Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) |
 
 ### Four-legged tactile buttons
 
-The four-leg push button is one of the most common button types for breadboarding circuits; however, it's also a bit funky. You might be wondering: why **four legs** instead of two? How does this button work? 
+The four-leg push button is one of the most common button types for breadboarding circuits; however, it's also a bit funky and non-intuitive at first. You might be wondering: why **four legs** instead of two? How does this button work?
 
-![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
-<!-- TODO: in future, make this into a table with links for improved accessibility -->
-
-We created the following animation to help explain how to use a four-legged button and how the four legs work. It's a bit non-intuitive at first. The best way to learn how to use it is to try it (and hopefully the animation will help).
+We created the following animation to help explain. And, of course, the best way to learn it is to try it yourself (and hopefully the animation will help).
 
 ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif)
+
+<!-- TODO: I like this simple picture by LadyAda, consider adding it? https://www.ladyada.net/images/arduino/pushbuttons.gif -->
 
 In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter to check for continuity between the four legs.
 
@@ -73,7 +77,7 @@ In general, if you're confused about how to use a component, it's a good idea to
 
 ### Using buttons without a microcontroller
 
-We'll make a simple button-based circuit that turns on an LED when the button is pressed. Below, we've included two wiring diagrams: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion. Of course, even if you power your circuit with the Arduino 5V pin, this circuit is completely independent of Arduino!
+We'll make a simple button-based circuit that turns on an LED when the button is pressed. Below, we've included two wiring diagrams: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—this circuit is completely independent of Arduino!
 
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|
@@ -85,6 +89,8 @@ If you build the 9V battery circuit, then we suggest a 680Ω or 1KΩ resistor ra
 That's it! Once you've created the circuit, give it a try by pushing the button and the LED should turn on. See the animation below.
 
 ![Animation showing both the 9V battery and Arduino 5V power LED circuits with four-legged button working](assets/movies/FourLeggedTactileButton_LEDCircuitBreadboard_Animation.gif)
+
+<!-- TODO: Consider a circuit simulation of how this is working here? -->
 
 Now that we understand how this button works, let's move on to using switches/buttons with a microcontroller.
 
@@ -106,35 +112,65 @@ As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 di
 
 ### What is digital input?
 
-Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). You would thus think that using digital input with microcontrollers would be easy—and it will be eventually—but it can be confusing initially.
+Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). Simple, right? However, using digital input with microcontrollers can be confusing, at first.
 
-The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits. We cannot simply do this:
+The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits.
 
-TODO: insert diagram of incorrect button circuit (and schematic).
+Indeed, the [Arduino documentation ](https://www.arduino.cc/en/Tutorial/DigitalPins) states that pins configured as digital input "are in a high-impedance state" equivalent to a 100,000,000Ω (100MΩ) resistor added to the front of the input pin. This means that once you configure a microcontroller pin as input, very little current will "seep" into the pin (on the orders of picoamps).
 
-Instead, we have to do something like this:
-
-TODO: insert proper button circuit with schematic.
-
-Why?
-
-### High impedance input
-
-When you configure a pin as `INPUT` via `pinMode(<pin>, INPUT)`:
-
-From Arduino's [DigitalPins](https://www.arduino.cc/en/Tutorial/DigitalPins) tutorial: "Pins configured this way are said to be in a high-impedance state. Input pins make extremely small demands on the circuit that they are sampling, equivalent to a series resistor of 100 megohm in front of the pin. This means that it takes very little current to move the input pin from one state to another, and can make the pins useful for such tasks as implementing a capacitive touch sensor, reading an LED as a photodiode, or reading an analog sensor with a scheme such as RCTime." 
+<!-- TODO: add illustrative figure here. -->
 
 ### Is it LOW or is it HIGH?
 
-As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{CC}$$ or 0V. The precise meaning of "close" varies between microcontrollers"
+You might be wondering: what's the precise voltage-related definition of `HIGH` and `LOW` from the microcontroller's perspective? And what happens if our voltage signal is not 0V and not 5V? Great questions!
 
-For the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3$$ to qualify as `HIGH` and between 0 and $$0.3\cdot V_{CC}\to 0.3\cdot 5V=1.5$$ to qualify as `LOW`. For the middle range $$0.3\cdot V_{CC}$$ to $$0.6\cdot V_{CC}$$, the behavior of the pin is undefined.
+As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{CC}$$ or $$0V$$. The precise meaning of "close" varies between microcontrollers"
 
-Note that the value returned by digitalRead() is only well-defined when the input pin voltage
-is close to VDD or 0 V. The precise meaning of “close” varies between microcontrollers, but for the
-Adafruit Metro Mini1 as it’s used in our circuit, the input pin voltage needs to be at least 0.6VDD
-to qualify as HIGH, and at most 0.3VDD to qualify as LOW. In the middle (say, at 0.45VDD), the
-behavior of the pin is undefined
+For the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3$$ to qualify as `HIGH` and between $$0$$ and $$0.3\cdot V_{CC}\to 0.3\cdot 5V=1.5$$ to qualify as `LOW`. For the middle range $$0.3\cdot V_{CC}$$ to $$0.6\cdot V_{CC}$$, the behavior of the pin is undefined.
+
+In general, this is unlikely to affect how you wire your digital input circuits with switches, buttons, or binary sensors (like reed switches)—because your two states will be 5V and 0V—but it may affect whether and how you hook up other sensors to a microcontroller, if you want to interpret them as digital input.
+
+### Hooking up digital input with microcontrollers
+
+Let's walk through how we might try to hook up a button to a microcontroller. In doing so, we'll learn about what **not** to do and **why** as well as **what to do** and the role of **pull-down resistors**.
+
+So, if you just completed our simple button LED circuit exercise above, you might initially think to hook up your button like the following:
+
+TODO: circuit diagram.
+
+However, if you do this, what does the digital input pin read when the switch is **open** (*i.e,* the button is **not** pressed). Well, this is called a "floating pin", and the pin is susceptible to randomly oscillating between `HIGH` and `LOW`. 
+
+TODO: insert animation
+
+<!-- consider showing video of a floating pin -->
+
+The problem is: we need to bias the digital input pin to a known voltage state when the circuit is open (the button is not pressed). 
+
+You might initially think that you could simply add `GND` to the other leg of the button like this: 
+
+TODO: insert diagram
+
+And you're on the right track. Now, when the button is **not** pressed, the digital input pin is in a known voltage state—it reads 0V. But now when we press the button, a short circuit occurs (which is not good!).
+
+TODO: insert short circuit animation
+
+#### Pull-down resistors
+
+So, what to do? To solve this, we can add in a pull-down resistor before the GND connection. Here, our digital input will still be biased (or "pulled down") to 0V when the switch is open and then read 5V when the switch is closed.
+
+TODO: insert animation
+
+Outline:
+- You might initially think to hook up your button like this: 5V through button leg
+- However, if you do this, what does the digital input pin read when the button is **not** pressed? Well, this is called a "floating pin" and it will be susceptible to randomly oscillating between `HIGH` and `LOW` input. Try it yourself. Include little program to show them?
+- So, we need to bias the digital input pin to a known voltage state when the circuit is open (button is not pressed)
+- You might initially think that you could simply add `GND` to the other leg of the button... and you're on the right track. Now, when the button is **not** pressed, the digital input pin does indeed read 0V. However, now when we press the button, we cause a short-circuit (which is not good!)
+- So, what to do? To solve this, we can add in a pull-down resistor before the GND connection. Here, our digital input will still be biased (or "pulled down") to 0V when the switch is open and then read 5V when the switch is closed. button is not pressed and then correctly read 5V when the button is pressed.
+
+#### Pull-up resistors
+
+
+
 
 ## Pull-down and pull-up resistors
 A key concept to understand is that microcontrollers read input like voltmeters—that is, they read voltage rather than current.

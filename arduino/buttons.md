@@ -141,7 +141,7 @@ You might initially think to hook up your button like the following:
 This circuit will "sort of" work but has a problem related to a "floating pin" when the switch is open.
 {: .fs-1 }
 
-However, if you do this, what will the digital input pin read when the switch is **open** (*i.e,* the button is **not** pressed). Well, this is called a "floating pin" and it's not good. A floating pin is susceptible to randomly oscillating between `HIGH` and `LOW`. <!-- TODO: add in reasons why pin could oscillate -->
+However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed). Well, this is called a "floating pin" and it's not good. A floating pin is susceptible to randomly oscillating between `HIGH` and `LOW`. See the animation below. <!-- TODO: add in reasons why pin could oscillate -->
 
 ![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
 
@@ -155,27 +155,29 @@ You might try to do this by adding `GND` to the other leg of the button like thi
 Warning: Do **not** do this. When the switch closes, a short circuit occurs, which could damage your microcontroller or Arduino.
 {: .fs-1 }
 
-And you're on the right track. Now, when the switch is open, the digital input pin is in a known voltage state—it reads 0V. But when we press the button, a short circuit occurs (which is not good!). <!-- TODO: expand on why short circuits are bad? -->
+And you're on the right track. Now, when the switch is open, the digital input pin is in a known voltage state—it reads 0V. But what happens when we actually press the button? Oh no, a short circuit occurs! This could damage your microcontroller and/or Arduino! <!-- TODO: expand on why short circuits are bad? -->
 
 ![Animation showing a button circuit without a pull-down resistor causing a short when the button is pressed](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-ShortCircuit-Optimized.gif)
+Animation showing the effect of adding `GND` without a resistor. A short circuit!
+{: .fs-1 }
 
-So, what to do? Pull-down resistors to the rescue!
+So, what to do? **Pull-down resistors** to the rescue!
 
 ### Pull-down resistors
 
-We can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. Typically, this pull-down resistor value is 10KΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins).
+To solve this problem, we can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. Typically, this pull-down resistor value is 10KΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins).
 
 ![Circuit diagram showing a correct pull-down resistor circuit with the 5V connection then the digital input pin then a 10K resistor then GND](assets/images/ArduinoUno_Button_SchematicAndDiagram_PullDownResistor.png)
 The pull-down resistor is quite large: 10,000Ω (10KΩ)
 {: .fs-1 }
 
-Here's an animation of the full circuit working:
+Here's an animation showing how a pull-down resistor configuration works:
 
 ![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
 
 ### Pull-up resistors
 
-So, what's a pull-up resistor then? With a **pull-down resistor** configuration, the input pin is biased to GND when the circuit is in an open state. With a **pull-up resistor** configuration, the resistor moves from the GND side of the circuit to the 5V side and logic is flipped: the input pin is "pulled up" to $$V_{CC}$$ when the switch is open and goes to GND when the switch is closed.
+So, what's a **pull-up resistor** then? With a **pull-down resistor** configuration, the input pin is biased to GND when the circuit is in an open state. With a **pull-up resistor** configuration, the resistor moves from the GND side of the circuit to the 5V side and logic is flipped: the input pin is "pulled up" to $$V_{CC}$$ when the switch is open and goes to GND when the switch is closed.
 
 <!-- TODO: insert pull-up resistor animation -->
 
@@ -203,7 +205,7 @@ Some microcontrollers have both internal pull-up *and* pull-down resistors. The 
 
 ### What value should I use for my pull-down or pull-up resistors?
 
-The official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
+As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
 
 TODO: talk about tradeoffs in setting pull-up and pull-down resistor values
 
@@ -223,6 +225,12 @@ See also:
 - [Sparkfun's tutorial on Pull-up Resistors](https://learn.sparkfun.com/tutorials/pull-up-resistors/all)
 - [Arduino's official `INPUT_PULLUP` tutorial](https://www.arduino.cc/en/Tutorial/InputPullupSerial)
 - [Electronics Tutorials' Pull-up Resistors](https://www.electronics-tutorials.ws/logic/pull-up-resistor.html)
+
+## Let's make stuff!
+
+Whew, OK. We've now explained how to use four-legged tactile buttons, how to use pull-down, pull-up, and pull-up resistors and their purpose, and provided a general overview of digital input.
+
+It's time to make stuff. We're going to start with a button in a pull-down configuration before making circuits (and programs) for pull-up and internal pull-up configurations. Then, we'll make a simple "piano" synthesizer that puts our skills to the test!
 
 ## Pull-down resistor configuration
 

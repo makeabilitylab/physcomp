@@ -37,7 +37,7 @@ As noted above, switches are simple components: they're typically either "open" 
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
-In this lesson, we are going to use a **four-legged push button** (momentary switch), which looks like this:
+In this lesson, we are going to use a **four-legged push button** (momentary switch), which look like:
 
 ![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
 <!-- TODO: in future, make this into a table with links for improved accessibility -->

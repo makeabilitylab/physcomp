@@ -48,7 +48,7 @@ So, for this lesson, we **don't** have to change our circuit at all! You can kee
 
 ### A common confusion: analog I/O pins are different!
 
-A common confusion amongst beginners is mixing up the analog **output** pins and the analog **input** pins. For the digital I/O, the input and output pins are the same and configurable to `INPUT` or `OUTPUT` using the [`pinMode`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, the analog I/O pins are different! See the figure below:
+A common confusion amongst beginners is mixing up the analog **output** pins and the analog **input** pins. For digital I/O, the input and output pins are the same and configurable to `INPUT` or `OUTPUT` using the [`pinMode`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, the analog I/O pins are different! See the figure below:
 
 ![Annotated image of an Arduino Uno showing the difference between analog input and output pins](assets/images/ArduinoUno_AnalogInputAndOutputPinsAreDifferent.png)
 
@@ -123,7 +123,7 @@ The full code from our [GitHub repo](https://github.com/jonfroehlich/arduino/blo
 
 ### Step 4: Compile, upload, and run!
 
-Now, compile, upload, and run the code. After upload completes, the LED should immediately begin blinking. See video below.
+Now, compile, upload, and run the code. After upload completes, the LED should immediately begin fading on then off. See video below.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/Y0mSFmW7G4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

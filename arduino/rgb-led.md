@@ -99,7 +99,7 @@ In this example, we will flash the following sequence:
 | <span style="background-color:#00FF00">&nbsp;&nbsp;</span> Green | `LOW`, `HIGH`, `LOW` |
 | <span style="background-color:#0000FF">&nbsp;&nbsp;</span> Blue | `LOW`, `LOW`, `HIGH` |
 | <span style="background-color:#FF00FF">&nbsp;&nbsp;</span> Purple | `HIGH`, `LOW`, `HIGH` |
-| <span style="background-color:#00FFFF">&nbsp;&nbsp;</span> Turqoise | `HIGH`, `LOW`, `HIGH` |
+| <span style="background-color:#00FFFF">&nbsp;&nbsp;</span> Turqoise | `LOW`, `HIGH`, `HIGH` |
 | <span style="background-color:#FFFFFF">&nbsp;&nbsp;</span> White | `HIGH`, `HIGH`, `HIGH` |
 
 ---
@@ -116,8 +116,8 @@ As usual, we introduce some constants for our literal assignments and then setup
 {% highlight C %}
 const int DELAY_MS = 1000;       // delay between color changes in ms
 const int RGB_RED_LED_PIN = 6;   // indicated by orange wire
-const int RGB_BLUE_LED_PIN = 5;  // indicated by blue wire
-const int RGB_GREEN_LED_PIN = 3; // indicated by green wire
+const int RGB_GREEN_LED_PIN = 5; // indicated by green wire
+const int RGB_BLUE_LED_PIN = 3;  // indicated by blue wire
 
 void setup()
 {
@@ -238,7 +238,7 @@ We will flash the same sequence as before but again our `HIGH`s and `LOW`s are f
 | <span style="background-color:#00FF00">&nbsp;&nbsp;</span> Green | `HIGH`, `LOW`, `HIGH` |
 | <span style="background-color:#0000FF">&nbsp;&nbsp;</span> Blue | `HIGH`, `HIGH`, `LOW` |
 | <span style="background-color:#FF00FF">&nbsp;&nbsp;</span> Purple | `LOW`, `HIGH`, `LOW` |
-| <span style="background-color:#00FFFF">&nbsp;&nbsp;</span> Turqoise | `LOW`, `HIGH`, `LOW` |
+| <span style="background-color:#00FFFF">&nbsp;&nbsp;</span> Turqoise | `HIGH`, `LOW`, `LOW` |
 | <span style="background-color:#FFFFFF">&nbsp;&nbsp;</span> White | `LOW`, `LOW`, `LOW` |
 
 Here's an animation. Pay close attention to the current direction—it flows from 5V down through the LED, the current limiting resistors, and into the digital I/O pins.

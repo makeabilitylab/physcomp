@@ -147,15 +147,15 @@ However, if you do this, what will the digital input pin read when the switch is
 
 <!-- TODO: consider adding in video of floating pin and effect. Use external resistor + LED. Have current video so reshooting could be low priority -->
 
-The problem is: we need to bias the digital input pin to a known voltage state when the circuit is open (the button is not pressed). 
+To solve this, we need to bias the digital input pin to a known voltage state when the circuit is open (the button is not pressed). 
 
-You might initially think that you could simply add `GND` to the other leg of the button like this: 
+You might try to do this by adding `GND` to the other leg of the button like this: 
 
 ![Circuit diagram showing an incorrect hookup which causes a short circuit when the button is pressed](assets/images/ArduinoUno_Button_SchematicAndDiagram_ShortCircuit.png)
 Warning: Do **not** do this. When the switch closes, a short circuit occurs, which could damage your microcontroller or Arduino.
 {: .fs-1 }
 
-And you're on the right track. Now, when the button is **not** pressed, the digital input pin is in a known voltage state—it reads 0V. But now when we press the button, a short circuit occurs (which is not good!).
+And you're on the right track. Now, when the switch is open, the digital input pin is in a known voltage state—it reads 0V. But when we press the button, a short circuit occurs (which is not good!). <!-- TODO: expand on why short circuits are bad? -->
 
 ![Animation showing a button circuit without a pull-down resistor causing a short when the button is pressed](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-ShortCircuit-Optimized.gif)
 
@@ -163,28 +163,30 @@ So, what to do? Pull-down resistors to the rescue!
 
 ### Pull-down resistors
 
-We can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. Typically, this pull-down resistor is 10KΩ.
+We can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. Typically, this pull-down resistor value is 10KΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins).
 
 ![Circuit diagram showing a correct pull-down resistor circuit with the 5V connection then the digital input pin then a 10K resistor then GND](assets/images/ArduinoUno_Button_SchematicAndDiagram_PullDownResistor.png)
+The pull-down resistor is quite large: 10,000Ω (10KΩ)
+{: .fs-1 }
 
-Here's an animation showing a correct pull-down resistor circuit with a digital input pin:
+Here's an animation of the full circuit working:
 
 ![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
 
 ### Pull-up resistors
 
-With a **pull-down resistor** configuration, the input pin is biased to GND when the circuit is in an open state. With a **pull-up resistor** configuration, the resistor moves from the GND side of the circuit to the 5V side and logic is flipped: the input pin is "pulled up" to $$V_{CC}$$ when the switch is open and goes to GND when the switch is closed.
+So, what's a pull-up resistor then? With a **pull-down resistor** configuration, the input pin is biased to GND when the circuit is in an open state. With a **pull-up resistor** configuration, the resistor moves from the GND side of the circuit to the 5V side and logic is flipped: the input pin is "pulled up" to $$V_{CC}$$ when the switch is open and goes to GND when the switch is closed.
 
-Pull-up resistor configurations can be confusing because now, when when the switch is open (the button is not pressed), the digital input pin is `HIGH`. When the switch is closed (the button is pressed), the input pin goes `LOW`.
+<!-- TODO: insert pull-up resistor animation -->
+
+Pull-up resistor configurations can be confusing because the `HIGH` and `LOW` values are flipped. Now, when the switch is open, the digital input pin is `HIGH`. When the switch closes, the input pin goes `LOW`.
 
 | Switch State | Input pin with pull-down | Input pin with pull-up |
 | ------------ | ------------------------ | ---------------------- |
 | Open         | `LOW`                    | `HIGH`                 |
 | Closed       | `HIGH`                   | `LOW`                  |
 
-
-
-See the diagram below. We've also included a pull-up resistor diagram for comparison
+For convenience, here are side-by-side diagrams of a pull-down *vs.* pull-up resistor configuration:
 
 ![Difference between a pull-down vs. pull-up resistor](assets/images/Arduino_Button_PullDownVsPullUpResistor.png) 
 

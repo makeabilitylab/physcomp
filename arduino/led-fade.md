@@ -187,7 +187,7 @@ void loop() {
   _curBrightness = _curBrightness + _fadeAmount;
 
   // reverse the direction of the fading at the end of each fade direction
-  if (_curBrightness <= 0 || _curBrightness >= MAX_BRIGHTNESS) {
+  if (_curBrightness <= 0 || _curBrightness >= MAX_ANALOG_OUT) {
     _fadeAmount = -_fadeAmount; // reverses fade direction
   }
   

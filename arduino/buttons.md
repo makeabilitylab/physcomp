@@ -81,7 +81,8 @@ We'll make a simple button-based circuit that turns on an LED when the button is
 
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|
-| ![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) | ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) |
+| ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) | ![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) |
+| Circuit powered by 9V battery | Circuit powered by 5V Arduino pin | 
 
 If you build the 9V battery circuit, then we suggest a 680Ω or 1KΩ resistor rather than a 220Ω resistor.
 {: .fs-1 }
@@ -134,7 +135,7 @@ In general, this is unlikely to affect how you wire your digital input circuits 
 
 Let's walk through how one might try to hook up a button to a microcontroller. In doing so, we'll learn about what **not** to do and **why** as well as **what to do** and the role of **pull-down resistors**.
 
-So, if you just completed our simple button LED circuit exercise above, you might initially think to hook up your button like the following:
+You might initially think to hook up your button like the following:
 
 ![Initial digital input circuit with a button but there is a problem](assets/images/ArduinoUno_Button_SchematicAndDiagram_FloatingPin.png)
 This circuit will "sort of" work but has a problem related to a "floating pin" when the switch is open.

@@ -130,7 +130,7 @@ For the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0
 
 In general, this is unlikely to affect how you wire your digital input circuits with switches, buttons, or binary sensors (like reed switches)—because your two states will be 5V and 0V—but it may affect whether and how you hook up other sensors to a microcontroller, if you want to interpret them as digital input.
 
-### Hooking up digital input with microcontrollers
+## Hooking up digital input with microcontrollers
 
 Let's walk through how we might try to hook up a button to a microcontroller. In doing so, we'll learn about what **not** to do and **why** as well as **what to do** and the role of **pull-down resistors**.
 
@@ -140,9 +140,9 @@ TODO: circuit diagram.
 
 However, if you do this, what does the digital input pin read when the switch is **open** (*i.e,* the button is **not** pressed). Well, this is called a "floating pin", and the pin is susceptible to randomly oscillating between `HIGH` and `LOW`. 
 
-TODO: insert animation
+![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
 
-<!-- consider showing video of a floating pin -->
+<!-- TODO: consider adding in video of floating pin and effect. Use external resistor + LED. Have current video so reshooting could be low priority -->
 
 The problem is: we need to bias the digital input pin to a known voltage state when the circuit is open (the button is not pressed). 
 
@@ -152,56 +152,35 @@ TODO: insert diagram
 
 And you're on the right track. Now, when the button is **not** pressed, the digital input pin is in a known voltage state—it reads 0V. But now when we press the button, a short circuit occurs (which is not good!).
 
-TODO: insert short circuit animation
+![Animation showing a button circuit without a pull-down resistor causing a short when the button is pressed](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-ShortCircuit-Optimized.gif)
 
-#### Pull-down resistors
+So, what to do? Pull-down resistors to the rescue!
 
-So, what to do? To solve this, we can add in a pull-down resistor before the GND connection. Here, our digital input will still be biased (or "pulled down") to 0V when the switch is open and then read 5V when the switch is closed.
+### Pull-down resistors
 
-TODO: insert animation
+ To solve this, we can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open.
 
-Outline:
-- You might initially think to hook up your button like this: 5V through button leg
-- However, if you do this, what does the digital input pin read when the button is **not** pressed? Well, this is called a "floating pin" and it will be susceptible to randomly oscillating between `HIGH` and `LOW` input. Try it yourself. Include little program to show them?
-- So, we need to bias the digital input pin to a known voltage state when the circuit is open (button is not pressed)
-- You might initially think that you could simply add `GND` to the other leg of the button... and you're on the right track. Now, when the button is **not** pressed, the digital input pin does indeed read 0V. However, now when we press the button, we cause a short-circuit (which is not good!)
-- So, what to do? To solve this, we can add in a pull-down resistor before the GND connection. Here, our digital input will still be biased (or "pulled down") to 0V when the switch is open and then read 5V when the switch is closed. button is not pressed and then correctly read 5V when the button is pressed.
+![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
 
-#### Pull-up resistors
+### Pull-up resistors
 
+So, what are pull-up resistors? With a **pull-down resistor** configuration the input pin is biased to GND when the circuit is in an open state. With a **pull-up resistor** configuration, the resistor moves from the GND side of the circuit to the 5V side and logic is flipped: the input pin is "pulled up" to $$V_{CC}$$ via a series resistor when a switch is open and goes to GND when the switch is closed.
 
+Pull-up resistor configurations can be confusing because now the digital input pin is `HIGH` when the switch is open (the button is not pressed) and then goes `LOW` when the switch is closed (the button is pressed).
 
+See the diagram below. We've also included a pull-up resistor diagram for comparison
 
-## Pull-down and pull-up resistors
-A key concept to understand is that microcontrollers read input like voltmeters—that is, they read voltage rather than current.
+![Difference between a pull-down vs. pull-up resistor](assets/images/Arduino_Button_PullDownVsPullUpResistor.png) 
 
-### Pull-down and pull-up resistors
-
-To use a digital input with a microcontroller—say, a push button, a slider switch, or a tilt switch—you need either a pull-down or pull-up resistor. Why? Watch the following [video](https://youtu.be/wxjerCHCEMg) by AddOhms: 
-
-<!-- See below (right-click on the image and select 'Open Image in New Tab' for an enlarged version).
-![Visual walkthrough of why a pull-down resistor setup of a button circuit is necessary](assets/images/Arduino_Button_PullDownResistor_Walkthrough.png)
-In this example, the button is hooked up to digital I/O pin 12 but any I/O pin will work.
-{: .fs-1 } -->
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wxjerCHCEMg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-[Video](https://youtu.be/wxjerCHCEMg) by AddOhms demonstrating floating pins and why pull-up resistors are necessary for digital input with microcontrollers.
-{: .fs-1 }
-
-<!-- TODO: add in video of floating pin and effect. Use external resistor + LED. Have current video so reshooting could be low priority -->
-
-While a **pull-down resistor** configuration biases the input pin to GND when a switch or button is in the open state, a **pull-up resistor** configuration does the opposite: in an open state, the microcontroller input pin reads `HIGH` (5V). When the switch is closed, the microcontroller reads `LOW` (0V). See figure below.
-
-![Difference between a pull-down vs. pull-up resistor](assets/images/Arduino_Button_PullDownVsPullUpResistor.png)
-
+### Internal pull-up resistors
 Finally, many microcontrollers include an internal pull-up resistor that can be activated with software. On the Arduino, we can configure an input pin to use its internal pull-up resistor with: `pinMode(<pin>, INPUT_PULLUP);`. This eliminates the need for any external resistors (thus simplifying your circuit).
 
 ![Difference between a pull-down, pull-up, and internal pull-up resistor](assets/images/Arduino_Button_InternalPullUpResistor.png)
 
+Some microcontrollers have both internal pull-up *and* pull-down resistors. The popular ESP32 chip, for example, used in the [Adafruit Huzzah32](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview) has built-in pull-up and pull-down resistors on all GPIO pins except for GPIO34-GPIO39 (see [link](https://github.com/espressif/arduino-esp32/issues/316)). These can be enabled with either `pinMode(<pin>, INPUT_PULLUP);` or `pinMode(<pin>, INPUT_PULLDOWN);`
+
 <!-- TODO: fix syntax mistake in figure; have its instead of it's in the diagram above -->
 <!-- TODO: maybe also add a switch after the internal pull-up to show that it's a software controlled switch like this: https://electronics.stackexchange.com/q/185953-->
-
-We'll go through each of these circuit configurations below. But first, a bit more about pull-down and pull-up resistors.
 
 ### What value should I use for my pull-down or pull-up resistors?
 
@@ -209,13 +188,15 @@ The official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) reco
 
 TODO: talk about tradeoffs in setting pull-up and pull-down resistor values
 
-### Some microcontrollers have built-in pull-up and pull-down resistors
-
-Some Arduino boards use microcontrollers that have both pull-up and pull-down resistors. The popular ESP32 chip, for example, used in the [Adafruit Huzzah32](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview) has built-in pull-up and pull-down resistors on all GPIO pins except for GPIO34-GPIO39 (see [link](https://github.com/espressif/arduino-esp32/issues/316)). These can be enabled with either `pinMode(<pin>, INPUT_PULLUP);` or `pinMode(<pin>, INPUT_PULLDOWN);`
-
 ### Want to dive deeper?
 
-To learn more about pull-up and pull-down resistors, watch this video by NYU ITP's Jeff Feddersen:
+Still feeling confused or want to learn more about pull-up and pull-down resistors? Try watching this [video](https://youtu.be/wxjerCHCEMg) by AddOhms: 
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/wxjerCHCEMg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Video](https://youtu.be/wxjerCHCEMg) by AddOhms demonstrating floating pins and why pull-up resistors are necessary for digital input with microcontrollers.
+{: .fs-1 }
+
+Or this video by NYU ITP's Jeff Feddersen:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/241209240?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 

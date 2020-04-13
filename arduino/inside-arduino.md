@@ -83,9 +83,14 @@ void delay(unsigned long ms)
 
 ## How does the Arduino Uno ADC work exactly?
 
-- http://www.gammon.com.au/adc
-- http://www.skillbank.co.uk/arduino/adc.htm
+To convert analog signals to digital, the ATmega328 uses a successive approximation ADC, which [Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC) nicely summarizes as: "a type of analog-to-digital converter that converts a continuous analog waveform into a discrete digital representation via a binary search through all possible quantization levels before finally converging upon a digital output for each conversion"
 
 The [ATmega328 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf) says that the analog input resistance is 100 megohms:
 
 ![Screenshot of Table 29-16 in ATmega328 datasheet describing the ADC](assets/images/ATmega328_Datasheet_Screenshot_ADCCharacteristics.png)
+
+## References
+- https://electronics.stackexchange.com/a/67173
+- http://www.gammon.com.au/adc
+- http://www.skillbank.co.uk/arduino/adc.htm
+

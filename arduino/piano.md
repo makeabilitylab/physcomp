@@ -21,6 +21,13 @@ Assumes that you have completed both the Intro to Input and Intro to Output tuto
 ## Outline
 - Show how to make a simple piano
 
+## Materials
+
+| Breadboard | Arduino | Buttons | Piezo Buzzer |
+|:-----:|:-----:|:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_40w.png) | ![Piezo buzzer]({{ site.baseurl }}/assets/images/PiezoBuzzer_100h.png)
+| Breadboard | Arduino Uno, Leonardo, or similar  | [Tactile Buttons](https://www.adafruit.com/product/1119) | [Piezo Buzzer](https://www.mouser.com/ProductDetail/810-PS1240P02BT) |
+
 ## Should you use a series resistor?
 
 - https://forum.arduino.cc/index.php?topic=16088.msg117474#msg117474

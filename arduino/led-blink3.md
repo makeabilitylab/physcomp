@@ -44,7 +44,7 @@ Blink is easy. It's gratifying. But... it sets up a flawed mental model about ho
 
 What if you want to blink multiple LEDs at **different rates**? How would you do this with `delay()`? Well, **you can't.** While in a `delay()`, your program is literally *doing nothing* (well, it's stuck in a `while` loop waiting for the delay period to finish but that's essentially nothing).
 
-So, what should we do instead? We **eliminate all delays** and track time and state using [state machines](https://en.wikipedia.org/wiki/Finite-state_machine).
+So, what should we do instead? We **eliminate all delays** and track time and state using [state machines](https://en.wikipedia.org/wiki/Finite-state_machine). Alternatively, we could use interrupts (but we'll cover that later).
 
 ## Materials
 

@@ -28,7 +28,7 @@ If the Tinkercad simulator does not load, [click here to view](https://www.tinke
 
 ## Materials
 
-We are going to build input circuits using the microcontroller's own internal pull-up resistors, so our material list includes only four things:
+We are going to build input circuits using the microcontroller's own internal pull-up resistors, so our material list includes only four things (well, and wires of course!):
 
 | Breadboard | Arduino | Buttons | Piezo Buzzer |
 |:-----:|:-----:|:-----:|:-----:|:-----:|

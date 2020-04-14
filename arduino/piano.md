@@ -33,7 +33,7 @@ We are going to build input circuits using the microcontroller's own internal pu
 | Breadboard | Arduino | Buttons | Piezo Buzzer |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_40w.png) | ![Piezo buzzer]({{ site.baseurl }}/assets/images/PiezoBuzzer_100h.png)
-| Breadboard | Arduino Uno, Leonardo, or similar  | **5** [Tactile Buttons](https://www.adafruit.com/product/1119) | [Piezo Buzzer](https://www.mouser.com/ProductDetail/810-PS1240P02BT) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | **Five** [Tactile Buttons](https://www.adafruit.com/product/1119) | [Piezo Buzzer](https://www.mouser.com/ProductDetail/810-PS1240P02BT) |
 
 ## Making sound with Arduino
 

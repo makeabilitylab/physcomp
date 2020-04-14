@@ -18,12 +18,11 @@ comments: true
 
 OK, we made it through our first digital input lesson. Now, let's do something fun with this newfound knowledge!
 
-In this lesson, we are going to make a simple five-key piano with tactile buttons and a [piezo buzzer](https://www.adafruit.com/product/160). 
+In this lesson, we are going to make a simple five-key piano with tactile buttons wired with internal pull-up resistors and a [piezo buzzer](https://www.adafruit.com/product/160). Will it be fun? Yes! Will it produce hi-fidelity music? No!
+
+As a sneak preview, try out our circuit+code in the Tinkercad simulator. Click "Start Simulation" and then click on the buttons to hear corresponding notes (yes, the "notes" will sound somewhat abrasive to our ears—more on that below) 
 
 <iframe width="725" height="453" src="https://www.tinkercad.com/embed/dunwYl8U0Uq?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-
-## Outline
-- Show how to make a simple piano
 
 ## Materials
 
@@ -33,12 +32,6 @@ We are going to build input circuits using the microcontroller's own internal pu
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_40w.png) | ![Piezo buzzer]({{ site.baseurl }}/assets/images/PiezoBuzzer_100h.png)
 | Breadboard | Arduino Uno, Leonardo, or similar  | **5** [Tactile Buttons](https://www.adafruit.com/product/1119) | [Piezo Buzzer](https://www.mouser.com/ProductDetail/810-PS1240P02BT) |
-
-## Making the circuit
-
-![Tinkercad wiring diagram showing how to hook up the buttons and piezo speaker](assets/images/ArduinoUno_SimplePiano_TinkercadWiringDiagram.png)
-You can play with this circuit and the underlying Arduino program on [Tinkercad](https://www.tinkercad.com/things/dunwYl8U0Uq-simple-piano)
-{: .fs-1 }
 
 ## Making sound with Arduino
 
@@ -75,6 +68,8 @@ If you want to take a (super) deep dive into how tone works, see the [source cod
 
 There are two primary types of buzzers: magnetic and piezo. A magnetic buzzer operates similarly to a traditional speaker: a current driven through a coil of wire produces a magnetic field, which dynamically moves a magnetic disk resulting in a sound wave. A piezo buzzer is driven by voltage rather than current and is constructed out of piezoelectric material. This material mechanically deforms in response to applied voltages, which can be used to generate sounds.
 
+If you're taking one of our courses, we typically purchase piezo buzzers—either from [Adafruit](https://www.adafruit.com/product/160) ($1.35) or 
+
 There is some debate about whether you should use a small in-series resistor with a passive piezo buzzer ([link1](https://forum.arduino.cc/index.php?topic=16088.msg117474#msg117474), [link2](https://forum.arduino.cc/index.php?topic=522576.msg3564043#msg3564043)). I never have. I've always directly wired my piezo buzzer to the Arduino pins like the wiring diagram above (and [here](https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/playing-a-scale)).
 
 ### Playing multiple tones simultaneously
@@ -84,7 +79,11 @@ Can you use the [Tone()](https://www.arduino.cc/reference/en/language/functions/
 No, the default [tone](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library does not support generating square waves composed of multiple frequencies (in other words, chords). However, Brett Hagman, the author of the original Arduino tone function, wrote a more advanced tone library to generate multiple simultaneous tones:
 https://code.google.com/archive/p/rogue-code/wikis/ToneLibraryDocumentation.wiki. This is also described in the [Arduino Cookbook (Section 9.3 Generating More than One Simultaneous Tone)](https://learning.oreilly.com/library/view/arduino-cookbook-2nd/9781449321185/ch09.html). Another discussion [here](https://forum.arduino.cc/index.php?topic=77447.0).
 
-##
+## Making the circuit
+
+![Tinkercad wiring diagram showing how to hook up the buttons and piezo speaker](assets/images/ArduinoUno_SimplePiano_TinkercadWiringDiagram.png)
+You can play with this circuit and the underlying Arduino program on [Tinkercad](https://www.tinkercad.com/things/dunwYl8U0Uq-simple-piano)
+{: .fs-1 }
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/FhfzZ4qpxZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

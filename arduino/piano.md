@@ -20,7 +20,7 @@ OK, we made it through our first digital input lesson. Now, let's do something f
 
 In this lesson, we are going to make a simple five-key piano with tactile buttons wired with internal pull-up resistors and a [piezo buzzer](https://www.adafruit.com/product/160). Will it be fun? Yes! Will it produce hi-fidelity music? No!
 
-As a sneak preview, try out our circuit+code in the Tinkercad simulator. Click "Start Simulation" and then click on the buttons to hear corresponding notes (yes, the "notes" will sound somewhat abrasive to our ears—more on that below) 
+As a sneak preview, try out our circuit+code in the Tinkercad simulator. Click "Start Simulation" and then click on the buttons to "play the piano" (yes, the "notes" will sound somewhat abrasive to our ears—more on that below). You can even click on the 'Code' button, modify the code, and rerun the simulation.
 
 <iframe width="725" height="453" src="https://www.tinkercad.com/embed/dunwYl8U0Uq?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 

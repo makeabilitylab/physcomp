@@ -151,6 +151,10 @@ We did it! Now, compile, upload and run your program!
 
 <!--TODO insert video of my siren -->
 
+### Our SimpleSiren code on GitHub
+You can access our [SimpleSiren](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino) code in our GitHub repo. It's also displayed below:
+<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino?footer=minimal"></script>
+
 ### Go further
 
 There are lots of fun examples online of using Arduino + piezo buzzers to play lo-fi versions of popular theme songs (like the [Imperial March](https://gist.github.com/StevenNunez/6786124) from Star Wars). Feel free to keep playing with the piezo buzzer before building your piano.
@@ -295,6 +299,10 @@ Here's a workbench video of our piano and wiring:
 <iframe width="736" height="414" src="https://www.youtube.com/embed/FhfzZ4qpxZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 The sound and video stream seem a bit out of sync here, but you get the idea.
 {: .fs-1 }
+
+### Our SimplePiano code on GitHub
+You can access our [SimplePiano](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) code in our GitHub repo. It's also displayed below:
+<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino?footer=minimal"></script>
 
 ## Exercises
 

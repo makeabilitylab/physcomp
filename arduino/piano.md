@@ -47,7 +47,7 @@ Instead, these microcontrollers produce [square voltage waves](https://en.wikipe
 
 ### The Arduino tone library
 
-Brett Hagman created the [tone](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library to address this problem, which is part of the core Arduino library. While tone cannot generate sinusoidal waves like a DAC, it does produce square waves at specific frequencies, which can be used to actuate speakers and piezo buzzers. And,  
+Brett Hagman created the [tone](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library to address this problem, which is part of the core Arduino library. While tone cannot generate sinusoidal waves like a DAC, it does produce square waves at specific frequencies, which can be used to actuate speakers and piezo buzzers.
 
 Using tone is easy. You simply call `tone(pin, frequency)` with the pin number and a frequency (the minimum frequency is 31Hz) and a square wave with the given frequency is generated on the pin. The library also offers a convenience method that enables you to specify how long to play a tone in milliseconds: `tone(pin, frequency, duration)`.
 
@@ -57,9 +57,11 @@ Using tone is easy. You simply call `tone(pin, frequency)` with the pin number a
 
 **ADVANCED INFO:**
 
-Note that the tone call returns immediately—almost like an asynchronous call in a multi-threaded program. However, the Arduino Uno is a single-core chip with no multi-threading support. So, how does this work? Via timer interrupts.
+Note that the tone call returns immediately—almost like an asynchronous call in a multi-threaded program. However, the Arduino Uno is a single-core chip with no multi-threading support. So, how does this work?
 
-The ATmega328 supports different types of interrupts, including interrupts to detect when a voltage value on a pin changes and time. The timer interrupts, for example, are used by the [millis()](https://www.arduino.cc/reference/en/language/functions/time/millis/) and [micros()](https://www.arduino.cc/reference/tr/language/functions/time/micros/) functions to precisely count. They are also used to generate square waves at specific frequencies.
+Answer: via timer interrupts.
+
+The ATmega328 supports a variety of interrupts, including interrupts to detect when a voltage value on a pin changes as well as time. The timer interrupts, for example, are used by the [millis()](https://www.arduino.cc/reference/en/language/functions/time/millis/) and [micros()](https://www.arduino.cc/reference/tr/language/functions/time/micros/) functions to count precisely. They are also used to generate square waves at specific frequencies, which is what tone() does.
 
 The ATmega328 has three timers:
 - Timer0: 8-bit timer used by millis() and micros().

@@ -107,7 +107,7 @@ There is some debate about whether you should use a small in-series resistor wit
 
 We're going to flash the Arduino's built-in LED on and off (we can never outrun [Blink](led-blink.md)) and play two alternating sounds.
 
-### Step 1: Declare our constants
+#### Step 1: Declare our constants
 
 {% highlight C %}
 const int OUTPUT_PIEZO_PIN = 9; // hook up one piezo leg to GND, other leg to Pin 9
@@ -115,7 +115,7 @@ const int OUTPUT_LED_PIN = LED_BUILTIN; // we'll flash an LED on/off with the so
 const int SOUND_DURATION_MS = 500; // duration to play each siren part
 {% endhighlight C %}
 
-### Step 2: Initialize our pins in setup()
+#### Step 2: Initialize our pins in setup()
 
 {% highlight C %}
 void setup() {
@@ -124,7 +124,7 @@ void setup() {
 }
 {% endhighlight C %}
 
-### Step 3: Implement the siren logic in loop()
+#### Step 3: Implement the siren logic in loop()
 
 The loop alternates between playing a 392Hz square wave and a 262Hz square wave—each for `SOUND_DURATION_MS`. We'll also flash on/off an LED with the same rhythm. Very siren like!
 
@@ -143,7 +143,7 @@ void loop() {
 }
 {% endhighlight C %}
 
-### Step 4: Compile, upload, and run!
+#### Step 4: Compile, upload, and run!
 
 We did it! Now, compile, upload and run your program!
 
@@ -152,6 +152,7 @@ We did it! Now, compile, upload and run your program!
 <!--TODO insert video of my siren -->
 
 ### Our SimpleSiren code on GitHub
+
 You can access our [SimpleSiren](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino) code in our GitHub repo. It's also displayed below:
 <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino?footer=minimal"></script>
 

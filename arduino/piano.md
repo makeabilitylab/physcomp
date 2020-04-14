@@ -88,7 +88,7 @@ No, the default [tone](https://www.arduino.cc/reference/en/language/functions/ad
 
 Alright, let's build some stuff!
 
-We're going to start by constructing a simple piezo buzzer siren before making our piano. It's always a good idea to modularize and build things in small steps—especially when using new components. So, our simple siren will give us familiarity with hooking up and using a piezo buzzer before we add in the additional circuit and code complexity of buttons.
+We'll start by constructing a simple piezo buzzer siren before making our piano. It's always a good idea to modularize and build things in small steps—especially when using new components. So, our simple siren will give us familiarity with hooking up and using a piezo buzzer before we add in the additional circuit and code complexity of buttons required by the piano.
 
 ### Making the siren circuit
 
@@ -167,7 +167,7 @@ Alright, let's make that piano.
 
 To limit the use of unnecessary components, we're going to hook up our buttons with the ATmega's internal pull-up resistors. So, the default state will be `HIGH` for each button (and then `LOW` when pressed). We'll write code to support both pull-down and pull-resistor designs, however.
 
-This is the first time we've breadboarded so many components, so try to keep your wiring and layout clean. I always reserve using black wire for connections to GND and red wire for connections to Vcc.
+This is the first time we've breadboarded so many components, so try to keep your wiring and layout clean. I always reserve using black wire for connections to GND and red wire for connections to Vcc. Note that we do **not** need to wire anything directly to Vcc here (and you can tell this at a glance with my wiring because no red wires!).
 
 ![Tinkercad wiring diagram showing how to hook up the buttons and piezo speaker](assets/images/ArduinoUno_SimplePiano_TinkercadWiringDiagram.png)
 You can play with this circuit and the underlying Arduino program on [Tinkercad](https://www.tinkercad.com/things/dunwYl8U0Uq-simple-piano)
@@ -294,13 +294,14 @@ boolean isButtonPressed(int btnPin){
 
 Now, compile, upload, and run your code. Let's hear it Beethoven!
 
-Here's a workbench video of our piano and wiring:
+Here's a workbench video of us playing our piano. Make sure your sound is on (or not) to hear our beautiful music! :-D
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/FhfzZ4qpxZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 The sound and video stream seem a bit out of sync here, but you get the idea.
 {: .fs-1 }
 
 ### Our SimplePiano code on GitHub
+
 You can access our [SimplePiano](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) code in our GitHub repo. It's also displayed below:
 <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino?footer=minimal"></script>
 
@@ -314,3 +315,12 @@ You can access our [SimplePiano](https://github.com/makeabilitylab/arduino/blob/
 
 - [Lab 5: Tone Output Using An Arduino](https://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/tone-output-using-an-arduino/)
 - [Arduino sketch for high frequency precision sine wave tone sound synthesis](http://www.adrianfreed.com/content/arduino-sketch-high-frequency-precision-sine-wave-tone-sound-synthesis)
+
+## Next Lesson
+
+In the [next lesson](trimpot.md), we'll move beyond digital input to the far more exciting and flexible world of analog input!
+
+<span class="fs-6">
+[Previous: Using buttons](buttons.md){: .btn .btn-outline }
+[Next: Using trimpots](trimpots.md){: .btn .btn-outline }
+</span>

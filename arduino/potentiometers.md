@@ -33,9 +33,21 @@ Let's look at the same animation as before but this time with the resistance val
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/QPVuZbW9Nsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{13}$$. In our UW courses, we often provide 10KΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{13}=10KΩ$$. 
+Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{total}$$. In our UW courses, we often provide 10KΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{total}=10KΩ$$. 
 
-As you move the wiper, the resistance across legs 1 and 2 $$R_{12}$$ and 2 and 3 $$R_{23}$$ proportionally change and always sum to $$R_{13}$$. Again, regardless of wiper position, $$R_{13}$$ is equal to the potentiometer's total resistance (in this case, 10KΩ). 
+As you move the wiper, the resistance across legs 1 and 2 $$R_{1}$$ and 2 and 3 $$R_{2}$$ proportionally change and always sum to $$R_{total}$$. Again, regardless of wiper position, $$R_{total}$$ is equal to the potentiometer's total resistance (in this case, 10KΩ).
+
+<!-- TODO: talk about different taper types? -->
+
+### Potentiometers as voltage dividers
+
+Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves. 
+
+![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
+
+The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R2}{R1 + R2}$$. So, the voltage at leg 2 of the potentiometer is equal to V_{in} \cdot \frac{R2}{R1 + R2}$$  
+
+![The voltage divider equation](assets/images/VoltageDividerEquation.png)
 
 Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing.
 
@@ -43,7 +55,7 @@ Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers a
 <p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 {: .fs-1 }
 
-<!-- TODO: talk about different taper types? -->
+See also this [Sparkfun tutorial](https://learn.sparkfun.com/tutorials/voltage-dividers/all) on voltage dividers.
 
 We're going to start with using only **two legs** of the potentiometer. We'll need all **three legs** when we start working again with microcontrollers.
 
@@ -99,7 +111,9 @@ Then click on "Create new Circuit":
 
 #### Step 3: Aquaint yourself with Tinkercad
 
-Tinkercad works by dragging and dropping components from the right sidebar menu onto the Circuit canvas. You can click on the "Start Simulation" button to simulate circuits (and even Arduino code + circuits). If you've dragged over an Arduino, you can also click on the "Code" button and write code either in `C/C++` or in a visual, block-based language.
+Tinkercad works by dragging and dropping components from the right sidebar menu onto the Circuit canvas. You can click on the "Start Simulation" button to simulate circuits (and even Arduino code + circuits). 
+
+If you've dragged over an Arduino, you can also click on the "Code" button and write code either in `C/C++` or in a visual, block-based language. The simulator even has a "Serial Monitor", "Serial Plotter", and, wait for it, even a simplistic debugger with breakpoint support!
 
 ![Screenshot of Tinkercad's primary UI](assets/images/Tinkercad_MainInterface.png)
 An example of the [multi-rate blinking lesson](led-blink3.md) created in Tinkercad. [Try it out](https://www.tinkercad.com/things/kAq7G2p4QQ6)!
@@ -172,7 +186,7 @@ Given that the Arduino supplies 5V rather than 9V, we can replace our 470Ω resi
 You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things/cDMY5BmSacm).
 {: .fs-1 }
 
-### Workbench video of my trimpot dimmer
+#### Workbench video of my trimpot dimmer
 
 Here's a workbench video of my trimpot circuit:
 
@@ -180,7 +194,7 @@ Here's a workbench video of my trimpot circuit:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-### Replace trimpot with FSR and photocell
+#### Replace trimpot with FSR and photocell
 
 As long as we have this circuit, let's have a bit of fun: try replacing the trimpot with the force-sensitive resistor:
 
@@ -192,13 +206,67 @@ Or the photocell:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/Y0GOsocDCGU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-### Making your own lo-fi potentiometer
+#### Making your own lo-fi potentiometer
 
 Inspired by [Jeff's video](https://vimeo.com/76442431), we also made my own potentiometer using paper, a 12B pencil, and, for the wiper, cardboard and a paper clip. You should try something like this too!
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/NRlJbuj5jr4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## Intro to analog input
 
+In our previous lessons, we first learned about digital and analog **output** then digital **input**. Now, we'll learn about analog input.
+
+The Arduino's microcontroller contains an analog-to-digital converter, which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and Vcc (5V) to a $$2^10$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
+
+The Arduino Uno and Leonardo have six analog inputs, which can be read using analogRead(int pin):
+
+![Close-up image of the six analog input pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_AnalogInputPins.png)
+
+While the digital I/O pins on the Arduino microcontroller are shared. The **analog input** pins are different from the **analog output** pins.
+
+![Close-up image of the Arduino Uno emphasizing that the Arduino analog input pins are different from the analog output pins](assets/images/ArduinoUno_CloseUp_WarningAnalogInputAndOutputPinsAreDifferent.png)
+
+### How does the Arduino read analog input?
+
+Remember how we said that Arduino input pins work like voltmeters? Microcontrollers measure voltage in parallel just like voltmeters. In fact, the analog input pins have an effective resistance of 100,000,000Ω (100MΩ), which means almost **no current** goes into an input pin.
+
+This means that we have to configure our variable resistor sensors as **voltage dividers** to work with microcontrollers.
+
+## Hooking up variable resistors with microcontrollers
+
+Just like with our [button](buttons.md) lesson, let's walk through how one might try to hook up a potentiometer with a microcontroller. As before, we'll learn about what **not** to do and **why** as well as **what to do.**
+
+### Simple program to read analog input
+
+Let's first introduce a simple program to read and print analog input values to Serial.
+
+{% highlight C %}
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int potVal = analogRead(A0); // returns 0 - 1023 on Uno
+  Serial.println(potVal);      // print value to Serial
+  delay(50);				   // Reading new values at ~20Hz
+}
+{% endhighlight C %}
+
+### Building an initial circuit
+
+To begin, you might think to treat the potentiometer similar to how we did with our LED circuits above—as a rheostat where we only use two legs. However, this won't work. Build and try these configurations yourself.
+
+![Incorrect ways to hook up potentiometers with microcontrollers](assets/images/ArduinoUno_Potentiometer_IncorrectCircuits_Tinkercad.png)
+To try these incorrect circuits on Tinkercad, go [here](https://www.tinkercad.com/things/cvIBIowVyxG) and [here](https://www.tinkercad.com/things/fQOFEwZKUg6), respectively
+{: .fs-1 }
+
+Why don;t these work?
+
+Because our input pins measure **voltage** and there is no voltage difference across our potentiometer (because no current is flowing!).
+
+So,
 
 ## Exercises
 - Try to use the slide potentiometer (also in your kits)

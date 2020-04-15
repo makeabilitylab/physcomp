@@ -54,7 +54,19 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 ## Intro to Input
 
-This is a **draft** list of topics (and order may change).
+### Lesson 1: Using buttons
+
+Introduces buttons (aka momentary switches), digital input, using Arduino's [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
+
+### Lesson 2: Button piano
+
+In this lesson, we are going to make a simple five-key piano with tactile buttons wired with internal pull-up resistors and a [piezo buzzer](https://www.adafruit.com/product/160).
+
+### Lesson 3: Potentiometers
+
+Introduces potentiometers and rheostats, analog input, and using Arduino's [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function. Also shows how to use Tinkercad to prototype and test circuits in an online simulator and how to use a multimeter to measure current.
+
+<!-- This is a **draft** list of topics (and order may change).
 
 ### Lesson 1: Using buttons
 
@@ -84,7 +96,7 @@ Adapts the previous force-sensitive resistor example to work with a photocell. D
 
 ### Lesson 7: Smoothing analog input
 
-Smooths analog input
+Smooths analog input -->
 
 <!-- ## Other possibilities
 - Debugging

@@ -45,15 +45,62 @@ TODO: insert figure of variable resistors
 
 We're first going to make a potentiometer-based LED dimmer in [Tinkercad Circuits](https://www.tinkercad.com/) before building a physical prototype. Tinkercad makes it easy to rapidly prototype, build, and simulate circuits in a software environment. And, for those that do not have access to electronic tools, Tinkercad also provides a simple multimeter and oscilloscope—so we can test and measure our circuits too!
 
+<!-- TODO: before we make, show and have them play around with Tinkercad and Falstad JS simulator? -->
+
+In Tinkercad, you could make your dimmer with or without a breadboard. Let's prototype something we would actually make in real life, so go with the breadboarded version:
+
+![Wiring diagram of an LED-based circuit with a potentiometer for fading. 9V battery used for power](assets/images/Potentiometer_LEDCircuits_9VBatteryPowerSource_Tinkercad.png)
+You can access these Tinkercad circuits [here](https://www.tinkercad.com/things/f4mL9xm0C7z) (no breadboard) and [here](https://www.tinkercad.com/things/2CTd0LQTHRk) (with breadboard).
+{: .fs-1 }
+
+To help us observe the effect of the potentiometer's wiper position on the total current in our circuit, we can use Tinkercad's multimeter tool (switched to ammeter mode). A multimeter can be used for a variety of circuit measurements, including resistance (ohmeter), current (ammeter), voltage (voltmeter), and to test for short circuits (continuity testing).
+
+While we measure voltage in parallel, we measure current in series. 
+
+TODO: insert figure from slides of how to use a multimeter to measure
+TODO: insert turbine figure
+
+I like to return to our water analogy for current and think of the ammeter like a turbine that must be in-line within a pipe to measure water flow.
+
+So, here are updated versions of our circuits with ammeters attached
+
+
+#### Run the simulator
+
+#### What happens if we connect the two outer legs?
+
+TODO: talk about and show video
+
+
+### Let's build it for real
+
+Because not all of you have access to a 9V battery + snap connector to easily interface with your breadboard, we can again use our Arduino for a power source (just like we did in our very first lesson: [LED On](led-on.md)).
+
+Given that the Arduino supplies 5V rather than 9V, we can replace our 470Ω resistor with a 220Ω.
+
+![Wiring diagram of an LED-based circuit with a potentiometer for fading. Arduino used for power](assets/images/Potentiometer_LEDCircuit_ArduinoUnoPowerSource_Tinkercad.png)
+You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things/cDMY5BmSacm).
+{: .fs-1 }
+
 ### Workbench video of my trimpot dimmer
 
-Here's a workbench video of my circuit:
+Here's an animated gif of my trimpot circuit:
+
+
 
 ### Replace trimpot with FSR and photocell
 
-As long as we have this circuit, let's have a bit of fun: try replacing the trimpot with the force-sensitive resistor
+As long as we have this circuit, let's have a bit of fun: try replacing the trimpot with the force-sensitive resistor:
 
-<!-- TODO: before we make, show and have them play around with Tinkercad and Falstad JS simulator? -->
+<iframe width="736" height="414" src="https://www.youtube.com/embed/YMCqDcnwMYo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+The same circuit as before but replace the trimpot with a force-sensitive resistor.
+{: .fs-1 }
+
+Or the photocell:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/Y0GOsocDCGU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 
 In Tinkercad, need to make breadboard version
 

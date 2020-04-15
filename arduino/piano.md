@@ -320,9 +320,9 @@ You can access our [SimplePiano](https://github.com/makeabilitylab/arduino/blob/
 
 ## Next Lesson
 
-In the [next lesson](trimpot.md), we'll move beyond digital input to the far more exciting and flexible world of analog input!
+In the [next lesson](potentiometers.md), we'll move beyond digital input to the far more exciting and flexible world of analog input!
 
 <span class="fs-6">
 [Previous: Using buttons](buttons.md){: .btn .btn-outline }
-[Next: Using trimpots](trimpots.md){: .btn .btn-outline }
+[Next: Using trimpots](potentiometers.md){: .btn .btn-outline }
 </span>

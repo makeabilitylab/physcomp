@@ -207,7 +207,7 @@ Some microcontrollers have both internal pull-up *and* pull-down resistors. The 
 
 As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
 
-TODO: talk about tradeoffs in setting pull-up and pull-down resistor values
+<!-- TODO: talk about tradeoffs in setting pull-up and pull-down resistor values -->
 
 ### Want to dive deeper?
 
@@ -253,7 +253,15 @@ The schematic is for illustrative purposes. The internal software controlled swi
 
 ## Putting it all together
 
-## Outline
+## Next Lesson
+
+In the [next lesson](piano.md), we'll get to apply our newfound digital input skills to build a simple interactive piano with tactile buttons and a piezo buzzer.
+
+<span class="fs-6">
+[Next: Make a simple piano](piano.md){: .btn .btn-outline }
+</span>
+
+<!-- ## TODO/Outline
 - The button is funky: why four legs? what's connected. Maybe show multimeter?
 - We are going to cover three separate circuit designs: pull-down resistor, pull-up resistor, internal pull-up resistor
 - Why do we need these resistors. Explain.
@@ -273,4 +281,4 @@ Things to remember:
 
 ## Tinkercad circuits
 - https://www.tinkercad.com/things/9skzhTypQRh-button-with-breadboard/
-- https://www.tinkercad.com/things/hlkxqsvSz2E-button-no-breadboard
+- https://www.tinkercad.com/things/hlkxqsvSz2E-button-no-breadboard -->

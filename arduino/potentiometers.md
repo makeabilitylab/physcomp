@@ -107,30 +107,37 @@ Once you're done, try simulating your circuit:
 
 In the circuit above, we hooked up legs 2 and 3 of the potentiometer. What happens if you, instead, hook up legs 1 and 3 or 1 and 2? Try it!
 
+![Different wirings with the potentiometer in Tinkercad](assets/images/Potentiometer_LEDCircuitWithBackupResistor_MultipleWirings_Tinkercad.png)
 
+### Add ammeter to Tinkercad prototype
 
-To help us observe the effect of the potentiometer's wiper position on the total current in our circuit, we can use Tinkercad's multimeter tool. A multimeter can be used for a variety of circuit measurements, including resistance (ohmeter), current (ammeter), voltage (voltmeter), and to test for short circuits (continuity testing).
+To help us observe the effect of the potentiometer's wiper position on the total current in our circuit, we can use Tinkercad's multimeter tool. A multimeter can be used for a variety of circuit measurements, including to measure resistance (ohmeter), current (ammeter), voltage (voltmeter), and to test for short circuits (continuity testing).
 
-As the figure below shows, we measure voltage in parallel, we measure current in series. 
+#### How to measure current with a multimeter
+
+While we measure voltage in parallel, we measure current in series: 
 
 ![Shows two pictures: image on left shows how to measure voltage in parallel using a multimeter and figure on right shows how to measure current in series using a multimeter](assets/images/Multimeter_HowToMeasureVoltageAndCurrent.png)
 
-I like to return to our water analogy and think of the ammeter like a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow.
+To help us think about and remember how to measure current, I like to return to our water analogy and think of the ammeter as if it is a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow.
 
 ![Image shows a water flow meter that uses a turbine in series with a pipe to measure water flow and makes analogy to measure current in line with an ammeter](assets/images/Multimeter_MeasuringCurrentInSeriesLikeWaterFlowTurbine.png)
 
+#### Updated Tinkercad circuit with ammeter
 
-So, here are updated versions of our circuits with ammeters attached. Note: when you drag over a multimeter, make sure you click on it and change the mode to ammeter.
+So, here are updated versions of our circuits with ammeters attached. Because there is only one path for the current to flow in this circuit (no branches), we could hook up the ammeter at in-series any location. I just selected a position that I found convenient.
 
-![](assets/images/Tinkercad_Multimeter_SwitchToAmmeter.png)
+![Tinkercad potentiometer circuit with ammeter in series](assets/images/Potentiometer_LEDCircuitWithBackupResistorAndAmmeter_Tinkercad.png)
 
+Note: when you drag over a multimeter, make sure you click on it and change the mode to ammeter.
 
-#### Run the simulator
+![Updated Tinkercad wiring diagram with ammeter](assets/images/Tinkercad_Multimeter_SwitchToAmmeter.png)
 
-#### What happens if we connect the two outer legs?
+#### Tinkercad simulation with ammeter
 
-TODO: talk about and show video
+Here's our circuit with the ammeter running in the simulator:
 
+![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
 
 ### Let's build it for real
 
@@ -146,7 +153,7 @@ You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things
 
 Here's an animated gif of my trimpot circuit:
 
-
+![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif)
 
 ### Replace trimpot with FSR and photocell
 
@@ -159,10 +166,6 @@ The same circuit as before but replace the trimpot with a force-sensitive resist
 Or the photocell:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/Y0GOsocDCGU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-
-In Tinkercad, need to make breadboard version
 
 ### Making your own lo-fi potentiometer
 

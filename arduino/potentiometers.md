@@ -97,7 +97,7 @@ Then click on "Create new Circuit":
 
 ![Screenshot of Tinkercad's dashboard with "create new circuit button"](assets/images/Tinkercad_CreateNewCircuit.png)
 
-#### Step 3: Aquaint yourself with the UI
+#### Step 3: Aquaint yourself with Tinkercad
 
 Tinkercad works by dragging and dropping components from the right sidebar menu onto the Circuit canvas. You can click on the "Start Simulation" button to simulate circuits (and even Arduino code + circuits). If you've dragged over an Arduino, you can also click on the "Code" button and write code either in `C/C++` or in a visual, block-based language.
 
@@ -106,7 +106,7 @@ An example of the [multi-rate blinking lesson](led-blink3.md) created in Tinkerc
 
 #### Step 4: Build the potentiomer-based LED dimmer
 
-Now, build the potentiometer-based LED dimmer. It's important to include that additional resistor because many potentiometers, including those provided in your hardware kits, go all the way down to 0Ω. If you don't have that "backup" current-limiting resistor, you will blow your LED.
+Now, build the potentiometer-based LED dimmer. It's important to include that additional resistor because many potentiometers, including those provided in your hardware kits, go all the way down to 0Ω. If you don't have that "backup" current-limiting resistor, you will blow your LED. (Indeed, try it out in Tinkercad and see what happens—kablooey!)
 
 ![Wiring diagram of an LED-based circuit with a potentiometer for fading. 9V battery used for power](assets/images/Potentiometer_LEDCircuitWithBreadboard_9VPower_Tinkercad.png)
 
@@ -126,7 +126,7 @@ To help us observe the effect of the potentiometer's wiper position on the total
 
 #### How to measure current with a multimeter
 
-While we measure voltage in parallel, we measure current in series: 
+While voltmeter's measure voltage in parallel, ammeter's measure current in series: 
 
 ![Shows two pictures: image on left shows how to measure voltage in parallel using a multimeter and figure on right shows how to measure current in series using a multimeter](assets/images/Multimeter_HowToMeasureVoltageAndCurrent.png)
 
@@ -134,9 +134,11 @@ To help us think about and remember how to measure current, I like to return to 
 
 ![Image shows a water flow meter that uses a turbine in series with a pipe to measure water flow and makes analogy to measure current in line with an ammeter](assets/images/Multimeter_MeasuringCurrentInSeriesLikeWaterFlowTurbine.png)
 
+As an important side note, recall that microcontroller input pins work like voltmeters. We'll return to this in a bit.
+
 #### Updated Tinkercad circuit with ammeter
 
-Because there is only one path for the current to flow in this circuit (no branches), we could hook up the ammeter at in-series any location. I just selected a position that I found convenient.
+Because there is only one path for the current to flow in this circuit (no branches), we could hook up the ammeter at any in-series location—in between the potentiometer and LED or the resistor and potentiometer, for example. I just selected a position that I found convenient.
 
 ![Tinkercad potentiometer circuit with ammeter in series](assets/images/Potentiometer_LEDCircuitWithBackupResistorAndAmmeter_Tinkercad.png)
 
@@ -150,9 +152,15 @@ Here's our circuit with the ammeter running in the simulator:
 
 ![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
 
-Here's a nearly equivalent circuit running in CircuitJS (the only difference is I'm using a 1KΩ potentiometer here rather than a 10KΩ):
+Play around with the multimeter. You can add multiple voltmeters and ammeters to your Tinkercad circuits, which is a handy way to learn how voltages and currents are working (and double check your mental model).
 
+#### Circuit simulation in CircuitJS
 
+We also made this circuit in another online simulator called [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which has a far more powerful and feature-rich simulator but still accessible to novices.
+
+Note: we used a 1KΩ potentiometer in this circuit rather than a 10KΩ:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/F92_-MOqzM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Let's build it for real
 
@@ -186,9 +194,11 @@ Or the photocell:
 
 ### Making your own lo-fi potentiometer
 
-Inspired by [Jeff's video](https://vimeo.com/76442431), I made my own potentiometer using paper, a 12B pencil, and, for the wiper, cardboard and a paper clip. You could try something similar. Note: in this video, only two terminals (or legs) of the potentiometer are used: an outer leg and the wiper (or signal) leg. In this configuration, the potentiometer acts as **rheostat** or a two-terminal variable resistor. You should try something like this too!
+Inspired by [Jeff's video](https://vimeo.com/76442431), we also made my own potentiometer using paper, a 12B pencil, and, for the wiper, cardboard and a paper clip. You should try something like this too!
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/NRlJbuj5jr4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 
 ## Exercises
 - Try to use the slide potentiometer (also in your kits)

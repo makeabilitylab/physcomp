@@ -39,6 +39,8 @@ There are many types of sensors that change their resistance based on some human
 
 TODO: insert figure of variable resistors
 
+![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
+
 <!-- TODO: Where to bring in circuit theory here? -->
 
 ## Making an LED dimmer with a potentiometer
@@ -53,16 +55,20 @@ In Tinkercad, you could make your dimmer with or without a breadboard. Let's pro
 You can access these Tinkercad circuits [here](https://www.tinkercad.com/things/f4mL9xm0C7z) (no breadboard) and [here](https://www.tinkercad.com/things/2CTd0LQTHRk) (with breadboard).
 {: .fs-1 }
 
-To help us observe the effect of the potentiometer's wiper position on the total current in our circuit, we can use Tinkercad's multimeter tool (switched to ammeter mode). A multimeter can be used for a variety of circuit measurements, including resistance (ohmeter), current (ammeter), voltage (voltmeter), and to test for short circuits (continuity testing).
+To help us observe the effect of the potentiometer's wiper position on the total current in our circuit, we can use Tinkercad's multimeter tool. A multimeter can be used for a variety of circuit measurements, including resistance (ohmeter), current (ammeter), voltage (voltmeter), and to test for short circuits (continuity testing).
 
-While we measure voltage in parallel, we measure current in series. 
+As the figure below shows, we measure voltage in parallel, we measure current in series. 
 
-TODO: insert figure from slides of how to use a multimeter to measure
-TODO: insert turbine figure
+![Shows two pictures: image on left shows how to measure voltage in parallel using a multimeter and figure on right shows how to measure current in series using a multimeter](assets/images/Multimeter_HowToMeasureVoltageAndCurrent.png)
 
-I like to return to our water analogy for current and think of the ammeter like a turbine that must be in-line within a pipe to measure water flow.
+I like to return to our water analogy and think of the ammeter like a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow.
 
-So, here are updated versions of our circuits with ammeters attached
+![Image shows a water flow meter that uses a turbine in series with a pipe to measure water flow and makes analogy to measure current in line with an ammeter](assets/images/Multimeter_MeasuringCurrentInSeriesLikeWaterFlowTurbine.png)
+
+
+So, here are updated versions of our circuits with ammeters attached. Note: when you drag over a multimeter, make sure you click on it and change the mode to ammeter.
+
+![](assets/images/Tinkercad_Multimeter_SwitchToAmmeter.png)
 
 
 #### Run the simulator

@@ -45,7 +45,7 @@ Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers a
 
 <!-- TODO: talk about different taper types? -->
 
-We're going to start with using only **two legs** of the potentiometer. When we use potentiometers with microcontrollers, however, we will use them as voltage dividers, which requires all three legs.
+We're going to start with using only **two legs** of the potentiometer. We'll need all **three legs** when we start working again with microcontrollers.
 
 ### Variable resistors
 
@@ -54,7 +54,8 @@ When only two terminals (or legs) of the potentiometer are used—an outer leg a
 Many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have both photocells and FSRs in your hardware kits!
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
-
+Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
+{: .fs-1 }
 <!-- TODO: Where to bring in circuit theory here? -->
 
 ## Materials
@@ -63,8 +64,8 @@ We'll need the following materials:
 
 | Breadboard | Arduino | LED | Resistor | Trimpot |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_40w.png) |
-| Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) |
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of 10KOhm trimpot]({{ site.baseurl }}/assets/images/Trimpot_100h.png) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | 10KΩ Trimpot |
 
 ## Making an LED dimmer with a potentiometer
 
@@ -82,7 +83,7 @@ You can access these Tinkercad circuits [here](https://www.tinkercad.com/things/
 
 #### Step 1: Open Tinkercad Circuits
 
-Visit [tinkercad.com](https://www.tinkercad.com/) and login (if you already have an Autodesk account) or register if not. We are not using any of the "In School?" features, so create a personal account:
+Visit [tinkercad.com](https://www.tinkercad.com/) and login (if you already have an Autodesk account) or register if not. We are not using any of the "In School" features, so create a personal account:
 
 ![Screenshot of Tinkercad's registration page](assets/images/Tinkercad_RegistrationPage.png)
 
@@ -101,6 +102,7 @@ Then click on "Create new Circuit":
 Tinkercad works by dragging and dropping components from the right sidebar menu onto the Circuit canvas. You can click on the "Start Simulation" button to simulate circuits (and even Arduino code + circuits). If you've dragged over an Arduino, you can also click on the "Code" button and write code either in `C/C++` or in a visual, block-based language.
 
 ![Screenshot of Tinkercad's primary UI](assets/images/Tinkercad_MainInterface.png)
+An example of the [multi-rate blinking lesson](led-blink3.md) created in Tinkercad. [Try it out](https://www.tinkercad.com/things/kAq7G2p4QQ6)!
 
 #### Step 4: Build the potentiomer-based LED dimmer
 
@@ -134,7 +136,7 @@ To help us think about and remember how to measure current, I like to return to 
 
 #### Updated Tinkercad circuit with ammeter
 
-So, here are updated versions of our circuits with ammeters attached. Because there is only one path for the current to flow in this circuit (no branches), we could hook up the ammeter at in-series any location. I just selected a position that I found convenient.
+Because there is only one path for the current to flow in this circuit (no branches), we could hook up the ammeter at in-series any location. I just selected a position that I found convenient.
 
 ![Tinkercad potentiometer circuit with ammeter in series](assets/images/Potentiometer_LEDCircuitWithBackupResistorAndAmmeter_Tinkercad.png)
 
@@ -148,11 +150,15 @@ Here's our circuit with the ammeter running in the simulator:
 
 ![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
 
+Here's a nearly equivalent circuit running in CircuitJS (the only difference is I'm using a 1KΩ potentiometer here rather than a 10KΩ):
+
+
+
 ### Let's build it for real
 
-Because not all of you have access to a 9V battery + snap connector to easily interface with your breadboard, we can again use our Arduino for a power source (just like we did in our very first lesson: [LED On](led-on.md)).
+Because not all of us have access to a 9V battery + snap connector to easily interface with our breadboards, we can again use our Arduino for a power source (just like we did in our very first lesson: [LED On](led-on.md)).
 
-Given that the Arduino supplies 5V rather than 9V, we can replace our 470Ω resistor with a 220Ω.
+Given that the Arduino supplies 5V rather than 9V, we can replace our 470Ω resistor with a smaller resistor like a 220Ω (but you can certainly use a 470Ω or 680Ω if you'd like—remember, this is a backup resistor for when the potentiometer's wiper resistance goes to 0Ω).
 
 ![Wiring diagram of an LED-based circuit with a potentiometer for fading. Arduino used for power](assets/images/Potentiometer_LEDCircuit_ArduinoUnoPowerSource_Tinkercad.png)
 You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things/cDMY5BmSacm).
@@ -165,8 +171,6 @@ Here's a workbench video of my trimpot circuit:
 <!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-And here
 
 ### Replace trimpot with FSR and photocell
 

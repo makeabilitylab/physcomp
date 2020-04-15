@@ -33,9 +33,9 @@ Let's look at the same animation as before but this time with the resistance val
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/QPVuZbW9Nsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{1-3}$$. In our UW courses, we often provide 10KΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{1-3}=10KΩ$$. 
+Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{13}$$. In our UW courses, we often provide 10KΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{13}=10KΩ$$. 
 
-As you move the wiper, the resistance across legs 1 and 2 $$R_{1-2}$$ and 2 and 3 $$R_{2-3}$$ proportionally change and always sum to $$R_{1-3}$$. Again, regardless of wiper position, $$R_{1-3}$$ is equal to the potentiometer's total resistance (in this case, 10KΩ). 
+As you move the wiper, the resistance across legs 1 and 2 $$R_{12}$$ and 2 and 3 $$R_{23}$$ proportionally change and always sum to $$R_{13}$$. Again, regardless of wiper position, $$R_{13}$$ is equal to the potentiometer's total resistance (in this case, 10KΩ). 
 
 Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing.
 
@@ -45,17 +45,26 @@ Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers a
 
 <!-- TODO: talk about different taper types? -->
 
-We're going to start with using only **two legs** of the potentiometer (as **rheostats**). When we use potentiometers with microcontrollers, however, we will use them as voltage dividers, which requires all three legs.
+We're going to start with using only **two legs** of the potentiometer. When we use potentiometers with microcontrollers, however, we will use them as voltage dividers, which requires all three legs.
 
 ### Variable resistors
 
 When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. 
 
-Many common **sensors** are variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. You have both photocells and FSRs in your hardware kits!
+Many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have both photocells and FSRs in your hardware kits!
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
 
 <!-- TODO: Where to bring in circuit theory here? -->
+
+## Materials
+
+We'll need the following materials:
+
+| Breadboard | Arduino | LED | Resistor | Trimpot |
+|:-----:|:-----:|:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_40w.png) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) |
 
 ## Making an LED dimmer with a potentiometer
 
@@ -151,9 +160,13 @@ You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things
 
 ### Workbench video of my trimpot dimmer
 
-Here's an animated gif of my trimpot circuit:
+Here's a workbench video of my trimpot circuit:
 
-![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif)
+<!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+And here
 
 ### Replace trimpot with FSR and photocell
 
@@ -169,10 +182,9 @@ Or the photocell:
 
 ### Making your own lo-fi potentiometer
 
-Inspired by Jeff's video, I made my own potentiometer using paper, a 12B pencil, and, for the wiper, cardboard and a paper clip. You could try something similar. Note: in this video, only two terminals (or legs) of the potentiometer are used: an outer leg and the wiper (or signal) leg. In this configuration, the potentiometer acts as **rheostat** or a two-terminal variable resistor. You should try something like this too!
+Inspired by [Jeff's video](https://vimeo.com/76442431), I made my own potentiometer using paper, a 12B pencil, and, for the wiper, cardboard and a paper clip. You could try something similar. Note: in this video, only two terminals (or legs) of the potentiometer are used: an outer leg and the wiper (or signal) leg. In this configuration, the potentiometer acts as **rheostat** or a two-terminal variable resistor. You should try something like this too!
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/NRlJbuj5jr4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Outline
-- Use trimpot on own to change brightness of LED
-- Just focus on trimpot or also slide potentiometer (could close with that?)?
+## Exercises
+- Try to use the slide potentiometer (also in your kits)

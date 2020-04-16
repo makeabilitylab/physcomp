@@ -333,5 +333,5 @@ In the [next lesson](potentiometers.md), we'll move beyond digital input to the 
 
 <span class="fs-6">
 [Previous: Using buttons](buttons.md){: .btn .btn-outline }
-[Next: Using trimpots](potentiometers.md){: .btn .btn-outline }
+[Next: Using potentiometers](potentiometers.md){: .btn .btn-outline }
 </span>

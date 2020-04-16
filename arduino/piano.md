@@ -2,6 +2,7 @@
 layout: default
 title: L2&#58; A simple piano
 parent: Input
+nav_order: 2
 usemathjax: true
 has_toc: true # (on by default)
 comments: true

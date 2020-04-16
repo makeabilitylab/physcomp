@@ -49,6 +49,10 @@ The voltage divider equation, which derives from Ohm's Law, states that $$V_{out
 
 ![The voltage divider equation](assets/images/VoltageDividerEquation.png)
 
+For example, if we set Leg 1 to $$5V$$ and Leg 3 to $$GND$$, then as we change the potentiometer dial, $$V_{out}$$ at Leg 2 will dynamically shift according to the voltage divider equation:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/lSkqjTVwXFQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing.
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
@@ -68,11 +72,12 @@ Many common **sensors** are actually variable resistors—they dynamically chang
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
-<!-- TODO: Where to bring in circuit theory here? -->
+
+To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. However, that's the focus of our next lesson!
 
 ## Materials
 
-We'll need the following materials:
+Let's start building with the potentiometer! We'll need the following materials:
 
 | Breadboard | Arduino | LED | Resistor | Trimpot |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
@@ -81,7 +86,7 @@ We'll need the following materials:
 
 ## Making an LED dimmer with a potentiometer
 
-For our first making activity, we're going to create a potentiometer-based LED dimmer. We won't yet be using an Arduino. This will be a pure electrical circuit.
+For our first making activity, we're going to create a potentiometer-based LED dimmer. We won't yet be using an Arduino. This will be a pure electrical circuit (no microcontrollers for a bit!).
 
 ### A Tinkercad prototype
 
@@ -262,11 +267,37 @@ To begin, you might think to treat the potentiometer similar to how we did with 
 To try these incorrect circuits on Tinkercad, go [here](https://www.tinkercad.com/things/cvIBIowVyxG) and [here](https://www.tinkercad.com/things/fQOFEwZKUg6), respectively
 {: .fs-1 }
 
-Why don;t these work?
+Why don't these work?
 
-Because our input pins measure **voltage** and there is no voltage difference across our potentiometer (because no current is flowing!).
+Because, remember, our input pins measure **voltage** and there is no voltage difference across our potentiometer (because no current is flowing!). Here's an illustrative video of what's happening (and not happening) in our circuit:
 
-So,
+<iframe width="736" height="414" src="https://www.youtube.com/embed/dBbsce3KD44" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 2 (wiper leg) hooked to A0.
+{: .fs-1 }
+
+So, what do we do? We hook up all three potentiometer legs to form a voltage divider. Now, $$V_{out}$$ of the potentiometer's wiper leg equals V_{CC} \cdot \frac{R2}{R1 + R2}$$. So, we want to connect the wiper leg to the analog input pin of our Arduino:
+
+![Wiring diagram of a potentiometer hooked up to Arduino's analog input A0. Leg1 is hooked to GND, Leg2 to A0, and Leg3 to Vcc](assets/images/ArduinoUno_PotentiometerSimple_Tinkercad.png)
+Try this circuit+code out on [Tinkercad](https://www.tinkercad.com/things/7K7OLIUWCdj).
+{: .fs-1 }
+
+And here's an illustrative video of what's happening in our circuit:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/SEbXuKh52vc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Exercises
+
+Here are some exercises to try.
+
 - Try to use the slide potentiometer (also in your kits)
+- Hook up an external LED that fades based on analog input
+- Hook up the piezo buzzer to make sound based on analog input
+
+## Next Lesson
+
+In the next lesson, we'll learn how to add a fixed resistor to a two-leg variable resistor like a force-sensitive resistor or photocell to create a voltage divider that can be read by a microcontroller.
+
+<span class="fs-6">
+[Previous: Make a simple piano](piano.md){: .btn .btn-outline }
+Next: Using two-leg variable resistors{: .btn .btn-outline }
+</span>

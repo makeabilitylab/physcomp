@@ -77,7 +77,9 @@ In general, if you're confused about how to use a component, it's a good idea to
 
 ### Using buttons without a microcontroller
 
-We'll make a simple button-based circuit that turns on an LED when the button is pressed. Below, we've included two wiring diagrams: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—this circuit is completely independent of Arduino!
+We'll make a simple button-based circuit that turns on an LED when the button is pressed. 
+
+Below, we've included two wiring diagrams: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—this circuit is completely independent of Arduino!
 
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|
@@ -228,7 +230,7 @@ See also:
 
 ## Let's make stuff!
 
-Whew, OK. We've now explained how to use four-legged tactile buttons, how to use pull-down, pull-up, and pull-up resistors and their purpose, and provided a general overview of digital input.
+Whew, OK. We've now explained how to use four-legged tactile buttons, how to use pull-down, pull-up, and internal pull-up resistors and their purpose, and provided a general overview of digital input.
 
 It's time to make stuff. We're going to start with a button in a pull-down configuration before making circuits (and programs) for pull-up and internal pull-up configurations. Then, in the [next lesson](piano.md), we'll make a simple "piano" synthesizer that puts our skills to the test!
 

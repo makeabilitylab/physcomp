@@ -25,6 +25,7 @@ A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a thr
 
 ![Animation showing how a potentiometer works](/assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
 Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
+{: .fs-1 }
 
 Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks.
 

@@ -70,15 +70,17 @@ We're going to start with using only **two legs** of the potentiometer. We'll ne
 
 ### Variable resistors
 
-When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. 
+When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. Notably, however, we can't use this configuration with a microcontroller.
 
-Many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have both photocells and FSRs in your hardware kits!
+That said, many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have both photocells and FSRs in your hardware kits!
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
 Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
 To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. However, that's the focus of our next lesson!
+
+Here, we are going to focus on using a potentiometer first as a rheostat and then as a voltage divider with our Arduino.
 
 ## Materials
 
@@ -123,7 +125,7 @@ Then click on "Create new Circuit":
 
 Tinkercad works by dragging and dropping components from the right sidebar menu onto the Circuit canvas. You can click on the "Start Simulation" button to simulate circuits (and even Arduino code + circuits). 
 
-If you've dragged over an Arduino, you can also click on the "Code" button and write code either in `C/C++` or in a visual, block-based language. The simulator even has a "Serial Monitor", "Serial Plotter", and, wait for it, even a simplistic debugger with breakpoint support!
+If you've dragged over an Arduino, you can also click on the "Code" button and write code either in `C/C++` or in a visual, block-based language. The simulator even has a "Serial Monitor", "Serial Plotter", and, wait for it, a simplistic debugger with breakpoint support!
 
 ![Screenshot of Tinkercad's primary UI](assets/images/Tinkercad_MainInterface.png)
 An example of the [multi-rate blinking lesson](led-blink3.md) created in Tinkercad. [Try it out](https://www.tinkercad.com/things/kAq7G2p4QQ6)!
@@ -132,11 +134,13 @@ An example of the [multi-rate blinking lesson](led-blink3.md) created in Tinkerc
 
 Now, build the potentiometer-based LED dimmer. It's important to include that additional resistor because many potentiometers, including those provided in your hardware kits, go all the way down to 0Ω. If you don't have that "backup" current-limiting resistor, you will blow your LED. (Indeed, try it out in Tinkercad and see what happens—kablooey!)
 
+Here's one possible wiring for a potentiometer-based LED fading circuit:
+
 ![Wiring diagram of an LED-based circuit with a potentiometer for fading. 9V battery used for power](assets/images/Potentiometer_LEDCircuitWithBreadboard_9VPower_Tinkercad.png)
 
 #### Step 5: Now simulate your circuit
 
-Once you're done, try simulating your circuit:
+Once you're done, try simulating your circuit. Click the "Start Simulation" button (see animation below):
 
 ![Animation of the LED-based circuit with potentiometer working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_Tinkercad2-Optimized.gif)
 
@@ -150,23 +154,23 @@ To help us observe the effect of the potentiometer's wiper position on the total
 
 #### How to measure current with a multimeter
 
-While voltmeter's measure voltage in parallel, ammeter's measure current in series: 
+While voltmeter's measure voltage in parallel, ammeter's measure current in series. See the wiring diagram below. 
 
 ![Shows two pictures: image on left shows how to measure voltage in parallel using a multimeter and figure on right shows how to measure current in series using a multimeter](assets/images/Multimeter_HowToMeasureVoltageAndCurrent.png)
 
-To help us think about and remember how to measure current, I like to return to our water analogy and think of the ammeter as if it is a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow.
+To help us think about and remember how to measure current, I like to return to our water analogies from lecture and think of the ammeter as if it is a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow.
 
 ![Image shows a water flow meter that uses a turbine in series with a pipe to measure water flow and makes analogy to measure current in line with an ammeter](assets/images/Multimeter_MeasuringCurrentInSeriesLikeWaterFlowTurbine.png)
 
-As an important side note, recall that microcontroller input pins work like voltmeters. We'll return to this in a bit.
+As an important side note, recall that microcontroller input pins work like voltmeters. So, we will wire our analog input pins in parallel (where the "COM" connection is GND). We'll return to this in a bit. 
 
 #### Updated Tinkercad circuit with ammeter
 
-Because there is only one path for the current to flow in this circuit (no branches), we could hook up the ammeter at any in-series location—in between the potentiometer and LED or the resistor and potentiometer, for example. I just selected a position that I found convenient.
+Because there is only one path for the current to flow in this circuit (no branches), we could hook up the ammeter at any in-series location—for example, in between the potentiometer and LED or the resistor and potentiometer. I just selected a position that I found convenient.
 
 ![Tinkercad potentiometer circuit with ammeter in series](assets/images/Potentiometer_LEDCircuitWithBackupResistorAndAmmeter_Tinkercad.png)
 
-Note: when you drag over a multimeter, make sure you click on it and change the mode to ammeter.
+Note: when you drag over a multimeter, make sure you click on it and change the mode to ammeter to measure current (select Amperage).
 
 ![Updated Tinkercad wiring diagram with ammeter](assets/images/Tinkercad_Multimeter_SwitchToAmmeter.png)
 
@@ -176,17 +180,19 @@ Here's our circuit with the ammeter running in the simulator:
 
 ![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
 
-Play around with the multimeter. You can add multiple voltmeters and ammeters to your Tinkercad circuits, which is a handy way to learn how voltages and currents are working (and double check your mental model).
+Play around with the multimeter. You can add multiple voltmeters and ammeters to your Tinkercad circuits, which is a handy way to learn how voltages and currents are working (and double check your mental model of a circuit before expending effort actually building it).
 
 #### Circuit simulation in CircuitJS
 
-We also made this circuit in another online simulator called [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which has a far more powerful and feature-rich simulator but still accessible to novices.
+We also made this circuit in another online simulator called [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which has a far more powerful and feature-rich simulator but is still relatively accessible to novices. We like it because it shows an illustrative animation of current (just like some of the animations that we've made).
 
-Note: we used a 1KΩ potentiometer in this circuit rather than a 10KΩ:
+Note: we used a 1KΩ potentiometer in this circuit rather than a 10KΩ but the effect is the same:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/F92_-MOqzM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Let's build it for real
+
+OK, let's build this thing for real with our hardware parts.
 
 Because not all of us have access to a 9V battery + snap connector to easily interface with our breadboards, we can again use our Arduino for a power source (just like we did in our very first lesson: [LED On](led-on.md)).
 
@@ -224,9 +230,9 @@ Inspired by [Jeff's video](https://vimeo.com/76442431), we also made my own pote
 
 ## Intro to analog input
 
-In our previous lessons, we first learned about digital and analog **output** then digital **input**. Now, we'll learn about analog input.
+In our previous lessons, we learned about digital and analog **output** then digital **input**. Now, we'll learn about analog input.
 
-The Arduino's microcontroller contains an analog-to-digital converter, which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and Vcc (5V) to a $$2^10$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
+The Arduino's microcontroller contains an analog-to-digital converter, which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and Vcc (5V) to a $$2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
 
 The Arduino Uno and Leonardo have six analog inputs, which can be read using analogRead(int pin):
 
@@ -258,18 +264,18 @@ void setup()
 
 void loop()
 {
-  int potVal = analogRead(A0); // returns 0 - 1023 on Uno
+  int potVal = analogRead(A0); // returns 0 - 1023 (due to 10 bit ADC)
   Serial.println(potVal);      // print value to Serial
-  delay(50);				   // Reading new values at ~20Hz
+  delay(50);                   // Reading new values at ~20Hz
 }
 {% endhighlight C %}
 
-### Building an initial circuit
+### Building an initial circuit in Tinkercad
 
-To begin, you might think to treat the potentiometer similar to how we did with our LED circuits above—as a rheostat where we only use two legs. However, this won't work. Build and try these configurations yourself.
+To begin, you might treat the potentiometer similar to how we did with our LED circuits above—as a rheostat where we only use two legs. However, this won't work. Build and try these configurations yourself. Make sure to add the above code to the "Code" window in Tinkercad.
 
 ![Incorrect ways to hook up potentiometers with microcontrollers](assets/images/ArduinoUno_Potentiometer_IncorrectCircuits_Tinkercad.png)
-To try these incorrect circuits on Tinkercad, go [here](https://www.tinkercad.com/things/cvIBIowVyxG) and [here](https://www.tinkercad.com/things/fQOFEwZKUg6), respectively
+To try these incorrect circuits on Tinkercad, go [here](https://www.tinkercad.com/things/cvIBIowVyxG) and [here](https://www.tinkercad.com/things/fQOFEwZKUg6).
 {: .fs-1 }
 
 Why don't these work?
@@ -277,18 +283,26 @@ Why don't these work?
 Because, remember, our input pins measure **voltage** and there is no voltage difference across our potentiometer (because no current is flowing!). Here's an illustrative video of what's happening (and not happening) in our circuit:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/dBbsce3KD44" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 2 (wiper leg) hooked to A0.
+This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 2 (wiper leg) hooked to A0. 
 {: .fs-1 }
 
-So, what do we do? We hook up all three potentiometer legs to form a voltage divider. Now, $$V_{out}$$ of the potentiometer's wiper leg equals V_{CC} \cdot \frac{R2}{R1 + R2}$$. So, we want to connect the wiper leg to the analog input pin of our Arduino:
+Notice how the analog input voltage $$V_{A0}$$ to the microcontroller is always 5V? And, indeed, if you play with the Tinkercad circuits above, you'll note that the Serial console simply prints `1023` continuously (which translates to 5V).
+
+So, what do we do? We hook up all three potentiometer legs to form a voltage divider: Leg 1 to $$V_{CC}$$ and Leg 2 to $$A0$$ but we'll also wire Leg 3 to $$GND$$. This will create a voltage difference across the potentiometer and cause current to flow (and a voltage divider network to emerge):
 
 ![Wiring diagram of a potentiometer hooked up to Arduino's analog input A0. Leg1 is hooked to GND, Leg2 to A0, and Leg3 to Vcc](assets/images/ArduinoUno_PotentiometerSimple_Tinkercad.png)
 Try this circuit+code out on [Tinkercad](https://www.tinkercad.com/things/7K7OLIUWCdj).
 {: .fs-1 }
 
+Now $$V_{A0}=V_{CC} \cdot \frac{R2}{R1 + R2}$$.
+
 And here's an illustrative video of what's happening in our circuit:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/SEbXuKh52vc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Build it for real
+
+Once you get the potentiometer-based analog input working in Tinkercad, build the physical circuit and, to begin, copy the code from above.
 
 ## Exercises
 

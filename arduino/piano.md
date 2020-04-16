@@ -46,6 +46,8 @@ To play ear-pleasing, high-frequency waveforms with a microcontroller, you need 
 
 Instead, these microcontrollers produce [square voltage waves](https://en.wikipedia.org/wiki/Square_wave). Indeed, when we use `analogWrite`, the Arduino produces a square wave of a fixed frequency—490Hz on most PWM pins but the Uno can produce double that (980Hz) on Pins 5 and 6 (see [docs](https://www.arduino.cc/en/Reference/AnalogWrite)). When you write an 8-bit value (0-255) to `analogWrite`, this changes the **duty cycle** of the waveform, not the **frequency**. And this fixed frequency waveform is not helpful for generating pitch-controllable tones. Well, it's fine if you just want to produce a tone at 490Hz or 980Hz but what about other frequencies?
 
+<!-- TODO: show oscilloscope video of analogWrite vs. tone. Ah, see comment below. -->
+
 ### The Arduino tone library
 
 Brett Hagman created the [tone](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library to address this problem, which is part of the core Arduino library. While tone cannot generate sinusoidal waves like a DAC, it does produce square waves at specific frequencies, which can be used to actuate speakers and piezo buzzers.
@@ -75,7 +77,9 @@ If you want to take a (super) deep dive into how tone works, see the [source cod
 
 ### Piezo buzzers
 
-There are two primary types of buzzers: magnetic and piezo. A magnetic buzzer operates similarly to a traditional speaker: a current driven through a coil of wire produces a magnetic field, which dynamically moves a magnetic disk resulting in a sound wave. A piezo buzzer is driven by voltage rather than current and is constructed out of piezoelectric material. This material mechanically deforms in response to applied voltages, which can be used to generate sounds.
+There are two primary types of buzzers: magnetic and piezo. A **magnetic buzzer** operates similarly to a traditional speaker: a current driven through a coil of wire produces a magnetic field, which dynamically moves a magnetic disk resulting in a sound wave. In contrast, a **piezo buzzer **is driven by voltage rather than current and is constructed out of piezoelectric material. This material mechanically deforms in response to applied voltages, which can be used to generate sounds.
+
+<!-- TODO: would be great to have a slow-mo video of a piezo material being deformed by a voltage waveform... -->
 
 There are two types of piezo buzzers: active and passive. Active buzzers use internal oscillators to generate tones, so only need a steady DC voltage. In contrast, passive buzzers require a voltage waveform—the waveform frequency will corresopndingly vibrate the piezoelectric material to make sound.
 
@@ -105,9 +109,13 @@ You can play with the Tinkercad simulation [here](https://www.tinkercad.com/thin
 
 There is some debate about whether you should use a small in-series resistor with a passive piezo buzzer ([link1](https://forum.arduino.cc/index.php?topic=16088.msg117474#msg117474), [link2](https://forum.arduino.cc/index.php?topic=522576.msg3564043#msg3564043)) similar to an LED circuit. I never have. I've always directly wired my piezo buzzer to the Arduino pins like the wiring diagram above (and [here](https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/playing-a-scale)).
 
+It never hurts to add a resistor. You could start with a 100Ω or 220Ω resistor (or try a [variable resistor](potentiometers.md), which you'll learn about in the next lesson)
+
 ### Writing the siren code
 
-We're going to flash the Arduino's built-in LED on and off (we can never outrun [Blink](led-blink.md)) and play two alternating sounds.
+We're going to flash the Arduino's built-in LED on and off (we can never outrun [Blink](led-blink.md)) and play two alternating sounds. We encourage you to try writing this code first before looking at our step-by-step guide. 
+
+You've built up all the skills you need to do this! Just remember, `[tone(pin, frequency)](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/)`. Oh, and yah, feel free to use `[delay()](https://www.arduino.cc/reference/en/language/functions/time/delay/)` calls for this simple prototype (hey, sometimes `delay()` is the best solution!)
 
 #### Step 1: Declare our constants
 
@@ -168,15 +176,17 @@ Alright, let's make that piano.
 
 ### Making the piano circuit
 
-To limit the use of unnecessary components, we're going to hook up our buttons with the ATmega's internal pull-up resistors. So, the default state will be `HIGH` for each button (and then `LOW` when pressed). We'll write code to support both pull-down and pull-resistor designs, however.
+To limit the use of unnecessary components, we're going to hook up our buttons with the ATmega's internal pull-up resistors. So, the default state will be `HIGH` for each button (and then `LOW` when pressed). We'll write code to support both pull-down and pull-resistor designs, however (ahhh, the magic of code to help manage hardware messiness!).
 
-This is the first time we've breadboarded so many components, so try to keep your wiring and layout clean. I always reserve using black wire for connections to GND and red wire for connections to Vcc. Note that we do **not** need to wire anything directly to Vcc here (and you can tell this at a glance with my wiring because no red wires!).
+This is the first time we've breadboarded so many components, so try to keep your wiring and layout clean. I always reserve using <span style="background-color:#000000; color:#FFFFFF;">**black wire**</span> for connections to GND and <span style="background-color:red; color:#FFFFFF;">**red wire**</span> for connections to Vcc. In fact, if you sneak back a look to any of our wiring diagrams, you should observe this convention. :)
+
+Note that we do **not** need to wire anything directly to Vcc here (and you can tell this at a glance with my wiring because no red wires!).
 
 ![Tinkercad wiring diagram showing how to hook up the buttons and piezo speaker](assets/images/ArduinoUno_SimplePiano_TinkercadWiringDiagram.png)
 You can play with this circuit and the underlying Arduino program on [Tinkercad](https://www.tinkercad.com/things/dunwYl8U0Uq-simple-piano)
 {: .fs-1 }
 
-Here are two images of our physical wiring. Click and open the images in a new tab to zoom. Obviously, many other functionally equivalent wirings are possible.
+Here are two images of our physical wiring. Click and open the images in a new tab to zoom. Obviously, many other functionally equivalent wirings are possible. We are also using a mixture of jumper wires (which you have in your kits) and [manually cut solid-core wire](https://www.sparkfun.com/products/11367)s (which you do not). Generally, we strive to make clean, elegant circuits—but doubly so for when we're teaching!
 
 | Simple Piano Wiring View 1 | Simple Piano Wiring View 2 |
 | -------------------------- | -------------------------- |
@@ -193,8 +203,6 @@ First, let's declare the waveform frequencies of our notes.
 {% highlight C %}
 // Frequencies (in Hz) of our piano keys
 // From: https://en.wikipedia.org/wiki/Piano_key_frequencies
-// Looks like there are also constants built into the tone library
-// https://github.com/bhagman/Tone#musical-notes
 #define KEY_C 262  // 261.6256 Hz (middle C)
 #define KEY_D 294  // 293.6648 Hz
 #define KEY_E 330  // 329.6276 Hz
@@ -247,7 +255,7 @@ void setup() {
 
 Because tone() can only play one frequency at a time (darn, no rockin' chords), we setup a large conditional block checking for each individual button press. If a button is pressed, we play the corresponding note.
 
-To more easily handle both pull-up and pull-down circuit configurations, we wrote a convenience function called `isButtonPressed(int btnPin)`, which abstracts the "isPressed" logic.
+To more easily handle both pull-up and pull-down circuit configurations, we wrote a convenience function called `isButtonPressed(int btnPin)`, which abstracts the "isPressed" logic. (Though one might criticize the use of a global variable—tis common for these rapid prototypes, I'm afraid. You could pass the global var as a parameter into `isButtonPressed` if this makes you feel better about code modularity). 
 
 {% highlight C %}
 void loop() {

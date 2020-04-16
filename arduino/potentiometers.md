@@ -46,7 +46,7 @@ As you move the wiper, the resistance across legs 1 and 2 ($$R_{1}$$) and 2 and 
 Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves. 
 
 ![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
-A 10KΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$)
+A 10KΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
 {: .fs-1 }
 
 The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R2}{R1 + R2}$$. So, the voltage at leg 2 of the potentiometer is equal to $$V_{in} \cdot \frac{R2}{R1 + R2}$$  

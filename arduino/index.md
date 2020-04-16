@@ -54,17 +54,23 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 ## Intro to Input
 
-### Lesson 1: Using buttons
+We will be posting a few more input lessons soon, including one on force-sensitive resistors and one on debouncing. If you want to get a head start, try this [FSR lesson by Adafruit](https://learn.adafruit.com/force-sensitive-resistor-fsr/using-an-fsr).
+
+### [Lesson 1: Using buttons](buttons.md)
 
 Introduces buttons (aka momentary switches), digital input, using Arduino's [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
 
-### Lesson 2: Button piano
+### [Lesson 2: Button piano](piano.md)
 
 In this lesson, we are going to make a simple five-key piano with tactile buttons wired with internal pull-up resistors and a [piezo buzzer](https://www.adafruit.com/product/160).
 
-### Lesson 3: Potentiometers
+### [Lesson 3: Potentiometers](potentiometers.md)
 
 Introduces potentiometers and rheostats, analog input, and using Arduino's [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function. Also shows how to use Tinkercad to prototype and test circuits in an online simulator and how to use a multimeter to measure current.
+
+### Lesson 4: Force-sensitive resistors
+
+Introduces force-sensitive resistors (FSRs), how to use an FSR and variable resistors in general with microcontrollers (building on our potentiometer lesson), and how to make a force-piano. Very Jedi-like!
 
 <!-- This is a **draft** list of topics (and order may change).
 

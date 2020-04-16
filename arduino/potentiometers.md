@@ -24,6 +24,7 @@ In this lesson, we'll learn about potentiometers, analog input, voltage dividers
 A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance. 
 
 ![Animation showing how a potentiometer works](/assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
+Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
 
 Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks.
 
@@ -35,7 +36,7 @@ Let's look at the same animation as before but this time with the resistance val
 
 Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{total}$$. In our UW courses, we often provide 10KΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{total}=10KΩ$$. 
 
-As you move the wiper, the resistance across legs 1 and 2 $$R_{1}$$ and 2 and 3 $$R_{2}$$ proportionally change and always sum to $$R_{total}$$. Again, regardless of wiper position, $$R_{total}$$ is equal to the potentiometer's total resistance (in this case, 10KΩ).
+As you move the wiper, the resistance across legs 1 and 2 ($$R_{1}$$) and 2 and 3 ($$R_{2}$$) proportionally change and always sum to $$R_{total}$$.
 
 <!-- TODO: talk about different taper types? -->
 
@@ -44,14 +45,18 @@ As you move the wiper, the resistance across legs 1 and 2 $$R_{1}$$ and 2 and 3 
 Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves. 
 
 ![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
+A 10KΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$)
+{: .fs-1 }
 
-The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R2}{R1 + R2}$$. So, the voltage at leg 2 of the potentiometer is equal to V_{in} \cdot \frac{R2}{R1 + R2}$$  
+The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R2}{R1 + R2}$$. So, the voltage at leg 2 of the potentiometer is equal to $$V_{in} \cdot \frac{R2}{R1 + R2}$$  
 
 ![The voltage divider equation](assets/images/VoltageDividerEquation.png)
 
-For example, if we set Leg 1 to $$5V$$ and Leg 3 to $$GND$$, then as we change the potentiometer dial, $$V_{out}$$ at Leg 2 will dynamically shift according to the voltage divider equation:
+For example, if we set Leg 1 to $$5V$$ and Leg 3 to $$GND$$, then as we change the potentiometer dial, the voltage at Leg 2 ($$V_{out}$$) will dynamically shift according to the voltage divider equation.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/lSkqjTVwXFQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Video shows how the voltage output at Leg 2 changes based on the wiper position, which splits the potentiometer into two "resistor" sub-parts, ($$R_{1}$$) and ($$R_{2}$$), which creates a voltage divider.
+{: .fs-1 }
 
 Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing.
 

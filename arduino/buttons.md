@@ -230,9 +230,13 @@ See also:
 
 Whew, OK. We've now explained how to use four-legged tactile buttons, how to use pull-down, pull-up, and pull-up resistors and their purpose, and provided a general overview of digital input.
 
-It's time to make stuff. We're going to start with a button in a pull-down configuration before making circuits (and programs) for pull-up and internal pull-up configurations. Then, we'll make a simple "piano" synthesizer that puts our skills to the test!
+It's time to make stuff. We're going to start with a button in a pull-down configuration before making circuits (and programs) for pull-up and internal pull-up configurations. Then, in the [next lesson](piano.md), we'll make a simple "piano" synthesizer that puts our skills to the test!
 
 ## Pull-down resistor configuration
+
+Let's begin with a pull-down resistor configuration.
+
+### Pull-down resistor wiring diagram
 
 ![Wiring diagram and schematic for a button with a pull-down resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagram.png)
 
@@ -240,11 +244,36 @@ As with any circuit, there are many ways to wire up a button with a pull-down re
 
 ![Five separate wiring diagrams of a pull-down resistor configuration with a button wired to Pin 2 on the Arduino Uno](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagramGallery.png)
 
+### Code to turn on LED with button press
+
+{% highlight C %}
+const int INPUT_BUTTON_PIN = 2;
+const int OUTPUT_LED_PIN = LED_BUILTIN;
+
+void setup()
+{
+  pinMode(INPUT_BUTTON_PIN, INPUT);
+  pinMode(OUTPUT_LED_PIN, OUTPUT);
+}
+
+void loop()
+{
+  // read the state of the pushbutton value
+  int buttonState = digitalRead(INPUT_BUTTON_PIN);
+  digitalWrite(OUTPUT_LED_PIN, buttonState);
+  delay(30);
+}
+{% endhighlight C %}
+
 ## Pull-up resistor configuration
+
+Here's the wiring for a pull-up resistor configuration. Modify the code above to turn on the LED when the button is pressed.
 
 ![Wiring diagram and schematic for a button with a pull-up resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_PullUpResistor_WiringDiagram.png)
 
 ## Internal pull-up resistor configuration
+
+Now try it with the internal pull-up resistor.
 
 ![Wiring diagram and schematic for a button with an internal pull-up resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_InternalPullUpResistor_WiringDiagram.png)
 
@@ -252,6 +281,10 @@ The schematic is for illustrative purposes. The internal software controlled swi
 {: .fs-1 }
 
 ## Putting it all together
+
+Make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. Then write code to respond accordingly.
+
+![](assets/images/ArduinoUno_ThreeButtonsWithDifferentResistorConfigurations_WorkbenchPhoto.png)
 
 ## Next Lesson
 

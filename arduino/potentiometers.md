@@ -35,7 +35,7 @@ Let's look at the same animation as before but this time with the resistance val
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/QPVuZbW9Nsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{total}$$. In our UW courses, we often provide 10KΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{total}=10KΩ$$. 
+Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{total}$$. In our UW courses, we often provide 10kΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{total}=10kΩ$$. 
 
 As you move the wiper, the resistance across legs 1 and 2 ($$R_{1}$$) and 2 and 3 ($$R_{2}$$) proportionally change and always sum to $$R_{total}$$.
 
@@ -46,7 +46,7 @@ As you move the wiper, the resistance across legs 1 and 2 ($$R_{1}$$) and 2 and 
 Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves. 
 
 ![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
-A 10KΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
+A 10kΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
 {: .fs-1 }
 
 The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R2}{R1 + R2}$$. So, the voltage at leg 2 of the potentiometer is equal to $$V_{in} \cdot \frac{R2}{R1 + R2}$$  
@@ -90,7 +90,7 @@ Let's start building with the potentiometer! We'll need the following materials:
 | Breadboard | Arduino | LED | Resistor | Trimpot |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of 10KOhm trimpot]({{ site.baseurl }}/assets/images/Trimpot_100h.png) |
-| Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | 10KΩ Trimpot |
+| Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | 10kΩ Trimpot |
 
 ## Making an LED dimmer with a potentiometer
 
@@ -197,7 +197,7 @@ Before moving on, play around with the multimeter in Tinkercad. You can add mult
 
 We also made this circuit in another online simulator called [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which offers a far more powerful and feature-rich simulation but is still relatively accessible to novices. We like it because it shows an illustrative animation of current (just like some of the animations from our previous lessons that we've painstakingly manually made).
 
-There are two differences in this circuit compared to the Tinkercad one above. First, we used a 1KΩ potentiometer in this circuit rather than a 10KΩ but the general effect is the same. Second, here we have Leg 1 hooked up towards the positive voltage source and Leg 2 as our "output", so resistance is minimized when the dial is all the way left (it was the opposite for our Tinkercad circuit).
+There are two differences in this circuit compared to the Tinkercad one above. First, we used a 1kΩ potentiometer in this circuit rather than a 10kΩ but the general effect is the same. Second, here we have Leg 1 hooked up towards the positive voltage source and Leg 2 as our "output", so resistance is minimized when the dial is all the way left (it was the opposite for our Tinkercad circuit).
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/F92_-MOqzM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

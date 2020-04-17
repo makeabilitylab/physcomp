@@ -70,7 +70,7 @@ Introduces potentiometers and rheostats, analog input, and using Arduino's [`ana
 
 ### Lesson 4: Force-sensitive resistors
 
-Introduces force-sensitive resistors (FSRs), how to use an FSR and variable resistors in general with microcontrollers (building on our potentiometer lesson), and how to make a force-piano. Very Jedi-like!
+Introduces force-sensitive resistors (FSRs), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
 
 <!-- This is a **draft** list of topics (and order may change).
 

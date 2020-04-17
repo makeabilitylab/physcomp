@@ -86,7 +86,7 @@ Below, we've included two wiring diagrams: one using an external power source li
 | ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) | ![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) |
 | Circuit powered by 9V battery | Circuit powered by 5V Arduino pin | 
 
-If you build the 9V battery circuit, then we suggest a 680Ω or 1KΩ resistor rather than a 220Ω resistor.
+If you build the 9V battery circuit, then we suggest a 680Ω or 1kΩ resistor rather than a 220Ω resistor.
 {: .fs-1 }
 
 That's it! Once you've created the circuit, give it a try by pushing the button and the LED should turn on. See the animation below.
@@ -167,10 +167,10 @@ So, what to do? **Pull-down resistors** to the rescue!
 
 ### Pull-down resistors
 
-To solve this problem, we can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. Typically, this pull-down resistor value is 10KΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins).
+To solve this problem, we can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. Typically, this pull-down resistor value is 10kΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins).
 
 ![Circuit diagram showing a correct pull-down resistor circuit with the 5V connection then the digital input pin then a 10K resistor then GND](assets/images/ArduinoUno_Button_SchematicAndDiagram_PullDownResistor.png)
-The pull-down resistor is quite large: 10,000Ω (10KΩ)
+The pull-down resistor is quite large: 10,000Ω (10kΩ)
 {: .fs-1 }
 
 Here's an animation showing how a pull-down resistor configuration works:

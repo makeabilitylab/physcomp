@@ -28,17 +28,19 @@ We'll need the following materials:
 | Breadboard | Arduino | FSR | Resistor | Piezo Buzzer |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![FSR]({{ site.baseurl }}/assets/images/FSR_200h.png) | ![Image of 10KOhm resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | ![Piezo buzzer]({{ site.baseurl }}/assets/images/PiezoBuzzer_100h.png) |
-| Breadboard | Arduino Uno, Leonardo, or similar  | [Force-Sensitive Resistor](https://www.adafruit.com/product/166) | 10KΩ Resistor | [Piezo Buzzer](https://www.mouser.com/ProductDetail/810-PS1240P02BT) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | [Force-Sensitive Resistor](https://www.adafruit.com/product/166) | 10kΩ Resistor | [Piezo Buzzer](https://www.mouser.com/ProductDetail/810-PS1240P02BT) |
 
 ## Force-sensitive resistors (FSRs)
 
-Force-sensing (or force-sensitive) resistors (FSRs) are two-legged variable resistors that **decrease** in resistance with an **increase** in applied force. There are a variety of different FSR form factors, including square and circular (which host the active sensor area). In our hardware kits, we typically purchase and provide the popular [Interlink FSR 402]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) (either from [Sparkfun](https://www.sparkfun.com/products/9375) or [Adafruit](https://www.adafruit.com/product/166)), which is the product in the upper-left below.
+Force-sensing (or force-sensitive) resistors (FSRs) are two-legged variable resistors that **decrease** in resistance with an **increase** in applied force. FSRs can differ in size, shape, and force sensing sensitivity. There are a variety of different form factors, including square and circular (which host the active sensor area). In our hardware kits, we typically purchase and provide the popular [Interlink FSR 402]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) (either from [Sparkfun](https://www.sparkfun.com/products/9375) or [Adafruit](https://www.adafruit.com/product/166)), which is the product in the upper-left below.
 
 ![Grid of example force sensitive resistors from Sparkfun's website](assets/images/ForceSensitiveResistors_Examples_Sparkfun.png)
 Prices and products from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all)
 {: .fs-1 }
 
-While FSRs respond to force, they are not precision measurement instruments like load cells or strain gauges (TODO: add links)
+While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to measure weight, load, or strain.
+
+<!-- TODO: How do FSRs work? Include figure from datasheet -->
 
 ### FSR applications
 
@@ -58,8 +60,8 @@ So, what exactly is the relationship between an FSR's resistance and an applied 
 
 A graph of the force (g) vs. resistance (kΩ) of the FSR 402 is shown below (plotted on a log-log scale). As can be observed from the graph, the FSR has two response phases: 
 
-1. An initial "break force" that dramatically swings the resistance from >100kΩ to roughly 10kΩ
-2. After this threshold, the FSR resistance is inversely proportional to the applied force (following an inverse power-law characteristic).  
+1. An initial "break force" or "turn on threshold" that dramatically swings the resistance from >10MΩ to roughly 10kΩ
+2. After this threshold, the FSR resistance becomes linear: inversely proportional to the applied force (following an inverse power-law characteristic).  
 
 At the high-end of the force range (greater than 1000g), the FSR saturates and does not continue to drop resistance.
 
@@ -78,14 +80,30 @@ To begin, just like we did with the [buttons](buttons.md) and [potentiometers](p
 Below, we show two possible wiring diagrams: the first (preferred) shows the FSR circuit powered by a 9V battery while the second shows power derived from the 5V and GND pins on the Arduino. (Again, we prefer the former just to further emphasize that at this point, we're not using microcontrollers!)
 
 ![Two wiring diagrams of an FSR connected to an LED](assets/images/FSR_WiringDiagram_NoArduino_Fritzing.png)
+Two wiring options of an FSR using a breadboard. Like typical resistors, FSRs can be inserted into your circuits in either direction.
+{: .fs-1 }
 
-You'll note that unlike with the rheostat circuit, here we're not using a backup resistor. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with 1,000g of force, the FSR still has roughly 1KΩ of resistance. So, it never drops to dangerously low resistance levels like the potentiometer.
+You'll note that unlike with the rheostat circuit, here we're **not** using a backup resistor. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with 1,000g of force, the FSR still has roughly 500Ω-1kΩ of resistance. So, it never drops to dangerously low resistance levels like the potentiometer. You can, of course, use one if you want. Remember that we sum resistance in series.
 
-Once you've made the circuit, have fun playing with the FSR. Get a sense of its responsiveness and how hard you have to press.
+### Positioning FSR on breadboard
+
+The two contact legs are 2.54mm apart (0.1"), so should fit snugly into your breadboard. Just like a traditional resistor, the FSR can be inserted in either direction.
+
+![FSR close-up of the two contact legs](assets/images/FSR_ContactLegs_Zoom_FromSparkfun.png)
+Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all#res).
+{: .fs-1 }
+
+If you want a more permanent connection, see this [fantastic guide](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all#hardware-assembly) from Sparkfun on soldering FSRs (difficult) or using Amphenol FCI Clinchers (recommended):
+
+![Image showing Amphenol CFI clincher connectors installed on the FSR's legs](assets/images/FSR_Clinchers_Sparkfun.png)
+Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all#hardware-assembly)
+{: .fs-1 }
 
 ### Workbench video of completed circuit
 
-Here's a workbench video of our completed circuit:
+Once you've made the circuit, have fun playing with the FSR. Get a sense of its responsiveness and how hard you have to press.
+
+Here's a workbench video of our completed circuit (this is the same video as the one in the [potentiometers](potentiometers.md) lesson, so there is a backup resistor):
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/YMCqDcnwMYo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 Workbench video of the FSR LED dimmer circuit
@@ -95,6 +113,9 @@ Workbench video of the FSR LED dimmer circuit
 
 TODO
 
+### Make your own lo-fi pressure sensor
+
+TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator clip version and taped jumper wire version.
 
 ## References
 - [Interlink FSR 402 Data Sheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf)

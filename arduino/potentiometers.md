@@ -310,7 +310,7 @@ void loop()
 
 Let's build an initial circuit in Tinkercad—first, the wrong way. And then we'll fix it and show how to do it the right way.
 
-#### Incorrect potentiometer analog input circuit
+#### Incorrect potentiometer-based analog input circuit
 
 To begin, you might treat the potentiometer similar to how we did with our LED circuits above—as a rheostat where we only use two legs (an outer leg and Leg 2). However, this won't work. Build and try these configurations yourself. Make sure to add the above code to the "Code" window in Tinkercad and then hit the "Simulation" button.
 
@@ -328,11 +328,11 @@ This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 
 
 Notice how the analog input voltage $$V_{A0}$$ to the microcontroller is always 5V? And, indeed, if you play with the Tinkercad circuits above, you'll note that the Serial console simply prints `1023` continuously (which translates to 5V).
 
-#### Correct analog input circuit: voltage divider
+#### Correct potentiometer-based analog input circuit: voltage divider
 
 So, what do we do? We hook up all three potentiometer legs to form a voltage divider: Leg 1 to $$V_{CC}$$ and Leg 2 to $$A0$$ but we'll also wire Leg 3 to $$GND$$. This will create a voltage difference across the potentiometer and cause current to flow from $$V_{CC}$$ to $$GND$$ (and a voltage divider network to emerge):
 
-![Wiring diagram of a potentiometer hooked up to Arduino's analog input A0. Leg1 is hooked to GND, Leg2 to A0, and Leg3 to Vcc](assets/images/ArduinoUno_PotentiometerSimple_Tinkercad.png)
+![Correct ways of wiring a potentiometer to an Arduino's analog input A0.](assets/images/ArduinoUno_PotentiometerSimple_Tinkercad.png)
 Try this circuit+code out on [Tinkercad](https://www.tinkercad.com/things/7K7OLIUWCdj).
 {: .fs-1 }
 

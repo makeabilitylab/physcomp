@@ -322,8 +322,8 @@ Why don't these work?
 
 Because, remember, our input pins measure **voltage** and there is no voltage difference across our potentiometer (because no current is flowing!). Here's an illustrative video of what's happening (and not happening) in our circuit:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/dBbsce3KD44" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 2 (wiper leg) hooked to A0. 
+<iframe width="736" height="414" src="https://www.youtube.com/embed/gp379BG-aeE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 2 (wiper leg) hooked to A0. Simulation made in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 {: .fs-1 }
 
 Notice how the analog input voltage $$V_{A0}$$ to the microcontroller is always 5V? And, indeed, if you play with the Tinkercad circuits above, you'll note that the Serial console simply prints `1023` continuously (which translates to 5V).
@@ -340,7 +340,9 @@ Now $$V_{A0}=V_{CC} \cdot \frac{R2}{R1 + R2}$$.
 
 And here's an illustrative video of what's happening in our circuit:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/SEbXuKh52vc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414"  src="https://www.youtube.com/embed/rJr4TgoFZ2Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+This is a circuit simulation of the potentiometer correctly hooked up to a microcontroller with Leg 1 hooked to 5V, Leg 2 (wiper leg) hooked to analog input A0, and Leg 3 to GND. Simulation made in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
+{: .fs-1 }
 
 ### Build it for real
 

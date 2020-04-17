@@ -127,7 +127,7 @@ To use an FSR—or any variable resistor—with a microcontroller, you must add 
 
 ![Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_SchematicAndDiagram.png)
 
-That fixed resistor is like the third leg. You can also think about this fixed resistor as a pull-up or pull-down resistor for our switch circuits (and, indeed, when the FSR is **not** pressed, it is like an open switch).
+That fixed resistor is like the third leg. This fixed resistor is also similar to the pull-up or pull-down resistors for our switch circuits (and, indeed, when the FSR is **not** pressed, it is like an open switch).
 <!-- TODO: how to select the this resistor -->
 
 <!-- Remaining TODOs: writing code to fade LED, talking about map function, write musical code -->

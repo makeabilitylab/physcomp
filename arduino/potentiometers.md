@@ -306,7 +306,7 @@ void loop()
 }
 {% endhighlight C %}
 
-### Building an initial circuit in Tinkercad
+### Building an initial circuit
 
 Let's build an initial circuit in Tinkercad—first, the wrong way. And then we'll fix it and show how to do it the right way.
 
@@ -364,5 +364,5 @@ In the next lesson, we'll learn how to add a fixed resistor to a two-leg variabl
 
 <span class="fs-6">
 [Previous: Make a simple piano](piano.md){: .btn .btn-outline }
-Next: Using two-leg variable resistors{: .btn .btn-outline }
+[Next: Using force-sensitive resistors](force-sensitive-resistors.md) {: .btn .btn-outline }
 </span>

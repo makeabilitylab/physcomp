@@ -68,7 +68,7 @@ In this lesson, we are going to make a simple five-key piano with tactile button
 
 Introduces potentiometers and rheostats, analog input, and using Arduino's [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function. Also shows how to use Tinkercad to prototype and test circuits in an online simulator and how to use a multimeter to measure current.
 
-### Lesson 4: Force-sensitive resistors
+### [Lesson 4: Force-sensitive resistors](force-sensitive-resistors.md)
 
 Introduces force-sensitive resistors (FSRs), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
 

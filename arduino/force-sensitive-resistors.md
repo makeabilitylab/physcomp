@@ -121,7 +121,9 @@ Why doesn't this work?
 
 Recall from our [potentiometers](potentiometers.md) lesson, microcontrollers read voltages, not current. We have to setup a circuit that enables our microcontroller to "see" changes in voltages. 
 
-We had to do the same thing with the [potentiometer](potentiometers.md). It would not work when only two legs were used. We had to connect all three potentiometer legs. 
+<!-- make and show an animation of the pot splitting into two resistors and how this is the same thing that we have to do for our FSR -->
+
+We had to do the same thing with the [potentiometer](potentiometers.md). The potentiometer would not work as analog input when only two legs were used. We had to connect all three potentiometer legs. 
 
 To use an FSR—or any variable resistor—with a microcontroller, you must add a fixed resistor to form a voltage divider like this:
 

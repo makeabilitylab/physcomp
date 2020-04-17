@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L3&#58; Potentiometers
-nav_order: 3
+title: L4&#58; Force-Sensitive Resistors
+nav_order: 4
 parent: Input
 has_toc: true # (on by default)
 comments: true
@@ -71,7 +71,7 @@ At the high-end of the force range (greater than 1000g), the FSR saturates and d
 A graph of the force (g) vs. resistance (kΩ) plotted on a log-log scale for the Interlink FSR 402. Graph from the [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf).
 {: .fs-1 }
 
-For more details, see the Interlink [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and [Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf) for details.
+For more details, see the Interlink [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and [Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf).
 
 ## Making an LED dimmer with an FSR
 
@@ -98,7 +98,7 @@ Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-r
 If you want a more permanent connection, see this [fantastic guide](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all#hardware-assembly) from Sparkfun on soldering FSRs (difficult) or using Amphenol FCI Clinchers (recommended):
 
 ![Image showing Amphenol CFI clincher connectors installed on the FSR's legs](assets/images/FSR_Clinchers_Sparkfun.png)
-Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all#hardware-assembly)
+Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all#hardware-assembly) showing Amphenol CFI clincher connectors installed on the FSR's legs.
 {: .fs-1 }
 
 ### Workbench video of completed circuit
@@ -129,23 +129,25 @@ To use an FSR—or any variable resistor—with a microcontroller, you must add 
 
 ![Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_SchematicAndDiagram.png)
 
-That fixed resistor is like the third leg. This fixed resistor is also similar to the pull-up or pull-down resistors for our switch circuits (and, indeed, when the FSR is **not** pressed, it is like an open switch).
+That fixed resistor is like the third leg. It's also similar to the pull-up or pull-down resistors for our switch circuits (and, indeed, when the FSR is **not** pressed, it is like an open switch).
 
 ### How to select the fixed resistor
 
 But how do we know what value to select for this fixed resistor? To the datasheets!
 
-The [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf) suggests choosing the fixed resistor (which it calls $$R_M$$) based on the specific use context to maximize the desired force sensitivity range and to limit current.
+The [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf) suggests choosing the fixed resistor (which it calls $$R_M$$) based on your specific use context to maximize the desired force sensitivity range and to limit current.
 
-The guide provides a useful force *vs.* $$V_{out}$$ graph with different fixed resistor values ($$R_M$$).
+The guide provides a useful force *vs.* $$V_{out}$$ graph with different fixed resistor values ($$R_M$$). As can be observed from the graph, selecting a 10kΩ resistor for $$R_M$$ provides the most dynamic $$V_{out}$$ range for the full sensing force range of the FSR. Note also the two-phase relationship with the initial steep slope followed by a software increase.
 
 ![FSR force vs. Vout graph for different fixed resistor values from the Interlink FSR data sheet](assets/images/Voltage-divider-circuit-Interlink-FSR-402-Makerguides.png)
 Graph originally from [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf). Image above from [Makerguides](https://www.makerguides.com/fsr-arduino-tutorial).
 
+## Exercises
+
+- Write code to fade an LED based on the force applied to the FSR
+- Write code to change the tone frequency to a piezo buzzer based on the force applied to the FSR
 
 <!-- Remaining TODOs: writing code to fade LED, talking about map function, write musical code -->
-
-
 
 <!-- ### Make your own lo-fi pressure sensor
 
@@ -158,4 +160,3 @@ TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator
 - [Force Sensitive Resistors (FSRs)](http://www.openmusiclabs.com/learning/sensors/fsr/), Open Music Labs
 - [Force Sensitive Resistor (FSR)](https://learn.adafruit.com/force-sensitive-resistor-fsr), Adafruit Learn
 - [Force Sensitive Resistor Hookup Guide](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all), Sparkfun Tutorials
-- 

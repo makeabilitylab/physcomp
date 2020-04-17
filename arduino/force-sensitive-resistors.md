@@ -63,7 +63,7 @@ So, what exactly is the relationship between an FSR's resistance and an applied 
 A graph of the force (g) vs. resistance (kΩ) of the FSR 402 is shown below (plotted on a log-log scale). As can be observed from the graph, the FSR has two response phases: 
 
 1. An initial "break force" or "turn on threshold" that dramatically swings the resistance from >10MΩ to roughly 10kΩ
-2. After this threshold, the FSR resistance becomes linear: inversely proportional to the applied force (following an inverse power-law characteristic).  
+2. After this threshold, the FSR resistance becomes inversely proportional to the applied force (following an inverse power-law characteristic).  
 
 At the high-end of the force range (greater than 1000g), the FSR saturates and does not continue to drop resistance.
 

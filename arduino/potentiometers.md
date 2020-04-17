@@ -336,7 +336,7 @@ So, what do we do? We hook up all three potentiometer legs to form a voltage div
 Try this circuit+code out on [Tinkercad](https://www.tinkercad.com/things/7K7OLIUWCdj).
 {: .fs-1 }
 
-Now $$V_{A0}=V_{CC} \cdot \frac{R2}{R1 + R2}$$.
+Now $$V_{A0}=V_{CC} \cdot \frac{R_2}{R_1 + R_2}$$.
 
 And here's an illustrative video of what's happening in our circuit:
 

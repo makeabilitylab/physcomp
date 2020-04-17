@@ -128,7 +128,18 @@ To use an FSR—or any variable resistor—with a microcontroller, you must add 
 ![Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_SchematicAndDiagram.png)
 
 That fixed resistor is like the third leg. This fixed resistor is also similar to the pull-up or pull-down resistors for our switch circuits (and, indeed, when the FSR is **not** pressed, it is like an open switch).
-<!-- TODO: how to select the this resistor -->
+
+### How to select the fixed resistor
+
+But how do we know what value to select for this fixed resistor? To the datasheets!
+
+The [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf) suggests choosing the fixed resistor (which it calls $$R_M$$) based on the specific use context to maximize the desired force sensitivity range and to limit current.
+
+The guide provides a useful force *vs.* $$V_{out}$$ graph with different fixed resistor values ($$R_M$$).
+
+![FSR force vs. Vout graph for different fixed resistor values from the Interlink FSR data sheet](assets/images/Voltage-divider-circuit-Interlink-FSR-402-Makerguides.png)
+Graph originally from [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf). Image above from [Makerguides](https://www.makerguides.com/fsr-arduino-tutorial).
+
 
 <!-- Remaining TODOs: writing code to fade LED, talking about map function, write musical code -->
 

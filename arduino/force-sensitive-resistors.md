@@ -83,7 +83,7 @@ Below, we show two possible wiring diagrams: the first (preferred) shows the FSR
 Two wiring options of an FSR using a breadboard. Like typical resistors, FSRs can be inserted into your circuits in either direction.
 {: .fs-1 }
 
-You'll note that unlike with the rheostat circuit, here we're **not** using a backup resistor. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with 1,000g of force, the FSR still has roughly 500Ω-1kΩ of resistance. So, it never drops to dangerously low resistance levels like the potentiometer. You can, of course, use one if you want. Remember that we sum resistance in series.
+You'll note that unlike with the rheostat circuit, here we're **not** using a backup resistor. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with 1,000g of force, the FSR still has roughly 500Ω-1kΩ of resistance. So, it never drops to dangerously low resistance levels like the potentiometer. You can, of course, use one if you want.
 
 ### Positioning FSR on breadboard
 
@@ -111,7 +111,11 @@ Workbench video of the FSR LED dimmer circuit
 
 ## Using FSRs with microcontrollers
 
-TODO
+To use an FSR—or any variable resistor—with a microcontroller, you must add a fixed resistor to form a voltage divider like this:
+
+![Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_SchematicAndDiagram.png)
+
+
 
 ### Make your own lo-fi pressure sensor
 

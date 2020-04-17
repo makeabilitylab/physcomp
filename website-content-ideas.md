@@ -58,6 +58,14 @@ nav_exclude: true
 - [Programming microcontrollers](https://itp.nyu.edu/physcomp/lessons/programming/programming-terms-and-programming-environments/)
 - Electronic prototyping kits section
 
+### Sensors
+
+If we do a sensors subsection:
+
+#### Distance
+- [HC-SR04 Ultrasonic guide](https://www.makerguides.com/hc-sr04-arduino-tutorial/) by Makerguides is quite good
+- [Sharp IR Distance Sensor](https://www.makerguides.com/sharp-gp2y0a21yk0f-ir-distance-sensor-arduino-tutorial/)--also by Makerguides and also quite good
+
 ## Intro to Output TODOs
 TODO: 
 - [Done in led-blink.md] blink no delay (where to put this?). We do have a fade with no delay at end of led-fade.md

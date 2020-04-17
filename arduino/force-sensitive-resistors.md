@@ -40,7 +40,7 @@ Prices and products from [Sparkfun.com](https://learn.sparkfun.com/tutorials/for
 
 While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to measure weight, load, or strain.
 
-<!-- TODO: How do FSRs work? Include figure from datasheet -->
+<!-- TODO: How do FSRs work actually work? Include figure from datasheet -->
 
 ### FSR applications
 
@@ -53,6 +53,8 @@ The [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResis
 - **Finding centroid of force.** Use multiple sensors to determine centroid of force
 - **Detecting presence, position, or motion** Sense a person/patient in a bed, chair, or medical device
 - **Detecting liquid blockage.** Detect tube or pump occlusion or blockage by measuring back pressure
+
+<!-- TODO: in future, include papers from HCI and UbiComp with pressure sensors -->
 
 ### FSR force-resistance graph
 
@@ -111,15 +113,30 @@ Workbench video of the FSR LED dimmer circuit
 
 ## Using FSRs with microcontrollers
 
+First, we'll show you the wrong way to hook up an FSR to a microcontroller:
+
+![Incorrect Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_Incorrect_SchematicAndDiagram.png)
+
+Why doesn't this work?
+
+Recall from our [potentiometers](potentiometers.md) lesson, microcontrollers read voltages, not current. We have to setup a circuit that enables our microcontroller to "see" changes in voltages. 
+
+We had to do the same thing with the [potentiometer](potentiometers.md). It would not work when only two legs were used. We had to connect all three potentiometer legs. 
+
 To use an FSR—or any variable resistor—with a microcontroller, you must add a fixed resistor to form a voltage divider like this:
 
 ![Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_SchematicAndDiagram.png)
 
+That fixed resistor is like the third leg. You can also think about this fixed resistor as a pull-up or pull-down resistor for our switch circuits (and, indeed, when the FSR is **not** pressed, it is like an open switch).
+<!-- TODO: how to select the this resistor -->
+
+<!-- Remaining TODOs: writing code to fade LED, talking about map function, write musical code -->
 
 
-### Make your own lo-fi pressure sensor
 
-TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator clip version and taped jumper wire version.
+<!-- ### Make your own lo-fi pressure sensor
+
+TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator clip version and taped jumper wire version. -->
 
 ## References
 - [Interlink FSR 402 Data Sheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf)

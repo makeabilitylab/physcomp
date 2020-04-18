@@ -75,6 +75,8 @@ We're going to start with using only **two legs** of the potentiometer. We'll ne
 
 When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. Notably, however, we can't use this configuration with a microcontroller.
 
+<!-- TODO: maybe show images of circuits with only two legs hooked up? -->
+
 That said, many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have both photocells and FSRs in your hardware kits!
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
@@ -366,5 +368,6 @@ In the next lesson, we'll learn how to add a fixed resistor to a two-leg variabl
 
 <span class="fs-6">
 [Previous: Make a simple piano](piano.md){: .btn .btn-outline }
-[Next: Using force-sensitive resistors](force-sensitive-resistors.md) {: .btn .btn-outline }
+[Next: Using force-sensitive resistors](force-sensitive-resistors.md) 
+{: .btn .btn-outline }
 </span>

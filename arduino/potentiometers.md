@@ -27,39 +27,37 @@ A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a thr
 Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
 {: .fs-1 }
 
-Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks.
+Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit).
 
 ![Image of two physical potentiometers along with a diagram and schematic symbol](assets/images/Potentiometer_DiagramWithSchematicSymbol.png)
-
-Let's look at the same animation as before but this time with the resistance values emphasized:
-
-<iframe width="736" height="414" src="https://www.youtube.com/embed/QPVuZbW9Nsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-Notice how the resistance across the two outer legs never changes. This is the total potentiometer resistance. Let's call this $$R_{total}$$. In our UW courses, we often provide 10kΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit), so $$R_{total}=10kΩ$$. 
-
-As you move the wiper, the resistance across legs 1 and 2 ($$R_{1}$$) and 2 and 3 ($$R_{2}$$) proportionally change and always sum to $$R_{total}$$.
 
 <!-- TODO: talk about different taper types? -->
 
 ### Potentiometers as voltage dividers
 
-Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves. 
+Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves. As you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change and always sum to $$R_{total}$$.
+
+Watch this video to learn how a potentiometer can function as a voltage divider in a circuit:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/ZAzX_pxuWps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Video shows how the voltage output at Leg 2 changes based on the wiper position, which splits the potentiometer into two "resistor" sub-parts, ($$R_{1}$$) and ($$R_{2}$$), which creates a voltage divider.
+{: .fs-1 }
+
+#### Voltage divider equation
 
 ![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
 A 10kΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
 {: .fs-1 }
 
-The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R2}{R1 + R2}$$. So, the voltage at leg 2 of the potentiometer is equal to $$V_{in} \cdot \frac{R2}{R1 + R2}$$  
+The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R_2}{R_1 + R_2}$$. So, the voltage at leg 2 of the potentiometer is equal to $$V_{in} \cdot \frac{R_2}{R_1 + R_2}$$  
 
 ![The voltage divider equation](assets/images/VoltageDividerEquation.png)
 
 For example, if we set Leg 1 to $$5V$$ and Leg 3 to $$GND$$, then as we change the potentiometer dial, the voltage at Leg 2 ($$V_{out}$$) will dynamically shift according to the voltage divider equation.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/lSkqjTVwXFQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-Video shows how the voltage output at Leg 2 changes based on the wiper position, which splits the potentiometer into two "resistor" sub-parts, ($$R_{1}$$) and ($$R_{2}$$), which creates a voltage divider.
-{: .fs-1 }
+#### Video on Ohm's Law and voltage dividers
 
-Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing.
+Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing (it's one of my favorites!).
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 <p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>

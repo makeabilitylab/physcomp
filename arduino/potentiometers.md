@@ -32,6 +32,7 @@ Potentiometers are truly ubiquitous electronic components found in everything fr
 ![Image of two physical potentiometers along with a diagram and schematic symbol](assets/images/Potentiometer_DiagramWithSchematicSymbol.png)
 
 <!-- TODO: talk about different taper types? -->
+<!-- TODO: talk about potentiometer drawbacks--like maintainance, corrosion. See https://ultimateelectronicsbook.com/potentiometers/ -->
 
 ### Potentiometers as voltage dividers
 
@@ -267,6 +268,8 @@ On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages betwee
 **ADVANCED INFO:**
 
 But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and certainly our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). According to the ATmega328 datasheet, "the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate." See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
+
+<!-- TODO: even more interesting discussions about how for one ADC clock period, the ADC has to charge a capacitor that it uses to measure voltage on the input pin. See: https://www.avrfreaks.net/forum/minumum-current-required-analog-pin-atmega328 -->
 
 ---
 

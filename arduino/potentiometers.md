@@ -41,6 +41,8 @@ Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_
 A 10kΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
 {: .fs-1 }
 
+<!-- TODO: fix image to use Vout and Vin and not show 5K for resistance values? -->
+
 As you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$.
 
 #### Voltage divider equation

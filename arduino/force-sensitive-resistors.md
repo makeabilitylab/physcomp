@@ -56,6 +56,16 @@ The [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResis
 
 <!-- TODO: in future, include papers from HCI and UbiComp with pressure sensors -->
 
+### How do FSRs work?
+
+How do FSRs actually work? Their construction is actually quite simple. There are three layers: the top and bottom layers are conductive and the middle layer provides a "thin air gap" that separates the two. When the two conductive layers are pressed together, electrical pathways are made. The harder you press, the more connections. See the FSR construction diagram from Interlink below:
+
+![FSR construction diagram from interlink showing three layers: top and bottom layer are conductive and middle layer is an "air gap" that separates the two.](assets/images/FSR_ConstructionDiagram_Interlink.png)
+Diagram from the Interlink FSR [Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf)
+{: .fs-1 }
+
+<!-- TODO: in future, consider adding in a second diagram that shows how the connections in the "active area" are made when the top layer comes down? -->
+
 ### FSR force-resistance graph
 
 So, what exactly is the relationship between an FSR's resistance and an applied force?
@@ -129,7 +139,7 @@ To use an FSR—or any variable resistor—with a microcontroller, you must add 
 
 ![Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_SchematicAndDiagram.png)
 
-That fixed resistor is like the third leg. It's also similar to the pull-up or pull-down resistors for our switch circuits (and, indeed, when the FSR is **not** pressed, it is like an open switch).
+That fixed resistor is like hooking up the third leg of a potentiometer. It's also similar to the pull-up or pull-down resistors for our switch circuits (and, indeed, when the FSR is **not** pressed, it acts like an open switch because its resistance is so high).
 
 ### How to select the fixed resistor
 

@@ -254,7 +254,7 @@ There are other factors to consider as well—for example, including line capaci
 
 #### Tradeoffs in selecting a pull-down resistor
 
-What about pull-down resistors? The same tradeoffs and factors also affect selecting a pull-down resistor. Here, however, we need to know the leakage current $$I_{IL}$$ from an input pin to ground. The ATmega328 datasheet specifies the same leakage current for $$I_{IH}$$ and $$I_{IL}$$ as $$1µA$$. 
+What about pull-down resistors? The same tradeoffs and factors apply here. But instead of  $$I_{IH}$$, we need to know the leakage current $$I_{IL}$$ from an input pin to ground. The ATmega328 datasheet specifies the same leakage current for $$I_{IH}$$ and $$I_{IL}$$ as $$1µA$$. 
 
 ![Two schematics showing a pull-down resistor when switch is open and closed and the amount of current and power](assets/images/PullDownResistor_Schematics_CurrentLeakageAndPowerDissipation.png)
 

@@ -38,7 +38,7 @@ Force-sensing (or force-sensitive) resistors (FSRs) are two-legged variable resi
 Prices and products from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all)
 {: .fs-1 }
 
-While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to measure weight, load, or strain.
+While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to precisely measure weight, load, or strain.
 
 <!-- TODO: How do FSRs work actually work? Include figure from datasheet -->
 
@@ -47,7 +47,7 @@ While FSRs respond to force, they are not precision measurement instruments like
 What can we do with FSRs?
 
 The [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) describes a number of example applications, including:
-- **Detecting human interaction.** Sense whether a touch is accidnetal or intended by a reading force (or other signal processing)
+- **Detecting human interaction.** Sense whether a touch is accidental or intentional by a reading force (or other signal processing)
 - **Using force for UI feedback.** Detect user's touch force to make a more intuitive interface
 - **Enhancing tool safety.** Differentiate a grip from a touch as a safety lock
 - **Finding centroid of force.** Use multiple sensors to determine centroid of force
@@ -85,7 +85,7 @@ Below, we show two possible wiring diagrams: the first (preferred) shows the FSR
 Two wiring options of an FSR using a breadboard. Like typical resistors, FSRs can be inserted into your circuits in either direction.
 {: .fs-1 }
 
-You'll note that unlike with the rheostat circuit, here we're **not** using a backup resistor. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with 1,000g of force, the FSR still has roughly 500Ω-1kΩ of resistance. So, it never drops to dangerously low resistance levels like the potentiometer. You can, of course, use one if you want.
+With the 9V wiring, we include a backup resistor; however, with the 5V wiring (with Arduino), we do not. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with 1,000g of force, the FSR still has roughly 200Ω-500Ω of resistance. So, while the potentiometer drops to 0Ω at the lowest setting, the FSR does not. For the 9V wiring, if we assume the red LED's $$V_f=2V$$ and the lowest FSR resistance of 200Ω, then $$I=\frac{9V-2V}{200Ω}=35mA$$, which exceeds the max current of the LED. We thus added a 470Ω backup resistor to be safe. So, $$I=\frac{9V-2V}{200Ω + 470Ω}=10.4mA$$.
 
 ### Positioning FSR on breadboard
 
@@ -113,7 +113,7 @@ Workbench video of the FSR LED dimmer circuit
 
 ## Using FSRs with microcontrollers
 
-First, we'll show you the wrong way to hook up an FSR to a microcontroller:
+First, like usual, we'll show you the wrong way to hook up an FSR to a microcontroller:
 
 ![Incorrect Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_Incorrect_SchematicAndDiagram.png)
 

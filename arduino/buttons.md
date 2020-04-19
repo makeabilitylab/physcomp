@@ -236,7 +236,7 @@ The short answer: use a 10kΩ resistor. As mentioned above, the official [Arduin
 
 #### Tradeoffs in selecting a pull-up resistor
 
-The longer answer: there are multiple factors to consider, but the primary tradeoff is in selecting a resistor that is small enough to "pull-up" the voltage to `HIGH` when the switch is open but large enough to not "waste" power due to too much current through the resistor when the switch is closed.
+The longer answer: there are multiple factors to consider, but the primary tradeoff is in selecting a resistor that is small enough to "pull-up" the voltage to `HIGH` when the switch is open but large enough to not "waste" power due to too much current through the resistor when the switch is closed. Remember, a "strong" pull-up is a low-resistance value while a "weak" pull-up is a high-resistance value. This will make more sense below.
 
 ![Two schematics showing pull-up resistor when switch is open and closed](assets/images/PullUpResistor_Schematics_CurrentLeakageAndPowerDissipation.png)
 

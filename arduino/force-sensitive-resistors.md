@@ -208,7 +208,7 @@ In our code, we only play sound when the FSR is pressed (to limit the annoyance)
 
 ### Workbench video with serial plotter
 
-Here's our take on it! Make sure to have your sound on (or not) if you want to hear the piezo buzzer!
+Here's our take on it! Make sure to have your sound on (or not) if you want to hear the piezo buzzer! 
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/OuEABPQV9_k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

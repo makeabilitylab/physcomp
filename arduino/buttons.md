@@ -193,7 +193,7 @@ So, what to do? **Pull-down resistors** to the rescue!
 
 To solve this problem, we can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. 
 
-Typically, this pull-down resistor value is 10kΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins). A small resistor is called a **strong** pull-down and a large resistor is called a **weak** pull-down. In a bit, we'll talk about **what** factors influence the pull-down resistor value (hint: use a 10kΩ) but the primary tradeoff is in power efficiency (low resistor value "wastes" more current), function (a large resistor may not always work properly as a pull-down), and speed (a large resistor will limit current and slow down capacitor charging on the input pin, which is how the microcontroller determines input voltage).
+Typically, this pull-down resistor value is 10kΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins). A small resistor is called a **strong** pull-down and a large resistor is called a **weak** pull-down. In a bit, we'll talk about **what** factors influence the pull-down resistor value (hint: use a 10kΩ) but the primary tradeoff is in power efficiency (low resistor value "wastes" more current) and function (a large resistor may not always work properly as a pull-down).
 
 ![Circuit diagram showing a correct pull-down resistor circuit with the 5V connection then the digital input pin then a 10K resistor then GND](assets/images/ArduinoUno_Button_SchematicAndDiagram_PullDownResistor.png)
 The pull-down resistor is quite large: 10,000Ω (10kΩ)
@@ -235,27 +235,31 @@ Some microcontrollers have both internal pull-up *and* pull-down resistors. The 
 
 The short answer: use a 10kΩ resistor. As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
 
+#### Tradeoffs in selecting a pull-up resistor
+
 The longer answer: there are multiple factors to consider, but the primary tradeoff is in selecting a resistor that is small enough to "pull-up" the voltage to `HIGH` when the switch is open but large enough to not "waste" power due to too much current through the resistor when the switch is closed.
 
 ![Two schematics showing pull-up resistor when switch is open and closed](assets/images/PullUpResistor_Schematics_CurrentLeakageAndPowerDissipation.png)
 
-Above, we show two diagrams. On the left, a diagram of the leakage current $$I_{IH}$$ into our input pin when the switch is open. This leakage current is specified in the ATmega328 datasheet as $$1µA$$. We can thus calculate the voltage on the input pin ($$V_{pin}$$) using Ohm's Law: $$V_{pin} = V_{in} - I_{IH}R$$ where $$V_{in}=5V$$ and $$I_{IH}=0.000001A$$ or ($$1µA$$). Recall that on the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH`. So, we must ensure that our selection of $$R$$ is not so high as to drop below this threshold. Using this formula alone to drive our decision, we can determine that $$R$$ should not exceed ~400kΩ.
+Above, we show two diagrams. On the left, a diagram of the leakage current $$I_{IH}$$ into our input pin when the switch is open. This leakage current is specified in the ATmega328 datasheet as 0.000001A$$ or ($$1µA$$) (Section 26.2). We can thus calculate the voltage on the input pin ($$V_{pin}$$) using Ohm's Law: $$V_{pin} = V_{in} - I_{IH}R$$ where $$V_{in}=5V$$ and $$I_{IH}=1µA$$). Recall that on the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH`. So, we must ensure that our selection of $$R$$ is not so high as to drop below this threshold. Using this formula alone to drive our decision, we can determine that $$R$$ should not exceed ~400kΩ.
 
-The right diagram illustrates what happens when the switch is closed. Now, the leakage current of ($$1µA$$) can be ignored as the current is dominated by the $$V_{in}$$ to $$GND$$ branch. And here, the key factor is how much power is being dissipated (wasted) by the resistor. The formula for power is $$P = I \cdot V$$, which, using Ohm's Law, can be rewritten as $$P = \frac{V^2}{R}$$. If $$R$$ is too small, power dissipation skyrockets.
+The right diagram illustrates what happens when the switch is closed. Now, the leakage current of ($$1µA$$) can be ignored as the current is dominated by the $$V_{in}$$ to $$GND$$ branch. And here, the key factor is how much current is flowing when the switch is closed: from Ohm's Law ($$I=\frac{V}{R}$$), we know that a small resistor will result in more current. We can quantify this as how much power is being dissipated (wasted) by the resistor. The formula for power is $$P = I \cdot V$$, which, using Ohm's Law to replace $$I$$ with $$\frac{V}{R}$$, can be rewritten as $$P = \frac{V^2}{R}$$. Given the exponential, when $$R$$ is small, power dissipation is quite large.
 
-Using the two formulas above, we've graphed the tradeoff in selecting a resistance value for the pull-up resistor $$R$$ (calculated with $$V_{in}=5V$$). For convenience, we've also marked the ATmega328 `HIGH` threshold for $$V_{pin}$$ and the 10kΩ $$R$$ value.
+Using the two formulas above, we can graph the tradeoff in selecting a resistance value for the pull-up resistor $$R$$ (calculated with $$V_{in}=5V$$) and the effect on $$V_{pin}$$ and power dissipation. For convenience, we've also marked the ATmega328 `HIGH` threshold for $$V_{pin}$$ and the 10kΩ $$R$$ value.
 
 ![A graph of the tradeoff in selecting a resistance value for pull-up resistor](assets/images/PullUpResistor_VpinAndPowerDissipationGraph.png)
 Calculated using $$V_{in}=5V$$
 {: .fs-1 }
 
-There are other factors to consider as well—for example, a large resistor will slow down the charging rate on the capacitor on the input pin, which is used by the microcontroller to determine input pin voltages. But these factors are beyond the scope of our class (and beyond our own knowledge as well). See this [forum post](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) for more.
+There are other factors to consider as well—for example, including line capacitance and capacitive coupling. For the former, the input line will have some "stray capacitance" to ground, which creates an "RC circuit" that has associated rise and fall times. Larger resistors can slow down the responsiveness of the circuit. But these factors are beyond the scope of our class (and beyond our own knowledge as well). See theses forum posts for more details: [AVR Freaks](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) and ([EE StackExchange](https://electronics.stackexchange.com/questions/23645/how-do-i-calculate-the-required-value-for-a-pull-up-resistor)).
 
-This sub-section was strongly informed by Section 12.6.9 entitled "Pullup and Pulldown Resistors" of Scherz and Monk's [Practical Electronics for Inventors](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559).
+#### Tradeoffs in selecting a pull-down resistor
 
-<!-- https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p -->
+What about pull-down resistors? The same tradeoffs and factors also affect selecting a pull-down resistor. Here, however, we need to know the leakage current $$I_{IL}$$ from an input pin to ground. The ATmega328 datasheet specifies the same leakage current for $$I_{IH}$$ and $$I_{IL}$$ as $$1µA$$. 
 
-<!-- TODO: talk about tradeoffs in setting pull-up and pull-down resistor values -->
+![Two schematics showing a pull-down resistor when switch is open and closed and the amount of current and power](assets/images/PullDownResistor_Schematics_CurrentLeakageAndPowerDissipation.png)
+
+The above sub-sections were strongly informed by Section 12.6.9 entitled "Pullup and Pulldown Resistors" of Scherz and Monk's [Practical Electronics for Inventors](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559).
 
 ### Want to dive deeper?
 

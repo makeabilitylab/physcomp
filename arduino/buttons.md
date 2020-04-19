@@ -229,7 +229,6 @@ Finally, many microcontrollers include an internal pull-up resistor that can be 
 Some microcontrollers have both internal pull-up *and* pull-down resistors. The popular ESP32 chip, for example, used in the [Adafruit Huzzah32](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview) has built-in pull-up and pull-down resistors on all GPIO pins except for GPIO34-GPIO39 (see [link](https://github.com/espressif/arduino-esp32/issues/316)). These can be enabled with either `pinMode(<pin>, INPUT_PULLUP);` or `pinMode(<pin>, INPUT_PULLDOWN);`
 
 <!-- TODO: fix syntax mistake in figure; have its instead of it's in the diagram above -->
-<!-- TODO: maybe also add a switch after the internal pull-up to show that it's a software controlled switch like this: https://electronics.stackexchange.com/q/185953-->
 
 ### What value should I use for my pull-down or pull-up resistors?
 
@@ -336,7 +335,9 @@ The schematic is for illustrative purposes. The internal software controlled swi
 
 Make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. Then write code to respond accordingly.
 
-![](assets/images/ArduinoUno_ThreeButtonsWithDifferentResistorConfigurations_WorkbenchPhoto.png)
+![Workbench photo of three buttons with different pull-up and pull-down configurations](assets/images/ArduinoUno_ThreeButtonsWithDifferentResistorConfigurations_WorkbenchPhoto.png)
+
+<!-- TODO: add code for this and a workbench video showing it working -->
 
 ## Next Lesson
 

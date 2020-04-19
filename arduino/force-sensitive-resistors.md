@@ -152,16 +152,71 @@ The guide provides a useful force *vs.* $$V_{out}$$ graph with different fixed r
 ![FSR force vs. Vout graph for different fixed resistor values from the Interlink FSR data sheet](assets/images/Voltage-divider-circuit-Interlink-FSR-402-Makerguides.png)
 Graph originally from [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf). Image above from [Makerguides](https://www.makerguides.com/fsr-arduino-tutorial).
 
+In general, for a resistive sensor like an FSR, read the datasheet (of course) but also play around with the sensor. Start with a 10kΩ fixed resistor, write a simple Arduino program to graph its analog input in response to various stimuli (in this case, force), and go from there.
+
+## Let's make stuff!
+
+We're going to begin with a simple circuit to read the FSR and proportionally set the Arduino's built-in LED brightness. We'll also graph the FSR input using the Arduino IDE's [Serial Plotter](https://randomnerdtutorials.com/arduino-serial-plotter-new-tool/). Then, we'll conclude with the Jedi-force "instrument." For both constructions, try to make the circuit and write the code before looking at our solutions. You can do it!
+
+### FSR-based LED fade circuit
+
+Let's make a simple FSR circuit with the fixed resistor (10kΩ) in the pull-down position. In this configuration, the analog input A0 (VA0) will increase with increasing force and start at 0V when the FSR is not pressed.
+
+![FSR wiring diagram for Arduino Uno with FSR Leg 1 hooked to 5V, and Leg 2 hooked to a fixed resistor 10kΩ in the pull-down resistor position](assets/images/ArduinoUno_FSR_FixedResistorInPullDown_SchematicAndDiagram.png)
+
+### FSR-based LED fade code
+
+For our FSR-based LED fade code, we're going to read in the FSR value from the voltage divider using `analogRead` and then use this to proportionally set our LED brightness using `analogWrite`. Easy, right?
+
+#### Converting analogRead range to analogWrite range using map()
+
+There is one small issue, which is that `analogRead` (on the Uno and Leonardo) uses a 10-bit ADC. Thus, the `analogRead` value ranges from 0-1023; however, the `analogWrite` value is 8 bits, which means that it ranges from 0-255. So, we have to do a simple conversion between the two ranges: 0-1023 to 0-255.
+
+If we assume both ranges start at zero (as they do in this case), our conversion is simply: `int outputVal = (int)(inputVal/1023.0 * 255);`. 
+
+If, instead, we can't assume that both ranges start at zero, the more general conversion algorithm is: `int outputVal = OUTPUT_MIN + (inputVal - INPUT_MIN)/(INPUT_MAX - INPUT_MIN) * (OUTPUT_MAX - OUTPUT_MIN);` This type of range conversion is so common that Arduino (and Processing and many other programming libraries) have a built-in function for it called [`map`](https://www.arduino.cc/reference/en/language/functions/math/map/). It's called "map" because we want to re-map a number from one range to another.
+
+OK, now that we have that out of the way, let's write our code!
+
+#### FSR-based LED fade code
+
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorLED/ForceSensitiveResistorLED.ino?footer=minimal"></script>
+
+#### Workbench video with serial plotter
+
+Here's a workbench video with a corresponding Serial Plotter screen recording. The `analogRead` FSR values are in blue, the `analogWrite` LED PWM values are in orange.
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/MTpmVaVi92o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Jedi force instrument
+
+For our final creation, we're going to make a Jedi force instrument: the harder you press on the FSR, the higher the frequency we play on the piezo. Again, try making this yourself without looking at our circuit or code.
+
+#### Jedi force circuit
+
+Simply add in a piezo buzzer and connect it to a GPIO pin.
+
+![The FSR-based piezo instrument wiring diagram](assets/images/ArduinoUno_FSRPiezoInstrument_BreadboardDiagram.png)
+
+#### Jedi force code
+
+In our code, we only play sound when the FSR is pressed (to limit the annoyance). :)
+
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorPiezo/ForceSensitiveResistorPiezo.ino?footer=minimal"></script>
+
+#### Workbench video with serial plotter
+
+Here's our take on it!
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/OuEABPQV9_k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Exercises
 
-- Write code to fade an LED based on the force applied to the FSR
-- Write code to change the tone frequency to a piezo buzzer based on the force applied to the FSR
+- Can you improve the Jedi force instrument so that it sounds better (well, as good as we can make a piezo with square waves sound). How about only playing notes on a scale, for example.
+- Add in some LEDs that work as a "bar graph" for the FSR value.
+- Try making a lo-fi pressure sensor using everyday materials and use it to make a new Jedi force instrument!
 
-<!-- Remaining TODOs: writing code to fade LED, talking about map function, write musical code -->
-
-<!-- ### Make your own lo-fi pressure sensor
-
-TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator clip version and taped jumper wire version. -->
+<!-- ### Make your own lo-fi pressure sensor. TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator clip version and taped jumper wire version. -->
 
 ## References
 - [Interlink FSR 402 Data Sheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf)

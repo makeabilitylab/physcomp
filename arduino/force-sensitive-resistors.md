@@ -186,7 +186,7 @@ OK, now that we have that out of the way, let's write our code!
 
 ### Workbench video with serial plotter
 
-Here's a workbench video with a corresponding Serial Plotter screen recording. The `analogRead` FSR values are in blue, the `analogWrite` LED PWM values are in orange.
+Here's a workbench video with a corresponding Serial Plotter screen recording. The `analogRead` FSR values are in blue, the `analogWrite` LED PWM values are in orange. We're using the built-in LED, so the LED brightness changes may be difficult to see in the video.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/MTpmVaVi92o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

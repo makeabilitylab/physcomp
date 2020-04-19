@@ -371,6 +371,5 @@ In the next lesson, we'll learn how to add a fixed resistor to a two-leg variabl
 
 <span class="fs-6">
 [Previous: Make a simple piano](piano.md){: .btn .btn-outline }
-[Next: Using force-sensitive resistors](force-sensitive-resistors.md) 
-{: .btn .btn-outline }
+[Next: Using force-sensitive resistors](force-sensitive-resistors.md){: .btn .btn-outline }
 </span>

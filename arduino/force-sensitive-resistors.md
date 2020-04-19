@@ -158,6 +158,8 @@ In general, for a resistive sensor like an FSR, read the datasheet (of course) b
 
 We're going to begin with a simple circuit to read the FSR and proportionally set the Arduino's built-in LED brightness. We'll also graph the FSR input using the Arduino IDE's [Serial Plotter](https://randomnerdtutorials.com/arduino-serial-plotter-new-tool/). Then, we'll conclude with the Jedi-force "instrument." For both constructions, try to make the circuit and write the code before looking at our solutions. You can do it!
 
+## FSR-based LED fader
+
 ### FSR-based LED fade circuit
 
 Let's make a simple FSR circuit with the fixed resistor (10kΩ) in the pull-down position. In this configuration, the analog input A0 (VA0) will increase with increasing force and start at 0V when the FSR is not pressed.
@@ -178,33 +180,33 @@ If, instead, we can't assume that both ranges start at zero, the more general co
 
 OK, now that we have that out of the way, let's write our code!
 
-#### FSR-based LED fade code
+#### Full FSR-based LED fade code
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorLED/ForceSensitiveResistorLED.ino?footer=minimal"></script>
 
-#### Workbench video with serial plotter
+### Workbench video with serial plotter
 
 Here's a workbench video with a corresponding Serial Plotter screen recording. The `analogRead` FSR values are in blue, the `analogWrite` LED PWM values are in orange.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/MTpmVaVi92o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-### Jedi force instrument
+## Jedi force instrument
 
 For our final creation, we're going to make a Jedi force instrument: the harder you press on the FSR, the higher the frequency we play on the piezo. Again, try making this yourself without looking at our circuit or code.
 
-#### Jedi force circuit
+### Jedi force circuit
 
 Simply add in a piezo buzzer and connect it to a GPIO pin.
 
 ![The FSR-based piezo instrument wiring diagram](assets/images/ArduinoUno_FSRPiezoInstrument_BreadboardDiagram.png)
 
-#### Jedi force code
+### Jedi force code
 
 In our code, we only play sound when the FSR is pressed (to limit the annoyance). :)
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorPiezo/ForceSensitiveResistorPiezo.ino?footer=minimal"></script>
 
-#### Workbench video with serial plotter
+### Workbench video with serial plotter
 
 Here's our take on it!
 

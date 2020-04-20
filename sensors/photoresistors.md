@@ -55,7 +55,7 @@ Hint: what does a voltage divider do?
 
 ### An improved auto-on nightlight circuit
 
-We are going to create an inverse relationship between ambient light levels and LED brightness by creating a voltage divider with the photoresistor. Yes, that's right, voltage dividers aren't just useful for hooking up variable resistors to microcontrollers. :)
+We are going to create an inverse relationship between ambient light levels and LED brightness by creating a voltage divider with the photoresistor and placing the LED in parallel with the photoresistor. Now, as the photoresistor resistance drops, the LED will get brighter.
 
 ![](assets/images/Photoresistor_WiringDiagramAndSchematicVoltageDivider_NoArduino_Fritzing.png)
 

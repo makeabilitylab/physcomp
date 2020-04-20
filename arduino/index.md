@@ -54,8 +54,6 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 ## Intro to Input
 
-We will be posting a few more input lessons soon, including one on force-sensitive resistors and one on debouncing. If you want to get a head start, try this [FSR lesson by Adafruit](https://learn.adafruit.com/force-sensitive-resistor-fsr/using-an-fsr).
-
 ### [Lesson 1: Using buttons](buttons.md)
 
 Introduces buttons (aka momentary switches), digital input, using Arduino's [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.

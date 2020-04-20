@@ -77,7 +77,7 @@ If you want to take a (super) deep dive into how tone works, see the [source cod
 
 ### Piezo buzzers
 
-There are two primary types of buzzers: magnetic and piezo. A **magnetic buzzer** operates similarly to a traditional speaker: a current driven through a coil of wire produces a magnetic field, which dynamically moves a magnetic disk resulting in a sound wave. In contrast, a **piezo buzzer **is driven by voltage rather than current and is constructed out of piezoelectric material. This material mechanically deforms in response to applied voltages, which can be used to generate sounds.
+There are two primary types of buzzers: magnetic and piezo. A **magnetic buzzer** operates similarly to a traditional speaker: a current driven through a coil of wire produces a magnetic field, which dynamically moves a magnetic disk resulting in a sound wave. In contrast, a **piezo buzzer** is driven by voltage rather than current and is constructed out of piezoelectric material. This material mechanically deforms in response to applied voltages, which can be used to generate sounds.
 
 <!-- TODO: would be great to have a slow-mo video of a piezo material being deformed by a voltage waveform... -->
 

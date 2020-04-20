@@ -49,16 +49,17 @@ In this video, the photoresistor is in series with the LED. As the ambient light
 
 Because the photoresistor resistance **decreases** with light levels, the LED gets brighter as the ambient light gets brighter. This is the opposite of what we want!
 
-What should we do? Well, the coder in me wants to immediately hook the sensor up to the microcontroller and solve this in code (which is a fine solution). However, can we solve this in hardware too?
+What should we do? Well, the coder in me wants to immediately hook the sensor up to the microcontroller and solve this in code (which is a fine solution and, ultimately, what we will do!). However, can we solve this in hardware too?
 
 Hint: what does a voltage divider do?
 
 ### An improved auto-on nightlight circuit
 
-We are going to create an inverse relationship between ambient light levels and LED brightness by creating a voltage divider with the photoresistor.
+We are going to create an inverse relationship between ambient light levels and LED brightness by creating a voltage divider with the photoresistor. Yes, that's right, voltage dividers aren't just useful for hooking up variable resistors to microcontrollers. :)
 
-TODO: insert diagram + schematic
-TODO: insert graph of resistance levels.
+![](assets/images/Photoresistor_WiringDiagramAndSchematicVoltageDivider_NoArduino_Fritzing.png)
+
+TODO: insert graph of resistance levels?
 
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ZYVQLw-7HU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

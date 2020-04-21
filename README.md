@@ -43,6 +43,7 @@ A key pedagogical philosophy underlying our teaching is **learning by doing**. F
 ## Example Hardware Kits
 
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
+- HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)
 
 ## About this website
 

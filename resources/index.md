@@ -102,6 +102,13 @@ I *encourage* you to ask questions! There are so many people out there willing t
 
 <!-- Nick Gammon forum: https://www.gammon.com.au/forum/index.php?bbtopic_id=123 -->
 
+## Example Hardware Kits
+
+Here are some example hardware kits (with source links) that we've used in our classes.
+
+- CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
+- HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)
+
 ## Inspirations
 
 Searching for project ideas or some divine epiphany on what to work on next? Check out our [Inspirations]({{ site.baseurl }}/pages/inspirations/index.md).

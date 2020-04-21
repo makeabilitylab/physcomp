@@ -71,7 +71,7 @@ We created the following animation to help explain. The key thing to remember is
 
 <!-- TODO: I like this simple picture by LadyAda, consider adding it? https://www.ladyada.net/images/arduino/pushbuttons.gif -->
 
-In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter to check for continuity between the four legs.
+In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter, if you have one, to check for continuity between the four legs.
 
 <!-- TODO video of using a multimeter to figure out how the four legs are hooked up -->
 
@@ -145,7 +145,7 @@ You might initially think to hook up your button like the following:
 This circuit will "sort of" work but has a problem related to a "floating pin" when the switch is open.
 {: .fs-1 }
 
-However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed). Well, this is called a "floating pin" and it's not good. A floating pin is susceptible to randomly oscillating between `HIGH` and `LOW`. See the animation below. <!-- TODO: add in reasons why pin could oscillate -->
+However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed)? Well, this is called a "floating pin" and it's not good. A floating pin is susceptible to randomly oscillating between `HIGH` and `LOW`. See the animation below. <!-- TODO: add in reasons why pin could oscillate -->
 
 ![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
 
@@ -193,7 +193,7 @@ So, what to do? **Pull-down resistors** to the rescue!
 
 To solve this problem, we can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. 
 
-Typically, this pull-down resistor value is 10kΩ, which is also what the official [Arduino documentation recommends](https://www.arduino.cc/en/Tutorial/DigitalPins). A small resistor is called a **strong** pull-down and a large resistor is called a **weak** pull-down. In a bit, we'll talk about **what** factors influence the pull-down resistor value (hint: use a 10kΩ) but the primary tradeoff is in power efficiency (low resistor value "wastes" more current) and function (a large resistor may not always work properly as a pull-down).
+Typically, this pull-down resistor value is 10kΩ, which is also what the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommends. A small resistor is called a **strong** pull-down and a large resistor is called a **weak** pull-down. In a bit, we'll talk about **what** factors influence the pull-down resistor value (hint: use a 10kΩ) but the primary tradeoff is in power efficiency (low resistor value "wastes" more current) and function (a large resistor may not always work properly as a pull-down).
 
 ![Circuit diagram showing a correct pull-down resistor circuit with the 5V connection then the digital input pin then a 10K resistor then GND](assets/images/ArduinoUno_Button_SchematicAndDiagram_PullDownResistor.png)
 The pull-down resistor is quite large: 10,000Ω (10kΩ)
@@ -240,7 +240,7 @@ The longer answer: there are multiple factors to consider, but the primary trade
 
 ![Two schematics showing pull-up resistor when switch is open and closed](assets/images/PullUpResistor_Schematics_CurrentLeakageAndPowerDissipation.png)
 
-Above, we show two diagrams. On the left, a diagram of the leakage current $$I_{IH}$$ into our input pin when the switch is open. This leakage current is specified in the ATmega328 datasheet as $$0.000001A$$ or ($$1µA$$) (Section 26.2). We can thus calculate the voltage on the input pin ($$V_{pin}$$) using Ohm's Law: $$V_{pin} = V_{in} - I_{IH}R$$ where $$V_{in}=5V$$, $$I_{IH}=1µA$$), and $$R$$ is our pull-down resistor value. Recall that on the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH`. So, we must ensure that our selection of $$R$$ is not so high as to drop below this threshold. Using this formula alone to drive our decision, we can determine that $$R$$ should not exceed ~400kΩ—which would be a very large (weak) pull-up resistor.
+Above, we show two diagrams. On the left, a diagram of the leakage current $$I_{IH}$$ into our input pin when the switch is open. This leakage current is specified in the ATmega328 datasheet as $$0.000001A$$ or ($$1µA$$) (Section 26.2). We can thus calculate the voltage on the input pin ($$V_{pin}$$) using Ohm's Law: $$V_{pin} = V_{in} - I_{IH}R$$ where $$V_{in}=5V$$, $$I_{IH}=1µA$$, and $$R$$ is our pull-down resistor value. Recall that on the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH`. So, we must ensure that our selection of $$R$$ is not so high as to drop below this threshold. Using this formula alone to drive our decision, we can determine that $$R$$ should not exceed ~400kΩ—which would be a very large (weak) pull-up resistor.
 
 The diagram on the right illustrates what happens when the switch is closed. Now, the leakage current of ($$1µA$$) can be ignored as the current is dominated by the $$V_{in}$$ to $$GND$$ branch. And here, the key factor is how much current is flowing when the switch is closed: from Ohm's Law ($$I=\frac{V}{R}$$), we know that a small resistor will result in more current. We can characterize this as how much power is being dissipated by the resistor—ideally, we want to minimize this. The formula for power is $$P = I \cdot V$$ (in watts), which, using Ohm's Law to replace $$I$$ with $$\frac{V}{R}$$, can be rewritten as $$P = \frac{V^2}{R}$$. Given the exponential, when $$R$$ is small, power dissipation is quite large.
 
@@ -252,7 +252,7 @@ Calculated using $$V_{in}=5V$$
 
 With a pull-up resistor of $$R=100Ω$$ (an unnecessarily strong pull-up), when the switch is closed, we are using 50mA (and 250 milliwatts)—a non-trivial amount for a battery-powered circuit (*e.g.,* for a mobile or wearable). In contrast, with a 10kΩ pull-up, we would use $$I=0.5mA$$ (and 2.5 mwatts).
 
-There are other factors to consider as well—for example, including line capacitance and capacitive coupling. For the former, the input line will have some "stray capacitance" to ground, which creates an "RC circuit" that has associated rise and fall times. Larger resistors can slow down the responsiveness of the circuit. But these factors are beyond the scope of our class (and beyond our own knowledge as well). See theses forum posts for more details: [AVR Freaks](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) and ([EE StackExchange](https://electronics.stackexchange.com/questions/23645/how-do-i-calculate-the-required-value-for-a-pull-up-resistor)).
+There are other factors to consider as well—for example, including line capacitance and capacitive coupling. For the former, the input line will have some "stray capacitance" to ground, which creates an "RC circuit" that has associated rise and fall times. Larger resistors can slow down the responsiveness of the circuit. But these factors are beyond the scope of our class (and beyond our own knowledge as well). See these forum posts for more details: [AVR Freaks](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) and ([EE StackExchange](https://electronics.stackexchange.com/questions/23645/how-do-i-calculate-the-required-value-for-a-pull-up-resistor)).
 
 #### Tradeoffs in selecting a pull-down resistor
 

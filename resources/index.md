@@ -41,6 +41,11 @@ has_toc: true # (on by default)
 
 - [Physical Computing @ ITP/NYU](https://vimeo.com/channels/pcomp). This online video series by NYU ITP's Jeff Feddersen & Tom Igoe provides over 100 high-quality teaching videos about circuits, & Arduino
 
+- [The Learning Circuit](https://www.youtube.com/playlist?list=PLwO8CTSLTkii9S_vhEOsyJ17RI3jjBZ95)
+
+- [EEVBlog](https://www.eevblog.com/fundamentals/). Perhaps the most popular EE video blogs but also generally quite advanced for beginners.
+
+
 ## Books
 
 I've gone through many electronics and microcontroller books. Here are some of my favorites. I've attempted to provide EBook library links whenever possible. If you click on the O'Reilly links, when the login prompt occurs, use your @uw.edu email and it should open the linked book and allow access.
@@ -96,6 +101,13 @@ I *encourage* you to ask questions! There are so many people out there willing t
 - **Online Forums**. The most popular electronics and Arduino-based Q/A forums, include: [Adafruit](https://forums.adafruit.com/viewforum.php?f=37&sid=39a6c8dce50981dcc363bdd5b0a77b23), [Sparkfun](https://forum.sparkfun.com/index.php), [Arduino.cc](https://forum.arduino.cc/), and [EEVBlog](https://www.eevblog.com/forum/).
 
 <!-- Nick Gammon forum: https://www.gammon.com.au/forum/index.php?bbtopic_id=123 -->
+
+## Example Hardware Kits
+
+Here are some example hardware kits (with source links) that we've used in our classes.
+
+- CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
+- HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)
 
 ## Inspirations
 

@@ -37,6 +37,7 @@ nav_exclude: true
     - http://fetlab.io/722-spring18/index.html
     - http://fetlab.io/720-fall17/
   - Sean Follmer (couldn't find link to his teaching site)
+  - Interesting, just found "Modern Mobile" course at UW: https://modernmobile.cs.washington.edu/
   - https://people.eecs.berkeley.edu/~boser/courses/49/
     - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/index.html
     - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/N_gpio.html#_analog_input_adc

@@ -120,7 +120,27 @@ The Arduino library also supports changing the ADC range from the default of $$0
 
 ## Let's make stuff!
 
-With that, let's make some stuff with sensors.
+With that, let's make some stuff with sensors. The lessons below assume that you've completed both our [Intro to Output](../arduino/intro-output.md) and [Intro to Input](../arduino/intro-input.md) series.
+
+### Force
+
+Learn how to sense force using a force-sensitive resistor (FSR).
+
+### Light
+
+Learn how to sense light using a photoresistor (aka photocell)
+
+### Magnetic fields
+
+Learn how to sense magnetic fields using a Hall effect sensor.
+
+### Distance
+
+Learn how to sense distance (2-400cm) using an [ultrasonic distance sensor](https://www.makerguides.com/hc-sr04-arduino-tutorial/)
+
+### Sound
+
+Learn how to sense sound using a microphone.
 
 <!-- ### Human related I/O
 For human related I/O, human reaction time to an external stimulus is ~150-300ms (try a [human benchmark](https://www.humanbenchmark.com/tests/reactiontime)) and modern monitors refresh at 60Hz

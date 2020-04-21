@@ -71,7 +71,7 @@ We created the following animation to help explain. The key thing to remember is
 
 <!-- TODO: I like this simple picture by LadyAda, consider adding it? https://www.ladyada.net/images/arduino/pushbuttons.gif -->
 
-In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter to check for continuity between the four legs.
+In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter, if you have one, to check for continuity between the four legs.
 
 <!-- TODO video of using a multimeter to figure out how the four legs are hooked up -->
 
@@ -145,7 +145,7 @@ You might initially think to hook up your button like the following:
 This circuit will "sort of" work but has a problem related to a "floating pin" when the switch is open.
 {: .fs-1 }
 
-However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed). Well, this is called a "floating pin" and it's not good. A floating pin is susceptible to randomly oscillating between `HIGH` and `LOW`. See the animation below. <!-- TODO: add in reasons why pin could oscillate -->
+However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed)? Well, this is called a "floating pin" and it's not good. A floating pin is susceptible to randomly oscillating between `HIGH` and `LOW`. See the animation below. <!-- TODO: add in reasons why pin could oscillate -->
 
 ![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
 

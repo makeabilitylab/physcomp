@@ -32,7 +32,7 @@ Perhaps the most intuitive and important organizing scheme is by function. Wikip
 
 1. Acoustic, sound, and vibration
 2. Moisture and humidity
-3. flow and fluid velocity
+3. Flow and fluid velocity
 4. Optical, light, and imaging
 5. Thermal, heat, and temperature
 6. Position, angle, displacement, distance, and more. 
@@ -47,7 +47,7 @@ But first, let's break sensors down by **how** they sense and **what** output th
 
 **Active** sensors require external power and often actively transmit a signal and then analyze some property of that signal (*e.g.,* distortion or reflection) for sensing. For example, an infrared (IR) proximity sensor like the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) contains both an IR transmitter and IR receiver. Distance is calculated via triangulation of the IR beam and its reflection angle back on the IR receiver. Similarly, an ultrasonic distance sensor like the [HC-SR04](https://www.sparkfun.com/products/15569) transmits ultrasonic pings and listens for reflected waves. The speed of sound through air is then used to calculate the distance between the sensor to the reflected object.
 
-In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. 
+In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. Of course, we may need to design a powered circuit to "retrieve" information from the sensor but the underlying sensor is responding to environmental phenomena regardless of its external power state.
 
 ### Sensor output
 
@@ -58,6 +58,18 @@ Many modern sensors are chip-based and include some on-board processing, which p
 Finally, some "sensors" are either on or off (which could be construed as a type of simple digital output but not one specifically encoded for a microcontroller so does not qualify as "digital signal" in our taxonomy). For example, [reed switches](https://en.wikipedia.org/wiki/Reed_switch) close in the presence of a magnetic field and [tilt ball switches](https://www.adafruit.com/product/173) are hollow tubes with an enclosed conductive ball, which closes internal contacts in certain orientations.
 
 [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) provides an even deeper breakdown of sensor output types, including open collector and current. See his book for details.
+
+### Signal acquisition pipeline
+
+Let's examine the entire signal acquisition pipeline from raw physical signal to the digitized representation.
+
+First, there exists some physical phenomena that exists in the world (Stage 1). We need to develop and/or utilize a method to sense that phenomena and output an electrical signal (Stage 2). Some sensor chips process this electrical signal (*e.g.,* apply smoothing)—(an optional) Stage 3. Fourth, an analog-to-digital converter (ADC) converts this electrical signal to bits (a process called quantization). Finally, we can process and analyze the signal using digital signal processing and machine learning, woohoo!
+
+![Signal acquisition pipeline going from physical signal to sensor to signal conditioning to ADC to computer](assets/images/SignalAcquisitionPipeline_Wikipedia.png)
+Block diagram from Wikipedia ["Data acquisition"](https://en.wikipedia.org/wiki/Data_acquisition) article. [Direct link](https://en.wikipedia.org/wiki/File:DigitalDAQv2.pdf).
+{: .fs-1 }
+
+Some key questions you 
 
 ## Outline
 - Overview of sensor + transducer pipeline

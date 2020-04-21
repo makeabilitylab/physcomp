@@ -17,7 +17,7 @@ Some great discussions online, including:
 
 This [Arduino forum ](https://forum.arduino.cc/index.php?topic=6549.0), which says:
 
-> The ADC clock is 16 MHz divided by a prescale factor. The prescale is set to 128 (16MHz/128 = 125 KHz) in wiring.c. Since a conversion takes 13 ADC clocks, the sample rate is about 125KHz/13 or 9600 Hz.
+> The ADC clock is 16 MHz divided by a prescale factor. The prescaler is set to 128 (16MHz/128 = 125 KHz) in wiring.c. Since a conversion takes 13 ADC clocks, the sample rate is about 125KHz/13 or 9600 Hz.
 >
 > So anyway, setting the prescale to, say, 16, would give a sample rate of 77 KHz. Not sure what kind of resolution you would get though!
 

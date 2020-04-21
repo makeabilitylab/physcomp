@@ -94,7 +94,9 @@ When selecting sensors and a data processing pipeline, there are multiple consid
 
 - **Sampling rates.** How often does the target physical signal change? How quickly can your sensor respond? Does this response rate matter? A photoresistor, for example, takes several milliseconds to respond to bright light and can require more than one second to regain its dark resistance while a phototransitor and photodiode are far more responsive (see [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307/ch20.html#SECTION_PHOTORESISTOR)). 
 - **ADC conversion rates** How fast can your microcontroller sample the signal and perform the analog-to-digital conversion?
-- **ADC precision** What precision of ADC do you need? The ATmega328 microcontroller uses a 10-bit ADC. So, by default, the voltage range of 0-5V is mapped to 0-1023 $$2^10$$ and, thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV). If you require greater precision—that is, changes in sensor output < 0.0049V are important—then you either need to change the [`analogReference`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/) or you need a different ADC.
+- **ADC precision** What precision of ADC do you need? The ATmega328 microcontroller uses a 10-bit ADC. So, by default, the voltage range of 0-5V is mapped to 0-1023 $$2^10$$ and, thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV). If you require greater precision—that is, changes in sensor output < 0.0049V are important—then you either need to change the [`analogReference`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/) or you need a different ADC. The difference between a raw continuous signal and its digitized version is called the quantization error.
+
+<!-- TODO: Where to talk about quantization error? https://en.wikipedia.org/wiki/Quantization_(signal_processing) -->
 
 ### Nyquist sampling theorem
 
@@ -120,7 +122,9 @@ The Arduino library also supports changing the ADC range from the default of $$0
 
 ## Let's make stuff!
 
-With that, let's make some stuff with sensors. The lessons below assume that you've completed both our [Intro to Output](../arduino/intro-output.md) and [Intro to Input](../arduino/intro-input.md) series.
+With that, let's make some stuff with sensors! 
+
+The lessons below assume that you've completed both our [Intro to Output](../arduino/intro-output.md) and [Intro to Input](../arduino/intro-input.md) series.
 
 ### Force
 
@@ -144,6 +148,8 @@ Learn how to sense sound using a microphone.
 
 <!-- ### Human related I/O
 For human related I/O, human reaction time to an external stimulus is ~150-300ms (try a [human benchmark](https://www.humanbenchmark.com/tests/reactiontime)) and modern monitors refresh at 60Hz
+
+Joysticks are often made from poteniometers like this one: https://www.adafruit.com/product/2765 and this one: https://www.adafruit.com/product/245
 
 See: https://gamedev.stackexchange.com/a/30289 -->
 

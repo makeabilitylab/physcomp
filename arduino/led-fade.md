@@ -54,30 +54,33 @@ A common confusion amongst beginners is mixing up the analog **output** pins and
 
 We'll learn about analog output in this lesson (using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)). In a future lesson, we will learn about analog input (using [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/))
 
-## Writing the code
+## Using analogWrite
 
-To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. This 8-bit value is directly proportional to the voltage output: so, 0 is 0V, 255 is 5V, 128 is 2.5V, 168 is 3.3V, *etc.* This means that the settable voltage granularity is $$\frac{5V}{255}=~0.0196V$$.
+To gradually fade an LED, we are going to use the [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) function, which takes in a pin as the first parameter and an 8-bit value between 0-255 as the second. 
 
-<!-- TODO: come up with a figure to explain this. -->
+### Pulse-width modulation (PWM)
 
----
+Despite its name, the Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide **true analog** output via a [digital-to-analog converter (DAC)](https://en.wikipedia.org/wiki/Digital-to-analog_converter). Instead, they use a method called Pulse-Width Modulation (PWM) to *emulate* analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform—a true analog output signal—like playing music, then you'll need to either find an Arduino microcontroller with a built-in DAC like the [Due](https://store.arduino.cc/usa/due) (see this [SimpleAudioPlayer tutorial](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer)) or connect your Uno to an external DAC board like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all).
 
-**IMPORTANT SIDE NOTE:**
+So, what does the `analogWrite` function do, exactly? The 8-bit value (0-255) directly controls how long a 5V value is applied to the output pin during one "analog write" period. So, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). This fraction of the time the signal is `HIGH` is called the duty cycle.
 
-The Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide true analog output via a [digital-to-analog converter (DAC)](https://en.wikipedia.org/wiki/Digital-to-analog_converter). Instead, they use a method called Pulse-Width Modulation (PWM) to *emulate* analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform—a true analog output signal—like playing music, then you'll need to either find an Arduino microcontroller with a built-in DAC like the [Due](https://store.arduino.cc/usa/due) (see this [SimpleAudioPlayer tutorial](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer)) or connect your Uno to an external DAC board like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all).
+![Pulse-width modulation duty cycle graphic](assets/images/PWM_ArduinoCC.png)
+Pulse-width modulation duty cycle graph from [arduino.cc](https://www.arduino.cc/en/tutorial/PWM)
+{: .fs-1 }
 
 Why does the Arduino Uno only have six PWM outputs? Because the ATmega328 microcontroller has three hardware timers, which control the six PWM outputs.
 
 Could I manually implement PWM on any pin simply by rapidly turning the pin on and off at a desired frequency and duty cycle? Yes, however, the PWM waveform could be jittery (unless you disable interrupts). See: [SecretsOfArduinoPWM](https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM) and [example code](https://playground.arduino.cc/Main/PWMallPins/) that manually implements a PWM loop.
 
-If you want to learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and/or watch their "analog output" video:
+To learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and/or watch their "analog output" video:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/93554355" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 <!-- TODO: in the future, it would be cool to hook up OLED to display analogOut value + show PWM signal on Oscilliscope with
      top-down workbench camera. Could do two versions: (1) with the code running as written and another (2) with a pot
      to control the PWM signal -->
----
+
+## Writing the code
 
 OK, so let's write some code!
 

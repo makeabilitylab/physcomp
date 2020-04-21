@@ -16,15 +16,25 @@ For computing, sensors provide a way to access information about the world, huma
 
 With advances in sensing technology like [MEMs](https://en.wikipedia.org/wiki/Microelectromechanical_systems), computing (storage, networking, wearables), and in processing and machine learning, now is a fascinating time to study sensing and applied signal processing. 
 
-How can new sensing and processing systems help identify cancer cells, find new life-supporting planets, or change how we fundamentally interact with computing itself (ala capacitive touchscreens!).
+How can new sensing and processing systems help identify cancer cells, find new life-supporting planets, or change how we fundamentally interact with computing itself (ala capacitive touchscreens on tablets and phones!).
 
-<!-- primary learning goal: expose to certain types of sensors, how to use them, how to process them? how to make some yourself? -->
+<!-- primary learning goals: expose to certain types of sensors, how to use them, how to process them? how to make some yourself? -->
 
 ## Sensors
 
-Wikipedia lists [hundreds of sensors](https://en.wikipedia.org/wiki/List_of_sensors), sorted by "function", including: (1) acoustic, sound, and vibration, (2) moisture and humidity, (3) flow and fluid velocity, (4) optical, light, and imaging, (5) thermal, heat, and temperature, (6) position, angle, displacement, distance, and more. Other categorizations are also possible: Platt's 3rd volume of ["Encyclopedia of Electronic Components"](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307), for example, categorizes sensors into spatial, mechanical, fluid, radiation, and electricity. Regardless of categorization, we will only cover a small fraction here.
+Wikipedia lists [hundreds of sensors](https://en.wikipedia.org/wiki/List_of_sensors), sorted by "function", including: (1) acoustic, sound, and vibration, (2) moisture and humidity, (3) flow and fluid velocity, (4) optical, light, and imaging, (5) thermal, heat, and temperature, (6) position, angle, displacement, distance, and more. Other categorizations are also possible: Platt's 3rd volume of ["Encyclopedia of Electronic Components"](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307), for example, categorizes sensors into spatial, mechanical, fluid, radiation, and electricity. Regardless of functional categorization, we will only cover a small fraction here.
 
-Our primary goal is to 
+But first, let's break sensors down by **how** they sense and **what** output they provide.
+
+### Passive vs. active sensing
+
+**Active** sensors require external power and often actively transmit a signal and then analyze some property of that signal (*e.g.,* distortion or reflection) for sensing. For example, an infrared (IR) proximity sensor like the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) contains both an IR transmitter and IR receiver. Distance is calculated via triangulation of the IR beam and its reflection angle back on the IR receiver. Similarly, an ultrasonic distance sensor like the popular and inexpensive [HC-SR04](https://www.sparkfun.com/products/15569) transmits ultrasonic pings and listens for reflected waves. The speed of sound through air is then used to calculate the distance between the sensor to the reflected object.
+
+In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. 
+
+### Sensor output
+
+Sensors output either analog or digital signals. 
 
 
 

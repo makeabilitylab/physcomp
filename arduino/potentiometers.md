@@ -282,7 +282,7 @@ But wait, you might wonder, how does the actual conversion from analog-to-digita
 
 ### Analog input pins
 
-The Arduino Uno and Leonardo have six analog inputs, which can be read using analogRead(int pin):
+The Arduino Uno and Leonardo have six analog inputs, which can be read using `analogRead(int pin)`:
 
 ![Close-up image of the six analog input pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_AnalogInputPins.png)
 

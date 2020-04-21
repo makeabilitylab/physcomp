@@ -70,6 +70,8 @@ Introduces potentiometers and rheostats, analog input, and using Arduino's [`ana
 
 Introduces force-sensitive resistors (FSRs), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
 
+<!--TODO: need to add debouncing and interrupts -->
+
 <!-- This is a **draft** list of topics (and order may change).
 
 ### Lesson 1: Using buttons

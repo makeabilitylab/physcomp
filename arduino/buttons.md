@@ -230,6 +230,8 @@ Some microcontrollers have both internal pull-up *and* pull-down resistors. The 
 
 <!-- TODO: fix syntax mistake in figure; have its instead of it's in the diagram above -->
 
+<!-- actual diagram of atmega328 with pull-up circled: https://electronics.stackexchange.com/a/296452 -->
+
 ### What value should I use for my pull-down or pull-up resistors?
 
 The short answer: use a 10kΩ resistor. As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.

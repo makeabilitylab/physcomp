@@ -72,7 +72,7 @@ Why does the Arduino Uno only have six PWM outputs? Because the ATmega328 microc
 
 Could I manually implement PWM on any pin simply by rapidly turning the pin on and off at a desired frequency and duty cycle? Yes, however, the PWM waveform could be jittery (unless you disable interrupts). See: [SecretsOfArduinoPWM](https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM) and [example code](https://playground.arduino.cc/Main/PWMallPins/) that manually implements a PWM loop.
 
-To learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and/or watch their "analog output" video:
+To learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and watch their "analog output" video:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/93554355" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 

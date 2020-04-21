@@ -258,7 +258,7 @@ Analog input!
 
 More formally, just like **analog output** enabled us to write out voltages between 0V and Vcc (5V on the Uno), analog input enables us to read voltages between 0V and 5V. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
-<!-- TODO: The arduino.cc docs mention adding a short delay before using analogReads on successive pins: https://www.arduino.cc/en/Tutorial/AnalogInputPins. Add this? Here's the full quote: The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins. -->
+<!-- TODO: The arduino.cc docs mention adding a short delay before using analogReads on successive pins: https://www.arduino.cc/en/Tutorial/AnalogInputPins. Add this? Here's the full quote: "The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins." -->
 
 ### Analog-to-digital converter (ADC)
 

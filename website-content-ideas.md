@@ -23,6 +23,8 @@ nav_exclude: true
 - Look at: http://ladyada.net/learn/arduino/
 - Stanford's ENGR40m Arduino/making course:
   - https://web.stanford.edu/class/archive/engr/engr40m.1178/slides.html
+- USC Ming Hsieh Embedded Systems Design Laboratory
+  - http://ee-classes.usc.edu/ee459/library/
 - Look at some related online courses:
   - EdX IOT: https://courses.edx.org/courses/course-v1:UPValenciaX+IOT101.1x+3T2019a/course/
   - https://www.coursera.org/specializations/iot

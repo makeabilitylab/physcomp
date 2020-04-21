@@ -256,22 +256,29 @@ So, what's analog input?! The world—in all its beauty and complexity—is anal
 
 Analog input!
 
-More formally, just like **analog output** enabled us to write out voltages between 0V and Vcc (5V on the Uno), analog input enables us to read voltages between 0V and 5V. How does this work? Via an ADC.
+More formally, just like **analog output** enabled us to write out voltages between 0V and Vcc (5V on the Uno), analog input enables us to read voltages between 0V and 5V. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
 ### Analog-to-digital converter (ADC)
 
 The Arduino's microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. 
-On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and Vcc (5V) to a $$2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
+On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and $$V_{cc} (5V) to a $$2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
 
----
+#### Changing the HIGH reference voltage
 
-**ADVANCED INFO:**
+It is also possible to change the `HIGH` reference voltage from $$V_{cc}$$ (which is 5V on the Uno) to a different value between 1.0V to $$V_{cc}$$ using [analogReference()](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/). The `LOW` reference voltage is fixed to $$GND$$.
+
+Changing the reference voltage may be useful if you know your max analog input value is less than $$V_{cc}$$ because you will increase your ADC precision.
+
+On the Uno and Leonardo, the options are:
+- **DEFAULT**: the default analog reference of 5V (on 5V boards) or 3.3V (on 3.3V boards)
+- **INTERNAL**: a built-in reference equal to 1.1V on the ATmega328
+- **EXTERNAL**: the voltage applied to the AREF pin (between 1.0V-5V)
+
+#### How does the ADC actually work?
 
 But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and certainly our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). According to the ATmega328 datasheet, "the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate." See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
 
 <!-- TODO: even more interesting discussions about how for one ADC clock period, the ADC has to charge a capacitor that it uses to measure voltage on the input pin. See: https://www.avrfreaks.net/forum/minumum-current-required-analog-pin-atmega328 -->
-
----
 
 ### Analog input pins
 

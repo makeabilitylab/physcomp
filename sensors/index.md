@@ -63,13 +63,16 @@ Finally, some "sensors" are either on or off (which could be construed as a type
 
 Let's examine the entire signal acquisition pipeline from raw physical signal to the digitized representation.
 
-First, there exists some physical phenomena that exists in the world (Stage 1). We need to develop and/or utilize a method to sense that phenomena and output an electrical signal (Stage 2). Some sensor chips process this electrical signal (*e.g.,* apply smoothing)—(an optional) Stage 3. Fourth, an analog-to-digital converter (ADC) converts this electrical signal to bits (a process called quantization). Finally, we can process and analyze the signal using digital signal processing and machine learning, woohoo!
+First, there exists some physical phenomena that exists in the world (Stage 1). We need to develop and/or utilize a method to sense that phenomena and output an electrical signal (Stage 2). Some sensor chips process this electrical signal (*e.g.,* smooth, filter, amplify)—(an optional) Stage 3. Fourth, an analog-to-digital converter (ADC) converts this electrical signal to bits (a process called quantization). Finally, we can process and analyze the signal using digital signal processing and machine learning, woohoo!
 
 ![Signal acquisition pipeline going from physical signal to sensor to signal conditioning to ADC to computer](assets/images/SignalAcquisitionPipeline_Wikipedia.png)
 Block diagram from Wikipedia ["Data acquisition"](https://en.wikipedia.org/wiki/Data_acquisition) article. [Direct link](https://en.wikipedia.org/wiki/File:DigitalDAQv2.pdf).
 {: .fs-1 }
 
-Some key questions you 
+TODO: Things to think about:
+- Sampling rate. How often does the physical signal change? How quickly does the sensor respond? How quickly does the ADC produce a digitized signal?
+- What precision of ADC do we need? The ATmega328 uses a 10-bit ADC, which means the smallest discriminable voltage change is XXX.
+- For human related "psychomotor" sensing like joysticks, we need to sample around XXX. 
 
 ## Outline
 - Overview of sensor + transducer pipeline

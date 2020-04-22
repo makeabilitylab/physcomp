@@ -135,7 +135,7 @@ The lessons below assume that you've completed both our [Intro to Output](../ard
 
 ### Force
 
-Learn how to sense force using a force-sensitive resistor (FSR).
+Learn how to sense force using a [force-sensitive resistor (FSR)](../arduino/force-sensitive-resistors.md). This is what you did in the [Intro to Input](../arduino/intro-input.md) series.
 
 ### Light
 
@@ -151,7 +151,7 @@ Learn how to sense distance (2-400cm) using an [ultrasonic distance sensor](http
 
 ### Sound
 
-Learn how to sense sound using a microphone.
+Learn how to sense sound using a microphone. In this case, an [electret microphone](https://www.adafruit.com/product/1063) with a MAX4466 amplifier.
 
 <!-- ### Human related I/O
 For human related I/O, human reaction time to an external stimulus is ~150-300ms (try a [human benchmark](https://www.humanbenchmark.com/tests/reactiontime)) and modern monitors refresh at 60Hz

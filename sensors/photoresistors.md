@@ -29,13 +29,14 @@ We'll need the following materials:
 | Breadboard | Arduino Uno, Leonardo, or similar  | [Photoresistor](https://www.adafruit.com/product/161) | 10kΩ Resistor | 
 
 ## Photoresistor 
-![Three differently sized photoresistors with scale in mm](assets/images/Photoresistors_Wikipedia.png)
-Three differently sized photoresistors with scale in mm. Image from [Wikipedia](https://en.wikipedia.org/wiki/Photoresistor).
-{: .fs-1 }
 
-A photoresistor (or sometimes called a photocell or light-dependent resistor) varies its resistance in response to light. 
+| Photoresistors | Schematic Symbol |
+| -------------- | ---------------- |
+| ![Three differently sized photoresistors with scale in mm](assets/images/Photoresistors_Wikipedia.png) |
+![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png) |
+| Three differently sized photoresistors with scale in mm. Image from [Wikipedia](https://en.wikipedia.org/wiki/Photoresistor). | There are six interchangeable photoresistor schematic symbols. Image from [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) |
 
-Photoresistors are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.
+A photoresistor (or sometimes called a photocell or light-dependent resistor) varies its resistance in response to light. They are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.
 
 Consequently, photoresistors are popular in children's toys, nightlights, clock radios, and other inexpensive gadgets. For example, they are used in this Melissa and Doug wooden fire truck puzzle to detect when pieces have been placed and the puzzle is complete:
 
@@ -44,14 +45,6 @@ Consequently, photoresistors are popular in children's toys, nightlights, clock 
 When the all pieces are placed (or all photoresistors have been covered), the puzzle plays a rewarding "fire truck siren" for the child:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ySJw510mVgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe
-
-### Schematic symbol
-
-There are six interchangeable photoresistor schematic symbols. 
-
-![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png)
-Image from [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307)
-{: .fs-1 }
 
 ### How do photoresistors work?
 

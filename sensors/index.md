@@ -30,9 +30,11 @@ How can new sensing and processing systems help identify cancer cells, find new 
 
 <!-- primary learning goals: expose to certain types of sensors, how to use them, how to process them? how to make some yourself? -->
 
-## Sensors
+## Introduction to Sensors
 
-Humans have invented thousands of sensors. How should we organize them? There are typically three key characteristics: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides.
+Humans have invented thousands of sensors. How should we organize and characterize them? 
+
+There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides. As well as numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, designer familiarity, *etc.* that may impact usage.
 
 ### Characterizing sensors by function
 

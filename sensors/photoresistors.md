@@ -17,9 +17,97 @@ usemathjax: true
 {:toc}
 ---
 
-In my own experiments, I found that the photoresistor resistance ranged from 100+ MΩ to ~50-100Ω with my iPhone LED flashlight on full power 
+In this lesson, you'll learn about [photoresistors](https://en.wikipedia.org/wiki/Photoresistor) and how to use them with and without microcontrollers.
 
-### Photoresistor 
+## Materials
+
+We'll need the following materials:
+
+| Breadboard | Arduino | Photoresistor | Resistor | Piezo Buzzer |
+|:-----:|:-----:|:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Photoresistor]({{ site.baseurl }}/assets/images/Photoresistor_150h.png) | ![Image of 10KOhm resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) |
+| Breadboard | Arduino Uno, Leonardo, or similar  | [Photoresistor](https://www.adafruit.com/product/161) | 10kΩ Resistor | 
+
+## Photoresistor 
+![Three differently sized photoresistors with scale in mm](assets/images/Photoresistors_Wikipedia.png)
+Three differently sized photoresistors with scale in mm. Image from [Wikipedia](https://en.wikipedia.org/wiki/Photoresistor).
+{: .fs-1 }
+
+A photoresistor (or sometimes called a photocell or light-dependent resistor) varies its resistance in response to light. 
+
+Photoresistors are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.
+
+Consequently, photoresistors are popular in children's toys, nightlights, clock radios, and other inexpensive gadgets. For example, they are used in this Melissa and Doug wooden fire truck puzzle to detect when pieces have been placed and the puzzle is complete:
+
+![Picture showing the Melissa and Doug puzzle with embedded photoresistors](assets/images/Photoresistor_MelissaAndDougPuzzle.png)
+
+When the all pieces are placed (or all photoresistors have been covered), the puzzle plays a rewarding "fire truck siren" for the child:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/ySJw510mVgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe
+
+### Schematic symbol
+
+There are six interchangeable photoresistor schematic symbols. 
+
+![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png)
+Image from [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307)
+{: .fs-1 }
+
+### How do photoresistors work?
+
+Photoresistors are typically made of Cadmium-Sulfide (CdS), which is a semiconductor that reacts to light. As [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) describes, "when exposed to light, more charge carriers are excited into states where they are mobile and can participate in conduction. As a result, electrical resistance decreases." Because they are made from Cadmium-Sulfide, they are sometimes referred to as CdS cells.
+
+### Photoresistor resistance vs. illumination
+
+To describe the relationship between photoresistance and light level, we need a more precise definition of the latter. The SI unit of illuminance is [lux](https://en.wikipedia.org/wiki/Lux), which is the "luminous flux per unit area". According to Wikipedia, in photometry, lux is used as a measure of the intensity of light that hits or passes through a surface as perceived by the human eye.
+
+You're likely as unfamiliar with lux as we are. So, to contextualize lux, the [Wikipedia](https://en.wikipedia.org/wiki/Lux) page offers some examples. 
+
+| Illuminance (lux) | Example |
+| ----------------- | ------- |
+| 0.0001            | Moonless, overcast night sky |
+| 0.05 - 0.3        | Full moon on a clear night |
+| 50                | Lighting in a domestic family room |
+| 80                | Office building hallway |
+| 100               | Dark overcast day |
+| 400               | Sunrise or sunset on a clear day |
+| 10k - 25k         | Full daylight (not direct sun) |
+| 32k - 100k        | Direct sunlight |
+
+While finding a detailed datasheet on photoresistors is difficult, both [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light) provide graphs of a photoresistor resistance *vs.* lux.
+
+![Sparkfun and Adafruit resistance vs. illuminance graphs](assets/images/Photoresistor_ResistanceVsIllumination_SparkfunAndAdafruit.png)
+Graphs from [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light). Both are in log-log scale.
+{: .fs-1 }
+
+Using a professional light meter, [All About Circuits](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/) did their own examination of photoresistance vs. illumination and found the same log-log relationship, which we graphed ourselves below both in linear and log-log form (the former is easier to understand).
+
+![All about Circuits resistance vs. illuminance graph](assets/images/Photoresistor_ResistanceVsIllumination_AllAboutCircuits.png)
+
+In short, the photoresistor is most sensitive to light differences at lower lux levels (darker environments). This sensitivity drops exponentially as lux decreases. For example, the resistance drops 65kΩ between $$lux=1$$ and $$lux=2$$ (65kΩ per lux) and 54kΩ between $$lux=2$$ and $$lux=20$$ (3kΩ per lux). Between $$lux=900$$ and $$lux=~1300$$, however, the resistance only drops 140Ω.
+
+The Adafruit documentation emphasizes that each photocell will perform differently due to manufacturing and other variations and reaffirms that photocells should not be used to precisely measure light levels (and each photocell requires individual calibration).
+
+<!-- Therefore, the resistance of LDRs is an inverse, nonlinear function of light intensity.
+Read more http://www.resistorguide.com/photoresistor/ -->
+
+#### Photoresistor spectral response graph
+
+CdS is most responsive to wavelengths of visible light ranging from 400nm (violet) to 800nm (red); however, their sensitivity peaks between 500nm (green) and 700nm (red). See the relative spectral response graph below:
+
+![Graph of relative spectral response showing that CdS is most sensitive to wavelengths of light between 500-700nm](assets/images/Photoresistor_RelativeSpectralResponse_Adafruit.png)
+Graph from [Adafruit](https://learn.adafruit.com/photocells/measuring-light).
+{: .fs-1 }
+
+#### Photoresistors lag
+
+Photoresistors should not be used to sense or measure rapid fluctuations of light because of response latency. According to [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) as well as [others](http://www.resistorguide.com/photoresistor/), photoresistors may take ~10ms to drop completely when light is applied after total darkness and up to 1 second to rise back to a stable high resistance after the removal of light. Phototransistors and photodiodes are both more responsive. 
+
+#### Cadmium-Sulfide is classified as a hazardous material
+
+Cadmium-Sulfide is classified as a hazardous environmental chemical by the [RoHS](https://www.rohsguide.com/rohs-faq.htm) and are thus unavailable in Europe. They are, however, still available in the US (and still used in toy manufacturing, yay!) 
+
+### Measuring photoresistance with a multimeter
 
 To get a sense of the photoresistor's resistance as a function of light, try hooking it up to a multimeter (the ohmmeter setting). What do you observe?
 
@@ -27,7 +115,7 @@ Here's the results of our own informal experiments:
 
 | Lighting condition | Photoresistor resistance |
 | ------------------ | ------------------------ |
-| iPhone LED flashlight on full power over photoresistor   | ~50-100Ω                     |
+| iPhone LED flashlight on full power directly against photoresistor   | ~50-100Ω                     |
 | Desk lamp **on**   | 1.6kΩ                    |
 | Desk lamp **off** but some ambient light (*e.g.,* from computer moitor)   | 10kΩ                    |
 | Finger over photoresistor   | ~130kΩ                    |
@@ -45,11 +133,13 @@ Let's make something.
 
 As before, we're going to explore this sensor first **without** a microcontroller to build up familiarity before connecting it as analog input to the Arduino. 
 
-Let's try making a simple, prototype nightlight that automatically turns **on** in the dark. 
+Let's try making a simple, prototype nightlight that automatically turns **on** (or gets brighter) in the dark. 
 
 ### Initial auto-on nightlight circuit
 
-Like the FSR, the photocell is a two-legged resistive sensor. So, we might initially try to hook it up in the exact same way. As we measured a minimum resistance of ~50-100Ω when an ultrabright LED flashlight was pointed directly at the photoresistor, in both wiring diagrams, we include a backup current limiting resistor.
+Like the [FSR](../arduino/force-sensitive-resistors.md), the photoresistor is a two-legged resistive sensor and is non-polarized. So, you can connect them in "either direction" in your circuits. 
+
+You might initially try to hook up the photoresistor in the same way as the [FSR](../arduino/force-sensitive-resistors.md): in-series with the LED. As we measured a minimum resistance of ~50-100Ω when an ultrabright LED flashlight was pointed directly at the photoresistor, in both wiring diagrams, we include a backup current limiting resistor.
 
 ![Two wiring diagrams of a photocell connected to an LED: one with 9V battery; other powered by Arduino 5V pin](assets/images/Photoresistor_WiringDiagram_NoArduino_Fritzing.png)
 
@@ -167,10 +257,11 @@ Once again, the handy 10kΩ for $$R_1$$ may be a nice compromise.
 TODO: use serial plotter to select min/max values for conversion
 
 ## Exercises
-- `map` assumes a linear mapping between two value ranges. What if you wanted a logarithmic or exponential conversion? How might this be useful here?
+- `map` assumes a linear mapping between two value ranges. What if you wanted a logarithmic or exponential conversion? How would you implement this? How might this be useful for working with sensors?
 
 ## References
 - [Photoresistor](https://en.wikipedia.org/wiki/Photoresistor), Wikipedia
+- [Photoresistor(http://www.resistorguide.com/photoresistor/), Resistorguide.com
 - Chapter 20: Photoresistor in Platt, [*Make: Encyclopedia of Electronic Components Volume 3: Sensing Light, Sound, Heat, Motion, and More*](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307), O'Reilly, 2016.
 
 <!-- Selenium history:

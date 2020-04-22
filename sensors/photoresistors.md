@@ -270,6 +270,7 @@ TODO: use serial plotter to select min/max values for conversion
 ## References
 - [Photoresistor](https://en.wikipedia.org/wiki/Photoresistor), Wikipedia
 - [Photoresistor](http://www.resistorguide.com/photoresistor/), Resistorguide.com
+- [Photocells](https://learn.adafruit.com/photocells?view=all), Adafruit tutorial
 - [Designing a Luxmeter Using a Light-Dependent Resistor](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/, All About Circuits, David Williams 
 - Chapter 20: Photoresistor in Platt, [*Make: Encyclopedia of Electronic Components Volume 3: Sensing Light, Sound, Heat, Motion, and More*](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307), O'Reilly, 2016.
 

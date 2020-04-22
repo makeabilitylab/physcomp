@@ -151,11 +151,15 @@ Learn how to sense magnetic fields using a Hall effect sensor.
 
 ### Distance
 
-Learn how to sense distance (2-400cm) using an [ultrasonic distance sensor](https://www.makerguides.com/hc-sr04-arduino-tutorial/)
+Learn how to sense distance (2-400cm) using the [HC-SR04 ultrasonic distance sensor](https://www.makerguides.com/hc-sr04-arduino-tutorial/)
 
 ### Sound
 
-Learn how to sense sound using a microphone. In this case, an [electret microphone](https://www.adafruit.com/product/1063) with a MAX4466 amplifier.
+Learn how to sense sound using an [electret microphone](https://www.adafruit.com/product/1063) with a MAX4466 amplifier.
+
+### Accelerometer
+
+Learn how to sense acceleration using the [LIS3DH 3-axis accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/overview).
 
 <!-- ### Human related I/O
 For human related I/O, human reaction time to an external stimulus is ~150-300ms (try a [human benchmark](https://www.humanbenchmark.com/tests/reactiontime)) and modern monitors refresh at 60Hz

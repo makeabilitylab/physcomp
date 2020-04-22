@@ -127,7 +127,7 @@ If you want to learn more about faster analog reads on the Arduino, Open Music L
 
 ### Changing the analog conversion range
 
-The Arduino library also supports changing the ADC range from the default of $$0-5V$$ to $$0-X$$ where $$X$$ is any value between 1.0V and $$V_{cc}$$ (which is 5V on the Uno). You can do this via the `[analogReference](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/)` function. This may be useful, for example, if you know that your sensors output voltages between 0-3.3V, then setting `analogRerence(EXTERNAL)` and applying 3.3V to the `AREF` pin on the Arduino improves the ADC resolution from 4.9mV to 3.2mV.  
+The Arduino library also supports changing the ADC range from the default of $$0-5V$$ to $$0-X$$ where $$X$$ is any value between 1.0V and $$V_{cc}$$ (which is 5V on the Uno). You can do this via the [`analogReference`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/) function. This may be useful, for example, if you know that your sensors output voltages between 0-3.3V, then setting `analogRerence(EXTERNAL)` and applying 3.3V to the `AREF` pin on the Arduino improves the ADC resolution from 4.9mV to 3.2mV.  
 
 ## Let's make stuff!
 

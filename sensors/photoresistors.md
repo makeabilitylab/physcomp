@@ -202,7 +202,7 @@ analogWrite(OUTPUT_LED_PIN, ledVal);
 
 {% endhighlight C %}
 
-And I like to simplify this even more by relying on `map` for the inversion, so the code becomes:
+And I often like to simplify this even more by relying on `map` for the inversion (notice how I flip the order of `255` and `0`), so the code becomes:
 
 {% highlight C %}
 
@@ -235,7 +235,7 @@ Let's focus on the bottom graph for now (the "darkness" sensor configuration). H
 | 50kΩ    | 0.05V	     | 0.45V       | 2.50V        | 4.17V        | 4.55V         |
 | 100kΩ   | 0.01V        | 0.10V       | 0.83V        | 2.50V        | 3.33V         |
 
-Note how with a 1kΩ for $$R_1$$, almost our entire $$V_{out}$$ range falls between the photoresistance $$R_2=100Ω$$ and $$R_2=10kΩ$$. So, a 1kΩ for $$R_1$$ is useful if we want to discriminate between brighter light levels but not as useful for darker light levels (indeed, from $$R_2=50kΩ$$ to $$R_2=100kΩ$$, there is only a 0.05V difference across a 50kΩ range!). In contrast, if we select a 100kΩ for $$R_1$$, then at bright light levels ($$R_2=100Ω$$ to $$R_2=1kΩ$$), our voltage only differs by 0.09V but at darker light levels ($$R_2=50kΩ$$ to $$R_2=100kΩ$$), the voltage differs by 0.83V. So, comparatively more precision in darker environments with $$R_1=100kΩ$$ than $$R_2=1kΩ$$
+Note how with a 1kΩ for $$R_1$$, almost our entire $$V_{out}$$ range falls between the photoresistance $$R_2=100Ω$$ and $$R_2=10kΩ$$. So, a 1kΩ for $$R_1$$ is useful if we want to discriminate between brighter light levels but not as useful for darker light levels (indeed, from $$R_2=50kΩ$$ to $$R_2=100kΩ$$, there is only a 0.05V difference across a 50kΩ range!). In contrast, if we select a 100kΩ for $$R_1$$, then at bright light levels ($$R_2=100Ω$$ to $$R_2=1kΩ$$), our voltage only differs by 0.09V but at darker light levels ($$R_2=50kΩ$$ to $$R_2=100kΩ$$), the voltage differs by 0.83V. So, there is comparatively more precision in darker environments with $$R_1=100kΩ$$ than $$R_2=1kΩ$$
 
 Once again, the handy 10kΩ for $$R_1$$ may be a nice compromise.
 
@@ -264,16 +264,16 @@ Our code:
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Sensors/PhotoresistorLED/PhotoresistorLED.ino?footer=minimal"></script>
 
 ## Exercises
-- `map` assumes a linear mapping between two value ranges. What if you wanted a logarithmic or exponential conversion? How would you implement this? How might this be useful for working with sensors?
+- `map()` assumes a linear mapping between two value ranges. What if you wanted a logarithmic or exponential conversion? How would you implement this? How might this be useful for working with sensors?
 - Just like we did for the [FSR lesson](../arduino/force-sensitive-resistors.md), try hooking up a piezo buzzer (and be creative about how it makes "music").
 - Make the night light brighter or multi-color (either with your RGB LEDs or individually colored LEDs)
 
 ## References
+- [Photocells](https://learn.adafruit.com/photocells?view=all), Adafruit tutorial
+- [Designing a Luxmeter Using a Light-Dependent Resistor](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/), All About Circuits, David Williams 
+- Chapter 20: Photoresistor in Platt, [*Make: Encyclopedia of Electronic Components Volume 3: Sensing Light, Sound, Heat, Motion, and More*](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307), O'Reilly, 2016.
 - [Photoresistor](https://en.wikipedia.org/wiki/Photoresistor), Wikipedia
 - [Photoresistor](http://www.resistorguide.com/photoresistor/), Resistorguide.com
-- [Photocells](https://learn.adafruit.com/photocells?view=all), Adafruit tutorial
-- [Designing a Luxmeter Using a Light-Dependent Resistor](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/, All About Circuits, David Williams 
-- Chapter 20: Photoresistor in Platt, [*Make: Encyclopedia of Electronic Components Volume 3: Sensing Light, Sound, Heat, Motion, and More*](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307), O'Reilly, 2016.
 
 <!-- Selenium history:
 

@@ -113,13 +113,13 @@ To get a sense of the photoresistor's resistance as a function of light, try hoo
 
 Here's the results of our own informal experiments:
 
-| Lighting condition | Photoresistor resistance |
+| Lighting condition | Photoresistance |
 | ------------------ | ------------------------ |
 | iPhone LED flashlight on full power directly against photoresistor   | ~50-100Ω                     |
 | Desk lamp **on**   | 1.6kΩ                    |
-| Desk lamp **off** but some ambient light (*e.g.,* from computer moitor)   | 10kΩ                    |
+| Desk lamp **off** but some ambient light (*e.g.,* from computer monitor )   | 10kΩ                    |
 | Finger over photoresistor   | ~130kΩ                    |
-| Very dark room | 1+MΩ                    |
+| Very dark room (basement, no ambient light) | 1+ MΩ                    |
 
 And a video:
 
@@ -231,7 +231,7 @@ I think, by now, we understand how to hook up a two-leg resistive sensor to a mi
 
 Ideally, we would want to vary $$V_{out}$$ across our entire ADC range (0-5V)—otherwise, we're artificially limiting our precision—and to discriminate between light levels of interest (do we care more about discriminating bright lights or darker environments).
 
-To help answer this, we can graph $$V_{out}$$ as a function of various fixed resistors and a range of photoresistor resistances. We've also marked approximate resistances of the photoresistor based on ambient light levels. Note that these graphs don't incorporate how the photoresistor's resistance changes in response to light: they simply graph how $$V_{out}$$ changes as the photoresistors resistance changes linearly.
+To help answer this, we can graph $$V_{out}$$ as a function of various fixed resistors and a range of photoresistor resistances. We've also marked approximate resistances of the photoresistor based on ambient light levels. Note that these graphs don't incorporate how the photoresistor's resistance changes in response to light: they simply graph the voltage divider output for $$R_1$$ and varying $$R_2$$.
 
 ![Graph of various Vout voltages for a voltage divider network with various fixed resistors (as R1) and the photoresistor as R2 (from 100 to 100kΩ)](assets/images/Photoresistor_VoltageDividerGraph_PhotoresistorAsR2.png)
 
@@ -254,6 +254,14 @@ Note how with a 1kΩ for $$R_1$$, almost our entire $$V_{out}$$ range falls betw
 
 Once again, the handy 10kΩ for $$R_1$$ may be a nice compromise.
 
+#### Using the "Axel Benz" formulation
+
+To help select a fixed resistor value, both [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) and the Adafruit tutorial recommend the following equation: $$R_{fixed} = \sqrt{R_{min} \cdot R_{max}}$$ where $$R_{min}$$ is the minimum photoresistance value expected in the deployment environment (*i.e.,* resistance at highest light intensity) and $$R_{max}$$ is the maximum resistance value expected (*i.e.,* resistance at lowest light intensity). [Adafruit](https://learn.adafruit.com/photocells/using-a-photocell) refers to this as the "Axel Benz" formulation but we couldn't determine a reliable source for this.
+
+## Let's make a simple auto-on nightlight with Arduino
+
+
+
 TODO: use serial plotter to select min/max values for conversion
 
 ## Exercises
@@ -261,7 +269,8 @@ TODO: use serial plotter to select min/max values for conversion
 
 ## References
 - [Photoresistor](https://en.wikipedia.org/wiki/Photoresistor), Wikipedia
-- [Photoresistor(http://www.resistorguide.com/photoresistor/), Resistorguide.com
+- [Photoresistor](http://www.resistorguide.com/photoresistor/), Resistorguide.com
+- [Designing a Luxmeter Using a Light-Dependent Resistor](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/, All About Circuits, David Williams 
 - Chapter 20: Photoresistor in Platt, [*Make: Encyclopedia of Electronic Components Volume 3: Sensing Light, Sound, Heat, Motion, and More*](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307), O'Reilly, 2016.
 
 <!-- Selenium history:

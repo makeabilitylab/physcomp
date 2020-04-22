@@ -259,7 +259,7 @@ Below, we've wired the photoresistor using a voltage divider with a fixed resist
 
 Try writing the code before looking at our solution. Print your `analogRead` values from the photoresistor to better determine light/dark thresholds to set your LED brightness. For example, your auto-on nightlight should be completely off when it's "light" and fully bright when it's "dark" (but you can control these tolerances).
 
-#### Our code
+Our code:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Sensors/PhotoresistorLED/PhotoresistorLED.ino?footer=minimal"></script>
 

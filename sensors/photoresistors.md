@@ -71,6 +71,7 @@ You're likely as unfamiliar with lux as we are. So, to contextualize lux, the [W
 | 80                | Office building hallway |
 | 100               | Dark overcast day |
 | 400               | Sunrise or sunset on a clear day |
+| 1,000             | Overcast day |
 | 10k - 25k         | Full daylight (not direct sun) |
 | 32k - 100k        | Direct sunlight |
 

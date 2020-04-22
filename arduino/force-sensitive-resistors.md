@@ -40,8 +40,6 @@ Prices and products from [Sparkfun.com](https://learn.sparkfun.com/tutorials/for
 
 While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to precisely measure weight, load, or strain.
 
-<!-- TODO: How do FSRs work actually work? Include figure from datasheet -->
-
 ### FSR applications
 
 What can we do with FSRs?

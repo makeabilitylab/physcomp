@@ -29,7 +29,7 @@ In this lesson, you'll learn about [photoresistors](https://en.wikipedia.org/wik
 
 A photoresistor—sometimes called a photocell or light-dependent resistor—varies its resistance in response to light. They are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.
 
-Consequently, photoresistors are popular in children's toys, nightlights, clock radios, and other inexpensive gadgets. For example, they are used in this Melissa and Doug wooden fire truck puzzle to detect when pieces have been placed and the puzzle is complete:
+Consequently, photoresistors are popular in children's toys, nightlights, clock radios, and other inexpensive gadgets. For example, they are used in this Melissa and Doug wooden fire truck puzzle to detect when pieces have been placed and when the puzzle is complete:
 
 ![Picture showing the Melissa and Doug puzzle with embedded photoresistors](assets/images/Photoresistor_MelissaAndDougPuzzle.png)
 
@@ -43,11 +43,11 @@ Photoresistors are typically made of Cadmium-Sulfide (CdS), which is a semicondu
 
 ### Photoresistor resistance vs. illumination
 
-To describe the relationship between photoresistance and light level, we need a more precise definition of the how light is characterized. Enter: lux!
+To describe the relationship between photoresistance and light level, we need a more precise definition of the how light levels are characterized. Enter: (https://en.wikipedia.org/wiki/Lux)!
 
-The SI unit of illuminance is called [lux](https://en.wikipedia.org/wiki/Lux), which is the "luminous flux per unit area". In photometry, lux is used as a measure of the intensity of light that hits or passes through a surface as perceived by the human eye.
+The SI unit of illuminance is called [lux](https://en.wikipedia.org/wiki/Lux), which is, formally, the "*luminous flux per unit area*". In photometry, lux is used as a measure of the intensity of light that hits or passes through a surface as perceived by the human eye.
 
-You're likely as unfamiliar with lux as we are. So, to contextualize lux, the [Wikipedia](https://en.wikipedia.org/wiki/Lux) page offers some useful examples. 
+As you're likely unfamiliar with lux just as we were, it's useful to contextualize lux with some examples (from [Wikipedia](https://en.wikipedia.org/wiki/Lux)). 
 
 | Illuminance (lux) | Example |
 | ----------------: | ------- |
@@ -61,17 +61,17 @@ You're likely as unfamiliar with lux as we are. So, to contextualize lux, the [W
 | 10k - 25k         | Full daylight (not direct sun) |
 | 32k - 100k        | Direct sunlight |
 
-While finding a detailed datasheet on photoresistors is difficult, both [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light) provide graphs of photoresistor resistance *vs.* lux.
+While finding a detailed datasheet on photoresistors is difficult, both [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light) provide low-quality graphs of photoresistor resistance *vs.* lux on their websites.
 
 ![Sparkfun and Adafruit resistance vs. illuminance graphs](assets/images/Photoresistor_ResistanceVsIllumination_SparkfunAndAdafruit.png)
 Graphs from [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light). Both are in log-log scale.
 {: .fs-1 }
 
-Using a professional light meter, [All About Circuits](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/) conducted their own experiments of photoresistance *vs. *illumination and found the same log-log relationship. We've used this data to graph both a linear version and log-log version with annotations.
+Using a professional light meter, David Williams at [All About Circuits](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/) also conducted their own experiments of photoresistance *vs.* illumination and found the same log-log relationship. We've used this data to graph both a linear version (which is easier to understand) and log-log version with annotations.
 
 ![All about Circuits resistance vs. illuminance graph](assets/images/Photoresistor_ResistanceVsIllumination_AllAboutCircuits.png)
 
-In short, the photoresistor is most sensitive to light differences at lower lux levels (darker environments). This sensitivity drops exponentially as lux decreases. For example, the resistance drops 65kΩ between $$lux=1$$ and $$lux=2$$ (65kΩ per lux) and 54kΩ between $$lux=2$$ and $$lux=20$$ (3kΩ per lux). Between $$lux=900$$ and $$lux=~1300$$, however, the resistance only drops 140Ω.
+In short, a photoresistor is most sensitive to light differences at lower lux levels (darker environments). This sensitivity drops exponentially as lux decreases. For example, the resistance drops 65kΩ between $$lux=1$$ and $$lux=2$$ (~65kΩ per lux) and 54kΩ between $$lux=2$$ and $$lux=20$$ (~3kΩ per lux in this range). Between $$lux=900$$ and $$lux=~1300$$, however, the resistance only drops 140Ω (2.8Ω per lux).
 
 The Adafruit documentation emphasizes that each photocell will perform differently due to manufacturing and other variations and reaffirms that photocells should not be used to precisely measure light levels (and each photocell requires individual calibration).
 
@@ -80,7 +80,7 @@ Read more http://www.resistorguide.com/photoresistor/ -->
 
 #### Photoresistor spectral response graph
 
-CdS is most responsive to wavelengths of visible light ranging from 400nm (violet) to 800nm (red); however, their sensitivity peaks between 500nm (green) and 700nm (red). See the relative spectral response graph below:
+Photoresistors are also not uniformly responsive to all wavelengths of light. Their sensitivity peaks between 500nm (green) and 700nm (red). See the relative spectral response graph below:
 
 ![Graph of relative spectral response showing that CdS is most sensitive to wavelengths of light between 500-700nm](assets/images/Photoresistor_RelativeSpectralResponse_Adafruit.png)
 Graph from [Adafruit](https://learn.adafruit.com/photocells/measuring-light).
@@ -92,11 +92,11 @@ Photoresistors should not be used to sense or measure rapid fluctuations of ligh
 
 #### Cadmium-Sulfide is classified as a hazardous material
 
-Cadmium-Sulfide is classified as a hazardous environmental chemical by the [RoHS](https://www.rohsguide.com/rohs-faq.htm) and are thus unavailable in Europe. They are, however, still available in the US (and still used in toy manufacturing, yay!) 
+Cadmium-Sulfide is classified as a hazardous environmental chemical by the [RoHS](https://www.rohsguide.com/rohs-faq.htm) and are thus unavailable in Europe. They are, however, still available in the US (and still used in toy manufacturing, yay!). 
 
 ### Measuring photoresistance with a multimeter
 
-To get a sense of the photoresistor's resistance as a function of light, try hooking it up to a multimeter (the ohmmeter setting). What do you observe?
+To get your own empirical sense of a photoresistor's resistance as a function of light, try hooking it up to a multimeter (with the ohmmeter setting). What do you observe?
 
 Here's the results of our own informal experiments:
 
@@ -116,11 +116,9 @@ Our photoresistor ranges from 1.6kΩ with our desk lamp to 10kΩ with the lights
 
 ## Making an LED dimmer with a photoresistor
 
-Let's make something.
+Let's make something. How about a simple, prototype nightlight that automatically turns **on** (gets brighter) in the dark. 
 
-As before, we're going to explore this sensor first **without** a microcontroller to build up familiarity before connecting it as analog input to the Arduino. 
-
-Let's try making a simple, prototype nightlight that automatically turns **on** (or gets brighter) in the dark. 
+As before, we're going to explore this sensor first **without** a microcontroller to build up familiarity. 
 
 ### Initial auto-on nightlight circuit
 
@@ -132,7 +130,7 @@ You might initially try to hook up the photoresistor in the same way as the [FSR
 
 Try making this circuit. What happens?
 
-Because the photoresistor resistance **decreases** with light levels, the LED gets brighter as the ambient light gets brighter. This is the opposite of what we want! See video below.
+Because the photoresistor resistance **decreases** with light levels, the LED gets brighter as the ambient light gets brighter. This is the opposite behavior of what we want! See video below.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/tNOG2tYaBQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 In this video, the photoresistor is in series with the LED. As the ambient light level increases, the photoresistor resistance decreases, and the LED gets brighter. But we want the opposite effect? Note: this video has no audio.
@@ -148,7 +146,7 @@ We are going to create an inverse relationship between ambient light levels and 
 
 ![](assets/images/Photoresistor_WiringDiagramAndSchematicVoltageDivider_NoArduino_Fritzing.png)
 
-If $$R$$ is too small, the LED will still turn on even in ambient light. Through experimentation, we determined that $$R=4.7kΩ$$ resulted in a 1.72V drop and 0.10mA through the LED with the **desk lamp off** (up to 0.6mA when the photoresistor is covered) and a 0.8V drop and 0mA through the LED with the lights on. So, while this circuit works, it doesn't work well. We are not able to sufficiently control the current through the LED based on lighting conditions. Yes, we have the general LED behavior we want but 0.10mA is a very small current, so the LED is not very bright (even in the darkest conditions). See video below.
+If $$R$$ is too small, the LED will still turn on even in ambient light. Through experimentation, we determined that $$R=4.7kΩ$$ resulted in the best performance: a 1.72V drop and 0.10mA through the LED with a **desk lamp off** (up to 0.6mA when the photoresistor is covered) and a 0.8V drop and 0mA through the LED with the **lamp on**. 
 
 | R     | Desk Lamp **Off** | Desk Lamp **Off** | Desk Lamp **On**  | Desk Lamp **On**  |
 | ----- | ----------------- | ----------------- | ----------------- | ----------------- |
@@ -157,6 +155,8 @@ If $$R$$ is too small, the LED will still turn on even in ambient light. Through
 | 2.2kΩ | 1.82V             | 1.23mA            | 1.78V             | 0.5mA             |
 | 4.7kΩ | 1.78V             | 0.48mA            | 1.41V             | 0mA               |
 | 10kΩ  | 1.72V             | 0.10mA            | 0.80V             | 0mA               |
+
+So, while this circuit works, it doesn't work well. We are not able to sufficiently control the current through the LED based on lighting conditions. Yes, we have the general LED behavior we want but 0.10mA is a very small current, so the LED is not very bright (even in the darkest conditions). See video below.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ZYVQLw-7HU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 This video shows a photoresistor wired in parallel to inverse the relationship between ambient light levels and LED brightness. Note: this video has no audio.
@@ -216,15 +216,13 @@ analogWrite(OUTPUT_LED_PIN, ledVal);
 
 I think, by now, we understand how to hook up a two-leg resistive sensor to a microcontroller (using a voltage divider!). But one key question is: what to use as the fixed resistor in the voltage divider? 
 
-Ideally, we would want to vary $$V_{out}$$ across our entire ADC range (0-5V)—otherwise, we're artificially limiting our precision—and to discriminate between light levels of interest (do we care more about discriminating bright lights or darker environments).
+Ideally, we would want to: (1) vary $$V_{out}$$ across our entire ADC range (0-5V)—otherwise, we're artificially limiting our precision—and (2) discriminate between light levels of interest (do we care more about bright lights or darker environments, for example).
 
-To help answer this, we can graph $$V_{out}$$ as a function of various fixed resistors and a range of photoresistor resistances. We've also marked approximate resistances of the photoresistor based on ambient light levels. Note that these graphs don't incorporate how the photoresistor's resistance changes in response to light: they simply graph the voltage divider output for $$R_1$$ and varying $$R_2$$.
+To help answer this, we can graph $$V_{out}$$ as a function of various fixed resistors and a range of photoresistor resistances. We've also marked approximate resistances of the photoresistor based on ambient light levels. Note that these graphs don't incorporate how the photoresistor's resistance changes in response to light: they simply graph the voltage divider output for $$R_1$$ and varying $$R_2$$. Both graphs show the same data, just the inverse depending on whether the fixed resistor is $$R_1$$ or $$R_2$$.
 
 ![Graph of various Vout voltages for a voltage divider network with various fixed resistors (as R1) and the photoresistor as R2 (from 100 to 100kΩ)](assets/images/Photoresistor_VoltageDividerGraph_PhotoresistorAsR2.png)
 
 ![Graph of various Vout voltages for a voltage divider network with various fixed resistors (as R2) and the photoresistor as R1 (from 100 to 100kΩ)](assets/images/Photoresistor_VoltageDividerGraph_PhotoresistorAsR1.png)
-
-Both graphs show the same data, just the inverse depending on whether the fixed resistor is $$R_1$$ or $$R_2$$.
 
 Let's focus on the bottom graph for now (the "darkness" sensor configuration). Here's a table of $$V_{out}$$ values for six different fixed resistors ($$R_1$$) and some various resistances for the photoresistor ($$R_2$$).
 
@@ -237,7 +235,7 @@ Let's focus on the bottom graph for now (the "darkness" sensor configuration). H
 | 50kΩ    | 0.05V	     | 0.45V       | 2.50V        | 4.17V        | 4.55V         |
 | 100kΩ   | 0.01V        | 0.10V       | 0.83V        | 2.50V        | 3.33V         |
 
-Note how with a 1kΩ for $$R_1$$, almost our entire $$V_{out}$$ range falls between the photoresistance $$R_2=100Ω$$ and $$R_2=10kΩ$$. So, a 1kΩ for $$R_1$$ is useful if we want to discriminate between brighter light levels but not as useful for darker light levels (indeed, from $$R_2=50kΩ$$ to $$R_2=100kΩ$$, there is only a 0.05V difference across 50kΩ!). In contrast, if we select a 100kΩ for $$R_1$$, then at bright light levels ($$R_2=100Ω$$ to $$R_2=1kΩ$$), our voltage only differs by 0.09V but at darker light levels ($$R_2=50kΩ$$ to $$R_2=100kΩ$$), the voltage differs by 0.83V.
+Note how with a 1kΩ for $$R_1$$, almost our entire $$V_{out}$$ range falls between the photoresistance $$R_2=100Ω$$ and $$R_2=10kΩ$$. So, a 1kΩ for $$R_1$$ is useful if we want to discriminate between brighter light levels but not as useful for darker light levels (indeed, from $$R_2=50kΩ$$ to $$R_2=100kΩ$$, there is only a 0.05V difference across a 50kΩ range!). In contrast, if we select a 100kΩ for $$R_1$$, then at bright light levels ($$R_2=100Ω$$ to $$R_2=1kΩ$$), our voltage only differs by 0.09V but at darker light levels ($$R_2=50kΩ$$ to $$R_2=100kΩ$$), the voltage differs by 0.83V. So, comparatively more precision in darker environments with $$R_1=100kΩ$$ than $$R_2=1kΩ$$
 
 Once again, the handy 10kΩ for $$R_1$$ may be a nice compromise.
 
@@ -247,12 +245,28 @@ To help select a fixed resistor value, both [Platt](https://learning.oreilly.com
 
 ## Let's make a simple auto-on nightlight with Arduino
 
+OK, now let's make a simple auto-on nightlight with the Arduino that inversely sets an LED's brightness based on light level.
 
+### Make the circuit
 
-TODO: use serial plotter to select min/max values for conversion
+We need to make two independent circuits: one for the photoresistor and one for the LED. Unlike our non-microcontroller examples where the photoresistor was part of the same circuit as the LED, in this case, they are two separate circuits.
+
+Below, we've wired the photoresistor using a voltage divider with a fixed resistor of 10kΩ in the $$R_1$$ position (so, the 'darkness' sensor configuration). The voltage divider output is connected to `A0`. For the LED circuit, we've wired the LED anode towards Pin 3 with a 220Ω current-limiting resistor. 
+
+![Wiring diagram for LED circuit with photoresistor](assets/images/ArduinoUno_PhotoresistorLEDCircuit_Fritzing.png)
+
+### Write the code
+
+Try writing the code before looking at our solution. Print your `analogRead` values from the photoresistor to better determine light/dark thresholds to set your LED brightness. For example, your auto-on nightlight should be completely off when it's "light" and fully bright when it's "dark" (but you can control these tolerances).
+
+#### Our code
+
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Sensors/PhotoresistorLED/PhotoresistorLED.ino?footer=minimal"></script>
 
 ## Exercises
 - `map` assumes a linear mapping between two value ranges. What if you wanted a logarithmic or exponential conversion? How would you implement this? How might this be useful for working with sensors?
+- Just like we did for the [FSR lesson](../arduino/force-sensitive-resistors.md), try hooking up a piezo buzzer (and be creative about how it makes "music").
+- Make the night light brighter or multi-color (either with your RGB LEDs or individually colored LEDs)
 
 ## References
 - [Photoresistor](https://en.wikipedia.org/wiki/Photoresistor), Wikipedia

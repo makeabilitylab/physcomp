@@ -19,15 +19,6 @@ usemathjax: true
 
 In this lesson, you'll learn about [photoresistors](https://en.wikipedia.org/wiki/Photoresistor) and how to use them with and without microcontrollers.
 
-## Materials
-
-We'll need the following materials:
-
-| Breadboard | Arduino | Photoresistor | Resistor | Piezo Buzzer |
-|:-----:|:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Photoresistor]({{ site.baseurl }}/assets/images/Photoresistor_150h.png) | ![Image of 10KOhm resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) |
-| Breadboard | Arduino Uno, Leonardo, or similar  | [Photoresistor](https://www.adafruit.com/product/161) | 10kΩ Resistor | 
-
 ## Photoresistor 
 
 | Photoresistors | Schematic Symbol |
@@ -36,28 +27,30 @@ We'll need the following materials:
 ![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png) |
 | Three differently sized photoresistors with scale in mm. Image from [Wikipedia](https://en.wikipedia.org/wiki/Photoresistor). | There are six interchangeable photoresistor schematic symbols. Image from [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) |
 
-A photoresistor (or sometimes called a photocell or light-dependent resistor) varies its resistance in response to light. They are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.
+A photoresistor—sometimes called a photocell or light-dependent resistor—varies its resistance in response to light. They are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.
 
 Consequently, photoresistors are popular in children's toys, nightlights, clock radios, and other inexpensive gadgets. For example, they are used in this Melissa and Doug wooden fire truck puzzle to detect when pieces have been placed and the puzzle is complete:
 
 ![Picture showing the Melissa and Doug puzzle with embedded photoresistors](assets/images/Photoresistor_MelissaAndDougPuzzle.png)
 
-When the all pieces are placed (or all photoresistors have been covered), the puzzle plays a rewarding "fire truck siren" for the child:
+When the all pieces are placed (or all photoresistors have been covered), the puzzle plays a rewarding "fire truck siren" (rewarding for a child, at least):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ySJw510mVgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe
+<iframe width="736" height="414" src="https://www.youtube.com/embed/ySJw510mVgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### How do photoresistors work?
 
-Photoresistors are typically made of Cadmium-Sulfide (CdS), which is a semiconductor that reacts to light. As [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) describes, "when exposed to light, more charge carriers are excited into states where they are mobile and can participate in conduction. As a result, electrical resistance decreases." Because they are made from Cadmium-Sulfide, they are sometimes referred to as CdS cells.
+Photoresistors are typically made of Cadmium-Sulfide (CdS), which is a semiconductor that reacts to light. As [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) describes, "*when exposed to light, more charge carriers are excited into states where they are mobile and can participate in conduction. As a result, electrical resistance decreases.*" Because they are made from Cadmium-Sulfide, they are sometimes referred to as CdS cells.
 
 ### Photoresistor resistance vs. illumination
 
-To describe the relationship between photoresistance and light level, we need a more precise definition of the latter. The SI unit of illuminance is [lux](https://en.wikipedia.org/wiki/Lux), which is the "luminous flux per unit area". According to Wikipedia, in photometry, lux is used as a measure of the intensity of light that hits or passes through a surface as perceived by the human eye.
+To describe the relationship between photoresistance and light level, we need a more precise definition of the how light is characterized. Enter: lux!
 
-You're likely as unfamiliar with lux as we are. So, to contextualize lux, the [Wikipedia](https://en.wikipedia.org/wiki/Lux) page offers some examples. 
+The SI unit of illuminance is called [lux](https://en.wikipedia.org/wiki/Lux), which is the "luminous flux per unit area". In photometry, lux is used as a measure of the intensity of light that hits or passes through a surface as perceived by the human eye.
+
+You're likely as unfamiliar with lux as we are. So, to contextualize lux, the [Wikipedia](https://en.wikipedia.org/wiki/Lux) page offers some useful examples. 
 
 | Illuminance (lux) | Example |
-| ----------------- | ------- |
+| ----------------: | ------- |
 | 0.0001            | Moonless, overcast night sky |
 | 0.05 - 0.3        | Full moon on a clear night |
 | 50                | Lighting in a domestic family room |
@@ -68,13 +61,13 @@ You're likely as unfamiliar with lux as we are. So, to contextualize lux, the [W
 | 10k - 25k         | Full daylight (not direct sun) |
 | 32k - 100k        | Direct sunlight |
 
-While finding a detailed datasheet on photoresistors is difficult, both [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light) provide graphs of a photoresistor resistance *vs.* lux.
+While finding a detailed datasheet on photoresistors is difficult, both [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light) provide graphs of photoresistor resistance *vs.* lux.
 
 ![Sparkfun and Adafruit resistance vs. illuminance graphs](assets/images/Photoresistor_ResistanceVsIllumination_SparkfunAndAdafruit.png)
 Graphs from [Sparkfun](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/SEN-09088.pdf) and [Adafruit](https://learn.adafruit.com/photocells/measuring-light). Both are in log-log scale.
 {: .fs-1 }
 
-Using a professional light meter, [All About Circuits](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/) did their own examination of photoresistance vs. illumination and found the same log-log relationship, which we graphed ourselves below both in linear and log-log form (the former is easier to understand).
+Using a professional light meter, [All About Circuits](https://www.allaboutcircuits.com/projects/design-a-luxmeter-using-a-light-dependent-resistor/) conducted their own experiments of photoresistance *vs. *illumination and found the same log-log relationship. We've used this data to graph both a linear version and log-log version with annotations.
 
 ![All about Circuits resistance vs. illuminance graph](assets/images/Photoresistor_ResistanceVsIllumination_AllAboutCircuits.png)
 
@@ -118,7 +111,7 @@ Here's the results of our own informal experiments:
 And a video:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/imbN0PtUQg0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-Our photoresistor ranges from 1.6kΩ with our desk lamp to 10kΩ with the lights off to over ~10MΩ when covered by a coffee cup
+Our photoresistor ranges from 1.6kΩ with our desk lamp to 10kΩ with the lights off to over ~10MΩ when covered by a coffee cup.
 {: .fs-1 }
 
 ## Making an LED dimmer with a photoresistor

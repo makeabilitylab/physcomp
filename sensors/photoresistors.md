@@ -23,8 +23,7 @@ In this lesson, you'll learn about [photoresistors](https://en.wikipedia.org/wik
 
 | Photoresistors | Schematic Symbol |
 | -------------- | ---------------- |
-| ![Three differently sized photoresistors with scale in mm](assets/images/Photoresistors_Wikipedia.png) |
-![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png) |
+| ![Three differently sized photoresistors with scale in mm](assets/images/Photoresistors_Wikipedia.png) | ![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png) |
 | Three differently sized photoresistors with scale in mm. Image from [Wikipedia](https://en.wikipedia.org/wiki/Photoresistor). | There are six interchangeable photoresistor schematic symbols. Image from [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) |
 
 A photoresistor—sometimes called a photocell or light-dependent resistor—varies its resistance in response to light. They are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.
@@ -220,11 +219,15 @@ Ideally, we would want to: (1) vary $$V_{out}$$ across our entire ADC range (0-5
 
 To help answer this, we can graph $$V_{out}$$ as a function of various fixed resistors and a range of photoresistor resistances. We've also marked approximate resistances of the photoresistor based on ambient light levels. Note that these graphs don't incorporate how the photoresistor's resistance changes in response to light: they simply graph the voltage divider output for $$R_1$$ and varying $$R_2$$. Both graphs show the same data, just the inverse depending on whether the fixed resistor is $$R_1$$ or $$R_2$$.
 
-![Graph of various Vout voltages for a voltage divider network with various fixed resistors (as R1) and the photoresistor as R2 (from 100 to 100kΩ)](assets/images/Photoresistor_VoltageDividerGraph_PhotoresistorAsR2.png)
-
 ![Graph of various Vout voltages for a voltage divider network with various fixed resistors (as R2) and the photoresistor as R1 (from 100 to 100kΩ)](assets/images/Photoresistor_VoltageDividerGraph_PhotoresistorAsR1.png)
+A graph of $$V_{out}$$ as a function of photoresistance values for various fixed resistors. In this configuration, the fixed resistor is $$R_1$$ and the photoresistor is $$R_2$$, so this matches the "lightness" sensor configuration in the wiring diagram (the left one).
+{: .fs-1 }
 
-Let's focus on the bottom graph for now (the "darkness" sensor configuration). Here's a table of $$V_{out}$$ values for six different fixed resistors ($$R_1$$) and some various resistances for the photoresistor ($$R_2$$).
+![Graph of various Vout voltages for a voltage divider network with various fixed resistors (as R1) and the photoresistor as R2 (from 100 to 100kΩ)](assets/images/Photoresistor_VoltageDividerGraph_PhotoresistorAsR2.png)
+A graph of $$V_{out}$$ as a function of photoresistance values for various fixed resistors. In this configuration, the photoresistor is $$R_1$$ and the fixed resistor is $$R_2$$, so this matches the "darkness" sensor configuration in the wiring diagram (the right one).
+{: .fs-1 }
+
+Let's focus on the bottom graph for now (the "darkness" sensor configuration). Here's a table of $$V_{out}$$ values for six different fixed resistors ($$R_1$$) and some various resistances for the photoresistor ($$R_2$$). We've extracted these directly from the graph above.
 
 | $$R_1$$ | $$R_2=100Ω$$ | $$R_2=1kΩ$$ | $$R_2=10kΩ$$ | $$R_2=50kΩ$$ | $$R_2=100kΩ$$ | 
 | ------- | ------------ | ----------- | ------------ | ------------ | ------------- |

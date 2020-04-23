@@ -35,7 +35,7 @@ How can new sensing and processing systems help identify cancer cells, find new 
 
 Humans have invented thousands of sensors. How should we organize and characterize them? 
 
-There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides, as well as numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, and designer familiarity..
+There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides. And, of course, there are numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, and designer familiarity..
 
 ### Characterizing sensors by function
 
@@ -62,7 +62,11 @@ But first, let's break sensors down by **how** they sense and **what** output th
 Ultrasonic distance sensors are a type of **active** sensor consisting of both a transmitter and receiver. They work by transmitting an ultrasonic pulse, which is partially reflected back by objects in the sound wave path (if any). By measuring the time between the pulse transmission and the echo reception, distance can be determined.
 {: .fs-1 }
 
-In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. Of course, we may need to design a powered circuit to "retrieve" information from the sensor but the underlying sensor is responding to environmental phenomena regardless of its external power state.
+Active sensors may also include hardware to counteract sensor drift, to filter/smooth a signal, and/or to communicate output via a digital communication protocol like [I2C](https://en.wikipedia.org/wiki/I%C2%B2C). 
+
+In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. Of course, we need a powered circuit to "retrieve" information from the sensor—like a voltage divider—but the underlying sensor is responding to environmental phenomena regardless of this applied power.
+
+A simple heuristic to distinguish active from passive sensors is to count pins: active sensors have an extra third pin (for power) while passive sensors have two.
 
 <!-- TODO: in future add in a sub-section on MEMS because it's so AWESOME! : -->
 

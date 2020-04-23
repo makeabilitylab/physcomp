@@ -26,7 +26,7 @@ According to this article by [Landuyt *et al.,* SPLC'14](https://doi.org/10.1145
 
 https://en.wikipedia.org/wiki/Hall_effect_sensor has a good intro too, some animations, and some application ideas.
 
-## The Hall Effect
+## The Hall effect
 
 How do electric fields and magnetic fields interact? You may remember that electric current produces a magnetic field. But does a magnetic field also affect current? Yes!
 
@@ -42,6 +42,13 @@ To better understand the Hall effect, this 5-minute video from Professor Bowley 
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/AcRCgyComEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of Notthingham, Professor Bowley explains the physics of the Hall Effect.
+{: .fs-1 }
+
+## Hall effect sensors
+
+[Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) use the "Hall effect" to measure the magnitude of a magnetic field. Unlike resistive sensors, which change their resistance based on some external stimulus, a Hall effect sensor outputs a varying voltage directly proportional to the sensed magnetic field. In contrast to inductive sensors, which respond to *changing* magnetic fields, Hall effect sensors work with static (non-changing) fields.
+
+
 
 ## Reed switches
 My lecture CMSC838f_Lecture05_AllThingsResistance_v2 has a great reed switch video that we might be able to convert part of to animation: http://youtu.be/qje8LhZXwO0

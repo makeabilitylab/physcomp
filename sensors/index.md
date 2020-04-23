@@ -34,7 +34,7 @@ How can new sensing and processing systems help identify cancer cells, find new 
 
 Humans have invented thousands of sensors. How should we organize and characterize them? 
 
-There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides, as well as numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, designer familiarity, *etc.* that may impact usage.
+There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides, as well as numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, and designer familiarity..
 
 ### Characterizing sensors by function
 
@@ -56,6 +56,10 @@ But first, let's break sensors down by **how** they sense and **what** output th
 ### Passive vs. active sensing
 
 **Active** sensors require external power. Often, they will also actively transmit a signal and then analyze some property of that signal (*e.g.,* distortion or reflection) for sensing. For example, an infrared (IR) proximity sensor like the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) contains both an IR transmitter and IR receiver. The sensor calculates distance by transmitting an IR beam and measuring the reflection angle back on the IR receiver. Similarly, an ultrasonic distance sensor like the popular [HC-SR04](https://www.sparkfun.com/products/15569) transmits ultrasonic pings and listens for reflected ultrasonic waves. The speed of sound through air is then used to calculate the distance between the sensor to the reflected object.
+
+![Ultrasonic diagram](assets/images/UltrasonicDiagram_Wikipedia.png)
+Ultrasonic distance sensors are a type of **active** sensor consisting of both a transmitter and receiver. They work by transmitting an ultrasonic pulse, which is partially reflected back by objects in the sound wave path. By measuring the time between the pulse transmission and the echo reception, distance can be determined.
+{: .fs-1 }
 
 In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. Of course, we may need to design a powered circuit to "retrieve" information from the sensor but the underlying sensor is responding to environmental phenomena regardless of its external power state.
 
@@ -83,9 +87,9 @@ Because the LIS3DH supports a digital communication protocol (both I2C and SPI),
 
 #### Binary output
 
-Finally, some "sensors" are either on or off (which could be construed as a type of simple digital output but not one specifically encoded for a microcontroller so does not qualify as "digital signal" in our taxonomy). For example, [reed switches](https://en.wikipedia.org/wiki/Reed_switch) close in the presence of a magnetic field and [tilt ball switches](https://www.adafruit.com/product/173) are hollow tubes with an enclosed conductive ball, which moves to close internal contacts in certain tube orientations.
+Finally, some "sensors" are either on or off (which could be construed as a type of simple digital output but not one specifically encoded for a microcontroller so does not qualify as "digital signal" in our taxonomy). For example, [reed switches](https://en.wikipedia.org/wiki/Reed_switch) close in the presence of a magnetic field and [tilt ball switches](https://www.adafruit.com/product/173) are hollow tubes with an enclosed conductive ball, which moves to close internal contacts in certain tube orientations (or tilts).
 
-[Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) provides an even deeper breakdown of sensor output types, including open collector and current. See his book for details.
+[Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) provides an even deeper breakdown of sensor output types, including open collectors and sensors that change in current rather than voltage. See his book for details.
 
 ## Signal acquisition pipeline
 

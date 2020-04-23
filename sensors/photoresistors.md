@@ -1,13 +1,13 @@
 ---
 layout: default
-title: L1&#58; Photoresistors
+title: Photoresistors
 nav_order: 1
 parent: Sensors
 has_toc: true # (on by default)
 comments: true
 usemathjax: true
 ---
-# {{ page.title | replace_first:'L','Lesson '}}
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of Contents

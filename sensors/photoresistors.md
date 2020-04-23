@@ -42,7 +42,7 @@ Photoresistors are typically made of Cadmium-Sulfide (CdS), which is a semicondu
 
 ### Photoresistor resistance vs. illumination
 
-To describe the relationship between photoresistance and light level, we need a more precise definition of the how light levels are characterized. Enter: (https://en.wikipedia.org/wiki/Lux)!
+To describe the relationship between photoresistance and light level, we need a more precise definition of the how light levels are characterized. Enter: [Lux](https://en.wikipedia.org/wiki/Lux)!
 
 The SI unit of illuminance is called [lux](https://en.wikipedia.org/wiki/Lux), which is, formally, the "*luminous flux per unit area*". In photometry, lux is used as a measure of the intensity of light that hits or passes through a surface as perceived by the human eye.
 

@@ -3,6 +3,7 @@ layout: default
 title: Sensors
 nav_order: 3
 has_toc: false # on by default
+usemathjax: true
 ---
 # {{ page.title }}
 {: .no_toc }
@@ -58,7 +59,7 @@ But first, let's break sensors down by **how** they sense and **what** output th
 **Active** sensors require external power. Often, they will also actively transmit a signal and then analyze some property of that signal (*e.g.,* distortion or reflection) for sensing. For example, an infrared (IR) proximity sensor like the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) contains both an IR transmitter and IR receiver. The sensor calculates distance by transmitting an IR beam and measuring the reflection angle back on the IR receiver. Similarly, an ultrasonic distance sensor like the popular [HC-SR04](https://www.sparkfun.com/products/15569) transmits ultrasonic pings and listens for reflected ultrasonic waves. The speed of sound through air is then used to calculate the distance between the sensor to the reflected object.
 
 ![Ultrasonic diagram](assets/images/UltrasonicDiagram_Wikipedia.png)
-Ultrasonic distance sensors are a type of **active** sensor consisting of both a transmitter and receiver. They work by transmitting an ultrasonic pulse, which is partially reflected back by objects in the sound wave path. By measuring the time between the pulse transmission and the echo reception, distance can be determined.
+Ultrasonic distance sensors are a type of **active** sensor consisting of both a transmitter and receiver. They work by transmitting an ultrasonic pulse, which is partially reflected back by objects in the sound wave path (if any). By measuring the time between the pulse transmission and the echo reception, distance can be determined.
 {: .fs-1 }
 
 In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. Of course, we may need to design a powered circuit to "retrieve" information from the sensor but the underlying sensor is responding to environmental phenomena regardless of its external power state.

@@ -23,8 +23,7 @@ In this lesson, you'll learn about [photoresistors](https://en.wikipedia.org/wik
 
 | Photoresistors | Schematic Symbol |
 | -------------- | ---------------- |
-| ![Three differently sized photoresistors with scale in mm](assets/images/Photoresistors_Wikipedia.png) |
-![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png) |
+| ![Three differently sized photoresistors with scale in mm](assets/images/Photoresistors_Wikipedia.png) | ![Schematic symbols for photoresistor](assets/images/Photoresistor_SchematicSymbol_PlattEncyclopediaOfElectronicVol3.png) |
 | Three differently sized photoresistors with scale in mm. Image from [Wikipedia](https://en.wikipedia.org/wiki/Photoresistor). | There are six interchangeable photoresistor schematic symbols. Image from [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) |
 
 A photoresistor—sometimes called a photocell or light-dependent resistor—varies its resistance in response to light. They are small, inexpensive, and easy-to-use. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance.

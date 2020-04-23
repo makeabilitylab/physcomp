@@ -34,7 +34,7 @@ How can new sensing and processing systems help identify cancer cells, find new 
 
 Humans have invented thousands of sensors. How should we organize and characterize them? 
 
-There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides. As well as numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, designer familiarity, *etc.* that may impact usage.
+There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides, as well as numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, designer familiarity, *etc.* that may impact usage.
 
 ### Characterizing sensors by function
 

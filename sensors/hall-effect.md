@@ -1,6 +1,6 @@
 ---
 layout: default
-title: LX&#58; Hall Effect Sensor
+title: Hall Effect Sensor
 nav_order: 3
 parent: Sensors
 has_toc: true # (on by default)
@@ -8,7 +8,7 @@ comments: true
 usemathjax: true
 nav_exclude: true
 ---
-# {{ page.title | replace_first:'L','Lesson '}}
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of Contents
@@ -30,13 +30,15 @@ https://en.wikipedia.org/wiki/Hall_effect_sensor has a good intro too, some anim
 
 How do electric fields and magnetic fields interact? You may remember that electric current produces a magnetic field. But does a magnetic field also affect current? Yes!
 
-Wikipedia has an interesting, lengthy article on the history of electromagnetic theory. Electricity and magnetism have long captured human interest but were considered separate forces. It wasn't until the late 19th century when James Maxwell published [A Treatise on Electricity and Magnetism](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which theorized one interrelated force: electromagnetism. But key questions remained, including how magnets interacted with electric current. Enter Edwin Hall. As a PhD student at Johns Hopkins, Hall discovered the "Hall effect", which is the production of a voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied. 
+Wikipedia has an interesting, lengthy article on the history of electromagnetic theory. Electricity and magnetism have long captured human interest but were considered separate forces. It wasn't until the late 19th century when James Maxwell published [A Treatise on Electricity and Magnetism](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which theorized united electricity and magnetism into one interrelated force: electromagnetism. 
 
-This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect. 
+But key questions remained, including, most relevantly for us: how do magnets interact with electric current? Enter Edwin Hall. As a PhD student at Johns Hopkins, Hall discovered the "Hall effect", which is the production of a voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied. This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect:
 
-Note that though the animation appears to show the cessation of current through the conductor during the Hall effect, this is not the case. Current continues to flow through the conductor even with the application of the magnet.
+![Animation of Hall Effect](/sensors/assets/movies/HallEffectAnimation_HowToMechatronics-Optimized.gif)
 
-This video from Professor Bowley at the University of Nottingham provides a wonderful explanation (the best we've seen):
+Note that though the animation appears to show the cessation of current through the conductor during the Hall effect, this is not the case. Current continues to flow through the conductor even in the presence of a magnetic field. The animation also does not show that when the magnet is reversed, the Hall effect is also reversed.
+
+To better understand the Hall effect, this 5-minute video from Professor Bowley at the University of Nottingham provides a wonderful set of visual experiments and explanations (the best we've seen):
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AcRCgyComEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of Notthingham, Professor Bowley explains the physics of the Hall Effect.

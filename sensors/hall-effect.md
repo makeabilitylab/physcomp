@@ -84,11 +84,13 @@ To produce a binary output, these Hall effect sensors have an additional interna
 
 ![Reed switch with contact detail](https://en.wikipedia.org/wiki/Reed_switch#/media/File:Reed_switch_(aka).jpg)
 
-While some Hall effect sensors produce binary output (`HIGH` or `LOW`) and thus, can function as switches, they are not to be confused with [reed switches](https://en.wikipedia.org/wiki/Reed_switch), which are **electromechanical** devices. With a reed switch, two ferromagnetic metal contacts close in the presence of a magnetic field (and are otherwise normally open). Because a reed switch is a mechanical device, the switch contacts can wear over time.
+While some Hall effect sensors produce binary output (`HIGH` or `LOW`) and thus, can function as switches, they are not to be confused with [reed switches](https://en.wikipedia.org/wiki/Reed_switch), which are **electromechanical** devices. With a reed switch, two ferromagnetic metal contacts close in the presence of a magnetic field (and are otherwise normally open). Because a reed switch is a mechanical device, the switch contacts can wear over time. See the animations below.
 
 | Reed Switch Animation | Slow Motion Activation Video |
 | ---------- | ----------- |
 | ![Reed switch slow-mo video](/assets/movies/ReedSwitchAnimation-Optimized.gif) | ![Reed switch animation](/assets/movies/HowAReedSwitchWorks_Wikipedia.gif) | 
+The slow-motion activation video is from [Wikipedia](https://en.wikipedia.org/wiki/Reed_switch).
+{: .fs-1 }
 
 ### The DRV5055 Hall effect sensor
 

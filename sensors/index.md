@@ -90,6 +90,17 @@ Because the LIS3DH supports a digital communication protocol (both I2C and SPI),
 | --------------------- | -------------------- |
 | ![Picture of ADXL335 - 5V ready triple-axis accelerometer (+-3g analog out)](assets/images/ADXL335_Accelerometer_Adafruit.png) | ![Adafruit LIS3DH Triple-Axis Accelerometer (+-2g/4g/8g/16g)](assets/images/LIS3DH_Accelerometer_Adafruit.png) |
 
+### Evaluating a sensor
+
+There are a variety of important criteria when evaluating a sensor's capabilities, including:
+
+* **Sampling rate**: How fast does the sensor provide output?
+* **Resolution**: What is the smallest change in physical quantity that the sensor can identify?
+* **Quantization error**: what is the error caused by rounding due to digitizing the analog data in the ADC? See *Signal acquisition pipeline* section below.
+* **Absolute error**: what's the difference between sensor readings and the true physical quantity?
+* **Drift**: How does the absolute error change over time while operating the sensor?
+* **Environmental stability**: How does the sensor change in response to differences in temperature or moisture?
+
 #### Binary output
 
 Finally, some "sensors" are either on or off (which could be construed as a type of simple digital output but not one specifically encoded for a microcontroller so does not qualify as "digital signal" in our taxonomy). For example, [reed switches](https://en.wikipedia.org/wiki/Reed_switch) close in the presence of a magnetic field and [tilt ball switches](https://www.adafruit.com/product/173) are hollow tubes with an enclosed conductive ball, which moves to close internal contacts in certain tube orientations (or tilts).
@@ -118,7 +129,7 @@ When selecting sensors and a data processing pipeline, there are multiple consid
 
 ### Nyquist sampling theorem
 
-One of the most important (and interesting!) theorems in DSP is the [*Nyquist-Shannon Sampling Theorem*](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem), which states that a continuous time signal (the raw physical signal) can be sampled and perfectly reconstructed (!) if the sampling rate is over twice as fast as the raw signal's highest frequency component. That is, the minimum sampling frequency > 2 * max(signal_{freq}).
+One of the most important (and interesting!) theorems in DSP is the [*Nyquist-Shannon Sampling Theorem*](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem), which states that a continuous time signal (the raw physical signal) can be sampled and perfectly reconstructed (!) if the sampling rate (sometimes called the sampling frequency or $$F_s$$) is over twice as fast as the raw signal's highest frequency component. That is, the minimum sampling frequency $$min(F_s)$$ must be greater than $$2 * max(F_{signal})$$.
 
 For example, a common digital audio sampling rate is [44,100Hz](https://en.wikipedia.org/wiki/44,100_Hz) (44.1 kHz). This is what compact discs (CDs) use and is also standard for mp3s. Why 44.1 kHz? This sampling rate was chosen, in part, because the human hearing range is ~20 Hz to 20kHz. Hence, according to the above theorem, the minimum sampling frequency needed to be at least $$2 * 20kHz$$ or 40kHz. 
 

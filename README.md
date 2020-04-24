@@ -6,14 +6,22 @@ usemathjax: true
 description: "Website Overview"
 permalink: /
 ---
-# Physical and Ubiquitous Computing
-{: .no_toc }
-
 > Joy is a well-made object, equaled only to the joy of making it.
 {: .v-align-bottom }
 
 A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, co-founder of [BoingBoing](https://boingboing.net/), & former editor of MAKE Magazine)
 {: .fs-2 .mt-1 }
+
+---
+
+# Physical and Ubiquitous Computing
+{: .no_toc }
+
+Welcome to our website. Here, we explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. This website is intended to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
+
+![Example projects from some physical computing-related courses taught by Jon E. Froehlich]({{ site.baseurl }}/assets/images/ExampleAssignmentsAndProjects.jpg)
+Example projects from Tangible Interactive Computing.
+{: .fs-1 }
 
 ## Table of Contents
 {: .no_toc .text-delta }
@@ -22,13 +30,7 @@ A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, 
 {:toc}
 ---
 
-## Welcome!
-
-Here, we explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. This website is intended to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
-
-![Example projects from some physical computing-related courses taught by Jon E. Froehlich]({{ site.baseurl }}/assets/images/ExampleAssignmentsAndProjects.jpg)
-Example projects from Tangible Interactive Computing.
-{: .fs-1 }
+## Why now?
 
 This is a particularly interesting time to survey and explore physical computing because of three, interrelated technology and social trends:
 
@@ -40,7 +42,7 @@ Enabled by the above three points, our goal is to explore new human-computer int
 
 And we are not alone, the content here is inspired by a rich set of courses, including [NYU's ITP Physical Computing](https://itp.nyu.edu/physcomp/), UC Berkeley's [Critical Making](http://make.berkeley.edu/) and [Interactive Device Design](http://web.archive.org/web/20150712080846/http://husk.eecs.berkeley.edu/courses/cs294-84-fall14/index.php/Main_Page). See [Inspirations](resources/inspirations.md) and the [Resource list](resources/index.md) for more.
 
-## Prerequisite
+## Learning prerequisites
 
 We assume the following background about our learners:
 
@@ -48,11 +50,13 @@ We assume the following background about our learners:
 
 - **No previous experience with hardware.** In contrast, we assume no previous experience with electronics or microcontrollers.
 
-## Learn by doing
+## Learning philosphy: learn by doing
 
 A key pedagogical philosophy underlying our teaching is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises. So, we we expect that you will build along with our guides and lessons.
 
 ## Example Hardware Kits
+
+Here are some example hardware kits that we provide students in our classes.
 
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
 - HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)

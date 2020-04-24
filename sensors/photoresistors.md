@@ -266,6 +266,10 @@ Our code:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Sensors/PhotoresistorLED/PhotoresistorLED.ino?footer=minimal"></script>
 
+### Workbench video
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/CIhCJCBrOYU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Exercises
 - `map()` assumes a linear mapping between two value ranges. What if you wanted a logarithmic or exponential conversion? How would you implement this? How might this be useful for working with sensors?
 - Just like we did for the [FSR lesson](../arduino/force-sensitive-resistors.md), try hooking up a piezo buzzer (and be creative about how it makes "music").

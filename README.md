@@ -6,11 +6,23 @@ usemathjax: true
 description: "Website Overview"
 permalink: /
 ---
+# Physical and Ubiquitous Computing
+{: .no_toc }
+
 > Joy is a well-made object, equaled only to the joy of making it.
 {: .v-align-bottom }
 
 A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, co-founder of [BoingBoing](https://boingboing.net/), & former editor of MAKE Magazine)
 {: .fs-2 .mt-1 }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
+
+## Welcome!
 
 Here, we explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. This website is intended to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
 

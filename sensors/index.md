@@ -90,6 +90,12 @@ Because the LIS3DH supports a digital communication protocol (both I2C and SPI),
 | --------------------- | -------------------- |
 | ![Picture of ADXL335 - 5V ready triple-axis accelerometer (+-3g analog out)](assets/images/ADXL335_Accelerometer_Adafruit.png) | ![Adafruit LIS3DH Triple-Axis Accelerometer (+-2g/4g/8g/16g)](assets/images/LIS3DH_Accelerometer_Adafruit.png) |
 
+#### Binary output
+
+Finally, some "sensors" are either on or off (which could be construed as a type of simple digital output but not one specifically encoded for a microcontroller so does not qualify as "digital signal" in our taxonomy). For example, [reed switches](https://en.wikipedia.org/wiki/Reed_switch) close in the presence of a magnetic field and [tilt ball switches](https://www.adafruit.com/product/173) are hollow tubes with an enclosed conductive ball, which moves to close internal contacts in certain tube orientations (or tilts).
+
+[Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) provides an even deeper breakdown of sensor output types, including open collectors and sensors that change in current rather than voltage. See his book for details.
+
 ### Evaluating a sensor
 
 There are a variety of important criteria when evaluating a sensor's capabilities, including:
@@ -100,12 +106,6 @@ There are a variety of important criteria when evaluating a sensor's capabilitie
 * **Absolute error**: what's the difference between sensor readings and the true physical quantity?
 * **Drift**: How does the absolute error change over time while operating the sensor?
 * **Environmental stability**: How does the sensor change in response to differences in temperature or moisture?
-
-#### Binary output
-
-Finally, some "sensors" are either on or off (which could be construed as a type of simple digital output but not one specifically encoded for a microcontroller so does not qualify as "digital signal" in our taxonomy). For example, [reed switches](https://en.wikipedia.org/wiki/Reed_switch) close in the presence of a magnetic field and [tilt ball switches](https://www.adafruit.com/product/173) are hollow tubes with an enclosed conductive ball, which moves to close internal contacts in certain tube orientations (or tilts).
-
-[Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) provides an even deeper breakdown of sensor output types, including open collectors and sensors that change in current rather than voltage. See his book for details.
 
 ## Signal acquisition pipeline
 

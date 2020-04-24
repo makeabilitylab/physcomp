@@ -28,19 +28,23 @@ https://en.wikipedia.org/wiki/Hall_effect_sensor has a good intro too, some anim
 
 ## The Hall effect
 
-How do electric fields and magnetic fields interact? You may remember that electric current produces a magnetic field. But does a magnetic field also affect current? Yes!
+How do electric fields and magnetic fields interact? You may remember that electric current produces a magnetic field (recall the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule#Electromagnetics) from high school physics). But does a magnetic field also affect current? Yes!
 
 Electricity and magnetism have long captured human interest but were considered separate phenomena. It wasn't until the late 19th century when James Maxwell published [*A Treatise on Electricity and Magnetism*](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which united electricity and magnetism into one interrelated force: electromagnetism. 
 
-But key questions remained, including, most relevantly for us: how do magnets interact with electric current? Enter Edwin Hall. As a PhD student at Johns Hopkins, Hall discovered the "Hall effect", which is the production of a voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied. This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect:
+But key questions remained, including, most relevantly for us: how do **magnets** interact with** electric current**? 
+
+Enter Edwin Hall. As a PhD student at Johns Hopkins in 1879, Hall discovered the "Hall effect", which is the production of a voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied ([Wikipedia](https://en.wikipedia.org/wiki/Hall_effect#Discovery)). This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect:
 
 ![Animation of Hall Effect](/assets/movies/HallEffectAnimation_HowToMechatronics-Optimized.gif)
- Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
- {: .fs-1 }
+Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
+{: .fs-1 }
 
 Note that though the animation appears to show the cessation of current through the conductor during the Hall effect, this is not the case. Current continues to flow even in the presence of a magnetic field. The animation also does not show that when the magnet is reversed, the Hall effect is also reversed: negative and positive charges would displace to opposite sides of the conductor (and again, this displacement is *transverse* to the flow of current).
 
-To better understand the Hall effect, this 5-minute video from Professor Bowley at the University of Nottingham provides a wonderful set of visual experiments and explanations (the best we've seen):
+Confused? That's ok!
+
+To better understand the Hall effect, watch this 5-minute video from Professor Bowley at the University of Nottingham. He provides a wonderful set of visual experiments and explanations (the best we've seen) that should clarify things:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/AcRCgyComEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of Notthingham, Professor Bowley explains the physics of the Hall Effect.
@@ -48,7 +52,7 @@ In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of N
 
 ## Hall effect sensors
 
-[Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) use the "Hall effect" to measure the magnitude of a proximal magnetic field. More precisely, they measure "magnetic flux" ($$Φ$$), which is the total magnetic field $$\vec{B}$$ passing through a given area $$\vec{A}$$ (where $$\vec{A}$$ is the area of the sensing unit normal to the magnetic field): $$Φ = $$\vec{B}$$ \dot $$\vec{A}$$. While inductive sensors respond to *changing* magnetic fields, one benefit of Hall effect sensors is that they work with static (non-changing) fields. So, a Hall effect sensor can recognize a magnet even if it's not moving.
+[Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) use the "Hall effect" to measure the magnitude of a proximal magnetic field. More precisely, they measure "magnetic flux" ($$Φ$$), which is the total magnetic field $$\vec{B}$$ passing through a given area $$\vec{A}$$ (where A is the area of the sensing unit normal to the magnetic field): $$Φ = $$\vec{B}$$ \dot $$\vec{A}$$. While [inductive sensors](https://en.wikipedia.org/wiki/Inductive_sensor) respond to *changing* magnetic fields, one benefit of Hall effect sensors is that they work with static (non-changing) fields. So, a Hall effect sensor can recognize a magnet even if it's not moving.
 
 ![Simulated magnetic flux of a NdFeB magnet from the DRV5055 datasheet](assets/images/HallEffectSensor_SimulatedMagneticFlux.png)
 Simulated magnetic flux of a NdFeB magnet. Image from the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor datasheet.
@@ -56,15 +60,23 @@ Simulated magnetic flux of a NdFeB magnet. Image from the [DRV5055](http://www.t
 
 <!-- Great explanation of flux and magnetic flux on Khan Academy: https://www.khanacademy.org/science/physics/magnetic-forces-and-magnetic-fields/magnetic-flux-faradays-law/v/flux-and-magnetic-flux -->
 
-Because a magnetic field vectors flow from a magnet's north to south poles, magnetic flux will change based on a magnet's orientation to the Hall effect sensor. The amount of magnetic flux is maximized when the poles of the magnet are orthogonal to the sensor. If you want to learn more about magnetic flux, see this [Khan Academy lesson](https://www.khanacademy.org/science/physics/magnetic-forces-and-magnetic-fields/magnetic-flux-faradays-law/v/flux-and-magnetic-flux).
+Because a magnetic field vectors flow from a magnet's north to south poles, magnetic flux will change based on a magnet's orientation to the Hall effect sensor. The amount of magnetic flux is maximized when the poles of the magnet are orthogonal to the sensor. To learn more about magnetic flux, see this [Khan Academy lesson](https://www.khanacademy.org/science/physics/magnetic-forces-and-magnetic-fields/magnetic-flux-faradays-law/v/flux-and-magnetic-flux).
 
 <!-- TODO insert graphic that shows orientation differences? Or at least a graphic of magnetic field around a magnet? -->
 
 ### Analog vs. binary output
 
-Unlike resistive sensors, which change their **resistance** based on some external stimulus, an analog Hall effect sensor outputs a varying **voltage**. This voltage is directly proportional to the sensed magnetic flux density. 
+Hall effect sensors can provide either **analog** or **binary** output. In either case, they are **active** sensors with three pins ($$V_{CC}$$, $$GND$$, and $$Out$$).
+
+#### Analog Hall effect sensors
+
+In previous lessons, we've covered resistive sensors like force-sensitive resistors and photoresistors, both which change their **resistance** based on some external stimulus. In contrast, an analog Hall effect sensor outputs a varying **voltage**. This voltage is directly proportional to the sensed magnetic flux density. 
+
+#### Binary (switch-based) Hall effect sensors
 
 Some Hall effect sensors act as switches: either on (in the presence of a sufficiently strong magnetic field) or off (if not). For example, the [US5881LUA](https://www.adafruit.com/product/158) sold by Adafruit is normally `HIGH` but switches to `LOW` in the presence of a **south** magnetic pole. Some Hall effect switches are **latching**, which remain in their activated state even when the magnet is removed. For example, the US1881 latching Hall effect sensor switches to `HIGH` in the presence of a **north** magnetic pole but remains in that state even after the magnet is removed and until a **south** magnetic pole is sensed.
+
+To produce a binary output, these Hall effect sensors have an additional internal element called a Schmitt Trigger connected to the analog output, which converts the internal analog output signal to the external digital output (`HIGH` or `LOW`). See [this video](https://youtu.be/wpAA3qeOYiI?t=143) by "How to Mechatronics."
 
 <!-- TODO: talk about strength of magnetic field: size of magnet, proximity? Or maybe magnetic flux density -->
 
@@ -110,6 +122,10 @@ The magnetic response graph for the [DRV5055](http://www.ti.com/lit/ds/symlink/d
 
 ## Let's make stuff!
 
+
+## Workbench video
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/MvVfq6AAEQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!-- ## Reed switches
 My lecture CMSC838f_Lecture05_AllThingsResistance_v2 has a great reed switch video that we might be able to convert part of to animation: http://youtu.be/qje8LhZXwO0. Update: OK, I've m

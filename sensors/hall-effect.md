@@ -30,13 +30,15 @@ https://en.wikipedia.org/wiki/Hall_effect_sensor has a good intro too, some anim
 
 How do electric fields and magnetic fields interact? You may remember that electric current produces a magnetic field. But does a magnetic field also affect current? Yes!
 
-Wikipedia has an interesting, lengthy article on the history of electromagnetic theory. Electricity and magnetism have long captured human interest but were considered separate forces. It wasn't until the late 19th century when James Maxwell published [*A Treatise on Electricity and Magnetism*](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which theorized united electricity and magnetism into one interrelated force: electromagnetism. 
+Electricity and magnetism have long captured human interest but were considered separate forces. It wasn't until the late 19th century when James Maxwell published [*A Treatise on Electricity and Magnetism*](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which united electricity and magnetism into one interrelated force: electromagnetism. 
 
 But key questions remained, including, most relevantly for us: how do magnets interact with electric current? Enter Edwin Hall. As a PhD student at Johns Hopkins, Hall discovered the "Hall effect", which is the production of a voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied. This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect:
 
 ![Animation of Hall Effect](/assets/movies/HallEffectAnimation_HowToMechatronics-Optimized.gif)
+ Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
+ {: .fs-1 }
 
-Note that though the animation appears to show the cessation of current through the conductor during the Hall effect, this is not the case. Current continues to flow through the conductor even in the presence of a magnetic field. The animation also does not show that when the magnet is reversed, the Hall effect is also reversed: negative and positive charges are displaced to opposite sides of the conductor.
+Note that though the animation appears to show the cessation of current through the conductor during the Hall effect, this is not the case. Current continues to flow even in the presence of a magnetic field. The animation also does not show that when the magnet is reversed, the Hall effect is also reversed: negative and positive charges would displace to opposite sides of the conductor.
 
 To better understand the Hall effect, this 5-minute video from Professor Bowley at the University of Nottingham provides a wonderful set of visual experiments and explanations (the best we've seen):
 
@@ -46,8 +48,41 @@ In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of N
 
 ## Hall effect sensors
 
-[Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) use the "Hall effect" to measure the magnitude of a magnetic field. Unlike resistive sensors, which change their resistance based on some external stimulus, a Hall effect sensor outputs a varying voltage directly proportional to the sensed magnetic field. In contrast to inductive sensors, which respond to *changing* magnetic fields, Hall effect sensors work with static (non-changing) fields.
+[Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) use the "Hall effect" to measure the magnitude of a proximal magnetic field. More precisely, they measure "magnetic flux" ($$\vec{Φ}$$), which is the total magnetic field $$\vec{B}$$ passing through a given area $$\vec{A}$$ (where $$\vec{A}$$ is the area of the sensing unit normal to the magnetic field). 
 
+![Simulated magnetic flux of a NdFeB magnet from the DRV5055 datasheet](assets/images/HallEffectSensor_SimulatedMagneticFlux.png)
+Simulated magnetic flux of a NdFeB magnet from the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor datasheet.
+{: .fs-1 }
+
+<!-- Great explanation of flux and magnetic flux on Khan Academy: https://www.khanacademy.org/science/physics/magnetic-forces-and-magnetic-fields/magnetic-flux-faradays-law/v/flux-and-magnetic-flux -->
+
+Because a magnetic field vectors flow from the north to the south poles of a magnet, magnetic flux will change based on a magnet's orientation to the Hall effect sensor. The amount of magnetic flux is maximized when the poles of the magnet are orthogonal to the sensor.
+
+<!-- TODO insert graphic that shows orientation differences? Or at least a graphic of magnetic field around a magnet? -->
+
+Unlike resistive sensors, which change their **resistance** based on some external stimulus, an analog Hall effect sensor outputs a varying **voltage**. This voltage is directly proportional to the sensed magnetic flux density. While inductive sensors respond to *changing* magnetic fields, one benefit of Hall effect sensors is that they work with static (non-changing) fields. 
+
+<!-- TODO: talk about strength of magnetic field: size of magnet, proximity? Or maybe magnetic flux density -->
+
+Some Hall effect sensors act as switches: either on (in the presence of a sufficiently strong magnetic field) or off (if not). For example, the [US5881LUA](https://www.adafruit.com/product/158) sold by Adafruit is normally `HIGH` but switches to `LOW` in the presence of a **south** magnetic pole. 
+
+### The DRV5055 Hall effect sensor
+
+In our hardware kits, we provide the Texas Instruments (TI) [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) ratiometric linear hall effect sensor, which varies its voltage output proportionally to magnetic flux density. Ratiometric means that the sensor's voltage output is proportional to the supply voltage ($$V_{CC}$$). The DRV5055 can operate with both 3.3V and 5V power supplies (with +/- 10% tolerance). The sensor can be sampled at 20kHz.
+
+Two packages are available: a surface-mount package SOT-23 (left diagram below) and a through hole package TO-92 (right).
+
+![Two DRV5055 packages are available: a surface-mount package (left diagram) and a through hole package (right)](assets/images/HallEffectSensor_Package_DRV5055.png)
+The two DRV5055 packages with pin configurations and Hall element location is labeled in red (at center of the sensor)
+{: .fs-1 }
+
+To provide a reliable voltage output across a range of deployment conditions, the DRV5055 chip includes temperature compensation circuits, mechanical stress cancellation, signal conditioning, and amplification.
+
+When no magnetic field is present, the analog output drives **half** of $$V_{cc}$$. So, on an Arduino Uno, `analogRead()` would return 1023/2 in a normal state (with no magnet present). The output then changes linearly with the applied magnetic flux density. If the south pole of the magnet is facing the sensor, the analog output will increase between $$V_{cc}/2$$ - $$V_{cc}$$. If the north pole faces the sensor, the output will decrease from $$V_{cc}/2$$) to 0V. See the magnetic response graph below and Section 7.3.2 of the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) datasheet.
+
+![Magnetic response graph](assets/images/HallEffectSensor_MagneticResponse_DRV5055.png)
+The magnetic response graph for the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor. The diagram on the right shows a magnet's south pole orthogonal to the sensing surface, which would result in a positive $$\vec{B}$$ and an analog output voltage > $$V_{cc}/2$$.
+{: .fs-1 }
 
 
 ## Reed switches
@@ -65,7 +100,7 @@ A Hall effect sensor is a transducer that varies its output voltage in response 
 Which of these two sensors is right for your application depends on a number of things.  Factors include cost, magnet orientation, frequency range (reed switches typically aren't usable over 10 kHz), signal bounce and the design of the associated logic circuitry.
 
 ## References
-- [TI DRV5055 datasheet](http://www.ti.com/lit/ds/symlink/drv5055.pdf?HQS=TI-null-null-mousermode-df-pf-null-wwe&DCM=yes&ref_url=https%3A%2F%2Fwww.mouser.com%2F&distId=26), Texas Instruments
+- [TI DRV5055 datasheet](http://www.ti.com/lit/ds/symlink/drv5055.pdf), Texas Instruments
 - [Hall Effect Sensing and Applications](https://sensing.honeywell.com/hallbook.pdf), Honeywell
 
 ## Videos

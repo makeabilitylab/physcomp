@@ -38,7 +38,7 @@ But key questions remained, including, most relevantly for us: how do magnets in
  Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
  {: .fs-1 }
 
-Note that though the animation appears to show the cessation of current through the conductor during the Hall effect, this is not the case. Current continues to flow even in the presence of a magnetic field. The animation also does not show that when the magnet is reversed, the Hall effect is also reversed: negative and positive charges would displace to opposite sides of the conductor.
+Note that though the animation appears to show the cessation of current through the conductor during the Hall effect, this is not the case. Current continues to flow even in the presence of a magnetic field. The animation also does not show that when the magnet is reversed, the Hall effect is also reversed: negative and positive charges would displace to opposite sides of the conductor (and again, this displacement is *transverse* to the flow of current).
 
 To better understand the Hall effect, this 5-minute video from Professor Bowley at the University of Nottingham provides a wonderful set of visual experiments and explanations (the best we've seen):
 

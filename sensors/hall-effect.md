@@ -98,7 +98,7 @@ In our hardware kits, we provide the Texas Instruments (TI) [DRV5055](http://www
 
 The DRV5055 can operate with both 3.3V and 5V power supplies (with +/- 10% tolerance). The sensor can be sampled at 20kHz. To provide a reliable voltage output across a range of deployment conditions, the DRV5055 chip includes temperature compensation circuits, mechanical stress cancellation, signal conditioning, and amplification.
 
-Two packages are available: a surface-mount package SOT-23 (left diagram below) and a through hole package TO-92 (right). We will be using the through-hole package. 
+Two packages are available: a surface-mount package SOT-23 (left diagram below) and a through hole package TO-92 (right). We will be using the through-hole package (TO-92). 
 
 ![Two DRV5055 packages are available: a surface-mount package (left diagram) and a through hole package (right)](assets/images/HallEffectSensor_Package_DRV5055.png)
 The two DRV5055 packages with pin configurations and Hall element location is labeled in red (at center of the sensor)
@@ -112,6 +112,8 @@ To use the sensor, hook up Leg 1 to $$V_{CC}$$*, Leg 2 to $$GND$$, and Leg 3 to 
 We've included two equivalent Arduino wirings. The left diagram includes a breadboard, which we felt may be a bit confusing to those still becoming familiar with breadboards. The middle diagram is the same wiring but without a breadboard. The schematic on the right is copy/pasted directly from the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) datasheet.
 {: .fs-1 }
 
+![](assets/images/HallEffectSensor_PinConfigurations_DatasheetScreenshot.png)
+
 #### Sensor response to magnetic field
 
 So, how does the DRV5055 output pin (Leg 3) respond to a magnetic field?
@@ -122,8 +124,37 @@ When no magnetic field is present, the analog output drives **half** of $$V_{cc}
 The magnetic response graph for the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor. The diagram on the right shows a magnet's south pole orthogonal to the sensing surface, which would result in a positive $$\vec{B}$$ and an analog output voltage > $$V_{cc}/2$$. If the magnet's orientation is flipped such that the north pole is facing the sensor, then the $$\vec{B}$$ will be negative and the analog output voltage will range between 0 and $$V_{cc}/2$$.
 {: .fs-1 }
 
-## Let's make stuff!
+## Let's make stuff
 
+First, we're going to use the Hall effect sensor in a "bare bones" circuit without a microcontroller and then we'll show how to use the sensor with Arduino.
+
+## Make a magical magnetic LED brightener
+
+Let's use the Hall effect sensor to automatically change the brightness of our LED. Recall that $$V_{out}$$ increases as the south pole of a magnet nears and $$V_{out}$$ decreases as the north pole nears. Let's use this to control the brightness of our LED.
+
+The [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) datasheet states that the maximum continuous output current is 1mA. Using Ohm's Law, we can calculate a safe resistance value for the current-limiting resistor such that the LED does not pull too much current. $$I=\frac{V_{cc} - V_f}{R} \to 1mA=\frac{5V-2V}{R} \to R=\frac{3V}{0.001A} = 3,000Ω$$. So, we'll use a 3.3kΩ.
+
+![Screenshot of DRV5055 datasheet, which specifies the maximum continuous current of 1mA](assets/images/HallEffectSensor_RecommendedOperatingConditions_DatasheetScreenshot.png)
+
+We've included two wiring diagrams: on the left, the suggested wiring by the DRV5055 datasheet with the decoupling capacitor and, on the right, the same wiring but without the capacitor. Both will work similarly for our purposes here, so if you don't have a capacitor handy, just make the circuit on the right.
+
+![Wiring diagram for Hall effect-based LED brightner](assets/images/HallEffectSensor_WiringDiagram_NoArduino.png)
+
+### Workbench video
+
+And here's a workbench video demonstrating the circuit (without a capacitor). The second half of the video includes two multimeters: one to measure the current through the circuit and the other to measure the voltage output from the Hall effect sensor. 
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/RLNx7tHCxC0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+My vocal narration is quite soft as I recorded the video early in the morning and did not want to disturb my house! :D
+{: .fs-1 }
+
+### Improving the circuit
+
+What if we wanted to supply more than 1mA through our LED? We have have two choices: 
+1. Just like with our [photoresistor](photoresistors.md#An-improved-auto-on-nightlight-circuit) circuit, we could change our circuit to use a **transistor**. In this case, the Hall effect sensor output would be connected to a transistor, which would control the current through our LED. If you have a transistor, feel free to try this!
+2. We could move on to using a microcontroller, which is what we're going to do!
+
+## Make an Arduino-based magical magnetic LED brightener
 
 ## Workbench video
 

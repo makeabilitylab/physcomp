@@ -46,7 +46,7 @@ While capable of displaying thousands of color combinations, RGB LEDs are actual
 
 ### How can I tell if I have a Common Anode or Cathode RGB LED?
 
-You **cannot** tell whether you have a Common Anode or Common Cathode RGB LED by visual inspection. Instead, consult the supplier website, the datasheet, or experiment with the LED yourself (remember, diodes only work in one directly so as long as you include your current limiting resistors, you should be fine!).
+You **cannot** tell whether you have a Common Anode or Common Cathode RGB LED by visual inspection. Instead, consult the supplier website, the datasheet, or experiment with the LED yourself (remember, diodes only work in one direction so as long as you include your current limiting resistors, you should be fine!).
 
 | Common Anode | Common Cathode |
 |:-----:|:-----:|

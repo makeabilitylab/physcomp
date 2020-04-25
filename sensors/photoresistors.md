@@ -114,7 +114,7 @@ Our photoresistor ranges from 1.6kΩ with our desk lamp to 10kΩ with the lights
 
 ## Making an LED dimmer with a photoresistor
 
-Let's make something. How about a simple, prototype nightlight that automatically turns **on** (gets brighter) in the dark. 
+Let's make something. How about a simple nightlight that automatically turns **on** (gets brighter) in the dark. 
 
 As before, we're going to explore this sensor first **without** a microcontroller to build up familiarity. 
 
@@ -131,7 +131,7 @@ Try making this circuit. What happens?
 Because the photoresistor resistance **decreases** with light levels, the LED gets brighter as the ambient light gets brighter. This is the opposite behavior of what we want! See video below.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/tNOG2tYaBQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-In this video, the photoresistor is in series with the LED. As the ambient light level increases, the photoresistor resistance decreases, and the LED gets brighter. But we want the opposite effect? Note: this video has no audio.
+In this video, the photoresistor is in series with the LED. As the ambient light level increases, the photoresistor resistance decreases, and the LED gets brighter. But we want the opposite effect? Remember, we are using the Arduino only for power here. Note: this video has no audio.
 {: .fs-1 }
 
 What should we do? Well, the coder in us wants to immediately hook the sensor up to the microcontroller and solve this in code (which is a fine solution and, ultimately, what we will do!). However, can we solve this in hardware too?
@@ -144,11 +144,10 @@ We are going to create an inverse relationship between ambient light levels and 
 
 ![](assets/images/Photoresistor_WiringDiagramAndSchematicVoltageDivider_NoArduino_Fritzing.png)
 
-If $$R$$ is too small, the LED will still turn on even in ambient light. Through experimentation, we determined that $$R=4.7kΩ$$ resulted in the best performance: a 1.72V drop and 0.10mA through the LED with a **desk lamp off** (up to 0.6mA when the photoresistor is covered) and a 0.8V drop and 0mA through the LED with the **lamp on**. 
+If $$R$$ is too small, the LED will still turn on even in ambient light. Through experimentation, we determined that $$R=4.7kΩ$$ resulted in the best performance: a 1.72V drop and 0.10mA through the LED with a **desk lamp off** and a 0.8V drop and 0mA through the LED with the **lamp on**. 
 
-| R     | Desk Lamp **Off** | Desk Lamp **Off** | Desk Lamp **On**  | Desk Lamp **On**  |
+| R     | Desk Lamp **Off**<br/>LED Voltage Drop  | Desk Lamp **Off**<br/>LED Current | Desk Lamp **On**<br/>LED Voltage Drop  | Desk Lamp **On**<br/>LED Current  |
 | ----- | ----------------- | ----------------- | ----------------- | ----------------- |
-| -     | LED Voltage Drop  | LED Current       | LED Voltage Drop  | LED Current       |
 | 1kΩ   | 1.89V             | 2.9mA             | 1.85V             | 2.13mA            |
 | 2.2kΩ | 1.82V             | 1.23mA            | 1.78V             | 0.5mA             |
 | 4.7kΩ | 1.78V             | 0.48mA            | 1.41V             | 0mA               |
@@ -157,15 +156,17 @@ If $$R$$ is too small, the LED will still turn on even in ambient light. Through
 So, while this circuit works, it doesn't work well. We are not able to sufficiently control the current through the LED based on lighting conditions. Yes, we have the general LED behavior we want but 0.10mA is a very small current, so the LED is not very bright (even in the darkest conditions). See video below.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ZYVQLw-7HU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-This video shows a photoresistor wired in parallel to inverse the relationship between ambient light levels and LED brightness. Note: this video has no audio.
+This video shows a photoresistor wired in parallel with an LED in a voltage divider to inverse the relationship between ambient light levels and LED brightness. Again, the Arduino is used solely for power. Note: this video has no audio.
 {: .fs-1 }
 
-So, what could we do?
+So, what should we do?
 
 Two potential solutions: 
 
 1. We could continue a pure hardware solution and add in a transistor like [this video](https://youtu.be/eEBMTpxdPiE). This would be the cheapest solution and the one EE's would advocate! :)
-2. We could add in a microcontroller and solve this in software (a place where we are more comfortable but it's always useful to consider a pure hardware solution, if possible)
+2. We could add in a microcontroller and solve this in software (a place where we are more comfortable but it's always useful to consider a pure hardware solution, if possible). 
+
+Let's pursue the latter option!
 
 <!-- Using Thevenin equivalent circuits: https://ultimateelectronicsbook.com/voltage-dividers/#solving-by-hand-->
 
@@ -183,10 +184,10 @@ As a two-legged variable resistor, we can use the same voltage divider wiring as
 Below, we show two wiring options. On the left, the photoresistor is $$R_1$$ in the voltage divider configuration so $$V_{out}$$ will increase as light levels increase. On the right, the photoresistor is $$R_2$$ so $$V_{out}$$ will increase as light levels decrease (a "darkness" sensor, if you will).
 
 ![Wiring diagram showing the photoresistor in a voltage divider configuration. On left diagram, photoresistor is the top resistor in the voltage divider, so Vout will increase as light levels increase. On the right diagram, the photoresistor is the bottom resistor, so Vout will increase as light levels decrease](assets/images/ArduinoUno_Photoresistor_WiringDiagramPlusSchematic.png)
-Either wiring will work. They are functionally equivalent but opposite. 
+Either wiring will work. They are functionally equivalent but have opposite behavior. 
 {: .fs-1 }
 
-And, of course, we could inverse the relationship in software (rather than hardware). So, for example, if we wanted to make an LED brighter as light levels decrease with the left wiring configuration, we could do:
+And, of course, we could inverse the relationship in software (rather than hardware). So, for example, if we wanted to make an LED brighter as light levels decrease with the left wiring configuration, we could do the following:
 
 {% highlight C %}
 
@@ -212,11 +213,11 @@ analogWrite(OUTPUT_LED_PIN, ledVal);
 
 ### What value should we make our fixed resistor?
 
-I think, by now, we understand how to hook up a two-leg resistive sensor to a microcontroller (using a voltage divider!)—we covered this both in our [potentiometers lesson](../arduino/potentiometers.md) and our [force-sensitive resistor lesson](../arduino/force-sensitive-resistors.md). 
+I think, by now, we understand how to hook up a two-leg resistive sensor to a microcontroller: using a voltage divider! We covered this both in our [potentiometers lesson](../arduino/potentiometers.md) and our [force-sensitive resistor lesson](../arduino/force-sensitive-resistors.md). 
 
 However, one key question remains: how do we know what to use as the fixed resistor in the voltage divider?
 
-Ideally, we would want to: (1) vary $$V_{out}$$ across our entire ADC range (0-5V)—otherwise, we're artificially limiting our precision—and (2) focus our sensing range on expected light levels of interest (do we care more about bright lights or darker environments, for example).
+Ideally, we would want to: (1) vary $$V_{out}$$ across our entire ADC range (0-5V)—otherwise, we're artificially limiting our precision—and (2) focus our sensing range on the expected light levels of interest (for example, do we care more about bright lights or darker environments?).
 
 To help answer this, we can graph $$V_{out}$$ as a function of various fixed resistors and a range of photoresistor resistances. We've also marked approximate resistances of the photoresistor based on ambient light levels. Note that these graphs don't incorporate how the photoresistor's resistance changes in response to light: they simply graph the voltage divider output for $$R_1$$ and varying $$R_2$$. Both graphs show the same data, just the inverse depending on whether the fixed resistor is $$R_1$$ or $$R_2$$.
 
@@ -240,6 +241,8 @@ Let's focus on the bottom graph for now (the "darkness" sensor configuration). H
 | 10kΩ    | 0.10V	     | 0.88V       | 3.40V        | 4.57V        | 4.78V         |
 | 50kΩ    | 0.05V	     | 0.45V       | 2.50V        | 4.17V        | 4.55V         |
 | 100kΩ   | 0.01V        | 0.10V       | 0.83V        | 2.50V        | 3.33V         |
+
+<!-- Make this in to a table visualization where we color cells based on value; like conditional formatting in Excel -->
 
 From the graph and table, we can select an $$R_1$$ best suited for our expected light level in our deployment environment.
 

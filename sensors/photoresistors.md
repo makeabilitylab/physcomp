@@ -256,6 +256,8 @@ Once again, the handy 10kΩ for $$R_1$$ may be a nice compromise.
 
 To help select a fixed resistor value, both [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) and the Adafruit tutorial recommend the following equation: $$R_{fixed} = \sqrt{R_{min} \cdot R_{max}}$$ where $$R_{min}$$ is the minimum photoresistance value expected in the deployment environment (*i.e.,* resistance at highest light intensity) and $$R_{max}$$ is the maximum resistance value expected (*i.e.,* resistance at lowest light intensity). [Adafruit](https://learn.adafruit.com/photocells/using-a-photocell) refers to this as the "Axel Benz" formulation but we couldn't determine a reliable source for this.
 
+<!--TODO: give example from my informal experiment multimeter data -->
+
 ## Let's make a simple auto-on nightlight with Arduino
 
 OK, now let's make a simple auto-on nightlight with the Arduino that inversely sets an LED's brightness based on light level.

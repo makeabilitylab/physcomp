@@ -167,7 +167,7 @@ Learn how to sense light using a [photoresistor (aka photocell)](photoresistors.
 
 ### Magnetic fields
 
-Learn how to sense magnetic fields using a Hall effect sensor.
+Learn how to sense magnetic fields using a [Hall effect sensor](hall-effect.md).
 
 ### Distance
 

@@ -1,7 +1,6 @@
 ---
 layout: default
-title: Hall Effect Sensor
-nav_order: 3
+title: Hall Effect Sensors
 parent: Sensors
 has_toc: true # (on by default)
 comments: true

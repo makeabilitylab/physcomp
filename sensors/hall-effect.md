@@ -34,11 +34,9 @@ Two example bike wheel tracking systems (left and middle) along with a bike spee
 
 How do electric fields and magnetic fields interact? You may remember that electric current produces a magnetic field (recall the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule#Electromagnetics) from high school physics). But does a magnetic field also affect current? Yes!
 
-Electricity and magnetism have long captured human interest but were considered separate phenomena. It wasn't until the late 19th century when James Maxwell published [*A Treatise on Electricity and Magnetism*](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which united electricity and magnetism into one interrelated force: electromagnetism. 
+Electricity and magnetism have long captured human interest but were considered separate phenomena. It wasn't until the late 19th century when James Maxwell published [*A Treatise on Electricity and Magnetism*](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which united electricity and magnetism into one interrelated force: electromagnetism. But key questions remained, including, most relevantly for us: how do **magnets** interact with **electric current**? 
 
-But key questions remained, including, most relevantly for us: how do **magnets** interact with **electric current**? 
-
-Enter Edwin Hall. As a PhD student at Johns Hopkins in 1879, Hall discovered the "Hall effect", which is the production of a small voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied ([Wikipedia](https://en.wikipedia.org/wiki/Hall_effect#Discovery)). This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect:
+Enter Edwin Hall. As a PhD student at Johns Hopkins in 1879, Hall discovered the "Hall effect", which is the production of a small voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied ([Wikipedia](https://en.wikipedia.org/wiki/Hall_effect#Discovery)). This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect. When a magnet is introduced, it repels negative charges to one side of the conductor creating an asymmetric distribution of charge (perpendicular to the flow of current) on the conductor. This separation of charge establishes a new electric field with a small electric potential (often in the millivolts), which can be measured by a multimeter or similar device.
 
 ![Animation of Hall Effect](/assets/movies/HallEffectAnimation_HowToMechatronics-Optimized.gif)
 Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
@@ -56,7 +54,7 @@ In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of N
 
 ## Hall effect sensors
 
-[Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) use the "Hall effect" to measure the magnitude of a proximal magnetic field. More precisely, they measure "magnetic flux" ($$Φ$$), which is the total magnetic field $$\vec{B}$$ passing through a given area $$\vec{A}$$ (where A is the area of the sensing unit normal to the magnetic field): $$Φ = $$\vec{B}$$ \dot $$\vec{A}$$. While [inductive sensors](https://en.wikipedia.org/wiki/Inductive_sensor) respond to *changing* magnetic fields, one benefit of Hall effect sensors is that they work with static (non-changing) fields. So, a Hall effect sensor can recognize a magnet even if it's not moving.
+[Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) use the "Hall effect" to measure the magnitude of a proximal magnetic field. More precisely, Hall effect sensors measure "magnetic flux" ($$Φ$$), which is the total magnetic field $$\vec{B}$$ passing through a given area $$\vec{A}$$ (where A is the area of the sensing unit normal to the magnetic field): $$Φ = \vec{B} \dot \vec{A}$$. While [inductive sensors](https://en.wikipedia.org/wiki/Inductive_sensor) respond to *changing* magnetic fields, one benefit of Hall effect sensors is that they work with static (non-changing) fields. So, a Hall effect sensor can respond to a magnet even if it's not moving.
 
 ![Simulated magnetic flux of a NdFeB magnet from the DRV5055 datasheet](assets/images/HallEffectSensor_SimulatedMagneticFlux.png)
 Simulated magnetic flux of a NdFeB magnet. Image from the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor datasheet.
@@ -70,12 +68,13 @@ Because a magnetic field vectors flow from a magnet's north to south poles, magn
 
 ### Hall effect sensor applications
 
-Hall effect sensors are used in a range of consumer and industrial applications from automotive to fluid monitoring to building automation. Some applications, like sensing seat and safety belt position, use Hall effect sensors for localizing objects while others use Hall effect sensors as contactless measurements of DC current (measuring the induced magnetic field by current through a wire).
+Hall effect sensors are used in a range of consumer and industrial applications from automotive to fluid monitoring to building automation. Some applications, like sensing seat and safety belt position, use Hall effect sensors for localizing objects while others use Hall effect sensors as contactless measurements of DC current (measuring the induced magnetic field by current through a wire). Modern automotive vehicles alone contain 10 or more Hall effect sensors for everything from windshield wiper position sensing to brake and gas pedals to the ignition system ([Landuyt et al., SPLC’14](https://doi.org/10.1145/2648511.2648546)).
 
 In their [handbook](https://sensing.honeywell.com/hallbook.pdf) for Hall effect sensors, Honeywell provides dozens of application ideas:
-![Hall effect sensing ideas from Honeywell including piston detection, throttle angle sensor](assets/images/ExampleHallEffectSensingIdeas_Honeywell.png)
 
-Modern automotive vehicles alone contain 10 or more Hall effect sensors for everything from windshield wiper position sensing to brake and gas pedals to the ignition system ([Landuyt et al., SPLC’14](https://doi.org/10.1145/2648511.2648546)).
+![Hall effect sensing ideas from Honeywell including piston detection, throttle angle sensor](assets/images/ExampleHallEffectSensingIdeas_Honeywell.png)
+A subset of Hall effect sensor application ideas presented in the [Honeywell handbook](https://sensing.honeywell.com/hallbook.pdf).
+{: .fs-1 }
 
 ### Analog vs. binary output
 
@@ -96,12 +95,15 @@ To produce a binary output, these Hall effect sensors have an additional interna
 ### Reed switches
 
 ![Reed switch with contact detail](assets/images/Reed_switch_aka_Wikipedia.jpg)
+Image from [Wikipedia](https://en.wikipedia.org/wiki/Reed_switch).
+{: .fs-1 }
 
 While some Hall effect sensors produce binary output (`HIGH` or `LOW`) and thus, can function as switches, they are not to be confused with [reed switches](https://en.wikipedia.org/wiki/Reed_switch), which are **electromechanical** devices. With a reed switch, two ferromagnetic metal contacts close in the presence of a magnetic field (and are otherwise normally open). Because a reed switch is a mechanical device, the switch contacts can wear over time. See the animations below.
 
 | Reed Switch Animation | Slow Motion Activation Video |
 | ---------- | ----------- |
-| ![Reed switch slow-mo video](/assets/movies/ReedSwitchAnimation-Optimized.gif) | ![Reed switch animation](/assets/movies/HowAReedSwitchWorks_Wikipedia.gif) | 
+| ![Reed switch slow-mo video](/assets/movies/ReedSwitchAnimation-Optimized.gif) | ![Reed switch animation](/assets/movies/HowAReedSwitchWorks_Wikipedia.gif) |
+
 The slow-motion activation video is from [Wikipedia](https://en.wikipedia.org/wiki/Reed_switch).
 {: .fs-1 }
 
@@ -113,7 +115,7 @@ With a Hall effect sensor, the magnetic flux density through the sensor is maxim
 
 Here's a [video](https://youtu.be/hnCEQYO-i_E) demonstrating a reed switch functioning with three different magnets from K&J Magnetics:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hnCEQYO-i_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/hnCEQYO-i_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ### The DRV5055 Hall effect sensor

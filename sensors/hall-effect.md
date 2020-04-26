@@ -6,7 +6,6 @@ parent: Sensors
 has_toc: true # (on by default)
 comments: true
 usemathjax: true
-nav_exclude: true
 ---
 # {{ page.title }}
 {: .no_toc }
@@ -18,13 +17,17 @@ nav_exclude: true
 {:toc}
 ---
 
-A key benefit of a Hall Effect sensor is that magnets do not need to be powered and thus can be affixed to objects for position tracking—for example, a bicycle tachometer works by affixing a magnet to the bike wheel (which spins) while a Hall Effect sensor attached to a wheel fork.
+In this lesson, you will learn about two types of magnetic sensors: Hall effect sensors and reed switches. You will then use a [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor to build a simple auto-brightening LED circuit first without and then with a microcontroller.
 
-Hall Effect sensors are transducers: they convert magnetic energy to electrical energy. 
+## Introduction
 
-According to this article by [Landuyt *et al.,* SPLC'14](https://doi.org/10.1145/2648511.2648546), modern automotive vehicles contain 10 or more Hall effect sensors, including to sense windshield wiper position and brake and gas pedals.
+Magnet-based sensors such as [reed switches](https://en.wikipedia.org/wiki/Reed_switch) and [Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) react to the presence of a magnetic field. They are truly ubiquitous sensors found in everything from automobile control circuits and fluid control systems to electronic devices like cell phones and computers. While Reed switches are electro-mechanical: two internal contacts physically close when a properly oriented magnetic field is within range, Hall effect sensors are solid state (no moving parts) transducers: they convert magnetic energy to electrical energy and can either be used as analog sensors or switches. 
 
-https://en.wikipedia.org/wiki/Hall_effect_sensor has a good intro too, some animations, and some application ideas.
+A key benefit of a magnet-based sensors is that the magnet itself does not need to be powered and can even be fully encased in a moving part like a window, a wheel, a turbine, *etc.* For example, a bicycle tachometer works by affixing a magnet to the bike wheel (which spins) while a Hall Effect sensor or reed switch is attached to a wheel fork and used by a microcontroller to count rotations. Magnet-based sensors are also commonly use to track rotations in DC electric motors, which already contain magnets to power the motor. 
+
+![Magnet-based sensors used in bike tachometers](assets/images/MagneticBikeTachometers2.png)
+
+<!-- https://en.wikipedia.org/wiki/Hall_effect_sensor has a good intro too, some animations, and some application ideas. -->
 
 ## The Hall effect
 
@@ -32,9 +35,9 @@ How do electric fields and magnetic fields interact? You may remember that elect
 
 Electricity and magnetism have long captured human interest but were considered separate phenomena. It wasn't until the late 19th century when James Maxwell published [*A Treatise on Electricity and Magnetism*](https://en.wikipedia.org/wiki/A_Treatise_on_Electricity_and_Magnetism), which united electricity and magnetism into one interrelated force: electromagnetism. 
 
-But key questions remained, including, most relevantly for us: how do **magnets** interact with** electric current**? 
+But key questions remained, including, most relevantly for us: how do **magnets** interact with **electric current**? 
 
-Enter Edwin Hall. As a PhD student at Johns Hopkins in 1879, Hall discovered the "Hall effect", which is the production of a voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied ([Wikipedia](https://en.wikipedia.org/wiki/Hall_effect#Discovery)). This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect:
+Enter Edwin Hall. As a PhD student at Johns Hopkins in 1879, Hall discovered the "Hall effect", which is the production of a small voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied ([Wikipedia](https://en.wikipedia.org/wiki/Hall_effect#Discovery)). This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect:
 
 ![Animation of Hall Effect](/assets/movies/HallEffectAnimation_HowToMechatronics-Optimized.gif)
 Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
@@ -64,6 +67,15 @@ Because a magnetic field vectors flow from a magnet's north to south poles, magn
 
 <!-- TODO insert graphic that shows orientation differences? Or at least a graphic of magnetic field around a magnet? -->
 
+### Hall effect sensor applications
+
+Hall effect sensors are used in a range of consumer and industrial applications from automotive to fluid monitoring to building automation. Some applications, like sensing seat and safety belt position, use Hall effect sensors for localizing objects while others use Hall effect sensors as contactless measurements of DC current (measuring the induced magnetic field by current through a wire).
+
+In their [handbook](https://sensing.honeywell.com/hallbook.pdf) for Hall effect sensors, Honeywell provides dozens of application ideas:
+![Hall effect sensing ideas from Honeywell including piston detection, throttle angle sensor](assets/images/ExampleHallEffectSensingIdeas_Honeywell.png)
+
+Modern automotive vehicles alone contain 10 or more Hall effect sensors for everything from windshield wiper position sensing to brake and gas pedals to the ignition system ([Landuyt et al., SPLC’14](https://doi.org/10.1145/2648511.2648546)).
+
 ### Analog vs. binary output
 
 Hall effect sensors can provide either **analog** or **binary** output. In either case, they are **active** sensors with three pins ($$V_{CC}$$, $$GND$$, and $$Out$$).
@@ -82,7 +94,7 @@ To produce a binary output, these Hall effect sensors have an additional interna
 
 ### Reed switches
 
-![Reed switch with contact detail](https://en.wikipedia.org/wiki/Reed_switch#/media/File:Reed_switch_(aka).jpg)
+![Reed switch with contact detail](assets/images/Reed_switch_aka_Wikipedia.jpg)
 
 While some Hall effect sensors produce binary output (`HIGH` or `LOW`) and thus, can function as switches, they are not to be confused with [reed switches](https://en.wikipedia.org/wiki/Reed_switch), which are **electromechanical** devices. With a reed switch, two ferromagnetic metal contacts close in the presence of a magnetic field (and are otherwise normally open). Because a reed switch is a mechanical device, the switch contacts can wear over time. See the animations below.
 
@@ -92,11 +104,22 @@ While some Hall effect sensors produce binary output (`HIGH` or `LOW`) and thus,
 The slow-motion activation video is from [Wikipedia](https://en.wikipedia.org/wiki/Reed_switch).
 {: .fs-1 }
 
+A reed switch is a passive sensor: its contacts will close in the presence of a magnetic field regardless of whether it's even hooked up in a circuit. Unlike Hall effect sensors, reed switches are not sensitive to magnetic field polarity; however, the magnetic field has to be parallel to the reeds—either north-to-south or south-to-north. See figure below.
+
+![Image showing proper orientation of magnets with a hall effect sensor and reed switch](assets/images/ReedswitchVsHallEffectSensor_MagneticPoles_KJMagnetics.png)
+With a Hall effect sensor, the magnetic flux density through the sensor is maximized when a magnetic pole is directly facing the sensor. With a reed switch, the magnetic poles should be parallel to the sensor. Image derived from [KJMagnetics](https://www.kjmagnetics.com/blog.asp?p=reed-switches-and-hall-effect-sensors).
+{: .fs-1 }
+
+Here's a [video](https://youtu.be/hnCEQYO-i_E) demonstrating a reed switch functioning with three different magnets from K&J Magnetics:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hnCEQYO-i_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ### The DRV5055 Hall effect sensor
 
 In our hardware kits, we provide the Texas Instruments (TI) [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) ratiometric linear hall effect sensor, which varies its voltage output proportionally to magnetic flux density. Ratiometric means that the sensor's voltage output is proportional to the supply voltage ($$V_{CC}$$). 
 
-The DRV5055 can operate with both 3.3V and 5V power supplies (with +/- 10% tolerance). The sensor can be sampled at 20kHz. To provide a reliable voltage output across a range of deployment conditions, the DRV5055 chip includes temperature compensation circuits, mechanical stress cancellation, signal conditioning, and amplification.
+The DRV5055 can operate with both 3.3V and 5V power supplies (with +/- 10% tolerance). The sensor can be sampled at 20kHz. To provide a reliable voltage output across a range of deployment conditions, the DRV5055 chip includes temperature compensation circuits, mechanical stress cancellation, signal conditioning, and amplification. So, while small, there is a significant amount of sophisticated hardware packed into this piece of hardware.
 
 Two packages are available: a surface-mount package SOT-23 (left diagram below) and a through hole package TO-92 (right). We will be using the through-hole package (TO-92). 
 
@@ -106,13 +129,15 @@ The two DRV5055 packages with pin configurations and Hall element location is la
 
 #### Wiring the DRV5055
 
-To use the sensor, hook up Leg 1 to $$V_{CC}$$*, Leg 2 to $$GND$$, and Leg 3 to an analog input pin on your Arduino (say, `A0`). *TI recommends connecting Leg 1 to a ceramic capacitor to ground with a value of at least 0.01 µF. This is called a **decoupling capacitor** (or bypass capacitor) and is a common addition to help smooth the voltage supply as the sensor is operating. See wiring diagram below. While not absolutely necessary—and some of you may not have access to ceramic capacitors—it's recommended (it will improve performance and reliability). To see the effect of adding a decoupling capacitor on a voltage supply to a chip, see this [video](https://youtu.be/UW_XFGGTh0I). Dave Jones at the EEVblog also provides a nice whiteboard lesson ([link](https://youtu.be/BcJ6UdDx1vg)). 
+To use the sensor, hook up Leg 1 to $$V_{CC}$$*, Leg 2 to $$GND$$, and Leg 3 to an analog input pin on your Arduino (say, `A0`). 
+
+*TI recommends connecting Leg 1 to a ceramic capacitor to ground with a value of at least 0.01 µF. This is called a **decoupling capacitor** (or bypass capacitor) and is a common addition to help smooth the voltage supply as the sensor is operating. See wiring diagram below. While not absolutely necessary—and some of you may not have access to ceramic capacitors—it's recommended (it will improve performance and reliability). To see the effect of adding a decoupling capacitor on a voltage supply to a chip, see this [video](https://youtu.be/UW_XFGGTh0I). Dave Jones at the EEVblog also provides a nice whiteboard lesson ([link](https://youtu.be/BcJ6UdDx1vg)). 
 
 ![Wiring diagram for DRV5055 with ceramic capacitor](assets/images/HallEffectSensor_RecommendedWiringWithSchematic_DRV5055.png)
 We've included two equivalent Arduino wirings. The left diagram includes a breadboard, which we felt may be a bit confusing to those still becoming familiar with breadboards. The middle diagram is the same wiring but without a breadboard. The schematic on the right is copy/pasted directly from the [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) datasheet.
 {: .fs-1 }
 
-![](assets/images/HallEffectSensor_PinConfigurations_DatasheetScreenshot.png)
+![Screenshot of pin configurations from datasheet](assets/images/HallEffectSensor_PinConfigurations_DatasheetScreenshot.png)
 
 #### Sensor response to magnetic field
 
@@ -130,7 +155,9 @@ First, we're going to use the Hall effect sensor in a "bare bones" circuit witho
 
 ## Make a magical magnetic LED brightener
 
-Let's use the Hall effect sensor to automatically change the brightness of our LED. Recall that $$V_{out}$$ increases as the south pole of a magnet nears and $$V_{out}$$ decreases as the north pole nears. Let's use this to control the brightness of our LED.
+Let's use the Hall effect sensor to automatically change the brightness of our LED. Recall that $$V_{out}$$ increases as the south pole of a magnet nears and $$V_{out}$$ decreases as the north pole nears. Let's use this property to control the brightness of our LED. 
+
+Even with this simple circuit, there are many creative possibilities: imagine a Harry Potter light that only turns on when a wizard's wand is close (the light would contain a Hall effect sensor and the wand a magnet).  
 
 The [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) datasheet states that the maximum continuous output current is 1mA. Using Ohm's Law, we can calculate a safe resistance value for the current-limiting resistor such that the LED does not pull too much current. $$I=\frac{V_{cc} - V_f}{R} \to 1mA=\frac{5V-2V}{R} \to R=\frac{3V}{0.001A} = 3,000Ω$$. So, we'll use a 3.3kΩ.
 
@@ -156,7 +183,23 @@ What if we wanted to supply more than 1mA through our LED? We have have two choi
 
 ## Make an Arduino-based magical magnetic LED brightener
 
-## Workbench video
+Let's adapt our circuit to use the Arduino. We'll make one circuit to read the Hall effect sensor on `A0` and another circuit to turn on and auto-brighten an LED using PWM (via GPIO Pin 3).
+
+### Hall effect Arduino circuit
+
+Below, we provide two wiring diagrams: one with the decoupling capacitor (0.01 µF) and one without. The decoupling capacitor is necessary to ensure that the voltage supply is constant while the Hall effect sensor is operating; however, it's not absolutely necessary for simple prototyping and learning. 
+
+![Two wiring diagrams for Hall effect sensor: one with decoupling capacitor and other not](assets/images/ArduinoUno_HallEffectSensor_WiringDiagram.png)
+
+### The code
+
+Our code is the simplest possible take. We simply read in the Hall effect sensor's output voltage on `A0` and directly translate this to the LED's PWM output. Recall that the Hall effect sensor outputs $$V_{cc}/2$$ when no magnet is present. Thus, the LED is "half on" (`analogWrite(LED_PIN, 128)`) with no magnet, fully bright when the south pole is facing and directly in front of the sensor, and fully off when the north pole is facing and directly in front of the sensor. 
+
+One simple modification you may want to try: when no magnet is present, make the LED off. When either the south or north magnetic field poles are sensed, brighten the LED accordingly.
+
+<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Sensors/HallEffectLED/HallEffectLED.ino?footer=minimal"></script>
+
+### Workbench video
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/MvVfq6AAEQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

@@ -27,12 +27,20 @@ In this lesson, you'll learn about [photoresistors](https://en.wikipedia.org/wik
 
 A photoresistor—sometimes called a photocell or light-dependent resistor (LDR)—varies its resistance in response to light. They are small, inexpensive, and easy-to-use. Consequently, photoresistors are popular in children's toys (see example below), nightlights, clock radios, and other inexpensive gadgets. However, they are not particularly accurate so are best suited for measuring coarse-grain light levels (*e.g.,* the difference between a light and dark room) rather than precise illuminance. Other common light sensors include phototransistors and [photodiodes](https://en.wikipedia.org/wiki/Photodiode), both which are more accurate and responsive.
 
+### Photoresistor examples
+
 As one example use case in consumer toys, this Melissa and Doug wooden fire truck puzzle uses embedded photoresistors to detect when each puzzle piece has been placed and when the puzzle is complete. There is one embedded photoresistor per puzzle piece location. When the all pieces are placed (all photoresistors have been covered), the puzzle plays a rewarding "fire truck siren":
 
 ![Picture showing the Melissa and Doug puzzle with embedded photoresistors](assets/images/Photoresistor_MelissaAndDougPuzzle.png)
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/ySJw510mVgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 Each puzzle piece location has a respective embedded photoresistor, which is used to track whether a piece has been placed or not. When the puzzle is completed (and all photoresistors have been covered), the puzzle plays a fire truck siren. There are a few limitations to this sensing technique: while cheap, the "fire truck" siren can be triggered when the photoresistors are covered (either accidentally via an errant puzzle piece or hand or on purpose), occassionally the siren will be triggered before the puzzle is actually completed (just when the last puzzle piece is hovering over the remaining location), and, of course, the sensing method cannot tell whether a puzzle piece is in the correct position (which is fine if one just needs to infer when the puzzle is completed and not, for example, to help guide a child in completing the puzzle).
+{: .fs-1 }
+
+Another example use case from inexpensive consumer electronics: an auto-brightness setting nightlight from General Electric, which gets brighter as the ambient light gets darker.
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/EkBDjZZ3v00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+An auto-brightness fading night light from General Electric.
 {: .fs-1 }
 
 ### How do photoresistors work?

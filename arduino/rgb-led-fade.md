@@ -155,6 +155,7 @@ Here's a video of various hues, saturations, and lightness levels using Hunor Ma
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/a0j8qyBJE2E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 A screen recording of [Hunor Marton's HSL Color Picker](https://codepen.io/HunorMarton/pen/dvXVvQ/).
+{: .fs-1 }
 
 In our case, we perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. With this HSL approach, our code is comparatively much simpler, something like the following pseudocode:
 

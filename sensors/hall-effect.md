@@ -22,9 +22,11 @@ In this lesson, you will learn about two types of magnetic sensors: Hall effect 
 
 Magnet-based sensors such as [reed switches](https://en.wikipedia.org/wiki/Reed_switch) and [Hall effect sensors](https://en.wikipedia.org/wiki/Hall_effect_sensor) react to the presence of a magnetic field. They are truly ubiquitous sensors found in everything from automobile control circuits and fluid control systems to electronic devices like cell phones and computers. While Reed switches are electro-mechanical: two internal contacts physically close when a properly oriented magnetic field is within range, Hall effect sensors are solid state (no moving parts) transducers: they convert magnetic energy to electrical energy and can either be used as analog sensors or switches. 
 
-A key benefit of a magnet-based sensors is that the magnet itself does not need to be powered and can even be fully encased in a moving part like a window, a wheel, a turbine, *etc.* For example, a bicycle tachometer works by affixing a magnet to the bike wheel (which spins) while a Hall Effect sensor or reed switch is attached to a wheel fork and used by a microcontroller to count rotations. Magnet-based sensors are also commonly use to track rotations in DC electric motors, which already contain magnets to power the motor. 
+A key benefit of a magnet-based sensors is that the magnet itself does not need to be powered and can even be fully encased in a moving part like a window, a wheel, a turbine, *etc.* For example, a bicycle tachometer works by affixing a magnet to the bike wheel (which spins) while a Hall Effect sensor or reed switch is attached to a wheel fork and used by a microcontroller to count revolutions. Magnet-based sensors are also commonly use to track rotations in DC electric motors, which already contain magnets to power the motor. 
 
 ![Magnet-based sensors used in bike tachometers](assets/images/MagneticBikeTachometers2.png)
+Two example bike wheel tracking systems (left and middle) along with a bike speedometer. Typically, these systems are made with Hall effect sensors or reed switches to measure wheel revolutions, which are converted to distance and speed by a small computer with a display (often mounted on the handlebars). Note: to use this system, the bicyclist must first complete a calibration step by moving the wheel a set distance (thereby providing the necessary data to convert from revolutions to distance).
+{: .fs-1 }
 
 <!-- https://en.wikipedia.org/wiki/Hall_effect_sensor has a good intro too, some animations, and some application ideas. -->
 

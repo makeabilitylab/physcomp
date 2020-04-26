@@ -145,7 +145,18 @@ Second, a workbench video of the code running on an Arduino Uno:
 
 ### Crossfading in the HSL color space
 
-The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its **hue**. It's much easier to do this using HSL and then converting to RGB to set our RGB LED color. We perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. With this HSL approach, our code is comparatively much simpler, something like the following pseudocode:
+The second method for crossfading the RGB LED takes advantage of the [Hue, Saturation, Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV) color space. To change the "color" of the RGB LED, we are really talking about changing its **hue**. It's much easier to do this using HSL and then converting to RGB to set our RGB LED color. 
+
+![RGB vs. HSL color spaces](assets/images/RGBVsHSLColorSpace_Wikipedia.png)
+RGB and HSL color space visualizations from [Wikipedia](https://en.wikipedia.org/wiki/HSL_and_HSV).
+{: .fs-1 }
+
+Here's a vide of various hues, saturations, and lightness levels using Hunor Marton's HSL Color Picker. Play around with it yourself on [codepen.io](https://codepen.io/HunorMarton/pen/dvXVvQ/).
+
+
+
+
+We perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. With this HSL approach, our code is comparatively much simpler, something like the following pseudocode:
 
 {% highlight C %}
 // Basic overview of our approach (pseudocode)

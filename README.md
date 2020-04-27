@@ -17,7 +17,7 @@ A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, 
 # Physical and Ubiquitous Computing
 {: .no_toc }
 
-Welcome to our website. Here, we explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. This website is intended to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
+Welcome to our website! Here, we explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. This website is intended to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
 
 ![Example projects from some physical computing-related courses taught by Jon E. Froehlich]({{ site.baseurl }}/assets/images/ExampleAssignmentsAndProjects.jpg)
 Example projects from Tangible Interactive Computing.
@@ -52,7 +52,7 @@ We assume the following background about our learners:
 
 ## Learning philosphy: learn by doing
 
-A key pedagogical philosophy underlying our teaching is **learning by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises. So, we we expect that you will build along with our guides and lessons.
+A key pedagogical philosophy underlying our teaching is **learn by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises. So, we we expect that you will build along with our guides and lessons.
 
 ## Example Hardware Kits
 
@@ -60,6 +60,7 @@ Here are some example hardware kits that we provide students in our classes.
 
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
 - HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)
+- CSE599 Prototyping Interactive Systems: [Spring'19](https://docs.google.com/spreadsheets/d/15ltWMcmYbSrWlz8ajt5TZfj8ZXctMJVueplwYYdZKdc/edit?usp=sharing)
 
 ## About this website
 

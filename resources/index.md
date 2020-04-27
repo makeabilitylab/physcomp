@@ -108,6 +108,7 @@ Here are some example hardware kits (with source links) that we've used in our c
 
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
 - HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)
+- CSE599 Prototyping Interactive Systems: [Spring'19](https://docs.google.com/spreadsheets/d/15ltWMcmYbSrWlz8ajt5TZfj8ZXctMJVueplwYYdZKdc/edit?usp=sharing)
 
 ## Inspirations
 

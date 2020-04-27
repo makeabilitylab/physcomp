@@ -22,19 +22,27 @@ nav_exclude: true
 | Microcontroller | 8-bit, 16 MHz [ATmega328P](https://www.microchip.com/wwwproducts/en/ATmega328) | 32-bit, 240 MHz dual core Tensilica LX6 |
 | Microcontroller Manufacturer | Microchip (Atmel) | Espressif |
 | System-on-a-chip | N/A | [ESP32](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) |
+| Input voltage (limit) | 6-20V | 7-12V |
 | Operating voltage | 5V | 3.3V |
 | Flash memory | 32KB (0.5KB used by bootloader) | 4MB |
 | SRAM | 2KB | 520KB |
-| Analog inputs | 6 | 6 |
+| Analog inputs | 6 | 8 |
 | GPIO pins | 14 | 21 |
 | PWM pins | 6 | All |
-| Wi-Fi | N/A | 802.11b/g/n HT40 Wi-Fi transceiver, baseband, stack and LWIP |
+| Wi-Fi | N/A | 802.11b/g/n HT40 Wi-Fi transceiver |
 | Bluetooth | N/A | Dual mode (classic and BLE) |
 
 Recall that flash memory is where your compiled program is stored and SRAM is where your microcontroller creates and manipulates variables when it runs.
 
-## Pin outs
+The ESP32 also has 2xI2S Audio, 2xDAC, 2xI2C (only one configured by default in the Feather Arduino IDE support), 3 x SPI (only one configured by default in Feather IDE support). See [Adafruit overview](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview).
 
+## Huzzah32 pin diagram
+
+The pin diagram for the Huzzah32 in the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) is pretty confusing. [Zerynth](https://www.zerynth.com/), an IoT company, produced a much cleaner version:
+
+![ESP32 Huzzah32 pin diagram from Zerynth]({{ site.baseurl }}/assets/images/adafruithuzzah32pin_zerynth.jpg)
+Pin diagram from [Zerynth](https://docs.zerynth.com/latest/official/board.zerynth.adafruit_huzzah32/docs/index.html). ICU stands for [Input Capture Unit](https://docs.zerynth.com/official/core.zerynth.stdlib/r2.0.9/icu.html).
+{: .fs-1 } 
 
 ## Huzzah32 installation instructions for the Arduino IDE
 

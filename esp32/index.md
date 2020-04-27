@@ -16,6 +16,26 @@ nav_exclude: true
 {:toc}
 ---
 
+| Name | Arduino Uno | Huzzah32 |
+| ---- | ----------- | -------- |
+| Image | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_ArduinoCC.png) | ![ESP32 Huzzah32]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit.png) |
+| Microcontroller | 8-bit, 16 MHz [ATmega328P](https://www.microchip.com/wwwproducts/en/ATmega328) | 32-bit, 240 MHz dual core Tensilica LX6 |
+| Microcontroller Manufacturer | Microchip (Atmel) | Espressif |
+| System-on-a-chip | N/A | [ESP32](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) |
+| Operating voltage | 5V | 3.3V |
+| Flash memory | 32KB (0.5KB used by bootloader) | 4MB |
+| SRAM | 2KB | 520KB |
+| Analog inputs | 6 | 6 |
+| GPIO pins | 14 | 21 |
+| PWM pins | 6 | All |
+| Wi-Fi | N/A | 802.11b/g/n HT40 Wi-Fi transceiver, baseband, stack and LWIP |
+| Bluetooth | N/A | Dual mode (classic and BLE) |
+
+Recall that flash memory is where your compiled program is stored and SRAM is where your microcontroller creates and manipulates variables when it runs.
+
+## Pin outs
+
+
 ## Huzzah32 installation instructions for the Arduino IDE
 
 You can follow the [official Adafruit Huzzah32 Arduino IDE installation instructions](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/using-with-arduino-ide), which we've expanded a bit below.

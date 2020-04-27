@@ -59,6 +59,10 @@ Including other markdown pages: https://stackoverflow.com/a/41966993/388117.
 ### Make a Note (Call Out Box)
 - https://stackoverflow.com/questions/25654845/how-can-i-create-a-text-box-for-a-note-in-markdown
 
+I quite like the call-out boxes on this Boser Berkeley teaching page [IoT49](https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/N_gpio.html):
+
+![](assets/images/BoserIoT49Webpage.png)
+
 ### Option 1
 
 ---

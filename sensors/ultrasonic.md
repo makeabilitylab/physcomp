@@ -3,7 +3,7 @@ layout: default
 title: Ultrasonic Distance
 parent: Sensors
 has_toc: true # (on by default)
-comments: true
+comments: false
 usemathjax: false
 ---
 

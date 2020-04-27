@@ -6,6 +6,15 @@ has_toc: true # on by default
 has_children: true
 nav_exclude: true
 ---
+# {{ page.title }}
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
 
 ## Huzzah32 installation instructions for the Arduino IDE
 

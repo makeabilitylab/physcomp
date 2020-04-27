@@ -2,7 +2,7 @@
 layout: default
 title: ESP32
 nav_order: 2
-has_toc: false # on by default
+has_toc: true # on by default
 has_children: true
 nav_exclude: true
 ---
@@ -55,7 +55,7 @@ Finally, select the appropriate port
 ### Other
 - [Sparkfun's ESP32 Thing Hookup Guide](https://learn.sparkfun.com/tutorials/esp32-thing-hookup-guide/all). Written for Sparkfun's ESP32 Thing board but has relevant WiFi and BLE examples.
 
-## Application ideas
+<!-- ## Application ideas
 - Connect to WiFi, get the time, print out on OLED. Create a clock?
 - Connect to WiFi, download Covid-19 stats, print out on display
 - Evidently ESP32 may support Serial.printf? [See link](https://arduino.stackexchange.com/a/53751).
@@ -68,5 +68,5 @@ Finally, select the appropriate port
 ### Platform IO for VSCode
 
 - https://docs.platformio.org/en/latest/integration/ide/visualstudio.html
-- https://maker.pro/arduino/tutorial/how-to-use-platformio-in-visual-studio-code-to-program-arduino
+- https://maker.pro/arduino/tutorial/how-to-use-platformio-in-visual-studio-code-to-program-arduino -->
 

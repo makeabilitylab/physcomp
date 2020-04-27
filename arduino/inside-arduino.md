@@ -6,7 +6,54 @@ has_toc: false # on by default
 nav_exclude: true
 ---
 
-This page is intended to provide more advanced information about the Arduino. Rest assured,you do not need to read or understand this page to use the Arduino! :)
+This page is intended to provide more advanced information about the Arduino. Rest assured, you do not need to read or understand this page to use the Arduino! :)
+
+## How can I print multiple variables using Serial.println?
+
+A common question on [Arduino StackExchange](https://arduino.stackexchange.com/) and the [Arduino forums](https://forum.arduino.cc/) is some variation of: "How can I print multiple variables in one line of code using `Serial.println`?" 
+
+Here are some common answers. Note: I have not stress tested them all and I'm sure many solutions are slow and memory inefficient (but if neither of these are concerns, then feel free to use them!)
+
+Perhaps the simplest way is to cast everything as a String and use string concatenation:
+
+``` C
+Serial.println((String)"Var 1:" + var1 + " Var 2:" + var2 + " Var 3:" + var3);
+```
+[Source](https://arduino.stackexchange.com/a/69566)
+{: .fs-1 }
+
+Redirect `printf` to Serial output:
+
+{% highlight C %}
+// Function that printf and related will use to print
+int serial_putchar(char c, FILE* f) {
+    if (c == '\n') serial_putchar('\r', f);
+    return Serial.write(c) == 1? 0 : 1;
+}
+
+FILE serial_stdout;
+
+void setup(){
+    Serial.begin(9600);
+
+    // Set up stdout
+    fdev_setup_stream(&serial_stdout, serial_putchar, NULL, _FDEV_SETUP_WRITE);
+    stdout = &serial_stdout;
+
+    printf("My favorite number is %6d!\n", 12);
+}
+
+void loop() {
+  static long counter = 0;
+  if (millis()%300==0){
+    printf("millis(): %ld\tcounter: %ld (%02X)\n", millis(), counter, counter++);
+    delay(1);    
+  }
+}
+{% endhighlight C %}
+[Source](https://arduino.stackexchange.com/a/480) and [discussion](https://forum.arduino.cc/index.php/topic,120440.0.html)
+
+Use the [PrintEx](https://github.com/Chris--A/PrintEx#printex-library-for-arduino-) open-source library.
 
 ## What's calling loop() and how fast?
 

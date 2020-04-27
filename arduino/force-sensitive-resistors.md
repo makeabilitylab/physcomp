@@ -174,7 +174,15 @@ There is one small issue, which is that `analogRead` (on the Uno and Leonardo) u
 
 If we assume both ranges start at zero (as they do in this case), our conversion is simply: `int outputVal = (int)(inputVal/1023.0 * 255);`. 
 
-If, instead, we can't assume that both ranges start at zero, the more general conversion algorithm is: `int outputVal = OUTPUT_MIN + (inputVal - INPUT_MIN)/(INPUT_MAX - INPUT_MIN) * (OUTPUT_MAX - OUTPUT_MIN);` This type of range conversion is so common that Arduino (and Processing and many other programming libraries) have a built-in function for it called [`map`](https://www.arduino.cc/reference/en/language/functions/math/map/). It's called "map" because we want to re-map a number from one range to another.
+If, instead, we can't assume that both ranges start at zero, the more general conversion algorithm is: `int outputVal = OUTPUT_MIN + (inputVal - INPUT_MIN)/(INPUT_MAX - INPUT_MIN) * (OUTPUT_MAX - OUTPUT_MIN);` This type of range conversion is so common that Arduino (and Processing and many other programming libraries) have a built-in function for it called [`map`](https://www.arduino.cc/reference/en/language/functions/math/map/). It's called "map" because we want to re-map a number from one range to another. Indeed, here's the entire `map` function from the Arduino source code:
+
+{% highlight C %}
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+{% endhighlight C %}
+
+Importantly, as the [docs](https://www.arduino.cc/reference/en/language/functions/math/map/) make abundantly clear, notice that this built-in method using **integer** math and so will not return fractions (floats). If you need more precise conversions, implement your own mapping function (which also provides the opportunity to implement non-linear conversions like logarithmic mappings). 
 
 OK, now that we have that out of the way, let's write our code!
 

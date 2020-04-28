@@ -1,7 +1,7 @@
 ---
 layout: default
 title: ESP32
-nav_order: 2
+nav_order: 4
 has_toc: true # on by default
 has_children: true
 nav_exclude: false
@@ -29,17 +29,13 @@ nav_exclude: false
 Image from [makeradvisor.com](https://makeradvisor.com/esp32-development-boards-review-comparison/). There are literally dozens of ESP32 boards. Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)).
 {: .fs-1 } 
 
-The [ESP32](https://en.wikipedia.org/wiki/ESP32) is a low-cost, "system-on-a-chip" board with integrated WiFi, Bluetooth, and a Tensilica Xtensa LX6 microprocessor running at 160 or 240 MHz. It is a successor to the massively successful [ESP8266](https://en.wikipedia.org/wiki/ESP8266). It's far more powerful than introductory Arduino boards like the Uno or Leonardo but also more complex.
+The [ESP32](https://en.wikipedia.org/wiki/ESP32) is a low-cost, "system-on-a-chip" board with integrated WiFi, Bluetooth, and a Tensilica Xtensa LX6 microprocessor running at 160 or 240 MHz. It is a successor to the massively successful [ESP8266](https://en.wikipedia.org/wiki/ESP8266). The ESP32 is far more powerful than introductory Arduino boards like the Uno or Leonardo but also more complex.
 
-There are literally dozens of ESP32 boards on the market, including Adafruit's [Huzzah32](https://www.adafruit.com/product/3405) and Sparkfun's [ESP32 Thing](https://www.sparkfun.com/products/13907). Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)). 
-
-We will be using the [Huzzah32](https://www.adafruit.com/product/3405).
+There are literally dozens of ESP32 boards on the market, including Adafruit's [Huzzah32](https://www.adafruit.com/product/3405) and Sparkfun's [ESP32 Thing](https://www.sparkfun.com/products/13907). Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)). We will be using the [Huzzah32](https://www.adafruit.com/product/3405).
 
 ### Programming environment
 
-You can program the ESP32 in variety of languages and programming environments, including `C/C++`, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, many ESP32 boards have developed Arduino libraries so you can use the Arduino IDE, the [Espressif IoT Development Framework](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/), or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html).
-
-For our examples, we are going to use the Arduino libraries and IDE.
+You can program the ESP32 in variety of languages and programming environments, including `C/C++`, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, you can use the [Espressif IoT Development Framework](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/) or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html). Many ESP32 boards have developed Arduino libraries so you can also use the Arduino IDE, which is what we will do. This greatly simplifies programming the ESP32 (but at a cost of flexibility and efficiency).
 
 ## The Adafruit ESP32 Huzzah32 Feather
 

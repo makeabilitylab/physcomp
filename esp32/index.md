@@ -51,7 +51,7 @@ See the Adafruit Huzzah32 [docs](https://learn.adafruit.com/adafruit-huzzah32-es
 
 Some important notes:
 - There are **21 GPIO pins**; however, on the Huzzah32, pins 34 (A2), 39 (A3), 36 (A4) are not output-capable and thus should only be used for input. So, **18 GPIO pins** in total
-- **PWM** is possible on every GPIO pin
+- **PWM** is possible on all 18 GPIO pin
 - There are **13 analog input pins**; however, A13 is not exposed. It's used for measuring the voltage on the LiPoly battery via a voltage divider. When reading in the battery level using `analogRead(A13)`, make sure multiply by 2 to get correct reading.
 - The Adafruit docs state (somewhat confusingly) that ADC#1 only works when WiFi has started. This affects A2, A3, A4, A7, and A9.
 
@@ -60,6 +60,8 @@ TODO: what is the ADC resolution?
 <!-- ![ESP32 Huzzah32 pin diagram from Zerynth]({{ site.baseurl }}/assets/images/adafruithuzzah32pin_zerynth.jpg)
 Pin diagram from [Zerynth](https://docs.zerynth.com/latest/official/board.zerynth.adafruit_huzzah32/docs/index.html). ICU stands for [Input Capture Unit](https://docs.zerynth.com/official/core.zerynth.stdlib/r2.0.9/icu.html).
 {: .fs-1 }  -->
+
+<!-- Another helpful pin diagram: https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/N_gpio.html#_pin_diagram -->
 
 
 ## Huzzah32 installation instructions for the Arduino IDE

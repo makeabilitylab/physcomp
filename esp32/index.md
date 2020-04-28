@@ -23,8 +23,6 @@ nav_exclude: false
 4. Show off WiFi? And/or bluetooth?
 5.  -->
 
-## ESP32
-
 ![Image of a variety of ESP32 boards](assets/images/ESP32Boards_MakerAdvisor.png)
 Image from [makeradvisor.com](https://makeradvisor.com/esp32-development-boards-review-comparison/). There are literally dozens of ESP32 boards. Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)).
 {: .fs-1 } 
@@ -35,13 +33,13 @@ There are literally dozens of ESP32 boards on the market, including Adafruit's [
 
 ### Programming environment
 
-You can program the ESP32 in variety of languages and programming environments, including `C/C++`, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, you can use the [Espressif IoT Development Framework](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/) or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html). Many ESP32 boards have developed Arduino libraries so you can also use the Arduino IDE, which is what we will do. This greatly simplifies programming the ESP32 (but at a cost of flexibility and efficiency).
+You can program the ESP32 in variety of languages and programming environments, including `C/C++`, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, you can use Espressif's [IoT Development Framework](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/) or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html). Many ESP32 boards have Arduino libraries so you can also use the [Arduino IDE](https://www.arduino.cc/en/main/software), which is what we will do. This greatly simplifies programming the ESP32 (but at a cost of flexibility and efficiency).
 
 ## The Adafruit ESP32 Huzzah32 Feather
 
 | Name | Arduino Uno | Huzzah32 |
 | ---- | ----------- | -------- |
-| Image | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_ArduinoCC.png) | ![ESP32 Huzzah32]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit.png) |
+| Image | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_ArduinoCC_w200.png) | ![ESP32 Huzzah32]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit_w200.png) |
 | Microcontroller | 8-bit, 16 MHz [ATmega328P](https://www.microchip.com/wwwproducts/en/ATmega328) | 32-bit, 240 MHz dual core Tensilica LX6 |
 | Microcontroller Manufacturer | Microchip (Atmel) | Espressif |
 | System-on-a-chip | N/A | [ESP32](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) |
@@ -49,9 +47,9 @@ You can program the ESP32 in variety of languages and programming environments, 
 | Operating voltage | 5V | 3.3V |
 | Flash memory | 32KB (0.5KB used by bootloader) | 4MB |
 | SRAM | 2KB | 520KB |
-| Analog inputs | 6 | 8 |
 | GPIO pins | 14 | 21 |
 | PWM pins | 6 | All |
+| Analog inputs | 6 | 13 |
 | Wi-Fi | N/A | 802.11b/g/n HT40 Wi-Fi transceiver |
 | Bluetooth | N/A | Dual mode (classic and BLE) |
 

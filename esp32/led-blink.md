@@ -47,7 +47,7 @@ Note, we're still using a 220Ω resistor just like the original [Blink lesson](.
 
 $$I=V/R \\ 
 I = \frac{V_{cc} - V_f}{R} \\
-I = \frac{3.3V - 2V}/220Ω \\
+I = \frac{3.3V - 2V}{220Ω} \\
 I = 5.9mA$$
 
 ## Code

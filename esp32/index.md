@@ -19,9 +19,10 @@ nav_exclude: false
 <!-- Content TODOs:
 1. Make blink example
 2. Make fade example. Show PWM
-3. Make touch sensor example?
-4. Show off WiFi? And/or bluetooth?
-5.  -->
+3. Analog input
+4. Make touch sensor example?
+5. Show off WiFi? And/or bluetooth?
+6.  -->
 
 ![Image of a variety of ESP32 boards](assets/images/ESP32Boards_MakerAdvisor.png)
 Image from [makeradvisor.com](https://makeradvisor.com/esp32-development-boards-review-comparison/). There are literally dozens of ESP32 boards. Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)).
@@ -56,6 +57,8 @@ You can program the ESP32 in variety of languages and programming environments, 
 Recall that flash memory is where your compiled program is stored and SRAM is where your microcontroller creates and manipulates variables when it runs.
 
 The ESP32 also has 2xI2S Audio, 2xDAC, 2xI2C (only one configured by default in the Feather Arduino IDE support), 3xSPI (only one configured by default in Feather IDE support). See [Adafruit overview](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview).
+
+There is a hardware floating point unit (FPU) on ESP32; however, there have been some criticisms about its performance ([link1](https://blog.classycode.com/esp32-floating-point-performance-6e9f6f567a69), [link2](https://www.esp32.com/viewtopic.php?f=14&t=800)).
 
 ### Huzzah32 pin diagram
 

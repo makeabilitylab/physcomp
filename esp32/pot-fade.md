@@ -6,7 +6,6 @@ parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true
-nav_exclude: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
@@ -75,9 +74,9 @@ Here's a workbench video with serial plotter graphing the analog input value fro
 
 ## Next Lesson
 
-In the [next lesson](TODO), we will TODO
+In the [next lesson](capacitive-touch-sensing.md), we will learn about and use the ESP32's built-in capacitive touch sensing module.
 
 <span class="fs-6">
 [Previous: Fading an LED with ESP32](led-fade.md){: .btn .btn-outline }
-[Next: TODO](TODO){: .btn .btn-outline }
+[Next: Capacitive touch sensing with the ESP32](capacitive-touch-sensing.md){: .btn .btn-outline }
 </span>

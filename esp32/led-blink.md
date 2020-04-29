@@ -6,7 +6,6 @@ parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true
-nav_exclude: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
@@ -59,6 +58,8 @@ Given that this should be review, try writing a Blink implementation without con
 <!-- https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Blink/Blink.ino -->
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Blink/Blink.ino?footer=minimal"></script>
+
+<!-- TODO: insert workbench video -->
 
 ## Next Lesson
 

@@ -6,7 +6,6 @@ parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true
-nav_exclude: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
@@ -18,9 +17,7 @@ nav_exclude: true
 {:toc}
 ---
 
-The ESP32 has built-in circuitry and software for capacitive touch sensing ([docs](https://github.com/espressif/esp-iot-solution/blob/master/documents/touch_pad_solution/touch_sensor_design_en.md#1-introduction-to-touch-sensor-system)). In this lesson, we'll use the touch sensing functionality to X and Y.
-
-<!-- TODO: write background on capacitive touch sensing -->
+The ESP32 has built-in circuitry and software for capacitive touch sensing ([docs](https://github.com/espressif/esp-iot-solution/blob/master/documents/touch_pad_solution/touch_sensor_design_en.md#1-introduction-to-touch-sensor-system)). In this lesson, we'll use the touch sensing functionality to turn on an LED.
 
 ## Materials
 
@@ -42,6 +39,8 @@ See the Adafruit Huzzah32 [docs](https://learn.adafruit.com/adafruit-huzzah32-es
 {: .fs-1 } 
 
 Espressif sells the "[ESP32-Sense Kit](https://www.espressif.com/en/media_overview/news/look-out-new-esp32-sense-kit)" to help highlight how capacitive touch sensing may be integrated into products, including linear touch sliders, a wheel slider, and matrix buttons.
+
+<!-- TODO: considering writing a background section on capacitive touch sensing -->
 
 ### Touch sensing vs. physical buttons
 
@@ -122,9 +121,9 @@ We also created two touch sensing examples using interrupts: [TouchInterrupt](ht
 
 ## Next Lesson
 
-In the [next lesson](pot-fade.md), we will TODO
+In the [next lesson](iot.md), we will connect our ESP32 to the cloud over WiFi and use an IoT dashboard to view our data.
 
 <span class="fs-6">
 [Previous: Analog input using the ESP32](pot-fade.md){: .btn .btn-outline }
-[Next: TODO](todo.md){: .btn .btn-outline }
+[Next: Making an IoT device](iot.md){: .btn .btn-outline }
 </span>

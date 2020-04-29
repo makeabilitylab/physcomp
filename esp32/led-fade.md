@@ -6,7 +6,6 @@ parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true
-nav_exclude: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
@@ -179,6 +178,8 @@ void loop() {
 #### Step 5: We did it!
 
 That's it, you can run the program! Try experimenting with different frequency and resolution values, what happens?
+
+<!-- TODO: insert workbench video -->
 
 ### Our ESP32 fade code on github
 

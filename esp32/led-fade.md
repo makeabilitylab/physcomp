@@ -33,9 +33,15 @@ You'll need the same materials as the [last lesson](led-blink.md):
 
 ## PWM on ESP32
 
-To fade an LED on and off with an Arduino Uno (or other basic boards), you use the `[analogWrite](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)` method. As we know by now, `analogWrite` does not actually drive an analog voltage to the specified pin but, instead, uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers, which precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). The fraction of the time the signal is `HIGH` is called the duty cycle. The Arduino Uno (and Leonardo) only have six PWM outputs because they have three timers, each which can be used two control two PWM pins.
+To fade an LED on and off with an Arduino Uno (or other basic Arduino boards), you use the `[analogWrite](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)` method. As we know by now, `analogWrite` does not actually drive an analog voltage to the specified pin but, instead, uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers, which precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). The fraction of the time the signal is `HIGH` is called the duty cycle. The Arduino Uno (and Leonardo) only have six PWM outputs because they have three timers, each which can be used two control two PWM pins.
 
 On the ESP32, all 18 GPIO pins support PWM but the programming approach is fundamentally different. Rather than `analogWrite`, we'll use Espressif's [LED control (LEDC)](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html) system. More specifically, we'll be using an Arduino-based abstraction layer above this. While the documentation for this Arduino library is a bit light (indeed, I never found formal API documentation), the code is open source and available here ([.h file](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.h), [.c file](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.c)).
+
+In addition to the LEDC module, the ESP32 supports two other analog output options:
+1. A **sigma-delta modulation module** ([docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sigmadelta.html)). In comparison to PWM, [sigma-delta modulation](https://en.wikipedia.org/wiki/Delta-sigma_modulation) has a built-in feedback loop to try and minimize timer errors and produce more accurate waveforms. There is a sigma-delta example in the Arduino IDE. Go to File -> Examples -> ESP32 -> AnalogOut -> SigmaDelta. Similar to the LEDC library, you attach pins to preconfigured sigma-delta channels.
+2. **True analog output** via a digital-to-analog (DAC) converter ([docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/dac.html)). The ESP32 has two 8-bit DACs connected to GPIO25 (Channel 1) and GPIO26 (Channel 2). The DAC driver allows these channels to be set to arbitrary voltages, which means you can finally produce beautiful sinusoidal voltage waveforms rather than those boring square waves. There are many examples online of folks using the ESP32's DAC to play music. Here's a tutorial by [Xtronical](https://www.xtronical.com/introduction-to-dac-audio/) but search online for more!
+
+In this lesson, however, we are going to focus on using the LEDC library to produce PWM waveforms that will fade in and out an LED.
 
 ### The LEDC library
 
@@ -180,3 +186,12 @@ That's it, you can run the program! Try experimenting with different frequency a
 And here's our ESP32 fade code on [github](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino).
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino?footer=minimal"></script>
+
+## Next Lesson
+
+In the [next lesson](pot-fade.md), we will use a potentiometer to control and LED's brightness and learn about the ESP32's analog input.
+
+<span class="fs-6">
+[Previous: Blinking an LED with ESP32](led-blink.md){: .btn .btn-outline }
+[Next: Analog input with the ESP32](pot-fade.md){: .btn .btn-outline }
+</span>

@@ -34,7 +34,7 @@ There are literally dozens of ESP32 boards on the market, including Adafruit's [
 
 ### Programming environment
 
-You can program the ESP32 in variety of languages and programming environments, including `C/C++`, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, you can use Espressif's [IoT Development Framework](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/) or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html). Many ESP32 boards have Arduino libraries so you can also use the [Arduino IDE](https://www.arduino.cc/en/main/software), which is what we will do. This greatly simplifies programming the ESP32 (but at a cost of flexibility and efficiency).
+You can program the ESP32 in variety of languages and programming environments, including `C/C++`, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, you can use Espressif's IoT Development Framework ([IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/)) or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html). Many ESP32 boards have Arduino libraries so you can also use the [Arduino IDE](https://www.arduino.cc/en/main/software), which is what we will do. This greatly simplifies programming the ESP32 (but at a cost of flexibility and efficiency).
 
 ## The Adafruit ESP32 Huzzah32 Feather
 
@@ -64,7 +64,7 @@ There is a hardware floating point unit (FPU) on ESP32; however, there have been
 
 So, what do all of these pins do? Oh, so many things!
 
-The pin diagram for the Huzzah32 in the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) is pretty confusing. So, we read a few documentation sources and created our own pin diagram:
+The pin diagram for the Huzzah32 in the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) is pretty confusing. So, we read a few documentation sources and created our own:
 
 ![Huzzah32 pin diagram](assets/images/AdafruitHuzzah32PinDiagram.png)
 See the Adafruit Huzzah32 [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) for details. Right-click and open image in a new tab to zoom in.
@@ -123,7 +123,7 @@ You can follow the [official Adafruit Huzzah32 Arduino IDE installation instruct
 
 As noted in the [official Adafruit Huzzah32 Arduino IDE installation instructions](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/using-with-arduino-ide), the second step is to install the USB to UART Bridge Virtual COM Port (VCP) driver to interface with the ESP32 board. You can download the driver from Windows, Mac, and Linux [here](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers).
 
-#### Step 3: Select `Adafruit ESP32 Feather` in board menu
+#### Step 3: Select "Adafruit ESP32 Feather" in board menu
 
 Once installed, select the `Adafruit ESP32 Feather` in the Board menu.
 

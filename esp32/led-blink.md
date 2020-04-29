@@ -59,3 +59,12 @@ Given that this should be review, try writing a Blink implementation without con
 <!-- https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Blink/Blink.ino -->
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Blink/Blink.ino?footer=minimal"></script>
+
+## Next Lesson
+
+In the [next lesson](led-fade.md), we will learn about how to use "analog output" on the ESP32 to fade an LED's brightness up and down. This is similar to our original Arduino [LED fade](../arduino/led-fade.md) lesson but we won't be using `analogWrite`!
+
+<span class="fs-6">
+[Previous: Blinking an LED with ESP32](led-blink.md){: .btn .btn-outline }
+[Next: Analog input with the ESP32](pot-fade.md){: .btn .btn-outline }
+</span>

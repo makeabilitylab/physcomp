@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L2&#58; Fading an LED
+title: L3&#58; Analog input
 nav_order: 2
 parent: ESP32
 has_toc: true # (on by default)
@@ -17,7 +17,7 @@ comments: true
 {:toc}
 ---
 
-In this lesson, we'll learn how to use analog input on the ESP32 by building an potentiometer-based LED fader.
+In this lesson, we'll learn how to use analog input on the ESP32 by building a potentiometer-based LED fader.
 
 ![Animation of using a potentiometer to fade an LED on the ESP32](assets/movies/Huzzah32_PotFade-optimized.gif)
 

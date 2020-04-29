@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L2&#58; Fading an LED
+title: L2&#58; Fading an LED with PWM
 nav_order: 2
 parent: ESP32
 has_toc: true # (on by default)

@@ -74,7 +74,7 @@ In our code, we will reference the pins based on their GPIO number. However, the
 
 So, what do all of these pins do? Oh, so many things!
 
-The pin diagram for the Huzzah32 in the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) is pretty confusing. So, we read a few documentation sources and created our own:
+The pin diagram for the Huzzah32 in the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) is pretty confusing. So, we created our own:
 
 ![Huzzah32 pin diagram](assets/images/AdafruitHuzzah32PinDiagram.png)
 See the Adafruit Huzzah32 [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) for details. Right-click and open image in a new tab to zoom in.

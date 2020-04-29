@@ -68,6 +68,8 @@ The official ESP32 pin list is [here](https://www.espressif.com/sites/default/fi
 Screenshot of the ESP32 pin list [PDF](https://www.espressif.com/sites/default/files/1a-esp32_pin_list_en-v0.1.pdf).
 {: .fs-1 }
 
+In our code, we will reference the pins based on their GPIO number. However, the ESP32 [docs](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) often use the pin name (far left column).
+
 ### Huzzah32 pin diagram
 
 So, what do all of these pins do? Oh, so many things!

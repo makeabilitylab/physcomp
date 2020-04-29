@@ -60,7 +60,6 @@ All 18 GPIO pins are subscribed to the same PWM channel.
 The LEDC API has four relevant methods:
 
 {% highlight C %}
-
 /**
  * Sets up a channel (0-15), a PWM duty cycle frequency, and a PWM resolution (1 - 16 bits) 
  */
@@ -189,7 +188,7 @@ And here's our ESP32 fade code on [github](https://github.com/makeabilitylab/ard
 
 ## Next Lesson
 
-In the [next lesson](pot-fade.md), we will use a potentiometer to control and LED's brightness and learn about the ESP32's analog input.
+In the [next lesson](pot-fade.md), we will use a potentiometer to control an LED's brightness and learn about the ESP32's analog input.
 
 <span class="fs-6">
 [Previous: Blinking an LED with ESP32](led-blink.md){: .btn .btn-outline }

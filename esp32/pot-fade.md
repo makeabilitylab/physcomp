@@ -32,19 +32,26 @@ You'll need the same materials as the [last lesson](led-fade.md) but also a 10kÎ
 
 ## The ADC on the ESP32
 
-The ATmega chips used by the Arduino Uno ([ATmega328](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)) and the Arduino Leonardo ([ATmega32U4](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)) both used 10-bit ADCs, which provided a resolution of $$2^10=1024$$. The ESP32 integrates two 12-bit ADCs (resolution: $$2^12=4096$$) supporting a total of 18 measurement channels (analog enabled pins). The official ESP32 docs are [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html).
+The ATmega chips used by the Arduino Uno ([ATmega328](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)) and the Arduino Leonardo ([ATmega32U4](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)) both had 10-bit ADCs, which provided a resolution of $$2^{10}=1024$$. The ESP32 integrates two 12-bit ADCs (resolution: $$2^{12}=4096$$) supporting a total of 18 measurement channels (analog enabled pins). The official ESP32 docs are [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html).
 
 ![Huzzah32 pin diagram](assets/images/AdafruitHuzzah32PinDiagram.png)
 The ADC pins are marked in teal. Right-click and open image in a new tab to zoom in.
 {: .fs-1 } 
 
-ADC1 has 8 channels (attached to GPIO pins 32-39) and ADC2 has 10 channels (attached to GPIOs 0, 2, 4, 12 - 15 and 25 - 27); however, the usage of ADC2 has some restrictions:
+The pin assignments:
+- **ADC1** has 8 channels attached to GPIO pins 32-39, which translates to A7 (32), A9 (33), A2 (34), A4 (36), and A3 (39); The GPIO pins are in parentheses. Note that GPIO 35, 37, and 38 are not exposed on the Huzzah32.
+- **ADC2** has 10 channels attached to GPIOs 0, 2, 4, 12 - 15 and 25 - 27, which translates to A5(4), A11 (12), A12 (13), A6 (14), A8 (15), A1 (25), A0 (26), A10 (27). The GPIO pins 0, 2, are not exposed on the Huzzah32. 
+
+So, in total, the Huzzah32 has 13 usable analog inputs (A0-A12).
+
+### ADC2 Restrictions
+ADC2 has some restrictions:
 1. ADC2 is used by the Wi-Fi driver, so ADC2 is only usable when the Wi-Fi driver has **not** started.
 2. Three of the ADC2 pins are strapping pins and thus should be used with caution. Strapping pins are used during power-on/reset to configure the device boot mode, the operating voltage, and other initial settings ([link](https://www.esp32.com/viewtopic.php?t=5970))
 
 Importantly, the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) for the Huzzah32 have an error: they state that "you can only read analog inputs on ADC #1 once WiFi has started". Through experimentation, we've found this to be untrue.
 
-In the following video, I'm testing all 13 analog input pins (`A0` - `A12`) using a trim potentiometer for input and the Serial Plotter for output.
+In the following video, I'm testing all 13 analog input pins (`A0` - `A12`) using a trim potentiometer for input and the Serial Plotter for output. WiFi is off and all pins work.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/8BBY-5n4e5A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -55,7 +62,7 @@ Let's make a potentiometer-based LED fader.
 ### The circuit
 
 The circuit is almost the same as the [previous lessons](led-fade.md); however, we need to add and hook up a potentiometer. So, we'll build two simple circuits:
-1. The **input** circuit using the potentiometer, which we'll hook to `A6`
+1. The **input** circuit using the potentiometer, which we'll hook to `A6` (GPIO 14)
 2. The **output** circuit, which is the same as the [previous lessons](led-fade.md)
 
 ![Circuit diagram and schematic for potentiometer-based fader](assets/images/Huzzah32_PotFade_CircuitDiagramAndSchematic_Fritzing.png)

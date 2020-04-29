@@ -60,6 +60,14 @@ The ESP32 also has 2xI2S Audio, 2xDAC, 2xI2C (only one configured by default in 
 
 There is a hardware floating point unit (FPU) on ESP32; however, there have been some criticisms about its performance ([link1](https://blog.classycode.com/esp32-floating-point-performance-6e9f6f567a69), [link2](https://www.esp32.com/viewtopic.php?f=14&t=800)).
 
+### ESP32 pin list
+
+The official ESP32 pin list is [here](https://www.espressif.com/sites/default/files/1a-esp32_pin_list_en-v0.1.pdf):
+
+![Official ESP32 pin list](assets/images/ESP32PinList_Espressif.png)
+Screenshot of the ESP32 pin list [PDF](https://www.espressif.com/sites/default/files/1a-esp32_pin_list_en-v0.1.pdf).
+{: .fs-1 }
+
 ### Huzzah32 pin diagram
 
 So, what do all of these pins do? Oh, so many things!

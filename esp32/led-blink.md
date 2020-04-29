@@ -52,7 +52,7 @@ I = 5.9mA$$
 
 ## Code
 
-The code is the exact same as the original Arduino [Blink lesson](../arduino/led-blink.md). The hard part here is just getting the wiring right and figuring out which pins correspond to what!
+The code is the exact same as the original Arduino [Blink lesson](../arduino/led-blink.md) (forewarning: it won't be for PWM output). The hard part here is just getting the wiring right and figuring out which pins correspond to what!
 
 Given that this should be review, try writing a Blink implementation without consulting our solution below. You can do it!
 

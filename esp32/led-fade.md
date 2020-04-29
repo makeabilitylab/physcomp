@@ -19,7 +19,9 @@ comments: true
 
 In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/PWM) output on the ESP32 to fade an LED on and off. This is where our lessons begin to differ from the [Intro to Output](../arduino/intro-output.md) series.
 
-Importantly, the `analogWrite` method—which was always a misnomer in the Arduino library because it output a pulse-width modulation (PWM) waveform rather than a true analog voltage—is not implemented in the ESP32 Arduino library. Instead, there is a set of PWM methods, which give you additional control but at a cost of complexity. So, it's good that, by now, you understand PWM. If you want a refresher, see our description with videos [here](../arduino/led-fade.md#Pulse-width-modulation-PWM).
+Importantly, the `analogWrite` method—which was always a misnomer in the Arduino library because it output a pulse-width modulation (PWM) waveform rather than a true analog voltage—is not implemented in the ESP32 Arduino library. Instead, there is a set of PWM methods, which give you additional control but at a cost of complexity. So, it's good that, by now, you understand PWM. If you want a refresher, see our description and watch the videos [here](../arduino/led-fade.md#Pulse-width-modulation-PWM).
+
+![Animation of Fade on the ESP32](assets/movies/Huzzah32_Fade-optimized.gif)
 
 ## Materials
 

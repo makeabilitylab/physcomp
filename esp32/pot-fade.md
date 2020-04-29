@@ -19,6 +19,8 @@ comments: true
 
 In this lesson, we'll learn how to use analog input on the ESP32 by building an potentiometer-based LED fader.
 
+![Animation of using a potentiometer to fade an LED on the ESP32](assets/movies/Huzzah32_PotFade-optimized.gif)
+
 ## Materials
 
 You'll need the same materials as the [last lesson](led-fade.md) but also a 10kΩ trim potentiometer.

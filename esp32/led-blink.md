@@ -19,6 +19,8 @@ comments: true
 
 In this lesson, we'll rehash the ole [Blink lesson](../arduino/led-blink.md) from the [Introduction to Output](../arduino/intro-output.md) lesson but this time for the ESP32.
 
+![Animation of Blink on the ESP32](assets/movies/Huzzah32_Blink-optimized.gif)
+
 ## Materials
 
 All of our ESP32 examples will use the Huzzah32 but any ESP32 board will work as long as you've installed the appropriate Arduino library in the Arduino IDE for your board. Remember, if you're not using the Huzzah32, the pins will also be different, so consult your specific pin out diagram for your board.

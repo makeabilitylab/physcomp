@@ -41,14 +41,43 @@ On the ESP32, all 18 GPIO pins support PWM but the programming approach is funda
 
 The LEDC library was written primarily to control LEDs but can also be used for other purposes where PWM waveforms are useful like playing "music" to piezo speakers and driving motors.
 
-Unlike all other I/O we've done thus far with the Arduino, the LEDC library works on channels rather than individual pins. We setup a channel with a PWM waveform frequency and dutcy cycle and then subscribe or "attach" output pins to these channels. So, for example, multiple pins could attach to the same channel and thus receive the same PWM waveform. The ESP32 has 16 channels in total, each which can generate an independent waveform. So, to be clear, while all 18 GPIO pins support PWM, we can only drive 16 of them at once with **unique** waveforms. If we don't care about uniqueness, we can attach all 18 GPIO pins to a single channel. See animation below:
+Unlike all the other I/O we've done thus far with the Arduino, the LEDC library works on **channels** rather than individual **pins**. We setup a channel with a PWM waveform frequency and duty cycle and then subscribe or "attach" output pins to these channels. Multiple pins can attach to the same channel and will receive the same PWM waveform. The ESP32 has 16 channels in total, each which can generate an independent waveform. So, while all 18 GPIO pins support PWM, we can only drive 16 of them at once with **different** waveforms. However, we can attach all 18 GPIO pins to a single channel (or divide them across channels). In the animation below, we've attached all 18 GPIO pins to channel 0.
 
 ![Animation of all 18 GPIO output pins fading in and out](assets/movies/Huzzah32_GPIOFadeTestAllPinsSimultaneously-Optimized3.gif)
 All 18 GPIO pins are subscribed to the same PWM channel.
 {: .fs-1 } 
 
+#### LEDC API
 
+<!-- https://github.com/espressif/arduino-esp32/blob/96822d783f3ab6a56a69b227ba4d1a1a36c66268/tools/sdk/include/driver/driver/ledc.h -->
 
+The LEDC API has four relevant methods:
+
+{% highlight C %}
+
+/**
+ * Sets up a channel (0-15), a PWM duty cycle frequency, and a PWM resolution (1 - 16 bits) 
+ */
+double      ledcSetup(uint8_t channel, double freq, uint8_t resolution_bits);
+
+/**
+ * Writes out a duty cycle value to the specified channel. The duty cycle value should be
+ * between 0 - 2^PWM resolution
+ */
+void        ledcWrite(uint8_t channel, uint32_t duty);
+
+/**
+ * Attach the given pin to the specified channel (0-15)
+ */
+void        ledcAttachPin(uint8_t pin, uint8_t channel);
+
+/**
+ * Detach the previously attached pin
+ */
+void        ledcDetachPin(uint8_t pin);
+{% endhighlight C %}
+
+The Espressif [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#supported-range-of-frequency-and-duty-resolutions) emphasize that the PWM frequency and resolution are interdependent; however, the docs do not precisely describe this relationship.  
 
 
 ![Huzzah32 pin diagram](assets/images/AdafruitHuzzah32PinDiagram.png)

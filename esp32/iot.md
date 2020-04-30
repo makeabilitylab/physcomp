@@ -59,7 +59,9 @@ Because the max upload rate is 30 data points/minute (1 data point every two sec
 
 ### The circuit
 
-We have a photoresistor in a voltage divider with a 10k resistor. The analog input voltage will increase as the brightness level increases. We drive a PWM output on pin GPIO 21 whose duty cycle is inversely proportional to the light level thereby turning on an LED brighter as the light level decreases.
+We have a photoresistor in a voltage divider with a 10k resistor connected to `A7` (we can only use ADC1 pins because we're going to use WiFi). The analog input voltage will increase as the brightness level increases. We drive a PWM output on pin GPIO 21 whose duty cycle is inversely proportional to the light level thereby turning on an LED brighter as the light level decreases.
+
+![Circuit diagram and schematic for LED photoresistor circuit with Huzzah32](assets/images/Huzzah32_Photoresistor_CircuitDiagramAndSchematic_Fritzing.png)
 
 ### The code
 

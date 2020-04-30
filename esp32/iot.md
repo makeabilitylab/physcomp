@@ -69,7 +69,7 @@ We have a photoresistor in a voltage divider with a 10k resistor connected to `A
 
 The code is on [github](https://github.com/makeabilitylab/arduino/tree/master/ESP32/WiFi/IoTPhotoresistorLed). Note: there are two files. The [IotPhotoresistorLed.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/WiFi/IoTPhotoresistorLed/IoTPhotoresistorLed.ino) file and the [config.h](https://github.com/makeabilitylab/arduino/blob/master/ESP32/WiFi/IoTPhotoresistorLed/config.h) file. 
 
-However, we are only showing the `.ino` file below. In the `config.h` file, you must change the following:
+In the `config.h` file, you must change the following:
 
 {% highlight C %}
 // visit io.adafruit.com if you need to create an account,
@@ -80,6 +80,8 @@ However, we are only showing the `.ino` file below. In the `config.h` file, you 
 #define WIFI_SSID "your_ssid"
 #define WIFI_PASS "your_pass"
 {% endhighlight C %}
+
+And here's the full [IotPhotoresistorLed.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/WiFi/IoTPhotoresistorLed/IoTPhotoresistorLed.ino) code:
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/WiFi/IoTPhotoresistorLed/IoTPhotoresistorLed.ino ?footer=minimal"></script>
 

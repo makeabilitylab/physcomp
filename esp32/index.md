@@ -30,7 +30,7 @@ Image from [makeradvisor.com](https://makeradvisor.com/esp32-development-boards-
 
 The [ESP32](https://en.wikipedia.org/wiki/ESP32) is a low-cost, "system-on-a-chip" board with integrated WiFi, Bluetooth, and a Tensilica Xtensa LX6 microprocessor running at 160 or 240 MHz. It is a successor to the massively successful [ESP8266](https://en.wikipedia.org/wiki/ESP8266). The ESP32 is far more powerful than introductory Arduino boards like the Uno or Leonardo but also more complex.
 
-There are literally dozens of ESP32 boards on the market, including Adafruit's [Huzzah32](https://www.adafruit.com/product/3405) and Sparkfun's [ESP32 Thing](https://www.sparkfun.com/products/13907). Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)). We will be using the [Huzzah32](https://www.adafruit.com/product/3405), which came out in May 2017.
+There are literally dozens of ESP32 boards on the market, including Adafruit's [Huzzah32](https://www.adafruit.com/product/3405) and Sparkfun's [ESP32 Thing](https://www.sparkfun.com/products/13907). Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)). We will be using the [Huzzah32](https://www.adafruit.com/product/3405).
 
 ### Programming environment
 
@@ -38,13 +38,17 @@ You can program the ESP32 in variety of languages and programming environments, 
 
 ## The Adafruit ESP32 Huzzah32 Feather
 
+For our course, we will be using Adafruit's [Huzzah32 ESP32 Feather Board](https://www.adafruit.com/product/3405), which came out in May 2017. This board is built on Espressif's [ESP32 WROOM](https://www.espressif.com/en/products/modules/esp-wroom-32/overview) module. While a bit more expensive than other ESP32 boards, Adafruit produces reliable, high-quality products and has good customer support (check out the [Adafruit forums](https://forums.adafruit.com/)). In addition, because the Huzzah32 is a "Feather" board, it's compatible with Adafruit's expansion board series called Wings ([link1](https://www.adafruit.com/category/814), [link2](https://learn.adafruit.com/adafruit-feather/featherwings)). 
+
+### The Huzzah32 Specs
+
 | Name | Arduino Uno | Huzzah32 |
 | ---- | ----------- | -------- |
 | Image | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_ArduinoCC_w200.png) | ![ESP32 Huzzah32]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit_w200.png) |
 | Microcontroller | 8-bit, 16 MHz [ATmega328P](https://www.microchip.com/wwwproducts/en/ATmega328) | 32-bit, 240 MHz dual core Tensilica LX6 |
 | Microcontroller Manufacturer | Microchip (Atmel) | Espressif |
 | System-on-a-chip | N/A | [ESP32](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) |
-| Input voltage (limit) | 6-20V | 7-12V |
+| Input voltage (limit) | 6-20V | Use either USB (5V) or LiPoly (3.7/4.2V) |
 | Operating voltage | 5V | 3.3V |
 | Flash memory | 32KB (0.5KB used by bootloader) | 4MB |
 | SRAM | 2KB | 520KB |
@@ -59,6 +63,8 @@ Recall that flash memory is where your compiled program is stored and SRAM is wh
 The ESP32 also has 2xI2S Audio, 2xDAC, 2xI2C (only one configured by default in the Feather Arduino IDE support), 3xSPI (only one configured by default in Feather IDE support). See [Adafruit overview](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview).
 
 There is a hardware floating point unit (FPU) on ESP32; however, there have been some criticisms about its performance ([link1](https://blog.classycode.com/esp32-floating-point-performance-6e9f6f567a69), [link2](https://www.esp32.com/viewtopic.php?f=14&t=800)).
+
+The Huzzah32 is **not** designed for external power supplies, so either use the USB port with a [5V 1A USB wall adapter](https://www.adafruit.com/product/501) or by plugging into your computer or a LiPoly battery (3.7/4.2V). Unlike with the Arduino Uno and Leonardo, do not use a 9V battery or you could damage your board!
 
 ### ESP32 pin list
 
@@ -82,17 +88,19 @@ See the Adafruit Huzzah32 [docs](https://learn.adafruit.com/adafruit-huzzah32-es
 
 ### Important notes
 
+- The ESP32 runs on **3.3V power and logic**, and unless otherwise specified, GPIO pins are not 5V safe!
+- There are **21 GPIO pins**; however, on the Huzzah32, pins 34 (A2), 39 (A3), 36 (A4) are not output-capable and thus should only be used for input. So, **18 GPIO pins** in total. Be forewarned: the pins are in a strange order, so read the diagram carefully.
+- **PWM** is possible on all 18 GPIO pins
+- **14 of the 21 GPIO pins** can be used **analog input pins**; however, A13 is not exposed. It's used for measuring the voltage on the LiPoly battery via a voltage divider. When reading in the battery level using `analogRead(A13)`, make sure to multiply by 2 to get correct reading. Here's an initial program to read and print out the battery level to Serial ([link](https://github.com/makeabilitylab/arduino/blob/master/ESP32/BatteryLevel/BatteryLevel.ino))
+- The **ADC resolution is 12 bits** (0-4095). This is in contrast to the Arduino Uno and Leonardo, which uses ATmega chips with 10 bit ADCs (so, 0-1023). Make sure you use the proper max value in your conversions (*e.g.,* using [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/))
+- **GPIO 13** is the `LED_BUILTIN` (the red LED next to micro USB)
+- The charging circuit light will flash quickly when there is no LiPoly battery plugged in. It's harmless and doesn't mean anything. This LED will also flash (more slowly) when the battery is plugged in and charging. The battery charges automatically when plugged in and the Huzzah32 is externally powered.
+- Only power your Huzzah32 either using the USB plug (max 5V, 1A) or a LiPoly battery (3.7/4.2V)
+
 ![Animation of all 18 GPIO output pins fading in and out](assets/movies/Huzzah32_GPIOFadeTestAllPinsSimultaneously-Optimized3.gif)
 
 The Huzzah32 has 21 GPIO pins; however pins 34 (A2), 39 (A3), 36 (A4) are not output-capable. In this animation, we are attempting to fade in/out all 21 GPIO pins and demonstrating that only 18 work for output.
 {: .fs-1 } 
-
-- The ESP32 runs on **3.3V power and logic**, and unless otherwise specified, GPIO pins are not 5V safe!
-- There are **21 GPIO pins**; however, on the Huzzah32, pins 34 (A2), 39 (A3), 36 (A4) are not output-capable and thus should only be used for input. So, **18 GPIO pins** in total. Be forewarned: the pins are in a strange order, so read the diagram carefully.
-- **PWM** is possible on all 18 GPIO pin
-- **14 of the 21 GPIO pins** can be used **analog input pins**; however, A13 is not exposed. It's used for measuring the voltage on the LiPoly battery via a voltage divider. When reading in the battery level using `analogRead(A13)`, make sure multiply by 2 to get correct reading.
-- The **ADC resolution is 12 bits** (0-4095). This is in contrast to the Arduino Uno and Leonardo, which uses ATmega chips with 10 bit ADCs (so, 0-1023). Make sure you use the proper max value in your conversions (*e.g.,* using [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/))
-- The charging circuit light will flash quickly when there is no LiPoly battery plugged in. It's harmless and doesn't mean anything. This LED will also flash (more slowly) when the battery is plugged in and charging. The battery charges automatically when plugged in and the Huzzah32 is externally powered.
 
 ### ADC2 is only usable when WiFi not activated
 

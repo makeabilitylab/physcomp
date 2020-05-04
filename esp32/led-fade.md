@@ -88,7 +88,29 @@ If you attempt to set incompatible frequency and duty resolution combinations, t
 E (196) ledc: requested frequency and duty resolution cannot be achieved, try reducing freq_hz or duty_resolution.
 ```
 
+**UPDATE:** I found that this error is not shown when using the Arduino LEDC library because internally, the `ledcSetup` function does bounds checking and, if a threshold is exceeded, sets things to their maximum values ([link](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.c)).
+
+<!-- The LEDC on ESP32 has a total of 16 channels (0-15), divided into high and low speed channels (0-7) driven by 80MHz clock and low speed channels (8-15) driven by 1MHz clock. http://forum.banana-pi.org/t/arduino-for-bpi-bit-3-using-ledc-pwm/9394 --->
+
 <!-- TODO: experiment with different resolutions and frequency combos and report back -->
+
+<!-- I read more about the relationship between PWM frequency and duty cycle resolution. Still reading. No definitive answers, but some potentially helpful posts:
+- https://www.microchip.com/forums/m79448.aspx. Which says: 
+
+"PWM output is a tradeoff between PWM frequency and duty cycle resolution. For example, with a 1MHz oscillator you get a minimum PWM time slice of 1uS. You chose how many of these to include in a PWM period. If Ts is the time slice period, and N is the number of time slices selected per period, then:
+
+PWM Frequency = 1 / (Ts * N)
+Duty cycle resolution = 1 / (N + 1)"
+
+- http://www.t-es-t.hu/download/microchip/an539c.pdf
+This datasheet has a PWM resolution vs PWM frequency graph 
+
+https://electrosome.com/pwm-pulse-width-modulation/
+http://inst.eecs.berkeley.edu/~ee40/calbot/pdf/ChapterFive/ChapterFive.pdf
+-->
+
+<!-- some discussion of max pwm freq on esp33:
+https://forum.micropython.org/viewtopic.php?t=3717. Appears to be 40MHz, which is 1/6 clock speed of 240MHz>
 
 #### Using the LEDC API
 

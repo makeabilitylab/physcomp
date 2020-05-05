@@ -73,7 +73,7 @@ If we do a sensors subsection:
 TODO: 
 - [Done in led-blink.md] blink no delay (where to put this?). We do have a fade with no delay at end of led-fade.md
   - [Done in led-blink3.md] But a blink no delay could also show how to blink multiple LEDs at different rates.
-- how to hook up multiple LEDS per port with Arduino (in parallel and why)
+- how to hook up multiple LEDS per port with Arduino (in parallel and why). But maybe this belongs in core electronics
 - Where to put breadboard stuff? This should probably go in the basic electronics series but for now my focus is on Arduino stuff...
 - Maybe add in sound?
   - https://www.programmingelectronics.com/an-easy-way-to-make-noise-with-arduino-using-tone/
@@ -81,3 +81,43 @@ TODO:
   - https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/overview
 
 <!--  https://www.exploringarduino.com/resources/ -->
+
+## Interactive Book
+If we were to treat this as an interactive book. What would it look like? This is just a very drafty (**very drafty**) look.
+
+### Chapter 1: Intro to Electronics
+- Circuit theory: Ohm's Law, kirchhoffs voltage law, voltage dividers
+- Components: LEDs, resistors, conductors (wires), breadboards
+- (More advanced) components: capacitors, transistors (could also bring this up later)
+
+### Chapter 2: Intro to microcontrollers (and Arduino)
+- Quick chapter on the basics of microcontrollers?
+- Microcontrollers vs. computers
+- What is the Arduino?
+
+### Chapter 3: Intro to MCU Output
+- Digital output, source and sinking current
+- Analog output, PWM, DACs
+
+### Chapter 4: Intro to MCU Input
+- Digital input, debouncing, interrupts
+- Analog input, voltage dividers (revisited)
+
+### Chapter 5: Sensors
+- Sensors: characteristics, taxonomies
+- Digital communication protocols like I2C and SPI
+- Example sensors including accel, photoresistor, fsr, and more
+
+### Chapter 6: Signals
+- Processing signals
+- Time vs. frequency analysis
+- Filters
+
+### Chapter 7: Applied ML
+- Classifying these signals!
+
+### Possible additions
+- Chapter on motors (or other advanced output). Maybe this is analogous to Chapter 5: Sensors but for Output
+- Chapter on ESP32: Moving to a more sophisticated micro
+- Chapter on sound: making and listening
+- Chapter on tools like soldering, multimeters, etc.

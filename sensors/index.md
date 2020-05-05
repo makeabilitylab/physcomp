@@ -193,6 +193,9 @@ See: https://gamedev.stackexchange.com/a/30289 -->
 - Force: FSR
 - Light: photocell
 - Movement: Accel
+- Movement 2: IMU
+  - CSE590 VR had some slides on IMU, gyro, and accel: https://courses.cs.washington.edu/courses/cse490v/20wi/uwnetid/lecture9.pdf
+  - https://courses.cs.washington.edu/courses/cse490v/20wi/uwnetid/lecture10.pdf
 - Distance: Ultrasonic
 - Magnetic field: hall effect
 - Sound: microphone -->

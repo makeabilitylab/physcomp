@@ -37,7 +37,7 @@ As one example use case in consumer toys, this Melissa and Doug wooden fire truc
 Each puzzle piece location has a respective embedded photoresistor, which is used to track whether a piece has been placed or not. When the puzzle is completed (and all photoresistors have been covered), the puzzle plays a fire truck siren. There are a few limitations to this sensing technique: while cheap, the "fire truck" siren can be triggered when the photoresistors are covered (either accidentally via an errant puzzle piece or hand or on purpose), occassionally the siren will be triggered before the puzzle is actually completed (just when the last puzzle piece is hovering over the remaining location), and, of course, the sensing method cannot tell whether a puzzle piece is in the correct position (which is fine if one just needs to infer when the puzzle is completed and not, for example, to help guide a child in completing the puzzle).
 {: .fs-1 }
 
-Another example use case from inexpensive consumer electronics: an auto-brightness setting nightlight from General Electric, which gets brighter as the ambient light gets darker.
+Another example use case from inexpensive consumer electronics: an auto-brightening nightlight from General Electric, which gets brighter as the ambient light gets darker.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/EkBDjZZ3v00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 An auto-brightness fading night light from General Electric.

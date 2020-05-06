@@ -31,7 +31,7 @@ Just like for Arduino, there is a plethora of wonderful tutorials, forums, and v
 
 <!-- maybe talking about Google Colab here? https://colab.research.google.com/notebooks/intro.ipynb -->
 
-## Installation and configuration
+## Jupyter Notebook installation and configuration
 
 To install, Jupyter Notebook, follow the installation instructions below (or read the official [quickstart guide](https://jupyter.readthedocs.io/en/latest/install.html)).
 
@@ -111,3 +111,8 @@ These lessons are intended to be interactive. Open the notebooks (`ipynb` files)
 2. [**Introduction to NumPy**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToNumPy.ipynb). We'll be using [NumPy arrays](https://numpy.org/doc/stable/reference/arrays.html) (created with `np.array` and called [`ndarray`](https://numpy.org/doc/stable/reference/arrays.ndarray.html#arrays-ndarray)) as one of our primary data structures. Use this notebook to build up some initial familiarity. You need not become an expert here but it's useful to understand what `np.array`'s are and how they're used and manipulated. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToNumPy.ipynb)
 
 3. [**Introduction to Matplotlib**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToMatplotlib.ipynb). For visualizing our data, we'll be using [Matplotlib](https://matplotlib.org/)—an incredibly powerful with a bit of an eccentric API (thanks to Matlab). Open this notebook, learn about creating basic charts, and try to build some of your own. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToMatplotlib.ipynb)
+
+4. [**Step Tracker Exercises**](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). Now, let's actually work on a **real** problem with **real** data. Building off our A2 assignment, let's analyze some example accelerometer step data and write an algorithm in Jupyter Notebook to infer steps. Notebook is perfectly suited for this task: it's easy to visualize data with [Matplotlib](https://matplotlib.org/) and [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html) offer filtering, detrending, and other useful signal processing algorithms. You can try lots of ideas, see how well they work on some test data, and then implement your most promising idea on the ESP32. 
+
+
+<!-- ![](assets/images/JupyterNotebook_StepTrackerVisualization_Screenshot.png) -->

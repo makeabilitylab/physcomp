@@ -31,7 +31,7 @@ Just like for Arduino, there is a plethora of wonderful tutorials, forums, and v
 
 To install, Jupyter Notebook, follow the installation instructions below (or read the official [quickstart guide](https://jupyter.readthedocs.io/en/latest/install.html)).
 
-**Importantly**, please use Anaconda to install Jupyter Notebook and all dependencies. This is the recommended way to install and use Notebook ([link](https://jupyter.readthedocs.io/en/latest/install.html#id3)).
+**Importantly**, please use [**Anaconda**](https://www.anaconda.com/download) to install Jupyter Notebook and all dependencies. This is the officially recommended way to install and use Notebook ([link](https://jupyter.readthedocs.io/en/latest/install.html#id3)).
 
 #### Step 1: Download Anaconda
 
@@ -53,12 +53,12 @@ We strongly recommend installing the [`jupyter_contrib_nbextensions`](https://ju
 
 ![Screenshot of the Jupyter Notebook extension called Table of Contents (2)](assets/images/JupyterNotebook_TOC2_Screenshot.png)
 
-Screenshot of a Jupyter Notebook with the nbextension called Table of Contents (2), which auto-generates a navigation pane based on markdown headers. This is installed as part of the [`jupyter_contrib_nbextensions` ](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/index.html)notebook extensions
+Screenshot of a Jupyter Notebook with the nbextension called Table of Contents (2), which auto-generates a navigation pane based on markdown headers.
 {: .fs-1 }
 
 Feel free to follow the official installation instructions [here](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html) or our simplified version below:
 
-#### Step 1: Use conda
+#### Step 1: Use conda to install nbextensions
 
 To install the `nbextensions`, open your terminal (on linux or Mac) or the Anaconda Prompt (on Windows) and type:
 
@@ -77,6 +77,9 @@ Restart Jupyter Notebook and you should see a tab called `Nbextensions` on the h
 Make some headers in markdown and then click on the `Table of Contents` button in the toolbar to see an auto-generated and clickable navigation sidebar. You can also access the TOC via the `Navigate` menu item.
 
 ![Screenshot showing how to access Jupyter Notebook TOC navigation sidebar](assets/images/JupyterNotebook_TOC2Example_Screenshot.png)
+
+Example of TOC running in Jupyter Notebook
+{: .fs-1 }
 
 ## How to use Jupyter Notebook
 

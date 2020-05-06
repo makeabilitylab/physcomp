@@ -70,3 +70,8 @@ Make some headers in markdown and then click on the `Table of Contents` button i
 
 ![Screenshot showing how to access Jupyter Notebook TOC navigation sidebar](assets/images/JupyterNotebook_TOC2Example_Screenshot.png)
 
+## How to use Jupyter Notebook
+
+Start by reading the official introduction to Jupyter Notebook ([link](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html)). We will also go over basic functionality in class. Finally, there are many good tutorials online.
+
+

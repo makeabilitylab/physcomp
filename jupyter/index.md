@@ -5,7 +5,7 @@ title: Jupyter Notebook
 nav_order: 5
 has_toc: true # on by default
 has_children: true
-nav_exclude: true
+nav_exclude: false
 ---
 # {{ page.title }}
 {: .no_toc }

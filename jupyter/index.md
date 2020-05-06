@@ -1,4 +1,24 @@
 
+---
+layout: default
+title: Jupyter Notebook
+nav_order: 5
+has_toc: true # on by default
+has_children: true
+nav_exclude: true
+---
+# {{ page.title }}
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
+
+We will be using [Jupyter Notebook](https://jupyter.org/index.html) for the signal processing and machine learning portion of our course.
+
 ## Installation and configuration
 
 Feel free to read the official Jupyter Notebook [quickstart guide](https://jupyter.readthedocs.io/en/latest/install.html) or our abbreviated installation instructions below.
@@ -44,5 +64,9 @@ Restart Jupyter Notebook and you should see a tab called `Nbextensions` on the h
 
 ![](assets/images/JupyterNotebook_TOC2_ConfigurableNbextensions_TOC2.png)
 
+#### Step 3: Try out TOC
 
+Make some headers in markdown and then click on the `Table of Contents` button in the toolbar to see an auto-generated and clickable navigation sidebar. You can also access the TOC via the `Navigate` menu item.
+
+![Screenshot showing how to access Jupyter Notebook TOC navigation sidebar](assets/images/JupyterNotebook_TOC2Example_Screenshot.png)
 

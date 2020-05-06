@@ -17,11 +17,15 @@ nav_exclude: true
 {:toc}
 ---
 
-We will be using [Jupyter Notebook](https://jupyter.org/index.html) for the signal processing and machine learning portion of our course.
+![Screenshot of Jupyter Notebook](assets/images/JupyterNotebook_Screenshot.png)
+
+We will be using [Jupyter Notebook](https://jupyter.org/index.html) for the signal processing and machine learning portion of our course. Jupyter Notebook is a popular "data science" platform for quickly analyzing, processing, classifying, modeling, and visualizing data. While Notebook supports multiple languages (like R, Julia), we'll be using Python (specifically, Python 3).
+
+<!-- maybe talking about Google Colab here? https://colab.research.google.com/notebooks/intro.ipynb -->
 
 ## Installation and configuration
 
-Feel free to read the official Jupyter Notebook [quickstart guide](https://jupyter.readthedocs.io/en/latest/install.html) or our abbreviated installation instructions below.
+To install, Jupyter Notebook, follow the installation instructions below (or read the official [quickstart guide](https://jupyter.readthedocs.io/en/latest/install.html)).
 
 **Importantly**, please use Anaconda to install Jupyter Notebook and all dependencies. This is the recommended way to install and use Notebook ([link](https://jupyter.readthedocs.io/en/latest/install.html#id3)).
 

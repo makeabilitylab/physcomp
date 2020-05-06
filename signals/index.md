@@ -91,6 +91,14 @@ Start by reading the official introduction to Jupyter Notebook ([link](https://j
 
 Please follow the [Python](https://www.python.org/dev/peps/pep-0008/) style guide for variable and function naming conventions and other formatting. This will make your code easier to follow and debug. And, of course, we all often (accidentally or intentionally) intermix styles from other programming languages—this is especially true in this course as we toggle between so many languages.
 
+### Some useful tips
+
+Please feel free to share some tips with me and I'll add them to this list.
+
+1. Before turning in or sharing a notebook, it's useful (and important) to restart the kernal and rerun all cells. Why? Because the **most common mistake** I've seen with Jupyter Notebook is code that refers to variables that are in memory but were renamed or deleted (either intentionally or accidentally) thereby breaking the code!
+1. Hit `shift-enter` to execute the current cell.
+1. Hit `esc` then the `m` key to switch the current cell to markdown
+
 ## Lessons
 
 These lessons are intended to be interactive. Open the notebooks (`ipynb` files) either locally on your computer in Jupyter Notebook or, perhaps even more conveniently, using [Google Colab](https://colab.research.google.com/), which enables us to dynamically serve our notebooks directly from GitHub into the Colab environment where you can play, edit code, etc. right from your browser—and just a click away. Yay!
@@ -100,4 +108,4 @@ These lessons are intended to be interactive. Open the notebooks (`ipynb` files)
 1. [**Introduction to Python**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb). If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It was also give you a feel for Jupyter Notebook.
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb)
 
-2. [**Introduction to NumPy**]
+2. [**Introduction to NumPy**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToNumPy.ipynb). We'll be using NumPy arrays (called `np.array`) as one of our primary data structures.Use this notebook to build up some initial familiarity. You need not become an expert here but it's useful to understand what `np.array`'s are and how they're used and manipulated. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToNumPy.ipynb)

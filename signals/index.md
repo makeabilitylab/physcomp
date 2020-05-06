@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Jupyter Notebook
+title: Signals
 nav_order: 5
 has_toc: true # on by default
 has_children: true
@@ -15,6 +15,8 @@ nav_exclude: false
 1. TOC
 {:toc}
 ---
+
+<!-- TODO: write an intro for signal processing and move this to jupyter.md -->
 
 ![Screenshot of Jupyter Notebook](assets/images/JupyterNotebook_Screenshot.png)
 
@@ -51,7 +53,7 @@ See "Running the Notebook" in the official Jupyter Notebook [docs](https://jupyt
 
 ### Installing notebook extensions
 
-We strongly recommend installing the [`jupyter_contrib_nbextensions`](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/index.html) notebook extensions, which contains a collection of community-contributed (unofficial) extensions for Jupyter Notebook, including a table of contents generator and navigation pane called [Table of Contents (2)](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html). See figure below.
+We strongly recommend installing the [`jupyter_contrib_nbextensions`](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/index.html) notebook extensions, which contains a collection of community-contributed (unofficial) extensions for Jupyter Notebook, including a table of contents generator and navigation pane called [Table of Contents (2)](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/nbextensions/toc2/README.html). See figure below.
 
 ![Screenshot of the Jupyter Notebook extension called Table of Contents (2)](assets/images/JupyterNotebook_TOC2_Screenshot.png)
 
@@ -97,3 +99,5 @@ These lessons are intended to be interactive. Open the notebooks (`ipynb` files)
 
 1. [**Introduction to Python**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb). If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It was also give you a feel for Jupyter Notebook.
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb)
+
+2. [**Introduction to NumPy**]

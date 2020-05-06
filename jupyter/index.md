@@ -84,7 +84,7 @@ Make some headers in markdown and then click on the `Table of Contents` button i
 Example of TOC running in Jupyter Notebook
 {: .fs-1 }
 
-## Using Jupyter Notebook
+## How to use Jupyter Notebook
 
 Start by reading the official introduction to Jupyter Notebook ([link](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html)). We will also go over basic functionality in class. Finally, there are many good tutorials online.
 

@@ -95,7 +95,7 @@ Please follow the [Python](https://www.python.org/dev/peps/pep-0008/) style guid
 
 Please feel free to share some tips with me and I'll add them to this list.
 
-1. Before turning in or sharing a notebook, it's useful (and important) to restart the kernal and rerun all cells. Why? Because the **most common mistake** I've seen with Jupyter Notebook is code that refers to variables that are in memory but were renamed or deleted (either intentionally or accidentally) thereby breaking the code!
+1. Before turning in or sharing a notebook, it's useful (and important) to restart the kernel and rerun all cells. Why? Because the **most common mistake** I've seen with Jupyter Notebook is code that refers to variables that are in memory but were renamed or deleted (either intentionally or accidentally) thereby breaking the code! How? Go to the file menu, then `Kernel -> Restart & Run All`
 1. Hit `shift-enter` to execute the current cell.
 1. Hit `esc` then the `m` key to switch the current cell to markdown
 

@@ -141,6 +141,8 @@ When selecting sensors and a data processing pipeline, there are multiple consid
 
 <!-- TODO: Where to talk about quantization error? https://en.wikipedia.org/wiki/Quantization_(signal_processing) -->
 
+<!-- TODO: consider moving signal acquisition pipeline into the Signals section? -->
+
 ### Nyquist sampling theorem
 
 One of the most important (and interesting!) theorems in DSP is the [*Nyquist-Shannon Sampling Theorem*](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem), which states that a continuous time signal (the raw physical signal) can be sampled and perfectly reconstructed (!) if the sampling rate (sometimes called the sampling frequency or $$F_s$$) is over twice as fast as the raw signal's highest frequency component. That is, the minimum sampling frequency $$min(F_s)$$ must be greater than $$2 * max(F_{signal})$$.

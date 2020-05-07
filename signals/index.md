@@ -103,7 +103,7 @@ Please feel free to share some tips with me and I'll add them to this list.
 
 These lessons are intended to be interactive. Open the notebooks (`ipynb` files) either locally on your computer in Jupyter Notebook or, perhaps even more conveniently, using [Google Colab](https://colab.research.google.com/). Google Colab dynamically loads our notebooks directly from GitHub, so you can play, edit code, *etc.* right from your browser—and just a click away. Yay!
 
-**Note:** For your actual assignments, you'll likely want to run your notebooks locally because you'll want to load data from disk. You can also do this with Google Colab (you'll just need to get your data into the cloud environment).
+**Note:** For your actual assignments, you'll likely want to run your notebooks locally because you'll want to load data from disk. You can also do this with Google Colab (you'll just need to get your data into the cloud environment; see below).
 
 1. [**Introduction to Python**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb). If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It was also give you a feel for Jupyter Notebook.
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb)

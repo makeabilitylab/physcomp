@@ -33,54 +33,60 @@ How can new sensing and processing systems help identify cancer cells, find new 
 
 ## Introduction to Sensors
 
-Humans have invented thousands of sensors. How should we organize and characterize them? 
+Humans have invented thousands of sensors. How should we organize and characterize them? There are numerous pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, and designer familiarity—all important. However, for our purposes, we will focus on three characteristics:
 
-There are three key characteristics, which we expand on below: (1) **what** a sensor does (its function), (2) **how** it senses (passively or actively), (3) and the **output** it provides. And, of course, there are numerous other pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, and designer familiarity..
+1. **What** a sensor does (its function)
+2. **How** it senses (passively or actively)
+3. **What output** it provides 
 
 ### Characterizing sensors by function
 
-Perhaps the most intuitive and important organizing scheme is by function. Wikipedia lists [hundreds of sensors](https://en.wikipedia.org/wiki/List_of_sensors), sorted by "function", including:
+Perhaps the most intuitive scheme is organizing sensors by function. Wikipedia lists [hundreds of sensors](https://en.wikipedia.org/wiki/List_of_sensors) in broad categories, including:
 
 1. Acoustic, sound, and vibration
 2. Moisture and humidity
 3. Flow and fluid velocity
 4. Optical, light, and imaging
 5. Thermal, heat, and temperature
-6. Position, angle, displacement, distance, and more. 
+6. Position, angle, displacement, distance, and more 
 
-But other categorizations are also possible: Platt's 3rd volume of "Encyclopedia of Electronic Components", for example, categorizes sensors into spatial, mechanical, fluid, radiation, and electricity ([link](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307)). 
+Other categorizations are also possible: Platt's 3rd volume of "Encyclopedia of Electronic Components", for example, categorizes sensors into spatial, mechanical, fluid, radiation, and electricity ([link](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307)). 
 
 <!-- Regardless of functional categorization, we will only cover a small fraction here.
 
 But first, let's break sensors down by **how** they sense and **what** output they provide. -->
 
+In addition to **what** a sensor does, we can characterize them by **how** they sense and **what** output they provide.
+
 ### Passive vs. active sensing
 
-**Active** sensors require external power. Often, they will also actively transmit a signal and then analyze some property of that signal (*e.g.,* distortion or reflection) for sensing. For example, an infrared (IR) proximity sensor like the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) contains both an IR transmitter and IR receiver. The sensor calculates distance by transmitting an IR beam and measuring the reflection angle back on the IR receiver. Similarly, an ultrasonic distance sensor like the popular [HC-SR04](https://www.sparkfun.com/products/15569) transmits ultrasonic pings and listens for reflected ultrasonic waves. The speed of sound through air is then used to calculate the distance between the sensor to the reflected object.
+There are two basic classes of sensors: active and passive. **Active** sensors require external power (and will thus have a Vcc pin and GND) while **passive** sensors do not. For example, the popular [ADXL335](https://www.adafruit.com/product/163) 3-axis accelerometer has a Vin, a GND, and three analog outputs (Xout, Yout, and Zout), which translate acceleration along each axis into ratiometric (proportional) voltage levels.
+
+Some active sensors transmit a signal and then analyze some reflected property of that signal for sensing. For example, an infrared (IR) proximity sensor like the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) contains both an infrared (IR) transmitter and IR receiver. The sensor calculates distance by transmitting an IR beam and measuring the reflection angle back on the IR receiver. Similarly, an ultrasonic distance sensor like the popular [HC-SR04](https://www.sparkfun.com/products/15569) transmits ultrasonic pings and listens for reflected ultrasonic waves. A connected microcontroller can than calculate the distance between the sensor to the sound-reflecting object by using the speed of sound through air.
 
 ![Ultrasonic diagram](assets/images/UltrasonicDiagram_Wikipedia.png)
 Ultrasonic distance sensors are a type of **active** sensor consisting of both a transmitter and receiver. They work by transmitting an ultrasonic pulse, which is partially reflected back by objects in the sound wave path (if any). By measuring the time between the pulse transmission and the echo reception, distance can be determined.
 {: .fs-1 }
 
-Active sensors may also include hardware to counteract sensor drift, to filter/smooth a signal, and/or to communicate output via a digital communication protocol like [I2C](https://en.wikipedia.org/wiki/I%C2%B2C). 
+Active sensors may also include sophisticated (but tiny) on-board hardware to counteract sensor drift, to filter/smooth a signal, and/or to communicate output via a digital communication protocol like [I2C](https://en.wikipedia.org/wiki/I%C2%B2C). 
 
 In contrast, a **passive** sensor generates an output signal based on some external stimulus and does not require external power. For example, a [photoresistor](https://en.wikipedia.org/wiki/Photoresistor) changes its resistance in response to light, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) in response to temperature, and a [force-sensitive resistor](https://en.wikipedia.org/wiki/Force-sensing_resistor) in response to pressure. Of course, we need a powered circuit to "retrieve" information from the sensor—like a voltage divider—but the underlying sensor is responding to environmental phenomena regardless of this applied power.
 
-A simple heuristic to distinguish active from passive sensors is to count pins: active sensors have an extra third pin (for power) while passive sensors have two.
+A simple heuristic to distinguish active from passive sensors is to count pins: active sensors have at least three pins (one for Vin, one for GND, and at least one for output) while passive sensors have two.
 
 <!-- TODO: in future add in a sub-section on MEMS because it's so AWESOME! : -->
 
 ### Sensor output
 
-Sensors output either analog, binary (on/off), or digital signals (*e.g.,* [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface)). 
+Sensors output either analog, binary (on/off), or digital signals (*e.g.,* [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface)). Yes, "binary" is a type of digital output but it's worth distinguishing.
 
 #### Analog output
 
-Pure analog sensors include resistive sensors, like the aforementioned thermistors and photoresistors, which **change their resistance** based on some stimuli as well as ratiometric sensors like the [ADXL335](https://learn.adafruit.com/adafruit-analog-accelerometer-breakouts/overview) accelerometer or the [DRV5055 Hall Effect](https://www.ti.com/product/DRV5055) sensor, both which vary their voltage output linearly in response to some stimuli—in this case, acceleration and magnetic fields, respectively.
+Pure analog sensors include resistive sensors, like the aforementioned thermistors and photoresistors, which **change their resistance** based on some stimuli as well as ratiometric sensors like the aforementioned [ADXL335](https://learn.adafruit.com/adafruit-analog-accelerometer-breakouts/overview) accelerometer or the [DRV5055 Hall Effect](https://www.ti.com/product/DRV5055) sensor, both which vary their voltage output linearly in response to some stimuli—in this case, acceleration and magnetic fields, respectively.
 
 #### Digital output
 
-Many modern sensors are chip-based and include some on-board processing. These sensors process and convert  raw analog signals to digital output. This output is stored in a memory location (called a register) on the sensor chip itself and accessed by a microcontroller via a communication protocol like [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface). 
+Many modern sensors are chip-based and include some on-board processing. These sensors process and convert raw analog signals to digital output. This output is stored in a memory location (called a register) on the sensor chip itself and accessed by a microcontroller via a communication protocol like [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface). 
 
 For example, in contrast to the [ADXL335](https://learn.adafruit.com/adafruit-analog-accelerometer-breakouts/overview) accelerometer, which outputs a voltage proportional to acceleration on each axis on pins X, Y, and Z, the [LIS3DH](https://www.adafruit.com/product/2809) accelerometer communicates over either I2C or SPI. We often supply one or the other in our hardware kits. 
 
@@ -90,9 +96,13 @@ Because the LIS3DH supports a digital communication protocol (both I2C and SPI),
 | --------------------- | -------------------- |
 | ![Picture of ADXL335 - 5V ready triple-axis accelerometer (+-3g analog out)](assets/images/ADXL335_Accelerometer_Adafruit.png) | ![Adafruit LIS3DH Triple-Axis Accelerometer (+-2g/4g/8g/16g)](assets/images/LIS3DH_Accelerometer_Adafruit.png) |
 
+<!--TODO: add a bit on advantages vs. disadvnatages of analog vs. digital sensors: for example, with a digital communication protocol like SPI, can have error correction, etc. -->
+
 #### Binary output
 
 Finally, some "sensors" are either on or off (which could be construed as a type of simple digital output but not one specifically encoded for a microcontroller so does not qualify as "digital signal" in our taxonomy). For example, [reed switches](https://en.wikipedia.org/wiki/Reed_switch) close in the presence of a magnetic field and [tilt ball switches](https://www.adafruit.com/product/173) are hollow tubes with an enclosed conductive ball, which moves to close internal contacts in certain tube orientations (or tilts).
+
+<!-- TODO: would be nice to have either lil animations of these or video snippets -->
 
 [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307) provides an even deeper breakdown of sensor output types, including open collectors and sensors that change in current rather than voltage. See his book for details.
 
@@ -102,8 +112,8 @@ There are a variety of important criteria when evaluating a sensor's capabilitie
 
 * **Sampling rate**: How fast does the sensor provide output?
 * **Resolution**: What is the smallest change in physical quantity that the sensor can identify?
-* **Quantization error**: what is the error caused by rounding due to digitizing the analog data in the ADC? See *Signal acquisition pipeline* section below.
-* **Absolute error**: what's the difference between sensor readings and the true physical quantity?
+* **Quantization error**: What is the error caused by rounding due to digitizing the analog data in the ADC? See *Signal acquisition pipeline* section below.
+* **Absolute error**: What's the difference between sensor readings and the true physical quantity?
 * **Drift**: How does the absolute error change over time while operating the sensor?
 * **Environmental stability**: How does the sensor change in response to differences in temperature or moisture?
 
@@ -111,7 +121,11 @@ There are a variety of important criteria when evaluating a sensor's capabilitie
 
 Let's examine the entire signal acquisition pipeline from raw physical signal to the digitized representation.
 
-First, there exists some physical phenomena that exists in the world (Stage 1). We need to develop and/or utilize a method to sense that phenomena and output an electrical signal (Stage 2). Some sensor chips process this electrical signal (*e.g.,* smooth, filter, amplify)—Stage 3. In Stage 4, an analog-to-digital converter (ADC) converts the electrical signal to bits (a process called quantization). Finally, in Stage 5, we can process and analyze the digitized signal using digital signal processing (DSP) techniques and machine learning, woohoo!
+1. First, there exists some physical phenomena that exists in the world (Stage 1). 
+2. We need to develop and/or utilize a method to sense that phenomena and output an electrical signal (Stage 2). 
+3. Some sensor chips process this electrical signal (*e.g.,* smooth, filter, amplify)—Stage 3. 
+4. In Stage 4, an analog-to-digital converter (ADC) converts the electrical signal to bits (a process called quantization). 
+5. Finally, in Stage 5, we can process and analyze the digitized signal using digital signal processing (DSP) techniques and machine learning, woohoo!
 
 ![Signal acquisition pipeline going from physical signal to sensor to signal conditioning to ADC to computer](assets/images/SignalAcquisitionPipeline_Wikipedia.png)
 Block diagram from Wikipedia ["Data acquisition"](https://en.wikipedia.org/wiki/Data_acquisition) article. [Direct link](https://en.wikipedia.org/wiki/File:DigitalDAQv2.pdf).
@@ -121,7 +135,7 @@ Block diagram from Wikipedia ["Data acquisition"](https://en.wikipedia.org/wiki/
 
 When selecting sensors and a data processing pipeline, there are multiple considerations, including:
 
-- **Sampling rates.** How often does the target physical signal change? How quickly can your sensor respond? Does this response rate matter? A photoresistor, for example, takes several milliseconds to respond to bright light and can require more than one second to regain its dark resistance while a phototransitor and photodiode are far more responsive (see [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307/ch20.html#SECTION_PHOTORESISTOR)). 
+- **Sampling rates.** How often does the target physical signal change? How quickly can your sensor respond? Does this response rate matter? A photoresistor, for example, takes several milliseconds to respond to bright light and can require more than one second to regain its dark resistance while a phototransitor and photodiode are more responsive (see [Platt](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307/ch20.html#SECTION_PHOTORESISTOR)). 
 - **ADC conversion rates** How fast can your microcontroller sample the signal and perform the analog-to-digital conversion?
 - **ADC precision** What precision of ADC do you need? The ATmega328 microcontroller uses a 10-bit ADC. So, by default, the voltage range of 0-5V is mapped to 0-1023 $$2^10$$ and, thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV). If you require greater precision—that is, changes in sensor output < 0.0049V are important—then you either need to change the [`analogReference`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/) or you need a different ADC. The difference between a raw continuous signal and its digitized version is called the quantization error.
 
@@ -135,13 +149,11 @@ For example, a common digital audio sampling rate is [44,100Hz](https://en.wikip
 
 ### ATmega328 ADC conversion rate
 
-The ATmega328 ADC requires an input clock frequency between 50kHz and 200kHz (Section 24.4 of [datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)). A normal conversion takes 13 ADC clock cycles (though the very first conversion takes 25 ADC clock cycles to initialize the analog circuitry)
+The ATmega328 ADC requires an input clock frequency between 50kHz and 200kHz (Section 24.4 of [datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)). A normal conversion takes 13 ADC clock cycles (though the very first conversion takes 25 ADC clock cycles to initialize the analog circuitry).
 
-The ATmega328 CPU and ADC share the same clock; however, the microcontroller clock is too fast (16MHz) on the Uno so you can adjust a "prescaler" to divide the CPU clock into an acceptable range (divisors are 2, 4, 8, 16, 32, 64, 128). By default, the Arduino library sets the prescaler to 128 (16MHz/128 = 125 KHz) in `wiring.c`. Since a conversion takes 13 ADC clocks, the sample rate is about 125KHz/13 or **9600 Hz**.
+The ATmega328 CPU and ADC share the same clock; however, the microcontroller clock is too fast (16MHz) for the ADC, so you can control a "prescaler" to divide the CPU clock into an acceptable range (divisors are 2, 4, 8, 16, 32, 64, 128). By default, the Arduino library sets the prescaler to 128 (16MHz/128 = 125 KHz) in `wiring.c` (by setting a bit in a configuration register). Since a conversion takes 13 ADC clocks, the sample rate is about 125KHz/13 or **9600 Hz**. Is this fast enough? For a vast majority of human-oriented sensing, yes! For example, video games target 60 fps (60Hz) refresh rates and human reaction time is ~150-250 ms (~4 Hz). For sampling sound, however, 9600Hz is on the low end.
 
-It's possible, however, to sample faster but at a cost of ADC accuracy. The ATmega328 datasheet warns that if the ADC input clock frequency exceeds 200kHz then not all 10 bits of conversion may be ready (perhaps just the first 8 bits or less). 
-
-If you want to learn more about faster analog reads on the Arduino, Open Music Labs has explored the speed/quality tradeoffs of the ATmega328 ADC [here](http://www.openmusiclabs.com/learning/digital/atmega-adc/index.html) and [here](http://www.openmusiclabs.com/learning/digital/atmega-adc/in-depth/index.html). In addition, this [blog post ](http://yaab-arduino.blogspot.com/2015/02/fast-sampling-from-analog-input.html) talks about using the "ADC Free Running mode" with interrupts to get a 76.8 KHz sampling rate (and also links [here](https://sites.google.com/site/qeewiki/books/avr-guide/analog-input)).
+Note: It is possible to sample the ATmega328 at a faster rate but at a cost of accuracy. The ATmega328 datasheet warns that if the ADC input clock frequency exceeds 200kHz then not all 10 bits of conversion may be ready (perhaps just the first 8 bits or less). If you want to learn more about faster analog reads on the Arduino, Open Music Labs has explored the speed/quality tradeoffs of the ATmega328 ADC [here](http://www.openmusiclabs.com/learning/digital/atmega-adc/index.html) and [here](http://www.openmusiclabs.com/learning/digital/atmega-adc/in-depth/index.html). In addition, this [blog post ](http://yaab-arduino.blogspot.com/2015/02/fast-sampling-from-analog-input.html) talks about using the "ADC Free Running mode" with interrupts to get a 76.8 KHz sampling rate (and also links [here](https://sites.google.com/site/qeewiki/books/avr-guide/analog-input)).
 
 <!-- See also: http://ee-classes.usc.edu/ee459/library/documents/ADC.pdf -->
 

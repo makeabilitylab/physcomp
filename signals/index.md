@@ -112,7 +112,16 @@ These lessons are intended to be interactive. Open the notebooks (`ipynb` files)
 
 3. [**Introduction to Matplotlib**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToMatplotlib.ipynb). For visualizing our data, we'll be using [Matplotlib](https://matplotlib.org/)—an incredibly powerful with a bit of an eccentric API (thanks to Matlab). Open this notebook, learn about creating basic charts, and try to build some of your own. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToMatplotlib.ipynb)
 
-4. [**Step Tracker Exercises**](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). Now, let's actually work on a **real** problem with **real** data. Building off our A2 assignment, let's analyze some example accelerometer step data and write an algorithm in Jupyter Notebook to infer steps. Notebook is perfectly suited for this task: it's easy to visualize data with [Matplotlib](https://matplotlib.org/) and [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html) offer filtering, detrending, and other useful signal processing algorithms. You can try lots of ideas, see how well they work on some test data, and then implement your most promising idea on the ESP32. 
+4. [**Step Tracker Exercises**](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). Now, let's actually work on a **real** problem with **real** data. Building off our A2 assignment, let's analyze some example accelerometer step data and write an algorithm in Jupyter Notebook to infer steps. Notebook is perfectly suited for this task: it's easy to visualize data with [Matplotlib](https://matplotlib.org/) and [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html) offer filtering, detrending, and other useful signal processing algorithms. You can try lots of ideas, see how well they work on some test data, and then implement your most promising idea on the ESP32. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). 
 
+**Importantly,** to get this to work in Colab, you must create a folder called `Logs` and copy over at least one log file from [here](https://github.com/makeabilitylab/signals/tree/master/Projects/StepTracker/Logs). I suggest starting with [`arduino_accel_righthoodiepocket_3sets_15steps_delay10_9600baud_subset.csv`](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/Logs/arduino_accel_righthoodiepocket_3sets_15steps_delay10_9600baud_subset.csv) because it's the most straightforward. 
+
+To upload data to Colab, click on the folder icon on the left sidebar, then make a new folder called `Logs`, and then right-click on that folder and select `Upload`. Finally, select the file that you want to upload:
+
+![Screenshot of uploading data to Google Colab](assets/images/GoogleColab_UploadingData_Screenshot.png)
+
+Once you've done this, you can save the project to your Google Drive and then invite your group to collaborate and code together in the Colab notebook.
+
+![Screenshot of sharing and collaborating in Google Colab](assets/images/GoogleColab_ShareAndCollaborate_Screenshot.png)
 
 <!-- ![](assets/images/JupyterNotebook_StepTrackerVisualization_Screenshot.png) -->

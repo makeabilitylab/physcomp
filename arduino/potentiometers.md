@@ -262,12 +262,17 @@ More formally, just like **analog output** enabled us to write out voltages betw
 
 ### Analog-to-digital converter (ADC)
 
-The Arduino's microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. 
-On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and $$V_{cc} (5V) to a $$2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
+The Arduino's microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and $$V_{cc} (5V) to a $$2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV). 
+
+Why does this matter?
+
+For many purposes, it probably doesn't. But the practical implication is that with a 0.0049V resolution, you won't be able to tell the difference between, for example, 2.0140V and 2.0152V (both which would convert to 411) or 4.9148V and 4.9190V (both which would be read as 1003). Does this matter? It depends on the context—for most things we do, it won't. We'll return to this in more depth when we discuss sampling rates and quantization in the [Sensors](../sensors/index.md) and [Signals](../signals/index.md) sections.
 
 #### Changing the HIGH reference voltage
 
-It is also possible to change the `HIGH` reference voltage from $$V_{cc}$$ (which is 5V on the Uno) to a different value between 1.0V to $$V_{cc}$$ using [analogReference()](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/). The `LOW` reference voltage is fixed to $$GND$$.
+If you want to improve the ADC resolution, you have two choices: (1) up the bitrate, which would require different hardware (you can use an external ADC like this 12-bit [ADS1015](https://www.adafruit.com/product/1083)) or (2) decrease the convertible voltage range (so, applying the same 10-bits across a smaller voltage range).
+
+It's possible to do the latter on the Arduino. You can change the `HIGH` reference voltage from $$V_{cc}$$ (which is 5V on the Uno) to a different value between 1.0V to $$V_{cc}$$ using [analogReference()](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/). The `LOW` reference voltage is fixed to $$GND$$.
 
 Changing the reference voltage may be useful if you know your max analog input value is less than $$V_{cc}$$ because you will increase your ADC precision.
 

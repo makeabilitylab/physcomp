@@ -95,11 +95,11 @@ If we were to treat this as an interactive book. What would it look like? This i
 - Microcontrollers vs. computers
 - What is the Arduino?
 
-### Chapter 3: Intro to MCU Output
+### Chapter 3: Intro to Output
 - Digital output, source and sinking current
 - Analog output, PWM, DACs
 
-### Chapter 4: Intro to MCU Input
+### Chapter 4: Intro to Input
 - Digital input, debouncing, interrupts
 - Analog input, voltage dividers (revisited)
 
@@ -121,3 +121,5 @@ If we were to treat this as an interactive book. What would it look like? This i
 - Chapter on ESP32: Moving to a more sophisticated micro
 - Chapter on sound: making and listening
 - Chapter on tools like soldering, multimeters, etc.
+
+Throughout the microcontroller, sensors, signals, and ML parts, we should try to refer to examples from HCI and ubicomp literature as much as possible (and possibly more broadly as well!)

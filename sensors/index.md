@@ -60,7 +60,7 @@ In addition to **what** a sensor does, we can characterize them by **how** they 
 
 ### Passive vs. active sensing
 
-There are two basic classes of sensors: active and passive. **Active** sensors require external power (and will thus have a Vcc pin and GND) while **passive** sensors do not. For example, the popular [ADXL335](https://www.adafruit.com/product/163) 3-axis accelerometer has a Vin, a GND, and three analog outputs (Xout, Yout, and Zout), which translate acceleration along each axis into ratiometric (proportional) voltage levels.
+There are two basic classes of sensors: active and passive. **Active** sensors require external power (and will thus have a Vcc pin and GND) while **passive** sensors do not. Yes, that's it. That's the key difference! For example, the popular [ADXL335](https://www.adafruit.com/product/163) 3-axis accelerometer is an **active** sensor: it has a Vin, a GND, and three analog outputs (Xout, Yout, and Zout), which translate acceleration along each axis into ratiometric (proportional) voltage levels. In contrast, a [thermistor](https://en.wikipedia.org/wiki/Thermistor) is a passive sensor: it changes its resistance in response to heat, which can be used to calculate temperature.
 
 Some active sensors transmit a signal and then analyze some reflected property of that signal for sensing. For example, an infrared (IR) proximity sensor like the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) contains both an infrared (IR) transmitter and IR receiver. The sensor calculates distance by transmitting an IR beam and measuring the reflection angle back on the IR receiver. Similarly, an ultrasonic distance sensor like the popular [HC-SR04](https://www.sparkfun.com/products/15569) transmits ultrasonic pings and listens for reflected ultrasonic waves. A connected microcontroller can than calculate the distance between the sensor to the sound-reflecting object by using the speed of sound through air.
 
@@ -139,7 +139,7 @@ When selecting sensors and a data processing pipeline, there are multiple consid
 - **ADC conversion rates** How fast can your microcontroller sample the signal and perform the analog-to-digital conversion?
 - **ADC precision** What precision of ADC do you need? The ATmega328 microcontroller uses a 10-bit ADC. So, by default, the voltage range of 0-5V is mapped to 0-1023 $$2^10$$ and, thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV). If you require greater precision—that is, changes in sensor output < 0.0049V are important—then you either need to change the [`analogReference`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/) or you need a different ADC. The difference between a raw continuous signal and its digitized version is called the quantization error.
 
-<!-- TODO: Where to talk about quantization error? https://en.wikipedia.org/wiki/Quantization_(signal_processing) -->
+<!-- TODO: Where to talk about quantization error? https://en.wikipedia.org/wiki/Quantization_(signal_processing) or quantization in general? -->
 
 <!-- TODO: consider moving signal acquisition pipeline into the Signals section? -->
 
@@ -148,6 +148,8 @@ When selecting sensors and a data processing pipeline, there are multiple consid
 One of the most important (and interesting!) theorems in DSP is the [*Nyquist-Shannon Sampling Theorem*](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem), which states that a continuous time signal (the raw physical signal) can be sampled and perfectly reconstructed (!) if the sampling rate (sometimes called the sampling frequency or $$F_s$$) is over twice as fast as the raw signal's highest frequency component. That is, the minimum sampling frequency $$min(F_s)$$ must be greater than $$2 * max(F_{signal})$$.
 
 For example, a common digital audio sampling rate is [44,100Hz](https://en.wikipedia.org/wiki/44,100_Hz) (44.1 kHz). This is what compact discs (CDs) use and is also standard for mp3s. Why 44.1 kHz? This sampling rate was chosen, in part, because the human hearing range is ~20 Hz to 20kHz. Hence, according to the above theorem, the minimum sampling frequency needed to be at least $$2 * 20kHz$$ or 40kHz. 
+
+<!-- TODO: make interactive visualization that shows off Nyquist and its effect. Perhaps show two graphs: on left, the real signal with circles that represent sampling points. And then, on the right, the resulting signal -->
 
 ### ATmega328 ADC conversion rate
 

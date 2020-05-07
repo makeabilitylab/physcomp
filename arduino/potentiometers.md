@@ -74,7 +74,7 @@ We're going to start with using only **two legs** of the potentiometer. We'll ne
 
 ### Variable resistors
 
-When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. Notably, however, we can't use this configuration with a microcontroller.
+When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. Notably, however, we can't use this configuration directly as analog input to a microcontroller.
 
 <!-- TODO: maybe show images of circuits with only two legs hooked up? -->
 
@@ -164,13 +164,13 @@ To help us observe the effect of the potentiometer's wiper position on the total
 
 #### How to measure current with a multimeter
 
-While voltmeter's measure voltage in parallel, ammeter's measure current in series. See the wiring diagram below. 
+Voltmeter's **measure voltage** in **parallel**. Ammeter's **measure current** in **series** (ammeter comes from Amperage meter). See the wiring diagram below. 
 
 ![Shows two pictures: image on left shows how to measure voltage in parallel using a multimeter and figure on right shows how to measure current in series using a multimeter](assets/images/Multimeter_HowToMeasureVoltageAndCurrent.png)
 Image from this great ["Science Buddies" tutorial](https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-multimeter#usingamultimeter) on using multimeters.
 {: .fs-1 } 
 
-To help us think about and remember how to measure current, I like to return to our water analogies from lecture and think of the ammeter as if it is a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow.
+To help us think about and remember how to measure current, I like to return to our water analogies from lecture: think of the ammeter as if it's a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow. An ammeter must be "in line" to measure current—you must rewire your circuit such that current is forced through your ammeter (just like water flowing through a turbine in a pipe).
 
 ![Image shows a water flow meter that uses a turbine in series with a pipe to measure water flow and makes analogy to measure current in line with an ammeter](assets/images/Multimeter_MeasuringCurrentInSeriesLikeWaterFlowTurbine.png)
 Image adapted from ["Science Buddies"](https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-multimeter#usingamultimeter).

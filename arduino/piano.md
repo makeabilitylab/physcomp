@@ -115,7 +115,7 @@ It never hurts to add a resistor. You could start with a 100Ω or 220Ω resistor
 
 We're going to flash the Arduino's built-in LED on and off (we can never outrun [Blink](led-blink.md)) and play two alternating sounds. We encourage you to try writing this code first before looking at our step-by-step guide. 
 
-You've built up all the skills you need to do this! Just remember, `[tone(pin, frequency)](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/)`. Oh, and yah, feel free to use `[delay()](https://www.arduino.cc/reference/en/language/functions/time/delay/)` calls for this simple prototype (hey, sometimes `delay()` is the best solution!)
+You've built up all the skills you need to do this! Just remember, [`tone(pin, frequency)`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/). Oh, and yah, feel free to use [`delay()`](https://www.arduino.cc/reference/en/language/functions/time/delay/) calls for this simple prototype (hey, sometimes `delay()` is the best solution!)
 
 #### Step 1: Declare our constants
 

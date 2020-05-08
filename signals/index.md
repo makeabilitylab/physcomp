@@ -93,24 +93,24 @@ Please follow the [Python](https://www.python.org/dev/peps/pep-0008/) style guid
 
 ### Some useful tips
 
-Please feel free to share some tips with me and I'll add them to this list.
+Please share your own tips and I'll add them to this list.
 
 1. Regularly save your Notebooks using `ctrl-s` (on Windows) or `cmd-s` (on a Mac). Notebooks are also regularly autosaved.
-1. Before turning in or sharing a notebook, it's useful (and important) to restart the kernel and rerun all cells. Why? Because the **most common mistake** I've seen with Jupyter Notebook is code that refers to variables that are in memory but were renamed or deleted (either intentionally or accidentally) thereby breaking the code! How? Go to the file menu, then `Kernel -> Restart & Run All`
-1. Hit `shift-enter` to execute the current cell.
-1. Hit `esc` to enter "command" mode and then:
+2. Before turning in or sharing a notebook, it's useful (and important) to restart the kernel and rerun all cells. Why? Because the **most common mistake** I've seen with Jupyter Notebook is code that refers to variables that are in memory but were renamed or deleted (either intentionally or accidentally) thereby breaking the code! How? Go to the file menu, then `Kernel -> Restart & Run All`
+3. Hit `shift-enter` to execute the current cell.
+4. Hit `esc` to enter "command" mode and then:
    - The `m` key to switch the current cell to markdown
    - The `a` or `b` keys to insert a new cell above or below the current cell, respectively
    - The `d` key twice to delete the current cell
    - The `f` key to find in your code but not outputs
-1. `shift-tab` will show you the dcostring for the object you have just typed into code
-1. Because Jupyter Notebook is built on the IPython kernel so you can use all of the IPython [magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html) commands, including:
+5. `shift-tab` will show you the dcostring for the object you have just typed into code
+6. Because Jupyter Notebook is built on the IPython kernel so you can use all of the IPython [magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html) commands, including:
    - Type `%who` in a cell to list all variables in global scope. As noted above, determining variables loaded into memory is, perhaps, the single most confusing thing about using Notebooks. What cell did I execute again?
    - Type `%who <data type>` will list only variables of that type *e.g.,* `%who str`
-1. How fast is my code? You can use the magic command: `%%time` at the beginning of a cell to determine how long it takes to execute said cell. You can also use `%prun` to show much time your program spent in each function.
-1. Suppress final output of a cell. By default, Notebook will display the output of the function of the final line on your cell. Sometimes, you don't want this! In those cases, just add a semicolon to the end of the line
-1. You can execute shell commands inside your notebook by prefixing an exclamation point `!ls *.csv`
-1. You can use LaTeX formulas in a Markdown cell, which will be rendered using MathJax (just like we use on this website!)
+7. How fast is my code? You can use the magic command: `%%time` at the beginning of a cell to determine how long it takes to execute said cell. You can also use `%prun` to show much time your program spent in each function.
+8. Suppress final output of a cell. By default, Notebook will display the output of the function of the final line on your cell. Sometimes, you don't want this! In those cases, just add a semicolon to the end of the line
+9. You can execute shell commands inside your notebook by prefixing an exclamation point `!ls *.csv`
+10. You can use LaTeX formulas in a Markdown cell, which will be rendered using MathJax (just like we use on this website!)
 
 For more tips, see this [dataquest](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/) article.
 

@@ -6,7 +6,7 @@ has_toc: false # (on by default)
 comments: false
 ---
 
-Please see our [Force-Sensitive Resistor lesson](../arduino/force-sensitive-resistors.md) as part of our [Intro to Input](../arduino/intro-input.md).
+Please see our [Force-Sensitive Resistor lesson](../arduino/force-sensitive-resistors.md) as part of our [Intro to Input](../arduino/intro-input.md) series.
 
 <!-- ugh, can't include '/arduino/force-sensitive-resistors.md' because it's in a diff directory and going up parent dirs not
      supported by Jekyll. From Jekyll docs: "Note that you cannot use the ../ syntax to specify an include location that refers to a higher-level directory." 

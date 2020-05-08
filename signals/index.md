@@ -95,6 +95,7 @@ Please follow the [Python](https://www.python.org/dev/peps/pep-0008/) style guid
 
 Please feel free to share some tips with me and I'll add them to this list.
 
+1. Regularly save your Notebooks using `ctrl-s` (on Windows) or `cmd-s` (on a Mac). Notebooks are also regularly autosaved.
 1. Before turning in or sharing a notebook, it's useful (and important) to restart the kernel and rerun all cells. Why? Because the **most common mistake** I've seen with Jupyter Notebook is code that refers to variables that are in memory but were renamed or deleted (either intentionally or accidentally) thereby breaking the code! How? Go to the file menu, then `Kernel -> Restart & Run All`
 1. Hit `shift-enter` to execute the current cell.
 1. Hit `esc` to enter "command" mode and then:
@@ -115,14 +116,18 @@ For more tips, see this [dataquest](https://www.dataquest.io/blog/jupyter-notebo
 
 ## Lessons
 
-These lessons are intended to be interactive. Open the notebooks (`ipynb` files) either locally on your computer in Jupyter Notebook or, perhaps even more conveniently, using [Google Colab](https://colab.research.google.com/). Google Colab dynamically loads our notebooks directly from GitHub, so you can play, edit code, *etc.* right from your browser—and just a click away. Yay!
+These lessons are intended to be interactive. You should modify, run, iterate, and play with the cells. Make these notebooks your own!
+
+Open the notebooks (`ipynb` files) either locally on your computer in Jupyter Notebook (do a git clone of this [repo](https://github.com/makeabilitylab/signals)) or, perhaps even more conveniently, using [Google Colab](https://colab.research.google.com/). Google Colab dynamically loads our notebooks directly from GitHub, so you can play, edit code, *etc.* right from your browser—and just a click away. Yay!
 
 **Note:** For your actual assignments, you'll likely want to run your notebooks locally because you'll want to load data from disk. You can also do this with Google Colab (you'll just need to get your data into the cloud environment; see below).
 
 <!-- TODO: add in a very first notebook on using Jupyter Notebook -->
 
-1. [**Introduction to Python**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb). If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It was also give you a feel for Jupyter Notebook.
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb)
+1. **Introduction to Jupyter Notebook**. There are many introductory tutorials and videos to Jupyter Notebook online. We'll quickly demo Notebook in class but if you want to learn more, you could consult this [Datacamp tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook) or this [Dataquest tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/). Regardless, you will learn Notebook as you go through the lessons below and work on your assignments.
+
+1. [**Introduction to Python**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb). If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It was also give you a feel for Jupyter Notebook. To gain the most value from these example Notebooks, you should feel free to modify and run the cells (and add your own cells).
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb). 
 
 2. [**Introduction to NumPy**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToNumPy.ipynb). We'll be using [NumPy arrays](https://numpy.org/doc/stable/reference/arrays.html) (created with `np.array` and called [`ndarray`](https://numpy.org/doc/stable/reference/arrays.ndarray.html#arrays-ndarray)) as one of our primary data structures. Use this notebook to build up some initial familiarity. You need not become an expert here but it's useful to understand what `np.array`'s are and how they're used and manipulated. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToNumPy.ipynb)
 

@@ -23,7 +23,7 @@ nav_exclude: false
 Jupyter Notebook screenshot showing an analysis and visualization of a 3-axis accelerometer to infer step counts.
 {: .fs-1 }
 
-We will be using [Jupyter Notebook](https://jupyter.org/index.html) for the signal processing and machine learning portion of our course. Jupyter Notebook is a popular "data science" platform for analyzing, processing, classifying, modeling, and visualizing data. While Notebook supports multiple languages (like R, Julia), we'll be using Python (specifically, Python 3).
+We will be using [Jupyter Notebook](https://jupyter.org/index.html) for the signal processing and machine learning portion of our course. Jupyter Notebook is a popular "data science" platform for analyzing, processing, classifying, modeling, and visualizing data. While Notebook supports multiple languages (like R, Julia), we'll be using Python (specifically, Python 3). For those familiar with Python, Jupyter Notebook is built on the IPython kernel so you can use all of the IPython [magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html) commands!
 
 For analysis, we'll be using the [SciPy](https://www.scipy.org/) ("Sigh Pie") ecosystem of open-source libraries for mathematics, science, and engineering. Specifically, [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/scipylib/index.html), and [matplotlib](https://matplotlib.org/). We may also dabble in [Pandas](https://pandas.pydata.org/) and [Seaborn](https://seaborn.pydata.org/). For machine learning, we'll be using [sci-kit learn](https://scikit-learn.org/stable/). And don't worry, all of these libraries will be managed and installed for us!
 
@@ -97,13 +97,29 @@ Please feel free to share some tips with me and I'll add them to this list.
 
 1. Before turning in or sharing a notebook, it's useful (and important) to restart the kernel and rerun all cells. Why? Because the **most common mistake** I've seen with Jupyter Notebook is code that refers to variables that are in memory but were renamed or deleted (either intentionally or accidentally) thereby breaking the code! How? Go to the file menu, then `Kernel -> Restart & Run All`
 1. Hit `shift-enter` to execute the current cell.
-1. Hit `esc` then the `m` key to switch the current cell to markdown
+1. Hit `esc` to enter "command" mode and then:
+   - The `m` key to switch the current cell to markdown
+   - The `a` or `b` keys to insert a new cell above or below the current cell, respectively
+   - The `d` key twice to delete the current cell
+   - The `f` key to find in your code but not outputs
+1. `shift-tab` will show you the dcostring for the object you have just typed into code
+1. Because Jupyter Notebook is built on the IPython kernel so you can use all of the IPython [magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html) commands, including:
+   - Type `%who` in a cell to list all variables in global scope. As noted above, determining variables loaded into memory is, perhaps, the single most confusing thing about using Notebooks. What cell did I execute again?
+   - Type `%who <data type>` will list only variables of that type *e.g.,* `%who str`
+1. How fast is my code? You can use the magic command: `%%time` at the beginning of a cell to determine how long it takes to execute said cell. You can also use `%prun` to show much time your program spent in each function.
+1. Suppress final output of a cell. By default, Notebook will display the output of the function of the final line on your cell. Sometimes, you don't want this! In those cases, just add a semicolon to the end of the line
+1. You can execute shell commands inside your notebook by prefixing an exclamation point `!ls *.csv`
+1. You can use LaTeX formulas in a Markdown cell, which will be rendered using MathJax (just like we use on this website!)
+
+For more tips, see this [dataquest](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/) article.
 
 ## Lessons
 
 These lessons are intended to be interactive. Open the notebooks (`ipynb` files) either locally on your computer in Jupyter Notebook or, perhaps even more conveniently, using [Google Colab](https://colab.research.google.com/). Google Colab dynamically loads our notebooks directly from GitHub, so you can play, edit code, *etc.* right from your browser—and just a click away. Yay!
 
 **Note:** For your actual assignments, you'll likely want to run your notebooks locally because you'll want to load data from disk. You can also do this with Google Colab (you'll just need to get your data into the cloud environment; see below).
+
+<!-- TODO: add in a very first notebook on using Jupyter Notebook -->
 
 1. [**Introduction to Python**](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb). If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It was also give you a feel for Jupyter Notebook.
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb)
@@ -125,3 +141,7 @@ Once you've done this, you can save the project to your Google Drive and then in
 ![Screenshot of sharing and collaborating in Google Colab](assets/images/GoogleColab_ShareAndCollaborate_Screenshot.png)
 
 <!-- ![](assets/images/JupyterNotebook_StepTrackerVisualization_Screenshot.png) -->
+
+<!-- ## Sampling
+
+Love this video by Monty Montgomery at Xiph on sampling: https://youtu.be/FG9jemV1T7I entitled: "A Digital Media Primer For Geeks by Christopher "Monty" Montgomery and Xiph.org". Also shows impact of sampling rate and quantization on audio -->

@@ -122,7 +122,7 @@ There are a variety of important criteria when evaluating a sensor's capabilitie
 Let's examine the entire signal acquisition pipeline from raw physical signal to the digitized representation.
 
 1. First, there exists some physical phenomena that exists in the world (Stage 1). 
-2. We need to develop and/or utilize a method to sense that phenomena and output an electrical signal (Stage 2). 
+2. We need to develop and/or utilize a method to sense that phenomena and output an electrical signal (which will be readable by a computer) (Stage 2). 
 3. Some sensor chips process this electrical signal (*e.g.,* smooth, filter, amplify)—Stage 3. 
 4. In Stage 4, an analog-to-digital converter (ADC) converts the electrical signal to bits (a process called quantization). 
 5. Finally, in Stage 5, we can process and analyze the digitized signal using digital signal processing (DSP) techniques and machine learning, woohoo!

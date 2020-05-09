@@ -10,6 +10,10 @@
         <li class="navigation-list-item{% if active %} active{% endif %}">
           <a href="{{ node.url | absolute_url }}" class="navigation-list-link{% if active %} active{% endif %}">{{ node.title }}</a>
           {%- if active -%}
+            Active: {{ node.title }} <br/>
+            {%- if node.title == "Signals" -%}
+              "In Signals!"<br/>
+            {%- endif -%}
             {%- assign active = false -%}
             {%- assign children = hierarchy | where_exp:"item", "item.name == node.title" | map: "items" | first -%}
             {%- if children -%}

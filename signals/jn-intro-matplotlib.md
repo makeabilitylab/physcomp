@@ -15,4 +15,4 @@ nav_exclude: false
 {:toc}
 ---
 
-{% include IntroToMatplotlib.html %}
+{% include_relative IntroToMatplotlib.html %}

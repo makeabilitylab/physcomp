@@ -31,6 +31,8 @@ How can new sensing and processing systems help identify cancer cells, find new 
 
 <!-- primary learning goals: expose to certain types of sensors, how to use them, how to process them? how to make some yourself? -->
 
+<!-- There's also an interesting potential sub-section here--especially since we are teaching HCI and human-oriented engineering--in talking about how human's sense and translate sensations. The Weber-Fechner Law relates to human perception: the change in a physical stimulus and the perceived change (also relates to JND: https://en.wikipedia.org/wiki/Weber%E2%80%93Fechner_law)>
+
 ## Introduction to Sensors
 
 Humans have invented thousands of sensors. How should we organize and characterize them? There are numerous pragmatic factors, including reliability, precision, manufacturing cost, availability, power usage, and designer familiarity—all important. However, for our purposes, we will focus on three characteristics:

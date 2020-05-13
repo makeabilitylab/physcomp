@@ -50,7 +50,7 @@ We assume the following background about our learners:
 
 - **No previous experience with hardware.** In contrast, we assume no previous experience with electronics or microcontrollers.
 
-As physical and ubiquitous computing are inherently multidisciplinary fields spanning electrical engineering, computer science, signal processing, human-computer interaction, and machine learning, there are many diverse topic areas (and too many to cover in one course or website). The content here reflects what we teach to graduate and upper-level bachelor students (typically with engineering and/or computer science backgrounds). The [Intro to Arduino](arduino/index.md) lessons were written for a more general audience and should be suitable for interaction design courses in information science or design fields (but again, do assume some coding experience). 
+As physical and ubiquitous computing are inherently multidisciplinary fields spanning electrical engineering, computer science, signal processing, human-computer interaction, machine learning, and more (*e.g.,* applied anthropology) there are many diverse topic areas—and too many to cover in one course or website. The content here reflects what we teach to graduate and upper-level bachelor students (typically with engineering and/or computer science backgrounds). The [Intro to Arduino](arduino/index.md) lessons were written for a more general audience and should be suitable for interaction design courses in information science or design fields (but again, do assume some coding experience). 
 
 ## Learning philosphy: learn by doing
 

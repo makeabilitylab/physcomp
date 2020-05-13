@@ -13138,14 +13138,16 @@ $( document ).ready(function(){
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://makeabilitylab.github.io/physcomp/signals">← Back to Index</a></p>
 <h1 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h1><p>In this Notebook, you will write a shape-based gesture classifier (or sometimes called a template-based classifier)—that is, a classifier that measures the similarity between time-series signals. This is in contrast to a feature-based classifier, which extracts features from the signal (<em>e.g.,</em> mean, variance, strongest frequency) to train a model for classification. We'll do that in a future notebook.</p>
 <p>Importantly, for this assignment, you will be working with <strong>pre-segmented</strong> data—that is, we'll use the segmentation boundaries from the "ground truth" data collected with the GestureRecorder. This will enable us to focus purely on the classification aspects of this assignment rather than intermixing segmentation + classification.</p>
-<h2 id="GestureRecorder-data-collection">GestureRecorder data collection<a class="anchor-link" href="#GestureRecorder-data-collection">&#182;</a></h2><p>We wrote a gesture data collection system composed of two parts (<a href="https://github.com/makeabilitylab/arduino/tree/master/Processing/GestureRecorder">source code</a>):</p>
+<h2 id="GestureRecorder-data-collection">GestureRecorder data collection<a class="anchor-link" href="#GestureRecorder-data-collection">&#182;</a></h2><p><img src="https://raw.githubusercontent.com/makeabilitylab/physcomp/master/signals/assets/movies/GestureRecorder_Trim_800_5fps_compressed90.gif" alt="GestureRecorder animated gif showing a sample data collection"></p>
+<p>We wrote a gesture data collection system composed of two parts (<a href="https://github.com/makeabilitylab/arduino/tree/master/Processing/GestureRecorder">source code</a>):</p>
 <ol>
 <li>An <strong>Arduino program</strong> called <a href="https://github.com/makeabilitylab/arduino/blob/master/Processing/GestureRecorder/Arduino/LIS3DHGestureRecorder/LIS3DHGestureRecorder.ino">LIS3DHGestureRecorder.ino</a> that writes out accelerometer data in a CSV format on Serial: timestamp, x, y, z at ~90 Hz. The program also sends a button state to trigger data recording in the GestureRecorder program, described next.</li>
 <li>A <strong>Processing program</strong> called <a href="https://github.com/makeabilitylab/arduino/blob/master/Processing/GestureRecorder/GestureRecorder.pde">GestureRecorder.pde</a>, which runs on your Windows, Mac, or Linux machine, reads the Serial data from the Arduino program, and steps you through the gesture data collection process, including: (1) prompting you to perform gestures; (2) saving those gestures to the filesystem (in a directory called <code>GestureLogs</code>). You must download and install <a href="https://processing.org/download/">Processing</a> for this program to work.</li>
 </ol>
-<p>Here's a video demonstration of me using GestureRecorder (execute the next cell):</p>
+<p>Here's a video demonstration of me using GestureRecorder:</p>
 
 </div>
 </div>
@@ -13194,9 +13196,11 @@ $( document ).ready(function(){
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Using-this-notebook">Using this notebook<a class="anchor-link" href="#Using-this-notebook">&#182;</a></h2><p>This Notebook reads gesture logs from the <code>GestureLogs</code> folder, which must exist in the same dir as this <code>.ipynb</code>. Inside of <code>GestureLogs</code>, you should have one or more sub-directories like <code>JonGestureLogs</code> or <code>FrankGestureLogs</code>, which were created by the <code>GestureRecorder.pde.</code></p>
-<p>The cells are written such that they should be executed in order.</p>
-<h3 id="The-gesturerec-package">The gesturerec package<a class="anchor-link" href="#The-gesturerec-package">&#182;</a></h3><p>We wrote the <code>gesturerec</code> package to handle parsing the sensor stream data and to help run basic classification experiments. You can and should look over the code in the gesturerec folder, particularly <code>data.py</code> and <code>experiments.py</code>. But you'll build up a stronger understanding as you look over this Notebook and start writing analysis and visualization code.</p>
+<h2 id="Using-this-notebook">Using this notebook<a class="anchor-link" href="#Using-this-notebook">&#182;</a></h2><p>The cells are written such that they should be executed in order.</p>
+<h3 id="Data-from-GestureRecorder">Data from GestureRecorder<a class="anchor-link" href="#Data-from-GestureRecorder">&#182;</a></h3><p>This Notebook reads gesture logs from the <code>GestureLogs</code> folder, which must exist in the same dir as this <code>.ipynb</code>. Inside of <code>GestureLogs</code>, you should have one or more sub-directories like <code>JonGestures</code> or <code>FrankGestures</code>, which were created by the <code>GestureRecorder.pde.</code></p>
+<p>We have included one GestureLog folder already called <code>JonGestures</code>. In addition, we have a sample of log files from previous classes in the folder <a href="https://github.com/makeabilitylab/signals/tree/master/Projects/GestureRecognizer/ADXL335GestureLogs"><code>ADXL335GestureLogs</code></a>; however, these were recorded with the <a href="https://www.adafruit.com/product/163">ADXL335 accelerometer</a> rather than the <a href="https://www.adafruit.com/product/2809">LIS3DH accelerometer</a>. So, normalized versions of the gesture signals should be similar but non-normalized versions will have different y-amplitudes.</p>
+<h3 id="The-gesturerec-package">The gesturerec package<a class="anchor-link" href="#The-gesturerec-package">&#182;</a></h3><p>We wrote the <code>gesturerec</code> package to handle parsing the sensor stream data and to help run basic classification experiments. You can and should look over the code in the <a href="https://github.com/makeabilitylab/signals/tree/master/Projects/GestureRecognizer/gesturerec">gesturerec</a> folder, particularly <code>data.py</code> and <code>experiments.py</code>. Feel free to edit this code!</p>
+<p>It might look a bit complicated at first but you'll build up a stronger understanding as you look over this Notebook and start writing analysis and visualization code.</p>
 <p>There are three primary data structure objects in <code>gesturerec.data</code>:</p>
 <ol>
 <li>At the top level, we have a <code>GestureSet</code>, which contains all of the gesture data for a person.</li>
@@ -13214,6 +13218,7 @@ $( document ).ready(function(){
 <li>Run experiments and iterate on your algorithms (take notes on what you've found)</li>
 <li>Write-up your results for your gesture set and for others in the course.</li>
 </ol>
+<p>You should be able to get above 90% classification accuracies but aim for 100%, of course! :)</p>
 <h2 id="Misc">Misc<a class="anchor-link" href="#Misc">&#182;</a></h2><h3 id="How-To-Navigate-This-Notebook">How To Navigate This Notebook<a class="anchor-link" href="#How-To-Navigate-This-Notebook">&#182;</a></h3><p>I strongly encourage you to install the <a href="https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html">toc2 extension</a>, which will give you a navigable table of contents (based on markdown) on a side pane and drop-down menu.</p>
 <h3 id="Writing-Docstrings">Writing Docstrings<a class="anchor-link" href="#Writing-Docstrings">&#182;</a></h3><p>To help with commenting your functions, it's helpful to write <a href="https://www.python.org/dev/peps/pep-0257/">Docstrings</a>. More <a href="https://www.datacamp.com/community/tutorials/docstrings-python">here</a>.</p>
 <h3 id="Dynamic-Time-Warping-Library">Dynamic Time Warping Library<a class="anchor-link" href="#Dynamic-Time-Warping-Library">&#182;</a></h3><p>If you choose to explore Dynamic Time Warping (DTW), I recommend fastdtw. You can install this by typing the following in cell:</p>
@@ -13277,7 +13282,7 @@ $( document ).ready(function(){
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load the data</span>
-<span class="n">root_gesture_log_path</span> <span class="o">=</span> <span class="s1">&#39;./GestureLogs&#39;</span>
+<span class="n">root_gesture_log_path</span> <span class="o">=</span> <span class="s1">&#39;./ADXL335GestureLogs&#39;</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found the following gesture log sub-directories&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">grutils</span><span class="o">.</span><span class="n">get_immediate_subdirectories</span><span class="p">(</span><span class="n">root_gesture_log_path</span><span class="p">))</span>
@@ -13322,8 +13327,8 @@ $( document ).ready(function(){
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Found the following gesture log sub-directories
 [&#39;Amelia&#39;, &#39;Anne&#39;, &#39;Chris&#39;, &#39;Jason&#39;, &#39;JonGesturesEasy&#39;, &#39;JonGesturesHarder&#39;, &#39;Jose&#39;, &#39;Kim&#39;, &#39;Matt&#39;, &#39;Nathalie&#39;, &#39;Robin&#39;, &#39;Steph&#39;]
-Creating a GestureSet object for path &#39;./GestureLogs\Amelia&#39;
-Found 55 csv files in ./GestureLogs\Amelia
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Amelia&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Amelia
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13340,8 +13345,8 @@ Max trial length across all gesture is &#39;At Rest&#39; Trial 0 with 446 sensor
 Avg samples/sec across 55 sensor files: 76.9
 Avg sample length across 55 sensor files: 2.7s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Anne&#39;
-Found 55 csv files in ./GestureLogs\Anne
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Anne&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Anne
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13358,8 +13363,8 @@ Max trial length across all gesture is &#39;Backhand Tennis&#39; Trial 0 with 29
 Avg samples/sec across 55 sensor files: 77.0
 Avg sample length across 55 sensor files: 2.4s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Chris&#39;
-Found 55 csv files in ./GestureLogs\Chris
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Chris&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Chris
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13376,8 +13381,8 @@ Max trial length across all gesture is &#39;Shake&#39; Trial 3 with 520 sensor e
 Avg samples/sec across 55 sensor files: 76.7
 Avg sample length across 55 sensor files: 4.7s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Jason&#39;
-Found 55 csv files in ./GestureLogs\Jason
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Jason&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Jason
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13394,8 +13399,8 @@ Max trial length across all gesture is &#39;Custom&#39; Trial 4 with 266 sensor 
 Avg samples/sec across 55 sensor files: 73.1
 Avg sample length across 55 sensor files: 2.5s
 
-Creating a GestureSet object for path &#39;./GestureLogs\JonGesturesEasy&#39;
-Found 55 csv files in ./GestureLogs\JonGesturesEasy
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\JonGesturesEasy&#39;
+Found 55 csv files in ./ADXL335GestureLogs\JonGesturesEasy
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13412,8 +13417,8 @@ Max trial length across all gesture is &#39;At Rest&#39; Trial 4 with 443 sensor
 Avg samples/sec across 55 sensor files: 76.9
 Avg sample length across 55 sensor files: 3.4s
 
-Creating a GestureSet object for path &#39;./GestureLogs\JonGesturesHarder&#39;
-Found 55 csv files in ./GestureLogs\JonGesturesHarder
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\JonGesturesHarder&#39;
+Found 55 csv files in ./ADXL335GestureLogs\JonGesturesHarder
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13430,8 +13435,8 @@ Max trial length across all gesture is &#39;Baseball Throw&#39; Trial 4 with 110
 Avg samples/sec across 55 sensor files: 76.7
 Avg sample length across 55 sensor files: 6.2s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Jose&#39;
-Found 55 csv files in ./GestureLogs\Jose
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Jose&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Jose
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13448,8 +13453,8 @@ Max trial length across all gesture is &#39;Midair Clockwise &#39;O&#39;&#39; Tr
 Avg samples/sec across 55 sensor files: 77.0
 Avg sample length across 55 sensor files: 2.5s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Kim&#39;
-Found 55 csv files in ./GestureLogs\Kim
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Kim&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Kim
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13466,8 +13471,8 @@ Max trial length across all gesture is &#39;Midair Counter-clockwise &#39;O&#39;
 Avg samples/sec across 55 sensor files: 77.3
 Avg sample length across 55 sensor files: 1.5s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Matt&#39;
-Found 55 csv files in ./GestureLogs\Matt
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Matt&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Matt
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13484,8 +13489,8 @@ Max trial length across all gesture is &#39;Custom&#39; Trial 3 with 188 sensor 
 Avg samples/sec across 55 sensor files: 48.9
 Avg sample length across 55 sensor files: 2.9s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Nathalie&#39;
-Found 55 csv files in ./GestureLogs\Nathalie
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Nathalie&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Nathalie
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13502,8 +13507,8 @@ Max trial length across all gesture is &#39;Custom&#39; Trial 2 with 282 sensor 
 Avg samples/sec across 55 sensor files: 76.9
 Avg sample length across 55 sensor files: 2.6s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Robin&#39;
-Found 55 csv files in ./GestureLogs\Robin
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Robin&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Robin
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13520,8 +13525,8 @@ Max trial length across all gesture is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 
 Avg samples/sec across 55 sensor files: 76.8
 Avg sample length across 55 sensor files: 2.9s
 
-Creating a GestureSet object for path &#39;./GestureLogs\Steph&#39;
-Found 55 csv files in ./GestureLogs\Steph
+Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Steph&#39;
+Found 55 csv files in ./ADXL335GestureLogs\Steph
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
@@ -13538,7 +13543,7 @@ Max trial length across all gesture is &#39;Shake&#39; Trial 4 with 529 sensor e
 Avg samples/sec across 55 sensor files: 76.6
 Avg sample length across 55 sensor files: 3.9s
 
-The selected gesture set: &#39;./GestureLogs\JonGesturesEasy&#39; : 11 gestures and 55 total trials
+The selected gesture set: &#39;./ADXL335GestureLogs\JonGesturesEasy&#39; : 11 gestures and 55 total trials
 </pre>
 </div>
 </div>
@@ -14332,39 +14337,20 @@ The selected gesture set is: JonGesturesEasy
     
     <span class="k">return</span> <span class="n">trial_classification_result</span>
 
-<span class="c1"># TODO: your DTW algorithm here</span>
-<span class="k">def</span> <span class="nf">find_closest_match_dtw</span><span class="p">(</span><span class="n">test_trial</span><span class="p">,</span> <span class="n">template_trials</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># TODO: Write your similarity functions here. Write as many as you can brainstorm! :)</span>
+
+<span class="c1"># For example, how about writing a DTW-based algorithm here. </span>
+<span class="k">def</span> <span class="nf">find_closest_match_dtw</span><span class="p">(</span><span class="n">test_trial</span><span class="p">,</span> <span class="n">template_trials</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Implement this&quot;</span><span class="p">)</span>
     
-<span class="k">def</span> <span class="nf">find_closest_match_your_alg_here</span><span class="p">(</span><span class="n">test_trial</span><span class="p">,</span> <span class="n">template_trials</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">find_closest_match_your_alg_here</span><span class="p">(</span><span class="n">test_trial</span><span class="p">,</span> <span class="n">template_trials</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Implement this too&quot;</span><span class="p">)</span>
     <span class="c1"># Remember, your &#39;scoring&#39; function is whatever *you* want--it could combine distance calculations across</span>
-    <span class="c1"># x, y, z, and mag--or just one of those signals.</span>
+    <span class="c1"># x, y, z, and mag--or just one of those signals. And it can use whatever similarity measure you decide upon!</span>
+    <span class="c1"># What about finding the best alignment between signals before computing a similarity measure?</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-cyan-intense-fg ansi-bold">  File </span><span class="ansi-green-intense-fg ansi-bold">&#34;&lt;ipython-input-13-70d47b5d6fcd&gt;&#34;</span><span class="ansi-cyan-intense-fg ansi-bold">, line </span><span class="ansi-green-intense-fg ansi-bold">93</span>
-<span class="ansi-yellow-intense-fg ansi-bold">    def find_closest_match_dtw(test_trial, template_trials, **kwargs)</span>
-<span class="ansi-white-intense-fg ansi-bold">                                                                     ^</span>
-<span class="ansi-red-intense-fg ansi-bold">SyntaxError</span><span class="ansi-red-intense-fg ansi-bold">:</span> invalid syntax
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -14378,7 +14364,7 @@ The selected gesture set is: JonGesturesEasy
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run experiments</span>
@@ -14425,13 +14411,397 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>DEBUG: PRINTING OUT FOLDS
+Fold:  0
+	At Rest Trial: 4
+	Backhand Tennis Trial: 3
+	Baseball Throw Trial: 1
+	Bunny Hops Trial: 0
+	Forehand Tennis Trial: 2
+	Midair &#39;S&#39; Trial: 4
+	Midair Clockwise &#39;O&#39; Trial: 0
+	Midair Counter-clockwise &#39;O&#39; Trial: 4
+	Midair Zorro &#39;Z&#39; Trial: 4
+	Shake Trial: 1
+	Underhand Bowling Trial: 3
+Fold:  1
+	At Rest Trial: 0
+	Backhand Tennis Trial: 2
+	Baseball Throw Trial: 4
+	Bunny Hops Trial: 2
+	Forehand Tennis Trial: 1
+	Midair &#39;S&#39; Trial: 0
+	Midair Clockwise &#39;O&#39; Trial: 3
+	Midair Counter-clockwise &#39;O&#39; Trial: 0
+	Midair Zorro &#39;Z&#39; Trial: 3
+	Shake Trial: 4
+	Underhand Bowling Trial: 0
+Fold:  2
+	At Rest Trial: 1
+	Backhand Tennis Trial: 4
+	Baseball Throw Trial: 2
+	Bunny Hops Trial: 1
+	Forehand Tennis Trial: 4
+	Midair &#39;S&#39; Trial: 2
+	Midair Clockwise &#39;O&#39; Trial: 1
+	Midair Counter-clockwise &#39;O&#39; Trial: 3
+	Midair Zorro &#39;Z&#39; Trial: 0
+	Shake Trial: 3
+	Underhand Bowling Trial: 2
+Fold:  3
+	At Rest Trial: 2
+	Backhand Tennis Trial: 1
+	Baseball Throw Trial: 0
+	Bunny Hops Trial: 3
+	Forehand Tennis Trial: 3
+	Midair &#39;S&#39; Trial: 1
+	Midair Clockwise &#39;O&#39; Trial: 4
+	Midair Counter-clockwise &#39;O&#39; Trial: 1
+	Midair Zorro &#39;Z&#39; Trial: 2
+	Shake Trial: 0
+	Underhand Bowling Trial: 1
+Fold:  4
+	At Rest Trial: 3
+	Backhand Tennis Trial: 0
+	Baseball Throw Trial: 3
+	Bunny Hops Trial: 4
+	Forehand Tennis Trial: 0
+	Midair &#39;S&#39; Trial: 3
+	Midair Clockwise &#39;O&#39; Trial: 2
+	Midair Counter-clockwise &#39;O&#39; Trial: 2
+	Midair Zorro &#39;Z&#39; Trial: 1
+	Shake Trial: 2
+	Underhand Bowling Trial: 4
+
+**FOLD: 0**
+Correct : Best match for &#39;At Rest&#39; Trial 4 is &#39;At Rest&#39; Trial 0 w/score: 19.0 (0.006s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 3 is &#39;Backhand Tennis&#39; Trial 1 w/score: 1034.7 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 1 is &#39;Baseball Throw&#39; Trial 3 w/score: 1257.1 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 0 is &#39;Bunny Hops&#39; Trial 2 w/score: 298.4 (0.004s)
+Correct : Best match for &#39;Forehand Tennis&#39; Trial 2 is &#39;Forehand Tennis&#39; Trial 3 w/score: 1303.0 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 4 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 322.6 (0.004s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 w/score: 325.1 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 225.7 (0.004s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 w/score: 295.5 (0.005s)
+Incorrect : Best match for &#39;Shake&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 656.4 (0.006s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 3 is &#39;Underhand Bowling&#39; Trial 4 w/score: 918.6 (0.004s)
+COMPLETED FOLD: 0 IN 0.046 SECS WITH ACCURACY 10/11 (90.9%)
+
+**FOLD: 1**
+Correct : Best match for &#39;At Rest&#39; Trial 0 is &#39;At Rest&#39; Trial 1 w/score: 15.3 (0.003s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 2 is &#39;Forehand Tennis&#39; Trial 4 w/score: 803.2 (0.003s)
+Incorrect : Best match for &#39;Baseball Throw&#39; Trial 4 is &#39;Forehand Tennis&#39; Trial 4 w/score: 1367.2 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 2 is &#39;Bunny Hops&#39; Trial 4 w/score: 290.4 (0.005s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 1 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 w/score: 1358.6 (0.007s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 0 is &#39;Midair &#39;S&#39;&#39; Trial 1 w/score: 377.9 (0.005s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 w/score: 340.0 (0.006s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 308.7 (0.004s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 w/score: 295.5 (0.004s)
+Incorrect : Best match for &#39;Shake&#39; Trial 4 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 515.9 (0.004s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 0 is &#39;Underhand Bowling&#39; Trial 4 w/score: 713.8 (0.004s)
+COMPLETED FOLD: 1 IN 0.049 SECS WITH ACCURACY 7/11 (63.6%)
+
+**FOLD: 2**
+Correct : Best match for &#39;At Rest&#39; Trial 1 is &#39;At Rest&#39; Trial 0 w/score: 15.3 (0.007s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 4 is &#39;Backhand Tennis&#39; Trial 0 w/score: 726.3 (0.004s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 2 is &#39;Baseball Throw&#39; Trial 3 w/score: 1160.5 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 1 is &#39;Bunny Hops&#39; Trial 4 w/score: 334.0 (0.004s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 4 is &#39;Backhand Tennis&#39; Trial 2 w/score: 803.2 (0.004s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 2 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 322.3 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 0 w/score: 325.1 (0.005s)
+Incorrect : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 w/score: 462.8 (0.006s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 0 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 w/score: 461.1 (0.006s)
+Incorrect : Best match for &#39;Shake&#39; Trial 3 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 706.4 (0.004s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 2 is &#39;Underhand Bowling&#39; Trial 1 w/score: 728.4 (0.004s)
+COMPLETED FOLD: 2 IN 0.051 SECS WITH ACCURACY 8/11 (72.7%)
+
+**FOLD: 3**
+Correct : Best match for &#39;At Rest&#39; Trial 2 is &#39;At Rest&#39; Trial 0 w/score: 37.8 (0.004s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 1 is &#39;Forehand Tennis&#39; Trial 0 w/score: 994.4 (0.004s)
+Incorrect : Best match for &#39;Baseball Throw&#39; Trial 0 is &#39;Bunny Hops&#39; Trial 2 w/score: 926.0 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 3 is &#39;Bunny Hops&#39; Trial 4 w/score: 289.6 (0.004s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 3 is &#39;Backhand Tennis&#39; Trial 0 w/score: 1094.9 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 0 w/score: 377.9 (0.004s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 3 w/score: 340.0 (0.004s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 241.1 (0.003s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 0 w/score: 523.2 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 0 is &#39;Midair &#39;S&#39;&#39; Trial 4 w/score: 830.2 (0.002s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 1 is &#39;Underhand Bowling&#39; Trial 2 w/score: 728.4 (0.005s)
+COMPLETED FOLD: 3 IN 0.040 SECS WITH ACCURACY 7/11 (63.6%)
+
+**FOLD: 4**
+Correct : Best match for &#39;At Rest&#39; Trial 3 is &#39;At Rest&#39; Trial 0 w/score: 17.6 (0.004s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 0 is &#39;Backhand Tennis&#39; Trial 4 w/score: 726.3 (0.004s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 3 is &#39;Baseball Throw&#39; Trial 2 w/score: 1160.5 (0.003s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 4 is &#39;Bunny Hops&#39; Trial 3 w/score: 289.6 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 0 is &#39;Backhand Tennis&#39; Trial 1 w/score: 994.4 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 3 is &#39;Midair &#39;S&#39;&#39; Trial 2 w/score: 322.3 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 w/score: 344.3 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 w/score: 225.7 (0.003s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 w/score: 584.3 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 2 is &#39;Midair &#39;S&#39;&#39; Trial 4 w/score: 803.2 (0.004s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 4 is &#39;Underhand Bowling&#39; Trial 0 w/score: 713.8 (0.004s)
+COMPLETED FOLD: 4 IN 0.037 SECS WITH ACCURACY 9/11 (81.8%)
+
+Title: JonGesturesEasy: Euclidean distance with raw x signal: 41/55 (74.55%)
+Optional arguments: {&#39;verbose&#39;: True}
+Took 0.223s for 55 comparisons (avg=0.004s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 3/5 (60.0%)
+- Baseball Throw 3/5 (60.0%)
+- Bunny Hops 5/5 (100.0%)
+- Forehand Tennis 1/5 (20.0%)
+- Midair &#39;S&#39; 5/5 (100.0%)
+- Midair Clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Counter-clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Zorro &#39;Z&#39; 5/5 (100.0%)
+- Shake 0/5 (0.0%)
+- Underhand Bowling 5/5 (100.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 3 0 0 2 0 0 0 0 0 0]
+ [0 0 3 1 1 0 0 0 0 0 0]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [0 3 0 0 1 0 0 0 1 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 5 0 0 0 0]
+ [0 0 0 0 0 0 1 4 0 0 0]
+ [0 0 0 0 0 0 0 0 5 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 5]]
+
+**FOLD: 0**
+Correct : Best match for &#39;At Rest&#39; Trial 4 is &#39;At Rest&#39; Trial 3 w/score: 20.2 (0.005s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 3 is &#39;Backhand Tennis&#39; Trial 1 w/score: 1103.5 (0.005s)
+Incorrect : Best match for &#39;Baseball Throw&#39; Trial 1 is &#39;Underhand Bowling&#39; Trial 4 w/score: 1746.2 (0.003s)
+Incorrect : Best match for &#39;Bunny Hops&#39; Trial 0 is &#39;At Rest&#39; Trial 0 w/score: 563.4 (0.003s)
+Correct : Best match for &#39;Forehand Tennis&#39; Trial 2 is &#39;Forehand Tennis&#39; Trial 3 w/score: 1271.6 (0.004s)
+Incorrect : Best match for &#39;Midair &#39;S&#39;&#39; Trial 4 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 w/score: 918.0 (0.005s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 w/score: 853.5 (0.004s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 338.4 (0.003s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 w/score: 923.0 (0.004s)
+Correct : Best match for &#39;Shake&#39; Trial 1 is &#39;Shake&#39; Trial 3 w/score: 3709.9 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 3 is &#39;Underhand Bowling&#39; Trial 1 w/score: 605.0 (0.003s)
+COMPLETED FOLD: 0 IN 0.042 SECS WITH ACCURACY 8/11 (72.7%)
+
+**FOLD: 1**
+Correct : Best match for &#39;At Rest&#39; Trial 0 is &#39;At Rest&#39; Trial 1 w/score: 13.9 (0.004s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 2 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 w/score: 1119.4 (0.004s)
+Incorrect : Best match for &#39;Baseball Throw&#39; Trial 4 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 w/score: 1683.9 (0.004s)
+Incorrect : Best match for &#39;Bunny Hops&#39; Trial 2 is &#39;At Rest&#39; Trial 2 w/score: 628.8 (0.004s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 1 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 w/score: 1479.9 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 0 is &#39;Midair &#39;S&#39;&#39; Trial 1 w/score: 961.2 (0.004s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 w/score: 549.8 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 w/score: 609.9 (0.003s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 w/score: 923.0 (0.004s)
+Incorrect : Best match for &#39;Shake&#39; Trial 4 is &#39;Forehand Tennis&#39; Trial 0 w/score: 4270.6 (0.003s)
+Incorrect : Best match for &#39;Underhand Bowling&#39; Trial 0 is &#39;At Rest&#39; Trial 3 w/score: 470.5 (0.004s)
+COMPLETED FOLD: 1 IN 0.040 SECS WITH ACCURACY 5/11 (45.5%)
+
+**FOLD: 2**
+Correct : Best match for &#39;At Rest&#39; Trial 1 is &#39;At Rest&#39; Trial 0 w/score: 13.9 (0.004s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 4 is &#39;Backhand Tennis&#39; Trial 0 w/score: 897.0 (0.005s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 2 is &#39;Baseball Throw&#39; Trial 0 w/score: 1304.6 (0.004s)
+Incorrect : Best match for &#39;Bunny Hops&#39; Trial 1 is &#39;At Rest&#39; Trial 0 w/score: 607.3 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 4 is &#39;Underhand Bowling&#39; Trial 1 w/score: 1411.9 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 2 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 528.2 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 2 w/score: 577.1 (0.002s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 0 w/score: 609.9 (0.004s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 0 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 w/score: 1285.7 (0.003s)
+Correct : Best match for &#39;Shake&#39; Trial 3 is &#39;Shake&#39; Trial 1 w/score: 3709.9 (0.004s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 2 is &#39;Underhand Bowling&#39; Trial 1 w/score: 523.0 (0.003s)
+COMPLETED FOLD: 2 IN 0.038 SECS WITH ACCURACY 9/11 (81.8%)
+
+**FOLD: 3**
+Correct : Best match for &#39;At Rest&#39; Trial 2 is &#39;At Rest&#39; Trial 1 w/score: 19.7 (0.004s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 1 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 0 w/score: 1077.0 (0.004s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 0 is &#39;Baseball Throw&#39; Trial 3 w/score: 1294.4 (0.003s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 3 is &#39;Bunny Hops&#39; Trial 4 w/score: 661.3 (0.004s)
+Correct : Best match for &#39;Forehand Tennis&#39; Trial 3 is &#39;Forehand Tennis&#39; Trial 2 w/score: 1271.6 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 0 w/score: 961.2 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 3 w/score: 549.8 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 311.1 (0.004s)
+Incorrect : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 is &#39;Midair &#39;S&#39;&#39; Trial 4 w/score: 1262.2 (0.004s)
+Incorrect : Best match for &#39;Shake&#39; Trial 0 is &#39;Underhand Bowling&#39; Trial 4 w/score: 5599.6 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 1 is &#39;Underhand Bowling&#39; Trial 2 w/score: 523.0 (0.004s)
+COMPLETED FOLD: 3 IN 0.039 SECS WITH ACCURACY 8/11 (72.7%)
+
+**FOLD: 4**
+Correct : Best match for &#39;At Rest&#39; Trial 3 is &#39;At Rest&#39; Trial 1 w/score: 16.5 (0.003s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 0 is &#39;Backhand Tennis&#39; Trial 4 w/score: 897.0 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 3 is &#39;Baseball Throw&#39; Trial 0 w/score: 1294.4 (0.002s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 4 is &#39;Bunny Hops&#39; Trial 3 w/score: 661.3 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 0 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 0 w/score: 1145.1 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 3 is &#39;Midair &#39;S&#39;&#39; Trial 2 w/score: 528.2 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 w/score: 577.1 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 1 w/score: 311.1 (0.003s)
+Incorrect : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 is &#39;Forehand Tennis&#39; Trial 1 w/score: 1479.9 (0.003s)
+Correct : Best match for &#39;Shake&#39; Trial 2 is &#39;Shake&#39; Trial 1 w/score: 5411.4 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 4 is &#39;Underhand Bowling&#39; Trial 0 w/score: 650.0 (0.003s)
+COMPLETED FOLD: 4 IN 0.032 SECS WITH ACCURACY 9/11 (81.8%)
+
+**FOLD: 0**
+Correct : Best match for &#39;At Rest&#39; Trial 4 is &#39;At Rest&#39; Trial 0 w/score: 23.1 (0.003s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 3 is &#39;At Rest&#39; Trial 1 w/score: 434.0 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 1 is &#39;Baseball Throw&#39; Trial 3 w/score: 649.2 (0.002s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 0 is &#39;Bunny Hops&#39; Trial 3 w/score: 926.7 (0.002s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 2 is &#39;At Rest&#39; Trial 0 w/score: 605.1 (0.003s)
+Incorrect : Best match for &#39;Midair &#39;S&#39;&#39; Trial 4 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 w/score: 644.8 (0.003s)
+Incorrect : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 w/score: 553.9 (0.004s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 263.8 (0.003s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 w/score: 331.2 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 1 is &#39;At Rest&#39; Trial 0 w/score: 845.5 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 3 is &#39;Underhand Bowling&#39; Trial 0 w/score: 480.4 (0.003s)
+COMPLETED FOLD: 0 IN 0.032 SECS WITH ACCURACY 6/11 (54.5%)
+
+**FOLD: 1**
+Correct : Best match for &#39;At Rest&#39; Trial 0 is &#39;At Rest&#39; Trial 1 w/score: 20.7 (0.003s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 2 is &#39;At Rest&#39; Trial 1 w/score: 314.9 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 4 is &#39;Baseball Throw&#39; Trial 0 w/score: 742.2 (0.003s)
+Incorrect : Best match for &#39;Bunny Hops&#39; Trial 2 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 w/score: 1353.7 (0.002s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 1 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 w/score: 570.9 (0.004s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 0 is &#39;Midair &#39;S&#39;&#39; Trial 1 w/score: 387.0 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 w/score: 467.8 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 w/score: 555.1 (0.004s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 w/score: 331.2 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 4 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 w/score: 810.0 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 0 is &#39;Underhand Bowling&#39; Trial 3 w/score: 480.4 (0.003s)
+COMPLETED FOLD: 1 IN 0.034 SECS WITH ACCURACY 7/11 (63.6%)
+
+**FOLD: 2**
+Correct : Best match for &#39;At Rest&#39; Trial 1 is &#39;At Rest&#39; Trial 0 w/score: 20.7 (0.004s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 4 is &#39;At Rest&#39; Trial 2 w/score: 323.0 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 2 is &#39;Baseball Throw&#39; Trial 0 w/score: 744.1 (0.003s)
+Incorrect : Best match for &#39;Bunny Hops&#39; Trial 1 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 w/score: 1190.1 (0.002s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 4 is &#39;At Rest&#39; Trial 0 w/score: 635.0 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 2 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 399.2 (0.004s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 2 w/score: 394.7 (0.003s)
+Incorrect : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 w/score: 383.5 (0.004s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 0 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 w/score: 431.4 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 3 is &#39;At Rest&#39; Trial 2 w/score: 1212.0 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 2 is &#39;Underhand Bowling&#39; Trial 1 w/score: 485.0 (0.003s)
+COMPLETED FOLD: 2 IN 0.035 SECS WITH ACCURACY 6/11 (54.5%)
+
+**FOLD: 3**
+Correct : Best match for &#39;At Rest&#39; Trial 2 is &#39;At Rest&#39; Trial 0 w/score: 55.9 (0.004s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 1 is &#39;Backhand Tennis&#39; Trial 4 w/score: 500.8 (0.004s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 0 is &#39;Baseball Throw&#39; Trial 4 w/score: 742.2 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 3 is &#39;Bunny Hops&#39; Trial 0 w/score: 926.7 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 3 is &#39;At Rest&#39; Trial 1 w/score: 564.9 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 0 w/score: 387.0 (0.003s)
+Incorrect : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 w/score: 383.5 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 324.2 (0.004s)
+Incorrect : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 is &#39;At Rest&#39; Trial 1 w/score: 348.9 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 0 is &#39;Forehand Tennis&#39; Trial 4 w/score: 2358.3 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 1 is &#39;Underhand Bowling&#39; Trial 2 w/score: 485.0 (0.003s)
+COMPLETED FOLD: 3 IN 0.037 SECS WITH ACCURACY 7/11 (63.6%)
+
+**FOLD: 4**
+Correct : Best match for &#39;At Rest&#39; Trial 3 is &#39;At Rest&#39; Trial 0 w/score: 32.9 (0.005s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 0 is &#39;Backhand Tennis&#39; Trial 3 w/score: 673.0 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 3 is &#39;Baseball Throw&#39; Trial 1 w/score: 649.2 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 4 is &#39;Bunny Hops&#39; Trial 3 w/score: 1363.0 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 0 is &#39;At Rest&#39; Trial 0 w/score: 414.1 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 3 is &#39;Midair &#39;S&#39;&#39; Trial 2 w/score: 399.2 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 w/score: 394.7 (0.002s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 w/score: 263.8 (0.003s)
+Incorrect : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 is &#39;At Rest&#39; Trial 1 w/score: 489.1 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 2 is &#39;At Rest&#39; Trial 2 w/score: 1086.1 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 4 is &#39;Underhand Bowling&#39; Trial 0 w/score: 561.9 (0.003s)
+COMPLETED FOLD: 4 IN 0.035 SECS WITH ACCURACY 8/11 (72.7%)
+
+**FOLD: 0**
+Correct : Best match for &#39;At Rest&#39; Trial 4 is &#39;At Rest&#39; Trial 0 w/score: 17.1 (0.003s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 3 is &#39;Backhand Tennis&#39; Trial 1 w/score: 692.4 (0.003s)
+Incorrect : Best match for &#39;Baseball Throw&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 991.2 (0.003s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 0 is &#39;Bunny Hops&#39; Trial 3 w/score: 837.2 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 2 is &#39;Backhand Tennis&#39; Trial 4 w/score: 757.7 (0.003s)
+Incorrect : Best match for &#39;Midair &#39;S&#39;&#39; Trial 4 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 w/score: 499.6 (0.003s)
+Incorrect : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 316.5 (0.004s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 308.1 (0.002s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 w/score: 467.9 (0.002s)
+Incorrect : Best match for &#39;Shake&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 1 w/score: 1679.0 (0.002s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 3 is &#39;Underhand Bowling&#39; Trial 4 w/score: 862.3 (0.003s)
+COMPLETED FOLD: 0 IN 0.031 SECS WITH ACCURACY 6/11 (54.5%)
+
+**FOLD: 1**
+Correct : Best match for &#39;At Rest&#39; Trial 0 is &#39;At Rest&#39; Trial 1 w/score: 13.4 (0.004s)
+Incorrect : Best match for &#39;Backhand Tennis&#39; Trial 2 is &#39;Underhand Bowling&#39; Trial 4 w/score: 926.9 (0.003s)
+Incorrect : Best match for &#39;Baseball Throw&#39; Trial 4 is &#39;Forehand Tennis&#39; Trial 4 w/score: 1146.3 (0.002s)
+Incorrect : Best match for &#39;Bunny Hops&#39; Trial 2 is &#39;At Rest&#39; Trial 1 w/score: 1307.3 (0.004s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 1 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 0 w/score: 1053.3 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 0 is &#39;Midair &#39;S&#39;&#39; Trial 1 w/score: 645.9 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 w/score: 401.4 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 0 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 w/score: 534.5 (0.004s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 3 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 w/score: 467.9 (0.005s)
+Incorrect : Best match for &#39;Shake&#39; Trial 4 is &#39;Midair &#39;S&#39;&#39; Trial 4 w/score: 2321.0 (0.004s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 0 is &#39;Underhand Bowling&#39; Trial 4 w/score: 691.3 (0.004s)
+COMPLETED FOLD: 1 IN 0.039 SECS WITH ACCURACY 6/11 (54.5%)
+
+**FOLD: 2**
+Correct : Best match for &#39;At Rest&#39; Trial 1 is &#39;At Rest&#39; Trial 0 w/score: 13.4 (0.004s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 4 is &#39;Backhand Tennis&#39; Trial 0 w/score: 638.5 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 2 is &#39;Baseball Throw&#39; Trial 0 w/score: 994.8 (0.003s)
+Incorrect : Best match for &#39;Bunny Hops&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 0 w/score: 1069.8 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 4 is &#39;Baseball Throw&#39; Trial 4 w/score: 1146.3 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 2 is &#39;Midair &#39;S&#39;&#39; Trial 3 w/score: 345.2 (0.003s)
+Incorrect : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 434.8 (0.005s)
+Incorrect : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 3 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 2 w/score: 547.7 (0.005s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 0 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 4 w/score: 488.7 (0.003s)
+Correct : Best match for &#39;Shake&#39; Trial 3 is &#39;Shake&#39; Trial 1 w/score: 2149.5 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 2 is &#39;Underhand Bowling&#39; Trial 1 w/score: 735.2 (0.004s)
+COMPLETED FOLD: 2 IN 0.039 SECS WITH ACCURACY 7/11 (63.6%)
+
+**FOLD: 3**
+Correct : Best match for &#39;At Rest&#39; Trial 2 is &#39;At Rest&#39; Trial 0 w/score: 28.6 (0.005s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 1 is &#39;Backhand Tennis&#39; Trial 3 w/score: 692.4 (0.004s)
+Incorrect : Best match for &#39;Baseball Throw&#39; Trial 0 is &#39;Midair &#39;S&#39;&#39; Trial 4 w/score: 859.0 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 3 is &#39;Bunny Hops&#39; Trial 0 w/score: 837.2 (0.004s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 3 is &#39;Backhand Tennis&#39; Trial 4 w/score: 908.5 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 1 is &#39;Midair &#39;S&#39;&#39; Trial 4 w/score: 632.3 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 4 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 3 w/score: 401.4 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 1 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 w/score: 314.5 (0.002s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 w/score: 612.8 (0.003s)
+Incorrect : Best match for &#39;Shake&#39; Trial 0 is &#39;Midair &#39;S&#39;&#39; Trial 4 w/score: 2498.8 (0.003s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 1 is &#39;Underhand Bowling&#39; Trial 2 w/score: 735.2 (0.003s)
+COMPLETED FOLD: 3 IN 0.037 SECS WITH ACCURACY 8/11 (72.7%)
+
+**FOLD: 4**
+Correct : Best match for &#39;At Rest&#39; Trial 3 is &#39;At Rest&#39; Trial 0 w/score: 19.4 (0.003s)
+Correct : Best match for &#39;Backhand Tennis&#39; Trial 0 is &#39;Backhand Tennis&#39; Trial 4 w/score: 638.5 (0.003s)
+Correct : Best match for &#39;Baseball Throw&#39; Trial 3 is &#39;Baseball Throw&#39; Trial 0 w/score: 1055.3 (0.004s)
+Correct : Best match for &#39;Bunny Hops&#39; Trial 4 is &#39;Bunny Hops&#39; Trial 3 w/score: 1241.4 (0.003s)
+Incorrect : Best match for &#39;Forehand Tennis&#39; Trial 0 is &#39;Backhand Tennis&#39; Trial 1 w/score: 786.6 (0.003s)
+Correct : Best match for &#39;Midair &#39;S&#39;&#39; Trial 3 is &#39;Midair &#39;S&#39;&#39; Trial 2 w/score: 345.2 (0.003s)
+Correct : Best match for &#39;Midair Clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 1 w/score: 448.2 (0.003s)
+Correct : Best match for &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 2 is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 4 w/score: 308.1 (0.003s)
+Correct : Best match for &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 2 w/score: 612.8 (0.003s)
+Correct : Best match for &#39;Shake&#39; Trial 2 is &#39;Shake&#39; Trial 1 w/score: 2440.0 (0.004s)
+Correct : Best match for &#39;Underhand Bowling&#39; Trial 4 is &#39;Underhand Bowling&#39; Trial 0 w/score: 691.3 (0.003s)
+COMPLETED FOLD: 4 IN 0.035 SECS WITH ACCURACY 10/11 (90.9%)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Visualizing-Experiment-Results">Visualizing Experiment Results<a class="anchor-link" href="#Visualizing-Experiment-Results">&#182;</a></h1><p>We've written a number of functions to help visualize experimental results. You'll likely want to add more, for example:</p>
 <ul>
-<li>Visualizing incorrect matches. What happened? What could you do to improve your algorithm so these incorrect matches don't occur?</li>
+<li>Visualize incorrect matches. What happened? What could you do to improve your algorithm so these incorrect matches don't occur?</li>
 </ul>
 
 </div>
@@ -14439,7 +14809,7 @@ The selected gesture set is: JonGesturesEasy
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
@@ -14699,7 +15069,7 @@ The selected gesture set is: JonGesturesEasy
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_classification_result_as_confusion_matrix</span><span class="p">(</span><span class="n">results_x</span><span class="p">)</span>
@@ -14713,6 +15083,83 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_34_0.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_34_1.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_34_2.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_34_3.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_34_4.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -14723,7 +15170,7 @@ The selected gesture set is: JonGesturesEasy
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># track multiple experiments</span>
@@ -14752,10 +15199,536 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Title: Amelia: Euclidean distance with raw x signal: 45/55 (81.82%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.177s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 2/5 (40.0%)
+- Baseball Throw 4/5 (80.0%)
+- Custom 4/5 (80.0%)
+- Forehand Tennis 4/5 (80.0%)
+- Midair &#39;S&#39; 3/5 (60.0%)
+- Midair Clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Counter-clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Zorro &#39;Z&#39; 5/5 (100.0%)
+- Shake 5/5 (100.0%)
+- Underhand Bowling 4/5 (80.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 2 0 0 3 0 0 0 0 0 0]
+ [0 1 4 0 0 0 0 0 0 0 0]
+ [0 0 0 4 0 1 0 0 0 0 0]
+ [0 1 0 0 4 0 0 0 0 0 0]
+ [0 0 0 2 0 3 0 0 0 0 0]
+ [0 0 0 0 0 0 5 0 0 0 0]
+ [0 0 0 0 0 1 0 4 0 0 0]
+ [0 0 0 0 0 0 0 0 5 0 0]
+ [0 0 0 0 0 0 0 0 0 5 0]
+ [0 0 0 0 1 0 0 0 0 0 4]]
+
+Title: Anne: Euclidean distance with raw x signal: 47/55 (85.45%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.157s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 5/5 (100.0%)
+- Baseball Throw 4/5 (80.0%)
+- Custom 5/5 (100.0%)
+- Forehand Tennis 2/5 (40.0%)
+- Midair &#39;S&#39; 4/5 (80.0%)
+- Midair Clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Counter-clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Zorro &#39;Z&#39; 4/5 (80.0%)
+- Shake 4/5 (80.0%)
+- Underhand Bowling 5/5 (100.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0]
+ [0 0 4 0 0 0 0 0 0 0 1]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [0 3 0 0 2 0 0 0 0 0 0]
+ [1 0 0 0 0 4 0 0 0 0 0]
+ [0 0 0 0 0 1 4 0 0 0 0]
+ [0 0 0 0 0 0 0 5 0 0 0]
+ [0 0 0 0 0 1 0 0 4 0 0]
+ [1 0 0 0 0 0 0 0 0 4 0]
+ [0 0 0 0 0 0 0 0 0 0 5]]
+
+Title: Chris: Euclidean distance with raw x signal: 41/55 (74.55%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.176s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 5/5 (100.0%)
+- Baseball Throw 3/5 (60.0%)
+- Custom 5/5 (100.0%)
+- Forehand Tennis 5/5 (100.0%)
+- Midair &#39;S&#39; 4/5 (80.0%)
+- Midair Clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Counter-clockwise &#39;O&#39; 2/5 (40.0%)
+- Midair Zorro &#39;Z&#39; 2/5 (40.0%)
+- Shake 1/5 (20.0%)
+- Underhand Bowling 5/5 (100.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0]
+ [0 0 3 0 0 0 0 0 2 0 0]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [0 0 0 0 5 0 0 0 0 0 0]
+ [0 0 0 0 0 4 0 0 1 0 0]
+ [1 0 0 0 0 0 4 0 0 0 0]
+ [3 0 0 0 0 0 0 2 0 0 0]
+ [0 0 0 0 0 3 0 0 2 0 0]
+ [4 0 0 0 0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 0 0 0 0 5]]
+
+Title: Jason: Euclidean distance with raw x signal: 49/55 (89.09%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.149s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 5/5 (100.0%)
+- Baseball Throw 5/5 (100.0%)
+- Custom 5/5 (100.0%)
+- Forehand Tennis 3/5 (60.0%)
+- Midair &#39;S&#39; 5/5 (100.0%)
+- Midair Clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Counter-clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Zorro &#39;Z&#39; 3/5 (60.0%)
+- Shake 4/5 (80.0%)
+- Underhand Bowling 5/5 (100.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0]
+ [0 0 5 0 0 0 0 0 0 0 0]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [0 1 1 0 3 0 0 0 0 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 4 1 0 0 0]
+ [0 0 0 0 0 0 0 5 0 0 0]
+ [0 0 0 0 0 2 0 0 3 0 0]
+ [0 0 0 0 0 0 0 1 0 4 0]
+ [0 0 0 0 0 0 0 0 0 0 5]]
+
+Title: JonGesturesEasy: Euclidean distance with raw x signal: 41/55 (74.55%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.270s for 55 comparisons (avg=0.005s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 3/5 (60.0%)
+- Baseball Throw 3/5 (60.0%)
+- Bunny Hops 5/5 (100.0%)
+- Forehand Tennis 1/5 (20.0%)
+- Midair &#39;S&#39; 5/5 (100.0%)
+- Midair Clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Counter-clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Zorro &#39;Z&#39; 5/5 (100.0%)
+- Shake 0/5 (0.0%)
+- Underhand Bowling 5/5 (100.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 3 0 0 2 0 0 0 0 0 0]
+ [0 0 3 1 1 0 0 0 0 0 0]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [0 3 0 0 1 0 0 0 1 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 5 0 0 0 0]
+ [0 0 0 0 0 0 1 4 0 0 0]
+ [0 0 0 0 0 0 0 0 5 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 5]]
+
+Title: JonGesturesHarder: Euclidean distance with raw x signal: 18/55 (32.73%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.168s for 55 comparisons (avg=0.003s per match)
+- At Rest 2/5 (40.0%)
+- Backhand Tennis 0/5 (0.0%)
+- Baseball Throw 0/5 (0.0%)
+- Bunny Hops 3/5 (60.0%)
+- Forehand Tennis 0/5 (0.0%)
+- Midair &#39;S&#39; 2/5 (40.0%)
+- Midair Clockwise &#39;O&#39; 3/5 (60.0%)
+- Midair Counter-clockwise &#39;O&#39; 2/5 (40.0%)
+- Midair Zorro &#39;Z&#39; 2/5 (40.0%)
+- Shake 1/5 (20.0%)
+- Underhand Bowling 3/5 (60.0%)
+[[2 0 0 2 0 0 0 1 0 0 0]
+ [0 0 0 0 0 1 1 1 0 1 1]
+ [0 0 0 0 0 0 1 2 2 0 0]
+ [1 0 0 3 0 0 1 0 0 0 0]
+ [0 1 2 1 0 0 0 1 0 0 0]
+ [0 0 0 1 0 2 0 2 0 0 0]
+ [0 0 0 0 0 0 3 2 0 0 0]
+ [1 0 0 0 0 0 2 2 0 0 0]
+ [0 1 0 0 0 2 0 0 2 0 0]
+ [1 0 0 3 0 0 0 0 0 1 0]
+ [0 1 0 0 0 0 1 0 0 0 3]]
+
+Title: Jose: Euclidean distance with raw x signal: 45/55 (81.82%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.155s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 3/5 (60.0%)
+- Baseball Throw 4/5 (80.0%)
+- Forehand Tennis 5/5 (100.0%)
+- Midair &#39;S&#39; 5/5 (100.0%)
+- Midair Clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Counter-clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Zorro &#39;Z&#39; 2/5 (40.0%)
+- Running Man 4/5 (80.0%)
+- Shake 2/5 (40.0%)
+- Underhand Bowling 5/5 (100.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 3 0 1 1 0 0 0 0 0 0]
+ [0 0 4 0 1 0 0 0 0 0 0]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [0 0 0 0 5 0 0 0 0 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 5 0 0 0 0]
+ [0 0 2 0 0 0 0 2 0 0 1]
+ [0 0 0 0 0 1 0 0 4 0 0]
+ [0 0 0 0 1 0 2 0 0 2 0]
+ [0 0 0 0 0 0 0 0 0 0 5]]
+
+Title: Kim: Euclidean distance with raw x signal: 40/55 (72.73%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.146s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 3/5 (60.0%)
+- Baseball Throw 0/5 (0.0%)
+- Custom 5/5 (100.0%)
+- Forehand Tennis 3/5 (60.0%)
+- Midair &#39;S&#39; 5/5 (100.0%)
+- Midair Clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Counter-clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Zorro &#39;Z&#39; 4/5 (80.0%)
+- Shake 2/5 (40.0%)
+- Underhand Bowling 4/5 (80.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 3 0 0 0 0 0 2 0 0 0]
+ [0 2 0 0 3 0 0 0 0 0 0]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [1 0 1 0 3 0 0 0 0 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 5 0 0 0 0]
+ [0 0 0 0 0 1 0 4 0 0 0]
+ [1 0 0 0 0 0 0 0 4 0 0]
+ [0 0 0 3 0 0 0 0 0 2 0]
+ [0 0 0 0 1 0 0 0 0 0 4]]
+
+Title: Matt: Euclidean distance with raw x signal: 42/55 (76.36%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.167s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 2/5 (40.0%)
+- Baseball Throw 4/5 (80.0%)
+- Custom 5/5 (100.0%)
+- Forehand Tennis 3/5 (60.0%)
+- Midair &#39;S&#39; 5/5 (100.0%)
+- Midair Clockwise &#39;O&#39; 3/5 (60.0%)
+- Midair Counter-clockwise &#39;O&#39; 3/5 (60.0%)
+- Midair Zorro &#39;Z&#39; 5/5 (100.0%)
+- Shake 4/5 (80.0%)
+- Underhand Bowling 3/5 (60.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [1 2 0 0 1 1 0 0 0 0 0]
+ [0 0 4 0 0 0 0 1 0 0 0]
+ [0 0 0 5 0 0 0 0 0 0 0]
+ [0 1 1 0 3 0 0 0 0 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 3 1 1 0 0]
+ [0 0 0 0 0 0 2 3 0 0 0]
+ [0 0 0 0 0 0 0 0 5 0 0]
+ [0 0 0 0 0 0 0 0 1 4 0]
+ [0 0 0 0 1 0 0 0 0 1 3]]
+
+Title: Nathalie: Euclidean distance with raw x signal: 41/55 (74.55%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.152s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 5/5 (100.0%)
+- Baseball Throw 2/5 (40.0%)
+- Custom 3/5 (60.0%)
+- Forehand Tennis 4/5 (80.0%)
+- Midair &#39;S&#39; 3/5 (60.0%)
+- Midair Clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Counter-clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Zorro &#39;Z&#39; 5/5 (100.0%)
+- Shake 1/5 (20.0%)
+- Underhand Bowling 5/5 (100.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0]
+ [0 0 2 0 1 1 0 0 0 1 0]
+ [2 0 0 3 0 0 0 0 0 0 0]
+ [0 0 0 0 4 1 0 0 0 0 0]
+ [0 0 0 0 0 3 0 2 0 0 0]
+ [0 0 0 1 0 0 4 0 0 0 0]
+ [0 0 0 0 0 0 1 4 0 0 0]
+ [0 0 0 0 0 0 0 0 5 0 0]
+ [4 0 0 0 0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 0 0 0 0 5]]
+
+Title: Robin: Euclidean distance with raw x signal: 42/55 (76.36%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.162s for 55 comparisons (avg=0.003s per match)
+- At Rest 4/5 (80.0%)
+- Backhand Tennis 5/5 (100.0%)
+- Baseball Throw 2/5 (40.0%)
+- Custom 3/5 (60.0%)
+- Forehand Tennis 4/5 (80.0%)
+- Midair &#39;S&#39; 5/5 (100.0%)
+- Midair Clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Counter-clockwise &#39;O&#39; 3/5 (60.0%)
+- Midair Zorro &#39;Z&#39; 5/5 (100.0%)
+- Shake 2/5 (40.0%)
+- Underhand Bowling 4/5 (80.0%)
+[[4 0 0 1 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0]
+ [1 0 2 0 2 0 0 0 0 0 0]
+ [2 0 0 3 0 0 0 0 0 0 0]
+ [0 0 1 0 4 0 0 0 0 0 0]
+ [0 0 0 0 0 5 0 0 0 0 0]
+ [0 0 0 0 0 0 5 0 0 0 0]
+ [0 0 0 0 0 1 1 3 0 0 0]
+ [0 0 0 0 0 0 0 0 5 0 0]
+ [0 0 0 1 0 0 0 1 0 2 1]
+ [0 0 0 0 1 0 0 0 0 0 4]]
+
+Title: Steph: Euclidean distance with raw x signal: 37/55 (67.27%)
+Optional arguments: {&#39;verbose&#39;: False}
+Took 0.176s for 55 comparisons (avg=0.003s per match)
+- At Rest 5/5 (100.0%)
+- Backhand Tennis 1/5 (20.0%)
+- Baseball Throw 2/5 (40.0%)
+- Forehand Tennis 3/5 (60.0%)
+- Midair &#39;S&#39; 2/5 (40.0%)
+- Midair Clockwise &#39;O&#39; 4/5 (80.0%)
+- Midair Counter-clockwise &#39;O&#39; 5/5 (100.0%)
+- Midair Zorro &#39;Z&#39; 5/5 (100.0%)
+- Salute (Custom Gesture) 4/5 (80.0%)
+- Shake 3/5 (60.0%)
+- Underhand Bowling 3/5 (60.0%)
+[[5 0 0 0 0 0 0 0 0 0 0]
+ [0 1 1 3 0 0 0 0 0 0 0]
+ [0 1 2 2 0 0 0 0 0 0 0]
+ [0 1 1 3 0 0 0 0 0 0 0]
+ [0 0 0 0 2 2 1 0 0 0 0]
+ [0 0 0 0 1 4 0 0 0 0 0]
+ [0 0 0 0 0 0 5 0 0 0 0]
+ [0 0 0 0 0 0 0 5 0 0 0]
+ [1 0 0 0 0 0 0 0 4 0 0]
+ [1 0 0 0 0 0 0 0 1 3 0]
+ [0 1 0 0 0 1 0 0 0 0 3]]
+Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_1.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_2.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_3.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_4.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_5.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_6.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_7.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_8.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_9.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_10.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_11.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_12.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_13.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_36_14.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg_accuracy</span><span class="p">,</span> <span class="n">stddev</span> <span class="o">=</span> <span class="n">experiments</span><span class="o">.</span><span class="n">get_avg_accuracy_with_std</span><span class="p">()</span>
@@ -14763,6 +15736,24 @@ The selected gesture set is: JonGesturesEasy
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -14778,7 +15769,7 @@ The selected gesture set is: JonGesturesEasy
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Demonstration of numpy arithmetic array operations</span>
@@ -14802,10 +15793,29 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[2 4 6]
+[3 6 9]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># playing around with numpy subtraction. In order for these operations to work</span>
@@ -14826,10 +15836,30 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 0,  0, -1, -5, -5])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Testing to see if the numpy &#39;where&#39; method supports string matching</span>
@@ -14845,10 +15875,29 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(array([0, 2], dtype=int64),)
+[&#39;apple&#39; &#39;apple&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Playing around with classes in Python 3. Notice how just like in Javascript, you can add a new member variable</span>
@@ -14870,10 +15919,42 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5
+7
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;testVar&#39;: 5, &#39;newVar&#39;: 7}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Experimenting with how unpacking tuples work</span>
@@ -14887,10 +15968,30 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+1 2 3 4 5 6 7 8 9 10
+6 7 8 9 10
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Experimenting with how we delete things out of lists</span>
@@ -14908,10 +16009,30 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;a&#39;, &#39;c&#39;, &#39;d&#39;]
+[&#39;a&#39;, &#39;c&#39;, &#39;d&#39;]
+[&#39;a&#39;, &#39;d&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Playing around with how we can split up and combine lists in Python</span>
@@ -14930,10 +16051,31 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 2, 3, 4]
+[1, 2, 3, 5]
+[4, 5]
+[1, 2, 3]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Find Euclidean distance between two numpy vector arrays</span>
@@ -14957,10 +16099,29 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>6.324555320336759
+6.324555320336759
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># detrend playground</span>
@@ -14983,10 +16144,63 @@ The selected gesture set is: JonGesturesEasy
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[15.07651485 38.95826915 24.06805911 15.72247249 40.19961501 11.51039253
+ 46.19437545  8.08694086 47.04984742 44.16330621  0.42746396 41.18520135
+ 27.43052433 10.73809097 49.67376932 42.63242418 38.57048627  7.62321623
+ 14.8583582  15.09225716  6.33996976  6.61331935 23.9243732   1.6474267
+  9.12349668 37.86633077 24.90183907 48.87885008  1.91082188 42.50149638
+ 15.46561595 39.24623367 28.00937973 43.04537912 12.29431732 36.51387178
+ 31.78335462 25.28153011 13.25576937 11.0538778   4.42495403 49.78478923
+ 14.03494656 32.94161069 35.34596084 11.50253433 19.30666599 28.97305561
+  3.04953944 42.43841146]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.legend.Legend at 0x1d983f95ba8&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_47_2.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Playing around with plotting confusion matrices</span>
@@ -15045,6 +16259,59 @@ The selected gesture set is: JonGesturesEasy
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Confusion matrix, without normalization
+[[2 0 0]
+ [0 1 1]
+ [1 0 2]]
+Normalized confusion matrix
+[[1.         0.         0.        ]
+ [0.         0.5        0.5       ]
+ [0.33333333 0.         0.66666667]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_48_1.png"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="output_48_2.png"
+>
+</div>
+
+</div>
+
 </div>
 </div>
 

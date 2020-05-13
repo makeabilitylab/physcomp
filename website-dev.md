@@ -47,6 +47,7 @@ nav_exclude: true
   - https://avexdesigns.com/responsive-youtube-embed/
   - https://embedresponsively.com/
 - Serve images responsively with jekyll plugin: https://github.com/rbuchberger/jekyll_picture_tag
+- Add build script (in ruby?) to inject google analytics into the html-ized .pynbs
 
 ## Markdown Tips
 

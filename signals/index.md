@@ -130,7 +130,7 @@ git clone https://github.com/makeabilitylab/signals.git
 **Note:** Again, for your actual assignments, you'll likely want to run your notebooks **locally** because you'll want to load data from disk. You can also do this with Google Colab (you'll just need to get your data into the cloud environment; see below).
 
 <!-- TODO: add in a very first notebook on using Jupyter Notebook -->
-
+<!-- TODO: add in an H3 that separates this stuff out a bit -->
 1. **Introduction to Jupyter Notebook**. There are many introductory tutorials and videos to Jupyter Notebook online. We'll quickly demo Notebook in class but if you want to learn more, you could consult this [Datacamp tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook) or this [Dataquest tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/). Regardless, you will learn Notebook as you go through the lessons below and work on your assignments.
 
 <!-- MusicInformationRetrieval has a good Jupyter Notebook basics page: https://musicinformationretrieval.com/get_good_at_ipython.html -->
@@ -144,6 +144,8 @@ git clone https://github.com/makeabilitylab/signals.git
 5. [**Step Tracker Exercises**](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). Now, let's actually work on a **real** problem with **real** data. Building off our A2 assignment, let's analyze some example accelerometer step data and write an algorithm in Jupyter Notebook to infer steps. Notebook is perfectly suited for this task: it's easy to visualize data with [Matplotlib](https://matplotlib.org/) and [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html) offer filtering, detrending, and other useful signal processing algorithms. You can try lots of ideas, see how well they work on some test data, and then implement your most promising idea on the ESP32. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). 
 
 6. [**Gesture Recognizer: Shape Matching**](gesturerec/shapebased/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/GestureRecognizer/GestureRecognizer-ShapeBased.ipynb)). Let's build a shape-based (or template-based) gesture recognizer! This Notebook provides the data structures and experimental scaffolding to write and test shape-based gesture classifiers.
+
+7. [Quantization and Sampling](QuantizationAndSampling/index.html)([ipynb](TODO)). Introduces the two primary factors in digitizing an analog signal: **quantization** and **sampling**. Describes and shows the effect of different quantization levels and sampling rates on real signals (audio data) and introduces the Nyquist sampling theorem, aliasing, and some frequency plots.
 
 ### Using Google Colab
 

@@ -21,6 +21,7 @@ nav_exclude: true
 - Add in design and design thinking books like Sketching User Experiences.
 - Look at my resources list from [CMSC838f](https://web.archive.org/web/20170605201324/http:/cmsc838f-s15.wikispaces.com/). [Direct link](https://web.archive.org/web/20150709105051/http://cmsc838f-s15.wikispaces.com/Resources)
 - Look at: http://ladyada.net/learn/arduino/
+- Berkeley's EECS16A course: https://www.eecs16a.org/
 - Stanford's ENGR40m Arduino/making course:
   - https://web.stanford.edu/class/archive/engr/engr40m.1178/slides.html
 - USC Ming Hsieh Embedded Systems Design Laboratory
@@ -53,6 +54,10 @@ nav_exclude: true
   - http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf
 - Kalman filter on ESP32: http://www.iotsharing.com/2019/06/how-to-apply-kalman-filter-to-esp.html
 - [Beginners guide to ESP8266](https://tttapa.github.io/ESP8266/Chap01%20-%20ESP8266.html)
+
+## Touch/pen/mouse gesture recognizers
+- http://depts.washington.edu/acelab/proj/dollar/index.html
+- Datasets: https://sites.google.com/site/adriendelaye/home/pen-and-touch-datasets
 
 ## Possible H1 Content
 - Motors

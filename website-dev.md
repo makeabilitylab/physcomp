@@ -48,6 +48,9 @@ nav_exclude: true
   - https://embedresponsively.com/
 - Serve images responsively with jekyll plugin: https://github.com/rbuchberger/jekyll_picture_tag
 - Add build script (in ruby?) to inject google analytics into the html-ized .pynbs
+- Interactive dtw visualization in p5s. Maybe have user draw the two signals and run dtw, fill out table, and show heat plot? Could also select from some predefined signals
+- This goes along with my interactive convoultion idea too.
+- Jupyter Notebook with interactive visualization widgets: https://plotly.com/python/chart-events/
 
 ## Markdown Tips
 

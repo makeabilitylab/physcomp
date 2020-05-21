@@ -153,11 +153,11 @@ For visualizing our data, we'll be using [Matplotlib](https://matplotlib.org/)â€
 
 ## Signals
 
-#### [Lesson 1: Quantization and Sampling](QuantizationAndSampling/index.html) ([ipynb](TODO)). 
+#### [Lesson 1: Quantization and Sampling](QuantizationAndSampling/index.html) ([ipynb]([TODO](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Quantization%20and%20Sampling.ipynb)). 
 
 Introduces the two primary factors in digitizing an analog signal: **quantization** and **sampling**. Describes and shows the effect of different quantization levels and sampling rates on real signals (audio data) and introduces the Nyquist sampling theorem, aliasing, and some frequency plots.
 
-#### [Lesson 2: Comparing Signals (Time Domain)](ComparingSignals/index.html) ([ipynb](TODO)). 
+#### [Lesson 2: Comparing Signals (Time Domain)](ComparingSignals/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Comparing%20Signals.ipynb)). 
 
 Introduces techniques to compare signals in the time domain, including Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW).
 

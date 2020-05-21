@@ -131,7 +131,7 @@ git clone https://github.com/makeabilitylab/signals.git
 
 <!-- TODO: add in a very first notebook on using Jupyter Notebook -->
 <!-- TODO: add in an H3 that separates this stuff out a bit -->
-## Introduction to Jupyter Notebook, Python, and SciPy
+### Introduction to Jupyter Notebook, Python, and SciPy
 
 #### Lesson 1: Introduction to Jupyter Notebook
 
@@ -151,7 +151,7 @@ We'll be using [NumPy arrays](https://numpy.org/doc/stable/reference/arrays.html
 
 For visualizing our data, we'll be using [Matplotlib](https://matplotlib.org/)—an incredibly powerful with a bit of an eccentric API (thanks to Matlab). Open this notebook, learn about creating basic charts, and try to build some of your own. [![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/makeabilitylab/signals/master?filepath=Tutorials%2FIntroToMatplotlib.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToMatplotlib.ipynb)
 
-## Signals
+### Signals
 
 #### [Lesson 1: Quantization and Sampling](QuantizationAndSampling/index.html) ([ipynb]([TODO](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Quantization%20and%20Sampling.ipynb)). 
 

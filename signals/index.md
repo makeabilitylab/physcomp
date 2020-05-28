@@ -153,7 +153,7 @@ For visualizing our data, we'll be using [Matplotlib](https://matplotlib.org/)â€
 
 ### Signals
 
-#### [Lesson 1: Quantization and Sampling](QuantizationAndSampling/index.html) ([ipynb]((https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Quantization%20and%20Sampling.ipynb))
+#### [Lesson 1: Quantization and Sampling](QuantizationAndSampling/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Quantization%20and%20Sampling.ipynb))
 
 Introduces the two primary factors in digitizing an analog signal: **quantization** and **sampling**. Describes and shows the effect of different quantization levels and sampling rates on real signals (audio data) and introduces the Nyquist sampling theorem, aliasing, and some frequency plots.
 
@@ -161,7 +161,7 @@ Introduces the two primary factors in digitizing an analog signal: **quantizatio
 
 Introduces techniques to compare signals in the time domain, including Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW).
 
-#### [Lesson 3: Frequency Analysis](FrequencyAnalysis/index.html)([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Frequency%20Analysis.ipynb))
+#### [Lesson 3: Frequency Analysis](FrequencyAnalysis/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Frequency%20Analysis.ipynb))
 
 Introduces frequency analysis, including Discrete Fourier Transforms (DFTs) and the intuition for how they work, Fast Fourier Transforms and spectral frequency plots, and Short-time Fourier Transforms (STFTs) and spectrograms.
 

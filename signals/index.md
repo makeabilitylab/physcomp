@@ -171,6 +171,10 @@ Building off our A2 assignment, let's analyze some example accelerometer step da
 
 Let's build a shape-based (or template-based) gesture recognizer! This Notebook provides the data structures and experimental scaffolding to write and test shape-based gesture classifiers.
 
+#### [Exercise 3: Gesture Recognizer: Supervised Learning](gesturerec/featurebased/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/GestureRecognizer/GestureRecognizer-FeatureBased.ipynb)). 
+
+Let's build a feature-based (or model-based) gesture recognizer using supervised learning! This Notebook provides an overview of how to use supervised learning and the Scikit-learn library to classify gestures.
+
 ### Using Google Colab
 
 **Importantly,** to get the Step Tracker Exercise notebook to work in Colab, you must create a folder called `Logs` and copy over at least one log file from [here](https://github.com/makeabilitylab/signals/tree/master/Projects/StepTracker/Logs). I suggest starting with [`arduino_accel_righthoodiepocket_3sets_15steps_delay10_9600baud_subset.csv`](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/Logs/arduino_accel_righthoodiepocket_3sets_15steps_delay10_9600baud_subset.csv) because it's the most straightforward. 

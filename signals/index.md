@@ -161,6 +161,10 @@ Introduces the two primary factors in digitizing an analog signal: **quantizatio
 
 Introduces techniques to compare signals in the time domain, including Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW).
 
+#### [Lesson 3: Frequency Analysis](FrequencyAnalysis/index.html)([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Frequency%20Analysis.ipynb))
+
+Introduces frequency analysis, including Discrete Fourier Transforms (DFTs) and the intuition for how they work, Fast Fourier Transforms and spectral frequency plots, and Short-time Fourier Transforms (STFTs) and spectrograms.
+
 ### Exercises
 
 #### [Exercise 1: Step Tracker](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). 

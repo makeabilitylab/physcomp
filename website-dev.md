@@ -51,6 +51,7 @@ nav_exclude: true
 - Interactive dtw visualization in p5s. Maybe have user draw the two signals and run dtw, fill out table, and show heat plot? Could also select from some predefined signals
 - This goes along with my interactive convoultion idea too.
 - Jupyter Notebook with interactive visualization widgets: https://plotly.com/python/chart-events/
+- Add in acknowledgments in Jupyter Notebook: "open education statement + written by Jon Froehlich"
 
 ## Markdown Tips
 

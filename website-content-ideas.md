@@ -103,17 +103,19 @@ If we were to treat this as an interactive book. What would it look like? This i
 ### Chapter 3: Intro to Output
 - Digital output, source and sinking current
 - Analog output, PWM, DACs
+- (Maybe include some things about human psychology and interpreting sound, displays, etc?)
 
 ### Chapter 4: Intro to Input
 - Digital input, debouncing, interrupts
 - Analog input, voltage dividers (revisited)
+- Maybe something about how fast humans move, etc.
 
 ### Chapter 5: Sensors
 - Sensors: characteristics, taxonomies
 - Digital communication protocols like I2C and SPI
 - Example sensors including accel, photoresistor, fsr, and more
 
-### Chapter 6: Signals
+### Chapter 6: Signals (or Applied DSP)
 - Processing signals
 - Time vs. frequency analysis
 - Filters

@@ -74,6 +74,7 @@ For visualizing our data, we'll be using [Matplotlib](https://matplotlib.org/)â€
 ### Signals
 
 <!-- I can't seem to get Binder to work on the following lessons, perhaps because of spaces in the filenames? -->
+<!-- For example: https://mybinder.org/v2/gh/makeabilitylab/signals/master?filepath=Tutorials%2FSignals%2520-%2520Comparing%2520Signals.ipynb doesn't work -->
 
 #### [Lesson 1: Quantization and Sampling](QuantizationAndSampling/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Quantization%20and%20Sampling.ipynb))
 
@@ -81,7 +82,7 @@ Introduces the two primary factors in digitizing an analog signal: **quantizatio
 
 #### [Lesson 2: Comparing Signals (Time Domain)](ComparingSignals/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Comparing%20Signals.ipynb))
 
-Introduces techniques to compare signals in the time domain, including Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW). 
+Introduces techniques to compare signals in the time domain, including Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW).
 
 #### [Lesson 3: Frequency Analysis](FrequencyAnalysis/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Frequency%20Analysis.ipynb))
 

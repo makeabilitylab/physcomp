@@ -2,6 +2,16 @@
 <html>
 <head><meta charset="utf-8" />
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161192681-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-161192681-1');
+</script>
+
 <title>GestureRecognizer-ShapeBased</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
@@ -13233,6 +13243,16 @@ $( document ).ready(function(){
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Acknowledgments">Acknowledgments<a class="anchor-link" href="#Acknowledgments">&#182;</a></h2><p>This Notebook was designed and written by Professor Jon E. Froehlich at the University of Washington along with feedback from students. It is made available freely online as an <a href="https://en.wikipedia.org/wiki/Open_educational_resources">open educational resource</a> at the teaching website: <a href="https://makeabilitylab.github.io/physcomp/">https://makeabilitylab.github.io/physcomp/</a>.</p>
+<p>The <a href="https://github.com/makeabilitylab/physcomp">website</a>, <a href="https://github.com/makeabilitylab/signals">Notebook code</a>, and <a href="https://github.com/makeabilitylab/arduino">Arduino code</a> are all open source using the MIT license.</p>
+<p>Please file a GitHub Issue or Pull Request for changes/comments or email me directly.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Imports">Imports<a class="anchor-link" href="#Imports">&#182;</a></h1>
 </div>
 </div>
@@ -13252,14 +13272,13 @@ $( document ).ready(function(){
 
 <span class="c1"># We wrote this gesturerec package for the class</span>
 <span class="c1"># It provides some useful data structures for the accelerometer signal</span>
-<span class="c1"># and running experiments so you can focus on on writing classification code, </span>
+<span class="c1"># and running experiments so you can focus on writing classification code, </span>
 <span class="c1"># evaluating your solutions, and iterating </span>
 <span class="kn">import</span> <span class="nn">gesturerec.utility</span> <span class="k">as</span> <span class="nn">grutils</span>
 <span class="kn">import</span> <span class="nn">gesturerec.data</span> <span class="k">as</span> <span class="nn">grdata</span>
 <span class="kn">import</span> <span class="nn">gesturerec.gesturestream</span> <span class="k">as</span> <span class="nn">grstream</span>
 <span class="kn">from</span> <span class="nn">gesturerec.data</span> <span class="k">import</span> <span class="n">SensorData</span>
 <span class="kn">from</span> <span class="nn">gesturerec.data</span> <span class="k">import</span> <span class="n">GestureSet</span>
-<span class="kn">from</span> <span class="nn">gesturerec.gesturestream</span> <span class="k">import</span> <span class="n">GestureStream</span>
 <span class="kn">from</span> <span class="nn">gesturerec.experiments</span> <span class="k">import</span> <span class="n">Experiments</span>
 <span class="kn">from</span> <span class="nn">gesturerec.experiments</span> <span class="k">import</span> <span class="n">ClassificationResults</span>
 <span class="kn">from</span> <span class="nn">gesturerec.experiments</span> <span class="k">import</span> <span class="n">TrialClassificationResult</span>
@@ -13279,11 +13298,11 @@ $( document ).ready(function(){
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load the data</span>
-<span class="n">root_gesture_log_path</span> <span class="o">=</span> <span class="s1">&#39;./ADXL335GestureLogs&#39;</span>
+<span class="n">root_gesture_log_path</span> <span class="o">=</span> <span class="s1">&#39;./GestureLogs&#39;</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found the following gesture log sub-directories&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">grutils</span><span class="o">.</span><span class="n">get_immediate_subdirectories</span><span class="p">(</span><span class="n">root_gesture_log_path</span><span class="p">))</span>
@@ -13327,224 +13346,26 @@ $( document ).ready(function(){
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Found the following gesture log sub-directories
-[&#39;Amelia&#39;, &#39;Anne&#39;, &#39;Chris&#39;, &#39;Jason&#39;, &#39;JonGesturesEasy&#39;, &#39;JonGesturesHarder&#39;, &#39;Jose&#39;, &#39;Kim&#39;, &#39;Matt&#39;, &#39;Nathalie&#39;, &#39;Robin&#39;, &#39;Steph&#39;]
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Amelia&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Amelia
+[&#39;JonGestures&#39;]
+Creating a GestureSet object for path &#39;./GestureLogs\JonGestures&#39;
+Found 55 csv files in ./GestureLogs\JonGestures
 Found 11 gestures
 Found 5 trials for &#39;At Rest&#39;
 Found 5 trials for &#39;Backhand Tennis&#39;
 Found 5 trials for &#39;Baseball Throw&#39;
 Found 5 trials for &#39;Custom&#39;
 Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;At Rest&#39; Trial 0 with 446 sensor events.
-Avg samples/sec across 55 sensor files: 76.9
-Avg sample length across 55 sensor files: 2.7s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Anne&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Anne
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Custom&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Backhand Tennis&#39; Trial 0 with 293 sensor events.
-Avg samples/sec across 55 sensor files: 77.0
-Avg sample length across 55 sensor files: 2.4s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Chris&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Chris
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Custom&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Shake&#39; Trial 3 with 520 sensor events.
-Avg samples/sec across 55 sensor files: 76.7
-Avg sample length across 55 sensor files: 4.7s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Jason&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Jason
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Custom&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Custom&#39; Trial 4 with 266 sensor events.
-Avg samples/sec across 55 sensor files: 73.1
-Avg sample length across 55 sensor files: 2.5s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\JonGesturesEasy&#39;
-Found 55 csv files in ./ADXL335GestureLogs\JonGesturesEasy
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Bunny Hops&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
 Found 5 trials for &#39;Midair &#39;S&#39;&#39;
 Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
 Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
 Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
 Found 5 trials for &#39;Shake&#39;
 Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;At Rest&#39; Trial 4 with 443 sensor events.
-Avg samples/sec across 55 sensor files: 76.9
-Avg sample length across 55 sensor files: 3.4s
+Max trial length across all gesture is &#39;At Rest&#39; Trial 3 with 889 sensor events.
+Avg samples/sec across 55 sensor files: 91.2
+Avg sample length across 55 sensor files: 3.5s
 
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\JonGesturesHarder&#39;
-Found 55 csv files in ./ADXL335GestureLogs\JonGesturesHarder
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Bunny Hops&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Baseball Throw&#39; Trial 4 with 1100 sensor events.
-Avg samples/sec across 55 sensor files: 76.7
-Avg sample length across 55 sensor files: 6.2s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Jose&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Jose
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Running Man&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Midair Clockwise &#39;O&#39;&#39; Trial 0 with 310 sensor events.
-Avg samples/sec across 55 sensor files: 77.0
-Avg sample length across 55 sensor files: 2.5s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Kim&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Kim
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Custom&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Midair Counter-clockwise &#39;O&#39;&#39; Trial 1 with 170 sensor events.
-Avg samples/sec across 55 sensor files: 77.3
-Avg sample length across 55 sensor files: 1.5s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Matt&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Matt
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Custom&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Custom&#39; Trial 3 with 188 sensor events.
-Avg samples/sec across 55 sensor files: 48.9
-Avg sample length across 55 sensor files: 2.9s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Nathalie&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Nathalie
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Custom&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Custom&#39; Trial 2 with 282 sensor events.
-Avg samples/sec across 55 sensor files: 76.9
-Avg sample length across 55 sensor files: 2.6s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Robin&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Robin
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Custom&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Midair Zorro &#39;Z&#39;&#39; Trial 1 with 299 sensor events.
-Avg samples/sec across 55 sensor files: 76.8
-Avg sample length across 55 sensor files: 2.9s
-
-Creating a GestureSet object for path &#39;./ADXL335GestureLogs\Steph&#39;
-Found 55 csv files in ./ADXL335GestureLogs\Steph
-Found 11 gestures
-Found 5 trials for &#39;At Rest&#39;
-Found 5 trials for &#39;Backhand Tennis&#39;
-Found 5 trials for &#39;Baseball Throw&#39;
-Found 5 trials for &#39;Forehand Tennis&#39;
-Found 5 trials for &#39;Midair Clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Counter-clockwise &#39;O&#39;&#39;
-Found 5 trials for &#39;Midair Zorro &#39;Z&#39;&#39;
-Found 5 trials for &#39;Midair &#39;S&#39;&#39;
-Found 5 trials for &#39;Salute (Custom Gesture)&#39;
-Found 5 trials for &#39;Shake&#39;
-Found 5 trials for &#39;Underhand Bowling&#39;
-Max trial length across all gesture is &#39;Shake&#39; Trial 4 with 529 sensor events.
-Avg samples/sec across 55 sensor files: 76.6
-Avg sample length across 55 sensor files: 3.9s
-
-The selected gesture set: &#39;./ADXL335GestureLogs\JonGesturesEasy&#39; : 11 gestures and 55 total trials
+The selected gesture set: &#39;./GestureLogs\JonGestures&#39; : 11 gestures and 55 total trials
 </pre>
 </div>
 </div>
@@ -13736,7 +13557,7 @@ The selected gesture set is: JonGesturesEasy
 
 
 <div class="output_png output_subarea ">
-<img src="output_14_0.png"
+<img src="output_15_0.png"
 >
 </div>
 
@@ -13792,7 +13613,7 @@ The selected gesture set is: JonGesturesEasy
 
 
 <div class="output_png output_subarea ">
-<img src="output_16_0.png"
+<img src="output_17_0.png"
 >
 </div>
 
@@ -13863,7 +13684,7 @@ The selected gesture set is: JonGesturesEasy
 
 
 <div class="output_png output_subarea ">
-<img src="output_18_0.png"
+<img src="output_19_0.png"
 >
 </div>
 
@@ -13951,7 +13772,7 @@ The selected gesture set is: JonGesturesEasy
 
 
 <div class="output_png output_subarea ">
-<img src="output_20_0.png"
+<img src="output_21_0.png"
 >
 </div>
 
@@ -14012,7 +13833,7 @@ The selected gesture set is: JonGesturesEasy
 
 
 <div class="output_png output_subarea ">
-<img src="output_22_0.png"
+<img src="output_23_0.png"
 >
 </div>
 
@@ -15096,7 +14917,7 @@ COMPLETED FOLD: 4 IN 0.035 SECS WITH ACCURACY 10/11 (90.9%)
 
 
 <div class="output_png output_subarea ">
-<img src="output_34_0.png"
+<img src="output_35_0.png"
 >
 </div>
 
@@ -15110,7 +14931,7 @@ COMPLETED FOLD: 4 IN 0.035 SECS WITH ACCURACY 10/11 (90.9%)
 
 
 <div class="output_png output_subarea ">
-<img src="output_34_1.png"
+<img src="output_35_1.png"
 >
 </div>
 
@@ -15124,7 +14945,7 @@ COMPLETED FOLD: 4 IN 0.035 SECS WITH ACCURACY 10/11 (90.9%)
 
 
 <div class="output_png output_subarea ">
-<img src="output_34_2.png"
+<img src="output_35_2.png"
 >
 </div>
 
@@ -15138,7 +14959,7 @@ COMPLETED FOLD: 4 IN 0.035 SECS WITH ACCURACY 10/11 (90.9%)
 
 
 <div class="output_png output_subarea ">
-<img src="output_34_3.png"
+<img src="output_35_3.png"
 >
 </div>
 
@@ -15152,7 +14973,7 @@ COMPLETED FOLD: 4 IN 0.035 SECS WITH ACCURACY 10/11 (90.9%)
 
 
 <div class="output_png output_subarea ">
-<img src="output_34_4.png"
+<img src="output_35_4.png"
 >
 </div>
 
@@ -15535,7 +15356,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_1.png"
+<img src="output_37_1.png"
 >
 </div>
 
@@ -15549,7 +15370,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_2.png"
+<img src="output_37_2.png"
 >
 </div>
 
@@ -15563,7 +15384,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_3.png"
+<img src="output_37_3.png"
 >
 </div>
 
@@ -15577,7 +15398,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_4.png"
+<img src="output_37_4.png"
 >
 </div>
 
@@ -15591,7 +15412,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_5.png"
+<img src="output_37_5.png"
 >
 </div>
 
@@ -15605,7 +15426,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_6.png"
+<img src="output_37_6.png"
 >
 </div>
 
@@ -15619,7 +15440,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_7.png"
+<img src="output_37_7.png"
 >
 </div>
 
@@ -15633,7 +15454,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_8.png"
+<img src="output_37_8.png"
 >
 </div>
 
@@ -15647,7 +15468,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_9.png"
+<img src="output_37_9.png"
 >
 </div>
 
@@ -15661,7 +15482,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_10.png"
+<img src="output_37_10.png"
 >
 </div>
 
@@ -15675,7 +15496,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_11.png"
+<img src="output_37_11.png"
 >
 </div>
 
@@ -15689,7 +15510,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_12.png"
+<img src="output_37_12.png"
 >
 </div>
 
@@ -15703,7 +15524,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_13.png"
+<img src="output_37_13.png"
 >
 </div>
 
@@ -15717,7 +15538,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_36_14.png"
+<img src="output_37_14.png"
 >
 </div>
 
@@ -16189,7 +16010,7 @@ Average accuracy: 0.7393939393939394 Stdev=0.13673350512337548
 
 
 <div class="output_png output_subarea ">
-<img src="output_47_2.png"
+<img src="output_48_2.png"
 >
 </div>
 
@@ -16293,7 +16114,7 @@ Normalized confusion matrix
 
 
 <div class="output_png output_subarea ">
-<img src="output_48_1.png"
+<img src="output_49_1.png"
 >
 </div>
 
@@ -16307,7 +16128,7 @@ Normalized confusion matrix
 
 
 <div class="output_png output_subarea ">
-<img src="output_48_2.png"
+<img src="output_49_2.png"
 >
 </div>
 

@@ -90,17 +90,21 @@ Introduces frequency analysis, including Discrete Fourier Transforms (DFTs) and 
 
 ### Exercises
 
-#### [Exercise 1: Step Tracker](StepTracker/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb)).
+#### [Exercise 1: Step Tracker](StepTracker/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb))
 
 Building off our A2 assignment, let's analyze some example accelerometer step data and write an algorithm in Jupyter Notebook to infer steps. Notebook is perfectly suited for this task: it's easy to visualize data with [Matplotlib](https://matplotlib.org/) and [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html) offer filtering, detrending, and other useful signal processing algorithms. You can try lots of ideas, see how well they work on some test data, and then implement your most promising idea on the ESP32. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Projects/StepTracker/StepTracker-Exercises.ipynb). 
 
-#### [Exercise 2: Gesture Recognizer: Shape Matching](gesturerec/shapebased/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/GestureRecognizer/GestureRecognizer-ShapeBased.ipynb)). 
+#### [Exercise 2: Gesture Recognizer: Shape Matching](gesturerec/shapebased/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/GestureRecognizer/GestureRecognizer-ShapeBased.ipynb))
 
 Let's build a shape-based (or template-based) gesture recognizer! This Notebook provides the data structures and experimental scaffolding to write and test shape-based gesture classifiers.
 
-#### [Exercise 3: Gesture Recognizer: Supervised Learning](gesturerec/featurebased/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/GestureRecognizer/GestureRecognizer-FeatureBased.ipynb)). 
+#### [Exercise 3: Gesture Recognizer: Supervised Learning](gesturerec/featurebased/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/GestureRecognizer/GestureRecognizer-FeatureBased.ipynb))
 
 Let's build a feature-based (or model-based) gesture recognizer using supervised learning! This Notebook provides an overview of how to use supervised learning and the Scikit-learn library to classify gestures.
+
+#### [Exercise 4: Gesture Recognizer: Automatic Feature Selection and Hyperparameter Tuning](FeatureSelectionAndHyperparameterTuning/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Projects/GestureRecognizer/Feature%20Selection%20and%20Hyperparameter%20Tuning.ipynb))
+
+In this Notebook, you'll learn about automatic feature selection and hyperparameter tuning.
 
 ### Using Google Colab
 

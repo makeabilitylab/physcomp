@@ -65,19 +65,19 @@ We'll need the following materials:
 
 The four-leg push button is one of the most common button types for breadboarding circuits; however, it's also a bit funky and non-intuitive at first. You might be wondering: why **four legs** instead of two? How does this button work?
 
-We created the following animation to help explain. The key thing to remember is that the two legs closest together (on the same side) are, somewhat unintuitively, **not** connected until you press the button. Upon button press, all four legs become connected. And, of course, the best way to learn it is to try it yourself (and hopefully the animation will help).
+We created the following animation to help explain. The key thing to remember is that the two legs closest together (on the same side) are, somewhat unintuitively, **not** connected until you press the button. Upon button press, all four legs become connected. Study the animation below carefully. 
 
 ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif)
 
 <!-- TODO: I like this simple picture by LadyAda, consider adding it? https://www.ladyada.net/images/arduino/pushbuttons.gif -->
 
-In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter, if you have one, to check for continuity between the four legs.
+And, of course, the best way to learn it is to try it yourself (and hopefully the animation will help). In general, if you're confused about how to use a component, it's a good idea to consult the [datasheet](https://cdn-shop.adafruit.com/datasheets/B3F-1000-Omron.pdf). You can also use a multimeter, if you have one, to check for continuity between the four legs.
 
 <!-- TODO video of using a multimeter to figure out how the four legs are hooked up -->
 
 ### Using buttons without a microcontroller
 
-We'll make a simple button-based circuit that turns on an LED when the button is pressed. 
+We'll make a simple button-based circuit that turns on an LED when the button is pressed. This will give you experience understanding how the button connections work before hooking it up to an Arduino.
 
 Below, we've included two wiring diagrams: one using an external power source like a 9V battery with a snap connector and the other using Arduino's 5V pin for power, just like we did in the [LED on](led-on.md) lesson. We suggest the 9V battery approach just to avoid confusion—remember, this circuit is completely independent of Arduino!
 
@@ -109,25 +109,25 @@ Recall that the Arduino Uno and Leonardo have 14 digital I/O pins that can be us
 
 As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 digital I/O pins with three functions:
 
-1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`. For our buttons, we'll be using `INPUT` and a variant called `INPUT_PULLUP`.
-2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`.
-3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`.
+1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`. For our buttons, we'll be using `INPUT`—because a button is an input and not an output—and a variant of `INPUT` called `INPUT_PULLUP`.
+2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`. This is what we need to read the button's state (either pressed or not pressed)
+3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`. This is not relevant to us here because we don't write out data to a button.
 
 ### What is digital input?
 
-Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). Simple, right? However, using digital input with microcontrollers can be confusing, at first.
+Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). Simple, right? However, using digital input with microcontrollers can be confusing, at least at first.
 
 The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits.
 
-Indeed, the [Arduino documentation ](https://www.arduino.cc/en/Tutorial/DigitalPins) states that pins configured as digital input "are in a high-impedance state" equivalent to a 100,000,000Ω (100MΩ) resistor added to the front of the input pin. This means that once you configure a microcontroller pin as input, very little current will "seep" into the pin. More specifically, the [ATMega328 datasheet](../assets/datasheets/ATMega328.pdf) states that the input "leakage" current is 1 microamp (1 µA)—see Section 26.2 (DC Characteristics). 
+Indeed, the [Arduino documentation ](https://www.arduino.cc/en/Tutorial/DigitalPins) states that pins configured as digital input "*are in a high-impedance state*" equivalent to a 100,000,000Ω (100MΩ) resistor added to the front of the input pin. This means that once you configure a microcontroller pin as input, very little current will "seep" into the pin. More specifically, Section 26.2 of the [ATMega328 datasheet](../assets/datasheets/ATMega328.pdf) (entitled *DC Characteristics*) states that the input "leakage" current is 1 microamp (1 µA).
 
 <!-- TODO: consider adding illustrative figure here. -->
 
 ### Is it LOW or is it HIGH?
 
-You might be wondering: what's the precise voltage-related definition of `HIGH` and `LOW` from the microcontroller's perspective? And what happens if our voltage signal is not 0V and not 5V? Great questions!
+You might be wondering: what's the precise voltage-related definition of `HIGH` and `LOW` from the microcontroller's perspective? And what does `digitalRead` read if our voltage signal is not 0V and not 5V? Great questions!
 
-As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{CC}$$ or $$0V$$. The precise meaning of "close" varies between microcontrollers"
+As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "*the value returned from `digitalRead()` is only well-defined when the input pin voltage is *close* to $$V_{CC}$$ or $$0V$$. The precise meaning of "close" varies between microcontrollers*"
 
 For the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH` and between $$0$$ and $$0.3\cdot V_{CC}\to 0.3\cdot 5V=1.5V$$ to qualify as `LOW`. For the middle range $$0.3\cdot V_{CC}$$ to $$0.6\cdot V_{CC}$$, the behavior of the pin is undefined.
 
@@ -193,7 +193,7 @@ So, what to do? **Pull-down resistors** to the rescue!
 
 To solve this problem, we can add in what's called a **pull-down resistor** before the GND connection, which prevents short circuits when the switch is closed while still biasing the pin to 0V when the switch is open. 
 
-Typically, this pull-down resistor value is 10kΩ, which is also what the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommends. A small resistor is called a **strong** pull-down and a large resistor is called a **weak** pull-down. In a bit, we'll talk about **what** factors influence the pull-down resistor value (hint: use a 10kΩ) but the primary tradeoff is in power efficiency (low resistor value "wastes" more current) and function (a large resistor may not always work properly as a pull-down).
+Typically, this pull-down resistor value is 10kΩ, which is also what the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommends. A small resistor is called a **strong** pull-down and a large resistor is called a **weak** pull-down. In a bit, we'll talk about **what** factors influence the pull-down resistor value (hint: use a 10kΩ) but the primary tradeoff is in power efficiency (low resistor values "waste" more current) and function (a large resistor may not always work properly as a pull-down).
 
 ![Circuit diagram showing a correct pull-down resistor circuit with the 5V connection then the digital input pin then a 10K resistor then GND](assets/images/ArduinoUno_Button_SchematicAndDiagram_PullDownResistor.png)
 The pull-down resistor is quite large: 10,000Ω (10kΩ)
@@ -254,7 +254,7 @@ Calculated using $$V_{in}=5V$$
 
 With a pull-up resistor of $$R=100Ω$$ (an unnecessarily strong pull-up), when the switch is closed, we are using 50mA (and 250 milliwatts)—a non-trivial amount for a battery-powered circuit (*e.g.,* for a mobile or wearable). In contrast, with a 10kΩ pull-up, we would use $$I=0.5mA$$ (and 2.5 mwatts).
 
-There are other factors to consider as well—for example, including line capacitance and capacitive coupling. For the former, the input line will have some "stray capacitance" to ground, which creates an "RC circuit" that has associated rise and fall times. Larger resistors can slow down the responsiveness of the circuit. But these factors are beyond the scope of our class (and beyond our own knowledge as well). See these forum posts for more details: [AVR Freaks](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) and ([EE StackExchange](https://electronics.stackexchange.com/questions/23645/how-do-i-calculate-the-required-value-for-a-pull-up-resistor)).
+There are other factors to consider as well—for example, including line capacitance and capacitive coupling. For the former, the input line will have some "stray capacitance" to ground, which creates an "RC circuit" that has associated rise and fall times. Larger resistors can slow down the responsiveness of the circuit. But these factors are beyond the scope of our class. See these forum posts for more details: [AVR Freaks](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) and ([EE StackExchange](https://electronics.stackexchange.com/questions/23645/how-do-i-calculate-the-required-value-for-a-pull-up-resistor)).
 
 #### Tradeoffs in selecting a pull-down resistor
 
@@ -275,6 +275,8 @@ Still feeling confused or want to learn more about pull-up and pull-down resisto
 Or this video by NYU ITP's Jeff Feddersen:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/241209240?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+[Video](https://vimeo.com/241209240) by NYU ITP’s Jeff Feddersen on pull-up and pull-down resistors.
+{: .fs-1 }
 
 See also:
 - [Sparkfun's tutorial on Pull-up Resistors](https://learn.sparkfun.com/tutorials/pull-up-resistors/all)
@@ -285,7 +287,7 @@ See also:
 
 Whew, OK. We've now explained how to use four-legged tactile buttons, how to use pull-down, pull-up, and internal pull-up resistors and their purpose, and provided a general overview of digital input.
 
-It's time to make stuff. We're going to start with a button in a pull-down configuration before making circuits (and programs) for pull-up and internal pull-up configurations. Then, in the [next lesson](piano.md), we'll make a simple "piano" synthesizer that puts our skills to the test!
+It's time to make stuff. We're going to start with a button in a pull-down configuration before making circuits with external pull-up and internal pull-up configurations. Then, in the [next lesson](piano.md), we'll make a simple "piano" synthesizer that puts our skills to the test!
 
 ## Pull-down resistor configuration
 
@@ -298,6 +300,9 @@ Let's begin with a pull-down resistor configuration.
 As with any circuit, there are many ways to wire up a button with a pull-down resistor configuration. Here are some examples—all are functionally equivalent. I tend to use the wiring shown on the far left, which is the same one shown above.
 
 ![Five separate wiring diagrams of a pull-down resistor configuration with a button wired to Pin 2 on the Arduino Uno](assets/images/ArduinoUno_Button_PullDownResistor_WiringDiagramGallery.png)
+
+To zoom in on this image, right-click and select 'Open image in a new tab.'
+{: .fs-1 }
 
 ### Code to turn on LED with button press
 
@@ -319,6 +324,8 @@ void loop()
   delay(30);
 }
 {% endhighlight C %}
+
+<!-- TODO: show video of this and then also modify code and include serial.print for button state -->
 
 ## Pull-up resistor configuration
 

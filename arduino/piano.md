@@ -81,7 +81,7 @@ There are two primary types of buzzers: magnetic and piezo. A **magnetic buzzer*
 
 <!-- TODO: would be great to have a slow-mo video of a piezo material being deformed by a voltage waveform... -->
 
-There are two types of piezo buzzers: active and passive. Active buzzers use internal oscillators to generate tones, so only need a steady DC voltage. In contrast, passive buzzers require a voltage waveform—the waveform frequency will corresopndingly vibrate the piezoelectric material to make sound.
+There are two types of piezo buzzers: active and passive. Active buzzers use internal oscillators to generate tones, so only need a steady DC voltage. In contrast, passive buzzers require a voltage waveform—the waveform frequency will corresopndingly vibrate the piezoelectric material to make sound. This is the waveform that our Arduino will produce via [tone](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/). 
 
 If you're taking one of our courses, we purchase **passive** piezo buzzers—typically from places like [Adafruit](https://www.adafruit.com/product/160) ($1.35) or [Mouser](https://www.mouser.com/ProductDetail/810-PS1240P02BT) ($0.51).
 
@@ -136,7 +136,7 @@ void setup() {
 
 #### Step 3: Implement the siren logic in loop()
 
-The loop alternates between playing a 392Hz square wave and a 262Hz square wave—each for `SOUND_DURATION_MS`. We'll also flash on/off an LED with the same rhythm. Very siren like!
+The loop alternates between playing a 392Hz square wave and a 262Hz square wave—each for `SOUND_DURATION_MS`. Feel free to use other frequencies, I chose 392 and 262 because they correspond to the piano keys `C4` (Middle C) and `G4`. We'll also flash on/off an LED with the same rhythm. Very siren like!
 
 {% highlight C %}
 void loop() {

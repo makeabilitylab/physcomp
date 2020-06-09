@@ -53,7 +53,7 @@ As you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2
 
 #### Voltage divider equation
 
-The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R_2}{R_1 + R_2}$$. So, the voltage at leg 2 of the potentiometer is equal to $$V_{in} \cdot \frac{R_2}{R_1 + R_2}$$  
+The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R_2}{R_1 + R_2}$$. So, the voltage at leg 2 (the wiper) of the potentiometer is equal to $$V_{in} \cdot \frac{R_2}{R_1 + R_2}$$  
 
 ![The voltage divider equation](assets/images/VoltageDividerEquation.png)
 
@@ -89,9 +89,9 @@ That said, many common **sensors** are actually variable resistors—they dynami
 Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
-To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. However, that's the focus of our next lesson!
+To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. We'll show you how to do that in our [next lesson](force-sensitive-resistors.md).
 
-Here, we are going to focus on using a potentiometer first as a rheostat and then as a voltage divider with our Arduino.
+Here, however, we are going to focus on using a potentiometer first as a rheostat and then as a voltage divider with our Arduino.
 
 ## Materials
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Signals
+parent: Tools
 title: L1&#58; Jupyter Notebook
 has_toc: true # on by default
 has_children: false

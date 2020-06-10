@@ -1,7 +1,6 @@
 ---
 layout: default
-title: L1&#58; Blinking an LED
-nav_order: 2
+title: L2&#58; Blinking an LED
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

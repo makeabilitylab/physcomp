@@ -1,9 +1,8 @@
 ---
 layout: default
-title: L5&#58; Internet of Things
-nav_order: 5
+title: L6&#58; Internet of Things
 parent: ESP32
-has_toc: true # (on by default)
+has_toc: false # (on by default)
 usemathjax: true
 comments: true
 ---

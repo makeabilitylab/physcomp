@@ -1,7 +1,6 @@
 ---
 layout: default
-title: L4&#58; Capacitive touch sensing
-nav_order: 4
+title: L5&#58; Capacitive touch sensing
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

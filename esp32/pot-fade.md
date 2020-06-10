@@ -1,7 +1,6 @@
 ---
 layout: default
-title: L3&#58; Analog input
-nav_order: 2
+title: L4&#58; Analog input
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

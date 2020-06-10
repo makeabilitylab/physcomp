@@ -1,7 +1,6 @@
 ---
 layout: default
-title: L2&#58; Fading an LED with PWM
-nav_order: 2
+title: L3&#58; Fading an LED with PWM
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

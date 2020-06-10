@@ -17,7 +17,7 @@ comments: true
 {:toc}
 ---
 
-In this lesson, we'll rehash the ole [Blink lesson](../arduino/led-blink.md) from the [Introduction to Output](../arduino/intro-output.md) lesson but now for the **ESP32**.
+In this lesson, we'll rehash the ole [Blink lesson](../arduino/led-blink.md) from the [Intro to Output](../arduino/intro-output.md) series but with the **ESP32**.
 
 ![Animation of Blink on the ESP32](assets/movies/Huzzah32_Blink-optimized.gif)
 
@@ -70,5 +70,6 @@ Given that this should be review, try writing a Blink implementation without con
 In the [next lesson](led-fade.md), we'll learn about how to use "analog output" on the ESP32 to fade an LED's brightness up and down. This is similar to our original Arduino [LED fade](../arduino/led-fade.md) lesson but we won't be using `analogWrite`!
 
 <span class="fs-6">
+[Previous: Introduction to the ESP32](esp32.md){: .btn .btn-outline }
 [Next: Using PWM on the ESP32](led-fade.md){: .btn .btn-outline }
 </span>

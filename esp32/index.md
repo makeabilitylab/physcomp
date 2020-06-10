@@ -24,26 +24,22 @@ These tutorials are interactive and designed to be completed **in order**. All E
 
 In [this lesson](esp32.md), you'll learn about the ESP32, how it differs from and relates to the Arduino platform, and how to program and use the Huzzah32 ESP32 board.
 
-## [Lesson 1: Turning on an LED](led-on.md)
-
-Introduces the Arduino power and ground pins, powering an initial LED circuit with a current limiting resistor, and plugging components into the Arduino.
-
 ## [Lesson 2: Blinking an LED](led-blink.md)
 
-Introduces the Arduino IDE and the ability to programmatically control Arduino GPIO pins to turn an LED on and off via [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
+Introduces how to program the ESP32 using the Arduino IDE and ESP32 Arduino library ([link](led-blink.md))
 
-## [Lesson 3: Fading an LED](led-fade.md)
+## [Lesson 3: Fading an LED with PWM](led-fade.md)
 
-Demonstrates how to gradually fade an LED on and off by using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)
+In this [lesson](led-fade.md), you'll learn how to use PWM output on the ESP32 to fade an LED on and off. The ESP32 Arduino library does not have an `analogWrite` method, so you'll learn how to use PWM via an alternative method.
 
-## [Lesson 4: Blinking an LED Part 2](led-blink2.md)
+## [Lesson 4: Analog Input](analog-read.md)
 
-Introduces the concept of using Arduino GPIO pins as either current **sources** or **sinks** by hooking up two LED circuit configurations: one circuit with the LED cathode towards GND and another with the LED anode towards GND.
+In this [lesson](analog-read.md), you'll learn how to use analog input on the ESP32 by building a potentiometer-based LED fader.
 
-## [Lesson 5: RGB LEDs](rgb-led.md)
+## [Lesson 5: Capacitive Touch Sensing](capacitive-touch-sensing.md)
 
-Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
+The ESP32 has built-in circuitry and software for capacitive touch sensing ([docs](https://github.com/espressif/esp-iot-solution/blob/master/documents/touch_pad_solution/touch_sensor_design_en.md#1-introduction-to-touch-sensor-system)). In [this lesson](capacitive-touch-sensing.md), we’ll use the touch sensing functionality to turn on an LED.
 
-## [Lesson 6: Crossfading RGB LEDs](rgb-led-fade.md)
+## [Lesson 6: Internet of Things](iot.md)
 
-Shows how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and to use and load local `C/C++` libraries
+The ESP32 is exciting not just because of its speed, memory, and GPIO capabilities but also because it is truly a modern Internet of Things (IoT) board with Wi-Fi and Bluetooth support. In this lesson, we'll learn how to use WiFi and the IoT platform [Adafruit IO](https://learn.adafruit.com/welcome-to-adafruit-io) to upload sensor data in real-time.

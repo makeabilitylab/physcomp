@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L0&#58; Intro to the ESP32
+title: L1&#58; Intro to the ESP32
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

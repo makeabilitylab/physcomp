@@ -90,3 +90,9 @@ And here's the full [IotPhotoresistorLed.ino](https://github.com/makeabilitylab/
 Here's a brief video demonstration showing a workbench recording paired with a screen recording of Adafruit IO.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/DgCFUHGSKSM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Previous lesson
+
+<span class="fs-6">
+[Previous: Capacitive Touch Sensing](capacitive-touch-sensing.md){: .btn .btn-outline }
+</span>

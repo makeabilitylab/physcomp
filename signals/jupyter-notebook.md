@@ -107,3 +107,4 @@ Please share your own tips and I'll add them to this list.
 11. You can use LaTeX formulas in a Markdown cell, which will be rendered using MathJax (just like we use on this website!)
 
 For more tips, see this [dataquest](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/) article.
+

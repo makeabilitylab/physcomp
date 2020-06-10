@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L2&#58; Shape-Based Classification
+title: L3&#58; Feature-Based Classification
 parent: Classification
 has_toc: false # (on by default)
 comments: false

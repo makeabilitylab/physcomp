@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Signal Classification
+title: Classification
 parent: Signals
 nav_order: 3
 has_toc: true # on by default

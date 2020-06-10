@@ -32,9 +32,9 @@ Introduces how to program the ESP32 using the Arduino IDE and ESP32 Arduino libr
 
 In this [lesson](led-fade.md), you'll learn how to use PWM output on the ESP32 to fade an LED on and off. The ESP32 Arduino library does not have an `analogWrite` method, so you'll learn how to use PWM via an alternative method.
 
-## [Lesson 4: Analog Input](analog-read.md)
+## [Lesson 4: Analog Input](pot-fade.md)
 
-In this [lesson](analog-read.md), you'll learn how to use analog input on the ESP32 by building a potentiometer-based LED fader.
+In this [lesson](pot-fade.md), you'll learn how to use analog input on the ESP32 by building a potentiometer-based LED fader.
 
 ## [Lesson 5: Capacitive Touch Sensing](capacitive-touch-sensing.md)
 

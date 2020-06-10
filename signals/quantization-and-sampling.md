@@ -13,7 +13,7 @@ comments: false
 
 This [Notebook](QuantizationAndSampling/index.html) introduces the two primary factors in digitizing an analog signal: **quantization** and **sampling**. Describes and shows the effect of different quantization levels and sampling rates on real signals (audio data) and introduces the Nyquist sampling theorem, aliasing, and some frequency plots.
 
-You can view the Notebook in [html here](QuantizationAndSampling/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Quantization%20and%20Sampling.ipynb)) but we also **strongly** recommend working with our Notebooks locally by performing a git clone on `https://github.com/makeabilitylab/signals.git` and running Jupyter Notebook on your system (see [installation notes](jupyter-notebook.md)).
+You can view the Notebook in [html here](QuantizationAndSampling/index.html) but we also **strongly** recommend working with our Notebooks locally by performing a git clone on `https://github.com/makeabilitylab/signals.git` and running the [Jupyter Notebook](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Quantization%20and%20Sampling.ipynb) on your system (see [installation notes](jupyter-notebook.md)).
 
 ## Next Lesson
 

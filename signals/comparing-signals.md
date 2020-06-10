@@ -13,7 +13,7 @@ comments: false
 
 This [Notebook](ComparingSignals/index.html) introduces techniques to compare signals in the time domain, including Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW).
 
-You can view the Notebook in [html here](ComparingSignals/index.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Comparing%20Signals.ipynb)) but we also **strongly** recommend working with our Notebooks locally by performing a git clone on `https://github.com/makeabilitylab/signals.git` and running Jupyter Notebook on your system (see [installation notes](jupyter-notebook.md)).
+You can view the Notebook in [html here](ComparingSignals/index.html) but we also **strongly** recommend working with our Notebooks locally by performing a git clone on `https://github.com/makeabilitylab/signals.git` and running the [Jupyter Notebook](https://github.com/makeabilitylab/signals/blob/master/Tutorials/Signals%20-%20Comparing%20Signals.ipynb) on your system (see [installation notes](jupyter-notebook.md)).
 
 ## Next Lesson
 

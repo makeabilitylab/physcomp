@@ -15,7 +15,7 @@ If you're not familiar with Python—or even if you are—it's a good idea to st
 
 You can view the Notebook in [html here](IntroToPython.html) but we also **strongly** recommend working with our Notebooks locally by performing a git clone on `https://github.com/makeabilitylab/signals.git` and running Jupyter Notebook on your system (see [installation notes](jupyter-notebook.md)). 
 
-Additionally, for quick access, you can use:
+Additionally, for quick interactive access to editable versions, you can use:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/makeabilitylab/signals/master?filepath=Tutorials%2FIntroToPython.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb).
 
 ## Next Lesson

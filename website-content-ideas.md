@@ -59,12 +59,21 @@ nav_exclude: true
 - http://depts.washington.edu/acelab/proj/dollar/index.html
 - Datasets: https://sites.google.com/site/adriendelaye/home/pen-and-touch-datasets
 
+## Examples from hci lit
+- Could do hydrosense (need to find logs though)
+- Scratchput
+- $1 recognizer
+
 ## Possible H1 Content
 - Motors
 - Power
 - Sensors
 - [Programming microcontrollers](https://itp.nyu.edu/physcomp/lessons/programming/programming-terms-and-programming-environments/)
 - Electronic prototyping kits section
+
+## Deep Learning
+- Pytorch vs. Keras: https://deepsense.ai/keras-or-pytorch/
+- 
 
 ### Sensors
 

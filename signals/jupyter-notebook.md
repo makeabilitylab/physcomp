@@ -1,7 +1,7 @@
 ---
 layout: default
 parent: Signals
-title: Installing Jupyter Notebook
+title: L1&#58; Jupyter Notebook
 has_toc: true # on by default
 has_children: false
 nav_exclude: false
@@ -15,6 +15,8 @@ nav_exclude: false
 1. TOC
 {:toc}
 ---
+
+We will be using [Jupyter Notebook](https://jupyter.org/index.html) for the signal processing and machine learning portion of our course. Jupyter Notebook is a popular data science platform for analyzing, processing, classifying, modeling, and visualizing data. While Notebook supports multiple languages (like R, Julia), we'll be using Python (specifically, Python 3). 
 
 ![Screenshot of Jupyter Notebook](assets/images/JupyterNotebook_Screenshot.png)
 
@@ -76,7 +78,9 @@ Example of TOC running in Jupyter Notebook
 
 ## How to use Jupyter Notebook
 
-Start by reading the official introduction to Jupyter Notebook ([link](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html)). We will also go over basic functionality in class. Finally, there are many good tutorials online.
+There are many introductory tutorials and videos to Jupyter Notebook online. We'll quickly demo Notebook in class but if you want to learn more, start by reading the official introduction to Jupyter Notebook ([link](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html)). You could also consult this [Datacamp tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook) or this [Dataquest tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/). 
+
+Again, you will learn Notebook as you go through the lessons and work on your assignments.
 
 Please follow the [Python](https://www.python.org/dev/peps/pep-0008/) style guide for variable and function naming conventions and other formatting. This will make your code easier to follow and debug. And, of course, we all often (accidentally or intentionally) intermix styles from other programming languages—this is especially true in this course as we toggle between so many languages.
 

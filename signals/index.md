@@ -61,7 +61,7 @@ There are many introductory tutorials and videos to Jupyter Notebook online. We'
 
 #### [Lesson 2: Introduction to Python](IntroToPython.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb)) 
 
-If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It was also give you a feel for Jupyter Notebook. To gain the most value from these example Notebooks, you should modify and run the cells yourself (and add your own cells). [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/makeabilitylab/signals/master?filepath=Tutorials%2FIntroToPython.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb).
+If you're not familiar with Python—or even if you are—it's a good idea to start with this (rapid) introduction to Python. It will also give you a feel for Jupyter Notebook. To gain the most value from these example Notebooks, you should modify and run the cells yourself (and add your own cells). [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/makeabilitylab/signals/master?filepath=Tutorials%2FIntroToPython.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/makeabilitylab/signals/blob/master/Tutorials/IntroToPython.ipynb).
 
 #### [Lesson 3: Introduction to NumPy](IntroToNumPy.html) ([ipynb](https://github.com/makeabilitylab/signals/blob/master/Tutorials/IntroToNumPy.ipynb))
 

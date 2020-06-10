@@ -110,7 +110,21 @@ http://inst.eecs.berkeley.edu/~ee40/calbot/pdf/ChapterFive/ChapterFive.pdf
 -->
 
 <!-- some discussion of max pwm freq on esp33:
-https://forum.micropython.org/viewtopic.php?t=3717. Appears to be 40MHz, which is 1/6 clock speed of 240MHz>
+https://forum.micropython.org/viewtopic.php?t=3717. Appears to be 40MHz, which is 1/6 clock speed of 240MHz -->
+
+#### Relationship between PWM frequency and resolution
+
+So *why* and *how* are the PWM frequency and resolution interdependent? While the ESP32 [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#supported-range-of-frequency-and-duty-resolutions) are, unfortunately, sparse, here's the explanation.
+
+Imagine you have a clock (CPU clock or a timer, doesn't matter) running at some frequency. Then, you want to set a PWM wave frequency and resolution. Let's say your CPU clock is running at 40MHz. Well, then obviously we cannot produce a PWM wave faster than that. So, with a CPU clock running at 40MHz, then our max PWM frequency is also 40MHz.
+
+But what about **resolution**? Well, resolution is really about how much we can slice up one period of the PWM wave into different duty cycles. And here's the insight: slicing up the PWM wave requires a CPU clock running at the $PWM_{freq} * 2^{PWM resolution}$. Why? Because to generate those duty cycles, you need to be able to create those time slices. And the only way to do so is with an even faster clock. (Note: this is the *ideal*. In reality, all things have overhead and so my understanding is that you generally want a CPU clock to be 30-50% faster than your fastest PWM freq; again, it would be nice if ESP32 actually gave us the equation).
+
+Here's a visual example that, hopefully, further clarifies the concept. Here, you can see the clock running at 40MHz and then I set the PWM freq at 1MHz. For each of the PWM resolutions, I put in their "time slices"—this is when the PWM waveform generator would be able to potentially set the PWM wave HIGH or LOW for a given duty cycle. Notice how as the PWM resolution increases, the need for a faster and faster CPU clock also increases (to be able to meet those increasingly demanding duty cycle resolutions).
+
+![A figure showing the relationship between frequency and duty cycle resolution for PWM](assets/images/PWM_FrequencyAndDutyCycleRelationship.png)
+
+For more PWM examples, see this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pdf) that we made.
 
 #### Using the LEDC API
 
@@ -122,7 +136,9 @@ Despite the somewhat confusing (and lacking) documentation, using the LEDC API i
 ### Alternatives to LEDC
 
 In addition to the LEDC module, the ESP32 supports two other analog output options:
+
 1. A **sigma-delta modulation module** ([docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sigmadelta.html)). In comparison to PWM, [sigma-delta modulation](https://en.wikipedia.org/wiki/Delta-sigma_modulation) has a built-in feedback loop to try and minimize timer errors and produce more accurate waveforms. There is a sigma-delta example in the Arduino IDE. Go to File -> Examples -> ESP32 -> AnalogOut -> SigmaDelta. Similar to the LEDC library, you attach pins to preconfigured sigma-delta channels.
+
 2. **True analog output** via a digital-to-analog (DAC) converter ([docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/dac.html)). The ESP32 has two 8-bit DACs connected to GPIO25 (Channel 1) and GPIO26 (Channel 2). The DAC driver allows these channels to be set to arbitrary voltages, which means you can finally produce beautiful sinusoidal voltage waveforms rather than those boring square waves. There are many examples online of folks using the ESP32's DAC to play music. Here's a tutorial by [Xtronical](https://www.xtronical.com/introduction-to-dac-audio/) but search online for more!
 
 In this lesson, however, we are going to focus on using the LEDC library to produce PWM waveforms that will fade in and out an LED.

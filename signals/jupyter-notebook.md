@@ -108,3 +108,10 @@ Please share your own tips and I'll add them to this list.
 
 For more tips, see this [dataquest](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/) article.
 
+## Next Lesson
+
+In the [next lesson](python.md), you will learn about the Python programming language and gain practical experience using Jupyter Notebook.
+
+<span class="fs-6">
+[Next: Introduction to Python](python.md){: .btn .btn-outline }
+</span>

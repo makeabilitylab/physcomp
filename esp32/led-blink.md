@@ -43,7 +43,7 @@ Our circuit is about as simple as they come.
 
 ![Circuit showing LED connected to GPIO #21 via a current limiting resistor](assets/images/Huzzah32_Blink_CircuitDiagramAndSchematic_Fritzing.png)
 
-Seating the Huzzah32 into the breadboard might take some effort. Please take care not to bend pins when placing and removing the board. Given that the Huzzah32 takes up so much room on the breadboard, you might consider using the full-sized breadboard rather than the half-sized.
+Seating the Huzzah32 into the breadboard might take some effort. Please take care not to bend pins when placing and removing the board. Given that the Huzzah32 takes up so much room, you might consider using the full-sized breadboard rather than the half-sized.
 
 Note, we're still using a 220Ω resistor just like the original [Blink lesson](../arduino/led-blink.md). But now we're using a 3.3V board rather than 5V (like the Uno or Leonardo), so we'll be supplying less current with the same resistor value. To obtain the predicted current in our circuit, assume a ~2V forward voltage ($$V_f$$) for a red LED. Thus, 
 
@@ -61,6 +61,10 @@ Given that this should be review, try writing a Blink implementation without con
 <!-- https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Blink/Blink.ino -->
 
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Blink/Blink.ino?footer=minimal"></script>
+
+## Video
+
+![Animation of Blink on the ESP32](assets/movies/Huzzah32_Blink-optimized.gif)
 
 <!-- TODO: insert workbench video -->
 

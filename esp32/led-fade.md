@@ -33,7 +33,7 @@ You'll need the same materials as the [last lesson](led-blink.md):
 
 ## PWM on ESP32
 
-To fade an LED on and off with an Arduino Uno (or other basic Arduino boards), you use the [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) method. As we know by now, `analogWrite` does not actually drive an analog voltage to the specified pin but, instead, uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers, which precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 = ~50%) on Pin 3 and `analogWrite(3, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). The fraction of the time the signal is `HIGH` is called the duty cycle. The Arduino Uno (and Leonardo) only have six PWM outputs because they have three timers, each which can be used two control two PWM pins.
+To fade an LED on and off with an Arduino Uno (or other basic Arduino boards), you use the [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) method. As we know by now, `analogWrite` does not actually drive an analog voltage to the specified pin but, instead, uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers, which precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 = ~50%) on Pin 3 and `analogWrite(3, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). The fraction of the time the signal is `HIGH` is called the duty cycle. The Arduino Uno (and Leonardo) only have six PWM outputs because they have three timers, each which can be used to control two PWM pins.
 
 On the ESP32, all 18 GPIO pins support PWM but the programming approach is different. Rather than `analogWrite`, we'll use Espressif's [LED control (LEDC)](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html) library. More specifically, we'll use an Arduino-based abstraction layer above this. While the available documentation for the Arduino LEDC library is a bit light (indeed, I never found formal API docs), the code is open source and available here ([.h file](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.h), [.c file](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.c)). And we'll show you how to use it below.
 
@@ -41,9 +41,10 @@ On the ESP32, all 18 GPIO pins support PWM but the programming approach is diffe
 
 The LEDC library was written primarily to control LEDs but can also be used for other purposes where PWM waveforms are useful like playing "music" to piezo speakers (just like we did with [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) in our [simple piano](../arduino/piano.md) lesson) and driving motors. The Arduino version of this library is part of the core ESP32 Arduino library, so you don't need any `include` statements to use it.
 
-Unlike all the other I/O we've done thus far with the Arduino, the LEDC library works on **channels** rather than individual **pins**. To apply a PWM wave to a pin, first setup a channel with a PWM waveform frequency and duty cycle and then subscribe or "attach" output that pin to this channel. Multiple pins can attach to the same channel and will receive the same PWM waveform. The ESP32 has 16 channels in total, each which can generate an independent waveform. So, while all 18 GPIO pins support PWM, we can only drive 16 of them at once with **unique** waveforms. However, we can attach all 18 GPIO pins to a single channel (or divide them across channels). In the animation below, we've attached all 18 GPIO pins to channel 0.
+Unlike all the other I/O we've done thus far with the Arduino, the LEDC library works on **channels** rather than individual **pins**. To apply a PWM wave to a pin, first setup a channel with a PWM waveform frequency and duty cycle and then subscribe or "attach" that pin to this channel. Multiple pins can attach to the same channel and will receive the same PWM waveform. The ESP32 has 16 channels in total, each which can generate an independent waveform. So, while all 18 GPIO pins support PWM, we can only drive 16 of them at once with **unique** waveforms. However, we can attach all 18 GPIO pins to a single channel (or divide them across channels). In the animation below, we've attached all 18 GPIO pins to channel 0.
 
 ![Animation of all 18 GPIO output pins fading in and out](assets/movies/Huzzah32_GPIOFadeTestAllPinsSimultaneously-Optimized3.gif)
+
 All 18 GPIO pins are subscribed to the same PWM channel.
 {: .fs-1 } 
 
@@ -115,15 +116,21 @@ https://forum.micropython.org/viewtopic.php?t=3717. Appears to be 40MHz, which i
 
 So *why* and *how* are the PWM frequency and resolution interdependent? While the ESP32 [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#supported-range-of-frequency-and-duty-resolutions) are, unfortunately, sparse, here's the explanation.
 
-Imagine you have a clock (CPU clock or a timer, doesn't matter) running at some frequency. Then, you want to set a PWM wave frequency and resolution. Let's say your CPU clock is running at 40MHz. Well, then obviously we cannot produce a PWM wave faster than that. So, with a CPU clock running at 40MHz, then our max PWM frequency is also 40MHz.
+Imagine you have a clock (CPU clock or a timer, doesn't matter) running at some frequency, and we want to set some PWM wave frequency and resolution. Our maximum PWM wave frequency is bound by the clock. If it's 40MHz, then our max PWM frequency is also 40MHz. We cannot produce a PWM wave faster than our clock.
 
-But what about **resolution**? Well, resolution is really about how much we can slice up one period of the PWM wave into different duty cycles. And here's the insight: slicing up the PWM wave requires a CPU clock running at the $PWM_{freq} * 2^{PWM resolution}$. Why? Because to generate those duty cycles, you need to be able to create those time slices. And the only way to do so is with an even faster clock. (Note: this is the *ideal*. In reality, all things have overhead and so my understanding is that you generally want a CPU clock to be 30-50% faster than your fastest PWM freq; again, it would be nice if ESP32 actually gave us the equation).
+But what about **resolution**? Well, resolution is really about how much we can slice up one period of the PWM wave into different duty cycles. And here's the insight: slicing up the PWM wave requires a CPU clock running at the $$PWM_{freq} * 2^{PWM resolution}$$. Why? Because to generate those duty cycles, you need to be able to create those time slices. And the only way to do so is with an even faster clock. (Note: this is the *ideal*. In reality, all things have overhead and so my understanding is that you generally want a CPU clock to be 30-50% faster than your fastest PWM freq; again, it would be nice if ESP32 actually gave us the equation).
 
-Here's a visual example that, hopefully, further clarifies the concept. Here, you can see the clock running at 40MHz and then I set the PWM freq at 1MHz. For each of the PWM resolutions, I put in their "time slices"—this is when the PWM waveform generator would be able to potentially set the PWM wave HIGH or LOW for a given duty cycle. Notice how as the PWM resolution increases, the need for a faster and faster CPU clock also increases (to be able to meet those increasingly demanding duty cycle resolutions).
+Here's a visual example that, hopefully, further clarifies the concept. Here, you can see the clock running at 40MHz, the PWM freq at 1MHz, and then various PWM resolutions. For each of the PWM resolutions, I put in their "time slices"—this is when the PWM waveform generator would be able to potentially set the PWM wave HIGH or LOW for a given duty cycle. Notice how as the PWM resolution increases, the need for a faster and faster CPU clock also increases (to be able to meet those increasingly demanding duty cycle resolutions).
+
+So, for example, if we want to set a PWM resolution of 5 bits running at 1MHz, then we need a clock running at least 32MHz. If we want a resolution of 6 bits at 1MHz, then we exceed our 40MHz clock speed.
 
 ![A figure showing the relationship between frequency and duty cycle resolution for PWM](assets/images/PWM_FrequencyAndDutyCycleRelationship.png)
 
 For more PWM examples, see this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pdf) that we made.
+
+#### So what PWM frequency and resolution should I use?
+
+So, what PWM frequency and resolution should you use? This is context dependent. Remember, the Arduino Uno supplies a ~490MHz PWM waveform at 8 bits. And this is more than fast enough to smoothly fade between different LED brightness levels. So, you can always start there (~490MHz freq, 8-bit resolution) and then play around.
 
 #### Using the LEDC API
 
@@ -228,7 +235,11 @@ void loop() {
 
 That's it, you can run the program! Try experimenting with different frequency and resolution values, what happens?
 
+![Animation of Fade on the ESP32](assets/movies/Huzzah32_Fade-optimized.gif)
+
 <!-- TODO: insert workbench video -->
+
+<!-- TODO: consider an example that uses multiple channels to flash different freqs -->
 
 ### Our ESP32 fade code on github
 

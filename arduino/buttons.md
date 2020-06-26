@@ -63,9 +63,11 @@ We'll need the following materials:
 
 ### Four-legged tactile buttons
 
-The four-leg push button is one of the most common button types for breadboarding circuits; however, it's also a bit funky and non-intuitive at first. You might be wondering: why **four legs** instead of two? How does this button work?
+The four-leg push button is one of the most common button types for breadboarding circuits; however, it's also a bit funky and non-intuitive at first. You might be wondering: why **four legs** instead of two? How does this button work? See the diagram below.
 
-We created the following animation to help explain. The key thing to remember is that the two legs closest together (on the same side) are, somewhat unintuitively, **not** connected until you press the button. Upon button press, all four legs become connected. Study the animation below carefully. 
+![Overview of four-legged tactile buttons showing which two sides are disconnected by default and how the connections are formed when the button is pressed](assets/images/FourLeggedTactileButtons_Overview.png)
+
+The key thing to remember is that the two legs closest together (on the same side) are, somewhat unintuitively, **not** connected until you press the button. Upon button press, all four legs become connected. We created the following animation to help explain further. Observe the *orientation* of the button and how the legs are connected.
 
 ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif)
 

@@ -10,7 +10,7 @@
 # remote_theme: pmarsceill/just-the-docs
 
 # Fixed at 0.2.8 because of: https://github.com/makeabilitylab/physcomp/issues/9
-remote_theme: pmarsceill/just-the-docs@0.2.8
+remote_theme: pmarsceill/just-the-docs@v0.2.8
 
 # For "Just the Docs" configuration options, see:
 # - https://pmarsceill.github.io/just-the-docs/docs/configuration/

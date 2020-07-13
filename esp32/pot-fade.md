@@ -31,7 +31,9 @@ You'll need the same materials as the [last lesson](led-fade.md) but also a 10kÎ
 
 ## The ADC on the ESP32
 
-The ATmega chips used by the Arduino Uno ([ATmega328](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)) and the Arduino Leonardo ([ATmega32U4](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)) both had 10-bit ADCs, which provided a resolution of $$2^{10}=1024$$. The ESP32 integrates two 12-bit ADCs (resolution: $$2^{12}=4096$$) supporting a total of 18 measurement channels (analog enabled pins). The official ESP32 docs are [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html).
+The ATmega chips used by the Arduino Uno ([ATmega328](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)) and the Arduino Leonardo ([ATmega32U4](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)) both have 10-bit ADCs, which provide an analog-to-digital resolution of $$2^{10}=1024$$. 
+
+In constrast, the ESP32 integrates two **12-bit** ADCs (resolution: $$2^{12}=4096$$) supporting a total of 18 measurement channels (analog enabled pins). The official ESP32 docs are [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html).
 
 ![Huzzah32 pin diagram](assets/images/AdafruitHuzzah32PinDiagram.png)
 The ADC pins are marked in teal. Right-click and open image in a new tab to zoom in.

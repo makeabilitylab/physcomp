@@ -18,8 +18,9 @@ nav_exclude: true
 {:toc}
 ---
 
-Should this go in our intro series?
+Should this go in our intro series? I'm thinking the sixth lesson (after debouncing in buttons)
 
 ## References
 - https://gammon.com.au/interrupts
+- https://arduino.stackexchange.com/questions/1784/how-many-interrupt-pins-can-an-uno-handle
 - 

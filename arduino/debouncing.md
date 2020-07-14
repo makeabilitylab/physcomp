@@ -37,6 +37,7 @@ Image from [ladyada.net](https://www.ladyada.net/learn/arduino/lesson5.html)
 ## Outline
 - Describe problem and include snippets (or animated gifs) of videos we typically show in class
 - Talk about potential solutions
+- Show off the simplest: just check value wait for some amount of time and then check value again (using sleep)
 - Show and talk about test code that shows why debouncing is important (maybe with video?). Could have top-down video of OLED display showing counting differences.
 - Introduce class to do debouncing for us (and other things like deal with both pull-down and pull-up resistor configs)
   - Maybe talk about callback functions for handling buttonDown vs. buttonUp events? Or even like double click?
@@ -46,3 +47,6 @@ Image from [ladyada.net](https://www.ladyada.net/learn/arduino/lesson5.html)
     -  [DebounchedSwitch](https://github.com/ThomasGravekamp/Arduino-Debounced-Switch) uses callback functions
  -  Consider also showing how to use a tilt switch? (just as another example digital input?)
  -  There are also hardware solutions using, for example, RC circuits (could include links?)
+
+## Notes
+- Check this: https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/

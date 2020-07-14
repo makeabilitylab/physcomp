@@ -1,4 +1,7 @@
 {
     "pasteImage.showFilePathConfirmInputBox": true,
-    "pasteImage.path": "${currentFileDir}/assets/images"
+    "pasteImage.path": "${currentFileDir}/assets/images",
+    "files.exclude": {
+        "_site": true
+    }
 }

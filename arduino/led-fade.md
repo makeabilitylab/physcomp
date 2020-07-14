@@ -65,6 +65,7 @@ Despite its name, the Arduino Uno, Leonardo, Nano, Mega, and many other Arduino 
 So, what does the `analogWrite` function do, exactly? The 8-bit value (0-255) directly controls how long a 5V value is applied to the output pin during one "analog write" period. So, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). This fraction of the time the signal is `HIGH` is called the duty cycle.
 
 ![Pulse-width modulation duty cycle graphic](assets/images/PWM_ArduinoCC.png)
+
 Pulse-width modulation duty cycle graph from [arduino.cc](https://www.arduino.cc/en/tutorial/PWM)
 {: .fs-1 }
 

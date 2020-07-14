@@ -68,6 +68,8 @@ I've gone through many electronics and microcontroller books. Here are some of m
 
 - Charles Platt, *Make: Encyclopedia of Electronic Components Volume 3: Sensing Light, Sound, Heat, Motion, and More*, O'Reilly, 2016. [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71290815340001451), [O'Reilly Online](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449334307)]
 
+- You may also want to consult the [Books Worth Reading list](https://us.reddit.com/r/AskElectronics/wiki/education#wiki_books_worth_reading) from [/r/AskElectronics](https://us.reddit.com/r/AskElectronics/)
+
 ### Microcontrollers
 
 - Jeremy Blum, *Exploring Arduino: Tools and Techniques for Engineering Wizardry*, 2nd Edition, Wiley, 2020. This is my favorite Arduino book and assumes no previous electronics knowledge! [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451), [Wiley Online](https://onlinelibrary-wiley-com.offcampus.lib.washington.edu/doi/book/10.1002/9781119405320)]. Interestingly, Blum was inspired to work in physical computing after taking HCI Professor [François Guimbretière's](https://www.cs.cornell.edu/~francois/) *Introduction to Rapid Prototyping and Physical Computing* course at Cornell.

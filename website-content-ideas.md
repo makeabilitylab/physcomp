@@ -18,7 +18,7 @@ nav_exclude: true
 ## TODO:
 
 - Look at my curriculum sheet
-- Add in design and design thinking books like Sketching User Experiences.
+- Add in design and design thinking books like Sketching User Experiences?
 - Look at my resources list from [CMSC838f](https://web.archive.org/web/20170605201324/http:/cmsc838f-s15.wikispaces.com/). [Direct link](https://web.archive.org/web/20150709105051/http://cmsc838f-s15.wikispaces.com/Resources)
 - Look at: http://ladyada.net/learn/arduino/
 - Berkeley's EECS16A course: https://www.eecs16a.org/
@@ -50,19 +50,66 @@ nav_exclude: true
 - What content to add?
   - Logic gates: https://youtu.be/cdMJvFT-Afc
   - IMU 9 DOF with bunny 3D orientation: https://www.adafruit.com/product/2472
-- Electricity primer
-  - http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf
-- Kalman filter on ESP32: http://www.iotsharing.com/2019/06/how-to-apply-kalman-filter-to-esp.html
 - [Beginners guide to ESP8266](https://tttapa.github.io/ESP8266/Chap01%20-%20ESP8266.html)
+- Photocell dinosaur game in Chrome: https://twitter.com/null4bl3/status/1247032404990210053
+- How to start a lecture: https://twitter.com/davidklaing/status/1280730027361832961
+- How to speak: https://vimeo.com/101543862
+
+## Content to add
+- How to debug Arduino
+  - Evil of using String: https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/ (but obviously, fine to use for quick prototypes)
+- Filtering
+  - Window filters: mean filter, median filter
+  - Kalman filtering
+    - Kalman filter on ESP32: http://www.iotsharing.com/2019/06/how-to-apply-kalman-filter-to-esp.html
+- Electricity primer series
+  - http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf
+
+## Other Online Physical Computing (or Related) Courses
+- RoboGrok at Arizona State: http://www.robogrok.com/index.html
+
+## Fabrication
+
+### 3D Printing
+- Removing printed object from plate (funny fail): https://www.reddit.com/r/3Dprinting/comments/g2syhq/when_you_just/
+- Physical visualization of Iron Man routes: https://www.reddit.com/r/3Dprinting/comments/g8oqt5/gift_for_a_friend_to_celebrate_his_first_ironman/
+
+### Laser cutting
+- Etching hot dog: https://www.reddit.com/r/lasercutting/comments/fyu6vq/hot_dog/
 
 ## Touch/pen/mouse gesture recognizers
 - http://depts.washington.edu/acelab/proj/dollar/index.html
 - Datasets: https://sites.google.com/site/adriendelaye/home/pen-and-touch-datasets
 
-## Examples from hci lit
+## Fun with LEDs
+- Motion-triggered LED strip shoes: https://www.youtube.com/watch?v=Olgea6h25ug&feature=youtu.be
+
+## ESP32
+- ESP32 video series: https://www.youtube.com/playlist?list=PLB-czhEQLJbWMOl7Ew4QW1LpoUUE7QMOo
+
+## Embedded systems/embedded programming
+- FastBit Courses on Udemy: https://www.udemy.com/user/kiran-nayak-2/ covering embedded C, timers, RTC, PWM, low power, RTOS, 
+- https://www.reddit.com/r/embedded/comments/f4wta3/i_am_looking_for_knowledge_i_am_interested_in/fhw24lh/
+
+## Motors
+- Different motor types: servo, DC, stepper
+- DC motor torque/speed
+- 
+
+## Machine Learning
+- Dive into Deep Learning book: http://d2l.ai/
+
+## Projects
+
+### Examples from hci lit
+Would be cool to assign homework or show examples pulled directly from HCI/UbiComp lit:
 - Could do hydrosense (need to find logs though)
 - Scratchput
 - $1 recognizer
+
+### From the Interwebs
+- Mega Tiny Time Watch: watch made using ATtiny: http://www.technoblogy.com/show?2OKF
+- Use standard TV remote control and IR to control servo motor: https://www.youtube.com/watch?v=NqXu7SScVIg&feature=youtu.be
 
 ## Possible H1 Content
 - Motors
@@ -73,7 +120,11 @@ nav_exclude: true
 
 ## Deep Learning
 - Pytorch vs. Keras: https://deepsense.ai/keras-or-pytorch/
-- 
+- Tensorflow.js: https://www.tensorflow.org/js/
+
+
+## Video games
+- Create expressive video games: https://www.futurelearn.com/courses/create-expressive-video-games
 
 ### Sensors
 
@@ -87,22 +138,35 @@ If we do a sensors subsection:
 TODO: 
 - [Done in led-blink.md] blink no delay (where to put this?). We do have a fade with no delay at end of led-fade.md
   - [Done in led-blink3.md] But a blink no delay could also show how to blink multiple LEDs at different rates.
-- how to hook up multiple LEDS per port with Arduino (in parallel and why). But maybe this belongs in core electronics
+- how to hook up multiple LEDS per port with Arduino (in parallel and why). But maybe this belongs in core electronics?
 - Where to put breadboard stuff? This should probably go in the basic electronics series but for now my focus is on Arduino stuff...
-- Maybe add in sound?
-  - https://www.programmingelectronics.com/an-easy-way-to-make-noise-with-arduino-using-tone/
-  - https://www.cuidevices.com/blog/buzzer-basics-technologies-tones-and-driving-circuits#application-circuit-for-piezo-transducer
-  - https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/overview
+
+## Sound
+
+### Making Sound
+- https://www.programmingelectronics.com/an-easy-way-to-make-noise-with-arduino-using-tone/
+- https://www.cuidevices.com/blog/buzzer-basics-technologies-tones-and-driving-circuits#application-circuit-for-piezo-transducer
+- https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/overview
+- The Singing Road: america the beautiful via rumble strips: http://thesingingroad.com/
+
+### Sound Responsive
+- https://www.reddit.com/r/arduino/comments/hfmwjp/_/
+
+### Sound processing
+- Source separation: https://deezer.io/releasing-spleeter-deezer-r-d-source-separation-engine-2b88985e797e
+- Interactive distortion: cool javascript website: https://benmosheron.gitlab.io/blog/2020/04/26/distortion.html
+- Sound level meter and spectrum analyzer with Arduino: https://blog.yavilevich.com/2016/08/arduino-sound-level-meter-and-spectrum-analyzer/
 
 <!--  https://www.exploringarduino.com/resources/ -->
 
 ## Interactive Book
-If we were to treat this as an interactive book. What would it look like? This is just a very drafty (**very drafty**) look.
+If we were to treat this as an interactive book. What would it look like? This is just a very drafty (**very drafty**) look with some possible content and flow.
 
 ### Chapter 1: Intro to Electronics
 - Circuit theory: Ohm's Law, kirchhoffs voltage law, voltage dividers
 - Components: LEDs, resistors, conductors (wires), breadboards
 - (More advanced) components: capacitors, transistors (could also bring this up later)
+- What about tools: multimeters, soldering, oscilliscope, wire strippers, etc.
 
 ### Chapter 2: Intro to microcontrollers (and Arduino)
 - Quick chapter on the basics of microcontrollers?
@@ -112,6 +176,7 @@ If we were to treat this as an interactive book. What would it look like? This i
 ### Chapter 3: Intro to Output
 - Digital output, source and sinking current
 - Analog output, PWM, DACs
+  - For more on PWM: https://provideyourown.com/2011/analogwrite-convert-pwm-to-voltage/. Currently, we don't have a specific PWM section. Maybe we should? Could go in a Microcontroller section with PWM and Interrupts as sub-sections
 - (Maybe include some things about human psychology and interpreting sound, displays, etc?)
 
 ### Chapter 4: Intro to Input
@@ -123,11 +188,15 @@ If we were to treat this as an interactive book. What would it look like? This i
 - Sensors: characteristics, taxonomies
 - Digital communication protocols like I2C and SPI
 - Example sensors including accel, photoresistor, fsr, and more
+- IR receivers
+  - Why are they often in metal cages: https://electronics.stackexchange.com/questions/295629/why-are-many-ir-receivers-in-metal-cages/295689#295689
 
 ### Chapter 6: Signals (or Applied DSP)
 - Processing signals
 - Time vs. frequency analysis
 - Filters
+- Noise?
+  - Phase noise fundamentals: https://imgur.com/a/T44q4P3
 
 ### Chapter 7: Applied ML
 - Classifying these signals!

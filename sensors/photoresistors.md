@@ -302,6 +302,22 @@ Our code:
 - [Photoresistor](https://en.wikipedia.org/wiki/Photoresistor), Wikipedia
 - [Photoresistor](http://www.resistorguide.com/photoresistor/), Resistorguide.com
 
+## Photoresistor uses
+
+Some interesting uses of photoresistors in HCI/UbiComp research and beyond:
+
+- Chris Harrison and Scott E. Hudson. 2008. Lightweight material detection for placement-aware mobile computing. In Proceedings of the 21st annual ACM symposium on User interface software and technology (UIST ’08). Association for Computing Machinery, New York, NY, USA, 279–282. DOI:https://doi.org/10.1145/1449715.1449761
+
+- Azusa Kadomura, Cheng-Yuan Li, Yen-Chang Chen, Koji Tsukada, Itiro Siio, and Hao-hua Chu. 2013. Sensing fork: eating behavior detection utensil and mobile persuasive game. In CHI ’13 Extended Abstracts on Human Factors in Computing Systems (CHI EA ’13). Association for Computing Machinery, New York, NY, USA, 1551–1556. DOI:https://doi.org/10.1145/2468356.2468634
+
+- Stacey Kuznetsov, Eric Paulos, and Mark D. Gross. 2010. WallBots: interactive wall-crawling robots in the hands of public artists and political activists. In Proceedings of the 8th ACM Conference on Designing Interactive Systems (DIS ’10). Association for Computing Machinery, New York, NY, USA, 208–217. DOI:https://doi.org/10.1145/1858171.1858208
+
+- Preetha Moorthy, Michaela Honauer, Eva Hornecker, and Andreas Mühlenberend. 2017. Hello world: a children’s touch and feel books enhanced with DIY electronics. In Proceedings of the 16th International Conference on Mobile and Ubiquitous Multimedia (MUM ’17). Association for Computing Machinery, New York, NY, USA, 481–488. DOI:https://doi.org/10.1145/3152832.3157811
+
+- Jay Vidyarthi, Alissa N. Antle, and Bernhard E. Riecke. 2011. Sympathetic guitar: can a digitally augmented guitar be a social entity? In CHI ’11 Extended Abstracts on Human Factors in Computing Systems (CHI EA ’11). Association for Computing Machinery, New York, NY, USA, 1819–1824. DOI:https://doi.org/10.1145/1979742.1979863
+
+- Photoresistor, Arduino, and Servo to Auto-Play Chrome Dinosaur Game [link1](https://twitter.com/null4bl3/status/1247032404990210053?s=20) [link2](https://www.tomshardware.com/news/how-to-beat-googles-chrome-dinosaur-game-with-arduino)
+
 <!-- Selenium history:
 
 "The word 'optophone' was first used by Dr. E E. Fournier d'Albe, who in 1910 was appointed Assistant Lecturer in Physics at the University of Birmingham in England. It was here that he set up a laboratory to look into the properties of selnium. Selenium had been discovered by Berzelius in 1817 and in the years that followed, it became apparent that selenium was photosensitive, racting to light in such a way as to vary its conductivity. Possibly uknown to Fournier d'Albe, a few devices had already been inveted, such as the Elktroftalm and the Photophonic book. The Elektroftalm, originally created in 1897 by Noiszewski, was a mobility aid for the blind. It used a single selenium cell that was placed on the forehad to control the intensity of a sound output, thus allowing a blind persont o distinguish between light and dark." From Capp_TheOptophone-AnElectronicBlindAid_BiomedicalEngineering2000.pdf

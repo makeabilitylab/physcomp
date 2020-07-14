@@ -152,6 +152,8 @@ The [ATmega328 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega
 
 ![Screenshot of Table 29-16 in ATmega328 datasheet describing the ADC](assets/images/ATmega328_Datasheet_Screenshot_ADCCharacteristics.png)
 
+<!-- An additional in-depth thread describing this here: https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p -->
+
 ## References
 - https://electronics.stackexchange.com/a/67173
 - http://www.gammon.com.au/adc
@@ -160,4 +162,6 @@ The [ATmega328 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega
 ## Secrets of Arduino PWM
 
 - https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM
+
+<!-- Another nice article is Protecting Inputs in Digital Electronics: https://www.digikey.com/en/articles/protecting-inputs-in-digital-electronics -->
 

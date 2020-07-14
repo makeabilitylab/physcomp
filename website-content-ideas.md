@@ -44,6 +44,7 @@ nav_exclude: true
   - https://people.eecs.berkeley.edu/~boser/courses/49/
     - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/index.html
     - https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/N_gpio.html#_analog_input_adc
+  - Anthony Chen's course at UCLA: https://www.notion.so/2019-Fall-ECE-209AS-Human-Computer-Interaction-82df29ed1b1f49c4bcb245550133f3f8
 - Places of inspiration
   - Hackaday
   - Instructables
@@ -52,8 +53,15 @@ nav_exclude: true
   - IMU 9 DOF with bunny 3D orientation: https://www.adafruit.com/product/2472
 - [Beginners guide to ESP8266](https://tttapa.github.io/ESP8266/Chap01%20-%20ESP8266.html)
 - Photocell dinosaur game in Chrome: https://twitter.com/null4bl3/status/1247032404990210053
+  - Another version: https://www.instagram.com/p/B8ZNyarlrDt/?igshid=6mhgrkmbxpje
+  - Wonder if same thing could be used for playing guitar hero (or variants) by sticking on multiple photocells on screen and pressing buttons
+  - In fact, you don't need the servo motor--you can just use like a Leonardo or anything that can mount as a joystick to press keys virtually (though not as interesting to watch)
 - How to start a lecture: https://twitter.com/davidklaing/status/1280730027361832961
 - How to speak: https://vimeo.com/101543862
+- Recommended Arduino IDE is Code + PlatformIO: https://www.reddit.com/r/esp8266/comments/fwtxtp/recommended_c_ide_for_arduino_on_linuxdebian/
+- AskElectronics FAQ page: https://www.reddit.com/r/AskElectronics/wiki/design
+- Online Python course published on GitHub with ipynb files and recommends Jupyter Lab: https://github.com/webartifex/intro-to-python
+- Intro to JavaScript codeacademy course: https://www.codecademy.com/learn/introduction-to-javascript 
 
 ## Content to add
 - How to debug Arduino
@@ -67,12 +75,27 @@ nav_exclude: true
 
 ## Other Online Physical Computing (or Related) Courses
 - RoboGrok at Arizona State: http://www.robogrok.com/index.html
+- Teaching Machine Learning resources: https://github.com/kierisi/teaching_ml/blob/master/teaching_ml_resources.md
+
+## HCI + AI
+- Real-time sketching + GAN to make sketch interactive: https://twitter.com/dhaakon/status/1237059398175870976
+- Face and hand pose tracking in real-time: https://blog.tensorflow.org/2020/03/face-and-hand-tracking-in-browser-with-mediapipe-and-tensorflowjs.html?linkId=83993617
+
+### Arduino + AI
+- Gesture recognition in real-time on Arduino: https://eloquentarduino.github.io/2019/12/how-to-do-gesture-identification-on-arduino/
+- TensorFlowLite: how to train tensorflowlite micro speech models: https://learn.adafruit.com/how-to-train-new-tensorflow-lite-micro-speech-models?view=all
+
+## HCI History
+- Touchscreen-based gesture controlled Casio watch 1984: https://www.techeblog.com/gesture-controlled-touchscreen-casio-calculator-watch/
+- 1986 Puma shoe, RS computer shoe, had a microprocessor built into the heel to record your run and download the data on an Apple III or an IBM PC or a C64. https://twitter.com/Rainmaker1973/status/1189291805004750848?s=20. Puma shoe photo gallery and manual: https://imgur.com/gallery/NfsMIlp
 
 ## Fabrication
 
 ### 3D Printing
 - Removing printed object from plate (funny fail): https://www.reddit.com/r/3Dprinting/comments/g2syhq/when_you_just/
 - Physical visualization of Iron Man routes: https://www.reddit.com/r/3Dprinting/comments/g8oqt5/gift_for_a_friend_to_celebrate_his_first_ironman/
+- 3D printing a boat: https://twitter.com/Rainmaker1973/status/1188929553294680064?s=20
+- Nice poster summarizing key 3d printing tips: https://twitter.com/BillieRubenMake/status/1218496270836256769?s=20
 
 ### Laser cutting
 - Etching hot dog: https://www.reddit.com/r/lasercutting/comments/fyu6vq/hot_dog/
@@ -98,6 +121,17 @@ nav_exclude: true
 
 ## Machine Learning
 - Dive into Deep Learning book: http://d2l.ai/
+- Introduction to Reinforcement Learning by David Silver from DeepMind: https://www.youtube.com/watch?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ&time_continue=5&v=2pWv7GOvuf0
+- Grokking Deep Learning by Andrew Trask: https://www.manning.com/books/grokking-deep-learning?a_aid=grokkingdl&a_bid=32715258
+- Math Basics for ML from UPenn: http://www.cis.upenn.edu/~jean/math-basics.pdf 
+
+### Computer Vision
+- https://github.com/microsoft/computervision-recipes/blob/master/README.md. "Our target audience for this repository includes data scientists and machine learning engineers with varying levels of Computer Vision knowledge as our content is source-only and targets custom machine learning modelling. The utilities and examples provided are intended to be solution accelerators for real-world vision problems."
+
+## Prototyping
+
+### Cardboard prototyping
+- Cardboard prototype xylophone instrument: https://twitter.com/MrsBissonSF/status/1215056588358111232?s=20
 
 ## Projects
 
@@ -109,7 +143,13 @@ Would be cool to assign homework or show examples pulled directly from HCI/UbiCo
 
 ### From the Interwebs
 - Mega Tiny Time Watch: watch made using ATtiny: http://www.technoblogy.com/show?2OKF
+  - I've previous thought of an assignment to make a wearable LED bracelet with an ATTiny; somewhat similar to this. Could be an interesting first PCB exercise too; I noticed OSHPark does flex PCBs
 - Use standard TV remote control and IR to control servo motor: https://www.youtube.com/watch?v=NqXu7SScVIg&feature=youtu.be
+- Future of table tennis training: https://twitter.com/ronald_vanloon/status/1246549503987126280?s=11
+- IoT touchscreen translated to LED ring position: https://www.reddit.com/r/ArduinoProjects/comments/fpjlei/amazing_how_responsive_the_led_positioning_data/
+- Energy lamp shows whether electricity comes from renewable energy sources: https://www.reddit.com/r/arduino/comments/fo4yon/energy_lamp_shows_whether_the_electricity_used/
+- Example use of a gyro/IMO to self-level a pool table on a cruise ship: https://twitter.com/rainmaker1973/status/1236660586232102912?s=11
+- FlappyBird on Arduino Nano + OLED: https://gitlab.com/richardathome/nano-bird. Could easily adapt my flappy bird clone for this.
 
 ## Possible H1 Content
 - Motors
@@ -122,6 +162,9 @@ Would be cool to assign homework or show examples pulled directly from HCI/UbiCo
 - Pytorch vs. Keras: https://deepsense.ai/keras-or-pytorch/
 - Tensorflow.js: https://www.tensorflow.org/js/
 
+## Designing PCBs
+- https://docs.oshpark.com/
+- Making first PCB: https://youtu.be/wJXMZybXftk
 
 ## Video games
 - Create expressive video games: https://www.futurelearn.com/courses/create-expressive-video-games
@@ -150,7 +193,9 @@ TODO:
 - The Singing Road: america the beautiful via rumble strips: http://thesingingroad.com/
 
 ### Sound Responsive
+- https://www.instructables.com/id/Arduino-Audio-Input/
 - https://www.reddit.com/r/arduino/comments/hfmwjp/_/
+- https://www.reddit.com/r/arduino/comments/f2daed/i_built_an_infinity_mirror_musicvisualizer_that/
 
 ### Sound processing
 - Source separation: https://deezer.io/releasing-spleeter-deezer-r-d-source-separation-engine-2b88985e797e
@@ -206,5 +251,7 @@ If we were to treat this as an interactive book. What would it look like? This i
 - Chapter on ESP32: Moving to a more sophisticated micro
 - Chapter on sound: making and listening
 - Chapter on tools like soldering, multimeters, etc.
+  - Great post by Jeff Glass on setting up an electronics workbench: https://jeff.glass/2019/12/01/electronics-lab-tools/
+- Chapter on making PCBs?
 
 Throughout the microcontroller, sensors, signals, and ML parts, we should try to refer to examples from HCI and ubicomp literature as much as possible (and possibly more broadly as well!)

@@ -104,11 +104,9 @@ The Huzzah32 has 21 GPIO pins; however pins 34 (A2), 39 (A3), 36 (A4) are not ou
 
 ### ADC2 is only usable when WiFi not activated
 
-The Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) state (somewhat confusingly) that ADC#1 only works when WiFi has started. We empirically tested this (see video below) and found this **not** to be true. 
+The Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) state (somewhat confusingly) that ADC#1 only works when WiFi has started. We empirically tested this (see video below) and found this **not** to be true.  On the other hand, the Espressif [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html) state that ADC#2 only works when WiFi has **not** started. We **did** find this to be true. So, we believe the Espressif docs are right and the Adafruit docs are wrong. **Update:** it turns out that the Adafruit docs _are_ accurate but just poorly phrased. Indeed, ADC#1 is the only ADC that works when using WiFi (see [Reddit post](https://www.reddit.com/r/esp32/comments/gav6mw/huzzah32_pin_diagram_draft/)).
 
-On the other hand, the Espressif [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html) state that ADC#2 only works when WiFi has **not** started. We **did** find this to be true. So, we believe the Espressif docs are right and the Adafruit docs are wrong. 
-
-Check out our two test programs:
+Indeed, we empirically tested this. Check out our two programs:
 - [AnalogInputTest.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/AnalogInputTest/AnalogInputTest.ino) reads from all analog input pins and prints the values to Serial (so you can view them in Serial Console or Serial Plotter)
 - [WiFiAnalogInputTest.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/WiFi/WiFiAnalogInputTest/WiFiAnalogInputTest.ino) extends AnalogInputTest but turns on WiFi.
 

@@ -50,9 +50,9 @@ ADC2 has some restrictions:
 1. ADC2 is used by the Wi-Fi driver, so ADC2 is only usable when the Wi-Fi driver has **not** started.
 2. Three of the ADC2 pins are strapping pins and thus should be used with caution. Strapping pins are used during power-on/reset to configure the device boot mode, the operating voltage, and other initial settings ([link](https://www.esp32.com/viewtopic.php?t=5970))
 
-Importantly, the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) for the Huzzah32 have an error: they state that "you can only read analog inputs on ADC #1 once WiFi has started". Through experimentation, we've found this to be untrue.
+Importantly, the official Adafruit [docs](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts) for the Huzzah32 are confusing: they state that "you can only read analog inputs on ADC #1 once WiFi has started". Through experimentation and a [Reddit post](https://www.reddit.com/r/esp32/comments/gav6mw/huzzah32_pin_diagram_draft/fp1zcz5?utm_source=share&utm_medium=web2x&context=3), we found that Adafruit intended to say simply that ADC#2 is unavailable once WiFi has started (so you can only use ADC#1).
 
-In the following video, I'm testing all 13 analog input pins (`A0` - `A12`) using a trim potentiometer for input and the Serial Plotter for output. WiFi is off and all pins work.
+In the following video, I'm testing all 13 analog input pins (`A0` - `A12`) using a trim potentiometer for input and the Serial Plotter for output. WiFi is off and, indeed, all pins work.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/8BBY-5n4e5A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

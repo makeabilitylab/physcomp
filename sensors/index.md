@@ -151,7 +151,7 @@ One of the most important (and interesting!) theorems in DSP is the [*Nyquist-Sh
 
 For example, a common digital audio sampling rate is [44,100Hz](https://en.wikipedia.org/wiki/44,100_Hz) (44.1 kHz). This is what compact discs (CDs) use and is also standard for mp3s. Why 44.1 kHz? This sampling rate was chosen, in part, because the human hearing range is ~20 Hz to 20kHz. Hence, according to the above theorem, the minimum sampling frequency needed to be at least $$2 * 20kHz$$ or 40kHz. 
 
-To learn more about the Nyquist sampling theorem along with concrete, interactive examples, please see our [Quantization and Sampling Jupyter Notebook](signals/QuantizationAndSampling/index.html).
+To learn more about the Nyquist sampling theorem along with concrete, interactive examples, please see our [Quantization and Sampling Jupyter Notebook](../signals/QuantizationAndSampling/index.html).
 
 <!-- TODO: make interactive visualization that shows off Nyquist and its effect. Perhaps show two graphs: on left, the real signal with circles that represent sampling points. And then, on the right, the resulting signal. Update: I've now done this here https://makeabilitylab.github.io/physcomp/signals/QuantizationAndSampling/index.html -->
 

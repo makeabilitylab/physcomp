@@ -147,11 +147,13 @@ When selecting sensors and a data processing pipeline, there are multiple consid
 
 ### Nyquist sampling theorem
 
-One of the most important (and interesting!) theorems in DSP is the [*Nyquist-Shannon Sampling Theorem*](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem), which states that a continuous time signal (the raw physical signal) can be sampled and perfectly reconstructed (!) if the sampling rate (sometimes called the sampling frequency or $$F_s$$) is over twice as fast as the raw signal's highest frequency component. That is, the minimum sampling frequency $$min(F_s)$$ must be greater than $$2 * max(F_{signal})$$.
+One of the most important (and interesting!) theorems in DSP is the [*Nyquist-Shannon Sampling Theorem*](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem), which states that a continuous time signal (the raw physical signal) can be sampled and perfectly reconstructed if the sampling rate (sometimes called the sampling frequency or $$F_s$$) is over twice as fast as the raw signal's highest frequency component. That is, the minimum sampling frequency $$min(F_s)$$ must be greater than $$2 * max(F_{signal})$$.
 
 For example, a common digital audio sampling rate is [44,100Hz](https://en.wikipedia.org/wiki/44,100_Hz) (44.1 kHz). This is what compact discs (CDs) use and is also standard for mp3s. Why 44.1 kHz? This sampling rate was chosen, in part, because the human hearing range is ~20 Hz to 20kHz. Hence, according to the above theorem, the minimum sampling frequency needed to be at least $$2 * 20kHz$$ or 40kHz. 
 
-<!-- TODO: make interactive visualization that shows off Nyquist and its effect. Perhaps show two graphs: on left, the real signal with circles that represent sampling points. And then, on the right, the resulting signal -->
+To learn more about the Nyquist sampling theorem along with concrete, interactive examples, please see our [Quantization and Sampling Jupyter Notebook](signals/QuantizationAndSampling/index.html).
+
+<!-- TODO: make interactive visualization that shows off Nyquist and its effect. Perhaps show two graphs: on left, the real signal with circles that represent sampling points. And then, on the right, the resulting signal. Update: I've now done this here https://makeabilitylab.github.io/physcomp/signals/QuantizationAndSampling/index.html -->
 
 ### ATmega328 ADC conversion rate
 

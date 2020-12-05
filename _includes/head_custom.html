@@ -5,12 +5,20 @@
   </script>
 {% endif %}
 
+{% if page.usetocbot %}
+  <!-- tocbot is an awesome automatic table-of-contents generator/navigator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
+{% endif %}
+
 <!-- <link rel="stylesheet" href="{{ "/_includes/css/custom.css" | prepend: site.baseurl }}">
 <link rel="stylesheet" href="{{ "/css/custom2.css" | prepend: site.baseurl }}">
 <link rel="stylesheet" href="{{ "css/custom.css" | prepend: site.baseurl }}">
 <link rel="stylesheet" href="custom2.css">
 <link rel="stylesheet" href="/assets/css/custom.css"> -->
 <link rel="stylesheet" href="{{ "/assets/css/custom.css" | prepend: site.baseurl }}">
+
+
 
 <!-- <style type="text/css">
   body {background-color: green;}

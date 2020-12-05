@@ -41,6 +41,7 @@ layout: table_wrappers
     </div>
     <div class="main-content-wrap js-main-content" tabindex="0">
       <div class="main-content">
+        
         <div class="page-header js-page-header">
           {% if site.search_enabled != false %}
           <div class="search">
@@ -69,7 +70,9 @@ layout: table_wrappers
               </nav>
             {% endif %}
           {% endunless %}
-          <div id="main-content" class="page-content" role="main">
+          <div id="main-content" class="page-content js-toc-content" role="main">
+            <div class="tocbot tocbot-right js-toc">Test!</div>
+
             {% if site.heading_anchors != false %}
               {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><use xlink:href=\"#link\"></use></svg>" anchorClass="anchor-heading" %}
             {% else %}
@@ -80,9 +83,9 @@ layout: table_wrappers
               {%- include toc.html -%}
             {%- endif -%}
           
-          {% if page.comments %} 
-            {% include disqus.html %}
-          {% endif %}
+            {% if page.comments %} 
+              {% include disqus.html %}
+            {% endif %}
 
           {% if site.footer_content != nil %}
             <hr>
@@ -94,5 +97,24 @@ layout: table_wrappers
         </div>
       </div>
   </div>
+
+  {% if page.usetocbot %} 
+    <!-- tocbot is an awesome table of contents generator, see: https://tscanlin.github.io/tocbot/-->
+    <script>
+      tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.js-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.js-toc-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h2, h3, h4',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+        positionFixedSelector: '.js-toc',
+        includeHtml: true,
+        onClick: (e) => { console.log('you clicked a link', e) }
+      });
+    </script>
+  {% endif %}
 </body>
 </html>

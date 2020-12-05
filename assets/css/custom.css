@@ -37,3 +37,58 @@ figure.highlight {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Used for tocbot */
+/* .tocbot-right {
+  position: fixed !important;
+  transform: translateX(0);
+  right: calc((100% - 48rem - 4rem) / 2);
+  top:5px;
+  z-index: 100;
+}
+
+.tocbot {
+  height: 100%;
+  width: 280px;
+  transform: translateX(0);
+} */
+
+.tocbot {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateX(-100%);
+}
+
+.tocbot.tocbot-right {
+  transform: translateX(100%);
+  right: 0;
+  position: absolute;
+}
+
+@media (min-width: 52em) {
+  .tocbot {
+    transform: translateX(0)
+  }
+
+  .tocbot.tocbot-right {
+    position: fixed !important;
+    transform: translateX(0);
+    right: calc((100% - 48rem - 4rem) / 2);
+  }
+
+  .tocbot-icon {
+    display: none
+  }
+
+  /* .try-it-container {
+      display: block
+  }
+
+  .content {
+      margin-left: 280px
+  } */
+
+  .tocbot-right~.content {
+      margin-left: 0;
+      margin-right: 280px
+  }
+}

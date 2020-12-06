@@ -71,7 +71,7 @@ layout: table_wrappers
             {% endif %}
           {% endunless %}
           <div id="main-content" class="page-content js-toc-content" role="main">
-            <div class="tocbot tocbot-right js-toc">Test!</div>
+            <nav id="tocbot-toc" class="js-toc"></nav>
 
             {% if site.heading_anchors != false %}
               {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><use xlink:href=\"#link\"></use></svg>" anchorClass="anchor-heading" %}
@@ -99,19 +99,16 @@ layout: table_wrappers
   </div>
 
   {% if page.usetocbot %} 
-    <!-- tocbot is an awesome table of contents generator, see: https://tscanlin.github.io/tocbot/-->
+    <!-- tocbot is an awesome table of contents generator, see: https://tscanlin.github.io/tocbot/ -->
     <script>
       tocbot.init({
-        // Where to render the table of contents.
+        /* Where to render the table of contents. */
         tocSelector: '.js-toc',
-        // Where to grab the headings to build the table of contents.
+        /* Where to grab the headings to build the table of contents. */
         contentSelector: '.js-toc-content',
-        // Which headings to grab inside of the contentSelector element.
+        /* Which headings to grab inside of the contentSelector element. */
         headingSelector: 'h2, h3, h4',
-        // For headings inside relative or absolute positioned containers within content.
-        hasInnerContainers: true,
-        positionFixedSelector: '.js-toc',
-        includeHtml: true,
+      
         onClick: (e) => { console.log('you clicked a link', e) }
       });
     </script>

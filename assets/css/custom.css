@@ -53,42 +53,18 @@ figure.highlight {
   transform: translateX(0);
 } */
 
-.tocbot {
+#tocbot-toc{
+  position: fixed !important;
+  top:150px;
+  right: 0px;
+  z-index: 100;
   background-color: rgba(255, 255, 255, 0.9);
-  transform: translateX(-100%);
 }
 
-.tocbot.tocbot-right {
-  transform: translateX(100%);
-  right: 0;
-  position: absolute;
+#tocbot-toc ol {
+  list-style: none;
 }
 
-@media (min-width: 52em) {
-  .tocbot {
-    transform: translateX(0)
-  }
-
-  .tocbot.tocbot-right {
-    position: fixed !important;
-    transform: translateX(0);
-    right: calc((100% - 48rem - 4rem) / 2);
-  }
-
-  .tocbot-icon {
-    display: none
-  }
-
-  /* .try-it-container {
-      display: block
-  }
-
-  .content {
-      margin-left: 280px
-  } */
-
-  .tocbot-right~.content {
-      margin-left: 0;
-      margin-right: 280px
-  }
+a.toc-link{
+  margin-left: 5px;
 }

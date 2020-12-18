@@ -21,6 +21,10 @@ In this lesson, you'll learn about force-sensitive resistors (FSRs) and how to u
 
 This lesson directly builds on the prior one ([potentiometers](potentiometers.md)), so definitely complete that first.
 
+![Animation showing how a force-sensitive resistor works](/assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif)
+Animation shows how the resistance of the FSR drops with applied pressure (higher pressure, lower resistance, brighter LED).
+{: .fs-1 }
+
 ## Materials
 
 We'll need the following materials:
@@ -32,13 +36,13 @@ We'll need the following materials:
 
 ## Force-sensitive resistors (FSRs)
 
-Force-sensing (or force-sensitive) resistors (FSRs) are two-legged variable resistors that **decrease** in resistance with an **increase** in applied force. FSRs can differ in size, shape, and force sensing sensitivity. There are a variety of different form factors, including square and circular (which host the active sensor area). In our hardware kits, we typically purchase and provide the popular [Interlink FSR 402]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) (either from [Sparkfun](https://www.sparkfun.com/products/9375) or [Adafruit](https://www.adafruit.com/product/166)), which is the product in the upper-left below.
+Force-sensing (or force-sensitive) resistors (FSRs) are two-legged variable resistors that **decrease** in resistance with an **increase** in applied force. 
+
+FSRs can differ in size, shape, and force sensing sensitivity. There are a variety form factors, including square and circular (which host the active sensor area). In our hardware kits, we typically purchase and provide the popular [Interlink FSR 402]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) (either from [Sparkfun](https://www.sparkfun.com/products/9375) or [Adafruit](https://www.adafruit.com/product/166)), which is the product in the upper-left below.
 
 ![Grid of example force sensitive resistors from Sparkfun's website](assets/images/ForceSensitiveResistors_Examples_Sparkfun.png)
 Prices and products from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all)
 {: .fs-1 }
-
-While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to precisely measure weight, load, or strain.
 
 ### FSR applications
 
@@ -52,11 +56,13 @@ The [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResis
 - **Detecting presence, position, or motion** Sense a person/patient in a bed, chair, or medical device
 - **Detecting liquid blockage.** Detect tube or pump occlusion or blockage by measuring back pressure
 
+While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to precisely measure weight, load, or strain.
+
 <!-- TODO: in future, include papers from HCI and UbiComp with pressure sensors -->
 
 ### How do FSRs work?
 
-How do FSRs actually work? Their construction is actually quite simple. There are three layers: the top and bottom layers are conductive and the middle layer provides a "thin air gap" that separates the two. When the two conductive layers are pressed together, electrical pathways are made. The harder you press, the more connections. And the more connections, the less resistance. See the FSR construction diagram from Interlink below:
+How do FSRs actually work? Their construction is quite simple. There are three layers: the top and bottom layers are conductive and the middle layer provides a "thin air gap" that separates the two. When the two conductive layers are pressed together, electrical pathways are made. The harder you press, the more connections. And the more connections, the less resistance. See the FSR construction diagram from Interlink below:
 
 ![FSR construction diagram from interlink showing three layers: top and bottom layer are conductive and middle layer is an "air gap" that separates the two.](assets/images/FSR_ConstructionDiagram_Interlink.png)
 Diagram from the Interlink FSR [Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf)
@@ -93,7 +99,9 @@ Below, we show two possible wiring diagrams: the first (preferred) shows the FSR
 Two wiring options of an FSR using a breadboard. Like typical resistors, FSRs can be inserted into your circuits in either direction.
 {: .fs-1 }
 
-With the 9V wiring, we include a backup resistor; however, with the 5V wiring (with Arduino), we do not. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with 1,000g of force, the FSR still has roughly 200Ω-500Ω of resistance. So, while the potentiometer drops to 0Ω at the lowest setting, the FSR does not. For the 9V wiring, if we assume the red LED's $$V_f=2V$$ and the lowest FSR resistance of 200Ω, then $$I=\frac{9V-2V}{200Ω}=35mA$$, which exceeds the max current of the LED. We thus added a 470Ω backup resistor to be safe. So, $$I=\frac{9V-2V}{200Ω + 470Ω}=10.4mA$$.
+With the 9V wiring, we include a backup resistor; however, with the 5V wiring (with Arduino), we do not. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with significant force (roughly 1,000g according to the datasheet), the FSR still has ~200Ω-500Ω of resistance. So, while a potentiometer may drop to 0Ω at the lowest setting, the FSR does not, and thus does not require a backup resistor.
+
+For the 9V wiring, if we assume the red LED's $$V_f=2V$$ and the lowest FSR resistance of 200Ω, then $$I=\frac{9V-2V}{200Ω}=35mA$$, which exceeds the max current of the LED. We thus added a 470Ω backup resistor to be safe. So, $$I=\frac{9V-2V}{200Ω + 470Ω}=10.4mA$$.
 
 ### Positioning FSR on breadboard
 
@@ -120,8 +128,9 @@ Workbench video of the FSR LED dimmer circuit
 {: .fs-1 }
 
 ## Using FSRs with microcontrollers
+OK, now that you've gained some experience with FSRs and understand how to use them *without* a microcontroller, let's explore how to use them *with* a microcontroller.
 
-First, like usual, we'll show you the wrong way to hook up an FSR to a microcontroller:
+First, like usual, we'll show you the wrong way to hook up a component to a microcontroller:
 
 ![Incorrect Arduino wiring diagram and schematic for FSR](assets/images/ArduinoUno_FSR_Incorrect_SchematicAndDiagram.png)
 
@@ -149,6 +158,7 @@ The guide provides a useful force *vs.* $$V_{out}$$ graph with different fixed r
 
 ![FSR force vs. Vout graph for different fixed resistor values from the Interlink FSR data sheet](assets/images/Voltage-divider-circuit-Interlink-FSR-402-Makerguides.png)
 Graph originally from [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf). Image above from [Makerguides](https://www.makerguides.com/fsr-arduino-tutorial).
+{: .fs-1 }
 
 In general, for a resistive sensor like an FSR, read the datasheet (of course) but also play around with the sensor. Start with a 10kΩ fixed resistor, write a simple Arduino program to graph its analog input in response to various stimuli (in this case, force), and go from there.
 

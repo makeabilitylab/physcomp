@@ -24,9 +24,9 @@ The Circuit Express Playground. Image from [Adafruit](https://www.adafruit.com/p
 
 The Circuit Express Playground (CPX) is an introductory physical computing board created through a partnership by [Adafruit](https://adafruit.com) and [Code.org](https://code.org). The CPX can be programmed with the block-based programming language [MakeCode](https://makecode.adafruit.com/) (which is similar to [Scratch](https://scratch.mit.edu/)) and is intended to be both an introductory board for learning *electronics* and *programming*.
 
-Because the CPX includes a host of I/O components—including a [LIS3DH accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout), a light-level sensor (a phototransistor), multiple push buttons, a microphone, RGB LEDs, a speaker, IR receivers/transmitter, and more—the CPX is a great choice for rapidly prototyping physical computing experiences as well. For many applications, you do not even need to use an external breadboard.
+Because the CPX includes a host of on-board I/O components—including a [LIS3DH accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout), a light-level sensor (a phototransistor), multiple push buttons, a microphone, RGB LEDs, a speaker, IR receivers/transmitter, and more—the CPX is a great choice for rapidly prototyping physical computing experiences. For many applications, you do not even need to use an external breadboard.
 
-For programming, the board supports a variety of languages, including: [MakeCode](https://learn.adafruit.com/makecode) (block-based and JavaScript), [CircuitPython](https://www.adafruit.com/category/956) (Python), or Arduino (C/C++).
+For programming, the board supports a variety of languages, including: [MakeCode](https://learn.adafruit.com/makecode) (block-based and JavaScript), [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) (Python), or [Arduino](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino) (C/C++).
 
 Given the CPX's low floor (approachable, easy to use for beginners), high ceiling (you can make increasingly advanced things as you learn), and wide walls (supports a wide variety of projects)*, the CPX is a perfect platform for introductory physical computing or prototyping courses. We now use the CPX in our [MHCI+D program](https://mhcid.washington.edu/) at UW.
 
@@ -39,7 +39,7 @@ Given the CPX's low floor (approachable, easy to use for beginners), high ceilin
 An annotated version of the CPX showing the location of all main components. Image from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour). 
 {: .fs-1 } 
 
-One key benefit of the CPX—compared with vanilla Arduino boards, for example—is that it's  full of amazing input/output (IO) components. See Adafruit's helpful ["guided tour"](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour) of the CPX. In short, the board includes:
+One key benefit of the CPX—compared with vanilla Arduino boards, for example—is that it's  full of amazing input/output (IO) components. See Adafruit's helpful ["guided tour"](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour) for more but, in short, the board includes:
 
 ### Input
 

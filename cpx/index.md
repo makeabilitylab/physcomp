@@ -3,7 +3,7 @@ layout: default
 title: Circuit Express (CPX)
 has_toc: false # (on by default)
 usemathjax: true
-comments: true
+comments: false
 has_children: true
 nav_exclude: false
 nav_order: 3

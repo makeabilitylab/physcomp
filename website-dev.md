@@ -15,7 +15,14 @@ nav_exclude: true
 {:toc}
 ---
 
-## Website TODO
+## Running the website
+Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll), you can open terminal in VSCode and type:
+
+```
+> bundle exec jekyll serve 
+```
+
+## Website TODOs
 - [Done] Update format for blockquote in "just the docs" to https://codepen.io/cliftwalker/pen/XJaEXY
   - Need to modify the css style:
   - See: https://aregsar.com/blog/2019/how-to-customize-your-github-pages-blog-style-in-five-minutes/

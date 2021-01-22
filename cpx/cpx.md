@@ -92,7 +92,6 @@ As someone who has worked with and taught physical computing for nearly a decade
 
 ## Learning Resources
 ![A screenshot of the MakeCode website where you can find links to projects](assets/images/MakeCode_Screenshot_Tutorials.png)
-
 A screenshot of the [Adafruit MakeCode website](https://makecode.adafruit.com/) that has links to tutorials and example projects.
 {: .fs-1 }
 

@@ -90,3 +90,23 @@ As someone who has worked with and taught physical computing for nearly a decade
 - Third, there is a built-in **simulation environment** that immediately lets you see how your code will perform before uploading it to your physical CPX device
 - Finally, it is a **web-based editor**. There is nothing to install and you can program the CPX from your web browser. And once you've loaded the editor, it stays cached in your browser (so works offline).
 
+## Learning Resources
+![A screenshot of the MakeCode website where you can find links to projects](assets/images/MakeCode_Screenshot_Tutorials.png)
+
+A screenshot of the MakeCode website that has links to tutorials and example projects.
+{: .fs-1 }
+
+Adafruit and MakeCode have published a series of thoughtful, easy-to-understand tutorials:
+- You can find [step-by-step MakeCode + CPX tutorials](https://makecode.adafruit.com/) within the MakeCode editor itself. The nice thing here is that the MakeCode editor walks you through each step. Pretty awesome!
+
+- You can also access the above tutorials as [traditional, linear step-by-step guides here](https://makecode.adafruit.com/tutorialss).
+
+- Adafruit also publishes individual "courses", including [Using the CPX Pins](https://makecode.adafruit.com/learnsystem/pins-tutorial), [Logic Lab](https://makecode.adafruit.com/learnsystem/logic-lab), and a [Maker Course](https://makecode.adafruit.com/courses/maker).
+
+- Finally, if you want to dive deeper into some of the CPX's individual hardware components, [Shawn Hymel](https://shawnhymel.com/), Adafruit, and MakeCode teamed up to make a video-based tutorial series called [Behind the MakeCode Hardware](https://makecode.adafruit.com/behind-the-makecode-hardware), including:
+  - [Neopixels](https://youtu.be/Bo0cM2qmuAE)
+  - [Speaker](https://youtu.be/JjJ-KGwKh_4)
+  - [Accelerometer](https://youtu.be/2HzNKz-QlV0)
+  - [Light Sensor](https://youtu.be/9LrWQ68lO20)
+  - [Infrared](https://youtu.be/0EMuaMClfos)
+  - [Microphone](https://youtu.be/g5894PVYOF4)

@@ -20,6 +20,6 @@ nav_order: 3
 
 Welcome! These tutorials are designed to be completed **in order**.
 
-## [Lesson 1: Introduction to the CPX and MakeCode](esp32.md)
+## [Lesson 1: Introduction to the CPX and MakeCode](cpx.md)
 
 In [this lesson](cpx.md), you'll learn about the Circuit Playground Express (CPX), how it differs from and relates to the Arduino platform, and how to program the board.

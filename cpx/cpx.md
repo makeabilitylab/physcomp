@@ -108,7 +108,7 @@ Adafruit and MakeCode have published a series of thoughtful, easy-to-understand 
 
 - Finally, if you want to dive deeper into some of the CPX's individual hardware components, [Shawn Hymel](https://shawnhymel.com/), Adafruit, and MakeCode teamed up to make a video-based tutorial series called [Behind the MakeCode Hardware](https://makecode.adafruit.com/behind-the-makecode-hardware), including topics on:
   - [Neopixels](https://youtu.be/Bo0cM2qmuAE)
-  - [Speaker](https://youtu.be/JjJ-KGwKh_4)
+  - [Speaker](https://youtu.be/JjJ-KGwKh_4). See also the [Make it Sound](https://learn.adafruit.com/make-it-sound?view=all#music-and-sound-in-makecode) tutorial.
   - [Accelerometer](https://youtu.be/2HzNKz-QlV0)
   - [Light Sensor](https://youtu.be/9LrWQ68lO20)
   - [Infrared](https://youtu.be/0EMuaMClfos)

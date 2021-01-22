@@ -97,9 +97,13 @@ A screenshot of the [Adafruit MakeCode website](https://makecode.adafruit.com/) 
 {: .fs-1 }
 
 Adafruit and MakeCode have published a series of thoughtful, easy-to-understand tutorials:
+- A ["What is MakeCode and How to Use it"](https://learn.adafruit.com/makecode) primer
+
 - You can find [step-by-step MakeCode + CPX tutorials](https://makecode.adafruit.com/) within the MakeCode editor itself. The nice thing here is that the MakeCode editor walks you through each step. Pretty awesome!
 
 - You can also access the above tutorials as [traditional, linear step-by-step guides here](https://makecode.adafruit.com/tutorialss).
+
+- Microsoft's [Peli de Halleux](https://learn.adafruit.com/users/pelikhan) has created a few CPX+MakeCode guides on the Adafruit website, including one on [NeoPixels](https://learn.adafruit.com/neopixels-with-makecode) and the other on [CPX Sensors](https://learn.adafruit.com/sensors-in-makecode).
 
 - Adafruit also publishes individual "courses", including [Using the CPX Pins](https://makecode.adafruit.com/learnsystem/pins-tutorial), [Logic Lab](https://makecode.adafruit.com/learnsystem/logic-lab), and a [Maker Course](https://makecode.adafruit.com/courses/maker).
 
@@ -110,3 +114,7 @@ Adafruit and MakeCode have published a series of thoughtful, easy-to-understand 
   - [Light Sensor](https://youtu.be/9LrWQ68lO20)
   - [Infrared](https://youtu.be/0EMuaMClfos)
   - [Microphone](https://youtu.be/g5894PVYOF4)
+
+## Example projects
+
+- Adafruit publishes [example MakeCode+CPX example projects](https://learn.adafruit.com/category/makecode) along with tutorials.

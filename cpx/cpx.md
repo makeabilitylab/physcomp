@@ -93,7 +93,7 @@ As someone who has worked with and taught physical computing for nearly a decade
 ## Learning Resources
 ![A screenshot of the MakeCode website where you can find links to projects](assets/images/MakeCode_Screenshot_Tutorials.png)
 
-A screenshot of the MakeCode website that has links to tutorials and example projects.
+A screenshot of the [Adafruit MakeCode website](https://makecode.adafruit.com/) that has links to tutorials and example projects.
 {: .fs-1 }
 
 Adafruit and MakeCode have published a series of thoughtful, easy-to-understand tutorials:
@@ -103,7 +103,7 @@ Adafruit and MakeCode have published a series of thoughtful, easy-to-understand 
 
 - Adafruit also publishes individual "courses", including [Using the CPX Pins](https://makecode.adafruit.com/learnsystem/pins-tutorial), [Logic Lab](https://makecode.adafruit.com/learnsystem/logic-lab), and a [Maker Course](https://makecode.adafruit.com/courses/maker).
 
-- Finally, if you want to dive deeper into some of the CPX's individual hardware components, [Shawn Hymel](https://shawnhymel.com/), Adafruit, and MakeCode teamed up to make a video-based tutorial series called [Behind the MakeCode Hardware](https://makecode.adafruit.com/behind-the-makecode-hardware), including:
+- Finally, if you want to dive deeper into some of the CPX's individual hardware components, [Shawn Hymel](https://shawnhymel.com/), Adafruit, and MakeCode teamed up to make a video-based tutorial series called [Behind the MakeCode Hardware](https://makecode.adafruit.com/behind-the-makecode-hardware), including topics on:
   - [Neopixels](https://youtu.be/Bo0cM2qmuAE)
   - [Speaker](https://youtu.be/JjJ-KGwKh_4)
   - [Accelerometer](https://youtu.be/2HzNKz-QlV0)

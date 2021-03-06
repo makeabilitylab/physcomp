@@ -74,6 +74,8 @@ Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherw
 
 As noted, for course and content inspirations, see our [Resources](resources/index.md) page and our [Inspirations](resources/inspirations.md) page.
 
+This website site is built in [Jekyll](https://jekyllrb.com/) with the [Just the Docs](https://github.com/pmarsceill/just-the-docs) theme. 
+
 <!--
 ## Ideas to Call This Repo and Site?
 - Physical Computing (or physcomp)

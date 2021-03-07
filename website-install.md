@@ -15,12 +15,39 @@ nav_exclude: true
 {:toc}
 ---
 
-This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css.
+This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css. We use a Jekyll template called ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/).
 
-## Jekyll Installation
+## Dev environment setup
+Below, we walk through dev environment setup on both Mac and Windows.
 
 ### Mac
-Simply follow the [official installation guide](https://jekyllrb.com/docs/installation/)
+Installing the prequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). For MacOS, simply follow the [official installation guide](https://jekyllrb.com/docs/installation/macos/). Because you have to install the XCode development environment, [Homebrew](https://brew.sh/), [Ruby](https://www.ruby-lang.org/en/), and [Jekyll](https://jekyllrb.com/), this installation process may take ~1 hour (depending on your download speeds).
+
+Follow the installation guide closely. I did each step except for I skipped the [rbenv part](https://jekyllrb.com/docs/installation/macos/#rbenv) (as I only use Ruby for Jekyll, no need for selecting between multiple Ruby versions on my dev environment).
+
+After finishing the last step in the [MacOS installation guide](https://jekyllrb.com/docs/installation/macos/), which is running the command `> sudo gem install -n /usr/local/bin/ jekyll`, then go to the `physcomp` folder and type `> bundle install`.
+
+Finally, type `> bundle exec jekyll serve`. Note: I typically do this from within VSCode's Terminal.
+
+I just tried this full installation process from end-to-end and ran into the following issue on this last command:
+
+```
+jonf-macbook:physcomp jonf$ bundle exec jekyll serve
+Configuration file: /Users/jonf/Git/physcomp/_config.yml
+            Source: /Users/jonf/Git/physcomp
+       Destination: /Users/jonf/Git/physcomp/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+      Remote Theme: Using theme pmarsceill/just-the-docs
+                    done in 17.425 seconds.
+ Auto-regeneration: enabled for '/Users/jonf/Git/physcomp'
+bundler: failed to load command: jekyll (/usr/local/lib/ruby/gems/3.0.0/bin/jekyll)
+
+/usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in `require': cannot load such file -- webrick (LoadError)
+```
+The problem is that webrick no longer comes with Ruby 3.0. To solve this, I simply typed `> bundle add webrick` and then again `> bundle exec jekyll serve`. And then things worked!
+
+
 
 ### Windows
 
@@ -87,14 +114,18 @@ ERROR:  Error installing github-pages:
 
 So then I just tried `bundle install` and that worked. Whew.
 
-#### Some possibly useful links:
-- I used the Chocolatey Windows package manager ([installation instructions here](https://chocolatey.org/install)). Fastest way to open PowerShell with admin privilages is `Windows-X`
-- Then I followed the instructions [here](https://learn.cloudcannon.com/jekyll/install-jekyll-on-windows/) and [here](https://malekbenz.com/blog/2017/09/05/Install-Jekyll-on-Windows-with-Chocolatey).
-- Note: I still haven't gotten Jekyll to run on Windows...
+## Developing the website
+1. Clone the website repo `> git clone https://github.com/makeabilitylab/physcomp.git`
+2. Download [VS Code](https://code.visualstudio.com/Download)
+3. Open the `physcomp` folder in VS Code
+4. Use markdown to build new pages. We are using the ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/) Jekyll template.
+5. Run the website locally by opening `Terminal` in VS Code and typing `> bundle exec jekyll serve`. As you save code, the website will auto-generate and serve the new content.
+6. The local website should serve at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/)
 
-## Running the website
+## Running the website locally
 Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll), you can open terminal in VSCode and type:
 
 ```
 > bundle exec jekyll serve 
 ```
+The website should then be available at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).

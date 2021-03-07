@@ -209,7 +209,9 @@ If we were to treat this as an interactive book. What would it look like? This i
 
 ### Chapter 1: Intro to Electronics
 - Circuit theory: Ohm's Law, kirchhoffs voltage law, voltage dividers
+- Parallel vs. series circuits
 - Components: LEDs, resistors, conductors (wires), breadboards
+- Make own variable resistor out of lo-fi materials
 - (More advanced) components: capacitors, transistors (could also bring this up later)
 - What about tools: multimeters, soldering, oscilliscope, wire strippers, etc.
 
@@ -228,6 +230,13 @@ If we were to treat this as an interactive book. What would it look like? This i
 - Digital input, debouncing, interrupts
 - Analog input, voltage dividers (revisited)
 - Maybe something about how fast humans move, etc.
+
+### Chapter 5: Advanced output
+- Transistors / motors
+- Sound
+
+### Chapter 6: Advanced input
+Go through various sensors
 
 ### Chapter 5: Sensors
 - Sensors: characteristics, taxonomies

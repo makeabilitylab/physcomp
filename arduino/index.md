@@ -19,6 +19,7 @@ comments: true
 These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
 <!-- TODO: add in link to Tinkercad circuits here... -->
+<!-- Call this intro to Microcontrollers and then cast Arduino as an example>
 
 ## Intro to Output
 
@@ -70,6 +71,7 @@ Introduces potentiometers and rheostats, analog input, and using Arduino's [`ana
 
 Introduces force-sensitive resistors (FSRs), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
 
+<!--TODO: after Lesson 4, have them make their own lo-fi resistive sensor? -->
 <!--TODO: need to add debouncing and interrupts -->
 
 <!-- This is a **draft** list of topics (and order may change).

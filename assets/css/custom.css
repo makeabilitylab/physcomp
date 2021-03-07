@@ -14,6 +14,14 @@ blockquote{
   border-left: 0.25em solid #6f777d;
 }
 
+.margin-zero{
+  margin: 0;
+}
+
+.text-right{
+  text-align: right;
+}
+
 cite{
   text-align: right;
   font-size: smaller;

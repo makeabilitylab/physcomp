@@ -6,31 +6,22 @@ usemathjax: true
 description: "Website Overview"
 permalink: /
 ---
+
 > Joy is a well-made object, equaled only to the joy of making it.
-{: .v-align-bottom }
+{: .v-align-bottom .margin-zero }
 
-A Canadian Native American tribe saying, as quoted by Mark Fraunfelder (author, co-founder of [BoingBoing](https://boingboing.net/), & former editor of MAKE Magazine)
-{: .fs-2 .mt-1 }
+\- A [Haida](https://en.wikipedia.org/wiki/Haida_people) saying
+{: .fs-2 .mt-1 .text-right}
 
----
+Welcome 👋!
 
-# Physical and Ubiquitous Computing
-{: .no_toc }
-
-Welcome to our website! Here, we explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. This website is intended to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
+This website a place to learn and explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. It was built to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
 
 ![Example projects from some physical computing-related courses taught by Jon E. Froehlich]({{ site.baseurl }}/assets/images/ExampleAssignmentsAndProjects.jpg)
-Example projects from Tangible Interactive Computing.
+Example projects from our courses.
 {: .fs-1 }
 
-## Table of Contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
----
-
-## Why now?
+## Why learn physical computing?
 
 This is a particularly interesting time to survey and explore physical computing because of three, interrelated technology and social trends:
 
@@ -50,7 +41,9 @@ We assume the following background about our learners:
 
 - **No previous experience with hardware.** In contrast, we assume no previous experience with electronics or microcontrollers.
 
-As physical and ubiquitous computing are inherently multidisciplinary fields spanning electrical engineering, computer science, signal processing, human-computer interaction, machine learning, and more (*e.g.,* applied anthropology) there are many diverse topic areas—and too many to cover in one course or website. The content here reflects what we teach to graduate and upper-level bachelor students (typically with engineering and/or computer science backgrounds). The [Intro to Arduino](arduino/index.md) lessons were written for a more general audience and should be suitable for interaction design courses in information science or design fields (but again, do assume some coding experience). 
+As physical and ubiquitous computing are inherently multidisciplinary fields spanning electrical engineering, computer science, signal processing, human-computer interaction, machine learning, and more (*e.g.,* applied anthropology) there are many diverse topic areas—and too many to cover in one course or website. The content here reflects what we teach to graduate and upper-level bachelor students (typically with engineering and/or computer science backgrounds). 
+
+The [Intro to Arduino](arduino/index.md) lessons were written for a more general audience and should be suitable for interaction design courses in information science or design fields (but again, do assume some coding experience). 
 
 ## Learning philosphy: learn by doing
 
@@ -74,7 +67,7 @@ Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherw
 
 As noted, for course and content inspirations, see our [Resources](resources/index.md) page and our [Inspirations](resources/inspirations.md) page.
 
-This website site is built in [Jekyll](https://jekyllrb.com/) with the [Just the Docs](https://github.com/pmarsceill/just-the-docs) theme. 
+This website site is built in [Jekyll](https://jekyllrb.com/) with the [Just the Docs](https://github.com/pmarsceill/just-the-docs) theme.
 
 <!--
 ## Ideas to Call This Repo and Site?

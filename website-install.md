@@ -51,9 +51,15 @@ The problem is that webrick no longer comes with Ruby 3.0. To solve this, I simp
 
 ### Windows
 
-I have tried to get Jekyll installed in Windows in the past and failed. It's unfortunately complicated. However, here's how I eventually got it to work.
+I have tried to get Jekyll installed in Windows in the past and failed. It's unfortunately complicated. Indeed, the [Jekyll website](https://jekyllrb.com/docs/installation/windows/) says that Windows is not officially supported:
 
-**First**, although this documentation is old, I started with this [Run Jekyll on Windows](https://jekyll-windows.juthilo.com/) guide. The first step states to Install Ruby via the [rubyinstaller.org](http://rubyinstaller.org/downloads/) website and then to install the Ruby Devkit; however, the most recent versions of Ruby Installer for Windows also allows you to install the Devkit. So, that's what I did.
+> While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks.
+
+However, here's how I eventually got it to work. These instructions have since been replicated by me (Jon) and Liang. Yay!
+
+**First**, although this documentation is old, I started with this [Run Jekyll on Windows](https://jekyll-windows.juthilo.com/) guide. The first step states to Install Ruby via the [rubyinstaller.org](http://rubyinstaller.org/downloads/) website and then to install the Ruby Devkit; however, the most recent versions of Ruby Installer for Windows also allows you to install the Devkit. So, that's what I did. 
+
+Specifically, I downloaded and installed the [Ruby+Devkit 2.7.X (x64) installer](https://rubyinstaller.org/downloads/), which according to the RubyInstaller website "provides the biggest number of compatible gems and installs the MSYS2 Devkit alongside Ruby, so gems with C-extensions can be compiled immediately."
  
 **Second**, I then opened `Windows Powershell` and typed `gem install jekyll`:
 

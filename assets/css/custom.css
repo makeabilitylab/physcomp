@@ -45,3 +45,8 @@ figure.highlight {
   margin-left: auto;
   margin-right: auto;
 }
+
+.test-css{
+  font-size: 14 pt;
+  font-family: 'Courier New', Courier, monospace;
+}

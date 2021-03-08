@@ -19,7 +19,7 @@ comments: true
 These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
 <!-- TODO: add in link to Tinkercad circuits here... -->
-<!-- Call this intro to Microcontrollers and then cast Arduino as an example>
+<!-- Call this intro to Microcontrollers and then cast Arduino as an example -->
 
 ## Intro to Output
 

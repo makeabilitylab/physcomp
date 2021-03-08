@@ -251,6 +251,11 @@ Go through various sensors
 - Filters
 - Noise?
   - Phase noise fundamentals: https://imgur.com/a/T44q4P3
+- Features to describe time series signals
+  - Why use root mean square rather than absolute average: https://www.researchgate.net/publication/283085046_Sensors_and_Signal_Processing_-_Draft_version_unedited_and_before_final_revision_of_Chapter_5_of_the_book_Mechatronics_Fundamentals_and_Applications/link/5629de9008ae518e347eecc6/download
+- Nice plot of quantization error here (Section 4.2): https://www.researchgate.net/publication/283085046_Sensors_and_Signal_Processing_-_Draft_version_unedited_and_before_final_revision_of_Chapter_5_of_the_book_Mechatronics_Fundamentals_and_Applications/link/5629de9008ae518e347eecc6/download
+- Fourier analysis leakage and windowing and possible ways to address with filters (Section 4.3): https://www.researchgate.net/publication/283085046_Sensors_and_Signal_Processing_-_Draft_version_unedited_and_before_final_revision_of_Chapter_5_of_the_book_Mechatronics_Fundamentals_and_Applications/link/5629de9008ae518e347eecc6/download
+- Convolution (Section 4.4): https://www.researchgate.net/publication/283085046_Sensors_and_Signal_Processing_-_Draft_version_unedited_and_before_final_revision_of_Chapter_5_of_the_book_Mechatronics_Fundamentals_and_Applications/link/5629de9008ae518e347eecc6/download
 
 ### Chapter 7: Applied ML
 - Classifying these signals!

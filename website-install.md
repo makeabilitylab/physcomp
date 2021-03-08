@@ -18,21 +18,33 @@ nav_exclude: true
 This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css. We use a Jekyll template called ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/).
 
 ## Dev environment setup
-Below, we walk through dev environment setup on both Mac and Windows. Regardless of which platform you're using, the first step is to clone the [physcomp repo](https://github.com/makeabilitylab/physcomp):
+Below, we will walk you through dev environment setup on both Mac and Windows. 
+
+Regardless of which platform you're using, the first step is to clone the [physcomp repo](https://github.com/makeabilitylab/physcomp). Open your command prompt and run:
 
 ```
 > git clone https://github.com/makeabilitylab/physcomp.git`
 ```
 
+Note: I use [GitHub Desktop](https://desktop.github.com/), which I strongly recommend. VSCode also has built-in git support.
+
 ### Mac
-Installing the prequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). For MacOS, simply follow the [official installation guide](https://jekyllrb.com/docs/installation/macos/). Because you have to install the XCode development environment, [Homebrew](https://brew.sh/), [Ruby](https://www.ruby-lang.org/en/), and [Jekyll](https://jekyllrb.com/), this installation process may take ~1 hour (depending on your download speeds).
+Installing the prequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). 
+
+#### Follow official installation guide
+For MacOS, simply follow the [official installation guide](https://jekyllrb.com/docs/installation/macos/). Because you have to install the XCode development environment, [Homebrew](https://brew.sh/), [Ruby](https://www.ruby-lang.org/en/), and [Jekyll](https://jekyllrb.com/), this installation process may take ~1 hour (depending on your download speeds).
 
 Follow the installation guide closely. I did each step except for I skipped the [rbenv part](https://jekyllrb.com/docs/installation/macos/#rbenv) (as I only use Ruby for Jekyll, no need for selecting between multiple Ruby versions on my dev environment).
 
-After finishing the last step in the [MacOS installation guide](https://jekyllrb.com/docs/installation/macos/), which is running the command `> sudo gem install -n /usr/local/bin/ jekyll`, then go to the `physcomp` folder and type `> bundle install`.
+#### Run 'bundle install' in physcomp dir
+After finishing the last step in the [MacOS installation guide](https://jekyllrb.com/docs/installation/macos/), which is running the command `> sudo gem install -n /usr/local/bin/ jekyll`, then go to the `physcomp` folder and type `> bundle install`. Note: I typically do this from within VSCode's Terminal.
 
-Finally, type `> bundle exec jekyll serve`. Note: I typically do this from within VSCode's Terminal.
+#### Run 'bundle exec jekyll serve' in physcomp dir
+Finally, type `> bundle exec jekyll serve` in the `physcomp` folder. Again, I typically do this from within VSCode's Terminal.
 
+And that's it! Hopefully the server will be running at at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).
+
+#### Potential problems
 I just tried this full installation process from end-to-end and ran into the following issue on this last command:
 
 ```
@@ -50,8 +62,6 @@ bundler: failed to load command: jekyll (/usr/local/lib/ruby/gems/3.0.0/bin/jeky
 /usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in `require': cannot load such file -- webrick (LoadError)
 ```
 The problem is that webrick no longer comes with Ruby 3.0. To solve this, I simply typed `> bundle add webrick` and then again `> bundle exec jekyll serve`. And then things worked!
-
-
 
 ### Windows
 
@@ -152,11 +162,6 @@ Installing minitest 5.14.4
 
 You've done it!
 
-## Developing the website
-1. Download [VS Code](https://code.visualstudio.com/Download)
-2. Open the `physcomp` folder in VS Code
-3. Use markdown to build new pages. We are using the ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/) Jekyll template.
-
 ## Running the website locally
 Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll), you can open terminal in VSCode and type:
 
@@ -164,3 +169,9 @@ Assuming you have the prerequisite libraries and software infrastructure (e.g., 
 > bundle exec jekyll serve 
 ```
 The website should then be available at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).
+
+## Developing the website
+1. Download [VS Code](https://code.visualstudio.com/Download)
+2. Open the `physcomp` folder in VS Code
+3. Use markdown to build new pages. We are using the ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/) Jekyll template.
+4. Read more about website dev [here](website-dev.md)

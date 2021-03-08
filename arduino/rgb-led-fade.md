@@ -36,7 +36,7 @@ You'll need the same materials as the previous [RGB LED lesson](rgb-led.md). Rec
 
 ## Making the circuit
 
-The circuit is the same as the previous [RGB LED lesson](rgb-led.md). Make sure you follow the appropriate wiring based on wheter you are using a **common cathode** or **common anode** RGB LED.
+The circuit is the same as the previous [RGB LED lesson](rgb-led.md). Make sure you follow the appropriate wiring based on whether you are using a **common cathode** or **common anode** RGB LED.
 
 | RGB Common Cathode Wiring | RGB Common Anode Wiring |
 |:-----:|:-----:|

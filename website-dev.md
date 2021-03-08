@@ -3,6 +3,7 @@ layout: default
 title: Website Dev Notes
 has_toc: false # on by default
 nav_exclude: true
+usemathjax: true
 ---
 
 # {{ page.title | replace_first:'L','Lesson '}}
@@ -22,118 +23,26 @@ Assuming you have the prerequisite libraries and software infrastructure (e.g., 
 > bundle exec jekyll serve 
 ```
 
-## Website TODOs
-- Make all videos hosted on YouTube rather than direct embeds to reduce website size
-- [done] Add in incremental build option
-- [Done] Update format for blockquote in "just the docs" to https://codepen.io/cliftwalker/pen/XJaEXY
-  - Need to modify the css style:
-  - See: https://aregsar.com/blog/2019/how-to-customize-your-github-pages-blog-style-in-five-minutes/
-  - https://pmarsceill.github.io/just-the-docs/docs/customization/#override-styles
-  - Here's miminimal mistakes version: https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/docs/_posts/2013-01-11-markup-html-tags-and-formatting.md
-    - And the scss: https://github.com/mmistakes/minimal-mistakes/blob/0cf1a2e1144336b5e026d13b5fd87dc2af02fe8c/_sass/minimal-mistakes/_base.scss
-- [Done] Add in Discussion support. Update: OK, did this with disqus platform
-- Add in 'info box` support like minimal mistakes
-  - See: https://mmistakes.github.io/minimal-mistakes/docs/utility-classes/
-  - https://github.com/mmistakes/minimal-mistakes/blob/e749af9ff82014b6523ee19a2057d5fe6971d427/_sass/minimal-mistakes/_notices.scss
-- Add in auto-TOC (Table of contents) with sticky support. 
-  - Working on this in a branch with: https://tscanlin.github.io/tocbot/
-- Add in figure captioning support (minimal mistakes also has this)
-- Explore how to add custom css in markdown
-- Possible to add last modified date into file?
-- Update all arduino code in github to include link back to website
-- [Done] Embedding code from github repo into jekyll post
-  - https://blog.revathskumar.com/2012/08/embed-files-from-github-repository-into-webpage.html
-  - https://flowerinthenight.com/blog/2017/11/28/embed-github-code
-- Have citation manager for references on each page?
-  - https://www.amirasiaee.com/dailyreport/jekyll-scholar/
-  - https://github.com/inukshuk/jekyll-scholar
-  - Unfortunately, Jekyll Scholar plugin is not compatible with GitHub Pages
-- Maybe have a top-level link for UW Courses?
-- How to hide headers in tables in markdown?
-  - https://stackoverflow.com/questions/17536216/create-a-table-without-a-header-in-markdown
-- Make Next/Previous buttons same size like in Minimal Mistakes?
-- Make it so if you left-click on an image, it shows up as a pop-up with a description below?
-- Make YouTube videos responsive
-  - https://avexdesigns.com/responsive-youtube-embed/
-  - https://embedresponsively.com/
-- Serve images responsively with jekyll plugin: https://github.com/rbuchberger/jekyll_picture_tag
-- Add build script (in ruby?) to inject google analytics into the html-ized .pynbs
-- Interactive dtw visualization in p5s. Maybe have user draw the two signals and run dtw, fill out table, and show heat plot? Could also select from some predefined signals
-- This goes along with my interactive convoultion idea too.
-- Jupyter Notebook with interactive visualization widgets: https://plotly.com/python/chart-events/
-- [done] Add in acknowledgments in Jupyter Notebook: "open education statement + written by Jon Froehlich" Maybe at end of notebooks or as an H2 in Intro part?
+## VS Code
+I've been using [VS Code](https://code.visualstudio.com/) with some popular markdown extensions to develop the website. 
 
-## Markdown Tips
+### Extensions
+I have the following extensions installed for VS Code:
+- Code Spell Check 1.8.0 (1.1m downloads)
+- Markdown All in One 2.7.0 (1.2m downloads)
+- markdownlint 0.34.0 (1.5, downloads)
+- Paste Image 1.0.4 (45K): Allows user to paste images in clipboard using `alt-cmd-v` (Mac) and `ctrl-alt-v` (Windows)
 
-### Embedding markdown content on a page
+## Embedding markdown content on a page
 
 Including other markdown pages: https://stackoverflow.com/a/41966993/388117.
 
 <!-- {percent sign include_relative tutorials/index.md percent sign} -->
 
-### Make a Note (Call Out Box)
-- https://stackoverflow.com/questions/25654845/how-can-i-create-a-text-box-for-a-note-in-markdown
-
-I quite like the call-out boxes on this Boser Berkeley teaching page [IoT49](https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/N_gpio.html):
-
-![](assets/images/BoserIoT49Webpage.png)
-
-### Option 1
-
----
-
-**NOTE**
-
-It works with almost all markdown flavours (the below blank line matters). This is from [link](https://stackoverflow.com/a/41449789/388117).
-
----
-
-### Option 2
-
-> **_NOTE:_**  You could also try a block quote format from [link](https://stackoverflow.com/a/43120795/388117).
-
-### Option 3
-
-    Start on a fresh line
-    Hit tab twice, type up the content
-    Your content should appear in a box. However, doesn't appear to now support markdown. For example, **this** should be bold. However, I can still use html it appears? For example, <b>this</b> is bold? Or maybe not! So, perhaps this is treated as a code block or something...
-
-## Notes
-- To crop animated gifs, I use: https://ezgif.com/
-
-# Static Site Generator Options
-
-## Python
-- [mkdocs.org](https://mkdocs.org).
-
-## Rust
-- [mdbook](https://rust-lang.github.io/mdBook/). Examples below:
-  - [Intro to Reverse Engineering](https://guyinatuxedo.github.io/)
-
-### Templates
-- Minimal Mistakes
-- "Just the Docs"
-
-### Just the Docs
-Probably my favorite template that I've evaluated so far
-
-#### Better support for grandchildren
-Looks like it was addressed here:
-- https://pdmosses.github.io/test-nav/docs/utilities
-- https://github.com/pmarsceill/just-the-docs/pull/192
-- See also: https://github.com/pmarsceill/just-the-docs/pull/252?
-
-### To Build with Jekyll
-To build the docs with Jekyll,
-- Open iTerm in /physcomp/docs
-- `> bundle`
-- `> bundle exec jekyll serve` (actually, use `> bundle exec jekyll serve --baseurl ''`)
-- Follow directions for web address, typically: `https://127.0.0.1:4000`
-
-### Code highlighting
+## Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
 
-#### Using Jekyll's `highlight` functionality
+### Using Jekyll's `highlight` functionality
 This is a test.
 {% highlight C %}
 void loop() {
@@ -144,7 +53,7 @@ void loop() {
 }
 {% endhighlight C %}
 
-#### Using Markdown's ` ```C``` `
+### Using Markdown's ` ```C``` `
 ```C
 void loop() {
   digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
@@ -159,27 +68,94 @@ void loop() {
 This is awesome! Can embed code directly!
 <script src="http://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
 
+
+## Make a Note (Call Out Box)
+There are a variety of ways to make "call out boxes" in markdown.
+
+### Option 1: Two horizontal lines
+The simplest and most universal way—recommended by this [Stack Overflow post](https://stackoverflow.com/a/41449789/388117)—is to draw two horizontal lines surrounding the content like this:
+
+---
+
+**NOTE**
+
+It works with almost all markdown flavours (the below blank line matters). This is from [link](https://stackoverflow.com/a/41449789/388117).
+
+---
+
+### Option 2: Use block quotes
+
+> **_NOTE:_**  You could also try a block quote format from [link](https://stackoverflow.com/a/43120795/388117).
+
+### Option 3: Use tabs
+This version is using tabs:
+
+    Start on a fresh line
+    Hit tab twice, type up the content
+    Your content should appear in a box. However, doesn't appear to now support markdown. For example, **this** should be bold. However, I can still use html it appears? For example, <b>this</b> is bold? Or maybe not! So, perhaps this is treated as a code block or something...
+
+This version is using tick marks (rather than tabs) but it should render in the same way:
+```
+Use tickmarks
+```
+
+### Option 4: Custom CSS
+But if we want to do something more complicated, it's going to take custom css. For example, I quite like the call-out boxes on Boser's Berkeley teaching page [IoT49](https://people.eecs.berkeley.edu/~boser/courses/49_sp_2019/N_gpio.html):
+
+![Screenshot of call out boxes from the Boser website](assets/images/BoserIoT49Webpage.png)
+
+This would take some experimentation and custom css to get right, however.
+
+## How to add custom CSS to markdown
+Adding custom CSS to markdown is relatively straightforward.
+
+### Modify custom.css
+First, add your custom CSS to `assets\css\custom.css`. Let's add the following new CSS class called `.test-css`:
+
+```css
+.test-css{
+  font-size: 14 pt;
+  font-family: 'Courier New', Courier, monospace;
+}
+```
+
+### Use custom CSS
+Now, let' use this new CSS class to style our markdown. 
+
+This paragraph is now using the `.test-css` style. We do this by using this syntax `{: .test-css}` below the element we want styled.
+{: .test-css}
+
+So, the markdown looks like this:
+
+```
+This paragraph is now using the `.test-css` style. We do this by using this syntax `{: .test-css}` below the element we want styled.
+{: .test-css}
+```
+
+## LaTeX
+
 ### Adding LaTeX support
 After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll template and GitHub Pages. Steps:
 1. I largely followed the advice from this [blog post](https://alan97.github.io/random/mathjax/)
 2. Since I'm currently using `remote_theme: pmarsceill/just-the-docs`, I was a bit confused about how to make local configuration changes since most online blogs, forum posts talk about editing content in the `_includes` folder; however, I didn't have this in my local dev environment. So, what to do?
 3. I manually made a `_includes` folder with the filename `head_custom.html` and put in there:
 
-```Jekyll
+{% highlight html %}{% raw %}
 {% if page.usemathjax %}
 <script type="text/javascript" async
  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+</script>
 {% endif %}
-```
+{% endraw %}{% endhighlight %}
 
-4. Still need to test that this works when deployed on GitHub. Update: it does!
-
-5. Because I'm forever a LaTeX n00b, I found this online WYSIWYG LaTeX math editor: https://www.mathcha.io/editor. See: https://tex.stackexchange.com/questions/57068/wysiwyg-latex-editor-for-maths
+### Using LaTeX on markdown pages
+On pages where you want to use LaTeX, then add `usemathjax: true` to the header content
 
 Here's a test LaTeX equation. If it works, this should render correctly.
 
 $$\frac{\partial f(y)}{\partial x} = \frac{\partial f}{\partial y} \times \frac{\partial y}{\partial x}$$
+
+Because I'm forever a LaTeX n00b, I found this online [WYSIWYG LaTeX math editor](https://www.mathcha.io/editor). For a discussion of other WYSIWYG editors, see [this Stack Overflow post](https://tex.stackexchange.com/questions/57068/wysiwyg-latex-editor-for-maths). 
 
 ## Disqus
 
@@ -254,13 +230,18 @@ And here's the code that **does** work with the single line comments replaced wi
 </div>
 {% endhighlight HTML %}
 
+## Tools
 
-## VS Code
-I've been using [VS Code](https://code.visualstudio.com/) with some popular markdown extensions to develop the website. 
+### Making animated gifs
+To create animated gifs, I use [https://ezgif.com/](https://ezgif.com/).
 
-### Extensions
-I have the following extensions installed for VS Code:
-- Code Spell Check 1.8.0 (1.1m downloads)
-- Markdown All in One 2.7.0 (1.2m downloads)
-- markdownlint 0.34.0 (1.5, downloads)
-- Paste Image 1.0.4 (45K): Allows user to paste images in clipboard using `alt-cmd-v` (Mac) and `ctrl-alt-v` (Windows)
+#### Templates
+- Minimal Mistakes
+- "Just the Docs". Probably my favorite template that I've evaluated so far
+
+## Just the Docs
+#### Better support for grandchildren
+Looks like it was addressed here:
+- https://pdmosses.github.io/test-nav/docs/utilities
+- https://github.com/pmarsceill/just-the-docs/pull/192
+- See also: https://github.com/pmarsceill/just-the-docs/pull/252?

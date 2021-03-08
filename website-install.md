@@ -18,7 +18,11 @@ nav_exclude: true
 This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css. We use a Jekyll template called ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/).
 
 ## Dev environment setup
-Below, we walk through dev environment setup on both Mac and Windows.
+Below, we walk through dev environment setup on both Mac and Windows. Regardless of which platform you're using, the first step is to clone the [physcomp repo](https://github.com/makeabilitylab/physcomp):
+
+```
+> git clone https://github.com/makeabilitylab/physcomp.git`
+```
 
 ### Mac
 Installing the prequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). For MacOS, simply follow the [official installation guide](https://jekyllrb.com/docs/installation/macos/). Because you have to install the XCode development environment, [Homebrew](https://brew.sh/), [Ruby](https://www.ruby-lang.org/en/), and [Jekyll](https://jekyllrb.com/), this installation process may take ~1 hour (depending on your download speeds).
@@ -57,10 +61,14 @@ I have tried to get Jekyll installed in Windows in the past and failed. It's unf
 
 However, here's how I eventually got it to work. These instructions have since been replicated by me (Jon) and Liang. Yay!
 
+#### Download and run Ruby Installer
 **First**, although this documentation is old, I started with this [Run Jekyll on Windows](https://jekyll-windows.juthilo.com/) guide. The first step states to Install Ruby via the [rubyinstaller.org](http://rubyinstaller.org/downloads/) website and then to install the Ruby Devkit; however, the most recent versions of Ruby Installer for Windows also allows you to install the Devkit. So, that's what I did. 
 
 Specifically, I downloaded and installed the [Ruby+Devkit 2.7.X (x64) installer](https://rubyinstaller.org/downloads/), which according to the RubyInstaller website "provides the biggest number of compatible gems and installs the MSYS2 Devkit alongside Ruby, so gems with C-extensions can be compiled immediately."
- 
+
+When the Ruby Installer command prompt asks you which option to install, just press 'Enter'.
+
+#### Run 'gem install jekyll'
 **Second**, I then opened `Windows Powershell` and typed `gem install jekyll`:
 
 ```
@@ -77,7 +85,8 @@ Done installing documentation for mercenary, jekyll after 16 seconds
 2 gems installed
 ```
 
-**Third**, I then tried to install `github-pages` via: `gem install github-pages` but failed with:
+#### Run 'gem install github-pages'
+**Third**, I then tried to install `github-pages` via: `gem install github-pages`. This worked well on some of our Windows systems but others failed with. If this succeeded for you, great! Skip to the next step. If not, check out the error below and see if it matches your problem (or contact us to help and copy/paste the error outcome in your email or Slack message).
 
 ```
 ERROR:  Error installing github-pages:
@@ -118,15 +127,35 @@ ERROR:  Error installing github-pages:
         nokogiri requires Ruby version >= 2.3, < 2.7.dev. The current ruby version is 2.7.0.0.
 ```
 
-So then I just tried `bundle install` and that worked. Whew.
+So, then I just skipped to the final step and ran `bundle install` and things worked. Hope it does for you too!
+
+#### Run 'bundle install'
+From the shell, change directories to `physcomp`. On my machine:
+
+```
+> cd c:\git\physcomp
+```
+
+And then run `bundle install`:
+
+```
+C:\git\physcomp> bundle install
+Fetching gem metadata from https://rubygems.org/...........
+Fetching gem metadata from https://rubygems.org/.
+Resolving dependencies.....
+Using concurrent-ruby 1.1.8
+Using i18n 0.9.5
+Fetching minitest 5.14.4
+Installing minitest 5.14.4
+...
+```
+
+You've done it!
 
 ## Developing the website
-1. Clone the website repo `> git clone https://github.com/makeabilitylab/physcomp.git`
-2. Download [VS Code](https://code.visualstudio.com/Download)
-3. Open the `physcomp` folder in VS Code
-4. Use markdown to build new pages. We are using the ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/) Jekyll template.
-5. Run the website locally by opening `Terminal` in VS Code and typing `> bundle exec jekyll serve`. As you save code, the website will auto-generate and serve the new content.
-6. The local website should serve at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/)
+1. Download [VS Code](https://code.visualstudio.com/Download)
+2. Open the `physcomp` folder in VS Code
+3. Use markdown to build new pages. We are using the ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/) Jekyll template.
 
 ## Running the website locally
 Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll), you can open terminal in VSCode and type:

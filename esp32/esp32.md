@@ -24,6 +24,8 @@ comments: true
 5. Show off WiFi? And/or bluetooth?
 6.  -->
 
+<!-- See also https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/ -->
+
 ![Image of a variety of ESP32 boards](assets/images/ESP32Boards_MakerAdvisor.png)
 Image from [makeradvisor.com](https://makeradvisor.com/esp32-development-boards-review-comparison/). There are literally dozens of ESP32 boards. Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)).
 {: .fs-1 } 

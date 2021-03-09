@@ -1,1 +1,0 @@
-- https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/

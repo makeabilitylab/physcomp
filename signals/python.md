@@ -2,6 +2,7 @@
 layout: default
 title: L2&#58; Python
 parent: Tools
+grand_parent: Signals
 has_toc: false # (on by default)
 comments: false
 ---

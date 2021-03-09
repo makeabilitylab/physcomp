@@ -3,7 +3,7 @@ layout: default
 title: Intro to Arduino
 nav_order: 1
 has_toc: false # on by default
-has_children: false
+has_children: true
 comments: true
 ---
 # {{ page.title }}

@@ -3,6 +3,7 @@ layout: default
 title: L5&#58; RGB LEDs
 # nav_order: 1
 parent: Output
+grand_parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 comments: true

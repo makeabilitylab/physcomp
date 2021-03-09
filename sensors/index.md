@@ -4,6 +4,7 @@ title: Sensors
 nav_order: 4
 has_toc: false # on by default
 usemathjax: true
+has_children: true
 ---
 # {{ page.title }}
 {: .no_toc }

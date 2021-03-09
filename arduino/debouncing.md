@@ -3,6 +3,7 @@ layout: default
 title: LX&#58; Debouncing
 nav_order: 1
 parent: Input
+grand_parent: Intro to Arduino
 has_toc: true # (on by default)
 comments: true
 usemathjax: true

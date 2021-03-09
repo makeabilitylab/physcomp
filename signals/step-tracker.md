@@ -2,6 +2,7 @@
 layout: default
 title: L1&#58; Heuristic-Based Classification
 parent: Classification
+grand_parent: Signals
 has_toc: false # (on by default)
 comments: false
 ---

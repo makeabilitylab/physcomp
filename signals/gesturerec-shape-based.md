@@ -2,6 +2,7 @@
 layout: default
 title: L2&#58; Shape-Based Classification
 parent: Classification
+grand_parent: Signals
 has_toc: false # (on by default)
 comments: false
 ---

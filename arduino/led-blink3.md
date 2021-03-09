@@ -2,6 +2,7 @@
 layout: default
 title: L7&#58; Rate Blinking LEDs
 parent: Output
+grand_parent: Intro to Arduino
 usemathjax: false
 has_toc: true # (on by default)
 comments: true

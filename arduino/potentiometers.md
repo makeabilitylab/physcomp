@@ -3,6 +3,7 @@ layout: default
 title: L3&#58; Potentiometers
 nav_order: 3
 parent: Input
+grand_parent: Intro to Arduino
 has_toc: true # (on by default)
 comments: true
 usemathjax: true

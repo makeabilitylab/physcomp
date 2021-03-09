@@ -3,6 +3,7 @@ layout: default
 title: L1&#58; Using buttons
 nav_order: 1
 parent: Input
+grand_parent: Intro to Arduino
 has_toc: true # (on by default)
 comments: true
 usemathjax: true

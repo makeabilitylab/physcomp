@@ -2,6 +2,7 @@
 layout: default
 title: L2&#58; A simple piano
 parent: Input
+grand_parent: Intro to Arduino
 nav_order: 2
 usemathjax: true
 has_toc: true # (on by default)

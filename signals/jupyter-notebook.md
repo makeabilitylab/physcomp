@@ -1,7 +1,8 @@
 ---
 layout: default
-parent: Tools
 title: L1&#58; Jupyter Notebook
+parent: Tools
+grand_parent: Signals
 has_toc: true # on by default
 has_children: false
 nav_exclude: false

@@ -3,6 +3,7 @@ layout: default
 title: L2&#58; Blinking an LED
 nav_order: 2
 parent: Output
+grand_parent: Intro to Arduino
 has_toc: true # (on by default)
 usemathjax: true
 comments: true

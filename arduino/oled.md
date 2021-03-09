@@ -3,6 +3,7 @@ layout: default
 title: L1&#58; Turning on an OLED
 nav_order: 1
 parent: Advanced Output
+grand_parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 comments: true

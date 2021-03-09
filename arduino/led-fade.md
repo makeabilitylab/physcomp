@@ -3,6 +3,7 @@ layout: default
 title: L3&#58; Fading an LED
 nav_order: 3
 parent: Output
+grand_parent: Intro to Arduino
 usemathjax: true
 has_toc: true # (on by default)
 comments: true

@@ -1,3 +1,15 @@
+---
+layout: default
+title: L1&#58; Turning on an OLED
+nav_order: 1
+parent: Advanced Output
+usemathjax: true
+has_toc: true # (on by default)
+comments: true
+nav_exclude: true
+---
+
+<!-- consider adding parent "Advanced Arduino" or Advanced I/O -->
 
 These instructions are for the [Adafruit 128x64 OLED graphic display](https://www.adafruit.com/product/938). You can follow the official [Adafruit tutorial here](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples).
 

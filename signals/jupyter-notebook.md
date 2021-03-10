@@ -6,6 +6,7 @@ grand_parent: Signals
 has_toc: true # on by default
 has_children: false
 nav_exclude: false
+usetocbot: true
 ---
 # {{ page.title }}
 {: .no_toc }

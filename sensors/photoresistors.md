@@ -5,6 +5,7 @@ parent: Sensors
 has_toc: true # (on by default)
 comments: true
 usemathjax: true
+usetocbot: true
 ---
 # {{ page.title }}
 {: .no_toc }

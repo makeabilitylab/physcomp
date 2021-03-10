@@ -4,6 +4,7 @@ title: Website Dev Notes
 has_toc: false # on by default
 nav_exclude: true
 usemathjax: true
+usetocbot: true
 ---
 
 # {{ page.title | replace_first:'L','Lesson '}}

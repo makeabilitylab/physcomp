@@ -4,6 +4,7 @@ title: Resources
 nav_order: 6
 has_children: true
 has_toc: true # (on by default)
+usetocbot: true
 ---
 # Resources
 {: .no_toc }

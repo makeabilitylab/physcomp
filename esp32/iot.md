@@ -5,6 +5,7 @@ parent: ESP32
 has_toc: false # (on by default)
 usemathjax: true
 comments: true
+usetocbot: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

@@ -69,6 +69,12 @@ layout: table_wrappers
       This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
     </footer>
   </div>
+  <!-- <div class="right-side-bar">
+      
+  </div> -->
+  <div class="box3-test">
+    
+  </div>
   <div class="main" id="top">
     <nav id="tocbot-toc" class="js-toc tocbot-right"></nav>
     <div id="main-header" class="main-header">
@@ -198,19 +204,28 @@ layout: table_wrappers
 
       <div class="search-overlay"></div>
     {% endif %}
+    <div class="box1-test">
+
+    </div>
+  </div>
+  <div class="box2-test">
+      
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
+  {% if page.usetocbot %} 
+    <!-- tocbot is an awesome table of contents generator, see: https://tscanlin.github.io/tocbot/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
 
-  <script>
-    tocbot.init({
-      /* Where to render the table of contents. */
-      tocSelector: '.js-toc',
-      /* Where to grab the headings to build the table of contents. */
-      contentSelector: '.main-content',
-      /* Which headings to grab inside of the contentSelector element. */
-      headingSelector: 'h1, h2, h3',
-    });
-  </script>
+    <script>
+      tocbot.init({
+        /* Where to render the table of contents. */
+        tocSelector: '.js-toc',
+        /* Where to grab the headings to build the table of contents. */
+        contentSelector: '.main-content',
+        /* Which headings to grab inside of the contentSelector element. */
+        headingSelector: 'h1, h2, h3',
+      });
+    </script>
+  {% endif %}
 </body>
 </html>

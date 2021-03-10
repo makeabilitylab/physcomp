@@ -56,12 +56,35 @@ figure.highlight {
 #tocbot-toc{
   position: fixed !important;
   top:150px;
+  left: calc((100% - 1064px) / 2 + 264px + 800px); 
   width:250px;
   right: 0px;
-  z-index: 100;
+  z-index: 10;
   background-color: rgba(255, 255, 255, 0.9);
 }
 
 #tocbot-toc ol {
   list-style: none;
 }
+
+.box1-test{
+  background-color: red;
+  width: 200px;
+  height: 200px;
+}
+
+.box2-test{
+  background-color: blue;
+  width: 200px;
+  height: 200px;
+}
+
+.box3-test{
+  background-color: rgb(24, 184, 130);
+  width: 200px;
+  height: 200px;
+  position: fixed;
+  top: 80px;
+  left: calc((100% - 1064px) / 2 + 264px + 800px); 
+}
+

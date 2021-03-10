@@ -50,3 +50,18 @@ figure.highlight {
   font-size: 14 pt;
   font-family: 'Courier New', Courier, monospace;
 }
+
+/**** FOR TOCBOT ******/
+/** See: https://tscanlin.github.io/tocbot/ **/
+#tocbot-toc{
+  position: fixed !important;
+  top:150px;
+  width:250px;
+  right: 0px;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#tocbot-toc ol {
+  list-style: none;
+}

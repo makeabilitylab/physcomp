@@ -6,6 +6,7 @@ nav_order: 1
 has_children: false
 has_toc: false # on by default
 nav_exclude: true
+usetocbot: true
 ---
 
 ## Installing library for Adafruit LIS3DH 3-Axis accelerometer

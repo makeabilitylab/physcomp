@@ -8,6 +8,7 @@ usemathjax: true
 has_toc: true # (on by default)
 comments: true
 nav_exclude: true
+usetocbot: true
 ---
 
 <!-- consider adding parent "Advanced Arduino" or Advanced I/O -->

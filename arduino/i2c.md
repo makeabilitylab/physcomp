@@ -7,6 +7,7 @@ usemathjax: true
 has_toc: true # (on by default)
 comments: true
 nav_exclude: true
+usetocbot: true
 ---
 
 Scan for I2C addresses:

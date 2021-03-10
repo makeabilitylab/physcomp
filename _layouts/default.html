@@ -69,14 +69,10 @@ layout: table_wrappers
       This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
     </footer>
   </div>
-  <!-- <div class="right-side-bar">
-      
-  </div> -->
-  <div class="box3-test">
-    
-  </div>
+
+  <!-- This is the floating sidebar to the right of table of contents -->
+  <nav id="tocbot-toc" class="js-toc tocbot-right"></nav>
   <div class="main" id="top">
-    <nav id="tocbot-toc" class="js-toc tocbot-right"></nav>
     <div id="main-header" class="main-header">
       {% if site.search_enabled != false %}
         <div class="search">
@@ -204,12 +200,6 @@ layout: table_wrappers
 
       <div class="search-overlay"></div>
     {% endif %}
-    <div class="box1-test">
-
-    </div>
-  </div>
-  <div class="box2-test">
-      
   </div>
 
   {% if page.usetocbot %} 
@@ -217,6 +207,8 @@ layout: table_wrappers
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
 
     <script>
+      /** WARNING: YOU MUST USE C MULTI-LINE COMMENT STYLE RATHER THAN // BECAUSE 
+       *  OF HOW JEKYLL COMPILES THIS FILE INTO SINGLE LINES **/
       tocbot.init({
         /* Where to render the table of contents. */
         tocSelector: '.js-toc',
@@ -225,6 +217,20 @@ layout: table_wrappers
         /* Which headings to grab inside of the contentSelector element. */
         headingSelector: 'h1, h2, h3',
       });
+
+      /* Track scrolling to show/hide the tocbot navigation bar on right side */
+      var onScrollHandler = function (event) {
+
+        /* End event listener after visitor scrolls past 500px */
+        if (window.pageYOffset > 500) {
+          window.removeEventListener('scroll', onScrollHandler, false);
+          document.getElementById("tocbot-toc").style.visibility = "visible";
+        }
+        console.log("window scroll event:", window.pageYOffset);
+      };
+
+      /* Listen for scroll events */
+      window.addEventListener('scroll', onScrollHandler, false);
     </script>
   {% endif %}
 </body>

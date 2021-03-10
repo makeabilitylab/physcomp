@@ -6,6 +6,7 @@ nav_order: 3
 has_toc: true # on by default
 has_children: true
 nav_exclude: true
+usetocbot: true
 ---
 
 Notes:

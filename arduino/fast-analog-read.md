@@ -4,6 +4,7 @@ title: Fast Analog Read
 parent: Advanced Arduino
 has_toc: false # on by default
 nav_exclude: true
+usetocbot: true
 ---
 
 ## Speeding up the Arduino

@@ -4,6 +4,7 @@ title: Website Dev Notes
 has_toc: false # on by default
 nav_exclude: true
 usemathjax: true
+usetocbot: true
 ---
 
 # {{ page.title | replace_first:'L','Lesson '}}
@@ -239,10 +240,3 @@ To create animated gifs, I use [https://ezgif.com/](https://ezgif.com/).
 #### Templates
 - Minimal Mistakes
 - "Just the Docs". Probably my favorite template that I've evaluated so far
-
-## Just the Docs
-#### Better support for grandchildren
-Looks like it was addressed here:
-- https://pdmosses.github.io/test-nav/docs/utilities
-- https://github.com/pmarsceill/just-the-docs/pull/192
-- See also: https://github.com/pmarsceill/just-the-docs/pull/252?

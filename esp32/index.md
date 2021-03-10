@@ -5,6 +5,7 @@ nav_order: 2
 has_toc: false # on by default
 has_children: true
 nav_exclude: false
+usetocbot: true
 ---
 # {{ page.title }}
 {: .no_toc }

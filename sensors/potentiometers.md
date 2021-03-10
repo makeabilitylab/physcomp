@@ -4,6 +4,7 @@ title: Potentiometers
 parent: Sensors
 has_toc: false # (on by default)
 comments: false
+usetocbot: true
 ---
 
 Please see our [Potentiometers lesson](../arduino/potentiometers.md) as part of our [Intro to Input](../arduino/intro-input.md) series.

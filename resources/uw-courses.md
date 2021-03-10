@@ -4,6 +4,7 @@ title: UW Courses
 nav_order: 2
 parent: Resources
 has_toc: true # (on by default)
+usetocbot: true
 ---
 # UW Physical Computing Courses
 {: .no_toc }

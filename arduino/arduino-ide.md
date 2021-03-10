@@ -6,6 +6,7 @@ nav_order: 15
 has_toc: true # (on by default)
 nav_exclude: true
 comments: true
+usetocbot: true
 ---
 # Arduino
 {: .no_toc }

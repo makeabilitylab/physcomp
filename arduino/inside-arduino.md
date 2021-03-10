@@ -5,6 +5,7 @@ parent: Intro to Arduino
 has_toc: true # on by default
 nav_exclude: false
 nav_order: 3
+usetocbot: true
 ---
 # {{ page.title }}
 {: .no_toc }

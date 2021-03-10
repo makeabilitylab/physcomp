@@ -4,6 +4,7 @@ title: Force-Sensitive Resistors
 parent: Sensors
 has_toc: false # (on by default)
 comments: false
+usetocbot: true
 ---
 
 Please see our [Force-Sensitive Resistor lesson](../arduino/force-sensitive-resistors.md) as part of our [Intro to Input](../arduino/intro-input.md) series.

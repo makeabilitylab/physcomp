@@ -7,6 +7,7 @@ grand_parent: Intro to Arduino
 has_toc: true # (on by default)
 usemathjax: true
 comments: true
+usetocbot: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

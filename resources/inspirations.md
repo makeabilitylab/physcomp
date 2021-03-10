@@ -4,6 +4,7 @@ title: Inspirations
 nav_order: 1
 parent: Resources
 has_toc: true # (on by default)
+usetocbot: true
 ---
 # Inspirations
 {: .no_toc }

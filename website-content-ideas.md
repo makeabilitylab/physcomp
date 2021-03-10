@@ -3,6 +3,7 @@ layout: default
 title: Website Content Ideas
 has_toc: false # on by default
 nav_exclude: true
+usetocbot: true
 ---
 
 # {{ page.title | replace_first:'L','Lesson '}}

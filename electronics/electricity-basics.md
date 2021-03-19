@@ -141,7 +141,7 @@ As noted above, we can *increase* the conductance of a wire by *increasing* its 
 
 TODO: insert figure
 
-Because wire diameter is so important to current capacity, there is a standardized system for measurement. In the US, we use the [American Wire Gauge](https://en.wikipedia.org/wiki/American_wire_gauge) or AWG system. A wire with a diameter of 5.2mm (AWG 4) has a current capacity of 59.6A. In comparison, a standard circuit prototyping wire (0.64mm or AWG 22) has a current capacity of 0.9A. 
+Because wire diameter is so important to current capacity, there is a standardized system for measurement. In the US, we use the [American Wire Gauge](https://en.wikipedia.org/wiki/American_wire_gauge) or AWG system. A wire with a diameter of 5.2mm (AWG 4) has a current capacity of 59.6A. In comparison, a standard circuit prototyping wire (0.64mm or AWG 22) has a current capacity of 0.9A. If we pass more current through a wire than its capacity, it will start to heat up and eventually burn (indeed, this is how fuses work!).
 
 ![A picture of a box of AWG circuit prototyping wire and a complementary image showing that wire being used in a breadboard](assets/images/StandardSolidCorePrototypingWireOf22AWG.png)
 **Figure.** Example AWG solid-core wire commonly used in circuit prototyping. The box of wire on the left is $29.95 for ten 25ft spools from [Adafruit](https://www.adafruit.com/product/3174). 
@@ -158,10 +158,10 @@ Could have posille's law here?
 ### What are resistors?
 
 ![An animated gif showing how resistors can be placed in a circuit to resist current flow.](assets/gifs/ResistorCurrentFlow_EngineeringMindset-Optimized.gif)
-**Figure.** Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
+**Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons collide with other atoms and themselves, which restricts electron flow (and creates heat). Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
 {: .fs-1 }
 
-Resistors can be placed between wires in circuits to reduce current. They are specially formulated to restrict current at a certain rate based on their material composition and construction. Why would we want to restrict current? In short, to protect components in our circuit that require lower current. TODO: We'll talk more about this in Lesson X.
+Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. In circuits, we place resistors between components to lower current. Why would we want to restrict current? In short, to protect components in our circuit that require lower current. TODO: We'll talk more about this in Lesson X.
 
 ## Notes
 - Should I talk about short vs. open circuit here? I think so

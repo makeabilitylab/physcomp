@@ -24,13 +24,31 @@ In short, **voltage** pushes **electrons** through a conductive material (*e.g.,
 
 Hydraulic analogies are often useful to aid understanding. In a water plumbing system, *voltage* is analogous to *water pressure*. An increase in pressure provides more force to propel water molecules through the pipes (from high pressure to low pressure). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors to impede the flow of current.
 
+## Lesson plan
+- L1: What is electricity: current, voltage, and resistance + online simulation activities
+- L2: Building your first circuit: lighting up an LED, swapping out different resistances (maybe paper-based version)
+- L3: Ohm's Law + example circuit equations/solving + online simulation activities
+- L4: How to use a breadboard + moving your prev circuit to breadboards
+- L5: Series vs. Parallel Resistance, Voltage Dividers, and Ohm's Law
+
+Should I have a small lesson on what is a resistor and what is an LED (or perhaps I fold that into Lesson 2).
+
+See also notes on phone.
+
+## Notes:
+Things to consider adding:
+- What is an open vs. a closed circuit? (Perhaps add to Ohm's Law or maybe third lesson?)
+- What is a short circuit?
+
 ## What is current?
 
 ![An animated gif showing current flowing in a simple circuit out of the positive terminal of a 9V battery through an LED and resistor and then back to the negative terminal of the 9V battery](assets/gifs/CurrentFlow_EngineeringMindset.gif)
 **Figure.** *Current* is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
 {: .fs-1 }
 
-*Current* is the flow of charged particles through a conductor. Electric current is similar to water current moving through a pipe. To measure the flow of water, we could count the number of water molecules flowing past a given cross-section of pipe in time $$t$$. In fact, electric current $$I$$ is defined as the amount of charge $$Q$$ moving through a cross-section of wire in time $$t$$:
+*Current* is the flow of charged particles through a conductor. In digital circuits, these charged particles are *electrons* moving from the negative terminal to the positive (called *electron flow* as shown in the figure above).
+
+Electric* current is similar to water current moving through a pipe. To measure the flow of water, we could count the number of water molecules flowing past a given cross-section of pipe in time $$t$$. Similarly, we can measure electric current by "counting" the number of charges flowing through a wire. Indeed, electric current $$I$$ is defined as the amount of charge $$Q$$ moving through a cross-section of wire in time $$t$$:
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
@@ -38,7 +56,7 @@ A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for elect
 
 ![](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
 
-Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands were the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor.
+Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms (with easily displaceable electrons). When you open the tap, the water molecules that touch your hands were the molecules pushing against that tap's valve. This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor.
 
 ![An image showing a tightly packed tube of single-file marbles. When a marble is inserted into the left side of the tube, a marble on the right side instantly exits.](assets/images/ElectronFlowMarbleTube_FromAllAboutCircuits.png)
 {: .mx-auto .align-center }
@@ -52,7 +70,17 @@ The SI unit of electric current is the *ampere* or *amp* (A), which is the flow 
 
 $$1 A = 1 C / s$$
 
-With digital circuits, we work with low amperages. For example, an LED may require 2V and ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$(6.24 × 10^{18}) * 0.04 = 2.5 × 10^{17}$$ electrons/second.
+With digital circuits, we work with low amperages. For example, an LED may require 2V but only ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$(6.24 × 10^{18}) * 0.04 = 2.5 × 10^{17}$$ electrons/second.
+
+---
+
+NOTE: BASE UNITS
+
+As you learn and begin analyzing electrical circuits, it's important to pay attention to *units*. The base unit of voltage is volts (V), the base unit of current is amperes or amps (A), and the base unit of resistance is ohms (Ω). With digital circuits, we often work with voltages between 0-5V (and sometimes 9V or 12V) but much smaller amperages often in the milliamp range—like 0.02A or 0.1A—and much higher resistances like 1,000Ω, 2,200Ω, or 10,000Ω.
+
+Typically, however, you'll see these written as 20mA and 100mA and 1kΩ, 2.2kΩ, and 10kΩ respectively. However, it's important to carefully track units and convert values to base units for analysis.
+
+---
 
 ### What is an open circuit?
 

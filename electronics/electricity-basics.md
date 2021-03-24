@@ -20,9 +20,20 @@ usetocbot: true
 
 In this lesson, we are going to learn about three key electricity concepts, *current*, *voltage*, and *resistance*, which form the foundation of electronics and circuits. We will also use an online circuit simulator to play with basic components and advanced understanding.
 
-In short, **voltage** pushes **electrons** through a conductive material (*e.g.,* a wire) and the amount of *electron flow* is called **current**. Some materials conduct electrons better than others—materials with low conductivity have high **resistance**. 
+---
+**NOTE**
 
-Hydraulic analogies are often useful to aid understanding. In a water plumbing system, *voltage* is analogous to *water pressure*. An increase in pressure provides more force to propel water molecules through the pipes (from high pressure to low pressure). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors to impede the flow of current.
+This material is important. Depending on your previous background in physics or engineering, some of these concepts may be brand new and confusing. Take your time to understand (and re-read) sections—this material will help you understand *how* circuits work and *how* and *why* we hook up and use electronic components the way we do.
+
+But this is also *not* a circuits course, so I will largely focus on what I *think* is most critical to physical computing.
+
+---
+
+## A brief overview
+
+In short, **voltage** pushes **electrons** through a conductive material (*e.g.,* a wire) and the amount of *electron flow* is called **current**. Some materials conduct electrons better than others—materials with low conductivity have high **resistance**.
+
+In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes (from high pressure to low pressure). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors to impede the flow of current.
 
 ## Lesson plan
 - L1: What is electricity: current, voltage, and resistance + online simulation activities
@@ -43,7 +54,7 @@ Things to consider adding:
 ## What is current?
 
 ![An animated gif showing current flowing in a simple circuit out of the positive terminal of a 9V battery through an LED and resistor and then back to the negative terminal of the 9V battery](assets/gifs/CurrentFlow_EngineeringMindset.gif)
-**Figure.** *Current* is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
+**Figure.** *Current* is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Note that this is actually opposite from *conventional current* flow, but we'll get to that below. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
 {: .fs-1 }
 
 *Current* is the flow of charged particles through a conductor. In digital circuits, these charged particles are *electrons* moving from the negative terminal to the positive (called *electron flow* as shown in the figure above).
@@ -52,11 +63,20 @@ Electric* current is similar to water current moving through a pipe. To measure 
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for electric charge and is approximately $$6.24 × 10^{18}$$ electrons. Thus, you can can calculate the number of electrons passing through a cross-section over time t. For example, in the image below, we are calculating how many electrons pass a given point in 3s if a conductor is carrying 2A of current.
+A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately $$6.24 × 10^{18}$$ electrons. Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* that wire is carrying $$1.872 × 10^{19}$$ electrons per second—we, instead, use the SI unit of electric current called *amperes* or *amps* (A):
 
-![](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
+$$1 A = 1 C / s$$
 
-Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms (with easily displaceable electrons). When you open the tap, the water molecules that touch your hands were the molecules pushing against that tap's valve. This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor.
+That is, *amperes* is the flow of electric charge in coloumbs per second $$C/s$$. Though unnecessary (and not typically helpful), you can use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we are calculating how many electrons pass a given point in 3s if a conductor is carrying 2A of current.
+
+![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
+Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .
+{: .fs-1 }
+
+With digital circuits, we work with low amperages. For example, an LED may require 2V and ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$(6.24 × 10^{18}) * 0.04 = 2.5 × 10^{17}$$ electrons/second.
+
+### Building intuition for current
+Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands were the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor.
 
 ![An image showing a tightly packed tube of single-file marbles. When a marble is inserted into the left side of the tube, a marble on the right side instantly exits.](assets/images/ElectronFlowMarbleTube_FromAllAboutCircuits.png)
 {: .mx-auto .align-center }
@@ -66,21 +86,7 @@ Importantly, just like your home plumbing system, where water flows instantly ou
 
 Another way to think about current flow is like that of a tube filled end-to-end with marbles. If a marble is inserted on the left, another marble will immediately exit the tube on the right. Even though each marble travels only a short distance, the transfer of motion is nearly instantaneous. With electricity, the overall effect from one end of a conductor to the other is at the speed of light; however, each individual electron travels through the conductor at a much slower pace.
 
-The SI unit of electric current is the *ampere* or *amp* (A), which is the flow of electric charge in coloumbs per second ($$C/s$$). Thus:
 
-$$1 A = 1 C / s$$
-
-With digital circuits, we work with low amperages. For example, an LED may require 2V but only ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$(6.24 × 10^{18}) * 0.04 = 2.5 × 10^{17}$$ electrons/second.
-
----
-
-NOTE: BASE UNITS
-
-As you learn and begin analyzing electrical circuits, it's important to pay attention to *units*. The base unit of voltage is volts (V), the base unit of current is amperes or amps (A), and the base unit of resistance is ohms (Ω). With digital circuits, we often work with voltages between 0-5V (and sometimes 9V or 12V) but much smaller amperages often in the milliamp range—like 0.02A or 0.1A—and much higher resistances like 1,000Ω, 2,200Ω, or 10,000Ω.
-
-Typically, however, you'll see these written as 20mA and 100mA and 1kΩ, 2.2kΩ, and 10kΩ respectively. However, it's important to carefully track units and convert values to base units for analysis.
-
----
 
 ### What is an open circuit?
 
@@ -127,7 +133,15 @@ If you connect two batteries in series (i.e., stack them), you increase their ab
 
 Insert cropped animation from: https://youtu.be/w82aSjLuD_8?t=183
 
-In digital circuits, common operating voltages are 3.3V or 5V. For example, the ESP32 chip operates at 3.3V while the Arduino Uno and Leonardo boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A.
+In digital circuits, common operating voltages are 3.3V or 5V. For example, the popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A.
+
+---
+
+**NOTE: BASE UNITS**
+
+As you learn and begin analyzing electrical circuits, it's important to pay attention to *units*. The base unit of voltage is volts (V), the base unit of current is amperes or amps (A), and the base unit of resistance is ohms (Ω). With digital circuits, we often work with voltages between 0-5V (and sometimes 9V or 12V) but much smaller amperages often in the milliamp range—like 0.02A or 0.1A—and much higher resistances like 1,000Ω, 2,200Ω, or 10,000Ω. Typically, however, you'll see these written as 20mA and 100mA and 1kΩ, 2.2kΩ, and 10kΩ respectively. However, it's important to carefully track units and convert values to base units for analysis.
+
+---
 
 ## What is electrical resistance?
 <video autoplay loop muted playsinline style="margin:0px">

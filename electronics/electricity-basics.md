@@ -128,19 +128,29 @@ Some potential references:
 - https://learning.oreilly.com/library/view/learn-electronics-with/9781680454420/#toc
 - https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/12_Chapter_01.xhtml#ch01
 
-**[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the work needed to move a charge between two points. Voltage is like pressure in a water pipe: the more pressure, the more water is being forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
+**[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the "electric pressure" or "electric tension" that moves charge (electrons) in a circuit. Voltage is like pressure in a water pipe: the more pressure, the more water is being forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
-We measure voltage with the SI unit *volt* (V), which is expressed as:
+Voltage is the electric potential difference between two points caused by an electric charge build-up or imbalance (*e.g.,* induced by a battery). We measure voltage with the SI unit *volt* (V), which is expressed as:
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
 That is, two points with a voltage of $$1\ V$$ between them will have enough "pressure" to perform $$1\ J$$ of work while moving $$1 C$$ worth of charge (or $$6.24 × 10^{18}$$ electrons) between the two points.
 
-When you hook up a circuit, you can't have current flow without a difference in pressure and the flow will occur from the "high" pressure area to the "low" pressure area—same thing with water flow in a pipe (hydraulics) or air flow in a tube (pneumatics); all flow from high pressure to low pressure.
+In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges)—thereby creating this electromotive force that moves charge through the circuit. We call this movement *current*. This is similar to water flow in a pipe (hydraulics) or air flow in a tube (pneumatics)—all which flow from "high pressure" to "low pressure."
 
-And just like we can use "energy" of flowing water to do work—*e.g.,* sping a turbine—so too can we use flowing current to do work. And as work is performed, the pressure drops.
+<!-- Another nice analogy is a tube with water and angling the tube upright, which increases pressure and then increases flow -->
 
-In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied b your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want so supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. And as work is performed, the pressure drops.
+
+In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want so supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+
+### Relative voltages and ground
+
+By definition, voltage is the difference in electric potential between **two points**. When we actually start measuring voltages in a circuit (using the voltmeter on a multimeter), you'll observe that we can't just place a single probe on the circuit. Instead, we have to place two probes on the circuit in different places to measure the voltage difference between them (also called the **voltage drop**).
+
+To simplify calculations, we select some point on the circuit—typically the point with the least electric potential (*e.g.,* wires connected to the negative terminal of a battery)—as 0 volts. As [Bartlett](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/) notes (Chapter 4.3), "This 'zero point' goes by several names, the most popular of which is **ground** (often abbreviated as **GND**). It is called the ground because, historically, the physical ground has often been used as a reference voltage for circuits."
+
+Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4) from the Introduction, how much potential to do work does water have once it's flowed out of the hole and onto the ground? None! It's lost all of its energy. Likewise, when an electric charge reaches ground, it no longer has electric potential for work.
 
 ### What provides the pressure?
 
@@ -206,7 +216,7 @@ To help illustrate this idea visually, [Professor Squier](http://people.cs.georg
 **Figure.** Continuing our water analogies: imagine two pipes filled with resistive materials, one with gravel (less resistance) and one filled with clay (more resistance). Both pipes have an equal amount of water pressure (voltage) "pushing" water through them. The pipe with less resistance (gravel) will have more water flow (current). Image from Professor Richard Squier's [Electricity Primer](http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf).
 {: .fs-1 }
 
-## Electrical resitivity
+### Electrical resitivity
 
 Because resistance is not just an intrinsic property of a material (*e.g.,* based on its atomic makeup) but also because of its shape and size, we use [*electrical resistivity*](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) $$\rho$$, which is independent of the dimensions of a material (assuming temperature is constant).
 

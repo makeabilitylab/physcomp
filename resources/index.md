@@ -57,6 +57,8 @@ I've gone through many electronics and microcontroller books. Here are some of m
 
 - Simon Monk, *Hacking Electronics: An Illustrated DIY Guide for Makers and Hobbyists*, McGraw-Hill, 2013. [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71297764200001451), [O'Reilly Online](https://learning.oreilly.com/library/view/hacking-electronics-an/9780071802369/)]
 
+- Judy Culkin, Eric Hagan, *Make: Learn Electronics with Arduino*, Maker Media, 2017 [O'Reilly Online](https://learning.oreilly.com/library/view/learn-electronics-with/9781680454420/)
+
 ### (More) Advanced Electronics
 
 - Paul Scherz and Simon Monk, *Practical Electronics for Inventors*, 4th Edition, McGraw-Hill Education, 2016. [[UW Library EBook](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71291894620001451), [O'Reilly Online](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559)]. This is a more advanced book, *e.g.,* the first chapter entitled *Theory* is 200+ pages long.

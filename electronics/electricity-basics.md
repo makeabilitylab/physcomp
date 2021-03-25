@@ -28,8 +28,9 @@ This material is important. Depending on your previous background in physics or 
 ---
 
 ## A brief overview
+So, what is voltage, current, and resistance?
 
-In short, **voltage** "pushes" **electrons** through a conductive material (*e.g.,* a wire) and the amount of *electron flow* is called **current** (measured in amps). Some materials conduct electrons better than others—materials with low conductivity have high **resistance** (measured in ohms). See image below.
+In short, **voltage** "pushes" **electrons** through a conductive material (*e.g.,* a wire) and the amount of *electron flow* is called **current** (measured in amps). Resistors are specially formulated materials that can be placed in a circuit to *resist* the flow of electrons (the **resistance** is measured in ohms). See image.
 
 ![A humorous depiction of the relationship between voltage, current, and resistance. Three cartoon characters are shown: the "volt" character is trying to push the "amp" character through a wire but the "ohm" character is resisting the "amp" character by restricting the girth of the wire with a tightening rope.](assets/images/OhmsLawCartoon_ShowingRelationshipBetweenVoltsAmpsAndResistance.png)
 {: .mx-auto .align-center }
@@ -45,22 +46,11 @@ In circuits, we often use hydraulic (and other) analogies to aid understanding. 
 | Potential  | Voltage, *volts*               | Pressure, *psi (pound per square inch)*  |
 | Resistance | Resistance, *ohm (volts/amp)*  | Resistance, *psi/gpm*                    |
 
-
-## Lesson plan
-- L1: What is electricity: current, voltage, and resistance + online simulation activities
-- L2: Building your first circuit: lighting up an LED, swapping out different resistances (maybe paper-based version)
-- L3: Ohm's Law + example circuit equations/solving + online simulation activities
-- L4: How to use a breadboard + moving your prev circuit to breadboards
-- L5: Series vs. Parallel Resistance, Voltage Dividers, and Ohm's Law
-
-Should I have a small lesson on what is a resistor and what is an LED (or perhaps I fold that into Lesson 2).
-
-See also notes on phone.
-
-## Notes:
-Things to consider adding:
-- What is an open vs. a closed circuit? (Perhaps add to Ohm's Law or maybe third lesson?)
-- What is a short circuit?
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Figure.** Here's a slightly different hydraulic analogy than the water plumbing system one described above. Here, we have a water tank filled with water with a hole at the bottom: as the water level increases, the pressure (voltage) on the water at the bottom of the tank also increases, which commensurately increases the amount of water flowing out of the hole. If we increase the hole size (decreasing resistance), more water (current) will flow. The water diagram based on an illustration in [Platt's *Make: Electronics* book](https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/).
+{: .fs-1 }
 
 ## What is current?
 
@@ -68,13 +58,13 @@ Things to consider adding:
 **Figure.** *Current* is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Note that this is actually opposite from *conventional current* flow, but we'll get to that below. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
 {: .fs-1 }
 
-*Current* is the flow of charged particles through a conductor. In digital circuits, these charged particles are *electrons* moving from the negative terminal to the positive (called *electron flow* as shown in the figure above).
+*Current* is the flow of charged particles through a conductor. In digital circuits, these charged particles are *electrons* (negatively charged particles) propelled by an electromotive force (voltage) to move from "high pressure" to "low pressure" in a circuit.
 
-Electric current is similar to water current moving through a pipe. To measure the flow of water, we could count the number of water molecules flowing past a given cross-section of pipe in time $$t$$. Similarly, we can measure electric current by "counting" the number of charges flowing through a wire. Indeed, electric current $$I$$ is defined as the amount of charge $$Q$$ moving through a cross-section of wire in time $$t$$:
+Electric current is similar to water current moving through a pipe. To measure the flow of water, we could count the number of water molecules flowing past a given cross-section of pipe in time $$t$$. Similarly, we can measure electric current by "counting" the number of charges flowing through a wire. Indeed, electric current $$I$$ is defined as the amount of charge $$Q$$ moving through a point in time $$t$$:
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately $$6.24 × 10^{18}$$ electrons. Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A), which the flow of electric charge in coloumbs per second $$C/s$$.
+A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately $$6.24 × 10^{18}$$ electrons. Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A), which is the flow of electric charge in coloumbs per second $$C/s$$.
 
 $$1 A = 1 C / s$$
 
@@ -83,8 +73,6 @@ You can use these formulations to calculate the number of electrons passing thro
 ![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
 Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .
 {: .fs-1 }
-
-But typically, as noted above, we will not describe current flow in electrons per second but rather *amps* (A).
 
 With digital circuits, we work with low amperages. For example, an LED may require 2V and ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$(6.24 × 10^{18}) * 0.04 = 2.5 × 10^{17}$$ electrons/second.
 
@@ -100,10 +88,18 @@ Importantly, just like your home plumbing system, where water flows instantly ou
 
 Another way to think about current flow is like that of a tube filled end-to-end with marbles. If a marble is inserted on the left, another marble will immediately exit the tube on the right. Even though each marble travels only a short distance, the transfer of motion is nearly instantaneous. With electricity, the overall effect from one end of a conductor to the other is at the speed of light; however, each individual electron travels through the conductor at a much slower pace. Indeed, the average speed at which electrons move through a wire due to an applied electric field (such as from a battery) is on the order of centimeters per hour (called the [drift velocity](https://en.wikipedia.org/wiki/Speed_of_electricity#Electric_drift))!
 
+<!-- Another nice description of this marble analogy is from https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
+
 ### What's conventional current vs. electron flow?
 
-![An animated gif showing the true direction of negative charges (electrons) in a circuit from the negative terminal of a battery to the positive vs. the conventional current direction which is just the opposite. Here, charge flow is modeled as going from positive to negative.](assets/gifs/ConventionalCurrentVsElectronFlow_EngineeringMindset-Optimized.gif)
+<!-- ![An animated gif showing the true direction of negative charges (electrons) in a circuit from the negative terminal of a battery to the positive vs. the conventional current direction which is just the opposite. Here, charge flow is modeled as going from positive to negative.](assets/gifs/ConventionalCurrentVsElectronFlow_EngineeringMindset-Optimized.gif)
 **Figure.** In electric circuits, we model the flow of charges (electrons) as if they move from positive to negative terminals in a battery (or voltage source)—this is called "*conventional current*"—see right side of image. However, it is a historic artifact (blame Benjamin Franklin). Instead, because electrons are negatively charged, they actually flow from negative to positive (called "*electron flow*")—see left side of figure. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
+{: .fs-1 } -->
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ElectronFlowVsConventionalCurrent_PhetSimulation_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Figure.** In electric circuits, negatively charged particles (electrons) move from the negative terminals of a battery (or voltage source) to the positive—this is called *electron flow*; however, when we model circuits (and use circuit formulas), we use *conventional current*, which moves in the opposite direction.
 {: .fs-1 }
 
 In circuits, we use *conventional current* to model the flow of electrons from the positive terminal of the voltage source to the negative; however, electrons actually move in the *opposite* direction (called *electron flow*). This causes great confusion!
@@ -126,11 +122,34 @@ For more, see [Chapter 2](https://learning.oreilly.com/library/view/practical-el
 **Figure.** *Voltage* is what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
 {: .fs-1 }
 
-**[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the difference in electric potential between two points—it is the work needed to move a charge between two points. Voltage is like pressure in a water pipe: the more pressure, the more water is being forced through a pipe. Similarly, by increasing voltage, we "push" more electrons through a wire.
+**TODO: UPDATE THIS DESCRIPTION**
+Some potential references:
+- https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html
+- https://learning.oreilly.com/library/view/learn-electronics-with/9781680454420/#toc
+- https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/12_Chapter_01.xhtml#ch01
+
+**[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the work needed to move a charge between two points. Voltage is like pressure in a water pipe: the more pressure, the more water is being forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
 We measure voltage with the SI unit *volt* (V), which is expressed as:
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
+
+That is, two points with a voltage of $$1\ V$$ between them will have enough "pressure" to perform $$1\ J$$ of work while moving $$1 C$$ worth of charge (or $$6.24 × 10^{18}$$ electrons) between the two points.
+
+When you hook up a circuit, you can't have current flow without a difference in pressure and the flow will occur from the "high" pressure area to the "low" pressure area—same thing with water flow in a pipe (hydraulics) or air flow in a tube (pneumatics); all flow from high pressure to low pressure.
+
+And just like we can use "energy" of flowing water to do work—*e.g.,* sping a turbine—so too can we use flowing current to do work. And as work is performed, the pressure drops.
+
+In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied b your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want so supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+
+### What provides the pressure?
+
+
+### How can we increase pressure?
+
+As [Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) state, "a voltage placed across a conductor gives rise to an *electromotive force (EMF)* that is responsible for giving all free electrons within the conductor a push." <--- Really need to improve this description of voltage.
+
+As electrons move through as a circuit, they begin to lose their "electric potential"
 
 A battery has an imbalanced electric charge built up between its positive and negative leads. When a circuit is connected, electric charges (electrons) flow to "correct" this imbalance. The larger the imbalance (*i.e.,* the higher voltage), the greater the "push" and the more electrons that flow (higher current).
 
@@ -139,10 +158,12 @@ If you connect two batteries in series (i.e., stack them), you increase their ab
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/VoltageBatteriesInSeries_CroppedAndTrimmed2_EngineeringMindset.mp4" type="video/mp4" />
 </video>
-**Figure.** When you connect batteries in series, you increase the "pushing" force—indeed, you sum the battery voltages together. More voltage, more pressure. More pressure, more electrons are "pushed" through the circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8?t=183) video by The Engineering Mindset.
+**Figure.** When you connect batteries in series, you increase the "pushing" force—indeed, you sum the battery voltages together (so, 1.5V + 1.5V = 3V in total). More voltage, more pressure. More pressure, more electrons are "pushed" through the circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8?t=183) video by The Engineering Mindset.
 {: .fs-1 }
 
-In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied b your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want so supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+<!-- See https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->
+
+See also: http://andnowforelectronics.com/notes/voltage-and-current/
 
 ---
 
@@ -168,20 +189,11 @@ The SI unit of electrical resistance is the ohm (Ω). The direct inverse of resi
 **Figure.** The image shows PVC-insulated copper wire.
 {: .fs-1 }
 
-The resistance $$R$$ of an object is defined as the ratio of voltage $$V$$ across it to current $$I$$ through it while conductance G is the reciprocal:
+The resistance $$R$$ of an object is defined as the ratio of voltage $$V$$ across it to current $$I$$ through it while conductance $$G$$ is the reciprocal:
 
 $$R = \frac{V}{I}$$, $$G = \frac{1}{R}$$
 
-The higher the resistance (higher Ω value), the more opposition to current flow.
-
 With enough voltage (pressure), almost any material can conduct electrical current (even air, as evident by lightning). The resistance (or conductance) of a wire is not just a function of material type but also its temperature and its size (both length and thickness). In short, for metal wires, resistance drops with increases to wire diameter or temperature. And resistance increases as wire length increases.
-
-More specifically, at a constant temperature, the electrical resistivity $$ρ$$ of a wire can be calculated by:
-
-$$\rho =R{\frac {A}{\ell }}$$,
-
-where $$R$$ is the electrical resistance of a uniform specimen of the material, $$ℓ$$ is the length of the specimen
-$$A$$ is the cross-sectional area of the specimen. 
 
 [Wikipedia](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) provides a nice water-based analogy: 
 
@@ -194,11 +206,44 @@ To help illustrate this idea visually, [Professor Squier](http://people.cs.georg
 **Figure.** Continuing our water analogies: imagine two pipes filled with resistive materials, one with gravel (less resistance) and one filled with clay (more resistance). Both pipes have an equal amount of water pressure (voltage) "pushing" water through them. The pipe with less resistance (gravel) will have more water flow (current). Image from Professor Richard Squier's [Electricity Primer](http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf).
 {: .fs-1 }
 
+## Electrical resitivity
+
+Because resistance is not just an intrinsic property of a material (*e.g.,* based on its atomic makeup) but also because of its shape and size, we use [*electrical resistivity*](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) $$\rho$$, which is independent of the dimensions of a material (assuming temperature is constant).
+
+More specifically, at a constant temperature, the electrical resistivity $$\rho$$ of a wire can be calculated by:
+
+$$\rho =R{\frac {A}{\ell }}$$,
+
+where $$R$$ is the electrical resistance of a uniform specimen of the material, $$ℓ$$ is the length of the specimen, and $$A$$ is the cross-sectional area of the specimen. The SI unit for resistivity are ohm-meters (Ωm).
+
+Some prefer to describe materials not in terms of their *resistivity* but, instead, in terms of their *conductivity* $$\sigma$$ (which is the direct inverse): 
+
+$$\sigma = \frac {1}{\rho }$$
+
+The SI units of conductivity are in siemens per meter (S/m).
+
+[Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) report some common resitivities (and conductivities) of materials, which is drawn from the *Handbook of Chemistry and Physics*.
+
+| Material | Classification | Resitivity $$\rho$$ (Ωm) | Conductivity $$\sigma$$ (S/m) |
+|----------|----------------|--------------------------|-------------------------------|
+|Aluminunum| Conductor      | $$2.82 × 10^{-8}$$       | 3.55 × 10^7                   |
+|Gold      | Conductor      | $$2.44 × 10^{-8}$$       | 4.10 × 10^7                   |
+|Silver    | Conductor      | $$1.59 × 10^{-8}$$       | 6.29 × 10^7                   |
+|Copper    | Conductor      | $$1.72 × 10^{-8}$$       | 5.81 × 10^7                   |
+|Brass     | Conductor      | $$7 × 10^{-8}$$          | 1.4 × 10^7                   |
+|Carbon    | Semi-Conductor | $$3.5 × 10^{-5}$$        | 2.9 × 10^4                   |
+|Silicon   | Semi-Conductor | $$640$$                  | 3.5 × 10^{-3}                   |
+|Glass     | Insulator      | $$~10^{10}$$             | 10^{-10}                      |
+|Rubber    | Insulator      | $$10^{9}$$               | 10^{-9}                   |
+|Teflon    | Insulator      | $$10^{14}$$              | 10^{-14}                   |
+
+<!-- See also http://spiff.rit.edu/classes/phys213/lectures/resist/resist_long.html -->
+
 ### Increasing conductance by increasing wire girth
 
 As noted above, we can *increase* the conductance of a wire by *increasing* its diameter (a "bigger pipe" for current to flow). Drawing again on our water analogy: just as a larger diameter pipe can support larger quantities of water flow so too can a thicker wire support more current flow.
 
-TODO: insert figure (maybe from that PDF?)
+<!-- TODO: possibly insert figure (maybe from that PDF?) -->
 
 Because wire diameter is so important to current capacity, there is a standardized system for measurement. In the US, we use the [American Wire Gauge](https://en.wikipedia.org/wiki/American_wire_gauge) or AWG system. A wire with a diameter of 5.2mm (AWG 4) has a current capacity of 59.6A. In comparison, a standard circuit prototyping wire (0.64mm or AWG 22)—see Figure below—has a current capacity of 0.9A. 
 
@@ -224,7 +269,7 @@ Could have posille's law here?
 
 ### What are resistors?
 <video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/ResistorAndCurrentFlow_WaterHoseAnalogy_TrimmedAndCropped_EngineeringMindset.mp44" type="video/mp4" />
+  <source src="assets/videos/ResistorAndCurrentFlow_WaterHoseAnalogy_TrimmedAndCropped_EngineeringMindset.mp4" type="video/mp4" />
 </video>
 **Figure.** Resistors are specially electronic components to reduce current flow. Just as a kink in a water hose will provide increased resistance and reduce water flow, so too will a resistor placed between two wires in a circuit. Animation from the [What is Current?](https://youtu.be/8Posj4WMo0o?t=521) video by The Engineering Mindset.
 {: .fs-1 }
@@ -233,7 +278,9 @@ Could have posille's law here?
 **Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons "collide" with other atoms and themselves, which restricts electron flow (and also transforms some energy as heat). Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
 {: .fs-1 }
 
-Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. In circuits, we place resistors between components to lower current. Why would we want to restrict current? In short, to protect components in our circuit that require lower current. 
+Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. In circuits, we place resistors between components to lower current. Why would we want to restrict current? In short, to protect components in our circuit that require lower current.
+
+When current flows through a resistor, some of the electrical pressure (voltage) is converted to heat, which results in a *voltage drop*. 
 
 **TODO: We'll talk more about this in Lesson X.**
 
@@ -265,6 +312,27 @@ TODO: add in how water plumbing analogy breaks down with pipe breakage (Water wo
 - Introduce the multimeter and how to measure voltage, current, and resistance
   - Engineering Mindset has a good animation of [ammeter here](https://youtu.be/kcL2_D33k3o?t=718) 
 
+## Lesson plan
+- L1: What is electricity: current, voltage, and resistance + online simulation activities
+- Circuit schematics?
+- LX: Common electronic components: resistors and LEDs
+- L2: Ohm's Law + example circuit equations/solving + online simulation activities
+- L3: Measuring current, voltage, and resistance using multimeters
+- L4: Series vs. parallel resistance
+
+- L4: How to use a breadboard + moving your prev circuit to breadboards
+- L5: Series vs. Parallel Resistance, Voltage Dividers, and Ohm's Law
+- LX: Building your first circuit: lighting up an LED, swapping out different resistances (maybe paper-based version)
+
+Should I have a small lesson on what is a resistor and what is an LED (or perhaps I fold that into Lesson 2).
+
+See also notes on phone.
+
+## Notes:
+Things to consider adding:
+- What is an open vs. a closed circuit? (Perhaps add to Ohm's Law or maybe third lesson?)
+- What is a short circuit?
+
 ## Resources
 
 ### Circuit Simulators
@@ -278,6 +346,9 @@ We recommend the following basic circuit simulators (these are not intended for 
 - [Chapter 2: Circuit Thoery](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml), Scherz & Monk, Practical Electronics for Inventors, 4th Edition
 - [Voltage, Current, Resistance, and Ohm's Law](https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law/all), Sparkfun.com
 - [Electrical Resistance and Conductance](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance), Wikipedia
+
+<!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential -->
+<!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->
 
 ### Video links
 - [Electronics for Beginners](https://www.youtube.com/watch?v=8gvJzrjwjds&list=PLzqS33DOPhJkRn6e9_OTdQwRojO8qlusI), [afrotechmods.com](http://afrotechmods.com/tutorials/)

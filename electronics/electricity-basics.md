@@ -38,7 +38,18 @@ In short, **voltage** "pushes" **electrons** through a conductive material (*e.g
 **Figure.** A humorous but helpful depiction of the relationship between voltage (measured in volts), current (measured in amps), and resistance (measured in ohms). The yellow "volt" character is trying to push the green "amp" character through a tube (*i.e.,* a wire) but the red "ohm" character is impeding this by restricting the size of the tube (by tightening a rope, reducing its girth). The image source is unknown but there are many examples and alternatives [online](https://www.google.com/search?q=ohm%27s+law+cartoon&tbm=isch&sxsrf=ALeKk01Bq3GWclp6ij6yQ6Kn3yWKh1GXxA%3A1616617564907&source=hp&biw=1280&bih=1248&ei=XKBbYMb0NLXV9APPhL3ABA&oq=ohm%27s+law+cartoon&gs_lcp=CgNpbWcQAzICCAAyAggAOgQIIxAnOgUIABCxAzoGCAAQCBAeUMMBWPoVYNkXaABwAHgAgAHAA4gBrBKSAQk3LjguMC4xLjGYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ved=0ahUKEwjGksTd4cnvAhW1Kn0KHU9CD0gQ4dUDCAc&uact=5).
 {: .fs-1 }
 
-In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes (from high pressure to low pressure). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors to impede the flow of current.
+Just like we measure weight in kilograms and temperature in celsius, soo too do we have standard units of measurement for current, voltage, and resistance (called [SI units](https://en.wikipedia.org/wiki/International_System_of_Units) for the *International System of Units*):
+
+| Quantity   | Symbol | Unit of Measurement   | Unit abbreviation |
+|------------|--------|-----------------------|-------------------|
+| Current    | $$I$$  | Ampere (or Amp)       | A |
+| Voltage    | $$V$$  | Volt                  | V |
+| Resistance | $$R$$  | Ohm                   | Ω |
+
+
+### A hydraulic analogy
+
+In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes—and water flows from high pressure (intake supply) to low pressure (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors to impede the flow of current.
 
 |            | Electric                       | Hydraulic                                |
 |------------|--------------------------------|------------------------------------------|
@@ -64,21 +75,19 @@ Electric current is similar to water current moving through a pipe. To measure t
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately $$6.24 × 10^{18}$$ electrons. Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A), which is the flow of electric charge in coloumbs per second $$C/s$$.
+A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately $$6.24 × 10^{18}$$ electrons. Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A):
 
 $$1 A = 1 C / s$$
 
-You can use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we calculate how many electrons pass a given point in 3s if a conductor is carrying 2A of current.
+Thus, amps are defined as the flow of electric charge in coloumbs per second $$C/s$$—1 A is 1 coulomb/sec (or $$6.24 × 10^{18}$$ electrons / sec). Though you'll never need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we calculate how many electrons pass a given point in 3s if a conductor is carrying 2A of current.
 
 ![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
 Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .
 {: .fs-1 }
 
-With digital circuits, we work with low amperages. For example, an LED may require 2V and ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$(6.24 × 10^{18}) * 0.04 = 2.5 × 10^{17}$$ electrons/second.
-
 ### Building intuition for current
 
-Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands were the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B.
+Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B.
 
 ![An image showing a tightly packed tube of single-file marbles. When a marble is inserted into the left side of the tube, a marble on the right side instantly exits.](assets/images/ElectronFlowMarbleTube_FromAllAboutCircuits.png)
 {: .mx-auto .align-center }
@@ -111,22 +120,25 @@ Why? Blame [Benjamin Franklin](https://hackaday.com/2017/07/17/conventional-curr
 **Figure.** Franklin thought that positive charge carriers moved in a conductor from positive to negative. This is called the *conventional current* direction, which is still used today. Instead, as Thomson discovered, it's electrons that move in a conductor (which are negatively charged) and they move from negative to positive. This is called *electron flow*. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .
 {: .fs-1 }
 
-Despite this confusion, it turns out that as long as you're consistent, it does not matter: negative electrons flowing one way is equivalent to modeling positive charges going the other direction. So, we tend to use *conventional current* (modeling flow of charge from positive to negative) in electronics (*e.g.,* in diagrams, formulas, *etc.*). The math will still work out and even mnemonics like the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule) are based on conventional current (point thumb in direction of current $$I$$, see direction of electric field $$B$$).
+Despite this confusion, it turns out that as long as you're consistent, it does not matter: negative electrons flowing one way is equivalent to modeling positive charges flowing the other. So, we tend to use *conventional current* (modeling flow of charge from positive to negative) in electronics (*e.g.,* in diagrams, formulas, *etc.*). The math will still work out and even mnemonics like the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule) are based on conventional current (point thumb in direction of current $$I$$, see direction of electric field $$B$$).
 
 For more, see [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* and this lovely [video](https://youtu.be/kcL2_D33k3o?t=224) by The Engineering Mindset.
 
+### Common operating currents in circuits
+
+With digital circuits, we typically work with low amperages. For example, an LED may require 2V and ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or 2.5 × 10^{17}$$ electrons/second.
+
+Most USB ports supply 5V of electricity with a maximum current of 0.5A (500 mA). Some electrical components, like [motors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-a-high-current-load/) or a [long string of LED lights](https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/), require more current (called "[high current loads](https://itp.nyu.edu/physcomp/lessons/electronics/transistors-relays-and-controlling-high-current-loads/)") than a microcontroller or USB port can supply. In these cases, we can use an external power supply controlled by a transistor. 
+
 ## What is voltage?
+
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/VoltageElectromotiveForce_EngineeringMindset.mp4" type="video/mp4" />
 </video>
 **Figure.** *Voltage* is what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
 {: .fs-1 }
 
-**TODO: UPDATE THIS DESCRIPTION**
-Some potential references:
-- https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html
-- https://learning.oreilly.com/library/view/learn-electronics-with/9781680454420/#toc
-- https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/12_Chapter_01.xhtml#ch01
+OK, so if current is the *flow* of charge in a circuit? What's pushing those charges?
 
 **[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the "electric pressure" or "electric tension" that moves charge (electrons) in a circuit. Voltage is like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
@@ -136,15 +148,27 @@ $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
 That is, two points with a voltage of $$1\ V$$ between them will have enough "pressure" to perform $$1\ J$$ of work while moving $$1 C$$ worth of charge (or $$6.24 × 10^{18}$$ electrons) between the two points.
 
-In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*. This is similar to water flow in a pipe (hydraulics) or air flow in a tube (pneumatics)—all which flow from "high pressure" to "low pressure."
+In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*. 
+
+<!-- This is similar to water flow in a pipe (hydraulics) or air flow in a tube (pneumatics)—all which flow from "high pressure" to "low pressure." -->
 
 <!-- Another nice analogy is a tube with water and angling the tube upright, which increases pressure and then increases flow -->
 
-And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through as a circuit, they begin to lose their "electric potential" as they perform work (drive a motor, heat up a wire, turn on a light).
+And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential."
+
+TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would rops potential.
 
 <!-- "Another way to think of voltage is as the electric potential difference between two points in an electric field. It is similar to the difference in the potential energy of a cannonball at the top of a ladder as opposed to one at the top of a tall tower. Both cannonballs exist in the earth’s gravitational field, they both have potential energy, and it took some work to get them both into position. When they are released, the cannonball on the top of the tower will have more energy when it hits the ground than the cannonball dropped from the top of the ladder, because it had a larger potential energy due to its position." From https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
 
+### Common operating voltages
+
 In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want so supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+
+<!-- **TODO: UPDATE THIS DESCRIPTION**
+Some potential references:
+- https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html
+- https://learning.oreilly.com/library/view/learn-electronics-with/9781680454420/#toc
+- https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/12_Chapter_01.xhtml#ch01 -->
 
 ### Relative voltages and ground
 
@@ -220,7 +244,7 @@ To help illustrate this idea visually, [Professor Squier](http://people.cs.georg
 
 ### Electrical resitivity
 
-Because resistance is not just an intrinsic property of a material (*e.g.,* based on its atomic makeup) but also because of its shape and size, we use [*electrical resistivity*](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) $$\rho$$, which is independent of the dimensions of a material (assuming temperature is constant).
+Because resistance is not just an intrinsic property of a material (*e.g.,* based on its atomic makeup) but also because of its shape and size, we use [*electrical resistivity*](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) $$\rho$$, which is independent of a material's dimensions (assuming temperature is constant).
 
 More specifically, at a constant temperature, the electrical resistivity $$\rho$$ of a wire can be calculated by:
 
@@ -228,7 +252,7 @@ $$\rho =R{\frac {A}{\ell }}$$,
 
 where $$R$$ is the electrical resistance of a uniform specimen of the material, $$ℓ$$ is the length of the specimen, and $$A$$ is the cross-sectional area of the specimen. The SI unit for resistivity are ohm-meters (Ωm).
 
-Some prefer to describe materials not in terms of their *resistivity* but, instead, in terms of their *conductivity* $$\sigma$$ (which is the direct inverse): 
+Similar to resistance and conductance, we can also describe *resistivity* in terms of its inverse, which is *conductivity* $$\sigma$$: 
 
 $$\sigma = \frac {1}{\rho }$$
 
@@ -298,6 +322,14 @@ When current flows through a resistor, some of the electrical pressure (voltage)
 
 ## Misc section
 
+## What's a short circuit?
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ShortCircuitExample_PhetScreenRecording-Cropped_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Figure.** TODO. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
+{: .fs-1 }
+
 ### What's the difference between AC and DC?
 
 Digital circuits use *direct current* (DC), which is supplied by batteries or by AC adapters that convert the *alternating current* from your wall socket into DC current used by your phone or laptop chargers.
@@ -306,9 +338,12 @@ Digital circuits use *direct current* (DC), which is supplied by batteries or by
 
 TODO: add in how water plumbing analogy breaks down with pipe breakage (Water would spill out of hole); with circuits, an open circuit, no current flow.
 
-### What is an open circuit?
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ClosedVsOpenCircuit-Cropped_PhetRecording_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Figure.** TODO. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
+{: .fs-1 }
 
-TODO: add in how water plumbing analogy breaks down with pipe breakage (Water would spill out of hole); with circuits, an open circuit, no current flow.
 
 ## Notes
 - Should I talk about short vs. open circuit here? I think so

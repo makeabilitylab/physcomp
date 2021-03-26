@@ -128,25 +128,27 @@ Some potential references:
 - https://learning.oreilly.com/library/view/learn-electronics-with/9781680454420/#toc
 - https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/12_Chapter_01.xhtml#ch01
 
-**[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the "electric pressure" or "electric tension" that moves charge (electrons) in a circuit. Voltage is like pressure in a water pipe: the more pressure, the more water is being forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
+**[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the "electric pressure" or "electric tension" that moves charge (electrons) in a circuit. Voltage is like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
-Voltage is the electric potential difference between two points caused by an electric charge build-up or imbalance (*e.g.,* induced by a battery). We measure voltage with the SI unit *volt* (V), which is expressed as:
+More precisely, voltage is the electric potential difference between two points caused by an electric charge build-up or imbalance (*e.g.,* induced by a battery). We measure voltage with the SI unit *volt* (V), which is expressed as:
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
 That is, two points with a voltage of $$1\ V$$ between them will have enough "pressure" to perform $$1\ J$$ of work while moving $$1 C$$ worth of charge (or $$6.24 × 10^{18}$$ electrons) between the two points.
 
-In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges)—thereby creating this electromotive force that moves charge through the circuit. We call this movement *current*. This is similar to water flow in a pipe (hydraulics) or air flow in a tube (pneumatics)—all which flow from "high pressure" to "low pressure."
+In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*. This is similar to water flow in a pipe (hydraulics) or air flow in a tube (pneumatics)—all which flow from "high pressure" to "low pressure."
 
 <!-- Another nice analogy is a tube with water and angling the tube upright, which increases pressure and then increases flow -->
 
-And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. And as work is performed, the pressure drops.
+And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through as a circuit, they begin to lose their "electric potential" as they perform work (drive a motor, heat up a wire, turn on a light).
+
+<!-- "Another way to think of voltage is as the electric potential difference between two points in an electric field. It is similar to the difference in the potential energy of a cannonball at the top of a ladder as opposed to one at the top of a tall tower. Both cannonballs exist in the earth’s gravitational field, they both have potential energy, and it took some work to get them both into position. When they are released, the cannonball on the top of the tower will have more energy when it hits the ground than the cannonball dropped from the top of the ladder, because it had a larger potential energy due to its position." From https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
 
 In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want so supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
 
 ### Relative voltages and ground
 
-By definition, voltage is the difference in electric potential between **two points**. When we actually start measuring voltages in a circuit (using the voltmeter on a multimeter), you'll observe that we can't just place a single probe on the circuit. Instead, we have to place two probes on the circuit in different places to measure the voltage difference between them (also called the **voltage drop**).
+By definition, voltage is the *difference* in electric potential between **two points**. When we actually start measuring voltages in a circuit (using a multimeter), you'll observe that we can't just place a single probe on the circuit. Instead, we have to place **two probes** in different locations to measure the voltage difference between them (also called the **voltage drop**).
 
 To simplify calculations, we select some point on the circuit—typically the point with the least electric potential (*e.g.,* wires connected to the negative terminal of a battery)—as 0 volts. As [Bartlett](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/) notes (Chapter 4.3), "This 'zero point' goes by several names, the most popular of which is **ground** (often abbreviated as **GND**). It is called the ground because, historically, the physical ground has often been used as a reference voltage for circuits."
 
@@ -159,7 +161,7 @@ Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_
 
 As [Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) state, "a voltage placed across a conductor gives rise to an *electromotive force (EMF)* that is responsible for giving all free electrons within the conductor a push." <--- Really need to improve this description of voltage.
 
-As electrons move through as a circuit, they begin to lose their "electric potential"
+
 
 A battery has an imbalanced electric charge built up between its positive and negative leads. When a circuit is connected, electric charges (electrons) flow to "correct" this imbalance. The larger the imbalance (*i.e.,* the higher voltage), the greater the "push" and the more electrons that flow (higher current).
 

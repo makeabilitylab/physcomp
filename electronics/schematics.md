@@ -80,6 +80,8 @@ An example of how even simple circuits can start to get confusing. What's connec
 <!-- - https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/lecture01.pdf
 - https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/lecture02.pdf -->
 
+**TODO: Add in ground discussion**
+
 ## Resources
 
 - [From Schematic to Reality](http://beavisaudio.com/techpages/SchematicToReality/), beavisaudio.com

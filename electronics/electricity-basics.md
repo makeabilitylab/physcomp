@@ -28,6 +28,7 @@ This material is important. Depending on your previous background in physics or 
 ---
 
 ## A brief overview
+
 So, what is voltage, current, and resistance?
 
 In short, **voltage** "pushes" **electrons** through a conductive material (*e.g.,* a wire) and the amount of *electron flow* is called **current** (measured in amps). Resistors are specially formulated materials that can be placed in a circuit to *resist* the flow of electrons (the **resistance** is measured in ohms). See image.
@@ -87,7 +88,7 @@ Using the formulas above, we can calculate the amount of electrons that pass thr
 
 ### Building intuition for current
 
-Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B.
+Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B (see [video](https://youtu.be/OGa_b26eK2c?t=472)).
 
 ![An image showing a tightly packed tube of single-file marbles. When a marble is inserted into the left side of the tube, a marble on the right side instantly exits.](assets/images/ElectronFlowMarbleTube_FromAllAboutCircuits.png)
 {: .mx-auto .align-center }
@@ -146,7 +147,7 @@ More precisely, voltage is the electric potential difference between two points 
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
-That is, two points with a voltage of $$1\ V$$ between them will have enough "pressure" to perform $$1\ J$$ of work while moving $$1 C$$ worth of charge (or $$6.24 × 10^{18}$$ electrons) between the two points.
+That is, two points with a voltage of $$1\ V$$ between them will have enough "pressure" to perform $$1\ J$$ of work while moving $$1 C$$ worth of charge (or $$6.24 × 10^{18}$$ electrons) between the two points. Put simply: a higher voltage has a higher electric potential to "push" electrons through a conductor.
 
 In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*. 
 
@@ -316,19 +317,33 @@ Could have posille's law here?
 
 Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. In circuits, we place resistors between components to lower current. Why would we want to restrict current? In short, to protect components in our circuit that require lower current.
 
-When current flows through a resistor, some of the electrical pressure (voltage) is converted to heat, which results in a *voltage drop*. 
+When current flows through a resistor, some of the electrical energy is converted to heat, which results in a *voltage drop*.
 
 **TODO: We'll talk more about this in Lesson X.**
 
-## Misc section
+## Some common questions
+
+Before moving on to the next lesson, let's cover some common questions.
+
+## Dangerous voltage/current levels
+
+TODO!
 
 ## What's a short circuit?
 
 <video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/ShortCircuitExample_PhetScreenRecording-Cropped_ByJonFroehlich.mp4" type="video/mp4" />
+  <source src="assets/videos/ShortCircuitExample_PhetScreenRecording-Cropped2_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Figure.** TODO. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
 {: .fs-1 }
+
+A **short circuit** is a zero-resistance *shortcut* between two sides of a power source—for example, if the positive and negative terminals of a battery directly touch. It's a bad thing and should be avoided. Short circuits can cause excessive current, burn out components, start fires, or even cause explosions. Here's a [video](https://youtu.be/75_f6CjIcz8) of four AA batteries being shorted, a [news story](https://youtu.be/75_f6CjIcz8) about how a house fire started when two 9V batteries shorted together, and a [Stack Exchange post](https://physics.stackexchange.com/a/30596) about shorting a single AA alkaline battery.
+
+When we build circuits, we obviously do not try to create *shorts* but they can, accidentally, happen. For example, we may inadvertently hook up a 5V source to ground, touch two wires together, or even make accidental connections between two points in a circuit with a screwdriver or other metal tool. When working on your circuit, always make sure that it is *unpowered* to prevent accidental shorts while building.
+
+How will you know if something is shorted? You might start to smell something burning or touch a wire or other electrical component that is hot. If this happens, immediately unplug your power source.
+
+Note that your USB port and the Arduino microcontrollers have some level of short circuit protection. For example, if you start drawing too much current from your USB, it will (hopefully) auto-disconnect.
 
 ### What's the difference between AC and DC?
 

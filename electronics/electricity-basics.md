@@ -41,7 +41,7 @@ In short, **voltage** "pushes" **electrons** through a conductive material (*e.g
 **Figure.** A humorous but helpful depiction of the relationship between voltage (measured in volts), current (measured in amps), and resistance (measured in ohms). The yellow "volt" character is trying to push the green "amp" character through a tube (*i.e.,* a wire) but the red "ohm" character is impeding this by restricting the size of the tube (by tightening a rope, reducing its girth). The image source is unknown but there are many examples and alternatives [online](https://www.google.com/search?q=ohm%27s+law+cartoon&tbm=isch&sxsrf=ALeKk01Bq3GWclp6ij6yQ6Kn3yWKh1GXxA%3A1616617564907&source=hp&biw=1280&bih=1248&ei=XKBbYMb0NLXV9APPhL3ABA&oq=ohm%27s+law+cartoon&gs_lcp=CgNpbWcQAzICCAAyAggAOgQIIxAnOgUIABCxAzoGCAAQCBAeUMMBWPoVYNkXaABwAHgAgAHAA4gBrBKSAQk3LjguMC4xLjGYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ved=0ahUKEwjGksTd4cnvAhW1Kn0KHU9CD0gQ4dUDCAc&uact=5).
 {: .fs-1 }
 
-Just like we measure weight in kilograms and temperature in celsius, soo too do we have standard units of measurement for current, voltage, and resistance (called [SI units](https://en.wikipedia.org/wiki/International_System_of_Units) for the *International System of Units*):
+Just like we measure weight in kilograms and temperature in celsius, so too do we have standard units of measurement for current, voltage, and resistance (called [SI units](https://en.wikipedia.org/wiki/International_System_of_Units) for the *International System of Units*). We will use these quantities and measurements a lot in physical computing, so take a moment to study the table below.
 
 | Quantity   | Symbol | Unit of Measurement   | Unit abbreviation |
 |------------|--------|-----------------------|-------------------|
@@ -52,7 +52,7 @@ Just like we measure weight in kilograms and temperature in celsius, soo too do 
 
 ### A hydraulic analogy
 
-In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes—and water flows from high pressure (intake supply) to low pressure (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors—which are materials with less displaceable electrons—to impede the flow of current.
+In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, we can think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes. And water flows from high pressure (intake supply) to low pressure (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors—which are electronic components with less displaceable electrons—to impede the flow of current.
 
 |            | Electric                       | Hydraulic                                |
 |------------|--------------------------------|------------------------------------------|
@@ -66,25 +66,29 @@ In circuits, we often use hydraulic (and other) analogies to aid understanding. 
 **Figure.** Here's a slightly different hydraulic analogy than the water plumbing system one described above. Here, we have a water tank filled with water with a hole at the bottom: as the water level increases, the pressure (voltage) on the water at the bottom of the tank also increases, which commensurately increases the amount of water flowing out of the hole. If we increase the hole size (decreasing resistance), more water (current) will flow. The water diagram based on an illustration in [Platt's *Make: Electronics* book](https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/).
 {: .fs-1 }
 
+Let's dive into each of these concepts more deeply, starting with current.
+
 ## What is current?
 
 ![An animated gif showing current flowing in a simple circuit out of the positive terminal of a 9V battery through an LED and resistor and then back to the negative terminal of the 9V battery](assets/gifs/CurrentFlow_EngineeringMindset.gif)
-**Figure.** *Current* is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Note that this is actually opposite from *conventional current* flow, but we'll get to that below. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
+**Figure.** **[Current](https://en.wikipedia.org/wiki/Electric_current)** is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Note that this is actually opposite from *conventional current* flow, but we'll get to that below. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
 {: .fs-1 }
 
 *Current* is the flow of charged particles through a conductor. In digital circuits, these charged particles are *electrons* (negatively charged particles) propelled by an electromotive force (voltage) to move from "high pressure" to "low pressure" in a circuit.
 
-Electric current is similar to water current moving through a pipe. To measure the flow of water, we could count the number of water molecules flowing past a given cross-section of pipe in time $$t$$. Similarly, we can measure electric current by "counting" the number of charges flowing through a wire. Indeed, electric current $$I$$ is defined as the amount of charge $$Q$$ moving through a point in time $$t$$:
+Electric current is similar to water current moving through a pipe. Just like with water where we can guide water flow through various pipe configurations and harness its kinetic energy (*e.g.,* by spinning a turbine), so too can we use wires to guide the flow of electrons and use it to power lamps, turn motors, *etc.*
+
+To measure the flow of water, we could count the number of water molecules flowing past a given cross-section of pipe in time $$t$$. Similarly, we can measure electric current by "counting" the number of charges flowing through a wire. Indeed, electric current $$I$$ is defined as the amount of charge $$Q$$ moving through a point in time $$t$$:
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons (6.24 quintillion!). Using scientific notation is much cleaner: $$6.24 × 10^{18}$$ electrons. 
+A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons (6.24 quintillion!). Using scientific notation is much cleaner: $$6.24 × 10^{18}$$ electrons.
 
-Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A):
+Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "*Hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second!*"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A), which is simply equal to 1 coloumb per second:
 
 $$1 A = 1 C / s$$
 
-Though you'll never need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we calculate how many electrons pass a given point in 3s if a conductor is carrying 2A of current (Answer: $$6C$$ or $$3.74 × 10^{19}$$ electrons).
+Though you'll not need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. We do so below in the image simply for illustrative purposes: How many electrons pass a given point in 3s if a conductor is carrying 2A of current? Answer: $$6C$ (6 coloumbs) or $$3.74 × 10^{19}$$ electrons.
 
 ![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
 Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .
@@ -94,18 +98,23 @@ Using the formulas above, we can calculate the amount of electrons that pass thr
 
 ### Building intuition for current
 
-Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). 
-
+Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue).
 
 This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B (see [video](https://youtu.be/OGa_b26eK2c?t=472)).
+
+![An animated gif showing electrons hopping from atom to atom propelled by an applied voltage](assets/gifs/ElectronsFlowingFromAtomToAtomToMakeCurrent.gif)
+{: .mx-auto .align-center }
+
+A animation of charges (electrons) hopping from atom-to-atom propelled by an applied voltage. This is simplified model showing a wire (conductor) that is only a single atom thick but helps illustrate the cascading movement of electrons in current flow. Image from [What is Electricity?](https://learn.sparkfun.com/tutorials/what-is-electricity) by [Sparkfun.com](https://www.sparkfun.com/). 
+{: .fs-1 }
+
+Another way to think about current flow is like that of a tube filled end-to-end with marbles. If a marble is inserted on the left, another marble will immediately exit the tube on the right. Even though each marble travels only a short distance, the transfer of motion is nearly instantaneous. With electricity, the overall effect from one end of a conductor to the other is at the speed of light; however, each individual electron travels through the conductor at a much slower pace. Indeed, the average speed at which electrons move through a wire due to an applied electric field (such as from a battery) is on the order of centimeters per hour (called the [drift velocity](https://en.wikipedia.org/wiki/Speed_of_electricity#Electric_drift))!
 
 ![An image showing a tightly packed tube of single-file marbles. When a marble is inserted into the left side of the tube, a marble on the right side instantly exits.](assets/images/ElectronFlowMarbleTube_FromAllAboutCircuits.png)
 {: .mx-auto .align-center }
 
 **Figure.** You can think of electrons flowing through a circuit like marbles tightly packed in a tube. A marble does not need to traverse the entire tube to create motion. Instead, when a marble is inserted into the left side of the tube, a marble on the right side instantly exits. Image from [All About Circuits](https://www.allaboutcircuits.com/textbook/direct-current/chpt-1/conductors-insulators-electron-flow/). See also, [this video](https://youtu.be/8gvJzrjwjds?t=74) by Afrotechmods.
 {: .fs-1 }
-
-Another way to think about current flow is like that of a tube filled end-to-end with marbles. If a marble is inserted on the left, another marble will immediately exit the tube on the right. Even though each marble travels only a short distance, the transfer of motion is nearly instantaneous. With electricity, the overall effect from one end of a conductor to the other is at the speed of light; however, each individual electron travels through the conductor at a much slower pace. Indeed, the average speed at which electrons move through a wire due to an applied electric field (such as from a battery) is on the order of centimeters per hour (called the [drift velocity](https://en.wikipedia.org/wiki/Speed_of_electricity#Electric_drift))!
 
 <!-- Another nice description of this marble analogy is from https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
 
@@ -118,7 +127,7 @@ Another way to think about current flow is like that of a tube filled end-to-end
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ElectronFlowVsConventionalCurrent_PhetSimulation_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** In electric circuits, negatively charged particles (electrons) move from the negative terminals of a battery (or voltage source) to the positive—this is called *electron flow*; however, when we model circuits (and use circuit formulas), we use *conventional current*, which moves in the opposite direction.
+**Figure.** In the animation above, we are showing the **same** two electrical circuits but the difference between *electron flow* and *current flow*. In circuits, negatively charged particles (electrons) move from the negative terminals of a battery (or voltage source) to the positive—this is called *electron flow*; however, when we model circuits (and use circuit formulas), we use *conventional current*, which moves in the opposite direction.
 {: .fs-1 }
 
 In electric circuits, we use *conventional current* to model the flow of charge from the positive terminal of the voltage source to the negative; however, electrons actually move in the *opposite* direction (called *electron flow*). This causes great confusion!
@@ -136,18 +145,13 @@ Despite this confusion, it turns out that as long as you're consistent, it does 
 
 ### Common operating currents in circuits
 
-With digital circuits, we typically work with low amperages. For example, an LED may require 2V and ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or 2.5 × 10^{17}$$ electrons/second.
+As you begin working in physical computing, you'll gain a better understanding of "*What's a lot of current?* vs. "*What's a little current?*".
 
-Most USB ports supply 5V of electricity with a maximum current of 0.5A (500 mA). Some electrical components, like [motors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-a-high-current-load/) or a [long string of LED lights](https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/), require more current (called "[high current loads](https://itp.nyu.edu/physcomp/lessons/electronics/transistors-relays-and-controlling-high-current-loads/)") than a microcontroller or USB port can supply. In these cases, we can use an external power supply controlled by a transistor. 
+With digital circuits, we typically work with **low amperages**. For example, an LED may require 2V but only ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or 2.5 × 10^{17}$$ electrons/second.
+
+Most USB ports supply 5V of electricity with a maximum current of 0.5A (500 mA). Some electrical components, like [motors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-a-high-current-load/) or a [long string of LED lights](https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/), require more current (called "[high current loads](https://itp.nyu.edu/physcomp/lessons/electronics/transistors-relays-and-controlling-high-current-loads/)") than a microcontroller or USB port can supply. In these cases, we can use an external power supply controlled by a transistor.
 
 ## What is voltage?
-
-https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
-https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
-https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml#
-https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch05.html
-https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_5_Chapter.xhtml
-https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/VoltageElectromotiveForce_EngineeringMindset.mp4" type="video/mp4" />
@@ -155,37 +159,50 @@ https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a
 **Figure.** You can think of *voltage* as what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
 {: .fs-1 }
 
-OK, so if current is the *flow* of charge in a circuit? What's pushing those charges?
+OK, so if current is the *flow* of charge in a circuit? What's compelling these charges to move?
 
 Similar to magnets, charges with the *same sign* repel each other (*e.g.,* electrons repel each other because they are all negatively charged) and charges with opposite signs *attract* each other (*e.g.,* electrons and protons). A battery uses chemical reactions to cause a *build up* of electrons at the negative terminal—this creates a "pressure" or electrical difference between the battery's two terminals.
 
-When you connect the two terminals of a battery (*i.e.,* close the circuit), electrons flow to rearrange this difference (imbalance). As new electrons flow into the positive terminal of the battery, the electrochemical processes continue and the "pressure" is maintained thereby creating a continuous stream of electron movement (current). (And, confusingly, recall that we model circuits as if *positive* charges move rather than *negative*—so, we show current moving from the positive terminal of a battery to the negative). 
+When you connect the battery's terminals (*i.e.,* close the circuit), electrons flow to rearrange this imbalance from the negative terminal to the positive. But remember, with conventional current, we model charge movement in the other direction, so we show current going from the positive terminal to the negative; in this case, we refer to charges at the positive terminal has having high potential energy and those at the negative terminal as having low potential energy. 
+
+<!-- As new electrons flow into the positive terminal of the battery, the electrochemical processes continue and the "pressure" is maintained thereby creating a continuous stream of electron movement (current). (And, confusingly, recall that we model circuits as if *positive* charges move rather than *negative*—so, we show current moving from the positive terminal of a battery to the negative).  -->
 
 In short, you can think of voltage like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
-Indeed, Wikipedia refers to **[Voltage](https://en.wikipedia.org/wiki)Voltage** as "electric pressure", "electromotive force", and "electric potential difference" to capture this propelling (or repelling) effect. This is a reasonable conceptual approximation: you can think of voltage as a measure of "pressure" that causes current to flow. Between two components, if there is a electric potential difference of 0V, no current will flow.
+Indeed, Wikipedia refers to **[Voltage](https://en.wikipedia.org/wiki)** as "electric pressure", "electromotive force", and "electric potential difference" to capture this propelling (or repelling) effect. This is a reasonable conceptual approximation: you can think of voltage as a measure of "pressure" that causes current to flow. Between two components, if there is a electric potential difference of 0V, no current will flow.
 
 <!-- As [Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) state, "a voltage placed across a conductor gives rise to an *electromotive force (EMF)* that is responsible for giving all free electrons within the conductor a push."  -->
 
+<!-- https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
+https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
+https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml#
+https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch05.html
+https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_5_Chapter.xhtml
+https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current -->
+
 ### A more precise definition
 
-More precisely, **[Voltage](https://en.wikipedia.org/wiki)Voltage** is the work needed to bring a charge from one location to another in an electric field. Voltage gives us an idea of how much "pushing" force an electric field has, and is defined as the electric potential energy per unit charge (*e.g.,* electron) measured in joules per coloumb (volts):
+More precisely, *voltage* is the work needed to bring a charge from one location to another in an electric field. Voltage gives us an idea of how much "pushing" force an electric field has, and is defined as the electric potential energy per unit charge (*e.g.,* electron), which is measured in joules per coloumb (volts):
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
 As joule is a unit of *energy*, voltage introduces a very important and necessary concept: the potential to do *work* (*e.g.,* to power a light bulb, spin a motor)!
 
-**TODO: PUT GRAVITY ANALOGY HERE**
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/VoltagePotentialWaterWheelCircuitAnalogy_TrimmedAndCropped_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Figure.** An animation showing an analogy between an electrical circuit and a "water" circuit. In a battery, the electric potential of charges increase as they move to the positive terminal (higher voltage)—this potential drops as work is performed (*e.g.,* flowing through a resistor). Similarly, water molecules being pumped to higher elevations have *higher potential* to do work; this potential decreases as the water flows to lower elevations or is used to perform work (*e.g.,* spin a turbine). Note that no charges (or water molecules) are lost in these systems—but the potential energy of these particles is transformed to other forms (*e.g.,* kinetic, heat).
+{: .fs-1 }
 
-And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential."
+And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential." See animation above.
 
 ### Example problems
 
 Let's look at some examples (inspired by [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)). We use conventional current below.
 
-If a smartphone battery does $$15J$$ of work to move a net charge of $$3.0C$$ between its negative and positive terminals, then what voltage does the battery provide? Let's define $$V\subscript{cell}$$ as the work needed to move one unit of charge through the battery and we know $$1V = \frac{1J}{1C}$$. Thus:
+If a smartphone battery does $$15J$$ of work to move a net charge of $$3.0C$$ between its negative and positive terminals, then what voltage does the battery provide? Let's define $$V_{cell}$$ as the work needed to move one unit of charge through the battery and we know $$1V = \frac{1J}{1C}$$. Thus:
 
-$$V\subscript{cell} = \frac{15J}{3.0C} = 5V$$
+$$V_{cell} = \frac{15J}{3.0C} = 5V$$
 
 So, we say that the *charges* at the battery's positive terminal have an electric potential of 5V. The battery uses chemical reactions (work) to elevate the potential energy of these charges from 0V (from its negative terminal) to 5V (to its positive terminal).
 
@@ -199,6 +216,8 @@ So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the ne
 
 TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would drops potential. See: https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
 
+
+<!-- another fun gravity analogy: https://electronics.stackexchange.com/a/182450 -->
 
 <!-- In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*.  -->
 
@@ -226,16 +245,26 @@ To simplify calculations, we select some point on the circuit—typically the po
 
 Returning to the gravity-voltage analogy, how much potential energy does a rock have once it reached the ground? None! For the rock to gain potential energy, we need to do *work* to lift the rock.
 
+### Danger: high voltage!
+
+You may have seen warnings like: *DANGER: HIGH VOLTAGE* but you may have also heard contradictory phrases like "*it's not the voltage the kills, it's the current.*" How can both be true?
+
+Well, in some regards: they are. High voltage has the potential to push more current through your body than low voltages—and it's the *current* that can burn tissue, impede muscle control, and fibrillate your heart. Indeed, humans can feel DC currents as low as 0.6-1.0mA pass through their bodies, 40-60mA is painful, and a ~90mA and above current is sufficient to induce cardiac/respiratory arrest. 
+
+But—and this is an important but—our bodies offer fairly high resistance. And the voltages we work with (typically 3.3V and 5V) are simply not sufficiently high to "push" current through our bodies. However, wet skin can drop your resistance and metal jewelry can cause incidental shorts (and possibly thermal burns). So, be careful.
+
+Generally, the most dangerous electrical thing in your household is the line voltage coming out of your home outlets (120V at 60Hz in the US and 240V at 50Hz in many other countries). Never open any electronic device while it's plugged in and, even then, be careful (charged capacitors can still maintain high voltages for a time).
+
+For more on electrical safety, see this [write-up on AllAboutCircuits.com](https://www.allaboutcircuits.com/textbook/direct-current/chpt-3/ohms-law-again/) or this section on [Safety (Chapter 7.1) in Practical Electronics for Inventors](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/18_Chapter_07.xhtml).
+
+
 <!-- Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4) from the Introduction, how much potential to do work does water have once it's flowed out of the hole and onto the ground? None! It's lost all of its energy. Likewise, when an electric charge reaches ground, it no longer has electric potential for work. -->
 
 ### How can we increase pressure?
 
-
-
-
 A battery has an imbalanced electric charge built up between its positive and negative leads. When a circuit is connected, electric charges (electrons) flow to "correct" this imbalance. The larger the imbalance (*i.e.,* the higher voltage), the greater the "push" and the more electrons that flow (higher current).
 
-If you connect two batteries in series (i.e., stack them), you increase their ability to "push" electrons—indeed, you sum the battery voltages together. So, two standard alkaline 1.5V AA batteries in series will have a 3V potential difference, which can "push" more electrons around a circuit—see the animation below. 
+If you connect two batteries in series (*i.e.,* stack them), you increase their ability to "push" electrons—indeed, you sum the battery voltages together. So, two standard alkaline 1.5V AA batteries in series will have a 3V potential difference, which can "push" more electrons around a circuit—see the animation below. 
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/VoltageBatteriesInSeries_CroppedAndTrimmed2_EngineeringMindset.mp4" type="video/mp4" />
@@ -294,7 +323,7 @@ To help illustrate this idea visually, [Professor Squier](http://people.cs.georg
 
 ### Electrical resitivity
 
-Because resistance is not just an intrinsic property of a material (*e.g.,* based on its atomic makeup) but also because of its shape and size, we use [*electrical resistivity*](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) $$\rho$$, which is independent of a material's dimensions (assuming temperature is constant).
+Because resistance is not just an intrinsic property of a material (*e.g.,* based on its atomic makeup) but also based on the material's shape and size, we use [*electrical resistivity*](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) $$\rho$$, which is independent of a material's dimensions (assuming temperature is constant).
 
 More specifically, at a constant temperature, the electrical resistivity $$\rho$$ of a wire can be calculated by:
 

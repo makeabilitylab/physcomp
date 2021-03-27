@@ -20,6 +20,8 @@ usetocbot: true
 
 In this lesson, we are going to learn about three key electricity concepts, *current*, *voltage*, and *resistance*, which form the foundation of electronics and circuits. We will also use an online circuit simulator to play with basic components and advanced understanding.
 
+**TODO: Some nice animations** [here](https://kaiserscience.wordpress.com/physics/electromagnetism/electric-current/)
+
 ---
 **NOTE**
 
@@ -76,23 +78,26 @@ Electric current is similar to water current moving through a pipe. To measure t
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons (6.24 quintillion!) or, using scientific notation: $$6.24 × 10^{18}$$ electrons. 
+A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons (6.24 quintillion!). Using scientific notation is much cleaner: $$6.24 × 10^{18}$$ electrons. 
 
 Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A):
 
 $$1 A = 1 C / s$$
 
-Though you'll never need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we calculate how many electrons pass a given point in 3s if a conductor is carrying 2A of current.
+Though you'll never need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we calculate how many electrons pass a given point in 3s if a conductor is carrying 2A of current (Answer: $$6C$$ or $$3.74 × 10^{19}$$ electrons).
 
 ![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
 Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .
 {: .fs-1 }
 
-As electric charges move through a circuit from the high potential terminal to the low, they perform work (spin a motor, heat up electric coils, turn on a light bulb). By doing work, a charge loses its electric potential energy. For example, the conductive point just prior to a light bulb or motor is at a higher electric potential than the point just after. This loss in electric potential is referred to as a *voltage drop*, which we will explain later.
+<!-- As electric charges move through a circuit from the high potential terminal to the low, they perform work (spin a motor, heat up electric coils, turn on a light bulb). By doing work, a charge loses its electric potential energy. For example, the conductive point just prior to a light bulb or motor is at a higher electric potential than the point just after. This loss in electric potential is referred to as a *voltage drop*, which we will explain later. -->
 
 ### Building intuition for current
 
-Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B (see [video](https://youtu.be/OGa_b26eK2c?t=472)).
+Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue). 
+
+
+This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B (see [video](https://youtu.be/OGa_b26eK2c?t=472)).
 
 ![An image showing a tightly packed tube of single-file marbles. When a marble is inserted into the left side of the tube, a marble on the right side instantly exits.](assets/images/ElectronFlowMarbleTube_FromAllAboutCircuits.png)
 {: .mx-auto .align-center }
@@ -137,21 +142,38 @@ Most USB ports supply 5V of electricity with a maximum current of 0.5A (500 mA).
 
 ## What is voltage?
 
+https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
+https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
+https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml#
+https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch05.html
+https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_5_Chapter.xhtml
+https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
+
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/VoltageElectromotiveForce_EngineeringMindset.mp4" type="video/mp4" />
 </video>
-**Figure.** *Voltage* is what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
+**Figure.** You can think of *voltage* as what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
 {: .fs-1 }
 
 OK, so if current is the *flow* of charge in a circuit? What's pushing those charges?
 
-**[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the "electric pressure" or "electric tension" that moves charge (electrons) in a circuit. Voltage is like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
+Similar to magnets, charges with the *same sign* repel each other (*e.g.,* electrons repel each other) and charges with opposite signs (*e.g.,* electrons and protons) *attract* each other. 
+
+https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
+
+**[Voltage](https://en.wikipedia.org/wiki)Voltage** is the work needed to bring a charge from one location to another in an electric field. Voltage gives us an idea of how much "pushing" force an electric field has.
+
+<!-- is the "electric pressure" or "electric tension" that that moves charge (electrons) in a circuit.  -->
+
+You can think of voltage like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
 More precisely, voltage is defined as the electric potential energy per unit charge (*e.g.,* electron) and is measured in joules per coloumb (volts):
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
-As joule is a unit of *energy*, voltage helps us relate electrical circuits to *work* (*e.g.,* to power a light bulb, spin a motor). Let's look at some examples (inspired by [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)).
+As joule is a unit of *energy*, voltage introduces a very important and necessary concept: the potential to do *work* (*e.g.,* to power a light bulb, spin a motor)!
+
+Let's look at some examples (inspired by [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)).
 
 If a smartphone battery does $$15J$$ of work to move a net charge of $$3.0C$$ between its negative and positive terminals, then what voltage does the battery provide? Let's define $$V\subscript{cell}$$ as the work needed to move one unit of charge through the battery and we know $$1V = \frac{1J}{1C}$$. Thus:
 
@@ -163,9 +185,11 @@ As another example, after an exhausting journey through resistors and bulbs in a
 
 $$9V = \frac{xJ}{2C} => xJ = 9V * 2C = 18J$$
 
-So, it takes 18J to move 2C of charge () from the negative terminal of the battery to the positive!
+So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the negative terminal of the battery to the positive!
 
-TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would rops potential.
+<!-- Finally, last one: if 1C of charge exits the positive terminal of a battery with 2J of energy and passes through a resistive lamp, what is the voltage drop across the lamp? -->
+
+TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would rops potential. See: https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
 
 
 
@@ -435,6 +459,7 @@ We recommend the following basic circuit simulators (these are not intended for 
 ### Online text links
 
 - [Chapter 2: Circuit Thoery](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml), Scherz & Monk, Practical Electronics for Inventors, 4th Edition
+- [Basic electrical quantities: current, voltage, power](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current)
 - [Voltage, Current, Resistance, and Ohm's Law](https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law/all), Sparkfun.com
 - [Electrical Resistance and Conductance](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance), Wikipedia
 

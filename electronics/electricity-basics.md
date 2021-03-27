@@ -25,7 +25,7 @@ In this lesson, we are going to learn about three key electricity concepts, *cur
 ---
 **NOTE**
 
-This material is important. Depending on your previous background in physics or engineering, some of these concepts may be brand new and confusing. Take your time to understand (and re-read) sections—this material will help you understand *how* circuits work and *how* and *why* we hook up and use electronic components the way we do. But this is also *not* a circuits course, so I will largely focus on what I *think* is most critical to physical computing.
+This material is important. Depending on your previous background in physics or engineering, some of these concepts may be brand new and confusing. Take your time to understand (and re-read) sections—this material will help you comprehend *how* circuits work and *how* and *why* we hook up and use electronic components the way we do. But this is also *not* a circuits course nor a [physics course](https://youtu.be/x1-SibwIPM4), so I will largely focus on what I *think* is most critical to physical computing.
 
 ---
 
@@ -52,7 +52,7 @@ Just like we measure weight in kilograms and temperature in celsius, soo too do 
 
 ### A hydraulic analogy
 
-In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes—and water flows from high pressure (intake supply) to low pressure (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors to impede the flow of current.
+In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes—and water flows from high pressure (intake supply) to low pressure (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors—which are materials with less displaceable electrons—to impede the flow of current.
 
 |            | Electric                       | Hydraulic                                |
 |------------|--------------------------------|------------------------------------------|
@@ -157,23 +157,31 @@ https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a
 
 OK, so if current is the *flow* of charge in a circuit? What's pushing those charges?
 
-Similar to magnets, charges with the *same sign* repel each other (*e.g.,* electrons repel each other) and charges with opposite signs (*e.g.,* electrons and protons) *attract* each other. 
+Similar to magnets, charges with the *same sign* repel each other (*e.g.,* electrons repel each other because they are all negatively charged) and charges with opposite signs *attract* each other (*e.g.,* electrons and protons). A battery uses chemical reactions to cause a *build up* of electrons at the negative terminal—this creates a "pressure" or electrical difference between the battery's two terminals.
 
-https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
+When you connect the two terminals of a battery (*i.e.,* close the circuit), electrons flow to rearrange this difference (imbalance). As new electrons flow into the positive terminal of the battery, the electrochemical processes continue and the "pressure" is maintained thereby creating a continuous stream of electron movement (current). (And, confusingly, recall that we model circuits as if *positive* charges move rather than *negative*—so, we show current moving from the positive terminal of a battery to the negative). 
 
-**[Voltage](https://en.wikipedia.org/wiki)Voltage** is the work needed to bring a charge from one location to another in an electric field. Voltage gives us an idea of how much "pushing" force an electric field has.
+In short, you can think of voltage like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
-<!-- is the "electric pressure" or "electric tension" that that moves charge (electrons) in a circuit.  -->
+Indeed, Wikipedia refers to **[Voltage](https://en.wikipedia.org/wiki)Voltage** as "electric pressure", "electromotive force", and "electric potential difference" to capture this propelling (or repelling) effect. This is a reasonable conceptual approximation: you can think of voltage as a measure of "pressure" that causes current to flow. Between two components, if there is a electric potential difference of 0V, no current will flow.
 
-You can think of voltage like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
+<!-- As [Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) state, "a voltage placed across a conductor gives rise to an *electromotive force (EMF)* that is responsible for giving all free electrons within the conductor a push."  -->
 
-More precisely, voltage is defined as the electric potential energy per unit charge (*e.g.,* electron) and is measured in joules per coloumb (volts):
+### A more precise definition
+
+More precisely, **[Voltage](https://en.wikipedia.org/wiki)Voltage** is the work needed to bring a charge from one location to another in an electric field. Voltage gives us an idea of how much "pushing" force an electric field has, and is defined as the electric potential energy per unit charge (*e.g.,* electron) measured in joules per coloumb (volts):
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
 As joule is a unit of *energy*, voltage introduces a very important and necessary concept: the potential to do *work* (*e.g.,* to power a light bulb, spin a motor)!
 
-Let's look at some examples (inspired by [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)).
+**TODO: PUT GRAVITY ANALOGY HERE**
+
+And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential."
+
+### Example problems
+
+Let's look at some examples (inspired by [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)). We use conventional current below.
 
 If a smartphone battery does $$15J$$ of work to move a net charge of $$3.0C$$ between its negative and positive terminals, then what voltage does the battery provide? Let's define $$V\subscript{cell}$$ as the work needed to move one unit of charge through the battery and we know $$1V = \frac{1J}{1C}$$. Thus:
 
@@ -185,15 +193,11 @@ As another example, after an exhausting journey through resistors and bulbs in a
 
 $$9V = \frac{xJ}{2C} => xJ = 9V * 2C = 18J$$
 
-So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the negative terminal of the battery to the positive!
+So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the negative terminal of the battery to the positive.
 
 <!-- Finally, last one: if 1C of charge exits the positive terminal of a battery with 2J of energy and passes through a resistive lamp, what is the voltage drop across the lamp? -->
 
-TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would rops potential. See: https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
-
-
-
-### Example problem
+TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would drops potential. See: https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
 
 
 <!-- In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*.  -->
@@ -202,15 +206,11 @@ TODO: insert that animation I use in lecture here of charges moving up gaining e
 
 <!-- Another nice analogy is a tube with water and angling the tube upright, which increases pressure and then increases flow -->
 
-And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential."
-
-
-
 <!-- "Another way to think of voltage is as the electric potential difference between two points in an electric field. It is similar to the difference in the potential energy of a cannonball at the top of a ladder as opposed to one at the top of a tall tower. Both cannonballs exist in the earth’s gravitational field, they both have potential energy, and it took some work to get them both into position. When they are released, the cannonball on the top of the tower will have more energy when it hits the ground than the cannonball dropped from the top of the ladder, because it had a larger potential energy due to its position." From https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
 
 ### Common operating voltages
 
-In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want so supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want to supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
 
 <!-- **TODO: UPDATE THIS DESCRIPTION**
 Some potential references:
@@ -222,18 +222,14 @@ Some potential references:
 
 By definition, voltage is the *difference* in electric potential between **two points**. When we actually start measuring voltages in a circuit (using a multimeter), you'll observe that we can't just place a single probe on the circuit. Instead, we have to place **two probes** in different locations to measure the voltage difference between them (also called the **voltage drop**).
 
-To simplify calculations, we select some point on the circuit—typically the point with the least electric potential (*e.g.,* wires connected to the negative terminal of a battery)—as 0 volts. As [Bartlett](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/) notes (Chapter 4.3), "This 'zero point' goes by several names, the most popular of which is **ground** (often abbreviated as **GND**). It is called the ground because, historically, the physical ground has often been used as a reference voltage for circuits."
+To simplify calculations, we select some point on the circuit—typically the point with the least electric potential (*e.g.,* wires connected to the negative terminal of a battery)—as 0 volts. As [Bartlett](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/) notes (Chapter 4.3), "*This 'zero point' goes by several names, the most popular of which is **ground** (often abbreviated as **GND**). It is called the ground because, historically, the physical ground has often been used as a reference voltage for circuits*."
 
-Returning to the rock analogy, how much potential energy does a rock have once it reached the ground? None! For the rock to gain potential energy, we need to do *work* to lift the rock.
+Returning to the gravity-voltage analogy, how much potential energy does a rock have once it reached the ground? None! For the rock to gain potential energy, we need to do *work* to lift the rock.
 
 <!-- Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4) from the Introduction, how much potential to do work does water have once it's flowed out of the hole and onto the ground? None! It's lost all of its energy. Likewise, when an electric charge reaches ground, it no longer has electric potential for work. -->
 
-### What provides the pressure?
-
-
 ### How can we increase pressure?
 
-As [Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) state, "a voltage placed across a conductor gives rise to an *electromotive force (EMF)* that is responsible for giving all free electrons within the conductor a push." <--- Really need to improve this description of voltage.
 
 
 
@@ -255,7 +251,7 @@ If you connect two batteries in series (i.e., stack them), you increase their ab
 
 **NOTE: BASE UNITS**
 
-As you learn and begin analyzing electrical circuits, it's important to pay attention to *units*. The base unit of voltage is volts (V), the base unit of current is amperes or amps (A), and the base unit of resistance is ohms (Ω). As noted, with digital circuits, we often work with voltages between 0-5V (and sometimes 9V or 12V) but amperages are often in the milliamp range—like 0.02A or 0.1A—and common resistances include 220Ω, 1,000Ω, 2,200Ω, and even 10,000Ω. Typically, however, you'll see these written as 20mA and 100mA and 1kΩ, 2.2kΩ, and 10kΩ respectively. Thus, it's important to carefully track units and convert values to base units for analysis.
+As you learn and begin analyzing electrical circuits, it's important to pay attention to *units*. The base unit of voltage is volts (V), the base unit of current is amperes or amps (A), and the base unit of resistance is ohms (Ω). As noted, with digital circuits, we often work with voltages between 0-5V (and sometimes 9V or 12V) but amperages are often in the milliamp range—like 0.02A or 0.1A—and common resistances include 220Ω, 1,000Ω, 2,200Ω, and even 10,000Ω. Typically, however, you'll see these written as 20mA and 100mA and 1kΩ, 2.2kΩ, and 10kΩ respectively. Thus, it's important to carefully track units and convert values to base units for analysis. We'll talk more about this in the [Ohm's Law](ohms-law.md) lesson.
 
 ---
 
@@ -267,7 +263,7 @@ As you learn and begin analyzing electrical circuits, it's important to pay atte
 **Figure.** As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a resistance. In the animation above, notice how the iron wire has more collisions than the copper wire. Iron is ~17% as conductive as copper. At 20° C, Iron has an electrical resistivity of 96.1 nanoohm-meters while Copper has a resitivity of 16.8 nanoohm-meters. Notice the halo around the Iron wire: this is to illustrate how some of the "kinetic"  or movement energy of electrons gets converted into heat or light through those collisions. Indeed, this is how incandescent lightbulbs, toaster ovens, and electric spaceheaters work! Animation from the [How Electricity Works](https://youtu.be/mc979OhitAg?t=322) video by The Engineering Mindset.
 {: .fs-1 }
 
-As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a *resistance* to the electrical current. Notably, and importantly, this resistance slows **all** of the charge movement (current), not just those charges passing through a resistor.
+As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a *resistance* to the electrical current. Notably, and importantly, this resistance slows **all** of the charge movement (current) in the circuit, not just those charges passing through the resistive material.
 
 **TODO: think of a water [flow through a narrow pipe](https://youtu.be/F_vLWkkOETI?t=267)**
 

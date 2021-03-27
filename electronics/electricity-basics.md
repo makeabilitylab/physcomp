@@ -76,15 +76,19 @@ Electric current is similar to water current moving through a pipe. To measure t
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately $$6.24 × 10^{18}$$ electrons. Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A):
+A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons (6.24 quintillion!) or, using scientific notation: $$6.24 × 10^{18}$$ electrons. 
+
+Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A):
 
 $$1 A = 1 C / s$$
 
-Thus, amps are defined as the flow of electric charge in coloumbs per second $$C/s$$—1 A is 1 coulomb/sec (or $$6.24 × 10^{18}$$ electrons / sec). Though you'll never need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we calculate how many electrons pass a given point in 3s if a conductor is carrying 2A of current.
+Though you'll never need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. For example, in the image below, we calculate how many electrons pass a given point in 3s if a conductor is carrying 2A of current.
 
 ![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
 Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .
 {: .fs-1 }
+
+As electric charges move through a circuit from the high potential terminal to the low, they perform work (spin a motor, heat up electric coils, turn on a light bulb). By doing work, a charge loses its electric potential energy. For example, the conductive point just prior to a light bulb or motor is at a higher electric potential than the point just after. This loss in electric potential is referred to as a *voltage drop*, which we will explain later.
 
 ### Building intuition for current
 
@@ -112,7 +116,7 @@ Another way to think about current flow is like that of a tube filled end-to-end
 **Figure.** In electric circuits, negatively charged particles (electrons) move from the negative terminals of a battery (or voltage source) to the positive—this is called *electron flow*; however, when we model circuits (and use circuit formulas), we use *conventional current*, which moves in the opposite direction.
 {: .fs-1 }
 
-In circuits, we use *conventional current* to model the flow of electrons from the positive terminal of the voltage source to the negative; however, electrons actually move in the *opposite* direction (called *electron flow*). This causes great confusion!
+In electric circuits, we use *conventional current* to model the flow of charge from the positive terminal of the voltage source to the negative; however, electrons actually move in the *opposite* direction (called *electron flow*). This causes great confusion!
 
 Why? Blame [Benjamin Franklin](https://hackaday.com/2017/07/17/conventional-current-vs-electron-current/). In early experiments (mid 1740s), Franklin determined that electricity appears to "flow" as if a liquid in solid material. He assumed that the flowing charges had positive signs and moved from positive to negative. It was not until 1897, however, that Sir Joseph Thomson determined that the real charge carrier in a wire was the electron and that electrons move from cathode (negative) to anode (positive).
 
@@ -123,7 +127,7 @@ Why? Blame [Benjamin Franklin](https://hackaday.com/2017/07/17/conventional-curr
 
 Despite this confusion, it turns out that as long as you're consistent, it does not matter: negative electrons flowing one way is equivalent to modeling positive charges flowing the other. So, we tend to use *conventional current* (modeling flow of charge from positive to negative) in electronics (*e.g.,* in diagrams, formulas, *etc.*). The math will still work out and even mnemonics like the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule) are based on conventional current (point thumb in direction of current $$I$$, see direction of electric field $$B$$).
 
-For more, see [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* and this lovely [video](https://youtu.be/kcL2_D33k3o?t=224) by The Engineering Mindset.
+<!-- For more, see [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* and this lovely [video](https://youtu.be/kcL2_D33k3o?t=224) by The Engineering Mindset. -->
 
 ### Common operating currents in circuits
 
@@ -143,13 +147,32 @@ OK, so if current is the *flow* of charge in a circuit? What's pushing those cha
 
 **[Voltage](https://en.wikipedia.org/wiki/Voltage)** is the "electric pressure" or "electric tension" that moves charge (electrons) in a circuit. Voltage is like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
 
-More precisely, voltage is the electric potential difference between two points caused by an electric charge build-up or imbalance (*e.g.,* induced by a battery). We measure voltage with the SI unit *volt* (V), which is expressed as:
+More precisely, voltage is defined as the electric potential energy per unit charge (*e.g.,* electron) and is measured in joules per coloumb (volts):
 
 $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
-That is, two points with a voltage of $$1\ V$$ between them will have enough "pressure" to perform $$1\ J$$ of work while moving $$1 C$$ worth of charge (or $$6.24 × 10^{18}$$ electrons) between the two points. Put simply: a higher voltage has a higher electric potential to "push" electrons through a conductor.
+As joule is a unit of *energy*, voltage helps us relate electrical circuits to *work* (*e.g.,* to power a light bulb, spin a motor). Let's look at some examples (inspired by [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)).
 
-In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*. 
+If a smartphone battery does $$15J$$ of work to move a net charge of $$3.0C$$ between its negative and positive terminals, then what voltage does the battery provide? Let's define $$V\subscript{cell}$$ as the work needed to move one unit of charge through the battery and we know $$1V = \frac{1J}{1C}$$. Thus:
+
+$$V\subscript{cell} = \frac{15J}{3.0C} = 5V$$
+
+So, we say that the *charges* at the battery's positive terminal have an electric potential of 5V. The battery uses chemical reactions (work) to elevate the potential energy of these charges from 0V (from its negative terminal) to 5V (to its positive terminal).
+
+As another example, after an exhausting journey through resistors and bulbs in a circuit, 2C of charges arrive at the negative terminal of a 9V battery with 0 electric potential (0V). How much work, in joules, does the battery need to do to push these charges back to high potential energy (its positive terminal)? Using basic algebra, we can solve for joules by:
+
+$$9V = \frac{xJ}{2C} => xJ = 9V * 2C = 18J$$
+
+So, it takes 18J to move 2C of charge () from the negative terminal of the battery to the positive!
+
+TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would rops potential.
+
+
+
+### Example problem
+
+
+<!-- In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*.  -->
 
 <!-- This is similar to water flow in a pipe (hydraulics) or air flow in a tube (pneumatics)—all which flow from "high pressure" to "low pressure." -->
 
@@ -157,7 +180,7 @@ In a battery-powered circuit, electrons are repelled by the negative battery ter
 
 And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential."
 
-TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would rops potential.
+
 
 <!-- "Another way to think of voltage is as the electric potential difference between two points in an electric field. It is similar to the difference in the potential energy of a cannonball at the top of a ladder as opposed to one at the top of a tall tower. Both cannonballs exist in the earth’s gravitational field, they both have potential energy, and it took some work to get them both into position. When they are released, the cannonball on the top of the tower will have more energy when it hits the ground than the cannonball dropped from the top of the ladder, because it had a larger potential energy due to its position." From https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
 
@@ -177,7 +200,9 @@ By definition, voltage is the *difference* in electric potential between **two p
 
 To simplify calculations, we select some point on the circuit—typically the point with the least electric potential (*e.g.,* wires connected to the negative terminal of a battery)—as 0 volts. As [Bartlett](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/) notes (Chapter 4.3), "This 'zero point' goes by several names, the most popular of which is **ground** (often abbreviated as **GND**). It is called the ground because, historically, the physical ground has often been used as a reference voltage for circuits."
 
-Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4) from the Introduction, how much potential to do work does water have once it's flowed out of the hole and onto the ground? None! It's lost all of its energy. Likewise, when an electric charge reaches ground, it no longer has electric potential for work.
+Returning to the rock analogy, how much potential energy does a rock have once it reached the ground? None! For the rock to gain potential energy, we need to do *work* to lift the rock.
+
+<!-- Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4) from the Introduction, how much potential to do work does water have once it's flowed out of the hole and onto the ground? None! It's lost all of its energy. Likewise, when an electric charge reaches ground, it no longer has electric potential for work. -->
 
 ### What provides the pressure?
 
@@ -200,7 +225,7 @@ If you connect two batteries in series (i.e., stack them), you increase their ab
 
 <!-- See https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->
 
-See also: http://andnowforelectronics.com/notes/voltage-and-current/
+<!-- See also: http://andnowforelectronics.com/notes/voltage-and-current/ -->
 
 ---
 
@@ -218,7 +243,11 @@ As you learn and begin analyzing electrical circuits, it's important to pay atte
 **Figure.** As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a resistance. In the animation above, notice how the iron wire has more collisions than the copper wire. Iron is ~17% as conductive as copper. At 20° C, Iron has an electrical resistivity of 96.1 nanoohm-meters while Copper has a resitivity of 16.8 nanoohm-meters. Notice the halo around the Iron wire: this is to illustrate how some of the "kinetic"  or movement energy of electrons gets converted into heat or light through those collisions. Indeed, this is how incandescent lightbulbs, toaster ovens, and electric spaceheaters work! Animation from the [How Electricity Works](https://youtu.be/mc979OhitAg?t=322) video by The Engineering Mindset.
 {: .fs-1 }
 
-As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a *resistance* to the electrical current. Depending on their atomic composition, some materials have lower resistance than others. Metals like silver, copper, and gold are *good* conductors—they offer *low* resistance—because they have loosely bound electrons in the outer shells of their atoms. These electrons are easily displaceable and, with an externally applied force (voltage), can be pushed from atom-to-atom within the material to form a current.
+As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a *resistance* to the electrical current. Notably, and importantly, this resistance slows **all** of the charge movement (current), not just those charges passing through a resistor.
+
+**TODO: think of a water [flow through a narrow pipe](https://youtu.be/F_vLWkkOETI?t=267)**
+
+Depending on their atomic composition, some materials have lower resistance than others. Metals like silver, copper, and gold are *good* conductors—they offer *low* resistance—because they have loosely bound electrons in the outer shells of their atoms. These electrons are easily displaceable and, with an applied electric field, can be "pushed" from atom-to-atom within the material to form a current.
 
 The SI unit of electrical resistance is the ohm (Ω). The direct inverse of resistance is *conductance*. Materials with low resistance are called *conductors*. In contrast, materials such as glass, rubber, and air have high resistance and poor conductivity ("low electron mobility")—these materials are called *insulators*.
 
@@ -305,19 +334,14 @@ TODO?
 Could have posille's law here?
 
 ### What are resistors?
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/ResistorAndCurrentFlow_WaterHoseAnalogy_TrimmedAndCropped_EngineeringMindset.mp4" type="video/mp4" />
-</video>
-**Figure.** Resistors are specially electronic components to reduce current flow. Just as a kink in a water hose will provide increased resistance and reduce water flow, so too will a resistor placed between two wires in a circuit. Animation from the [What is Current?](https://youtu.be/8Posj4WMo0o?t=521) video by The Engineering Mindset.
-{: .fs-1 }
 
 ![An animated gif showing how resistors can be placed in a circuit to resist current flow.](assets/gifs/ResistorCurrentFlow_EngineeringMindset-Optimized.gif)
 **Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons "collide" with other atoms and themselves, which restricts electron flow (and also transforms some energy as heat). Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
 {: .fs-1 }
 
-Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. In circuits, we place resistors between components to lower current. Why would we want to restrict current? In short, to protect components in our circuit that require lower current.
+Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. In circuits, we place resistors between components to lower current. Why would we want to restrict current? In short, to protect components in our circuit that require lower current (like LEDs).
 
-When current flows through a resistor, some of the electrical energy is converted to heat, which results in a *voltage drop*.
+Just as there is a pressure drop after a kink in a hose, so too is there a voltage drop after a resistor. That is, electric charges before a resistor have a higher electric potential than those after.
 
 **TODO: We'll talk more about this in Lesson X.**
 
@@ -341,15 +365,15 @@ A **short circuit** is a zero-resistance *shortcut* between two sides of a power
 
 When we build circuits, we obviously do not try to create *shorts* but they can, accidentally, happen. For example, we may inadvertently hook up a 5V source to ground, touch two wires together, or even make accidental connections between two points in a circuit with a screwdriver or other metal tool. When working on your circuit, always make sure that it is *unpowered* to prevent accidental shorts while building.
 
-How will you know if something is shorted? You might start to smell something burning or touch a wire or other electrical component that is hot. If this happens, immediately unplug your power source.
+How will you know if something is shorted? You might start to smell something burning or touch a wire or other electrical component that is hot. If this happens—and it eventually happens to all of us—immediately unplug your power source!
 
-Note that your USB port and the Arduino microcontrollers have some level of short circuit protection. For example, if you start drawing too much current from your USB, it will (hopefully) auto-disconnect.
+Note that your USB port and the Arduino microcontrollers have some level of short circuit protection. For example, if you start drawing too much current from your USB, it will (hopefully) auto-disconnect. And your homes, of course, have built in "circuit breakers" that trigger automatically when excess current is drawn (like happens with a short). See how a circuit breaker works in slow motion [here](https://youtu.be/wGFnooeA6Iw?t=116) and [here](https://youtu.be/wGFnooeA6Iw?t=284).
 
-### What's the difference between AC and DC?
-
-Digital circuits use *direct current* (DC), which is supplied by batteries or by AC adapters that convert the *alternating current* from your wall socket into DC current used by your phone or laptop chargers.
+When a circuit breaker triggers, it creates an *open circuit*, which we describe next!
 
 ### What is an open circuit?
+
+
 
 TODO: add in how water plumbing analogy breaks down with pipe breakage (Water would spill out of hole); with circuits, an open circuit, no current flow.
 
@@ -359,6 +383,9 @@ TODO: add in how water plumbing analogy breaks down with pipe breakage (Water wo
 **Figure.** TODO. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
 {: .fs-1 }
 
+### What's the difference between AC and DC?
+
+Digital circuits use *direct current* (DC), which is supplied by batteries or by AC adapters that convert the *alternating current* from your wall socket into DC current used by your phone or laptop chargers.
 
 ## Notes
 - Should I talk about short vs. open circuit here? I think so
@@ -383,6 +410,7 @@ TODO: add in how water plumbing analogy breaks down with pipe breakage (Water wo
 - L4: Series vs. parallel resistance
 
 - L4: How to use a breadboard + moving your prev circuit to breadboards
+- LX: What are LEDs and resistors?
 - L5: Series vs. Parallel Resistance, Voltage Dividers, and Ohm's Law
 - LX: Building your first circuit: lighting up an LED, swapping out different resistances (maybe paper-based version)
 
@@ -398,13 +426,14 @@ Things to consider adding:
 ## Resources
 
 ### Circuit Simulators
+
 We recommend the following basic circuit simulators (these are not intended for advanced analysis):
 - [Falstad's CircuitJS](https://www.falstad.com/circuit/circuitjs.html). A completely free, open-source web platform for circuit simulation with circuit animation.
 - [EveryCircuit.com](https://everycircuit.com/). Similar to CircuitJS in supporting simulated animations of current but more powerful (and also not free, though there is a free trial). There is no 'wire' component; you need to click one node and then another node to make a connection.
 - [Circuitlab.com](https://www.circuitlab.com/). A more traditional circuit simulator that is not as approachable for novices/makers. You can use a trial version but the number of circuits you can create is limited without a paid account.
 
+### Online text links
 
-### Online links
 - [Chapter 2: Circuit Thoery](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml), Scherz & Monk, Practical Electronics for Inventors, 4th Edition
 - [Voltage, Current, Resistance, and Ohm's Law](https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law/all), Sparkfun.com
 - [Electrical Resistance and Conductance](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance), Wikipedia
@@ -413,9 +442,18 @@ We recommend the following basic circuit simulators (these are not intended for 
 <!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->
 
 ### Video links
+- [Intro to potential differences and voltage](https://youtu.be/pmtmJep1xY0), [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)
 - [Electronics for Beginners](https://www.youtube.com/watch?v=8gvJzrjwjds&list=PLzqS33DOPhJkRn6e9_OTdQwRojO8qlusI), [afrotechmods.com](http://afrotechmods.com/tutorials/)
 - [Voltage, Current, Resistance](https://youtu.be/OGa_b26eK2c), [mathandscience.com](http://mathandscience.com/)
 - [What is Ohm's Law?](https://youtu.be/lf0lMDZVwTI), [mathandscience.com](http://mathandscience.com/)
 - [Engineering Circuits, Volume 1](https://www.youtube.com/watch?v=OGa_b26eK2c&list=PLnVYEpTNGNtUSjEEYf01D-q4ExTO960sG), [mathandscience.com](http://mathandscience.com/)
 - [What is Voltage?](https://youtu.be/OGa_b26eK2c), Sparkfun.com
 - [What is Current?](https://youtu.be/kYwNj9uauJ4), Sparkfun.com
+
+## Next Lesson
+
+In the [next lesson](schematics.md), we will learn about visual representations of circuits—called [circuit schematics](schematics.md), which will prepare us for some basic circuit analysis and [Ohm's Law](ohms-law.md).
+
+<span class="fs-6">
+[Next: Circuit Schematics](schematics.md){: .btn .btn-outline }
+</span>

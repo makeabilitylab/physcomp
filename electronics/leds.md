@@ -9,6 +9,12 @@ has_children: true
 This is the LED page
 
 ## Resources
+
+### Videos
+- [LED Basics](https://youtu.be/Yo6JI_bzUzo), Afrotechmods
+
+### Text
+
 - [Adafruit's LED tutorial](https://learn.adafruit.com/all-about-leds)
 - [Sparkfun's LED Tutorial](https://learn.sparkfun.com/tutorials/light-emitting-diodes-leds/all)
 - [Chapter 3: LEDs](https://learning.oreilly.com/library/view/hacking-electronics-an/9780071802369/ch04.html#ch4) in Monk, *Hacking Electronics: An Illustrated DIY Guide for Makers and Hobbyists*, McGraw-Hill, 2013.

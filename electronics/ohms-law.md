@@ -39,19 +39,19 @@ $$V = I * R$$
 To solve for **resistance**, use:
 $$R = \frac{V}{I}$$
 
-To understand Ohm's Law, you may find yourself returning to our first lesson on [Voltage, Current, and Resistance](electricity-basics.md). That's OK and even expected! You need to build up an understanding of these concepts as we move forward through the material.
+Notice how these equations map to the concepts we explained in our first lesson on [Voltage, Current, and Resistance](electricity-basics.md)—which you may want to return to (that's OK and even expected!). For example, with $$I = \frac{V}{R}$$, notice how if we *increase* the electric potential (the voltage source), we will increase the current. Similarly, if we *decrease* the resistance, we will *increase* the current.
 
 ### Why $$I$$ and not $$C$$?
 
 You might be asking, "If $$R$$ is the **r**esistance in ohms (Ω) and V is the **v**oltage in volts (V) then why is $$I$$ used to represent the **c**urrent in amperes (A) rather than $$C$$?" Two reasons: first, $$C$$ is already reserved for the SI unit of coloumbs (C), which is used in the very definition of amperes (recall that $$1\ A = 1\ C / s$$) and thus, could get confusing! Second, the ampere is named after [André-Marie Ampère](https://en.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re), considered the father of electromagnetism, who referred to amperage as the "**i**ntensity of current." So, current is $$I$$ and not $$C$$.
 
-### Make sure to use base units
+## Make sure to use base units
 
 A common "gotcha" in applying Ohm's Law—or analyzing in circuits in general—is messing up base units. In digital circuits, we often deal with kilohms (kΩ)—which is 1,000 ohms—milliamps (ma)—which is $$\frac{1}{1000}$$ (0.001) of an amp—or even microamps (μA)—which is one millionth ($$\frac{1}{1,000,000}$$ or 0.000001) of an amp—and so on. We need to convert these units to **base units** volts (V), ohms (Ω), and amps (A) to perform our analysis.
 
 You should feel comfortable switching between units. For example, if a circuit contains a 2.2kΩ resistor with a 9V battery, to calculate the current do not mistakenly write $$I = \frac{9V}{2.2Ω}A$$ but, instead, $$I = \frac{9V}{2200Ω}A$$. The former would give you 4.1A (a large amperage and incorrect!) while the latter gives you the correct value of 0.0041A—which is 4.1mA.
 
-#### Common SI prefixes
+### Common SI prefixes
 
 Below, we've written some common SI prefixes—most of which should be familiar to you from other measurement quantities. This chart is based on NIST's [Metric SI Prefixes webpage](https://www.nist.gov/pml/weights-and-measures/metric-si-prefixes) and Figure 2.2 in [Bartlett's book](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_2_Chapter.xhtml).
 
@@ -68,7 +68,7 @@ Below, we've written some common SI prefixes—most of which should be familiar 
 | 0.000000000001      | $$10^{-9}$$         | nano   | n            | billionth    | nanosecond, nanoamp |
 {: .fs-1 .condensed-table }
 
-#### Converting units
+### Converting units
 
 To convert between a prefixed unit and a base unit, we *multiply* by the conversion factor. To convert between a base unit and a prefixed unit, we *divide* the conversion factor.
 
@@ -76,9 +76,13 @@ So, for example, to convert 2.2kΩ to ohms, we would multiply by the conversion 
 
 ## Let's analyze some circuits!
 
+<!-- Voltage—like water pressure—can be measured without flow. For example, we can use a multimeter to measure the voltage between two ends of a battery. Notably, any wires we connect to those battery terminals will have the same electric potential.
+
 - Single loop one resistor
 - Single loop two resistors in series
-- Single loop two resistors in parallel
+- Single loop two resistors in parallel -->
+
+https://youtu.be/ZxNHcUp-CFY
 
 ## Some gotchas
 
@@ -87,3 +91,17 @@ So, for example, to convert 2.2kΩ to ohms, we would multiply by the conversion 
 ## Notes
 
 https://ccrma.stanford.edu/wiki/Introduction_to_Electronics_(condensed)
+
+https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
+https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml#
+https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch05.html
+https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_5_Chapter.xhtml
+
+## Next Lesson
+
+In the [next lesson](resistors.md), we will expand what we know about [resistors](resistors.md)—specially designed electrical components that *resist* the flow of current—before showing how they are useful with [LEDs](leds.md). 
+
+<span class="fs-6">
+[Previous: Schematics](schematics.md){: .btn .btn-outline }
+[Next: Resistors](resistors.md){: .btn .btn-outline }
+</span>

@@ -1,10 +1,25 @@
 ---
 layout: default
-title: Resistors
-nav_order: 2
+title: L4&#58; Resistors
+nav_order: 4
 parent: Electronics
 has_toc: false # on by default
+usemathjax: true
+comments: true
+usetocbot: true
 ---
+# {{ page.title | replace_first:'L','Lesson '}}
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
+
+<!-- ACTIVITY IDEA: have them make their own resistors with graphite pencils -->
+
 This is the resistor page.
 
 - A very nice animation and explanation from [Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=901)
@@ -16,3 +31,12 @@ This is the resistor page.
  - [Chapter 10: Resistor](https://learning.oreilly.com/library/view/encyclopedia-of-electronic/9781449333881/ch10.html) in Platt, *Make: Encyclopedia of Electronic Components Volume 1: Resistors, Capacitors, Inductors, Switches, Encoders, Relays, Transistors*, O'Reilly, 2012.
 
 https://learning.oreilly.com/library/view/Encyclopedia+of+Electronic+Components+Volume+1/9781449333881/ch11.html
+
+## Next Lesson
+
+In the [next lesson](leds.md), we will learn about light-emitting diodes (LEDs)
+
+<span class="fs-6">
+[Previous: Resistors](resistors.md){: .btn .btn-outline }
+[Next: LEDs](leds.md){: .btn .btn-outline }
+</span>

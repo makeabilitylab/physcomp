@@ -89,3 +89,12 @@ An example of how even simple circuits can start to get confusing. What's connec
 - [Appendix B: Schematics](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/app02.html), John M. Hughes, [Practical Electronics: Components and Techniques](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/), O'Reilly Media, 2015
 
 - [Schematic Diagrams](https://itp.nyu.edu/physcomp/videos/videos-schematic-diagrams/), [ITP videos](https://vimeo.com/album/2801639) by [Jeff Feddersen](http://www.fddrsn.net/) on Vimeo
+
+## Next Lesson
+
+In the [next lesson](ohms-law.md), we will learn about [Ohm's Law](ohms-law.md), one of the most important and fundamental empirical laws in electrical circuits that relates voltage, current, and resistance together in a rather simple equation: $$I = \frac{V}{R}$$.
+
+<span class="fs-6">
+[Previous: Voltage, current, and resistance](electricity-basics.md){: .btn .btn-outline }
+[Next: Ohm's Law](ohms-law.md){: .btn .btn-outline }
+</span>

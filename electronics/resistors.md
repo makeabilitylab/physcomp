@@ -22,6 +22,17 @@ usetocbot: true
 
 This is the resistor page.
 
+Links:
+- Introduce resistors and how they work
+- Power?
+- Rheostats (and make own resistor with graphite pencil)
+
+<!-- <video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ResistorAndCurrentFlow_WaterHoseAnalogy_TrimmedAndCropped_EngineeringMindset.mp4" type="video/mp4" />
+</video>
+**Figure.** Resistors are specially electronic components to reduce current flow. Just as a kink in a water hose will provide increased resistance and reduce water flow, so too will a resistor placed between two wires in a circuit. Animation from the [What is Current?](https://youtu.be/8Posj4WMo0o?t=521) video by The Engineering Mindset.
+{: .fs-1 } -->
+
 - A very nice animation and explanation from [Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=901)
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>

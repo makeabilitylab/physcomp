@@ -1,10 +1,21 @@
 ---
 layout: default
-title: LEDs
-nav_order: 2
+title: L5&#58; LEDs
+nav_order: 5
 parent: Electronics
 has_toc: false # on by default
-has_children: true
+usemathjax: true
+comments: true
+usetocbot: true
+---
+# {{ page.title | replace_first:'L','Lesson '}}
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 ---
 This is the LED page
 

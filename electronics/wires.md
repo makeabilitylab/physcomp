@@ -4,6 +4,7 @@ title: Wires
 nav_order: 2
 parent: Electronics
 has_toc: false # on by default
+nav_exclude: false
 ---
 This is the wires page
 

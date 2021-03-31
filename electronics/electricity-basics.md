@@ -487,6 +487,7 @@ We recommend the following basic circuit simulators (these are not intended for 
 - [Basic electrical quantities: current, voltage, power](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current)
 - [Voltage, Current, Resistance, and Ohm's Law](https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law/all), Sparkfun.com
 - [Electrical Resistance and Conductance](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance), Wikipedia
+- [Electromotive Force](https://opentextbc.ca/universityphysicsv2openstax/chapter/electromotive-force/), opentextbc.ca
 
 <!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential -->
 <!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->

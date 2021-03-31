@@ -99,7 +99,7 @@ To convert between a prefixed unit and a base unit, we *multiply* by the convers
 
 So, for example, to convert 2.2kΩ to ohms, we would multiply by the conversion factor for *kilo* (k), which is 1,000. So, $$2.2 * 1,000 = 2,200 Ω$$. To convert 0.000037A to microamps, we would divide by the conversion factor for *micro* (μ), which is 0.000001 (or $$10^{-6}$$). So, $$\frac{0.000037}{10^{-6}} = 37 μA$$.
 
-## Let's analyze our first circuit!
+## Let's analyze some circuits!
 
 Whew, OK, now we are ready to start analyzing some circuits. We'll start with a simple circuit and go from there. When analyzing (or even preparing to build) circuits, it's always a good idea to get out a pencil and paper. So, please do that now.
 

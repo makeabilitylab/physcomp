@@ -20,13 +20,15 @@ usetocbot: true
 
 In our Ohm's Law lesson we analyzed relatively straightforward circuits with a single resistor. These circuits helped us build a foundation for and a conceptual understanding of Ohm's Law and how to apply it; however, most circuits are not so simple.
 
-In this lesson, we we're going to extend Ohm's Law to more complicated circuits: resistors in **series** and resistors in **parallel**—perhaps you built some of these circuit configurations in your [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulations. In short: 
+In this lesson, we we're going to extend Ohm's Law to more complicated circuits: resistors in **series** and resistors in **parallel**. In short: 
 * Resistors in series **divide voltage** and are one of the most common (and useful) circuit configurations when working with microcontrollers and resistive sensors like [potentiometers](../arduino/potentiometers.md), [force-sensitive resistors](../arduino/force-sensitive-resistors.md), and [photocells](../sensors/photoresistors.md).
 * Resistors in parallel **divide current** (and more current travels down paths with less resistance). Parallel circuits are useful, for example, in powering multiple LEDs.
 
 ![Image shows two diagrams: on the left is a circuit with series resistors and on the right is a circuit with parallel resistors.](assets/images/OhmsLaw_IntroToSeriesVsParallelResistorCircuits_ByJonFroehlich.png)
 **Figure.** An example of **series** resistors (left) and **parallel** resistors (right). Images made  PowerPoint.
 {: .fs-1 }
+
+## Equivalent resistances
 
 Using [Kirchhoff's circuit laws](https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws), we can derive "equivalent" resistances for series and parallel circuits.
 
@@ -46,7 +48,48 @@ For us, the most important and useful concept to understand is that **series res
 
 And, while the ability to manually understand and analyze a circuit is important in physical computing, if you become confused, you can always use a circuit simulator like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
-### Series resistors
+## Series resistors
+
+Resistors in series are connected in sequence: head-to-tail. From Ohm's Law, we know that resistors *drop* voltage (indeed, the voltage drop $$V_{R}$$ over a resistor $$R$$ is $$V_{R} = I * R$$). Thus, multiple resistors "in a row" (in series) will *each* cause a drop in voltage—and the magnitude of this drop is proportional to the resistor (higher resistance, higher voltage drop).
+
+Generally, when we are trying to analyze a circuit with multiple resistor configurations (series, parallel, or a combination), the first step is to determine an **equivalent resistance**. That is, how can we combine all the resistance in the circuit to a single value (called $$R_{total}$$ or $$R_{equivalent}$$) that enables us to apply Ohm's Law across the entire circuit. In the case of solving for current, this would be $$I=\frac{V}{R_{total}}$$
+
+So, let's try it!
+
+### Series example 1: Solve for current
+
+Let's begin with the simplest series resistor circuit: a 9V battery with 100Ω and 1kΩ resistors in series.
+
+![](assets/images/SeriesResistorCircuit_TwoResistorsOf100OhmAnd1kOhm_Step0.png)
+
+#### Step 1: Solve for total resistance
+
+The first step is to solve for the total resistance in our circuit. We know that we sum resistances in series, so: $$R_{Total} = R_{1} + R_{2} \Rightarrow  100Ω + 1000Ω \Rightarrow 1100Ω$$.
+
+![](assets/images/SeriesResistorCircuit_TwoResistorsOf100OhmAnd1kOhm_Step1.png)
+
+#### Step 2: Solve for current I with equivalent resistance
+
+TODO: text goes here. 
+
+![](assets/images/SeriesResistorCircuit_TwoResistorsOf100OhmAnd1kOhm_Step2.png)
+
+### Series example 2: Solve for current
+
+Just to make sure you "get it", let's try one more time but with three resistors instead of two. This time, $$R_{1}=2.2kΩ$$, $$R_{2}=1kΩ$$, and $$R_{3}=470Ω$$.
+
+Again, we start by finding $$R_{Total}$$, which is:
+$$R_{Total} = R_{1} + R_{2} + R_{3}$$
+$$R_{Total} =2200Ω + 1000Ω + 470Ω$$
+$$R_{Total} = 3670Ω$$.
+
+![](assets/images/SeriesResistorCircuit_ThreeResistors_Solved.png)
+
+### Voltage dividers
+
+TODO:
+- Talk about voltage dividers
+- Talk about equation Vin (R1)/(r1+r2) and that the ratio is most important
 
 <!-- Electronics for beginners has some nice voltage divider examples: https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_9_Chapter.xhtml -->
 

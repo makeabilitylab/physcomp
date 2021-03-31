@@ -54,6 +54,10 @@ TODO: what are breadboards and how to use them
 
 TODO: what are variables resistors, how to use them, and how to make your own.
 
+## [Lesson 9: Using a multimeter](multimeter.md)
+
+TODO: or could integrate this somewhere else?
+
 <!-- # TODO
 - Should we add voltage regulator? https://youtu.be/howQ05z4v7Q?
 - Switches?

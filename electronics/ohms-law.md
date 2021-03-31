@@ -229,6 +229,6 @@ In the [next lesson](series-parallel.md), we will apply Ohm's Law to more comple
 
 <span class="fs-6">
 [Previous: Schematics](schematics.md){: .btn .btn-outline }
-[Next: Resistors in Series and Parallel](resistors.md){: .btn .btn-outline }
+[Next: Resistors in Series and Parallel](series-parallel.md){: .btn .btn-outline }
 <!-- [Next: Resistors](resistors.md){: .btn .btn-outline } -->
 </span>

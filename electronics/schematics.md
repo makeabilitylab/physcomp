@@ -82,6 +82,7 @@ A wire is shown as a solid line. When two or more wires **connect**, the junctio
 But this can quickly get confusing. For example, are the two circuits below equivalent or not? In fact, they are! When in doubt, redraw the circuit yourself on a piece of paper!
 
 ![An image of four block elements connected together in a certain arrangement and two equivalent circuit diagrams](assets/images/ExampleOfConfusingButEquivalentCircuit_CircuitSchematics_StanfordEngr40.png)
+
 An example of how even simple circuits can start to get confusing. What's connected to what? Are these two circuits the same? In fact, yes! When in doubt, redraw the circuit on paper. Image from [Stanford's ENGR 40M course](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/lecture01.pdf).
 {: .fs-1 }
 
@@ -92,20 +93,31 @@ An example of how even simple circuits can start to get confusing. What's connec
 
 On many circuit diagrams, you'll see special symbols used to denote the voltage source and ground nodes. Positive voltage source nodes are usually indicated by an arrow pointing up while ground nodes are typically pointed down (with a flat line, downward pointing triangle, or three lines).
 
-![](assets/images/VoltageSourceAndGroundNodes_ByJonFroehlich.png)
+![Shows examples of positive voltage sources (upward arrows) and ground nodes (downward pointed triangles)](assets/images/VoltageSourceAndGroundNodes_ByJonFroehlich.png)
 
-Using these symbols has the advantage of more clearly marking what the reference or ground node of a circuit is but, more importantly, also allows the circuit designer to render more clean diagrams (by removing needless wires).
+Using these symbols has the advantage of more clearly marking what the reference or ground node of a circuit is but, more importantly, also allows the circuit designer to render more clean diagrams (by removing needless wires). 
 
 For example, all four versions of this simple LED-based circuit are functionally equivalent but the one on the right is far simpler.
 
-![](assets/images/RedrawingLEDCircuitWithVoltageSourceAndGroundNodes_ByJonFroehlich.png)
+![Shows four equivalent circuits but the two on the right use the special voltage and/or ground node symbols](assets/images/RedrawingLEDCircuitWithVoltageSourceAndGroundNodes_ByJonFroehlich.png)
 
+Four examples of the *same* circuit drawn differently. The circuit visuals become increasingly minimalist from left-to-right. Image made in PowerPoint (inspired by [Section 5.6](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_5_Chapter.xhtml) of Electronics for Beginners)
+{: .fs-1 }
 
+### A real example
 
+In the schematic below, you can see how the circuit designer made use of the voltage source and ground node symbols. This declutters the diagram by reducing the need to have many lines (wires) drawn to a shared $$GND$$ node.
 
-TODO: actually analyze 
+![A circuit diagram of the 5V regulator on the RedBoard](assets/images/CircuitSchematic_RedBoard5VRegulator_FromSparkfun.png)
+
+This circuit schematic is of the 5V voltage regulator on the [Sparkfun RedBoard](https://www.sparkfun.com/products/13975), Sparkfun's open hardware version of the [Arduino Uno R3](https://store.arduino.cc/usa/arduino-uno-rev3) board. Notice how the schematic uses the voltage source and ground node symbols? A [voltage regulator](https://en.wikipedia.org/wiki/Voltage_regulator) is a system designed to maintain a constant voltage and is used here to stepdown 7-15V source inputs to a constant 5V. The full schematic is [here](http://cdn.sparkfun.com/datasheets/Dev/Arduino/Boards/RedBoard-v06.pdf).
+{: .fs-1 }
+
+The circuit schematic above also has a number of other symbols, including polarized and non-polarized [capacitors](https://en.wikipedia.org/wiki/Capacitor) (two parallel lines), a [zener diode](https://en.wikipedia.org/wiki/Zener_diode), and the [LM1117 linear regulator](https://www.ti.com/lit/ds/symlink/lm1117.pdf?ts=1617203074186&ref_url=https%253A%252F%252Fwww.google.com%252F).
 
 ## Resources
+
+- [How to Read a Schematic](https://learn.sparkfun.com/tutorials/how-to-read-a-schematic/all), sparkfun.com
 
 - [From Schematic to Reality](http://beavisaudio.com/techpages/SchematicToReality/), beavisaudio.com
 

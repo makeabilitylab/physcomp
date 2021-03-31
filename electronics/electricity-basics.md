@@ -20,7 +20,7 @@ usetocbot: true
 
 In this lesson, we are going to learn about three key electricity concepts, *current*, *voltage*, and *resistance*, which form the foundation of electronics and circuits. We will also use an online circuit simulator to play with basic components and advanced understanding.
 
-**TODO: Some nice animations** [here](https://kaiserscience.wordpress.com/physics/electromagnetism/electric-current/)
+<!-- TODO: Include a nice overview animation? [here](https://kaiserscience.wordpress.com/physics/electromagnetism/electric-current/) -->
 
 ---
 **NOTE**
@@ -82,13 +82,13 @@ To measure the flow of water, we could count the number of water molecules flowi
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons (6.24 quintillion!). Using scientific notation is much cleaner: $$6.24 × 10^{18}$$ electrons.
+A [couloumb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons (6.24 quintillion or $$6.24 × 10^{18}$$ electrons!).
 
 Rather than constantly describe current as the number of coloumbs/second (or electrons/second) flowing through a wire—*i.e.,* "*Hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second!*"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A), which is simply equal to 1 coloumb per second:
 
 $$1 A = 1 C / s$$
 
-Though you'll not need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. We do so below in the image simply for illustrative purposes: How many electrons pass a given point in 3s if a conductor is carrying 2A of current? Answer: $$6C$ (6 coloumbs) or $$3.74 × 10^{19}$$ electrons.
+Though you'll not need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. We do so below in the image simply for illustrative purposes: How many electrons pass a given point in 3s if a conductor is carrying 2A of current? Answer: $$6C$$ (6 coloumbs) or $$3.74 × 10^{19}$$ electrons.
 
 ![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
 Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* .

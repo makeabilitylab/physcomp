@@ -2,7 +2,7 @@
 layout: default
 title: L4&#58; Resistors
 nav_order: 4
-parent: Electronics
+parent: Intro to Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true

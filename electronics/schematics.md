@@ -2,7 +2,7 @@
 layout: default
 title: L2&#58; Circuit Schematics
 nav_order: 2
-parent: Electronics
+parent: Intro to Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true

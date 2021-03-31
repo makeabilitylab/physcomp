@@ -2,7 +2,7 @@
 layout: default
 title: L4&#58; Series and Parallel Resistors
 nav_order: 4
-parent: Electronics
+parent: Intro to Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true
@@ -48,7 +48,7 @@ And, while the ability to manually understand and analyze a circuit is important
 
 ### Series resistors
 
-
+<!-- Electronics for beginners has some nice voltage divider examples: https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_9_Chapter.xhtml -->
 
 
 

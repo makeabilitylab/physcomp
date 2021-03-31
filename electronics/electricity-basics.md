@@ -2,7 +2,7 @@
 layout: default
 title: L1&#58; Voltage, Current, and Resistance
 nav_order: 1
-parent: Electronics
+parent: Intro to Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true

@@ -2,7 +2,7 @@
 layout: default
 title: L3&#58; Ohm's Law
 nav_order: 3
-parent: Electronics
+parent: Intro to Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true

@@ -2,7 +2,7 @@
 layout: default
 title: L5&#58; LEDs
 nav_order: 5
-parent: Electronics
+parent: Intro to Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true

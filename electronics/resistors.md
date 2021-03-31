@@ -7,6 +7,8 @@ has_toc: false # on by default
 usemathjax: true
 comments: true
 usetocbot: true
+nav_exclude: true
+search_exclude: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

@@ -32,6 +32,8 @@ For the most part, the symbols are clean, distinguishable, and help capture the 
 
 For more examples, see [Wikipedia's entry](https://en.wikipedia.org/wiki/Electronic_symbol) or visit one of the [Resources](#resources) listed below.
 
+<!-- TODO: consider adding ground to this diagram below? -->
+
 ![An image showing the electronic symbol for voltage source, current source, battery, resistive light (lamp), resistor, switch, diode, and LED](assets/images/BasicElectronicSymbols_ByJonFroehlich.png)
 
 **Figure.** Common electronic symbols. For the battery, the long line is used to indicate the positive terminal and the short line is the negative terminal (which is typically used as ground). Image made in PowerPoint.
@@ -86,7 +88,22 @@ An example of how even simple circuits can start to get confusing. What's connec
 <!-- - https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/lecture01.pdf
 - https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/lecture02.pdf -->
 
-**TODO: Add in ground discussion**
+## Voltage source and ground nodes
+
+On many circuit diagrams, you'll see special symbols used to denote the voltage source and ground nodes. Positive voltage source nodes are usually indicated by an arrow pointing up while ground nodes are typically pointed down (with a flat line, downward pointing triangle, or three lines).
+
+![](assets/images/VoltageSourceAndGroundNodes_ByJonFroehlich.png)
+
+Using these symbols has the advantage of more clearly marking what the reference or ground node of a circuit is but, more importantly, also allows the circuit designer to render more clean diagrams (by removing needless wires).
+
+For example, all four versions of this simple LED-based circuit are functionally equivalent but the one on the right is far simpler.
+
+![](assets/images/RedrawingLEDCircuitWithVoltageSourceAndGroundNodes_ByJonFroehlich.png)
+
+
+
+
+TODO: actually analyze 
 
 ## Resources
 

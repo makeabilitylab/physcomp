@@ -1,12 +1,14 @@
 ---
 layout: default
-title: L1&#58; Voltage, Current, and Resistance
+title: L1&#58; Voltage, Current, and Resistance (Old Draft)
 nav_order: 1
 parent: Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true
+nav_exclude: true
 usetocbot: true
+search_exclude: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

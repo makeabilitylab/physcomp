@@ -45,6 +45,14 @@ The following courses have inspired my pedagogical approach and materials.
 
 - **CS4830/7000: Things that Think**, CU Boulder, Co-taught by Mike and Ann Eisenberg. Example offerings: [Spring 2011](http://web.archive.org/web/20151105011253/http://l3d.cs.colorado.edu/~ctg/classes/ttt2011/Home.html), [Spring 2012](http://web.archive.org/web/20151105011258/http://l3d.cs.colorado.edu/~ctg/classes/ttt2012/TTT12.html)
 
+## Classes with interactive websites
+
+There are a number of emerging academic courses that have accompanying interactive learning websites, like this one. Here are some that I'm aware of (please share others!):
+
+- **[CMSC 11111 Creative Coding](https://www.classes.cs.uchicago.edu/archive/2021/spring/11111-1/schedule.html)**, University of Chicago, [Ravi Chugh](http://people.cs.uchicago.edu/~rchugh/), Andrew McNutt, Anton Outkine, Angela Liu, and 30+ creative coders
+
+- **[Visualization Curriculum](https://uwdata.github.io/visualization-curriculum/intro.html)**, University of Washington, Jeffrey Heer, Dominik Moritz, Jake VanderPlas, and Brock Craft
+
 <!-- TODO -->
 <!-- Add social media maker accounts (twitter, instagram)? -->
 <!-- Add people? -->

@@ -161,7 +161,7 @@ Before doing anything else: it's useful to think of *conceptually* what will hap
 
 Current decreases, right? And does so proportionally.
 
-Indeed, the current goes from $$90mA$$ with $$100Ω$$ to $$I = \frac{9V}{4700Ω} \Rightarrow 0.0019𝐴 \Rightarrow 1.9𝑚𝐴$$.
+Indeed, the current goes from $$90mA$$ with $$100Ω$$ to $$I = \frac{9V}{4700Ω} \Rightarrow 0.0019𝐴 \Rightarrow 1.9𝑚𝐴$$, which is not very much!
 
 ![Same circuit as before but with an increased resistance from 100Ω to 4700Ω](assets/images/OhmsLawBasic_SolveForCurrent2_ByJonFroehlich.png)
 

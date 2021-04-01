@@ -8,6 +8,7 @@ has_toc: true # (on by default)
 comments: true
 nav_exclude: true
 usetocbot: true
+search_exclude: true
 ---
 
 Scan for I2C addresses:

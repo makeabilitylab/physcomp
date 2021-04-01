@@ -3,6 +3,7 @@ layout: default
 title: Website Dev Notes
 has_toc: false # on by default
 nav_exclude: true
+search_exclude: true
 ---
 
 # {{ page.title | replace_first:'L','Lesson '}}

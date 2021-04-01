@@ -7,6 +7,7 @@ has_toc: true # on by default
 has_children: true
 nav_exclude: true
 usetocbot: true
+search_exclude: true
 ---
 
 Notes:

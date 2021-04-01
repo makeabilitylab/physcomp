@@ -2,8 +2,10 @@
 layout: default
 title: Variable Resistors
 nav_order: 2
-parent: Electronics
+parent: Intro to Electronics
 has_toc: false # on by default
+nav_exclude: true
+search_exclude: true
 ---
 This is the resistor page.
 

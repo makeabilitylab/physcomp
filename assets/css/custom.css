@@ -37,6 +37,20 @@ figure.highlight {
   font-size: small;
 }
 
+.width-100{
+  width: 100%;
+}
+
+/** FOR SMALL TABLES **/
+.condensed-table{
+  min-width: 0px;
+}
+
+.condensed-table th, td{
+  min-width: 0px;
+  font-size: 12px !important;
+}
+
 /* image align center */
 /* See: https://mmistakes.github.io/minimal-mistakes/docs/utility-classes/
 /* https://github.com/mmistakes/minimal-mistakes/blob/a2385e25840f38d573d057f427396eaf09f41e81/_sass/minimal-mistakes/_utilities.scss */
@@ -44,6 +58,7 @@ figure.highlight {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  width: 50%;
 }
 
 .test-css{
@@ -67,5 +82,7 @@ figure.highlight {
 #tocbot-toc ol {
   list-style: none;
 }
+
+
 
 

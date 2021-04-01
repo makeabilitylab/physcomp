@@ -444,6 +444,9 @@ To gain a better understanding of common operating voltages/currents, we would l
 
 ![](assets/images/InputOutputVoltages_ThreeDevices_ByJonFroehlich.png)
 
+**Figure.** Here's an example of the AC input and DC output of three devices in my home.
+{: .fs-1 }
+
 <!-- ## Notes
 - Should I talk about short vs. open circuit here? I think so
 - And then the activity can be with PHET?

@@ -214,7 +214,7 @@ So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the ne
 
 <!-- Finally, last one: if 1C of charge exits the positive terminal of a battery with 2J of energy and passes through a resistive lamp, what is the voltage drop across the lamp? -->
 
-TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would drops potential. See: https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current
+<!-- TODO: insert that animation I use in lecture here of charges moving up gaining electric potential and then using that work would drops potential. See: https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current -->
 
 
 <!-- another fun gravity analogy: https://electronics.stackexchange.com/a/182450 -->
@@ -257,6 +257,8 @@ Generally, the most dangerous electrical thing in your household is the line vol
 
 For more on electrical safety, see this [write-up on AllAboutCircuits.com](https://www.allaboutcircuits.com/textbook/direct-current/chpt-3/ohms-law-again/) or this section on [Safety (Chapter 7.1) in Practical Electronics for Inventors](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/18_Chapter_07.xhtml).
 
+You can also watch [this video](https://youtu.be/hp97GjuULX8) by popular YouTuber [ElectroBOOM](https://www.youtube.com/channel/UCJ0-OtVpF0wOKEqT2Z1HEtA), which examines his pain tolerance between AC and DC.
+
 
 <!-- Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4) from the Introduction, how much potential to do work does water have once it's flowed out of the hole and onto the ground? None! It's lost all of its energy. Likewise, when an electric charge reaches ground, it no longer has electric potential for work. -->
 
@@ -294,7 +296,7 @@ As you learn and begin analyzing electrical circuits, it's important to pay atte
 
 As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a *resistance* to the electrical current. Notably, and importantly, this resistance slows **all** of the charge movement (current) in the circuit, not just those charges passing through the resistive material.
 
-**TODO: think of a water [flow through a narrow pipe](https://youtu.be/F_vLWkkOETI?t=267)**
+<!-- **TODO: think of a water [flow through a narrow pipe](https://youtu.be/F_vLWkkOETI?t=267)** -->
 
 Depending on their atomic composition, some materials have lower resistance than others. Metals like silver, copper, and gold are *good* conductors—they offer *low* resistance—because they have loosely bound electrons in the outer shells of their atoms. These electrons are easily displaceable and, with an applied electric field, can be "pushed" from atom-to-atom within the material to form a current.
 
@@ -373,14 +375,14 @@ If we pass more current through a wire than its capacity, it will start to heat 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/BlowingFuses_RobinsonsAuto.mp4" type="video/mp4" />
 </video>
-**Figure.** If we attempt to push large amounts of current through a wire and exceed its carrying capacity (by hooking up a large voltage supply, for example), then the wire will heat up and could start a fire. This can happen almost instantly, which is the operating principle behind a fuse (shown above). A fuse is *designed* to burn up thereby disconnecting your circuit when a damagingly large current is supplied. Animation from the [How Electricity Works](https://youtu.be/mc979OhitAg?t=322) video by The Engineering Mindset.
+**Figure.** If we attempt to push large amounts of current through a wire and exceed its carrying capacity (by hooking up a large voltage supply, for example), then the wire will heat up and could start a fire. This can happen almost instantly, which is the operating principle behind a fuse (shown above). A fuse is *designed* to burn up thereby disconnecting your circuit when a damagingly large current is supplied. Video from [Robinson Auto](https://youtu.be/V-lhVTDWjwY).
 {: .fs-1 }
 
-### Resistance increases with wire length
+<!-- ### Resistance increases with wire length
 
 TODO?
 
-Could have posille's law here?
+Could have posille's law here? -->
 
 ### What are resistors?
 
@@ -392,22 +394,22 @@ Resistors are specially formulated electrical components that restrict current a
 
 Just as there is a pressure drop after a kink in a hose, so too is there a voltage drop after a resistor. That is, electric charges before a resistor have a higher electric potential than those after.
 
-**TODO: We'll talk more about this in Lesson X.**
+<!-- **TODO: We'll talk more about this in Lesson X.** -->
 
 ## Some common questions
 
 Before moving on to the next lesson, let's cover some common questions.
 
-## Dangerous voltage/current levels
+<!-- ## Dangerous voltage/current levels
 
-TODO!
+TODO! -->
 
-## What's a short circuit?
+### What's a short circuit?
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ShortCircuitExample_PhetScreenRecording-Cropped2_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** TODO. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
+**Figure.** A **short circuit** is when there is a zero-resistance path back to your power source. It's never good! Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
 {: .fs-1 }
 
 A **short circuit** is a zero-resistance *shortcut* between two sides of a power source—for example, if the positive and negative terminals of a battery directly touch. It's a bad thing and should be avoided. Short circuits can cause excessive current, burn out components, start fires, or even cause explosions. Here's a [video](https://youtu.be/75_f6CjIcz8) of four AA batteries being shorted, a [news story](https://youtu.be/75_f6CjIcz8) about how a house fire started when two 9V batteries shorted together, and a [Stack Exchange post](https://physics.stackexchange.com/a/30596) about shorting a single AA alkaline battery.
@@ -422,21 +424,27 @@ When a circuit breaker triggers, it creates an *open circuit*, which we describe
 
 ### What is an open circuit?
 
-
-
-TODO: add in how water plumbing analogy breaks down with pipe breakage (Water would spill out of hole); with circuits, an open circuit, no current flow.
+While a **closed** circuit is a complete circuit (a "circle" for current flow), an **open** circuit is an *incomplete* circuit. For example, when there is no path from the positive terminal of a battery to the negative. This might happen intentionally (*e.g.,* due to a switch opening) or unintionally (*e.g.,* circuit shuts off due to a fuse blowing).
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ClosedVsOpenCircuit-Cropped_PhetRecording_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** TODO. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
+**Figure.** A closed circuit is when **no path** exists between the positive and negative terminals of your power source. It is an incomplete circuit. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
 {: .fs-1 }
 
 ### What's the difference between AC and DC?
 
 Digital circuits use *direct current* (DC), which is supplied by batteries or by AC adapters that convert the *alternating current* from your wall socket into DC current used by your phone or laptop chargers.
 
-## Notes
+There are lots of great videos on YouTube explaining the difference between AC and DC, like [this one](https://youtu.be/vN9aR2wKv0U) by AddOhms and [this one](https://youtu.be/Wm75XgbqHBY) by KEMET Electronics.
+
+## Activity
+
+To gain a better understanding of common operating voltages/currents, we would like you to document the  AC input voltages/current and the DC output voltages/current of devices of your home. Select five devices and take a picture of the device and its AC-to-DC adapter with the operating AC/DC information visible (if you can't find this sticker, it may be on the device itself, which is also fine). In your prototyping journals, include these pictures along with a table of operating input/output voltages/current and a brief summary of what you found.
+
+![](assets/images/InputOutputVoltages_ThreeDevices_ByJonFroehlich.png)
+
+<!-- ## Notes
 - Should I talk about short vs. open circuit here? I think so
 - And then the activity can be with PHET?
 
@@ -448,29 +456,13 @@ Digital circuits use *direct current* (DC), which is supplied by batteries or by
 - Have them work with an online circuit simulator like Tinkercad or [Falstad](https://www.falstad.com/circuit/circuitjs.html)
 
 - Introduce the multimeter and how to measure voltage, current, and resistance
-  - Engineering Mindset has a good animation of [ammeter here](https://youtu.be/kcL2_D33k3o?t=718) 
+- Engineering Mindset has a good animation of [ammeter here](https://youtu.be/kcL2_D33k3o?t=718) 
 
-## Lesson plan
-- L1: What is electricity: current, voltage, and resistance + online simulation activities
-- Circuit schematics?
-- LX: Common electronic components: resistors and LEDs
-- L2: Ohm's Law + example circuit equations/solving + online simulation activities
-- L3: Measuring current, voltage, and resistance using multimeters
-- L4: Series vs. parallel resistance
-
-- L4: How to use a breadboard + moving your prev circuit to breadboards
-- LX: What are LEDs and resistors?
-- L5: Series vs. Parallel Resistance, Voltage Dividers, and Ohm's Law
-- LX: Building your first circuit: lighting up an LED, swapping out different resistances (maybe paper-based version)
-
-Should I have a small lesson on what is a resistor and what is an LED (or perhaps I fold that into Lesson 2).
-
-See also notes on phone.
 
 ## Notes:
 Things to consider adding:
 - What is an open vs. a closed circuit? (Perhaps add to Ohm's Law or maybe third lesson?)
-- What is a short circuit?
+- What is a short circuit? -->
 
 ## Resources
 

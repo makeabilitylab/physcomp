@@ -38,7 +38,7 @@ Introduces [Ohm’s Law](ohms-law.md), one of the most important empirical laws 
 
 Introduces [series and parallel resistor circuits](series-parallel.md), how to analyze them, and why they're important.
 
-## [Lesson 5: Resistors](resistors.md)
+<!-- ## [Lesson 5: Resistors](resistors.md)
 
 TODO: what are resistors, how to decode them, use them, etc. (Builds on Lesson 1)
 
@@ -56,7 +56,7 @@ TODO: what are variables resistors, how to use them, and how to make your own.
 
 ## [Lesson 9: Using a multimeter](multimeter.md)
 
-TODO: or could integrate this somewhere else?
+TODO: or could integrate this somewhere else? -->
 
 <!-- # TODO
 - Should we add voltage regulator? https://youtu.be/howQ05z4v7Q?
@@ -81,3 +81,21 @@ TODO: or could integrate this somewhere else?
 - [Polarity](https://learn.sparkfun.com/tutorials/polarity)
 - [Series and Parallel Circuits](https://learn.sparkfun.com/tutorials/series-and-parallel-circuits)
 - [AC vs DC current](https://learn.sparkfun.com/tutorials/alternating-current-ac-vs-direct-current-dc) -->
+
+<!-- ## Old lesson plan
+
+- L1: What is electricity: current, voltage, and resistance + online simulation activities
+- Circuit schematics?
+- LX: Common electronic components: resistors and LEDs
+- L2: Ohm's Law + example circuit equations/solving + online simulation activities
+- L3: Measuring current, voltage, and resistance using multimeters
+- L4: Series vs. parallel resistance
+
+- L4: How to use a breadboard + moving your prev circuit to breadboards
+- LX: What are LEDs and resistors?
+- L5: Series vs. Parallel Resistance, Voltage Dividers, and Ohm's Law
+- LX: Building your first circuit: lighting up an LED, swapping out different resistances (maybe paper-based version)
+
+Should I have a small lesson on what is a resistor and what is an LED (or perhaps I fold that into Lesson 2).
+
+See also notes on phone. -->

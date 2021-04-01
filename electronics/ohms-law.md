@@ -210,7 +210,9 @@ Using [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), build and ana
 * You can use as many resistors per circuit as you'd like but double click on the wires to show current/voltage
 * For each circuit, take a screenshot and put it in your prototyping journal along with a brief reflection of what you observed/learned.
 
-You can save your circuits in one of two ways: (1) download them locally (File -> Save As) or (2) export them as a shareable link (File -> Export as Link). We'd like you to use the export as link option and include this in your prototyping journal.
+You can save your circuits in one of two ways: (1) download them locally (File -> Save As) or (2) export them as a shareable link (File -> Export as Link)—use this latter option for your prototyping journals. 
+
+In your prototyping journals, include a screenshot of each CircuitJS circuit along with a brief description of what you observed and a link directly back to the CircuitJS circuit that you made.
 
 ## Lesson summary
 

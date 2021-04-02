@@ -21,6 +21,8 @@ search_exclude: true
 ---
 This is the LED page
 
+https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?diodes
+
 ## Resources
 
 ### Videos

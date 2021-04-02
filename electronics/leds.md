@@ -29,6 +29,17 @@ See video: [Constant current source / LED driver tutorial](https://youtu.be/iuMn
 
 See discussion of LM317 (constant current driver) here: [Chapter 3: LEDs](https://learning.oreilly.com/library/view/hacking-electronics-an/9780071802369/ch04.html#ch4)
 
+## Addressable LED strips
+
+Wiring up, powering, and controlling a large number of LEDs with a microcontroller is complicated and messy. Thus, in the last decade, we've seen the emergence of low-cost "smart" RGB LED strips like [Adafruit's Neopixel](https://www.adafruit.com/product/1376?length=1) (aka, the WS2812B LED from WorldSemi), which contain strips of RGB LEDs (red, green, blue) with a small embedded microcontroller that can be addressed and controlled individually. They are truly awesome!
+
+The NeoPixel has quickly become a prototyping standard because of Adafruit's [Arduino](https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-installation), [CircuitPython](https://learn.adafruit.com/adafruit-neopixel-uberguide/python-circuitpython), and [MakeCode](https://learn.adafruit.com/adafruit-neopixel-uberguide/makecode) libraries and Adafruit's production of [widely read tutorials](https://learn.adafruit.com/adafruit-neopixel-uberguide).
+
+There are many tutorials and comparisons of LED strips online, including:
+- [How to use WS2812B NeoPixels with FastLED on Arduino](https://youtu.be/YgII4UYW5hU), Gadget Reboot
+- [LED Strips, What's the Difference?](https://www.youtube.com/watch?v=QnvircC22hU), The Hook Up
+- [DotStars vs NeoPixels](https://learn.adafruit.com/adafruit-dotstar-leds/overview), Adafruit
+
 ## Resources
 
 ### Videos

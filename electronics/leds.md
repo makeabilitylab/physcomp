@@ -23,10 +23,17 @@ This is the LED page
 
 https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?diodes
 
+## Constant current source
+
+See video: [Constant current source / LED driver tutorial](https://youtu.be/iuMngik0GR8), Afrotechmods
+
+See discussion of LM317 (constant current driver) here: [Chapter 3: LEDs](https://learning.oreilly.com/library/view/hacking-electronics-an/9780071802369/ch04.html#ch4)
+
 ## Resources
 
 ### Videos
 - [LED Basics](https://youtu.be/Yo6JI_bzUzo), Afrotechmods
+- [Constant current source / LED driver tutorial](https://youtu.be/iuMngik0GR8), Afrotechmods
 
 ### Text
 

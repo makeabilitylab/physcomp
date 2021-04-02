@@ -223,6 +223,12 @@ In this lesson, we learned:
 - That a common "gotcha" for beginners is forgetting to convert measurements to base units
 - We then played around with circuits in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and made observations.
 
+## Resources
+
+- [Introduction to Ohm's Law](https://www.khanacademy.org/science/high-school-physics/dc-circuits/electric-current-resistivity-and-ohms-law/v/circuits-part-1), Khan Academy
+
+- [What is Ohm's Law?](https://youtu.be/lf0lMDZVwTI), Math and Science
+
 ## Next Lesson
 
 In the [next lesson](series-parallel.md), we will apply Ohm's Law to more complex circuits—specifically those that combine resistors in *series* and those that combine them in *parallel*.

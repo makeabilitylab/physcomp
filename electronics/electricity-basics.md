@@ -488,6 +488,7 @@ We recommend the following basic circuit simulators (these are not intended for 
 <!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->
 
 ### Video links
+
 - [Intro to potential differences and voltage](https://youtu.be/pmtmJep1xY0), [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)
 - [Electronics for Beginners](https://www.youtube.com/watch?v=8gvJzrjwjds&list=PLzqS33DOPhJkRn6e9_OTdQwRojO8qlusI), [afrotechmods.com](http://afrotechmods.com/tutorials/)
 - [Voltage, Current, Resistance](https://youtu.be/OGa_b26eK2c), [mathandscience.com](http://mathandscience.com/)
@@ -495,6 +496,9 @@ We recommend the following basic circuit simulators (these are not intended for 
 - [Engineering Circuits, Volume 1](https://www.youtube.com/watch?v=OGa_b26eK2c&list=PLnVYEpTNGNtUSjEEYf01D-q4ExTO960sG), [mathandscience.com](http://mathandscience.com/)
 - [What is Voltage?](https://youtu.be/OGa_b26eK2c), Sparkfun.com
 - [What is Current?](https://youtu.be/kYwNj9uauJ4), Sparkfun.com
+
+<!-- 
+MIT 8.02x lecture on electric charges, forces, and coulomb's law (polarization) by Walter Lewin: https://youtu.be/x1-SibwIPM4 -->
 
 ## Next Lesson
 

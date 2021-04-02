@@ -45,26 +45,60 @@ We can carefully select the *type* and *amount* of a resistive material to creat
 Other resistors look like this inside:
 
 ![](assets/images/ResistorCrossSections_ByTubeTimeUS.png)
-
 **Figure.** Two cross sections of non-wrapping resistors. Image from [TubeTimeUS](https://twitter.com/tubetimeus/status/1111785671650242560?s=11) on Twitter with adapted annotations by Jon Froehlich. Right-click and "Open image in new tab" to expand.
 {: .fs-1 }
+
+Depending on their type and manufacturing, resistors have a certain "accuracy" tolerance. For example a 100Ω resistor with a ±5% tolerance could be, in actuality, a 95Ω or 105Ω resistor.
 
 ## Characterizing resistors
 
 Resistors are characterized according to their **resistance value** (in Ohms or Ω) and **maximum power capacity** (in Watts), which is the maximum rate at which they can convert electrical energy to thermal energy (heat).
 
+### Power dissipation
 
+TODO: talk about power stuff.
 
 ![](assets/images/OverheatedResistor_FromBeingEngineersAndReddit.png)
 **Figure.** Two cross sections of non-wrapping resistors. Image on left from this [Being Engineers video](https://youtu.be/HhUiWLlx1oA) and image on the right from the Electrical Engineering sub-reddit by user Xil0Sil0 ([link](https://www.reddit.com/r/ElectricalEngineering/comments/mh6jee/my_cute_little_resistor_burn/?utm_source=share&utm_medium=web2x&context=3))
 {: .fs-1 }
 
-This is the resistor page.
+## Resistor kits
 
-Links:
+In our prototyping classes, we tend to purchase resistor kits, which come with a set of resistors organized by resistance value and labeled (though you pay more per resistor for the convenience).
+
+![](assets/images/ResistorKits_Sparkfun_Plusivo.png)
+**Figure.** The Sparkfun resistor kit comes with 500 $$\frac{1}{4}W$$ resistors with ±5% tolerance (and costs ~$7.55 in bulk, which is $0.015/resistor) while the Plusivo resistor kit comes with 600 $$\frac{1}{4}W$$ resistors with ±1% tolerance (currently $8.99 on Amazon, which is $0.015/resistor).
+{: .fs-1 }
+
+## Reading resistors
+
+If you don't have your resistors pre-labeled in a pack, you'll need a method to determine their resistance value. Unfortunately, unlike capacitors, resistors do *not* have textual labels. Instead, they use a color coding system that is a bit arcane. 
+
+![](assets/images/ResistorColorBands.png)
+**Figure** A legend for the color bands used on resistors and two examples: on the top, a tan ±5% tolerance resistor with green (5) and blue (6) digits and an orange multiplier (1000) color bands, which is $$56 * 1000 = 56kΩ$$. On the bottom, a blue ±1% tolerance resistor with yellow (4), purple (7), black (0) digits and a multipler of red (100), which is $$470 * 100 = 47kΩ$$. Image modified from [here](http://www.imajeenyus.com/electronics/20120315_resistor_colour_code/resistor-color-code2.jpg).
+{: .fs-1 }
+
+To read the resistor color bands, orient the resistor such that the "tolerance" band (*e.g.,* the gold band for tan resistors or a brown band for blue resistors) is on the *right*. Then you read the color bands left-to-right based on the color chart below. Notably, the color band just before the tolerance band is a multiplier. So, if you have a four band resistor that ends in a gold stripe (±5% tolerance) and has the colors red, red, brown. Then those colors correspond to 2, 2, and a multiplier of 10, which would be $$22 * 10 = 220Ω$$. 
+
+Confused? That's ok!
+
+In the video below, I show how to decode the color bands on resistors and walk through some examples. Then I show how to use a multimeter to read the resistance values directly.
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/rHiSMNXyuHI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+**Video** A [video tutorial](https://youtu.be/rHiSMNXyuHI) of how to decode the resistor color codes and how to "read" a resistor's value using a multimeter.
+{: .fs-1 }
+
+## Activity
+
+For your learning activity, pick out three different resistors from your kits. For each resistor, take a picture, write down the color bands, and then calculate the resistance. In the Plusivo kits, the resistors come in labeled strips, which you can use to check your work (ground truth!) or, if you have access to a multimeter, you could do that too. 
+
+![](assets/images/PlusivoKitResistors.png)
+
+
+<!-- Links:
 - Introduce resistors and how they work
 - Power?
-- Rheostats (and make own resistor with graphite pencil)
+- Rheostats (and make own resistor with graphite pencil) -->
 
 <!-- <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ResistorAndCurrentFlow_WaterHoseAnalogy_TrimmedAndCropped_EngineeringMindset.mp4" type="video/mp4" />
@@ -89,7 +123,7 @@ Links:
 
 - [Power](https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?power), UIUC ECE101
 
-https://learning.oreilly.com/library/view/Encyclopedia+of+Electronic+Components+Volume+1/9781449333881/ch11.html
+<!-- [Potentiometer](https://learning.oreilly.com/library/view/Encyclopedia+of+Electronic+Components+Volume+1/9781449333881/ch11.html) -->
 
 ## Next Lesson
 

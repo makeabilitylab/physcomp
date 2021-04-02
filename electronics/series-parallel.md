@@ -212,13 +212,13 @@ Whereas **series resistors** have the same current but divide voltage, **[parall
  Image on left from [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors). Image made in PowerPoint. 
 {: .fs-1 }
 
-### Parallel example 1: Solve for Itotal
+### Parallel example 1: Solve for $$I_{Total}$$
 
 In the circuit below, we have two parallel resistors $$R_1=100Ω$$ and $$R_2=1kΩ$$. Let's solve for the total current $$I_{Total}$$ in the circuit.
 
 ![](assets/images/ParallelResistorCircuit_TwoResistors_ByJonFroehlich.png)
 
-#### Step 1: Observe that Itotal splits into branches
+#### Step 1: Observe that $$I_{Total}$$ splits into branches
 
 The first thing to recognize is that $$I_{Total}$$ splits into two branches. Let's call the current down those two branches $$I_1$$ and $$I_2$$. From Kirchoff's Laws, we know that $$I_{Total} = I_1 + I_2$$. This is due to the conservation of energy—no charges are lost in our circuit (they simply flow around and around).
 
@@ -230,13 +230,13 @@ Also recognize that there are only two *nodes* in our circuit. We can label them
 
 ![](assets/images/ParallelResistorCircuit_TwoResistors_Step2_ByJonFroehlich.png)
 
-#### Step 3: Define VA
+#### Step 3: Define $$V_A$$
 
 Because $$Node A$$ is directly connected to the positive terminal of the battery, it has an electric potential of 9V. Let's call this $$V_A = 9V$$. Similarly, $$Node B$$ is directly connected to the negative terminal of the battery, so let's refer to this as $$GND$$ or $$OV$$.
 
 ![](assets/images/ParallelResistorCircuit_TwoResistors_Step3_ByJonFroehlich.png)
 
-#### Step 4: Solve for I1 and I2
+#### Step 4: Solve for $$I_1$$ and $$I_2$$
 
 Using Ohm's Law, we can now solve for $$I_1$$ and $$I_2$$ where: $$I_1 = \frac{V_A}{R_1}$$ and $$I_2 = \frac{V_A}{R_2}$$. Thus, $$I_1 = \frac{9V}{100Ω} \Rightarrow 90mA$$ and $$I_2 = \frac{9V}{1000Ω} \Rightarrow 9mA$$.
 
@@ -246,7 +246,7 @@ Stop for a moment. Think about these results. Do they *conceptually* make sense?
 
 Using Ohm's Law, we found that **10 times** as much current flows through the $$I_2$$ branch as the $$I_1$$ branch. Indeed, this exactly matches the ratio of the two resistors $$R_1$$ to $$R_2$$—$$R_2$$ is **10 times** larger than $$R_1$$ and thus will restrict far more current. This makes sense: just as more water will flow through a branch with less resistance, so too will more current flow through the path of less resistance.
 
-#### Step 5: Finally, solve for Itotal
+#### Step 5: Finally, solve for $$I_{Total}$$
 
 Finally, we can use $$I_{Total} = I_1 + I_2$$ to solve for $$I_{Total}$$. In this case, $$I_{Total} = 90mA + 9mA \Rightarrow 99mA$$.
 
@@ -281,7 +281,7 @@ Does the visualization match your expectation?
 
 ## Activity
 
-Come up with two series resistor circuits and two parallel resistor circuits. Using what you've learned, solve for *current* in each circuit. Show your step-by-step work. Check your work by building a simulation in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
+Come up with two series resistor circuits and two parallel resistor circuits. Using what you've learned, manually solve for *current* in each circuit (either on pencil+paper or digitally). Show your step-by-step work. Check your work by building a simulation in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
 In your prototyping journals, include a sketch of the circuit (can be a smartphone picture of paper+pencil), your manual work to solve for current $$I$$ (again, can be paper+pencil), and a screenshot of the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) circuit along with a direct link. (Remember, you can create a CircuitJS link by going to File -> Export as Link).
 

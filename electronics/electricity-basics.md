@@ -378,6 +378,8 @@ If we pass more current through a wire than its capacity, it will start to heat 
 **Figure.** If we attempt to push large amounts of current through a wire and exceed its carrying capacity (by hooking up a large voltage supply, for example), then the wire will heat up and could start a fire. This can happen almost instantly, which is the operating principle behind a fuse (shown above). A fuse is *designed* to burn up thereby disconnecting your circuit when a damagingly large current is supplied. Video from [Robinson Auto](https://youtu.be/V-lhVTDWjwY).
 {: .fs-1 }
 
+<!-- TODO: can we totally ignore wire resistance? It depends. Typically, in basic circuit analysis, we do but this can become problematic if we employ the wrong wire sizes in practice. Nice discussion of cars, 12V batteries, and thick wiring here: https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html -->
+
 <!-- ### Resistance increases with wire length
 
 TODO?
@@ -446,6 +448,8 @@ To gain a better understanding of common operating voltages/currents, we would l
 
 **Figure.** Here's an example of the AC input and DC output of three devices in my home.
 {: .fs-1 }
+
+<!-- Should probably talk about watts P= V * I. But don't want to overwhelm in first lesson. https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html has a nice introductory description of watts>
 
 <!-- ## Notes
 - Should I talk about short vs. open circuit here? I think so

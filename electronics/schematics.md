@@ -115,6 +115,36 @@ This circuit schematic is of the 5V voltage regulator on the [Sparkfun RedBoard]
 
 The circuit schematic above also has a number of other symbols, including polarized and non-polarized [capacitors](https://en.wikipedia.org/wiki/Capacitor) (two parallel lines), a [zener diode](https://en.wikipedia.org/wiki/Zener_diode), and the [LM1117 linear regulator](https://www.ti.com/lit/ds/symlink/lm1117.pdf?ts=1617203074186&ref_url=https%253A%252F%252Fwww.google.com%252F).
 
+## Activity: Building circuit diagrams in Fritzing
+
+For your learning activity, we would like you to build both a *pictorial* representation and a *schematic* representation of the same circuit in the open-source hardware layout tool [Fritzing](https://fritzing.org/). While the production version of Fritzing is € 8, you can download development versions for free on [GitHub](https://github.com/fritzing/fritzing-app/releases).
+
+### Download and install Fritzing
+
+The latest development version of Fritzing is CD-548. Visit the GitHub Fritzing [releases page](https://github.com/fritzing/fritzing-app/releases) and scroll down to CD-548, then click on the 'Assets' link, which will expand a download menu for compiled versions of Fritzing for various OSes. See image below.
+
+![Screenshot of the GitHub releases page for Fritzing](assets/images/DownloadingFritizingFromGitHub_ScreenshotByJonFroehlich.png)
+
+**Figure** Go to the GitHub Fritzing [releases page](https://github.com/fritzing/fritzing-app/releases), scroll down to CD-548, then click on the 'Assets' link to download a free development version of Fritzing.
+{: .fs-1 }
+
+### Using Fritzing
+
+Once you've downloaded and unzipped the Fritzing release, open it and follow this tutorial video. Together, we will make a simple LED-based circuit with a 9V battery, a switch, a resistor, and an LED. To complement the video, we also have this [simple Fritzing PDF guide](assets/pdfs/RapidIntroduction_HowToUseFritizing_ByJonFroehlich.pdf).
+
+<iframe width="736" height="414"  src="https://www.youtube.com/embed/x1aN9LwhIAQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+**Video** A video tutorial of using [Fritzing](https://fritzing.org/) to build a simple LED-based circuit.
+{: .fs-1 }
+
+### For your prototyping journal
+
+For your prototyping journal, take a screenshot of what you made following the tutorial video. Then save a new file, and make a simple modification to the circuit—it could be switching to a different color LED or adding in another part of the circuit. Take a screenshot of this new modified circuit and describe it, briefly, in your journal.
+
+As usual, you should also report on any challenges or confusions you experienced!
+
+Have fun!
+
 ## Resources
 
 - [How to Read a Schematic](https://learn.sparkfun.com/tutorials/how-to-read-a-schematic/all), sparkfun.com

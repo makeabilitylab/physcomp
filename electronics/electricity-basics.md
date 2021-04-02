@@ -296,6 +296,8 @@ As you learn and begin analyzing electrical circuits, it's important to pay atte
 
 As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a *resistance* to the electrical current. Notably, and importantly, this resistance slows **all** of the charge movement (current) in the circuit, not just those charges passing through the resistive material.
 
+A common, but imperfect, analogy for electrical resistance is *mechanical friction*; a resistor converts electrical energy to heat energy (and causes a voltage drop) just as friction transforms kinetic mechanical energy to heat. 
+
 <!-- **TODO: think of a water [flow through a narrow pipe](https://youtu.be/F_vLWkkOETI?t=267)** -->
 
 Depending on their atomic composition, some materials have lower resistance than others. Metals like silver, copper, and gold are *good* conductors—they offer *low* resistance—because they have loosely bound electrons in the outer shells of their atoms. These electrons are easily displaceable and, with an applied electric field, can be "pushed" from atom-to-atom within the material to form a current.

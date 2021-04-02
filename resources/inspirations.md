@@ -45,7 +45,7 @@ The following courses have inspired my pedagogical approach and materials.
 
 - **CS4830/7000: Things that Think**, CU Boulder, Co-taught by Mike and Ann Eisenberg. Example offerings: [Spring 2011](http://web.archive.org/web/20151105011253/http://l3d.cs.colorado.edu/~ctg/classes/ttt2011/Home.html), [Spring 2012](http://web.archive.org/web/20151105011258/http://l3d.cs.colorado.edu/~ctg/classes/ttt2012/TTT12.html)
 
-## Classes with interactive websites
+## Courses with interactive websites
 
 There are a number of emerging academic courses that have accompanying interactive learning websites, like this one. Here are some that I'm aware of (please share others!):
 

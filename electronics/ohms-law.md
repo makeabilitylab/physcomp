@@ -229,6 +229,8 @@ In this lesson, we learned:
 
 - [What is Ohm's Law?](https://youtu.be/lf0lMDZVwTI), Math and Science
 
+- [Ohm's Law and Power](https://www.electronics-tutorials.ws/dccircuits/dcp_2.html), [Electronics Tutorials](https://www.electronics-tutorials.ws/)
+
 ## Next Lesson
 
 In the [next lesson](series-parallel.md), we will apply Ohm's Law to more complex circuits—specifically those that combine resistors in *series* and those that combine them in *parallel*.

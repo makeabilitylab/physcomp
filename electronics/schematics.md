@@ -59,7 +59,7 @@ Below, we have two additional examples. On the left, a 9V circuit with three com
 
 ## Schematics do not capture physical arrangement
 
-While a circuit schematic captures the relative ordering of and connections between components, the spacing and overall layout is *not* captured. When followed, you can circuit schematics to build a circuit—a bit like following Ikea instructions. But, in this case, the schematic only captures the electrical relationships between components. So, you can use whatever spatial layout you want—as long as it is functionally equivalent to the diagram.
+While a circuit schematic captures the relative ordering of and connections between components, the spacing and overall layout is *not* captured. When followed, you can use circuit schematics to build a circuit—a bit like following Ikea instructions. But, in this case, the schematic only captures the electrical relationships between components. So, you can use whatever spatial layout you want—as long as it is functionally equivalent to the diagram.
 
 For example, the following five schematics of a basic LED circuit are all functionally equivalent! Take your time reading them—do you agree that they are all equivalent? What stands out to you?
 

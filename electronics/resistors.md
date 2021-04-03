@@ -24,19 +24,19 @@ Resistors are one of the most common electrical components in digital circuits. 
 
 A resistor is a specially formulated component that *resists* the flow of charge (current) in a circuit. Just as we can reduce the flow of water in a pipe by inserting a valve packed with sand, clay, hair (bleah), or other permeable blockages, so too can we reduce the flow of electrons by inserting a component that has less conductive material than a normal wire.
 
-## How does a resistor work?
+## How do resistors work?
 
 ![An animated gif showing how resistors can be placed in a circuit to resist current flow.](assets/gifs/ResistorCurrentFlow_EngineeringMindset-Optimized.gif)
-**Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons "collide" with other atoms and themselves, which restricts electron flow (and also transforms some energy as heat). Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
+**Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons "collide" with other atoms and themselves, which transforms the electrical energy to thermal energy and induces a voltage drop. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
 {: .fs-1 }
 
-In a resistor, flowing electrons collide with atoms and make them vibrate converting *electrical energy* to *heat energy*. Thus, there is a voltage drop $$V$$ across each resistor, which is captured by Ohm's Law: $$V = I * R$$. The amount by which a resistor *resists* the flow of charge is called its resistance $$R$$ and is measured in Ohms (Ω).
+In a resistor, flowing electrons collide with atoms making them vibrate, which converts *electrical energy* to *heat energy* and induces a voltage drop $$V$$. The amount by which a resistor *resists* the flow of charge is called its resistance $$R$$ and is measured in Ohms (Ω). The amount of voltage drop over a resistor captured by Ohm's Law: $$V = I * R$$.
 
-As noted in [Lesson 1](electricity-basics.md), some materials have lower resistance than others depending on their atomic composition. Metals like silver, copper, and gold are *good* conductors—they offer *low* resistance—because they have easily displaceable electrons in their outer atomic shells. Other materials such as glass, rubber, and air have high resistance and poor conductivity ("low electron mobility")—these materials are called *insulators*.
+As noted in [Lesson 1](electricity-basics.md), some materials like metals—silver, copper, and gold—have low resistances. They have easily displaceable electrons in their outer atomic shells and make good *conductors*. Other materials such as glass, rubber, and air have high resistance and poor conductivity ("low electron mobility")—these materials are called *insulators*.
 
-## Resistor composition
+## How are resistors made?
 
-We can carefully select the *type* and *amount* of a resistive material to create a resistor with a specific resistance $$R$$. In the image below, for example, a resistive material (like carbon) is wrapped around an insulator and covered by an insulating material as well. The more wraps, the higher resistance. And this should intuitively make sense: increasing the number of wraps simply increases the *length* of the resistive material (or the amount of resistive material electrons have to navigate through).
+To make a resistor with a specific resistance $$R$$, component manufacturers carefully select the *type* and *amount* of a resistive material embedded into insulated packaging. In the image below, for example, a resistive material (like carbon) is wrapped around an insulator and covered by an insulating material as well. The more wraps, the higher resistance. And this should intuitively make sense: increasing the number of wraps simply increases the *length* of the resistive material (or the amount of resistive material electrons have to navigate through).
 
 ![](assets/images/InsideResistors_FromSparkfunWithSlightModificationsByJonFroehlich.png)
 **Figure.**  Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/resistors) with annotations by Jon Froehlich.

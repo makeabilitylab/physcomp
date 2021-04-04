@@ -386,6 +386,10 @@ Here are some exercises to try.
 - Hook up an external LED that fades based on analog input
 - Hook up the piezo buzzer to make sound based on analog input
 
+<!-- ## Resources
+
+UIUC Analog Input: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M005_ArduinoAnalogInputs.pdf -->
+
 ## Next Lesson
 
 In the next lesson, we'll learn how to add a fixed resistor to a two-leg variable resistor like a force-sensitive resistor or photocell to create a voltage divider that can be read by a microcontroller.

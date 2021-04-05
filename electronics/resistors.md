@@ -151,6 +151,8 @@ If we exceed a resistor's power capacity, it will begin to heat up and eventuall
 **Figure.** Resistors are made of materials that cause electron collisions with atoms, generating heat. Resistors have "power ratings" that, when exceeded, can heat up too much and burn out (left image). If you overpower your resistor, it could burn you—be careful. On the right image, a Reddit user posted their resistor burn imprint on their finger. Image on left from this [Being Engineers video](https://youtu.be/HhUiWLlx1oA) and image on the right from the Electrical Engineering sub-reddit by user Xil0Sil0 ([link](https://www.reddit.com/r/ElectricalEngineering/comments/mh6jee/my_cute_little_resistor_burn/?utm_source=share&utm_medium=web2x&context=3))
 {: .fs-1 }
 
+Notably, I've never had a resistor start on fire or burn up (though I have had them heat up to the point in which they are "hot to the touch"). If you smell something burning, immediately unplug your power supply.
+
 ## Reading resistors
 
 There are three ways to "read" resistors: (1) keep them arranged in pre-labeled packs (sidestepping the problem a bit); (2) learn how to decode the color-coded bands; or (3) use a multimeter on the "read resistance" setting.

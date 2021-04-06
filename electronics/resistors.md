@@ -1,14 +1,14 @@
 ---
 layout: default
-title: L4&#58; Resistors
-nav_order: 4
+title: L5&#58; Using Resistors
+nav_order: 5
 parent: Intro to Electronics
 has_toc: false # on by default
 usemathjax: true
 comments: true
 usetocbot: true
-nav_exclude: true
-search_exclude: true
+nav_exclude: false
+search_exclude: false
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

@@ -28,7 +28,7 @@ Introduces three key electricity concepts, [current, voltage, and resistance](el
 
 ## [Lesson 2: Circuit Schematics](schematics.md)
 
-Introduces a visual language for describing circuits called [circuit schematics](schematics.md), which are used in component datasheets, CAD programs (*e.g.,* circuit simulators, PCB layout software), and circuit analyses.
+Introduces a visual language for describing circuits called [circuit schematics](schematics.md), which are used in component datasheets, CAD programs (*e.g.,* circuit simulators, PCB layout software), and circuit analyses. Also includes an activity using [Fritzing](https://fritzing.org/) to build your own schematics.
 
 ## [Lesson 3: Ohm's Law](ohms-law.md)
 
@@ -36,7 +36,7 @@ Introduces [Ohm’s Law](ohms-law.md), one of the most important empirical laws 
 
 ## [Lesson 4: Series vs. Parallel Resistors](series-parallel.md)
 
-Introduces [series and parallel resistor circuits](series-parallel.md), how to analyze them, and why they're important.
+Introduces [series and parallel resistor circuits](series-parallel.md), how to analyze them, and why they're important. Also includes an activity to build and explore series and parallel resistor configurations in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
 <!-- ## [Lesson 5: Resistors](resistors.md)
 
@@ -46,17 +46,19 @@ TODO: what are resistors, how to decode them, use them, etc. (Builds on Lesson 1
 
 TODO: what are LEDs, how to select resistors, how to use LEDs in series vs. parallel
 
-## [Lesson 7: Breadboards](breadboards.md)
-
-TODO: what are breadboards and how to use them
-
-## [Lesson 8: Variable resistors](variable-resistors.md)
+## [Lesson 7: Variable resistors](variable-resistors.md)
 
 TODO: what are variables resistors, how to use them, and how to make your own.
 
-## [Lesson 9: Using a multimeter](multimeter.md)
+## [Lesson 8: Using a multimeter](multimeter.md)
 
-TODO: or could integrate this somewhere else? -->
+TODO: or could integrate this somewhere else? 
+
+## [Lesson 9: Breadboards](breadboards.md)
+
+TODO: what are breadboards and how to use them
+
+-->
 
 <!-- # TODO
 - Should we add voltage regulator? https://youtu.be/howQ05z4v7Q?

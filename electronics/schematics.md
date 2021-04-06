@@ -147,6 +147,16 @@ As usual, you should also report on any challenges or confusions you experienced
 
 Have fun!
 
+## Schematic building tools
+
+There are a number of schematic building tools aimed at makers, each with their own tradeoffs.
+
+- [Circuit.io](https://www.circuito.io/). Has some very interesting auto-completion features, combines design+code, is purely a web app. No simulation support.
+
+- [Fritzing](https://fritzing.org/). Provides both pictorial ("breadboard") plus schematic representations. Was "industry standard" for many years but has struggled with fundraising and feature improvements of late.
+
+- [Tinkercad Circuits](https://www.tinkercad.com/learn/circuits). Allows you to design Arduino-based circuits, write code, and simulate. Does not provide schematic representations.
+
 ## Resources
 
 - [How to Read a Schematic](https://learn.sparkfun.com/tutorials/how-to-read-a-schematic/all), sparkfun.com

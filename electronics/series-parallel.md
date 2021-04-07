@@ -194,6 +194,8 @@ However, the amount of current between the two circuits would be significantly d
 
 Wouldn't it be cool to dynamically control one of those resistor values to output a variable voltage at $$V_{out}$$? Yes! And this is the basis of a [potentiometer](https://en.wikipedia.org/wiki/Potentiometer), which we will learn about in a later lesson.
 
+<!-- TODO: Khan Academy has a nice derivation of this: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider -->
+
 <!-- TODO: update diagrams to make this more clear. I like the diagrams by https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider -->
 
 <!-- TODO: add in note here about how VB needs to have no load (or a very small load) -->
@@ -278,6 +280,10 @@ Does the visualization match your expectation?
 
 **Figure.** This video shows a [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a basic two resistor parallel circuit. You can play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rxR48UMTSrExVGAjYB3QSGGjsCISPBsATiDW9s2QnvW0wxqmDg7axY4eM07Zi8muL9yzU+MqoCpRp+E14ggXYPUzDbR2DIAM8-TwctRR8vUXSUiJCXXOj4tOcacxi+AXigA).
 {: .fs-1 }
+
+<!-- TODO: add in parallel simplication with only two parallel resistors: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors
+
+TODO: add in strategy for simplifying: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-simplifying-resistor-networks -->
 
 ## Activity
 

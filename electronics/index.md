@@ -44,19 +44,21 @@ TODO: what are resistors, how to decode them, use them, etc. (Builds on Lesson 1
 
 ## [Lesson 6: LEDs](leds.md)
 
-TODO: what are LEDs, how to select resistors, how to use LEDs in series vs. parallel
+TODO: what are LEDs, how to select resistors, how to use LEDs in series vs. parallel. Simulate in CircuitJS?
 
-## [Lesson 7: Variable resistors](variable-resistors.md)
+## [Lesson 7: Breadboards](breadboards.md)
+
+TODO: what are breadboards and how to use them. Also introduces Tinkercad circuits.
+
+## [Lesson 8: Variable resistors](variable-resistors.md)
 
 TODO: what are variables resistors, how to use them, and how to make your own.
 
-## [Lesson 8: Using a multimeter](multimeter.md)
+## [Lesson 9: Using a multimeter](multimeter.md)
 
 TODO: or could integrate this somewhere else? 
 
-## [Lesson 9: Breadboards](breadboards.md)
 
-TODO: what are breadboards and how to use them
 
 -->
 

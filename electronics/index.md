@@ -44,23 +44,19 @@ Building on Lessons 1 - 4, let's dive more deeply into [resistors](resistors.md)
 
 ## [Lesson 6: LEDs](leds.md)
 
-In this lesson, we'll introduce one of the most common electrical components in the world: [light-emitting diodes](leds.md) or [LEDs](leds.md). You'll learn about your first semiconductor device, diodes, and how they're non-ohmic and only allow current to pass in one direction. Then, we'll introduce a special kind of diode, called an LED, and show how to use them, how to select an appropriate current-limiting resistor, and why resistors are necessary. You'll also get to physically build stuff, yay!
+In [this lesson](leds.md), we'll introduce one of the most common electrical components in the world: [light-emitting diodes](leds.md) or [LEDs](leds.md). You'll learn about your first semiconductor device, diodes, and how they're non-ohmic and only allow current to pass in one direction. Then, we'll introduce a special kind of diode, called an LED, and show how to use them, how to select an appropriate current-limiting resistor, and why resistors are necessary. You'll also get to physically build stuff, yay!
 
-<!-- ## [Lesson 7: Breadboards](breadboards.md)
+## [Lesson 7: Breadboards](breadboards.md)
 
-TODO: what are breadboards and how to use them. Also introduces Tinkercad circuits.
+In [this lesson](breadboards.md), we'll learn about a very useful circuit prototyping tool called breadboards, which makes it easy to rapidly build circuits (and plug/unplug components and wires).
 
-## [Lesson 8: Variable resistors](variable-resistors.md)
+<!-- ## [Lesson 8: Variable resistors](variable-resistors.md)
 
 TODO: what are variables resistors, how to use them, and how to make your own.
 
 ## [Lesson 9: Using a multimeter](multimeter.md)
 
-TODO: or could integrate this somewhere else?  -->
-
-
-
--->
+TODO: or could integrate this somewhere else?   -->
 
 <!-- # TODO
 - Should we add voltage regulator? https://youtu.be/howQ05z4v7Q?

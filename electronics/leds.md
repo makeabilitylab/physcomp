@@ -74,7 +74,7 @@ With resistors, there is a linear relationship between voltage and current. With
 **Figure.**  An approximate current-voltage (or I-V) graph for resistors and diodes. Notice that after the applied voltage $$V$$ exceeds the forward voltage $$V_f$$ of the diode, that the diode "turns on" and current flows (and flows as if the diode were just a closed switch). Image made in PowerPoint.
 {: .fs-1 }
 
-Typically, once $$V_f$$ is reached, we assume that the voltage drop $$V_D$$ across a diode remains relatively constant (at, say, 0.7V) regardless of the current through it. But this is not entirely true. In fact, $$V_D$$ continues to change slightly—however, this change is so small over a wide range of currents that we can model $$V_D$$ as constant. And this approximation will be perfectly fine for our purposes.
+Typically, once $$V_f$$ is reached, we assume that the voltage drop $$V_D$$ across a diode remains relatively constant (at, say, 0.7V) regardless of the current through it. But this is not entirely true. In fact, $$V_D$$ continues to change slightly—however, this change is so small over a wide range of currents that we can model $$V_D$$ as constant. And this approximation is fine for our purposes.
 
 ![](assets/images/CurrentVoltageGraphDiodeSimplication2_JonFroehlichAndUIUCECE110.png)
 **Figure.**  The current-voltage relationship of a diode is often simplified like the figure on the right, even though $$V_D$$ does indeed change slightly as current increases. Image on right from [UIUC ECE110](https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?diodes).
@@ -116,7 +116,7 @@ As we've done before, when we first begin analyzing a circuit, we identify what 
 
 [Kirchhoff’s Voltage Law](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/v/ee-kirchhoffs-voltage-law) states that for a closed loop series path the algebraic sum of all the voltages is zero. This is due to the conservation of energy—the circuit loop is a closed conducting path, so no energy is lost.
 
-In this case, the voltage supply of 9V plus the voltage drop $$V_R$$ over the resistor $$R_1$$ plus the voltage drop $$V_D$$ over the diode $$D_1$$ must equal zero. Another way to write this is:
+In this case, the voltage supply of 9V plus the voltage drop $$V_R$$ over the resistor $$R_1$$ and the voltage drop $$V_D$$ over the diode $$D_1$$ must equal zero. Another way to write this is:
 
 $$V_{CC} = V_R + V_D$$
 
@@ -186,7 +186,7 @@ Where $$I_S$$ is the saturation current, $$V_D$$ is the voltage across the diode
 
 ## Using LEDs
 
-Whew, we finally made it back to LEDs, which are amazingly flexible, fun, and elegant electronic components (see image below). We will also use LEDs in many of our [Intro to Arduino](../arduino/index.md) lessons. 
+Whew, we finally made it back to LEDs, which are amazingly flexible, fun, and elegant electronic components (see image below). LEDs are essential to physical computing and we rely on them in many of our [Intro to Arduino](../arduino/index.md) lessons. So, it's important that you understand how to use them. 
 
 ![](assets/images/LEDBasedProjects.png)
 **Figure.** A variety of relatively simple LED-based projects. The top row projects are built with just LEDs, resistors, and a battery. The bottom row are built with microcontrollers. From top-left: (a) Flower LED lamp built with plastic spoons by [Wemyour](https://www.youtube.com/watch?v=OsTKdKdMXKU); (b and c)  Paper-based nightlights and a starry water bottle built by [I Love Creativity](https://youtu.be/3frVM7J0nO8); (d) an 8x8x8 LED cube built with Arduino Uno by [Harry Le](https://youtu.be/T5Aq7cRc-mU); (e) hanging LED cloud by [Richard Clarkson](https://vimeo.com/111889143); (f) air quality balloons by Stacey Kuznetsov and colleagues ([UbiComp'11 paper](http://doi.acm.org/10.1145/2030112.2030145), [Instructables](https://www.instructables.com/Air-quality-balloons/))
@@ -217,7 +217,10 @@ Earlier, we showed a simple current-voltage graph (IV plot or IV curve) both for
 
 We can expand our IV graph for resistors to show how current linearly increases at different rates depending on the underlying resistance (literally just graphing $$I=\frac{V}{R}$$ for different values of $$R$$). See graph on the left below.
 
-We can also graph the IV curve for LEDs, which again demonstrates non-linearity (remember, diodes are non-ohmic). Some important things to point out: first, like diodes, very little current flows through an LED until its "on" or "forward" voltage $$V_f$$ is reached. Second, the forward voltage $$V_f$$ differs by the LED's color. For example, notice how blue (B) and white (W) LEDs require more $$V_f$$ than red (R) and orange (O) in the graph below.
+We can also graph the IV curve for LEDs, which again demonstrates non-linearity (remember, diodes are non-ohmic). Some important things to point out: 
+
+1. First, like diodes, very little current flows through an LED until its "on" or "forward" voltage $$V_f$$ is reached. 
+2. Second, the forward voltage $$V_f$$ differs by the LED's color. For example, notice how blue (B) and white (W) LEDs require more $$V_f$$ than red (R) and orange (O) in the graph below.
 
 ![](assets/images/IVCurves_FromLEDnique.com.png)
 **Figure.** This figure shows the IV curve for various resistor values (following $$I=\frac{V}{R}$$) and for various LED values (on the right). Notice how the forward voltage, $$V_f$$ is different based on the LED color. Image from [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/).
@@ -225,7 +228,7 @@ We can also graph the IV curve for LEDs, which again demonstrates non-linearity 
 
 #### Careful putting mixed-color LEDs in parallel
 
-Because differently colored LEDs have unique $$V_f$$, you need to be especially careful with mixed color LED circuit configurations—especially if you are wiring them in parallel. You'll need to account for the differences in $$V_f$$ and select an appropriate current-limiting resistor for each parallel branch.
+Because differently colored LEDs have unique "on" voltages $$V_f$$, you need to be especially careful with mixed color LED circuit configurations—especially if you are wiring them in parallel. You'll need to account for the differences in $$V_f$$ and select an appropriate current-limiting resistor for each parallel branch (see [LEDnique.com](http://lednique.com/parallel-leds/)).
 
 For the LEDs used to produce these IV graphs, the red LED draws 40mA at 2V while the green and blue LEDs only draw 12mA and 3mA, respectively.
 
@@ -237,15 +240,15 @@ For the LEDs used to produce these IV graphs, the red LED draws 40mA at 2V while
 
 To evaluate the current-voltage response curve for the LEDs in our hardware kits (the [Adafruit 5mm LED pack](https://www.adafruit.com/product/4203)), I ran my own measurement experiments using a benchtop variable DC power supply (I have the [Siglent SPD3303X-E](https://siglentna.com/power-supplies/spd3303x-spd3303x-e-series-programmable-dc-power-supply/)) and my trusty multimeter.
 
-I conducted two small experiments. First, using both a red LED and then a blue LED, I output a fixed voltage starting at 0V and incremented by 0.1V (ending at 3.2V for the red LED and 5V for the blue LED). For each step, I measured the current draw using my multimeter. The results are shown below (left graph). For the second experiment, I only used the red LED. This time, I started at 1.6V and incremented by 0.01V (ending at 2.4V)—again measuring the current draw. The results are shown on the right graph below.
+I conducted two small experiments. First, using both a red LED and then a blue LED, I output a fixed voltage starting at 0V and incremented by 0.1V (ending at 3.2V for the red LED and 5V for the blue LED). For each step, I measured the current $$I_F$$ through the LED using my multimeter (using the ammeter setting). The results are shown below (left graph). For the second experiment, I only used the red LED. This time, I started at 1.6V and incremented by 0.01V (ending at 2.4V)—again measuring the current draw. The results are shown on the right graph below.
 
 ![](assets/images/IVCurveExperiments_ByJonFroehlich.png)
 **Figure.** IV graphs from my own experiments with the [Adafruit 5mm LED pack](https://www.adafruit.com/product/4203). 
 {: .fs-1 }
 
-Notably, the IV curve generally matches [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/). The red LED has a much smaller $$V_f$$ than the blue LED and the current draw after the $$V_f$$ threshold is reached seems exponential. However, unlike the [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/) graphs, at $$V_f=2V$$, the red LED was only drawing $$5.2mA$$ of current and the blue LED was completely off ($$0mA$$ of current).
+Notably, the IV curve generally matches [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/). The red LED has a much smaller $$V_f$$ than the blue LED and the current draw after the $$V_f$$ threshold is exponential. However, unlike the [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/) graphs, at $$V_f=2V$$, the red LED was only drawing $$5.2mA$$ of current and the blue LED was completely off ($$0mA$$ of current).
 
-To show how the LED brightness varies with current, I've replotted the results of the second experiment and overlaid corresponding images of my experimental setup plus the red LED output. At $$V_f=1.6V$$, the red LED was drawing $$4μA$$ of current but was not illuminated. At $$V_f=1.8V$$, the red LED was drawing $$0.57mA$$ of current and on. By $$V_f=2V$$ and beyond, the red LED was very bright.
+To show how the LED brightness varies with current, I've replotted the results of the second experiment and overlaid corresponding images of my experimental setup plus the red LED output. At $$V_f=1.6V$$, the red LED was drawing $$4μA$$ of current but was not illuminated. At $$V_f=1.8V$$, the red LED was drawing $$0.57mA$$ of current and on. By $$V_f=2V$$ and beyond, the red LED was very bright and the exponential curve began!
 
 ![](assets/images/IVCurveExperiments_GraphPlusRedLEDPictures_ByJonFroehlich.png)
 **Figure.** The second experiment shown with images overlaid.
@@ -253,31 +256,116 @@ To show how the LED brightness varies with current, I've replotted the results o
 
 ## Current-limiting resistors
 
-As our IV graphs demonstrate, once $$V_f$$ is surpassed, LED's current draw increases exponentially. Without a current limiting resistor, the LEDs will draw as much current as they can and destroy themselves! Yikes!
+As our IV graphs demonstrate, once $$V_f$$ is surpassed, LED's current draw increases exponentially. Without a current-limiting resistor, the LEDs will draw as much current as they can and destroy themselves! Yikes!
 
-So, how can we determine what resistor to use? Using the same process that we did for the [diodes](#analyzing-a-diode-in-a-circuit).
+We need a resistor to limit the current in the circuit. But how can we determine what resistor to use? Using the same process that we did for the [diodes](#analyzing-a-diode-in-a-circuit).
 
-### Determining which resistor to use
+---
+**NOTE:**
 
-To determine what type of current-limiting resistor to use, you need to consult the LED's datasheet. The [Adafruit product page](https://www.adafruit.com/product/4203) for the diffused 5mm LEDs has a link to five datasheets—one for each color in the pack. For this example, let's go with the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf), which we've also copied [locally](assets/pdfs/RedLEDDatasheet_C53-002_Fedy_FD-5AR35-1.pdf) just in case.
+As an important aside, once you get used to prototyping circuits and working with LEDs, you'll often just choose a 330Ω or 470Ω resistor (with a 9V supply) or a 220Ω resistor (with a 5V supply) and start building. If the LED is too bright, just grab a bigger resistor. Too dim, smaller resistor.
 
-The datasheet states that the forward voltage $$V_f$$ for the red LED is between $$1.9V$$ and $$2.1V$$ with a typical value of $$2.0V$$. At $$V_f=2V$$, the datasheet states that the forward current $$I_f$$ is $$20mA$$. All specifications are for 25 ℃. 
+You'll not go through the detailed process of picking out a perfect resistor unless it's critical to your construction (and LEDs play a key role). But we want to show you how to do it right, so read on!
+
+---
+
+### Solving for the current limiting resistor
+
+To determine a current-limiting resistor, you first need to consult your LED's datasheet. The [Adafruit product page](https://www.adafruit.com/product/4203) for the diffused 5mm LEDs has links to five datasheets—one for each color in the pack. For this example, let's go with the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf), which we've also copied [locally](assets/pdfs/RedLEDDatasheet_C53-002_Fedy_FD-5AR35-1.pdf) just in case.
+
+The datasheet states that the forward voltage $$V_f$$ for the red LED is between $$1.9V$$ and $$2.1V$$ with a typical value of $$2.0V$$. At $$V_f=2V$$, the datasheet states that the forward current $$I_f$$ is $$20mA$$. All specifications are for 25℃. 
+
+![](assets/images/ScreenshotOfTheRedLEDDatasheet-C53-002_Fedy_FD-5AR35-1.pdf.png.png)
+**Figure.** A screenshot of the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf) for the LEDS purchased from Adafruit.
+{: .fs-1 }
 
 Perfect, we can use this information to solve for our resistor! 
 
 Let's build a simple LED circuit with a 9V battery, a red LED, and a yet-to-be-determined resistor.
 
+![](assets/images/SolveForResistor_LEDCircuit_Step0_ByJonFroehlich.png)
+**Figure.** To limit the current in our LED-based circuit, we need to add a current-limiting resistor. But what value of resistance do we need? Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
+{: .fs-1 }
+
 #### Step 1: Identify nodes and voltage drops
 
-TODO
+As usual, our first step is to analyze what we know about our circuit and identify the nodes. This will help us solve any open questions. There are two key things of interest: What is the voltage drop $$V_R$$ over the resistor $$R_1$$ and what resistance value should $$R_1$$ be?
 
-#### Step 2: XXXXX
+![](assets/images/SolveForResistor_LEDCircuit_Step1_ByJonFroehlich.png)
+**Figure.** The first step in any circuit analysis is to identify and label your knowns. Get situated! Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
+{: .fs-1 }
 
-<!-- Watch Mike HArrison's "Everything I've Learned about LEDS" talk: https://youtu.be/5SQt1f4PsRU -->
+#### Step 2: Solve for $$V_R$$
+
+Just as we did with our regular diode circuit above, we can observe that $$V_R$$ plus $$V_F$$ must equal $$V_{CC}$$ due to Kirchhoff's Voltage Law. From the datasheet, we know that $$V_F = 2V$$. Thus, it's quite easy to solve for $$V_R$$, which is simply $$V_{CC}-V_D = 9V - 2V = 7V$$.
+
+![](assets/images/SolveForResistor_LEDCircuit_Step2_ByJonFroehlich.png)
+**Figure.** We can solve for $$V_R$$ using the LED datasheet value for $$V_F$$ and Kirchhoff's Voltage Law. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
+{: .fs-1 }
+
+#### Step 3: Consult datasheet for $$I_F$$
+
+Now, we need to consult the LED datasheet again to get the forward current $$I_F$$ at $$V_F=2V$$. The datasheet states that $$I_F=20mA = 0.02A$$. So, we want $$20mA$$ flowing around our circuit.
+
+![](assets/images/SolveForResistor_LEDCircuit_Step3_ByJonFroehlich.png)
+**Figure.** Consulting the LED datasheet again for the current $$I_F$$ at $$V_F=2V$$ shows us that $$I_F=20mA$$. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
+{: .fs-1 }
+
+#### Step 4: Solve for $$R_1$$
+
+Finally, we have all the information we need to solve for $$R_1$$ using Ohm's Law. More specifically, we can rearrange $$V_R = IR$$ to solve for resistance $$R=\frac{V_R}{I}=\frac{7V}{0.02A}=350Ω.
+
+![](assets/images/SolveForResistor_LEDCircuit_Step4_ByJonFroehlich.png)
+**Figure.** Using everything we know, we can solve for resistance value $$R_1$$ using Ohm's Law. More specifically, the resistance of $$R_1$$ must be equal to the voltage drop across the resistor divided by the current: $$R=\frac{V_R}{I}$$. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
+{: .fs-1 }
+
+#### What resistor to use?
+
+But there's just one problem: 350Ω is an unusual resistor value and it doesn't exist in your kits. You have a 330Ω resistor and a 470Ω resistor. So, which one should you use?
+
+![](assets/images/SolveForResistor_LEDCircuit_330Or470Ohm.png)
+
+Well, again we can use Ohm's Law to address this question. In this case, we have a known voltage drop $$V_R$$ over our resistor (that's 7V and does not change regardless of resistance value). We also know $$R$$—it's either 330Ω or 470Ω. So, let's solve for both cases and see what current we get.
+
+For **330Ω**:
+
+$$I=\frac{V_R}{I} = \frac{7V}{330Ω} = 21.2mA$$
+
+For **470Ω**:
+
+$$I=\frac{V_R}{I} = \frac{7V}{470Ω} = 14.9mA$$
+
+The [LED datasheet ](https://cdn-shop.adafruit.com/product-files/4203/C4277-001_Fedy_FD-5AB35-1.pdf) suggests that the maximum forward current $$I_F$$ is 20mA though the LED can support up to 100mA in very short bursts. Other [datasheets](https://www.sparkfun.com/datasheets/Components/LED/COM-09590-YSL-R531R3D-D2.pdf?_ga=2.92054106.1544287808.1617798899-935977820.1612992862) I've seen for red LEDs suggest a peak forward current of $$30mA$$.
+
+So, in this case, either the 330Ω or the 470Ω is probably OK (the 470Ω is, of course, a safer choice for protecting the wear on the LED). 
+
+As the final piece of analysis, we need to ensure that we are within the power dissipation limits of both the resistors and the LEDs. Recall that $$P=IV$$.
+
+For **330Ω**:
+
+$$P_R=0.0212A * 7V = 0.15W$$
+$$P_D=0.0212A * 2V = 0.04W$$
+
+For **470Ω**:
+
+$$P_R=0.0149A * 7V = 0.10W$$
+$$P_D=0.0149A * 2V = 0.03W$$
+
+In our kits, we have 0.25 watt resistors, which are capable of handling either the 0.15W (for the 330Ω circuit) or the 0.10W (for the 470Ω circuit). And the [LED datasheet ](https://cdn-shop.adafruit.com/product-files/4203/C4277-001_Fedy_FD-5AB35-1.pdf) states that these LEDs can dissipate up to 100mW (or 0.1W), which is within 0.04W and 0.03W.
+
+#### Use resistor equivalance rules
+
+We could, of course, also use our resistor equivalance rules to combine a resistor network (in series and parallel) to obtain the exact 350Ω value. In this case, it's quite simple because we can add two 10Ω to a 330Ω resistor.
+
+![](assets/images/SolveForResistor_LEDCircuit_UseResistorEquivalanceRules.png)
 
 #### Check work with simulator
 
 https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWub3mEJURfEMSiSYCNgHcB4YRRR5FVdgCdlqsBkLaQKBPqrZcchTX4IVfdRZs6lj8HsMPbR-S5WqUH1WwbAysqfwAPRV4iCTA8CExeGkVxADU2IV4fPFUXIOiQABMGADMAQwBXABsAFyYqhkLwKShYdiA
+
+#### Check work in reality
+
+![](assets/images/SolveForResistor_LEDCircuit_PhysicalBuildsOf330Ohm350OhmAnd470Ohm.png)
 
 ### Does it matter which side of the LED I place the resistor?
 
@@ -323,6 +411,7 @@ Outline:
 * Using LEDs and current limiting resistors
 * Wiring up multiple LEDs -->
 
+<!-- Watch Mike HArrison's "Everything I've Learned about LEDS" talk: https://youtu.be/5SQt1f4PsRU -->
 ## Resources
 
 ### Videos

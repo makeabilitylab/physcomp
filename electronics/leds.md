@@ -385,7 +385,7 @@ As you can see, our theoretical predictions were quite close to actual performan
 
 No. A resistor limits the current *throughout* a circuit loop. We know this from Ohm's Law and Kirchhoff's circuit laws.
 
-Don't believe me? Try performing the same circuit analysis we stepped through above but with the LED before the resistor. What changes? Nothing, right? $$V_f$$ is still 2V and thus $$V_R$$ is still 7V.
+Don't believe me? Try performing the same circuit analysis we stepped through above but with the LED before the resistor. What changes? Nothing, right? $$V_f$$ is still 2V and thus $$V_R$$ is still 7V. Here's a simulation demonstrating that nothing changes! 
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ResistorBeforeOrAfterTheLED_CircuitJS.mp4" type="video/mp4" />
@@ -405,9 +405,29 @@ There are lots of fun YouTube videos of supplying too much current to LEDs and o
 **Video.** This video shows what happens when the applied voltage significantly exceeds the LED's forward voltage $$V_f$$ with no current limiting resistor. Video from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
 {: .fs-1 }
 
-### Addressable LED strips
+## Activity
 
-Wiring up, powering, and controlling a large number of RGB (red, green, blue) LEDs with a microcontroller is complicated and messy. Thus, in the last decade, we've seen the emergence of low-cost "smart" RGB LED strips like [Adafruit's Neopixel](https://www.adafruit.com/product/1376?length=1) (aka, the WS2812B LED from WorldSemi), which contain strips of RGB LEDs—each with a small embedded microcontroller—that can be addressed and controlled individually. They are truly awesome but beyond the scope of this lesson because they are not raw electrical components and require a microcontroller to use.
+For your prototyping journals, design and build **two** different LED-based circuits with appropriate current-limiting resistors. For this activity, do **not** use a breadboard (even if you already know how). Instead, just wire up things directly using alligator clips and/or by "wire wrapping". Given that we are not using breadboards, you can keep this circuit relatively simple. If you want to hook up multiple LEDs, see this tutorial by [LEDnique](http://lednique.com/parallel-leds/).
+
+For each circuit, first sketch out the idea on paper using a circuit schematic representation (some of you use sketching apps on your touchscreens; this is also fine). Then build the circuit in CircuitJS and, finally, physically build it with your actual hardware components. Include a picture of your sketch, a screenshot of your CircuitJS simulation with a direct link, and a picture of your physical construction.
+
+To wire wrap your components, simply twist the legs together like this:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/WireWrapAnLED_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** An example of wire wrapping.
+{: .fs-1 }
+
+Here's an example picture of a simple LED circuit with alligator clips and wire wrapping:
+
+![](assets/images/SimpleLEDCircuitWithWireWrapping_ByJonFroehlich.png)
+**Figure.** An example of a simple LED circuit with a single resistor (to limit current) and multiple LEDs in series. This circuit draws ~10mA. Notice how the red LED is brightest at this amperage. 
+{: .fs-1 }
+
+<!-- ### Addressable LED strips
+
+Wiring up, powering, and controlling a large number of RGB (red, green, blue) LEDs with a microcontroller is complicated and messy. Thus, in the last decade, we've seen the emergence of low-cost "smart" RGB LED strips like [Adafruit's Neopixel](https://www.adafruit.com/product/1376?length=1) (aka, the WS2812B LED from WorldSemi), which contain strips of RGB LEDs—each with a small embedded microcontroller—that can be addressed and controlled individually. They are truly awesome but beyond the scope of this lesson because they are not raw electrical components and require a microcontroller to use. -->
 
 <!-- ## Constant current source
 

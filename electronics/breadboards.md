@@ -44,9 +44,24 @@ In the image below, we've highlighted *where* the pre-wired connections (those i
 **Figure** Breadboard image from [Fritzing](https://fritzing.org/). Annotations in PowerPoint.
 {: .fs-1 }
 
+## Examples
+
+Let's breadboard variations of the same LED-based circuit with a 9V power supply, a resistor, and a red LED.
+
+### Variation 1
 ![](assets/images/BreadboardExampleWithUnderlyingCircuitSchematicAndCurrentFlow_ByJonFroehlich.png)
 **Figure** Made in [Fritzing](https://fritzing.org/) and PowerPoint.
 {: .fs-1 }
+
+### Variation 2
+Here's another version of the same circuit but breadboarded differently. With breadboards, there are nearly infinite ways to build the same circuit. So, try to keep things clean and minimize the use of extraneous wires whenever possible. Which breadboarded version makes more sense to you?
+
+![](assets/images/BreadboardExample2_UsingPowerRailsOnBothSides.png)
+
+### Variation 3
+Again, the same circuit but breadboarded differently. This version uses no jumper wires and simple connects the resistor and LED directly to the power rails.
+
+![](assets/images/BreadboardExample3_NoExternalWires.png)
 
 ## Some breadboard tips
 

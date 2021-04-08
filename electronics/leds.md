@@ -20,7 +20,7 @@ search_exclude: false
 {:toc}
 ---
 
-Second only to [resistors](resistors.md), light-emitting diodes (LEDs) are the most common electrical components used in physical computing. LEDs are power-efficient light sources *not* based on resistive properties and thus, are non-ohmic devices. They come in a variety of shapes and sizes (see image below).
+Second only to [resistors](resistors.md), light-emitting diodes (LEDs) are the most common electrical components used in physical computing. LEDs are power-efficient light sources *not* based on resistive properties and thus, are non-ohmic devices. They come in a variety of shapes and sizes (see image below). In this lesson, you will learn about diodes and how they work before diving into LEDS, the importance of current-limiting resistors, and how to use them.
 
 ![](assets/images/Verschiedene_LEDs_FromWikipedia.jpg)
 **Figure.**  LEDs range in color, size, and shape. Image from [Wikipedia](https://en.wikipedia.org/wiki/File:Verschiedene_LEDs.jpg).
@@ -259,20 +259,42 @@ So, how can we determine what resistor to use? Using the same process that we di
 
 ### Determining which resistor to use
 
-To determine what type of current-limiting resistor to use, you need to consult the LED's datasheet. The [Adafruit product page](https://www.adafruit.com/product/4203) for the diffused 5mm LEDs has a link to five datasheets—one for each color in the pack.
+To determine what type of current-limiting resistor to use, you need to consult the LED's datasheet. The [Adafruit product page](https://www.adafruit.com/product/4203) for the diffused 5mm LEDs has a link to five datasheets—one for each color in the pack. For this example, let's go with the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf), which we've also copied [locally](assets/pdfs/RedLEDDatasheet_C53-002_Fedy_FD-5AR35-1.pdf) just in case.
+
+The datasheet states that the forward voltage $$V_f$$ for the red LED is between $$1.9V$$ and $$2.1V$$ with a typical value of $$2.0V$$. At $$V_f=2V$$, the datasheet states that the forward current $$I_f$$ is $$20mA$$. All specifications are for 25 ℃. 
+
+Perfect, we can use this information to solve for our resistor! 
+
+Let's build a simple LED circuit with a 9V battery, a red LED, and a yet-to-be-determined resistor.
+
+#### Step 1: Identify nodes and voltage drops
+
+TODO
+
+#### Step 2: XXXXX
 
 <!-- Watch Mike HArrison's "Everything I've Learned about LEDS" talk: https://youtu.be/5SQt1f4PsRU -->
 
+#### Check work with simulator
+
+https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWub3mEJURfEMSiSYCNgHcB4YRRR5FVdgCdlqsBkLaQKBPqrZcchTX4IVfdRZs6lj8HsMPbR-S5WqUH1WwbAysqfwAPRV4iCTA8CExeGkVxADU2IV4fPFUXIOiQABMGADMAQwBXABsAFyYqhkLwKShYdiA
+
 ### Does it matter which side of the LED I place the resistor?
 
-### Burning out LEDs
+No. A resistor limits the current throughout the circuit loop.
+
+### What happens if you forget the current-limiting resistor?
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/LEDBurnOut_Afrotechmods_Trimmed.mp4" type="video/mp4" />
 </video>
 
-**Video.** This video shows what happens when the applied voltage exceeds the LED's forward voltage $$V_f$$ with no current limiting resistor. Video from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
+**Video.** This video shows what happens when the applied voltage significantly exceeds the LED's forward voltage $$V_f$$ with no current limiting resistor. Video from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
 {: .fs-1 }
+
+### Addressable LED strips
+
+Wiring up, powering, and controlling a large number of RGB (red, green, blue) LEDs with a microcontroller is complicated and messy. Thus, in the last decade, we've seen the emergence of low-cost "smart" RGB LED strips like [Adafruit's Neopixel](https://www.adafruit.com/product/1376?length=1) (aka, the WS2812B LED from WorldSemi), which contain strips of RGB LEDs—each with a small embedded microcontroller—that can be addressed and controlled individually. They are truly awesome but beyond the scope of this lesson because they are not raw electrical components and require a microcontroller to use.
 
 <!-- ## Constant current source
 
@@ -282,7 +304,7 @@ See discussion of LM317 (constant current driver) here: [Chapter 3: LEDs](https:
 
 ## Addressable LED strips
 
-Wiring up, powering, and controlling a large number of RGB (red, green, blue) LEDs with a microcontroller is complicated and messy. Thus, in the last decade, we've seen the emergence of low-cost "smart" RGB LED strips like [Adafruit's Neopixel](https://www.adafruit.com/product/1376?length=1) (aka, the WS2812B LED from WorldSemi), which contain strips of RGB LEDs—each with a small embedded microcontroller—that can be addressed and controlled individually. They are truly awesome!
+Wiring up, powering, and controlling a large number of RGB (red, green, blue) LEDs with a microcontroller is complicated and messy. Thus, in the last decade, we've seen the emergence of low-cost "smart" RGB LED strips like [Adafruit's Neopixel](https://www.adafruit.com/product/1376?length=1) (aka, the WS2812B LED from WorldSemi), which contain strips of RGB LEDs—each with a small embedded microcontroller—that can be addressed and controlled individually. They are truly awesome but beyond the scope of this lesson because they are not raw electrical components and require a microcontroller to use.
 
 The NeoPixel has quickly become a prototyping standard because of Adafruit's [Arduino](https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-installation), [CircuitPython](https://learn.adafruit.com/adafruit-neopixel-uberguide/python-circuitpython), and [MakeCode](https://learn.adafruit.com/adafruit-neopixel-uberguide/makecode) libraries and their production of [widely read tutorials](https://learn.adafruit.com/adafruit-neopixel-uberguide).
 

@@ -32,7 +32,7 @@ LEDs are a type of [diode](https://en.wikipedia.org/wiki/Diode), which is an ele
 
 For example, an incandescent bulb converts roughly 5% of its energy into visible light, the rest is lost to heat. More specifically, the typical incandescent bulb at 120V can output 16 lumens per watt *vs.* 60 lm/W for compact fluorescent bulbs and 150 lm/W for white LED lamps ([source](https://en.wikipedia.org/wiki/Incandescent_light_bulb)). Moreover, a typical incandescent bulb lasts for roughly 1,000 hours compared to 20,000-30,000 hours for LEDs.
 
-While the basis for LED technology was discovered in 1927 ([Wikipedia](https://en.wikipedia.org/wiki/Light-emitting_diode#History)), it was not until the 1960s that the first visible-spectrum LEDs were demonstrated (red LEDs) and much later until they were commercially viable. Incredibly, the blue LED was not invented until the 1990s—earning co-inventors [Shuji Nakamura](https://en.wikipedia.org/wiki/Shuji_Nakamura), [Hiroshi Amano](https://en.wikipedia.org/wiki/Hiroshi_Amano), and [Isamu Akasaki](https://en.wikipedia.org/wiki/Isamu_Akasaki) the 2014 Nobel Prize in Physics—and there are still LED-based breakthroughs today (*e.g.,* high-efficiency, experimental white LEDs were demonstrated in the mid 2010s producing 303 lumens per watt of electricity).
+While the basis for LED technology was discovered in 1927 ([Wikipedia](https://en.wikipedia.org/wiki/Light-emitting_diode#History)), it was not until the 1960s that the first visible-spectrum LEDs were demonstrated (red LEDs) and much later until they were commercially viable. Incredibly, the blue LED was not invented until the 1990s—earning co-inventors [Shuji Nakamura](https://en.wikipedia.org/wiki/Shuji_Nakamura), [Hiroshi Amano](https://en.wikipedia.org/wiki/Hiroshi_Amano), and [Isamu Akasaki](https://en.wikipedia.org/wiki/Isamu_Akasaki) the 2014 Nobel Prize in Physics—and there are still LED-based breakthroughs today (*e.g.,* high-efficiency, experimental white LEDs were demonstrated in the mid 2010s producing 303 lumens per watt of electricity). Akasaki recently passed away (in April 2021) and the [New York Times](https://www.nytimes.com/2021/04/06/science/isamu-akasaki-dead.html?referringSource=articleShare) has a nice obituary with an interesting history of the blue LED invention.
 
 So, while LEDs are now pervasive, they're relatively new technology with active research.
 
@@ -184,7 +184,7 @@ $$I_D = I_S(e^\frac{q * V_D}{k * T}-1)$$
 
 Where $$I_S$$ is the saturation current, $$V_D$$ is the voltage across the diode, $$q$$ is the charge on an electron (in coulombs), $$k$$ is Boltzmann's constant, and $$T$$ is temperature (in kelvin). I have never had to use this equation but including it here for thoroughness. If you want to learn more, read this [Khan Academy article](https://www.khanacademy.org/science/electrical-engineering/ee-semiconductor-devices/ee-diode/a/ee-diode-circuit-element).
 
-## LEDs
+## Using LEDs
 
 Whew, we finally made it back to LEDs, which are amazingly flexible, fun, and elegant electronic components (see image below). We will also use LEDs in many of our [Intro to Arduino](../arduino/index.md) lessons. 
 
@@ -196,6 +196,8 @@ Building on our diode knowledge, we are now prepared to understand how LEDs work
 
 ### LED Parts
 
+LEDs are like super diodes—they function similarly but have this magical property of emitting light.
+
 Just like other diodes, an LED has two legs and is a polarized component—it will only work in one direction. The anode `+` is indicated by the *longer* leg of the LED and the cathode `-` is subtly indicated by the flat side of the LED's casing (see image below). The anode must face toward the higher electric potential part of your circuit and current flows from the anode to the cathode.
 
 ![](assets/images/LEDSymbolAndPartsLabeled_ByJonFroehlich.png)
@@ -206,12 +208,62 @@ Just like other diodes, an LED has two legs and is a polarized component—it wi
 LEDs are semiconductor devices that use [electroluminscence](https://en.wikipedia.org/wiki/Electroluminescence) to emit light in response to current. More specifically, when electrons pass through an LED they release energy in the form of photons. If you're curious to learn more, see this [video by Today I Found Out](https://youtu.be/uyse_I-zo4Q).
 
 ![](assets/images/InsideAnLED_ModifiedImageFromTubeTimeUS.png)
-
 **Figure.** An incredibly cool inside look a functioning LED by [TubeTimeUS](https://twitter.com/tubetimeus/status/1111807450141745152?s=11) on Twitter. Slight modifications to annotations by Jon E. Froehlich.
 {: .fs-1 }
 
+### The IV graph for LEDs
+
+Earlier, we showed a simple current-voltage graph (IV plot or IV curve) both for resistors, which follows Ohm's Law, $$I=\frac{V}{R}$$, and diodes, which does not.
+
+We can expand our IV graph for resistors to show how current linearly increases at different rates depending on the underlying resistance (literally just graphing $$I=\frac{V}{R}$$ for different values of $$R$$). See graph on the left below.
+
+We can also graph the IV curve for LEDs, which again demonstrates non-linearity (remember, diodes are non-ohmic). Some important things to point out: first, like diodes, very little current flows through an LED until its "on" or "forward" voltage $$V_f$$ is reached. Second, the forward voltage $$V_f$$ differs by the LED's color. For example, notice how blue (B) and white (W) LEDs require more $$V_f$$ than red (R) and orange (O) in the graph below.
+
+![](assets/images/IVCurves_FromLEDnique.com.png)
+**Figure.** This figure shows the IV curve for various resistor values (following $$I=\frac{V}{R}$$) and for various LED values (on the right). Notice how the forward voltage, $$V_f$$ is different based on the LED color. Image from [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/).
+{: .fs-1 }
+
+#### Careful putting mixed-color LEDs in parallel
+
+Because differently colored LEDs have unique $$V_f$$, you need to be especially careful with mixed color LED circuit configurations—especially if you are wiring them in parallel. You'll need to account for the differences in $$V_f$$ and select an appropriate current-limiting resistor for each parallel branch.
+
+For the LEDs used to produce these IV graphs, the red LED draws 40mA at 2V while the green and blue LEDs only draw 12mA and 3mA, respectively.
+
+![](assets/images/IVCurveZoomIn_FromLEDnique.com.png)
+**Figure.** Image based on [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/).
+{: .fs-1 }
+
+#### Experimenting with LED current-voltage relationships
+
+To evaluate the current-voltage response curve for the LEDs in our hardware kits (the [Adafruit 5mm LED pack](https://www.adafruit.com/product/4203)), I ran my own measurement experiments using a benchtop variable DC power supply (I have the [Siglent SPD3303X-E](https://siglentna.com/power-supplies/spd3303x-spd3303x-e-series-programmable-dc-power-supply/)) and my trusty multimeter.
+
+I conducted two small experiments. First, using both a red LED and then a blue LED, I output a fixed voltage starting at 0V and incremented by 0.1V (ending at 3.2V for the red LED and 5V for the blue LED). For each step, I measured the current draw using my multimeter. The results are shown below (left graph). For the second experiment, I only used the red LED. This time, I started at 1.6V and incremented by 0.01V (ending at 2.4V)—again measuring the current draw. The results are shown on the right graph below.
+
+![](assets/images/IVCurveExperiments_ByJonFroehlich.png)
+**Figure.** IV graphs from my own experiments with the [Adafruit 5mm LED pack](https://www.adafruit.com/product/4203). 
+{: .fs-1 }
+
+Notably, the IV curve generally matches [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/). The red LED has a much smaller $$V_f$$ than the blue LED and the current draw after the $$V_f$$ threshold is reached seems exponential. However, unlike the [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/) graphs, at $$V_f=2V$$, the red LED was only drawing $$5.2mA$$ of current and the blue LED was completely off ($$0mA$$ of current).
+
+To show how the LED brightness varies with current, I've replotted the results of the second experiment and overlaid corresponding images of my experimental setup plus the red LED output. At $$V_f=1.6V$$, the red LED was drawing $$4μA$$ of current but was not illuminated. At $$V_f=1.8V$$, the red LED was drawing $$0.57mA$$ of current and on. By $$V_f=2V$$ and beyond, the red LED was very bright.
+
+![](assets/images/IVCurveExperiments_GraphPlusRedLEDPictures_ByJonFroehlich.png)
+**Figure.** The second experiment shown with images overlaid.
+{: .fs-1 }
+
+## Current-limiting resistors
+
+As our IV graphs demonstrate, once $$V_f$$ is surpassed, LED's current draw increases exponentially. Without a current limiting resistor, the LEDs will draw as much current as they can and destroy themselves! Yikes!
+
+So, how can we determine what resistor to use? Using the same process that we did for the [diodes](#analyzing-a-diode-in-a-circuit).
+
+### Determining which resistor to use
+
+To determine what type of current-limiting resistor to use, you need to consult the LED's datasheet. The [Adafruit product page](https://www.adafruit.com/product/4203) for the diffused 5mm LEDs has a link to five datasheets—one for each color in the pack.
 
 <!-- Watch Mike HArrison's "Everything I've Learned about LEDS" talk: https://youtu.be/5SQt1f4PsRU -->
+
+### Does it matter which side of the LED I place the resistor?
 
 ### Burning out LEDs
 

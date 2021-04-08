@@ -273,7 +273,7 @@ You'll not go through the detailed process of picking out a perfect resistor unl
 
 To determine a current-limiting resistor, you first need to consult your LED's datasheet. The [Adafruit product page](https://www.adafruit.com/product/4203) for the diffused 5mm LEDs has links to five datasheets—one for each color in the pack. For this example, let's go with the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf), which we've also copied [locally](assets/pdfs/RedLEDDatasheet_C53-002_Fedy_FD-5AR35-1.pdf) just in case.
 
-The datasheet states that the forward voltage $$V_f$$ for the red LED is between $$1.9V$$ and $$2.1V$$ with a typical value of $$2.0V$$. At $$V_f=2V$$, the datasheet states that the forward current $$I_f$$ is $$20mA$$. All specifications are for 25℃. 
+The datasheet states that the forward voltage $$V_f$$ for the red LED is between $$1.9V$$ and $$2.1V$$ with a typical value of $$2.0V$$. The datasheet also states that in this range, the forward current $$I_f$$ is $$20mA$$. All specifications are for 25℃. 
 
 ![](assets/images/ScreenshotOfTheRedLEDDatasheet-C53-002_Fedy_FD-5AR35-1.pdf.png.png)
 **Figure.** A screenshot of the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf) for the LEDS purchased from Adafruit.
@@ -297,7 +297,7 @@ As usual, our first step is to analyze what we know about our circuit and identi
 
 #### Step 2: Solve for $$V_R$$
 
-Just as we did with our regular diode circuit above, we can observe that $$V_R$$ plus $$V_F$$ must equal $$V_{CC}$$ due to Kirchhoff's Voltage Law. From the datasheet, we know that $$V_F = 2V$$. Thus, it's quite easy to solve for $$V_R$$, which is simply $$V_{CC}-V_D = 9V - 2V = 7V$$.
+Just as we did with our regular diode circuit above, we can observe that $$V_R$$ plus $$V_D$$ must equal $$V_{CC}$$ due to Kirchhoff's Voltage Law. From the datasheet, we know that $$V_F = 2V$$. So, $$V_D=V_F=2V$$. Thus, it's quite easy to solve for $$V_R$$, which is simply $$V_{CC}-V_D = 9V - 2V = 7V$$.
 
 ![](assets/images/SolveForResistor_LEDCircuit_Step2_ByJonFroehlich.png)
 **Figure.** We can solve for $$V_R$$ using the LED datasheet value for $$V_F$$ and Kirchhoff's Voltage Law. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
@@ -313,7 +313,7 @@ Now, we need to consult the LED datasheet again to get the forward current $$I_F
 
 #### Step 4: Solve for $$R_1$$
 
-Finally, we have all the information we need to solve for $$R_1$$ using Ohm's Law. More specifically, we can rearrange $$V_R = IR$$ to solve for resistance $$R=\frac{V_R}{I}=\frac{7V}{0.02A}=350Ω.
+Finally, we have all the information we need to solve for $$R_1$$ using Ohm's Law. More specifically, we can rearrange $$V_R = IR$$ to solve for resistance $$R=\frac{V_R}{I}=\frac{7V}{0.02A}=350Ω$$.
 
 ![](assets/images/SolveForResistor_LEDCircuit_Step4_ByJonFroehlich.png)
 **Figure.** Using everything we know, we can solve for resistance value $$R_1$$ using Ohm's Law. More specifically, the resistance of $$R_1$$ must be equal to the voltage drop across the resistor divided by the current: $$R=\frac{V_R}{I}$$. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
@@ -343,29 +343,43 @@ As the final piece of analysis, we need to ensure that we are within the power d
 
 For **330Ω**:
 
-$$P_R=0.0212A * 7V = 0.15W$$
-$$P_D=0.0212A * 2V = 0.04W$$
+$$P_R=0.0212A * 7V = 0.15W \\
+P_D=0.0212A * 2V = 0.04W$$
 
 For **470Ω**:
 
-$$P_R=0.0149A * 7V = 0.10W$$
-$$P_D=0.0149A * 2V = 0.03W$$
+$$P_R=0.0149A * 7V = 0.10W \\
+P_D=0.0149A * 2V = 0.03W$$
 
 In our kits, we have 0.25 watt resistors, which are capable of handling either the 0.15W (for the 330Ω circuit) or the 0.10W (for the 470Ω circuit). And the [LED datasheet ](https://cdn-shop.adafruit.com/product-files/4203/C4277-001_Fedy_FD-5AB35-1.pdf) states that these LEDs can dissipate up to 100mW (or 0.1W), which is within 0.04W and 0.03W.
 
 #### Use resistor equivalance rules
 
-We could, of course, also use our resistor equivalance rules to combine a resistor network (in series and parallel) to obtain the exact 350Ω value. In this case, it's quite simple because we can add two 10Ω to a 330Ω resistor.
+We could, of course, also use our resistor equivalance rules to combine a resistor network (in series and/or in parallel) to obtain the exact 350Ω value. In this case, it's quite simple because we can add two 10Ω to a 330Ω resistor.
 
 ![](assets/images/SolveForResistor_LEDCircuit_UseResistorEquivalanceRules.png)
 
 #### Check work with simulator
 
-https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWub3mEJURfEMSiSYCNgHcB4YRRR5FVdgCdlqsBkLaQKBPqrZcchTX4IVfdRZs6lj8HsMPbR-S5WqUH1WwbAysqfwAPRV4iCTA8CExeGkVxADU2IV4fPFUXIOiQABMGADMAQwBXABsAFyYqhkLwKShYdiA
+We can also check our work in a circuit simulator like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which is good practice in general before investing time in physically building something.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ThreeLEDCircuitsWithDifferentCurrentLimitingResistors_CircuitJS.mp4" type="video/mp4" />
+</video>
+**Video.** This is a screen recording of the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of the 330Ω, 350Ω, and 470Ω LED-based circuits. Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7LwGQlpQJdVbLjkKa-c1UvhT11VrA6QKW-327rKPHmeujCFC1PNgAPEGxeIgkEekxAwV1iADU2IXi3by1sAOcQABMGADMAQwBXABsAFyZyhjzwKShYdjTwGnNnTLB2-0DAgpKK6tr6iFEYSHYwsEgMSJJkYliMeMVxFPlujuzAras3Uz3nAzaOrx8XTZ7FFWvHXUvwGd47a7sNU5UnI-dJGgxIIdnjdPiD2FxWJAXvxIQlxmIJONoDIAOZmfg8WhCKRsNGwhzAmjYkS4ijEdJUBDkrGGKCcMkUhkg0QdRFSZGmKm7JTknz2diaXnaRJeY607KA+RcrRC97yIX2BVOR5C36qzIq0U7cSi4JhAx9BYIPAQOK0NbJVKEQLqnxC7X9IplKo1OoNJGTNhAA) in CircuitJS.
+{: .fs-1 }
 
 #### Check work in reality
 
+Once we're satisfied with our predictions (and/or simulations), we can build the LED circuit itself and measure its performance (if we are so inclined). Below, I built each of the three LED-based circuits: 330Ω, 350Ω, and 470Ω with the same red LED and measured the total voltage supplied by our 9V battery source as well as the total current $$I$$. For the 350Ω circuit, I used two 10Ω and a 330Ω resistor in series to get 350Ω. 
+
+For the theoretical predictions using Ohm's Law, I plugged in measured values for the resistors and the 9V battery (which was a fresh battery supplying more than 9V). 
+
 ![](assets/images/SolveForResistor_LEDCircuit_PhysicalBuildsOf330Ohm350OhmAnd470Ohm.png)
+**Figure.** I built each of the three LED-based circuits (330Ω, 350Ω, and 470Ω) on my breadboard and measured the total voltage drop over our circuit (yellow multimeter) as well as teh total current $$I$$ (red multimeter shown in milliamps). You can right click on this image and "open image in new tab" to expand. 
+{: .fs-1 }
+
+As you can see, our theoretical predictions were quite close to actual performance. Yay!
 
 ### Does it matter which side of the LED I place the resistor?
 
@@ -376,7 +390,6 @@ No. A resistor limits the current throughout the circuit loop.
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/LEDBurnOut_Afrotechmods_Trimmed.mp4" type="video/mp4" />
 </video>
-
 **Video.** This video shows what happens when the applied voltage significantly exceeds the LED's forward voltage $$V_f$$ with no current limiting resistor. Video from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
 {: .fs-1 }
 

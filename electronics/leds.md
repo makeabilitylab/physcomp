@@ -383,7 +383,9 @@ As you can see, our theoretical predictions were quite close to actual performan
 
 ### Does it matter which side of the LED I place the resistor?
 
-No. A resistor limits the current throughout the circuit loop.
+No. A resistor limits the current *throughout* the circuit loop. We know this from Ohm's Law and Kirchhoff's circuit laws.
+
+https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7KQKPHi3ZCeqtkpyFNfhapXwZm6q1hiKbXf4oLWnXpRvjhrRtfAA8QbF4iCQR6TBdBQnEANTYhOP4nNKoPLJAAEwYAMwBDAFcAGwAXJjKGXPApKFh2AHNzfh5aISk2VoRnLT64rpFOCn6bQcVRayoJaegZeUmHZz0Hdk1V8AwErZQEBONTJfH+LfszLZWdbYTfeT2D8RvvVwebkxdz9zZQg5dIhQ8BBYrRFEkUoQvi9dM89J9tHlCqVKtVavV5pB2EA
 
 ### What happens if you forget the current-limiting resistor?
 

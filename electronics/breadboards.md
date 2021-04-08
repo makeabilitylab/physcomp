@@ -124,6 +124,15 @@ Tinkercad works by dragging and dropping components from the right sidebar menu 
 
 ![](assets/images/Tinkercad_ShowingInterfaceWithBasicLEDCircuitOnBreadboard.png)
 
+### Step 4: You can even embed created circuits onto webpages
+
+Tinkercad also has a cool feature to embed working versions of your circuits onto your webpages. Here's a simple LED circuit with a 9V battery supply, a 470Ω resistor, and an LED. You can open [this circuit up](https://www.tinkercad.com/things/9FSld5pOJbd) in Tinkercad yourself and start to remix it as well! 
+
+<iframe width="725" height="453" src="https://www.tinkercad.com/embed/9FSld5pOJbd?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+**Embedded Circuit**. We've embedded a simple LED circuit made in [Tinkercad](https://www.tinkercad.com/things/9FSld5pOJbd). You can open it up [here](https://www.tinkercad.com/things/9FSld5pOJbd) and play with it and/or build on it.
+{: .fs-1 }
+
 ## Activity
 
 For your prototyping journals, come up with three LED-based circuits and build them in Tinkercad circuits—each circuit can either be a minor or major variation. The goal of this activity is to get comfortable with breadboards. Play around. What do you observe? Take screenshots, provide a brief description, and include a link to your Tinkercad circuit in your prototyping journal.
@@ -131,6 +140,7 @@ For your prototyping journals, come up with three LED-based circuits and build t
 Then, select your two favorite ideas and actually build them using the components in your hardware kits (*e.g.,* breadboard, 9V battery, resistors, LEDs). Using manual calculations for current draw, estimate how long your circuit will last on a 9V battery—assume 500 mAh at a 25mA discharge rate and ~400mAh at a 50mA discharge rate down to 4.8 volts ([9V Energizer Datasheet](https://data.energizer.com/PDFs/522.pdf)).
 
 Note that you'll need to use the alligator clips on the 9V battery to supply power your breadboard rails. I suggest using the black alligator clip for the battery's negative terminal, the red alligator clip for the battery's positive terminal, and matching jumper wires to connect to your breadboard.
+
 
 <!-- https://www.baldengineer.com/9v-batteries-suck.html -->
 

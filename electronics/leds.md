@@ -376,7 +376,7 @@ Once we're satisfied with our predictions (and/or simulations), we can build the
 For the theoretical predictions using Ohm's Law, I plugged in measured values for the resistors and the 9V battery (which was a fresh battery supplying more than 9V). 
 
 ![](assets/images/SolveForResistor_LEDCircuit_PhysicalBuildsOf330Ohm350OhmAnd470Ohm.png)
-**Figure.** I built each of the three LED-based circuits (330Ω, 350Ω, and 470Ω) on my breadboard and measured the total voltage drop over our circuit (yellow multimeter) as well as teh total current $$I$$ (red multimeter shown in milliamps). You can right click on this image and "open image in new tab" to expand. 
+**Figure.** I built each of the three LED-based circuits (330Ω, 350Ω, and 470Ω) on my breadboard and measured the total voltage drop over our circuit (yellow multimeter) as well as the total current $$I$$ (red multimeter shown in milliamps). You can right click on this image and "open image in new tab" to expand. 
 {: .fs-1 }
 
 As you can see, our theoretical predictions were quite close to actual performance. Yay!
@@ -388,7 +388,7 @@ No. A resistor limits the current *throughout* a circuit loop. We know this from
 Don't believe me? Try performing the same circuit analysis we stepped through above but with the LED before the resistor. What changes? Nothing, right? $$V_f$$ is still 2V and thus $$V_R$$ is still 7V.
 
 <video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/LEDBurnOut_Afrotechmods_Trimmed.mp4" type="video/mp4" />
+  <source src="assets/videos/ResistorBeforeOrAfterTheLED_CircuitJS.mp4" type="video/mp4" />
 </video>
 **Video.** [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a LED-based circuit with the 350Ω current-limiting resistor either before or after the LED. Do you observe any differences? Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7KQKPHi3ZCeqtkpyFNfhapXwZm6q1hiKbXf4oLWnXpRvjhrRtfAA8QbF4iCQR6TBdBQnEANTYhOP4nNKoPLJAAEwYAMwBDAFcAGwAXJjKGXPApKFh2AHNzfh5aISk2VoRnLT64rpFOCn6bQcVRayoJaegZeUmHZz0Hdk1V8AwErZQEBONTJfH+LfszLZWdbYTfeT2D8RvvVwebkxdz9zZQg5dIhQ8BBYrRFEkUoQvi9dM89J9tHlCqVKtVavV5pB2EA).
 {: .fs-1 }

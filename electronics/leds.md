@@ -383,11 +383,21 @@ As you can see, our theoretical predictions were quite close to actual performan
 
 ### Does it matter which side of the LED I place the resistor?
 
-No. A resistor limits the current *throughout* the circuit loop. We know this from Ohm's Law and Kirchhoff's circuit laws.
+No. A resistor limits the current *throughout* a circuit loop. We know this from Ohm's Law and Kirchhoff's circuit laws.
 
-https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7KQKPHi3ZCeqtkpyFNfhapXwZm6q1hiKbXf4oLWnXpRvjhrRtfAA8QbF4iCQR6TBdBQnEANTYhOP4nNKoPLJAAEwYAMwBDAFcAGwAXJjKGXPApKFh2AHNzfh5aISk2VoRnLT64rpFOCn6bQcVRayoJaegZeUmHZz0Hdk1V8AwErZQEBONTJfH+LfszLZWdbYTfeT2D8RvvVwebkxdz9zZQg5dIhQ8BBYrRFEkUoQvi9dM89J9tHlCqVKtVavV5pB2EA
+Don't believe me? Try performing the same circuit analysis we stepped through above but with the LED before the resistor. What changes? Nothing, right? $$V_f$$ is still 2V and thus $$V_R$$ is still 7V.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/LEDBurnOut_Afrotechmods_Trimmed.mp4" type="video/mp4" />
+</video>
+**Video.** [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a LED-based circuit with the 350Ω current-limiting resistor either before or after the LED. Do you observe any differences? Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7KQKPHi3ZCeqtkpyFNfhapXwZm6q1hiKbXf4oLWnXpRvjhrRtfAA8QbF4iCQR6TBdBQnEANTYhOP4nNKoPLJAAEwYAMwBDAFcAGwAXJjKGXPApKFh2AHNzfh5aISk2VoRnLT64rpFOCn6bQcVRayoJaegZeUmHZz0Hdk1V8AwErZQEBONTJfH+LfszLZWdbYTfeT2D8RvvVwebkxdz9zZQg5dIhQ8BBYrRFEkUoQvi9dM89J9tHlCqVKtVavV5pB2EA).
+{: .fs-1 }
 
 ### What happens if you forget the current-limiting resistor?
+
+In short: Heat. Possible spark or small fire. Burn out. Open circuit.
+
+There are lots of fun YouTube videos of supplying too much current to LEDs and observing the effect. Here's a snippet of a good one from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/LEDBurnOut_Afrotechmods_Trimmed.mp4" type="video/mp4" />

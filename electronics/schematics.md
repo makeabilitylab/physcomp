@@ -137,6 +137,8 @@ Once you've downloaded and unzipped the Fritzing release, open it and follow thi
 **Video** A video tutorial of using [Fritzing](https://fritzing.org/) to build a simple LED-based circuit.
 {: .fs-1 }
 
+Unfortunately, while you can create nice pictorial and schematic diagrams of circuits in Fritzing, you cannot simulate them (ugh, I know!). So, you have to use another tool for this.
+
 ### For your prototyping journal
 
 For your prototyping journal, take a screenshot of what you made following the tutorial video. Then save a new file, and make a simple modification to the circuit—it could be switching to a different color LED or adding in another part of the circuit. Take a screenshot of this new modified circuit and describe it, briefly, in your journal.
@@ -144,6 +146,16 @@ For your prototyping journal, take a screenshot of what you made following the t
 As usual, you should also report on any challenges or confusions you experienced!
 
 Have fun!
+
+## Schematic building tools
+
+There are a number of schematic building tools aimed at makers, each with their own tradeoffs.
+
+- [Circuit.io](https://www.circuito.io/). Has some very interesting auto-completion features, combines design+code, is purely a web app. No simulation support.
+
+- [Fritzing](https://fritzing.org/). Provides both pictorial ("breadboard") plus schematic representations. Was "industry standard" for many years but has struggled with fundraising and feature improvements of late.
+
+- [Tinkercad Circuits](https://www.tinkercad.com/learn/circuits). Allows you to design Arduino-based circuits, write code, and simulate. Does not provide schematic representations.
 
 ## Resources
 

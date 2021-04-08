@@ -425,6 +425,15 @@ Here's an example picture of a simple LED circuit with alligator clips and wire 
 **Figure.** An example of a simple LED circuit with a single resistor (to limit current) and multiple LEDs in series. This circuit draws ~10mA. Notice how the red LED is brightest at this amperage. 
 {: .fs-1 }
 
+We'd also like you to begin experimenting with light diffusion and ideas for enclosures. For one of your LED designs, rapidly prototype a diffusive cover or case. As an example, here are simple light sabers my children and I made out of toilet paper rolls (for the hilt), paper (for the "plasma energy" blade), a 9V battery, a resistor, and some LEDs.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/StarWars_SimpleToiletRollLightSabers_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** Example light sabers made out of toilet paper cardboard rolls, paper, and a simple LED circuit.
+{: .fs-1 }
+
+
 <!-- ### Addressable LED strips
 
 Wiring up, powering, and controlling a large number of RGB (red, green, blue) LEDs with a microcontroller is complicated and messy. Thus, in the last decade, we've seen the emergence of low-cost "smart" RGB LED strips like [Adafruit's Neopixel](https://www.adafruit.com/product/1376?length=1) (aka, the WS2812B LED from WorldSemi), which contain strips of RGB LEDs—each with a small embedded microcontroller—that can be addressed and controlled individually. They are truly awesome but beyond the scope of this lesson because they are not raw electrical components and require a microcontroller to use. -->

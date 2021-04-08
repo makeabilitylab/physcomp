@@ -189,11 +189,11 @@ In the video below, I slowly walk through how to decode the color bands on resis
 
 ## Activity
 
-For your learning activity, pick out three different resistors from your kits. In your prototyping journals, for each selected resistor, take a picture, write down the color bands, and then manually calculate the resistance (showing your work). In the Plusivo kits, the resistors come in labeled strips, which you can use to check your work (ground truth!) or, if you have access to a multimeter, you could do that too. 
+For your learning activity, pick out three different resistors from your kits. In your prototyping journals, for each selected resistor, take a picture, write down the color bands, and then manually calculate the resistance (showing your work). In the Plusivo kits, the resistors come in labeled strips, which you can use to check your work (ground truth!) or, if you have access to a multimeter, you could do that too. If you do use a multimeter, do you notice any differences between the color-coded value and the measured resistance in practice? Why do you think this might be?
 
 ![](assets/images/PlusivoKitResistors.png)
 
-<!-- ACTIVITY IDEA: have them make their own resistors with graphite pencils. I think this activity is better suited for the LEDs lesson -->
+<!-- ACTIVITY IDEA: have them make their own resistors with graphite pencils. I think this activity is better suited for the LEDs lesson... -->
 
 ## Resources
 

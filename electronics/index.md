@@ -38,15 +38,15 @@ Introduces [Ohm’s Law](ohms-law.md), one of the most important empirical laws 
 
 Introduces [series and parallel resistor circuits](series-parallel.md), how to analyze them, and why they're important. Also includes an activity to build and explore series and parallel resistor configurations in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
-<!-- ## [Lesson 5: Resistors](resistors.md)
+## [Lesson 5: Resistors](resistors.md)
 
-TODO: what are resistors, how to decode them, use them, etc. (Builds on Lesson 1)
+Building on Lessons 1 - 4, let's dive more deeply into [resistors](resistors.md) and learn about how resistors work, how they're made, how they're characterized in terms of both resistance $$R$$ and power $$P$$, and how to "read" them.
 
 ## [Lesson 6: LEDs](leds.md)
 
-TODO: what are LEDs, how to select resistors, how to use LEDs in series vs. parallel. Simulate in CircuitJS?
+In this lesson, we'll introduce one of the most common electrical components in the world: [light-emitting diodes](leds.md) or [LEDs](leds.md). You'll learn about your first semiconductor device, diodes, and how they're non-ohmic and only allow current to pass in one direction. Then, we'll introduce a special kind of diode, called an LED, and show how to use them, how to select an appropriate current-limiting resistor, and why resistors are necessary. You'll also get to physically build stuff, yay!
 
-## [Lesson 7: Breadboards](breadboards.md)
+<!-- ## [Lesson 7: Breadboards](breadboards.md)
 
 TODO: what are breadboards and how to use them. Also introduces Tinkercad circuits.
 
@@ -56,7 +56,7 @@ TODO: what are variables resistors, how to use them, and how to make your own.
 
 ## [Lesson 9: Using a multimeter](multimeter.md)
 
-TODO: or could integrate this somewhere else? 
+TODO: or could integrate this somewhere else?  -->
 
 
 

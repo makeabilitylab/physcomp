@@ -46,15 +46,70 @@ In the image below, we've highlighted *where* the pre-wired connections (those i
 
 ## Examples
 
-Let's breadboard variations of the same LED-based circuit with a 9V power supply, a resistor, and a red LED.
+Let's breadboard an LED-based circuit with a 9V power supply, a resistor, and a red LED. We're going to build one variation step-by-step and then show other possibilities. 
 
-### Variation 1
+![](assets/images/SimpleBreadboardExample_BuildLEDCircuit_ByJonFroehlich.png)
+
+With breadboards, there are nearly infinite ways to build the same circuit. So, try to keep things clean and minimize the use of extraneous wires whenever possible. As we walk through this example and then show variations, check your understanding: what makes sense to you? Which breadboard variation is "cleanest" in your opinion and why?
+
+### Building variation 1
+
+So, let's build our first breadboard circuit. In this version, we're trying to keep things very clear. Consequently, we're using more jumper wires than necessary. Let's get started.
+
+#### Step 1: Connect the voltage source
+
+First, let's connect the positive and negative terminals of the battery to the power rails. Notice how with just making two connections, we create two giant nodes (red for positive `+` and black for `-`). These two nodes are now easily tappable as we build out our circuit.
+
+Typically, we would not connect the power rails to our voltage source until we're ready to test something (it's not good practice to breadboard with a live source!). But, for educational purposes, it's helpful to first start here and build the circuit outwards.
+
+![](assets/images/BreadboardingLEDCircuit_Step1_ByJonFroehlich.png)
+
+#### Step 2: Add the resistor
+
+Second, let's add in the resistor connecting one leg directly to the positive `+` power rail and the other to an arbitrary column on our breadboard. Notice how even though the bottom resistor leg is in just one hole, that entire column becomes the same node (Node C). Also note how Node C does not extend across the ravine in the middle of the board.
+
+![](assets/images/BreadboardingLEDCircuit_Step2_ByJonFroehlich.png)
+
+#### Step 3: Add the LED
+
+Third, let's add in the LED. We can place it anywhere we want but let's put it close to the resistor (since we know we'll have to connect them). Moreover, we cannot put the LED in such that both legs are in the same column. This wouldn't make sense.
+
+![](assets/images/BreadboardingLEDCircuit_Step3-DontDoThis_ByJonFroehlich.png)
+
+Instead, place the LED such that the legs span two columns, like this. Notably, the LED is not yet connected to anything in our circuit. It's just sort of floating there in its own space. We'll hook it up next.
+
+![](assets/images/BreadboardingLEDCircuit_Step3_ByJonFroehlich.png)
+
+#### Step 4: Connect LED anode (+) leg
+
+Now, let's wire up the LED to our circuit starting with the LED anode (`+`) leg first (which must point towards the positive electric potential).
+
+![](assets/images/BreadboardingLEDCircuit_Step4_ByJonFroehlich.png)
+
+#### Step 5: Connect LED cathode (-) leg
+
+Fifth, let's start to wire up the LED cathode leg. In this case, we'll create an intermediate wire connection to a different point of our breadboard just to keep things clean. However, we could just place a jumper wire from the cathode leg directly to the `GND` (`-`) power rail.
+
+![](assets/images/BreadboardingLEDCircuit_Step5_ByJonFroehlich.png)
+
+#### Step 6: Connect LED cathode (-) to ground
+
+Finally, we can connect the LED cathode node to ground thereby completing our circuit. Yay!
+
+![](assets/images/BreadboardingLEDCircuit_Step6_ByJonFroehlich.png)
+
+Does this breadboarded circuit make sense? Can you picture how current would flow through the breadboard?
+
+#### Visualizing current through breadboard
+
+To further reinforce how a breadboard works, we've drawn two additional representations. The middle image below shows a schematic overlay on top of the breadboard. The image on the right shows overlaid arrows showing the path of conventional current. Is this what you visualized too? Why or why not?
+
 ![](assets/images/BreadboardExampleWithUnderlyingCircuitSchematicAndCurrentFlow_ByJonFroehlich.png)
 **Figure** Made in [Fritzing](https://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
 ### Variation 2
-Here's another version of the same circuit but breadboarded differently. With breadboards, there are nearly infinite ways to build the same circuit. So, try to keep things clean and minimize the use of extraneous wires whenever possible. Which breadboarded version makes more sense to you?
+Here's another version of the same circuit but breadboarded differently. Again, with breadboards, part of what makes them powerful is their flexibility but this also introduces many possibilities for breadboarding the same circuit (and this is just for one simple example!).
 
 ![](assets/images/BreadboardExample2_UsingPowerRailsOnBothSides.png)
 

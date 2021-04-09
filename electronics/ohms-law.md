@@ -87,7 +87,7 @@ Below, we've written some common SI prefixes—most of which should be familiar 
 | 0.001               | $$10^{-3}$$         | milli  | m            | thousandth   | millimeter, milliamp, millivolt |
 | 0.000001            | $$10^{-6}$$         | micro  | μ            | millionth    | micrometer, microamp |
 | 0.000000001         | $$10^{-9}$$         | nano   | n            | billionth    | nanosecond, nanoamp |
-| 0.000000000001      | $$10^{-9}$$         | nano   | n            | billionth    | nanosecond, nanoamp |
+| 0.000000000001      | $$10^{-12}$$        | pico   | n            | trillionth    | picosecond, picoamp |
 {: .fs-1 .condensed-table }
 
 **Table** This chart is based on NIST's [Metric SI Prefixes webpage](https://www.nist.gov/pml/weights-and-measures/metric-si-prefixes) and Figure 2.2 in [Bartlett's book](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_2_Chapter.xhtml).

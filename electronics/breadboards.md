@@ -205,6 +205,6 @@ Note that you'll need to use the alligator clips on the 9V battery to supply pow
 
 - [Setting Up a Breadboard](https://itp.nyu.edu/physcomp/labs/labs-electronics/breadboard/), NYU ITP
 
-- ["How to use a breadboard"](https://youtu.be/6WReFkfrUIk), Science Buddies 
+- [How to use a breadboard](https://youtu.be/6WReFkfrUIk), Science Buddies video
 
 - [How to Use a Breadboard](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard), Sparkfun.com

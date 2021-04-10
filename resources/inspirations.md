@@ -56,3 +56,5 @@ There are a number of emerging academic courses that have accompanying interacti
 <!-- TODO -->
 <!-- Add social media maker accounts (twitter, instagram)? -->
 <!-- Add people? -->
+
+<!-- Wow, just found a very related course that even uses Just the Docs. Coincidence? http://diot2020.daraghbyrne.me/2020/10/01/full-syllabus/ and https://diotlabs.daraghbyrne.me/  -->

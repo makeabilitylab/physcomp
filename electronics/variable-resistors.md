@@ -50,8 +50,11 @@ Let's dive into potentiometers, why they have three legs, and how to use them!
 
 ## Potentiometers
 
-A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance.
+A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance. They are pervasive electronic components used in everything from audio mixing boards to cars. Though still widely used, some of their applications spaces have been subsumed by digital controls like rotary encoders and buttons. Rotary encoders look very similar to potentiometers—indeed, with knobs attached they can look identical (however, while rotary encoders can be spun around continuously, potentiometers typically have a controllable angle of 200°-270°)
 
+![](assets/images/VarietyOfPotentiometers.png)
+**Figure.** Potentiometers are ubiquitous input devices found in everything from cars to audio mixing boards. There are nearly infinite designs, so only showing a small sample above. Note that you cannot tell the resistance value of a potentiometer (or pot) simply by looking at it nor can you tell whether it is a linear taper or a logarithmic taper. Logarithmic potentiometers are common in audio applications (because the human ear senses loudness logarithmically). Images sources: the potentiometer pictures with dark backgrounds are from [Adafruit](https://www.adafruit.com). The others are from [digikey](https://www.digikey.com/).
+{: .fs-1 }
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/Potentiometer_Overview_ByJonFroehlich.mp4" type="video/mp4" />

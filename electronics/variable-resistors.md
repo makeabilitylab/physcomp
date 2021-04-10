@@ -22,7 +22,7 @@ usetocbot: true
 
 In previous lessons, we worked with [fixed-value resistors](resistors.md)—a critical component in many circuits. In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light).
 
-This is very exciting! Physical computing is all about **interaction** and resistive materials that respond to different stimuli open up a new world of possibilities!
+This is exciting! Physical computing is all about **interaction** and resistive materials that respond to different stimuli open up a new world of possibilities!
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
 **Figure.** Many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have thermistors, photocells, and FSRs in your hardware kits! Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
@@ -34,7 +34,7 @@ We'll start with one of the most common variable resistors, called a potentiomet
 
 There are **two-leg** variable resistors like rheostats, photocells, and force-sensitive resistors and there are **three-leg** variable resistors, which are called potentiometers. Both types are orientation agnostic—just like regular resistors, they will work in either direction (non-polarized).
 
-The schematic symbols for some example variable resistors are below. 
+We've included some schematic symbols for some example variable resistors below. 
 
 ![](assets/images/SchematicSymbolsOfVariableResistors_ByJonFroehlich.png)
 **Figure.** Schematic symbols for some example two-leg and three-leg variable resistors. Notice how some schematic symbols are the *same* across variable resistor types.
@@ -69,7 +69,7 @@ A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a thr
 
 ### Creating custom 3D-printable knobs
 
-A fun introductory exercise to 3D printing is to create your own potentiometer knob. We typically do this design+making activity in beginning of our fabrication module in our physical computing course. Here are some simple examples.
+A fun introductory exercise to 3D printing is to create your own potentiometer knob. We typically do this design+making activity at the beginning of our fabrication module in our physical computing course. Here are some simple example 3D-printable potentiometer knobs that we designed.
 
 ![](assets/images/CustomPotentiometerKnobsCreatedInFusion360_ByJonFroehlich.png)
 **Figure.** Three simple potentiometer knobs created in Fusion 360 (in 5-10 minutes each). The CAD designs take roughly 20 minutes to print on an Ultimaker 2+ 3D printer with 0.2mm layer height and no supports or plate adhesion (*e.g.,* brims). All designs by Jon Froehlich. You can see step-by-step tutorial videos [here](https://youtu.be/bF1hreNH_E0) and [here](https://youtu.be/1Yz9DDb4QnI).
@@ -97,7 +97,7 @@ By moving the analog joystick, you independently control two embedded 10kΩ pot
   <source src="assets/videos/Parallax_2-AxisJoystick_TrimmedAndMuted.mp4" type="video/mp4" />
 </video>
 **Video.** A short snippet from this [official Parallax video](https://youtu.be/SXtPGAu4MMw) showing how physical movement of the joystick is translated into an electrical signal using two potentiometers.
-
+{: .fs-1 }
 
 ## Potentiometers
 

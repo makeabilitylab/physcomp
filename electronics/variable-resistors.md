@@ -6,6 +6,9 @@ parent: Intro to Electronics
 has_toc: false # on by default
 nav_exclude: true
 search_exclude: true
+usemathjax: true
+comments: true
+usetocbot: true
 ---
 
 In previous lessons, we worked with fixed-value resistors—a critical component in most circuits. In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light).
@@ -57,11 +60,10 @@ A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a thr
 
 ### Creating custom 3D-printable knobs
 
-A fun introductory exercise to 3D printing is to create your own potentiometer knob. Here are some simple examples that we often start with in our physical computing fabrication module.
+A fun introductory exercise to 3D printing is to create your own potentiometer knob. We typically do this design+making activity in beginning of our fabrication module in our physical computing course. Here are some simple examples.
 
 ![](assets/images/CustomPotentiometerKnobsCreatedInFusion360_ByJonFroehlich.png)
-
-**Figure.** Three simple potentiometer knobs created in Fusion 360 (in less than five minutes each). They take roughly 20 minutes to print on an Ultimaker 2+ 3D printer with 0.2mm layer height and no supports or plate adhesion (*e.g.,* brims). All designs by Jon Froehlich. You can see step-by-step tutorial videos [here](https://youtu.be/bF1hreNH_E0) and [here](https://youtu.be/1Yz9DDb4QnI).
+**Figure.** Three simple potentiometer knobs created in Fusion 360 (in 5-10 minutes each). The CAD designs take roughly 20 minutes to print on an Ultimaker 2+ 3D printer with 0.2mm layer height and no supports or plate adhesion (*e.g.,* brims). All designs by Jon Froehlich. You can see step-by-step tutorial videos [here](https://youtu.be/bF1hreNH_E0) and [here](https://youtu.be/1Yz9DDb4QnI).
 {: .fs-1 }
 
 Even more fun is to combine your custom 3D prints with a microcontroller and custom applications like games to create new interactive experiences
@@ -71,6 +73,22 @@ Even more fun is to combine your custom 3D prints with a microcontroller and cus
 </video>
 **Video.** A short video demonstrating the custom 3D printed potentiometer knobs being used as custom game controllers with an Arduino Leonardo and custom [Processing](https://processing.org/) sketches. The code for the Arduino+Processing "Etch-a-sketch" is [here](https://github.com/makeabilitylab/arduino/tree/master/Processing/ArduinoEtchASketch) and the code for the Arduino+Processing "Pong" is [here](https://github.com/makeabilitylab/arduino/tree/master/Processing/ArduinoPong). All 3D CAD designs and code by Jon Froehlich.
 {: .fs-1 }
+
+### Potentiometers as analog joysticks
+
+In fact, potentiometers have a long history as game controllers. In our hardware kits, we often include a 2-axis joystick like [this one](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) from Parallax ([$6.95 on Adafruit](https://www.adafruit.com/product/245)).
+
+![](assets/images/Parallax2AxisJoystickWithTwoEmbeddedPotentiometers.png)
+**Figure.** The [Parallax 2-Axis Joystick](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) has two embedded 10 kΩ potentiometers, one for each axis. You can see a video demo [here](https://youtu.be/SXtPGAu4MMw).
+{: .fs-1 }
+
+By moving the analog joystick, you independently control two embedded 10kΩ potentiometers. There is a $$V_{Out}$$ for the "Up/Down" potentiometer and a $$V_{Out}$$ for the "Left/Right" potentiometer. See the circuit diagram above.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/Parallax_2-AxisJoystick_TrimmedAndMuted.mp4" type="video/mp4" />
+</video>
+**Video.** A short snippet from this [official Parallax video](https://youtu.be/SXtPGAu4MMw) showing how physical movement of the joystick is translated into an electrical signal using two potentiometers.
+
 
 ## Potentiometers
 

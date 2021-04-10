@@ -10,8 +10,17 @@ usemathjax: true
 comments: true
 usetocbot: true
 ---
+# {{ page.title | replace_first:'L','Lesson '}}
+{: .no_toc }
 
-In previous lessons, we worked with fixed-value resistors—a critical component in most circuits. In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light).
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
+
+In previous lessons, we worked with [fixed-value resistors](resistors.md)—a critical component in many circuits. In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light).
 
 This is very exciting! Physical computing is all about **interaction** and resistive materials that respond to different stimuli open up a new world of possibilities!
 

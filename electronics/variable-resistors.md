@@ -32,29 +32,23 @@ We'll start with one of the most common variable resistors, called a potentiomet
 
 ## Variable resistor types
 
-There are **two-leg** variable resistors like rheostats, photocells, and force-sensitive resistors and there are **three-leg** variable resistors, which are called potentiometers. Both types are orientation agnostic—just like regular resistors, they will work in either direction (non-polarized).
-
-We've included some schematic symbols for some example variable resistors below. 
+There are **two-leg** variable resistors like rheostats, photocells, and force-sensitive resistors and there are **three-leg** variable resistors, which are called potentiometers. Both types are orientation agnostic—just like regular resistors, they will work in either direction (non-polarized). See schematic symbols below.
 
 ![](assets/images/SchematicSymbolsOfVariableResistors_ByJonFroehlich.png)
 **Figure.** Schematic symbols for some example two-leg and three-leg variable resistors. Notice how some schematic symbols are the *same* across variable resistor types.
 {: .fs-1 }
 
-A few things to point out:
+A few things to  note:
 
 1. The two-leg variable resistor schematic symbol looks quite similar to a regular resistor but has a **diagonal line** through it indicating variability
 2. Some common variable resistors, like light-dependent resistors (LDRs or photocells), have their own schematic symbols
 3. The potentiometers have, as indicated, three legs. The middle arrow in its schematic representation (the "wiper leg") can be connected in a circuit. We'll see this below.
 
-Let's dive into potentiometers, why they have three legs, and how to use them!
+Let's dive into potentiometers!
 
 ## Potentiometers
 
-A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance. They are pervasive electronic components used in everything from audio mixing boards to cars. Though still widely used, some of their applications spaces have been subsumed by digital controls like rotary encoders and buttons. Rotary encoders look very similar to potentiometers—indeed, with knobs attached they can look identical (however, while rotary encoders can be spun around continuously, potentiometers typically have a controllable angle of 200°-270°)
-
-![](assets/images/VarietyOfPotentiometers.png)
-**Figure.** Potentiometers are ubiquitous input devices found in everything from cars to audio mixing boards. There are nearly infinite designs, so only showing a small sample above. Note that you cannot tell the resistance value of a potentiometer (or pot) simply by looking at it nor can you tell whether it is a linear taper or a logarithmic taper. Logarithmic potentiometers are common in audio applications (because the human ear senses loudness logarithmically). Images sources: the potentiometer pictures with dark backgrounds are from [Adafruit](https://www.adafruit.com). The others are from [digikey](https://www.digikey.com/).
-{: .fs-1 }
+A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance.  
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/Potentiometer_Overview_ByJonFroehlich.mp4" type="video/mp4" />
@@ -62,23 +56,35 @@ A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a thr
 **Video.** This animation shows how the wiper can be used to vary resistance in a rotary potentiometer. The figure on the right is the formal electrical symbol.
 {: .fs-1 }
 
+Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits like the following 10K panel mount and trim potentiometers.
 
-
-## Potentiometer knobs
-
-![](assets/images/ExamplePotentiometerKnobs_ImagesFromAdafruit.png)
-**Figure.** There are a variety of knobs that can be placed on panel-mount potentiometers and rotary encoders. This is just a small sample. All images from [Adafruit](https://www.adafruit.com/). From left-to-right: [Soft Touch T18 - White](https://www.adafruit.com/product/2047), [Soft Touch T18 - Red](https://www.adafruit.com/product/2046), [Slim Metal Knob](https://www.adafruit.com/product/2058), [Machined Metal Knob](https://www.adafruit.com/product/2056), [Slide Pot with Plastic Knob](https://www.adafruit.com/product/4271)
+![](assets/images/Potentiometers_TwoExamplesWithSchematicSymbol.png)
+**Figure.** Two example potentiometers commonly included in our hardware kits: a 10kΩ panel mount and and a 10kΩ trim potentiometer.
 {: .fs-1 }
 
-### Creating custom 3D-printable knobs
+Though still widely used, some of the potentiometer's applications spaces have recently been subsumed by digital controls like rotary encoders and buttons. [Rotary encoders](https://learn.adafruit.com/rotary-encoder) look very similar to potentiometers—indeed, with knobs attached they can look identical (however, while rotary encoders can be spun around continuously, potentiometers typically have a controllable angle of 200°-270°)
 
-A fun introductory exercise to 3D printing is to create your own potentiometer knob. We typically do this design+making activity at the beginning of our fabrication module in our physical computing course. Here are some simple example 3D-printable potentiometer knobs that we designed.
+![](assets/images/VarietyOfPotentiometers.png)
+**Figure.** Potentiometers are ubiquitous input devices found in everything from cars to audio mixing boards. There are nearly infinite designs, so we're only showing a small sample above. Note that you cannot tell the resistance value of a potentiometer (or pot) simply by looking at it nor can you tell whether it is a linear taper or a logarithmic taper. Logarithmic potentiometers are common in audio applications (because the human ear senses loudness logarithmically). Images sources: the potentiometer pictures with dark backgrounds are from [Adafruit](https://www.adafruit.com). The others are from [digikey](https://www.digikey.com/).
+{: .fs-1 }
+
+### Potentiometer knobs
+
+There are a variety of knobs that can be placed on panel-mount potentiometers and rotary encoders for user-facing applications like audio mixers, joysticks, and control panels. 
+
+![](assets/images/ExamplePotentiometerKnobs_ImagesFromAdafruit.png)
+**Figure.** Small sample of potentiometer and rotary encoder knobs. All images from [Adafruit](https://www.adafruit.com/). From left-to-right: [Soft Touch T18 - White](https://www.adafruit.com/product/2047), [Soft Touch T18 - Red](https://www.adafruit.com/product/2046), [Slim Metal Knob](https://www.adafruit.com/product/2058), [Machined Metal Knob](https://www.adafruit.com/product/2056), [Slide Pot with Plastic Knob](https://www.adafruit.com/product/4271)
+{: .fs-1 }
+
+#### Creating custom 3D-printable knobs
+
+A fun introductory 3D-printing exercise is to design, model, and print your own potentiometer knob. We typically do this activity at the beginning of our fabrication module in our physical computing course. Here are some simple example 3D-printable potentiometer knobs that we designed.
 
 ![](assets/images/CustomPotentiometerKnobsCreatedInFusion360_ByJonFroehlich.png)
 **Figure.** Three simple potentiometer knobs created in Fusion 360 (in 5-10 minutes each). The CAD designs take roughly 20 minutes to print on an Ultimaker 2+ 3D printer with 0.2mm layer height and no supports or plate adhesion (*e.g.,* brims). All designs by Jon Froehlich. You can see step-by-step tutorial videos [here](https://youtu.be/bF1hreNH_E0) and [here](https://youtu.be/1Yz9DDb4QnI).
 {: .fs-1 }
 
-Even more fun is to combine your custom 3D prints with a microcontroller and custom applications like games to create new interactive experiences
+Even more fun is to combine your custom 3D prints with a microcontroller and to build custom applications that create new interactive experiences
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/3DPrintedTrimPotKnobDemo2_TrimmedAndOptimized_ByJonFroehlich.mp4" type="video/mp4" />
@@ -88,7 +94,7 @@ Even more fun is to combine your custom 3D prints with a microcontroller and cus
 
 ### Potentiometers as analog joysticks
 
-In fact, potentiometers have a long history as game controllers. In our hardware kits, we often include a 2-axis joystick like [this one](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) from Parallax ([$6.95 on Adafruit](https://www.adafruit.com/product/245)).
+Potentiometers have a long history as game controllers. In our hardware kits, we often include a 2-axis joystick like [this one](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) from Parallax ([$6.95 on Adafruit](https://www.adafruit.com/product/245)).
 
 ![](assets/images/Parallax2AxisJoystickWithTwoEmbeddedPotentiometers.png)
 **Figure.** The [Parallax 2-Axis Joystick](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) has two embedded 10 kΩ potentiometers, one for each axis. You can see a video demo [here](https://youtu.be/SXtPGAu4MMw).

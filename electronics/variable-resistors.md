@@ -108,36 +108,21 @@ By moving the analog joystick, you independently control two embedded 10kΩ pot
 **Video.** A short snippet from this [official Parallax video](https://youtu.be/SXtPGAu4MMw) showing how physical movement of the joystick is translated into an electrical signal using two potentiometers.
 {: .fs-1 }
 
-## Potentiometers
+### How does a potentiometer work?
+
+Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will be 10kΩ. If you're using a 1kΩ resistor, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
+
+The power of a potentiometer is in that middle leg (Leg 2) whose resistance will vary depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
 
 <video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/PotentiometerIntroduction-WiperPositions-TrimmedAndCropped_ByJonFroehlich.mp4" type="video/mp4" />
+  <source src="assets/videos/PotentiometerIntroduction_TrimmedAndCropped.mp4" type="video/mp4" />
 </video>
-**Video.** This animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
+**Video.** TODO. Animation by Jon Froehlich. Created in PowerPoint.
 {: .fs-1 }
-
-### Demonstrating a potentiometer as a voltage divider
-
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/PotentiometerIntroduction-VoltageDividerWithCircuitJS_ByJonFroehlich.mp4" type="video/mp4" />
-</video>
-**Video.** This animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
-{: .fs-1 }
-
-![Animation showing how a potentiometer works](/assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
-Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
-{: .fs-1 }
-
-Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit).
-
-![Image of two physical potentiometers along with a diagram and schematic symbol](assets/images/Potentiometer_DiagramWithSchematicSymbol.png)
-
-<!-- TODO: talk about different taper types? -->
-<!-- TODO: talk about potentiometer drawbacks--like maintainance, corrosion. See https://ultimateelectronicsbook.com/potentiometers/ -->
 
 ### Potentiometers as voltage dividers
 
-Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves.
+Potentiometers are actually conveniently packaged voltage dividers, which we learned about in [Lesson 3](series-parallel.md): $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves.
 
 ![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
 A 10kΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
@@ -173,7 +158,7 @@ See also this [Sparkfun tutorial](https://learn.sparkfun.com/tutorials/voltage-d
 
 We're going to start with using only **two legs** of the potentiometer. We'll need all **three legs** when we start working again with microcontrollers.
 
-### Variable resistors
+### Using a potentiometer as a two-terminal variable resistor
 
 When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. 
 
@@ -193,6 +178,35 @@ Here, however, we are going to focus on using a potentiometer first as a rheosta
 - Use potentiometers in Tinkercad
 - Build actual circuits
 - Use FSR and photocell
+
+----
+
+## Potentiometers
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PotentiometerIntroduction-WiperPositions-TrimmedAndCropped_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** This animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
+{: .fs-1 }
+
+### Demonstrating a potentiometer as a voltage divider
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PotentiometerIntroduction-VoltageDividerWithCircuitJS_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** This animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
+{: .fs-1 }
+
+![Animation showing how a potentiometer works](/assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
+Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
+{: .fs-1 }
+
+Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit).
+
+![Image of two physical potentiometers along with a diagram and schematic symbol](assets/images/Potentiometer_DiagramWithSchematicSymbol.png)
+
+<!-- TODO: talk about different taper types? -->
+<!-- TODO: talk about potentiometer drawbacks--like maintainance, corrosion. See https://ultimateelectronicsbook.com/potentiometers/ -->
 
 <!-- <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 <p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>

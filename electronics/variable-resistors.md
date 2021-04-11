@@ -20,31 +20,29 @@ usetocbot: true
 {:toc}
 ---
 
-In previous lessons, we worked with [fixed-value resistors](resistors.md)—a critical component in many circuits. In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light).
-
-This is exciting! Physical computing is all about **interaction** and resistive materials that respond to different stimuli open up a new world of possibilities!
+In previous lessons, we worked with [fixed-value resistors](resistors.md). In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light).
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
 **Figure.** Many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have thermistors, photocells, and FSRs in your hardware kits! Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
-We'll start with one of the most common variable resistors, called a potentiometer, and then **TODO**!!!!
+This is exciting! Physical computing is all about **interaction** and resistive materials that respond to different stimuli open up a new world of possibilities! We'll start with one of the most common variable resistors, called a potentiometer, and then **TODO**!!!!
 
 ## Variable resistor types
 
-There are **two-leg** variable resistors like rheostats, photocells, and force-sensitive resistors and there are **three-leg** variable resistors, which are called potentiometers. Both types are orientation agnostic—just like regular resistors, they will work in either direction (non-polarized). See schematic symbols below.
+There are **two-leg** (or "two-terminal" or "two-lead") variable resistors like rheostats, photocells, and force-sensitive resistors and there are **three-leg** variable resistors, which are called potentiometers. Both types are orientation agnostic—just like regular resistors, they will work in either direction (non-polarized). See schematic symbols below.
 
 ![](assets/images/SchematicSymbolsOfVariableResistors_ByJonFroehlich.png)
 **Figure.** Schematic symbols for some example two-leg and three-leg variable resistors. Notice how some schematic symbols are the *same* across variable resistor types.
 {: .fs-1 }
 
-A few things to  note:
+Regardless of specific type, all variable resistors have a schematic symbol similar to a regular resistor but with some visual modification to indicate "variability." A few general things to note:
 
 1. The two-leg variable resistor schematic symbol looks quite similar to a regular resistor but has a **diagonal line** through it indicating variability
-2. Some common variable resistors, like light-dependent resistors (LDRs or photocells), have their own schematic symbols
-3. The potentiometers have, as indicated, three legs. The middle arrow in its schematic representation (the "wiper leg") can be connected in a circuit. We'll see this below.
+2. Potentiometers have three legs, which are also represented in the schematic. The middle arrow (the "wiper leg") can be connected in a circuit and will actually be shown that way in a circuit diagram. We'll see this below.
+3. Some common variable resistors, like light-dependent resistors (LDRs or photocells), have their own schematic symbols. Others, like force-sensitive resistors and rheostats share the same symbol.
 
-Let's dive into potentiometers!
+Potentiometers are probably the most common type of variable resistor and an important component to learn about, so let's get started!
 
 ## Potentiometers
 
@@ -53,7 +51,7 @@ A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a thr
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/Potentiometer_Overview_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Video.** This animation shows how the wiper can be used to vary resistance in a rotary potentiometer. The figure on the right is the formal electrical symbol.
+**Video.** This animation shows how the wiper can be used to vary resistance in a rotary potentiometer. The figure on the right is the formal electrical symbol. Animation by Jon Froehlich. Created in PowerPoint.
 {: .fs-1 }
 
 Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits like the following 10K panel mount and trim potentiometers.
@@ -62,15 +60,51 @@ Potentiometers are truly ubiquitous electronic components found in everything fr
 **Figure.** Two example potentiometers commonly included in our hardware kits: a 10kΩ panel mount and and a 10kΩ trim potentiometer.
 {: .fs-1 }
 
-Though still widely used, some of the potentiometer's applications spaces have recently been subsumed by digital controls like rotary encoders and buttons. [Rotary encoders](https://learn.adafruit.com/rotary-encoder) look very similar to potentiometers—indeed, with knobs attached they can look identical (however, while rotary encoders can be spun around continuously, potentiometers typically have a controllable angle of 200°-270°)
+Though still widely used, some of a potentiometer's application spaces have been subsumed by digital controls like rotary encoders and buttons. Don't get confused: [rotary encoders](https://learn.adafruit.com/rotary-encoder) can look very similar to potentiometers—indeed, with knobs attached they can look identical. However, rotary encoders are not resistive devices, require digital circuits to use, and can be spun around continuously. In contrast, potentiometers are resistive components, can be used in analog or digital circuits, and typically have a controllable angle of 200°-270°.
+
+While potentiometers are often used as human input devices, this is not always the case. For example, a potentiometer might be used in a feedback circuit for a servo motor. As the motor rotates, it also rotates an embedded potentiometer's control dial (wiper), which feedsback rotational information to the control circuit (see [Chapter 15.4 on RC Servos](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/26_Chapter_15.xhtml) in [Scherz and Monk, 2016](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/)).
+
+### How does a potentiometer work?
+
+Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will always be 10kΩ regardless of wiper position (Leg 2). If you're using a 1kΩ resistor, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
+
+The power of a potentiometer is in that middle leg (Leg 2) whose resistance varies depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value like 1kΩ or 10kΩ). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PotentiometerIntroduction_TrimmedAndCropped.mp4" type="video/mp4" />
+</video>
+**Video.** Animation by Jon Froehlich. Created in PowerPoint.
+{: .fs-1 }
+
+### Potentiometer types
+
+Potentiometers come in a range of sizes, power ratings, and physical designs. Some larger designs can handle several watts of power (capable of dissipating alot of heat) while smaller, surface-mounted designs are rated for only a fraction of a watt (just like the $$\frac{1}{4}$$ watt resistors in your kits). 
 
 ![](assets/images/VarietyOfPotentiometers.png)
 **Figure.** Potentiometers are ubiquitous input devices found in everything from cars to audio mixing boards. There are nearly infinite designs, so we're only showing a small sample above. Note that you cannot tell the resistance value of a potentiometer (or pot) simply by looking at it nor can you tell whether it is a linear taper or a logarithmic taper. Logarithmic potentiometers are common in audio applications (because the human ear senses loudness logarithmically). Images sources: the potentiometer pictures with dark backgrounds are from [Adafruit](https://www.adafruit.com). The others are from [digikey](https://www.digikey.com/).
 {: .fs-1 }
 
+Among other things, potentiometers can differ in terms of:
+
+- **Rotary** vs. **slider**. Rotary potentiometers use a rotating knob to control the wiper leg while slider potentiometers use a slider.
+
+- **Linear** vs. **logarithmic** tapers (or tracks). With linear potentiometers, the resistance varies linearly as the wiper is moved. With logarithmic potentiometers, the resistance varies logarithmically. The latter type is common in audio applications because the human ear perceives sound magnitude logarithmically with more sensitivity for quiet sounds and less for loud sounds.
+
+- **Mount**. Some potentiometers are built for "mounting", for example, in a car dashboard or audio mix board. Others are built for breadboarding or for mounting on printed-circuit boards (so-called "surface-mount" potentiometers)
+
+- **Knob**. For those potentiometers used for human-input applications, there are a variety of knob types to support ergonomic and grippable interaction.
+
+### Inside a potentiometer
+
+If you're curious about how a potentiometer is constructed, this video by John Cooper provides a wonderful deconstruction of rotary potentiometers and how they work.
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/rUkrpqEmXb8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+**Video.** A [video](https://youtu.be/rUkrpqEmXb8) deconstruction of potentiometers and how they work by John Cooper (on YouTube).
+{: .fs-1 }
+
 ### Potentiometer knobs
 
-There are a variety of knobs that can be placed on panel-mount potentiometers and rotary encoders for user-facing applications like audio mixers, joysticks, and control panels. 
+There are a variety of knobs that can be placed on panel-mount potentiometers and rotary encoders for user-facing applications like audio mixers, joysticks, and control panels. You have very likely interacted with potentiometers hundreds of times in your life but they have been covered by knobs!.
 
 ![](assets/images/ExamplePotentiometerKnobs_ImagesFromAdafruit.png)
 **Figure.** Small sample of potentiometer and rotary encoder knobs. All images from [Adafruit](https://www.adafruit.com/). From left-to-right: [Soft Touch T18 - White](https://www.adafruit.com/product/2047), [Soft Touch T18 - Red](https://www.adafruit.com/product/2046), [Slim Metal Knob](https://www.adafruit.com/product/2058), [Machined Metal Knob](https://www.adafruit.com/product/2056), [Slide Pot with Plastic Knob](https://www.adafruit.com/product/4271)
@@ -94,13 +128,13 @@ Even more fun is to combine your custom 3D prints with a microcontroller and to 
 
 ### Potentiometers as analog joysticks
 
-Potentiometers have a long history as game controllers. In our hardware kits, we often include a 2-axis joystick like [this one](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) from Parallax ([$6.95 on Adafruit](https://www.adafruit.com/product/245)).
+Just as our 3D-printed designs above highlight, potentiometers have a long history as game controllers. In our hardware kits, we often include a 2-axis joystick like [this one](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) from Parallax ([$6.95 on Adafruit](https://www.adafruit.com/product/245)), which contains two embedded 10kΩ potentiometers.
 
 ![](assets/images/Parallax2AxisJoystickWithTwoEmbeddedPotentiometers.png)
 **Figure.** The [Parallax 2-Axis Joystick](https://learn.parallax.com/tutorials/language/propeller-c/propeller-c-simple-devices/joystick) has two embedded 10 kΩ potentiometers, one for each axis. You can see a video demo [here](https://youtu.be/SXtPGAu4MMw).
 {: .fs-1 }
 
-By moving the analog joystick, you independently control two embedded 10kΩ potentiometers. There is a $$V_{Out}$$ for the "Up/Down" potentiometer and a $$V_{Out}$$ for the "Left/Right" potentiometer. See the circuit diagram above.
+By moving the analog joystick, you independently control the two potentiometers in a voltage divider configuration. There is a $$V_{Out}$$ for the "Up/Down" potentiometer and a $$V_{Out}$$ for the "Left/Right" potentiometer. See the circuit diagram above.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/Parallax_2-AxisJoystick_TrimmedAndMuted.mp4" type="video/mp4" />
@@ -108,21 +142,9 @@ By moving the analog joystick, you independently control two embedded 10kΩ pot
 **Video.** A short snippet from this [official Parallax video](https://youtu.be/SXtPGAu4MMw) showing how physical movement of the joystick is translated into an electrical signal using two potentiometers.
 {: .fs-1 }
 
-### How does a potentiometer work?
-
-Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will be 10kΩ. If you're using a 1kΩ resistor, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
-
-The power of a potentiometer is in that middle leg (Leg 2) whose resistance will vary depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
-
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/PotentiometerIntroduction_TrimmedAndCropped.mp4" type="video/mp4" />
-</video>
-**Video.** TODO. Animation by Jon Froehlich. Created in PowerPoint.
-{: .fs-1 }
-
 ### Potentiometers as voltage dividers
 
-Potentiometers are actually conveniently packaged voltage dividers, which we learned about in [Lesson 3](series-parallel.md): $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves.
+Potentiometers are actually conveniently packaged voltage dividers, which we first described in [Lesson 3](series-parallel.md): $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves.
 
 ![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
 A 10kΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
@@ -178,6 +200,10 @@ Here, however, we are going to focus on using a potentiometer first as a rheosta
 - Use potentiometers in Tinkercad
 - Build actual circuits
 - Use FSR and photocell
+
+## Resources
+
+- [Chapter 8, Variable Resistors](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch08.html), Hughes, Practical Electronics: Components and Techniques, O'Reilly Media, 2015 
 
 ----
 

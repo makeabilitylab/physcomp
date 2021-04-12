@@ -158,7 +158,7 @@ Potentiometers are actually conveniently packaged voltage dividers, which we fir
 **Figure.** A potentiometer is a compact voltage divider. Image made in PowerPoint.
 {: .fs-1 }
 
-As an example, let's hook up a potentiometer to 5V (Leg 1) and ground (Leg 2) and see the output voltage $$V_{out}$$ vary at the wiper leg (the signal):
+As an example, let's hook up a potentiometer to 5V (Leg 1) and ground (Leg 3) and see the output voltage $$V_{out}$$ vary at the wiper leg (the signal at Leg 2):
 
 ![](assets/images/PotentiometerHookedUpTo5VAndGnd_ByJonFroehlich.png)
 **Figure.** Let's hookup the potentiometer to a 5V and ground. Image made in PowerPoint.

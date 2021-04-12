@@ -188,7 +188,7 @@ When only two terminals (or legs) of the potentiometer are used—an outer leg a
 Whew, now we're ready to build stuff! Let's start by building a simple LED circuit with our potentiometer as a two-terminal variable resistor. Here, we will only use one outer leg (either Leg 1 or 3, it doesn't matter) and the signal leg (Leg 2). Let's take a look at the circuit diagram—is it what you expected? Why or why not?
 
 ![](assets/images/HookingUpPotentiometerAsTwoTerminalVariableResistor_ByJonFroehlich.png)
-**Figure.** An example of how to hook up a potentiometer as a variable resistor. Image made in Fritzing and PowerPoint. 
+**Figure.** An example of how to hook up a potentiometer as a variable resistor. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
 {: .fs-1 }
 
 Do you notice that additional fixed-value resistor in our circuit? Why do you think we have it?
@@ -205,15 +205,61 @@ You can, of course, also build a potentiometer-based circuit in [CircuitJS](http
 
 ### Prototype circuit in Tinkercad Circuits
 
-We'd like you to prototype two potentiometer-based circuits in Tinkercad: the first **without** a breadboard and the second **with** a breadboard. If you'd like, you can include a ammeter and voltmeter showing how the current and voltage drops change as you rotate the potentiometer knob.
+We'd like you to prototype two potentiometer-based LED circuits in Tinkercad Circuits: the first **without** a breadboard and the second **with** a breadboard. If you'd like, you can include a ammeter and voltmeter showing how the current and voltage drops change as you rotate the potentiometer knob. Here are two possible examples of potentiometer-based LED circuit. Make sure both the pictorial representations and circuit schematics make sense.
+
+![](assets/images/BreadboardingPotentiometerAsTwoTerminalVariableResistorWithLED_ByJonFroehlich.png)
+**Figure.** An example of how to hook up a potentiometer as a variable resistor with a breadboard. Many other possible functionally equivalent circuits exist. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
+{: .fs-1 }
+
+For both Tinkercad Circuits, include a screenshot in your prototyping journals and describe your observations (just a sentence or two is fine).
 
 ### Prototype circuit on breadboard
 
-After you've built and simulated the circuits in Tinkercad, we'd like you to physically build the breadedboarded version with your hardware kits.
+After you've built and simulated the circuits in Tinkercad, we'd like you to physically build the breadedboarded version with your hardware kits. Take a photo and a quick demo video of the circuit working and put them in your prototyping journals. Describe any challenges.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/TrimPotentiometer-IMG_5685_Trim-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** Here's one possible way to breadboard a trim potentiometer circuit with a backup resistor and red LED. What did you make? Please take a similar video for your prototyping journals.
+{: .fs-1 }
 
 ## Activity: Swap in another variable resistor
 
-TODO:
+After you finish the above, we would like you to play and experiment with other variable resistors in your hardware kits, which include the thermistor (in your Plusivo box), the light-dependent resistor (also in your Plusivo box), the slide potentiometer, and/or my favorite, the force-sensitive resistor. Choose two of these and swap them in instead of the trim potentiometer on your breadboard. Take some photos, a video demo, and write a brief description of what you observed/learned for your prototyping journals.
+
+We provide two examples below. 
+
+### Force-sensitive resistor circuit
+
+The force-sensitive resistor (FSR) responds to force or pressure. As an applied force increases, the resistance across the two terminals decreases. In the simple circuit below, the LED will receive more current (and emit more light as a result) as more pressure is applied to the FSR.
+
+![](assets/images/ForceSensitiveResistor_BasicLEDCircuit_ByJonFroehlich.png)
+**Figure.** An example of how to hook-up a force-sensitive resistor for a simple LED circuit. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
+{: .fs-1 }
+
+Here' a video demonstration:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/FSR-TopDown9VCircuit-IMG_5683_Trimmed-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A video demonstration of an FSR-based LED circuit.
+{: .fs-1 }
+
+### Light-dependent resistor circuit
+
+A light-dependent resistor (LDR)—sometimes called a photocell or photo-sensitive resistor—reduces its resistance in response to light. In the simple circuit below, you'll notice that the red LED illuminates brightly in response to a flashlight. Often, we want just the opposite behavior: brighten an LED inversely proportional to light.
+
+![](assets/images/LightDependentResistor_BasicLEDCircuit_ByJonFroehlich.png)
+**Figure.** An example light-dependent resistor (LDR) circuit with an LED. In this configuration, the LED brightness will increase in proportion to the amount of light cast on the LDR sensor. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
+{: .fs-1 }
+
+And the video demonstration:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/Photocell-IMG_5686_Trim-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A video demonstration of an LDR-based LED circuit.
+{: .fs-1 }
 
 ## Activity: build your own DIY variable resistor
 

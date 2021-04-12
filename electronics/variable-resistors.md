@@ -241,7 +241,7 @@ The force-sensitive resistor (FSR) responds to force or pressure. As an applied 
 **Figure.** An example of how to hook-up a force-sensitive resistor for a simple LED circuit. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
 {: .fs-1 }
 
-Here' a video demonstration:
+Here's a video demonstration:
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/FSR-TopDown9VCircuit-IMG_5683_Trimmed-Optimized.mp4" type="video/mp4" />

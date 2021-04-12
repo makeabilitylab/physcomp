@@ -208,3 +208,12 @@ Note that you'll need to use the alligator clips on the 9V battery to supply pow
 - [How to use a breadboard](https://youtu.be/6WReFkfrUIk), Science Buddies video
 
 - [How to Use a Breadboard](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard), Sparkfun.com
+
+## Next Lesson
+
+In the [next lesson](variable-resistors), we will learn more about **variable resistors** and how to use them.
+
+<span class="fs-6">
+[Previous: LEDs](leds.md){: .btn .btn-outline }
+[Next: Variable Resistors](variable-resistors.md){: .btn .btn-outline }
+</span>

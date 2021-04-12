@@ -192,7 +192,45 @@ Importantly, as you can tell from the equation, it is *not* the absolute resista
 
 However, the amount of current between the two circuits would be significantly different with the former: $$I = \frac{9V}{200Ω} \Rightarrow 45mA$$ and the latter: $$I = \frac{9V}{4.4kΩ} \Rightarrow 2.0mA$$.
 
-Wouldn't it be cool to dynamically control one of those resistor values to output a variable voltage at $$V_{out}$$? Yes! And this is the basis of a [potentiometer](https://en.wikipedia.org/wiki/Potentiometer), which we will learn about in a later lesson.
+Wouldn't it be cool to dynamically control one of those resistor values to output a variable voltage at $$V_{out}$$? Yes! And this is the basis of a [potentiometer](variable-resistors.md), which we will learn about in a later lesson.
+
+#### Deriving the voltage divider equation
+
+Given what you are learning about circuits, you might be capable of deriving the voltage divider equation or, at the very least, understand *how* it is derived.
+
+![](assets/images/DerivingTheVoltageDividerEquation_ByJonFroehlich.png)
+**Figure.** A derivation of the voltage divider equation. See [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) for more.
+{: .fs-1 }
+
+Using the figure above, let's identify and write down what we know. We know that the voltage drop over $$R2$$ is equal to $$V_{out}$$ (indeed, they are the same thing) and that $$V_R2=I*R2$$:
+
+$$V_{out} = V_{R2} = I * R2$$
+
+We also know that $$V_in$$ is equal to $$V_R1 + V_R2$$ given [Kirchhoff's Voltage Law](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-kirchhoffs-laws).
+
+$$V_{in} = V_{R1} + V_{R2}$$
+
+Using Ohm's Law, we can substitute $$I * R1$$ for $$V_{R1}$$ and $$I * R2$$ for $$V_{R2}$$.
+
+$$V_{in} = I * R1 + I * R2$$
+
+Now, rearrange the $$V_{in}$$ equation using algebra:
+
+$$V_{in} = I * (R1 + R2) \Rightarrow I = \frac{V_{in}}{(R1 + R2)}$$
+
+Returning to $$V_{out} = I * R2$$, we can substitute $$I$$ given the formulation above:
+
+$$V_{out} = I * R2 = \frac{V_{in}}{(R1 + R2)} * R2$$
+
+Finally, rearrange the above to achieve the popular voltage divider equation:
+
+$$V_{out} = V_{in} * \frac{R2}{(R1 + R2)}$$
+
+Note: for this voltage divider equation to hold true, the current $$I$$ flowing through $$R_1$$ must be (largely) equal to $$R_2$$. That is, if we hook up a branch to $$V_{out}$$, as we've done below, then this branch must have very high resistance so that very little current "leaks" out into that branch. That is, $$R_{Load}$$ must be magnitudes greater than $$R1 + R2$$. However, in the case of microcontroller inputs, this is *fortunately* the case, which we will return to later.
+
+![](assets/images/VoltageDividerWithHighResistanceLoad.png)
+**Figure.** The voltage divider equation only holds when $$R_{Load}$$ is large, which it will be when we start using microcontrollers (which read changes in voltage levels and have "high input impedance")
+{: .fs-1 }
 
 <!-- TODO: Khan Academy has a nice derivation of this: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider -->
 
@@ -297,6 +335,7 @@ In your prototyping journals, include a sketch of the circuit (can be a smartpho
 * [Series and Parallel Resistors](https://www.khanacademy.org/science/ap-physics-1/ap-circuits-topic/series-circuits-ap/v/ee-series-resistors), Khan Academy
 * [Voltage Divider](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider), Khan Academy
 * [Circuit Analysis Shortcuts](https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?circuitAnalysisShortcuts), UIUC ECE101
+* [Chapter 9.3 Voltage Divider Pattern](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_9_Chapter.xhtml), Bartlett, Electronics for Beginners, APress 2020
 
 <!-- The UIUC lab page "Module 100: The Voltage Divider" has a nice description: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M100_Voltage%20Divider.pdf -->
 

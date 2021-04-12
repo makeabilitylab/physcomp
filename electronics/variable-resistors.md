@@ -92,7 +92,7 @@ Potentiometers differ primarily in terms of:
 
 - **Linear** vs. **logarithmic** tapers (or tracks). With linear potentiometers, the resistance varies linearly as the wiper is moved. With logarithmic potentiometers, the resistance varies logarithmically. The latter type is common in audio applications because the human ear perceives sound magnitude logarithmically with more sensitivity for quiet sounds and less for loud sounds.
 
-- **Power dissipation**. Again, similar to resistors, potentiometers have different "power ratings", which correspond to their ability to dissipate heat. This trim potentiometer [datasheet](https://www.sparkfun.com/datasheets/Components/General/TSR-3386.pdf) states that the power rating is 0.5W while this panel mount potentiometer is rated at 0.1-0.2W (see dathttps://cdn-shop.adafruit.com/product-files/562/p160.pdfasheet).
+- **Power dissipation**. Again, similar to resistors, potentiometers have different "power ratings", which correspond to their ability to dissipate heat. This trim potentiometer [datasheet](https://www.sparkfun.com/datasheets/Components/General/TSR-3386.pdf) states that the power rating is 0.5W while this panel mount potentiometer is rated at 0.1-0.2W (see [datasheet](https://cdn-shop.adafruit.com/product-files/562/p160.pdf)).
 
 - **Rotary** vs. **slider**. Rotary potentiometers use a rotating knob to control the wiper leg while slider potentiometers use a slider.
 
@@ -110,7 +110,9 @@ If you're curious about how a potentiometer is constructed, this video by John C
 
 ### Potentiometer knobs
 
-As a physical computing course, we are interested in how *humans* interact with potentiometer. Thus, the design of the knobs is relevant. There is a large diversity of knobs designed for panel-mount potentiometers and rotary encoders and used in a variety user-facing applications like audio mixers, joysticks, and control panels. You have very likely interacted with potentiometers many times in your life but they have been covered by knobs!.
+You have very likely interacted with potentiometers many times in your life; however, they have been covered by knobs, which make the potentiometer more ergonomic and grippable. 
+
+There are a large diversity of knobs, which fit both panel-mount potentiometers and rotary encoders, used in a variety of user-facing applications like audio mixers, joysticks, and control panels. Take a look at some examples below:
 
 ![](assets/images/ExamplePotentiometerKnobs_ImagesFromAdafruit.png)
 **Figure.** Small sample of potentiometer and rotary encoder knobs. All images from [Adafruit](https://www.adafruit.com/). From left-to-right: [Soft Touch T18 - White](https://www.adafruit.com/product/2047), [Soft Touch T18 - Red](https://www.adafruit.com/product/2046), [Slim Metal Knob](https://www.adafruit.com/product/2058), [Machined Metal Knob](https://www.adafruit.com/product/2056), [Slide Pot with Plastic Knob](https://www.adafruit.com/product/4271)

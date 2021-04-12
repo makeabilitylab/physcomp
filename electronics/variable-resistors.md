@@ -263,70 +263,17 @@ And the video demonstration:
 
 ## Activity: build your own DIY variable resistor
 
-For the final activity, we'd like you to build your own DIY variable resistor.
-
-
-
-
-
-#### Video on Ohm's Law and voltage dividers
-
-Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing (it's one of my favorites!).
+For the final activity, we'd like you to build your own DIY variable resistor. This activity is inspired by Jeff Feddersen, from NYU's ITP program. Please watch this video before continuing (it's one of my favorites!).
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 <p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 {: .fs-1 }
 
-See also this [Sparkfun tutorial](https://learn.sparkfun.com/tutorials/voltage-dividers/all) on voltage dividers.
-
-We're going to start with using only **two legs** of the potentiometer. We'll need all **three legs** when we start working again with microcontrollers.
-
-
-## Outline
-
-- Introduce variable resistors
-- Introduce potentiometers and voltage dividers
-- Show CircuitJS simulations
-- Use potentiometers in Tinkercad
-- Build actual circuits
-- Use FSR and photocell
+### Example DIY rotary potentiometer
 
 ## Resources
 
-- [Chapter 8, Variable Resistors](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch08.html), Hughes, Practical Electronics: Components and Techniques, O'Reilly Media, 2015 
+- [Chapter 8, Variable Resistors](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch08.html), Hughes, *Practical Electronics: Components and Techniques*, O'Reilly Media, 2015 
 
-----
-
-## Potentiometers
-
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/PotentiometerIntroduction-WiperPositions-TrimmedAndCropped_ByJonFroehlich.mp4" type="video/mp4" />
-</video>
-**Video.** This animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
-{: .fs-1 }
-
-### Demonstrating a potentiometer as a voltage divider
-
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/PotentiometerIntroduction-VoltageDividerWithCircuitJS_ByJonFroehlich.mp4" type="video/mp4" />
-</video>
-**Video.** This animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
-{: .fs-1 }
-
-![Animation showing how a potentiometer works](/assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
-Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
-{: .fs-1 }
-
-Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit).
-
-![Image of two physical potentiometers along with a diagram and schematic symbol](assets/images/Potentiometer_DiagramWithSchematicSymbol.png)
-
-<!-- TODO: talk about different taper types? -->
-<!-- TODO: talk about potentiometer drawbacks--like maintainance, corrosion. See https://ultimateelectronicsbook.com/potentiometers/ -->
-
-<!-- <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-<p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-
-## Resources
- - [Chapter 11: Potentiometer](https://learning.oreilly.com/library/view/Encyclopedia+of+Electronic+Components+Volume+1/9781449333881/ch11.html) in Platt, *Make: Encyclopedia of Electronic Components Volume 1: Resistors, Capacitors, Inductors, Switches, Encoders, Relays, Transistors*, O'Reilly, 2012. -->
+- [Chapter 11: Potentiometer](https://learning.oreilly.com/library/view/Encyclopedia+of+Electronic+Components+Volume+1/9781449333881/ch11.html) in Platt, *Make: Encyclopedia of Electronic Components Volume 1: Resistors, Capacitors, Inductors, Switches, Encoders, Relays, Transistors*, O'Reilly, 2012.
 

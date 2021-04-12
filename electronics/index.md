@@ -50,11 +50,11 @@ In [this lesson](leds.md), we'll introduce one of the most common electrical com
 
 In [this lesson](breadboards.md), we'll learn about a very useful circuit prototyping tool called breadboards, which makes it easy to rapidly build circuits (and plug/unplug components and wires).
 
-<!-- ## [Lesson 8: Variable resistors](variable-resistors.md)
+## [Lesson 8: Variable resistors](variable-resistors.md)
 
-TODO: what are variables resistors, how to use them, and how to make your own.
+In [this lesson](variable-resistors.md), we'll learn about variable resistors, a certain kind of variable resistor called a potentiometer, and then we'll design, simulate, and build some LED circuits using variable resistors. At the end, you'll even make your own DIY variable resistor!
 
-## [Lesson 9: Using a multimeter](multimeter.md)
+<!-- ## [Lesson 9: Using a multimeter](multimeter.md)
 
 TODO: or could integrate this somewhere else?   -->
 

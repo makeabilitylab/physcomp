@@ -205,7 +205,7 @@ You can, of course, also build a potentiometer-based circuit in [CircuitJS](http
 
 ### Prototype circuit in Tinkercad Circuits
 
-We'd like you to prototype two potentiometer-based LED circuits in Tinkercad Circuits: the first **without** a breadboard and the second **with** a breadboard. If you'd like, you can include a ammeter and voltmeter showing how the current and voltage drops change as you rotate the potentiometer knob. Here are two possible examples of potentiometer-based LED circuit. Make sure both the pictorial representations and circuit schematics make sense.
+We'd like you to prototype two potentiometer-based LED circuits in Tinkercad Circuits: the first **without** a breadboard and the second **with** a breadboard. If you'd like, you can include a ammeter and voltmeter showing how the current and voltage drops change as you rotate the potentiometer knob. Here are two possible examples of potentiometer-based LED circuit. Make sure both the pictorial representations and circuit schematics make sense. Remember, we are only using **two** of the **three** legs of the potentiometer.
 
 ![](assets/images/BreadboardingPotentiometerAsTwoTerminalVariableResistorWithLED_ByJonFroehlich.png)
 **Figure.** An example of how to hook up a potentiometer as a variable resistor with a breadboard. Many other possible functionally equivalent circuits exist. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
@@ -225,7 +225,9 @@ After you've built and simulated the circuits in Tinkercad, we'd like you to phy
 
 ## Activity: Swap in another variable resistor
 
-After you finish the above, we would like you to play and experiment with other variable resistors in your hardware kits, which include the thermistor (in your Plusivo box), the light-dependent resistor (also in your Plusivo box), the slide potentiometer, and/or my favorite, the force-sensitive resistor. Choose two of these and swap them in instead of the trim potentiometer on your breadboard. Take some photos, a video demo, and write a brief description of what you observed/learned for your prototyping journals.
+After you finish the above, we would like you to play and experiment with other variable resistors in your hardware kits, which include the **thermistor** (in your Plusivo box), the **light-dependent resistor** (also in your Plusivo box), the **slide potentiometer**, and/or my favorite, the **force-sensitive resistor**. 
+
+Choose two of these and swap them in instead of the trim potentiometer on your breadboard. Take some photos, a video demo, and write a brief description of what you observed/learned for your prototyping journals.
 
 We provide two examples below. 
 
@@ -263,13 +265,35 @@ And the video demonstration:
 
 ## Activity: build your own DIY variable resistor
 
-For the final activity, we'd like you to build your own DIY variable resistor. This activity is inspired by Jeff Feddersen, from NYU's ITP program. Please watch this video before continuing (it's one of my favorites!).
+For the final activity, we'd like you to build your own DIY variable resistor. We included [12B graphite pencils](https://www.amazon.com/XDT-Pencils-Art-Drawing-Graphite/dp/B08269G6QQ/ref=sr_1_44?dchild=1&keywords=graphite+pencils+12B+graphite&qid=1603388081&sr=8-44) in your hardware kits for just this purpose but you can use other materials if you so choose. 
+
+Pencil leads are mixtures of clay and graphite—the more graphite, the more conductive. The more graphite, the higher the **B** rating (you can get 1B, 2B, 3B... 14B pencils). For your kits, we got 12B.
+
+This activity is inspired by Jeff Feddersen, from NYU's ITP program. Please watch this video before continuing (it's one of my favorites!).
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 <p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 {: .fs-1 }
 
 ### Example DIY rotary potentiometer
+
+Here is an example DIY rotary potentiometer I made out of some cardboard, paper, a paper clip and a thumb tack (for the wiper), and a 12B pencil sketch (for the resistive material).
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/DIY_Rotary_Pot-Reversed_AdobePremiere_720p_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** A lo-fi rotary potentiometer made out of some cardboard, paper, a paper clip and a thumb tack (for the wiper), and a 12B pencil sketch (for the resistive material).
+{: .fs-1 }
+
+### Example DIY slider potentiomter
+
+Here is an example DIY slider potentiometer I made out of similar materials: cardboard, paper, a cardboard wiper with copper tape, and some 12B pencil sketch (for the resistive track).
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/DIY_Slider_Pot-720p-Optimized-ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** A lo-fi slider potentiometer made out of some cardboard, paper, copper tape-wrapped cardboard (for the slider), and a 12B pencil sketch (for the resistive track).
+{: .fs-1 }
 
 ## Resources
 

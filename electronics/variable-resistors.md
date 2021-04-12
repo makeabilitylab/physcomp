@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Variable Resistors
+title: L8&#58; Variable Resistors
 nav_order: 8
 parent: Intro to Electronics
 has_toc: false # on by default
-nav_exclude: true
+nav_exclude: false
 search_exclude: true
 usemathjax: true
 comments: true
@@ -20,13 +20,13 @@ usetocbot: true
 {:toc}
 ---
 
-In previous lessons, we worked with [fixed-value resistors](resistors.md). In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light).
+In previous lessons, we worked with [fixed-value resistors](resistors.md). In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light). We've listed some examples below.
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
 **Figure.** Many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have thermistors, photocells, and FSRs in your hardware kits! Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
-This is exciting! Physical computing is all about **interaction** and resistive materials that respond to different stimuli open up a new world of possibilities! We'll start with one of the most common variable resistors, called a potentiometer, and then **TODO**!!!!
+This is exciting! Physical computing is all about **interaction** and resistive materials that respond to different stimuli open up a new world of possibilities! 
 
 ## Variable resistor types
 
@@ -104,7 +104,7 @@ If you're curious about how a potentiometer is constructed, this video by John C
 
 ### Potentiometer knobs
 
-There are a variety of knobs that can be placed on panel-mount potentiometers and rotary encoders for user-facing applications like audio mixers, joysticks, and control panels. You have very likely interacted with potentiometers hundreds of times in your life but they have been covered by knobs!.
+There are a variety of knobs that can be placed on panel-mount potentiometers and rotary encoders for user-facing applications like audio mixers, joysticks, and control panels. You have very likely interacted with potentiometers many times in your life but they have been covered by knobs!.
 
 ![](assets/images/ExamplePotentiometerKnobs_ImagesFromAdafruit.png)
 **Figure.** Small sample of potentiometer and rotary encoder knobs. All images from [Adafruit](https://www.adafruit.com/). From left-to-right: [Soft Touch T18 - White](https://www.adafruit.com/product/2047), [Soft Touch T18 - Red](https://www.adafruit.com/product/2046), [Slim Metal Knob](https://www.adafruit.com/product/2058), [Machined Metal Knob](https://www.adafruit.com/product/2056), [Slide Pot with Plastic Knob](https://www.adafruit.com/product/4271)

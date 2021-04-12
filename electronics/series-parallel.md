@@ -196,7 +196,7 @@ Wouldn't it be cool to dynamically control one of those resistor values to outpu
 
 #### Deriving the voltage divider equation
 
-Given what you are learning about circuits, you might be capable of deriving the voltage divider equation or, at the very least, understand *how* it is derived.
+Given what you are learning about circuits, you now have the knowledge to derive the voltage divider equation or, at the very least, understand *how* it is derived. Let's take a look!
 
 ![](assets/images/DerivingTheVoltageDividerEquation_ByJonFroehlich.png)
 **Figure.** A derivation of the voltage divider equation. See [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) for more.

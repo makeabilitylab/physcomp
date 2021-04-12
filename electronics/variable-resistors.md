@@ -275,6 +275,8 @@ This activity is inspired by Jeff Feddersen, from NYU's ITP program. Please watc
 <p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 {: .fs-1 }
 
+For your prototyping journals, sketch out the circuit diagram for the DIY potentiometer, physically build it, and then take some photos and a video demonstrating how it works. Please also include a brief description and a reflection of what you learned.
+
 ### Example DIY rotary potentiometer
 
 Here is an example DIY rotary potentiometer I made out of some cardboard, paper, a paper clip and a thumb tack (for the wiper), and a 12B pencil sketch (for the resistive material).

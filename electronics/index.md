@@ -16,13 +16,13 @@ nav_exclude: false
 {:toc}
 ---
 
-Welcome 👋 to the first "Chapter" of your Physical Computing journey!
+Welcome 👋 to the first "step" in your Physical Computing journey!
 
-In this chapter, you will learn about the fundamentals of electricity—[voltage, current, and resistance](electricity-basics.md)—and how these elements can be used to build circuits that turn on lights, spin motors, and do other "work." You'll also learn about an empirically derived relationship, called [Ohm's Law](ohms-law.md), that relates voltage, current, and resistance together and methods to analyze circuits using Ohm's Law. Finally, you'll learn about three common circuit elements (resistors,  LEDs, variable resistors), how they work, and how to use them in circuits.
+In this module, you will learn about the fundamentals of electricity—[voltage, current, and resistance](electricity-basics.md)—and how these elements can be used to build circuits that turn on lights, spin motors, and do other "work." You'll also learn about an empirically derived relationship, called [Ohm's Law](ohms-law.md), that relates voltage, current, and resistance together and methods to analyze circuits using Ohm's Law. Finally, you'll learn about three common circuit elements (resistors,  LEDs, variable resistors), how they work, and how to use them in circuits.
 
 Throughout, you'll use simulation tools like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and [Tinkercad Circuits](https://www.tinkercad.com/) to design and evaluate circuits and then actually build them using physical components.
 
-By the end of this chapter, you will be prepared to start Chapter 2—which is our endeavor into using electronics with microcontrollers!
+By the end of this module, you will be prepared to start [Module 2](../arduino/index.md)—which is our endeavor into using electronics with microcontrollers!
 
 ## [Lesson 1: Voltage, current, and resistance](electricity-basics.md)
 

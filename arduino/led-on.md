@@ -94,7 +94,7 @@ Let's compare the current and brightness between supplying 5V *vs.* 3.3V.
 | 5V        | 3.3V          |
 |:-------------|:------------------|
 | ![Animation showing current flowing through 5V LED circuit](assets/movies/Arduino_LEDOn_5VFixed_Current_USBPower.gif) | ![Animation showing current flowing through 3.3V LED circuit](assets/movies/Arduino_LEDOn_3.3VFixed_Current_USBPower.gif) |
-| With a 5V supply, the voltage drop across the 220Ω is ~3V. Thus, $$I = \frac{3V}{220Ω}= 13.6mA $$ | With a 3.3V supply, the voltage drop across the 220Ω resistor is ~1.3V, thus $$I = \frac{1.3V}{220Ω}= 5.9mA $$|
+| With a 5V supply, the voltage drop across the 220Ω is ~3V. Thus, $$I = \frac{3V}{220Ω}= 13.6mA $$. Note: there is an error in the animation: 1.3V in numerator should be 3V.  | With a 3.3V supply, the voltage drop across the 220Ω resistor is ~1.3V, thus $$I = \frac{1.3V}{220Ω}= 5.9mA $$|
 
 Here's a workbench photo of the LED wired to the 3.3V port. The LED is noticeably less bright:
 
@@ -132,7 +132,7 @@ With ($$V_R=1.3V$$), we can now use Ohm's Law to calculate $$I$$: $$I = \frac{V}
 
 <!-- TODO: in future Fix Ohm's Law animations to use Vr, Vf nomenclature -->
 
-To learn more about calculating the current through an LED, watch [this video](https://vimeo.com/78674965) by NYU ITP's Jeff Feddersen:
+To learn more about calculating the current through an LED, see our [LED lesson](../electronics/leds.md) and/or watch [this video](https://vimeo.com/78674965) by NYU ITP's Jeff Feddersen:
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/78674965" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 

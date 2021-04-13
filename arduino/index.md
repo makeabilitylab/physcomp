@@ -17,10 +17,13 @@ usetocbot: true
 {:toc}
 ---
 
+Welcome 👋 to the second module in your Physical Computing journey. Although you can begin your journey here, we strongly recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content. We will refer back to content from the first module.
+
 These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
-<!-- TODO: add in link to Tinkercad circuits here... -->
-<!-- Call this intro to Microcontrollers and then cast Arduino as an example -->
+<!-- Call this intro to Microcontrollers and then cast Arduino as an example? -->
+
+<!-- Add an Intro to Microcontrollers? -->
 
 ## Intro to Output
 
@@ -72,40 +75,12 @@ Introduces potentiometers and rheostats, analog input, and using Arduino's [`ana
 
 Introduces force-sensitive resistors (FSRs), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
 
-<!--TODO: after Lesson 4, have them make their own lo-fi resistive sensor? -->
-<!--TODO: need to add debouncing and interrupts -->
-
-<!-- This is a **draft** list of topics (and order may change).
-
-### Lesson 1: Using buttons
-
-Introduces buttons (aka momentary switches), working with digital input via [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/), and pull-up and pull-down resistors.
-
-### Lesson 2: Limiting use of delays
-
-Shows how to poll for input without delays and the reasons for this (show first example with delays and how button is not responsive). (Maybe also refer to interrupts here?)
-
-### Lesson 3: Debouncing digital input
-
-Introduces [debouncing](https://www.arduino.cc/en/Tutorial/Debounce) and solutions.
-
-### Lesson 4: Controlling LED brightness via a potentiometer
-
-Introduces analog input, the [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function, and using a potentiometer. 
-- TODO: potentially add in Serial monitor + plotter here?
-- TODO: potentially add in independently controlling brightness and color with RGB LED here?
-
-### Lesson 5: Using force-sensitive resistors
-
-Introduces variable resistors, demonstrates how to hook up a variable resistor to a microcontroller using a voltage divider, and shows how to control LED brightness via a force-sensitive resistor.
-
-### Lesson 6: Sensing light
-
-Adapts the previous force-sensitive resistor example to work with a photocell. Discusses calibration, etc.
-
-### Lesson 7: Smoothing analog input
-
-Smooths analog input -->
+<!--
+TODO: after Lesson 4, have them make their own lo-fi resistive sensor?
+TODO: what is debouncing and why
+TODO: how to use interrupts
+TODO: how to use some startup sequence to calibrate sensors?
+TODO: some basics on smoothing the signal? -->
 
 <!-- ## Other possibilities
 - Debugging

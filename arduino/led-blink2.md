@@ -18,7 +18,7 @@ usetocbot: true
 {:toc}
 ---
 
-In this tutorial, we will learn the difference between **current sourcing** and **current sinking** by revisiting our [LED Blink](led-blink.md) example. You will also begin learning how to use a breadboard.
+In this tutorial, we will learn the difference between **current sourcing** and **current sinking** by revisiting our [LED Blink](led-blink.md) example. We will also incorporate the use of a [breadboard](../electronics/breadboards.md).
 
 We are going to build two simple LED circuits:
 
@@ -40,7 +40,7 @@ Our materials are *almost* the same as before but this time, we are going to mak
 
 ## Before you begin: breadboarding circuits
 
-We will increasingly be using our breadboards in these lessons so now is a good opportunity to (re)visit how to use them. If you're unfamiliar please read this [Adafruit breadboard guide](https://learn.adafruit.com/breadboards-for-beginners) and watch the following [video](https://youtu.be/6WReFkfrUIk):
+We will increasingly be using our breadboards in these lessons so now is a good opportunity to revisit how to use them. If you're unfamiliar please read our [breadboarding guide](../electronics/breadboards.md) and watch the following [video](https://youtu.be/6WReFkfrUIk):
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/6WReFkfrUIk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

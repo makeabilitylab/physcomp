@@ -27,6 +27,9 @@ In this lesson, we are going to do something more exciting: use the Arduino to t
 <!-- TODO: Add in a version that makes a tone for accessibility reasons? 
      See: https://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/digital-input-and-output-with-an-arduino/ -->
 
+NOTES:
+- Add in either an oscilliscope or serial plotter output
+
 ## Materials
 
 You will use the same materials as [before](led-on.md), but you will also need the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.

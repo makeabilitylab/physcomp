@@ -27,9 +27,6 @@ In this lesson, we are going to do something more exciting: use the Arduino to t
 <!-- TODO: Add in a version that makes a tone for accessibility reasons? 
      See: https://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/digital-input-and-output-with-an-arduino/ -->
 
-<!-- NOTES:
-- Add in either an oscilliscope or serial plotter output -->
-
 ## Materials
 
 You will use the same materials as [before](led-on.md), but you will also need the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
@@ -146,7 +143,7 @@ NYU's ITP course has a [nice tutorial](https://itp.nyu.edu/physcomp/labs/motors-
 
 ### What's the maximum amount of current a digital output pin can supply?
 
-The Arduino Uno uses the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 0.04A (40 mA) per digital output pin or about ~2-3 LEDs in parallel. 
+The Arduino Uno uses the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 0.04A (40 mA) per digital output pin or about ~4 LEDs in parallel (with 10mA per branch). 
 
 According to Section 28.1 in the [ATmega328P datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf), anything beyond these limits "*may cause permanent damage to the chip*". The maximum total current draw **across all I/O pins** together should not exceed 200mA. Again, this limit is not a concern for our introductory lessons (unless you deviate significantly from them).
 
@@ -302,9 +299,9 @@ You can access our Blink code in our [Arduino GitHub repository](https://github.
 
 A common and important question when first working with microcontrollers is: what does the digital output look like?
 
-It's fairly straightforward: picture a graph of voltage over time with the x-axis as time and the y-axis as voltage output on your digital output pin (Pin 3 in our examples). You should envision a "square wave" of a 5V output signal (for the given `HIGH` delay length) followed by a 0V output signal (for the given `LOW` delay length). Indeed, this type of graph is exactly what an oscilloscope is for—it graphs voltage values over time.
+In your mind, imagine what the voltage out of Pin 3 looks like over time (the x-axis is time and the y-axis is voltage output). You should envision a 5V output signal `HIGH` for the delay length followed by a 0V output signal, which is `LOW` delay length. Indeed, this type of graph is exactly what an oscilloscope is for—it graphs voltage values over time.
 
-Using Tinkercad Circuits, we built the same LED-based circuit as above running the Blink program and hooked it up to an oscilliscope. Then, we recorded different `delay` values (400, 200, and 50) and created this movie. Is the graph what you expected? Why or why not.
+Using Tinkercad Circuits, we built the same LED-based circuit as above running the Blink program and hooked it up to an oscilliscope. Then, we recorded different `delay` values (400, 200, and 50) and created this movie. Is the graph what you expected? Why or why not. We suggest opening the video in its own tab or viewing it in fullscreen to see the details.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/movies/LedBlinkOscilliscope_TinkercadCircuits_Trim.mp4" type="video/mp4" />
@@ -323,8 +320,12 @@ We duplicated the above Tinkercad setup (circuit + oscilloscope) in our laborato
 <iframe width="736" height="414" src="https://www.youtube.com/embed/_ByA8Q-hL8I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 **Video** A [video](https://youtu.be/_ByA8Q-hL8I) showing the digital output voltage waveform at different "blinking" frequencies.
+{: .fs-1 }
 
-<!--TODO: include a link to tinkercad version in future; tinkercad is down right now -->
+You can play with the Tinkercad version of this experiment [here](https://www.tinkercad.com/things/42O2UlRJFrZ):
+
+![](assets/images/SettableBlinkLedOnAndOffWithOscilliscope_Tinkercad.png)
+**Figure**. Tinkercad Circuits version of the settable delay circuit+code ([link](https://www.tinkercad.com/things/42O2UlRJFrZ)).
 
 ## Mental model check: code is loaded and running on the Arduino
 
@@ -334,11 +335,90 @@ As a quick mental model check, it's worth emphasizing that once you upload the c
   <source src="assets/movies/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">
 </video>
 
-## Using Serial
+## Debugging strategies
 
-TODO
+Debugging code is always hard. Debugging code+circuits is even harder. We'll continue to talk about strategies for debugging throughout the course. For hardware debugging, multimeters and oscilliscopes are useful. For code debugging, it's common to use "print line" statements—this is particularly true given that the Arduino IDE does not currently support code debugging (*e.g.,* breakpoints, code stepping, memory stack dumps). Note: there is evidently debugging support in the newest beta of the Arduino IDE and there is rudimentary debugging support in the Tinkercad Circuits code editor.
 
-## Use the built-in LED
+### Using Serial.print for debugging
+
+Perhaps the oldest way of debugging code, printing out to "console" is the standard Arduino code debugging technique (as tedious as it can be). Unlike JavaScript, Java, C# or other code that runs in your web browser or natively on your desktops/laptops, your Arduino code is running on the Arduino's microcontroller. 
+
+Thus, when we "print to console", we actually need to get the data from the Arduino's microcontroller on to your development computer. To do this, we use the [serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/) protocol. More specifically, the function [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/).
+
+These two functions print data to the serial port as human-readable ASCII text (the `println` version simply inserts a carriage return `\r` followed by a newline character `\n`).
+
+#### Step 1: Initialize the serial port
+
+To use the serial port, we must first initialize it with [`Serial.begin(BAUD_RATE)`](https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/). The baud rate is the transmission speed in bits per second (bps) and is typically set to `9600` unless greater speeds are needed. 
+
+Typically, we initialize the serial port in `setup()`. 
+
+{% highlight C %}
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+}
+
+void loop() {}
+{% endhighlight C %}
+
+#### Step 2: Use Serial.print and Serial.println to write data
+
+Here's a complete program that writes "Hello world!" once very 500 ms.
+
+{% highlight C %}
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+}
+
+void loop() {
+  Serial.println("Hello world!");
+  delay(500);
+}
+{% endhighlight C %}
+
+#### Step 3: Open 'Serial Monitor' in the Arduino IDE
+
+Finally, to view the incoming serial data, open up the Serial Monitor in the Arduino IDE. 
+
+![](assets/images/BlinkWithSerialPrint_OpenSerialMonitor.png)
+
+And you should see something like this:
+
+![](assets/images/SerialPrintHelloWorld_SerialMonitor.png)
+
+### Printing out variables
+
+A common question is how to print out variables in Arduino. The simple answer is to use multiple `Serial.print` and `Serial.println` with the variable as the sole parameter (see below). A more complicated answer is available in our [Inside Arduino](inside-arduino.md) guide, which also talks about printing multiple variables and formatting.
+
+{% highlight C %}
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+}
+
+void loop() {
+  // Get the current time since the Arduino started our program (in ms)
+  unsigned long currentTimestampMs = millis();
+
+  Serial.print("Time since Arduino started: ");
+  Serial.print(currentTimestampMs);
+  Serial.println(" ms");
+  delay(500);
+}
+{% endhighlight C %}
+
+![](assets/images/SerialPrintTimeStamp_ArduinoSerialMonitorScreenshot.png)
+
+### Modify your blink code to use Serial.print
+
+Now, let's return to our blink code and modify it to use `Serial.print` to print out when the LED is on and off.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
+</video>
+**Video.** A video of the blink program with serial prints ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
+{: .fs-1 }
+
+### Use the built-in LED
 
 The Arduino has a **built-in LED** with a built-in in-series resistor that's often useful for some quick debugging (*e.g.,* turn on the built-in LED to indicate some program state without hooking up an external LED circuit). On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write `digitalWrite(13, HIGH);` in your code, the built-in LED will turn on. Because not all Arduino boards have the built-in LED at Pin 13, you should use the constant `LED_BUILTIN` rather than a literal pin number.
 

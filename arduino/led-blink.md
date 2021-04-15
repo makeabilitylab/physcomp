@@ -27,8 +27,8 @@ In this lesson, we are going to do something more exciting: use the Arduino to t
 <!-- TODO: Add in a version that makes a tone for accessibility reasons? 
      See: https://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/digital-input-and-output-with-an-arduino/ -->
 
-NOTES:
-- Add in either an oscilliscope or serial plotter output
+<!-- NOTES:
+- Add in either an oscilliscope or serial plotter output -->
 
 ## Materials
 
@@ -146,15 +146,17 @@ NYU's ITP course has a [nice tutorial](https://itp.nyu.edu/physcomp/labs/motors-
 
 ### What's the maximum amount of current a digital output pin can supply?
 
-The Arduino Uno uses the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 0.04A (40 mA) per digital output pin or about ~2-3 LEDs in parallel. According to Section 28.1 in the [ATmega328P datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf), anything beyond these limits "*may cause permanent damage to the chip*". The maximum total current draw **across all I/O pins** together should not exceed 200mA. Again, this limit is not a concern for our introductory lessons (unless you deviate significantly from them).
+The Arduino Uno uses the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller, which can supply an absolute maximum of 0.04A (40 mA) per digital output pin or about ~2-3 LEDs in parallel. 
 
-Importantly, once you configure a digital I/O pin as `OUTPUT`, do not connect it directly to `GND` or $$V_{CC}$$ (5V on the Uno) or you may damage the microcontroller (typically, just that particular pin will be damaged). So, for example, if you've accidentally connected Pin 3 directly to 5V and write `pinMode(3, OUTPUT); digitalWrite(3, LOW);`, a whole bunch of current will "sink" into Pin 3 and potentially damage the pin.
+According to Section 28.1 in the [ATmega328P datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf), anything beyond these limits "*may cause permanent damage to the chip*". The maximum total current draw **across all I/O pins** together should not exceed 200mA. Again, this limit is not a concern for our introductory lessons (unless you deviate significantly from them).
+
+Importantly, once you configure a digital I/O pin as `OUTPUT`, do not connect it directly to `GND` or $$V_{CC}$$ or you may damage the microcontroller (typically, just that particular pin will be damaged). So, for example, if you've accidentally connected Pin 3 directly to 5V and write `pinMode(3, OUTPUT); digitalWrite(3, LOW);`, a whole bunch of current will "sink" into Pin 3 and potentially damage the pin.
 
 You may be thinking: "um, what?" That's OK. In our years of teaching, we have had very few Arduinos damaged due to current overdraw (though it's worth watching this video on ["5 Ways to Destroy an Arduino"](https://youtu.be/WmcMrKELkcs)). And you won't need to worry about these limits for any of the introductory lessons.
 
 ### Internally, how does the Arduino set a pin HIGH or LOW?
 
-Feel free to skip over this but for those who may be curious: how does the Arduino control the voltage output of a pin? Using transistors. As the (simplified) schematic below highlights, an output pin provides either $$V_{DD}$$ (5V on the Uno) or $$GND$$ (0V) by dynamically turning on/off transistors (an inverter ensures that only one transistor can be on at a time).
+Though it's not necessary to understand the following in order to *use* an Arduino, you might be curious about how the Arduino controls the voltage output of a pin? Using transistors. As the (simplified) schematic below highlights, a digital output pin provides either $$V_{DD}$$ (5V on the Uno and Leonardo) or $$GND$$ (0V) by dynamically turning on/off transistors (an inverter ensures that only one transistor can be on at a time).
 
 ![A simplified schematic by Chuan-Zheng Lee showing that an output pin provides VDD or 0 V by making a connection to VDD or ground via a transistor](assets/images/Arduino_DigitalOutputPin_Schematic.png)
 Schematic by Chuan-Zheng Lee for his ["Intro to Arduino"](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/arduino.pdf) course at Stanford.
@@ -291,7 +293,40 @@ How does this work? See the code walkthrough video below:
   <source src="assets/movies/Arduino_BlinkWithCode_Pin3.mp4" type="video/mp4">
 </video>
 
-### Mental model check: code is loaded and running on the Arduino
+### Our Blink code is in GitHub
+
+You can access our Blink code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). A "live" version is also embedded directly from the GitHub repo below (at the bottom of this "code window", you should see direct links back to the code on GitHub and a "view raw" option):
+<script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
+
+## What does the digital output look like?
+
+A common and important question when first working with microcontrollers is: what does the digital output look like?
+
+It's fairly straightforward: picture a graph of voltage over time with the x-axis as time and the y-axis as voltage output on your digital output pin (Pin 3 in our examples). You should envision a "square wave" of a 5V output signal (for the given `HIGH` delay length) followed by a 0V output signal (for the given `LOW` delay length). Indeed, this type of graph is exactly what an oscilloscope is for—it graphs voltage values over time.
+
+Using Tinkercad Circuits, we built the same LED-based circuit as above running the Blink program and hooked it up to an oscilliscope. Then, we recorded different `delay` values (400, 200, and 50) and created this movie. Is the graph what you expected? Why or why not.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/movies/LedBlinkOscilliscope_TinkercadCircuits_Trim.mp4" type="video/mp4" />
+</video>
+**Video.** A video of this [Tinkercad project](https://www.tinkercad.com/things/17q2GFeYwP9) with three different `delay` values for both `HIGH` and `LOW`: 400, 200, and 50.
+{: .fs-1 }
+
+We encourage you to play with this [Tinkercad project ](https://www.tinkercad.com/things/17q2GFeYwP9)yourself and investigate different delays and their output on the oscilloscope. 
+
+<iframe width="725" height="453" src="https://www.tinkercad.com/embed/17q2GFeYwP9?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+### Setting and visualizing different blinking frequencies
+
+We duplicated the above Tinkercad setup (circuit + oscilloscope) in our laboratory and recorded a video. Notably, we used slightly different [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/SettableBlinkWithoutDelay/SettableBlinkWithoutDelay.ino) that allows us to set the blink frequency by rotating a [potentiometer](../electronics/variable-resistors.md).
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/_ByA8Q-hL8I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+**Video** A [video](https://youtu.be/_ByA8Q-hL8I) showing the digital output voltage waveform at different "blinking" frequencies.
+
+<!--TODO: include a link to tinkercad version in future; tinkercad is down right now -->
+
+## Mental model check: code is loaded and running on the Arduino
 
 As a quick mental model check, it's worth emphasizing that once you upload the code to your Arduino, you no longer need the USB cable. Why? Because a compiled version of the code is stored **locally** on your Arduino and stays there even when the Arduino loses power. Your Arduino *is* the computer! So, you could use some other power source like a 9V battery plugged in to the barrel jack port.
 
@@ -299,10 +334,9 @@ As a quick mental model check, it's worth emphasizing that once you upload the c
   <source src="assets/movies/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">
 </video>
 
-### Our Blink code is in GitHub
+## Using Serial
 
-You can access our Blink code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). A "live" version is also embedded directly from the GitHub repo below (at the bottom of this "code window", you should see direct links back to the code on GitHub and a "view raw" option):
-<script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
+TODO
 
 ## Use the built-in LED
 

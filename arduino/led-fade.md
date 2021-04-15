@@ -145,22 +145,24 @@ We can visualize the (effective) voltage output on Pin 3 using the Arduino IDE's
   <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
 </video>
 
-Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. Recall that current does not pass through an LED until its forward voltage $$V_f$$ condition is met. With a red LED, a common forward voltage is $$V_f=2V$$. With [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), the GPIO pin is still driven `HIGH` (5V) but only for a fraction of the time due to PWM (this fraction is called the duty cycle). So, the $$V_f$$ requirement is still met and our **eyes** perceive the LED on but it's actually flashing on/off imperceptibly quickly! 
+Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. Recall that current does not pass through an LED until its forward voltage $$V_f$$ condition is met. With a red LED, a common forward voltage is $$V_f=2V$$. With [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), the GPIO pin is still driven `HIGH` (5V) but only for a fraction of the time due to PWM (this fraction is called the duty cycle). So, the $$V_f$$ requirement is still met and our **eyes** perceive the LED on but it's actually **flashing on/off** imperceptibly quickly! 
 
-To calculate the current through our LED circuit with PWM, we can use the following equation: $$I = \frac{V_s - V_f}{R}DutyCycle_{fraction}$$. So, for example, if we `analogWrite` a `51` then our $$DutyCycle_{fraction}=\frac{51}{255}\to0.2$$. With a 220Ω, our current would be: $$I=\frac{5V - 2V}{220Ω}0.2\to2.7mA$$. See the table below.
+To calculate the current through our LED circuit with PWM, let's let $$DF$$ equal the **duty cycle fraction**, the fraction of a waveform period that is HIGH. Then, we can use the following equation: $$I = \frac{V_s - V_f}{R} * DF$$ to calculate current. So, for example, if we `analogWrite` a `51` then our $$DF=\frac{51}{255}=0.2$$. With a 220Ω, our current would be: $$I=\frac{5V - 2V}{220Ω}*0.2=2.7mA$$. 
+
+See the table below for example 8-bit output values for `analogWrite` on Pin 3 and the effective current.
 
 | Resistor | Pin 3 Voltage | Pin 3 Value | PWM Duty Cycle | Resulting Current |
 |:-------------|:-------------|:-------------|:-------------|:----------------|
-| 220Ω | 5V | 0 | $$\frac{0}{255}=0.0$$ | $$I = \frac{5V-2V}{220Ω}0.0=0.0mA $$ |
-| 220Ω | 5V | 45 | $$\frac{45}{255}=0.176$$ | $$I = \frac{5V-2V}{220Ω}0.176=2.4mA $$ |
-| 220Ω | 5V | 103 | $$\frac{103}{255}=0.404$$ | $$I = \frac{5V-2V}{220Ω}0.404=5.5mA $$ |
-| 220Ω | 5V | 128 | $$\frac{128}{255}=0.502$$ | $$I = \frac{5V-2V}{220Ω}0.780=6.8mA $$ |
-| 220Ω | 5V | 199 | $$\frac{199}{255}=0.780$$ | $$I = \frac{5V-2V}{220Ω}0.780=10.5mA $$ |
-| 220Ω | 5V | 255 | $$\frac{255}{255}=1.0$$ | $$I = \frac{5V-2V}{220Ω}1.0=13.4mA $$ |
+| 220Ω | 5V | 0 | $$\frac{0}{255}=0.0$$ | $$I = \frac{5V-2V}{220Ω} * 0.0=0.0mA $$ |
+| 220Ω | 5V | 45 | $$\frac{45}{255}=0.176$$ | $$I = \frac{5V-2V}{220Ω} * 0.176=2.4mA $$ |
+| 220Ω | 5V | 103 | $$\frac{103}{255}=0.404$$ | $$I = \frac{5V-2V}{220Ω} * 0.404=5.5mA $$ |
+| 220Ω | 5V | 128 | $$\frac{128}{255}=0.502$$ | $$I = \frac{5V-2V}{220Ω} * 0.780=6.8mA $$ |
+| 220Ω | 5V | 199 | $$\frac{199}{255}=0.780$$ | $$I = \frac{5V-2V}{220Ω} * 0.780=10.5mA $$ |
+| 220Ω | 5V | 255 | $$\frac{255}{255}=1.0$$ | $$I = \frac{5V-2V}{220Ω} * 1.0=13.4mA $$ |
 
 ## Improved fading approach: limiting delays
 
-Recall that we want to limit the use of long `for` loops and long `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now).
+Recall that we want to limit the use of long `for` loops and long `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now). See ["What does delay() actually do?"](inside-arduino.md#what-does-delay-actually-do) in our [Inside Arduino](inside-arduino.md) guide.
 
 So, let's rewrite the fade example but without for loops and, instead, rely on the fact that `loop()` is already a `loop` :). While the code below is different, the resulting LED fade behavior is the same (so you won't notice a difference if you try them both out).
 

@@ -23,7 +23,7 @@ These tutorials are interactive and designed to be completed **in order**. All A
 
 <!-- Call this intro to Microcontrollers and then cast Arduino as an example? -->
 
-<!-- Add an Intro to Microcontrollers? -->
+<!-- Add an Intro to Microcontrollers, talk about Arduino vs. RaspPi -->
 
 ## Intro to Output
 

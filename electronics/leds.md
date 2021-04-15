@@ -405,6 +405,12 @@ There are lots of fun YouTube videos of supplying too much current to LEDs and o
 **Video.** This video shows what happens when the applied voltage significantly exceeds the LED's forward voltage $$V_f$$ with no current limiting resistor. Video from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
 {: .fs-1 }
 
+## Still confused?
+
+Still a bit confused? Try watching [this video](https://vimeo.com/78674965) by NYU ITP's Jeff Feddersen or see the [Resource](#resources) links at the bottom.
+
+<div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/78674965" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ## Activity
 
 For your prototyping journals, design and build **two** different LED-based circuits with appropriate current-limiting resistors. For this activity, do **not** use a breadboard (even if you already know how). Instead, just wire up things directly using alligator clips and/or by "wire wrapping". Given that we are not using breadboards, you can keep this circuit relatively simple. If you want to hook up multiple LEDs, see this tutorial by [LEDnique](http://lednique.com/parallel-leds/).

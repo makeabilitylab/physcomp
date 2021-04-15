@@ -67,59 +67,13 @@ The Arduino software is open source and consists of a development environment (c
 
 ## Get the Arduino IDE
 
-But first, we need to download and install the Arduino IDE (if you haven't already).
-
-### Step 1: Download and install the Arduino IDE
-
-Download and install the local Mac, Windows, or Linux version of the [Arduino IDE](https://www.arduino.cc/en/main/software). We will **not** be using the Cloud version.
-
-### Step 2: Open the IDE
-
-After installation is complete, open the Arduino IDE. Notice that there are **two blocks** of code (called functions):
-
-1. The first block is `setup()`, which is called once and only once when the Arduino is turned on
-2. And the second block is `loop()`, which is called as soon as `setup()` completes. When `loop()` completes, it's automatically called again and again (until the Arduino is turned off). Want to learn more, read [Inside Arduino](inside-arduino.md#whats-calling-loop-and-how-fast).
-
-![Screenshot of the Arduino IDE](assets/images/ArduinoIDE_BlankAndAnnotated.png)
-
-For those who have used [Processing](https://processing.org/)—a programming environment for digital artists and creators (and a favorite of mine)—this code structure should seem familiar. Indeed, the Arduino IDE is written in Java and derives from Processing ([link](https://github.com/arduino/Arduino/tree/ee1967cd530ceb9a1d638875e385157e90d532e8/arduino-core/src/processing/app)).
-
-| Processing | p5js |
-|----|----|
-| ![Screenshot of the Processing IDE](assets/images/ProcessingIDE_Blank.png) | ![Screenshot of p5js IDE](assets/images/p5jsIDE_Blank.png) |
-| A screenshot of the [Processing IDE](https://processing.org/) | A screenshot of the [p5.js IDE](https://editor.p5js.org/) |
-
-### Step 3: Select your Arduino board
-
-Select your Arduino board:
-
-![Screenshot showing how to select your Arduino board in the Arduino IDE by going to the file menu and then Tools->Board](assets/images/ArduinoIDE_SelectYourArduinoBoard.png)
-
-In newer versions of the IDE (since [1.8.13](https://www.arduino.cc/en/Main/ReleaseNotes)), there is a cascading menu organized by platform type.
-
-![Screenshot showing how to select your Arduino board in the Arduino IDE by going to the file menu and then Tools->Arduino AVR Boards->Board](assets/images/ArduinoIDE_SelectYourArduinoBoard_GroupedByPlatform.png)
-
-### Step 4: Select your Arduino port
-
-Then select your Arduino port. **Important:** This port can change if, for example, you change which USB port you plug in your Arduino. Students have also reported this port changing on their computer after restarts, etc. You will not be able to download code to Arduino if the proper port is not selected.
-
-![Screenshot showing how to select your Arduino port in the Arduino IDE by going to the file menu and then Tools->Port](assets/images/ArduinoIDE_SelectYourArduinoPort.png)
-
-### Stop and double check the following
-
-A significant number of frustrating hours are wasted because:
-
-1. The **incorrect Arduino board** was selected. Double check this. For example, there are two Arduino Leonardo options: "Arduino Leonardo" and "Arduino Leonardo ETH". You must select the regular "Arduino Leonardo" board.
-
-2. The **incorrect port** was selected. Sometimes, your port selection gets reset. Other times, your Arduino gets moved to a different port. If you get a "uploading error", check this first!
-
-3. Finally, using a **non-data enabled USB cable**. You must use a USB cable that provides *data* not just one that provides power. Sometimes, cheap USB cords—which are largely sold to charge mobile phones—save on costs by *not* including and connecting the data wire in the USB spec. 
+But first, we need to download and install the [Arduino IDE](https://www.arduino.cc/en/software/) (if you haven't already). Please follow our step-by-step installation and customization instructions [here](arduino-ide.md).
 
 ## Introducing digital output
 
 Now, we are going to write code to turn on our LED by setting Pin 3 to HIGH (or 5V). Then, we will modify this code to flash the LED both on *and* off. To do this, we have to introduce **digital output.**
 
-The Arduino Uno has 14 general-purpose input/output ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (`HIGH` or `LOW`) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but we chose Pin 3 (in part, because we want to use this same pin in the next lesson and using it now simplifies things!).
+The Arduino Uno has 14 general-purpose input/output ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (`HIGH` or `LOW`) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but we chose Pin 3 (in part, because we want to use this same pin in [Lesson 4](led-fade.md) and using it now simplifies things!).
 
 ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
 
@@ -134,6 +88,8 @@ You can control any of these 14 digital I/O pins with three functions:
 An Arduino's supply voltage is often written as $$V_S$$, $$V_{CC}$$, and $$V_{DD}$$ in datasheets. Sadly, there does not appear to be a consistent naming convention ([link1](https://forum.arduino.cc/index.php?topic=374042.0), [link2](https://electronics.stackexchange.com/questions/17382/what-is-the-difference-between-v-cc-v-dd-v-ee-v-ss)). We'll try to consistently use $$V_{CC}$$ or $$V_S$$ but occasionally you'll see others (e.g., $$V_{DD}$$).
 
 On the Arduino Uno and Leonardo, the supply voltage ($$V_{CC}$$) is **5V**. So, when a pin as configured as an output via `pinMode(<pin>, OUTPUT)`, the pin can provide either a `HIGH` voltage ($$V_{CC}$$) or a `LOW` voltage (0V). Some microcontrollers operate at 3.3V. In this case, a `HIGH` state would be 3.3V but a `LOW` state would still be 0V.
+
+We'll look at actual digital output signals on an oscilloscope later in this lesson (in the section ["What does digital output look like?"](#what-does-the-digital-output-look-like)).
 
 ### What can we use digital output pins for?
 
@@ -326,6 +282,7 @@ You can play with the Tinkercad version of this experiment [here](https://www.ti
 
 ![](assets/images/SettableBlinkLedOnAndOffWithOscilliscope_Tinkercad.png)
 **Figure**. Tinkercad Circuits version of the settable delay circuit+code ([link](https://www.tinkercad.com/things/42O2UlRJFrZ)).
+{: .fs-1 }
 
 ## Mental model check: code is loaded and running on the Arduino
 
@@ -335,117 +292,6 @@ As a quick mental model check, it's worth emphasizing that once you upload the c
   <source src="assets/movies/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">
 </video>
 
-## Debugging strategies
-
-Debugging code is always hard. Debugging code+circuits is even harder. We'll continue to talk about strategies for debugging throughout the course. For hardware debugging, multimeters and oscilliscopes are useful. For code debugging, it's common to use "print line" statements—this is particularly true given that the Arduino IDE does not currently support code debugging (*e.g.,* breakpoints, code stepping, memory stack dumps). Note: there is evidently debugging support in the newest beta of the Arduino IDE and there is rudimentary debugging support in the Tinkercad Circuits code editor.
-
-### Using Serial.print for debugging
-
-Perhaps the oldest way of debugging code, printing out to "console" is the standard Arduino code debugging technique (as tedious as it can be). Unlike JavaScript, Java, C# or other code that runs in your web browser or natively on your desktops/laptops, your Arduino code is running on the Arduino's microcontroller. 
-
-Thus, when we "print to console", we actually need to get the data from the Arduino's microcontroller on to your development computer. To do this, we use the [serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/) protocol. More specifically, the function [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/).
-
-These two functions print data to the serial port as human-readable ASCII text (the `println` version simply inserts a carriage return `\r` followed by a newline character `\n`).
-
-#### Step 1: Initialize the serial port
-
-To use the serial port, we must first initialize it with [`Serial.begin(BAUD_RATE)`](https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/). The baud rate is the transmission speed in bits per second (bps) and is typically set to `9600` unless greater speeds are needed. 
-
-Typically, we initialize the serial port in `setup()`. 
-
-{% highlight C %}
-void setup() {
-  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
-}
-
-void loop() {}
-{% endhighlight C %}
-
-#### Step 2: Use Serial.print and Serial.println to write data
-
-Here's a complete program that writes "Hello world!" once very 500 ms.
-
-{% highlight C %}
-void setup() {
-  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
-}
-
-void loop() {
-  Serial.println("Hello world!");
-  delay(500);
-}
-{% endhighlight C %}
-
-#### Step 3: Open 'Serial Monitor' in the Arduino IDE
-
-Finally, to view the incoming serial data, open up the Serial Monitor in the Arduino IDE. 
-
-![](assets/images/BlinkWithSerialPrint_OpenSerialMonitor.png)
-
-And you should see something like this:
-
-![](assets/images/SerialPrintHelloWorld_SerialMonitor.png)
-
-### Printing out variables
-
-A common question is how to print out variables in Arduino. The simple answer is to use multiple `Serial.print` and `Serial.println` with the variable as the sole parameter (see below). A more complicated answer is available in our [Inside Arduino](inside-arduino.md) guide, which also talks about printing multiple variables and formatting.
-
-{% highlight C %}
-void setup() {
-  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
-}
-
-void loop() {
-  // Get the current time since the Arduino started our program (in ms)
-  unsigned long currentTimestampMs = millis();
-
-  Serial.print("Time since Arduino started: ");
-  Serial.print(currentTimestampMs);
-  Serial.println(" ms");
-  delay(500);
-}
-{% endhighlight C %}
-
-![](assets/images/SerialPrintTimeStamp_ArduinoSerialMonitorScreenshot.png)
-
-### Modify your blink code to use Serial.print
-
-Now, let's return to our blink code and modify it to use `Serial.print` to print out when the LED is on and off.
-
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
-</video>
-**Video.** A video of the blink program with serial prints ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
-{: .fs-1 }
-
-### Use the built-in LED
-
-The Arduino has a **built-in LED** with a built-in in-series resistor that's often useful for some quick debugging (*e.g.,* turn on the built-in LED to indicate some program state without hooking up an external LED circuit). On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write `digitalWrite(13, HIGH);` in your code, the built-in LED will turn on. Because not all Arduino boards have the built-in LED at Pin 13, you should use the constant `LED_BUILTIN` rather than a literal pin number.
-
-![Image showing the location of the built-in controllable LED on the Arduino Uno](assets/images/ArduinoUno_BuiltInLEDLocation.png)
-
-The official [Arduino Blink example](http://www.arduino.cc/en/Tutorial/Blink) uses the built-in LED and the constant `LED_BUILTIN` to demonstrate blinking: 
-
-{% highlight C %}
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
-}
-
-// the loop function runs over and over again forever
-void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
-}
-{% endhighlight C %}
-
-You can access this example directly in the Arduino IDE:
-
-![Screenshot of accessing the official Blink example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkExample.png)
-
 ## Blink without using delays()
 
 Before moving on, it's worth emphasizing that, in general, long `delay()` calls should be avoided. Why? Because while in a `delay()`, the Arduino is no longer responsive. So, for example, imagine updating your Blink program to also react to a button press from the user. If the user happens to press the button while the Arduino is in a `delay()`, your program would never be able to process that a button was pressed! This is a problem.
@@ -453,7 +299,7 @@ Before moving on, it's worth emphasizing that, in general, long `delay()` calls 
 ---
 **NOTE:**
 
-It's OK to stop here and move on to the [next lesson](led-fade.md). It's sufficient to be **aware** that long `delay()` calls can be dangerous and should probably be avoided. However, if you're curious, you can continue this sub-section to see a Blink example that works without delays. We will return to this concept for our final [Intro to Output](intro-output.md) lesson on [multi-rate blinking LEDs](led-blink3.md).
+It's OK to stop here and move on to the [next lesson](serial-print.md). It's sufficient to be **aware** that long `delay()` calls can be dangerous and should probably be avoided. However, if you're curious, you can continue this sub-section to see a Blink example that works without delays. We will return to this concept for our final [Intro to Output](intro-output.md) lesson on [multi-rate blinking LEDs](led-blink3.md).
 
 If you want to know how `delay()` actually works, read ["What does delay() actually do"](inside-arduino.md#what-does-delay-actually-do) in our [Inside Arduino guide](#inside-arduino).
 
@@ -495,9 +341,12 @@ We've also made our own [BlinkWithoutDelay](https://github.com/makeabilitylab/ar
 
 ## Next Lesson
 
-In the [next lesson](led-fade.md), we will learn how to control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
+In the [next lesson](serial-print.md), we are going to learn about a few basic debugging strategies before moving on to [analog output](led-fade.md), which lets us control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). 
+
+<!-- In the [next lesson](led-fade.md), we will learn how to control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). -->
 
 <span class="fs-6">
 [Previous: Turning on an LED with Arduino](led-on.md){: .btn .btn-outline }
-[Next: Fading an LED with Arduino](led-fade.md){: .btn .btn-outline }
+[Next: Debugging Arduino code with Serial.print](serial-print.md){: .btn .btn-outline }
+<!-- [Next: Fading an LED with Arduino](led-fade.md){: .btn .btn-outline } -->
 </span>

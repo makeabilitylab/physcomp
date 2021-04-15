@@ -1,7 +1,6 @@
 ---
 layout: default
-title: L5&#58; RGB LEDs
-# nav_order: 1
+title: L6&#58; RGB LEDs
 parent: Output
 grand_parent: Intro to Arduino
 usemathjax: true

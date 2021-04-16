@@ -37,23 +37,27 @@ Introduces the Arduino power and ground pins, powering an initial LED circuit wi
 
 Introduces the Arduino IDE and the ability to programmatically control Arduino GPIO pins to turn an LED on and off via [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
 
-### [Lesson 3: Fading an LED](led-fade.md)
+### [Lesson 3: Serial debugging](serial-print.md)
+
+Introduces some basic debugging approaches for Arduino, with a specific focus on [`Serial.print`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/).
+
+### [Lesson 4: Fading an LED](led-fade.md)
 
 Demonstrates how to gradually fade an LED on and off by using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)
 
-### [Lesson 4: Blinking an LED Part 2](led-blink2.md)
+### [Lesson 5: Blinking an LED Part 2](led-blink2.md)
 
 Introduces the concept of using Arduino GPIO pins as either current **sources** or **sinks** by hooking up two LED circuit configurations: one circuit with the LED cathode towards GND and another with the LED anode towards GND.
 
-### [Lesson 5: RGB LEDs](rgb-led.md)
+### [Lesson 6: RGB LEDs](rgb-led.md)
 
 Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
 
-### [Lesson 6: Crossfading RGB LEDs](rgb-led-fade.md)
+### [Lesson 7: Crossfading RGB LEDs](rgb-led-fade.md)
 
 Shows how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and to use and load local `C/C++` libraries
 
-### [Lesson 7: Rate Blinking Multiple LEDs](led-blink3.md)
+### [Lesson 8: Rate Blinking Multiple LEDs](led-blink3.md)
 
 In this lesson, we will learn how to blink multiple LEDs at different rates and build our first [C/C++ class](http://www.cplusplus.com/doc/tutorial/classes/), which will greatly simplify our code and, as an added bonus, reduce its size by eliminating code redundancy.
 

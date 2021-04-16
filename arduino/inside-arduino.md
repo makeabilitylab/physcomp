@@ -4,7 +4,7 @@ title: Inside Arduino
 parent: Intro to Arduino
 has_toc: true # on by default
 nav_exclude: false
-nav_order: 3
+nav_order: 4
 usetocbot: true
 ---
 # {{ page.title }}

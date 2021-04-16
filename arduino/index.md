@@ -17,13 +17,27 @@ usetocbot: true
 {:toc}
 ---
 
-Welcome 👋 to the second module in your Physical Computing journey. Although you can begin your journey here, we strongly recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content. We will refer back to content from the first module.
+Welcome 👋 to the second module in your Physical Computing journey: **Introduction to Microcontrollers** (using Arduino).
 
-These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
+Although you can begin your journey here, we strongly recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content. We will refer back to content from the first module.
 
 <!-- Call this intro to Microcontrollers and then cast Arduino as an example? -->
 
 <!-- Add an Intro to Microcontrollers, talk about Arduino vs. RaspPi -->
+
+There are many Arduino resources online, many good, some bad. Our two favorites are, perhaps, [Adafruit’s 18-Step Guide](https://learn.adafruit.com/series/learn-arduino) and Jeremy Blum's [Exploring Arduino: Tools and Techniques for Engineering Wizardry](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451), 2nd Edition, Wiley, 2020. See our [Resources](../resources/index.md) page for more.
+
+Our lessons are different both in approach and scope. They are based on years of experience in teaching physical computing—to design students, computer scientists, and engineers at the undergraduate and graduate level—and attempts to address common confusions head-on.
+
+Thus, while other resources **start** with digital/analog input (or quickly intermix input and output), we've found that it's easier to start with **output**. For novices, input is simply harder—it requires an understanding (or at least an awareness) of concepts like pull-down resistors, voltage dividers, and that a microcontroller reads *voltages* rather than current or resistance.
+
+So, our lessons start and stick with **output** to solidify understanding of how you to programmatically control microcontroller pins before adding in **input**—where the fun, of course, really starts! Moreover, most resources—at least those we are aware of—strike a different balance between depth and breadth. We love Adafruit's [tutorials](http://learn.adafruit.com/) but they tend towards step-by-step construction recipes rather than explaining *why* or *how* things work. As a college-level resource, we attempt to provide a deeper understanding at a cost of complexity and longer lessons. But we think it's worth it.
+
+Let the fun begin!
+
+These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
+
+<!-- The [Adafruit lessons](https://learn.adafruit.com/series/learn-arduino) provide a rapid, broad taste of using microcontrollers for digital and analog I/O. As a book, Blum's [Exploring Arduino](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451) goes deeper; however, ne -->
 
 ## Intro to Output
 
@@ -80,7 +94,7 @@ Introduces potentiometers and rheostats, analog input, and using Arduino's [`ana
 Introduces force-sensitive resistors (FSRs), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
 
 <!--
-TODO: after Lesson 4, have them make their own lo-fi resistive sensor?
+TODO: after Lesson 4, have them make their own lo-fi resistive sensor? and turn their arduino into a voltmeter?
 TODO: what is debouncing and why
 TODO: how to use interrupts
 TODO: how to use some startup sequence to calibrate sensors?

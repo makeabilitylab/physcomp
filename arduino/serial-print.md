@@ -23,7 +23,7 @@ Debugging code is always hard. Debugging code+circuits is even harder. Though we
 
 For **hardware debugging**, multimeters and oscilloscopes are useful. We realize that many (most!) of you do not have your own multimeters or oscilloscopes and that, due to COVID, our labs are closed. Thus, your only option here is to use something like [Tinkercad Circuits](tinkercad.com/). If you're physically building something and it's not working, you could try to replicate it in Tinkercad or some other simulation tool.
 
-For **code debugging**, it's common to use "print line" statements—this is particularly true given that the Arduino IDE does not currently support code debugging (*e.g.,* breakpoints, code stepping, memory stack dumps). Note: there is evidently debugging support in the [newest beta ](https://blog.arduino.cc/2021/03/01/announcing-the-arduino-ide-2-0-beta/)of the Arduino IDE and there is rudimentary debugging support in the Tinkercad Circuits code editor.
+For **code debugging**, it's common to use "print line" statements (yes, I know)—see video below. Currently, the Arduino IDE does not  support code debugging (*e.g.,* breakpoints, code stepping, memory stack dumps). Note: there is forthcoming debugging support in the [newest beta ](https://blog.arduino.cc/2021/03/01/announcing-the-arduino-ide-2-0-beta/) of the Arduino IDE and there is rudimentary debugging support in the Tinkercad Circuits code editor.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
@@ -33,25 +33,28 @@ For **code debugging**, it's common to use "print line" statements—this is par
 
 ## Using Serial.print for debugging
 
-Using "print out" statements to "console" is perhaps the oldest debugging technique and, I'm afraid, is the standard tried-and-true technique for Arduino as well (as tedious as it can be). Unlike JavaScript, Java, C# or other code that runs in your web browser or natively on your desktops/laptops, your Arduino code is running on the Arduino's microcontroller. Thus, when we "print to console", we actually need to get the data from the Arduino's microcontroller on to your development computer. For this, Arduino uses the [serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/) protocol. More specifically, the function [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/).
+Using "print out" statements to "console" is perhaps the oldest (and possibly most robust) debugging technique. It is the standard technique for Arduino as well (as tedious as it can be).
 
-These two functions print data to the serial port as human-readable ASCII text (the `println` version simply inserts a carriage return `\r` followed by a newline character `\n`).
+Unlike JavaScript, Java, C# or other code that runs in your web browser or natively on your desktops/laptops, your Arduino code is running on the Arduino's microcontroller. Thus, when we "print to console", we actually need to get the data from the Arduino's microcontroller on to your development computer. For this, Arduino uses the [serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/) protocol. More specifically, the function [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/).
 
-In later lessons, we'll see how to use serial communication for more than just debugging purposes but to actually bidirectionally communicate with the computer (see ehttps://itp.nyu.edu/physcomp/labs/labs-serial-communication/xamples).
+These two functions print data to the serial port as human-readable ASCII text (the `println` version simply inserts a carriage return `\r` followed by a newline character `\n`). To send data without converting it to ASCII text, you need to use [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write).
+
+In later lessons, we'll see how to use serial communication for more than just debugging purposes but to actually bidirectionally communicate with the computer (see ehttps://itp.nyu.edu/physcomp/labs/labs-serial-communication/xamples). For our introductory lessons, however, we'll just use it to print out information about how our program is performing.
 
 ---
 
 **IMPORTANT:**
 
-Once you turn on serial (via `Serial.begin()`), you can no longer use digital Pins 0 or 1 for I/O because these are used for serial communication (digital pin 0 is RX and pin 1 is TX). See [Arduino documentation](https://www.arduino.cc/en/reference/serial).
+Once you turn on serial (via `Serial.begin()`), you can **no longer use** digital Pins 0 or 1 for I/O because these pins are used for serial communication (digital pin 0 is RX and pin 1 is TX). See [Arduino documentation](https://www.arduino.cc/en/reference/serial).
 
 This is why many of my "starter" examples use Pin 3 rather than Pins 0 or 1 (Pin 3 also has the added benefit of being configurable for analog output, which we'll get to in the [next lesson](led-fade.md)).
 
 ---
 
+### Build a simple "Hello World!" Serial.print program
 Let's build a simple "Hello World!" program that uses `Serial.print` functionality to receive ASCII data over the serial port. We don't even need external hardware for this: just our Arduino Leonardo and a USB cable.
 
-### Step 1: Initialize the serial port
+#### Step 1: Initialize the serial port
 
 To use the serial port, we must first initialize it with [`Serial.begin(BAUD_RATE)`](https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/). The baud rate is the transmission speed in bits per second (bps) and is typically set to `9600` unless greater speeds are needed.
 
@@ -65,7 +68,7 @@ void setup() {
 void loop() {}
 {% endhighlight C %}
 
-### Step 2: Use Serial.print and Serial.println to write data
+#### Step 2: Use Serial.print and Serial.println to write data
 
 Here's a complete program that writes "Hello world!" once very 500 ms.
 
@@ -80,7 +83,7 @@ void loop() {
 }
 {% endhighlight C %}
 
-### Step 3: Open 'Serial Monitor' in the Arduino IDE
+#### Step 3: Open 'Serial Monitor' in the Arduino IDE
 
 Finally, to view the incoming serial data, open up the Serial Monitor in the Arduino IDE. 
 
@@ -96,7 +99,9 @@ The full code is on GitHub [here](https://github.com/makeabilitylab/arduino/blob
 
 You will obviously want to print out more than just strings. So, how do you print out variables?
 
-The simple answer is to use multiple `Serial.print` and `Serial.println` with the variable as the sole parameter (see below). A more complicated answer is available in our [Inside Arduino](inside-arduino.md) guide.
+The simple answer is to use multiple `Serial.print` and `Serial.println` statements. To print variables, put the variable as the sole parameter (see below). A more complicated answer is available in our [Inside Arduino](inside-arduino.md) guide. You can also see the example code on the [`Serial.print`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) API page.
+
+Below, we've written a simple program to print out the current time (in milliseconds) since the Arduino was turned on and our program began to run:
 
 {% highlight C %}
 void setup() {
@@ -160,7 +165,8 @@ You can access this example directly in the Arduino IDE:
 
 ## Next Lesson
 
-Now that we know a bit about debugging, it's time to learn about ["analog output"]((led-fade.md)) on the Arduino. 
+Now that we know a bit about debugging and [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/), it's time to learn about ["analog output"]((led-fade.md)) on the Arduino. We'll be using `Serial.print()` throughout the rest of our tutorials.
+
 <!-- In the [next lesson](led-fade.md), we will learn how to control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). -->
 
 <span class="fs-6">

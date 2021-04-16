@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L6&#58; Crossfading RGB LEDs
+title: L7&#58; Crossfading RGB LEDs
 parent: Output
 grand_parent: Intro to Arduino
 usemathjax: false
@@ -55,9 +55,9 @@ With `analogWrite`'s maximum output value of `255`, each embedded red, green, bl
 
 ### Crossfading in the RGB color space
 
-The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing or Prototyping Interactive Systems), you are expected to read and understand this code.
+The [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/CrossFadeRGB/CrossFadeRGB.ino) for crossfading an RGB LED is the most complex that we've covered thus far (and, if you don't have a coding background, it's OK if you don't fully understand it). For those in our engineering courses (like Ubiquitous Computing, Physical Computing, or Prototyping Interactive Systems), you are expected to read and understand this code.
 
-There are many different ways you could crossfade an RGB LED depending on which colors you want to illuminate and how quickly.
+There are many different ways you could crossfade an RGB LED depending on which colors you want to illuminate and how quickly. If you want to play with and explore the RGB color space, see [this interactive visualization](https://makeabilitylab.github.io/p5js/Color/ColorExplorer3D/) we made in p5js.
 
 Our particular crossfade method works by **increasing** one LED color value (from `0` to `255`) while **decreasing** another (from `255` to `0`). For example, the code begins by decreasing the red LED value while increasing the green LED value. When the red LED value reaches `0`, we begin decrementing another LED (green in this case). Similarly, when the green LED value reaches `255`, we begin incrementing another LED (the blue LED in this case), and so on. 
 

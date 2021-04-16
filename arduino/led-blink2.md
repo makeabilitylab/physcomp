@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L4&#58; Blinking Two LEDs
+title: L5&#58; Blinking Two LEDs
 parent: Output
 grand_parent: Intro to Arduino
 usemathjax: true

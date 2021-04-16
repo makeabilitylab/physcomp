@@ -105,7 +105,7 @@ I = \frac{3V}{220Ω} = 0.014A = 13.6mA$$
 
 So, with the 5V supply pin, our circuit is drawing 13.6mA of current. Is this a lot or a little? Let's put this in context below.
 
-#### Maximum current draw
+### Maximum current draw
 
 The Arduino has a variety of pin types, each with their own maximum current ratings. 
 
@@ -162,6 +162,7 @@ Well, in a parallel configuration, each resistor+LED branch is getting ~$$I=\fra
 
 ![](assets/images/LEDParallelCircuit_5VSupply_34LEDs_CircuitJS.png)
 **Figure.** 34 LEDs in parallel draws 514.1mA of current, which exceeds the maximum amount of the 5V output pin on the Arduino (when powered by USB). Here's the [CircuitJS link](https://tinyurl.com/yhyl2zpo).
+{: .fs-1 }
 
 <!-- <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/movies/LEDOn5V_Parallel_CircuitJS.mp4" type="video/mp4" />
@@ -172,8 +173,8 @@ Well, in a parallel configuration, each resistor+LED branch is getting ~$$I=\fra
 I attempted to "stress" test the maximum values a bit using the USB port on an old MacBook Pro (do not do this!). Even though I exceeded both the 500mA limit with the 5V output pin (563mA) and the 150mA limit with the 3.3V pin (314mA), I did not trigger the fuse. However, I only kept the board plugged in for a short time.
 
 ![](assets/images/LedParallel_TestPictures_ByJonFroehlich.png)
-
 **Figure.** I "stress tested" the 5V output pin using the USB for power. Do not attempt! Despite exceeding the rated maximums, I failed to trigger the Arduino's internal fuse on the 5V or 3.3V supplies. Note, the I/O pins do not have such protect so you could damage your board if you overdraw current.
+{: .fs-1 }
 
 ## Stepping down power supply voltages
 
@@ -276,6 +277,8 @@ If you want to know more about how to use a multimeter, here are a few "getting 
 
 - [How to use a multimeter](https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter/all), Sparkfun Tutorials
 - [Multimeters](https://learn.adafruit.com/multimeters), Adafruit Learning
+
+They have multimeters in [Tinkercad Circuits](https://www.tinkercad.com/things/d6wWCmUhl7g), so you can also use and play with them there (if you do not have one at home).
 
 ## Next Lesson
 

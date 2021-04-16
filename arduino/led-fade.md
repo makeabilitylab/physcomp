@@ -26,6 +26,7 @@ This illustrative animation doesn't show current (the yellow circles) only due t
 {: .fs-1 }
 
 ## Materials
+
 You will use the same materials as [before](led-blink.md), including the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
 
 | Arduino | LED | Resistor |
@@ -139,13 +140,33 @@ Now, compile, upload, and run the code. After upload completes, the LED should i
 
 ## Visualizing the voltage output
 
-We can visualize the (effective) voltage output on Pin 3 using the Arduino IDE's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter). In the video below, we see a simulation of our code + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time voltages output on Pin 3. Hopefully, this matches your intuition for how things work.
+What's actually happening on Pin 3 when we write out different values to `analogWrite`? Well, remember, basic Arduino boards like the Uno and Leonardo do not have the ability to write out intermediate voltages (they lack digital-to-analog converters or DACs). So, instead, they "fake it" by using pulse-width modulation (PWM) and modulating the *fraction* of time that a 5V output waveform is `HIGH` vs. `LOW`. This is called the **duty cycle**.
+
+### Visualizing the PWM waveform
+
+To let you see how the PWM waveform changes with different `analogWrite` values, we wrote a [simple program](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/TrimpotLEDSmoothed/TrimpotLEDSmoothed.ino) that takes in an analog input (from a potentiometer, in this case) and uses it to set an `analogWrite` value to Pin 3. Other than the potentiometer, our circuit did not change (we still have an LED with a current-limiting resistor on Pin 3).
+
+Let's take a look:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/h-K0q18BRIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+To create this [program](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/TrimpotLEDSmoothed/TrimpotLEDSmoothed.ino), we had to use both `analogRead` and `analogWrite`. By the end of this lesson, you should have a strong understanding of `analogWrite` and PWM. But we won't learn more about `analogRead` until we get to the [Introduction to Input](intro-input.md) microcontroller lessons.
+
+### Visualizing the effective voltage output
+
+In addition to visualzing the **actual** voltage output from `analogWrite` (the PWM waveform), we can also visualize the (effective) voltage output. For this, we can use Arduino's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter). To access this, open Tools -> Serial Plotter. The plotter will try to visualize any comma separated values you output via `Serial.print`.
+
+In the video below, we see a simulation of our [fade code](https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time effective voltages output on Pin 3. 
 
 <video controls="controls">
   <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
 </video>
 
-Of course, it's the **current** through the LED that determines brightness. Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. Recall that current does not pass through an LED until its forward voltage $$V_f$$ condition is met. With a red LED, a common forward voltage is $$V_f=2V$$. With [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), the GPIO pin is still driven `HIGH` (5V) but only for a fraction of the time due to PWM (this fraction is called the duty cycle). So, the $$V_f$$ requirement is still met and our **eyes** perceive the LED on but it's actually **flashing on/off** imperceptibly quickly! 
+## Calculating the current through our LED
+
+Of course, it's the **current** through the LED that determines brightness. But how can we calculate (effective) current with PWM?
+
+Again, given Ohm's Law ($$I = \frac{V}{R}$$), we can determine the current through our circuit at various Pin 3 outputs. Recall that current does not pass through an LED until its forward voltage $$V_f$$ condition is met. With a red LED, a common forward voltage is $$V_f=2V$$. With [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), the GPIO pin is still driven `HIGH` (5V) but only for a fraction of the time due to PWM (this fraction is called the duty cycle). So, the $$V_f$$ requirement is still met and our **eyes** perceive the LED on but it's actually **flashing on/off** imperceptibly quickly! 
 
 To calculate the current through our LED circuit with PWM, let's let $$DF$$ equal the **duty cycle fraction**, the fraction of a waveform period that is HIGH. Then, we can use the following equation: $$I = \frac{V_s - V_f}{R} * DF$$ to calculate current. So, for example, if we `analogWrite` a `51` then our $$DF=\frac{51}{255}=0.2$$. With a 220Ω, our current would be: $$I=\frac{5V - 2V}{220Ω}*0.2=2.7mA$$. 
 
@@ -160,9 +181,9 @@ See the table below for example 8-bit output values for `analogWrite` on Pin 3 a
 | 220Ω | 5V | 199 | $$\frac{199}{255}=0.780$$ | $$I = \frac{5V-2V}{220Ω} * 0.780=10.5mA $$ |
 | 220Ω | 5V | 255 | $$\frac{255}{255}=1.0$$ | $$I = \frac{5V-2V}{220Ω} * 1.0=13.4mA $$ |
 
-## Improved fading approach: limiting delays
+## Improved fading approach: removing for loop
 
-Recall that we want to limit the use of long `for` loops and long `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now). See ["What does delay() actually do?"](inside-arduino.md#what-does-delay-actually-do) in our [Inside Arduino](inside-arduino.md) guide.
+Remember in the [LED blink lesson](led-blink.md) where we mentioned wanting to avoid long `for` loops and long `delays` in our code. Why? Because while we are in a delay, we can't do anything else: we can't read or respond to other input (side note: we could use interrupts but let's defer that point for now). See ["What does delay() actually do?"](inside-arduino.md#what-does-delay-actually-do) in our [Inside Arduino](inside-arduino.md) guide.
 
 So, let's rewrite the fade example but without for loops and, instead, rely on the fact that `loop()` is already a `loop` :). While the code below is different, the resulting LED fade behavior is the same (so you won't notice a difference if you try them both out).
 
@@ -207,6 +228,14 @@ void loop() {
   delay(DELAY_MS);
 }
 {% endhighlight C %}
+
+You can find [this code in GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOff/FadeOnAndOff.ino).
+
+## Improved fading approach 2: eliminating delays
+
+Can you improve the above code even more? How about by eliminating the `delay()` all together but still allowing for a set interval to "pause" on each LED fade value?
+
+Try writing a solution yourself then look at [ours](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOffWithoutDelay/FadeOnAndOffWithoutDelay.ino). Are they the same or different? How?
 
 ## Next Lesson
 

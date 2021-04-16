@@ -242,6 +242,7 @@ Try writing a solution yourself then look at [ours](https://github.com/makeabili
 In the [next lesson](led-blink2.md), we will learn about the difference between **current sources** and **current sinks** to help reinforce our understanding of how microcontrollers can control output.
 
 <span class="fs-6">
-[Previous: LED Blink](led-blink.md){: .btn .btn-outline }
+<!-- [Previous: LED Blink](led-blink.md){: .btn .btn-outline } -->
+[Previous: Serial Debugging](serial-print.md){: .btn .btn-outline }
 [Next: LED Blink 2](led-blink2.md){: .btn .btn-outline }
 </span>

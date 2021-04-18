@@ -91,7 +91,7 @@ Resistors are characterized according to their **resistance value** (in Ohms or 
 
 ### What is electrical power?
 
-Electric power—just like mechanical power—is the rate of doing work. The power $$P$$ at a circuit element is a measure of how quickly it converts energy: a battery converts chemical potential energy to electrical energy (producing power), a resistor converts electrical energy to heat energy (absorbing power). Due to the conversation of energy, the total power delivered in a circuit is equal to the total power absorbed. The SI unit of power is the *watt*, one joule per second ($$\frac{J}{s}$$).
+Electric power—just like mechanical power—is the rate of doing work. The power $$P$$ at a circuit element is a measure of how quickly it converts energy: a battery converts chemical potential energy to electrical energy (producing power), a resistor converts electrical energy to heat energy (absorbing power). Due to the conservation of energy, the total power delivered in a circuit is equal to the total power absorbed. The SI unit of power is the *watt*, one joule per second ($$\frac{J}{s}$$).
 
 The amount of power $$P$$ absorbed at a circuit element is dependent on **both** voltage and current:
 

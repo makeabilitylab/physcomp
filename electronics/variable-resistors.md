@@ -164,7 +164,7 @@ As an example, let's hook up a potentiometer to 5V (Leg 1) and ground (Leg 3) an
 **Figure.** Let's hookup the potentiometer to a 5V and ground. Image made in PowerPoint.
 {: .fs-1 }
 
-Now, let's see what happens as we change the vary the wiper. Notice how $$V_{out}$$ changes according to $$V_{in} * \frac{R2}{(R1 + R2)}$$. In the video below, we are using a 1kΩ potentiometer but the function is the same.
+Now, let's see what happens as we change the wiper. Notice how $$V_{out}$$ changes according to $$V_{in} * \frac{R2}{(R1 + R2)}$$. In the video below, we are using a 1kΩ potentiometer but the function is the same.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/PotentiometerIntroduction-VoltageDividerWithCircuitJS_ByJonFroehlich.mp4" type="video/mp4" />

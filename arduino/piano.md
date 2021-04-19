@@ -111,7 +111,7 @@ You can play with the Tinkercad simulation [here](https://www.tinkercad.com/thin
 
 There is some debate about whether you should use a small in-series resistor with a passive piezo buzzer ([link1](https://forum.arduino.cc/index.php?topic=16088.msg117474#msg117474), [link2](https://forum.arduino.cc/index.php?topic=522576.msg3564043#msg3564043)) similar to an LED circuit. I never have. I've always directly wired my piezo buzzer to the Arduino pins like the wiring diagram above (and [here](https://learn.adafruit.com/adafruit-arduino-lesson-10-making-sounds/playing-a-scale)).
 
-It never hurts to add a resistor. You could start with a 100Ω or 220Ω resistor (or try a [variable resistor](potentiometers.md), which you'll learn about in the next lesson)
+It never hurts to add a resistor for testing. You could start with a 100Ω or 220Ω resistor (or try a [variable resistor](../electronics/variable-resistors.md) in series).
 
 ### Writing the siren code
 
@@ -159,7 +159,12 @@ void loop() {
 
 We did it! Now, compile, upload and run your program!
 
-**TIP:** To stop this (admittedly) annoying program, load up a fresh, empty sketch (Ctrl-N or CMD-N in the Arduino IDE) and immediately upload it to your board. An empty sketch will compile, upload, and run just fine (and do nothing, which is, at this point, what you so desperately want!).
+---
+**TIP:**
+
+To stop this (admittedly) annoying program, load up a fresh, empty sketch (Ctrl-N or CMD-N in the Arduino IDE) and immediately upload it to your board. An empty sketch will compile, upload, and run just fine (and do nothing, which is, at this point, what you so desperately want!).
+
+---
 
 <!--TODO insert video of my siren -->
 
@@ -319,6 +324,8 @@ You can access our [SimplePiano](https://github.com/makeabilitylab/arduino/blob/
 <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino?footer=minimal"></script>
 
 ## Exercises
+
+For your prototyping journals, select one of the following extensions to the piano keyboard (or come up with your own) and document it.
 
 - Extend your keyboard to support a full octave. If your kit only has five buttons, what else could you use for input (hint: it's fun and easy to make lo-fi button input out of everyday materials)
 - Try adding in LEDs for each key, which light up and then fade after each corresponding key press (hint: use your LEDFader class from a previous exercise)

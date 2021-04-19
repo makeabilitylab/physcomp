@@ -294,11 +294,14 @@ $$
 
 Below, we are graphing these two equations together for varying values of the pull-up resistor $$R$$. For convenience, we've marked the ATmega328 `HIGH` threshold for $$V_{pin}$$ and the 10kΩ $$R$$ value.  
 
-![A graph of the tradeoff in selecting a resistance value for pull-up resistor](assets/images/PullUpResistor_VpinAndPowerDissipationGraph.png)
-Calculated using $$V_{in}=5V$$
+<!-- ![A graph of the tradeoff in selecting a resistance value for pull-up resistor](assets/images/PullUpResistor_VpinAndPowerDissipationGraph.png)
+Calculated using $$V_{in}=5V$$ -->
+
+![](assets/images/PullUpResistor_InputVoltageAndPowerDissipationGraph2_LinearAxes.png)
+**Figure.** Graphing the input voltage $$V_{pin}$$ and the power dissipation $$P$$ as a function of pull-up resistor value. Both graphs are the same but differ in the x-axis: the right graph zooms in so that you can better see the 10kΩ pull-up value.
 {: .fs-1 }
 
-With a pull-up resistor of $$R=100Ω$$ (an unnecessarily strong pull-up), when the switch is closed, we are drawing 50mA (and consuming 250 milliwatts of power)—a non-trivial amount for a battery-powered circuit (*e.g.,* for a mobile or wearable). In contrast, with a 10kΩ pull-up, we would draw a more reasonable $$I=0.5mA$$ and consume 2.5mW of power.
+When the switch is closed (button is pressed), with a pull-up resistor of $$R=100Ω$$ (an unnecessarily strong pull-up), we are drawing 50mA (and consuming 250 milliwatts of power)—a non-trivial amount for a battery-powered circuit (*e.g.,* for a mobile or wearable). In contrast, with a 10kΩ pull-up—the recommended value for the ATmega328 microcontroller—we would draw a more reasonable $$I=0.5mA$$ and consume 2.5mW of power.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L4&#58; Force-Sensitive Resistors
-nav_order: 4
+title: L5&#58; Force-Sensitive Resistors
+nav_order: 5
 parent: Input
 grand_parent: Intro to Arduino
 has_toc: true # (on by default)

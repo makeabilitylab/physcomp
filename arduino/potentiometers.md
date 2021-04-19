@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L3&#58; Potentiometers
-nav_order: 3
+title: L4&#58; Potentiometers
+nav_order: 4
 parent: Input
 grand_parent: Intro to Arduino
 has_toc: true # (on by default)

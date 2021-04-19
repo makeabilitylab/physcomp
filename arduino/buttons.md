@@ -185,13 +185,21 @@ void loop()
 }
 {% endhighlight C %}
 
-<!-- TODO: consider adding in video of floating pin and effect. Use external resistor + LED. Have current video so reshooting could be low priority -->
+Here's a quick video demonstration of what happens—the floating pin problem! Note: we are using a slightly modified version of this code where an LED is turned on if the button is pressed (*i.e.,* if `buttonVal == 1`). This just makes it easier to see the button state.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/movies/Arduino_Button_FloatingPinProblem720p.mp4" type="video/mp4" />
+</video>
+**Video.** Floating pins are digital input pins that are not tied to a specific input voltage (either 0V or 5V) and thus, are subject to electromagnetic interference. Here, the button state is oscillating between `HIGH` and `LOW` simply due to the electromagnetic interference from my body. Makes me feel like Dumbledore! The source code is [here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/ButtonPressedFloatingPin/ButtonPressedFloatingPin.ino).
+{: .fs-1 }
+
+In the video above, the button state is noisy and vulnerable to electromagnetic interference, which could come from the human body (as it does here), cross-talk between wires, stray capacitance, etc. To fix this, we need to **force** the input pin into a known state. But how?
 
 ### An (incorrect) attempt to fix the floating pin
 
 To solve the floating pin problem, we need to bias the digital input pin to a known voltage state when the circuit is open (the button is not pressed).
 
-You might try to do this by adding `GND` to the other leg of the button like this: 
+You might try to do this by adding `GND` to the other leg of the button like this:
 
 ![Circuit diagram showing an incorrect hookup which causes a short circuit when the button is pressed](assets/images/ArduinoUno_Button_SchematicAndDiagram_ShortCircuit.png)
 **Figure.** Warning: Do **not** do this. When the switch closes, a short circuit occurs, which could damage your microcontroller or Arduino.
@@ -220,6 +228,10 @@ The pull-down resistor is quite large: 10,000Ω (10kΩ)
 Here's an animation showing how a pull-down resistor configuration works:
 
 ![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
+
+And here's a video demonstrating the floating pin problem and fix:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4qgyICqIVFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Pull-up resistors
 
@@ -252,9 +264,7 @@ Some microcontrollers have both internal pull-up *and* pull-down resistors. The 
 
 ### What value should I use for my pull-down or pull-up resistors?
 
-The short answer: use a 10kΩ resistor. 
-
-As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
+The short answer: use a **10kΩ resistor**. As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
 
 #### Tradeoffs in selecting a pull-up resistor
 
@@ -399,7 +409,7 @@ The schematic is for illustrative purposes. The internal software controlled swi
 
 ## Putting it all together
 
-Make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. Then write code to respond accordingly.
+For your prototyping journals, make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. Then write code to respond accordingly.
 
 ![Workbench photo of three buttons with different pull-up and pull-down configurations](assets/images/ArduinoUno_ThreeButtonsWithDifferentResistorConfigurations_WorkbenchPhoto.png)
 

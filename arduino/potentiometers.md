@@ -19,11 +19,7 @@ usetocbot: true
 {:toc}
 ---
 
-TODO: 
-- Make the potentiometer stuff about being a refresher
-- Directly compare the circuit hookup with using a potentiometer as a rheostat vs. as a potentiometer for our circuit
-
-In this lesson, we'll refresh our memories about potentiometers, learn a bit about multimeters, and then introduce the concept of **analog input** and hook-up potentiometers as voltage dividers! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
+In this lesson, we'll refresh our memories about potentiometers, learn a bit about multimeters, and then introduce the concept of **analog input** and hook-up potentiometers as voltage dividers to Arduino! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/MJt9kSNlsU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

@@ -233,9 +233,12 @@ Here's our take on it! Make sure to have your sound on (or not) if you want to h
 
 ## Exercises
 
+For your prototyping journals, choose of the following extensions and implement it!
+
 - Can you improve the Jedi force instrument so that it sounds better (well, as good as we can make a piezo with square waves sound). How about only playing notes on a scale, for example.
 - Add in some LEDs that work as a "bar graph" for the FSR value.
 - Try making a lo-fi pressure sensor using everyday materials and use it to make a new Jedi force instrument!
+- Another idea that you can think of (that should take ~15-20 minutes to accomplish!)
 
 <!-- ### Make your own lo-fi pressure sensor. TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator clip version and taped jumper wire version. -->
 

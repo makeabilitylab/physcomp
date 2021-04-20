@@ -24,7 +24,8 @@ In this lesson, you'll learn about force-sensitive resistors (FSRs) and how to u
 This lesson directly builds on the prior one ([potentiometers](potentiometers.md)), so definitely complete that first.
 
 ![Animation showing an FSR](/assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif)
-Animation shows how the resistance of the FSR drops with applied pressure (higher pressure, lower resistance, brighter LED).
+
+**Figure.** Animation shows how the resistance of the FSR drops with applied pressure (higher pressure, lower resistance, brighter LED).
 {: .fs-1 }
 
 ## Materials

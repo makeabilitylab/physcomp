@@ -99,7 +99,7 @@ Introduces [force-sensitive resistors (FSRs)](force-sensitive-resistors.md), how
 
 <!--
 TODO: after Lesson 4, have them make their own lo-fi resistive sensor? and turn their arduino into a voltmeter?
-TODO: what is debouncing and why
+TODO: [done] what is debouncing and why
 TODO: how to use interrupts
 TODO: how to use some startup sequence to calibrate sensors?
 TODO: some basics on smoothing the signal? -->

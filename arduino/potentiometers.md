@@ -23,7 +23,7 @@ TODO:
 - Make the potentiometer stuff about being a refresher
 - Directly compare the circuit hookup with using a potentiometer as a rheostat vs. as a potentiometer for our circuit
 
-In this lesson, we'll learn about potentiometers, analog input, voltage dividers, and, as a bonus, multimeters too! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
+In this lesson, we'll refresh our memories about potentiometers, learn a bit about multimeters, and then introduce the concept of **analog input** and hook-up potentiometers as voltage dividers! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/MJt9kSNlsU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -48,7 +48,7 @@ Potentiometers are common electronic components found in everything from volume 
 
 ### How does a potentiometer work
 
-Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will **always be 10kΩ ** regardless of wiper position (Leg 2). If you're using a 1kΩ resistor, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
+Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will **always be 10kΩ** regardless of wiper position (Leg 2). If you're using a 1kΩ resistor, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
 
 The power of a potentiometer is in that middle leg (Leg 2) whose resistance varies depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value like 1kΩ or 10kΩ). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
 
@@ -66,7 +66,7 @@ There are two common ways to use a potentiometer: as a variable resistor or rheo
 
 <!-- To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. We'll show you how to do that in our [next lesson](force-sensitive-resistors.md). -->
 
-Below, we are going to focus on using a potentiometer first as a rheostat and then as a voltage divider with our Arduino.
+Below, we are going to focus on using a potentiometer first as a two-legged variable resistor and then as a voltage divider with our Arduino.
 
 ## Materials
 
@@ -175,17 +175,19 @@ You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things
 
 #### Workbench video of my trimpot dimmer
 
-Here's a workbench video of my trimpot circuit:
+Here's a workbench video of my trimpot circuit where the potentiometer is simply a two-legged variable resistor and we're using the Arduino only as a 5V voltage source:
 
 <!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Whew, we did it! By now, you should feel pretty confident with using a potentiometer as a variable resistor; however, using potentiometers (or any variable resistor) with a microcontroller requires a different circuit configuration as you'll see below.
+Whew, we did it! 
+
+By now, you should feel pretty confident with using a potentiometer as a variable resistor; however, using potentiometers (or any variable resistor) with a microcontroller requires a different circuit configuration as you'll see below.
 
 ## Intro to analog input
 
-In our previous lessons, we learned about **digital output**, then **analog output**, and finally **digital input**. Now, it's time for the last frontier: **analog input**!
+In our previous lessons, we learned about [**digital output**](led-blink.md), then [**analog output**](led-fade.md), and finally [**digital input**](buttons.md). Now, it's time for the last frontier: **analog input**!
 
 So, what's analog input?! The world—in all its beauty and complexity—is analog. It's not simply `HIGH` and `LOW` but everything in between. How can we sense and access that complexity?
 
@@ -194,6 +196,24 @@ Analog input!
 More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, analog input enables us to read voltages between 0V and 5V. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
 <!-- TODO: The arduino.cc docs mention adding a short delay before using analogReads on successive pins: https://www.arduino.cc/en/Tutorial/AnalogInputPins. Add this? Here's the full quote: "The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins." -->
+
+### Analog input pins
+
+The Arduino Uno and Leonardo have six analog inputs, which can be read using [`analogRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/). The `analogRead` function reads voltage values between 0 and the Arduino's operating voltage (5V on the Uno and Leonardo) and converts this into integer values between 0 and 1023.
+
+![Close-up image of the six analog input pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_AnalogInputPins.png)
+
+While the digital I/O pins on the Arduino microcontroller are shared. The **analog input** pins are different from the **analog output** pins.
+
+![Close-up image of the Arduino Uno emphasizing that the Arduino analog input pins are different from the analog output pins](assets/images/ArduinoUno_CloseUp_WarningAnalogInputAndOutputPinsAreDifferent.png)
+
+### How does the Arduino read analog input?
+
+Remember how we said that Arduino input pins work like voltmeters? Just as voltmeters measure voltage in parallel—you connect the probes to two nodes in your circuit and the voltmeter measures the voltage difference between them—microcontrollers work similarly. Of course, microcontrollers have a single pin per input while voltmeters have two. Why the difference? Well, with voltmeters, you provide two reference points. With microcontrollers, the voltage at an input pin is always compared to `GND` (so, that second "probe point" is always ground).
+
+It's important that you conceptually understand that microcontrollers work by measuring voltages and not current. In fact, the [ATmega328 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf) says analog input pins have an effective resistance of 100,000,000Ω (100MΩ), which means almost **no current** goes into an input pin (see Table 29.8).
+
+This means that we have to configure our variable resistor sensors as **voltage dividers** to work with microcontrollers.
 
 ### Analog-to-digital converter (ADC)
 
@@ -221,24 +241,6 @@ On the Uno and Leonardo, the options are:
 But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and even our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). According to the ATmega328 datasheet, "the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate." See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
 
 <!-- TODO: even more interesting discussions about how for one ADC clock period, the ADC has to charge a capacitor that it uses to measure voltage on the input pin. See: https://www.avrfreaks.net/forum/minumum-current-required-analog-pin-atmega328 -->
-
-### Analog input pins
-
-The Arduino Uno and Leonardo have six analog inputs, which can be read using `analogRead(int pin)`:
-
-![Close-up image of the six analog input pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_AnalogInputPins.png)
-
-While the digital I/O pins on the Arduino microcontroller are shared. The **analog input** pins are different from the **analog output** pins.
-
-![Close-up image of the Arduino Uno emphasizing that the Arduino analog input pins are different from the analog output pins](assets/images/ArduinoUno_CloseUp_WarningAnalogInputAndOutputPinsAreDifferent.png)
-
-### How does the Arduino read analog input?
-
-Remember how we said that Arduino input pins work like voltmeters? Just as voltmeters measure voltage in parallel—you connect the probes to two nodes in your circuit and the voltmeter measures the voltage difference between them—microcontrollers work similarly. Of course, microcontrollers have a single pin per input while voltmeters have two. Why the difference? Well, with voltmeters, you provide two reference points. With microcontrollers, the voltage at an input pin is always compared to `GND` (so, that second "probe point" is always ground).
-
-It's important that you conceptually understand that microcontrollers work by measuring voltages and not current. In fact, the [ATmega328 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf) says analog input pins have an effective resistance of 100,000,000Ω (100MΩ), which means almost **no current** goes into an input pin (see Table 29.8).
-
-This means that we have to configure our variable resistor sensors as **voltage dividers** to work with microcontrollers.
 
 ## Hooking up variable resistors with microcontrollers
 
@@ -304,19 +306,24 @@ This is a circuit simulation of the potentiometer correctly hooked up to a micro
 
 Once you get the potentiometer-based analog input working in Tinkercad, build the physical circuit and, to begin, copy the code from above.
 
+For your prototyping journals, we'd also like you to make a version that reads in the analog input (using `analogRead`) and appropriately sets the brightness of an LED (using `analogWrite`).
+
 <!-- TODO: now adapt to change LED brightness. Use LED built-in -->
 
-## Exercises
+<!-- ## Exercises
 
 Here are some exercises to try.
 
 - Try to use the slide potentiometer (also in your kits)
 - Hook up an external LED that fades based on analog input
-- Hook up the piezo buzzer to make sound based on analog input
+- Hook up the piezo buzzer to make sound based on analog input -->
 
 <!-- ## Resources
 
-UIUC Analog Input: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M005_ArduinoAnalogInputs.pdf -->
+UIUC Analog Input: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M005_ArduinoAnalogInputs.pdf 
+
+TODO: add more resources
+-->
 
 ## Next Lesson
 

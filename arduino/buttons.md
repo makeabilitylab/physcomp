@@ -185,7 +185,7 @@ void loop()
 }
 {% endhighlight C %}
 
-Here's a quick video demonstration of what happens—the floating pin problem! Note: we are using a slightly modified version of this code where an LED is turned on if the button is pressed (*i.e.,* if `buttonVal == 1`). This just makes it easier to see the button state.
+Here's a quick video demonstration of what happens—the floating pin problem! Note: we are using a slightly modified version of this code where an LED is turned on if the button is pressed (*i.e.,* if `buttonVal == 1`). This just makes it easier to see the fluctuating button state.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/movies/Arduino_Button_FloatingPinProblem720p.mp4" type="video/mp4" />
@@ -193,7 +193,7 @@ Here's a quick video demonstration of what happens—the floating pin problem! N
 **Video.** Floating pins are digital input pins that are not tied to a specific input voltage (either 0V or 5V) and thus, are subject to electromagnetic interference. Here, the button state is oscillating between `HIGH` and `LOW` simply due to the electromagnetic interference from my body. Makes me feel like Dumbledore! The source code is [here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/ButtonPressedFloatingPin/ButtonPressedFloatingPin.ino).
 {: .fs-1 }
 
-In the video above, the button state is noisy and vulnerable to electromagnetic interference, which could come from the human body (as it does here), cross-talk between wires, stray capacitance, etc. To fix this, we need to **force** the input pin into a known state. But how?
+In the video above, the button state is noisy and vulnerable to electromagnetic interference, which could come from the human body (as it does here), cross-talk between wires, stray capacitance, *etc.* To fix this, we need to **force** the input pin into a known state. But how?
 
 ### An (incorrect) attempt to fix the floating pin
 

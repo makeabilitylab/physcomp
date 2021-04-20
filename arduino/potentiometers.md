@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L3&#58; Potentiometers
-nav_order: 3
+title: L4&#58; Potentiometers
+nav_order: 4
 parent: Input
 grand_parent: Intro to Arduino
 has_toc: true # (on by default)
@@ -19,81 +19,54 @@ usetocbot: true
 {:toc}
 ---
 
-In this lesson, we'll learn about potentiometers, analog input, voltage dividers, and, as a bonus, multimeters too! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
+TODO: 
+- Make the potentiometer stuff about being a refresher
+- Directly compare the circuit hookup with using a potentiometer as a rheostat vs. as a potentiometer for our circuit
+
+In this lesson, we'll refresh our memories about potentiometers, learn a bit about multimeters, and then introduce the concept of **analog input** and hook-up potentiometers as voltage dividers! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/MJt9kSNlsU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 A [video](https://youtu.be/MJt9kSNlsU4) demonstration of a [trimpot](https://www.adafruit.com/product/356) hooked up to analog input A0 on the Arduino. The A0 value is graphed on an OLED display in real-time. The code is available [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino).
 {: .fs-1 }
 
-## Potentiometers
+## Potentiometers: a refresher
 
-A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance. 
+In our [Intro to Electronics](../electronics/index.md) lessons, we learned about [potentiometers](../electronics/variable-resistors.md). Recall that a potentiometer (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance.
 
-![Animation showing how a potentiometer works](/assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
-Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="../electronics/assets/videos/Potentiometer_Overview_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** This animation shows how the wiper can be used to vary resistance in a rotary potentiometer. The figure on the right is the formal electrical symbol. Animation by Jon Froehlich. Created in PowerPoint.
 {: .fs-1 }
 
-Potentiometers are truly ubiquitous electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits (like [this one](https://www.adafruit.com/product/356) from Adafruit).
+Potentiometers are common electronic components found in everything from volume controls to analog joysticks. In our UW courses, we often provide 10kΩ potentiometers in our kits like the [10K panel mount potentiometer](https://www.adafruit.com/product/562) and [10K trim potentiometer](https://www.sparkfun.com/products/9806), shown below.
 
-![Image of two physical potentiometers along with a diagram and schematic symbol](assets/images/Potentiometer_DiagramWithSchematicSymbol.png)
-
-<!-- TODO: talk about different taper types? -->
-<!-- TODO: talk about potentiometer drawbacks--like maintainance, corrosion. See https://ultimateelectronicsbook.com/potentiometers/ -->
-
-### Potentiometers as voltage dividers
-
-Potentiometers can be thought of as conveniently packaged voltage dividers: $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves.
-
-![Image showing how you potentiometers can be thought of as voltage dividers](assets/images/PotentiometersAsVoltageDividers.png)
-A 10kΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_{2}$$). In this case, the wiper is in the middle, so $$V_{A0}$$ equals 2.5V.
+![](../electronics/assets/images/Potentiometers_TwoExamplesWithSchematicSymbol.png)
+**Figure.** Two example potentiometers commonly included in our hardware kits: a 10kΩ panel mount and and a 10kΩ trim potentiometer.
 {: .fs-1 }
 
-<!-- TODO: fix image to use Vout and Vin and not show 5K for resistance values? -->
+### How does a potentiometer work
 
-As you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$.
+Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will **always be 10kΩ** regardless of wiper position (Leg 2). If you're using a 1kΩ resistor, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
 
-#### Voltage divider equation
+The power of a potentiometer is in that middle leg (Leg 2) whose resistance varies depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value like 1kΩ or 10kΩ). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
 
-The voltage divider equation, which derives from Ohm's Law, states that $$V_{out} = V_{in} \cdot \frac{R_2}{R_1 + R_2}$$. So, the voltage at leg 2 (the wiper) of the potentiometer is equal to $$V_{in} \cdot \frac{R_2}{R_1 + R_2}$$  
+<!-- As you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$. -->
 
-![The voltage divider equation](assets/images/VoltageDividerEquation.png)
-
-For example, if we set Leg 1 to $$5V$$ and Leg 3 to $$GND$$, then as we change the potentiometer dial, the voltage at Leg 2 ($$V_{out}$$) will dynamically shift according to the voltage divider equation.
-
-The following video breaks down a potentiometer, shows how to think about ($$R_{1}$$) and ($$R_{2}$$) as the wiper moves, and demonstrates how the potentiometer functions in a circuit via a simulation:
-
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ZAzX_pxuWps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-Video shows how the voltage output at Leg 2 changes based on the wiper position, which splits the potentiometer into two "resistor" sub-parts, ($$R_{1}$$) and ($$R_{2}$$), which creates a voltage divider.
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="../electronics/assets/videos/PotentiometerIntroduction_TrimmedAndCropped.mp4" type="video/mp4" />
+</video>
+**Video.** Animation by Jon Froehlich. Created in PowerPoint.
 {: .fs-1 }
 
-#### Video on Ohm's Law and voltage dividers
+### Potentiomers as variable resistors vs. voltage dividers
 
-Jeff Feddersen, from NYU's ITP program, has a great video about potentiometers and nicely relates them to Ohm's Law and voltage dividers. Please watch this video before continuing (it's one of my favorites!).
+There are two common ways to use a potentiometer: as a variable resistor or rheostat—where you only hook up two legs (the wiper leg and an outer leg)—and as a voltage divider. The latter is how we'll use potentiometers as input to our microcontrollers.
 
-<div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/76442431" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-<p><a href="https://vimeo.com/76442431">Ohm Part 2</a> from <a href="https://vimeo.com/fddrsn">Jeff Feddersen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-{: .fs-1 }
+<!-- To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. We'll show you how to do that in our [next lesson](force-sensitive-resistors.md). -->
 
-See also this [Sparkfun tutorial](https://learn.sparkfun.com/tutorials/voltage-dividers/all) on voltage dividers.
-
-We're going to start with using only **two legs** of the potentiometer. We'll need all **three legs** when we start working again with microcontrollers.
-
-### Variable resistors
-
-When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. Notably, however, we can't use this configuration directly as analog input to a microcontroller.
-
-<!-- TODO: maybe show images of circuits with only two legs hooked up? -->
-
-That said, many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have both photocells and FSRs in your hardware kits!
-
-![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
-Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
-{: .fs-1 }
-
-To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. We'll show you how to do that in our [next lesson](force-sensitive-resistors.md).
-
-Here, however, we are going to focus on using a potentiometer first as a rheostat and then as a voltage divider with our Arduino.
+Below, we are going to focus on using a potentiometer first as a two-legged variable resistor and then as a voltage divider with our Arduino.
 
 ## Materials
 
@@ -110,52 +83,27 @@ For our first making activity, we're going to create a potentiometer-based LED d
 
 ### A Tinkercad prototype
 
-Let's build a prototype in [Tinkercad Circuits](https://www.tinkercad.com/) before building a physical prototype. Tinkercad makes it easy to rapidly prototype, build, and simulate circuits in a software environment. And, for those that do not have access to electronic tools, Tinkercad also provides a simple multimeter and oscilloscope—so we can test and measure our circuits too!
+Let's build a prototype in [Tinkercad Circuits](https://www.tinkercad.com/) before building a physical prototype. While similar to the activity in [Variable Resistors](../electronics/variable-resistors.md), we add in uses of Tinkercad's multimeter to check our circuits and also emphasize correct and incorrect hookups. Moreover, doing this activity before the Arduino-based one will help reinforce differences between using a potentiometer simply as a two-legged variable resistor and as a three-legged voltage divider.
 
-In Tinkercad, you could make your dimmer with or without a breadboard (both are shown in the figure below). Let's prototype something we would actually make in real life, so go with the breadboarded version:
+#### Step 1: Build the potentiomer-based LED dimmer
+
+First, let's build the potentiometer-based LED dimmer. In Tinkercad, you could make your dimmer with or without a breadboard (both are shown in the figure below). Let's prototype something we would actually make in real life, so go with the breadboarded version:
 
 ![Wiring diagram of an LED-based circuit with a potentiometer for fading. 9V battery used for power](assets/images/Potentiometer_LEDCircuits_9VBatteryPowerSource_Tinkercad.png)
 You can access these Tinkercad circuits [here](https://www.tinkercad.com/things/f4mL9xm0C7z) (no breadboard) and [here](https://www.tinkercad.com/things/2CTd0LQTHRk) (with breadboard).
 {: .fs-1 }
 
-#### Step 1: Open Tinkercad Circuits
+---
 
-Visit [tinkercad.com](https://www.tinkercad.com/) and login (if you already have an Autodesk account) or register if not. We are not using any of the "In School" features, so create a personal account:
+**IMPORTANT NOTE:** Recall that it's important to include that additional resistor because many potentiometers, including those provided in your hardware kits, go all the way down to 0Ω. If you don't have that "backup" current-limiting resistor, you will blow your LED if the potentiometer dial is set to 0Ω. (Indeed, try it out in Tinkercad and see what happens—kablooey!)
 
-![Screenshot of Tinkercad's registration page](assets/images/Tinkercad_RegistrationPage.png)
-
-#### Step 2: Create a new circuit
-
-In your dashboard, click on "Circuits":
-
-![Screenshot of Tinkercad's dashboard](assets/images/Tinkercad_ClickOnCircuits.png)
-
-Then click on "Create new Circuit":
-
-![Screenshot of Tinkercad's dashboard with "create new circuit button"](assets/images/Tinkercad_CreateNewCircuit.png)
-
-#### Step 3: Aquaint yourself with Tinkercad
-
-Tinkercad works by dragging and dropping components from the right sidebar menu onto the Circuit canvas. You can click on the "Start Simulation" button to simulate circuits (and even Arduino code + circuits). 
-
-If you've dragged over an Arduino, you can also click on the "Code" button and write code either in `C/C++` or in a visual, block-based language. The simulator even has a "Serial Monitor", "Serial Plotter", and, wait for it, a simplistic debugger with breakpoint support!
-
-![Screenshot of Tinkercad's primary UI](assets/images/Tinkercad_MainInterface.png)
-An example of the [multi-rate blinking lesson](led-blink3.md) created in Tinkercad. [Try it out](https://www.tinkercad.com/things/kAq7G2p4QQ6)!
-
-#### Step 4: Build the potentiomer-based LED dimmer
-
-Now, let's build the potentiometer-based LED dimmer. 
-
-**IMPORTANT NOTE:**: It's important to include that additional resistor because many potentiometers, including those provided in your hardware kits, go all the way down to 0Ω. If you don't have that "backup" current-limiting resistor, you will blow your LED if the potentiometer dial is set to 0Ω. (Indeed, try it out in Tinkercad and see what happens—kablooey!)
-
-<!-- TODO: insert animated gif of kablooey from tinkercad -->
+---
 
 Here's one possible wiring for a potentiometer-based LED fading circuit:
 
 ![Wiring diagram of an LED-based circuit with a potentiometer for fading. 9V battery used for power](assets/images/Potentiometer_LEDCircuitWithBreadboard_9VPower_Tinkercad.png)
 
-#### Step 5: Now simulate your circuit
+#### Step 2: Now simulate your circuit
 
 Once you're done, try simulating your circuit. Click the "Start Simulation" button (see animation below):
 
@@ -177,7 +125,7 @@ Voltmeter's **measure voltage** in **parallel**. Ammeter's **measure current** i
 Image from this great ["Science Buddies" tutorial](https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-multimeter#usingamultimeter) on using multimeters.
 {: .fs-1 } 
 
-To help us think about and remember how to measure current, I like to return to our water analogies from lecture: think of the ammeter as if it's a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow. An ammeter must be "in line" to measure current—you must rewire your circuit such that current is forced through your ammeter (just like water flowing through a turbine in a pipe).
+To help us think about and remember how to measure current, I like to return to [our water analogies](../electronics/electricity-basics.md) from our [Intro to Electronics](../electronics/index.md) lessons: think of the ammeter as if it's a mechanical water flow meter (aka a turbine) that must be in-line within a pipe to measure water flow. An ammeter must be "in line" to measure current—you must rewire your circuit such that current is forced through your ammeter (just like water flowing through a turbine in a pipe).
 
 ![Image shows a water flow meter that uses a turbine in series with a pipe to measure water flow and makes analogy to measure current in line with an ammeter](assets/images/Multimeter_MeasuringCurrentInSeriesLikeWaterFlowTurbine.png)
 Image adapted from ["Science Buddies"](https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-multimeter#usingamultimeter).
@@ -199,7 +147,7 @@ Here's our circuit with the ammeter running in the simulator. Does the simulatio
 
 ![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
 
-Because we have Leg 2 hooked to the positive voltage source and Leg 3 as our "output", as we move the wiper from left-to-right, there is a smaller amount of resistance and an increase in current. You'll notice a jump in current when the $$V_f$$ condition of the LED is met (recall the [LED IV curves](http://lednique.com/current-voltage-relationships/iv-curves/) from lecture).
+Because we have Leg 2 hooked to the positive voltage source and Leg 3 as our "output", as we move the wiper from left-to-right, there is a smaller amount of resistance and an increase in current. You'll notice a jump in current when the $$V_f$$ condition of the LED is met (recall the [LED IV curves](../electronics/leds.md#the-iv-graph-for-leds) from our [LED lesson](../electronics/leds.md).
 
 <!-- TODO insert animation from Tinkercad with voltage drop across LED showing IV curve -->
 
@@ -207,9 +155,9 @@ Before moving on, play around with the multimeter in Tinkercad. You can add mult
 
 #### Circuit simulation in CircuitJS
 
-We also made this circuit in another online simulator called [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which offers a far more powerful and feature-rich simulation but is still relatively accessible to novices. We like it because it shows an illustrative animation of current (just like some of the animations from our previous lessons that we've painstakingly manually made).
+We also made this circuit in  [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which offers a far more powerful and feature-rich simulation compared with Tinkercad but is still relatively accessible to novices. We like it because it shows an illustrative animation of current (just like some of the animations from our previous lessons that we've manually made).
 
-There are two differences in this circuit compared to the Tinkercad one above. First, we used a 1kΩ potentiometer in this circuit rather than a 10kΩ but the general effect is the same. Second, here we have Leg 1 hooked up towards the positive voltage source and Leg 2 as our "output", so resistance is minimized when the dial is all the way left (it was the opposite for our Tinkercad circuit).
+There are two differences in this circuit compared to the Tinkercad one above. First, we used a 1kΩ potentiometer rather than a 10kΩ but the general effect is the same. Second, here we have Leg 1 hooked up towards the positive voltage source and Leg 2 as our "output", so resistance is minimized when the dial is all the way left (it was the opposite for our Tinkercad circuit).
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/F92_-MOqzM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -217,7 +165,7 @@ There are two differences in this circuit compared to the Tinkercad one above. F
 
 OK, let's build this thing for real with our hardware parts.
 
-Because not all of us have access to a 9V battery + snap connector to easily interface with our breadboards, we can again use our Arduino for a power source (just like we did in our very first lesson: [LED On](led-on.md)).
+Because not all of us have access to a 9V battery + snap connector (or alligator clips) to easily interface with our breadboards, we can again use our Arduino for a power source (just like we did in our very first Arduino lesson: [LED On](led-on.md)).
 
 Given that the Arduino supplies 5V rather than 9V, we can replace our 470Ω resistor with a smaller resistor like a 220Ω (but you can certainly use a 470Ω or 680Ω if you'd like—remember, this is a backup resistor for when the potentiometer's wiper resistance goes to 0Ω).
 
@@ -227,76 +175,31 @@ You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things
 
 #### Workbench video of my trimpot dimmer
 
-Here's a workbench video of my trimpot circuit:
+Here's a workbench video of my trimpot circuit where the potentiometer is simply a two-legged variable resistor and we're using the Arduino only as a 5V voltage source:
 
 <!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-#### Replace trimpot with FSR and photocell
+Whew, we did it! 
 
-As long as we have this circuit, let's have a bit of fun: try replacing the trimpot with the [force-sensitive resistor](https://www.adafruit.com/product/166):
-
-<iframe width="736" height="414" src="https://www.youtube.com/embed/YMCqDcnwMYo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-The same circuit as before but replace the trimpot with a force-sensitive resistor.
-{: .fs-1 }
-
-Or the [photocell](https://www.adafruit.com/product/161):
-
-<iframe width="736" height="414" src="https://www.youtube.com/embed/Y0GOsocDCGU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-#### Making your own lo-fi potentiometer
-
-Inspired by [Jeff's video](https://vimeo.com/76442431), we also made our own potentiometer using paper, a 12B pencil, and, for the wiper, cardboard and a paper clip. You should try something like this too!
-
-<iframe width="736" height="414" src="https://www.youtube.com/embed/NRlJbuj5jr4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-The most exciting part is that these lo-fi constructions can be used to create novel and interesting sensors for microcontrollers!
-
-<!-- TODO: in next lesson or maybe end of this one, show how to use this lo-fi contraption to make music? -->
+By now, you should feel pretty confident with using a potentiometer as a variable resistor; however, using potentiometers (or any variable resistor) with a microcontroller requires a different circuit configuration as you'll see below.
 
 ## Intro to analog input
 
-In our previous lessons, we learned about **digital output**, then **analog output**, and finally **digital input**. Now, it's time for the last frontier: **analog input**!
+In our previous lessons, we learned about [**digital output**](led-blink.md), then [**analog output**](led-fade.md), and finally [**digital input**](buttons.md). Now, it's time for the last frontier: **analog input**!
 
 So, what's analog input?! The world—in all its beauty and complexity—is analog. It's not simply `HIGH` and `LOW` but everything in between. How can we sense and access that complexity?
 
 Analog input!
 
-More formally, just like **analog output** enabled us to write out voltages between 0V and Vcc (5V on the Uno), analog input enables us to read voltages between 0V and 5V. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
+More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, analog input enables us to read voltages between 0V and 5V. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
 <!-- TODO: The arduino.cc docs mention adding a short delay before using analogReads on successive pins: https://www.arduino.cc/en/Tutorial/AnalogInputPins. Add this? Here's the full quote: "The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins." -->
 
-### Analog-to-digital converter (ADC)
-
-The Arduino's microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and $$V_{cc}$$ (5V) to a $$0 - 2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
-
-Why does this matter?
-
-For many purposes, it probably doesn't. But the practical implication is that with a 0.0049V resolution, you won't be able to tell the difference between, for example, 2.0140V and 2.0152V (both which would convert to 411) or 4.9148V and 4.9190V (both which would be read as 1003). Does this matter? It depends on the context—for most things we do, it won't. We'll return to this in more depth when we discuss sampling rates and quantization in the [Sensors](../sensors/index.md) and [Signals](../signals/index.md) sections.
-
-#### Changing the HIGH reference voltage
-
-If you want to improve the ADC resolution, you have two choices: (1) up the bitrate, which would require different hardware (you can use an external ADC like this 12-bit [ADS1015](https://www.adafruit.com/product/1083)) or (2) decrease the convertible voltage range (so, applying the same 10-bits across a smaller voltage range).
-
-It's possible to do the latter on the Arduino. You can change the `HIGH` reference voltage from $$V_{cc}$$ (which is 5V on the Uno) to a different value between 1.0V to $$V_{cc}$$ using [analogReference()](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/). The `LOW` reference voltage is fixed to $$GND$$.
-
-Changing the reference voltage may be useful if you know your max analog input value is less than $$V_{cc}$$ because you will increase your ADC precision.
-
-On the Uno and Leonardo, the options are:
-- **DEFAULT**: the default analog reference of 5V (on 5V boards) or 3.3V (on 3.3V boards)
-- **INTERNAL**: a built-in reference equal to 1.1V on the ATmega328
-- **EXTERNAL**: the voltage applied to the AREF pin (between 1.0V-5V)
-
-#### How does the ADC actually work?
-
-But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and even our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). According to the ATmega328 datasheet, "the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate." See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
-
-<!-- TODO: even more interesting discussions about how for one ADC clock period, the ADC has to charge a capacitor that it uses to measure voltage on the input pin. See: https://www.avrfreaks.net/forum/minumum-current-required-analog-pin-atmega328 -->
-
 ### Analog input pins
 
-The Arduino Uno and Leonardo have six analog inputs, which can be read using `analogRead(int pin)`:
+The Arduino Uno and Leonardo have six analog inputs, which can be read using [`analogRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/). The `analogRead` function reads voltage values between 0 and the Arduino's operating voltage (5V on the Uno and Leonardo) and converts this into integer values between 0 and 1023.
 
 ![Close-up image of the six analog input pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_AnalogInputPins.png)
 
@@ -311,6 +214,33 @@ Remember how we said that Arduino input pins work like voltmeters? Just as voltm
 It's important that you conceptually understand that microcontrollers work by measuring voltages and not current. In fact, the [ATmega328 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf) says analog input pins have an effective resistance of 100,000,000Ω (100MΩ), which means almost **no current** goes into an input pin (see Table 29.8).
 
 This means that we have to configure our variable resistor sensors as **voltage dividers** to work with microcontrollers.
+
+### Analog-to-digital converter (ADC)
+
+The Arduino's microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and $$V_{cc}$$ (5V) to a $$0 - 2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
+
+Why does this matter?
+
+For many purposes, it probably doesn't. But the practical implication is that with a 0.0049V resolution, you won't be able to tell the difference between, for example, 2.0140V and 2.0152V (both which would convert to 411) or 4.9148V and 4.9190V (both which would be read as 1003). Does this matter? It depends on the context—for most things we do, it won't. We discuss quantization in more depth in the [Sensors](../sensors/index.md) and [Signals](../signals/index.md) sections.
+
+#### Changing the HIGH reference voltage
+
+If you want to improve the ADC resolution, you have two choices: (1) up the bitrate, which would require different hardware (you can use an external ADC like this 12-bit [ADS1015](https://www.adafruit.com/product/1083)) or (2) decrease the convertible voltage range (so, applying the same 10-bits across a smaller voltage range).
+
+It's possible to do the latter on the Arduino. You can change the `HIGH` reference voltage from $$V_{cc}$$ (which is 5V on the Uno and Leonardo) to a different value between 1.0V to $$V_{cc}$$ using [analogReference()](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/). The `LOW` reference voltage is fixed to $$GND$$.
+
+Changing the reference voltage may be useful if you know your max analog input value is less than $$V_{cc}$$ because you will increase your ADC precision.
+
+On the Uno and Leonardo, the options are:
+- **DEFAULT**: the default analog reference of 5V (on 5V boards) or 3.3V (on 3.3V boards)
+- **INTERNAL**: a built-in reference equal to 1.1V on the ATmega328
+- **EXTERNAL**: the voltage applied to the AREF pin (between 1.0V-5V)
+
+#### How does the ADC actually work?
+
+But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and even our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). According to the ATmega328 datasheet, "the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate." See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
+
+<!-- TODO: even more interesting discussions about how for one ADC clock period, the ADC has to charge a capacitor that it uses to measure voltage on the input pin. See: https://www.avrfreaks.net/forum/minumum-current-required-analog-pin-atmega328 -->
 
 ## Hooking up variable resistors with microcontrollers
 
@@ -376,19 +306,24 @@ This is a circuit simulation of the potentiometer correctly hooked up to a micro
 
 Once you get the potentiometer-based analog input working in Tinkercad, build the physical circuit and, to begin, copy the code from above.
 
+For your prototyping journals, we'd also like you to make a version that reads in the analog input (using `analogRead`) and appropriately sets the brightness of an LED (using `analogWrite`).
+
 <!-- TODO: now adapt to change LED brightness. Use LED built-in -->
 
-## Exercises
+<!-- ## Exercises
 
 Here are some exercises to try.
 
 - Try to use the slide potentiometer (also in your kits)
 - Hook up an external LED that fades based on analog input
-- Hook up the piezo buzzer to make sound based on analog input
+- Hook up the piezo buzzer to make sound based on analog input -->
 
 <!-- ## Resources
 
-UIUC Analog Input: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M005_ArduinoAnalogInputs.pdf -->
+UIUC Analog Input: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M005_ArduinoAnalogInputs.pdf 
+
+TODO: add more resources
+-->
 
 ## Next Lesson
 

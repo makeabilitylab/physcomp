@@ -3,5 +3,8 @@
     "pasteImage.path": "${currentFileDir}/assets/images",
     "files.exclude": {
         "_site": true
-    }
+    },
+    "cSpell.words": [
+        "debouncing"
+    ]
 }

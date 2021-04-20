@@ -79,7 +79,9 @@ For our first making activity, we're going to create a potentiometer-based LED d
 
 ### A Tinkercad prototype
 
-Let's build a prototype in [Tinkercad Circuits](https://www.tinkercad.com/) before building a physical prototype. While similar to the activity in [Variable Resistors](../electronics/variable-resistors.md), we add in uses of Tinkercad's multimeter to check our circuits and also emphasize correct and incorrect hookups. Moreover, doing this activity before the Arduino-based one will help reinforce differences between using a potentiometer simply as a two-legged variable resistor and as a three-legged voltage divider.
+Let's build a prototype in [Tinkercad Circuits](https://www.tinkercad.com/) before building a physical prototype. While similar to the activity in [Variable Resistors](../electronics/variable-resistors.md), we add in uses of Tinkercad's multimeter to check our circuits and also emphasize correct and incorrect hookups. Moreover, doing this activity before the Arduino-based one will help reinforce differences between using a potentiometer simply as a two-legged variable resistor and as a three-legged voltage divider. 
+
+Still, if you feel confident in your understanding of potentiometers as two-leg variable resistors, then feel free to skip to the [Intro to Analog Input](#intro-to-analog-input) part of this lesson!
 
 #### Step 1: Build the potentiomer-based LED dimmer
 

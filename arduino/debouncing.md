@@ -37,16 +37,39 @@ Indeed, if you look at a button signal with an oscilloscope, you can see the "bo
 **Figure.** Image from [ladyada.net](https://www.ladyada.net/learn/arduino/lesson5.html)
 {: .fs-1 }
 
-So, what can you do? The solution is to "debounce" your switches, which can be done via software or [pure hardware solutions](#pure-hardware-solutions), which we'll address below. 
+So, what can you do? The solution is to "debounce" your switches, which can be done via software or [pure hardware solutions](#pure-hardware-solutions), which we'll address below.
 
-## Button without debouncing
+## Can switches bounce when closing and opening?
+
+Yes!
+
+TODO: take a look at graph
+
+## How long do switches bounce?
+
+So, how long do buttons bounce for? The answer: it varies significantly depending on the switch type.
+
+Thankfully, we have [Jack Ganssle](http://www.ganssle.com/), an expert in embedded systems, who painstakingly tested nearly twenty different switches ranging from cheap joystick and old mouse buttons to toggle and slide switches (see figure below). He hooked up each switch to an oscilloscope, individually pressed them 300 times, and logged the min and max amount of bouncing for both *closing* and *opening* activations. He documented the results of his research [here](https://my.eng.utah.edu/~cs5780/debouncing.pdf).
+
+![](assets/images/Ganssle_SwitchesTested.png)
+
+In sum, most switches exhibited an average of 1.5 milliseconds (ms) of bouncing; however, two outlier switches exceeded 6.2ms. The worst  was a red pushbutton, which had an *open* bounce of 157ms but only 20 microseconds (μs) on close. Interestingly, each switch seemed to have its own "bounce pattern" off rapid oscillations.
+
+## What should our debounce window be?
+
+So, how long should you set your debounce window? This depends, again, on the switch type and on the expected use of your switch. Is it an occassionally-used toggle switch, a keyboard (a fast typist can generate ~10 characters/second), or a joystick button (button mashing anyone!?)? 
+
+As a second consideration, what's a human perceptible amount of lag? Wikipedia suggests that "input lag"—from controller input to display response—of ~200ms are perceptible and distracting and that "quick twitch" games like [first-person shooters](https://en.wikipedia.org/wiki/First-person_shooter) and [fighting games](https://en.wikipedia.org/wiki/Fighting_game) have response times of 67ms. Similarly, [Ganssle suggests](https://my.eng.utah.edu/~cs5780/debouncing.pdf) that, in his tests, a 100ms delay is noticeable but 50ms seems instantaneous. 
+
+## Switches without debouncing
 
 TODO: show video of Arduino code with and without debouncing
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tw-pndJQFqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## Outline
-- Describe problem and include snippets (or animated gifs) of videos we typically show in class
+- [Done] Describe problem and include snippets (or animated gifs) of videos we typically show in class
 - Talk about potential solutions
 - Show off the simplest: just check value wait for some amount of time and then check value again (using sleep)
 - Show and talk about test code that shows why debouncing is important (maybe with video?). Could have top-down video of OLED display showing counting differences.
@@ -61,7 +84,7 @@ TODO: show video of Arduino code with and without debouncing
 
 ## Pure hardware solutions
 
-Like with many microcontroller+circuit problems, there are multiple solutions including **pure** hardware techniques. Typically, as computer scientists, we often default to the programmatic solution. But the hardware solution can be just as good or better. For example, in this Texas Instruments video, the instructor shows how to use a capacitor and a [Schmitt Trigger](https://en.wikipedia.org/wiki/Schmitt_trigger) to debounce a switch. The capacitor smooths out the the rising and falling edges of a button state transition and the Schmitt Trigger converts this smoothed signal back into digital output.
+Like with many microcontroller+circuit problems, there are multiple approaches including **pure** hardware solutions. Typically, as computer scientists, we often default to code. But the hardware solution can be just as functionally good (though it does complicate the build and require more components). For example, in this Texas Instruments video, the instructor shows how to use a capacitor and a [Schmitt Trigger](https://en.wikipedia.org/wiki/Schmitt_trigger) to debounce a switch. The capacitor smooths out the the rising and falling edges of a button state transition and the Schmitt Trigger converts this smoothed signal back into digital output.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/e1-kc04jSE4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

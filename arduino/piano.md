@@ -338,9 +338,10 @@ For your prototyping journals, select one of the following extensions to the pia
 
 ## Next Lesson
 
-In the [next lesson](potentiometers.md), we'll move beyond digital input to the far more exciting and flexible world of analog input!
+In the [next lesson](debouncing.md), we'll introduce the problem of "contact bouncing" and talk about solutions.
 
 <span class="fs-6">
 [Previous: Using buttons](buttons.md){: .btn .btn-outline }
-[Next: Using potentiometers](potentiometers.md){: .btn .btn-outline }
+[Next: Debouncing](debouncing.md){: .btn .btn-outline }
+<!-- [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline } -->
 </span>

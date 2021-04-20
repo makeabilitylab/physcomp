@@ -83,15 +83,19 @@ Introduces buttons (aka momentary switches), digital input, using Arduino's [`di
 
 ### [Lesson 2: Button piano](piano.md)
 
-In this lesson, we are going to make a simple five-key piano with tactile buttons wired with internal pull-up resistors and a [piezo buzzer](https://www.adafruit.com/product/160).
+In [this lesson](piano.md), we are going to make a simple five-key piano with tactile buttons wired with internal pull-up resistors and a [piezo buzzer](https://www.adafruit.com/product/160).
 
-### [Lesson 3: Potentiometers](potentiometers.md)
+### [Lesson 3: Debouncing switches](debouncing.md)
 
-Introduces potentiometers and rheostats, analog input, and using Arduino's [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function. Also shows how to use Tinkercad to prototype and test circuits in an online simulator and how to use a multimeter to measure current.
+In [this lesson](debouncing.md), we'll learn about "contact bouncing" and how to "debounce" to make our digital input more reliable.
 
-### [Lesson 4: Force-sensitive resistors](force-sensitive-resistors.md)
+### [Lesson 4: Potentiometers](potentiometers.md)
 
-Introduces force-sensitive resistors (FSRs), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
+[This lesson](potentiometers.md) introduces potentiometers and rheostats, analog input, and using Arduino's [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) function. Also shows how to use Tinkercad to prototype and test circuits in an online simulator and how to use a multimeter to measure current.
+
+### [Lesson 5: Force-sensitive resistors](force-sensitive-resistors.md)
+
+Introduces [force-sensitive resistors (FSRs)](force-sensitive-resistors.md), how to use two-legged variable resistors with microcontrollers (including FSRs), and how to make a force-piano. Very Jedi-like!
 
 <!--
 TODO: after Lesson 4, have them make their own lo-fi resistive sensor? and turn their arduino into a voltmeter?

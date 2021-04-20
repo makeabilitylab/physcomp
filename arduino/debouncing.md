@@ -198,7 +198,7 @@ As a disclaimer, I have not tested these libraries myself but please do peruse t
 
 ## Activity
 
-For your prototyping journals, modify your [piano code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) from the [previous activity](piano.md) to use debouncing. Do you notice anything different? Why or why not?
+For your prototyping journals, modify your [piano code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) from the [previous activity](piano.md) to use debouncing. You can use one of the aforementioned button classes or roll your own solution. Do you notice anything different? Why or why not?
 
 <!-- ## Solution 3
 Uses interrupts. Assumes any initial state change is not spurious but due to human input.

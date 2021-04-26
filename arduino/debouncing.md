@@ -185,9 +185,9 @@ Just as we did for our [rate blinking LEDs](led-blink3.md) lesson, we can modify
 
 ### Debouncing solution 3: softening requirements
 
-For the two debouncing solutions above, we observed an initial state change on our digital input pin (`state1`) and then, after some time period (the debouncing window), verified this state change via a second read to the digital input pin (`state2`)). This approach protects against contact bounce, errant button presses (of time less than the debouncing window), and electrical interference (*e.g.,* electric static discharge that cause transient digital input pin changes).
+For the two debouncing solutions above, we observed an initial state change on our digital input pin (`state1`) and then, after some time period (the debouncing window), we verified this state change via a second read to the digital input pin (`state2`). This approach protects against contact bounce, errant button presses (of time less than the debouncing window), and electrical interference (*e.g.,* electric static discharge that cause transient digital input pin changes).
 
-However, if we soften our requirement and assume that the `state1` change was correct and not some errant signal, then we can apply a few other solutions. In these cases, we do **not read** from the digital input pin **again** after the debouncing window but, instead, simply ignore input for that timeperiod.
+However, if we soften our requirement and assume that the `state1` change was correct and not some errant signal, then we can apply a few other solutions. In these cases, we do **not read** from the digital input pin **again** after the debouncing window but, instead, simply ignore input for that time period.
 
 ![](assets/images/DebouncingStateChangeGraph_TwoSolutions.png)
 **Figure.** Two approaches to debouncing buttons.
@@ -209,7 +209,7 @@ This solution is nicely captured by user [cdvma](https://www.reddit.com/r/embedd
 >
 > 3. Go back to step #1.
 >
-> This allows for interrupt driven input and has zero delay between user action and input processing because you don't wait the debounce period before declaring it pressed. It is important to have that low delay in highly reactive control surfaces (games).
+> This allows for interrupt-driven input and has zero delay between user action and input processing because you don't wait the debounce period before declaring it pressed. It is important to have that low delay in highly reactive control surfaces (games).
 >
 > The downside is that it won't work if you need to pass regulatory ESD testing.
 {: .fs-4 }
@@ -267,6 +267,10 @@ Indeed, there are a number of custom `Button` classes online for Arduino, includ
 - ThomasGravekamp's [Arduino Debounced Switched Library](https://github.com/ThomasGravekamp/Arduino-Debounced-Switch), which includes support for callback functions when a trigger state is reached.
 
 As a disclaimer, I have not tested these libraries myself but please do peruse them (to learn about how they work) and try them out yourself, if you'd like.
+
+### Other solutions
+
+There are many other software debouncing solutions, including using [interrupts](https://www.arduino.cc/reference/en/language/functions/external-interrupts/attachinterrupt/). For example, here's a version we made for the Redbear Duo boards (https://github.com/makeabilitylab/arduino/blob/master/RedBearDuo/RedBearDuoButtonInterruptWithDebouncing/RedBearDuoButtonInterruptWithDebouncing.ino). See [Resources](#resources) below.
 
 ## Activity
 

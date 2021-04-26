@@ -201,9 +201,25 @@ The Arduino Uno and Leonardo have six analog inputs, which can be read using [`a
 
 ![Close-up image of the six analog input pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_AnalogInputPins.png)
 
-While the digital I/O pins on the Arduino microcontroller are shared. The **analog input** pins are different from the **analog output** pins.
+Often, students get confused between the analog **output** pins (which use PWM, see [Fading an LED](led-fade.md)) and the analog **input** pins. They are different.
 
 ![Close-up image of the Arduino Uno emphasizing that the Arduino analog input pins are different from the analog output pins](assets/images/ArduinoUno_CloseUp_WarningAnalogInputAndOutputPinsAreDifferent.png)
+
+You can access the analog input pins using `A0`, `A1` ... `AN`. For example, `analogRead(A0)` to read on analog input pin 0. On the Arduino Uno and Leonardo, there are six analog input pins: `A0` - `A6`.
+
+---
+
+**NOTE:**
+
+At risk of adding to pin confusions, if you run out of the general purpose input/output (GPIO) pins (pins 0 - 13 on the Uno and Leonardo), you can use the analog input pins as GPIO pins—they have all the same functionality. So, for example, if you do not need any analog input in your project, you could have up to 20 GPIO pins (14 pins at top of board and the 6 analog in pins). These analog pins also have pull-up resistors, which work identically to the pull-up resistors on the digital pins.
+
+```
+pinMode(A0, INPUT_PULLUP);  // set pull-up on analog pin 0
+```
+
+See the [official Arduino docs ](https://www.arduino.cc/en/Tutorial/Foundations/AnalogInputPins)for more information.
+
+---
 
 ### How does the Arduino read analog input?
 

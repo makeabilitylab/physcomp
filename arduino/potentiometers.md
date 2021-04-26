@@ -211,7 +211,7 @@ You can access the analog input pins using `A0`, `A1` ... `AN`. For example, `an
 
 **NOTE:**
 
-At risk of adding to pin confusions, if you run out of the general purpose input/output (GPIO) pins (pins 0 - 13 on the Uno and Leonardo), you can use the analog input pins as GPIO pins—they have all the same functionality. So, for example, if you do not need any analog input in your project, you could have up to 20 GPIO pins (14 pins at top of board and the 6 analog in pins). These analog pins also have pull-up resistors, which work identically to the pull-up resistors on the digital pins.
+At risk of adding to pin confusions, if you run out of the general purpose input/output (GPIO) pins (pins 0 - 13 on the Uno and Leonardo), you can use the analog input pins as GPIO pins—they have all the same functionality. These analog pins also have pull-up resistors, which work identically to the pull-up resistors on the digital pins.
 
 ```
 pinMode(A0, INPUT_PULLUP);  // set pull-up on analog pin 0

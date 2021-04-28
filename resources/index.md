@@ -82,6 +82,16 @@ I've gone through many electronics and microcontroller books. Here are some of m
 <!-- Machine Learning -->
 <!-- Koul, A., Ganju, Siddha, & Kasam, Meher. (2019). Practical deep learning for cloud, mobile, and edge : Real-world AI and computer-vision projects using Python, Keras and TensorFlow (First ed.). Sebastopol: O'Reilly Media, Incorporated. https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71312408300001451 -->
 
+### Digital Signal Processing
+
+- [Notes on Music Information Retrieval](https://musicinformationretrieval.com/), by [Steve Tjoa](https://github.com/stevetjoa/). An interactive textbook in Jupyter Python for music information retrieval that is highly accessible and covers introductory digital signal processing topics, including fourier transforms, feature extraction, signal segmentation, autocorrelation, and basic machine learning topics too (k-means clustering)
+
+- [Compact Primer on Digital Signal Processing](https://jackschaedler.github.io/circles-sines-signals/index.html), by Jack Schaelder. An interactive primer on DSP, including fourier transforms, sampling, correlation, signal representations.
+
+- [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com/pdfbook.htm), by Steven W. Smith. A free and fully comprehensive online DSP textbook
+
+- [Signal Computing: Digital Signals in the Software Domain](http://faculty.washington.edu/stiber/pubs/Signal-Computing/Signal%20Computing.pdf), Michael Stiber, Bilin Zhang Stiber, and Eric C. Larson
+
 ## Online Tools
 
 ### Circuit Simulators

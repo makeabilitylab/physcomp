@@ -53,6 +53,7 @@ A key pedagogical philosophy underlying our teaching is **learn by doing**. From
 
 Here are some example hardware kits that we provide students in our classes.
 
+- CSE490 Physical Computing: [Spring'21](https://docs.google.com/spreadsheets/d/1R2JqlGt5uzvqELevAIm99jlwRd08RPa6LtFQGwu32eM/edit#gid=0)
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
 - HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)
 - CSE599 Prototyping Interactive Systems: [Spring'19](https://docs.google.com/spreadsheets/d/15ltWMcmYbSrWlz8ajt5TZfj8ZXctMJVueplwYYdZKdc/edit?usp=sharing)

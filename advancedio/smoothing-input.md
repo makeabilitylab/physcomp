@@ -82,11 +82,13 @@ Note that if you're **logging** data (*e.g.,* to a storage card or the cloud), i
 
 ### Moving average filter
 
-The most common filter in DSP is the moving average filter, which slides a window of size $$N$$ over a raw signal, computes the average over that window, and uses this average as the smoothed value.
+The most common filter in DSP is the moving average filter, which slides a window of size $$N$$ over a raw signal, computes the average over that window, and uses this average as the smoothed value. 
 
 $$MA=\frac{X_{1} + X_{2} + \ldots + X_{N}}{N}$$
 
-For example, the animation below demonstrates a sliding window of size 3 for a moving average filter. The blue line corresponds to the raw input signal; the orange line, the smoothed filter output. For illustrative purposes, we only show the sliding window applied to a subset of data.
+This filter is a type of **low-pass** filter because it smooths out (eliminates) the high frequency oscillations in the signal. 
+
+You can control the filter's performance by tweaking the size of the sliding window. The animation below demonstrates a sliding window of size 3 for a moving average filter. The blue line corresponds to the raw input signal; the orange line, the smoothed filter output. For illustrative purposes, we only show the sliding window applied to a subset of data.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/MovingAverageFilter_PowerPointAnimation_TrimmedAndCropped.mp4" type="video/mp4" />
@@ -251,13 +253,23 @@ void loop()
 
 TODO: and take video of using the class.
 
-### Considerations
+## Other filters
 
-TODO: 
+In this lesson, we covered only a few basic filters but many other approaches exist—some which allow you to control which frequencies in your signal to eliminate. For example, high-pass filters remove low-frequency components from your signal while keeping high frequencies, low-pass filters eliminate high-frequency components while keeping low frequencies, *etc.* Other filters, like [Kalman filters](https://en.wikipedia.org/wiki/Kalman_filter), attempt to predict output based on historic data.
+
+Other popular filters include the [Savitzky-Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter), the [Butterworth filter](https://en.wikipedia.org/wiki/Butterworth_filter), 
+
+If you're interested in this area, we suggest experimenting with the filters in [SciPy](https://docs.scipy.org/doc/scipy/reference/signal.html) in Jupyter Notebook. You can log sensor data to your computer and analyze it there post hoc, as we do in our [Step Tracker](../signals/StepTracker/index.html) and [Gesture Recognition](../signals/gesturerec/shapebased/index.html) assignments.
+
+It is typically not very helpful to perform robust filtering investigations in real-time on sensor data because it's difficult to replicate input signals and test and compare filtering algorithms.
+
+<!-- ### Considerations
+
+TODO in future: 
 - startup time
-- how window is applied around data...
+- how window is applied around data... -->
 
-## Outline
+<!-- ## Outline
 
 - What is the problem
 - Introduce digital signal processing
@@ -270,11 +282,11 @@ TODO:
   - Latency (dependent on window size)
   - Beginning. How to initialize. Common solutions are to fill initial array with first value. 
   - How to organize filter around the data (middle, left, or right)
-  - refer to numpy documentation here
+  - refer to numpy documentation here -->
 
 ## Arduino filtering libraries
 
-We have not had a chance to evaluate all of these libraries. So, use at your own risk. :)
+There are lots of Arduino filtering libraries online and general C++ filtering code that could be adapted to the Arduino context. The usual disclaimers apply: we have not had a chance to evaluate all of these libraries. So, use at your own risk. :)
 
 - [Kick Filter Library](https://github.com/LinnesLab/KickFilters), by [LinnesLab](https://github.com/LinnesLab) on GitHub. Here's the associated [IEEE publication](http://dx.doi.org/10.1109/EMBC.2018.8513356) from Linnes Lab's Kick LL smartwatch, a research device for measuring heart rate, respiration, and blood oxygen, which was the impetus for creating the library.
   

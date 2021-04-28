@@ -145,6 +145,7 @@ if (_curReadIndex >= SMOOTHING_WINDOW_SIZE) {
 {% endhighlight C %}
 
 #### Arduino code
+
 Our full implementation:
 
 <script src="http://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilter/MovingAverageFilter.ino?footer=minimal"></script>
@@ -212,7 +213,7 @@ The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha
 **Video** This video shows EWMA performance with $$\alpha$$ equal to 0.5 (red line), 0.1 (green line), and 0.01 (yellow line). The code used to produce this video is [here](https://github.com/makeabilitylab/arduino/blob/master/Filters/EwmaFilterAlphaDemo/EwmaFilterAlphaDemo.ino). Graph made with the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
 {: .fs-1 }
 
-#### Arduino implementation
+#### Arduino EWMA implementation
 
 If you're not used to reading filtering equations, then perhaps the Arduino code is more clear. The algorithm is quite straightforward and, crucially, unlike the traditional moving average algorithm, does not require a window buffer!
 
@@ -251,7 +252,14 @@ void loop()
 
 ### Moving median filter
 
-TODO: and take video of using the class.
+TODO: finish this
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/MovingMedianFilter-ThreeWindowSizes-TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video** This video shows moving median filter performance with window sizes 5, 11, and 21. To make this video, we used [this code](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingMedianFilterWindowSizeDemo/MovingMedianFilterWindowSizeDemo.ino) and the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
+
+{: .fs-1 }
 
 ## Other filters
 

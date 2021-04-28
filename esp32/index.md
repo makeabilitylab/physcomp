@@ -1,7 +1,7 @@
 ---
 layout: default
 title: ESP32
-nav_order: 3
+nav_order: 4
 has_toc: false # on by default
 has_children: true
 nav_exclude: false

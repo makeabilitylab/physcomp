@@ -24,7 +24,7 @@ usetocbot: true
 </video>
 
 **Video** Smoothing an analog input signal using a moving average filter with window size of 10. The raw analog input is shown in blue; the smoothed data is shown in red. Graph made with the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
-{: fs-1}
+{: .fs-1 }
 
 <!-- TODO: insert video of me using Sharp with noise instead? -->
 
@@ -38,11 +38,27 @@ In this lesson, we will cover a class of digital filters called smoothing algori
 
 **DIVE DEEPER:**
 
-DSP is a vast, complex area but even simple signal processing techniques like those covered in this lesson are helpful. If you'd like to dive deeper into this topic, see our [Signal Processing](../signals/signal-processing.md) lessons, which introduce [quantization and sampling](../signals/quantization-and-sampling.md), [signal comparisons](../signals/comparing-signals.md), and [frequency analysis](../signals/frequency-analysis.md). For a more technical introduction to digital filters, see [Chapter 14: Introduction to Digital Filters](http://www.dspguide.com/ch14/1.htm) in Steven W. Smith's book [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com/). We also recommend Jack Schaelder's [interactive primer on DSP](https://jackschaedler.github.io/circles-sines-signals/index.html).
+DSP is a vast, complex area but even simple signal processing techniques like those covered in this lesson are helpful. If you'd like to dive deeper into DSP, see our [Signal Processing](../signals/signal-processing.md) lessons, which introduce [quantization and sampling](../signals/quantization-and-sampling.md), [signal comparisons](../signals/comparing-signals.md), and [frequency analysis](../signals/frequency-analysis.md). For a more technical introduction to digital filters, see [Chapter 14: Introduction to Digital Filters](http://www.dspguide.com/ch14/1.htm) in Steven W. Smith's book [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com/). We also recommend Jack Schaelder's [interactive primer on DSP](https://jackschaedler.github.io/circles-sines-signals/index.html).
 
  <!-- In fact, the moving average filter is the most common filter in DSP both because of its simplicity but also because it does a great job of reducing random noise (see [Chapter 15](http://www.dspguide.com/ch15.htm) of Smith's book)! -->
 
 ---
+
+## Noisy input
+
+When reading sensor data using analog input pins on a microcontroller (*e.g.,* via [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) on the Arduino), there are many sources of noise, including electromagnetic interference, sensor noise, mechanical noise (for electro-mechanical sensors like potentiometers), stray capacitance, unstable voltage sources, and/or [small imperfections in the ADC](https://www.analog.com/en/analog-dialogue/articles/adc-input-noise.html#). Oh my!
+
+Even with a simple potentiometer, we can observe noise on our input pin. In the video below, we are **not** touching the potentiometer and yet the analog input is oscillating between 142 and 143 (0.694V and 0.699V)—shown as the blue line. You may have experienced this too in your own potentiometer-based projects or in the [Arduino potentiometer lesson](../arduino/potentiometers.md). In this case, we fixed this "input noise" by smoothing the signal using a moving average filter—shown in red—which we will describe in this lesson.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PotentiometerOscillatingWithNoInputButFixedWithMovingAverage-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** In this video, we're graphing the analog input from a potentiometer. Although we're not touching or using the potentiometer, the analog input (blue line) is oscillating between 142 and 143 (0.694V and 0.699V). We smooth this noise using a moving average filter (window size = 10)—shown in red. Note that, depending on the oscillation pattern, a different window size or smoothing approach may be necessary. Read more about potentiometer noise [here](https://passive-components.eu/resistors-potentiometers-basic-principles/). Graph made with the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
+{: .fs-1 }
+
+In addition to smoothing a potentiometer input signal with a digital filter (a software solution), we could, instead, use a hardware solution: add in a small ceramic capacitor (0.1µF or 0.47 µF) from the potentiometer wiper to ground. However, the focus of this lesson is on software solutions (the **digital** in DSP).
+
+<!-- TODO: video of sharpIR sensor -->
 
 <!-- ## Digital Filters
 
@@ -50,37 +66,93 @@ There are two primary approaches to filtering a signal: **time domain** methods,
 
 <!-- methods, which are commonly used for smoothing, applying an offset (*e.g.,* DC removal) and **frequency domain** methods that analyze the frequency components of a signal to filter low-frequency -->
 
-## Noisy input
-
-When reading sensor data using analog input pins on a microcontroller (*e.g.,* via [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) on the Arduino), there are many sources of noise, including electromagnetic interference, mechanical noise (for electro-mechanical sensors like potentiometers), stray capacitance, unstable voltage sources, and/or [small imperfections in the ADC](https://www.analog.com/en/analog-dialogue/articles/adc-input-noise.html#).
-
-For example, in the video below, we are **not** touching the potentiometer and yet the analog input is oscillating between 142 and 143 (0.694V and 0.699V)—shown as the blue line. You may have experienced this too in your own builds with potentiometers or even in our [Arduino potentiometer lesson](../arduino/potentiometers.md). In this case, we fixed this "input noise" by smoothing the signal using a moving average filter—shown in red.
-
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/PotentiometerOscillatingWithNoInputButFixedWithMovingAverage-Optimized.mp4" type="video/mp4" />
-</video>
-**Video** In this video, we're graphing the analog input from a potentiometer. Although we're not touching or using the potentiometer, the analog input is oscillating between 142 and 143 (0.694V and 0.699V). Read more about potentiometer noise [here](https://passive-components.eu/resistors-potentiometers-basic-principles/). Graph made with the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
-{: fs-1}
-
-Rather than smoothing a potentiometer input signal with a digital filter (a software solution), we could, instead, use a hardware solution: add in a small ceramic capacitor (0.1µF or 0.47 µF) from the potentiometer wiper to ground.
-
-However, the focus of this lesson is on software solutions.
-
-<!-- TODO: video of sharpIR sensor -->
-
 ## Moving window filters
 
-The most common and simplest to understand digital filters employ a moving window (or buffer) to smooth a signal in realtime. Some factors to consider:
-- Window size
-- Calculation on window
+The most common and simplest to understand digital filters use a moving window (or buffer) to smooth a signal in realtime. Typically, a **larger** windows size results in a "smoother" but more distorted signal. Larger windows also incur "lag"—the filtered signal's responsiveness to changes in the raw signal is delayed—and require more storage and computation time.
 
-As each sensor and human- or environmental-interaction is unique, we encourage you to experiment with different smoothing approaches to achieve your desired behavior. Note that if you're **logging** data (*e.g.,* to a storage card or the cloud), it's often best to capture and transmit the **raw** data so that you can experiment with signal processing approaches post hoc. Once an ideal sampling frequency and, perhaps, filtering approach has been determined, you could integrate this into the deployed system (to save bandwidth, power, etc.).
+As each sensor and human- or environmental-interaction is unique, we encourage you to experiment with different smoothing algorithms and window sizes to achieve your desired behavior.
+
+---
+
+SPECIAL CASE: DATA LOGGING
+
+Note that if you're **logging** data (*e.g.,* to a storage card or the cloud), it's often best to first capture and transmit the **raw** data so that you can experiment with signal processing approaches *post hoc* (*e.g.,* offline in Jupyter Notebook). Once an ideal sampling frequency and, perhaps, filtering approach for your particular problem domain and sensors has been determined, you could then integrate this into your field-deployed system (to save bandwidth, power, *etc.*).
+
+---
+
+### Moving average filter
+
+The most common filter in DSP is the moving average filter, which slides a window of size $$N$$ over a raw signal, computes the average over that window, and uses this average as the smoothed value.
+
+$$MA=\frac{X_{1} + X_{2} + \ldots + X_{N}}{N}$$
+
+For example, the animation below demonstrates a sliding window of size 3 (for illustrative purposes, we only show the sliding window applied to a subset of data):
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/MovingAverageFilter_PowerPointAnimation_TrimmedAndCropped.mp4" type="video/mp4" />
+</video>
+**Video** This video illustrates a moving average filter of window size 3 over a subset of data. Animation made in PowerPoint.
+{: .fs-1 }
+
+<!-- As [Smith notes ](http://www.dspguide.com/ch15.htm):
+
+> the moving average is the most common filter in DSP, mainly because it is the easiest digital filter to understand and use. In spite of its simplicity, the moving average filter is optimal for a common task: reducing random noise...
+{: .fs-4 } -->
+
+Despite its simplicity, a moving average filter of window size 5 or 10 is often all you will need in your physical computing projects. Depending your on your use context and underlying sensors + circuit setup, we encourage you to play around with various smoothing approaches and tuning parameters (in this case, the window size). If you're sampling a sensor 20 times per second (~20Hz), then a window size of 10 will capture roughly 500ms of data. So, it may be useful to think in terms of time rather than samples. 
+
+<!-- The object-oriented filtering approach makes it easy to test and compare the effect of different window sizes on the filtered output. -->
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/MovingAverageWithThreeWindowSizes-Optimized.mp4" type="video/mp4" />
+</video>
+**Video** This video demonstrates three different window sizes (5, 10, and 20) with the moving average filter. For this video, we used [this code](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWindowSizeDemo/MovingAverageFilterWindowSizeDemo.ino) and the [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
+{: .fs-1 }
+
+#### Arduino implementation
+
+The official Arduino [signal smoothing tutorial](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Smoothing) uses a moving average filter. Cleverly, their code uses an optimization (which we borrow below) to avoid iterating over the entire window to compute each new average. Instead, we simply subtract the least recent reading in our sliding window from a running total. The code also uses a [circular buffer](https://en.wikipedia.org/wiki/Circular_buffer) to eliminate needless memory allocations.
+
+{% highlight C %}
+// subtract the last reading:
+_sampleTotal = _sampleTotal - _samples[_curReadIndex];
+
+// read the sensor value
+int sensorVal = analogRead(SENSOR_INPUT_PIN);
+_samples[_curReadIndex] = sensorVal;
+
+// add the reading to the total:
+_sampleTotal = _sampleTotal + _samples[_curReadIndex];
+
+// advance to the next position in the array:
+_curReadIndex = _curReadIndex + 1;
+
+// if we're at the end of the array...
+if (_curReadIndex >= SMOOTHING_WINDOW_SIZE) {
+  // ...wrap around to the beginning:
+  _curReadIndex = 0;
+}
+
+// calculate the average:
+_sampleAvg = _sampleTotal / SMOOTHING_WINDOW_SIZE;
+{% endhighlight C %}
+
+#### Arduino code
+Our full implementation:
+
+<script src="http://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilter/MovingAverageFilter.ino?footer=minimal"></script>
+
+#### Simple C++ class
+
+Signal filtering is a perfect opportunity to create a class to handle the array allocation and data processing. In our [Makeability Lab Arduino Library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library/src), we created the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp) class, which greatly simplifies using a moving average filter.
+
+<script src="http://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWithClass/MovingAverageFilterWithClass.ino?footer=minimal"></script>
 
 ### Weighted moving average
 
-In the basic moving average algorithm, we assign equal weight to all data in our filter window. You could imagine implementations that more heavily weight data as a function of recency—that is, more recent data is likely more relevant and thus should be weighted more. This class of algorithms are called **weighted moving averages (WMA)** and include linear weighting schemes where weights drop off linearly in the filter window and exponential weighting schemes where weights drop off exponentially.
+In the basic moving average algorithm, we assign equal weight to all data in our filter window. You could imagine, however, more weighting data as a function of recency—that is, more recent data is likely more relevant and thus should be weighted more. This class of algorithms are called **weighted moving averages (WMA)** and include linear weighting schemes where weights drop off linearly in the filter window and exponential weighting schemes where weights drop off exponentially.
 
-If a regular moving average is:
+Recall that a regular moving average is:
 
 $$MA=\frac{X_{1} + X_{2} + \ldots + X_{N}}{N}$$
 
@@ -102,10 +174,11 @@ Below, we've included sample weights for both linear and exponential weighting s
 **Figure.** Images from [Wikipedia](https://en.wikipedia.org/wiki/Moving_average).
 {: fs-1 }
 
-### Exponential moving average implementation
-Interestingly, you can implement the exponential moving average (EMA)—also known as the exponentially weighted moving average (EWMA)—without storing a sliding window buffer.
+### Exponential moving average
 
-The algorithm is simply:
+Interestingly, you can implement the exponential moving average (EMA)—also known as the exponentially weighted moving average (EWMA)—without storing a sliding window buffer!
+
+The algorithm is:
 
 $$
 S_{i} =
@@ -115,15 +188,21 @@ S_{i} =
 \end{cases}
 $$
 
-![](assets/images/ExponentialWeightedMovingAverage.png)
-{: .mx-auto .align-center }
-
 Where:
 - The coefficient $$\alpha$$ represents the degree of weighting decrease between 0 and 1. A higher $$\alpha$$ discounts older observations faster.
 - $$X_{i}$$ is the value at index i.
 - $$S_{i}$$ is the value of the EMA at index i.
 
-And here's a version implemented for Arduino, which might make things more clear:
+The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha$$ weights more recent data more. For example, the video below shows EWMA performance with $$\alpha$$ equal to 0.5 (red line), 0.1 (green line), and 0.01 (yellow line). Notice how closely the $$\alpha=0.5$$ EWMA filter tracks the underlying raw signal whereas the $$\alpha=0.01$$ filter is quite distorted and lagged.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ExponentialMovingAverageFilter-ThreeAlphaValues-Optimized.mp4" type="video/mp4" />
+</video>
+**Video** This video shows EWMA performance with $$\alpha$$ equal to 0.5 (red line), 0.1 (green line), and 0.01 (yellow line). The code used to produce this video is [here](https://github.com/makeabilitylab/arduino/blob/master/Filters/EwmaFilterAlphaDemo/EwmaFilterAlphaDemo.ino). Graph made with the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
+{: .fs-1 }
+
+#### Arduino implementation
+Perhaps the coded version for Arduino is more clear:
 
 {% highlight C %}
 const int SENSOR_INPUT_PIN = A0;
@@ -150,6 +229,9 @@ void loop()
   delay(50); // Reading new values at ~20Hz
 }
 {% endhighlight C %}
+
+**Code.** [This code](https://github.com/makeabilitylab/arduino/blob/master/Filters/ExponentialWeightedMovingAverageFilter/ExponentialWeightedMovingAverageFilter.ino) is on GitHub.
+{: .fs-1 }
 
 <!-- Equation written in: https://www.codecogs.com/latex/eqneditor.php -->
 <!-- https://www.norwegiancreations.com/2015/10/tutorial-potentiometers-with-arduino-and-filtering/ -->

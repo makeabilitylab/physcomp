@@ -30,7 +30,11 @@ usetocbot: true
 
 <!-- Instructables also has an 'Intro to Arduino' tutorial series: https://www.instructables.com/class/Arduino-Class/ taught by Becky Stern -->
 
+### Advanced Arduino tutorials
+
 - [Nick Gammon's Arduino blog](http://www.gammon.com.au/forum/index.php?bbtopic_id=123). [Nick Gammon](https://github.com/nickgammon) is a popular figure and [moderator](https://forum.arduino.cc/index.php?action=profile;u=36095) on the Arduino forums and [runs a helpful website on Arduino](http://www.gammon.com.au/forum/index.php?bbtopic_id=123). See his [Arduino Traps, Tips, and Style Guide](http://www.gammon.com.au/forum/?id=12153) for example.
+
+- [John Errington's Experiments with an Arduino](http://www.skillbank.co.uk/arduino/index.htm). Like Nick Gammon, John Errington is popular on the Arduino forums.
 
 ### Lo-fi methods to create DIY electronics
 
@@ -45,7 +49,6 @@ usetocbot: true
 - [The Learning Circuit](https://www.youtube.com/playlist?list=PLwO8CTSLTkii9S_vhEOsyJ17RI3jjBZ95)
 
 - [EEVBlog](https://www.eevblog.com/fundamentals/). Perhaps the most popular EE video blogs but also generally quite advanced for beginners.
-
 
 ## Books
 

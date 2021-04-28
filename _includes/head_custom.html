@@ -1,8 +1,18 @@
 {% if page.usemathjax %}
   <!-- Mar 19, 2020: Just switched from cdn.mathjax.org to cdnjs based on https://www.mathjax.org/cdn-shutting-down/-->
-  <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
+      MathJax.InputJax.TeX.prefilterHooks.Add(function (data) {
+        data.math = data.math.replace(/^% <!\[CDATA\[/, '').replace(/%\]\]>$/, '');
+      });
+    });
   </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <!-- <script type="text/javascript" 
+    async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_CHTML"></script> -->
 {% endif %}
 
 <!-- <link rel="stylesheet" href="{{ "/_includes/css/custom.css" | prepend: site.baseurl }}">

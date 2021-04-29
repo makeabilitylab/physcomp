@@ -252,7 +252,12 @@ void loop()
 
 ### Moving median filter
 
-TODO: finish this
+A moving median filter is almost the exact same as a [moving average filter](#moving-average-filter) but takes the **median** over the sliding window rather than the average. 
+
+TODO: put in powerpoint animation
+
+TODO: include graph of mathworks charts explaining why median filter is helpful/useful: https://www.mathworks.com/help/signal/ug/signal-smoothing.html#SignalSmoothingExample-9
+
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/MovingMedianFilter-ThreeWindowSizes-TrimmedAndOptimized.mp4" type="video/mp4" />
@@ -263,19 +268,20 @@ TODO: finish this
 
 ## Other filters
 
-In this lesson, we covered only a few basic filters but many other approaches exist—some which allow you to control which frequencies in your signal to eliminate. For example, high-pass filters remove low-frequency components from your signal while keeping high frequencies, low-pass filters eliminate high-frequency components while keeping low frequencies, *etc.* Other filters, like [Kalman filters](https://en.wikipedia.org/wiki/Kalman_filter), attempt to predict output based on historic data.
+In this lesson, we covered only a few basic digital filters but many others exist—some which allow you to control which frequencies in your signal to eliminate. For example, high-pass filters can remove specific low-frequency components from your signal while keeping high frequencies, low-pass filters eliminate high-frequency components while keeping low frequencies, bandpass filters let you specify a *range* (or band) of frequencies to keep, *etc.*  
 
-Other popular filters include the [Savitzky-Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter), the [Butterworth filter](https://en.wikipedia.org/wiki/Butterworth_filter), 
+Other popular filters include the [Savitzky-Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter), the [Butterworth filter](https://en.wikipedia.org/wiki/Butterworth_filter), and the [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter). The [Savitzky-Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter), for example, is like a weighted moving average filter that attempts to fit a polynomial over the sliding window (to better fit the underlying signal)—see this [MathWorks article](https://www.mathworks.com/help/signal/ug/signal-smoothing.html#SignalSmoothingExample-7).
 
-If you're interested in this area, we suggest experimenting with the filters in [SciPy](https://docs.scipy.org/doc/scipy/reference/signal.html) in Jupyter Notebook. You can log sensor data to your computer and analyze it there post hoc, as we do in our [Step Tracker](../signals/StepTracker/index.html) and [Gesture Recognition](../signals/gesturerec/shapebased/index.html) assignments.
+In general, it is **not** helpful or appropriate to perform filtering investigations in real-time on sensor data because it's difficult to replicate input signals and test and compare filtering algorithms. It's OK for gut checking or to get something working quickly but not for more deep signal analysis. Thus, if you're interested in this area, we suggest experimenting with the filters in [SciPy](https://docs.scipy.org/doc/scipy/reference/signal.html) with [Jupyter Notebook](https://jupyter.org/). We suggest logging sensor data to your computer and analyze it in a testbed environment, as we do in our [Step Tracker](../signals/StepTracker/index.html) and [Gesture Recognition](../signals/gesturerec/shapebased/index.html) assignments.
 
-It is typically not very helpful to perform robust filtering investigations in real-time on sensor data because it's difficult to replicate input signals and test and compare filtering algorithms.
+
 
 <!-- ### Considerations
 
 TODO in future: 
 - startup time
-- how window is applied around data... -->
+- how window is applied around data...
+- centered moving average: https://www.alanzucconi.com/2016/06/03/an-introduction-to-signal-smoothing/ -->
 
 <!-- ## Outline
 

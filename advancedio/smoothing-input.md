@@ -293,7 +293,7 @@ Similar to the moving average filter, we can tweak the moving median filter's pe
 
 ### Why use a median filter?
 
-Median filters are widely used in image processing to remove noise from images (image processing is its own subfield of signal processing focusing on 2D DSP techniques). Unlike mean (or average) filters, median filters remove noise while preserving edges—edges are often a crucial part of other image processing algorithms (*e.g.,* [the Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector)).
+Median filters are widely used in image processing to remove noise from images (image processing is its own subfield of signal processing focusing on 2D DSP techniques). Unlike mean (or average) filters, median filters remove noise while preserving edges—and edges are often a crucial part of other image processing algorithms like the [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector).
 
 ![](assets/images/Medianfilterp_Wikipedia.png)
 {: .mx-auto .align-center }

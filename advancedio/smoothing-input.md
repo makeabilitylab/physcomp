@@ -76,19 +76,19 @@ As each sensor and physical computing project is unique, we encourage you to exp
 
 SPECIAL CASE: DATA LOGGING
 
-Note that if you're **logging** data (*e.g.,* to a storage card or the cloud), it's often best to first capture and transmit the **raw** data so that you can experiment with signal processing approaches *post hoc* (*e.g.,* offline in Jupyter Notebook). Through offline analysis with these raw logs, you can determine an ideal sampling frequency and filtering approach for your particular hardware components and problem domain. Then, you can implement this approach in your field-deployed system to save computational overhead, bandwidth, power, *etc.*.
+Note that if you're **logging** data (*e.g.,* to a storage card or the cloud) for research or data experiments, it's often best to first capture and transmit the **raw** data so that you can experiment with signal processing approaches *post hoc* (*e.g.,* offline in Jupyter Notebook). Through offline analysis with these raw logs, you can determine an ideal sampling frequency and filtering approach for your particular hardware components and problem domain. Then, you can implement this approach in your field-deployed system, which can result in reduced computational overhead, bandwidth, power, *etc.*.
 
 ---
 
 ### Moving average filter
 
-The most common filter in DSP is the moving average filter, which slides a window of size $$N$$ over a raw signal, computes the average over that window, and uses this average as the smoothed value. 
+The most common filter in DSP is the **moving average filter** (or moving mean filter), which slides a window of size $$N$$ over a raw signal, computes the average over that window, and uses this average as the smoothed value. 
 
 $$MA=\frac{X_{1} + X_{2} + \ldots + X_{N}}{N}$$
 
 This filter is a type of **low-pass** filter because it smooths out (eliminates) the high frequency oscillations in the signal. 
 
-You can control the filter's performance by tweaking the size of the sliding window. The animation below demonstrates a sliding window of size 3 for a moving average filter. The blue line corresponds to the raw input signal; the orange line, the smoothed filter output. For illustrative purposes, we only show the sliding window applied to a subset of data.
+You can control the filter's performance by tweaking the size of the sliding window. The animation below demonstrates a sliding window of size 3. The blue line corresponds to the raw input signal; the orange line, the smoothed filter output. For illustrative purposes, we only show the sliding window applied to a subset of data.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/MovingAverageFilter_PowerPointAnimation_TrimmedAndCropped.mp4" type="video/mp4" />
@@ -162,7 +162,7 @@ We also use the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/ar
 
 ### Weighted moving average
 
-In the moving average algorithm above, we assign equal weight to all data in our filter window. You could imagine, however, that more recent data deserves more weight (because it's more relevant). And, indeed, there are a class of algorithms called **weighted moving averages (WMA)** that do just this, including linear weighting schemes with weights that drop off linearly in the filter window and exponential weighting schemes where weights drop off exponentially.
+In the moving average algorithm above, we assign equal weight to all data in our filter window. You could imagine, however, designing an algorithm that assigns higher weights to more recent data (with the theory that recency correlates to relevancy). And, indeed, there are a class of algorithms called **weighted moving averages (WMA)** that do just this, including linear weighting schemes with weights that drop off linearly in the filter window and exponential weighting schemes where weights drop off exponentially.
 
 Recall that a regular moving average is:
 
@@ -188,7 +188,7 @@ Below, we've included sample weights for both linear and exponential weighting s
 
 ### Exponential moving average
 
-Interestingly, you can implement the exponential moving average (EMA)—also known as the exponentially weighted moving average (EWMA)—without storing a sliding window buffer!
+Interestingly, you can implement the exponential moving average (EMA)—also known as the exponentially weighted moving average (EWMA)—without storing a sliding window buffer! This is a very cool optimization and means that you can achieve smoothing without the memory and computation overhead of many other "moving" filter techniques.
 
 The algorithm is:
 
@@ -205,7 +205,7 @@ Where:
 - $$X_{i}$$ is the value at index i.
 - $$S_{i}$$ is the value of the EMA at index i.
 
-The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha$$ weights more recent data more. For example, the video below shows EWMA performance with $$\alpha$$ equal to 0.5 (red line), 0.1 (green line), and 0.01 (yellow line). Notice how closely the $$\alpha=0.5$$ EWMA filter tracks the underlying raw signal whereas the $$\alpha=0.01$$ filter is quite distorted and lagged. The $$\alpha=0.1$$ filter may still be appropriate, depending on your needs.
+The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha$$ weights more recent data more. For example, the video below shows EWMA performance with $$\alpha$$ equal to 0.5 (red line), 0.1 (green line), and 0.01 (yellow line). Notice how closely the $$\alpha=0.5$$ EWMA filter tracks the underlying raw signal whereas the $$\alpha=0.01$$ filter is quite distorted and lagged. The $$\alpha=0.1$$ filter may still be appropriate, depending on your needs. Again, it's up to you to experiment!
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ExponentialMovingAverageFilter-ThreeAlphaValues-Optimized.mp4" type="video/mp4" />
@@ -215,18 +215,18 @@ The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha
 
 #### Arduino EWMA implementation
 
-If you're not used to reading filtering equations, then perhaps the Arduino code is more clear. The algorithm is quite straightforward and, crucially, unlike the traditional moving average algorithm, does not require a window buffer!
+If you're not used to reading equations, then perhaps the Arduino code below is more clear. The algorithm is quite straightforward and, again, unlike the traditional moving average algorithm, does not require a window buffer!
 
 {% highlight C %}
 const int SENSOR_INPUT_PIN = A0;
 
-float _ewmaAlpha = 0.1;  // the EWMA alpha value
-double _ewma = 0;        // the EWMA result, initialized to zero
+float _ewmaAlpha = 0.1;  // the EWMA alpha value (α)
+double _ewma = 0;        // the EWMA result (Si), initialized to zero
 
 void setup()
 {
   Serial.begin(9600); // for printing values to console
-  _ewma = analogRead(SENSOR_INPUT_PIN);  //set EWMA for index 1
+  _ewma = analogRead(SENSOR_INPUT_PIN);  //set EWMA (S1) for index 1
 }
 
 void loop()
@@ -252,29 +252,74 @@ void loop()
 
 ### Moving median filter
 
-A moving median filter is almost the exact same as a [moving average filter](#moving-average-filter) but takes the **median** over the sliding window rather than the average. 
+A **moving median filter** is almost the exact same as a [moving average filter](#moving-average-filter) but takes the **median** over the sliding window rather than the average. 
 
-TODO: put in powerpoint animation
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/MovingMedianFilter_PowerPointAnimation_TrimmedAndCropped.mp4" type="video/mp4" />
+</video>
+**Video** This video shows a moving median filter with a window size of three. Animation made in PowerPoint.
+{: .fs-1 }
 
-TODO: include graph of mathworks charts explaining why median filter is helpful/useful: https://www.mathworks.com/help/signal/ug/signal-smoothing.html#SignalSmoothingExample-9
+The challenge, however, is [calculating](https://en.wikipedia.org/wiki/Median_filter#Algorithm_implementation_issues) the median efficiently. The median is simply the *middle* value of a sorted array $$X_s$$ or, if the size of the array is odd, then it is the average of the *two* middle values.
 
+$$
+Med(X) =
+\begin{cases}
+    X_{s}
+    \begin{bmatrix}
+     \frac{n}{2}\\ 
+    \end{bmatrix} & \text{if n is even}\\
+     \frac{(X_{s}\begin{bmatrix}
+       \frac{n-1}{2}\\ 
+     \end{bmatrix} +
+     \begin{bmatrix}
+       \frac{n+1}{2}\\ 
+     \end{bmatrix})}{2} & \text{if n is odd}
+\end{cases}
+$$
+
+**Note:** The array $$X$$ must be sorted (indicated by the 's' subscript in $$X_s$$). The brackets in the equation above indicate indices, similar to arrays in programming.
+{: .fs-1 }
+
+But how can we obtain this "middle" value efficiently? We know that re-sorting an array on each value insert can be computationally expensive. Thus, typically realtime median filters use other data structures, like [indexable skiplists](https://en.wikipedia.org/wiki/Skip_list#Indexable_skiplist), to efficiently keep a sorted data structure on inserts and removals.
+
+Similar to the moving average filter, we can tweak the moving median filter's performance by modifying the filter window size. Below, we show a moving median filter with window sizes 5, 11, and 21. For this video, we used our test code [MovingMedianFilterWindowSizeDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingMedianFilterWindowSizeDemo/MovingMedianFilterWindowSizeDemo.ino), which relies on Luis Llama's [Arduino Median Filter 2](https://github.com/warhog/Arduino-MedianFilter) library based on Phil Ekstrom's "[Better Than Average](https://www.embedded.com/better-than-average/)" article.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/MovingMedianFilter-ThreeWindowSizes-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video** This video shows moving median filter performance with window sizes 5, 11, and 21. To make this video, we used [this code](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingMedianFilterWindowSizeDemo/MovingMedianFilterWindowSizeDemo.ino) and the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
+**Video** This video shows moving median filter performance with window sizes 5, 11, and 21. Notice how a median filter tends to flatten "peaks" in the signal, which is unlike the other filters we've examined. To make this video, we used [this code](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingMedianFilterWindowSizeDemo/MovingMedianFilterWindowSizeDemo.ino) and the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
+{: .fs-1 }
 
+### Why use a median filter?
+
+Median filters are widely used in image processing to remove noise from images (image processing is its own subfield of signal processing focusing on 2D DSP techniques). Unlike mean (or average) filters, median filters remove noise while preserving edges—edges are often a crucial part of other image processing algorithms (*e.g.,* [the Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector)).
+
+![](assets/images/Medianfilterp_Wikipedia.png)
+{: .mx-auto .align-center }
+
+**Figure**. Median filtering is widely used in image processing where it is particularly effective at removing "speckle" or "salt-and-pepper" noise while preserving edges. Image from [Wikipedia](https://en.wikipedia.org/wiki/Median_filter).
+{: .fs-1 }
+
+In the case of 1-dimensional signal processing, which we've focused on in this lesson, median filters have the same advantage: they provide a smoothing technique the preserves edges in our signal. For example, what if our data is from an underlying clock signal that should have sharp rising and falling edges, which we don't wish to smooth. A moving average filter distorts *rise* and *fall* times while the median filter sharpens them.
+
+| Moving Average Filter | Moving Median Filter |
+|:----------------:|:-------------:|
+| ![](assets/images/SignalSmoothingExample_13-OriginalMovingAverageAndSavitzkyGolay_MathWorks.png) |  ![](assets/images/SignalSmoothingExample_14-OriginalVsMedianFilter.png)  |
+| The moving average filter distorts the rising and falling edges of the clock signal | The median filter both smooths the signal and crispens the clock transition edges |
+
+**Figure.** Images from [MathWorks](https://www.mathworks.com/help/signal/ug/signal-smoothing.html).
 {: .fs-1 }
 
 ## Other filters
 
-In this lesson, we covered only a few basic digital filters but many others exist—some which allow you to control which frequencies in your signal to eliminate. For example, high-pass filters can remove specific low-frequency components from your signal while keeping high frequencies, low-pass filters eliminate high-frequency components while keeping low frequencies, bandpass filters let you specify a *range* (or band) of frequencies to keep, *etc.*  
+In this lesson, we covered only a few basic digital filters but many others exist—some which allow you to actually control which frequencies in your signal to eliminate. For example, high-pass filters can remove specific low-frequency components from your signal while keeping high frequencies, low-pass filters eliminate high-frequency components while keeping low frequencies, bandpass filters let you specify a *range* (or band) of frequencies to keep, *etc.*  
 
 Other popular filters include the [Savitzky-Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter), the [Butterworth filter](https://en.wikipedia.org/wiki/Butterworth_filter), and the [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter). The [Savitzky-Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter), for example, is like a weighted moving average filter that attempts to fit a polynomial over the sliding window (to better fit the underlying signal)—see this [MathWorks article](https://www.mathworks.com/help/signal/ug/signal-smoothing.html#SignalSmoothingExample-7).
 
-In general, it is **not** helpful or appropriate to perform filtering investigations in real-time on sensor data because it's difficult to replicate input signals and test and compare filtering algorithms. It's OK for gut checking or to get something working quickly but not for more deep signal analysis. Thus, if you're interested in this area, we suggest experimenting with the filters in [SciPy](https://docs.scipy.org/doc/scipy/reference/signal.html) with [Jupyter Notebook](https://jupyter.org/). We suggest logging sensor data to your computer and analyze it in a testbed environment, as we do in our [Step Tracker](../signals/StepTracker/index.html) and [Gesture Recognition](../signals/gesturerec/shapebased/index.html) assignments.
+In general, it is **not** helpful or appropriate to perform filtering investigations in real-time on sensor data because it's difficult to replicate input signals and test and compare filtering algorithms. Experimenting with filters+real-time data is useful for gut checking or to get something working quickly but not for more deep signal analysis. 
 
-
+Thus, if you're interested in this area, we suggest experimenting with the filters in [SciPy](https://docs.scipy.org/doc/scipy/reference/signal.html) with [Jupyter Notebook](https://jupyter.org/). We suggest logging sensor data to your computer and then analyzing it in a testbed environment, as we do in our [Step Tracker](../signals/StepTracker/index.html) and [Gesture Recognition](../signals/gesturerec/shapebased/index.html) assignments.
 
 <!-- ### Considerations
 
@@ -309,6 +354,8 @@ There are lots of Arduino filtering libraries online and general C++ filtering c
 - [Microsmooth](https://github.com/AsheeshR/Microsmooth), by [asheeshr](https://github.com/asheeshr) on GitHub
 
 - [Median Filter Library 2](https://github.com/warhog/Arduino-MedianFilter), by Luis Llamas based on [an article](https://www.embedded.com/better-than-average/) by Phil Ekstrom
+
+- [Moving Average Filter](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilter/MovingAverageFilter.ino) by the [Makeability Lab](https://github.com/makeabilitylab)
 
 ## Resources
 

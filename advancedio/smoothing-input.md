@@ -343,6 +343,12 @@ TODO in future:
   - How to organize filter around the data (middle, left, or right)
   - refer to numpy documentation here -->
 
+## Activity
+
+For your prototyping activity, we would like you to choose a sensor from your hardware kits—it could be a [potentiometer](../arduino/potentiometers.md), a [hall effect sensor](../sensors/hall-effect.md), a [force-sensitive resistor](../arduino/force-sensitive-resistors.md), a [photoresistor](../sensors/photoresistors.md), an [accelerometer](../sensors/accelerometers.md), a DIY sensor, *etc.*—and **two** different smoothing algorithms to apply to it.
+
+More specifically, build an appropriate circuit for your sensor, read the input on an analog input pin, process this input with two different smoothing algorithms (either those we covered in this lesson or beyond), graph the three signals (raw signal, smoothing algorithm 1 output, smoothing algorithm 2 output), record a video of your input + the graphs, and report on your observations in the prototyping journal. Include a link to your video (or an embedded animated gif).
+
 ## Arduino filtering libraries
 
 There are lots of Arduino filtering libraries online and general C++ filtering code that could be adapted to the Arduino context. The usual disclaimers apply: we have not had a chance to evaluate all of these libraries. So, use at your own risk. :)

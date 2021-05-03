@@ -1,7 +1,7 @@
 ---
 layout: default
 title: L1&#58; Smoothing Input
-nav_order: 6
+nav_order: 1
 parent: Input
 grand_parent: Advanced I/O
 has_toc: true # (on by default)

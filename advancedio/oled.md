@@ -184,7 +184,15 @@ The black-and-white OLED consists of a matrix of LEDS, called pixels, which can 
 
 Thus, to turn "on" the LED at pixel `(18, 6)` using [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview), we would write: `drawPixel(18, 6, SSD1306_WHITE)`. For black-and-white displays, the last argument can be either `SSD1306_WHITE` to draw a white pixel or `SSD1306_BLACK` to draw a black pixel (these constants are defined in [Adafruit_SSD1306.h](https://github.com/adafruit/Adafruit_SSD1306/blob/master/Adafruit_SSD1306.h)). For color displays, you can instead pass in a unsigned 16-bit value representing RGB colors (see [docs](https://learn.adafruit.com/adafruit-gfx-graphics-library/coordinate-system-and-units)).
 
+### Drawing subsystem
+
+Below, we describe how to draw shapes, text, and bitmaps.
+
+TODO: EXPLAIN WHEN TO CALL DISPLAY, ETC.
+
 ### Drawing shapes
+
+The Adafruit GFX library current supports drawing lines, rectangles, circles, rounded rectangles, and triangles. For all shapes, you can draw an outlined version (*e.g.,* `drawRect`) or a filled version (*e.g.,* `fillRect`).
 
 | Shape and API call | Output |
 |-------|:--------:| 
@@ -192,7 +200,7 @@ Thus, to turn "on" the LED at pixel `(18, 6)` using [Adafruit GFX](https://learn
 |**Rectangles**<br>  `void drawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);` <br><br> `void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/270/large1024/lcds___displays_rect.png) `drawRect(3, 2, 13, 10, SSD1306_WHITE)` |
 |**Circles**<br> `void drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);` <br><br> `void fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/272/large1024/lcds___displays_circle.png) `drawCircle(14, 8, 7, SSD1306_WHITE)` |
 |**Rounded Rectangles**<br> `void drawRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);` <br><br> `void fillRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/274/large1024/lcds___displays_roundrect.png) `drawRoundRect(3, 1, 17, 12, 5, SSD1306_WHITE)` |
-|**Rounded Rectangles**<br> `void drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);` <br><br> `void fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/275/large1024/lcds___displays_triangle.png) `drawTriangle(6, 13, 9, 2, 18, 9, SSD1306_WHITE)` |
+|**Triangles**<br> `void drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);` <br><br> `void fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/275/large1024/lcds___displays_triangle.png) `drawTriangle(6, 13, 9, 2, 18, 9, SSD1306_WHITE)` |
 
 For more information and examples, see the [Basic Drawing section](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-basic-drawings) of Last Minute Engineer's OLED display tutorial.
 
@@ -202,7 +210,7 @@ There are two methods to render text: drawing a single character with `drawChar`
 
 #### Method 1: drawChar
 
-To draw a single character, you specify a `(x, y)` location, the character, the foreground and background color, and a size. By default, characters are 5x8 pixels but an optional size parameter (last argument) can be passed to scale the font (*e.g.,* a size of 2 will render 10x16 pixels per character).
+To draw a single character, you specify a `(x, y)` location, the character, the foreground and background color, and a size. By default, characters are 5x8 pixels but an optional size parameter (the last argument) can be passed to scale the font (*e.g.,* a size of 2 will render 10x16 pixels per character).
 
 | Text API call | Output |
 |-------|:--------:| 
@@ -210,7 +218,7 @@ To draw a single character, you specify a `(x, y)` location, the character, the 
 
 #### Method 2: Print rendering
 
-The more common and feature-rich method to draw text is via the `print` subsystem. Indeed, the [Adafruit_GFX class](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) extends the [Print class](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) from the Arduino core library. Rather than call `Serial.print("Hello World")`, however, you would call `oledDisplay.print("Hello World")` where `oledDisplay` is a `Adafruit_SSD1306` object.
+The more common and feature-rich method to draw text is via the `print` subsystem. Interestingly, the [Adafruit_GFX class](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) actually extends the [Print class](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) from the Arduino core library. Rather than call `Serial.print("Hello World")`, however, with the OLED display and Adafruit GFX library, you would call `oledDisplay.print("Hello World")`. Here, `oledDisplay` is the `Adafruit_SSD1306` object.
 
 To use the OLED's print functionality, you can first set optional parameters such as the text color, size, and wrapping:
 
@@ -238,11 +246,11 @@ size_t println(const char[]);
 size_t println(char);
 {% endhighlight C++ %}
 
-See the [Serial.print() docs](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) or the [Print.h](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) library for more.
+See the [Serial.print() docs](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) or the [Print.h](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) library for more on the `print` API or read on for an example.
 
 ##### Centering text
 
-In creative coding and game dev, we often want to center or otherwise align text. To do so, we need to **measure** it. Fortunately, the [Adafruit GFX](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) library has a method called `getTextBounds` that does just that!
+In creative coding, visualization, and game dev, we often want to center or otherwise align text. To do so, we need to **measure** it. Fortunately, the [Adafruit GFX](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) library has a method called `getTextBounds` that does just that!
 
 {% highlight C++ %}
 /**************************************************************************/
@@ -258,7 +266,7 @@ In creative coding and game dev, we often want to center or otherwise align text
     @param  h    The boundary height, returned by function
 */
 /**************************************************************************/
-void getTextBounds(const String &str, int16_t x, int16_t y, int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h);
+void getTextBounds(String &str, int16_t x, int16_t y, int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h);
 {% endhighlight C++ %}
 
 For example, in our [HelloWorld.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/HelloWorld/HelloWorld.ino) example, we center the text "Hello Makers!" both vertically and horizontally on the OLED screen. The key excerpt is here:
@@ -272,7 +280,8 @@ const char strHello[] = "Hello Makers!";
 _display.setTextSize(1);
 _display.setTextColor(WHITE, BLACK);
 
-// Measure the text with those parameters
+// Measure the text with those parameters. Pass x, y, textWidth, and textHeight
+// by reference so that they are set within the function itself.
 _display.getTextBounds(strHello, 0, 0, &x, &y, &textWidth, &textHeight);
 
 // Center the text on the display
@@ -285,27 +294,35 @@ _display.print(strHello);
 _display.display(); 
 {% endhighlight C++ %}
 
-##### More text functionality
+##### Inverting text
 
-To learn about displaying inverted text or loading custom fonts, see:
-https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-text
-https://learn.adafruit.com/adafruit-gfx-graphics-library/using-fonts
+We can also invert the text simply by switching the colors in `setTextColor(uint16_t color, uint16_t backgroundcolor)`. So, to draw black text on a white background, we would write `_display.setTextColor(BLACK, WHITE);`
+
+| setTextColor(WHITE, BLACK) | setTextColor(BLACK, WHITE) |
+|----------------------------|----------------------------|
+| ![](assets/images/OLED_setTextColor_WhiteBlack.png) | ![](assets/images/OLED_setTextColor_BlackWhite.png) |
+
+#### Loading custom fonts
+
+In addition to the default fixed-size, mono-spaced font, you can also load and render an alternative font. See the ["Loading Fonts"](https://learn.adafruit.com/adafruit-gfx-graphics-library/using-fonts) section of the [Adafruit GFX tutorial](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview). 
+
+### Drawing bitmaps
+
+Finally, you can load and render custom bitmaps on the display. See ["Displaying Bitmaps"](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-bitmap) on Last Minute Engineers.
 
 ### Resources
 
-For additional resources, the official [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives) tutorial and the "Last Minute Engineers" website both offer great overviews of the Adafruit GFX library and how to [display text](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-text), [draw shapes](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-basic-drawings), and [load and display bitmaps](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-bitmap). 
-
-We strongly encourage you to read both websites ([Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives), [Last Minute Engineers](https://lastminuteengineers.com/oled-display-arduino-tutorial/)) before moving forward.
+Before moving forward, we strongly encourage you to read the official [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives) tutorial and the "Last Minute Engineers" [OLED tutorial](https://lastminuteengineers.com/oled-display-arduino-tutorial/)—both offer great overviews of the Adafruit GFX library and how to [display text](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-text), [draw shapes](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-basic-drawings), and [load and display bitmaps](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-bitmap). 
 
 In addition, you can:
 
 - View the Adafruit GFX library source code [here](https://github.com/adafruit/Adafruit-GFX-Library), including the [Adafruit_GFX.h](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h), which shows the available API. Yes, depending on your familiarity with C++ and reading .h files, this might be intimidating or overwhelming—but it's important to demystify these libraries. They are just source code that devs wrote. And, with experience, you could too!
 
-- Examine our own OLED examples [here](https://github.com/makeabilitylab/arduino/tree/master/OLED), including a simple animation example called [BallBounce](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), an object-oriented version of the example 
+- Examine our own OLED examples [here](https://github.com/makeabilitylab/arduino/tree/master/OLED), including the [Hello World](https://github.com/makeabilitylab/arduino/blob/master/OLED/HelloWorld/HelloWorld.ino) example mentioned above, a simple animation example called [BallBounce](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), an [object-oriented version](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounceObjectOriented/BallBounceObjectOriented.ino) of this animation using the [Shape.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Shape.hpp) class from the [Makeability Lab Arduino library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library), and simple games such as a [collision test](https://github.com/makeabilitylab/arduino/blob/master/OLED/CollisionTest/CollisionTest.ino), [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), and [Flappy Bird](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino).
 
 ## Let's make stuff!
 
-In this part of the lesson, we are going to make
+In this part of the lesson, we are going to make a variety of OLED-based creations. Most of the source code that we reference is [here](https://github.com/makeabilitylab/arduino/tree/master/OLED).
 
 ### Try drawing a variety of shapes/text
 

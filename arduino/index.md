@@ -102,6 +102,7 @@ TODO: after Lesson 4, have them make their own lo-fi resistive sensor? and turn 
 TODO: [done] what is debouncing and why
 TODO: how to use interrupts
 TODO: how to use some startup sequence to calibrate sensors?
+ -- https://www.arduino.cc/en/Tutorial/BuiltInExamples/Calibration
 TODO: some basics on smoothing the signal? -->
 
 <!-- ## Other possibilities

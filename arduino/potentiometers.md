@@ -233,6 +233,11 @@ This means that we have to configure our variable resistor sensors as **voltage 
 
 The Arduino's microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and $$V_{cc}$$ (5V) to a $$0 - 2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
 
+![](assets/images/VoltageToAnalogValue_10BitADC.png)
+
+**Figure.** The Arduino Uno and Leonardo have 10-bit ADC's, which convert analog voltages between 0 - 5V to an integer range of 0 - 1023. Thus, the ADC resolution is 0.0049mV.
+{: .fs-1 }
+
 Why does this matter?
 
 For many purposes, it probably doesn't. But the practical implication is that with a 0.0049V resolution, you won't be able to tell the difference between, for example, 2.0140V and 2.0152V (both which would convert to 411) or 4.9148V and 4.9190V (both which would be read as 1003). Does this matter? It depends on the context—for most things we do, it won't. We discuss quantization in more depth in the [Sensors](../sensors/index.md) and [Signals](../signals/index.md) sections.
@@ -319,6 +324,8 @@ This is a circuit simulation of the potentiometer correctly hooked up to a micro
 ### Build it for real
 
 Once you get the potentiometer-based analog input working in Tinkercad, build the physical circuit and, to begin, copy the code from above.
+
+<!-- TODO: and then have them build a version that translates the analog input to voltage: https://www.arduino.cc/en/Tutorial/BuiltInExamples/ReadAnalogVoltage -->
 
 For your prototyping journals, we'd also like you to make a version that reads in the analog input (using `analogRead`) and appropriately sets the brightness of an LED (using `analogWrite`).
 

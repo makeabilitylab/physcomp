@@ -82,9 +82,12 @@ I am tracking both **non-debounced button presses** ("raw" button presses) and *
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/tw-pndJQFqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+**Video.** A video demonstrating the importance of debouncing your buttons. We track the number of "raw" button presses (in blue) and the number of debounced button presses (in red) and plot the values in Serial Plotter.
+{: .fs-1 }
+
 ## Debouncing solutions
 
-Like with many problems involving microcontrollers and circuit, there are multiple solutions including those that rely purely on software, on hardware, or some combination of both. In this lesson, we'll primarily focus on software solutions but briefly describe a common hardware solution below.
+Like with many problems involving microcontrollers and circuit, there are multiple solution approaches including those that rely purely on software, on hardware, or some combination of both. In this lesson, we'll primarily focus on software solutions but briefly describe a common hardware solution below.
 
 ### Pure hardware solutions
 
@@ -96,7 +99,7 @@ Although in physical computing, we often emphasize software solutions, hardware 
 
 ### Software solution
 
-So, how do we solve debouncing in software? The key is to first detect a switch state change (`state1`), then wait for a set amount of time (a "debouncing window"), then check the switch state again (`state2`). If the initial state and the post-debouncing window state match (*i.e.,* `state1 == state2`), then we can confidently conclude that the switch has transitioned from one steady state to another. See graph below.
+So, how do we solve debouncing in software? The key is to first detect a switch state change (let's call this `state1`), then wait for a set amount of time (a "debouncing window"), then check the switch state again (let's call this `state2`). If the initial state and the post-debouncing window state match (*i.e.,* `state1 == state2`), then we can confidently conclude that the switch has transitioned from one steady state to another. See graph below.
 
 ![](assets/images/DebounceSwitchGraph_DebouncingWindow.png)
 **Figure.** Both graphs are showing the same open-to-close switch state change but with different annotations. The graph on the left highlights the first steady state (`LOW`), the transition and bouncing contact state, and the second steady state (`HIGH`). The graph on the right shows a depiction of our "debouncing window", which is key to the software solution. Image made in PowerPoint.
@@ -125,7 +128,7 @@ Just like with the [buttons](buttons.md) lesson, we'll need the following materi
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing_100h.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of a Tactile Switch Buttons (12mm square, 6mm tall) ordered from Adafruit]({{ site.baseurl }}/assets/images/Button_12mmX12mm_Adafruit_40w.png) |
 | Breadboard | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor | [12x12mm "Tactile Switch Buttons"](https://www.adafruit.com/product/1119) |
 
-#### Debouncing solution 1: using delays
+### Debouncing solution 1: using delays
 
 For our first and most basic solution, we will read the button state, wait a given time period (the "debouncing window"), and then read the button state again. Notably, you should minimize the debouncing window while still satisfying the steady state requirement.
 
@@ -174,11 +177,80 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 <!-- From: https://github.com/makeabilitylab/arduino/tree/fd5a1403148cd98b7dcfa3a3be2ab64e0d231b76/RedBearDuo/RedBearDuoReadButtonSimpleDebouncing -->
 
-#### Debouncing solution 3: using timestamps
+### Debouncing solution 2: using timestamps
 
 Just as we did for our [rate blinking LEDs](led-blink3.md) lesson, we can modify the above program to **eliminate delays** and simply use timestamps to track state transitions. Indeed, this is how the official Arduino debounce tutorial works ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce)). Before looking at our solution, can you come up with your own?
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithoutDelays/DebounceWithTimestamps.ino?footer=minimal"></script>
+<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithTimestamps/DebounceWithTimestamps.ino?footer=minimal"></script>
+
+### Debouncing solution 3: softening requirements
+
+For the two debouncing solutions above, we observed an initial state change on our digital input pin (`state1`) and then, after some time period (the debouncing window), we verified this state change via a second read to the digital input pin (`state2`). This approach protects against contact bounce, errant button presses (of time less than the debouncing window), and electrical interference (*e.g.,* electric static discharge that cause transient digital input pin changes).
+
+However, if we soften our requirement and assume that the `state1` change was correct and not some errant signal, then we can apply a few other solutions. In these cases, we do **not read** from the digital input pin **again** after the debouncing window but, instead, simply ignore input for that time period.
+
+![](assets/images/DebouncingStateChangeGraph_TwoSolutions.png)
+**Figure.** Two approaches to debouncing buttons.
+{: .fs-1 }
+
+This solution is nicely captured by user [cdvma](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fprrygg?utm_source=share&utm_medium=web2x&context=3) on the [r/embedded](https://www.reddit.com/r/embedded/) sub-reddit:
+
+> I have learned two truths when it comes to debouncing:
+>
+> 1. Buttons don't push themselves
+>
+> 2. Humans can't do repeated button presses faster than 30 ms
+>
+> So my go-to to avoid tuning things for various mechanical buttons has been:
+>
+> 1. As soon as the GPIO state changes to active, you declare the button is pressed (due to rule #1 above).
+>
+>2. Ignore all further input on that button for 30 ms.
+>
+> 3. Go back to step #1.
+>
+> This allows for interrupt-driven input and has zero delay between user action and input processing because you don't wait the debounce period before declaring it pressed. It is important to have that low delay in highly reactive control surfaces (games).
+>
+> The downside is that it won't work if you need to pass regulatory ESD testing.
+{: .fs-4 }
+
+Here's a quick implementation:
+
+{% highlight C %}
+
+const int BUTTON_INPUT_PIN = 2;
+const int LED_OUTPUT_PIN = 3;
+const int DEBOUNCE_WINDOW = 40; // in milliseconds
+
+int _savedButtonVal = LOW; //starts low because using pull-down resistor
+
+void setup() {
+  pinMode(BUTTON_INPUT_PIN, INPUT);
+  pinMode(LED_OUTPUT_PIN, OUTPUT);
+}
+
+void loop() {
+
+  // Read the button value. We assume a pull-down resistor button configuration so
+  // the button will be HIGH when pressed and LOW when not pressed
+  int buttonVal = digitalRead(BUTTON_INPUT_PIN);
+
+  // Check for state change in button input
+  if(_savedButtonVal != buttonVal){
+    _savedButtonVal = buttonVal;
+
+    // Delay here for a very short time to ensure we get passed
+    // the debouncing period. Obviously, you could (and should) do this
+    // without a delay() call by simply tracking timestamps
+    delay(DEBOUNCE_WINDOW); 
+  }
+
+  // Write out HIGH or LOW
+  digitalWrite(LED_OUTPUT_PIN, _savedButtonVal);
+}
+{% endhighlight C %}
+
+This solution is less robust but works well for human input in environments with limited electrical noise (see this [Reddit discussion](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fprrygg?utm_source=share&utm_medium=web2x&context=3)). However, as is pointed out in the Reddit thread ([link](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fpw7xpf?utm_source=share&utm_medium=web2x&context=3)), this simple solution does not protect against electrostatic discharge (ESD) and thus fails regulatory requirements (which require the two state reads like we did in Solutions 1 and 2).
 
 ### Reflecting on our solutions
 
@@ -195,6 +267,10 @@ Indeed, there are a number of custom `Button` classes online for Arduino, includ
 - ThomasGravekamp's [Arduino Debounced Switched Library](https://github.com/ThomasGravekamp/Arduino-Debounced-Switch), which includes support for callback functions when a trigger state is reached.
 
 As a disclaimer, I have not tested these libraries myself but please do peruse them (to learn about how they work) and try them out yourself, if you'd like.
+
+### Other solutions
+
+There are many other software debouncing solutions, including using [interrupts](https://www.arduino.cc/reference/en/language/functions/external-interrupts/attachinterrupt/). For example, here's a version we made for the Redbear Duo boards (https://github.com/makeabilitylab/arduino/blob/master/RedBearDuo/RedBearDuoButtonInterruptWithDebouncing/RedBearDuoButtonInterruptWithDebouncing.ino). See [Resources](#resources) below.
 
 ## Activity
 
@@ -226,9 +302,13 @@ Problem is: is susceptible to electromagnetic interference (ESD testing) but is 
 
 ## Resources
 
+There are lots of debouncing resources and various solutions covered online and in the literature:
+
 - [Chapter 13: Microcontrollers - Debouncing](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/24_Chapter_13.xhtml), Scherz and Monk, Practical Electronics for Inventors
 
 - [Debounce Code: One Post To Rule Them All](https://hackaday.com/2010/11/09/debounce-code-one-post-to-rule-them-all/), Hackaday
+
+- [Switch Bounce and How to Deal with It](https://www.allaboutcircuits.com/technical-articles/switch-bounce-how-to-deal-with-it/) Jens Christoffersen at [allaboutcircuits.com](https://www.allaboutcircuits.com/)
 
 - [Reliable User Input with Unreliable Physical Switches](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/), Reddit discussion
 

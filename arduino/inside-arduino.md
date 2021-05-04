@@ -120,6 +120,13 @@ The [ATmega datasheet](https://www.sparkfun.com/datasheets/Components/SMD/ATMega
 
 For most practical purposes, dividing by 1023 or 1024 won't matter. :)
 
+For more on this hotly debated issue, read:
+- [Analog Input Noise](https://forum.arduino.cc/t/analog-input-noise/597713/6)
+ 
+- [ADC Conversion on the Arduino](https://www.gammon.com.au/adc), by Nick Gammon
+
+- [Precise Voltage Measurement with Arduino](http://www.skillbank.co.uk/arduino/measure.htm), by John Errington
+
 ## What does delay() actually do?
 
 As you might expect—given our warnings about avoiding overuse of [`delay(int ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/)—the delay code consists of a `while` loop that simply waits for the given amount of delay time to pass. There is a `yield()` call within the `while` loop but this is, by default, an empty function—though you could implement it to create a "real cooperative scheduler." The code for `yield()` is [here](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/hooks.c).

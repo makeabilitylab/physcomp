@@ -19,16 +19,10 @@ usetocbot: true
 {:toc}
 ---
 
-## Outline
-- What are OLED devices?
-- I2C vs. SPI
-  - Master/slave usage
-- Pinout diagram for 128x64
-- Can Leonardo actually use i2c pin confusion: https://forum.arduino.cc/t/can-leonardo-actually-use-its-i2c-pins/417516
-
-## Serial communication protocols
+<!-- ## Serial communication protocols
 
 TODO: intro i2c and SPI
+- Can Leonardo actually use i2c pin student confusion: https://forum.arduino.cc/t/can-leonardo-actually-use-its-i2c-pins/417516
 
 ### Terminology
 
@@ -38,7 +32,11 @@ Master/slave
 
 - With 7-bit addressing, 112 devices. With 10-bit addressing, 1008 devices
 - Each device has a unique id
-- Need pull-up resistors (importantly, the breakout boards that we use in class **already** have these pull-up resistors builtin to the PCBs)
+- Need pull-up resistors (importantly, the breakout boards that we use in class **already** have these pull-up resistors builtin to the PCBs) 
+
+- Hook up multiple devices at once with daisy chaining. Link to color sensor video
+
+- -->
 
 ## OLED Display
 
@@ -111,13 +109,11 @@ While the OLED display requires a 3.3V power supply and 3.3V logic levels for co
 **Figure** Wiring the Adafruit OLED display requires only four wires (and nothing else). I used the standard STEMMA QT color coding for my wires: blue for data (SDA), yellow for clock (SCL), black for ground (GND), and red for the voltage supply (5V). Note that the I<sup>2</sup>C pins differ depending on your board. For example, on the Arduino Uno, they are A4 (SDA) and A5 (SCL) rather than digital pins 2 (SDA) and 3 (SCL) as they are for the Leonardo.
 {: .fs-1 }
 
-
 #### Physical wiring with jumper cables
 
 ![](assets/images/ArduinoLeonardo_OLEDWiring_Breadboard.png)
 **Figure** Physically wiring the OLED display with jumper cables. The Arduino is running this demo code ['BitmapBounce.ino'](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino)
 {: .fs-1 }
-
 
 #### STEMMA QT wiring
 
@@ -324,18 +320,113 @@ In addition, you can:
 
 In this part of the lesson, we are going to make a variety of OLED-based creations. Most of the source code that we reference is [here](https://github.com/makeabilitylab/arduino/tree/master/OLED).
 
-### Try drawing a variety of shapes/text
+### Activity: draw shapes and text
 
-See: https://lastminuteengineers.com/oled-display-arduino-tutorial/
+First, to get a feel for and experience with the Adafruit GFX API and the coordinate system, let's simply draw some text and shapes to the screen.
+
+Remember, in `loop()`, you need to:
+
+{% highlight C++ %}
+// Clear the display
+_display.clearDisplay();
+
+// Put in drawing routines
+drawStuff();
+
+// Render graphics buffer to screen
+_display.display();
+{% endhighlight C++ %}
+
+I made a version, [called SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino) that draws shapes of random sizes and locations on **each frame** but you could do something even simpler (or more complex)!
+
+#### Prototyping journals
+
+For your prototyping journals, create your own drawing playground demo, record a short video or animated gif, link to the code, and reflect on what you learned.
+
+### Activity: draw a bouncing ball
+
+For this activity, we will learn a bit about animation. We are going to draw a simple bouncing ball around the screen. Bouncing or reflecting objects are one of the key components of many games, including [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), [Arkanoid](https://en.wikipedia.org/wiki/Arkanoid), *etc.*.
+
+To create a bouncing ball, we need to:
+- Track the x,y location of the ball across frames
+- Set a x,y speed in pixels per frame—that is, how much the does the ball move per frame? For smoother animation, we could track x,y speed in terms of time; however, this is slightly more complicated (*e.g.,* it requires tracking timestamps in the code, computing time deltas, *etc.*). For our purposes, tracking x,y speed in terms of pixels/frame is fine.
+- Check for **collisions** when the ball collides with the ceiling, floor, or walls of the screen. When a collision occurs, simply reverse the direction of the ball.
+
+Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animation/BallBounce2D/) we made in [p5js](https://p5js.org/). Sometimes, it's useful to prototype a visualization or game idea in a rapid programming environment like [p5js](https://p5js.org/) or [Processing](https://processing.org/) before coding it up in C++ for Arduino (and it's easier to debug in those environments as well). In this case, we had already created a bouncing ball demo in the past but linking it here allows you to draw parallels between the two implementations. You can edit and play with this demo in your browser [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) using the p5js online editor.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/BallBouncing_p5js.mp4" type="video/mp4" />
+</video>
+
+**Video** A video of the Ball Bounce demo created in p5js. You can edit the source code and run it live in the p5js online editor [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) or [view the source](https://github.com/makeabilitylab/p5js/blob/master/Animation/BallBounce2D/sketch.js) in our [p5js GitHub repo](https://github.com/makeabilitylab/p5js).
+{: .fs-1 }
+
+For the C++ implementation using the Adafruit GFX library and Arduino, the key code is:
+
+{% highlight C++ %}
+
+// Create the display object
+Adafruit_SSD1306 _display(128, 64, &Wire, 4);
+
+// Ball global variables
+const int _ballRadius = 5;
+int _xBall = 0;
+int _yBall = 0;
+int _xSpeed = 0;
+int _ySpeed = 0;
+
+void setup() {
+  // Initialize the display
+  _display.begin(SSD1306_SWITCHCAPVCC, 0x3D)
+
+  // Gets a random long between min and max - 1
+  // https://www.arduino.cc/reference/en/language/functions/random-numbers/random/
+  _xSpeed = random(1, 4);
+  _ySpeed = random(1, 4);
+}
+
+void loop() {
+  // Clear the display
+  _display.clearDisplay();
+  
+  // Update ball based on speed location
+  _xBall += _xSpeed;
+  _yBall += _ySpeed;
+
+  // Check for ball bounce. First check for going off left or right side of screen
+  if(_xBall - _ballRadius <= 0 || _xBall + _ballRadius >= _display.width()){
+    _xSpeed = _xSpeed * -1; // reverse x direction
+  }
+  
+  // Now check for bouncing on floor or ceiling
+  if(_yBall - _ballRadius <= 0 || _yBall + _ballRadius >= _display.height()){
+    _ySpeed = _ySpeed * -1; // reverse y direction
+  }
+
+  // Draw circle
+  _display.drawCircle(_xBall, _yBall, _ballRadius, SSD1306_WHITE);
+  
+  // Render buffer to screen
+  _display.display();
+}
+{% endhighlight C++ %}
+
+You can find the full code, called [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino). We also have a similar "bounce" demo, called [BitmapBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino), that uses a bitmap rather than a graphic primitive. 
+
+<!-- TODO: add video of ballbounce.ino and bitmapbounce.ino -->
+
+#### Prototyping journals
+
+For your prototyping journals, create your animation demo, record a short video or animated gif, link to the code, and reflect on what you learned. As one simple example, change the object bouncing around from a circle to a rectangle. If you want something more challenging, try bouncing a triangle around the screen and using the entry angle and triangle angles to calculate the reflection. Or you could use the `drawLine` method to animate rain fall similar to this [Purple Rain video](https://youtu.be/KkyIDI6rQJI) by the [Coding Train](https://thecodingtrain.com/). While this was made for p5js, it would fairly straightforward to translate to Arduino and the Adafruit GFX library.
 
 ### Adding interaction
 
 - Draw analog input value centered
-
 - Ball that changes size depending on analog input
 - Switch to FSR
 
-### Animation
+<!-- 
+Activity outline:
 
 - Animation with ball
 - Ball that changes speed depending on analog input
@@ -351,7 +442,7 @@ See: https://lastminuteengineers.com/oled-display-arduino-tutorial/
 
 - POSSIBLE TODO: hook up multiple OLED displays
   - You can hook up multiple OLED displays. But each will need a different address. By default, the address is 0x3D (show picture of back). The Adafruit breakout board makes it easy to set the address to 0x3C simply by tying `SA0` to `GND`.
-  - Show ball bounce two screens?
+  - Show ball bounce two screens? -->
 
 ## Resources
 

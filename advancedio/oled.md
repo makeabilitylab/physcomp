@@ -312,6 +312,8 @@ In addition to the default fixed-size, mono-spaced font, you can also load and r
 
 Finally, you can load and render custom bitmaps on the display. See ["Displaying Bitmaps"](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-bitmap) on Last Minute Engineers.
 
+<!-- TODO: consider recording a video of how to do this or at least showing a video or picture of it working -->
+
 ### Resources
 
 Before moving forward, we strongly encourage you to read the official [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives) tutorial and the "Last Minute Engineers" [OLED tutorial](https://lastminuteengineers.com/oled-display-arduino-tutorial/)—both offer great overviews of the Adafruit GFX library and how to [display text](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-text), [draw shapes](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-basic-drawings), and [load and display bitmaps](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-bitmap). 
@@ -328,7 +330,7 @@ In this part of the lesson, we are going to make a variety of OLED-based creatio
 
 ### Activity: draw shapes and text
 
-First, to get a feel for and experience with the Adafruit GFX API and the coordinate system, let's simply draw some text and shapes to the screen.
+First, to get a feel for and experience with the Adafruit GFX API and the coordinate system, let's simply draw some text and shapes to the screen. You get to choose what you want you want to draw and where. Think of it like [abstract shape art](https://www.google.com/search?q=abstract+shape+art)! 
 
 Remember, in `loop()`, you need to:
 
@@ -345,41 +347,47 @@ _display.display();
 
 I made a version, [called SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino) that draws shapes of random sizes and locations on **each frame** but you could do something even simpler (or more complex)!
 
+<!-- TODO: insert video of my version -->
+
 #### Prototyping journals
 
-For your prototyping journals, create your own drawing playground demo, record a short video or animated gif, link to the code, and reflect on what you learned.
+For your prototyping journals, create your own shape/text drawing demo. Take a picture or, if there is animation, record a short video or animated gif. In your journals, link to the code, insert the pictures/videos, and reflect on what you learned.
 
 ### Activity: draw a bouncing ball
 
-For this activity, we will learn a bit about animation. We are going to draw a simple bouncing ball around the screen. Bouncing or reflecting objects are one of the key components of many games, including [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), [Arkanoid](https://en.wikipedia.org/wiki/Arkanoid), *etc.*.
+Now that we've gained some familiarity of the drawing API and graphics pipeline, let's now learn a bit about animation.
+
+We are going to draw a simple bouncing ball around the screen. Bouncing or reflecting objects are one of the key components of many games, including [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), [Arkanoid](https://en.wikipedia.org/wiki/Arkanoid), *etc.*.
 
 To create a bouncing ball, we need to:
-- Track the x,y location of the ball across frames
-- Set a x,y speed in pixels per frame—that is, how much the does the ball move per frame? For smoother animation, we could track x,y speed in terms of time; however, this is slightly more complicated (*e.g.,* it requires tracking timestamps in the code, computing time deltas, *etc.*). For our purposes, tracking x,y speed in terms of pixels/frame is fine.
+- Track the **x,y location** of the ball across frames
+- Set a **x,y speed** in pixels per frame—that is, how much the does the ball move per frame? For smoother animation, we could track x,y speed in terms of time (*e.g.,* pixels/second); however, this is slightly more complicated (*e.g.,* it requires tracking timestamps in the code, computing time deltas, *etc.*). For our purposes, tracking x,y speed in terms of pixels/frame is fine.
 - Check for **collisions** when the ball collides with the ceiling, floor, or walls of the screen. When a collision occurs, simply reverse the direction of the ball.
 
+#### Demo using p5js
 Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animation/BallBounce2D/) we made in [p5js](https://p5js.org/). Sometimes, it's useful to prototype a visualization or game idea in a rapid programming environment like [p5js](https://p5js.org/) or [Processing](https://processing.org/) before coding it up in C++ for Arduino (and it's easier to debug in those environments as well). In this case, we had already created a bouncing ball demo in the past but linking it here allows you to draw parallels between the two implementations. You can edit and play with this demo in your browser [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) using the p5js online editor.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/BallBouncing_p5js.mp4" type="video/mp4" />
 </video>
+{: .mx-auto .align-center }
 
-**Video** A video of the Ball Bounce demo created in p5js. You can edit the source code and run it live in the p5js online editor [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) or [view the source](https://github.com/makeabilitylab/p5js/blob/master/Animation/BallBounce2D/sketch.js) in our [p5js GitHub repo](https://github.com/makeabilitylab/p5js).
+**Video** A video of the Ball Bounce demo created in p5js. You can edit the source code and run it live in the p5js online editor [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk). Alternatively, you can [view the source](https://github.com/makeabilitylab/p5js/blob/master/Animation/BallBounce2D/sketch.js) in our [p5js GitHub repo](https://github.com/makeabilitylab/p5js).
 {: .fs-1 }
 
-For the C++ implementation using the Adafruit GFX library and Arduino, the key code is:
+#### C++ implementation using Adafruit GFX
+For the C++ implementation using the Adafruit GFX library and Arduino, the key bits of code are excerpted below. Make sure you read over this code carefully and understand it.
 
 {% highlight C++ %}
-
 // Create the display object
 Adafruit_SSD1306 _display(128, 64, &Wire, 4);
 
 // Ball global variables
 const int _ballRadius = 5;
-int _xBall = 0;
-int _yBall = 0;
-int _xSpeed = 0;
-int _ySpeed = 0;
+int _xBall = 0;  // x location of the ball
+int _yBall = 0;  // y location of the ball
+int _xSpeed = 0; // x speed of ball (in pixels per frame)
+int _ySpeed = 0; // y speed of ball (in pixels per frame)
 
 void setup() {
   // Initialize the display
@@ -417,13 +425,153 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-You can find the full code, called [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino). We also have a similar "bounce" demo, called [BitmapBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino), that uses a bitmap rather than a graphic primitive. 
+You can find the full code, called [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino). 
+
+#### Bitmap bounce
+
+We also have a similar "bounce" demo, called [BitmapBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino), that uses a bitmap rather than a graphic primitive. To create the the bitmap byte dump, we used this [image2cpp](http://javl.github.io/image2cpp/) tool on this [Makeability Lab logo](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/logo_bw_no_text_600w.png).
 
 <!-- TODO: add video of ballbounce.ino and bitmapbounce.ino -->
 
 #### Prototyping journals
 
-For your prototyping journals, create your animation demo, record a short video or animated gif, link to the code, and reflect on what you learned. As one simple example, change the object bouncing around from a circle to a rectangle. If you want something more challenging, try bouncing a triangle around the screen and using the entry angle and triangle angles to calculate the reflection. Or you could use the `drawLine` method to animate rain fall similar to this [Purple Rain video](https://youtu.be/KkyIDI6rQJI) by the [Coding Train](https://thecodingtrain.com/). While this was made for p5js, it would fairly straightforward to translate to Arduino and the Adafruit GFX library.
+For your prototyping journals, create your animation demo, record a short video or animated gif, link to the code, and reflect on what you learned. As one simple example, change the object bouncing around from a circle to a rectangle. 
+
+If you want something more challenging, try bouncing a triangle around the screen and using the entry angle and triangle angles to properly calculate the reflection (it's probably easiest to do this using [vector calculations](https://makeabilitylab.github.io/p5js/Vectors/BouncingBallsAndLineSegmentsImproved/)). Or you could use the `drawLine` method to animate rain fall similar to this [Purple Rain video](https://youtu.be/KkyIDI6rQJI) by the [Coding Train](https://thecodingtrain.com/). While this was made for p5js, it would fairly straightforward to translate to Arduino and the Adafruit GFX library.
+
+### Activity: interactive graphics
+
+Finally, for our last activity, let's make a few interactive prototypes.
+
+#### Setting ball size based on analog input
+
+We'll start with changing a shape's size based on sensor input on `A0`. While you can use whatever sensor you want on `A0`, for this demonstration, we will use a [potentiometer](../arduino/potentiometers.md).
+
+##### The OLED + pot circuit
+Here's the circuit. Same as before but we've added a 10K potentiometer.
+
+![](assets/images/OLED_ArduinoLeonardo_POT_CircuitDiagram.png)
+
+##### The OLED + pot code 
+The code is fairly simple: read the analog input and use this to set the circle's radius.
+
+{% highlight C++ %}
+void loop() {
+  // On each loop, we'll want to clear the display so we're not writing over
+  // previously drawn data
+  _display.clearDisplay(); 
+
+  // Read the analog input value
+  int sensorVal = analogRead(ANALOG_INPUT_PIN);
+
+  // The maximum radius is either the display width or height, whichever is smallest
+  int maxRadius = min(_display.width(), _display.height());
+
+  // Now calculate the radius based on the sensor val
+  int radius = map(sensorVal, 0, MAX_ANALOG_INPUT, 0, maxRadius);
+
+  // Center the circle
+  int xCircle = _display.width() / 2;
+  int yCircle = _display.height() / 2;
+
+  // Draw it on the screen
+  _display.fillCircle(xCircle, yCircle,  radius, SSD1306_WHITE);
+
+  // Render the graphics buffer to screen
+  _display.display(); 
+
+  delay(50);
+}
+{% endhighlight C++ %}
+
+You can view the full code on GitHub as [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino).
+
+#### Setting ball location based on analog input
+
+TODO: make fritzing diagram with two pots
+
+You can view the full code on GitHub as [AnalogBallLocation.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallLocation/AnalogBallLocation.ino).
+
+#### Basic real-time analog graph
+
+One of the most famous Arduino + Processing demo's is the real-time analog sensor graph ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph)): the Arduino reads sensor data using `analogRead` then transmits it to the computer using `Serial.println()` where it is parsed and graphed using Processing.
+
+With the OLED display and the Adafruit GFX library, we can easily recreate this entirely on the Arduino!
+
+The idea is simple: read in a sensor value as `sensorVal`, draw a vertical line at `xPos` of a length proportional `sensorVal`, increment `xPos`, repeat. When `xPos >= _display.width()`, set `xPos` back to zero and start the whole process over.
+
+{% highlight C++ %}
+void loop() {
+
+  // Read the analog voltage value
+  int analogVal = analogRead(ANALOG_INPUT_PIN);
+
+  // Draw the line for the given sensor value
+  int lineHeight = map(analogVal, MIN_ANALOG_INPUT, MAX_ANALOG_INPUT, 0, _graphHeight);
+  int yPos = _display.height() - lineHeight;
+
+  // For purely horizontal or vertical lines, there are optimized line-drawing
+  // functions that avoid costly angular calculations
+  _display.drawFastVLine(_xPos++, yPos, lineHeight, SSD1306_WHITE);
+  _display.display();
+  
+  // If the x-position of is off the right side of the screen, clear the display
+  // and start the graph over
+  if (_xPos >= _display.width()) {
+    _xPos = 0;
+    _display.clearDisplay();
+  }
+
+  delay(10);
+}
+{% endhighlight C++ %}
+
+#### Real-time scrolling analog graph
+
+A slightly improved but more complicated version of this analog graph is a **scrolling** version that does not reset when `xPos >= _display.width()` but simply scrolls the graph.
+
+{% highlight C++ %}
+int _circularBuffer[SCREEN_WIDTH]; //fast way to store values 
+int _curWriteIndex = 0; // tracks where we are in the circular buffer
+
+void loop() {
+  // Clear the display on each frame. We draw from the _circularBuffer
+  _display.clearDisplay();
+
+  // Read and store the analog data into a circular buffer
+  int analogVal = analogRead(ANALOG_INPUT_PIN);
+  Serial.println(analogVal);
+  _circularBuffer[_curWriteIndex++] = analogVal;
+
+  // Set the circular buffer index back to zero when it reaches the 
+  // right of the screen
+  if(_curWriteIndex >= _display.width()){
+    _curWriteIndex = 0;
+  }
+  
+  // Draw the line graph based on data in _circularBuffer
+  int xPos = 0; 
+  for (int i = _curWriteIndex; i < _display.width(); i++){
+    int analogVal = _circularBuffer[i];
+    drawLine(xPos, analogVal);
+    xPos++;
+  }
+  
+  for(int i = 0; i < _curWriteIndex; i++){
+    int analogVal = _circularBuffer[i];
+    drawLine(xPos, analogVal);
+    xPos++;;
+  }
+  
+  _display.display();
+  
+  calcFrameRate();
+  
+  delay(DELAY_LOOP_MS);
+}
+{% endhighlight C++ %}
+
+<!-- You could imagine using the analog input to, instead, control the x-location of the circle. Or hook up two analog inputs (one to `A0` and the other to `A1`) to control the x- and y-location of the circle—and now you're starting to create the foundations of a simple game and game controller! -->
 
 <!-- TODO: add interaction -->
 <!-- ### Adding interaction

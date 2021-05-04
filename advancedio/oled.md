@@ -38,15 +38,23 @@ Master/slave
 
 - -->
 
+This is a **DRAFT LESSON** that will be finalized by the end of Tues, May 4, 2021.
+
+In this lesson, you will learn about organic light-emitting diode (OLED) displays, basic graphics programming, and a brief introduction to two serial communication protocols called [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface)
+
 ## OLED Display
 
-- Include overview of graphics
+Organic light-emitting diode ([OLED](https://en.wikipedia.org/wiki/OLED)) displays are relatively new technology, increasingly used in TVs, computer monitors, smartphones, and handheld game consoles. Unlike LCDs, which require backlighting, each OLED pixel generates its own light providing superior contrast and color control. 
+
+In this lesson, we will be using the [monochrome (black-and-white) OLED displays](https://learn.adafruit.com/monochrome-oled-breakouts) from Adafruit along with their display control and graphics libraries. To do so, we need to install some required libraries.
+
+<!-- - Include overview of graphics
     - https://learn.adafruit.com/adafruit-gfx-graphics-library/overview
-    - https://lastminuteengineers.com/oled-display-arduino-tutorial/
+    - https://lastminuteengineers.com/oled-display-arduino-tutorial/ -->
 
 ### Install Arduino libraries
 
-To use the OLED display, we need two libraries:
+To use the Adafruit OLED display, we need two libraries:
 
 - The [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306) display driver library, which handles display communication, memory mapping, and low-level drawing routines
 - The [Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library) graphics library, which provides core graphics routines for all Adafruit displays like drawing points, lines, circles. 
@@ -182,9 +190,7 @@ Thus, to turn "on" the LED at pixel `(18, 6)` using [Adafruit GFX](https://learn
 
 ### Drawing subsystem
 
-Below, we describe how to draw shapes, text, and bitmaps.
-
-TODO: EXPLAIN WHEN TO CALL DISPLAY, ETC.
+Below, we describe how to draw shapes, text, and bitmaps. Importantly, when you call any of the drawing routines—from `drawLine` to `drawTriangle`—you are **not** drawing directly to the OLED display. Instead, you are drawing to an offscreen buffer handled by the SSD1306 driver. So, after you call your drawing routines, you must then call the `void Adafruit_SSD1306::display()` function to push the data from RAM to the display.
 
 ### Drawing shapes
 
@@ -419,11 +425,12 @@ You can find the full code, called [BallBounce.ino](https://github.com/makeabili
 
 For your prototyping journals, create your animation demo, record a short video or animated gif, link to the code, and reflect on what you learned. As one simple example, change the object bouncing around from a circle to a rectangle. If you want something more challenging, try bouncing a triangle around the screen and using the entry angle and triangle angles to calculate the reflection. Or you could use the `drawLine` method to animate rain fall similar to this [Purple Rain video](https://youtu.be/KkyIDI6rQJI) by the [Coding Train](https://thecodingtrain.com/). While this was made for p5js, it would fairly straightforward to translate to Arduino and the Adafruit GFX library.
 
-### Adding interaction
+<!-- TODO: add interaction -->
+<!-- ### Adding interaction
 
 - Draw analog input value centered
 - Ball that changes size depending on analog input
-- Switch to FSR
+- Switch to FSR -->
 
 <!-- 
 Activity outline:
@@ -460,6 +467,6 @@ Activity outline:
 
 - [SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi), Sparkfun.com
 
-## Next lesson
+<!-- ## Next lesson
 
-In the next lesson, we TODO
+In the next lesson, we TODO -->

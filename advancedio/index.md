@@ -23,6 +23,19 @@ Welcome 👋 to the third module in your Physical Computing adventure: **Advance
 
 As usual, these lessons are interactive—that is, they assume that you're following along and building **with us**. They are designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
+**NOTE:** These lessons are being constructed during the Spring'21 term. The Output lessons should be finalized by the end of May 6, 2021. The Input lessons will be finalized the week of May 10th.
+
+## Output
+
+### [L1: OLED Displays](oled.md)
+In [this lesson](oled.md), you will learn about organic light-emitting diode (OLED) displays, basic graphics programming, and a brief introduction to two serial communication protocols called [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface).
+
+## Input
+
+### [L1: Smoothing Input](smoothing-input.md)
+
+In [this lesson](smoothing-input.md), we will learn how to smooth incoming sensor data using basic digital signal processing. We'll cover a class of digital filters called smoothing algorithms (aka **signal filters**), why they're helpful, and potential tradeoffs in their implementation and use.
+
 <!-- ## Output:
 ### L1: Vibro motors
 ### L2: Servo motors

@@ -40,11 +40,11 @@ Master/slave
 
 In this lesson, you will learn about organic light-emitting diode (OLED) displays, basic graphics programming, and a brief introduction to two serial communication protocols called [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface)
 
-## OLED Display
+## OLED displays
 
-Organic light-emitting diode ([OLED](https://en.wikipedia.org/wiki/OLED)) displays are relatively new technology, increasingly used in TVs, computer monitors, smartphones, and handheld game consoles. Unlike LCDs, which require backlighting, each OLED pixel generates its own light providing superior contrast and color control. 
+Organic light-emitting diode ([OLED](https://en.wikipedia.org/wiki/OLED)) displays are relatively new technology, increasingly used in TVs, computer monitors, smartphones, and handheld game consoles. Unlike LCDs, which require backlighting, each OLED pixel generates its own light providing superior contrast and color control.
 
-In this lesson, we will be using the [monochrome (black-and-white) OLED displays](https://learn.adafruit.com/monochrome-oled-breakouts) from Adafruit along with their display control and graphics libraries. To do so, we need to install some [required libraries](oled-libraries.md).
+In this lesson, we will be using the [monochrome (black-and-white) OLED displays](https://learn.adafruit.com/monochrome-oled-breakouts) from Adafruit along with their display control and graphics libraries. To do so, we need to install some [ libraries](oled-libraries.md).
 
 <!-- - Include overview of graphics
     - https://learn.adafruit.com/adafruit-gfx-graphics-library/overview
@@ -389,7 +389,7 @@ Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animati
 
 For the C++ implementation using the Adafruit GFX library and Arduino, the key bits of code are excerpted below. The overall implementation is quite similar to the [p5js version](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk). Make sure you read over this code carefully and understand it.
 
-Again, rather than, say "miles per hour" or "pixels per second", we've defined speed as "pixels per frame"—that is, how many pixels does the object move per frame. If we set `_xSpeed` to 5 and `_ySpeed` to 0, then the ball would move 5 x-pixels per frame (and simply bounce back and forth from the left side of the screen to the right and back again).
+Again, rather than, say "miles per hour" or "pixels per second", we've defined speed as "pixels per frame"—that is, how many pixels does the object move per frame. If we set `_xSpeed` to 5 and `_ySpeed` to 0, then the ball would move 5 x pixels per frame (and simply bounce back and forth from the left side of the screen to the right and back again).
 
 {% highlight C++ %}
 // Create the display object
@@ -459,8 +459,6 @@ For your prototyping journals, create a custom animation demo, record a short vi
 ### Activity: interactive graphics
 
 Finally, for our last activity, let's make a few **interactive prototypes**—that is, graphics that respond to digital or analog input. Interactivity captures the true essence of physical computing. And for an [HCI professor](https://jonfroehlich.github.io/) like me, this is where the joy really begins!
-
-We are going to cover multiple demos. We would like you to read through and attempt to understand each one. For your prototyping journals, select one demo to run and record in your journals. We also have 
 
 #### Demo 1: Setting ball size based on analog input
 
@@ -560,7 +558,7 @@ You can view the full code on GitHub as [AnalogBallLocation.ino](https://github.
 
 #### Demo 3: Basic real-time analog graph
 
-One of the most famous [Arduino](https://www.arduino.cc/) + [Processing](https://processing.org/) demo' is the real-time analog sensor graph ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph)): the Arduino reads sensor data using `analogRead` then transmits it to the computer using `Serial.println()` where it is parsed and graphed using [Processing](https://processing.org/).
+One of the most famous [Arduino](https://www.arduino.cc/) + [Processing](https://processing.org/) demos is the real-time analog sensor graph ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph)): the Arduino reads sensor data using `analogRead` then transmits it to the computer using `Serial.println()` where it is parsed and graphed using [Processing](https://processing.org/).
 
 With the OLED display and the Adafruit GFX library, we can easily recreate this entirely on the Arduino!
 

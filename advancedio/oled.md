@@ -656,7 +656,7 @@ The full source code is available in our [OLED GitHub](https://github.com/makeab
 
 Which graph version do you prefer? [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) or [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino)? We personally prefer the latter!
 
-#### Prototyping journal
+#### Interactive graphics prototyping journal activity
 
 For your prototyping journals, rapidly prototype an interactive OLED demo using a sensor of your own choosing and a design a simple visualization or responsive graphic around that input. In your journal, include a brief description with short video (or animated gif) and reflect on what you learned. As one simple idea to give you an idea of what we're looking for here, how about combine animation + interactivity: what if you changed the ball speed in [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino) based on sensed input?
 

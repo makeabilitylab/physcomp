@@ -105,11 +105,11 @@ Depending on your OS, you can view the installed Arduino `libraries` folder on y
 |:------------------------------------:|:--------------------------------:|
 | ![](assets/images/Arduino_LibraryDirectory_Windows.png) | ![](assets/images/Arduino_LibraryDirectory_Mac.png) |
 
-You'll note that the `libraries` folder contains raw source and **not** pre-compiled binaries. The Arduino IDE may compile underlying library files differently depending on the selected board.
+You'll note that the `libraries` folder contains raw source and **not** pre-compiled binaries. The Arduino IDE compiles the underlying library files differently depending on the selected board.
 
 ### Wiring the Adafruit OLED display
 
-The [SSD1306](https://github.com/adafruit/Adafruit_SSD1306) driver chip and accompanying library allows you to communicate with the OLED via two independent serial communication methods—each require different wirings: [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface). The default is I2C, which is what we will use in this lesson. For more on the SPI mode, see [Adafruit's official docs](https://learn.adafruit.com/monochrome-oled-breakouts/wiring-128x64-oleds).
+The [SSD1306](https://github.com/adafruit/Adafruit_SSD1306) driver chip and accompanying library provides two different communication methods—each require different wirings: [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface). The default is I2C, which is what we will use in this lesson. For more on the SPI mode, see [Adafruit's official docs](https://learn.adafruit.com/monochrome-oled-breakouts/wiring-128x64-oleds).
 
 While the OLED display requires a 3.3V power supply and 3.3V logic levels for communication, the Adafruit breakout board includes a 3.3V regulator and level shifting on all pins, so you can interface with either 3V or 5V devices. Additionally, recall that the I<sup>2</sup>C requires pull-up resistors on the clock (SCL) and data (SDA) lines so that both are pulled-up to logic level `HIGH` by default. Thankfully, the Adafruit breakout board also includes these resistors. So, the wiring is quite straightforward, consisting of only four wires!
 
@@ -138,7 +138,6 @@ The video below shows the OLED display hooked up to a STEMMA QT [female-to-male 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/AdafruitSTEMMAQT_IMG_6163-TrimmedAndCropped720p.mov" type="video/mp4" />
 </video>
-
 **Video** Running the demo [`ssd1306_128x64_i2c`](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino) with a STEMMA QT cable.
 {: .fs-1 }
 
@@ -167,10 +166,8 @@ Now, compile and upload the example.
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/AdafruitOLEDOfficialDemo0x3D-IMG_6160-Rotated-TrimmedAndSpedUp720p-Optimized.mp4" type="video/mp4" />
 </video>
-
 **Video** Running the demo [`ssd1306_128x64_i2c`](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino). Parts of this video are sped up 4x.
 {: .fs-1 }
-
 
 ## The Adafruit GFX Library
 
@@ -364,7 +361,8 @@ To create a bouncing ball, we need to:
 - Set a **x,y speed** in pixels per frame—that is, how much the does the ball move per frame? For smoother animation, we could track x,y speed in terms of time (*e.g.,* pixels/second); however, this is slightly more complicated (*e.g.,* it requires tracking timestamps in the code, computing time deltas, *etc.*). For our purposes, tracking x,y speed in terms of pixels/frame is fine.
 - Check for **collisions** when the ball collides with the ceiling, floor, or walls of the screen. When a collision occurs, simply reverse the direction of the ball.
 
-#### Demo using p5js
+#### Prototyping ideas with p5js
+
 Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animation/BallBounce2D/) we made in [p5js](https://p5js.org/). Sometimes, it's useful to prototype a visualization or game idea in a rapid programming environment like [p5js](https://p5js.org/) or [Processing](https://processing.org/) before coding it up in C++ for Arduino (and it's easier to debug in those environments as well). In this case, we had already created a bouncing ball demo in the past but linking it here allows you to draw parallels between the two implementations. You can edit and play with this demo in your browser [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) using the p5js online editor.
 
 <video autoplay loop muted playsinline style="margin:0px">
@@ -376,6 +374,7 @@ Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animati
 {: .fs-1 }
 
 #### C++ implementation using Adafruit GFX
+
 For the C++ implementation using the Adafruit GFX library and Arduino, the key bits of code are excerpted below. Make sure you read over this code carefully and understand it.
 
 {% highlight C++ %}
@@ -448,11 +447,13 @@ Finally, for our last activity, let's make a few interactive prototypes.
 We'll start with changing a shape's size based on sensor input on `A0`. While you can use whatever sensor you want on `A0`, for this demonstration, we will use a [potentiometer](../arduino/potentiometers.md).
 
 ##### The OLED + pot circuit
+
 Here's the circuit. Same as before but we've added a 10K potentiometer.
 
 ![](assets/images/OLED_ArduinoLeonardo_POT_CircuitDiagram.png)
 
 ##### The OLED + pot code 
+
 The code is fairly simple: read the analog input and use this to set the circle's radius.
 
 {% highlight C++ %}
@@ -488,9 +489,46 @@ You can view the full code on GitHub as [AnalogBallSize.ino](https://github.com/
 
 #### Setting ball location based on analog input
 
-TODO: make fritzing diagram with two pots
+Now let's hook up **two** analog inputs to control the x,y location of the circle rather than the size. In this case, we'll use two potentiometers. The wiring diagram is below.
+
+![](assets/images/OLED_ArduinoLeonardo_2Pots_CircuitDiagram.png)
+**Figure** The wiring and circuit diagram for two potentiometers and the OLED display.
+{: .fs-1 }
+
+For the code, it's very similar to [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino). But we translate the `analogRead` values to x and y locations: 
+
+{% highlight C++ %}
+void loop() {
+  // On each loop, we'll want to clear the display so we're not writing over
+  // previously drawn data
+  _display.clearDisplay(); 
+
+  // Read the analog input value
+  int xSensorVal = analogRead(X_ANALOG_INPUT_PIN);
+  delay(1); // give ADC time
+  int ySensorVal = analogRead(Y_ANALOG_INPUT_PIN);
+
+  // Translate sensor readings to x, y pixel locations
+  int xLoc = map(xSensorVal, 0, MAX_ANALOG_INPUT, 0, _display.width());
+  int yLoc = map(ySensorVal, 0, MAX_ANALOG_INPUT, 0, _display.height());
+
+  // Draw it on the screen
+  _display.fillCircle(xLoc, yLoc,  BALL_RADIUS, SSD1306_WHITE);
+
+  // Render the graphics buffer to screen
+  _display.display(); 
+
+  delay(50);
+}
+{% endhighlight C++ %}
 
 You can view the full code on GitHub as [AnalogBallLocation.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallLocation/AnalogBallLocation.ino).
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/OLEDMoveBallTwoPots-IMG_6190-TrimmedAndOptimized720p.mp4" type="video/mp4" />
+</video>
+**Video** A demonstration of [AnalogBallLocation.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallLocation/AnalogBallLocation.ino) using potentiometers on `A0` and `A1`.
+{: .fs-1 }
 
 #### Basic real-time analog graph
 
@@ -526,9 +564,19 @@ void loop() {
 }
 {% endhighlight C++ %}
 
+The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino). Here's a video demo:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/OLEDAnalogGraph_TrimmedAndOptimized720p.mp4" type="video/mp4" />
+</video>
+**Video** A demonstration of [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) using a potentiometer for analog input on `A0`.
+{: .fs-1 }
+
 #### Real-time scrolling analog graph
 
-A slightly improved but more complicated version of this analog graph is a **scrolling** version that does not reset when `xPos >= _display.width()` but simply scrolls the graph.
+A slightly improved but more complicated version of the analog graph is a **scrolling** implementation. Rather than clearing the display when `xPos >= _display.width()`, we simply "scroll" the content to the left. For memory and computational efficiency, we implement this with a circular buffer, which is the size of our screen width (so, 64 values—one for each x pixel).
+
+Look over the code. Does it make sense? 
 
 {% highlight C++ %}
 int _circularBuffer[SCREEN_WIDTH]; //fast way to store values 
@@ -565,11 +613,21 @@ void loop() {
   
   _display.display();
   
-  calcFrameRate();
-  
-  delay(DELAY_LOOP_MS);
+  delay(10);
 }
 {% endhighlight C++ %}
+
+The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino). Here's a video demo. Which version do you prefer? [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) or [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino)? We personally prefer the latter!
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/OLED_ScrollingGraphDemo-IMG_6192-TrimmedAndOptimized720p.mp4" type="video/mp4" />
+</video>
+**Video** A demonstration of [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino) using a potentiometer for analog input on `A0`.
+{: .fs-1 }
+
+#### Prototyping journal
+
+For your prototyping journals, rapidly prototype an interactive OLED demo using a sensor of your own choosing and a simple
 
 <!-- You could imagine using the analog input to, instead, control the x-location of the circle. Or hook up two analog inputs (one to `A0` and the other to `A1`) to control the x- and y-location of the circle—and now you're starting to create the foundations of a simple game and game controller! -->
 

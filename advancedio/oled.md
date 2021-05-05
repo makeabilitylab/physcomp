@@ -532,7 +532,7 @@ You can view the full code on GitHub as [AnalogBallLocation.ino](https://github.
 
 #### Basic real-time analog graph
 
-One of the most famous Arduino + Processing demo's is the real-time analog sensor graph ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph)): the Arduino reads sensor data using `analogRead` then transmits it to the computer using `Serial.println()` where it is parsed and graphed using Processing.
+One of the most famous Arduino + Processing demo' is the real-time analog sensor graph ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph)): the Arduino reads sensor data using `analogRead` then transmits it to the computer using `Serial.println()` where it is parsed and graphed using [Processing](https://processing.org/).
 
 With the OLED display and the Adafruit GFX library, we can easily recreate this entirely on the Arduino!
 
@@ -617,13 +617,15 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino). Here's a video demo. Which version do you prefer? [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) or [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino)? We personally prefer the latter!
+The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino). Here's a video demo. 
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/OLED_ScrollingGraphDemo-IMG_6192-TrimmedAndOptimized720p.mp4" type="video/mp4" />
 </video>
 **Video** A demonstration of [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino) using a potentiometer for analog input on `A0`.
 {: .fs-1 }
+
+Which graph version do you prefer? [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) or [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino)? We personally prefer the latter!
 
 #### Prototyping journal
 

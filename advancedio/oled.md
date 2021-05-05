@@ -9,7 +9,7 @@ comments: true
 usemathjax: true
 usetocbot: true
 ---
-# {{ page.title | replace_first:'L','Lesson '}}
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of Contents
@@ -38,15 +38,13 @@ Master/slave
 
 - -->
 
-This is a **DRAFT LESSON** that will be finalized by the end of Tues, May 4, 2021.
-
 In this lesson, you will learn about organic light-emitting diode (OLED) displays, basic graphics programming, and a brief introduction to two serial communication protocols called [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface)
 
 ## OLED Display
 
 Organic light-emitting diode ([OLED](https://en.wikipedia.org/wiki/OLED)) displays are relatively new technology, increasingly used in TVs, computer monitors, smartphones, and handheld game consoles. Unlike LCDs, which require backlighting, each OLED pixel generates its own light providing superior contrast and color control. 
 
-In this lesson, we will be using the [monochrome (black-and-white) OLED displays](https://learn.adafruit.com/monochrome-oled-breakouts) from Adafruit along with their display control and graphics libraries. To do so, we need to install some required libraries.
+In this lesson, we will be using the [monochrome (black-and-white) OLED displays](https://learn.adafruit.com/monochrome-oled-breakouts) from Adafruit along with their display control and graphics libraries. To do so, we need to install some [required libraries](oled-libraries.md).
 
 <!-- - Include overview of graphics
     - https://learn.adafruit.com/adafruit-gfx-graphics-library/overview
@@ -59,59 +57,17 @@ To use the Adafruit OLED display, we need two libraries:
 - The [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306) display driver library, which handles display communication, memory mapping, and low-level drawing routines
 - The [Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library) graphics library, which provides core graphics routines for all Adafruit displays like drawing points, lines, circles. 
 
-Fortunately, the Arduino IDE makes library installation easy. We can do it right from the IDE itself.
-
-#### Step 1: Open "Manage Libraries"
-
-Open your Arduino IDE, then go to `Tools -> Manage Libraries`.
-
-![](assets/images/ArduinoIDE_ManageLibrariesScreenshot.png)
-
-#### Step 2: Search for Adafruit SSD1306
-
-In the Library Manager, search for "Adafruit SSD1306". There are other SSD1306 libraries so make sure you find the one by Adafruit. In this screenshot, the current version is 2.4.4.
-
-![](assets/images/ArduinoIDE_LibraryManager_SearchForAdafruitSSD1306.png)
-
-#### Step 3: Install Adafruit SSD1306 library
-Click on the `Install` button.
-
-![](assets/images/ArduinoIDE_LibraryManager_ClickInstallAdafruitSSD1306.png)
-
-#### Step 4: Install all dependencies
-
-The Adafruit SSD1306 library depends on two other libraries, which we also need to install. Fortunately, the Library Manager detects this and explicitly asks about dependencies. So, select `Install all`.
-
-![](assets/images/ArduinoIDE_LibraryManager_AdafruitSSD1306Dependencies.png)
-
-<!-- The Arduino IDE Library Manager let's library designers to identify other library dependencies in their metadata. This allows the IDE to ask users about dependencies automatically.  -->
-
-#### Step 5: Confirm installation
-
-If the SSD1306 library was correctly installed, you should see a teal "INSTALLED" label next to it as we do below:
-
-![](assets/images/ArduinoIDE_LibraryManager_SSD1306Installed.png)
-
-#### Library installation folder location on OS
-
-All libraries are installed in the `Documents` folder on your OS. It's useful to be aware of this directory in case you want to do a manual install of a library (like the [Makeability Lab Arduino Library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library)) or want to view library source code. 
-
-Depending on your OS, you can view the installed Arduino `libraries` folder on your filesystem here:
-
-- On Windows, this defaults to `C:\Users\<username>\Documents\Arduino\libraries`
-- On Mac, `/Users/<username>/Documents/Arduino/libraries`
-
-| Arduino Library directory on Windows | Arduino Library directory on Mac |
-|:------------------------------------:|:--------------------------------:|
-| ![](assets/images/Arduino_LibraryDirectory_Windows.png) | ![](assets/images/Arduino_LibraryDirectory_Mac.png) |
-
-You'll note that the `libraries` folder contains raw source and **not** pre-compiled binaries. The Arduino IDE compiles the underlying library files differently depending on the selected board.
+Fortunately, the Arduino IDE makes library installation easy. We can do it right from the IDE itself. Follow our step-by-step [installation guide here](oled-libraries.md).
 
 ### Wiring the Adafruit OLED display
+
+Once you've installed the requisite libraries, you're ready to wire up the display!
 
 The [SSD1306](https://github.com/adafruit/Adafruit_SSD1306) driver chip and accompanying library provides two different communication methods—each require different wirings: [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface). The default is I2C, which is what we will use in this lesson. For more on the SPI mode, see [Adafruit's official docs](https://learn.adafruit.com/monochrome-oled-breakouts/wiring-128x64-oleds).
 
 While the OLED display requires a 3.3V power supply and 3.3V logic levels for communication, the Adafruit breakout board includes a 3.3V regulator and level shifting on all pins, so you can interface with either 3V or 5V devices. Additionally, recall that the I<sup>2</sup>C requires pull-up resistors on the clock (SCL) and data (SDA) lines so that both are pulled-up to logic level `HIGH` by default. Thankfully, the Adafruit breakout board also includes these resistors. So, the wiring is quite straightforward, consisting of only four wires!
+
+The wiring diagram and circuit schematic are below. We used the [Qwiic](https://www.sparkfun.com/qwiic) color-coding system for our wires: blue for data (SDA), yellow for clock (SCL), black for ground (GND), and red for the voltage supply (5V). The I<sup>2</sup>C pins differ depending on your board. For example, on the Arduino Uno, they are A4 (SDA) and A5 (SCL) rather than digital pins 2 (SDA) and 3 (SCL) as they are on the Leonardo.
 
 ![](assets/images/ArduinoLeonardo_OLEDWiring_FritzingSchematics.png)
 **Figure** Wiring the Adafruit OLED display requires only four wires (and nothing else). I used the standard STEMMA QT color coding for my wires: blue for data (SDA), yellow for clock (SCL), black for ground (GND), and red for the voltage supply (5V). Note that the I<sup>2</sup>C pins differ depending on your board. For example, on the Arduino Uno, they are A4 (SDA) and A5 (SCL) rather than digital pins 2 (SDA) and 3 (SCL) as they are for the Leonardo.
@@ -125,9 +81,9 @@ While the OLED display requires a 3.3V power supply and 3.3V logic levels for co
 
 #### STEMMA QT wiring
 
-Starting in ~2017, many Adafruit and SparkFun breakout boards began including standardized connectors to more easily connect multiple electronic devices without soldering or working with lots of individual wires. The Sparkfun connection standard for I<sup>2</sup>C devices, called [Qwicc](https://www.sparkfun.com/qwiic), was later adopted by Adafruit, which they call [STEMMA QT](https://learn.adafruit.com/introducing-adafruit-stemma-qt/what-is-stemma-qt).
+Starting in ~2017, many Adafruit and SparkFun breakout boards began including standardized connectors to more easily connect multiple electronic devices without soldering or working with lots of individual wires. This is particularly helpful because I<sup>2</sup>C let's us daisy chain I<sup>2</sup>C-compatible devices together. The Sparkfun connection standard for I<sup>2</sup>C devices, called [Qwicc](https://www.sparkfun.com/qwiic), was later adopted by Adafruit, which they call [STEMMA QT](https://learn.adafruit.com/introducing-adafruit-stemma-qt/what-is-stemma-qt).
 
-Adafruit sells a variety of STEMMA QT cables, including this [female-to-female](https://www.adafruit.com/product/4210) version (for ~$0.95) and this [female-to-male](https://www.adafruit.com/product/4209) jumper cable version ($0.95). You can use the female-to-female cable to daisy chain multiple devices together.
+Both [Sparkfun](https://www.sparkfun.com/categories/tags/qwiic-cables) and Adafruit sell a variety of Qwiic/STEMMA QT cables, including this [female-to-female](https://www.adafruit.com/product/4210) version (for ~$0.95) and this [female-to-male](https://www.adafruit.com/product/4209) jumper cable version ($0.95). You can use the female-to-female cable to daisy chain multiple devices together.
 
 | STEMMA QT / Qwiic Female-to-Female Cable | STEMMA QT / Qwiic Female-to-Male Jumper Cable |
 |:------------------------------------:|:--------------------------------:|
@@ -143,9 +99,9 @@ The video below shows the OLED display hooked up to a STEMMA QT [female-to-male 
 
 ### Testing the OLED display
 
-Once you've wired the OLED display, let's test it!
+Once you've wired the OLED display, we're ready to test it with some code!
 
-We will run one of the examples that ships with the [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306) library called [`ssd1306_128x64_i2c`](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino). This example iterates through a variety of drawing demonstrations, including: drawing lines, outlining and filling rectangles, circles, rounded rectangles, and triangles, rendering text with different styles, and drawing and animating bitmaps. You can view the [source code here](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino).
+We will run one of the examples that ships with the [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306) library called [`ssd1306_128x64_i2c`](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino). This example iterates through a variety of drawing demonstrations, including: drawing lines, outlining and filling rectangles, circles, rounded rectangles, and triangles, rendering text with different styles, and drawing and animating bitmaps. You can view the example [source code here](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino).
 
 To open and run the example, follow these steps.
 
@@ -163,35 +119,72 @@ Now, compile and upload the example.
 
 #### Step 3: Watch the demo
 
+Once the code has compiled and uploaded, it should look something like this:
+
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/AdafruitOLEDOfficialDemo0x3D-IMG_6160-Rotated-TrimmedAndSpedUp720p-Optimized.mp4" type="video/mp4" />
 </video>
 **Video** Running the demo [`ssd1306_128x64_i2c`](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino). Parts of this video are sped up 4x.
 {: .fs-1 }
 
+If you're curious how they rendered something, please do look over the [source code](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino). There is nothing magic here and reading the code may help inform your future prototypes!
+
 ## The Adafruit GFX Library
 
-To provide a common API for drawing across all Adafruit LCD and OLED displays, Adafruit created a general-purpose graphics rendering library, called [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview). Put simply, rather than having to individually turn on/off LEDs in the OLED matrix—which would be tedious (though perhaps a useful learning exercise)—the Adafruit GFX library provides higher level drawing routines to do this for you, like drawing rectangles, circles, text, and bitmaps.
+Now that we've got our OLED display wired up correctly and tested that it's working, let's talk about **how** to draw to the screen.
+
+To provide a common API for drawing across all Adafruit LCD and OLED displays, Adafruit created a general-purpose graphics rendering library, called [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview). Put simply, rather than having to individually turn on/off OLEDs in the OLED matrix—which would be tedious (though perhaps a useful learning exercise)—the Adafruit GFX library provides higher level drawing routines to do this for you, like drawing rectangles, circles, text, and bitmaps.
 
 ### Coordinate system and pixels
 
-If you're familiar with graphics APIs in other programming frameworks—like C#'s [System.Drawing library](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.graphics.drawline), [Processing's Java drawing library](https://processing.org/), [p5js' JavaScript drawing library](https://p5js.org/), *etc.*—the Adafruit GFX library works much the same.
+If you're familiar with graphics APIs in other programming frameworks—like C#'s [System.Drawing library](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.graphics.drawline), [Processing's Java drawing library](https://processing.org/), [p5js' JavaScript drawing library](https://p5js.org/), *etc.*—the Adafruit GFX library works much the same (at a high level).
 
-The black-and-white OLED consists of a matrix of LEDS, called pixels, which can be individually addressed to turn on/off (or, in the case of colored displays, to control individual RGB LEDs to create colors). As with all other drawing libraries, the coordinate system for these pixels places the origin `(0,0)` at the top-left corner with the `x-axis` increasing to the right and the `y-axis` increasing down.  
+The black-and-white OLED consists of a matrix of OLEDS, called pixels, which can be individually addressed to turn on/off (or, in the case of colored displays, to control individual RGB OLEDs to create colors). As with all other drawing libraries, the coordinate system for these pixels places the origin `(0,0)` at the top-left corner with the `x-axis` increasing to the right and the `y-axis` increasing down.
 
 ![](assets/images/AdafruitOLEDDisplay_CoordinateSystemAndPixels_ByJonFroehlich.png)
-**Figure** An overview of the 128x64 matrix of LEDs—we call each LED a "pixel". Image created in PowerPoint and uses images from Fritzing and the [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/coordinate-system-and-units) tutorial.
+**Figure** An overview of the 128x64 matrix of LEDs—we call each LED a "pixel". We've found that students sometimes flip the y-axis in their minds. So, make sure to note how the origin starts at `(0,0)` and the `x-axis` increases to the right and the `y-axis` increases down. Image created in PowerPoint and uses images from Fritzing and the [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/coordinate-system-and-units) tutorial.
 {: .fs-1 }
 
 Thus, to turn "on" the LED at pixel `(18, 6)` using [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview), we would write: `drawPixel(18, 6, SSD1306_WHITE)`. For black-and-white displays, the last argument can be either `SSD1306_WHITE` to draw a white pixel or `SSD1306_BLACK` to draw a black pixel (these constants are defined in [Adafruit_SSD1306.h](https://github.com/adafruit/Adafruit_SSD1306/blob/master/Adafruit_SSD1306.h)). For color displays, you can instead pass in a unsigned 16-bit value representing RGB colors (see [docs](https://learn.adafruit.com/adafruit-gfx-graphics-library/coordinate-system-and-units)).
 
 ### Drawing subsystem
 
-Below, we describe how to draw shapes, text, and bitmaps. Importantly, when you call any of the drawing routines—from `drawLine` to `drawTriangle`—you are **not** drawing directly to the OLED display. Instead, you are drawing to an offscreen buffer handled by the SSD1306 driver. So, after you call your drawing routines, you must then call the `void Adafruit_SSD1306::display()` function to push the data from RAM to the display.
+Below, we describe how to draw shapes, text, and bitmaps. Importantly, when you call any of the drawing routines—from `drawLine` to `drawTriangle`—you are **not** drawing directly to the OLED display. Instead, you are drawing to an offscreen buffer handled by the SSD1306 driver. So, after you call your drawing routines, you must then call the `void Adafruit_SSD1306::display()` function to push the data from RAM to the display. We'll show how to do this in your examples below.
+
+But, in short, the drawing pipeline looks like this:
+
+{% highlight C++ %}
+
+// Instantiate SSD1306 driver display object
+Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+void setup(){
+  Serial.begin(9600);
+  
+  // Initialize the display. If it fails, print failure to Serial
+  // and enter an infinite loop
+  if (!_display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) { // Address 0x3D for 128x64
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;); // Don't proceed, loop forever
+  }
+}
+
+void loop(){
+  // Clear the display
+  _display.clearDisplay();
+
+  // Put in drawing routines
+  // In this case, draw a circle at x,y location of 50,20 with a radius of 10
+  _display.fillCircle(50, 20, 10, SSD1306_WHITE);
+
+  // Render graphics buffer to screen
+  _display.display();
+}
+{% endhighlight C++ %}
 
 ### Drawing shapes
 
-The Adafruit GFX library current supports drawing lines, rectangles, circles, rounded rectangles, and triangles. For all shapes, you can draw an outlined version (*e.g.,* `drawRect`) or a filled version (*e.g.,* `fillRect`).
+The Adafruit GFX library current supports drawing lines, rectangles, circles, rounded rectangles, and triangles. For all shapes, you can draw an outlined version (*e.g.,* `drawRect`) or a filled version (*e.g.,* `fillRect`). The images below are drawn from the [Adafruit GFX tutorial](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives).
 
 | Shape and API call | Output |
 |-------|:--------:| 
@@ -200,6 +193,18 @@ The Adafruit GFX library current supports drawing lines, rectangles, circles, ro
 |**Circles**<br> `void drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);` <br><br> `void fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/272/large1024/lcds___displays_circle.png) `drawCircle(14, 8, 7, SSD1306_WHITE)` |
 |**Rounded Rectangles**<br> `void drawRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);` <br><br> `void fillRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/274/large1024/lcds___displays_roundrect.png) `drawRoundRect(3, 1, 17, 12, 5, SSD1306_WHITE)` |
 |**Triangles**<br> `void drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);` <br><br> `void fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/275/large1024/lcds___displays_triangle.png) `drawTriangle(6, 13, 9, 2, 18, 9, SSD1306_WHITE)` |
+
+#### Drawing custom shapes
+
+You can, of course, create custom shapes either by cleverly combining shape primitives (*e.g.,* a rectangle and a triangle to make a basic house) or by implementing your own drawing algorithm and calling `drawPixel`.
+
+| Shape and API call | Output |
+|-------|:--------:| 
+|**Pixels**<br> `void drawPixel(uint16_t x, uint16_t y, uint16_t color);` | ![](https://cdn-learn.adafruit.com/assets/assets/000/001/264/medium800/lcds___displays_coordsys.png?1396770439) `drawPixel(0, 0, SSD1306_WHITE)` <br> `drawPixel(18, 6, SSD1306_WHITE)` <br> `drawPixel(6, 13, SSD1306_WHITE)` |
+
+#### Optimized vertical and horizontal line drawing
+
+If you are drawing purely vertical or horizontal lines, then you can use optimized line-drawing functions that avoid angular calculations. For example, we use `drawFastVLine` in our [analog graphing demos](#demo-3-basic-real-time-analog-graph) below.
 
 For more information and examples, see the [Basic Drawing section](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-basic-drawings) of Last Minute Engineer's OLED display tutorial.
 
@@ -217,7 +222,7 @@ To draw a single character, you specify a `(x, y)` location, the character, the 
 
 #### Method 2: Print rendering
 
-The more common and feature-rich method to draw text is via the `print` subsystem. Interestingly, the [Adafruit_GFX class](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) actually extends the [Print class](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) from the Arduino core library. Rather than call `Serial.print("Hello World")`, however, with the OLED display and Adafruit GFX library, you would call `oledDisplay.print("Hello World")`. Here, `oledDisplay` is the `Adafruit_SSD1306` object.
+The more common and feature-rich method to draw text is via the `print` subsystem. Interestingly, the [Adafruit_GFX class](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) actually extends the [Print class](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) from the Arduino core library. Rather than call `Serial.print("Hello World")`, however, with the OLED display and Adafruit GFX library, you would call `_display.print("Hello World")`. Here, `_display` is the `Adafruit_SSD1306` object.
 
 To use the OLED's print functionality, you can first set optional parameters such as the text color, size, and wrapping:
 
@@ -283,7 +288,7 @@ _display.setTextColor(WHITE, BLACK);
 // by reference so that they are set within the function itself.
 _display.getTextBounds(strHello, 0, 0, &x, &y, &textWidth, &textHeight);
 
-// Center the text on the display
+// Center the text on the display (both horizontally and vertically)
 _display.setCursor(_display.width() / 2 - textWidth / 2, _display.height() / 2 - textHeight / 2);
 
 // Print out the string
@@ -311,7 +316,7 @@ Finally, you can load and render custom bitmaps on the display. See ["Displaying
 
 <!-- TODO: consider recording a video of how to do this or at least showing a video or picture of it working -->
 
-### Resources
+### Adafruit GFX Resources
 
 Before moving forward, we strongly encourage you to read the official [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives) tutorial and the "Last Minute Engineers" [OLED tutorial](https://lastminuteengineers.com/oled-display-arduino-tutorial/)—both offer great overviews of the Adafruit GFX library and how to [display text](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-text), [draw shapes](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-basic-drawings), and [load and display bitmaps](https://lastminuteengineers.com/oled-display-arduino-tutorial/#arduino-code-displaying-bitmap). 
 
@@ -319,11 +324,11 @@ In addition, you can:
 
 - View the Adafruit GFX library source code [here](https://github.com/adafruit/Adafruit-GFX-Library), including the [Adafruit_GFX.h](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h), which shows the available API. Yes, depending on your familiarity with C++ and reading .h files, this might be intimidating or overwhelming—but it's important to demystify these libraries. They are just source code that devs wrote. And, with experience, you could too!
 
-- Examine our own OLED examples [here](https://github.com/makeabilitylab/arduino/tree/master/OLED), including the [Hello World](https://github.com/makeabilitylab/arduino/blob/master/OLED/HelloWorld/HelloWorld.ino) example mentioned above, a simple animation example called [BallBounce](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), an [object-oriented version](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounceObjectOriented/BallBounceObjectOriented.ino) of this animation using the [Shape.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Shape.hpp) class from the [Makeability Lab Arduino library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library), and simple games such as a [collision test](https://github.com/makeabilitylab/arduino/blob/master/OLED/CollisionTest/CollisionTest.ino), [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), and [Flappy Bird](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino).
+- Examine our own OLED examples [here](https://github.com/makeabilitylab/arduino/tree/master/OLED), including the [Hello World](https://github.com/makeabilitylab/arduino/blob/master/OLED/HelloWorld/HelloWorld.ino) example mentioned above, a simple animation example called [BallBounce](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), an [object-oriented version](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounceObjectOriented/BallBounceObjectOriented.ino) of this animation using the [Shape.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Shape.hpp) class from the [Makeability Lab Arduino library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library), and simple games such as a [collision test](https://github.com/makeabilitylab/arduino/blob/master/OLED/CollisionTest/CollisionTest.ino), [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), and [Flappy Bird](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino). We'll go over some of these below.
 
 ## Let's make stuff!
 
-In this part of the lesson, we are going to make a variety of OLED-based creations. Most of the source code that we reference is [here](https://github.com/makeabilitylab/arduino/tree/master/OLED).
+In this part of the lesson, we are going to make a variety of OLED-based creations. This should be fun! As mentioned, we have a [GitHub repo of OLED examples](https://github.com/makeabilitylab/arduino/tree/master/OLED), some of which we describe below.
 
 ### Activity: draw shapes and text
 
@@ -332,7 +337,8 @@ First, to get a feel for and experience with the Adafruit GFX API and the coordi
 Remember, in `loop()`, you need to:
 
 {% highlight C++ %}
-// Clear the display
+// Clear the display. If we don't do this, we'll simply be drawing over our
+// previous renderings (which you may sometimes want but generally not)
 _display.clearDisplay();
 
 // Put in drawing routines
@@ -342,40 +348,48 @@ drawStuff();
 _display.display();
 {% endhighlight C++ %}
 
-I made a version, [called SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino) that draws shapes of random sizes and locations on **each frame** but you could do something even simpler (or more complex)!
+I made a version, called [SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino) that draws shapes of random sizes and locations on **each frame** but you could do something even simpler (or more complex)!
 
-<!-- TODO: insert video of my version -->
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/OLEDSimpleDrawingDemo-IMG_6188-TrimmedAndOptimized720p.mp4" type="video/mp4" />
+</video>
+**Video** A demonstration of [SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino).
+{: .fs-1 }
 
-#### Prototyping journals
+#### Shape drawing prototyping journal activity
 
 For your prototyping journals, create your own shape/text drawing demo. Take a picture or, if there is animation, record a short video or animated gif. In your journals, link to the code, insert the pictures/videos, and reflect on what you learned.
 
 ### Activity: draw a bouncing ball
 
-Now that we've gained some familiarity of the drawing API and graphics pipeline, let's now learn a bit about animation.
+Now that we've gained some familiarity of the drawing API and graphics pipeline, let's now learn a bit about **animation**.
 
-We are going to draw a simple bouncing ball around the screen. Bouncing or reflecting objects are one of the key components of many games, including [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), [Arkanoid](https://en.wikipedia.org/wiki/Arkanoid), *etc.*.
+We are going to draw a simple bouncing ball around the screen. Bouncing or reflecting objects are one of the key components of many games, including [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), [Arkanoid](https://en.wikipedia.org/wiki/Arkanoid), *etc.*
 
 To create a bouncing ball, we need to:
+
 - Track the **x,y location** of the ball across frames
 - Set a **x,y speed** in pixels per frame—that is, how much the does the ball move per frame? For smoother animation, we could track x,y speed in terms of time (*e.g.,* pixels/second); however, this is slightly more complicated (*e.g.,* it requires tracking timestamps in the code, computing time deltas, *etc.*). For our purposes, tracking x,y speed in terms of pixels/frame is fine.
 - Check for **collisions** when the ball collides with the ceiling, floor, or walls of the screen. When a collision occurs, simply reverse the direction of the ball.
+- **Draw** the circle at the given x,y location.
 
 #### Prototyping ideas with p5js
 
-Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animation/BallBounce2D/) we made in [p5js](https://p5js.org/). Sometimes, it's useful to prototype a visualization or game idea in a rapid programming environment like [p5js](https://p5js.org/) or [Processing](https://processing.org/) before coding it up in C++ for Arduino (and it's easier to debug in those environments as well). In this case, we had already created a bouncing ball demo in the past but linking it here allows you to draw parallels between the two implementations. You can edit and play with this demo in your browser [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) using the p5js online editor.
+Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animation/BallBounce2D/) we made in [p5js](https://p5js.org/). Sometimes, it's useful to prototype a visualization or game idea in a rapid programming environment like [p5js](https://p5js.org/) or [Processing](https://processing.org/) before coding it up in C++ for Arduino (and it's easier to debug in those environments as well). You can edit and play with this demo in your browser [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) using the p5js online editor.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/BallBouncing_p5js.mp4" type="video/mp4" />
 </video>
 {: .mx-auto .align-center }
 
-**Video** A video of the Ball Bounce demo created in p5js. You can edit the source code and run it live in the p5js online editor [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk). Alternatively, you can [view the source](https://github.com/makeabilitylab/p5js/blob/master/Animation/BallBounce2D/sketch.js) in our [p5js GitHub repo](https://github.com/makeabilitylab/p5js).
+**Video.** A video of the Ball Bounce demo created in p5js. You can edit the source code and run it live in the p5js online editor [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk). Alternatively, you can [view the source](https://github.com/makeabilitylab/p5js/blob/master/Animation/BallBounce2D/sketch.js) in our [p5js GitHub repo](https://github.com/makeabilitylab/p5js).
 {: .fs-1 }
 
 #### C++ implementation using Adafruit GFX
 
-For the C++ implementation using the Adafruit GFX library and Arduino, the key bits of code are excerpted below. Make sure you read over this code carefully and understand it.
+For the C++ implementation using the Adafruit GFX library and Arduino, the key bits of code are excerpted below. The overall implementation is quite similar to the [p5js version](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk). Make sure you read over this code carefully and understand it.
+
+Again, rather than, say "miles per hour" or "pixels per second", we've defined speed as "pixels per frame"—that is, how many pixels does the object move per frame. If we set `_xSpeed` to 5 and `_ySpeed` to 0, then the ball would move 5 x-pixels per frame (and simply bounce back and forth from the left side of the screen to the right and back again).
 
 {% highlight C++ %}
 // Create the display object
@@ -424,37 +438,45 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-You can find the full code, called [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino), [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino). 
+You can view the full code on GitHub as [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino). 
+
+<!-- TODO: insert video. -->
 
 #### Bitmap bounce
 
 We also have a similar "bounce" demo, called [BitmapBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino), that uses a bitmap rather than a graphic primitive. To create the the bitmap byte dump, we used this [image2cpp](http://javl.github.io/image2cpp/) tool on this [Makeability Lab logo](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/logo_bw_no_text_600w.png).
 
-<!-- TODO: add video of ballbounce.ino and bitmapbounce.ino -->
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/OLEDBouncingBitmap-IMG_6180-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A video of [BitmapBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino).
+{: .fs-1 }
 
-#### Prototyping journals
+#### Animation prototyping journal activity
 
-For your prototyping journals, create your animation demo, record a short video or animated gif, link to the code, and reflect on what you learned. As one simple example, change the object bouncing around from a circle to a rectangle. 
-
-If you want something more challenging, try bouncing a triangle around the screen and using the entry angle and triangle angles to properly calculate the reflection (it's probably easiest to do this using [vector calculations](https://makeabilitylab.github.io/p5js/Vectors/BouncingBallsAndLineSegmentsImproved/)). Or you could use the `drawLine` method to animate rain fall similar to this [Purple Rain video](https://youtu.be/KkyIDI6rQJI) by the [Coding Train](https://thecodingtrain.com/). While this was made for p5js, it would fairly straightforward to translate to Arduino and the Adafruit GFX library.
+For your prototyping journals, create a custom animation demo, record a short video or animated gif, link to the code, and reflect on what you learned. As one simple example, change the object bouncing around from a circle to a rectangle. If you want something more challenging, try bouncing a triangle around the screen and using the entry angle and triangle angles to properly calculate the reflection (it's probably easiest to do this using [vector calculations](https://makeabilitylab.github.io/p5js/Vectors/BouncingBallsAndLineSegmentsImproved/)). Or you could use the `drawLine` method to animate rain fall similar to this [Purple Rain video](https://youtu.be/KkyIDI6rQJI) by the [Coding Train](https://thecodingtrain.com/). While this was made for p5js, it would fairly straightforward to translate to Arduino and the Adafruit GFX library.
 
 ### Activity: interactive graphics
 
-Finally, for our last activity, let's make a few interactive prototypes.
+Finally, for our last activity, let's make a few **interactive prototypes**—that is, graphics that respond to digital or analog input. Interactivity captures the true essence of physical computing. And for an [HCI professor](https://jonfroehlich.github.io/) like me, this is where the joy really begins!
 
-#### Setting ball size based on analog input
+We are going to cover multiple demos. We would like you to read through and attempt to understand each one. For your prototyping journals, select one demo to run and record in your journals. We also have 
 
-We'll start with changing a shape's size based on sensor input on `A0`. While you can use whatever sensor you want on `A0`, for this demonstration, we will use a [potentiometer](../arduino/potentiometers.md).
+#### Demo 1: Setting ball size based on analog input
+
+We'll start with changing a shape's size based on sensor input. While you can use whatever sensor you want, for this demonstration, we will use our ole trusty [potentiometer](../arduino/potentiometers.md) hooked up to `A0`.
 
 ##### The OLED + pot circuit
 
 Here's the circuit. Same as before but we've added a 10K potentiometer.
 
 ![](assets/images/OLED_ArduinoLeonardo_POT_CircuitDiagram.png)
+**Figure** A basic OLED circuit with [potentiometer](../arduino/potentiometers.md) input on `A0`.
+{: .fs-1 }
 
 ##### The OLED + pot code 
 
-The code is fairly simple: read the analog input and use this to set the circle's radius.
+The code is simple: read the analog input and use this to set the circle's radius.
 
 {% highlight C++ %}
 void loop() {
@@ -487,7 +509,13 @@ void loop() {
 
 You can view the full code on GitHub as [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino).
 
-#### Setting ball location based on analog input
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/OLEDAnalogBallSize-IMG_6189-TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** A video of [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino).
+{: .fs-1 }
+
+#### Demo 2: Setting ball location based on analog input
 
 Now let's hook up **two** analog inputs to control the x,y location of the circle rather than the size. In this case, we'll use two potentiometers. The wiring diagram is below.
 
@@ -530,13 +558,15 @@ You can view the full code on GitHub as [AnalogBallLocation.ino](https://github.
 **Video** A demonstration of [AnalogBallLocation.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallLocation/AnalogBallLocation.ino) using potentiometers on `A0` and `A1`.
 {: .fs-1 }
 
-#### Basic real-time analog graph
+#### Demo 3: Basic real-time analog graph
 
-One of the most famous Arduino + Processing demo' is the real-time analog sensor graph ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph)): the Arduino reads sensor data using `analogRead` then transmits it to the computer using `Serial.println()` where it is parsed and graphed using [Processing](https://processing.org/).
+One of the most famous [Arduino](https://www.arduino.cc/) + [Processing](https://processing.org/) demo' is the real-time analog sensor graph ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph)): the Arduino reads sensor data using `analogRead` then transmits it to the computer using `Serial.println()` where it is parsed and graphed using [Processing](https://processing.org/).
 
 With the OLED display and the Adafruit GFX library, we can easily recreate this entirely on the Arduino!
 
-The idea is simple: read in a sensor value as `sensorVal`, draw a vertical line at `xPos` of a length proportional `sensorVal`, increment `xPos`, repeat. When `xPos >= _display.width()`, set `xPos` back to zero and start the whole process over.
+The idea is simple: read in a sensor value as `sensorVal`, draw a vertical line at `xPos` of a length proportional to `sensorVal`, increment `xPos`, repeat. When `xPos >= _display.width()`, set `xPos` back to zero, clear the display, and start the whole process over.
+
+Notably, this code takes advantage of **selectively** calling `_display.clearDisplay()`. Unlike the other examples we've shared thus far—which clear the display on each frame—here, we take advantage of graphics persisting across `_display.display()` calls to "build up" our graph over time. That is, we only draw **one** new line per new sensor input, which persists on the screen until `_xPos >= _display.width()` at which point we call `_display.clearDisplay()`.
 
 {% highlight C++ %}
 void loop() {
@@ -569,10 +599,10 @@ The full source code is available in our [OLED GitHub](https://github.com/makeab
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/OLEDAnalogGraph_TrimmedAndOptimized720p.mp4" type="video/mp4" />
 </video>
-**Video** A demonstration of [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) using a potentiometer for analog input on `A0`.
+**Video** A demonstration of [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) using a potentiometer for analog input on `A0`. We also show the currently sensed `A0` value in the upper-left corner and our frame rate (fps) in the upper-right corner.
 {: .fs-1 }
 
-#### Real-time scrolling analog graph
+#### Demo 4: Real-time scrolling analog graph
 
 A slightly improved but more complicated version of the analog graph is a **scrolling** implementation. Rather than clearing the display when `xPos >= _display.width()`, we simply "scroll" the content to the left. For memory and computational efficiency, we implement this with a circular buffer, which is the size of our screen width (so, 64 values—one for each x pixel).
 
@@ -583,7 +613,8 @@ int _circularBuffer[SCREEN_WIDTH]; //fast way to store values
 int _curWriteIndex = 0; // tracks where we are in the circular buffer
 
 void loop() {
-  // Clear the display on each frame. We draw from the _circularBuffer
+  // Clear the display on each frame. We draw the entire graph on each frame 
+  // from the _circularBuffer
   _display.clearDisplay();
 
   // Read and store the analog data into a circular buffer
@@ -622,23 +653,14 @@ The full source code is available in our [OLED GitHub](https://github.com/makeab
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/OLED_ScrollingGraphDemo-IMG_6192-TrimmedAndOptimized720p.mp4" type="video/mp4" />
 </video>
-**Video** A demonstration of [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino) using a potentiometer for analog input on `A0`.
+**Video** A demonstration of [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino) using a potentiometer for analog input on `A0`. We also show the currently sensed `A0` value in the upper-left corner and our frame rate (fps) in the upper-right corner.
 {: .fs-1 }
 
 Which graph version do you prefer? [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) or [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino)? We personally prefer the latter!
 
 #### Prototyping journal
 
-For your prototyping journals, rapidly prototype an interactive OLED demo using a sensor of your own choosing and a simple
-
-<!-- You could imagine using the analog input to, instead, control the x-location of the circle. Or hook up two analog inputs (one to `A0` and the other to `A1`) to control the x- and y-location of the circle—and now you're starting to create the foundations of a simple game and game controller! -->
-
-<!-- TODO: add interaction -->
-<!-- ### Adding interaction
-
-- Draw analog input value centered
-- Ball that changes size depending on analog input
-- Switch to FSR -->
+For your prototyping journals, rapidly prototype an interactive OLED demo using a sensor of your own choosing and a design a simple visualization or responsive graphic around that input. In your journal, include a brief description with short video (or animated gif) and reflect on what you learned. As one simple idea to give you an idea of what we're looking for here, how about combine animation + interactivity: what if you changed the ball speed in [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino) based on sensed input?
 
 <!-- 
 Activity outline:

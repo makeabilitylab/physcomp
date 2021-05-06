@@ -3,6 +3,7 @@
 ## Outline
 
 - Bring in Jonggi's work about looking at diff between motors
+- Go into my slides to find interesting haptic examples
 - Linear resonate actuators vs. ERMs
 
 - Coin or pancake motors:
@@ -43,12 +44,15 @@ Leaders:
 - Gaming. Nintendo was the first to support haptic feedback in their controllers with the introduction of the rumble pack accessory for the N64, which was extended and concretized by PlayStation dualshock controllers (one vibromotor per "handle") 
 - VR/AR applications
 - Vehicle feedback (pilot warning)
+- accessibility
 
 ### Vibrotactile feedback
 TODO: describe
 
 #### Vibrotactile feedback patterns
 - Maybe look at stephen brewster work? Or our jonggi paper?
+
+#### Just noticeable differences (JND)
 
 ### Some zanier examples
 
@@ -77,7 +81,6 @@ Sidhant Gupta, Dan Morris, Shwetak N. Patel, and Desney Tan. 2013. AirWave: non-
 
 One leader in this area is [Dr. Sriram Subramanian](https://subramaniansri.github.io/), a professor at the University College London and an expert in inventing novel user interfaces using the "*computational manipulation of acoustic wavefronts*"
 
-
 ### Operating specifications
 
 The [datasheet](https://cdn-shop.adafruit.com/product-files/1201/P1012_datasheet.pdf) for the [Adafruit vibrating mini-motor disc](https://www.adafruit.com/product/1201) states the following operating specifications.
@@ -91,8 +94,33 @@ The [datasheet](https://cdn-shop.adafruit.com/product-files/1201/P1012_datasheet
 | Starting voltage | 2.3V |
 | Starting current | Up to ~120mA |
 
+### Wiring up the vibro-motor
+
+- http://www.learningaboutelectronics.com/Articles/Vibration-motor-circuit.php
+- https://www.precisionmicrodrives.com/content/how-to-drive-a-vibration-motor-with-arduino-and-genuino/ 
+
+### Haptic motor drivers
+
+When haptics play a key role in a project, you should consider using a [haptic motor driver](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide?_ga=2.87552344.1190007566.1620233503-935977820.1612992862), which makes it easier to interface and work with vibration motors and drive complex haptic patterns.
+
+For example, Texas Instruments (TI) sells a variety of [haptic motor drivers](https://www.ti.com/motor-drivers/actuator-drivers/overview.html). The popular [TI DRV2605](https://www.ti.com/lit/ds/symlink/drv2605.pdf) provides a [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C)-based interface to control both ERM and LRA motors, generates its own the pulse-width modulated (PWM) waveforms, relieving the host microcontroller of this responsibility saving timer interrupts and hardware pins, and includes an integrated library of 123 licensed haptic patterns, reducing the need to design and implement software to create custom haptic effects.
+
+![](assets/images/TI_DRV205L_123LicensedHapticEffects.png)
+**Figure.** The [TI DRV2605L](https://www.ti.com/lit/ds/symlink/drv2605l.pdf) includes a preprogrammed library of over 100 haptic waveform effects, including single, double, and triple clicks, alerts, and transitions. These haptic patterns are licensed from Immersion Corporation. See page 63 of the [TI DRV2605L](https://www.ti.com/lit/ds/symlink/drv2605l.pdf) datasheet. Right-click on the image and select "Open image in new tab" to zoom in.   
+
+Both [Adafruit](https://www.adafruit.com/product/2305) and [SparkFun](https://www.sparkfun.com/products/14538) provide custom breakout boards to interface with the [TI DRV2605](https://www.ti.com/lit/ds/symlink/drv2605.pdf) IC.
+
+| SparkFun Haptic Breakout Board for TI DRV2605L | Adafruit Haptic Breakout Board for TI DRV2605L |
+| ![](assets/images/SparkFunHapticMotorDriver_DRV2605L.png) | ![](assets/images/AdafruitHapticMotorDriver_DRV2605L.png) |
+| $8.50 from [SparkFun](https://www.sparkfun.com/products/14538) | $7.95 from [Adafruit](https://www.adafruit.com/product/2305) |
+
+You can also purchase breakout boards with the vibration motor and haptic driver integrated together like this [SparkFun DA7280 Haptic Driver](https://www.sparkfun.com/products/17590) with Qwiic [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) connectors.
+
+For more information on using haptic motor drivers with Arduino, see [SparkFun's Haptic Motor Driver Hook-up Guide](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide).
 
 ## Resources:
+
+- [Haptic Motor Driver Arduino Hook-Up Guide](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide), SparkFun.com
 
 - http://www.learningaboutelectronics.com/Articles/Vibration-motor-circuit.php
 
@@ -101,6 +129,8 @@ The [datasheet](https://cdn-shop.adafruit.com/product-files/1201/P1012_datasheet
 - [Apple Taptic Engine Teardown](https://youtu.be/Nz3Z2XQZpJs), YouTube video by Chris M.
 
 - [The Amazing Evolution of Rumble/Vibration in Controllers](https://youtu.be/O18cHHOB0yY), GamingBolt
+
+- [Expanding the Sensory Experience with Core Haptics](https://developer.apple.com/videos/play/wwdc2019/223/), WWDC2019
 
 Nice overview article:
 - Fleury, A Survey on the Use of Haptic Feedback for Brain-Computer Interfaces and Neurofeedback, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7325479/
@@ -122,3 +152,7 @@ Apple iOS Haptics:
 - https://developer.apple.com/design/human-interface-guidelines/ios/user-interaction/haptics/
 - https://developer.apple.com/documentation/uikit/animation_and_haptics
 
+- A nice video explaining haptics 101: https://developer.apple.com/videos/play/wwdc2019/223/
+  - Starts at 4min. Discusses continuous and transient haptics. Finishes at 5:51 mins
+  - 10:37: great overview of visual, audio, and haptics synchronized. Talks alot about multimodality.
+  - Nice overview of how they did some watch feedback at 24 mins

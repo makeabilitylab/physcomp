@@ -36,6 +36,8 @@ Master/slave
 
 - Hook up multiple devices at once with daisy chaining. Link to color sensor video
 
+TODO: in future compare i2c and SPI. I believe SPI is faster
+
 - -->
 
 <video autoplay loop muted playsinline style="margin:0px">

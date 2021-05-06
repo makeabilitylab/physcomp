@@ -1,85 +1,29 @@
 
 
-## Outline
-
-- Bring in Jonggi's work about looking at diff between motors
-- Go into my slides to find interesting haptic examples
-- Linear resonate actuators vs. ERMs
-
-- Coin or pancake motors:
-  - https://www.precisionmicrodrives.com/vibration-motors/coin-vibration-motors/
-  - 
-
-- Show Tinkercad example?
-
-- Show vibration motor. Talk about 3M adhesive tape. Affix to things, make them vibrate.
-
-- Overview of Haptics generally with link to IEEE haptics conference. Define haptics, etc.
-- Show pictures of lots of diff haptic motors (maybe drawn from precision microdrive website)
-
-- Great overview of vibration motors with a video:
-  - https://www.precisionmicrodrives.com/vibration-motors/
-
-- Overview all of the tactile things that people can feel
-
-- Silly examples of things people have made with vibromotors? Like the automatic moving robot thing
-    - Also check my slides for examples
 
 
-- Haptic drivers
-  - TI DRV2605 Haptic Driver: https://youtu.be/y5nf-8N7J7g
+## Transistors
 
-## What are haptics?
+[Transistors](https://en.wikipedia.org/wiki/Transistor) are semiconductor devices used to amplify or switch electronic signals. They are used in almost every modern electronic device from smartphones to amplifiers in your headphones. 
 
-Leaders:
-[Dr. Hong Z. Tan](https://engineering.purdue.edu/~hongtan/), a professor in Electrical and Computer Engineering at Purdue University
-[Dr. Stephen Brewster](https://scholar.google.com/citations?hl=en&user=uu7LudIAAAAJ), a professor in the School of Computing Science at the University of Glasgow
-[Dr. Pedro Lopes](http://plopes.org/), a professor in Computer Science at the University of Chicago
-[Dr. Karon MacLean](https://scholar.google.com/citations?user=qANkJFwAAAAJ&hl=en&oi=sra), a professor in Computer Science at the University of British Columbia
-[Dr. Allison Okamura](http://charm.stanford.edu/), a professor in Mechanical Engineering at Stanford University
+The invention of the transistor in 1947 marked the beginning of the [computing revolution](https://en.wikipedia.org/wiki/History_of_computing_hardware_(1960s%E2%80%93present)#Third_generation), allowing electrical circuits to rapidly switch off (`0`) and on (`1`) to create [logic gates](https://en.wikipedia.org/wiki/Logic_gate), [accumulators](https://en.wikipedia.org/wiki/Accumulator_(computing)), and other computational building blocks. Before transistors, computers used [vacuum tubes](https://en.wikipedia.org/wiki/Vacuum_tube_computer), which were slower, less robust, much larger, and required significantly more power.
 
-### Where are they used?
+Transistors come in a variety of shapes, sizes, and operating specifications. There are two common designs: **BJTs** (Bipolar Junction Transistors), which we'll use in this lesson and are applicable to small-current loads (< 1A), and **MOSFETS** (Metal-Oxide Semiconductor Field Effect Transistors), which are well-suited for higher-current loads (and often come with built-in heat sinks).
 
-- Remote surgery feedback
-- Gaming. Nintendo was the first to support haptic feedback in their controllers with the introduction of the rumble pack accessory for the N64, which was extended and concretized by PlayStation dualshock controllers (one vibromotor per "handle") 
-- VR/AR applications
-- Vehicle feedback (pilot warning)
-- accessibility
+TODO: insert pictures of two transistors.
 
-### Vibrotactile feedback
-TODO: describe
+While transistors deserve their own lesson (indeed, multiple lessons), for our purposes here, two attributes are relevant:
 
-#### Vibrotactile feedback patterns
-- Maybe look at stephen brewster work? Or our jonggi paper?
+- First, transistors can **amplify** electronic signals. You can control transistors with *small* amounts of current (to turn them on and off) but the signal they control can be much *larger*. On the Arduino, recall that our GPIO pins can only supply 40mA of continuous current (maximum!); however, [RGB LED strips](https://learn.adafruit.com/rgb-led-strips/usage) can easily require 1A and even small [DC hobby motors](https://www.adafruit.com/product/711) use between 70-250mA. Even the tiny pancake vibromotor used in this lesson has a rated current of 75mA and a startup current of up to ~120mA. We need transistors to control these high-current circuits from our low-current source (GPIO pins).
 
-#### Just noticeable differences (JND)
+- Second, because transistors can **rapidly switch on and off**, they can use pulse-width modulation. That is, your microcontroller can supply a PWM signal to the transistor's control input, which will modulate the same PWM signal, but amplified, on the transistor's output. Thus, we can use PWM via our transistor to control the vibration strength of our vibromotor.
 
-### Some zanier examples
+### The BJT Transistor
 
-- Wireality by Cathy Fang and Chris Harrison, https://cathy-fang.com/project/wireality.html
-- Impacto by Pedro Lopes, Alexandra Ion, and Patrick Baudisch, https://youtu.be/k5e4mXQLq54
-- Magneto by Alex Mazurksy, Shan-Yuan Teng, et al. and Pedro Lopes: https://youtu.be/9bm7lBhwhwY. Shorter video: https://youtu.be/hsCo3g3JKy0  
-- 
-- Tesla touch: Olivier Bau, Ivan Poupyrev, Ali Israr, and Chris Harrison. 2010. TeslaTouch: electrovibration for touch surfaces. In Proceedings of the 23nd annual ACM symposium on User interface software and technology (UIST '10). Association for Computing Machinery, New York, NY, USA, 283–292. DOI:https://doi.org/10.1145/1866029.1866074. Video: https://youtu.be/3l3MDNZk-3I
+Show 
 
-Related to Tesla touch is follow-up work by the same team exploring how different tactile-rendering algorithms to simulate 3D geometric features such as bumps on a touch screen surface:
+## Vibromotors
 
-- Seung-Chan Kim, Ali Israr, and Ivan Poupyrev. 2013. Tactile rendering of 3D features on touch surfaces. In <i>Proceedings of the 26th annual ACM symposium on User interface software and technology</i> (<i>UIST '13</i>). Association for Computing Machinery, New York, NY, USA, 531–538. DOI:https://doi.org/10.1145/2501988.2502020. Video here: https://youtu.be/zo1n5CyCKr0
-
-Also follow-up work with Revel: Programming the Sense of Touch: https://youtu.be/L7DGq8SddEQ. Olivier Bau, Ivan Poupyrev, Mathieu Le Goc, Laureline Galliot, and Matthew Glisson. 2013. Revel: programming the sense of touch. In CHI '13 Extended Abstracts on Human Factors in Computing Systems (CHI EA '13). Association for Computing Machinery, New York, NY, USA, 2785–2786. DOI:https://doi.org/10.1145/2468356.2479511
-
-
-
-### Non-contact haptics
-
-Propelled by virtual and augmented reality and the emergence of optical-based input techniques like the [Microsoft Kinect](https://en.wikipedia.org/wiki/Kinect) or [Leap Motion Controller](https://www.ultraleap.com/product/leap-motion-controller/) where a user interacts with a computer **without** touching or holding an input device, there has been increased interest in non-contact haptics. That is, haptics that are modulated through air.
-
-TODO: insert brief looping video of Sidhant's work
-https://youtu.be/b5vzvMCmiyQ
-
-Sidhant Gupta, Dan Morris, Shwetak N. Patel, and Desney Tan. 2013. AirWave: non-contact haptic feedback using air vortex rings. In Proceedings of the 2013 ACM international joint conference on Pervasive and ubiquitous computing (UbiComp '13). Association for Computing Machinery, New York, NY, USA, 419–428. DOI:https://doi.org/10.1145/2493432.2493463
-
-One leader in this area is [Dr. Sriram Subramanian](https://subramaniansri.github.io/), a professor at the University College London and an expert in inventing novel user interfaces using the "*computational manipulation of acoustic wavefronts*"
 
 ### Operating specifications
 
@@ -94,16 +38,54 @@ The [datasheet](https://cdn-shop.adafruit.com/product-files/1201/P1012_datasheet
 | Starting voltage | 2.3V |
 | Starting current | Up to ~120mA |
 
+The ERM vibromotor is a type of DC motor—though a very tiny one. STARTUP CURRENT
+
 ### Wiring up the vibro-motor
+
+Specifically, the NPN bipolar transistors we use in our courses are the [PN2222A](https://www.adafruit.com/product/756) transistors (and variants such as the [2N2222A](https://components101.com/transistors/2n2222a-pinout-equivalent-datasheet)).
+
+You need a resistor in series with the control input pin (base pin) on the transistor. In this case, a 1kΩ resistor works well.
+
+<!-- 1023 | 255 | 0.012 A | 75.55
+900 | ~225 | 0.011 A | 65 mA
+800 | 199 | 0.009A | 58 mA
+700 | 174 | 0.008A | 52 mA
+600 | 149 | 0.007A | 45 mA
+400 | 99 | 0.005A | 32 mA
+300 | 75 | 0.004A | 25 mA
+200 | 50 | 0.002A | 15 mA
+160 | 40 | 0.002A | 12 mA (turned off)
+100 | 25 | 0.001A | 6.1 mA -->
+
+TODO: Take video of experimental  setup.
 
 - http://www.learningaboutelectronics.com/Articles/Vibration-motor-circuit.php
 - https://www.precisionmicrodrives.com/content/how-to-drive-a-vibration-motor-with-arduino-and-genuino/ 
+- http://www.ermicro.com/blog/?p=423
+- Transistor gain: https://www.electronics-notes.com/articles/electronic_components/transistor/current-gain-hfe-beta.php
+
+### Tinkercad version
+
+You 
+
+<iframe width="725" height="453" src="https://www.tinkercad.com/embed/dlqdbv0SFV4?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+Though messier, we also [made a version](https://www.tinkercad.com/things/jGRVrL9C8Jv) with ammeters to track (1) the current through the vibromotor and into the transistor emitter, (2) the current into the transistor's base pin (the control pin), and (3) current out of the emitter.
+
+![](assets/images/VibromotorTransistorPotCircuit_WithAmmeters_Tinkercad.png)
+**Figure.** We remixed the original vibromotor Tinkercad circuit to include ammeters ([link](https://www.tinkercad.com/things/jGRVrL9C8Jv)).
+{: .fs-1 }
+
+## Generating haptic patterns
+TODO: have students make a haptic pattern or two. Maybe schedule a timer interrupt to do this?
+
+Are there Arduino libraries for this?
 
 ### Haptic motor drivers
 
 When haptics play a key role in a project, you should consider using a [haptic motor driver](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide?_ga=2.87552344.1190007566.1620233503-935977820.1612992862), which makes it easier to interface and work with vibration motors and drive complex haptic patterns.
 
-For example, Texas Instruments (TI) sells a variety of [haptic motor drivers](https://www.ti.com/motor-drivers/actuator-drivers/overview.html). The popular [TI DRV2605](https://www.ti.com/lit/ds/symlink/drv2605.pdf) provides a [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C)-based interface to control both ERM and LRA motors, generates its own the pulse-width modulated (PWM) waveforms, relieving the host microcontroller of this responsibility saving timer interrupts and hardware pins, and includes an integrated library of 123 licensed haptic patterns, reducing the need to design and implement software to create custom haptic effects.
+For example, Texas Instruments (TI) sells a variety of [haptic motor drivers](https://www.ti.com/motor-drivers/actuator-drivers/overview.html). The popular [TI DRV2605](https://www.ti.com/lit/ds/symlink/drv2605.pdf) provides a [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C)-based interface to control both ERM and LRA motors, generates its own the pulse-width modulated (PWM) waveforms, which relieves the host microcontroller of this responsibility saving hardware pins and reducing code complexity (*e.g.,* setting precise timer interrupts for waveform generation), and includes an integrated library of 123 licensed haptic patterns, reducing the need to design and implement software to create custom haptic effects.
 
 ![](assets/images/TI_DRV205L_123LicensedHapticEffects.png)
 **Figure.** The [TI DRV2605L](https://www.ti.com/lit/ds/symlink/drv2605l.pdf) includes a preprogrammed library of over 100 haptic waveform effects, including single, double, and triple clicks, alerts, and transitions. These haptic patterns are licensed from Immersion Corporation. See page 63 of the [TI DRV2605L](https://www.ti.com/lit/ds/symlink/drv2605l.pdf) datasheet. Right-click on the image and select "Open image in new tab" to zoom in.   
@@ -118,41 +100,22 @@ You can also purchase breakout boards with the vibration motor and haptic driver
 
 For more information on using haptic motor drivers with Arduino, see [SparkFun's Haptic Motor Driver Hook-up Guide](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide).
 
-## Resources:
+## Resources
 
-- [Haptic Motor Driver Arduino Hook-Up Guide](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide), SparkFun.com
+- [How to Drive a Vibration Motor with Arduino](https://www.precisionmicrodrives.com/content/how-to-drive-a-vibration-motor-with-arduino-and-genuino/), Precision Microdrives
 
-- http://www.learningaboutelectronics.com/Articles/Vibration-motor-circuit.php
+- [Controlling RGB LED Strips with Transistors](https://learn.adafruit.com/rgb-led-strips/usage), Adafruit
 
-- Shows a DIY eccentric rotating mass vibrator: https://www.youtube.com/watch?v=cF1p6x6mZiI. Has some potentially nice things we could excerpt as small animations.
+- [Transistors 101](https://learn.adafruit.com/transistors-101/overview), Adafruit
+  
+- [Using a Transistor to Control High Current Loads with an Arduino](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-high-current-loads-with-an-arduino/), NYU ITP Physical Computing Course
 
-- [Apple Taptic Engine Teardown](https://youtu.be/Nz3Z2XQZpJs), YouTube video by Chris M.
+- [Motors and Transistors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/), NYU ITP Physical Computing Course
 
-- [The Amazing Evolution of Rumble/Vibration in Controllers](https://youtu.be/O18cHHOB0yY), GamingBolt
+### Videos
 
-- [Expanding the Sensory Experience with Core Haptics](https://developer.apple.com/videos/play/wwdc2019/223/), WWDC2019
+- [BJTs as Transistor Switches](https://youtu.be/sRVvUkK0U80), AddOhms on YouTube
 
-Nice overview article:
-- Fleury, A Survey on the Use of Haptic Feedback for Brain-Computer Interfaces and Neurofeedback, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7325479/
-- Haptics book by Lynette Jones, https://www.google.com/books/edition/Haptics/SrT4DwAAQBAJ?hl=en&gbpv=0
-- Karon MacLean, Designing with haptic feedback: https://www.cs.ubc.ca/labs/lci/papers/docs2000/maclean-icra00-DesignWithHaptic-reprint.PDF
+- [Transistor (BJT) as a Switch](https://youtu.be/WRm2oUw4owE), GreatScott! on YouTube
 
-- Culbertson, H., Schorr, S. B., Okamura, A. M., [Haptics: The Present and Future of Artificial Touch Sensation](https://doi.org/10.1146/annurev-control-060117-105043), Annual Review of Control, Robotics, and Autonomous Systems 2018. This paper is available online via the UW library website.
-
-## Fun
-- Giant controller rumbler (huge motor): https://youtu.be/fxmLD8y0RNQ
-- Apple WWDC2020 talk on the Apple Core Haptics API for game controllers: https://developer.apple.com/videos/play/wwdc2020/10614/
-
-
-Pallesthesia is the ability to perceive vibration:
-https://en.wikipedia.org/wiki/Pallesthesia#:~:text=Pallesthesia%20(%5C%CB%8Cpal%2Des%2D%CB%88th%C4%93,disk%20receptors%2C%20and%20tactile%20corpuscles.
-
-
-Apple iOS Haptics:
-- https://developer.apple.com/design/human-interface-guidelines/ios/user-interaction/haptics/
-- https://developer.apple.com/documentation/uikit/animation_and_haptics
-
-- A nice video explaining haptics 101: https://developer.apple.com/videos/play/wwdc2019/223/
-  - Starts at 4min. Discusses continuous and transient haptics. Finishes at 5:51 mins
-  - 10:37: great overview of visual, audio, and haptics synchronized. Talks alot about multimodality.
-  - Nice overview of how they did some watch feedback at 24 mins
+- [MOSFETS and Tranistors with Arduino](https://youtu.be/IG5vw6P9iY4), DroneBot Workshop on YouTube

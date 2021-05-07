@@ -1,20 +1,39 @@
+---
+layout: default
+title: L2&#58; Vibromotors
+nav_order: 1
+parent: Output
+grand_parent: Advanced I/O
+has_toc: true # (on by default)
+comments: true
+usemathjax: true
+usetocbot: true
+---
+# {{ page.title }}
+{: .no_toc }
 
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
 
 
 
 ## Transistors
 
-[Transistors](https://en.wikipedia.org/wiki/Transistor) are semiconductor devices used to amplify or switch electronic signals. They are used in almost every modern electronic device from smartphones to amplifiers in your headphones. 
-
 The invention of the transistor in 1947 marked the beginning of the [computing revolution](https://en.wikipedia.org/wiki/History_of_computing_hardware_(1960s%E2%80%93present)#Third_generation), allowing electrical circuits to rapidly switch off (`0`) and on (`1`) to create [logic gates](https://en.wikipedia.org/wiki/Logic_gate), [accumulators](https://en.wikipedia.org/wiki/Accumulator_(computing)), and other computational building blocks. Before transistors, computers used [vacuum tubes](https://en.wikipedia.org/wiki/Vacuum_tube_computer), which were slower, less robust, much larger, and required significantly more power.
 
-Transistors come in a variety of shapes, sizes, and operating specifications. There are two common designs: **BJTs** (Bipolar Junction Transistors), which we'll use in this lesson and are applicable to small-current loads (< 1A), and **MOSFETS** (Metal-Oxide Semiconductor Field Effect Transistors), which are well-suited for higher-current loads (and often come with built-in heat sinks).
+TODO: insert picture of variety of transistors
+
+[Transistors](https://en.wikipedia.org/wiki/Transistor) are semiconductor devices used to **amplify** or **switch** electronic signals. They are used in almost every modern electronic device from smartphones to amplifiers in your headphones and come in a variety of shapes, sizes, and operating specifications. There are two common designs: **BJTs** (Bipolar Junction Transistors), which we'll use in this lesson and are applicable to small-current loads (< 1A), and **MOSFETS** (Metal-Oxide Semiconductor Field Effect Transistors), which are well-suited for higher-current loads (and often come with built-in heat sinks).
 
 TODO: insert pictures of two transistors.
 
-While transistors deserve their own lesson (indeed, multiple lessons), for our purposes here, two attributes are relevant:
+While transistors deserve a full lesson in their own right (indeed, multiple lessons), for our purposes here, two attributes are relevant:
 
-- First, transistors can **amplify** electronic signals. You can control transistors with *small* amounts of current (to turn them on and off) but the signal they control can be much *larger*. On the Arduino, recall that our GPIO pins can only supply 40mA of continuous current (maximum!); however, [RGB LED strips](https://learn.adafruit.com/rgb-led-strips/usage) can easily require 1A and even small [DC hobby motors](https://www.adafruit.com/product/711) use between 70-250mA. Even the tiny pancake vibromotor used in this lesson has a rated current of 75mA and a startup current of up to ~120mA. We need transistors to control these high-current circuits from our low-current source (GPIO pins).
+- First, transistors can **amplify** electronic signals. You can control transistors with *small* amounts of current (to turn them on and off) but the signal they control can be much *larger*. On the Arduino, recall that our GPIO pins can only supply 40mA of continuous current (maximum!); however, [RGB LED strips](https://learn.adafruit.com/rgb-led-strips/usage) can easily require 1A or more and even small [DC hobby motors](https://www.adafruit.com/product/711) use between 70-250mA. The tiny pancake vibromotor used in this lesson has a rated current of 75mA and a startup current of up to ~120mA—both beyond the maximum safe current of our microcontroller GPIO pins.
 
 - Second, because transistors can **rapidly switch on and off**, they can use pulse-width modulation. That is, your microcontroller can supply a PWM signal to the transistor's control input, which will modulate the same PWM signal, but amplified, on the transistor's output. Thus, we can use PWM via our transistor to control the vibration strength of our vibromotor.
 
@@ -24,6 +43,54 @@ Show
 
 ## Vibromotors
 
+There are two common types of vibration motors: **eccentric rotating mass (ERM)** motors that have a small unbalanced (eccentric!) mass attached to the DC motor axle, which creates a vibration when rotating and **linear resonant actuators (LRA)** that contain a small internal mass attached to a spring.
+
+
+- Zoomed in look at a coin vibromotor spinning: https://youtu.be/lp7bwXXsVl8?t=569
+- https://www.vibrationmotors.com/vibration-motor-product-guide/coin-vibration-motor/
+- https://www.precisionmicrodrives.com/vibration-motors/
+
+### Coin vibration motors
+- https://nfpmotor.com/products-coin-vibration-motors.html
+- https://www.androidpolice.com/2020/10/20/a-lot-more-goes-into-good-smartphone-haptics-than-youd-think/
+
+
+### Eccentric Rotating Mass (ERM) Motors
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PrecisionMicrodrives_HowDoVibrationMotorsWork_ERM-OverviewOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** A video demonstrating how eccentric rotating mass (ERM) motors work. The idea is quite simple: attach an asymmetric or unbalanced mass to the DC motor's axle. When it rotates, the weight shifts causing a vibration. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
+{: .fs-1 }
+
+The amplitude of the vibration is affected by the mass of the attached object.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PrecisionMicrodrives_HowDoVibrationMotorsWork_ERM-VibrationAmplitudeOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** TODO DESCRIPTION. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
+{: .fs-1 }
+
+#### Coin-based ERMS
+
+Popular in mobile phones.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/CoinVibromotor_HowAMobilePhoneVibrationMotorLooksAndWorks_TrimmedOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** TODO DESCRIPTION. Video from [Tech Vision](https://youtu.be/iwEGqBpYaqc). There is another [great video](https://youtu.be/lp7bwXXsVl8?t=537) looking at a coin ERM with a microscope by Marty Jopson.
+{: .fs-1 }
+
+
+https://www.precisionmicrodrives.com/vibration-motors/coin-vibration-motors/
+
+<!-- LRAs are in iPhones since iPhone7: https://www.boreas.ca/blogs/piezo-haptics/last-decade-haptics-in-mobile-erm-to-lra-and-the-taptic-engine -->
+
+### LRAs
+
+- https://www.vibrationmotors.com/vibration-motor-product-guide/linear-resonant-actuator/
+- https://www.precisionmicrodrives.com/vibration-motors/linear-resonant-actuators-lras/
+- https://www.nfpmotor.com/products-linear-resonant-actuators-lras.html
 
 ### Operating specifications
 
@@ -40,7 +107,11 @@ The [datasheet](https://cdn-shop.adafruit.com/product-files/1201/P1012_datasheet
 
 The ERM vibromotor is a type of DC motor—though a very tiny one. STARTUP CURRENT
 
+<!-- How to improve start time and stop behavior of ERM and LRA actuators: https://e2e.ti.com/blogs_/b/analogwire/posts/how-to-improve-the-startup-and-stop-behavior-of-erm-and-lra-actuators -->
+
 ### Wiring up the vibro-motor
+
+![](assets/images/VibromotorTransistorCircuit_AbstractPictorialDiagramPlusCircuitDiagram.png)
 
 Specifically, the NPN bipolar transistors we use in our courses are the [PN2222A](https://www.adafruit.com/product/756) transistors (and variants such as the [2N2222A](https://components101.com/transistors/2n2222a-pinout-equivalent-datasheet)).
 
@@ -77,13 +148,14 @@ Though messier, we also [made a version](https://www.tinkercad.com/things/jGRVrL
 {: .fs-1 }
 
 ## Generating haptic patterns
+
 TODO: have students make a haptic pattern or two. Maybe schedule a timer interrupt to do this?
 
 Are there Arduino libraries for this?
 
 ### Haptic motor drivers
 
-When haptics play a key role in a project, you should consider using a [haptic motor driver](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide?_ga=2.87552344.1190007566.1620233503-935977820.1612992862), which makes it easier to interface and work with vibration motors and drive complex haptic patterns.
+When haptics play a key role in a project, consider using a [haptic motor driver](https://learn.sparkfun.com/tutorials/haptic-motor-driver-hook-up-guide?_ga=2.87552344.1190007566.1620233503-935977820.1612992862), which makes it easier to interface and work with vibration motors and drive complex haptic patterns.
 
 For example, Texas Instruments (TI) sells a variety of [haptic motor drivers](https://www.ti.com/motor-drivers/actuator-drivers/overview.html). The popular [TI DRV2605](https://www.ti.com/lit/ds/symlink/drv2605.pdf) provides a [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C)-based interface to control both ERM and LRA motors, generates its own the pulse-width modulated (PWM) waveforms, which relieves the host microcontroller of this responsibility saving hardware pins and reducing code complexity (*e.g.,* setting precise timer interrupts for waveform generation), and includes an integrated library of 123 licensed haptic patterns, reducing the need to design and implement software to create custom haptic effects.
 

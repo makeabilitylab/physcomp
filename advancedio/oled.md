@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L1&#58; OLED
+title: L1&#58; OLED Displays
 nav_order: 1
 parent: Output
 grand_parent: Advanced I/O

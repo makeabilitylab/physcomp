@@ -57,10 +57,12 @@ There are two common types of vibration motors: **eccentric rotating mass (ERM)*
 
 ### Eccentric Rotating Mass (ERM) Motors
 
+Eccentric rotating mass (ERM) motors have an unbalanced mass attached to its axle. When the ERM motor spins, an unbalanced centripetal force is created, which causes displacement. When attached the ERM motor is physically attached an object—like a smartphone or game controller—this vibrational movement is transferred to the underlying object.
+
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/PrecisionMicrodrives_HowDoVibrationMotorsWork_ERM-OverviewOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** A video demonstrating how eccentric rotating mass (ERM) motors work. The idea is quite simple: attach an asymmetric or unbalanced mass to the DC motor's axle. When it rotates, the weight shifts causing a vibration. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
+**Video.** A [video](https://vimeo.com/128603396) from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/) demonstrating how eccentric rotating mass (ERM) motors work. The idea is quite simple: attach an asymmetric or unbalanced mass to the DC motor's axle. When it rotates, the weight shifts causing a vibration.
 {: .fs-1 }
 
 The amplitude of the vibration is affected by the mass of the attached object.
@@ -70,6 +72,10 @@ The amplitude of the vibration is affected by the mass of the attached object.
 </video>
 **Video.** TODO DESCRIPTION. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
 {: .fs-1 }
+
+- [Understanding ERM Vibration Motor Characteristics](https://www.precisionmicrodrives.com/content/ab-004-understanding-erm-vibration-motor-characteristics/) <-- very useful content on ERMs, etc.
+
+- https://e2e.ti.com/blogs_/b/analogwire/posts/how-to-improve-the-startup-and-stop-behavior-of-erm-and-lra-actuators
 
 #### Coin-based ERMS
 
@@ -105,11 +111,14 @@ The [datasheet](https://cdn-shop.adafruit.com/product-files/1201/P1012_datasheet
 | Starting voltage | 2.3V |
 | Starting current | Up to ~120mA |
 
-The ERM vibromotor is a type of DC motor—though a very tiny one. STARTUP CURRENT
+The ERM vibromotor is a type of DC motor—though a very tiny one. STARTUP VOLTAGE to overcome inertia.
 
 <!-- How to improve start time and stop behavior of ERM and LRA actuators: https://e2e.ti.com/blogs_/b/analogwire/posts/how-to-improve-the-startup-and-stop-behavior-of-erm-and-lra-actuators -->
 
 ### Wiring up the vibro-motor
+
+- Many examples online are wrong and directly hook up the vibromotor to a microcontroller's GPIO pins
+- Be careful with the small wires. This is one of the most fragile components we've worked with: the tiny stranded wires soldered to the motor are prone to snap off.
 
 ![](assets/images/VibromotorTransistorCircuit_AbstractPictorialDiagramPlusCircuitDiagram.png)
 
@@ -134,6 +143,11 @@ TODO: Take video of experimental  setup.
 - https://www.precisionmicrodrives.com/content/how-to-drive-a-vibration-motor-with-arduino-and-genuino/ 
 - http://www.ermicro.com/blog/?p=423
 - Transistor gain: https://www.electronics-notes.com/articles/electronic_components/transistor/current-gain-hfe-beta.php
+- [Discrete Driver Circuits for Vibration Motors](https://www.precisionmicrodrives.com/content/ab-001-discrete-driver-circuits-for-vibration-motors/), Precision Microdrives
+- [Electrical Techniques for Driving Vibration Motors](https://www.precisionmicrodrives.com/content/ab-011-electrical-techniques-for-using-different-power-sources/), Precision Microdrives
+
+<!-- Talk about using diodes and capacitor:
+https://www.reddit.com/r/arduino/comments/a06hxr/why_do_motors_need_transistors_and_diodes/ -->
 
 ### Tinkercad version
 
@@ -183,6 +197,8 @@ For more information on using haptic motor drivers with Arduino, see [SparkFun's
 - [Using a Transistor to Control High Current Loads with an Arduino](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-high-current-loads-with-an-arduino/), NYU ITP Physical Computing Course
 
 - [Motors and Transistors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/), NYU ITP Physical Computing Course
+
+- [Vibration Motor Best Practices from Mobile Phones](https://www.precisionmicrodrives.com/content/ab-008-vibration-motor-best-practices-from-mobile-cell-phones/), Precision Microdrives
 
 ### Videos
 

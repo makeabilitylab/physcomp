@@ -54,9 +54,7 @@ Organic light-emitting diode ([OLED](https://en.wikipedia.org/wiki/OLED)) displa
 
 In this lesson, we will be using the [monochrome (black-and-white) OLED displays](https://learn.adafruit.com/monochrome-oled-breakouts) from Adafruit along with their display control and graphics libraries. To do so, we need to install some [ libraries](oled-libraries.md).
 
-<!-- - Include overview of graphics
-    - https://learn.adafruit.com/adafruit-gfx-graphics-library/overview
-    - https://lastminuteengineers.com/oled-display-arduino-tutorial/ -->
+<!-- TODO: add in examples of where OLEDs are used. Like the Fitbit Charge: https://www.microcontrollertips.com/inside-fitbit-charge/ -->
 
 ### Install Arduino libraries
 
@@ -153,16 +151,15 @@ The black-and-white OLED consists of a matrix of OLEDS, called pixels, which can
 **Figure** An overview of the 128x64 matrix of LEDs—we call each LED a "pixel". We've found that students sometimes flip the y-axis in their minds. So, make sure to note how the origin starts at `(0,0)` and the `x-axis` increases to the right and the `y-axis` increases down. Image created in PowerPoint and uses images from Fritzing and the [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/coordinate-system-and-units) tutorial.
 {: .fs-1 }
 
-Thus, to turn "on" the LED at pixel `(18, 6)` using [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview), we would write: `drawPixel(18, 6, SSD1306_WHITE)`. For black-and-white displays, the last argument can be either `SSD1306_WHITE` to draw a white pixel or `SSD1306_BLACK` to draw a black pixel (these constants are defined in [Adafruit_SSD1306.h](https://github.com/adafruit/Adafruit_SSD1306/blob/master/Adafruit_SSD1306.h)). For color displays, you can instead pass in a unsigned 16-bit value representing RGB colors (see [docs](https://learn.adafruit.com/adafruit-gfx-graphics-library/coordinate-system-and-units)).
+Thus, to turn "on" the LED at pixel `(18, 6)` using [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview), we would write: `drawPixel(18, 6, SSD1306_WHITE)`. For black-and-white displays, the last argument can be either `SSD1306_WHITE` to draw a white pixel or `SSD1306_BLACK` to draw a black pixel (these parameters are defined in [Adafruit_SSD1306.h](https://github.com/adafruit/Adafruit_SSD1306/blob/master/Adafruit_SSD1306.h)). For color displays, you can instead pass in an unsigned 16-bit value representing RGB colors (see [docs](https://learn.adafruit.com/adafruit-gfx-graphics-library/coordinate-system-and-units)).
 
 ### Drawing subsystem
 
-Below, we describe how to draw shapes, text, and bitmaps. Importantly, when you call any of the drawing routines—from `drawLine` to `drawTriangle`—you are **not** drawing directly to the OLED display. Instead, you are drawing to an offscreen buffer handled by the SSD1306 driver. So, after you call your drawing routines, you must then call the `void Adafruit_SSD1306::display()` function to push the data from RAM to the display. We'll show how to do this in your examples below.
+Below, we describe how to draw shapes, text, and bitmaps. Importantly, when you call any of the drawing routines—from `drawLine` to `drawTriangle`—you are **not** drawing directly to the OLED display. Instead, you are drawing to an offscreen buffer handled by the SSD1306 driver. So, after you call your drawing routines, you must then call the `void Adafruit_SSD1306::display()` function to push the data from RAM to the display. We'll show how to do this step-by-step in our examples below.
 
-But, in short, the drawing pipeline looks like this:
+In short, the drawing pipeline looks like this:
 
 {% highlight C++ %}
-
 // Instantiate SSD1306 driver display object
 Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
@@ -190,6 +187,41 @@ void loop(){
 }
 {% endhighlight C++ %}
 
+Now, because we are drawing the exact same thing on every `loop()` call, we could just as well put this drawing code into `setup()` and have it draw once and only once (the graphic content will persist).
+
+{% highlight C++ %}
+// Instantiate SSD1306 driver display object
+Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+void setup(){
+  Serial.begin(9600);
+  
+  // Initialize the display. If it fails, print failure to Serial
+  // and enter an infinite loop
+  if (!_display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) { // Address 0x3D for 128x64
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;); // Don't proceed, loop forever
+  }
+
+  // Clear the display
+  _display.clearDisplay();
+
+  // Put in drawing routines
+  // In this case, draw a circle at x,y location of 50,20 with a radius of 10
+  _display.fillCircle(50, 20, 10, SSD1306_WHITE);
+
+  // Render graphics buffer to screen
+  _display.display();
+}
+
+void loop(){
+  // Empty on purpose to make a point about how graphic content persists
+  // on screen
+}
+{% endhighlight C++ %}
+
+However, for practical purposes, we always want to put our drawing methods in `loop()` because we want so support **dynamic graphics**, which are animated (*e.g.,* graphics that change over time) and/or responsive (*e.g.,* graphics that change in response to input).
+
 ### Drawing shapes
 
 The Adafruit GFX library current supports drawing lines, rectangles, circles, rounded rectangles, and triangles. For all shapes, you can draw an outlined version (*e.g.,* `drawRect`) or a filled version (*e.g.,* `fillRect`). The images below are drawn from the [Adafruit GFX tutorial](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives).
@@ -204,7 +236,7 @@ The Adafruit GFX library current supports drawing lines, rectangles, circles, ro
 
 #### Drawing custom shapes
 
-You can, of course, create custom shapes either by cleverly combining shape primitives (*e.g.,* a rectangle and a triangle to make a basic house) or by implementing your own drawing algorithm and calling `drawPixel`.
+You can, of course, create custom shapes either by cleverly combining shape primitives (*e.g.,* a rectangle and a triangle to make a basic house) or by implementing your own drawing algorithm and calling `drawPixel`. The `drawPixel` API looks like:
 
 | Shape and API call | Output |
 |-------|:--------:| 
@@ -218,7 +250,7 @@ For more information and examples, see the [Basic Drawing section](https://lastm
 
 ### Drawing text
 
-There are two methods to render text: drawing a single character with `drawChar` and using the `print` rendering subsystem, which mimics the familiar [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) functionality, which we covered in our Intro to Arduino series [here](../arduino/serial-print.md).
+There are two methods to render text: drawing a single character with `drawChar` and using the `print` rendering subsystem, which mimics the familiar [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) functionality covered in our Intro to Arduino series [here](../arduino/serial-print.md).
 
 #### Method 1: drawChar
 
@@ -370,7 +402,7 @@ For your prototyping journals, create your own shape/text drawing demo. Take a p
 
 ### Activity: draw a bouncing ball
 
-Now that we've gained some familiarity of the drawing API and graphics pipeline, let's now learn a bit about **animation**.
+Now that we've gained some familiarity with the drawing API and graphics pipeline, let's now learn a bit about **animation**.
 
 We are going to draw a simple bouncing ball around the screen. Bouncing or reflecting objects are one of the key components of many games, including [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), [Arkanoid](https://en.wikipedia.org/wiki/Arkanoid), *etc.*
 

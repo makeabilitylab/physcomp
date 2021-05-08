@@ -43,16 +43,43 @@ Show
 
 ## Vibromotors
 
-There are two common types of vibration motors: **eccentric rotating mass (ERM)** motors that have a small unbalanced (eccentric!) mass attached to the DC motor axle, which creates a vibration when rotating and **linear resonant actuators (LRA)** that contain a small internal mass attached to a spring.
+There are two common types of vibration motors: **eccentric rotating mass (ERM)** motors that have a small unbalanced mass attached to the DC motor axle that creates a displacement force when rotating, which manifests as a vibration and **linear resonant actuators (LRA)** that contain a small internal mass attached to a spring, which XXX TODO.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PrecisionMicrodrives_ERMvsLRAMotors_Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A [video](https://vimeo.com/132533086) from Precision Microdrives showing the two most common types of vibration motors: **eccentric rotating mass (ERM)** motors and **linear resonant actuators (LRA)**.
+{: .fs-1 }
+
+If the vibromotor is fully enclosed in a shell, you cannot tell necessarily whether it is ERM or LRA even though the technologies are fundamentally different.
+
+![](assets/images/PrecisionMicrodrives_ERMsAndLRAsCanLookSimilarBasedOnCase.png)
+
+| Model | Body Diameter | Body Length | Eccentric Weight Radius | Eccentric Weight Length | Operating Voltage | Operating Current | Vibration Speed | Amplitude |
+|---|---|---|---|---|---|---|---|---|
+| [![](assets/images/PrecisionMicrodrive_4x7mmERM_304-015.png)](https://www.precisionmicrodrives.com/product/304-015-4mm-vibration-motor-7mm-type) | 4.1mm | 6.8mm | 1.4mm | 3mm | 2.5V | 25mA | 11,000 rpm | 0.25G |
+| [![](assets/images/PrecisionMicrodrive_5mmVibrationMotor_304-005.002.png)](https://www.precisionmicrodrives.com/product/304-005-002-5mm-vibration-motor-11mm-type) | 4.5mm | 11mm | 2mm | 3mm | 1.5V | 17mA | 9,100 rpm | 0.4G |
+| [![](assets/images/PrecisionMicrodrive_8mmx3mm_308-100.png)](https://www.precisionmicrodrives.com/product/308-100-8mm-vibration-motor-3mm-type) | 8mm | 3.4mm | -- | -- | 3V | 66mA | 12,500 rpm | 1.13G |
+| [![](assets/images/PrecisionMicrodrive_10mmx2mm_310-118.001.png)](https://www.precisionmicrodrives.com/product/310-118-001-10mm-vibration-motor-2mm-type) | 10mm | 2.1mm | -- | -- | 3V | 60mA | 14,000 rpm | 1.1G |
+| [![](assets/images/PrecisionMicrodrive_7mmx25mm_306-10H.png)](https://www.precisionmicrodrives.com/product/306-10h-7mm-vibration-motor-25mm-type) | 7mm | 24.5mm | -- | -- | 3V | 50mA | 13,800 rpm | 1.84G |
+| [![](assets/images/PrecisionMicrodrive_9mmx25mm_307-103.png)](https://www.precisionmicrodrives.com/product/307-103-9mm-vibration-motor-25mm-type) | 8.7mm | 25.1mm | -- | -- | 3V | 100mA | 13,800 rpm | 7G |
+| [![](assets/images/PrecisionMicrodrive_24x13mm_324-401.png)](https://www.precisionmicrodrives.com/product/324-401-24mm-vibration-motor-13mm-type) | 24.3mm | 12.5mm | 9mm | 4.8mm | 12V | 148mA | 5,500 rpm | 13G |
+{: .vibro-table }
+
+<!-- | [![](assets/images/PrecisionMicrodrive_4x6mm_304-10K.png)](https://www.precisionmicrodrives.com/product/304-10k-4mm-vibration-motor-6mm-type) | 4.4mm | 6mm | 1.7mm | 2.8mm | 2.7V | 65mA | 13,500 rpm | 0.5G | -->
+<!-- | [![](assets/images/PrecisionMicrodrive_20x25mm_320-105.png)](https://www.precisionmicrodrives.com/product/320-105-20mm-vibration-motor-25mm-type) | 20.4mm | 25mm | 9mm | 5.9mm | 3V | 413mA | 6,100 rpm | 15.9G | -->
 
 
-- Zoomed in look at a coin vibromotor spinning: https://youtu.be/lp7bwXXsVl8?t=569
-- https://www.vibrationmotors.com/vibration-motor-product-guide/coin-vibration-motor/
-- https://www.precisionmicrodrives.com/vibration-motors/
+LRA Motors
 
-### Coin vibration motors
-- https://nfpmotor.com/products-coin-vibration-motors.html
-- https://www.androidpolice.com/2020/10/20/a-lot-more-goes-into-good-smartphone-haptics-than-youd-think/
+| Model | Body Diameter | Body Length | Voltage (RMS) | Operating Current | Vibration Frequency | Amplitude |
+|---|---|---|---|---|---|---|
+| [![](assets/images/PrecisionMicrodrive_8mmLRA_C08-00A.png)](https://www.precisionmicrodrives.com/product/c08-00a-8mm-linear-resonant-actuator-3mm-type) | 8mm | 2.6mm | 1.2V | 28mA | 240Hz | 0.7G |
+| [![](assets/images/PrecisionMicrodrive_10mmLRA_C10-100.png)](https://www.precisionmicrodrives.com/product/c10-100-10mm-linear-resonant-actuator-4mm-type) | 10mm | 3.7mm | 2V | 69mA | 175Hz | 1.5G |
+| [![](assets/images/PrecisionMicrodrive_6x12mm_C12-003.001.png)](https://www.precisionmicrodrives.com/product/c12-003-001-6mm-linear-resonant-actuator-12mm-type) | 6mm | 12mm | 2V | 111mA | 204Hz | 1.5G |
+{: .vibro-table }
+
+<!-- | [![](assets/images/PrecisionMicrodrive_8mmLRA_C08-00A.003.png)](https://www.precisionmicrodrives.com/product/c08-00a-003-8mm-linear-resonant-actuator-3mm-type) | 8mm | 2.6mm | 1.2V | 28mA | 240Hz | 0.7G | -->
 
 
 ### Eccentric Rotating Mass (ERM) Motors
@@ -65,6 +92,8 @@ Eccentric rotating mass (ERM) motors have an unbalanced mass attached to its axl
 **Video.** A [video](https://vimeo.com/128603396) from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/) demonstrating how eccentric rotating mass (ERM) motors work. The idea is quite simple: attach an asymmetric or unbalanced mass to the DC motor's axle. When it rotates, the weight shifts causing a vibration.
 {: .fs-1 }
 
+
+
 The amplitude of the vibration is affected by the mass of the attached object.
 
 <video autoplay loop muted playsinline style="margin:0px">
@@ -76,6 +105,14 @@ The amplitude of the vibration is affected by the mass of the attached object.
 - [Understanding ERM Vibration Motor Characteristics](https://www.precisionmicrodrives.com/content/ab-004-understanding-erm-vibration-motor-characteristics/) <-- very useful content on ERMs, etc.
 
 - https://e2e.ti.com/blogs_/b/analogwire/posts/how-to-improve-the-startup-and-stop-behavior-of-erm-and-lra-actuators
+
+- Zoomed in look at a coin vibromotor spinning: https://youtu.be/lp7bwXXsVl8?t=569
+- https://www.vibrationmotors.com/vibration-motor-product-guide/coin-vibration-motor/
+- https://www.precisionmicrodrives.com/vibration-motors/
+
+### Coin vibration motors
+- https://nfpmotor.com/products-coin-vibration-motors.html
+- https://www.androidpolice.com/2020/10/20/a-lot-more-goes-into-good-smartphone-haptics-than-youd-think/
 
 #### Coin-based ERMS
 
@@ -119,6 +156,7 @@ The ERM vibromotor is a type of DC motor—though a very tiny one. STARTUP VOLTA
 
 - Many examples online are wrong and directly hook up the vibromotor to a microcontroller's GPIO pins
 - Be careful with the small wires. This is one of the most fragile components we've worked with: the tiny stranded wires soldered to the motor are prone to snap off.
+- The vibromotor in our kits is this one supplied by [Adafruit](https://www.adafruit.com/product/1201), which has a rated voltage of 2.5-3.8V; however, the Adafruit docs suggest that 2-5V work. We have also found this to be the case; however, to be safe, you could use the 3.3V supply rather than the 5V on your board. 
 
 ![](assets/images/VibromotorTransistorCircuit_AbstractPictorialDiagramPlusCircuitDiagram.png)
 

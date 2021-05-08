@@ -70,6 +70,13 @@ void loop() {
 This is awesome! Can embed code directly!
 <script src="http://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
 
+## Styling tables
+
+To set the size of a table, we can use inline spans.
+| <span style="display: inline-block; width:500px">text</span> | description      |
+| --------------------------------------- | ------------------------------------- |
+| `border-bottom-right-radius`            | Defines the shape of the bottom-right |
+
 
 ## Make a Note (Call Out Box)
 There are a variety of ways to make "call out boxes" in markdown.

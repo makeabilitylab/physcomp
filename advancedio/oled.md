@@ -402,7 +402,7 @@ For your prototyping journals, create your own shape/text drawing demo. Take a p
 
 ### Activity: draw a bouncing ball
 
-Now that we've gained some familiarity with the drawing API and graphics pipeline, let's now learn a bit about **animation**.
+Now that we've gained some familiarity with the drawing API and graphics pipeline, let's learn a bit about **animation**.
 
 We are going to draw a simple bouncing ball around the screen. Bouncing or reflecting objects are one of the key components of many games, including [Pong](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino), [Arkanoid](https://en.wikipedia.org/wiki/Arkanoid), *etc.*
 

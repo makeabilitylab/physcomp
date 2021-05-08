@@ -1,3 +1,26 @@
+---
+layout: default
+title: Haptics
+nav_order: 1
+parent: Output
+grand_parent: Advanced I/O
+has_toc: true # (on by default)
+comments: false
+usemathjax: true
+usetocbot: true
+nav_exclude: true
+search_exclude: true
+---
+# {{ page.title }}
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
+
 ## Sketched thoughts
 
 - Bring in Jonggi's work about looking at diff between motors
@@ -67,6 +90,9 @@ Related to Tesla touch is follow-up work by the same team exploring how differen
 
 Also follow-up work with Revel: Programming the Sense of Touch: https://youtu.be/L7DGq8SddEQ. Olivier Bau, Ivan Poupyrev, Mathieu Le Goc, Laureline Galliot, and Matthew Glisson. 2013. Revel: programming the sense of touch. In CHI '13 Extended Abstracts on Human Factors in Computing Systems (CHI EA '13). Association for Computing Machinery, New York, NY, USA, 2785–2786. DOI:https://doi.org/10.1145/2468356.2479511
 
+#### Some other haptic papers
+
+Artem Dementyev, Alex Olwal, and Richard F. Lyon. 2020. Haptics with Input: Back-EMF in Linear Resonant Actuators to Enable Touch, Pressure and Environmental Awareness. In Proceedings of the 33rd Annual ACM Symposium on User Interface Software and Technology (UIST '20). Association for Computing Machinery, New York, NY, USA, 420–429. DOI:https://doi.org/10.1145/3379337.3415823 <-- Blog post for that paper: https://ai.googleblog.com/2020/11/haptics-with-input-using-linear.html
 
 
 ### Non-contact haptics

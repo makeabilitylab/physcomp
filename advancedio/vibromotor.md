@@ -63,7 +63,7 @@ Eccentric rotating mass (ERM) motors have an unbalanced mass attached to their a
 
 There are two main characteristics of a vibration: the vibration **frequency**, which is how fast the mass is spinning and the vibration **amplitude**, which is the strength of the vibration force. For ERM motors, you cannot vary the vibration frequency and amplitude independently—both increase linearly with the applied voltage.
 
-DC motors spin at a rate proportional to the applied voltage. We measure "spin rate" in revolutions per minute (RPM); however, we measure vibration frequency in Hz (cycles per second). So, to convert RPM to the vibration frequency $$V_F$$ in Hz, we simply: 
+DC motors spin at a rate proportional to the applied voltage. We measure "spin rate" in revolutions per minute (RPM); however, we measure vibration frequency in Hz (cycles per second). So, to convert RPM to the vibration frequency $$V_F$$ in Hz, we simply divide by 60: 
 
 $$
 V_F = \frac{RPM}{60}

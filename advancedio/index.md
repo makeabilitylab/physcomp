@@ -30,6 +30,9 @@ As usual, these lessons are interactive—that is, they assume that you're follo
 ### [L1: OLED Displays](oled.md)
 In [this lesson](oled.md), you will learn about organic light-emitting diode (OLED) displays, basic graphics programming, and a brief introduction to two serial communication protocols called [I<sup>2</sup>C](https://en.wikipedia.org/wiki/I%C2%B2C) (Inter-Integrated Circuit) and [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) (Serial Peripheral Interface).
 
+### [L2: Vibromotors](vibromotor.md)
+In [this lesson](vibromotor.md), you will learn about vibration motors (vibromotors), their role in haptic technology, and how to connect them with microcontrollers.
+
 ## Input
 
 ### [L1: Smoothing Input](smoothing-input.md)

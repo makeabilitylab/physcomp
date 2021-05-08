@@ -47,6 +47,10 @@ figure.highlight {
   width: 100%;
 }
 
+.img-50{
+  width: 50px;
+}
+
 /** FOR SMALL TABLES **/
 .condensed-table{
   min-width: 0px;
@@ -55,6 +59,23 @@ figure.highlight {
 .condensed-table th, td{
   min-width: 0px;
   font-size: 12px !important;
+}
+
+/** VIBRATION TABLE **/
+.vibro-table{
+  min-width: 0px;
+  padding: 0.25rem;
+}
+
+.vibro-table th, td{
+  padding: 0.25rem;
+  min-width: 0px;
+  font-size: 12px !important;
+}
+
+.vibro-table img{
+  width: 60px !important;
+  min-width: 60px;
 }
 
 /* image align center */

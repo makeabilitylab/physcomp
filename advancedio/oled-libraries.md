@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Installing Adafruit OLED libraries
-nav_order: 1
-parent: Output
-grand_parent: Advanced I/O
+# nav_order: 1
+# parent: Output
+# grand_parent: Advanced I/O
 has_toc: true # (on by default)
 comments: true
 usemathjax: true

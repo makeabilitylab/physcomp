@@ -176,7 +176,7 @@ Recall that Arduino GPIO pins can supply a [maximum 40mA](https://www.arduino.cc
 So, what do we do? We need to use a **transistor**.
 
 ![](assets/images/Arduino_ERMMotorWirings_ThreeOptions.png)
-**Figure.** Three example wirings for hooking up ERM motors to your Arduino. The incorrect wiring on the left directly connects the ERM to the GPIO Pin 3 (using a similar wiring as we did with [LEDs](../arduino/led-blink.md)). This is wrong and could damage your Arduino. GPIO pins can only supply up to 40mA of current but the ERM motor requires 75mA with a startup current of up to 120mA. The other two wirings use transistors as switches to connect the ERM motors to the 3.3V supply pins, which are capable of supplying 150mA. You can right-click on this image and select "Open Image in a New Tab" to enlarge.
+**Figure.** Three example wirings for hooking up ERM motors to your Arduino. The incorrect wiring on the left directly connects the ERM to the GPIO Pin 3 (using a similar wiring as we did with [LEDs](../arduino/led-blink.md)). This is wrong and could damage your Arduino. GPIO pins can only supply up to 40mA of current but the ERM motor requires 75mA with a startup current of up to 120mA. The other two wirings use transistors as switches to connect the ERM motors to the 3.3V supply pins, which are capable of supplying 150mA. You can right-click on this image and select "Open Image in a New Tab" to enlarge. See also this "[How to Build a Vibration Motor Circuit](http://www.learningaboutelectronics.com/Articles/Vibration-motor-circuit.php)" by Learning about Electronics.
 {: .fs-1 }
 
 ---
@@ -247,7 +247,7 @@ Specifically, the NPN bipolar transistors we use in our courses are the [PN2222A
 Make sure you orient the transistor correctly. We created the abstract diagram below to help with assembly. In this diagram, the text on the transistor is facing us and the bulbous part is facing away.
 
 ![](assets/images/Arduino_VibromotorTransistorCircuit_AbstractPictorialDiagramPlusCircuitDiagram.png)
-**Figure**. An additional diagram to help you wire up this transistor-based circuit. Play close attention to the orientation of the transistor. The text on the transistor is facing us and the bulbous part is facing away from us.
+**Figure**. An additional diagram to help you wire up this transistor-based circuit. Play close attention to the orientation of the transistor. The text on the transistor is facing us and the bulbous part is facing away from us. Diagram idea based on [Learning About Electronics](http://www.learningaboutelectronics.com/Articles/Vibration-motor-circuit.php).
 {: .fs-1 }
 
 <!-- 1023 | 255 | 0.012 A | 75.55

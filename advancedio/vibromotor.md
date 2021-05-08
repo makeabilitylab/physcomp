@@ -23,24 +23,31 @@ Vibration motors are a specific type of "tactile actuator technology" or "haptic
 
 ## Vibromotors
 
+![](assets/images/VibrationMotorExamplesInMobilePhonesAndWatches.png)
+**Figure.** Examples of **eccentric rotating mass (ERM)** motors and **linear resonant actuators (LRA)** in mobile phones and watches. Images from [NFP Motors](https://youtu.be/k1iTLqAtd0U) and [Sosav](https://www.sosav.com/guides/mobiles/samsung/galaxy-s10/vibrator/)
+{: .fs-1 }
+
 <!-- https://www.fictiv.com/articles/intro-to-haptic-technology-vibration-motors -->
 
-There are two common types of vibration motors: **eccentric rotating mass (ERM)** motors that have a small unbalanced mass attached to the DC motor axle that creates a displacement force when rotating and **linear resonant actuators (LRA)** that contain a small internal mass attached to a spring, which vibrates in a linear motion with an applied AC signal. The video excerpt below from [Precision Microdrives](https://vimeo.com/132533086) shows how ERMs and LRAs vibrate.
+There are two common types of vibration motors: **eccentric rotating mass (ERM)** motors that have a small unbalanced mass attached to the DC motor axle that creates a displacement force when rotating and **linear resonant actuators (LRA)** that contain a small internal mass attached to a spring, which vibrates in a linear motion with an applied AC signal. ERMs vibrate along two axes while LRAs are single axis vibrators. The video excerpt below from [Precision Microdrives](https://vimeo.com/132533086) shows how ERMs and LRAs vibrate.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/PrecisionMicrodrives_ERMvsLRAMotors_Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A [video](https://vimeo.com/132533086) from Precision Microdrives showing the two most common types of vibration motors: **eccentric rotating mass (ERM)** motors and **linear resonant actuators (LRA)**. ERM motors vibrate in two directions due to the centripetal force of the unbalanced mass attached to the DC motor axle. LRAs are similar in design to speakers: 
+**Video.** A [video](https://vimeo.com/132533086) from Precision Microdrives showing the two most common types of vibration motors: eccentric rotating mass (ERM) motors and linear resonant actuators (LRA). ERM motors vibrate in two directions due to the centripetal force of the unbalanced mass attached to the DC motor axle. LRAs are similar in design to speakers: 
 {: .fs-1 }
 
 ERMs are built with DC motors and an off-centered mass: they are cheap, provide a strong vibration, and are pervasive in toys, game controllers, mobile phones, and watches; however, they have a long startup time (~20-30ms) and limited controllability. For ERMs, you cannot individually control the frequency of the vibration (*i.e.,* how fast the mass is spinning) and the amplitude of that vibration—they are tied together. As the applied DC voltage increases, the frequency and amplitude of the vibration linearly increases, which is perceived as overall vibration intensity.
 
-In contrast to ERMs, LRAs do not spin. They linearly move a mass (up and down) attached to a spring using an electromagnet. LRAs require an AC signal driven at specific resonant frequencies—usually 150-200Hz—which controls how often the mass moves and, therefore, the vibration oscillation. They are increasingly common in smartphones, watches, and trackpads to mimic the feeling of a click. While LRAs are more responsive than ERMs (~15-25ms startup times), their vibration strength is more minimal and the wiring circuitry more complicated.
+In contrast to ERMs, LRAs do not spin. They linearly move a mass (up and down) attached to a spring using an electromagnet. LRAs require a smooth sine wave voltage signal (aka an AC signal) driven at specific resonant frequencies—usually 150-200Hz—which controls how often the mass moves and, therefore, the vibration oscillation. They are increasingly common in smartphones, watches, and trackpads to mimic the feeling of a click. While LRAs are more responsive than ERMs (~15-25ms startup times), their vibration strength is more minimal and the wiring circuitry more complicated.
 
 If a vibromotor is fully enclosed in a shell, you cannot necessarily tell whether it is ERM or LRA even though the technologies are fundamentally different.
 
 ![](assets/images/PrecisionMicrodrives_ERMsAndLRAsCanLookSimilarBasedOnCase.png)
-**Figure.** Some ERMs and LRAs can look similar depending on their enclosures or form factors. Images from [Precision Microdrives](https://www.precisionmicrodrives.com/).
+**Figure.** Depending on their enclosure and form factor, some ERMs and LRAs can look similar even though they are fundamentally different technologies. They require different driver circuits and actuation methods (DC for ERM and AC for LRA). Images from [Precision Microdrives](https://www.precisionmicrodrives.com/).
+{: .fs-1 }
+
+<!-- Nice resource for comparing ERM vs LRA: https://www.precisionmicrodrives.com/content/ab-028-vibration-motor-comparison-guide/ -->
 
 ### Eccentric Rotating Mass (ERM) Motors
 
@@ -54,7 +61,7 @@ Eccentric rotating mass (ERM) motors have an unbalanced mass attached to their a
 
 #### Vibration frequency and amplitude
 
-There are two main characteristics of a vibration: the vibration **frequency**, which is how fast the mass is spinning and the vibration **amplitude**, which is the strength of the vibration force. For ERM motors, you cannot vary the vibration frequency and amplitude independently—both linearly increase with the applied voltage.
+There are two main characteristics of a vibration: the vibration **frequency**, which is how fast the mass is spinning and the vibration **amplitude**, which is the strength of the vibration force. For ERM motors, you cannot vary the vibration frequency and amplitude independently—both increase linearly with the applied voltage.
 
 DC motors spin at a rate proportional to the applied voltage. We measure "spin rate" in revolutions per minute (RPM); however, we measure vibration frequency in Hz (cycles per second). So, to convert RPM to the vibration frequency $$V_F$$ in Hz, we simply: 
 
@@ -74,18 +81,17 @@ Where $$F$$ is the centripetal force in Newtons (N), $$m$$ is the mass of the ec
 **Figure.** The strength of the force generated by the ERM motor is: $$F = m \cdot r \cdot ω^2$$ where $$F$$ is the centripetal force in Newtons (N), $$m$$ is the mass of the eccentric mass (in kg), $$r$$ is the radius of the eccentric mass (in meters), and $$ω$$ is the angular velocity in radians/second. Image based on [video](https://vimeo.com/128603396) from Precision Microdrives.
 {: .fs-1 }
 
-However, when attached to an object, the vibration amplitude is also affected by the size of that object, which should make intuitive sense. The small ERM motor in your mobile phone, for example, which is used for alerts and notifications, would not cause much displacement if it was attached to your laptop or even your (far heavier) office desk. If you know the size of the target object, you can use this to inform the size and operating characteristics of your ERM motor.
+However, when attached to an object, the vibration amplitude is also affected by the size of that object. This should make intuitive sense. For example, the small ERM motor in your mobile phone (used for alerts and notifications) would not cause much displacement if it was attached to your laptop or even your (far heavier) office desk. If you know the size of the target object, you can use this to inform the size and operating characteristics of your ERM motor.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/PrecisionMicrodrives_HowDoVibrationMotorsWork_ERM-VibrationAmplitudeOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** An ERM's vibration amplitude is not just a function of motor speed and eccentric mass size but also the size of the attached object. A larger object requires more force to vibrate. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
+**Video.** An ERM's vibration amplitude is not just a function of motor speed and eccentric mass size but also the size of the attached object. A larger object requires more force to vibrate. Notice how the vibration displacement is greater with the smaller attached mass compared to the larger attached mass. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
 {: .fs-1 }
-
 
 #### ERM form factors
 
-There are a variety of ERM form factors from the basic cylindrical "pager" motor, which can be mounted directly to a PCB or fully encapsulated for waterproof versions to coin or "pancake" forms.
+There are a variety of ERM form factors from the basic cylindrical "pager" motor, which can be mounted directly to a PCB, to fully encapsulated waterproof versions and coin or "pancake" forms—see the figure below. The coin ERMs are compact, easy-to-use, and come with strong adhesive backing for mounting. Many LRAs also come in a coin form factor but are fundamentally different technology.
 
 ![](assets/images/PrecisionMicrodrives_ERMMotorTypes.png)
 **Figure.** Example ERM motors Images from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/vibration-motors-erms-and-lras/).
@@ -93,7 +99,9 @@ There are a variety of ERM form factors from the basic cylindrical "pager" motor
 
 #### Example ERM motors
 
-Because vibration amplitude is dependent not just on the speed of the ERM motor and size of eccentric mass but also the size of the affixed target object (*e.g.,* smartphone or watch), vibromotor datasheets often quote a "normalized vibration amplitude", which is the ERM's motor performance at its rated voltage when attached to a fixed mass. The Precision Microdrive datasheets use 100g to calculate its typical normalized amplitude.
+Below, we've highlighted example ERM motors from a popular supplier: [Precision Microdrives](https://www.precisionmicrodrives.com/). For each ERM motor, we include the body diameter and length, the eccentric mass radius and length, the operating voltage and current, and the motor speed and vibration frequency at that voltage/current. 
+
+Because vibration amplitude is dependent not just on the speed of the ERM motor and the size of its eccentric mass but also the size of the affixed target object (*e.g.,* smartphone or watch), vibromotor datasheets often quote a "normalized vibration amplitude", which is the ERM's motor performance at its rated voltage when attached to a fixed mass. The Precision Microdrive datasheets, for example, use a fixed mass of 100g to calculate a normalized vibration amplitude for its motors.
 
 | Model | Body Diameter | Body Length | Eccentric Weight Radius | Eccentric Weight Length | Operating Voltage | Operating Current | Motor Speed | Vibration Frequency | Normalized Amplitude |
 |---|---|---|---|---|---|---|---|---|
@@ -109,42 +117,40 @@ Because vibration amplitude is dependent not just on the speed of the ERM motor 
 <!-- | [![](assets/images/PrecisionMicrodrive_4x6mm_304-10K.png)](https://www.precisionmicrodrives.com/product/304-10k-4mm-vibration-motor-6mm-type) | 4.4mm | 6mm | 1.7mm | 2.8mm | 2.7V | 65mA | 13,500 rpm | 0.5G | -->
 <!-- | [![](assets/images/PrecisionMicrodrive_20x25mm_320-105.png)](https://www.precisionmicrodrives.com/product/320-105-20mm-vibration-motor-25mm-type) | 20.4mm | 25mm | 9mm | 5.9mm | 3V | 413mA | 6,100 rpm | 15.9G | -->
 
-
-
-- [Understanding ERM Vibration Motor Characteristics](https://www.precisionmicrodrives.com/content/ab-004-understanding-erm-vibration-motor-characteristics/) <-- very useful content on ERMs, etc.
-
-- https://e2e.ti.com/blogs_/b/analogwire/posts/how-to-improve-the-startup-and-stop-behavior-of-erm-and-lra-actuators
-
-- Zoomed in look at a coin vibromotor spinning: https://youtu.be/lp7bwXXsVl8?t=569
+<!-- - https://e2e.ti.com/blogs_/b/analogwire/posts/how-to-improve-the-startup-and-stop-behavior-of-erm-and-lra-actuators
 - https://www.vibrationmotors.com/vibration-motor-product-guide/coin-vibration-motor/
-- https://www.precisionmicrodrives.com/vibration-motors/
+- https://www.precisionmicrodrives.com/vibration-motors/ -->
 
 ### Coin vibration motors
-- https://nfpmotor.com/products-coin-vibration-motors.html
-- https://www.androidpolice.com/2020/10/20/a-lot-more-goes-into-good-smartphone-haptics-than-youd-think/
 
-#### Coin-based ERMS
+In our hardware kits, we often supply ERM motors in the coin form factor, which are also called pancake ERMs or vibrating mini-motor discs. Coin ERMs are compact, self-contained, and provide a strong vibration. Due to their small size, ease-of-use, and fully enclosed vibration mechanism, they are common in mobile phones, handheld devices (*e.g.,* controllers), and medical applications.
 
-Popular in mobile phones.
+| Adafruit "Vibrating Mini-motor Disc" | Digikey ERM Vibration Motor |
+|-----|----|
+| ![](assets/images/Adafruit_VibratingMiniMotorDisc.png) | ![](assets/images/SeeedTechnology_ERMVibrationMotor.png) |
+| [Product #1201](https://www.adafruit.com/product/1201) $1.95 | [Product #316040001](https://www.digikey.com/en/products/detail/seeed-technology-co.,-ltd/316040001/5487672) $1.20 |
+
+Coin vibration motors are ERMs and generally have the same operating and functional characteristics as their cylindrical counterparts; however, their construction is different. See video below. You can read about their construction on the [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/coin-vibration-motors/) website. 
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/CoinVibromotor_HowAMobilePhoneVibrationMotorLooksAndWorks_TrimmedOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** TODO DESCRIPTION. Video from [Tech Vision](https://youtu.be/iwEGqBpYaqc). There is another [great video](https://youtu.be/lp7bwXXsVl8?t=537) looking at a coin ERM with a microscope by Marty Jopson.
+**Video.** A demonstration of an opened coin ERM from [Tech Vision](https://youtu.be/iwEGqBpYaqc). There is another [great video](https://youtu.be/lp7bwXXsVl8?t=537) looking at a coin ERM with a microscope by Marty Jopson.
 {: .fs-1 }
 
+<!-- - https://www.precisionmicrodrives.com/vibration-motors/coin-vibration-motors/
+- https://nfpmotor.com/products-coin-vibration-motors.html
+- https://www.androidpolice.com/2020/10/20/a-lot-more-goes-into-good-smartphone-haptics-than-youd-think/ -->
 
-https://www.precisionmicrodrives.com/vibration-motors/coin-vibration-motors/
+<!-- ### LRAs
 
-
-
-### LRAs
+Some helpful links:
 
 - https://www.vibrationmotors.com/vibration-motor-product-guide/linear-resonant-actuator/
 - https://www.precisionmicrodrives.com/vibration-motors/linear-resonant-actuators-lras/
 - https://www.nfpmotor.com/products-linear-resonant-actuators-lras.html
 
-<!-- LRAs are in iPhones since iPhone7: https://www.boreas.ca/blogs/piezo-haptics/last-decade-haptics-in-mobile-erm-to-lra-and-the-taptic-engine -->
+LRAs are in iPhones since iPhone7: https://www.boreas.ca/blogs/piezo-haptics/last-decade-haptics-in-mobile-erm-to-lra-and-the-taptic-engine 
 
 LRA Motors
 
@@ -153,24 +159,29 @@ LRA Motors
 | [![](assets/images/PrecisionMicrodrive_8mmLRA_C08-00A.png)](https://www.precisionmicrodrives.com/product/c08-00a-8mm-linear-resonant-actuator-3mm-type) | 8mm | 2.6mm | 1.2V | 28mA | 240Hz | 0.7G |
 | [![](assets/images/PrecisionMicrodrive_10mmLRA_C10-100.png)](https://www.precisionmicrodrives.com/product/c10-100-10mm-linear-resonant-actuator-4mm-type) | 10mm | 3.7mm | 2V | 69mA | 175Hz | 1.5G |
 | [![](assets/images/PrecisionMicrodrive_6x12mm_C12-003.001.png)](https://www.precisionmicrodrives.com/product/c12-003-001-6mm-linear-resonant-actuator-12mm-type) | 6mm | 12mm | 2V | 111mA | 204Hz | 1.5G |
-{: .vibro-table }
+{: .vibro-table } -->
 
 <!-- | [![](assets/images/PrecisionMicrodrive_8mmLRA_C08-00A.003.png)](https://www.precisionmicrodrives.com/product/c08-00a-003-8mm-linear-resonant-actuator-3mm-type) | 8mm | 2.6mm | 1.2V | 28mA | 240Hz | 0.7G | -->
 
-## Wiring and assembly
+<!-- Really neat inside-a-LRA demo: https://youtu.be/Nz3Z2XQZpJs?t=198 -->
+
+<!-- Amazing LRA video of the Samsung S10 LRA: https://youtu.be/gOBhQRVmLsA -->
+
+## Wiring and assembly for ERM motors
+
 TODO
 
-## Transistors
+### Transistors
 
-The invention of the transistor in 1947 marked the beginning of the [computing revolution](https://en.wikipedia.org/wiki/History_of_computing_hardware_(1960s%E2%80%93present)#Third_generation), allowing electrical circuits to rapidly switch off (`0`) and on (`1`) to create [logic gates](https://en.wikipedia.org/wiki/Logic_gate), [accumulators](https://en.wikipedia.org/wiki/Accumulator_(computing)), and other computational building blocks. Before transistors, computers used [vacuum tubes](https://en.wikipedia.org/wiki/Vacuum_tube_computer), which were slower, less robust, much larger, and required significantly more power.
+<!-- The invention of the transistor in 1947 marked the beginning of the [computing revolution](https://en.wikipedia.org/wiki/History_of_computing_hardware_(1960s%E2%80%93present)#Third_generation), allowing electrical circuits to rapidly switch off (`0`) and on (`1`) to create [logic gates](https://en.wikipedia.org/wiki/Logic_gate), [accumulators](https://en.wikipedia.org/wiki/Accumulator_(computing)), and other computational building blocks. Before transistors, computers used [vacuum tubes](https://en.wikipedia.org/wiki/Vacuum_tube_computer), which were slower, less robust, much larger, and required significantly more power.
 
-TODO: insert picture of variety of transistors
+TODO: insert picture of variety of transistors -->
 
 [Transistors](https://en.wikipedia.org/wiki/Transistor) are semiconductor devices used to **amplify** or **switch** electronic signals. They are used in almost every modern electronic device from smartphones to headphone amplifiers and come in a variety of shapes, sizes, and operating specifications. There are two common designs: **BJTs** (Bipolar Junction Transistors), which we'll use in this lesson and are applicable to small-current loads (< 1A), and **MOSFETS** (Metal-Oxide Semiconductor Field Effect Transistors), which are well-suited for higher-current loads (and often come with built-in heat sinks).
 
 TODO: insert pictures of two transistors.
 
-While transistors deserve a full lesson in their own right (indeed, multiple lessons), for our purposes here, two attributes are relevant:
+While transistors are a complex topic deserving of their own full lesson, for our purposes here, two attributes are relevant:
 
 - First, transistors can **amplify** electronic signals. You can control transistors with *small* amounts of current (to turn them on and off) but the signal they control can be much *larger*. On the Arduino, recall that our GPIO pins can only supply 40mA of continuous current (maximum!); however, [RGB LED strips](https://learn.adafruit.com/rgb-led-strips/usage) can easily require 1A or more and even small [DC hobby motors](https://www.adafruit.com/product/711) use between 70-250mA. The tiny pancake vibromotor used in this lesson has a rated current of 75mA and a startup current of up to ~120mA—both beyond the maximum safe current of our microcontroller GPIO pins.
 
@@ -272,6 +283,16 @@ For more information on using haptic motor drivers with Arduino, see [SparkFun's
 
 ## Resources
 
+### Vibromotor resources
+
+- [Vibration Motor Best Practices from Mobile Phones](https://www.precisionmicrodrives.com/content/ab-008-vibration-motor-best-practices-from-mobile-cell-phones/), Precision Microdrives
+
+- [Vibration Motor Comparison Guide](https://www.precisionmicrodrives.com/content/ab-028-vibration-motor-comparison-guide/), Precision Microdrives
+
+- [Understanding ERM Vibration Motor Characteristics](https://www.precisionmicrodrives.com/content/ab-004-understanding-erm-vibration-motor-characteristics/)
+
+### Using transistors with Arduino
+
 - [How to Drive a Vibration Motor with Arduino](https://www.precisionmicrodrives.com/content/how-to-drive-a-vibration-motor-with-arduino-and-genuino/), Precision Microdrives
 
 - [Controlling RGB LED Strips with Transistors](https://learn.adafruit.com/rgb-led-strips/usage), Adafruit
@@ -281,8 +302,6 @@ For more information on using haptic motor drivers with Arduino, see [SparkFun's
 - [Using a Transistor to Control High Current Loads with an Arduino](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-high-current-loads-with-an-arduino/), NYU ITP Physical Computing Course
 
 - [Motors and Transistors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/), NYU ITP Physical Computing Course
-
-- [Vibration Motor Best Practices from Mobile Phones](https://www.precisionmicrodrives.com/content/ab-008-vibration-motor-best-practices-from-mobile-cell-phones/), Precision Microdrives
 
 ### Videos
 

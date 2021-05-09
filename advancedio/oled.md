@@ -141,6 +141,14 @@ Now that we've got our OLED display wired up correctly and tested that it's work
 
 To provide a common API for drawing across all Adafruit LCD and OLED displays, Adafruit created a general-purpose graphics rendering library, called [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview). Put simply, rather than having to individually turn on/off OLEDs in the OLED matrix—which would be tedious (though perhaps a useful learning exercise)—the Adafruit GFX library provides higher level drawing routines to do this for you, like drawing rectangles, circles, text, and bitmaps.
 
+---
+
+**NOTE:**
+
+You certainly do not *have* to use the Adafruit [SSD1306](https://github.com/adafruit/Adafruit_SSD1306) and [GFX](https://github.com/adafruit/Adafruit-GFX-Library) libraries to use OLED displays. There are many tutorials online that describe how to directly interface with the SSD1306 OLED driver and create drawing routines. For example, this "[Getting Started With OLED Displays](https://www.instructables.com/Getting-Started-With-OLED-Displays/)" by JayconSystems on Instructables. Remember, the Adafruit engineers simply built their libraries to make it *easier* to program OLEDs... and we're thankful! But you could also follow the [SSD1306](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf) and I<sup>2</sup>C specs and build your own libraries!
+
+---
+
 ### Coordinate system and pixels
 
 If you're familiar with graphics APIs in other programming frameworks—like C#'s [System.Drawing library](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.graphics.drawline), [Processing's Java drawing library](https://processing.org/), [p5js' JavaScript drawing library](https://p5js.org/), *etc.*—the Adafruit GFX library works much the same (at a high level).
@@ -728,6 +736,8 @@ Activity outline:
 - [Monochrome OLED Breakouts](https://learn.adafruit.com/monochrome-oled-breakouts), Adafruit
 
 - [Adafruit_GFX Library](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview), Adafruit
+
+- [SSD1306 Datasheet](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf), Solomon Systech
 
 ### Serial communication protocols
 

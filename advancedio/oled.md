@@ -747,6 +747,13 @@ Activity outline:
 
 - [SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi), Sparkfun.com
 
-<!-- ## Next lesson
+## Next Lesson
 
-In the next lesson, we TODO -->
+In the [next lesson](vibromotor.md), we will learn about vibration motors and how to use them with Arduino.
+
+<!-- In the [next lesson](resistors.md), we will expand what we know about [resistors](resistors.md)—specially designed electrical components that *resist* the flow of current—before showing how they are useful with [LEDs](leds.md).  -->
+
+<span class="fs-6">
+[Next: Vibration Motors](vibromotor.md){: .btn .btn-outline }
+<!-- [Next: Resistors](resistors.md){: .btn .btn-outline } -->
+</span>

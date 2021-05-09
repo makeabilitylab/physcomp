@@ -739,6 +739,8 @@ Activity outline:
 
 - [SSD1306 Datasheet](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf), Solomon Systech
 
+- [Fast SSD1306 OLED Drawing with I2C Bit Banging](https://bitbanksoftware.blogspot.com/2018/05/fast-ssd1306-oled-drawing-with-i2c-bit.html), Larry Bank ([video demo](https://youtu.be/aQxOtyEr6eQ))
+
 ### Serial communication protocols
 
 - [I2C](https://learn.sparkfun.com/tutorials/i2c/all), Sparkfun.com

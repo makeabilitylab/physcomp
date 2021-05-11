@@ -313,6 +313,8 @@ For more information on using haptic motor drivers with Arduino, see [SparkFun's
 
 For your prototyping journal, please complete the **three** ERM motor activities we began in lecture (see [slides here](https://docs.google.com/presentation/d/1bV08Yjvlf1CtBgx1nD3IamVHx6wtGVE_HgxQQnEf7P4/edit?usp=sharing)). Take a video of your constructions and include a link to your video and code in your journal. Briefly describe what you did and what you learned.
 
+<!-- TODO: in future step through each of these lessons (at least provide wiring diagrams and some basic example code) -->
+
 ## Resources
 
 ### Vibromotor resources

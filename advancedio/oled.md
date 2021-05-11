@@ -21,7 +21,7 @@ usetocbot: true
 
 <!-- ## Serial communication protocols
 
-TODO: intro i2c and SPI
+TODO: intro i2c and SPI.
 - Can Leonardo actually use i2c pin student confusion: https://forum.arduino.cc/t/can-leonardo-actually-use-its-i2c-pins/417516
 
 ### Terminology
@@ -270,7 +270,9 @@ To draw a single character, you specify a `(x, y)` location, the character, the 
 
 #### Method 2: Print rendering
 
-The more common and feature-rich method to draw text is via the `print` subsystem. Interestingly, the [Adafruit_GFX class](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) actually extends the [Print class](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) from the Arduino core library. Rather than call `Serial.print("Hello World")`, however, with the OLED display and Adafruit GFX library, you would call `_display.print("Hello World")`. Here, `_display` is the `Adafruit_SSD1306` object.
+The more common and feature-rich method to draw text is via the `print` subsystem. Interestingly, the [Adafruit_GFX class](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) actually extends the [Print class](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) from the Arduino core library. You can view the `Serial.print()` docs [here](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/); the API is the same for the OLED.
+
+Rather than call `Serial.print("Hello World")`, however, with the OLED display and Adafruit GFX library, you would call `_display.print("Hello World")`. Here, `_display` is the `Adafruit_SSD1306` object.
 
 To use the OLED's print functionality, you can first set optional parameters such as the text color, size, and wrapping:
 
@@ -354,9 +356,59 @@ We can also invert the text simply by switching the colors in `setTextColor(uint
 |----------------------------|----------------------------|
 | ![](assets/images/OLED_setTextColor_WhiteBlack.png) | ![](assets/images/OLED_setTextColor_BlackWhite.png) |
 
+##### Using .write rather than .print
+
+The Adafruit Graphics library also supports the [`write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/) function to write *binary* data to the display rather than ASCII text. While you can also use `drawChar`, `write` has the benefit of using the currently set `setText` parameters like `setTextSize` and `setTextColor`. Below, I'm printing out all of the glyphs embedded in the default font, which includes embedded graphics like smiley faces, hearts, spades, etc.
+
+![](assets/images/OLED_UsingWriteToDisplayGraphicalCharacters.png)
+**Figure.** Drawing the embedded glyphs in the default font using `_display.write()`. This code is called [DrawAllChars.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawAllChars/DrawAllChars.ino) in our GitHub.
+{: .fs-1 }
+
+To draw a happy face—which is char index `2` in the middle of the screen, for example, we could use `drawChar`:
+
+{% highlight C++ %}
+const int CHAR_WIDTH = 5;
+const int CHAR_HEIGHT = 8;
+
+int charSize = 3;
+int charWidth = charSize * CHAR_WIDTH;
+int charHeight = charSize * CHAR_WIDTH;
+int charIndex = 2; // for smiley face
+
+uint16_t yText = _display.height() / 2 - charHeight / 2;
+uint16_t xText = _display.width() / 2 - charWidth / 2;
+
+_display.drawChar(xText, yText, (char)charIndex, SSD1306_WHITE, SSD1306_BLACK, charSize);
+{% endhighlight C++ %}
+
+Or we could also use the `write()` method:
+
+{% highlight C++ %}
+int16_t x1, y1;
+uint16_t textWidth, textHeight;
+int charIndex = 2; // for smiley face
+
+_display.setTextSize(3);
+_display.getTextBounds("X", 0, 0, &x1, &y1, &textWidth, &textHeight);
+uint16_t yText = _display.height() / 2 - textHeight / 2;
+uint16_t xText = _display.width() / 2 - textWidth / 2;
+_display.setCursor(xText, yText);
+_display.write(charIndex);
+{% endhighlight C++ %}
+
+Here's an [example](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino) iterating through all of the glyphs individually, which demonstrates the code above. Again, you can use either `drawChar` or `write` and I demonstrate both in [DrawChar.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino)
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/OLED_DrawChar-IMG_6308-Optimized.mp4" type="video/mp4" />
+</video>
+**Video** A demonstration of [DrawChar.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino) showing how to draw the embedded graphics from the default font.
+{: .fs-1 }
+
 #### Loading custom fonts
 
 In addition to the default fixed-size, mono-spaced font, you can also load and render an alternative font. See the ["Loading Fonts"](https://learn.adafruit.com/adafruit-gfx-graphics-library/using-fonts) section of the [Adafruit GFX tutorial](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview). 
+
+You can also make your own font or custom symbols for your font. See the Adafruit tutorial: "[Creating Custom Symbol Fonts for Adafruit GFX Library](https://learn.adafruit.com/creating-custom-symbol-font-for-adafruit-gfx-library/overview)".
 
 ### Drawing bitmaps
 

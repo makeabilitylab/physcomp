@@ -89,6 +89,8 @@ When attached to an object, the vibration amplitude is also affected by the size
 **Video.** An ERM's vibration amplitude is not just a function of motor speed and eccentric mass size but also the size of the attached object. A larger object requires more force to vibrate. Notice how the vibration displacement is greater with the smaller attached mass compared to the larger attached mass. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
 {: .fs-1 }
 
+<!-- TODO: in future talk about other characteristics like startup time, stop time, etc. -->
+
 #### ERM form factors
 
 There are a variety of ERM form factors—see the figure below—from the basic cylindrical "pager" motor, which can be mounted directly to a PCB, to fully encapsulated waterproof versions, to the popular coin or "pancake" forms. The coin ERMs are compact, easy-to-use, and come with strong adhesive backing for mounting. Don't be confused: many LRAs also come in a coin form factor but are fundamentally different technology.

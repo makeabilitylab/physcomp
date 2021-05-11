@@ -356,9 +356,11 @@ We can also invert the text simply by switching the colors in `setTextColor(uint
 |----------------------------|----------------------------|
 | ![](assets/images/OLED_setTextColor_WhiteBlack.png) | ![](assets/images/OLED_setTextColor_BlackWhite.png) |
 
-##### Using .write rather than .print
+##### Drawing the embedded font graphics
 
-The Adafruit Graphics library also supports the [`write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/) function to write *binary* data to the display rather than ASCII text. While you can also use `drawChar`, `write` has the benefit of using the currently set `setText` parameters like `setTextSize` and `setTextColor`. Below, I'm printing out all of the glyphs embedded in the default font, which includes embedded graphics like smiley faces, hearts, spades, etc.
+You can draw the embedded font graphics either using `drawChar` or, similar to [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/), the Adafruit GFX library also supports the `write()` function.
+
+While you can also use either `drawChar` or `write`, the latter uses the currently set `setText` parameters like `setTextSize` and `setTextColor`—which is helpful. Below, I'm printing out all of the glyphs embedded in the default font, which includes embedded graphics like smiley faces, hearts, spades, etc.
 
 ![](assets/images/OLED_UsingWriteToDisplayGraphicalCharacters.png)
 **Figure.** Drawing the embedded glyphs in the default font using `_display.write()`. This code is called [DrawAllChars.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawAllChars/DrawAllChars.ino) in our GitHub.

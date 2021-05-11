@@ -356,7 +356,7 @@ We can also invert the text simply by switching the colors in `setTextColor(uint
 |----------------------------|----------------------------|
 | ![](assets/images/OLED_setTextColor_WhiteBlack.png) | ![](assets/images/OLED_setTextColor_BlackWhite.png) |
 
-##### Drawing the embedded font graphics
+#### Drawing the embedded font graphics
 
 You can draw the embedded font graphics either using `drawChar` or, similar to [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/), the Adafruit GFX library also supports the `write()` function.
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L5&#58; Capacitive touch sensing
+title: L6&#58; Capacitive touch sensing
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
@@ -124,6 +124,7 @@ We also created two touch sensing examples using interrupts: [TouchInterrupt](ht
 In the [next lesson](iot.md), we will connect our ESP32 to the cloud over WiFi and use an IoT dashboard to view our data.
 
 <span class="fs-6">
-[Previous: Analog input using the ESP32](pot-fade.md){: .btn .btn-outline }
+<!-- [Previous: Analog input using the ESP32](pot-fade.md){: .btn .btn-outline } -->
+[Previous: Playing tones](tone.md){: .btn .btn-outline }
 [Next: Making an IoT device](iot.md){: .btn .btn-outline }
 </span>

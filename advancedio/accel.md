@@ -23,8 +23,11 @@ nav_exclude: true
 ## Outline
 
 - Go over accels and how they work. MEMs video?
+  - Great one from engineerguy (who else!): https://youtu.be/KZVgKu6v808?t=52
 - Talk about ADXL335 (or ADXL345?) vs. LIS3DH. Maybe show example demos of both?
 
+- Leveling table for calibration:
+    - http://www.gcdataconcepts.com/calibration.html
 
 ### Activity possibilities
 
@@ -43,3 +46,11 @@ nav_exclude: true
 - [How an accelerometer works](https://youtu.be/i2U49usFo10), Afrotechmods on YouTube
 
 - [Accelerometers: How a Smartphone Knows Up from Down](https://youtu.be/KZVgKu6v808), Engineer Guy on YouTube
+
+
+## Interesting links:
+
+<!-- - Helpful vector2D implementation built for arduino: https://github.com/yazug/Arduino/blob/master/libraries/AP_Math/vector2.h 
+
+- Ha, oh amazing, someone tried to implement the PVector class by Shiffman in Arduino: https://github.com/stuthedew/AVector. Does not look very feature complete. And should have used templates I think
+-->

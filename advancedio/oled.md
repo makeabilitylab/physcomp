@@ -421,6 +421,15 @@ To create a bouncing ball, we need to:
 - Check for **collisions** when the ball collides with the ceiling, floor, or walls of the screen. When a collision occurs, simply reverse the direction of the ball.
 - **Draw** the circle at the given x,y location.
 
+<!-- More on game loops and time deltas:
+- https://www.reddit.com/r/pcmasterrace/comments/29qcqr/an_explanation_of_game_loops_fps_and_delta_time/ciniknu?utm_source=share&utm_medium=web2x&context=3
+- The delay should be adaptive to keep framerate constant: https://drewcampbell92.medium.com/understanding-delta-time-b53bf4781a03 
+- https://www.informit.com/articles/article.aspx?p=2928180&seqNum=6 
+
+Perhaps best article I've seen:
+- https://gameprogrammingpatterns.com/game-loop.html
+- -->
+
 #### Prototyping ideas with p5js
 
 Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animation/BallBounce2D/) we made in [p5js](https://p5js.org/). Sometimes, it's useful to prototype a visualization or game idea in a rapid programming environment like [p5js](https://p5js.org/) or [Processing](https://processing.org/) before coding it up in C++ for Arduino (and it's easier to debug in those environments as well). You can edit and play with this demo in your browser [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) using the p5js online editor.

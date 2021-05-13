@@ -489,6 +489,8 @@ Finally, we've included a bonus [simple ball bounce demo](https://github.com/mak
 
 - [Arduino Tone for ESP32](https://www.thomascountz.com/2021/02/21/arduino-tone-for-esp32), Thomas Countz
 
+- [ESP32Servo](https://github.com/madhephaestus/ESP32Servo), a third-party Servo library for ESP32 that attempts to faithfully mimic the [Arduino Servo library](https://www.arduino.cc/reference/en/libraries/servo/) but also has [tone](https://github.com/madhephaestus/ESP32Servo/blob/master/src/ESP32Tone.h) functionality. 
+
 ## Next Lesson
 
 In the [next lesson](capacitive-touch-sensing.md), we will learn about and use the ESP32's built-in capacitive touch sensing module.

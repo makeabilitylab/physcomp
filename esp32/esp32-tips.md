@@ -41,7 +41,7 @@ Backtrace: 0x40080f85:0x3ffb1f60 0x400d1a17:0x3ffb1f80 0x400d4f2e:0x3ffb1fb0 0x4
 Rebooting...
 ```
 
-To help decode these messages, you can install the [EspExceptionDecoder](https://github.com/me-no-dev/EspExceptionDecoder). This tip was submitted by a CSE490 student. Thank you!
+To help decode these messages, you can install the [EspExceptionDecoder](https://github.com/me-no-dev/EspExceptionDecoder). This tip was submitted by CSE490 student W.Q. Thank you!
 
 ### Step 1: Install EspExceptionDecoder
 

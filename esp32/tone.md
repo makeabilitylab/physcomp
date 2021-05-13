@@ -18,7 +18,7 @@ usetocbot: true
 ---
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/zFg1fSFGL7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-**Video.** A video demonstrating the [Tone32.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Tone32.hpp) class, which supports play durations on the ESP32. The code running on the ESP32 is available [here](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32WithOLED/AnalogInputTone32WithOLED.ino). Make sure you have your sound on to hear.
+**Video.** A video demonstrating the [Tone32.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Tone32.hpp) class, which supports play durations on the ESP32. The code running on the ESP32 is available [here](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32WithOLED/AnalogInputTone32WithOLED.ino). Make sure your sound is on.
 {: .fs-1 }
 
 On Arduino, the [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) function generates a square wave of a specified frequency on a pin and is used to "play" tones on piezo buzzers or speakers; however, it is [famously unsupported](https://www.thomascountz.com/2021/02/21/arduino-tone-for-esp32) on the ESP32. In this lesson, we will provide some context about this problem and then show you how to play tones on the ESP32 using the [LEDC PWM library](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c), which we also used in our [ESP32 LED Fade lesson](led-fade.md).
@@ -228,7 +228,7 @@ void loop() {
 And a video demo below:
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/H7MOhibjOO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-**Video.** A video demonstration of [PlayScale.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/PlayScale/PlayScale.ino). The actual version shown in the video is [PlayScaleWithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/PlayScaleWithOLED/PlayScaleWithOLED.ino).
+**Video.** A video demonstration of [PlayScale.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/PlayScale/PlayScale.ino). The actual version shown in the video is [PlayScaleWithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/PlayScaleWithOLED/PlayScaleWithOLED.ino). Make sure your sound is on.
 {: .fs-1 }
 
 ### Reading analog input, outputting raw frequencies
@@ -270,7 +270,7 @@ void loop() {
 Here's a video demo.
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/xr_G_fkHcSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-**Video.** A video demonstration of [AnalogInputTone.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone/AnalogInputTone.ino). The actual version shown in the video is [AnalogInputToneWithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputToneWithOLED/AnalogInputToneWithOLED.ino).
+**Video.** A video demonstration of [AnalogInputTone.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone/AnalogInputTone.ino). The actual version shown in the video is [AnalogInputToneWithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputToneWithOLED/AnalogInputToneWithOLED.ino). Make sure your sound is on.
 {: .fs-1 }
 
 ### Introducing the Tone32.hpp class
@@ -446,7 +446,7 @@ void loop() {
 Here's a video demonstration of [AnalogInputTone32.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32/AnalogInputTone32.ino):
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/zFg1fSFGL7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-**Video.** A video demonstrating [AnalogInputTone32](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32/AnalogInputTone32.ino). Note that this video is running a slight variation with OLED output called [AnalogInputTone32WithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32WithOLED/AnalogInputTone32WithOLED.ino). Make sure you have your sound on to hear.
+**Video.** A video demonstrating [AnalogInputTone32](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32/AnalogInputTone32.ino). Note that this video is running a slight variation with OLED output called [AnalogInputTone32WithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32WithOLED/AnalogInputTone32WithOLED.ino). Make sure your sound is on.
 {: .fs-1 }
 
 ## Next Lesson

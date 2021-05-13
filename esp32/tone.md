@@ -51,7 +51,7 @@ void tone(uint8_t pin, unsigned int frequency, unsigned long duration)
 void noTone(uint8_t pin)
 {% endhighlight C %}
 
-Both tone methods drive a PWM waveform on the provided pin with the given frequency. The second version adds in a `duration` parameter, which allows you to specify how *long* (in milliseconds) to play the tone for. Either way, you can call `noTone(pin)` to stop outputting the PWM waveform and turn off the tone.
+Both tone methods drive a PWM waveform on the provided pin with the given frequency using timer interrupts. The second version adds in a `duration` parameter, which allows you to specify how *long* (in milliseconds) to play the tone for. Either way, you can call `noTone(pin)` to stop outputting the PWM waveform and turn off the tone.
 
 <!-- With comments:
 
@@ -87,15 +87,15 @@ void noTone(uint8_t pin)
 {: .fs-1 }
 -->
 
-This tone API is simple and well-understood. It's implemented in [ArduinoCore-avr](https://github.com/arduino/ArduinoCore-avr) ([Tone.cpp](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Tone.cpp)) and in [ArduinoCore-samd](https://github.com/arduino/ArduinoCore-samd) ([Tone.cpp](https://github.com/arduino/ArduinoCore-samd/blob/master/cores/arduino/Tone.cpp)).
+This tone API is simple and well-understood. It's implemented core Arduino, including for AVR-based microcontrollers—[ArduinoCore-avr](https://github.com/arduino/ArduinoCore-avr) ([Tone.cpp](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Tone.cpp))—and SAMD-based microcontrollers— [ArduinoCore-samd](https://github.com/arduino/ArduinoCore-samd) ([Tone.cpp](https://github.com/arduino/ArduinoCore-samd/blob/master/cores/arduino/Tone.cpp)).
 
-To generate the PWM waveforms and to track play tone duration, the tone library uses hardware timers. However, these hardware timers and the functionality therein differs widely depending on microcontroller chip. The Atmel microcontrollers like the [ATmega328](https://www.microchip.com/wwwproducts/en/ATmega328) used on the Arduino Uno and [ATmega32u4](https://www.microchip.com/wwwproducts/en/atmega32u4) handle them one way while the Atmel [SAMD21 microcontrollers](https://www.seeedstudio.com/blog/2020/01/09/samd21-arduino-boards-which-one-should-you-use/) handle them another. Even for just AVR-based microcontrollers, there is a lot of nuance and differences—see the `#ifdef` in [Tone.cpp](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Tone.cpp) for [ArduinoCore-avr](https://github.com/arduino/ArduinoCore-avr).
+To generate the PWM waveforms and to track play tone duration, the tone library uses hardware timers. However, these hardware timers and the functionality therein differs widely depending on microcontroller chip. The Atmel AVR microcontrollers like the [ATmega328](https://www.microchip.com/wwwproducts/en/ATmega328) used on the Arduino Uno and [ATmega32u4](https://www.microchip.com/wwwproducts/en/atmega32u4) handle them one way while the Atmel [SAMD21 microcontrollers](https://www.seeedstudio.com/blog/2020/01/09/samd21-arduino-boards-which-one-should-you-use/) handle them another. Even for just AVR-based microcontrollers, there is a lot of nuance and differences—see the `#ifdef` in [Tone.cpp](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Tone.cpp) for [ArduinoCore-avr](https://github.com/arduino/ArduinoCore-avr).
 
 And, most relevantly for us, Expressif decided **not** to implement tone into [arduino-esp32](https://github.com/espressif/arduino-esp32). So, what can we do?
 
 ## Playing tones on ESP32
 
-Even though [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) is not available on the ESP32, things are not as dire as they seem. As Thomas Countz points out on [GitHub Issue #1720](https://github.com/espressif/arduino-esp32/issues/1720#issuecomment-782876308) in the [`arduino-esp32`](https://github.com/espressif/arduino-esp32) repo, the [LEDC PWM library](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c)—which we used in our [ESP32 LED Fade lesson](led-fade.md)—actually has tone related methods, including:
+Even though [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) is not available on the ESP32, things are not as dire as they seem. As Thomas Countz points out on [GitHub Issue #1720](https://github.com/espressif/arduino-esp32/issues/1720#issuecomment-782876308), the [LEDC PWM library](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c)—which we used in our [ESP32 LED Fade lesson](led-fade.md)—actually has tone related methods, including:
 
 {% highlight C %}
 double ledcWriteTone(uint8_t chan, double freq)
@@ -106,7 +106,8 @@ where `note_t` is defined as the following in [esp32-hal-ledc.h](https://github.
 
 {% highlight C %}
 typedef enum {
-    NOTE_C, NOTE_Cs, NOTE_D, NOTE_Eb, NOTE_E, NOTE_F, NOTE_Fs, NOTE_G, NOTE_Gs, NOTE_A, NOTE_Bb, NOTE_B, NOTE_MAX
+    NOTE_C, NOTE_Cs, NOTE_D, NOTE_Eb, NOTE_E, NOTE_F, NOTE_Fs, 
+    NOTE_G, NOTE_Gs, NOTE_A, NOTE_Bb, NOTE_B, NOTE_MAX
 } note_t;
 {% endhighlight C %}
 
@@ -115,7 +116,7 @@ typedef enum {
 
 To use either `ledcWriteTone` and `ledcWriteNote`, we can follow a similar approach to what we did for fading an LED.
 
-First, we need to attach our piezo buzzer pin to one of the 16 PWM channels available on the ESP32:
+First, we need to "attach" our piezo buzzer pin to one of the 16 PWM channels available on the ESP32 using the `ledcAttachPin` function. In this case, we'll use Pin 26 and PWM channel 0.
 
 {% highlight C %}
 // Change this depending on where you put your piezo buzzer
@@ -131,7 +132,7 @@ void setup() {
 }
 {% endhighlight C %}
 
-And then we can simply play a note or frequency. For example, the code below loops through playing middle C using `ledcWriteNote` and then the frequency 800 Hz using `ledcWriteTone` with 500ms pauses in between.
+And then we can simply play a note (using `ledcWriteNote`) or frequency (using `ledcWriteTone`). For example, the code below loops through playing middle C using `ledcWriteNote` and then the frequency 800 Hz using `ledcWriteTone` with 500ms pauses in between.
 
 {% highlight C %}
 void loop() {
@@ -183,41 +184,50 @@ Let's get making!
 
 ## Let's make stuff
 
-In the activities below, we are going to first play a scale and various raw frequencies before introducing the Tone32.hpp class, which helps abstract some complexity. Though we love to embed mp4 videos directly into our lessons, we are going to be using YouTube embeds here instead so you can more easily control the sound.
+In the activities below, we are going to first play a scale and various raw frequencies before introducing the Tone32.hpp class, which helps abstract some complexity. Though we try to embed mp4 videos directly into our lessons, we are going to be using YouTube embeds here instead so you can more easily control the sound.
 
 ### Playing the C scale
 
-TODO
+<iframe width="736" height="414" src="https://www.youtube.com/embed/H7MOhibjOO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+**Video.** A video demonstration of [PlayScale.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/PlayScale/PlayScale.ino). The actual version shown in the video is [PlayScaleWithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/PlayScaleWithOLED/PlayScaleWithOLED.ino).
+{: .fs-1 }
 
 ### Reading analog input, outputting raw frequencies
 
-TODO
+<iframe width="736" height="414" src="https://www.youtube.com/embed/xr_G_fkHcSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+**Video.** A video demonstration of [AnalogInputTone.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone/AnalogInputTone.ino). The actual version shown in the video is [AnalogInputToneWithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputToneWithOLED/AnalogInputToneWithOLED.ino).
+{: .fs-1 }
 
 ### Introducing the Tone32.hpp class
 
 To make it easier to use tone functionality on the ESP32 and to support play durations, we created [Tone32.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Tone32.hpp). Tone32.hpp is part of the [Makeability Lab Arduino Library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library), follow the instructions here for installation and use.
 
-There are a few key differences with:[`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library:
+There are a few key differences with: [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library:
 
 - First, we use an object-oriented approach. To create a Tone32 object, simply call `Tone32 tone32(pin, pwmChannel)`, which creates a Tone32 object with the given output pin and PWM channel.
   
-- Second, while [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) uses timer interrupts to track play durations—and automatically stop playing after a duration has expired—we use a "polling" approach. So, you must call `update()` on each `loop()`. This is essential if you are using the duration parameters.
+- Second, while [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) uses timer interrupts to track play durations—and automatically stops playing after a duration has expired—we use a "polling" approach. So, you must call `update()` on each `loop()`. This is essential if you are using the duration parameters.
 
 - Third, unlike [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/), you play tones via either `playNote` or `playTone`, both of which are overloaded functions with `duration` options.
 
 Here are the key Tone32 methods:
 
 {% highlight C %}
-Tone32(uint8_t outputPin, uint8_t pwmChannel)
+Tone32(uint8_t outputPin, uint8_t pwmChannel) // constructor
+
+// Play frequency at specified note and octave
 void playNote(note_t note, uint8_t octave)
 void playNote(note_t note, uint8_t octave, unsigned long duration)
+
+// Play frequency
 void playTone(double freq)
 void playTone(double freq, unsigned long duration)
-void stopPlaying()
-void update()
+
+void stopPlaying() // stop playing
+void update() // call on every pass through loop()
 {% endhighlight C %}
 
-With comments:
+<!-- With comments:
 
 {% highlight C %}
 /**
@@ -272,7 +282,7 @@ void stopPlaying()
  *        on every loop()
  */
 void update()
-{% endhighlight C %}
+{% endhighlight C %} -->
 
 There are also some other helpful functions like:
 

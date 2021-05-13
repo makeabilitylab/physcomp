@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L6&#58; Internet of Things
+title: L7&#58; Internet of Things
 parent: ESP32
 has_toc: false # (on by default)
 usemathjax: true

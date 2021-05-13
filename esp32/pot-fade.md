@@ -85,9 +85,12 @@ Here's a workbench video with serial plotter graphing the analog input value fro
 
 ## Next Lesson
 
-In the [next lesson](capacitive-touch-sensing.md), we will learn about and use the ESP32's built-in capacitive touch sensing module.
+In the [next lesson](tone.md), we will learn how to play tones on the ESP32.
+
+<!-- In the [next lesson](capacitive-touch-sensing.md), we will learn about and use the ESP32's built-in capacitive touch sensing module. -->
 
 <span class="fs-6">
 [Previous: Fading an LED with ESP32](led-fade.md){: .btn .btn-outline }
-[Next: Capacitive touch sensing with the ESP32](capacitive-touch-sensing.md){: .btn .btn-outline }
+[Next: Playing tones](tone.md){: .btn .btn-outline }
+<!-- [Next: Capacitive touch sensing with the ESP32](capacitive-touch-sensing.md){: .btn .btn-outline } -->
 </span>

@@ -37,10 +37,14 @@ In this [lesson](led-fade.md), you'll learn how to use PWM output on the ESP32 t
 
 In this [lesson](pot-fade.md), you'll learn how to use analog input on the ESP32 by building a potentiometer-based LED fader.
 
-## [Lesson 5: Capacitive Touch Sensing](capacitive-touch-sensing.md)
+## [Lesson 5: Playing Tones](tone.md)
+
+ Arduino's [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) method is not supported on the ESP32. In this [lesson](tone.md), you'll learn how to play tones using the `ledcWriteTone` and `ledcWriteNote` in [esp32-hal-ledc.c](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c).
+
+## [Lesson 6: Capacitive Touch Sensing](capacitive-touch-sensing.md)
 
 The ESP32 has built-in circuitry and software for capacitive touch sensing ([docs](https://github.com/espressif/esp-iot-solution/blob/master/documents/touch_pad_solution/touch_sensor_design_en.md#1-introduction-to-touch-sensor-system)). In [this lesson](capacitive-touch-sensing.md), we’ll use the touch sensing functionality to turn on an LED.
 
-## [Lesson 6: Internet of Things](iot.md)
+## [Lesson 7: Internet of Things](iot.md)
 
 The ESP32 is exciting not just because of its speed, memory, and GPIO capabilities but also because it is truly a modern Internet of Things (IoT) board with Wi-Fi and Bluetooth support. In this lesson, we'll learn how to use WiFi and the IoT platform [Adafruit IO](https://learn.adafruit.com/welcome-to-adafruit-io) to upload sensor data in real-time.

@@ -23,7 +23,7 @@ usetocbot: true
 
 On Arduino, the [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) function generates a square wave of a specified frequency on a pin and is used to "play" tones on piezo buzzers or speakers; however, it is [famously unsupported](https://www.thomascountz.com/2021/02/21/arduino-tone-for-esp32) on the ESP32. In this lesson, we will provide some context about this problem and then show you how to play tones on the ESP32 using the [LEDC PWM library](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c), which we also used in our [ESP32 LED Fade lesson](led-fade.md).
 
-## The tone problem
+## The ESP32 tone problem
 
 The ESP32's Arduino library called [arduino-esp32](https://github.com/espressif/arduino-esp32/) attempts to mimic and/or directly replicate the functionality from [core Arduino](https://github.com/arduino/ArduinoCore-avr); however, as we saw in our [ESP32's LED Fade lesson](../esp32/led-fade.md), this is not always possible and key functions, like `analogWrite`, are different.
 

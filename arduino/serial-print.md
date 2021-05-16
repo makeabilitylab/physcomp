@@ -39,7 +39,7 @@ Unlike JavaScript, Java, C# or other code that runs in your web browser or nativ
 
 These two functions print data to the serial port as human-readable ASCII text (the `println` version simply inserts a carriage return `\r` followed by a newline character `\n`). To send data without converting it to ASCII text, you need to use [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write).
 
-In later lessons, we'll see how to use serial communication for more than just debugging purposes but to actually bidirectionally communicate with the computer (see ehttps://itp.nyu.edu/physcomp/labs/labs-serial-communication/xamples). For our introductory lessons, however, we'll just use it to print out information about how our program is performing.
+In later lessons, we'll see how to use serial communication for more than just debugging purposes but to actually bidirectionally communicate with the computer (see [these ITP examples](https://itp.nyu.edu/physcomp/labs/labs-serial-communication/)). For our introductory lessons, however, we'll just use it to print out information about how our program is performing.
 
 ---
 

@@ -1,4 +1,25 @@
+---
+layout: default
+title: LX&#58; Joystick
+nav_order: 1
+parent: Input
+grand_parent: Advanced I/O
+has_toc: true # (on by default)
+comments: true
+usemathjax: true
+usetocbot: true
+nav_exclude: true
+search_exclude: true
+---
+# {{ page.title }}
+{: .no_toc }
 
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
 
 ## Outline
 - Cite Playstation, XBox controllers, show pictures of analog sticks. Maybe from iFix it

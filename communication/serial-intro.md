@@ -22,7 +22,9 @@ usetocbot: true
 
 Arduino uses a standard [asynchronous serial communication protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) for serial communication. 
 
-On Arduino, we initialize the serial port using [`Serial.begin()`](https://www.arduino.cc/en/Serial.Begin). We've done this since our first set of lessons on Arduino (*e.g.,* [L3: Serial Debugging](../arduino/serial-print.md)). The [`Serial.begin()`](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/HardwareSerial.cpp) function has two overloaded options:
+On Arduino, we initialize the serial port using [`Serial.begin()`](https://www.arduino.cc/en/Serial.Begin). Indeed, we've done this since our very first set of lessons on Arduino (*e.g.,* [L3: Serial Debugging](../arduino/serial-print.md)). 
+
+The [`Serial.begin()`](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/HardwareSerial.cpp) function has two overloaded options:
 
 {% highlight C %}
 begin(unsigned long baud)
@@ -242,13 +244,24 @@ And the corresponding circuit:
 
 ### Using Serial Monitor
 
-Let's begin simply by using our now very familiar Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool. With [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) loaded on your Arduino and your Arduino connected to our computer, open the Serial Monitor and send data to our Arduino. Make sure you've selected the same baud rate used in `Serial.begin(<baud rate>)`.
+Let's begin by using our now very familiar Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool. With [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) loaded on your Arduino and your Arduino connected to your computer, open the Serial Monitor and send data to our Arduino. Make sure you've selected the same baud rate used in `Serial.begin(<baud rate>)`.
 
 ![](assets/images/ArduinoIDESerialMonitor_AnnotatedScreenShot.png)
 **Figure** An annotated screenshot the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) tool for sending and receiving serial data.
 {: .fs-1}
 
-#### Video demonstration of using Serial Monitor
+#### Video demo using Serial Monitor
+
+Here's a video demonstration of sending ASCII-encoded text via [Serial Monitor](../arduino/serial-print.md) to the Arduino running [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino). 
+
+Notice how we are able to print out what the Arduino received because the Arduino echos the received data back over serial using `Serial.print`:
+
+{% highlight C %}
+// Just for debugging, echo the data back on serial
+Serial.print("Arduino received: '");
+Serial.print(rcvdSerialData);
+Serial.println("'");
+{% endhighlight C %}
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/SimpleSerialIn-NoTalking-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
@@ -258,14 +271,14 @@ Let's begin simply by using our now very familiar Arduino IDE [Serial Monitor](.
 
 ### Command lines tools
 
-While we've thus far emphasized the Arduino IDE's [Serial Monitor](../arduino/serial-print.md), there is nothing special or unique about that tool. We can use any application or programming language with serial support. Below, we'll show how to use command line tools for both Windows and Mac/Linux.
+While we've thus far emphasized the Arduino IDE's [Serial Monitor](../arduino/serial-print.md), there is nothing special or unique about that tool. We can use any application or programming language with serial support. Below, we'll show how to use command line tools for both Windows and Mac/Linux before showing examples with Python and JavaScript (but C#, Objective C, Java, *etc.* would work too!)
 
 <!-- https://itp.nyu.edu/physcomp/lab-intro-to-serial-communications/#Connecting_via_the_Command_Line
 https://learn.sparkfun.com/tutorials/terminal-basics/command-line-windows-mac-linux -->
 
 #### Windows
 
-On Windows, we can use the [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.1) terminal, which is built into Windows 10. To read and write data from the serial port with PowerShell, we'll follow the official [PowerShell blog](https://devblogs.microsoft.com/powershell/writing-and-reading-info-from-serial-ports/).
+On Windows, we can use the [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.1) terminal, which is built into Windows 10, to read and write data from the serial port. For this, we'll follow the official [PowerShell blog](https://devblogs.microsoft.com/powershell/writing-and-reading-info-from-serial-ports/).
 
 First, to find the available serial ports, we can use `getportnames()`.
 
@@ -274,27 +287,31 @@ PS> [System.IO.Ports.SerialPort]::getportnames()
 COM7
 ```
 
-Then, we'll create a `SerialPort` object, which takes the COM port, the baud rate, serial configuration parameters (parity bit, data bit length, and stop bit). We'll then open this port.
+Then, we'll create a `SerialPort` object, which takes the COM port, the baud rate, serial configuration parameters (parity bit, data bit length, and stop bit). 
 
 ```
 PS> $port= new-Object System.IO.Ports.SerialPort COM7,9600,None,8,one
+```
+
+Now open this port.
+
+```
 PS> $port.open()
 ```
 
-To write to the port using ASCII-encoded text, we'll use `WriteLine(<str>)`:
+To write to the port using ASCII-encoded text, use `WriteLine(<str>)`:
 
 ```
 PS> $port.WriteLine(“Hello!")
 ```
 
-Similarly, to read from the port, we can use `ReadLine()`:
+Similarly, to read from the port, use `ReadLine()`:
 
 ```
 PS> $port.ReadLine()
 Arduino received: 'Hello!'
 ```
-
-Finally, to close the port, we use `Close()`. 
+Finally, to close the port, use `Close()`. 
 
 ```
 PS> $port.Close()
@@ -310,15 +327,88 @@ PS> $port.ReadLine()
 PS> $port.Close()
 ```
 
-##### Video demo
+##### Video demo using Windows PowerShell
 
-TODO: insert video demo.
+Here's a video demonstration:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SimpleSerialIn-NoTalking-WindowsPowerShell-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
+</video>
+**Video.** A video demonstrating using [Windows PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview) to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
+{: .fs-1 }
 
 #### Mac and Linux
 
+TODO
+
 ### Python
 
-We're going to show you how to use Python...
+We can also use [Python](https://www.python.org/) with the [pySerial](https://pyserial.readthedocs.io/en/latest/) library.
+
+With Python3 installed, open your terminal and type:
+
+```
+> pip3 install pyserial
+```
+
+Reading and writing data with pySerial is quite straightforward and pySerial's ["fast intro" docs](https://pyserial.readthedocs.io/en/latest/shortintro.html) provide a number of examples.
+
+Let's write a quick Python program to communicate with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino).
+
+First, import the required libraries and then create and initialize a pySerial `Serial` object.
+
+{% highlight Python %}
+import serial # from https://pyserial.readthedocs.io
+import time
+
+# Create serial object on COM13 with 9600 baud and a read timeout
+# of one second (can be a float value, so 1.5 would be 1.5s)
+ser = serial.Serial(port='COM13', baudrate=9600, timeout=1)
+{% endhighlight Python %}
+
+Now, let's ask the user to input a number between 0 and 255:
+
+{% highlight Python %}
+# Ask user for number between 0 and 255 and store in num
+num = input("Enter a number (0 - 255): ")
+{% endhighlight Python %}
+
+Then encode this data as a string. You can force it to ASCII via `num.encode("ascii", "ignore")`
+
+{% highlight Python %}
+# Encode numeric value as a string
+strNum = str.encode(num)
+{% endhighlight Python %}
+
+Now we're ready to send the data. We'll use the pySerial [`write(<data>)`](https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial.write) function.
+
+{% highlight Python %}
+# Send the data using pyserial write method
+print("Sending...", strNum)
+ser.write(strNum)
+time.sleep(0.05) # sleep for 0.05s
+{% endhighlight Python %}
+
+Finally, read the response from the Arduino and print it out:
+
+{% highlight Python %}
+# Read data back from Arduino
+echoLine = ser.readline()
+
+print(echoLine);
+print(); # empty line
+{% endhighlight Python %}
+
+And that's it! This code is available as serial_demo.py in our GitHub. Note, after creating the `Serial` object, we wrap everything in a `While True:` statement to infinitely loop and ask for new user data. See video below.
+
+#### Video demo using Python
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SimpleSerialIn-Python-NoTalking2-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
+</video>
+**Video.** A video demonstrating using [Python3](https://www.python.org/downloads/) with [pySerial](https://pypi.org/project/pyserial/) to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
+{: .fs-1 }
+
 
 
 ## Resources
@@ -328,7 +418,7 @@ We're going to show you how to use Python...
 - [Serial Communication](https://learn.sparkfun.com/tutorials/serial-communication/all), Sparkfun.com
 
 
-#### Demo Arduino serial program
+<!-- #### DisplayTextSerialIn
 
 For each, we will be running [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino, which reads text data off the Serial port, displays it on a connected [OLED](../advancedio/oled.md), and echos the data back on the Serial port.
 
@@ -363,4 +453,4 @@ void loop(){
     Serial.print(rcvdSerialData);
     Serial.println("'");
 }
-{% endhighlight C %}
+{% endhighlight C %} -->

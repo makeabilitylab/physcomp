@@ -173,7 +173,7 @@ if(Serial.available() > 0){
 }
 {% endhighlight C %}
 
-This example assumes that data is in the order of `sensorVal1, sensorVal2, sensorVal3` and that each received line is the same. To make this more flexible, you could transmit a modified CSV with variable names (like key,value pairs) or use JSON. Towards the former, you could transmit: "sensorVal1=896, sensorVal2=943, sensorVal3=349". The receiver would then parse both the variable names and their values.
+This example assumes that data is in the order of `sensorVal1, sensorVal2, sensorVal3` and that each received line is the same. To make this communication scheme more flexible, you could transmit a modified CSV with variable names (like key,value pairs) or use JSON. Towards the former, you could transmit the key,value pairs as: "`sensorVal1=896, sensorVal2=943, sensorVal3=349`". The receiver would then parse both the variable names and their values.
 
 In all of our examples, we use very simple CSV formatting with ASCII-encoded transceiving. But feel free to do things differently!
 
@@ -187,7 +187,7 @@ Similarly, if you want to ensure that data has arrived and been parsed correctly
 
 ## Example serial programs
 
-Below, we are going to show a few different examples using the command line, Python, and then JavaScript. To keep things simple, in this lesson, we are going to focus on **unidirectional communication** from the computer to the Arduino (`Computer→Arduino`). That is, the computer will send data and the Arduino will receive data. Later, we will cover `Arduino→Computer` and bidirectional (duplex) communication `Computer↔Arduino`.
+Below, we are going to show a few different examples using the command line, Python, and then JavaScript. To keep things simple, in this lesson, we are going to focus on **unidirectional communication** from the computer to the Arduino (`Computer → Arduino`). That is, the computer will send data and the Arduino will receive data. Later, we will cover `Arduino → Computer` and bidirectional (duplex) communication `Computer ↔ Arduino`.
 
 And actually, in all of our serial lessons—including this one—we will have the Arduino transmit something back to the computer to aid with debugging and ensure the Arduino received what we expected. You'll see!
 
@@ -238,6 +238,7 @@ And the corresponding circuit:
 
 ![](assets/images/SimpleSerialIn_LEDCircuit.png)
 **Figure.** The corresponding circuit for [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). Made in Fritzing and PowerPoint.
+{: .fs-1}
 
 ### Using Serial Monitor
 
@@ -245,24 +246,26 @@ Let's begin simply by using our now very familiar Arduino IDE [Serial Monitor](.
 
 ![](assets/images/ArduinoIDESerialMonitor_AnnotatedScreenShot.png)
 **Figure** An annotated screenshot the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) tool for sending and receiving serial data.
+{: .fs-1}
 
-#### Serial Monitor video
+#### Video demonstration of using Serial Monitor
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/SimpleSerialIn-NoTalking-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
 </video>
-**Video.** A video demonstrating using the Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). 
+**Video.** A video demonstrating using the Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
 {: .fs-1 }
 
+### Command lines tools
 
-### Command Line
+While we've thus far emphasized the Arduino IDE's [Serial Monitor](../arduino/serial-print.md), there is nothing special or unique about that tool. We can use any application or programming language with serial support. Below, we'll show how to use command line tools for both Windows and Mac/Linux.
 
-https://itp.nyu.edu/physcomp/lab-intro-to-serial-communications/#Connecting_via_the_Command_Line
-https://learn.sparkfun.com/tutorials/terminal-basics/command-line-windows-mac-linux
+<!-- https://itp.nyu.edu/physcomp/lab-intro-to-serial-communications/#Connecting_via_the_Command_Line
+https://learn.sparkfun.com/tutorials/terminal-basics/command-line-windows-mac-linux -->
 
 #### Windows
 
-On Windows, we can use [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.1). To read and write data from the serial port using PowerShell, we can follow the official [PowerShell blog](https://devblogs.microsoft.com/powershell/writing-and-reading-info-from-serial-ports/).
+On Windows, we can use the [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.1) terminal, which is built into Windows 10. To read and write data from the serial port with PowerShell, we'll follow the official [PowerShell blog](https://devblogs.microsoft.com/powershell/writing-and-reading-info-from-serial-ports/).
 
 First, to find the available serial ports, we can use `getportnames()`.
 
@@ -271,20 +274,20 @@ PS> [System.IO.Ports.SerialPort]::getportnames()
 COM7
 ```
 
-Then, create a `SerialPort` object, which takes the COM port, the baud rate, serial configuration parameters (parity bit, data bit length, and stop bit). Using the created port object, open it. 
+Then, we'll create a `SerialPort` object, which takes the COM port, the baud rate, serial configuration parameters (parity bit, data bit length, and stop bit). We'll then open this port.
 
 ```
 PS> $port= new-Object System.IO.Ports.SerialPort COM7,9600,None,8,one
 PS> $port.open()
 ```
 
-To write to the port, we can use `WriteLine(<str>)`:
+To write to the port using ASCII-encoded text, we'll use `WriteLine(<str>)`:
 
 ```
 PS> $port.WriteLine(“Hello!")
 ```
 
-Similarly, to read from the port, we use `ReadLine()`:
+Similarly, to read from the port, we can use `ReadLine()`:
 
 ```
 PS> $port.ReadLine()

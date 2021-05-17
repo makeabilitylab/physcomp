@@ -81,8 +81,18 @@ The wiring diagram and circuit schematic are below. We used the [Qwiic](https://
 
 #### Physical wiring with jumper cables
 
+Here's a picture of actually wiring up the OLED using jumper cables.
+
 ![](assets/images/ArduinoLeonardo_OLEDWiring_Breadboard.png)
 **Figure** Physically wiring the OLED display with jumper cables. The Arduino is running this demo code ['BitmapBounce.ino'](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino)
+{: .fs-1 }
+
+#### ESP32 wiring
+
+Some students have asked for the ESP32 wiring, so here it is. The ESP32 board runs at 3.3V *vs.* the 5V supplied by the Arduino Leonardo and Uno; however, the OLED itself only needs 3V for operation. You can learn more about the [ESP32 here](../esp32/index.md).
+
+![](assets/images/Huzzah32_OLEDWiring_FritzingSchematics.png)
+**Figure.** Wiring diagram for the [Adafruit Huzzah32](../esp32/index.md) ESP32 board with OLED.
 {: .fs-1 }
 
 #### STEMMA QT wiring

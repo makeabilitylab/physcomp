@@ -38,7 +38,7 @@ Much of what we do with Web Serial could be translated to a WiFi context.
 
 In the words of [François Beaufort](https://web.dev/serial/), the Web Serial API:
 
-> the Web Serial API bridges the web and the physical world by allowing websites to communicate with serial devices, such as microcontrollers and 3D printers
+> bridges the web and the physical world by allowing websites to communicate with serial devices, such as microcontrollers and 3D printers
 {: .fs-3 }
 
 Web Serial is already being used in web tools like [Microsoft's MakeCode](https://makecode.adafruit.com/), which lets you program microcontrollers via a drag-and-drop visual programming language and [Arduino's Web Editor](https://create.arduino.cc/editor), which lets you write code from the browser, store work in the cloud, and upload sketches directly from the web.
@@ -172,19 +172,19 @@ while (true) {
 
 To make it easier to work with Web Serial, we wrote a basic Web Serial JavaScript class called [`serial.js`](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js). 
 
-To use our Web Serial class, you can clone our [p5js repo](https://github.com/makeabilitylab/p5js) and include `serial.js` from `_libraries/serial.js` or use [jsDelivr](https://www.jsdelivr.com/) service, which turns any GitHub repo into a CDN and directly serves `serial.js` from our GitHub repo. 
+To use our Web Serial class, you can clone our [p5js repo](https://github.com/makeabilitylab/p5js) and include `serial.js` from `_libraries/serial.js` or use the [jsDelivr](https://www.jsdelivr.com/) service, which turns any GitHub repo into a CDN and directly serves `serial.js` from our GitHub repo. 
 
-In the `<head>` of your html file, simply add:
+For the latter, in the `<head>` or `<body>` of your html file, simply add:
 
 {% highlight HTML %}
 <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
 {% endhighlight HTML %}
 
-Currently, [`serial.js`](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) supports just reading/writing text data (rather than binary data).
+Currently, [`serial.js`](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) supports just reading/writing text data (rather than binary data) but that shouldn't affect us!
 
 ### Event-based functions
 
-[`serial.js`](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) uses an event-based architecture with callback functions, which is common in web and UI programming (see: Mozilla's [Introduction to Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)). There are four events:
+[`serial.js`](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) uses an event-based architecture with callback functions, which is common in web and UI programming (see: Mozilla's [Introduction to Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)). The Serial class has four events, which correspond to the connection opening, closing, receiving data, and errors.
 
 {% highlight JavaScript %}
 const SerialEvents = Object.freeze({
@@ -200,6 +200,8 @@ To create a new Serial object and subscribe to the events, you would write:
 {% highlight JavaScript %}
 // Setup Web Serial using serial.js
 const serial = new Serial();
+
+// Subscribe to the events.
 serial.on(SerialEvents.CONNECTION_OPENED, onSerialConnectionOpened);
 serial.on(SerialEvents.CONNECTION_CLOSED, onSerialConnectionClosed);
 serial.on(SerialEvents.DATA_RECEIVED, onSerialDataReceived);
@@ -226,9 +228,11 @@ function onSerialDataReceived(eventSender, newData) {
 }
 {% endhighlight JavaScript %}
 
+You need not subscribe to *all* the events—just the ones you need. However, subscribing to all of them does provide you with more information if something goes wrong.
+
 ### Opening the serial port
 
-To open a serial port, you must call `connect()` followed by `open()`. The method signatures are:
+To open a serial port, you call `connect()` followed by `open()`. The method signatures are:
 
 {% highlight JavaScript %}
 async connect(existingPort = null, portFilters = null)
@@ -242,7 +246,7 @@ The `connect()` method takes two optional parameters:
 
 The `open()` method takes in the previously described [SerialOptions](https://reillyeon.github.io/serial/#dom-serialoptions) dictionary. If no parameter is passed, the dictionary defaults to `serialOptions = { baudRate: 9600 }`.
 
-For convenience, there are two additional methods `connectAndOpen()` and `autoConnectAndOpenPreviouslyApprovedPort()`:
+For convenience, there are two additional methods `connectAndOpen()` and `autoConnectAndOpenPreviouslyApprovedPort()`—we typically use these:
 
 {% highlight JavaScript %}
 // Prompts user for approval to connect to a serial device and opens the port to
@@ -438,6 +442,107 @@ Now save and reload. With your Arduino plugged into your computer, try clicking 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/SliderOutScreenRecording_ButtonJustHookedUp-Optimized.mp4" type="video/mp4" />
 </video>
+
+#### Add and hook up a slider
+
+Finally, let's add and hook up an interactive slider to select and send values between 0 and 255 as text via serial. Slider widgets are specified as [`<input type="range">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range) in HTML.
+
+Below our `<button>` HTML in the `<body>`, add in the slider. We will specify a minimum, maximum, and initial value as well as a callback function for whenever the slider value changes.
+
+{% highlight HTML %}
+<button id="connect-button" onclick="onConnectButtonClick()">Connect via Serial Port</button>
+<input id="slider" type="range" min="0" max="255" value="128" onchange="onSliderValueChanged(this, event)" />
+{% endhighlight HTML %}
+
+Now, in the `<script>` block, add in the `onSliderValueChanged()` method. In this function, we'll grab the new value (`src.value`) and transmit it as a string via `serial.writeLine(src.value)`.
+
+{% highlight JavaScript %}
+async function onSliderValueChanged(src, event) {
+  console.log("Writing to serial: ", src.value.toString());
+  serial.writeLine(src.value);
+}
+{% endhighlight JavaScript %}
+
+And that's it! A fully working Web Serial demo, which should look something like this:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SliderOutSuperBasic-Optimized.mp4" type="video/mp4" />
+</video>
+
+#### Polish the interface
+
+We can make a few UI updates to polish the interface. First, let's **hide** the connect button after we successfully connect to serial. For this, we'll change the display style of our button to `none` in the `onSerialConnectionOpened()` function:
+
+{% highlight JavaScript %}
+function onSerialConnectionOpened(eventSender) {
+  console.log("onSerialConnectionOpened", eventSender);
+  document.getElementById("connect-button").style.display = "none";
+}
+{% endhighlight JavaScript %}
+
+Second, let's display the value of the slider widget on the webpage. For this, we need to add the following to the HTML:
+
+{% highlight HTML %}
+<h1>Slider value: <span id="slider-value">0</span></h1>
+{% endhighlight HTML %}
+
+And then modify the `onSliderValueChanged()` method:
+
+{% highlight JavaScript %}
+async function onSliderValueChanged(src, event) {
+  console.log("Writing to serial: ", src.value.toString());
+  serial.writeLine(src.value);
+
+  // Update the slider value text
+  document.getElementById('slider-value').textContent = src.value;
+}
+{% endhighlight JavaScript %}
+
+We should also initialize the `slider-value` textContent when the page first loads so that the slider widget and the text display are in sync. Somewhere at the top of the `<script>` block, add in:
+
+{% highlight JavaScript %}
+// Get current slider value and set it to the slider text output
+let sliderVal = document.getElementById('slider').value;
+document.getElementById('slider-value').textContent = sliderVal;
+{% endhighlight JavaScript %}
+
+Finally, let's wrap all of the interactive controls (except for the connect button) into their own `<div>` and only show this when we've successfully connected to serial. So, it starts hidden, which is set by `style="display:none"`.
+
+{% highlight HTML %}
+<div id="interactive-controls" style="display:none">
+  <h1>Slider value: <span id="slider-value">0</span></h1>
+  <input id="slider" type="range" min="0" max="255" value="128" onchange="onSliderValueChanged(this, event)" />
+</div>
+{% endhighlight HTML %}
+
+Now programatically change the `interactive-controls` style to `display:block` when a connection is made:
+
+{% highlight JavaScript %}
+function onSerialConnectionOpened(eventSender) {
+  console.log("onSerialConnectionOpened", eventSender);
+  document.getElementById("connect-button").style.display = "none";
+  document.getElementById("interactive-controls").style.display = "block";
+}
+{% endhighlight JavaScript %}
+
+<!-- TODO: add in the debug html-message stuff? -->
+
+#### Full slider video demo
+
+Here's a full video demo of what it should look like:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
+</video>
+**Video.** Running the SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
+{: .fs-1 }
+
+### Simple bidirectional text webpage
+
+For our second and final example, let's build a simple bidirectional text webpage that sends and receives text via serial.
+
+TODO: circuit
+TODO: movies
 
 ## Resources
 

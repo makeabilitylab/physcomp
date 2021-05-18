@@ -18,19 +18,19 @@ usetocbot: true
 {:toc}
 ---
 
-Devices need to communicate. Sensors to microcontrollers. Microcontrollers to computers. Computers to the Internet. And beyond! Many different protocols have been created to support this communication from [Ethernet](https://en.wikipedia.org/wiki/Ethernet) to [Zigbee](https://en.wikipedia.org/wiki/Zigbee). In this lesson, we will focus on asynchronous serial communication, specifically TTL serial (Transistor-Transistor Logic Serial)—an enduring standard that has prevailed since the beginning of personal computers and is what the [Arduino Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/) uses. 
+Devices need to communicate. Sensors to microcontrollers. Microcontrollers to computers. Computers to the Internet. And beyond! Many different protocols have been created to support device-to-device communication from [Ethernet](https://en.wikipedia.org/wiki/Ethernet) and [Zigbee](https://en.wikipedia.org/wiki/Zigbee) to WiFi and Bluetooth. In this lesson, we will focus on asynchronous serial communication, specifically TTL serial (Transistor-Transistor Logic Serial)—an enduring standard that has prevailed since the beginning of personal computers and is what the [Arduino Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/) uses. 
 
-Unlike other popular serial communication protocols like [I<sup>2</sup>C](https://learn.sparkfun.com/tutorials/i2c/all) and [SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi/all), TTL Serial is *asynchronous*, which means it does not rely on a shared clock signal (precisely timed voltage pulses) paired with its data lines. This has the benefit of fewer wires but does result in a bit of communication overhead for each transmitted "packet" or data frame.
+Unlike other popular serial communication protocols like [I<sup>2</sup>C](https://learn.sparkfun.com/tutorials/i2c/all) and [SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi/all), TTL serial is *asynchronous*, which means it does not rely on a shared clock signal (precisely timed voltage pulses) paired with its data lines. This has the benefit of fewer wires but does result in a bit of communication overhead for each transmitted "packet" or data frame.
 
-In this lesson, we'll dive into asynchronous serial communication and how we can use it for computer-to-microcontroller and microcontroller-to-computer communication.
+In this lesson, we'll dive into asynchronous serial communication and how we can use it for bidrectional `Computer ↔ Arduino` communication. 
 
 ## Serial communication with Arduino
 
 <!-- Arduino uses a standard [asynchronous serial communication protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) for serial communication.  -->
 
-On Arduino, we initialize the serial port using [`Serial.begin()`](https://www.arduino.cc/en/Serial.Begin). Indeed, we've done this since our very first set of lessons on Arduino (*e.g.,* [L3: Serial Debugging](../arduino/serial-print.md)). 
+We've been using [Arduino's serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/) functionality since our very first set of lessons (*e.g.,* [L3: Serial Debugging](../arduino/serial-print.md)). However, we've glossed over the details and used serial primarily for debugging rather than `Computer ↔ Arduino` communication.
 
-The [`Serial.begin()`](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/HardwareSerial.cpp) function has two overloaded options:
+On Arduino, we initialize the serial port using [`Serial.begin()`](https://www.arduino.cc/en/Serial.Begin). The [`Serial.begin()`](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/HardwareSerial.cpp) function has two overloaded options:
 
 {% highlight C %}
 begin(unsigned long baud)
@@ -45,7 +45,7 @@ Thus far, in our lessons, we have been using the first function—`begin(unsigne
 
 The baud rate specifies how fast data is sent over serial, which is expressed in bits-per-second (bps). For communicating with a computer, the [Arduino docs](https://www.arduino.cc/en/Serial.Begin) recommend: 300 bps, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200. Both devices—in this case, the Arduino and the computer—need to be set to the **same** baud rate to communicate.
 
-Thus far, we've only been using the serial port for debugging, so speed hasn't been a concern—and we've typically used 9600 bps (or 9.6 kbps). At 9600 bps, the transmitter transmits one new voltage pulse (*e.g.,* HIGH corresponding to +5V and LOW corresponding to 0V) every 1/9600th of a second, which is interpreted as a bit (a 1 or 0) by the receiver. For higher bandwidth, try 115200 or 115.2 kbps, which is 12x faster than 9600 (but still slow by today's networking standards, of course).
+Thus far, speed hasn't been a concern. We've typically used 9600 bps (or 9.6 kbps) for transmitting our debugging info. At 9600 bps, the transmitter transmits one new voltage pulse (*e.g.,* HIGH corresponding to +5V and LOW corresponding to 0V) every 1/9600th of a second, which is interpreted as a bit (a 1 or 0) by the receiver. Arduino recommends up to 115200 or 115.2 kbps, which is 12x faster than 9600 (but still slow by today's networking standards, of course).
 
 ![](assets/images/SerialMonitorShowingBaudRate.png)
 {: .mx-auto .align-center }
@@ -54,7 +54,7 @@ Thus far, we've only been using the serial port for debugging, so speed hasn't b
 
 #### What's the fastest serial baud rate?
 
-This will be microcontroller dependent. The Arduino Uno uses a ATmega328P, which states a maximum baud rate of 2,000,000 baud (2 Mbps). On [Stack Overflow](https://arduino.stackexchange.com/a/299/63793), Connor Wolf found that though the Uno was capable of communicating at 2Mpbs, the Arduino serial library resulted in only an effective 500 kbps communication rate. 
+This will be microcontroller dependent. The Arduino Uno uses a ATmega328P microcontroller, which states a maximum baud rate of 2,000,000 baud (2 Mbps). On [Stack Overflow](https://arduino.stackexchange.com/a/299/63793), Connor Wolf found that though the Uno was capable of communicating at 2Mpbs, the Arduino serial library resulted in only an effective 500 kbps communication rate. 
 
 ### The asynchronous serial communication frame
 
@@ -91,7 +91,7 @@ Incoming serial data is stored in a serial buffer, which is read as a first-in, 
 
 ### Serial to USB? USB to serial?
 
-In the 1980s and 1990s, computers had serial ports like [RS-232 connections](https://en.wikipedia.org/wiki/RS-232) to support asynchronous serial communication. Now, we use USB (Universal Serial Bus)—a far more sophisticated and efficient serial communication standard that allows multiple devices to communicate over the same wires. However, because asynchronous serial communication persists, USB drivers and our operating systems support asynchronous serial communication over USB. Devices, like the Arduino, include a USB-to-serial converter that shows up as a serial port when you plug them in (just as if you were using an old serial connection).
+In the 1980s and 1990s, computers had serial ports like [RS-232 connections](https://en.wikipedia.org/wiki/RS-232) to support asynchronous serial communication. Now, we use USB (Universal Serial Bus)—a far more sophisticated and efficient serial communication standard that allows multiple devices to communicate over the same wires. However, because asynchronous serial communication persists, USB drivers and our operating systems support asynchronous serial communication over USB. Devices, like the Arduino, include a USB-to-serial converter that shows up as a serial port when you plug them in (just as if you were using an old serial connection). You might see the Arduino device, for example, as a USBtoUART device (UART is Universal Asynchronous Receiver-Transmitter).
 
 ## Developing serial communication software applications
 
@@ -426,7 +426,26 @@ Here's a video demonstration:
 
 #### Mac and Linux
 
-TODO
+On Mac and Linux, we can use the `screen` command as described by this [Sparkfun tutorial](https://learn.sparkfun.com/tutorials/terminal-basics/command-line-windows-mac-linux). Screen should be installed by default on Mac. If it's not installed on Linux, install it with `sudo apt-get install screen`.
+
+First, we need to enumerate the available ports. Type:
+
+```
+> ls /dev/tty.*
+
+/dev/tty.Bluetooth-Incoming-Port /dev/tty.SLAB_USBtoUART
+/dev/tty.MALS                    /dev/tty.SOC
+```
+
+In this case, the Arduino is listed as `/dev/tty.SLAB_USBtoUART`. We can connect to it via screen by typing `screen <port_name> <baud_rate>`:
+
+```
+> screen /dev/tty.SLAB_USBtoUART 9600
+```
+
+You terminal should go blank with a flashing cursor. You are now connected to that port. Anything you write will be instantly sent to Arduino as ASCII-encoded text.
+
+To disconnect, you must type `control-a` followed by `control-\`. The screen program will then ask if you want to exit. Type `y`.
 
 ### Python
 
@@ -496,6 +515,21 @@ And that's it! This code is available as [serial_demo.py](https://github.com/mak
 **Video.** A video demonstrating using [Python3](https://www.python.org/downloads/) with [pySerial](https://pypi.org/project/pyserial/) to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
 {: .fs-1 }
 
+#### Using Python for real-time gesture recognition
+
+Of course, we can do significantly more interesting things using serial communication. In the video below, we demonstrate a Python program that reads in real-time accelerometer data sent via the Arduino over serial and classifies gestures (using a template matching).
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/nnTyqCwYVbA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+**Video.** A video demonstrating real-time gesture recognition using 3-axis accelerometer data sent via the Arduino over serial. We wrote the gesture recognizer in Python; however, we are not linking to the code because we use it as an assignment in some of our courses. You can learn more in our [Signal Classification](../signals/classification.md) lesson series.
+{: .fs-1 }
+
+There is a world of possibilities here. And we'll begin to explore them in this lesson series!
+
+## Activity
+
+For your prototyping journals, run [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) or [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) with the appropriate circuit and choose one of the above approaches (or develop your own!) to communicate with the Arduino. Take a video and reflect on what you learned in this lesson.
+
 ## Resources
 
 - [Intro to Asynchronous Serial Communications](https://itp.nyu.edu/physcomp/lab-intro-to-serial-communications/), NYU ITP Physical Computing course
@@ -509,6 +543,14 @@ And that's it! This code is available as [serial_demo.py](https://github.com/mak
 - [Serial 1: Introduction](https://vimeo.com/380355568), NYU ITP Physical Computing course video
 
 - [Serial 2: Logic Analyzer and ASCII](https://vimeo.com/380355716), NYU ITP Physical Computing course video 
+
+## Next Lesson
+
+In the [next lesson](web-serial), we'll apply our newfound serial knowledge to communicating with our Arduino via our web browsers using the [Web Serial API](https://web.dev/serial/).
+
+<span class="fs-6">
+[Next: Web Serial](web-serial.md){: .btn .btn-outline }
+</span>
 
 <!-- #### DisplayTextSerialIn
 

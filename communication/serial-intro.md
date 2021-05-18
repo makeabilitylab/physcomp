@@ -517,7 +517,7 @@ And that's it! This code is available as [serial_demo.py](https://github.com/mak
 
 #### Using Python for real-time gesture recognition
 
-Of course, we can do significantly more interesting things using serial communication. In the video below, we demonstrate a Python program that reads in real-time accelerometer data sent via the Arduino over serial and classifies gestures (using a template matching).
+Of course, we can do significantly more interesting things using serial communication. In the video below, for example, we demonstrate a Python program that reads in real-time accelerometer data sent via the Arduino over serial and classifies gestures (using a template matching).
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/nnTyqCwYVbA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

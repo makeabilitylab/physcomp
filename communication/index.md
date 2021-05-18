@@ -17,15 +17,21 @@ usetocbot: true
 {:toc}
 ---
 
-Notes:
+In this lesson series, we will learn about serial communication, web serial, and using [p5js](https://p5js.org/) to communicate with Arduino.
+
+## [L1: Intro to Serial](serial-intro.md)
+
+In this lesson, we’ll dive into asynchronous serial communication and how we can use it for bidrectional `Computer ↔ Arduino` communication. We'll show example serial communication clients using terminal programs and Python.
+
+## [L2: Web Serial](web-serial.md)
+
+In this lesson, you'll learn about the new [Web Serial API](https://wicg.github.io/serial/) and how to build simple web apps that communicate with Arduino.
+
 <!-- 
 Question to self: Should serial communication be its own top-level header on website?
 Eventually, we'll want Node as well... But seems like that too should be its own top-level header? -->
 
-
-
-
-## Serial
+<!-- ## Serial
 - Serial communication. 
   - Could transmit as binary, which is more efficient, but harder to debug. And we don't need high bandwidth for our applications
   - Handshaking. Perform some sort of initiation at the beginning of communication. For example, your Arduino could send the string "Ready?" and the computer could respond with "OK".
@@ -47,4 +53,4 @@ Eventually, we'll want Node as well... But seems like that too should be its own
 
 ## Human-input devices
 - Mouse
-- Keyboard
+- Keyboard -->

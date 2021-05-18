@@ -280,7 +280,9 @@ To use Live Server, open a `.html` page in VSCode. Then, you can either right-cl
 
 ### Basic slider webpage
 
-We're going to build a simple webpage with a slider that transmits a value between 0 and 255 as a text-encoded string via Web Serial. It should look like this:
+We're going to build a simple webpage with a slider that transmits a value between 0 and 255 as a text-encoded string via Web Serial. The Arduino receives the text value and converts it to an `int` then writes out that integer via `analogWrite` via one of the PWM-enabled pins.
+
+The full app experience should look like this:
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-Snippet720p.mp4" type="video/mp4" />
@@ -432,12 +434,12 @@ async function onConnectButtonClick() {
     }
 
   } else {
-    alert('The Web Serial API does not appear supported on this web browser. Are you using Chrome? Did you remember to enable `experimental-web-platform-features` in Chrome? See https://web.dev/serial/');
+    alert('The Web Serial API does not appear supported on this web browser.');
   }
 }
 {% endhighlight JavaScript %}
 
-Now save and reload. With your Arduino plugged into your computer, try clicking the `Connect via Serial Port` button. It should look something like this:
+Now save and reload. With your Arduino plugged into your computer, try clicking the `Connect via Serial Port` button. Once the button is clicked, the web browswer will enumerate all available serial devices and ask for user permission. It should look something like this:
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/SliderOutScreenRecording_ButtonJustHookedUp-Optimized.mp4" type="video/mp4" />
@@ -451,7 +453,8 @@ Below our `<button>` HTML in the `<body>`, add in the slider. We will specify a 
 
 {% highlight HTML %}
 <button id="connect-button" onclick="onConnectButtonClick()">Connect via Serial Port</button>
-<input id="slider" type="range" min="0" max="255" value="128" onchange="onSliderValueChanged(this, event)" />
+<input id="slider" type="range" min="0" max="255" 
+    value="128" onchange="onSliderValueChanged(this, event)" />
 {% endhighlight HTML %}
 
 Now, in the `<script>` block, add in the `onSliderValueChanged()` method. In this function, we'll grab the new value (`src.value`) and transmit it as a string via `serial.writeLine(src.value)`.
@@ -468,6 +471,8 @@ And that's it! A fully working Web Serial demo, which should look something like
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/SliderOutSuperBasic-Optimized.mp4" type="video/mp4" />
 </video>
+**Video.** Did I just tape my Arduino + breadboard to my computer screen to make this video? Yes I did!
+{: .fs-1 }
 
 #### Polish the interface
 
@@ -506,12 +511,13 @@ let sliderVal = document.getElementById('slider').value;
 document.getElementById('slider-value').textContent = sliderVal;
 {% endhighlight JavaScript %}
 
-Finally, let's wrap all of the interactive controls (except for the connect button) into their own `<div>` and only show this when we've successfully connected to serial. So, it starts hidden, which is set by `style="display:none"`.
+Finally, let's wrap all of the interactive controls (except for the connect button) into their own `<div>` with `id=interactive-controls` and only show this when we've successfully connected to serial. So, the `<div>` starts hidden, which is set by `style="display:none"`.
 
 {% highlight HTML %}
 <div id="interactive-controls" style="display:none">
   <h1>Slider value: <span id="slider-value">0</span></h1>
-  <input id="slider" type="range" min="0" max="255" value="128" onchange="onSliderValueChanged(this, event)" />
+  <input id="slider" type="range" min="0" max="255" 
+      value="128" onchange="onSliderValueChanged(this, event)" />
 </div>
 {% endhighlight HTML %}
 
@@ -539,10 +545,213 @@ Here's a full video demo of what it should look like:
 
 ### Simple bidirectional text webpage
 
-For our second and final example, let's build a simple bidirectional text webpage that sends and receives text via serial.
+For our second and final example, we will build a simple webpage that sends and receives text data via Web Serial. As you type in the provided textbox, the data is immediately transmitted over serial and displayed on the Arduino-connected OLED display. The Arduino echos back received data to the web app, which shows this text in the "Received from Arduino" block. The app looks like this:
 
-TODO: circuit
-TODO: movies
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/DisplaySerialTextIn-QuickSnippet-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** Running the DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
+{: .fs-1 }
+
+For our circuit and wiring, we simply need an Arduino and [OLED display](../advancedio/oled.md).
+![](assets/images/ArduinoLeonardo_OLEDDisplayWiring.png)
+
+#### Create new folder and index.html page
+
+As before, create a new folder (we'll call ours `DisplayText`) and an `index.html` file with some initial HTML. 
+
+{% highlight HTML %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Serial Demo</title>
+  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+</head>
+
+<body>
+  
+</body>
+</html>
+{% endhighlight HTML %}
+
+#### Add connect button and initial interface
+
+In the body, add in the connect button and initial interface:
+
+{% highlight HTML %}
+<body>
+  <div id="main-content">
+    <button id="connect-button" onclick="onButtonConnectToSerialDevice()">
+      Connect via Serial Port
+    </button>
+    <div id="text-interface">
+      <h3>Enter text:</h3>
+      <input placeholder="Enter some text" name="input-text" />
+
+      <h3>Display text:</h3>
+      <p id="output-text"></p>
+
+      <h3>Received from Arduino:</h3>
+      <p id="received-text"></p>
+    </div>
+  </div>
+</body>
+{% endhighlight HTML %}
+
+Save and open with Live Server. It should look like this:
+
+![](assets/images/DisplayTextWebPage_InitialUI.png)
+
+#### Hook up connect button and serial
+
+Now, let's hook up the connect button and add in the initial Web Serial code—both will be the same as before. Add a `<script>` block into the `<body>`:
+
+{% highlight HTML %}
+<script>
+  // Setup Web Serial using serial.js
+  const serial = new Serial();
+  serial.on(SerialEvents.CONNECTION_OPENED, onSerialConnectionOpened);
+  serial.on(SerialEvents.CONNECTION_CLOSED, onSerialConnectionClosed);
+  serial.on(SerialEvents.DATA_RECEIVED, onSerialDataReceived);
+  serial.on(SerialEvents.ERROR_OCCURRED, onSerialErrorOccurred);
+
+  async function onButtonConnectToSerialDevice() {
+    console.log("onButtonConnectToSerialDevice");
+    if (!serial.isOpen()) {
+      await serial.connectAndOpen();
+    }
+  }
+
+  function onSerialErrorOccurred(eventSender, error) {
+    console.log("onSerialErrorOccurred", error);
+  }
+
+  function onSerialConnectionOpened(eventSender) {
+    console.log("onSerialConnectionOpened", eventSender);
+  }
+
+  function onSerialConnectionClosed(eventSender) {
+    console.log("onSerialConnectionClosed", eventSender);
+  }
+
+  function onSerialDataReceived(eventSender, newData) {
+    console.log("onSerialDataReceived", newData);
+  }
+
+  async function onConnectButtonClick() {
+    console.log("Connect button clicked!");
+  }
+</script>
+{% endhighlight HTML %}
+
+#### Hook up event listener to textbox
+
+In our web app, you may have noticed that we have no "submit" button. Instead, the text data is sent immediately as the user types in the textbox. To achieve this, we need to hook up an event listener to the textbox. We'll have the event listener call our function called `updateOutputText(e)` whenever there is new input. Inside `updateOutputText`, we'll both send the text data to Arduino via serial and update the `<p id="output-text"></p>` with the text sent. 
+
+So, add the following to the beginning of our `<script>`:
+
+{% highlight HTML %}
+<script>
+  const inputText = document.querySelector('input');
+  const outputText = document.getElementById('output-text');
+
+  inputText.addEventListener('input', updateOutputText);
+
+  // Called automatically when the input textbox is updated
+  function updateOutputText(e) {
+    outputText.textContent = e.target.value;
+    serialWriteTextData(e.target.value);
+  }
+
+  // Send text data over serial
+  async function serialWriteTextData(textData) {
+    if (serial.isOpen()) {
+      console.log("Writing to serial: ", textData);
+      serial.writeLine(textData);
+    }
+  }
+  ...
+</script>
+{% endhighlight HTML %}
+
+#### Update received-text with data received from Arduino
+
+Finally, we need to listen for the data received back from the Arduino and update `<p id="received-text"></p>`. Make two additions to your existing script:
+
+{% highlight HTML %}
+<script>
+  // Add this
+  const rcvdText = document.getElementById('received-text');
+  
+  ...
+
+  // And update the textContent of 'received-text' when new data is received
+  function onSerialDataReceived(eventSender, newData) {
+    console.log("onSerialDataReceived", newData);
+    rcvdText.textContent = newData;
+  }
+  ...
+</script>
+{% endhighlight HTML %}
+
+At this point, you should be able to run the web app and have it communicate with your Arduino. You should try it! We can also polish our app with two UI updates.
+
+#### Hide UI until serial connection is made
+
+When a serial connection is made, we will hide the connect button and show the text entry interface:
+
+{% highlight HTML %}
+function onSerialConnectionOpened(eventSender) {
+  console.log("onSerialConnectionOpened");
+  document.getElementById("connect-button").style.display = "none";
+  document.getElementById("text-interface").style.display = "block";
+}
+{% endhighlight HTML %}
+
+#### Add CSS
+
+We will also prettify our UI with some basic CSS. Within the `DisplayText` project, create the folder `css` and the CSS file `styles.css` and put in:
+
+{% highlight CSS %}
+#main-content {
+  margin: auto;
+  width: 800px;
+  border: 3px solid rgb(216, 216, 216);
+  padding: 10px;
+}
+
+input{
+    min-width: 400px;
+}
+
+#text-interface{
+    display: none;
+}
+{% endhighlight CSS %}
+
+Then, in `index.html` add the following to the `<head>` to hook up the CSS.
+
+{% highlight HTML %}
+<head>
+  ...
+  <link rel="stylesheet" href="css/styles.css">
+  ...
+</head>
+{% endhighlight HTML %}
+
+You did it! Now, play and experiment!
+
+#### Full DisplayText video demo
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/DisplaySerialTextIn-FullSpedUp-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** The full DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
+{: .fs-1 }
+
+## Activity
+
+For your prototyping journals, either modify or create your own lil web app to communicate with the Arduino. You can, of course, also write custom Arduino code to receive and parse data or to transmit custom data. Take a video, link to your code, and write a brief description and reflection.
 
 ## Resources
 
@@ -552,10 +761,10 @@ TODO: movies
 
 ## Next Lesson
 
-In the [next lesson](debouncing.md), we'll show how to use [p5js](https://p5js.org/) with Web Serial. It's gonna be great fun!
+In the [next lesson](p5js-serial.md), we'll show how to use [p5js](https://p5js.org/) with Web Serial. It's gonna be great fun!
 
 <span class="fs-6">
 [Previous: Intro to Serial](serial-intro.md){: .btn .btn-outline }
-<!-- [Next: Debouncing](debouncing.md){: .btn .btn-outline } -->
+[Next: Using p5js with Web Serial](p5js-serial.md){: .btn .btn-outline }
 <!-- [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline } -->
 </span>

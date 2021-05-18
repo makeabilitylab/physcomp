@@ -258,7 +258,186 @@ The `connectAndOpen()` method simply combines the two `connect()` and `open()` f
 
 ## Let's make stuff
 
-We'r
+We'll begin by running the same Arduino code ([SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino)) with the same circuit as the [previous lesson](serial-intro.md). The circuit:
+
+![](assets/images/SimpleSerialIn_LEDCircuit.png)
+**Figure.** The corresponding circuit for [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). Made in Fritzing and PowerPoint.
+{: .fs-1}
+
+Now, let's build a simple webpage using Web Serial to interact with ([SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino)).
+
+### Web dev tools
+
+We recommend developing web code in [Visual Studio Code (VSCode)](https://code.visualstudio.com/) with the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) plugin. Because Web Serial requires device permissioning, you must run your webpage on a server rather than opening up `index.html` directly from your OS (in other words, doubling clicking on `index.html` in File Explorer or Finder won't work properly).
+
+To install Live Server, open VSCode and click on `Extensions` in the left sidebar (or type `ctrl-shift-x`) then search for [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) in the textbox. At the time of writing, the extension has nearly 12 million installs.
+
+To use Live Server, open a `.html` page in VSCode. Then, you can either right-click on the file and select "Open with Live Server" or, in the bottom-right hand corner of VSCode, look for a blue 'Go Live' button. Click it and boom, you're running a web server, serving the webpage! By default, the server will reload whenever the html file or any of its dependencies change!
+
+### Basic slider webpage
+
+We're going to build a simple webpage with a slider that transmits a value between 0 and 255 as a text-encoded string via Web Serial. It should look like this:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-Snippet720p.mp4" type="video/mp4" />
+</video>
+**Video.** Running the SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
+{: .fs-1 }
+
+#### Create folder and initial index.html page
+
+To begin, create a folder called `SliderOut` and an empty `index.html` file within it. Then, in VSCode select `File->Open Folder` and select `SliderOut`. With the `Explorer` view open in VSCode's left sidebar (`ctrl-shift-e`), double click on the `index.html` file to open it. Now, VSCode should look something like this:
+
+![](assets/images/VSCode_EmptyIndexHtmlFile.png)
+
+In `index.html`, copy/paste this simple, minimalist html page:
+
+{% highlight HTML %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Serial Demo</title>
+  </head>
+
+  <body>
+    Content will go here!
+  </body>
+</html>
+{% endhighlight HTML %}
+
+Save the file (`ctrl-s`). Now, to make sure everything is working, launch it via Live Server.
+
+There are three ways to launch Live Server—any will work! You can enlarge any of the screenshots below by right-clicking on them and selecting 'Open Image in New Tab'.
+
+| 1. Right-click on file in Explorer View | 2. Right-click on file in Editor | 3. Click 'Go Live' Button |
+|----|----|----|
+| ![](assets/images/VSCode_LaunchLiveServer1-RightClickOnIndexHtml.png) | ![](assets/images/VSCode_LaunchLiveServer2-RightClickonFileInEditor.png) | ![](assets/images/VSCode_LaunchLiveServer3-ClickOnGoLiveButton.png) |
+
+Once launched, your default web browser will open to a web server running at `127.0.0.1` on port 5500 (Live Server's defaults). The webpage should look like this:
+
+![](assets/images/LiveServerLaunched_WebSerialDemoBlankPage.png)
+
+Now, let's add in a title header in an `<h1>` block and some descriptive text:
+
+{% highlight HTML %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Serial Demo</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+  <h1>Web Serial Demo</h1>
+  This demo uses a slider to send a number between 0-255 to your connected serial device.
+</body>
+</html>
+{% endhighlight HTML %}
+
+If you hit `ctrl-s`, the website should automatically reload if you still have Live Server running. If not, just relaunch the webpage with Live Server (and keep it running as we build out).
+
+![](assets/images/WebSerialDemo_NowWithSimpleText.png)
+
+#### Add a connect button
+
+Because Web Serial requires explicit user permission to connect to a local serial device, we need to add a "connect button". To do that, we'll use the HTML [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) element and specify a callback function called `onConnectButtonClick()` (we could name this anything we want but it will need to match the subsequent callback function that we write).
+
+{% highlight HTML %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Serial Demo</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+  <h1>Web Serial Demo</h1>
+  This demo uses a slider to send a number between 0-255 to your connected serial device.
+
+  <p></p>
+  <button id="connect-button" onclick="onConnectButtonClick()">Connect via Serial Port</button>
+
+  <script>
+    async function onConnectButtonClick() {
+      console.log("Connect button clicked!")
+    }
+    </script>
+</body>
+</html>
+{% endhighlight HTML %}
+
+Reload the webpage and open the dev console (which you should almost always keep open when web developing). Click on the "Connect via Serial Port" button and you should see the message "Connect button clicked!" printed to console.
+
+![](assets/images/WebSerialDemo_WithConnectButton.png)
+
+#### Add and hook up serial.js
+
+Now we need to add in and hook up Web Serial, which we'll do via the [`serial.js`](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) library. In HTML, scripts can be placed in the `<body>`, `<head>`, or both. Pages load from top-to-bottom. In this case, we'll put it at the top of the `<body>`.
+
+{% highlight HTML %}
+<body>
+  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+
+   ...
+{% endhighlight HTML %}
+
+Now we need to create the Serial object and add in the callback functions. Add the following to the `<script>` block just above `async function onConnectButtonClick()`:
+
+{% highlight HTML %}
+<script>
+  // Setup Web Serial using serial.js
+  const serial = new Serial();
+  serial.on(SerialEvents.CONNECTION_OPENED, onSerialConnectionOpened);
+  serial.on(SerialEvents.CONNECTION_CLOSED, onSerialConnectionClosed);
+  serial.on(SerialEvents.DATA_RECEIVED, onSerialDataReceived);
+  serial.on(SerialEvents.ERROR_OCCURRED, onSerialErrorOccurred);
+
+  function onSerialErrorOccurred(eventSender, error) {
+      console.log("onSerialErrorOccurred", error);
+  }
+
+  function onSerialConnectionOpened(eventSender) {
+      console.log("onSerialConnectionOpened", eventSender);
+  }
+
+  function onSerialConnectionClosed(eventSender) {
+      console.log("onSerialConnectionClosed", eventSender);
+  }
+
+  function onSerialDataReceived(eventSender, newData) {
+      console.log("onSerialDataReceived", newData);
+  }
+
+  async function onConnectButtonClick() {
+      console.log("Connect button clicked!");
+  }
+</script>
+{% endhighlight HTML %}
+
+While you could save and reload the webpage at this point, nothing noticeably will happen because we haven't actually hooked up the `Serial` object to the connect button yet. So, let's do that now. Update `onConnectButtonClick()` to connect and open the serial port. 
+
+{% highlight JavaScript %}
+async function onConnectButtonClick() {
+  console.log("Connect button clicked!");
+
+  if (navigator.serial) {
+    if (!serial.isOpen()) {
+      await serial.connectAndOpen();
+    } else {
+      console.log("The serial connection appears already open");
+    }
+
+  } else {
+    alert('The Web Serial API does not appear supported on this web browser. Are you using Chrome? Did you remember to enable `experimental-web-platform-features` in Chrome? See https://web.dev/serial/');
+  }
+}
+{% endhighlight JavaScript %}
+
+Now save and reload. With your Arduino plugged into your computer, try clicking the `Connect via Serial Port` button. It should look something like this:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SliderOutScreenRecording_ButtonJustHookedUp-Optimized.mp4" type="video/mp4" />
+</video>
 
 ## Resources
 

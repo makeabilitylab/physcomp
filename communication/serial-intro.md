@@ -528,7 +528,7 @@ There is a world of possibilities here. And we'll begin to explore them in this 
 
 ## Activity
 
-For your prototyping journals, run [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) or [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) with the appropriate circuit and choose one of the above approaches (or develop your own!) to communicate with the Arduino. Take a video and reflect on what you learned in this lesson.
+For your prototyping journals, run [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) or [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) with the appropriate circuit and choose one of the above approaches (or develop your own!) to communicate with the Arduino. Take a video and reflect on what you've learned in this lesson.
 
 ## Resources
 

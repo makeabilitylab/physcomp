@@ -22,9 +22,22 @@ search_exclude: true
 
 We've only started to scratch the surface of what's possible in combining Arduino+Computers. In this lesson (and the next), we're going to use [p5js](https://p5js.org/) to help demonstrate this potential. It should be incredibly fun.
 
-<!-- - p5js demos (I've made three: one output only, one input only, one bidirectional).
-- Could walk through them both in p5js editor and in vscode
+<!-- TODO: consider showing one of our earlier p5js videos we made for HCID with a controller? -->
 
+<!-- - p5js demos (I've made three: one output only, one input only, one bidirectional).
+
+## From Arduino to p5.js
+
+- Could walk through them both in p5js editor and in vscode
+EtchaSketch Demo
+ -- Not just with pots but also FSRs, maybe the SharpIR sensor?
+ -- Then show another version with pretty colors and ball sizes getting bigger? Kind of like that YouTube video version I have.
+AccelBallDemo
+
+## From p5.js to Arduino
+- 
+
+## Bidirectional
 TODO: just generally need to add more screenshots or screen captures. -->
 
 ## Processing and p5js
@@ -34,7 +47,7 @@ TODO: just generally need to add more screenshots or screen captures. -->
 >  Since 2001, Processing has promoted software literacy within the visual arts and visual literacy within technology. There are tens of thousands of students, artists, designers, researchers, and hobbyists who use Processing for learning and prototyping.
 {: .fs-3 }
 
-Processing includes both an IDE and a Java-based library to allow designers, artists, makers, and engineers to *sketch with code*. The code is open source. Processing IDE and programming paradigm forms the basis of the Arduino IDE.
+Processing includes both an IDE and a Java-based library to allow designers, artists, makers, and engineers to *sketch with code*. Indeed, when you write code in Processing, you don't even need to know that you're using Java just like beginners don't know they are using C or C++ when writing code for Arduino (indeed, the Arduino IDE and programming paradigm is based on Processing!).
 
 It is hard to overemphasize the impact Processing has had on digital artists and creative coders.
 
@@ -51,7 +64,7 @@ p5js also has a convenient [online editor](https://editor.p5js.org/) to easily w
 
 ### p5.js examples written in the online editor
 
-Here are some examples that we've written directly in the p5.js editor. You can click on these links to see and run the code:
+Here are some examples that we've written directly in the p5.js editor. You can click on these links to see, edit, and run the code:
 
 - [Sound Visualizations](https://editor.p5js.org/jonfroehlich/sketches/d2euV09i)
 - [Santa Landscape Generator](https://editor.p5js.org/jonfroehlich/sketches/KFDQe5sbQ)
@@ -59,7 +72,6 @@ Here are some examples that we've written directly in the p5.js editor. You can 
 - [Basic Slider Scroller Game](https://editor.p5js.org/jonfroehlich/sketches/JwvvVJlNi)
 - [Falling Star FFT Game](https://editor.p5js.org/jonfroehlich/sketches/UvFAcoUgu)
 - [Flappy Bird](https://editor.p5js.org/jonfroehlich/sketches/shtF6XFeY)
-
 
 ## p5js Resources
 
@@ -76,4 +88,6 @@ There are some **amazing** p5js learning resources on the web. So, rather than r
 - The Coding Train's [Programming with p5.js](https://thecodingtrain.com/beginners/p5js/) by Daniel Shiffman who probably produces the best, most interesting, fun, and accessible creative coding videos.
 
 - The creator of p5js, Lauren McCarthy, wrote a book called [Getting started with p5.js : making interactive graphics in JavaScript and Processing](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71274969160001451), which is available as an e-book via the UW library.
+
+## p5js, Web Serial, and Arduino
 

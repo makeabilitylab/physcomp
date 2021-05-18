@@ -22,8 +22,10 @@ search_exclude: true
 
 We've only started to scratch the surface of what's possible in combining Arduino+Computers. In this lesson (and the next), we're going to use [p5js](https://p5js.org/) to help demonstrate this potential. It should be incredibly fun.
 
-- p5js demos (I've made three: one output only, one input only, one bidirectional).
+<!-- - p5js demos (I've made three: one output only, one input only, one bidirectional).
 - Could walk through them both in p5js editor and in vscode
+
+TODO: just generally need to add more screenshots or screen captures. -->
 
 ## Processing and p5js
 

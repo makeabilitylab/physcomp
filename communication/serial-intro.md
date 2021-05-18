@@ -46,7 +46,7 @@ The baud rate specifies how fast data is sent over serial, which is expressed in
 
 #### What's the fastest serial baud rate?
 
-This will be microcontroller dependent. The Arduino Uno uses a ATmega328P, which states a maximum baud rate of 2,000,000 baud (2 Mbps). On [Stack Overflow](https://arduino.stackexchange.com/a/299/63793), Connor Wolf found that though the Uno was capable of communicating at 2Mpbs, the Arduino serial library was poorly optimized and resulted in only an effective 500 kbps communication rate. 
+This will be microcontroller dependent. The Arduino Uno uses a ATmega328P, which states a maximum baud rate of 2,000,000 baud (2 Mbps). On [Stack Overflow](https://arduino.stackexchange.com/a/299/63793), Connor Wolf found that though the Uno was capable of communicating at 2Mpbs, the Arduino serial library resulted in only an effective 500 kbps communication rate. 
 
 ### The asynchronous serial communication frame
 
@@ -57,9 +57,9 @@ The second function, `begin(unsigned long baud, byte config)`, allows for an opt
 **Figure.** An asynchronous serial communication frame.
 {: .fs-1 }
 
-The [data bit](https://en.wikipedia.org/wiki/Asynchronous_serial_communication) is the length of the data portion of the transmission frame, the [parity bit](https://en.wikipedia.org/wiki/Parity_bit) is a simple form of error detecting code, and the synchronization bits help demarcate a frame. There is always only *one* start bit at the beginning of a frame but there can be one or two stop bits at the end (though one is most common). On Arduino, the default transmission frame configuration is: 8 data bits, no parity, one stop bit—this is a common configuration.
+The [data bit](https://en.wikipedia.org/wiki/Asynchronous_serial_communication) specifies the length of the data portion of the transmission frame (5-9), the [parity bit](https://en.wikipedia.org/wiki/Parity_bit) is a simple form of error detecting code (and can be turned on with '1' or off with '0'), and the synchronization bits help demarcate a frame. There is always *one* start bit at the beginning of a frame but there can be one or two stop bits at the end (though one is most common). On Arduino, the default transmission frame configuration is: 8 data bits, no parity, one stop bit—this is a common configuration.
 
-Importantly, if the baud and config settings do not match between the Arduino and the computer, communication will not work. This is the first thing to double check!
+Importantly, if the baud and config settings do not match between the Arduino and the computer, communication will not work. If something is not working for you, this is the first thing to double check!
 
 ### Only one computer program can open a serial port at a time
 
@@ -77,17 +77,86 @@ Similarly, if we attempt to access a previously opened serial port with [PowerSh
 
 ## Developing serial communication software applications
 
-So, how can we design and implement a computer program to communicate with our Arduino via serial? To answer this, let's decompose serial communication into three high-level layers:
+So, how can we design and implement a computer program to communicate with Arduino via serial? To answer this, let's decompose serial communication into three high-level layers:
 
-- **Hardware layer:** How is data communicated over hardware? How many wires are used? What does the voltage signal look like? Thankfully, Arduino handles this for us.
-- **Serial protocol:** What is the format of a serial transmission packet (*e.g.,* the data and parity bits)? Again, we do not really need to worry about this. Arduino uses the standard [asynchronous serial protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) and includes the software library [`Serial`](https://www.arduino.cc/reference/en/language/functions/communication/serial/) to support this. We just need to make sure that both communicating devices are using the same baud rate and data packet configuration.
-- **Application layer:** How do applications communicate together using serial? Aha, this is the key question!
+- **Hardware layer:** How is data communicated over hardware? How many wires are used? What does the voltage signal look like? Thankfully, Arduino handles this for us. And for `Computer ↔ Arduino` serial communication, serial data is transmitted via the USB cable. 
+- **Serial protocol:** What is the format of a serial transmission packet (*e.g.,* the data and parity bits)? How do we compose this packet? Again, we do not really need to worry about this. Arduino uses the standard [asynchronous serial protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) and includes the software library [`Serial`](https://www.arduino.cc/reference/en/language/functions/communication/serial/) to support this. We just need to make sure that both communicating devices are using the same baud rate and data packet configuration.
+- **Application layer:** How do applications communicate together using serial? Aha, this is the key question for this sub-section!
 
-The answer—for better or worse—is completely up to you! If you're writing serial communication code for both devices (the application on Arduino and the application on your computer), you get to decide how these applications communicate. There are, however, some important considerations, including: binary vs. ASCII-encoded data, message formatting, handshaking, and message acknowledgment (call-and-response).
+The answer—for better or worse—is completely up to you! If you're writing serial communication code for both devices (the application on Arduino and the application on your computer), you get to decide how these applications communicate—you're in complete control. There are, however, some important considerations, including: binary vs. ASCII-encoded data, message formatting, handshaking, and message acknowledgments (call-and-response).
 
 ### Binary vs. ASCII-encoded data
 
-With serial communication, we can either transmit/receive data as a series of bits (raw binary data) or as alphanumeric characters (ASCII-encoded data). Thus far, for our use-case of serial-based debugging, we've been using [`Serial.print`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/), which transmits data via serial as human-readable ASCII text. For binary data, however, we use [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/) and [`Serial.readBytes()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytes/).
+With serial communication, we can either transmit/receive data as a series of bits (raw binary data) or as alphanumeric characters (ASCII-encoded data). 
+
+#### Reading and writing binary data
+
+To read binary data with Arduino, use [`readBytes()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytes/) or [`readBytesUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytesuntil/).
+
+{% highlight C %}
+size_t readBytes(byte *buffer, size_t length)
+size_t readBytesUntil(byte terminator, byte *buffer, size_t length)
+{% endhighlight C %}
+
+[`Serial.readBytes()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytes/) reads bytes from the serial port into a buffer and terminates if the determined length has been read or it times out (see [`Serial.setTimeout()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/settimeout/)). [`Serial.readBytesUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytesuntil/) is similar but also has a terminator parameter—if the terminator byte is detected, the function returns all bytes up to the last byte before the terminator. Both functions return the number of bytes read.
+
+To write binary data, we can use [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/), which is an overloaded function:
+
+{% highlight C %}
+size_t write(byte val); // value to send as a single byte
+size_t write(String str); // string to send as a series of bytes
+size_t write(byte *buffer, size_t length); // an array and number of bytes in buffer
+{% endhighlight C %}
+
+All three [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/) functions return the number of bytes written.
+
+#### Reading and writing ASCII-encoded data
+
+Reading and writing ASCII-encoded data should feel more familiar. Indeed, for our use-case of [serial-based debugging](../arduino/serial-print.md), we've been using [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/), which transmits data as human-readable ASCII text. 
+
+To read ASCII data, we can use [`Serial.readString()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readstring/) and [`Serial.readStringUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readstringuntil/):
+
+{% highlight C %}
+String readString();
+String readStringUntil(char terminator)
+{% endhighlight C %}
+
+Both functions read characters from the serial buffer and store them in a String, which is returned. [`Serial.readString()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readstring/) terminates if it times out (see [`Serial.setTimeout()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/settimeout/)). [`Serial.readStringUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readstringuntil/) terminates either if a timeout is reached or if a terminator character is identified.
+
+To write ASCII data, we use [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/):
+
+{% highlight C %}
+size_t print(const __FlashStringHelper *);
+size_t print(const String &);
+size_t print(const char[]);
+size_t print(char);
+size_t print(unsigned char, int = DEC);
+size_t print(int, int = DEC);
+size_t print(unsigned int, int = DEC);
+size_t print(long, int = DEC);
+size_t print(unsigned long, int = DEC);
+size_t print(double, int = 2);
+size_t print(const Printable&);
+
+size_t println(const __FlashStringHelper *);
+size_t println(const String &s);
+size_t println(const char[]);
+size_t println(char);
+size_t println(unsigned char, int = DEC);
+size_t println(int, int = DEC);
+size_t println(unsigned int, int = DEC);
+size_t println(long, int = DEC);
+size_t println(unsigned long, int = DEC);
+size_t println(double, int = 2);
+size_t println(const Printable&);
+size_t println(void);
+{% endhighlight C %}
+
+Both functions return the number of bytes written. See their respective documentation pages for more details: [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/)
+
+<!-- See: https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Stream.cpp -->
+
+#### Why use binary vs. ASCII?
 
 Why might we want to use **binary** *vs.* **text** **encodings**? Well, if we are trying to transmit binary data—like an image, video, or song—then communicating via binary is preferred. It's also more bandwidth efficient (uses fewer bits). However, in our courses, we're typically transmitting/receiving small amounts of data and it's beneficial for debugging purposes (and human understanding) to use an ASCII-encoded format.
 
@@ -115,13 +184,13 @@ Similarly, if we wanted to transmit 127 or 255 using `Serial.println()`, we woul
 
 #### Both applications need to use same encoding
 
-Note that the receiver needs to know whether data has been transmitted using binary or ASCII encodings. If the latter, the receiver can simply use a method like [`Serial.readStringUntil('\n');`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readstringuntil/) and the data will be automatically transformed into an ASCII-encoded String. If the former, then a method like [`Serial.readBytes()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytes/) is necessary and the receiver must know how many bytes are being sent and how to decode them.
+Note that the receiver needs to know whether data has been transmitted using binary or ASCII encodings. If the latter, the receiver can simply use a method like [`Serial.readStringUntil('\n')`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readstringuntil/) and the data will be automatically transformed into an ASCII-encoded String. If the former, then a method like [`Serial.readBytes()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytes/) is necessary and the receiver must know how many bytes are being sent and how to decode them.
 
 For our purposes, we almost always use the ASCII encoding because the benefit of human readability (*e.g.,* sending and receiving text) outweighs efficiency. However, you should consider this on a case-by-case basis depending on your application context, communication medium (wireless *vs.* wired), and power requirements (*e.g.,* low power applications should minimize transceiving).
 
 ### Formatting messages
 
-The above example simply sent one value per transmission. That is, for binary, we sent one byte per new signal read; for ASCII-encoding, we sent one line per new signal read. However, it's likely that you'll want to transmit and receive *multiple* values. How do we do this?
+The above example simply sent one value per transmission. For binary, we sent one byte per new signal read; for ASCII-encoding, we sent one line per new signal read. However, it's likely that you'll want to transmit and receive *multiple* values. How do we do this?
 
 Again, it's completely up to you! If you're using ASCII-encoded transceiving, you could use a [comma-separated value (CSV) format](https://en.wikipedia.org/wiki/Comma-separated_values), [JSON](https://en.wikipedia.org/wiki/JSON), or some other messaging format of your own design.
 
@@ -191,11 +260,11 @@ Similarly, if you want to ensure that data has arrived and been parsed correctly
 
 Below, we are going to show a few different examples using the command line, Python, and then JavaScript. To keep things simple, in this lesson, we are going to focus on **unidirectional communication** from the computer to the Arduino (`Computer → Arduino`). That is, the computer will send data and the Arduino will receive data. Later, we will cover `Arduino → Computer` and bidirectional (duplex) communication `Computer ↔ Arduino`.
 
-And actually, in all of our serial lessons—including this one—we will have the Arduino transmit something back to the computer to aid with debugging and ensure the Arduino received what we expected. You'll see!
+And actually, in all of our serial lessons—including this one—we will have the Arduino transmit something back to the computer to aid with debugging and ensure the Arduino received what we expected. We call this an echo message. You'll see!
 
 ### Simple Arduino serial receiver program
 
-For our examples below, we will be running a simple program on our Arduino that looks for ASCII-encoded data off of its serial port, parses that data into an integer, and uses `analogWrite` to output that integer to an output pin. In this case, we have hooked up a red LED with a current limiting resistor to the `OUTPUT_PIN`, which is set to `LED_BUILTIN` (Pin 13 on the Arduino Uno and Leonardo). The entire program looks like this:
+For our examples below, we will be running a simple program on our Arduino that reads ASCII-encoded data off of the serial port, parses that data into an integer, and uses `analogWrite` to output that integer to an output pin. In this case, we have hooked up a red LED with a current limiting resistor to the `OUTPUT_PIN`, which is set to `LED_BUILTIN` (Pin 13 on the Arduino Uno and Leonardo). The entire program looks like this:
 
 {% highlight C %}
 const int DELAY_MS = 5;
@@ -236,7 +305,7 @@ void loop() {
 
 #### Demo circuit
 
-And the corresponding circuit:
+And here's the corresponding circuit for the program above, which consists of a current-limiting resistor and LED attached to Pin 13. Of course, you could build almost any circuit to respond to serial input. But let's keep things simple!
 
 ![](assets/images/SimpleSerialIn_LEDCircuit.png)
 **Figure.** The corresponding circuit for [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). Made in Fritzing and PowerPoint.
@@ -244,17 +313,23 @@ And the corresponding circuit:
 
 ### Using Serial Monitor
 
-Let's begin by using our now very familiar Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool. With [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) loaded on your Arduino and your Arduino connected to your computer, open the Serial Monitor and send data to our Arduino. Make sure you've selected the same baud rate used in `Serial.begin(<baud rate>)`.
+Let's begin by using our now familiar Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool. With [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) loaded on your Arduino and your Arduino connected to your computer, open the Serial Monitor and send data to our Arduino. Make sure you've selected the same baud rate used in `Serial.begin(<baud rate>)`.
 
 ![](assets/images/ArduinoIDESerialMonitor_AnnotatedScreenShot.png)
-**Figure** An annotated screenshot the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) tool for sending and receiving serial data.
+**Figure** An annotated screenshot the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) tool for sending and receiving serial data. The data "echoed" back to our Arduino is shown in the autoscrolling textfield (where it says "Arduino received...").
 {: .fs-1}
 
 #### Video demo using Serial Monitor
 
 Here's a video demonstration of sending ASCII-encoded text via [Serial Monitor](../arduino/serial-print.md) to the Arduino running [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino). 
 
-Notice how we are able to print out what the Arduino received because the Arduino echos the received data back over serial using `Serial.print`:
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SimpleSerialIn-NoTalking-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
+</video>
+**Video.** A video demonstrating using the Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
+{: .fs-1 }
+
+Notice how we are able to print out what the Arduino receives because the Arduino cpde echos the received data back over serial using `Serial.print`. This is optional but helpful!
 
 {% highlight C %}
 // Just for debugging, echo the data back on serial
@@ -263,15 +338,9 @@ Serial.print(rcvdSerialData);
 Serial.println("'");
 {% endhighlight C %}
 
-<video autoplay loop muted playsinline style="margin:0px">
-  <source src="assets/videos/SimpleSerialIn-NoTalking-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
-</video>
-**Video.** A video demonstrating using the Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
-{: .fs-1 }
-
 ### Command lines tools
 
-While we've thus far emphasized the Arduino IDE's [Serial Monitor](../arduino/serial-print.md), there is nothing special or unique about that tool. We can use any application or programming language with serial support. Below, we'll show how to use command line tools for both Windows and Mac/Linux before showing examples with Python and JavaScript (but C#, Objective C, Java, *etc.* would work too!)
+While we've thus far emphasized the Arduino IDE's [Serial Monitor](../arduino/serial-print.md), there is nothing special or unique about that tool. We can use any application or programming language with serial support. Below, we'll show how to use command line tools for both Windows and Mac/Linux before showing an example with Python (but C#, Objective C, Java, *etc.* would work too!)
 
 <!-- https://itp.nyu.edu/physcomp/lab-intro-to-serial-communications/#Connecting_via_the_Command_Line
 https://learn.sparkfun.com/tutorials/terminal-basics/command-line-windows-mac-linux -->
@@ -299,7 +368,7 @@ Now open this port.
 PS> $port.open()
 ```
 
-To write to the port using ASCII-encoded text, use `WriteLine(<str>)`:
+Write to the port using ASCII-encoded text with `WriteLine(<str>)`:
 
 ```
 PS> $port.WriteLine(“Hello!")
@@ -343,15 +412,15 @@ TODO
 
 ### Python
 
-We can also use [Python](https://www.python.org/) with the [pySerial](https://pyserial.readthedocs.io/en/latest/) library.
+Finally, let's make a simple program in [Python](https://www.python.org/) to write and read data off the serial port. This is simply to demonstrate the overall programming concepts before we dive more deeply into JavaScript solutions for our other lessons. Again, you can really use any programming language you like!
 
-With Python3 installed, open your terminal and type:
+For serial communication with Python, we'll use the [pySerial](https://pyserial.readthedocs.io/en/latest/) library. With Python3 installed, open your terminal and type:
 
 ```
 > pip3 install pyserial
 ```
 
-Reading and writing data with pySerial is quite straightforward and pySerial's ["fast intro" docs](https://pyserial.readthedocs.io/en/latest/shortintro.html) provide a number of examples.
+This will install the [pySerial](https://pyserial.readthedocs.io/en/latest/) library. pySerial is quite straightforward and pySerial's ["fast intro" docs](https://pyserial.readthedocs.io/en/latest/shortintro.html) provide a number of examples.
 
 Let's write a quick Python program to communicate with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino).
 
@@ -366,7 +435,7 @@ import time
 ser = serial.Serial(port='COM13', baudrate=9600, timeout=1)
 {% endhighlight Python %}
 
-Now, let's ask the user to input a number between 0 and 255:
+Now, write code to ask the user to input a number between 0 and 255:
 
 {% highlight Python %}
 # Ask user for number between 0 and 255 and store in num
@@ -380,7 +449,7 @@ Then encode this data as a string. You can force it to ASCII via `num.encode("as
 strNum = str.encode(num)
 {% endhighlight Python %}
 
-Now we're ready to send the data. We'll use the pySerial [`write(<data>)`](https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial.write) function.
+Now we're ready to send the data using pySerial's [`write(<data>)`](https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial.write) function.
 
 {% highlight Python %}
 # Send the data using pyserial write method
@@ -399,7 +468,7 @@ print(echoLine);
 print(); # empty line
 {% endhighlight Python %}
 
-And that's it! This code is available as serial_demo.py in our GitHub. Note, after creating the `Serial` object, we wrap everything in a `While True:` statement to infinitely loop and ask for new user data. See video below.
+And that's it! This code is available as [serial_demo.py](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py) in our GitHub. Note, after creating the `Serial` object, we wrap everything in a `While True:` statement to infinitely loop and ask for new user data. See video below.
 
 #### Video demo using Python
 
@@ -408,6 +477,8 @@ And that's it! This code is available as serial_demo.py in our GitHub. Note, aft
 </video>
 **Video.** A video demonstrating using [Python3](https://www.python.org/downloads/) with [pySerial](https://pypi.org/project/pyserial/) to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
 {: .fs-1 }
+
+### JavaScript
 
 
 

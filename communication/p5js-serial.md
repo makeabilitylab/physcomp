@@ -34,7 +34,7 @@ TODO: just generally need to add more screenshots or screen captures. -->
 >  Since 2001, Processing has promoted software literacy within the visual arts and visual literacy within technology. There are tens of thousands of students, artists, designers, researchers, and hobbyists who use Processing for learning and prototyping.
 {: .fs-3 }
 
-Processing includes both an IDE and a library around Java to allow designers, artists, makers, and engineers to *sketch with code*. The code is open source. Processing IDE and programming paradigm forms the basis of the Arduino IDE.
+Processing includes both an IDE and a Java-based library to allow designers, artists, makers, and engineers to *sketch with code*. The code is open source. Processing IDE and programming paradigm forms the basis of the Arduino IDE.
 
 It is hard to overemphasize the impact Processing has had on digital artists and creative coders.
 

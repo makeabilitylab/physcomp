@@ -18,9 +18,15 @@ usetocbot: true
 {:toc}
 ---
 
+Devices need to communicate. Sensors to microcontrollers. Microcontrollers to computers. Computers to the Internet. And beyond! Many different protocols have been created to support this communication from [Ethernet](https://en.wikipedia.org/wiki/Ethernet) to [Zigbee](https://en.wikipedia.org/wiki/Zigbee). In this lesson, we will focus on asynchronous serial communication, specifically TTL serial (Transistor-Transistor Logic Serial)—an enduring standard that has prevailed since the beginning of personal computers and is what the [Arduino Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/) uses. 
+
+Unlike other popular serial communication protocols like [I<sup>2</sup>C](https://learn.sparkfun.com/tutorials/i2c/all) and [SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi/all), TTL Serial is *asynchronous*, which means it does not rely on a shared clock signal (precisely timed voltage pulses) paired with its data lines. This has the benefit of fewer wires but does result in a bit of communication overhead for each transmitted "packet" or data frame.
+
+In this lesson, we'll dive into asynchronous serial communication and how we can use it for computer-to-microcontroller and microcontroller-to-computer communication.
+
 ## Serial communication with Arduino
 
-Arduino uses a standard [asynchronous serial communication protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) for serial communication. 
+<!-- Arduino uses a standard [asynchronous serial communication protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) for serial communication.  -->
 
 On Arduino, we initialize the serial port using [`Serial.begin()`](https://www.arduino.cc/en/Serial.Begin). Indeed, we've done this since our very first set of lessons on Arduino (*e.g.,* [L3: Serial Debugging](../arduino/serial-print.md)). 
 
@@ -31,13 +37,15 @@ begin(unsigned long baud)
 begin(unsigned long baud, byte config)
 {% endhighlight C %}
 
-Once `Serial.begin()` is called, the Arduino Uno and Leonardo take over pins 1 and 0 for serial transmission and reception, respectively, and the RX and TX LEDs light up on the board.
+Once `Serial.begin()` is called, the Arduino Uno and Leonardo take over Pins 1 and 0 for serial transmission and reception, respectively, and the RX and TX LEDs light up on the board. So, after `Serial.begin()` is called, you should not use Pins 1 and 0 (unless you're using them for cross-device communication or to hook up your [logic analyzer](https://en.wikipedia.org/wiki/Logic_analyzer)!).
 
-Thus far, we have been using the first function, which sets the data rate in bits per second (baud). But what about the second function? We'll dig in to both below.
+Thus far, in our lessons, we have been using the first function—`begin(unsigned long baud)`—which sets the data rate in bits per second (baud). But what about the second function with `byte config` and what does this parameter mean? We'll dig in to both below.
 
 ### Baud rate
 
-The baud rate specifies how fast data is sent over serial, which is expressed in bits-per-second (bps). For communicating with a computer, the [Arduino docs](https://www.arduino.cc/en/Serial.Begin) recommend: 300 bps, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200. Thus far, we've only been using the serial port for debugging, so speed hasn't been a concern—and we've typically used 9600 bps (or 9.6 kbps). However, for higher bandwidth, try 115200 or 115.2 kbps (still slow by today's networking standards, of course) but 12x faster than 9600.  
+The baud rate specifies how fast data is sent over serial, which is expressed in bits-per-second (bps). For communicating with a computer, the [Arduino docs](https://www.arduino.cc/en/Serial.Begin) recommend: 300 bps, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200. Both devices—in this case, the Arduino and the computer—need to be set to the **same** baud rate to communicate.
+
+Thus far, we've only been using the serial port for debugging, so speed hasn't been a concern—and we've typically used 9600 bps (or 9.6 kbps). At 9600 bps, the transmitter transmits one new voltage pulse (*e.g.,* HIGH corresponding to +5V and LOW corresponding to 0V) every 1/9600th of a second, which is interpreted as a bit (a 1 or 0) by the receiver. For higher bandwidth, try 115200 or 115.2 kbps, which is 12x faster than 9600 (but still slow by today's networking standards, of course).
 
 ![](assets/images/SerialMonitorShowingBaudRate.png)
 {: .mx-auto .align-center }
@@ -61,6 +69,8 @@ The [data bit](https://en.wikipedia.org/wiki/Asynchronous_serial_communication) 
 
 Importantly, if the baud and config settings do not match between the Arduino and the computer, communication will not work. If something is not working for you, this is the first thing to double check!
 
+<!-- TODO: would be nice to have some diagrams here showing the frame and voltages, etc. Kind of like what they have here: https://itp.nyu.edu/physcomp/lessons/serial-communication-the-basics/ -->
+
 ### Only one computer program can open a serial port at a time
 
 Only one computer program can open a serial port at a time. For example, if you attempt to open Serial Monitor on the same COM port that has been opened by another program, you will receive an error like this: `Error opening serial port 'COM7'. (Port busy)`.
@@ -74,6 +84,14 @@ Similarly, if we attempt to access a previously opened serial port with [PowerSh
 ![](assets/images/PowerShellAccessToPortIsDenied.png)
 **Figure.** Only one software program can access a serial port at a time.
 {: .fs-1 }
+
+### Serial buffers
+
+Incoming serial data is stored in a serial buffer, which is read as a first-in, first-out queue (FIFO). On the Arduino, this buffer is 64 bytes (defined in [USBAPI.h](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/USBAPI.h)) and is implemented as a circular or ring buffer. At 9600 baud, this buffer will fill in 53 milliseconds (9600 baud is 1,200 bytes/second or 1 byte every 0.83 millisecond).
+
+### Serial to USB? USB to serial?
+
+In the 1980s and 1990s, computers had serial ports like [RS-232 connections](https://en.wikipedia.org/wiki/RS-232) to support asynchronous serial communication. Now, we use USB (Universal Serial Bus)—a far more sophisticated and efficient serial communication standard that allows multiple devices to communicate over the same wires. However, because asynchronous serial communication persists, USB drivers and our operating systems support asynchronous serial communication over USB. Devices, like the Arduino, include a USB-to-serial converter that shows up as a serial port when you plug them in (just as if you were using an old serial connection).
 
 ## Developing serial communication software applications
 
@@ -478,16 +496,19 @@ And that's it! This code is available as [serial_demo.py](https://github.com/mak
 **Video.** A video demonstrating using [Python3](https://www.python.org/downloads/) with [pySerial](https://pypi.org/project/pyserial/) to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
 {: .fs-1 }
 
-### JavaScript
-
-
-
 ## Resources
 
 - [Intro to Asynchronous Serial Communications](https://itp.nyu.edu/physcomp/lab-intro-to-serial-communications/), NYU ITP Physical Computing course
 
 - [Serial Communication](https://learn.sparkfun.com/tutorials/serial-communication/all), Sparkfun.com
 
+- [Asynchronous Serial Communication: The Basics](https://itp.nyu.edu/physcomp/lessons/serial-communication-the-basics/), NYU ITP Physical Computing course
+
+### Videos
+
+- [Serial 1: Introduction](https://vimeo.com/380355568), NYU ITP Physical Computing course video
+
+- [Serial 2: Logic Analyzer and ASCII](https://vimeo.com/380355716), NYU ITP Physical Computing course video 
 
 <!-- #### DisplayTextSerialIn
 

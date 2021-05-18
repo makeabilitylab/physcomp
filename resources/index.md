@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Resources
-nav_order: 6
+nav_order: 8
 has_children: true
 has_toc: true # (on by default)
 usetocbot: true

@@ -47,6 +47,14 @@ In [this lesson](smoothing-input.md), we will learn how to smooth incoming senso
 ## Input
 ### L1: Smoothing Input
 ### L2: Microphones
+### L4: accelerometer?
+### Joystick?
 ### L3: Hall effect sensors
 ### L4: Ultrasonic distance sensor
 ### L5: Interrupts -->
+
+<!-- ## Computer Communication
+L1: Using Arduino as a keyboard or mouse 
+L2: Using Serial and parsing with Processing or Python
+L3: Web Serial
+L4: Node.js -->

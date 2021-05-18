@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Signals
-nav_order: 5
+nav_order: 7
 has_toc: true # on by default
 has_children: true
 nav_exclude: false

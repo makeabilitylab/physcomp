@@ -45,12 +45,14 @@ Web Serial is already being used in web tools like [Microsoft's MakeCode](https:
 
 ### Does my web browser support Web Serial?
 
-From what I can tell at the time of  writing (May 2021), **Chrome version 89+** is the only browser to support Web Serial but more should be coming soon! To check if the Web Serial API is supported, open your dev tool console on your web browser (on Windows, type `ctrl-shift-i` in Chrome or Firefox; on Mac, type `cmd-alt-i`).
+At the time of this writing (May 2021), **Chrome** and **Edge** versions 89+ are the only browser to support Web Serial but more should be coming soon! To check if the Web Serial API is supported, view Mozilla's [browser compatibility chart](https://developer.mozilla.org/en-US/docs/Web/API/Serial#browser_compatibility). Alternatively, open your dev tool console on your web browser (on Windows, type `ctrl-shift-i` in Chrome or Firefox; on Mac, type `cmd-alt-i`).
 
 {% highlight JavaScript %}
 > "serial" in navigator
 true
 {% endhighlight JavaScript %}
+
+If true, then there is browser support. If false, then there is not.
 
 ### How to use the Web Serial API
 

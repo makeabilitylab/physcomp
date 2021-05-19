@@ -23,8 +23,6 @@ Welcome 👋 to the third module in your Physical Computing adventure: **Advance
 
 As usual, these lessons are interactive—that is, they assume that you're following along and building **with us**. They are designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
-**NOTE:** These lessons are being constructed during the Spring'21 term. The Output lessons should be finalized by the end of May 6, 2021. The Input lessons will be finalized the week of May 10th.
-
 ## Output
 
 ### [L1: OLED Displays](oled.md)

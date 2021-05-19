@@ -191,7 +191,17 @@ There is nothing new here. We've been doing this since the very early [Intro to 
 
 #### The p5.js code: CircleSizeIn
 
-Start with a brand new blank project with `index.html`, `css\style.css`, and `sketch.js` files.
+We will build up the initial p5.js app step-by-step.
+
+##### Setup initial p5.js template.
+
+Start with a brand new blank project with `index.html`, `css\style.css`, and `sketch.js` files. If you have [p5.vcode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) installed, you can simply create a new project by hitting `ctrl-shift-p` on Windows or `cmd-shift-p` on Mac in VSCode and typing `Create p5.js Project` then selecting a new empty folder (say `CircleSizeIn`) to put your project in. If you do this, make sure you add in the line to `<body>` in `index.html`:
+
+```
+<script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+```
+
+Or you could manually build up the required files like this.
 
 The index.html should look like:
 
@@ -237,3 +247,69 @@ function draw() {
   background(100);
 }
 {% endhighlight JavaScript %}
+
+Now, save and load the page with Live Server. It should look like this:
+
+![](assets/images/CircleSizeDemoBlankCanvas.png)
+**Figure.** An initial template for web dev development with p5.js and web serial.
+
+{: .fs-1 }
+
+If your page does not load or does not look like this, study our blank template here ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/BlankTemplate/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/BlankTemplate)).
+
+##### Draw a circle
+
+Let's update our `sketch.js` to draw a white circle of diameter 30 in the canvas center. We'll use the [`fill()`](https://p5js.org/reference/#/p5/fill) function to set the fill color and turn off outlining with [`noStroke()`](https://p5js.org/reference/#/p5/noStroke).
+
+{% highlight JavaScript %}
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(100);
+  
+  noStroke(); // turn off outline
+  fill(250); // white circle
+
+  // Get x,y center of drawing Canvas
+  let xCenter = width / 2;
+  let yCenter = height / 2;
+  let circleDiameter = 50;
+  circle(xCenter, yCenter, circleDiameter);
+}
+{% endhighlight JavaScript %}
+
+It should look like this:
+
+![](assets/images/CircleSizeDemo-StaticCircleInTheMiddle.png)
+
+##### Make circle dynamically sized
+
+Now, let's make this sketch interactive! Let's set the size based on the mouse's x-position. We will then modify this code to use incoming serial data rather than the mouse to set the size.
+
+{% highlight JavaScript %}
+function draw() {
+  background(100);
+  
+  noStroke(); // turn off outline
+  fill(250); // white circle
+
+  // Get x,y center of drawing Canvas
+  let xCenter = width / 2;
+  let yCenter = height / 2;
+
+  // Set the diameter based on mouse x position
+  const maxDiameter = min(width, height);
+  let circleDiameter = maxDiameter * mouseX / width;
+  circle(xCenter, yCenter, circleDiameter);
+}
+{% endhighlight JavaScript %}
+
+It should look something like this:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/CircleSizeIn-MouseX.mp4" type="video/mp4" />
+</video>
+
+##### Add in web serial

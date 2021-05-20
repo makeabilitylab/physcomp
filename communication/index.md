@@ -21,11 +21,15 @@ In this lesson series, we will learn about serial communication, web serial, and
 
 ## [L1: Intro to Serial](serial-intro.md)
 
-In this lesson, we’ll dive into asynchronous serial communication and how we can use it for bidrectional `Computer ↔ Arduino` communication. We'll show example serial communication clients using terminal programs and Python.
+In [this lesson](serial-intro.md), we’ll dive into asynchronous serial communication and how we can use it for bidrectional `Computer ↔ Arduino` communication. We'll show example serial communication clients using terminal programs and Python.
 
 ## [L2: Web Serial](web-serial.md)
 
-In this lesson, you'll learn about the new [Web Serial API](https://wicg.github.io/serial/) and how to build simple web apps that communicate with Arduino.
+In [this lesson](web-serial.md), you'll learn about the new [Web Serial API](https://wicg.github.io/serial/) and how to build simple web apps that communicate with Arduino.
+
+## [L3: p5.js Serial](p5js-seriall.md)
+
+In [this lesson](p5js-serial.md), you'll learn about [Processing](https://processing.org/), [p5.js](https://p5js.org/), and how to use p5.js with Web Serial.
 
 <!-- 
 Question to self: Should serial communication be its own top-level header on website?

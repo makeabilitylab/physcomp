@@ -172,6 +172,12 @@ The easiest way to setup VSCode for p5.js is to install an extension like [p5.vc
 
 If you're a VSCode or web dev novice, we recommend this solution!
 
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/VSCodeAutocompleteForP5JS-TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** Spending time getting VSCode setup for p5.js is worth the investment. As the video shows, you get auto-complete, inline documentation, *etc.* You can either do this with the [p5.vcode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) extension or via a manual setup, described next.
+{: .fs-1 }
+
 ##### Manually setting up VSCode for p5.js
 
 Though I've used the above extension, I typically configure VSCode manually for web dev. There is nothing magic about p5.js. It's just a JavaScript library!
@@ -607,7 +613,7 @@ function mouseClicked() {
 }
 {% endhighlight JavaScript %}
 
-That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn)).
+That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn).
 
 ##### GraphIn video demonstration
 

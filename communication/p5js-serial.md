@@ -18,7 +18,7 @@ usetocbot: true
 {:toc}
 ---
 
-We've only started to scratch the surface of what's possible in combining Arduino+Computers. In this lesson (and the next), we're going to use [p5.js](https://p5.js.org/) to help demonstrate this potential. It should be fun!
+We've only started to scratch the surface of what's possible in combining Arduino+Computers. In this lesson (and the next), we're going to use a creative coding tool, called [p5.js](https://p5.js.org/), to help demonstrate this potential. It should be fun!
 
 <!-- TODO: consider showing one of our earlier p5.js videos we made for HCID with a controller? -->
 
@@ -52,7 +52,7 @@ TODO: just generally need to add more screenshots or screen captures. -->
 **Figure.** Variations on the Collatz Conjecture by user [/u/ideology_boi](https://www.reddit.com/r/processing/comments/dy5z5h/collatz_variations/) on Reddit. Coded in ~200 lines in Processing ([code link](https://dailygenerative.art.blog/2019/11/17/reflections/)). Inspired by the Coding Train walkthrough video ["Collatz Conjecture"](https://www.youtube.com/watch?v=EYLWxwo1Ed8).
 {: .fs-1 }
 
-[Processing](https://processing.org/) was started by [Casey Reas](https://en.wikipedia.org/wiki/Casey_Reas) and [Ben Frey](https://en.wikipedia.org/wiki/Ben_Fry) at MIT in 2001 to provide an accessible programming tool for combining art+technology. From the Processing website:
+p5.js is based on [Processing](https://processing.org/), which was started by [Casey Reas](https://en.wikipedia.org/wiki/Casey_Reas) and [Ben Frey](https://en.wikipedia.org/wiki/Ben_Fry) at MIT in 2001 to provide an accessible programming tool for combining art+technology. From the Processing website:
 
 >  Since 2001, Processing has promoted software literacy within the visual arts and visual literacy within technology. There are tens of thousands of students, artists, designers, researchers, and hobbyists who use Processing for learning and prototyping.
 {: .fs-3 }
@@ -70,7 +70,7 @@ Creating interactive graphics and visualizations in Processing requires only a f
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ProcessingSimpleDrawingDemo-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A ten-line drawing program for [Processing](https://processing.org/).
+**Video.** A ten-line drawing program written in [Processing](https://processing.org/).
 {: .fs-1 }
 
 It is hard to overemphasize the impact Processing has had on digital artists, creative coders, and even CS education. Processing is now used by professionals and hobbyists alike and has produced work featured in music videos (*e.g.,* [Radiohead's House of Cards](http://www.aaronkoblin.com/work/rh/index.html)), exhibited at art galleries, and featured in movies, TV, and other media. Processing is open source and there is an ethos of sharing work and learning from others. See the [Reddit Processing community](https://www.reddit.com/r/processing/), for example. Read more about the Processing mission at the [Processing Foundation](https://processingfoundation.org/).
@@ -104,7 +104,7 @@ And here's the same black-and-white drawing program we wrote in Processing above
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/p5jsSimpleDrawingDemo-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A ten-line drawing program for [Processing](https://processing.org/).
+**Video.** A ten-line drawing program written in [p5.js](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO). View, edit, and play with the code via the [online editor](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO).
 {: .fs-1 }
 
 p5.js also has a convenient and incredibly cool [online editor](https://editor.p5.js.org/), which makes it easy to not just rapidly write, test, and iterate on code but to share it with others as well. In the editor, simply go to `File -> Share` and select one of the options.
@@ -116,9 +116,7 @@ p5.js also has a convenient and incredibly cool [online editor](https://editor.p
 So, you can not only [view our code](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO) and make edits to it directly—don't worry, this won't affect the original code—but you can also embed the code in your other HTML pages. For example, here we've embedded the sketch below! Hold down the mouse to change the "paintbrush" to pure black.
 
 <iframe width="736" height="380" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/fja8NHOKO"></iframe>
-
 **Code**. A live embedded version of our simple b&w drawing program in p5.js. View, edit, and play with the code [here](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO).
-
 {: .fs-1 }
 
 Like Processing, the key overarching concept is to *sketch with code*—to play, to experiment, to iterate, to rapidly prototype ideas. I find it very intellectually freeing.
@@ -158,7 +156,7 @@ We will also cover parts of p5.js in lecture and in the next few lessons but we 
 
 ### Developing p5.js
 
-You can develop p5.js projects either in the [online editor](https://editor.p5.js.org/) or in your favorite web dev environment—we strongly recommend [VS Code](https://code.visualstudio.com). We often switch between using the [online editor](https://editor.p5.js.org/)—to sketch out or easily share quick ideas—and VSCode for larger or more complicated projects. 
+You can develop p5.js projects either in the [online editor](https://editor.p5.js.org/) or in your favorite web dev environment. If you're going to dev locally, we strongly recommend [VS Code](https://code.visualstudio.com). We often switch between using the [online editor](https://editor.p5.js.org/)—to sketch out or easily share quick ideas—and VSCode for larger or more complicated projects. 
 
 #### Setting up p5.js in VSCode
 
@@ -354,7 +352,7 @@ Or here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/aPoybLEdC)
 
 ##### Make circle dynamically sized
 
-Now, let's make this sketch interactive! We'll set the circle's size based on the mouse's x-position. Later, we'll modify this code to use **incoming serial data** rather than the mouse but it's good to modularize code like this and get the initial interactivity working.
+Now, let's make this sketch interactive! We'll set the circle's size based on the mouse's x position. Later, we'll modify this code to use **incoming serial data** rather than the mouse but it's good to modularize code like this and get the initial interactivity working.
 
 {% highlight JavaScript %}
 function draw() {
@@ -381,9 +379,9 @@ It should look something like this:
   <source src="assets/videos/CircleSizeIn-MouseX.mp4" type="video/mp4" />
 </video>
 
-Or here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) from the p5.js online editor.
+Or here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/HqhM0dc1B) from the p5.js online editor.
 
-<iframe width="736" height="380" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/5Knw4tN1d"></iframe>
+<iframe width="736" height="380" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/HqhM0dc1B"></iframe>
 
 ##### Add in web serial object and callback functions
 

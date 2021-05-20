@@ -24,6 +24,13 @@ Unlike other popular serial communication protocols like [I<sup>2</sup>C](https:
 
 In this lesson, we'll dive into asynchronous serial communication and how we can use it for bidrectional `Computer ↔ Arduino` communication. 
 
+<!-- TODO:
+- In future add in parallel vs. serial overview
+- Add in some diagrams that show how serial works with voltage waveform
+- https://www.circuitbasics.com/basics-uart-communication/
+- https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter
+- https://www.analog.com/en/analog-dialogue/articles/uart-a-hardware-communication-protocol.html -->
+
 ## Serial communication with Arduino
 
 <!-- Arduino uses a standard [asynchronous serial communication protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) for serial communication.  -->

@@ -495,7 +495,7 @@ function draw() {
 
 And that's it! We did it! You can view, edit, and run CircleSizeIn in p5.js's online editor [here](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) or via GitHub ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)).
 
-#### Video demonstration
+#### CircleIn video demonstration
 
 Here's a video demonstration:
 
@@ -505,7 +505,7 @@ Here's a video demonstration:
 **Video.** A demonstration of the p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the attached Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a potentiometer on Pin A0 as analog input. Note: in this video, we use a slightly different Arduino sketch called [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to demonstrate both Arduino output and p5.js interactivity.
 {: .fs-1 }
 
-#### Other sensor variations
+#### Other sensors as input
 
 And, of course, we can hook up whatever sensor we want as input. Below, we're showing demonstrations of a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) and a infrared distance sensor.
 
@@ -517,7 +517,7 @@ A demonstration of CircleSizeIn ([live page](http://makeabilitylab.github.io/p5j
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/AnalogOut-CircleSizeIn-FSR-Trimmed2-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A demonstration of the p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the attached Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a FSR on Pin A0 as analog input. Note: in this video, we use a slightly different Arduino sketch called [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to demonstrate both Arduino output and p5.js interactivity.
+**Video.** A demonstration of the p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), with a [force-sensitive resistor (FSR)](../arduino/potentiometers.md) on Pin A0 and Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a FSR on Pin A0 as analog input. Note: in this video, we use a slightly different Arduino sketch called [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to demonstrate both Arduino output and p5.js interactivity.
 {: .fs-1 }
 
 ##### CircleSizeIn with IR distance sensor
@@ -530,4 +530,115 @@ And here's a a demonstration of CircleSizeIn ([live page](http://makeabilitylab.
 **Video.** A demonstration of CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)) with the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) infrared distance sensor, which has analog output that varies from 3.1V at 10cm to 0.4V at 80cm. For the video, we used a slightly modified version of [SharpIRDistanceOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOut/SharpIRDistanceOut.ino) that also outputs information to a connected OLED called [SharpIRDistanceOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOutOLED/SharpIRDistanceOutOLED.ino)
 {: .fs-1 }
 
+### Simple real-time graph
+
 Once we get the data into p5.js, we can really do *anything* we want: use the input to change colors, play a game, make a visualization, *etc.*
+
+Recall in our [OLED lesson](../advancedio/oled.md) that we built a [real-time analog graph](../advancedio/oled.md#demo-4-real-time-scrolling-analog-graph). During that lesson, I alluded to how this graph replicated a [famous Processing example ](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph) but self-contained on the Arduino. Now we can build that Processing example in p5.js!
+
+On the Arduino side, we can use the exact same Arduino code ([AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino)) as before—which should make sense, the Arduino program simply read analog data and transmitted it via serial; however, we obviously need to write a new p5.js app. Let's call it `GraphIn`.
+
+#### Writing GraphIn in p5.js
+
+We can begin with the same p5.js serial template as before: just copy [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) and rename the folder to `GraphIn`. Now, let's begin coding!
+
+Our p5.js code will actually look very similar to the Arduino version ([AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino)), which speaks to the nice job the Adafruit team did in writing their Arduino [GFX graphics](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview) library.
+
+We're going to use a queue to temporarily store data coming off serial then read from and empty that queue in our `draw()` function. For each new value off of serial, we'll draw a representative line at an ever-increasing x-pixel position (`xPos`). Because this is *not* a scrolling implementation, we reset `xPos` when we reach the canvas width and start over.
+
+The full code is ~50 lines
+
+{% highlight JavaScript %}
+let serial; // the Serial object
+let serialOptions = { baudRate: 115200  };
+let queue = []
+let xPos = 0;
+
+function setup() {
+  createCanvas(750, 420);
+
+  // Setup Web Serial using serial.js
+  serial = new Serial();
+  serial.on(SerialEvents.DATA_RECEIVED, onSerialDataReceived);
+
+  // If we have previously approved ports, attempt to connect with them
+  serial.autoConnectAndOpenPreviouslyApprovedPort(serialOptions);
+
+  // Add in a lil <p> element to provide messages. This is optional
+  pHtmlMsg = createP("Click anywhere on this page to open the serial connection dialog");
+
+  background(50);
+}
+
+function draw() {
+  
+  while(queue.length > 0){
+    // Grab the least recent value of queue (first in first out)
+    // JavaScript is not multithreaded, so we need not lock the queue
+    // before reading/modifying.
+    let val = queue.shift();
+    let yPixelPos = height - val * height;
+
+    // Spruce up the color a bit by dynamically setting the line
+    // color based on the current sensor value
+    let redColor = val * 255;
+    stroke(redColor, 34, 255); //set the color
+    line(xPos, height, xPos, yPixelPos);
+
+    xPos++;
+  }
+
+  if(xPos >= width){
+    xPos = 0;
+    background(50);
+  }
+}
+
+function onSerialDataReceived(eventSender, newData) {
+  pHtmlMsg.html("onSerialDataReceived: " + newData);
+
+  // JavaScript is not multithreaded, so we need not lock the queue
+  // before pushing new elements
+  queue.push(parseFloat(newData));
+}
+
+function mouseClicked() {
+  if (!serial.isOpen()) {
+    serial.connectAndOpen(null, serialOptions);
+  }
+}
+{% endhighlight JavaScript %}
+
+That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn)).
+
+##### GraphIn video demonstration
+
+Here are two video demonstrations: one with a potentiometer and the other with the Sharp IR distance sensor.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SharpIRDistanceOutOLED-GraphIn-Trimmed-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of GraphIn ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn)) with a potentiometer hooked up to Pin A0. The Arduino is running [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) but something even simpler like [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) would work too!
+{: .fs-1 }
+
+And here's a demonstration with the Sharp IR distance sensor.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SharpIRDistanceOutOLED-GraphIn-Trimmed-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of GraphIn ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn)) with the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) infrared distance sensor. As before, we used a slightly modified version of [SharpIRDistanceOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOut/SharpIRDistanceOut.ino) that also outputs information to a connected OLED called [SharpIRDistanceOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOutOLED/SharpIRDistanceOutOLED.ino)
+{: .fs-1 }
+
+## Activity
+
+For your prototyping journals, create a simple p5.js app that reads in one or more serial values, appropriately parses them, and does something interesting. Your app doesn't need to be complicated but we do want you to explore the p5.js API and demonstrate your explorations through code. If necessary, please also write an accompanying Arduino program (but you can always use one of ours like [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) or [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino)). In your journals, include a brief video, links to code, and a brief learning reflection.
+
+## Next Lesson
+
+In the [next lesson](p5js-serial-io.md), we'll show more complicated examples where Arduino and p5.js bidirectionally communicate (Computer ↔ Arduino). It should be fun!
+
+<span class="fs-6">
+[Previous: Intro to Web Serial](web-serial.md){: .btn .btn-outline }
+[Next: Serial I/O with p5.js](p5js-serial-io.md){: .btn .btn-outline }
+<!-- [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline } -->
+</span>

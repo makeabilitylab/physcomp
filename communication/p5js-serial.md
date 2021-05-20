@@ -119,6 +119,8 @@ So, you can not only [view our code](https://editor.p5js.org/jonfroehlich/sketch
 
 **Code**. A live embedded version of our simple b&w drawing program in p5.js. View, edit, and play with the code [here](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO).
 
+{: .fs-1 }
+
 Like Processing, the key overarching concept is to *sketch with code*—to play, to experiment, to iterate, to rapidly prototype ideas. I find it very intellectually freeing.
 
 <!-- ### p5.js examples -->
@@ -201,13 +203,19 @@ You need to make sure that the baud rate in your JavaScript program and in your 
 
 OK, let's build a simple `Arduino → Computer` p5.js web app that reads in a single floating point number between [0, 1] (as text-encoded data) and draws an appropriately sized circle. For this demonstration, we will be using the Arduino program AnalogOut.ino and the web app called CircleSizeIn (live page, code). The full app experience will look like this:
 
-TODO: insert video
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/AnalogInputOut.ino-CircleSizeIn-POT-TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of the p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the attached Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a potentiometer on Pin A0 as analog input. Note: in this video, we use a slightly different Arduino sketch called [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to demonstrate both Arduino output and p5.js interactivity.
+{: .fs-1 }
+
+Let's get building!
 
 #### The Arduino code: AnalogOut.ino
 
 The Arduino program is simple: read in an analog value and transmit it via serial.
 
-More specifically, we will use [`analogRead` ](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) on Pin A0 and convert this to a fraction between [0, 1] (inclusive)—this "normalization" process just makes it easier to share data across programs. To normalize between [0, 1], we simply need to divide the `analogVal` by the maximum analog input (which is 1023 on the Arduino Uno and Leonardo because of 10-bit ADCs and 4095 on microcontrollers like the ESP32 that have 12-bit ADCs). We'll also set the baud rate to 115200.
+More specifically, we will use [`analogRead` ](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) on Pin A0 and convert this to a fraction between [0, 1] (inclusive)—this "normalization" process of sensor input just makes it easier to share data across programs. To normalize between [0, 1], we simply need to divide the `analogVal` by the maximum analog input (which is 1023 on the Arduino Uno and Leonardo because of 10-bit ADCs and 4095 on microcontrollers like the ESP32 that have 12-bit ADCs). We'll also set the baud rate to 115200.
 
 So, the full program looks like this:
 
@@ -448,7 +456,7 @@ Now save and run. The page should look largely the same except for the addition 
 
 ![](assets/images/CircleSizeDemo-JustHookedUpSerialButDidNotParseContentYet.png)
 
-#### Parse incoming web serial data
+##### Parse incoming web serial data
 
 Finally, we need to parse the incoming serial data from `onSerialDataReceived()` and store it in the variable `shapeFraction` and then slightly update our `draw()` function to use this `shapeFraction`.
 
@@ -485,10 +493,41 @@ function draw() {
 }
 {% endhighlight JavaScript %}
 
-And that's it! We did it! You can view, edit, and run CircleSizeIn in p5.js's online editor [here](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) or via GitHub (live page, code).
-
-TODO: add code links
+And that's it! We did it! You can view, edit, and run CircleSizeIn in p5.js's online editor [here](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) or via GitHub ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)).
 
 #### Video demonstration
 
-TODO: add video demonstration
+Here's a video demonstration:
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/AnalogInputOut.ino-CircleSizeIn-POT-TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of the p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the attached Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a potentiometer on Pin A0 as analog input. Note: in this video, we use a slightly different Arduino sketch called [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to demonstrate both Arduino output and p5.js interactivity.
+{: .fs-1 }
+
+#### Other sensor variations
+
+And, of course, we can hook up whatever sensor we want as input. Below, we're showing demonstrations of a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) and a infrared distance sensor.
+
+<!-- TODO: make circuit diagrams of each -->
+##### CircleSizeIn with FSR
+
+A demonstration of CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)) with a [force-sensitive resistor](../arduino/force-sensitive-resistors.md). The Arduino is still running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino).
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/AnalogOut-CircleSizeIn-FSR-Trimmed2-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of the p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the attached Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a FSR on Pin A0 as analog input. Note: in this video, we use a slightly different Arduino sketch called [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to demonstrate both Arduino output and p5.js interactivity.
+{: .fs-1 }
+
+##### CircleSizeIn with IR distance sensor
+
+And here's a a demonstration of CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)) with the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) infrared distance sensor, which has analog output that varies from 3.1V at 10cm to 0.4V at 80cm. Because the IR sensor is noisy, we did not use [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). Instead, we wrote a custom program called [SharpIRDistanceOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOut/SharpIRDistanceOut.ino) that uses a [moving average filter](../advancedio/smoothing-input.md) to smooth the input (at a cost of small input lag). 
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/SharpIRDistance-CircleSizeIn-Trimmed-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)) with the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) infrared distance sensor, which has analog output that varies from 3.1V at 10cm to 0.4V at 80cm. For the video, we used a slightly modified version of [SharpIRDistanceOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOut/SharpIRDistanceOut.ino) that also outputs information to a connected OLED called [SharpIRDistanceOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOutOLED/SharpIRDistanceOutOLED.ino)
+{: .fs-1 }
+
+Once we get the data into p5.js, we can really do *anything* we want: use the input to change colors, play a game, make a visualization, *etc.*

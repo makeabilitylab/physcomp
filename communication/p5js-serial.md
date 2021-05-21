@@ -18,7 +18,7 @@ usetocbot: true
 {:toc}
 ---
 
-We've only started to scratch the surface of what's possible in combining Arduino+Computers. In this lesson (and the next), we're going to use a creative coding tool, called [p5.js](https://p5.js.org/), to help demonstrate this potential. It should be fun!
+We've only started to scratch the surface of what's possible in combining Arduino+Computers. In this lesson (and the next), we're going to use a creative coding tool, called [p5.js](https://p5js.org/), to help demonstrate this potential. It should be fun!
 
 ## Processing and p5.js
 
@@ -64,7 +64,7 @@ https://www.reddit.com/r/processing/comments/du2ewt/tree_generator/
 
 In 2008, [John Resig](https://en.wikipedia.org/wiki/John_Resig) (the creator of jQuery) ported Processing to JavaScript, which allowed creators to use Processing without a Java plugin ([Wikipedia](https://en.wikipedia.org/wiki/Processing_(programming_language)#Processing.js)). While an early success—and adopted by teaching programs such as [Khan Academy](https://www.khanacademy.org/)—the port may have come out just a bit early in HTML+JavaScript history.
 
-In 2013, Lauren McCarthy (media artist + professor at UCLA) created [p5.js](https://p5.js.org/), which is now the officially supported JavaScript-based library for Processing and renders natively to the [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) element. Similar to the original Processing mission, p5.js is:
+In 2013, Lauren McCarthy (media artist + professor at UCLA) created [p5.js](https://p5js.org/), which is now the officially supported JavaScript-based library for Processing and renders natively to the [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) element. Similar to the original Processing mission, p5.js is:
 
 >  a JavaScript library for creative coding, with a focus on making coding accessible and inclusive for artists, designers, educators, beginners, and anyone else! p5.js is free and open-source because we believe software, and the tools to learn it, should be accessible to everyone.
 {: .fs-3 }
@@ -81,10 +81,10 @@ And here's the same black-and-white drawing program we wrote in Processing above
 **Video.** A ten-line drawing program written in [p5.js](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO). View, edit, and play with the code via the [online editor](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO).
 {: .fs-1 }
 
-p5.js also has a convenient and incredibly cool [online editor](https://editor.p5.js.org/), which makes it easy to not just rapidly write, test, and iterate on code but to share it with others as well. In the editor, simply go to `File -> Share` and select one of the options.
+p5.js also has a convenient and incredibly cool [online editor](https://editor.p5js.org/), which makes it easy to not just rapidly write, test, and iterate on code but to share it with others as well. In the editor, simply go to `File -> Share` and select one of the options.
 
 ![](assets/images/p5jsSharingSketch.png)
-**Figure.** Sharing options in the p5.js [online editor](https://editor.p5.js.org/).
+**Figure.** Sharing options in the p5.js [online editor](https://editor.p5js.org/).
 {: .fs-1 }
 
 So, you can not only [view our code](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO) and make edits to it directly—don't worry, this won't affect the original code—but you can also embed the code in your other HTML pages. For example, here we've embedded the sketch below! Hold down the mouse to change the "paintbrush" to pure black.
@@ -112,25 +112,25 @@ Here are some examples that we've written directly in the p5.js editor. You can 
 
 ## Learning p5.js
 
-After conquering the [OLED display](../advancedio/oled.md) and graphics rendering, p5.js will feel both familiar and infinitely more expressive and accessible. [Processing](https://processing.org/) (for Java) and [p5.js](https://p5.js.org/) (for JavaScript) are some of our favorite programming environments, and we can't wait to share p5.js with you!
+After conquering the [OLED display](../advancedio/oled.md) and graphics rendering, p5.js will feel both familiar and infinitely more expressive and accessible. [Processing](https://processing.org/) (for Java) and [p5.js](https://p5js.org/) (for JavaScript) are some of our favorite programming environments, and we can't wait to share p5.js with you!
 
 There are some **amazing** p5.js learning resources on the web. So, rather than replicate them, we'll simply share them with you!
 
 - Johannes Preis' [Introduction to p5.js](https://medium.com/comsystoreply/introduction-to-p5-js-9a7da09f20aa), an excellent introduction to p5.js, the coding editor, basic graphic rendering, and interactivity.
 
-- The official p5.js [Getting Started](https://p5.js.org/get-started/) guide, which parallels some of the Preis content but still worth a look.
+- The official p5.js [Getting Started](https://p5js.org/get-started/) guide, which parallels some of the Preis content but still worth a look.
 
-- The plethora of official [p5.js examples](https://p5.js.org/examples/)
+- The plethora of official [p5.js examples](https://p5js.org/examples/)
 
 - The Coding Train's [Programming with p5.js](https://thecodingtrain.com/beginners/p5.js/) by Daniel Shiffman who probably produces the best, most interesting, fun, and accessible creative coding videos.
 
 - The creator of p5.js, Lauren McCarthy, wrote a book called [Getting started with p5.js : making interactive graphics in JavaScript and Processing](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71274969160001451), which is available as an e-book via the UW library.
 
-We will also cover parts of p5.js in lecture and in the next few lessons but we assume you've read at least Preis' [Introduction to p5.js](https://medium.com/comsystoreply/introduction-to-p5-js-9a7da09f20aa) and the official p5.js [Getting Started](https://p5.js.org/get-started/) guide.
+We will also cover parts of p5.js in lecture and in the next few lessons but we assume you've read at least Preis' [Introduction to p5.js](https://medium.com/comsystoreply/introduction-to-p5-js-9a7da09f20aa) and the official p5.js [Getting Started](https://p5js.org/get-started/) guide.
 
 ### Developing p5.js
 
-You can develop p5.js projects either in the [online editor](https://editor.p5.js.org/) or in your favorite web dev environment. If you're going to dev locally, we strongly recommend [VS Code](https://code.visualstudio.com). We often switch between using the [online editor](https://editor.p5.js.org/)—to sketch out or easily share quick ideas—and VSCode for larger or more complicated projects. 
+You can develop p5.js projects either in the [online editor](https://editor.p5js.org/) or in your favorite web dev environment. If you're going to dev locally, we strongly recommend [VS Code](https://code.visualstudio.com). We often switch between using the [online editor](https://editor.p5js.org/)—to sketch out or easily share quick ideas—and VSCode for larger or more complicated projects. 
 
 #### Setting up p5.js in VSCode
 
@@ -232,7 +232,7 @@ This should all make sense. There is nothing new here. We've been doing this sin
 
 #### The p5.js code: CircleSizeIn
 
-We will build up the initial p5.js app step-by-step. You can choose to do this in the [p5.js online editor](https://editor.p5.js.org/) or in VSCode. Our instructions will be for VSCode. 
+We will build up the initial p5.js app step-by-step. You can choose to do this in the [p5.js online editor](https://editor.p5js.org/) or in VSCode. Our instructions will be for VSCode. 
 
 ##### Setup initial p5.js template
 

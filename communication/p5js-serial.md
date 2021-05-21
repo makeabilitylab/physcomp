@@ -20,32 +20,6 @@ usetocbot: true
 
 We've only started to scratch the surface of what's possible in combining Arduino+Computers. In this lesson (and the next), we're going to use a creative coding tool, called [p5.js](https://p5.js.org/), to help demonstrate this potential. It should be fun!
 
-<!-- TODO: consider showing one of our earlier p5.js videos we made for HCID with a controller? -->
-
-<!-- - p5.js demos (I've made three: one output only, one input only, one bidirectional).
-
-## From Arduino to p5.js
-
-- Could walk through them both in p5.js editor and in vscode
-
-Simple ball size demo
-
-- ExplodingImage?
-- Linegraph demo?
-
-For input, could show: FSR and then SharpIR (have SharpIRDistanceOut and SharpIRDistanceOutOLED)
-
-EtchaSketch Demo
- -- Not just with pots but also FSRs, maybe the SharpIR sensor?
- -- Then show another version with pretty colors and ball sizes getting bigger? Kind of like that YouTube video version I have.
-AccelBallDemo
-
-## From p5.js to Arduino
-- 
-
-## Bidirectional
-TODO: just generally need to add more screenshots or screen captures. -->
-
 ## Processing and p5.js
 
 ![](assets/images/ProcessingSketches_CollatzVariations.png)
@@ -129,12 +103,12 @@ Like Processing, the key overarching concept is to *sketch with code*—to play,
 
 Here are some examples that we've written directly in the p5.js editor. You can click on these links to see, edit, and run the code. Note that many of these examples were written while we were still learning p5.js ourselves (and, of course, our learning journey never ends!).
 
-- [Sound Visualizations](https://editor.p5.js.org/jonfroehlich/sketches/d2euV09i)
-- [Santa Landscape Generator](https://editor.p5.js.org/jonfroehlich/sketches/KFDQe5sbQ)
-- [Cookie Monster Game](https://editor.p5.js.org/jonfroehlich/sketches/oUIeXC9sS)
-- [Basic Slider Scroller Game](https://editor.p5.js.org/jonfroehlich/sketches/JwvvVJlNi)
-- [Falling Star FFT Game](https://editor.p5.js.org/jonfroehlich/sketches/UvFAcoUgu)
-- [Flappy Bird](https://editor.p5.js.org/jonfroehlich/sketches/shtF6XFeY)
+- [Sound Visualizations](https://editor.p5js.org/jonfroehlich/sketches/d2euV09i)
+- [Santa Landscape Generator](https://editor.p5js.org/jonfroehlich/sketches/KFDQe5sbQ)
+- [Cookie Monster Game](https://editor.p5js.org/jonfroehlich/sketches/oUIeXC9sS)
+- [Basic Slider Scroller Game](https://editor.p5js.org/jonfroehlich/sketches/JwvvVJlNi)
+- [Falling Star FFT Game](https://editor.p5js.org/jonfroehlich/sketches/UvFAcoUgu)
+- [Flappy Bird](https://editor.p5js.org/jonfroehlich/sketches/shtF6XFeY)
 
 ## Learning p5.js
 
@@ -644,5 +618,29 @@ In the [next lesson](p5js-serial-io.md), we'll show more complicated examples wh
 <span class="fs-6">
 [Previous: Intro to Web Serial](web-serial.md){: .btn .btn-outline }
 [Next: Serial I/O with p5.js](p5js-serial-io.md){: .btn .btn-outline }
-<!-- [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline } -->
 </span>
+
+<!-- TODO: consider showing one of our earlier p5.js videos we made for HCID with a controller? -->
+
+<!-- - p5.js demos (I've made three: one output only, one input only, one bidirectional).
+
+Simple ball size demo
+
+- ExplodingImage?
+
+For input, could show: FSR and then SharpIR (have SharpIRDistanceOut and SharpIRDistanceOutOLED)
+
+EtchaSketch Demo
+- Could use color sensor to color the paintbrush in etchasketch
+- Also pressure to change brush size. Might need three hands for this
+
+ -- Not just with pots but also FSRs, maybe the SharpIR sensor?
+ -- Then show another version with pretty colors and ball sizes getting bigger? Kind of like that YouTube video version I have.
+
+AccelBallDemo
+- how to make this bidirectional?
+- maybe you draw stuff on screen (like level editor) and it gets translated to OLED?
+
+- And actually, accel could be etch-a-sketch input too
+
+ -->

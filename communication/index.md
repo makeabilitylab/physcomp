@@ -27,7 +27,7 @@ In [this lesson](serial-intro.md), we’ll dive into asynchronous serial communi
 
 In [this lesson](web-serial.md), you'll learn about the new [Web Serial API](https://wicg.github.io/serial/) and how to build simple web apps that communicate with Arduino.
 
-## [L3: p5.js Serial](p5js-seriall.md)
+## [L3: p5.js Serial](p5js-serial.md)
 
 In [this lesson](p5js-serial.md), you'll learn about [Processing](https://processing.org/), [p5.js](https://p5js.org/), and how to use p5.js with Web Serial.
 

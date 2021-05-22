@@ -50,7 +50,17 @@ Now, we have to write code that allows the user to:
 
 - **Send shape data over serial.** Each time either the current shape or size changes, we need to send an update over serial. We'll do this using [our web serial class](web-serial.md#our-web-serial-class)
 
+#### Draw and dynamically resize shape
 
+We'll build this up piece-by-piece. First, we'll focus on the p5.js shape drawing code and then add in web serial. Let's start by supporting a single shape type and simply adding in the resizing via x mouse position.
+
+Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR) from the p5.js online editor:
+
+<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/qh-E0BRaR"></iframe>
+
+#### Add in support for multiple shapes
+
+Now, let's add in support for the square and triangle.
 
 ### Arduino
 TODO: make circuit

@@ -61,7 +61,7 @@ let maxShapeSize = -1;       // the maximum shape size
 let curShapeSize = 10;       // the current shape size
 {% endhighlight JavaScript %}
 
-We use the prefix [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) to indicate read-only variables and [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) for block-scoped variables that change.
+We use the prefix [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) to indicate read-only variables and [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) for block-scoped mutable variables.
 
 Now initialize the `maxShapeSize` based on the canvas width/height in `setup()`:
 
@@ -283,7 +283,7 @@ And we're done with the p5.js app! You can view, edit, play with the code in the
 
 ### Creating DisplayShapeIn in Arduino
 
-There are infinite possibilities for designing an interactive Arduino app that reads in `"shapeType, shapeSize"` off serial and does something interesting. For example, you could use this info to set the paddle size and ball type (circle, square, triangle) in an OLED-based [Breakout game](https://en.wikipedia.org/wiki/Breakout_(video_game)). For now, though, for our Arduino app, let's simply replicate the p5.js app visual experience. This might sound hard but you're [OLED](../advancedio/oled.md) experts by now—you got this!
+We could design many different types of Arduino apps that read in `"shapeType, shapeSize"` off serial and do something interesting. For example, we could use this info to set the paddle size and ball type (circle, square, triangle) in an OLED-based [Breakout game](https://en.wikipedia.org/wiki/Breakout_(video_game)). For this Arduino app, however, let's simply replicate the p5.js app visual experience. This might sound hard but you're [OLED](../advancedio/oled.md) experts by now—you got this!
 
 But how should we begin?
 
@@ -310,7 +310,7 @@ function onSerialDataReceived(eventSender, newData) {
 
 Which prints incoming data sent by Arduino to console and also updates the handy `pHtmlMsg` HTML element so you can see the info on your webpage (you could comment this out, of course).
 
-So, the simplest Arduino program to start with could be an "echo back" program like:
+So, the simplest Arduino sketch to start with could be an "echo back" program like:
 
 {% highlight C++ %}
 const long BAUD_RATE = 115200;
@@ -365,7 +365,6 @@ We'll wire up the OLED using I<sup>2</sup>C as we did in our [OLED](../advancedi
 ![](../advancedio/assets/images/Huzzah32_OLEDWiring_FritzingSchematics.png)
 **Figure.** Wiring diagram for the [Adafruit Huzzah32](../esp32/index.md) ESP32 board with OLED. Note that the ESP32 has silk-printed SCL and SDA pins at the top-right corner.
 {: .fs-1 }
-
 
 #### Add in OLED and debug printlns
 
@@ -438,7 +437,7 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-Here's a video demo with the full DisplayShapeOut p5.js app (([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)) running with an intermediate version of [DisplayShapeSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino).
+Here's a video demo with the full DisplayShapeOut p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)) running with an intermediate version of [DisplayShapeSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino).
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/DisplayShapeIn.ino-EchoBack-TrimmedAndOptimized.mp4" type="video/mp4" />
@@ -453,6 +452,8 @@ So far, so good!
 But now we actually need to **parse** the incoming serial text data into useful typed variables. Let's do that and update our OLED-based debug output. Again, it's useful to construct our program step-by-step testing along the way.
 
 Update the code inside of `if(Serial.available() > 0)` in `loop()` to include parsing. There are many possible parsing approaches; however, we are going to take advantage of Arduino's [String](https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/) object and functions like [`indexOf()`](https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/indexof) and [`substring()`](https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/substring) to look for commas and parse out our data. We showed a similar technique in our [Intro to Serial](serial-intro.md#formatting-messages) lesson.
+
+We'll display both the raw data received over serial as well as the parsed data:
 
 {% highlight C++ %}
 String rcvdSerialData = Serial.readStringUntil('\n'); 

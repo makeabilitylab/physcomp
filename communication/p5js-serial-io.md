@@ -626,13 +626,17 @@ Now, let's update our code in both p5.js and Arduino to communicate information 
 
 Here's a quick sneak peek at what the two apps will look like:
 
-TODO: insert quick video
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/DisplayShapeBidirectional_ShortenedAndOptimized1200w.mp4" type="video/mp4" />
+</video>
+**Video.** A brief end-to-end demo of the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
+{: .fs-1 }
 
-Notably, we are using **momentary buttons** for the Arduino input rather than hardware that maintains physical state like a potentiometer. The latter is problematic because the physical state of the Arduino input could get out of sync from the p5.js state. 
+Notably, we are using **momentary buttons** for the Arduino input rather than input devices or sensors that maintain physical state like a potentiometer. The latter is problematic because the fixed physical state could get out of sync with the p5.js state.
 
 ### Updating our p5.js code
 
-To begin, make a copy of the `DisplayShapeOut` p5.js folder and rename it to something like DisplayShapeBidirectional. Now, we need to add in support for the draw mode, update our parsing, and modify our instructions to the user.
+To begin, make a copy of the `DisplayShapeOut` p5.js folder and rename it to something like `DisplayShapeBidirectional`. Now, let's add in support for the draw mode, update our parsing, and modify our instructions to the user.
 
 #### Adding the fill/outline draw mode
 
@@ -673,6 +677,31 @@ function mousePressed() {
 }
 {% endhighlight JavaScript %}
 
+#### Add new instructions to the user
+
+In `draw()`, update the instructions to the user to include info about both left-clicking and right-clicking:
+
+{% highlight JavaScript %}
+function draw(){
+  ...
+
+  // Some instructions to the user
+  noStroke();
+  fill(255);
+  const tSize = 14;
+  let strInstructions = "";
+  if (serial.isOpen()) {
+    strInstructions = "Left click to change the shape. Right click to change fill/outline";
+  } else {
+    strInstructions = "Click anywhere to connect with serial"
+  }
+  textSize(tSize);
+  let tWidth = textWidth(strInstructions);
+  const xText = width / 2 - tWidth / 2;
+  text(strInstructions, xText, height - tSize + 6);
+}
+{% endhighlight JavaScript %}
+
 #### Update the serialWriteShapeData function and callers
 
 We also need to update our `serialWriteShapeData()` function to receive and write out three variables: `shapeType`, `shapeSize`, and `shapeDrawMode`:
@@ -685,6 +714,7 @@ async function serialWriteShapeData(shapeType, shapeSize, shapeDrawMode) {
     // Setup strData with three comma separated variables
     let strData = shapeType + ", " + nf(shapeSizeFraction, 1, 2) + ", " + shapeDrawMode;
 
+    // Write out the data to serial
     serial.writeLine(strData);
   }
 }
@@ -933,11 +963,19 @@ void loop() {
 
 We did it! Test it out!
 
-TODO: insert video of it working
+### Video of DisplayShapeBidirectional
+
+Here's a video demo of DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/DisplayShapeBidirectional_TrimmedAndOptimized900w.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
+{: .fs-1 }
 
 ## Activity
 
-For your prototyping journals, create a simple bidirectional app in p5.js and Arduino. Ideally, this app would correspond to an idea you have for MP3 and allow you to rapidly prototype a concept. In your journal, describe the app, link to the code (for both p5.js and Arduino), and include a brief video.
+For your prototyping journals, create a simple bidirectional app in p5.js and Arduino. Ideally, this app would correspond to an idea you have for MP3 allowing you to rapidly prototype a concept. In your journal, describe the app, link to the code (for both p5.js and Arduino), and include a brief video.
 
 <!-- extend the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino)  -->
 

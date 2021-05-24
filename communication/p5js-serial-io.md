@@ -920,7 +920,6 @@ And now the full `loop()` looks like:
 
 {% highlight C++ %}
 void loop() {
-  
   checkAndParseSerial();
   checkButtonPresses();
 
@@ -931,6 +930,26 @@ void loop() {
   }
 }
 {% endhighlight C++ %}
+
+We did it! Test it out!
+
+TODO: insert video of it working
+
+## Activity
+
+For your prototyping journals, create a simple bidirectional app in p5.js and Arduino. Ideally, this app would correspond to an idea you have for MP3 and allow you to rapidly prototype a concept. In your journal, describe the app, link to the code (for both p5.js and Arduino), and include a brief video.
+
+<!-- extend the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino)  -->
+
+## Next Lesson
+
+In the [next lesson](p5js-paint-io.md), we'll bring everything together and build a fully functional paint application.
+
+<!-- <span class="fs-6">
+[Previous: Intro to Web Serial](web-serial.md){: .btn .btn-outline }
+[Next: Serial I/O with p5.js](p5js-serial-io.md){: .btn .btn-outline }
+<!-- [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline } -->
+</span> -->
 
 <!-- Other p5js app ideas:
 - use p5.js sound API and display real-time sound

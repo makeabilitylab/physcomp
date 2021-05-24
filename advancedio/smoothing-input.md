@@ -160,6 +160,8 @@ Here's a demonstration of how to use [`MovingAveragefilter.hpp`](https://github.
 
 We also use the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp) class in our demonstration of various sliding window sizes on the moving average output ([code here](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWindowSizeDemo/MovingAverageFilterWindowSizeDemo.ino)).
 
+<!-- TODO: in future, make these libraries into template so we can have a native floating point version. Can use typdefs to "hide" template construction -->
+
 ### Weighted moving average
 
 In the moving average algorithm above, we assign equal weight to all data in our filter window. You could imagine, however, designing an algorithm that assigns higher weights to more recent data (with the theory that recency correlates to relevancy). And, indeed, there are a class of algorithms called **weighted moving averages (WMA)** that do just this, including linear weighting schemes with weights that drop off linearly in the filter window and exponential weighting schemes where weights drop off exponentially.

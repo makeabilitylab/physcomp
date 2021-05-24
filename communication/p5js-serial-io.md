@@ -31,7 +31,7 @@ Here's a small sneak preview of what the final interactive experience will look 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/DisplayShapeIn.ino-DisplayShapeOut-Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A demonstration of the p5.js app [DisplayShapeOut](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut) and Arduino sketch [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino). The p5.js app sends a `shapeType` and a `shapeSize` as a comma-separated text string to Arduino via web serial. The [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino) program parses this text and draws a shape with the appropriate size to the OLED. I did not use my regular recording setup for this because OBS Studio + my document camera have a noticeable lag. You can view, edit, play with the DisplayShapeOut code in the [p5.js online editor ](https://editor.p5js.org/jonfroehlich/sketches/TfE1BjOX6) or from our GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut))
+**Video.** A demonstration of the p5.js app [DisplayShapeOut](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut) and Arduino sketch [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino). The p5.js app sends a `shapeType` and a `shapeSize` as a comma-separated text string to Arduino via web serial. The [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino) program parses this text and draws a shape with the appropriate size to the OLED. I did not use my regular recording setup for this because OBS Studio + my document camera have a noticeable lag. You can view, edit, play with the DisplayShapeOut code in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/TfE1BjOX6) or from our GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut))
 {: .fs-1 }
 
 ### Creating DisplayShapeOut in p5.js
@@ -612,19 +612,329 @@ That's it! You can see our full implementation on GitHub as [DisplayShapeSerialI
 
 ### Full end-to-end demo
 
-We did it. Here's the full end-to-end demo.
+We did it! Here's the full end-to-end demo.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/DisplaySerialIn-EndToEndDemo-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** Using the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) to test our parsing code. 
+**Video.** A demonstration of the p5.js app [DisplayShapeOut](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut) and Arduino sketch [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino). You can view, edit, play with the DisplayShapeOut code in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/TfE1BjOX6) or from our GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut))
 {: .fs-1 }
 
+## DisplayShapeBidirectional: p5.js to Arduino and Arduino to p5.js
 
+Now, let's update our code in both p5.js and Arduino to communicate information bidirectionally. Again, there are many possibilities but let's keep things simple. We'll add two buttons on the Arduino side to select the **shape type** and a **new drawing mode** (fill *vs.* outline). We can also change these variables on the p5.js side via mouse clicks: left click to change the shape type (same as before) and right click to change the drawing mode.
 
-Other p5js app ideas:
+Here's a quick sneak peek at what the two apps will look like:
+
+TODO: insert quick video
+
+Notably, we are using **momentary buttons** for the Arduino input rather than hardware that maintains physical state like a potentiometer. The latter is problematic because the physical state of the Arduino input could get out of sync from the p5.js state. 
+
+### Updating our p5.js code
+
+To begin, make a copy of the `DisplayShapeOut` p5.js folder and rename it to something like DisplayShapeBidirectional. Now, we need to add in support for the draw mode, update our parsing, and modify our instructions to the user.
+
+#### Adding the fill/outline draw mode
+
+For the fill *vs.* outline draw mode, we'll add in an additional state tracking variable called `curShapeDrawMode`:
+
+{% highlight JavaScript %}
+let mapShapeDrawMode = {
+  0: "Fill",
+  1: "Outline",
+};
+
+let curShapeDrawMode = 0; // Fill as default
+{% endhighlight JavaScript %}
+
+The draw mode can be set either by right clicking the mouse or via new web serial data. Let's handle the former (right-mouse clicking) first. 
+
+According to [the p5.js docs](https://p5js.org/reference/#/p5/mouseClicked), the `mouseClicked()` function is only guaranteed to be called when the left mouse button is pressed and released. Thus, we'll add in our state tracking into the function [`mousePressed()`](https://p5js.org/reference/#/p5/mousePressed) instead.
+
+{% highlight JavaScript %}
+function mousePressed() {
+  // Only update states if we're connected to serial
+  if (serial.isOpen()) {
+    if (mouseButton == RIGHT) {
+      // Switch between fill and outline mode based on right click
+      curShapeDrawMode++;
+      if (curShapeDrawMode >= Object.keys(mapShapeDrawMode).length) {
+        curShapeDrawMode = 0;
+      }
+      console.log("Right click!");
+    } else {
+      curShapeType++;
+      if (curShapeType >= Object.keys(mapShapeTypeToShapeName).length) {
+        curShapeType = 0;
+      }
+    }
+    serialWriteShapeData(curShapeType, curShapeSize, curShapeDrawMode);
+  }
+}
+{% endhighlight JavaScript %}
+
+#### Update the serialWriteShapeData function and callers
+
+We also need to update our `serialWriteShapeData()` function to receive and write out three variables: `shapeType`, `shapeSize`, and `shapeDrawMode`:
+
+{% highlight JavaScript %}
+async function serialWriteShapeData(shapeType, shapeSize, shapeDrawMode) {
+  if (serial.isOpen()) {
+    let shapeSizeFraction = (shapeSize - MIN_SHAPE_SIZE) / (maxShapeSize - MIN_SHAPE_SIZE);
+
+    // Setup strData with three comma separated variables
+    let strData = shapeType + ", " + nf(shapeSizeFraction, 1, 2) + ", " + shapeDrawMode;
+
+    serial.writeLine(strData);
+  }
+}
+{% endhighlight JavaScript %}
+
+And make sure to update `mouseMoved()` too to use this new function signature by adding in `curShapeDrawMode`:
+
+{% highlight JavaScript %}
+function mouseMoved() { {
+  ...
+  serialWriteShapeData(curShapeType, curShapeSize, curShapeDrawMode);
+  ...
+}
+{% endhighlight JavaScript %}
+
+#### Add onSerialDataReceived parsing code
+
+Finally, we need to add code that parses incoming serial data into `shapeType`, `shapeSize`, and `shapeDrawMode`. For this, we'll add a new aspect to our `Arduino → Computer` communication protocol. Let's say that any line of text transmitted with a `#` prefix will be ignored and considered debugging output. This way, we can continue to use our p5.js web app for output debugging while still parsing useful information.
+
+Recall that our web serial library has an event called `SerialEvents.DATA_RECEIVED`, which we subscribe to in `setup()` and hook up a method called `onSerialDataReceived(newData)`:
+
+{% highlight JavaScript %}
+function setup() {
+  ...
+  serial.on(SerialEvents.DATA_RECEIVED, onSerialDataReceived);
+  ...
+}
+{% endhighlight JavaScript %}
+
+Let's now update that `onSerialDataReceived` method!
+
+{% highlight JavaScript %}
+function onSerialDataReceived(eventSender, newData) {
+  //console.log("onSerialDataReceived", newData);
+  pHtmlMsg.html("onSerialDataReceived: " + newData);
+
+  // Check if data received starts with '#'. If so, ignore it
+  // Otherwise, parse it! We ignore lines that start with '#' 
+  if (!newData.startsWith("#")) {
+    // Data format is ShapeType, ShapeDrawMode
+    const indexOfComma = newData.indexOf(",");
+    if (indexOfComma != -1) {
+      let strShapeType = newData.substring(0, indexOfComma).trim();
+      let strShapeDrawMode = newData.substring(indexOfComma + 1, newData.length).trim();
+      let newShapeType = parseInt(strShapeType);
+      let newShapeDrawMode = parseInt(strShapeDrawMode);
+
+      // If data valid, set new shape type
+      if (newShapeType in mapShapeTypeToShapeName) {
+        curShapeType = newShapeType;
+      }
+
+      // if shape draw mode valid, set new draw mode
+      if (newShapeDrawMode in mapShapeDrawMode) {
+        curShapeDrawMode = newShapeDrawMode;
+      }
+    }
+  }
+}
+{% endhighlight JavaScript %}
+
+And that's it!
+
+### Updating our Arduino code and circuit
+
+Now, let's add in two buttons to our Arduino circuit: one button to iterate through shape type and another to iterate through draw modes. We'll hook them up to GPIO pins 4 and 5 respectively with internal pull-up resistors.
+
+![](assets/images/ArduinoLeonardo_OLED_TwoButtons.png)
+**Figure.** The Arduino Leonardo circuit with two buttons hooked up to pins 4 and 5 using the Arduino's internal pull-up resistors. So, by default, they are in a `HIGH` state and will be pulled `LOW` upon button press.
+{: .fs-1 }
+
+#### Add draw mode support
+
+For the code, let's begin by adding draw mode support:
+
+{% highlight C++ %}
+enum DrawMode{
+  FILL,
+  OUTLINE,
+  NUM_DRAW_MODES
+};
+
+DrawMode _curDrawMode = FILL;
+{% endhighlight C++ %}
+
+And update our `drawShape()` function to accept three variables and draw the shapes accordingly:
+
+{% highlight C++ %}
+void drawShape(ShapeType shapeType, float fractionSize, DrawMode curDrawMode){
+  _display.clearDisplay();
+
+  int shapeSize = MIN_SHAPE_SIZE + fractionSize * (_maxShapeSize - MIN_SHAPE_SIZE);
+  int halfShapeSize = shapeSize / 2;
+  int xCenter = _display.width() / 2;
+  int yCenter = _display.height() / 2; 
+  int xLeft =  xCenter - halfShapeSize;
+  int yTop =  yCenter - halfShapeSize;
+  
+  if(shapeType == CIRCLE){
+    if(curDrawMode == FILL){
+      _display.fillRoundRect(xLeft, yTop, shapeSize, shapeSize, halfShapeSize, SSD1306_WHITE);
+    }else{
+      _display.drawRoundRect(xLeft, yTop, shapeSize, shapeSize, halfShapeSize, SSD1306_WHITE);
+    }
+  }else if(shapeType == SQUARE){
+    if(curDrawMode == FILL){
+      _display.fillRect(xLeft, yTop, shapeSize, shapeSize, SSD1306_WHITE);
+    }else{
+      _display.drawRect(xLeft, yTop, shapeSize, shapeSize, SSD1306_WHITE);
+    }
+  }else if(shapeType == TRIANGLE){
+    int x1 = xCenter - halfShapeSize;
+    int y1 = yCenter + halfShapeSize;
+
+    int x2 = xCenter;
+    int y2 = yCenter - halfShapeSize;
+
+    int x3 = xCenter + halfShapeSize;
+    int y3 = y1;
+
+    if(curDrawMode == FILL){
+      _display.fillTriangle(x1, y1, x2, y2, x3, y3, SSD1306_WHITE);
+    }else{
+      _display.drawTriangle(x1, y1, x2, y2, x3, y3, SSD1306_WHITE);
+    }
+  }
+
+  _display.display();
+}
+{% endhighlight C++ %}
+
+### Add in support for buttons
+
+Add in a new method called `checkButtonPresses()` that reads the two buttons, sets the global variables `_curShapeType` and `_curDrawMode` accordingly, and sends them over serial.
+
+{% highlight C++ %}
+void checkButtonPresses(){
+  // Read the shape selection button (active LOW)
+  int shapeSelectionButtonVal = digitalRead(SHAPE_SELECTION_BUTTON_PIN);
+  int lastShapeType = _curShapeType;
+  if(shapeSelectionButtonVal == LOW && shapeSelectionButtonVal != _lastShapeSelectionButtonVal){
+    // Increment the shape type
+    _curShapeType = (ShapeType)((int)_curShapeType + 1);
+
+    // Reset back to CIRCLE if we've made it to NUM_SHAPE_TYPES
+    if(_curShapeType >= NUM_SHAPE_TYPES){
+      _curShapeType = CIRCLE;
+    }
+  }
+
+  // Read the shape draw mode button val (active LOW)
+  int shapeDrawModeButtonVal = digitalRead(SHAPE_DRAWMODE_BUTTON_PIN);
+  int lastDrawMode = _curDrawMode;
+  if(shapeDrawModeButtonVal == LOW && shapeDrawModeButtonVal != _lastDrawModeButtonVal){
+    // Increment the draw mode
+    _curDrawMode = (DrawMode)((int)_curDrawMode + 1);
+
+    // Reset back to FILL if we've made it to NUM_DRAW_MODES
+    if(_curDrawMode >= NUM_DRAW_MODES){
+      _curDrawMode = FILL;
+    }
+  }
+
+  // Send new shape type and shape draw mode back over serial
+  if(lastShapeType != _curShapeType || lastDrawMode != _curDrawMode){
+    Serial.print(_curShapeType);
+    Serial.print(", ");
+    Serial.println(_curDrawMode);
+  }
+
+  // Set last button values (so nothing happens if user just holds down a button)
+  _lastShapeSelectionButtonVal = shapeSelectionButtonVal;
+  _lastDrawModeButtonVal = shapeDrawModeButtonVal;
+}
+{% endhighlight C++ %}
+
+We can test our new button and drawing code regardless of serial input. So, let's do that now:
+
+TODO: insert video. Link to DisplayShapeSerialBidirectional-Intermediate1
+
+### Update parsing code to support draw mode
+
+Finally, we need to update the serial parsing code to parse three comma separated values rather than just two: `shapeType`, `shapeSizeFraction`, and `drawMode`. Let's move all of this serial code into its own function called `checkAndParseSerial()`:
+
+{% highlight C++ %}
+void checkAndParseSerial(){
+  // Check to see if there is any incoming serial data
+  if(Serial.available() > 0){
+    // If we're here, then serial data has been received
+    // Read data off the serial port until we get to the endline delimeter ('\n')
+    // Store all of this data into a string
+    String rcvdSerialData = Serial.readStringUntil('\n'); 
+
+    // Parse out the comma separated string
+    int startIndex = 0;
+    int endIndex = rcvdSerialData.indexOf(',');
+    if(endIndex != -1){
+      // Parse out the shape type, which should be 0 (circle), 1 (square), 2 (triangle)
+      String strShapeType = rcvdSerialData.substring(startIndex, endIndex);
+      int shapeType = strShapeType.toInt();
+      _curShapeType = (ShapeType)shapeType;
+
+      // Parse out shape size fraction, a float between [0, 1]
+      startIndex = endIndex + 1;
+      endIndex = rcvdSerialData.indexOf(',', startIndex);
+      String strShapeSize = rcvdSerialData.substring(startIndex, endIndex);
+      _curShapeSizeFraction = strShapeSize.toFloat();
+
+      if(_curShapeSizeFraction < 0){
+        _curShapeSizeFraction = 0;
+      }else if(_curShapeSizeFraction > 1){
+        _curShapeSizeFraction = 1;
+      }
+
+      // Parse out draw mode 0 (fill), 1 (outline)
+      startIndex = endIndex + 1;
+      endIndex = rcvdSerialData.length();
+      String strDrawMode = rcvdSerialData.substring(startIndex, endIndex);
+      int drawMode = strDrawMode.toInt();
+      _curDrawMode = (DrawMode)drawMode;
+    } 
+    
+    // Echo the data back on serial (for debugging purposes)
+    // Prefix debug output with '#' as a convention
+    Serial.print("# Arduino Received: '");
+    Serial.print(rcvdSerialData);
+    Serial.println("'");
+  }
+}
+{% endhighlight C++ %}
+
+And now the full `loop()` looks like:
+
+{% highlight C++ %}
+void loop() {
+  
+  checkAndParseSerial();
+  checkButtonPresses();
+
+  // If we've received data from serial, then _curShapeSizeFraction will
+  // no longer be -1
+  if(_curShapeSizeFraction >= 0){
+    drawShape(_curShapeType, _curShapeSizeFraction, _curDrawMode);
+  }
+}
+{% endhighlight C++ %}
+
+<!-- Other p5js app ideas:
 - use p5.js sound API and display real-time sound
-- parse out weather in Seattle and display in OLED? 
+- parse out weather in Seattle and display in OLED?  -->
 
 <!-- - Show computer communicating with Arduino
 - Show simple bidirectional communication

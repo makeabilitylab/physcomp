@@ -102,7 +102,7 @@ function mouseMoved(){
 
 That's it! We made an initial interactive shape drawer. Save your work and try it out with VSCode's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) or simply hit the `play` button in the p5.js editor.
 
-Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR) from the p5.js online editor:
+Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR) from the p5.js online editor. Move your mouse over the canvas below to watch the circle change in size proportionall to the mouse's x position.
 
 <iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/qh-E0BRaR"></iframe>
 **Code.** The initial code skeleton for interactively sizing a shape based on the mouse's x position. You can view, edit, and play with the code [here](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR).
@@ -893,7 +893,11 @@ void checkButtonPresses(){
 
 We can test our new button and drawing code regardless of serial input. So, let's do that now:
 
-TODO: insert video. Link to DisplayShapeSerialBidirectional-Intermediate1
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/DisplayShapeBidirectionalIntermediate-TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** Testing an intermediate version of our Arduino code (in GitHub [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional-Intermediate1/DisplayShapeSerialBidirectional-Intermediate1.ino)).
+{: .fs-1 }
 
 ### Update parsing code to support draw mode
 
@@ -986,7 +990,6 @@ In the [next lesson](p5js-paint-io.md), we'll bring everything together and buil
 <!-- <span class="fs-6">
 [Previous: Intro to Web Serial](web-serial.md){: .btn .btn-outline }
 [Next: Serial I/O with p5.js](p5js-serial-io.md){: .btn .btn-outline }
-<!-- [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline } -->
 </span> -->
 
 <!-- Other p5js app ideas:

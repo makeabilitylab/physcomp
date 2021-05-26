@@ -73,7 +73,7 @@ function setup(){
 }
 {% endhighlight JavaScript %}
 
-Now we need to update the `draw()` function to actually draw our shape (a circle, for now).
+Update the `draw()` function to actually draw our shape (a circle, for now).
 
 {% highlight JavaScript %}
 function draw() {
@@ -100,7 +100,7 @@ function mouseMoved(){
 }
 {% endhighlight JavaScript %}
 
-That's it! We made an initial interactive shape drawer. Save your work and try it out with VSCode's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) or simply hit the `play` button in the p5.js editor.
+That's it! We made an initial interactive shape app. Save your work and try it out with VSCode's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) or simply hit the `play` button in the p5.js editor.
 
 Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR) from the p5.js online editor. Move your mouse over the canvas below to watch the circle change in size proportionall to the mouse's x position.
 
@@ -112,7 +112,7 @@ Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR) fr
 
 Now, let's add in support for rendering more shapes: the square and triangle. We need a variable to track the current shape type and a method for the user to switch between shapes:
 
-To track the current shape type, we'll use a JavaScript [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)—a flexible, foundational [data type in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures). Anything that is not a[primitive data type](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#data_and_structure_types) in JavaScript—*e.g.,* things that are not a [String](https://developer.mozilla.org/en-US/docs/Glossary/String), [Boolean](https://developer.mozilla.org/en-US/docs/Glossary/Boolean), [Number](https://developer.mozilla.org/en-US/docs/Glossary/Number), *etc.*—is a JavaScript [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object). In this case, we'll simply treat this Object as a key/value store, so let's call it `mapShapeTypeToShapeName` where the variable indicates "mapping" a shape type (0, 1, 2) to a shape name (circle, square, triangle). And we'll track the current shape type via `curShapeType`.
+To track the current shape type, we'll use a JavaScript [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)—a flexible, foundational [data type in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures). Anything that is not a [primitive data type](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#data_and_structure_types) in JavaScript—*e.g.,* things that are not a [String](https://developer.mozilla.org/en-US/docs/Glossary/String), [Boolean](https://developer.mozilla.org/en-US/docs/Glossary/Boolean), [Number](https://developer.mozilla.org/en-US/docs/Glossary/Number), *etc.*—is a JavaScript [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object). In this case, we'll simply treat this Object as a key/value store, so let's call it `mapShapeTypeToShapeName` where the variable indicates "mapping" a shape type (0, 1, 2) to a shape name (circle, square, triangle). And we'll track the current shape type via `curShapeType`.
 
 {% highlight JavaScript %}
 const mapShapeTypeToShapeName = {
@@ -204,7 +204,7 @@ Alright, we did it! Now check out your work by loading it with Live Server or in
 
 Finally, the last piece is to output shape type and shape size via web serial. To limit needless serial writes, we'll track the last shape type and size and only send out new data when these values have changed.
 
-First, let's add a serial write function called `serialWriteShapeData(shapeType, shapeSize)`, which takes in a shape type and shape size and outputs them over web serial.
+First, let's add a serial write function called `serialWriteShapeData(shapeType, shapeSize)`, which takes in a shape type and shape size and outputs them over web serial as text-encoded data.
 
 {% highlight JavaScript %}
 async function serialWriteShapeData(shapeType, shapeSize) {
@@ -236,6 +236,7 @@ function mouseClicked() {
       curShapeType = 0;
     }
 
+    // Given that shape type just changed, write out new values to serial
     serialWriteShapeData(curShapeType, curShapeSize);
   }
 }
@@ -299,7 +300,7 @@ Let's begin our Arduino app simply by echo'ing the incoming data back on serial.
 **Figure.** This figures shows the p5.js app [DisplayShapeOut](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut) running and connected to the Arduino via web serial. Consequently, we cannot open and use the Arduino IDE's Serial Monitor tool (`Tools -> Serial Monitor`) because only one program can connect to a serial port at a time. When we try, we get an error printed in the Arduino IDE console (right image) that says "Error opening serial port 'COM5'. (Port busy)"
 {: .fs-1 }
 
-So, instead, let's program our p5.js app to read incoming serial data and simply print it out. Essentially, serve as a web-based Serial Monitor program. Luckily, our p5.js [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) code already does that. In the template, we simply have:
+So, instead, let's program our p5.js app to read incoming serial data and print it out—a web-based Serial Monitor! Luckily, our p5.js [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) code already does that. In the template, we simply have:
 
 {% highlight JavaScript %}
 function onSerialDataReceived(eventSender, newData) {
@@ -336,9 +337,11 @@ void loop() {
 
 TODO: need video -->
 
-This echo technique is a crucial debugging tool. So, make sure you understand it! Another useful debugging strategy is to use our [OLED](../advancedio/oled.md) displays for debugging output. We can change these debug printouts as our app progresses (and remove them, of course, once we're confident things are working the way we intend).
+This echo technique is a crucial debugging tool. So, make sure you understand it! We can also use the OLED display to show debugging output, which we need for this app anyway. So, let's do that next!
 
-So, let's add in our OLED—which we need for this app anyway.
+<!-- Another useful debugging strategy is to use our [OLED](../advancedio/oled.md) displays for debugging output. We can change these debug printouts as our app progresses (and remove them, of course, once we're confident things are working the way we intend). -->
+
+<!-- So, let's add in our OLED—which we need for this app anyway. -->
 
 <!-- It's important that you understand this "echo" technique and the fact that you can no longer use Serial Monitor for debugging (at least not in the same way [as before](../arduino/serial-print.md)) because only one program can open and use a serial port at a time (which will be your p5.js app). -->
 
@@ -352,7 +355,7 @@ With that, let's begin making on the Arduino side! -->
 
 #### A simple OLED circuit
 
-We'll wire up the OLED using I<sup>2</sup>C as we did in our [OLED](../advancedio/oled.md) lesson. We'll use the Arduino Leonardo but some of you may choose to use the Adafruit Huzzah32 (ESP32). We provide both I<sup>2</sup>C wirings below.
+We'll wire up the OLED using I<sup>2</sup>C as we did in our [OLED](../advancedio/oled.md) lesson. For our lesson, we'll use the Arduino Leonardo but some of you may choose to use the Adafruit Huzzah32 (ESP32). We provide both I<sup>2</sup>C wirings below.
 
 ##### The Arduino Leonardo Wiring
 
@@ -383,7 +386,7 @@ Now, let's program the OLED to print out some debugging information. Add the fol
 Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 {% endhighlight C++ %}
 
-In `setup()`, initialize the OLED and print out a "Waiting for serial..." message:
+In `setup()`, initialize the OLED and print out a "Waiting for serial..." message. We'll also show the baud rate, which is a useful reminder in case you set a different value on the p5.js side.
 
 {% highlight C++ %}
 const long BAUD_RATE = 115200;
@@ -437,7 +440,7 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-Here's a video demo with the full DisplayShapeOut p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)) running with an intermediate version of [DisplayShapeSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino).
+Here's a video demonstration of what we have so far: the full DisplayShapeOut p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)) running with an intermediate version of [DisplayShapeSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino), which simply echos back received data and displays some debugging output to the OLED screen.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/DisplayShapeIn.ino-EchoBack-TrimmedAndOptimized.mp4" type="video/mp4" />
@@ -453,7 +456,7 @@ But now we actually need to **parse** the incoming serial text data into useful 
 
 Update the code inside of `if(Serial.available() > 0)` in `loop()` to include parsing. There are many possible parsing approaches; however, we are going to take advantage of Arduino's [String](https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/) object and functions like [`indexOf()`](https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/indexof) and [`substring()`](https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/substring) to look for commas and parse out our data. We showed a similar technique in our [Intro to Serial](serial-intro.md#formatting-messages) lesson.
 
-We'll display both the raw data received over serial as well as the parsed data:
+For now, we'll display both the raw data received over serial as well as the parsed data. Once we're confident we have this working, we'll remove this debug output.
 
 {% highlight C++ %}
 String rcvdSerialData = Serial.readStringUntil('\n'); 
@@ -507,7 +510,9 @@ Let's close our p5.js tab in our web browser to ensure it's disconnected from th
 
 #### Write drawing code
 
-Now, let's pivot from reading and parsing serial input to writing our OLED-based drawing code.
+Awesome! We're almost done.
+
+Let's pivot from reading and parsing serial input to writing our OLED-based drawing code. As we've previously mentioned the [Adafruit GFX drawing API](https://learn.adafruit.com/adafruit-gfx-graphics-library/graphics-primitives) is not significantly different from the [p5js drawing API](https://p5js.org/reference/). Note the similarities below!
 
 First, let's introduce some shape related types and variables:
 
@@ -622,7 +627,9 @@ We did it! Here's the full end-to-end demo.
 
 ## DisplayShapeBidirectional: p5.js to Arduino and Arduino to p5.js
 
-Now, let's update our code in both p5.js and Arduino to communicate information bidirectionally. Again, there are many possibilities but let's keep things simple. We'll add two buttons on the Arduino side to select the **shape type** and a **new drawing mode** (fill *vs.* outline). We can also change these variables on the p5.js side via mouse clicks: left click to change the shape type (same as before) and right click to change the drawing mode.
+The above example demonstrated how to transmit data from p5.js to Arduino via text-encoded serial communication but did not send any commands from Arduino to p5.js. So, let's extend our code to communicate information bidirectionally (from p5.js to Arduino and Arduino to p5.js)!
+
+Again, there are many possibilities but let's keep things simple. We'll add two buttons on the Arduino side to select the **shape type** and a **new drawing mode** (fill *vs.* outline). We can also change these variables on the p5.js side via mouse clicks: left click to change the shape type (same as before) and right click to change the drawing mode.
 
 Here's a quick sneak peek at what the two apps will look like:
 
@@ -632,7 +639,7 @@ Here's a quick sneak peek at what the two apps will look like:
 **Video.** A brief end-to-end demo of the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
 {: .fs-1 }
 
-Notably, we are using **momentary buttons** for the Arduino input rather than input devices or sensors that maintain physical state like a potentiometer. The latter is problematic because the fixed physical state could get out of sync with the p5.js state.
+Notably, we are using **momentary buttons** for the Arduino input rather than input devices or sensors that maintain physical state like a potentiometer because fixed physical states could get out of sync with p5.js.
 
 ### Updating our p5.js code
 
@@ -651,9 +658,9 @@ let mapShapeDrawMode = {
 let curShapeDrawMode = 0; // Fill as default
 {% endhighlight JavaScript %}
 
-The draw mode can be set either by right clicking the mouse or via new web serial data. Let's handle the former (right-mouse clicking) first. 
+The draw mode can be set either by **right clicking** the mouse or from incoming Arduino data (from web serial). Let's handle the former (right-mouse clicking) first. 
 
-According to [the p5.js docs](https://p5js.org/reference/#/p5/mouseClicked), the `mouseClicked()` function is only guaranteed to be called when the left mouse button is pressed and released. Thus, we'll add in our state tracking into the function [`mousePressed()`](https://p5js.org/reference/#/p5/mousePressed) instead.
+According to [the p5.js docs](https://p5js.org/reference/#/p5/mouseClicked), the `mouseClicked()` function is only guaranteed to be called when the left mouse button is pressed and released. Thus, we cannot rely on this [`mouseClicked()`](https://p5js.org/reference/#/p5/mouseClicked) for changing the draw mode. Instead, we'll add our state tracking into [`mousePressed()`](https://p5js.org/reference/#/p5/mousePressed).
 
 {% highlight JavaScript %}
 function mousePressed() {
@@ -665,7 +672,6 @@ function mousePressed() {
       if (curShapeDrawMode >= Object.keys(mapShapeDrawMode).length) {
         curShapeDrawMode = 0;
       }
-      console.log("Right click!");
     } else {
       curShapeType++;
       if (curShapeType >= Object.keys(mapShapeTypeToShapeName).length) {
@@ -676,6 +682,8 @@ function mousePressed() {
   }
 }
 {% endhighlight JavaScript %}
+
+Notice that we also moved the `shapeType` tracking here too.
 
 #### Add new instructions to the user
 
@@ -704,7 +712,7 @@ function draw(){
 
 #### Update the serialWriteShapeData function and callers
 
-We also need to update our `serialWriteShapeData()` function to receive and write out three variables: `shapeType`, `shapeSize`, and `shapeDrawMode`:
+We also need to update our `serialWriteShapeData()` function to receive and write out three variables: `shapeType`, `shapeSize`, and `shapeDrawMode` instead of two as before:
 
 {% highlight JavaScript %}
 async function serialWriteShapeData(shapeType, shapeSize, shapeDrawMode) {
@@ -720,7 +728,7 @@ async function serialWriteShapeData(shapeType, shapeSize, shapeDrawMode) {
 }
 {% endhighlight JavaScript %}
 
-And make sure to update `mouseMoved()` too to use this new function signature by adding in `curShapeDrawMode`:
+And make sure to also update the `serialWriteShapeData()` call in `mouseMoved()` to use three parameters as well:
 
 {% highlight JavaScript %}
 function mouseMoved() { {
@@ -776,11 +784,11 @@ function onSerialDataReceived(eventSender, newData) {
 }
 {% endhighlight JavaScript %}
 
-And that's it!
+And that's it! Here's our full implementation as [DisplayShapeBidirectional](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional) in GitHub ([live page here](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional)).
 
 ### Updating our Arduino code and circuit
 
-Now, let's add in two buttons to our Arduino circuit: one button to iterate through shape type and another to iterate through draw modes. We'll hook them up to GPIO pins 4 and 5 respectively with internal pull-up resistors.
+Shifting now to the Arduino side. Let's add in two buttons to our Arduino circuit: one button to iterate through shape type and another to iterate through draw modes. We'll hook them up to GPIO pins 4 and 5 respectively with internal pull-up resistors.
 
 ![](assets/images/ArduinoLeonardo_OLED_TwoButtons.png)
 **Figure.** The Arduino Leonardo circuit with two buttons hooked up to pins 4 and 5 using the Arduino's internal pull-up resistors. So, by default, they are in a `HIGH` state and will be pulled `LOW` upon button press.
@@ -800,7 +808,7 @@ enum DrawMode{
 DrawMode _curDrawMode = FILL;
 {% endhighlight C++ %}
 
-And update our `drawShape()` function to accept three variables and draw the shapes accordingly:
+And update our `drawShape()` function to accept three variables and draw the shapes accordingly (either **filled** or as **outlines**):
 
 {% highlight C++ %}
 void drawShape(ShapeType shapeType, float fractionSize, DrawMode curDrawMode){
@@ -965,7 +973,7 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-We did it! Test it out!
+We did it! Below, we provide the full code links and a video demonstration.
 
 ### Video of DisplayShapeBidirectional
 

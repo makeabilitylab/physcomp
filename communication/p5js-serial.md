@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L3&#58; p5.js Serial
+title: L3&#58; p5.js Serial In
 nav_order: 3
 parent: Communication
 has_toc: true # (on by default)

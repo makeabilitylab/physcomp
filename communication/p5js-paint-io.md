@@ -503,8 +503,9 @@ void loop() {
 
 ### Test and play!
 
-TODO: insert video
-
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PaintIO-Grayscale-TwoPots-KeyboardCommands-Optimized.mp4" type="video/mp4" />
+</video>
 **Video.** An initial Paint I/O p5.js + Arduino app. The p5.js code is available as [Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT) and the Arduino code is [XYAnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOut/XYAnalogOut.ino) on GitHub.
 
 ### Upgrading our Arduino controller with OLED
@@ -555,11 +556,15 @@ void loop(){
 
 ### Video demonstration of initial Paint I/O app
 
-TODO: video of OLED + p5.js
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/PaintIO-Grayscale-TwoPots-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** Using the same p5.js code as before ([Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT)) but with an updated Arduino circuit (with OLED) and code to show brush position. Arduino code is on GitHub as [XYAnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOutOLED/XYAnalogOutOLED.ino).
+{: .fs-1 }
 
-Also supports bimanual interaction:
+<!-- Also supports bimanual interaction:
 
-TODO: insert video.
+TODO: insert video. -->
 
 <!-- TODO: possibly also show the SharpIR sensor as brush input? -->
 
@@ -739,7 +744,7 @@ For the code, we need to update our paintbrush controller to:
 
 Rather than walk through this code piece-by-piece, we will simply link to it on GitHub as [PaintIO.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIO/PaintIO.ino). The code itself is essentially a culmination of the last few serial lessons—so it should be relatively straightforward (even if a bit lengthy). Feel free to ask questions!
 
-### Video demonstration of bidirectional PaintIO
+<!-- ### Video demonstration of bidirectional PaintIO -->
 
 
 <!-- ![](assets/images/PaintIO_Image1.png)
@@ -748,12 +753,14 @@ Rather than walk through this code piece-by-piece, we will simply link to it on 
 
 <!-- The paint brush size could be set by temperature, sound, etc. -->
 
+## Some example images
+
 ![](assets/images/PaintIO_Image3-Accel.png)
 
 ![](assets/images/PaintIO_Image4-Accel2.png)
 
-- Impressionist?
+<!-- - Impressionist?
 - Live video impressionist?
 
 - If we use color sensor version, can link to one of our favorite all time examples: I/O Brush from Ishii and Ryokai.
-- Use joystick for input rather than two pots?
+- Use joystick for input rather than two pots? -->

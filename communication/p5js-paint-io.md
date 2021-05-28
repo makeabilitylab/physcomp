@@ -796,7 +796,7 @@ We made a few small updates to PaintIO to create a final prototype application, 
 - And setting various color modes by hitting the `c` key, including coloring by the brush size, brush speed, brush location, and mouse location.
 - Adding in an on-screen cursor in p5.js about where the paintbrush location is
 
-The final application is on GitHub (live page, code). TODO.
+The final application is on GitHub (p5.js [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/PaintIO)) and Arduino sketch ([PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino)).
 
 ### Accelerometer-based paintbrush controller
 
@@ -814,11 +814,6 @@ And the schematic:
 **Figure.** A schematic diagram of the accelerometer-based paintbrush controller with ESP32. Made with Fritzing.
 {: .fs-1 }
 
-You could (and should) design your own paintbrush controller too! Think about how to map different brush properties to sensors:
-- Set the brush size or color based on microphone input—louder sounds correspond to larger brush sizes or different hues. Now, you can whistle, shout, and sing to paint!
-- Set the brush color using a color sensor like [this one from Adafruit](https://www.adafruit.com/product/1334)
-- Allow your painter to "paint over" an existing picture or video input stream (sort of [like this](https://youtu.be/QfpFX4NBhJw))
-
 ### Video demonstration of PaintIO 4
 
 Here's a sneak peek of me using this new controller followed by a YouTube video overview of the whole PaintIO application and controller experience.
@@ -835,6 +830,14 @@ In the YouTube video below, we provide a full demonstration of PaintIO with the 
 **Video.** A full video demonstration on [YouTube](https://youtu.be/oTuMkisug2A).
 {: .fs-1 }
 
+### Other ideas
+
+You could (and should) design your own paintbrush controller too! Think about how to map different brush properties to sensors:
+- Set the brush size or color based on microphone input—louder sounds correspond to larger brush sizes or different hues. Now, you can whistle, shout, and sing to paint!
+- Set the brush color using a color sensor like [this one from Adafruit](https://www.adafruit.com/product/1334)
+- Allow your painter to "paint over" an existing picture or video input stream (sort of [like this](https://youtu.be/QfpFX4NBhJw))
+- How to create a new paintbrush form that supports the artist, complements the onboard esnsors, better fits within their hands
+
 <!-- ### Video demonstration of bidirectional Paint I/O -->
 
 
@@ -846,7 +849,7 @@ In the YouTube video below, we provide a full demonstration of PaintIO with the 
 
 ## Some example images
 
-![](assets/images/PaintIO_Imagel.png)
+![](assets/images/PaintIO_Image1.png)
 
 ![](assets/images/PaintIO_Image3-Accel.png)
 

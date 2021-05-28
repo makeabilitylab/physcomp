@@ -29,7 +29,15 @@ In [this lesson](web-serial.md), you'll learn about the new [Web Serial API](htt
 
 ## [L3: p5.js Serial](p5js-serial.md)
 
-In [this lesson](p5js-serial.md), you'll learn about [Processing](https://processing.org/), [p5.js](https://p5js.org/), and how to use p5.js with Web Serial.
+In [this lesson](p5js-serial.md), you'll learn about [Processing](https://processing.org/), [p5.js](https://p5js.org/), and how to use p5.js with Web Serial (with a focus on processing incoming serial input data).
+
+## [L4: p5.js Serial I/O](p5js-serial-io.md)
+
+In [this lesson](p5js-serial-io.md), we look at creating more complicated p5.js + Arduino applications that bidirectionally communicate together both Arduino to p5.js (`Arduino → Computer`) as well as p5.js to Arduino (`Computer → Arduino`).
+
+## [L5: Paint I/O Example](p5js-paint-io.md)
+
+Culminating our p5.js + Arduino web serial series, in [this lesson](p5js-paint-io.md), we will build a fully interactive p5.js + Arduino painting application, called PaintIO, with bidirectional serial communication and a custom paintbrush controller using an accelerometer to control brush location, a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) to control brush size, and bimanual interaction using both Arduino + the mouse simultaneously for drawing.
 
 <!-- 
 Question to self: Should serial communication be its own top-level header on website?

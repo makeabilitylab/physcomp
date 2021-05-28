@@ -995,6 +995,11 @@ For your prototyping journals, create a simple bidirectional app in p5.js and Ar
 
 In the [next lesson](p5js-paint-io.md), we'll bring everything together and build a fully functional paint application.
 
+<span class="fs-6">
+[Previous: p5.js Serial In](p5js-serial.md){: .btn .btn-outline }
+[Next: Paint I/O Example](p5js-paint-io.md){: .btn .btn-outline }
+</span>
+
 <!-- <span class="fs-6">
 [Previous: Intro to Web Serial](web-serial.md){: .btn .btn-outline }
 [Next: Serial I/O with p5.js](p5js-serial-io.md){: .btn .btn-outline }

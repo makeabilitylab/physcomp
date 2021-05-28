@@ -136,8 +136,19 @@ let offscreenGfxBuffer;
 
 Because we cannot use any p5.js constructs or functions until `setup()` is called, we need to initialize `brushColor` and `offscreenGfxBuffer` in `setup()`. If we try to initialize them at declaration, the p5.js online editor is smart enough to catch this and hint at the problem:
 
+```
+🌸 p5.js says: There's an error due to "color" not being defined in the current scope (on line 116 in about:srcdoc [about:srcdoc:116:18]).
+
+If you have defined it in your code, you should check its scope, spelling, and letter-casing (JavaScript is case-sensitive). For more:
+https://p5js.org/examples/data-variable-scope.html
+https://developer.mozilla.org/docs/Web/JavaScript/Reference/Errors/Not_Defined#What_went_wrong 
+Did you just try to use p5.js's color() function? If so, you may want to move it into your sketch's setup() function.
+
+For more details, see: https://github.com/processing/p5.js/wiki/p5.js-overview#why-cant-i-assign-variables-using-p5-functions-and-variables-before-setup 
+```
+
 ![](assets/images/p5jsOnlineEditor_TryingToUseP5jsFunctionsBeforeSetup.png)
-**Figure.** You cannot use any p5.js functions or classes before `setup()` has been called. If you do, you'll likely receive an error like the above where we tried to use [`color()`](https://p5js.org/reference/#/p5/color) during a global variable declaration. The specific error says: "Did you just try to use p5.js's color() function? If so, you may want to move it into your sketch's setup() function. For more details, see the p5.js wiki"
+**Figure.** You cannot use any p5.js functions or classes before `setup()` has been called. If you do, you'll likely receive an error like the above where we tried to use [`color()`](https://p5js.org/reference/#/p5/color) during a global variable declaration. The specific error says: "Did you just try to use p5.js's color() function? If so, you may want to move it into your sketch's setup() function. For more details, see the [p5.js wiki](https://github.com/processing/p5.js/wiki/p5.js-overview#why-cant-i-assign-variables-using-p5-functions-and-variables-before-setup)"
 {: .fs-1 }
 
 So, instead, initialize them in `setup()`:

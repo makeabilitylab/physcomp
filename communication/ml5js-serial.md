@@ -421,7 +421,7 @@ function drawEye(x, y) {
 }
 {% endhighlight JavaScript %}
 
-And here's a video demo of where we are thus far! Notice how PoseNet will recognize *pictures* of humans as well as real, physical humans in the web cam stream (but not pictures of seals!).
+And another video demo to help show what we've created thus far! Notice how PoseNet will recognize *pictures* of humans as well as real, physical humans in the web cam stream (but not pictures of seals!).
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/NoseTracker3-EyesAndNoseWithBook-Optimized.mp4" type="video/mp4" />

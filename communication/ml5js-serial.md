@@ -1,7 +1,7 @@
 ---
 layout: default
 title: L6&#58; ml5.js Serial
-nav_order: 5
+nav_order: 6
 parent: Communication
 has_toc: true # (on by default)
 comments: true

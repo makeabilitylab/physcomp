@@ -124,7 +124,7 @@ Recognizing parts of the human body in images/video is a type of computer vision
 
 In May 2018, Google Creative Lab [announced](https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5) PoseNet, a TensorFlow.js-based real-time human pose estimator for the web browser. This was an incredible achievement: now, anyone with a web browser and web cam could use and/or build pose-based applications. TensorFlow.js runs locally in the browser using pre-trained data. Thus, all recognition and pose data is local—none is sent up to the cloud (unless an application built around PoseNet transmits this information).
 
-Where does the training data come from? According to [this article](https://medium.com/ml5js/ml5-friendly-open-source-machine-learning-library-for-the-web-e802b5da3b2), the pose detection models were trained using the [Cambridge Landmarks](http://mi.eng.cam.ac.uk/projects/relocalisation/) and [7-Scenes Datasets](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/).
+Where does the training data come from? According to [this article](https://medium.com/ml5js/ml5-friendly-open-source-machine-learning-library-for-the-web-e802b5da3b2), the pose detection models were trained using the [Cambridge Landmarks](http://mi.eng.cam.ac.uk/projects/relocalisation/) and [7-Scenes Datasets](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/). It's not clear how well they generalize; however, PoseNet has worked well for us across ~2 years of teaching (with maybe ~100 students).
 
 #### PoseNet models
 

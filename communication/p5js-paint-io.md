@@ -860,3 +860,12 @@ You could (and should) design your own paintbrush controller too! Think about ho
 
 - If we use color sensor version, can link to one of our favorite all time examples: I/O Brush from Ishii and Ryokai.
 - Use joystick for input rather than two pots? -->
+
+## Next Lesson
+
+In the [next lesson](ml5js-serial.md), we'll introduce machine learning (ML) frameworks and use one in particular, called [ml5.js](https://ml5js.org/), to create interactive ML-based applications with Arduino.
+
+<span class="fs-6">
+[Previous: p5.js Serial I/O](p5js-serial-io.md){: .btn .btn-outline }
+[Next: ml5.js Serial](ml5js-serial.md){: .btn .btn-outline }
+</span>

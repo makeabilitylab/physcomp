@@ -17,7 +17,7 @@ usetocbot: true
 {:toc}
 ---
 
-In this lesson series, we will learn about serial communication, web serial, and using [p5js](https://p5js.org/) to communicate with Arduino.
+In this lesson series, we will learn about computer-to-Arduino interaction. More specifically, serial communication, web serial, and using [p5js](https://p5js.org/) to communicate with Arduino.
 
 ## [L1: Intro to Serial](serial-intro.md)
 
@@ -37,7 +37,13 @@ In [this lesson](p5js-serial-io.md), we look at creating more complicated p5.js 
 
 ## [L5: Paint I/O Example](p5js-paint-io.md)
 
-Culminating our p5.js + Arduino web serial series, in [this lesson](p5js-paint-io.md), we will build a fully interactive p5.js + Arduino painting application, called PaintIO, with bidirectional serial communication and a custom paintbrush controller using an accelerometer to control brush location, a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) to control brush size, and bimanual interaction using both Arduino + the mouse simultaneously for drawing.
+In [this lesson](p5js-paint-io.md), we will bring everything together thus far to build a fully interactive p5.js + Arduino painting application, called PaintIO, with bidirectional serial communication and a custom paintbrush controller using an accelerometer to control brush location, a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) to control brush size, and bimanual interaction using both Arduino + the mouse simultaneously for drawing.
+
+## [L6: ml5.js Serial](ml5js-serial.md)
+
+In [this lesson](ml5js-serial.md), we'll introduce machine learning frameworks like [Runway ML](https://runwayml.com/) and [ml5js](https://ml5js.org/) and show how to use them with Arduino.
+
+
 
 <!-- 
 Question to self: Should serial communication be its own top-level header on website?

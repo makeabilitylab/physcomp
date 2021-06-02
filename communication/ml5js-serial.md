@@ -307,7 +307,7 @@ The ml5 PoseNet library is similar; however, there is only one event for subscri
 poseNet.on('pose', onPoseDetected);
 {% endhighlight JavaScript %}
 
-Thus, the full ml5 PoseNet initialization code with event subscription is:
+Thus, the full ml5 PoseNet initialization code with the pose event subscription is:
 
 {% highlight JavaScript %}
 let video;
@@ -332,7 +332,7 @@ function onPoseDetected(poses) {
 }
 {% endhighlight JavaScript %}
 
-You can view, play with, and edit [this code ](https://editor.p5js.org/jonfroehlich/sketches/TMafCYmKE) in the p5.js online editor.
+You can view, play with, and edit [this code](https://editor.p5js.org/jonfroehlich/sketches/TMafCYmKE) in the p5.js online editor.
 
 #### Draw nose keypoint
 
@@ -453,21 +453,21 @@ The circuit is similar to many we've built for our [web serial lessons](p5js-ser
 
 | Arduino Leonardo Wiring | Huzzah32 (ESP32) Wiring |
 |-------------------------|-------------------------|
-| ![](assets/images/ArduinoLeonardo_OLEDDisplayWiring.png) |
-![](assets/images/Huzzah32_OLEDWiring_FritzingSchematics.png) |
+| ![](assets/images/ArduinoLeonardo_OLEDDisplayWiring.png) | ![](../advancedio/assets/images/Huzzah32_OLEDWiring_FritzingSchematics.png) |
 
 #### The Arduino code
 
-Similarly, our code is similar to [previous lessons](p5js-serial-io.md#parse-serial-data-and-update-oled-debug-output). We simply need to:
+The NoseTracker Arduino code is similar to [previous lessons](p5js-serial-io.md#parse-serial-data-and-update-oled-debug-output). We simply need to:
 - **Parse incoming serial data** into x,y floats. 
 - **Convert the x,y normalized** positions into OLED pixel positions
 - **Draw a face** at the x,y pixel positions
+- **Echo data back** to our p5.js app for debugging purposes 
 
-We'll also echo data back to our p5.js app for debugging purposes. Given that this code so closely parallels other Arduino sketches we've written in the Web Serial series, we won't walk through every step—just the key parts.
+Given that this code so closely parallels other Arduino sketches we've written in the Web Serial series (*e.g.,* [this lesson](p5js-serial-io.md)), we won't walk through every step—just the key parts.
 
 ##### Parsing the incoming serial data
 
-Declare some global variables related to face drawing. We're going to draw a face using the built-in icon from the default font set.
+First, declare some global variables related to face drawing. We're going to draw a face using the built-in icon from the default font set.
 
 {% highlight C++ %}
 const int CHAR_SIZE = 3;           // set font size to 3
@@ -514,7 +514,7 @@ void loop() {
 
 ##### Drawing the face
 
-We could really draw anything we want at the x,y position. In this example, we'll simply draw a face.
+We could really draw anything we want at the received x,y position. In this example, we'll simply draw a face.
 
 {% highlight C++ %}
 void drawFace(float xFrac, float yFrac){
@@ -525,6 +525,8 @@ void drawFace(float xFrac, float yFrac){
 }
 {% endhighlight C++ %}
 
+TODO: insert close-up picture of this face character.
+
 And that's it, the full code is available on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino).
 
 ### Video demonstration of NoseTracker
@@ -534,7 +536,7 @@ Here's a longer video demonstration of the full p5.js + Arduino NoseTracker app:
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/NoseTrackerFullDemo-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino code is on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino).
+**Video.** The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino code is on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino). You can ignore the two momentary buttons on the breadboard—we don't use them here.
 {: .fs-1 }
 
 Outline:

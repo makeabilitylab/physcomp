@@ -92,6 +92,10 @@ To get started with [ml5.js](https://ml5js.org/), we recommend reading the offic
 
 ### Why not embedded machine learning?
 
+![](assets/images/SoundWatch_FourArchitecturesDiagram.png)
+**Figure.** There are many possibilities for how to architect embedded/IoT ML systems depending on power, computation, and latency requirements. In our [ASSETS'20 paper](https://makeabilitylab.cs.washington.edu/media/publications/Jain_SoundwatchExploringSmartwatchBasedDeepLearningApproachesToSupportSoundAwarenessForDeafAndHardOfHearingUsers_ASSETS2020.pdf) for [SoundWatch](https://makeabilitylab.cs.washington.edu/project/soundwatch/), for example, we explore four different ML architectures: *watch-only*, *watch+phone*, *watch+phone+cloud*, and *watch+cloud*.
+{: .fs-1 }
+
 As this is a physical computing course, one may rightly ask: why not teach *embedded* machine learning where the ML model runs locally on the Arduino or IoT device rather than on a computer or in the cloud. This is a great question with a multifold response:
 
 - First, when initially learning ML—even in the applied sense—we think the desktop provides a more approachable learning environment. The tools are more mature, it's easier to visualize and understand the data and the ML model, and it's easier to debug and iterate. 
@@ -180,7 +184,7 @@ The array structure looks like this:
 ];
 {% endhighlight JavaScript %}
 
-To make this more clear, here's a screenshot with Chrome's dev tools showing a pose and skeleton object.
+To make this more clear, here's a screenshot of our [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) app with Chrome's dev tools showing a pose and skeleton object.
 
 ![](assets/images/PoseNet_DataStructure_ChromeDevTools.png)
 **Figure.** Examining the PoseNet data structure for a single recognized pose. If you'd like to do the same, open our [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) app in your web browser (*e.g.,* Chrome or FireFox). Then open dev tools (ctrl-shift-i on Windows, cmd-option-i on Mac). Click on the `Sources` tab and then put in a breakpoint at the `drawPose()` function call within the `draw()` function. Finally, add the variable `currentPoses` to `Watch` in the debugger.
@@ -189,7 +193,7 @@ To make this more clear, here's a screenshot with Chrome's dev tools showing a p
 ### Example p5.js + ml5.js PoseNet demo
 
 To demonstrate the [ml5.js PoseNet API](https://learn.ml5js.org/#/reference/posenet), we created a simple application called [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) that renders:
-- a bounding box around each detected human with a confidence `score`
+- a bounding box around each detected human showing a confidence `score`
 - all 17 keypoints with `x,y` position and keypoint-specific confidence `scores`
 - the `skeleton` data for each pose.
 

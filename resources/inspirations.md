@@ -53,6 +53,8 @@ There are a number of emerging academic courses that have accompanying interacti
 
 - **[Visualization Curriculum](https://uwdata.github.io/visualization-curriculum/intro.html)**, University of Washington, Jeffrey Heer, Dominik Moritz, Jake VanderPlas, and Brock Craft
 
+<!-- This Linear Algebra book by Dan Margalit and Joseph Rabinoff: https://textbooks.math.gatech.edu/ila/index.html -->
+
 <!-- TODO -->
 <!-- Add social media maker accounts (twitter, instagram)? -->
 <!-- Add people? -->

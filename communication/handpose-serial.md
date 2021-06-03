@@ -25,7 +25,7 @@ In this lesson, we will introduce a new ml5 model, called [Handpose](https://lea
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/HandPose_Optimized_1200w.mp4" type="video/mp4" />
 </video>
-**Video.** A quick demonstration of [ml5's Handpose](https://learn.ml5js.org/#/reference/handpose) as implemented in our example app called [HandWaveDetector](https://makeabilitylab.github.io/p5js/ml5js/Handpose/HandWaveDetector) ([code](https://github.com/makeabilitylab/p5js/tree/master/ml5js/Handpose/HandWaveDetector)).
+**Video.** A quick demonstration of [ml5's Handpose](https://learn.ml5js.org/#/reference/handpose) as implemented in our example app called [HandWaveDetector](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandWaveDetector) ([code](https://github.com/makeabilitylab/p5js/tree/master/ml5js/HandPose/HandWaveDetector)).
 {: .fs-1 }
 
 ## Handpose

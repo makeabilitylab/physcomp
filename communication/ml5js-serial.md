@@ -187,7 +187,7 @@ The array structure looks like this:
 To make this more clear, here's a screenshot of our [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) app with Chrome's dev tools showing a pose and skeleton object.
 
 ![](assets/images/PoseNet_DataStructure_ChromeDevTools.png)
-**Figure.** Examining the PoseNet data structure for a single recognized pose. If you'd like to do the same, open our [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) app in your web browser (*e.g.,* Chrome or FireFox). Then open dev tools (ctrl-shift-i on Windows, cmd-option-i on Mac). Click on the `Sources` tab and then put in a breakpoint at the `drawPose()` function call within the `draw()` function. Finally, add the variable `currentPoses` to `Watch` in the debugger.
+**Figure.** Examining the PoseNet data structure for a single recognized pose. Right-click and select "Open Image in New Tab" to enlarge. If you'd like to do the same, open our [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) app in your web browser (*e.g.,* Chrome or FireFox). Then open dev tools (ctrl-shift-i on Windows, cmd-option-i on Mac). Click on the `Sources` tab and then put in a breakpoint at the `drawPose()` function call within the `draw()` function. Finally, add the variable `currentPoses` to `Watch` in the debugger.
 {: .fs-1 }
 
 ### Example p5.js + ml5.js PoseNet demo

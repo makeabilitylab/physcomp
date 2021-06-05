@@ -20,7 +20,9 @@ usetocbot: true
 
 In our [previous lesson](ml5js-serial.md), we introduced combining Arduino with machine learning (ML) libraries like [ml5.js](https://ml5js.org/), a web-based ML library built on [Google TensorFlow](https://www.tensorflow.org/js). Specifically, we built a [p5.js app](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/) that fed a real-time web cam stream into [ml5's PoseNet](https://learn.ml5js.org/#/reference/posenet) to identify and classify human body parts (keypoints) and sent identified keypoints to our Arduino to create new interactive experiences.
 
-In this lesson, we will introduce a new ml5 model, called [Handpose](https://learn.ml5js.org/#/reference/handpose), which was ported from [Google's TensorFlow Handpose model](https://github.com/tensorflow/tfjs-models/tree/master/handpose), and use it to control a servo motor. This lesson should further advance your understanding of using [ml5](https://ml5js.org/) and inspire you to think about how we can combine real-time ML with Arduino.
+In this lesson, we will introduce a new ml5 model, called [Handpose](https://learn.ml5js.org/#/reference/handpose),  which precisely tracks the hand and 20 finger keypoints in 3-dimensions, and use it to control a servo motor. This lesson should further advance your understanding of using [ml5](https://ml5js.org/) and inspire you to think about how we can combine real-time ML with Arduino.
+
+<!-- which was ported from [Google's TensorFlow Handpose model](https://github.com/tensorflow/tfjs-models/tree/master/handpose), -->
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/HandPose_Optimized_1200w.mp4" type="video/mp4" />
@@ -69,7 +71,7 @@ The 21 keypoints include four each for the `thumb`, `indexFinger`, `middleFinger
 **Figure.** The HandPose keypoints from the [MediaPipe team](https://google.github.io/mediapipe/solutions/hands).
 {: .fs-1 }
 
-The actual keypoint indices from the TensorFlow implementation:
+The actual keypoint indices from the TensorFlow implementation, which ml5 uses:
 
 {% highlight TypeScript %}
 export const MESH_ANNOTATIONS: {[key: string]: number[]} = {
@@ -136,10 +138,10 @@ The array structure looks like this:
 ]
 {% endhighlight JavaScript %}
 
-To make this more clear, here's a screenshot from Chrome's dev tools showing the `predictions` array (which, again, will always be size 1 because ml5 is currently limited to detecting one simultaneous hand). In the screenshot, I've expanded the predictions array, which shows you the aforementioned high-level structure of `handInViewConfidence`, `boundingBox`, `landmarks`, and `annotations`.
+To make this more clear, here's a screenshot from Chrome's dev tools showing the `predictions` array (which, again, will always be size 1 because ml5 is currently limited to detecting one simultaneous hand). In the screenshot, I've expanded the array to show the aforementioned high-level structure of `handInViewConfidence`, `boundingBox`, `landmarks`, and `annotations`.
 
 ![](assets/images/HandPose_ChromeDevToolsScreenshot.png)
-**Figure.** This figure shows a screenshot of the HandPose `predictions` array and underlying objects as shown in Chrome's dev tools. Right-click and select "Open Image in New Tab" to enlarge. The app running here is our [HandPoseDemo](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandPoseDemo/).
+**Figure.** This figure shows a screenshot of the HandPose `predictions` array and underlying objects as shown in Chrome's dev tools. Right-click and select "Open Image in New Tab" to enlarge. The app running here is our [HandPoseDemo](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandPoseDemo/). You can also explore the model interactively: run [HandPoseDemo](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandPoseDemo/), open `sketch.js` in Sources, put a breakpoint on the `onNewHandPosePrediction()` function, and add the `predictions` array to the `Watch` list. Exploring data structures like this can help advance understanding—and is a great strategy for web dev.
 {: .fs-1 }
 
 ### Example p5.js + ml5.js HandPose demo
@@ -158,7 +160,7 @@ We put the HandPoseDemo up on the p5.js web editor ([link](https://editor.p5js.o
 
 ## Building an ml5 HandPose + Arduino app: HandWaver
 
-To help highlight the potential of real-time ML plus Arduino, let's build a simple robotic hand waver. We will use ml5's HandPose API to control a servo motor, which we will embed on a cardboard crafted figure.
+To help highlight the potential of real-time ML plus Arduino, we will build a simple "robotic" hand waver. We will use ml5's HandPose API to sense the user's hand, which will then control a servo motor embedded on a cardboard-crafted figure.
 
 TODO: sneak preview video
 
@@ -171,20 +173,19 @@ We'll begin by building the web app in [p5.js](https://p5js.org/) and [ml5](http
 
 #### Add in and initialize ml5's HandPose
 
-The ml5 library generally aims to create consistency across their APIs. Thus, the ml5 HandPose API should feel familiar if you followed our previous [PoseNet lesson](ml5js-serial.md). Similar [PoseNet](https://learn.ml5js.org/#/reference/posenet), the `ml5.handpose` constructor takes in three optional arguments (indicated by the `?` prefix):
+The ml5 library generally aims to create consistency across their APIs. Thus, the ml5 HandPose API should feel familiar if you followed our previous [PoseNet lesson](ml5js-serial.md). Similar to [PoseNet](https://learn.ml5js.org/#/reference/posenet), the `ml5.handpose` constructor takes in three optional arguments `video`, `options`, and `callback` (indicated by the `?` prefix):
 
 {% highlight JavaScript %}
 const handpose = ml5.handpose(?video, ?options, ?callback);
 {% endhighlight JavaScript %}
 
-The three optional parameters are `video`, `options`, and `callback`:
 - `video`: An optional [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement), which we can acquire in p5.js simply by calling [`createCapture(VIDEO)`](https://p5js.org/reference/#/p5/createCapture).
 
 - `options`: An optional object of PoseNet configuration properties. See below.
 
 - `callback`: An optional reference to a callback function, which is called when the model is loaded.
 
-The configuration `options` include (with defaults shown). You can and should play with these options based on the needs of your application. These options are also described in the [TensorFlow documentation here](https://github.com/tensorflow/tfjs-models/tree/master/handpose#parameters-for-handposeload).
+The configuration `options` are listed below (with defaults shown). You can and should play with these options based on the needs of your application. 
 
 {% highlight JavaScript %}
 const options = {
@@ -192,23 +193,24 @@ const options = {
   maxContinuousChecks: Infinity, // How many frames to go without running the bounding box detector 
   detectionConfidence: 0.8, // [0, 1] threshold for discarding a prediction
   scoreThreshold: 0.75, // [0, 1] threshold for removing duplicate detections using "non-maximum suppression" 
-  iouThreshold: 0.3, // [0, 1] threshold for deciding whether boxes overlap too much in non-maximum suppression
+  iouThreshold: 0.3, // [0, 1] threshold for deciding whether boxes overlap in non-maximum suppression
 }
 {% endhighlight JavaScript %}
+
+See also: the [TensorFlow documentation here](https://github.com/tensorflow/tfjs-models/tree/master/handpose#parameters-for-handposeload).
 
 So, to initialize and create a `ml5.handpose` object, we write:
 
 {% highlight JavaScript %}
-let handPoseModel;
-let video;
-let curHandPose = null;
-let isHandPoseModelInitialized = false;
+let handPoseModel;                       // stores model returned from ml5.handpose constructor
+let video;                               // the createCapture video stream
+let curHandPose = null;                  // the current hand pose (ml5 supports only one at a time)
+let isHandPoseModelInitialized = false;  // whether the hand pose model is initialized
 
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.hide();
-
   handPoseModel = ml5.handpose(video, onHandPoseModelReady);
 }
 
@@ -218,7 +220,7 @@ function onHandPoseModelReady() {
 }
 {% endhighlight JavaScript %}
 
-Again, this should feel very familiar to our [PoseNet lesson](ml5js-serial.md#initialize-ml5s-posenet).
+Again, this should feel familiar! It's quite similar to our [PoseNet lesson](ml5js-serial.md#initialize-ml5s-posenet) thus far.
 
 #### Subscribe to the new HandPose event
 
@@ -239,19 +241,9 @@ let isHandPoseModelInitialized = false;
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
-  // video.size(width, height);
-
-  handPoseModel = ml5.handpose(video, onHandPoseModelReady);
-
-  // Call onNewHandPosePrediction every time a new handPose is predicted
-  handPoseModel.on("predict", onNewHandPosePrediction);
-
-  // Hide the video element, and just show the canvas
   video.hide();
-
-  boundingBoxColor = color(255, 0, 0);
-  kpColor = color(0, 255, 0, 200);
-  skeletonColor = color(kpColor);
+  handPoseModel = ml5.handpose(video, onHandPoseModelReady);
+  handPoseModel.on("predict", onNewHandPosePrediction);
 }
 
 function onHandPoseModelReady() {
@@ -262,27 +254,29 @@ function onHandPoseModelReady() {
 function onNewHandPosePrediction(predictions) {
   if (predictions && predictions.length > 0) {
     curHandPose = predictions[0];
-    // console.log(curHandPose);
+    console.log(curHandPose);
   } else {
     curHandPose = null;
   }
 }
 {% endhighlight JavaScript %}
 
-You can view, play with, and edit [this code](https://editor.p5js.org/jonfroehlich/sketches/7q-M3hpvrE) in the p5.js online editor. But there's not much there yet!
+You can view, play with, and edit [this code](https://editor.p5js.org/jonfroehlich/sketches/7q-M3hpvr) in the p5.js online editor. But there's not much there yet!
 
 #### Add in drawing code
 
-Now, the fun part! Let's render the 21 HandPose keypoints as circles (in a new function called `drawHand()`), a bounding box with overall hand confidence score (in a function called `drawBoundingBox()`), and some convenience text to tell the user about model initialization.
+Now, the fun part! Let's add drawing code to render three things:
+- the **21 HandPose keypoints** as circles (in a new function called `drawHand()`), 
+- a **bounding box** with overall hand confidence score (in a function called `drawBoundingBox()`), and 
+- some **convenience text** to tell the user about model initialization ("Waiting for model to load...").
 
-First, let's update the `draw()` function:
+First, let's update the `draw()` function to show some convenience text when the model is still loading and call drawing functions for the hand keypoints and bounding box (if the hand was detected):
 
 {% highlight JavaScript %}
 function draw() {
   image(video, 0, 0, width, height);
 
-  if(!isHandPoseModelInitialized){
-    // Show user initialization text
+  if(!isHandPoseModelInitialized){ // if hand model not yet initialized, show "model loading" text
     background(100);
     push();
     textSize(32);
@@ -293,28 +287,39 @@ function draw() {
     pop();
   }
 
-  if(curHandPose){
+  if(curHandPose){ // draw hand if detected
     drawHand(curHandPose);
     drawBoundingBox(curHandPose);
   }
 }
 {% endhighlight JavaScript %}
 
+It should look something like this:
+
+![](assets/images/WaitingForHandPoseModelToLoadScreenshot.png)
+**Figure.** Showing what "Waiting for HandPose model to load..." text looks like in the [p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/YVRlHlR0I).
+{: .fs-1 }
+
 Now, let's add the `drawHand(handPose)` function. We will iterate through all 21 landmarks (keypoints) and draw a green circle at their x,y position (stored in `landmark` index 0 and 1 respectively).
 
 {% highlight JavaScript %}
 function drawHand(handPose) {
 
-  // Draw keypoints. While each keypoints supplies a 3D point (x,y,z), we only draw
-  // the x, y point.
+  // Draw keypoints. While each keypoints supplies a 3D point (x,y,z), we only draw the x, y point.
   for (let j = 0; j < handPose.landmarks.length; j += 1) {
     const landmark = handPose.landmarks[j];
-    fill(0, 255, 0, 200);
+    fill(0, 255, 0, 200); // green with some opacity
     noStroke();
-    circle(landmark[0], landmark[1], 10);
+    circle(landmark[0], landmark[1], 10); // landmark[0] is x pos, landmark[1] is y pos
   }
 }
 {% endhighlight JavaScript %}
+
+Your hand should now have green circles drawn on the landmarks like this:
+
+![](assets/images/HandPoseKeypointsDrawninGreen.png)
+**Figure.** Drawing the keypoints on the hand. Screenshot from the [p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/YVRlHlR0I).
+{: .fs-1 }
 
 Lastly, let's add a `drawBoundingBox(handPose)` function that renders a rectangle for the HandPose `boundingBox` object along with its `handInViewConfidence` score:
 
@@ -337,6 +342,12 @@ function drawBoundingBox(handPose){
 }
 {% endhighlight JavaScript %}
 
+Here's a screenshot with the keypoints, bounding box, and confidence:
+
+![](assets/images/HandposeKeypointsBoundingBoxAndConfidence.png)
+**Figure.** Drawing the keypoints, the bounding box, and the hand confidence score. Screenshot from the [p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/YVRlHlR0I).
+{: .fs-1 }
+
 You can view, edit, and play with [this code](https://editor.p5js.org/jonfroehlich/sketches/YVRlHlR0I) in the p5.js online editor.
 
 #### Add in web serial code
@@ -347,11 +358,12 @@ For the final step, we'll add in code to transmit the `palmBase` normalized x po
 function onNewHandPosePrediction(predictions) {
   if (predictions && predictions.length > 0) {
     curHandPose = predictions[0];
-    if(serial.isOpen()){
+    if(serial.isOpen()){ // only send serial data if serial is open
       // Grab the palm's x-position and normalize it to [0, 1]
-      let palmBase = curHandPose.landmarks[0];
-      let palmXNormalized = palmBase[0] / width;
-      let outputData = nf(palmXNormalized, 1, 4); 
+      const palmBase = curHandPose.landmarks[0];
+      const palmBaseX = palmBase[0]; // x is at palmBase[0], y is at palmBase[1]
+      const palmXNormalized = palmBaseX / width; // normalize x by dividing by canvas width
+      const outputData = nf(palmXNormalized, 1, 4); 
       serial.writeLine(outputData); 
     }
   } else {
@@ -361,6 +373,8 @@ function onNewHandPosePrediction(predictions) {
 {% endhighlight JavaScript %}
 
 And that's it! Because our [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) already supports connecting to a serial device by clicking on the canvas (by default) and/or auto-connecting to previously approved web serial devices, we are all set.
+
+TODO: consider having video?
 
 The full code is [here](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu).
 
@@ -378,11 +392,11 @@ We're going to build up the Arduino side step-by-step. There are five main steps
 
 #### Initial servo motor circuit and Arduino test program
 
-This [Adafruit lesson](https://learn.adafruit.com/adafruit-arduino-lesson-14-servo-motors) by Simon Monk provides a nice brief introduction to servo motors.
+As a quick introduction to servo motors, please read this [Adafruit lesson](https://learn.adafruit.com/adafruit-arduino-lesson-14-servo-motors) by Simon Monk. Building on that lesson, we'll create a simple circuit that allows a user to control the servo motor position with a potentiometer. More specifically, we'll read in the potentiometer value on Pin `A0` using [`analogRead()`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/), convert it to an angle between 0 - 180, and then write out the angle to the servo motor.
 
-TODO: circuit diagram
-
-For the code, we'll read in the potentiometer value on Pin `A0` using [`analogRead()`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/), convert it to an angle between 0 - 180, and then write out the angle to the servo motor.
+![](assets/images/BasicServoPlusPotCircuit_ArduinoLeonardo.png)
+**Figure.** Basic servo motor circuit with servo pulse pin hooked to Arduino's Pin 9 and the potentiometer hooked to Pin `A0`. Diagram made in Fritzing and PowerPoint.
+{: .fs-1 }
 
 The code, in full, is:
 
@@ -415,7 +429,7 @@ void loop()
 **Code.** This code is in our GitHub as [ServoPot.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPot/ServoPot.ino).
 {: .fs-1 }
 
-Here's a video demonstration.
+Here's a video demonstration showing a slightly modified Arduino circuit and sketch (called [ServoPotOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPotOLED/ServoPotOLED.ino)) with an OLED display that outputs the current servo angle.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ServoMotorWithStick_TrimmedAndOptimized.mp4" type="video/mp4" />
@@ -425,13 +439,76 @@ Here's a video demonstration.
 
 #### Update code to accept serial input
 
-TODO: lots of ways you could do this with accepting 0 - 180, 0 - 255, or 0-1. We'll do latter. Then test with serial monitor.
+Let's update our code to set the servo motor angle based on **serial input** rather than the potentiometer. We're going to write slightly more flexible parsing code than usual. In this case, we'll accept either line delimited strings of integer values ranging from 0 - 180, inclusive, or float values ranging from 0-1, inclusive. We'll determine whether the serial transmitter sent an integer *vs.* a float by looking for a decimal point in the string.
 
-Show video.
+The full code:
+
+{% highlight C++ %}
+#include <Servo.h> 
+
+const int SERVO_OUTPUT_PIN = 9;
+const int MAX_ANALOG_VAL = 1023;
+const int MIN_SERVO_ANGLE = 0;
+const int MAX_SERVO_ANGLE = 180;
+
+Servo _servo; 
+int _serialServoAngle = -1;
+ 
+void setup() 
+{ 
+  Serial.begin(115200);
+  _servo.attach(SERVO_OUTPUT_PIN);  
+} 
+ 
+void loop() 
+{ 
+  // Check if serial data exists, if so read it in
+  if(Serial.available() > 0){
+    // Read data off the serial port until we get to the endline delimiter ('\n')
+    // Store all of this data into a string
+    String rcvdSerialData = Serial.readStringUntil('\n'); 
+
+    // We accept either integers between 0 and 180 or floats. Floats must have a period to be recognized
+    int indexOfDecimal = rcvdSerialData.indexOf('.');
+    if(indexOfDecimal != -1){
+      float serialServoAngleF = rcvdSerialData.toFloat();
+      _serialServoAngle = (int)(serialServoAngleF * MAX_SERVO_ANGLE); // truncate
+    }else{
+      _serialServoAngle = rcvdSerialData.toInt();
+    }
+
+    _serialServoAngle = constrain(_serialServoAngle, MIN_SERVO_ANGLE, MAX_SERVO_ANGLE);
+
+    // Echo back data
+    Serial.print("# Arduino Received: '");
+    Serial.print(rcvdSerialData);
+    Serial.print("' Converted to: ");
+    Serial.println(_serialServoAngle);
+
+    // Set new servo angle
+    _servo.write(_serialServoAngle);
+  }
+} 
+{% endhighlight C++ %}
+
+**Code.** The full code is here [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
+{: .fs-1 }
+
+TODO: Show video of [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) with Serial Monitor.
+
+**Video.** A demonstration of controlling the servo motor from serial input. This video is using a slightly modified sketch with OLED support called [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) but is functionally equivalent to [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
+{: .fs-1 }
+
+We also made a slightly modified version of [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino) and [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) that allows the user to choose between whether to use the potentiometer for control or serial input: [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino) and [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino)
+
+TODO: Show video of ServoPotWithSerialInOLED.ino with Serial Monitor
 
 #### Now add in basic p5.js test app
 
 Test code with simple p5.js web serial app. Use mouse x-position on canvas.
+
+Here's the full app:
+https://editor.p5js.org/jonfroehlich/sketches/iwbGN0wkj
 
 Show video.
 
@@ -441,7 +518,15 @@ Test and show video.
 
 #### Create interesting form
 
-In this case, I worked with a special kindergartner to create a form.
+Now, another fun, creative part: we need to create an interesting form for the servo motor. Remember, the servo motor will move in response to your hand's x position. So, you could:
+
+- Create the statue of liberty moving her torch
+- Create a cardboard crafted LeBron James moving his arm to block Andre Iguodala in the 2016 NBA Finals ([video](https://youtu.be/-zd62MxKXp8)). Now known simply as "[The Block.](https://en.wikipedia.org/wiki/The_Block_(basketball))"
+- Create a lightsaber wielding Darth Vader
+- The Queen of England waving back at you
+- ... your ideas here! ...
+
+In this case, I worked with a kindergartner and preschooler to create a form, which consists of a paper-crafted mountain scene and stick person they call "Henry the Tape Man."
 
 <!-- TODO: create a HandPoseDemo 3D? -->
 

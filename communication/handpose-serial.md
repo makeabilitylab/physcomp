@@ -542,7 +542,7 @@ We also made a modified version of [ServoSerialIn.ino](https://github.com/makeab
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ServoPotWithSerialInOLED-SerialMonitor_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** A demonstration of [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino). You can use the button to change between two input modes to control the servo motor: the potentiometer and serial input. In the video, we switch between potentiometer-based control and serial control using the Serial Monitor. We also created a non-OLED version of the code called [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino).
+**Video.** A demonstration of [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino). You can use the button to change between two input modes to control the servo motor: the potentiometer and serial input. In the video, note how we press the button to switch between potentiometer-based control and serial control. For the latter, we send new values using Serial Monitor. We also created a non-OLED version of the code called [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino).
 {: .fs-1 }
 
 #### Now add in basic p5.js test app
@@ -613,9 +613,13 @@ You can view, edit, and play with the app in the [p5.js web editor](https://edit
 
 #### Test with HandWaver p5.js app
 
-If the simple p5.js x-position web app works with your Arduino sketch, then the HandWaver app should too. So, return to your HandWaver code (here's our version on the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu) and in GitHub. TODO: add in GitHub link).
+If the simple p5.js x-position web app works with your Arduino sketch, then the HandWaver app should too. So, return to your HandWaver code—here's our version on the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu) and on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/HandWaver), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/HandWaver)).
 
-TODO: show video.
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ServoPotWithSerialInOLED-HandWaver_TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of [HandWaver](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu) with [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino).
+{: .fs-1 }
 
 #### Create interesting form
 

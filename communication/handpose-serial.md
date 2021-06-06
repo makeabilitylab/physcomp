@@ -352,19 +352,36 @@ You can view, edit, and play with [this code](https://editor.p5js.org/jonfroehli
 
 #### Add in web serial code
 
-For the final step, we'll add in code to transmit the `palmBase` normalized x position [0, 1] via web serial. Update the `onNewHandPosePrediction` function to:
+For the final step, we'll add in code to transmit the `palmBase` normalized x position [0, 1] via web serial. To avoid saturating web serial with data, we will also limit our transmission rate to ~20Hz (one transmission every 50ms). Lastly, let's also add in drawing code to show `palmBase` information to the screen (useful for debugging!). 
+
+First, add in a global variable: 
+{% highlight JavaScript %}
+let palmXNormalized = 0;
+let timestampLastTransmit = 0;
+const MIN_TIME_BETWEEN_TRANSMISSIONS_MS = 50; // 50 ms is ~20 Hz
+{% endhighlight JavaScript %}
+
+Then update the `onNewHandPosePrediction` function to calculate and transmit `palmXNormalized`:
 
 {% highlight JavaScript %}
 function onNewHandPosePrediction(predictions) {
   if (predictions && predictions.length > 0) {
     curHandPose = predictions[0];
-    if(serial.isOpen()){ // only send serial data if serial is open
-      // Grab the palm's x-position and normalize it to [0, 1]
-      const palmBase = curHandPose.landmarks[0];
-      const palmBaseX = palmBase[0]; // x is at palmBase[0], y is at palmBase[1]
-      const palmXNormalized = palmBaseX / width; // normalize x by dividing by canvas width
+    // Grab the palm's x-position and normalize it to [0, 1]
+    const palmBase = curHandPose.landmarks[0];
+    const palmBaseX = palmBase[0]; // x is at palmBase[0], y is at palmBase[1]
+    palmXNormalized = palmBaseX / width; // normalize x by dividing by canvas width
+
+    if(serial.isOpen()){
       const outputData = nf(palmXNormalized, 1, 4); 
-      serial.writeLine(outputData); 
+      const timeSinceLastTransmitMs = millis() - timestampLastTransmit;
+      if(timeSinceLastTransmitMs > MIN_TIME_BETWEEN_TRANSMISSIONS_MS){
+        serial.writeLine(outputData); 
+        timestampLastTransmit = millis();
+      }else{
+        console.log("Did not send  '" + outputData + "' because time since last transmit was " 
+                    + timeSinceLastTransmitMs + "ms");
+      }
     }
   } else {
     curHandPose = null;
@@ -372,9 +389,30 @@ function onNewHandPosePrediction(predictions) {
 }
 {% endhighlight JavaScript %}
 
+Finally, update the `draw()` function to draw `palmBase` info to the screen:
+
+{% highlight JavaScript %}
+function draw() {
+  ...
+  if(curHandPose){
+    ...
+    // draw palm info
+    noFill();
+    stroke(255);
+    const palmBase = curHandPose.landmarks[0];
+    circle(palmBase[0], palmBase[1], kpSize); // draw circle around palm keypoint
+    noStroke();
+    fill(255);
+    text(nf(palmXNormalized, 1, 4), palmBase[0] + kpSize, palmBase[1] + textSize() / 2);
+  }
+}
+{% endhighlight JavaScript %}
+
 And that's it! Because our [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) already supports connecting to a serial device by clicking on the canvas (by default) and/or auto-connecting to previously approved web serial devices, we are all set.
 
-TODO: consider having video?
+![](assets/images/ScreenshotOfHandWaverFullRunningInP5OnlineEditor.png)
+**Figure.** A screenshot of HandWaver running in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu). The code is also on GitHub (live page, code). TODO.
+{: .fs-1 }
 
 The full code is [here](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu).
 
@@ -434,7 +472,7 @@ Here's a video demonstration showing a slightly modified Arduino circuit and ske
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ServoMotorWithStick_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** A demonstration of the servo circuit with potentiometer. The video is showing [ServoPotOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPotOLED/ServoPotOLED.ino), which is functionally equivalent to the code above ([ServoPot.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPot/ServoPot.ino)) but just displays the output angle on the OLED.
+**Video.** A demonstration of the servo circuit with potentiometer. The video is showing [ServoPotOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPotOLED/ServoPotOLED.ino), which is functionally equivalent to the code above ([ServoPot.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPot/ServoPot.ino)) but includes OLED support. Here, the OLED displays the current servo angle.
 {: .fs-1 }
 
 #### Update code to accept serial input
@@ -499,34 +537,99 @@ TODO: Show video of [ServoSerialInOLED.ino](https://github.com/makeabilitylab/ar
 **Video.** A demonstration of controlling the servo motor from serial input. This video is using a slightly modified sketch with OLED support called [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) but is functionally equivalent to [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
 {: .fs-1 }
 
-We also made a slightly modified version of [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino) and [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) that allows the user to choose between whether to use the potentiometer for control or serial input: [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino) and [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino)
+We also made a modified version of [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino) and [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) that allows the user to choose between whether to use the potentiometer or serial input to control the servo motor: [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino) and [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino). You can toggle between potentiometer *vs.* serial input using the button.
 
-TODO: Show video of ServoPotWithSerialInOLED.ino with Serial Monitor
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ServoPotWithSerialInOLED-SerialMonitor_TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino). You can use the button to change between two input modes to control the servo motor: the potentiometer and serial input. In the video, we switch between potentiometer-based control and serial control using the Serial Monitor. We also created a non-OLED version of the code called [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino).
+{: .fs-1 }
 
 #### Now add in basic p5.js test app
 
-Test code with simple p5.js web serial app. Use mouse x-position on canvas.
+To more easily test our Arduino sketch with [p5](https://p5js.org/)), let's build a simple web serial app to control the servo through the web browser. In this case, we'll read the `x` position of the mouse, normalize it to [0, 1], and transmit it over serial. If this works, then the final step will be to integrate our HandWaver app—which should be straightforward.
 
-Here's the full app:
-https://editor.p5js.org/jonfroehlich/sketches/iwbGN0wkj
+Start by making a of copy [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate), if you're using VSCode, or [Serial Template](https://editor.p5js.org/jonfroehlich/sketches/vPfUvLze_C), if you're using p5.js. Rename your project to something like `XMouseSerialOut`—but the name is up to you, of course.
 
-Show video.
+Now, we need to implement three things:
+- **Sense and normalize** the `x` mouse position. This is easy, we can always grab the current `x` mouse position using the global `mouseX` variable in p5.js and the `mouseMoved()` function is called whenever the user's mouse moves
+- **Transmit** the normalized `x` position over web serial
+- **Draw** x mouse information to canvas. This is optional but useful.
 
-#### Test with HandPose p5.js app
+##### Sense, normalize, and transmit x mouse position
 
-Test and show video.
+The p5.js function [`mouseMoved()`](https://p5js.org/reference/#/p5/mouseMoved) is called every time the mouse moves (as long as the mouse button is not pressed). Let's put our mouse-related code there.
+
+First, create two global variables for mouse tracking:
+
+{% highlight JavaScript %}
+let xMouseConstrained = 0;
+let xMouseNormalized = 0;
+{% endhighlight JavaScript %}
+
+Now, implement the `mouseMoved()` function:
+
+{% highlight JavaScript %}
+function mouseMoved(){
+  xMouseConstrained = constrain(mouseX, 0, width); // get current x mouse pos
+  xMouseNormalized = xMouseConstrained / width; // normalize x position
+  
+  if(serial.isOpen()){
+    serial.writeLine(nf(xMouseNormalized, 0, 4)); // write out normalized value, if serial is connected/open
+  }
+}
+{% endhighlight JavaScript %}
+
+##### Add in draw code for x mouse position
+
+Finally, add in drawing code to display a gray line for the current x mouse position and large text for the normalized value:
+
+{% highlight JavaScript %}
+function draw() {
+  background(100);
+  
+  // draw vertical line at x position
+  noFill();
+  stroke(150);
+  line(xMouseConstrained, 0, xMouseConstrained, height);
+  
+  // draw normalized x value
+  textSize(80);
+  fill(255);
+  noStroke();
+  
+  textAlign(CENTER, CENTER);
+  text(nf(xMouseNormalized, 0, 4), width / 2, height / 2);
+}
+{% endhighlight JavaScript %}
+
+You can view, edit, and play with the app in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/iwbGN0wkj) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/XMouseSerialOut)).
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/XMouseP5jsAppWithServoSerial_TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of a small p5.js test app called [XMouseSerialOut](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/) ([code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/XMouseSerialOut)), which outputs a normalized mouse `x` position to serial. Code running on Arduino is [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino) but many other programs in our GitHub repo would work like [ServoSerialIn](https://github.com/makeabilitylab/arduino/tree/master/Serial/ServoSerialIn).
+{: .fs-1 }
+
+#### Test with HandWaver p5.js app
+
+If the simple p5.js x-position web app works with your Arduino sketch, then the HandWaver app should too. So, return to your HandWaver code (here's our version on the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu) and in GitHub. TODO: add in GitHub link).
+
+TODO: show video.
 
 #### Create interesting form
 
 Now, another fun, creative part: we need to create an interesting form for the servo motor. Remember, the servo motor will move in response to your hand's x position. So, you could:
 
-- Create the statue of liberty moving her torch
-- Create a cardboard crafted LeBron James moving his arm to block Andre Iguodala in the 2016 NBA Finals ([video](https://youtu.be/-zd62MxKXp8)). Now known simply as "[The Block.](https://en.wikipedia.org/wiki/The_Block_(basketball))"
 - Create a lightsaber wielding Darth Vader
-- The Queen of England waving back at you
+- Create a Statue of Liberty model moving her torch
+- Create a cardboard-crafted LeBron James moving his arm to block Andre Iguodala in the 2016 NBA Finals ([video](https://youtu.be/-zd62MxKXp8)). Now known simply as "[The Block.](https://en.wikipedia.org/wiki/The_Block_(basketball))"
+- Create a cardboard-crafted Queen of England waving back at you
 - ... your ideas here! ...
 
-In this case, I worked with a kindergartner and preschooler to create a form, which consists of a paper-crafted mountain scene and stick person they call "Henry the Tape Man."
+In this case, I worked with a kindergartner and preschooler to create a paper-crafted mountain scene and stick person we call "Henry, the Tape Man."
+
+TODO: insert picture of Henry
 
 <!-- TODO: create a HandPoseDemo 3D? -->
 

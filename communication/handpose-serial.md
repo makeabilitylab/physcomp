@@ -603,7 +603,7 @@ function draw() {
 }
 {% endhighlight JavaScript %}
 
-You can view, edit, and play with the app in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/iwbGN0wkj) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/XMouseSerialOut)).
+You can view, edit, and play with the [XMouseSerialOut](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/) app in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/iwbGN0wkj) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/XMouseSerialOut)).
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/XMouseP5jsAppWithServoSerial_TrimmedAndOptimized.mp4" type="video/mp4" />

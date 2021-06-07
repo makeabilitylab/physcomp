@@ -157,9 +157,13 @@ To demonstrate the ml5.js HandPose API and how to step through the data structur
 - the `handInViewConfidence` score, which we draw above the "tight" bounding box
 - the 21 `landmarks` (keypoints) for the `thumb`, `indexFinger`, `middleFinger`, `ringFinger`,  `pinky`, and `palmBase` along with text labels
 
-This data structure is similar but not identical to [PoseNet](ml5js-serial.md#the-posenet-data-structure)—one key difference is that unlike PoseNet, the individual keypoints do not include specific confidence scores.
+This data structure is similar but not identical to [PoseNet](ml5js-serial.md#the-posenet-data-structure)—one key difference is that unlike PoseNet, the individual keypoints do not include specific confidence scores. Here's a quick video demo.
 
-<!-- TODO: record and show video like we did for PoseNet here -->
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/HandPoseDemo-GrayBackdrop_TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
+**Video.** The [HandPoseDemo](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandPoseDemo/) ([code](https://github.com/makeabilitylab/p5js/tree/master/ml5js/HandPose/HandPoseDemo) on GitHub). You can also view, edit, and play with the code in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/Nn4pXTpbu).
+{: .fs-1 }
 
 We put the HandPoseDemo up on the p5.js web editor ([link](https://editor.p5js.org/jonfroehlich/sketches/Nn4pXTpbu)). We encourage you to view the code, edit it, and play. The demo is also available on GitHub ([live page](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandPoseDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/ml5js/HandPose/HandPoseDemo)).
 
@@ -539,8 +543,9 @@ void loop()
 **Code.** The full code is here [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
 {: .fs-1 }
 
-TODO: Show video of [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) with Serial Monitor.
-
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/ServoSerialInOLED-Pot-TrimmedAndOptimized.mp4" type="video/mp4" />
+</video>
 **Video.** A demonstration of controlling the servo motor from serial input. This video is using a slightly modified sketch with OLED support called [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) but is functionally equivalent to [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
 {: .fs-1 }
 

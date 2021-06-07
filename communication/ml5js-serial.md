@@ -225,7 +225,7 @@ Here's a quick sneak preview. Play close attention to the OLED display, which is
 
 First, let's start by building the p5.js + ml5.js NoseTracker. As we've done in previous lessons, begin by copying [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate). If you're using VSCode, copy [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) and rename the folder to `NoseTracker`. If you're using the p5.js online editor, simply open [Serial Template](https://editor.p5js.org/jonfroehlich/sketches/vPfUvLze_C) and rename your project to `NoseTracker`.
 
-#### Initialize ml5's PoseNet
+#### Add in and initialize ml5's PoseNet
 
 Now, let's add in ml5.js' PoseNet. The `ml5.poseNet` object has [two primary constructors](https://learn.ml5js.org/#/reference/posenet?id=initialize)—one which uses a live `video` feed, like from a webcam and the other which does not. Both constructors use multiple *optional* arguments (indicated by the `?` prefix in the function's parameter list):
 
@@ -238,11 +238,11 @@ const poseNet = ml5.poseNet(?callback, ?options);
 {% endhighlight JavaScript %}
 
 The parameters are:
-* `video`: An optional [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement). This is easy to acquire in p5.js, we simply call [`createCapture(VIDEO)`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement). Don't worry, we'll show an example below.
-
-* `callback`: An optional reference to a callback function, which is called when the model is loaded.
+* `video`: An optional [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement). This is easy to acquire in p5.js, we simply call [`createCapture(VIDEO)`](https://p5js.org/reference/#/p5/createCapture). Don't worry, we'll show an example below.
 
 * `options`: An optional object of PoseNet configuration properties. See below.
+
+* `callback`: An optional reference to a callback function, which is called when the model is loaded.
 
 The *options* object is formatted as follows. If no options object is passed, the given defaults below are used. For more on what these properties mean, please see the [ml5.js PoseNet properties reference](https://learn.ml5js.org/#/reference/posenet?id=properties)e or this [TensorFlow PoseNet article](https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5) (scroll to the section called "Part 2a: Single-person Pose Estimation").
 

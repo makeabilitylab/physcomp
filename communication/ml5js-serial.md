@@ -20,7 +20,15 @@ usetocbot: true
 
 In this lesson, we will extend our learning on [web serial](web-serial.md) and [p5.js](p5js-serial.md) to incorporate a machine learning (ML) framework called [ml5.js](https://ml5js.org/). While integrating machine learning into our designs may *seem* intimidating, just as p5.js makes it easier to play and experiment with interactive graphics in JavaScript so too does [ml5.js](https://ml5js.org/) make it easier to play and experiment with machine learning. It's really quite amazing!
 
-First, let's start with some background on machine learning frameworks before diving into building with [ml5.js](https://ml5js.org/).
+For example, with only a few lines of JavaScript code and some slight modifications to our [FlappyBird.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino) Arduino sketch (updated to [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino)), we can play FlappyBird with our nose using a real-time web camera stream and [ml5's PoseNet library](https://learn.ml5js.org/#/reference/posenet).
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/FlappyBirdNoseTracker_Short_1000w.mp4" type="video/mp4" />
+</video>
+**Video.** Playing Flappy Bird on the Arduino Leonardo by using my nose using p5.js, [ml5.js](https://ml5js.org/), and [web serial](web-serial.md). The p5.js app is called Nose Tracker ([p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2), GitHub [live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), GitHub [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino).
+{: .fs-1 }
+
+In this lesson, we'll show how to do this and more. But first, let's start with some background on machine learning frameworks before diving into [ml5.js](https://ml5js.org/) and ml5+Arduino more specifically.
 
 ## Machine learning frameworks
 
@@ -597,6 +605,17 @@ Here's a longer video demonstration of the full p5.js + Arduino NoseTracker app:
 </video>
 **Video.** The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino code is on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino). You can ignore the two momentary buttons on the breadboard—we don't use them here.
 {: .fs-1 }
+
+## Introducing FlappyNose
+
+Using the same p5+ml5 code, NoseTracker ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)), we can build lots of interesting physical computing experiences. As one example, we can modify the [FlappyBird.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino) code we introduced in our [OLED Lesson](../advancedio/oled.md) to use **serial input** rather than **digital input** (a button press) to control flapping. We'll call this new incarnation: FlappyNose! :)
+
+In this case, we'll draw a menu screen that asks the user to select the "flapping" control—either serial or button. If serial is selected, the Arduino sketch expects a text-encoded comma separated line of x,y positions—just like what the [NoseTracker](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/) page transmits—however, we only use the y position in the game to set the "bird" position. See the video below.
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/AktNXq-cflw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+**Video.** A full demonstration of "FlappyNose". Watch me get a high score of 33 after a few tries. :) The p5.js app is available on the[p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or in GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino).
+{: .fs-1 }
+
 
 <!-- TODO: You could imagine modifying this application to control a game.
 

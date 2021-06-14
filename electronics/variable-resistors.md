@@ -299,6 +299,15 @@ Here is an example DIY slider potentiometer I made out of similar materials: car
 **Video.** A lo-fi slider potentiometer made out of some cardboard, paper, copper tape-wrapped cardboard (for the slider), and a 12B pencil sketch (for the resistive track).
 {: .fs-1 }
 
+### DIY lo-fi electronics
+There are lots of great resources for building lo-fi sensors, buttons, and connectors using everyday craft materials like tinfoil, cardboard, and paper clips. See these resources to help kickstart your brainstorming!
+
+- The [KOBAKANT DIY Wearable Technology website](https://www.kobakant.at/DIY/) by Mika Satomi and Hannah Perner-Wilson has a wonderful set of resources for crafting your own electronic components, including [sensors](https://www.kobakant.at/DIY/?cat=26), [actuators](https://www.kobakant.at/DIY/?cat=28), [traces](https://www.kobakant.at/DIY/?cat=38), and [connectors](https://www.kobakant.at/DIY/?cat=32).
+
+- Similarly, the ["kit-of-no-parts" website ](http://konp.plusea.at/) describes multiple methods for handcrafting electronics and sensors.
+
+- [Scrappy Circuits](https://www.kickstarter.com/projects/deweymac/scrappy-circuits) by Michael Carroll covers cardboard-based circuits. See [their Twitter](https://twitter.com/ScrappyCircuits) for more ideas.
+
 ## Resources
 
 - [Chapter 8, Variable Resistors](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch08.html), Hughes, *Practical Electronics: Components and Techniques*, O'Reilly Media, 2015 

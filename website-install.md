@@ -69,6 +69,7 @@ The problem is that webrick no longer comes with Ruby 3.0. To solve this, I simp
 I have tried to get Jekyll installed in Windows in the past and failed. It's unfortunately complicated. Indeed, the [Jekyll website](https://jekyllrb.com/docs/installation/windows/) says that Windows is not officially supported:
 
 > While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks.
+{: .fs-4 }
 
 However, here's how I eventually got it to work. These instructions have since been replicated by me (Jon) and Liang. Yay!
 
@@ -77,7 +78,19 @@ However, here's how I eventually got it to work. These instructions have since b
 
 Specifically, I downloaded and installed the [Ruby+Devkit 2.7.X (x64) installer](https://rubyinstaller.org/downloads/), which according to the RubyInstaller website "provides the biggest number of compatible gems and installs the MSYS2 Devkit alongside Ruby, so gems with C-extensions can be compiled immediately."
 
-When the Ruby Installer command prompt asks you which option to install, just press 'Enter'.
+When the Ruby Installer command prompt asks you which option to install (see screenshot below), just press 'Enter'.
+
+![Shows a prompt from the Ruby Installer. Just hit Enter](assets/images/RubyInstaller_JustHitEnter.png)
+**Figure.** When prompted, just hit enter to accept defaults.
+{: .fs-1 }
+
+You may be prompted a second time. Again, just press 'Enter'.
+
+![Shows a prompt from the Ruby Installer. Just hit Enter](assets/images/RubyInstaller_Question2_JustHitEnter.png)
+**Figure.** If prompted again, just hit enter to accept defaults.
+{: .fs-1 }
+
+When the Ruby Installer finishes, it just disappears. So, on to the next step!
 
 #### Run 'gem install jekyll'
 **Second**, I then opened `Windows Powershell` and typed `gem install jekyll`:
@@ -96,8 +109,22 @@ Done installing documentation for mercenary, jekyll after 16 seconds
 2 gems installed
 ```
 
+Here's a screenshot:
+
+![Screenshot of the gem install jekyll command](assets/images/GemInstallJekyllScreenshot.png)
+**Figure.** A screenshot of PowerShell running the `gem install jekyll` command.
+{: .fs-1 }
+
 #### Run 'gem install github-pages'
-**Third**, I then tried to install `github-pages` via: `gem install github-pages`. This worked well on some of our Windows systems but others failed with. If this succeeded for you, great! Skip to the next step. If not, check out the error below and see if it matches your problem (or contact us to help and copy/paste the error outcome in your email or Slack message).
+**Third**, I then tried to install `github-pages` via: `gem install github-pages`. So, run:
+
+```
+> gem install github-pages
+```
+
+This worked well on some of our Windows systems but others failed with. If this succeeded for you, great! Skip to the next step. If not, check out the error below and see if it matches your problem (or contact us to help and copy/paste the error outcome in your email or Slack message).
+
+##### Handling error installing github-pages
 
 ```
 ERROR:  Error installing github-pages:
@@ -108,7 +135,7 @@ ERROR:  Error installing github-pages:
 So, I tried:
 
 ```
-gem install nokogiri -v 1.10.9
+> gem install nokogiri -v 1.10.9
 ERROR:  Error installing nokogiri:
         The last version of nokogiri (= 1.10.9) to support your Ruby & RubyGems was 1.10.9. Try installing it with `gem install nokogiri -v 1.10.9`
         nokogiri requires Ruby version >= 2.3, < 2.7.dev. The current ruby version is 2.7.0.0.
@@ -117,7 +144,7 @@ ERROR:  Error installing nokogiri:
 But this also failed. And given that I have no idea how hard it would be to downgrade Ruby and whether that would wreck other dependences, I searched the Internet and found this [Issue](https://github.com/sparklemotion/nokogiri/issues/1961) on the Nokogiri GitHub. So, then I tried [this](https://github.com/sparklemotion/nokogiri/issues/1961#issuecomment-581851368):
 
 ```
-gem inst nokogiri --pre
+> gem inst nokogiri --pre
 Fetching nokogiri-1.11.0.rc2-x64-mingw32.gem
 Nokogiri is built with the packaged libraries: libxml2-2.9.10, libxslt-1.1.34, zlib-1.2.11, libiconv-1.15.
 Successfully installed nokogiri-1.11.0.rc2-x64-mingw32
@@ -141,6 +168,8 @@ ERROR:  Error installing github-pages:
 So, then I just skipped to the final step and ran `bundle install` and things worked. Hope it does for you too!
 
 #### Run 'bundle install'
+![Screenshot of bundle install command](assets/images/BundleInstallScreenshot.png)
+
 From the shell, change directories to `physcomp`. On my machine:
 
 ```
@@ -159,17 +188,45 @@ Using i18n 0.9.5
 Fetching minitest 5.14.4
 Installing minitest 5.14.4
 ...
+Using github-pages 218
+Fetching wdm 0.1.1
+Installing wdm 0.1.1 with native extensions
+Bundle complete! 2 Gemfile dependencies, 100 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
 ```
 
 You've done it!
 
 ## Running the website locally
+
 Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll), you can open terminal in VSCode and type:
 
 ```
 > bundle exec jekyll serve 
 ```
+
 The website should then be available at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).
+
+### Bundle exec fails in VSCode terminal
+
+If you receive an error like the following, you may need to *restart* your computer (not just VSCode). 
+
+![](assets/images/BundleExecJekyllServeFailsInVSCodeScreenshot.png)
+
+```
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS D:\Git\physcomp> bundle exec jekyll serve 
+bundle : The term 'bundle' is not recognized as the name of a cmdlet, function, script file, or operable program. Check 
+the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ bundle exec jekyll serve
++ ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (bundle:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+```
+
+To resolve this error, simply restart your machine, reopen VSCode, and try again. That fixed it for me!
 
 ## Developing the website
 1. Download [VS Code](https://code.visualstudio.com/Download)

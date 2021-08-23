@@ -68,6 +68,15 @@ Here are some example hardware kits that we provide students in our classes.
 
 This website began as a response to teaching physical computing remotely due to Covid-19. My initial (humble) goal is simply to translate my lectures slides to more readable online versions; however, I am hopeful that it will expand further.
 
+All code on this website is open source, including the [website itself](https://github.com/makeabilitylab/physcomp). If you'd like to contribute, please read the [web dev setup guide here](website-install.md), start coding, and make a pull request!
+
+### Code links
+
+For our tutorials, we often link to example code in the following repositories:
+
+- [The Makeability Lab Arduino repository](https://github.com/makeabilitylab/arduino)
+- [The Makeability Lab p5js repository](https://github.com/makeabilitylab/p5js)
+
 ### Acknowledgments
 
 Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted and were created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview), and [Microsoft PowerPoint](https://products.office.com/en-us/powerpoint). For some Fritzing diagrams, we use the [Adafruit Fritzing Library](https://learn.adafruit.com/using-the-adafruit-library-with-fritzing?view=all).

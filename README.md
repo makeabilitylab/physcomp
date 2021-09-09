@@ -21,7 +21,7 @@ permalink: /
 
 Welcome 👋!
 
-This website a place to learn and explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. It was built to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
+This website is a place to learn and explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. It was built to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but may also be more broadly useful.
 
 ## Why learn physical computing?
 

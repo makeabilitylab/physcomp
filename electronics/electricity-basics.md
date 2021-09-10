@@ -33,13 +33,15 @@ This material is important. Depending on your previous background in physics or 
 
 So, what is voltage, current, and resistance?
 
-In short, **voltage** "pushes" **electrons** through a conductive material (*e.g.,* a wire) and the amount of *electron flow* is called **current** (measured in amps). Resistors are specially formulated materials that can be placed in a circuit to *resist* the flow of electrons (the **resistance** is measured in ohms). See image.
+In short, **voltage** "pushes" **electrons** through conductive material (*e.g.,* a wire). The amount of **electron flow** is called **current** (measured in amps). Some materials are better at conducting current than others. Resistors are specially formulated to *resist* the flow of electrons (the **resistance** is measured in ohms).
 
 ![A humorous depiction of the relationship between voltage, current, and resistance. Three cartoon characters are shown: the "volt" character is trying to push the "amp" character through a wire but the "ohm" character is resisting the "amp" character by restricting the girth of the wire with a tightening rope.](assets/images/OhmsLawCartoon_ShowingRelationshipBetweenVoltsAmpsAndResistance.png)
 {: .mx-auto .align-center }
 
 **Figure.** A humorous but helpful depiction of the relationship between voltage (measured in volts), current (measured in amps), and resistance (measured in ohms). The yellow "volt" character is trying to push the green "amp" character through a tube (*i.e.,* a wire) but the red "ohm" character is impeding this by restricting the size of the tube (by tightening a rope, reducing its girth). The image source is unknown but there are many examples and alternatives [online](https://www.google.com/search?q=ohm%27s+law+cartoon&tbm=isch&sxsrf=ALeKk01Bq3GWclp6ij6yQ6Kn3yWKh1GXxA%3A1616617564907&source=hp&biw=1280&bih=1248&ei=XKBbYMb0NLXV9APPhL3ABA&oq=ohm%27s+law+cartoon&gs_lcp=CgNpbWcQAzICCAAyAggAOgQIIxAnOgUIABCxAzoGCAAQCBAeUMMBWPoVYNkXaABwAHgAgAHAA4gBrBKSAQk3LjguMC4xLjGYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ved=0ahUKEwjGksTd4cnvAhW1Kn0KHU9CD0gQ4dUDCAc&uact=5).
 {: .fs-1 }
+
+What are the measurement units for voltage, current, and resistance?
 
 Just like we measure weight in kilograms and temperature in celsius, so too do we have standard units of measurement for current, voltage, and resistance (called [SI units](https://en.wikipedia.org/wiki/International_System_of_Units) for the *International System of Units*). We will use these quantities and measurements a lot in physical computing, so take a moment to study the table below.
 
@@ -52,7 +54,9 @@ Just like we measure weight in kilograms and temperature in celsius, so too do w
 
 ### A hydraulic analogy
 
-In circuits, we often use hydraulic (and other) analogies to aid understanding. For example, we can think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through the pipes. And water flows from high pressure (intake supply) to low pressure (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons (from high electric potential to low electric potential) through a circuit. And, just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. Similarly, in circuits, we can insert resistors—which are electronic components with less displaceable electrons—to impede the flow of current.
+In circuits, we often use hydraulic analogies to aid understanding. For example, we can think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through pipes. Water flows from **high pressure** (intake supply) to **low pressure** (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons from **high** electric potential to **low** electric potential through a circuit. 
+
+Just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. These obstructions are similar to resistors, which we can insert into circuits to impede the flow of current (resistors are electronic components with less displaceable electrons).
 
 |            | Electric                       | Hydraulic                                |
 |------------|--------------------------------|------------------------------------------|

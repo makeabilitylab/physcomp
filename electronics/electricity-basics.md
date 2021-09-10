@@ -200,7 +200,7 @@ As joule is a unit of *energy*, voltage introduces a very important and necessar
 
 And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential." See animation above.
 
-### Example problems
+<!-- ### Example problems
 
 Let's look at some examples (inspired by [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)). We use conventional current below.
 
@@ -214,7 +214,7 @@ As another example, after an exhausting journey through resistors and bulbs in a
 
 $$9V = \frac{xJ}{2C} => xJ = 9V * 2C = 18J$$
 
-So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the negative terminal of the battery to the positive.
+So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the negative terminal of the battery to the positive. -->
 
 <!-- Finally, last one: if 1C of charge exits the positive terminal of a battery with 2J of energy and passes through a resistive lamp, what is the voltage drop across the lamp? -->
 

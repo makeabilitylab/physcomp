@@ -132,7 +132,7 @@ For more PWM examples, see this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pd
 
 #### So what PWM frequency and resolution should I use?
 
-So, what PWM frequency and resolution should you use? This is context dependent. Remember, the Arduino Uno supplies a ~490MHz PWM waveform at 8 bits. And this is more than fast enough to smoothly fade between different LED brightness levels. So, you can always start there (~490MHz freq, 8-bit resolution) and then play around.
+So, what PWM frequency and resolution should you use? This is context dependent. Remember, the Arduino Uno supplies a ~490 Hz PWM waveform at 8 bits—though pins 5 and 6 are can drive a waveform at 980 Hz ([link](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)). And this is more than fast enough to smoothly fade between different LED brightness levels. So, you can always start there (~490 Hz freq, 8-bit resolution) and then play around.
 
 #### Using the LEDC API
 

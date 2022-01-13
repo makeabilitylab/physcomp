@@ -17,63 +17,81 @@ usetocbot: true
 {:toc}
 ---
 
-![Hand holding a Circuit Express Playground board](assets/images/CircuitExpressPlaygroundHandModelShot_Adafruit.png)
-The Circuit Express Playground. Image from [Adafruit](https://www.adafruit.com/product/3333). 
+![Hand holding a Circuit Express Playground board](assets/images/CircuitExpressPlaygroundHandModelShot_Adafruit_Edited.png)
+**Figure.** The Circuit Express Playground. Image from [Adafruit](https://www.adafruit.com/product/3333). 
 {: .fs-1 } 
 
-## Overview
+The Circuit Express Playground (CPX) is an introductory physical computing board created through a partnership by [Adafruit](https://adafruit.com) and [Code.org](https://code.org). The CPX is easy to program and build dynamic, interactive craft+computation projects.  It is intended as both an introductory board for learning *electronics* and *programming*.
 
-The Circuit Express Playground (CPX) is an introductory physical computing board created through a partnership by [Adafruit](https://adafruit.com) and [Code.org](https://code.org). The CPX can be programmed with the block-based programming language [MakeCode](https://makecode.adafruit.com/) (which is similar to [Scratch](https://scratch.mit.edu/)) and is intended to be both an introductory board for learning *electronics* and *programming*.
+The CPX's advantages as an electronic prototyping platform are twofold:
 
-Because the CPX includes a host of on-board I/O components—including a [LIS3DH accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout), a light-level sensor (a phototransistor), multiple push buttons, a microphone, RGB LEDs, a speaker, IR receivers/transmitter, and more—the CPX is a great choice for rapidly prototyping physical computing experiences. For many applications, you do not even need to use an external breadboard.
+1. First, the CPX can be programmed with an easy-to-use drag-and-drop—or block-based—visual programming language called [MakeCode](https://makecode.adafruit.com/), which is similar to [Scratch](https://scratch.mit.edu/). As students and makers gain experience and expertise, they can switch over to other supported though more advanced programming languages such as [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) (Python), or [Arduino](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino) (C/C++)
 
-For programming, the board supports a variety of languages, including: [MakeCode](https://learn.adafruit.com/makecode) (block-based and JavaScript), [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) (Python), or [Arduino](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino) (C/C++).
+2. Second, the CPX includes a variety of built-in inputs and outputs, so you do not need to purchase or wire-up external components (or even use a [breadboard](../electronics/breadboards.md)). On-board **inputs** include a [LIS3DH accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout), a light-level sensor (a phototransistor), multiple push buttons, a microphone, and **outputs** include [neopixel LEDS](https://learn.adafruit.com/neopixels-with-makecode), a speaker, and infrared receivers/transmitters.
 
-Given the CPX's low floor (approachable, easy to use for beginners), high ceiling (you can make increasingly advanced things as you learn), and wide walls (supports a wide variety of projects)*, the CPX is a perfect platform for introductory physical computing or prototyping courses. We now use the CPX in our [MHCI+D program](https://mhcid.washington.edu/) at UW.
+Mitchell Resnick and Brian Silverman's fantastic IDC'05 paper ["Some Reflections on Designing Construction Kits for Kids"](https://doi.org/10.1145/1109540.1109556) offers three evaluation criteria for construction kits: (1) *low floors*—construction kits should be approachable, easy-to-use for beginners; (2) *high ceilings*—construction kits should grow with you as you learn and gain experience, allowing you to create  increasingly advanced projects; (3) and *wide walls*—construction kits should support a breadth of designs and projects. We believe the CPX meets each of these criteria, which makes it a powerful prototyping and educational platform.
 
-\* This notion of low floors, high ceilings, and wide walls derives from Resnick and Silverman's fantastic IDC'05 paper ["Some Reflections on Designing Construction Kits for Kids"](https://doi.org/10.1145/1109540.1109556)
-{: .fs-1 }
+We now use the CPX in our [MHCI+D program](https://mhcid.washington.edu/) at UW but I also know that the platform has been used in electrical engineering courses—quite the range in educational contexts!
 
 ## Hardware
+<!-- ![Annotated version of the Circuit Playground Express showing the location of all components](assets/images/CircuitExpressHardwareOverview_AnnotationsByJonFroehlich.png)
+**Figure.** An overview of the Circuit Express Playground (CPX) hardware including built-in input and output. See below for larger versions.
+{: .fs-1 }  -->
+
+<!-- ![](assets/images/BuiltInCPXInput_AnnotationsByJonFroehlich.png.png)
 
 ![Annotated version of the Circuit Playground Express showing the location of all components](assets/images/CircuitPlaygroundExpress_AnnotatedImage_Adafruit.png)
-An annotated version of the CPX showing the location of all main components. Image from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour). 
-{: .fs-1 } 
+*Figure.* An annotated version of the CPX showing the location of all main components. Image from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour).  -->
 
-One key benefit of the CPX—compared with vanilla Arduino boards, for example—is that it's  full of amazing input/output (IO) components. See Adafruit's helpful ["guided tour"](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour) for more but, in short, the board includes:
+One key benefit of the CPX hardware—compared with vanilla Arduino boards—is that it's  full of amazing input/output (IO) components. Adafruit provides a detailed ["guided tour"](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour) but, in short, the board includes:
 
 ### Input
+![](assets/images/BuiltInCPXInput_AnnotationsByJonFroehlich.png)
+
+**Figure.** An annotated image of the CPX's built-in sensors/input.
+{: .fs-1 .align-center} 
+
+The CPX includes the following built-in input/sensors:
 
 - 1 x Motion sensor (LIS3DH triple-axis accelerometer with tap detection, free-fall detection)
 - 1 x Temperature sensor (thermistor)
 - 1 x Light sensor (phototransistor). Can also act as a color sensor and pulse sensor.
 - 1 x Sound sensor (MEMS microphone)
-- 7 pads can act as capacitive touch inputs and the 1 remaining is a true analog output
-- Reset button
-
-### Output
-
-- 10 x mini NeoPixels, each one can display any color
-- 1 x Mini speaker with class D amplifier (7.5mm magnetic speaker/buzzer)
 - 2 x Push buttons, labeled A and B
 - 1 x Slide switch
+
+<!-- - 7 pads can act as capacitive touch inputs and the 1 remaining is a true analog output
+- Reset button -->
+
+### Output
+![](assets/images/BuiltInCPXOutput_AnnotationsByJonFroehlich.png)
+
+**Figure.** An annotated image of the CPX's built-in output.
+{: .fs-1 .align-center} 
+
+The CPX includes the following built-in output:
+- 10 x mini [NeoPixels](https://learn.adafruit.com/neopixels-with-makecode), each one can display any color
+- 1 x Mini speaker with class D amplifier (7.5mm magnetic speaker/buzzer)
 - Green "ON" LED so you know its powered
 - Red "#13" LED for basic blinking
 
-### I/O
+<!-- ### I/O
 
 - Infrared (IR) receiver and transmitter: can receive and transmit any remote control codes, as well as send messages between Circuit Playground Expresses. Can also act as a proximity sensor.
 - 8 x alligator-clip friendly input/output pins
-- Includes I2C, UART, 8 pins that can do analog inputs, multiple PWM output
+- Includes I2C, UART, 8 pins that can do analog inputs, multiple PWM output -->
+### Other info
 
-The CPX itself is powered by a ATSAMD21 ARM Cortex M0 Processor, running at 3.3V and 48MHz. Compare this with the Arduino Uno, which is powered by an ATmega328P microcontroller at 5V and 16 MHz. Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MIDI, or simply a serial port. So you can easily make custom input to your computer—neat!
+The CPX has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M0 Processor—running at 3.3V and 48MHz. Compare this with the traditional Arduino Uno, which is powered by an ATmega328P microcontroller at 5V and 16 MHz. 
+
+Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MIDI, or simply a serial port. So you can easily make custom input to your computer—neat!
 
 ## Programming
 
-An additional key benefit of the CPX is that it can be programmed multiple ways—for novices with limited programming background or for those who simply like visual programming languages, you can use [MakeCode](https://learn.adafruit.com/adafruit-circuit-playground-express/makecode). But you can also program the CPX in Python via [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) or C/C++ via the [Arduino IDE](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino).
+An additional benefit of the CPX compared with traditional Arduino is that it can be programmed multiple ways—for novices with limited programming background or for those who simply like visual programming languages, you can use [MakeCode](https://learn.adafruit.com/adafruit-circuit-playground-express/makecode). More advanced users may choose Python via [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) or C/C++ via the [Arduino IDE](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino).
 
 ### MakeCode
-Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface to programming microcontrollers. This visual programming style—called block-based programming—was popularized by and is similar to [Scratch](https://scratch.mit.edu/). The animation below shows how you program the CPX simply by dragging-and-dropping "puzzle pieces" (blocks).
+Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface for programming physical computing projects. This visual programming style—called block-based programming—was popularized by and is similar to [Scratch](https://scratch.mit.edu/). The animation below shows how you program the CPX simply by dragging-and-dropping "puzzle pieces" (blocks).
 
 <video class="img img-responsive lazy" preload="auto" muted="muted" loop="loop" autoplay="autoplay" playsinline="" poster="https://cdn-learn.adafruit.com/assets/assets/000/048/088/medium800thumb/makecodedragdemo.jpg?1510260958">
     <source src="https://cdn-learn.adafruit.com/assets/assets/000/048/088/large1024mp4/makecodedragdemo.mp4?1510260958">
@@ -81,19 +99,12 @@ Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface t
     <source src="https://cdn-learn.adafruit.com/assets/assets/000/048/088/large1024ogv/makecodedragdemo.ogv?1510260958" type="video/ogg; codecs=theora,vorbis">
     Your browser does not support the video tag.
 </video>
-An animation showing how to program the CPX in MakeCode. Animation from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-makecode).
+**Video.** An animation showing how to program the CPX in MakeCode. Animation from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-makecode).
 {: .fs-1 }
-
-As someone who has worked with and taught physical computing for nearly a decade, MakeCode addresses several barriers to entry for novices (in rough order of importance):
-
-- First, the block-based, drag-and-drop interface is far more accessible to novice programmers than Arduino's IDE and C/C++ environment. And MakeCode generates **real** JavaScript code based on your block program so you can go back and forth between the two.
-- Second, **event handling**. A key challenge with Arduino for novices is handling events (e.g., when a button is pressed, do this), especially when programs contain lots of loops (which can make the system seem unresponsive, see this [discussion](https://makeabilitylab.github.io/physcomp/arduino/led-fade.html#improved-fading-approach-limiting-delays))
-- Third, there is a built-in **simulation environment** that immediately lets you see how your code will perform before uploading it to your physical CPX device
-- Finally, it is a **web-based editor**. There is nothing to install and you can program the CPX from your web browser. And once you've loaded the editor, it stays cached in your browser (so works offline).
 
 ## Learning Resources
 ![A screenshot of the MakeCode website where you can find links to projects](assets/images/MakeCode_Screenshot_Tutorials.png)
-A screenshot of the [Adafruit MakeCode website](https://makecode.adafruit.com/) that has links to tutorials and example projects.
+**Figure** A screenshot of the [Adafruit MakeCode website](https://makecode.adafruit.com/) that has links to tutorials and example projects.
 {: .fs-1 }
 
 Adafruit and MakeCode have published a series of thoughtful, easy-to-understand tutorials:
@@ -115,6 +126,14 @@ Adafruit and MakeCode have published a series of thoughtful, easy-to-understand 
   - [Infrared](https://youtu.be/0EMuaMClfos)
   - [Microphone](https://youtu.be/g5894PVYOF4)
 
-## Example projects
+### Example projects
 
 - Adafruit publishes [example MakeCode+CPX example projects](https://learn.adafruit.com/category/makecode) along with tutorials.
+
+### Educational reflections
+As someone who has worked with and taught physical computing for nearly a decade, MakeCode addresses several barriers to entry for novices (in rough order of importance):
+
+- First, the block-based, drag-and-drop interface is far more accessible to novice programmers than Arduino's IDE and C/C++ environment. And MakeCode generates **real** JavaScript code based on your block program so you can go back and forth between the two.
+- Second, **event handling**. A key challenge with Arduino for novices is handling events (e.g., when a button is pressed, do this), especially when programs contain lots of loops (which can make the system seem unresponsive, see this [discussion](https://makeabilitylab.github.io/physcomp/arduino/led-fade.html#improved-fading-approach-limiting-delays))
+- Third, there is a built-in **simulation environment** that immediately lets you see how your code will perform before uploading it to your physical CPX device
+- Finally, it is a **web-based editor**. There is nothing to install and you can program the CPX from your web browser. And once you've loaded the editor, it stays cached in your browser (so works offline).

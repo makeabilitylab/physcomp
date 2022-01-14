@@ -5,8 +5,8 @@ has_toc: false # (on by default)
 usemathjax: true
 comments: false
 has_children: true
-nav_exclude: true
-nav_order: 3
+nav_exclude: false
+nav_order: 5
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

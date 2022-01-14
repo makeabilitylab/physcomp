@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Sensors
-nav_order: 6
+nav_order: 7
 has_toc: false # on by default
 usemathjax: true
 has_children: true

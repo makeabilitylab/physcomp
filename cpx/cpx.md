@@ -21,17 +21,21 @@ usetocbot: true
 **Figure.** The Circuit Express Playground. Image from [Adafruit](https://www.adafruit.com/product/3333). 
 {: .fs-1 } 
 
-The Circuit Express Playground (CPX) is an introductory physical computing board created through a partnership by [Adafruit](https://adafruit.com) and [Code.org](https://code.org). The CPX is easy to program and build dynamic, interactive craft+computation projects.  It is intended as both an introductory board for learning *electronics* and *programming*.
+The Circuit Express Playground (CPX) is an introductory physical computing board created through a partnership by [Adafruit](https://adafruit.com) and [Code.org](https://code.org). It is a wonderful electronic prototyping platform and introductory board for learning *electronics* and *programming*.
 
-The CPX's advantages as an electronic prototyping platform are twofold:
+Compared with [Arduino](../arduino/index.md), the CPX's advantages for novice makers are twofold:
 
-1. First, the CPX can be programmed with an easy-to-use drag-and-drop—or block-based—visual programming language called [MakeCode](https://makecode.adafruit.com/), which is similar to [Scratch](https://scratch.mit.edu/). As students and makers gain experience and expertise, they can switch over to other supported though more advanced programming languages such as [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) (Python), or [Arduino](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino) (C/C++)
+1. First, the CPX can be programmed with an easy-to-use drag-and-drop—or block-based—visual programming language called [MakeCode](https://makecode.adafruit.com/), which is similar to [Scratch](https://scratch.mit.edu/). As students and makers gain experience and expertise, they can switch over to more advanced programming languages such as [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) (Python), or [Arduino](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino) (C/C++)
 
 2. Second, the CPX includes a variety of built-in inputs and outputs, so you do not need to purchase or wire-up external components (or even use a [breadboard](../electronics/breadboards.md)). On-board **inputs** include a [LIS3DH accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout), a light-level sensor (a phototransistor), multiple push buttons, a microphone, and **outputs** include [neopixel LEDS](https://learn.adafruit.com/neopixels-with-makecode), a speaker, and infrared receivers/transmitters.
 
-Mitchell Resnick and Brian Silverman's fantastic IDC'05 paper ["Some Reflections on Designing Construction Kits for Kids"](https://doi.org/10.1145/1109540.1109556) offers three evaluation criteria for construction kits: (1) *low floors*—construction kits should be approachable, easy-to-use for beginners; (2) *high ceilings*—construction kits should grow with you as you learn and gain experience, allowing you to create  increasingly advanced projects; (3) and *wide walls*—construction kits should support a breadth of designs and projects. We believe the CPX meets each of these criteria, which makes it a powerful prototyping and educational platform.
+To contextualize CPX's potential even further, we can use the three evaluation criteria for creative construction kits that Mitchell Resnick and Brian Silverman outline in their fantastic IDC'05 paper ["Some Reflections on Designing Construction Kits for Kids"](https://doi.org/10.1145/1109540.1109556)
 
-We now use the CPX in our [MHCI+D program](https://mhcid.washington.edu/) at UW but I also know that the platform has been used in electrical engineering courses—quite the range in educational contexts!
+1. **Low floors**—construction kits should be approachable, easy-to-use for beginners;
+2. **high ceilings**—construction kits should grow with you as you learn and gain experience, allowing you to create  increasingly advanced projects; 
+3. and **wide walls**—construction kits should support a breadth of designs and projects. 
+ 
+We believe the CPX meets each of these criteria—making it a powerful prototyping and educational platform. As an example, the UW has used the CPX in our [MHCI+D program](https://mhcid.washington.edu/) but also in some introductory electrical engineering courses—quite the range of contexts!
 
 ## Hardware
 <!-- ![Annotated version of the Circuit Playground Express showing the location of all components](assets/images/CircuitExpressHardwareOverview_AnnotationsByJonFroehlich.png)
@@ -82,7 +86,7 @@ The CPX includes the following built-in output:
 - Includes I2C, UART, 8 pins that can do analog inputs, multiple PWM output -->
 ### Other info
 
-The CPX has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M0 Processor—running at 3.3V and 48MHz. Compare this with the traditional Arduino Uno, which is powered by an ATmega328P microcontroller at 5V and 16 MHz. 
+The CPX also has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M0 Processor—running at 3.3V and 48MHz. In comparison, the Arduino Uno is powered by a much older and slower microcontroller: the ATmega328P at 5V and 16 MHz. 
 
 Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MIDI, or simply a serial port. So you can easily make custom input to your computer—neat!
 
@@ -103,11 +107,12 @@ Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface f
 {: .fs-1 }
 
 ## Learning Resources
-![A screenshot of the MakeCode website where you can find links to projects](assets/images/MakeCode_Screenshot_Tutorials.png)
-**Figure** A screenshot of the [Adafruit MakeCode website](https://makecode.adafruit.com/) that has links to tutorials and example projects.
-{: .fs-1 }
 
-Adafruit and MakeCode have published a series of thoughtful, easy-to-understand tutorials:
+<!-- ![A screenshot of the MakeCode website where you can find links to projects](assets/images/MakeCode_Screenshot_Tutorials.png)
+**Figure** A screenshot of the [Adafruit MakeCode website](https://makecode.adafruit.com/) that has links to tutorials and example projects.
+{: .fs-1 } -->
+
+To learn more, Adafruit and MakeCode have published a series of thoughtful, easy-to-understand tutorials:
 - A ["What is MakeCode and How to Use it"](https://learn.adafruit.com/makecode) primer
 
 - You can find [step-by-step MakeCode + CPX tutorials](https://makecode.adafruit.com/) within the MakeCode editor itself. The nice thing here is that the MakeCode editor walks you through each step. Pretty awesome!

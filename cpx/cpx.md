@@ -135,7 +135,16 @@ To learn more, Adafruit and MakeCode have published a series of thoughtful, easy
 
 - Adafruit publishes [example MakeCode+CPX example projects](https://learn.adafruit.com/category/makecode) along with tutorials.
 
-### Educational reflections
+## Next Lesson
+
+In the [next lesson](makecode.md), we will make our first MakeCode+CPX program—called Blinky. As we build, we will learn about the MakeCode programming environment, the simulator, and how to load our program on to the CPX.
+
+<span class="fs-6">
+[Next: Programming the CPX with MakeCode](makecode.md){: .btn .btn-outline }
+</span>
+
+## Educational reflections
+
 As someone who has worked with and taught physical computing for nearly a decade, MakeCode addresses several barriers to entry for novices (in rough order of importance):
 
 - First, the block-based, drag-and-drop interface is far more accessible to novice programmers than Arduino's IDE and C/C++ environment. And MakeCode generates **real** JavaScript code based on your block program so you can go back and forth between the two.

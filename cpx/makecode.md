@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L2&#58; Programming the CPX with MakeCode
+title: L2&#58; Programming with MakeCode
 parent: Circuit Express (CPX)
 has_toc: true # (on by default)
 comments: true
@@ -258,4 +258,7 @@ In the [next lesson](todo.md), we'll TODO.
 </span>
 
 <!-- TODO:
-- Add in saving and sharing projects -->
+- Add in saving and sharing projects 
+- Add in design challenge about using more lights? Show holiday light example from kids
+- Add in notion that once you download your program, it runs on the CPX
+- -->

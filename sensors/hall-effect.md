@@ -201,7 +201,12 @@ Our code is the simplest possible take. We simply read in the Hall effect sensor
 
 One simple modification you may want to try: when no magnet is present, make the LED off. When either the south or north magnetic field poles are sensed, brighten the LED accordingly.
 
-<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Sensors/HallEffectLED/HallEffectLED.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Sensors/HallEffectLED/HallEffectLED.ino?footer=minimal"></script> -->
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FSensors%2FHallEffectLED%2FHallEffectLED.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Sensors/HallEffectLED/HallEffectLED.ino) is on GitHub.
+{: .fs-1 }
 
 ### Workbench video
 

@@ -129,8 +129,15 @@ void loop(){
 }
 {% endhighlight C %}
 
-The full code from our [GitHub repo](https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) is:
-<script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino?footer=minimal"></script>
+The full code is embedded below:
+
+<!-- gist-it is down, so now using emgithub -->
+<!-- from our [GitHub repo](https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) is:
+<script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino?footer=minimal"></script> -->
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FanalogWrite%2FFadeOnAndOffForLoop%2FFadeOnAndOffForLoop.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) is on GitHub.
+{: .fs-1 }
 
 ### Step 4: Compile, upload, and run!
 

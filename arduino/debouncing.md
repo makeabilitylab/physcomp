@@ -181,7 +181,13 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Just as we did for our [rate blinking LEDs](led-blink3.md) lesson, we can modify the above program to **eliminate delays** and simply use timestamps to track state transitions. Indeed, this is how the official Arduino debounce tutorial works ([link](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce)). Before looking at our solution, can you come up with your own?
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithTimestamps/DebounceWithTimestamps.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithTimestamps/DebounceWithTimestamps.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalRead%2FDebounceWithTimestamps%2FDebounceWithTimestamps.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithTimestamps/DebounceWithTimestamps.ino) is on GitHub.
+{: .fs-1 }
 
 ### Debouncing solution 3: softening requirements
 
@@ -270,7 +276,7 @@ As a disclaimer, I have not tested these libraries myself but please do peruse t
 
 ### Other solutions
 
-There are many other software debouncing solutions, including using [interrupts](https://www.arduino.cc/reference/en/language/functions/external-interrupts/attachinterrupt/). For example, here's a version we made for the Redbear Duo boards (https://github.com/makeabilitylab/arduino/blob/master/RedBearDuo/RedBearDuoButtonInterruptWithDebouncing/RedBearDuoButtonInterruptWithDebouncing.ino). See [Resources](#resources) below.
+There are many other software debouncing solutions, including using [interrupts](https://www.arduino.cc/reference/en/language/functions/external-interrupts/attachinterrupt/). For example, here's a version we made for the [Redbear Duo boards](https://github.com/makeabilitylab/arduino/blob/master/RedBearDuo/RedBearDuoButtonInterruptWithDebouncing/RedBearDuoButtonInterruptWithDebouncing.ino). See [Resources](#resources) below.
 
 ## Activity
 

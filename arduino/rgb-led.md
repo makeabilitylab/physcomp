@@ -254,7 +254,13 @@ We're not going to include code specifically for the Common Anode RGB LED. Inste
 
 Because the only difference between the Common Cathode code and the Common Anode code is inverting `HIGH`s and `LOW`s, we can simply update our previous Common Cathode code by adding in a `boolean` to check for which RGB LED version we are using. If a Common Anode then we will invert the `HIGH` and `LOW` signals—see the `setRgbLedColor` function. The full code is on [GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkRGB/BlinkRGB.ino) and shown below:
 
+<!-- gist-it is down, so now using emgithub -->
 <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkRGB/BlinkRGB.ino?footer=minimal"></script>
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlinkRGB%2FBlinkRGB.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkRGB/BlinkRGB.ino) is on GitHub.
+{: .fs-1 }
 
 <!-- TODO add tinkercad circuit link for common cathode -->
 <!-- TODO: add in point about Vf being different for each color and thus the resistors for each leg should be different? -->

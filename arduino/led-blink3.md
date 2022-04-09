@@ -197,7 +197,13 @@ void loop() {
 
 OK, now back to the code. So, our full code for multi-rate blinking is below:
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultiple/BlinkMultiple.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultiple/BlinkMultiple.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlinkMultiple%2FBlinkMultiple.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultiple/BlinkMultiple.ino) is on GitHub.
+{: .fs-1 }
 
 #### Workbench video
 
@@ -290,7 +296,13 @@ In order to use the `Blinker` class (as shown above), it needs to be defined wit
 
 So, the entire code looks like this:
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultipleWithInternalClass/BlinkMultipleWithInternalClass.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultipleWithInternalClass/BlinkMultipleWithInternalClass.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlinkMultipleWithInternalClass%2FBlinkMultipleWithInternalClass.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultipleWithInternalClass/BlinkMultipleWithInternalClass.ino) is on GitHub.
+{: .fs-1 }
 
 ### Multi-rate blinking: using an external class
 
@@ -298,9 +310,13 @@ In `C++`, you declare member variables and function signatures in a `.h` file an
 
 Indeed, if we move `Blinker` into separate `.h` and `.cpp` files, then the full `.ino` sketch simply looks like:
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultipleWithExternalClass/BlinkMultipleWithExternalClass.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkMultipleWithExternalClass/BlinkMultipleWithExternalClass.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlinkMultipleWithExternalClass%2FBlinkMultipleWithExternalClass.ino&style=github&showCopy=on"></script>
 
 See the [code in our GitHub repository](https://github.com/makeabilitylab/arduino/tree/master/Basics/digitalWrite/BlinkMultipleWithExternalClass).
+{: .fs-1 }
 
 #### Workbench video
 

@@ -245,9 +245,15 @@ That's it, you can run the program! Try experimenting with different frequency a
 
 ### Our ESP32 fade code on github
 
-And here's our ESP32 fade code on [github](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino).
+And here's our ESP32 fade code on [GitHub](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino).
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FESP32%2FBasics%2FFade%2FFade.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino) is on GitHub.
+{: .fs-1 }
 
 ## Next Lesson
 

@@ -201,7 +201,12 @@ OK, now that we have that out of the way, let's write our code!
 
 #### Full FSR-based LED fade code
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorLED/ForceSensitiveResistorLED.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorLED/ForceSensitiveResistorLED.ino?footer=minimal"></script> -->
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FanalogRead%2FForceSensitiveResistorLED%2FForceSensitiveResistorLED.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorLED/ForceSensitiveResistorLED.ino) is on GitHub.
+{: .fs-1 }
 
 ### Workbench video with serial plotter
 
@@ -221,9 +226,14 @@ Simply add in a piezo buzzer and connect it to a GPIO pin.
 
 ### Jedi force code
 
-In our code, we only play sound when the FSR is pressed (to limit the annoyance). :)
+In [our code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorPiezo/ForceSensitiveResistorPiezo.ino), we only play sound when the FSR is pressed (to limit the annoyance). :)
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorPiezo/ForceSensitiveResistorPiezo.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorPiezo/ForceSensitiveResistorPiezo.ino?footer=minimal"></script> -->
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FanalogRead%2FForceSensitiveResistorPiezo%2FForceSensitiveResistorPiezo.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/ForceSensitiveResistorPiezo/ForceSensitiveResistorPiezo.ino) is on GitHub.
+{: .fs-1 }
 
 ### Workbench video with serial plotter
 

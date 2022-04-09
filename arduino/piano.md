@@ -171,7 +171,14 @@ To stop this (admittedly) annoying program, load up a fresh, empty sketch (Ctrl-
 ### Our SimpleSiren code on GitHub
 
 You can access our [SimpleSiren](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino) code in our GitHub repo. It's also displayed below:
-<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino?footer=minimal"></script>
+
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalRead%2FSimpleSiren%2FSimpleSiren.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimpleSiren/SimpleSiren.ino) is on GitHub.
+{: .fs-1 }
 
 ### Go further
 
@@ -321,7 +328,14 @@ The sound and video stream seem a bit out of sync here, but you get the idea.
 ### Our SimplePiano code on GitHub
 
 You can access our [SimplePiano](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) code in our GitHub repo. It's also displayed below:
-<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino?footer=minimal"></script>
+
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalRead%2FSimplePiano%2FSimplePiano.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) is on GitHub.
+{: .fs-1 }
 
 ## Exercises
 

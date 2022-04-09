@@ -67,12 +67,35 @@ void loop() {
 
 ### Using `gist-it.appspot.com` to embed code directly from GitHub
 <!-- <script src="http://gist-it.appspot.com/http://github.com/$file"></script> -->
-This is awesome! Can embed code directly!
+This is awesome! Can embed code directly! If this works, it should embed the code [Blink.ino](https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino) directly below.
+
 <script src="http://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
+
+Update: [gist-it.appspot.com](https://gist-it.appspot.com/)appears to be down.
+
+![](assets/images/gist-it.appspot.com-down.png)
+
+### Using `emgithub.com` to embed code directly from GitHub
+Alternatively, as it seems like [gist-it.appspot.com](https://gist-it.appspot.com/) is down, we could use [emgithub.com](https://emgithub.com/)
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fjonfroehlich%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlink%2FBlink.ino&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+
+Same thing without special sauce except copy button:
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fjonfroehlich%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlink%2FBlink.ino&style=github&showCopy=on"></script>
+
+Same thing without borders, line numbers, file meta data, and the copy button:
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fjonfroehlich%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlink%2FBlink.ino&style=github"></script>
 
 ## Styling tables
 
+| Column 1 | Column 2      |
+| --------------------------------------- | ------------------------------------- |
+| `border-bottom-right-radius`            | Defines the shape of the bottom-right |
+
 To set the size of a table, we can use inline spans.
+
 | <span style="display: inline-block; width:500px">text</span> | description      |
 | --------------------------------------- | ------------------------------------- |
 | `border-bottom-right-radius`            | Defines the shape of the bottom-right |

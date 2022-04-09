@@ -146,9 +146,12 @@ if (_curReadIndex >= SMOOTHING_WINDOW_SIZE) {
 
 #### Arduino code
 
-Our full implementation:
+You can find our full implementation on GitHub as [MovingAverageFilter.ino](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilter/MovingAverageFilter.ino), which is also displayed below:
 
-<script src="http://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilter/MovingAverageFilter.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="http://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilter/MovingAverageFilter.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FFilters%2FMovingAverageFilter%2FMovingAverageFilter.ino&style=github&showCopy=on"></script>
 
 #### Simple C++ class
 
@@ -156,7 +159,10 @@ Signal filtering is a perfect opportunity to create a class to hide complexity, 
 
 Here's a demonstration of how to use [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp):
 
-<script src="http://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWithClass/MovingAverageFilterWithClass.ino?footer=minimal"></script>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FFilters%2FMovingAverageFilterWithClass%2FMovingAverageFilterWithClass.ino&style=github&showCopy=on"></script>
+
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="http://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWithClass/MovingAverageFilterWithClass.ino?footer=minimal"></script> -->
 
 We also use the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp) class in our demonstration of various sliding window sizes on the moving average output ([code here](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWindowSizeDemo/MovingAverageFilterWindowSizeDemo.ino)).
 

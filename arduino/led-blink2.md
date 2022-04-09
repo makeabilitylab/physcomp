@@ -123,7 +123,14 @@ And here's a top-down video with the code window:
 ## Our Blink2 code on GitHub
 
 You can access our Blink2 code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). It's also displayed below:
-<script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalWrite/Blink2LEDs/Blink2LEDs.ino?footer=minimal"></script>
+
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalWrite/Blink2LEDs/Blink2LEDs.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlink2LEDs%2FBlink2LEDs.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/Blink2LEDs/Blink2LEDs.ino) is on GitHub.
+{: .fs-1 }
 
 ## Next Lesson
 

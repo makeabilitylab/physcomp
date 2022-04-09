@@ -248,8 +248,14 @@ How does this work? See the code walkthrough video below:
 
 ### Our Blink code is in GitHub
 
-You can access our Blink code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). A "live" version is also embedded directly from the GitHub repo below (at the bottom of this "code window", you should see direct links back to the code on GitHub and a "view raw" option):
-<script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script>
+You can access our Blink code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). A "live" version is also embedded directly from the GitHub repo below.
+
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script> -->
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fjonfroehlich%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlink%2FBlink.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino) is on GitHub.
+{: .fs-1 }
 
 ## What does the digital output look like?
 
@@ -337,7 +343,13 @@ void loop() {
 
 We've also made our own [BlinkWithoutDelay](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino) version, which is available on [GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino) and shown below. This version is functionally equivalent to Arduino's official example but uses our own coding style and is, in our opinion, more understandable.
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlinkWithoutDelay%2FBlinkWithoutDelay.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino) is on GitHub.
+{: .fs-1 }
 
 ## Next Lesson
 

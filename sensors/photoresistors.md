@@ -285,7 +285,13 @@ Try writing the code before looking at our solution. Print your `analogRead` val
 
 Our code:
 
-<script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Sensors/PhotoresistorLED/PhotoresistorLED.ino?footer=minimal"></script>
+<!-- gist-it is down, so now using emgithub -->
+<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/Sensors/PhotoresistorLED/PhotoresistorLED.ino?footer=minimal"></script> -->
+
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FSensors%2FPhotoresistorLED%2FPhotoresistorLED.ino&style=github&showCopy=on"></script>
+
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Sensors/PhotoresistorLED/PhotoresistorLED.ino) is on GitHub.
+{: .fs-1 }
 
 ### Workbench video
 

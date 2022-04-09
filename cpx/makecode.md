@@ -37,13 +37,14 @@ MakeCode is a visual programming language—like [Scratch](https://scratch.mit.e
 **Figure.** An annotated screenshot of the MakeCode interface highlighting the (1) programming workspace, (2) toolbox, and (3) the simulator.
 {: .fs-1 }
 
-The MakeCode editor has three primary user interface areas, the: (1) programming workspace, (2) toolbox, and (3) simulator.
+The MakeCode editor has three primary user interface areas: (1) programming workspace, (2) toolbox, and (3) simulator. Use the:
 
-1. The **programming workspace** to build your program by dragging-and-dropping the puzzle pieces
-2. The **toolbox** to retrieve the puzzle pieces (aka blocks)
-3. The **simulator** to test your program before downloading it to your CPX
+1. **Programming workspace** to build your program by dragging-and-dropping the puzzle pieces
+2. **Toolbox** to retrieve the puzzle pieces (aka blocks)
+3. **Simulator** to test your program before downloading it to your CPX
 
 ## Our first program: Blinky
+
 Let's make our first program: Blinky! To start, we'll make Blinky flash all ten of the CPX's NeoPixel LEDs on and off. Then we'll add in a special "startup" sound to introduce other programmable elements.
 
 <video autoplay loop muted playsinline style="margin:0px">

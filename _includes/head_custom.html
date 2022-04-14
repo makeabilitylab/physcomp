@@ -1,6 +1,5 @@
 {% if page.usemathjax %}
   <!-- Mar 19, 2020: Just switched from cdn.mathjax.org to cdnjs based on https://www.mathjax.org/cdn-shutting-down/-->
-  
   <script type="text/x-mathjax-config">
     MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       MathJax.InputJax.TeX.prefilterHooks.Add(function (data) {
@@ -8,12 +7,24 @@
       });
     });
   </script>
+
   <script type="text/javascript" async
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
+
   <!-- <script type="text/javascript" 
     async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_CHTML"></script> -->
 {% endif %}
+
+<!-- Update: Apr 14, 2022; Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N487SBL2S4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){window.dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
 
 <!-- <link rel="stylesheet" href="{{ "/_includes/css/custom.css" | prepend: site.baseurl }}">
 <link rel="stylesheet" href="{{ "/css/custom2.css" | prepend: site.baseurl }}">

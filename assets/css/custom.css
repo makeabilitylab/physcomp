@@ -1,4 +1,21 @@
-/* This is custom.css */
+/* custom css for the footer */
+.footer-logos{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+  align-items: center;
+  align-content: center;
+}
+
+.footer-logos img{
+  max-height: 60px;
+}
+
+.footer-logos a{
+  text-decoration: none;
+  background-image: none;
+}
+
 video {
   max-width: 100%;
   height: auto;

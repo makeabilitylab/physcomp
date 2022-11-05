@@ -5,6 +5,7 @@
   grid-gap: 15px;
   align-items: center;
   align-content: center;
+  justify-items: center;
 }
 
 .footer-logos img{

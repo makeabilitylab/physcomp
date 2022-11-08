@@ -2,8 +2,8 @@
 layout: default
 title: L2&#58; Accelerometers
 nav_order: 2
-parent: Input
-grand_parent: Advanced I/O
+# parent: Input
+# grand_parent: Advanced I/O
 has_toc: true # (on by default)
 comments: true
 usemathjax: true

@@ -2,8 +2,8 @@
 layout: default
 title: LX&#58; Joystick
 nav_order: 1
-parent: Input
-grand_parent: Advanced I/O
+# parent: Input
+# grand_parent: Advanced I/O
 has_toc: true # (on by default)
 comments: true
 usemathjax: true

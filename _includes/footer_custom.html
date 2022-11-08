@@ -1,4 +1,9 @@
+<!-- <nav id="tocbot-toc" class="js-toc tocbot-right"></nav> -->
 
+<!-- 
+ We override the footer with custom logos and text.
+ See: https://just-the-docs.github.io/just-the-docs/docs/customization/#custom-footer 
+-->
 <div class="footer-logos">
 
     <a href="https://makeabilitylab.cs.washington.edu">
@@ -21,16 +26,64 @@
 </div>
 
 <p class="text-small text-grey-dk-100 mb-0">
-    This website was developed by the <a href="https://makeabilitylab.cs.washington.edu">Makeability Lab</a> and 
-    Professor <a href="https://jonfroehlich.github.io/">Jon E. Froehlich</a>. If you found the website useful
-    or use it in your teaching, I'd love to hear from you: 
+    This website was developed by Professor <a href="https://jonfroehlich.github.io/">Jon E. Froehlich</a> and the 
+    <a href="https://makeabilitylab.cs.washington.edu">Makeability Lab</a> using 
+    <a href="https://just-the-docs.github.io/just-the-docs/">Just the Docs</a>. 
+
+    If you found the website useful
+    or use it in your teaching, we'd love to hear from you: 
     <a href="mailto:jonf@cs.uw.edu">jonf@cs.uw.edu</a>.
 
-    The website is open source on <a href="https://github.com/makeabilitylab/physcomp/">GitHub</a>.
+    This website and all code is open source (<a href="https://github.com/makeabilitylab/physcomp/">website GitHub</a>,
+    <a href="https://github.com/makeabilitylab/arduino">Arduino GitHub</a>,
+    <a href="https://github.com/makeabilitylab/p5js">p5js GitHub</a>). You can find the 
+    MakeabilityLab_Arduino_Library <a href="https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library">here</a>.
     Found an error? File a <a href="https://github.com/makeabilitylab/physcomp/issues">GitHub Issue</a>.
 </p>
-<p class="text-small text-grey-dk-100 mb-0">
-    All Arduino, ESP32, <em>etc.</em> code is also open source on <a href="https://github.com/makeabilitylab/arduino">GitHub</a>
-    You can find the MakeabilityLab_Arduino_Library <a href="https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library">here</a>.
-</p>
+
+
+{% if page.usetocbot %} 
+    <!-- tocbot is an awesome table of contents generator, see: https://tscanlin.github.io/tocbot/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
+
+    <script>
+      /* Dynamically add the toc navbar after the side-bar element. This allows us
+         to *not* have to override default.html in _layouts */
+      let sideBarElements = document.getElementsByClassName('side-bar');
+      if (sideBarElements.length > 0){
+        let tocNav = document.createElement('nav');
+        tocNav.setAttribute("id", "tocbot-toc");
+        tocNav.classList.add("js-toc");
+        tocNav.classList.add("tocbot-right");
+        sideBarElements[0].after(tocNav);
+      }
+
+      /** WARNING: YOU MUST USE C MULTI-LINE COMMENT STYLE RATHER THAN // BECAUSE 
+       *  OF HOW JEKYLL COMPILES THIS FILE INTO SINGLE LINES **/
+      tocbot.init({
+        /* Where to render the table of contents. */
+        tocSelector: '.js-toc',
+        /* Where to grab the headings to build the table of contents. */
+        contentSelector: '.main-content',
+        /* How many heading levels should collapse. Default is 0 */
+        collapseDepth: 2,
+        /* Which headings to grab inside of the contentSelector element. */
+        headingSelector: 'h1, h2, h3, h4',
+      });
+
+      /* Track scrolling to show/hide the tocbot navigation bar on right side */
+      var onScrollHandler = function (event) {
+
+        /* End event listener after visitor scrolls past 500px */
+        if (window.pageYOffset > 500) {
+          window.removeEventListener('scroll', onScrollHandler, false);
+          document.getElementById("tocbot-toc").style.visibility = "visible";
+        }
+        /* console.log("window scroll event:", window.pageYOffset); */
+      };
+
+      /* Listen for scroll events */
+      window.addEventListener('scroll', onScrollHandler, false);
+    </script>
+  {% endif %}
 

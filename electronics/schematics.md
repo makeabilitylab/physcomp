@@ -128,6 +128,9 @@ The latest development version of Fritzing is CD-548. Visit the GitHub Fritzing 
 **Figure** Go to the GitHub Fritzing [releases page](https://github.com/fritzing/fritzing-app/releases), scroll down to CD-548, then click on the 'Assets' link to download a free development version of Fritzing.
 {: .fs-1 }
 
+### Download and install Adafruit Fritzing library
+Adafruit maintains an [open-source repository on GitHub](https://github.com/adafruit/Fritzing-Library) of all their custom electronic parts (cool!). If you're using Adafruit parts in your projects, we strongly recommend downloading and installing the Adafruit Fritzing Library—just follow the [installation instructions here](https://learn.adafruit.com/using-the-adafruit-library-with-fritzing)!
+
 ### Using Fritzing
 
 Once you've downloaded and unzipped the Fritzing release, open it and follow this tutorial video. Together, we will make a simple LED-based circuit with a 9V battery, a switch, a resistor, and an LED. To complement the video, we also have this [simple Fritzing PDF guide](assets/pdfs/RapidIntroduction_HowToUseFritizing_ByJonFroehlich.pdf).

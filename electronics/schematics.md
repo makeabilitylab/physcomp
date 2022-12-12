@@ -129,7 +129,7 @@ The latest development version of Fritzing is CD-548. Visit the GitHub Fritzing 
 {: .fs-1 }
 
 ### Download and install Adafruit Fritzing library
-Adafruit maintains an [open-source repository on GitHub](https://github.com/adafruit/Fritzing-Library) of all their custom electronic parts (cool!). If you're using Adafruit parts in your projects, we strongly recommend downloading and installing the Adafruit Fritzing Library—just follow the [installation instructions here](https://learn.adafruit.com/using-the-adafruit-library-with-fritzing)!
+Adafruit maintains an [open-source repository on GitHub](https://github.com/adafruit/Fritzing-Library) of all their custom electronic parts for Fritzing (cool!). If you're using Adafruit parts in your projects, we strongly recommend downloading and installing the Adafruit Fritzing Library—just follow the [installation instructions here](https://learn.adafruit.com/using-the-adafruit-library-with-fritzing)!
 
 ### Using Fritzing
 

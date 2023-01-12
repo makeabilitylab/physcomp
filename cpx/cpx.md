@@ -163,8 +163,6 @@ This is the old Adafruit video we used to have here
 **Video.** Rapidly creating a full program with MakeCode called "Blinky." We will turn on all the NeoPixels (by setting them red) then pause then turn them off (by setting them black) and repeat "forever." [Code link](https://makecode.com/_JdPfj8VrmWV3).
 {: .fs-1 }
 
-
-
 ## Learning Resources
 
 <!-- ![A screenshot of the MakeCode website where you can find links to projects](assets/images/MakeCode_Screenshot_Tutorials.png)

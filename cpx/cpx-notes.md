@@ -28,7 +28,6 @@ In this lesson, we will learn about programming the CPX with MakeCode, including
 - Saving programs and sharing programs
 - Playing with Neopixels
 - Building first program with startup sound and then forever loop
-
 - Maybe have full video recording of myself doing this and post to YouTube?
 
 Lesson 2: More lights and console logging

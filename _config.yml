@@ -28,8 +28,13 @@ incremental: true
 # See: https://stackoverflow.com/a/19173888/388117
 baseurl: /physcomp
 
+url: "https://just-the-docs.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+
+# For copy button on code
+enable_copy_code_button: true
+
 # custom site variables
-arduino_github_baseurl: "https://github.com/jonfroehlich/arduino"
+arduino_github_baseurl: "https://makeabilitylab.github.io/physcomp/"
 comments: false
 
 # Set a path/url to a logo that will be displayed instead of the title
@@ -45,6 +50,29 @@ search_enabled: true
 
 # Enable support for hyphenated search words:
 # search_tokenizer_separator: /[\s/]+/
+
+# Callouts are now supported as part of v.0.4.0.rc4
+# See: https://just-the-docs.github.io/just-the-docs/docs/configuration/#callouts
+# See: https://just-the-docs.github.io/just-the-docs/docs/ui-components/callouts/
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  information:
+    title: More Information
+    color: yellow
+  warning:
+    title: Warning
+    color: red
 
 # Aux links for the upper right navigation
 aux_links:

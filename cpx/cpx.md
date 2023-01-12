@@ -21,21 +21,21 @@ usetocbot: true
 **Figure.** The Circuit Express Playground. Image from [Adafruit](https://www.adafruit.com/product/3333). 
 {: .fs-1 } 
 
-The Circuit Playground Express (CPX) is an introductory physical computing board created by [Adafruit](https://adafruit.com). It is a wonderful electronic prototyping platform and introductory board for learning *electronics* and *programming*.
+The Circuit Playground Express (CPX) is an introductory physical computing board created by [Adafruit](https://adafruit.com). It is a wonderful electronic prototyping platform board for learning *electronics* and *programming* and for creating imaginative physical computing projects (*e.g.,* [see samples here](https://learn.adafruit.com/category/circuit-playground)).
 
 Compared with [Arduino](../arduino/index.md), the CPX's advantages for novice makers are twofold:
 
-1. First, the CPX can be programmed with an easy-to-use drag-and-drop—or block-based—visual programming language called [MakeCode](https://makecode.adafruit.com/) developed by [Microsoft](https://www.microsoft.com/en-us/makecode), which is similar to [Scratch](https://scratch.mit.edu/). As students and makers gain experience and expertise, they can switch over to more advanced programming languages such as [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) (Python), or [Arduino](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino) (C/C++)
+1. First, the CPX can be programmed with an **easy-to-use drag-and-drop visual programming language** called [MakeCode](https://makecode.adafruit.com/) developed by [Microsoft](https://www.microsoft.com/en-us/makecode), which is similar to [Scratch](https://scratch.mit.edu/). As students and makers gain experience and expertise, they can switch over to more advanced programming languages such as [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) (Python), or [Arduino](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino) (C/C++)
 
-2. Second, the CPX includes a variety of built-in inputs and outputs, so you do not need to purchase or wire-up external components (or even use a [breadboard](../electronics/breadboards.md)). On-board **inputs** include a [LIS3DH accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout), a light-level sensor (a phototransistor), multiple push buttons, a microphone, and **outputs** include [neopixel LEDS](https://learn.adafruit.com/neopixels-with-makecode), a speaker, and infrared receivers/transmitters.
+2. Second, the CPX includes a variety of **built-in inputs and outputs**, so you do not need to purchase or wire-up external components (or even use a [breadboard](../electronics/breadboards.md)). On-board **inputs** include a [LIS3DH accelerometer](https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout), a light-level sensor (a phototransistor), multiple push buttons, a microphone, and **outputs** include [neopixel LEDS](https://learn.adafruit.com/neopixels-with-makecode), a speaker, and infrared receivers/transmitters.
 
-To contextualize CPX's potential even further, we can use the three evaluation criteria for creative construction kits that Mitchell Resnick and Brian Silverman outline in their fantastic IDC'05 paper ["Some Reflections on Designing Construction Kits for Kids"](https://doi.org/10.1145/1109540.1109556)
+To contextualize CPX's potential even further, we can use the three evaluation criteria for creative construction kits that Mitchell Resnick and Brian Silverman outline in their fantastic IDC'05 paper ["Some Reflections on Designing Construction Kits for Kids"](https://doi.org/10.1145/1109540.1109556). Creative constructions kits should have:
 
-1. **Low floors**—construction kits should be approachable, easy-to-use for beginners;
-2. **high ceilings**—construction kits should grow with you as you learn and gain experience, allowing you to create  increasingly advanced projects; 
-3. and **wide walls**—construction kits should support a breadth of designs and projects. 
- 
-We believe the CPX meets each of these criteria—making it a powerful prototyping and educational platform. As an example, the UW has used the CPX in our [MHCI+D program](https://mhcid.washington.edu/) but also in some introductory electrical engineering courses—quite the range of contexts!
+1. **Low floors**—kits should be approachable, easy-to-use for beginners;
+2. **high ceilings**—kits should grow with you as you learn and gain experience, allowing you to create  increasingly advanced projects; 
+3. and **wide walls**—kits should support a breadth of designs and projects. 
+
+We believe the CPX meets each of these criteria—making it a powerful prototyping and educational platform. As an example, at the University of Washington, the CPX has been used in our [MHCI+D program](https://mhcid.washington.edu/) as well as some introductory electrical engineering courses—quite the range of contexts!
 
 ## Hardware
 <!-- ![Annotated version of the Circuit Playground Express showing the location of all components](assets/images/CircuitExpressHardwareOverview_AnnotationsByJonFroehlich.png)
@@ -47,15 +47,13 @@ We believe the CPX meets each of these criteria—making it a powerful prototypi
 ![Annotated version of the Circuit Playground Express showing the location of all components](assets/images/CircuitPlaygroundExpress_AnnotatedImage_Adafruit.png)
 *Figure.* An annotated version of the CPX showing the location of all main components. Image from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour).  -->
 
-One key benefit of the CPX hardware—compared with vanilla Arduino boards—is that it's  full of amazing input/output (IO) components. Adafruit provides a detailed ["guided tour"](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour) but, in short, the board includes:
+One key benefit of the CPX hardware—compared with vanilla Arduino boards like the Uno—is that it's  full of amazing input/output (IO) components. Adafruit provides a detailed ["guided tour"](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour) but, in short, the board includes five types of input include motion, temperature, light, sound, and buttons as well as two types of output (LEDs, sound).
 
-### Input
-![](assets/images/BuiltInCPXInput_AnnotationsByJonFroehlich.png)
+{: .note } It's OK if you don't understand all of the terminology used below. In fact, if this is the first time you've ever played with electronics, we fully expect that this is mostly all new to you. Still, it's worthwhile to skim over the sections below to get a sense of what's possible with the CPX before we start building!
 
-**Figure.** An annotated image of the CPX's built-in sensors/input.
-{: .fs-1 .align-center} 
+### Built-in Input
 
-The CPX includes the following built-in input/sensors:
+Specifically, the CPX includes the following built-in input/sensors:
 
 - 1 x Motion sensor (LIS3DH triple-axis accelerometer with tap detection, free-fall detection)
 - 1 x Temperature sensor (thermistor)
@@ -64,29 +62,78 @@ The CPX includes the following built-in input/sensors:
 - 2 x Push buttons, labeled A and B
 - 1 x Slide switch
 
-<!-- - 7 pads can act as capacitive touch inputs and the 1 remaining is a true analog output
-- Reset button -->
+![An annotated diagram showing the location of the built-in motion, temperature, light, sound sensors along with the push buttons and slide switch](assets/images/BuiltInCPXInput_AnnotationsByJonFroehlich.png)
 
-### Output
-![](assets/images/BuiltInCPXOutput_AnnotationsByJonFroehlich.png)
+**Figure.** An annotated image of the CPX's built-in sensors/input.
+{: .fs-1 .align-center}
 
-**Figure.** An annotated image of the CPX's built-in output.
-{: .fs-1 .align-center} 
+### Built-in Output
 
-The CPX includes the following built-in output:
+In addition to the built-in input, the CPX also has built-in LEDs and speaker for light and sound output. More specifically:
+
 - 10 x mini [NeoPixels](https://learn.adafruit.com/neopixels-with-makecode), each one can display any color
 - 1 x Mini speaker with class D amplifier (7.5mm magnetic speaker/buzzer)
 - Green "ON" LED so you know its powered
 - Red "#13" LED for basic blinking
+
+![An annotated diagram showing the location of the built-in neopixels and speaker](assets/images/BuiltInCPXOutput_AnnotationsByJonFroehlich.png)
+
+**Figure.** An annotated image of the CPX's built-in output.
+{: .fs-1 .align-center}
+
+
 
 <!-- ### I/O
 
 - Infrared (IR) receiver and transmitter: can receive and transmit any remote control codes, as well as send messages between Circuit Playground Expresses. Can also act as a proximity sensor.
 - 8 x alligator-clip friendly input/output pins
 - Includes I2C, UART, 8 pins that can do analog inputs, multiple PWM output -->
-### Other info
 
-The CPX also has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M0 Processor—running at 3.3V and 48MHz. In comparison, the Arduino Uno is powered by a much older and slower microcontroller: the ATmega328P at 5V and 16 MHz. 
+## Input/Output (I/O)
+
+In addition to the built-in components, the CPX has 14 connection pads to support interfacing with external input/output (I/O), including buttons, LEDs, and more. You can use a variety of connection strategies from sewing with conductive thread to wire wrapping to even small metal screws, the most common connection is an alligator clip. 
+
+TODO: insert picture or animated movie of CPX with alligator clips
+
+<!-- ![A pinout diagram of the CPX highlighting the 14 alligator pads](assets/images/CPX_14AlligatorClips_ByJonFroehlich.png) -->
+
+![A pinout diagram of the CPX highlighting the 14 alligator pads](assets/images/CPX_14AlligatorClipsAnnotated_ByJonFroehlich.png)
+
+**Figure.** An annotated image of the CPX's 14 alligator pads for power and GPIO.
+{: .fs-1 .align-center}
+
+### Input/Output (I/O) Pads
+
+The CPX has eight general purpose I/O pins (GPIO) for interfacing with external electronic components. All of the I/O pads can be used as digital I/O, analog input (12-bit ADC), and PWM. All but A0 can be used for capacitive touch (A0 is special and the only true analog output).
+
+{: .warning }
+Each pad can provide up to ~20mA of current so do not connect a motor or other high-power component directly. If you don't know what this means, that's OK! You can always ask the instruction team whether a component is safe to use!
+
+![A pinout diagram of the CPX highlighting the CPX GPIO pads](assets/images/CPX_GPIOPadsAnnotated_ByJonFroehlich.png)
+
+TODO: consider adding brief .mp4 showing pressure sensor + CPX lights and a second .mp4 showing NeoPixel hookup.
+
+For more information, see [Adafruit's CPX Pinouts Guide](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#each-pin-2906289).
+
+### Power Pads
+
+As the [Adafruit CPX guide describes](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#power-pads-2906283), there are six power pads equally spaced around the CPX's perimeter. Specifically, there are:
+
+* 3 x **GND** pads, which are all connected together
+* 2 x **3.3V out** pads
+* 1 x **USB/battery Vout** pad, which is a special power pad. This pin will supply either USB power (5V) or LiPoly power (3.7V). If both are connected, the CPX supplies the higher voltage. This output is not connected to the onboard regulator, so can supply up to 500mA continuous and 1A peak before tripping the internal fuse (if the fuse trips, just wait a minute and it will automatically reset)
+
+![A pinout diagram of the CPX highlighting the alligator power pads](assets/images/CPX_PowerPadsAnnotated_ByJonFroehlich.png)
+
+**Figure.** An annotated image of the CPX's GND and Vout power pads.
+{: .fs-1 .align-center}
+
+
+### CPX Microcontroller
+
+The CPX also has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M0 Processor—running at 3.3V and 48MHz. In comparison, the Arduino Uno is powered by a much older and slower microcontroller: the ATmega328P at 5V and 16 MHz.
+
+## Using the CPX as Computer Input
 
 Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MIDI, or simply a serial port. So you can easily make custom input to your computer—neat!
 
@@ -95,6 +142,7 @@ Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MID
 An additional benefit of the CPX compared with traditional Arduino is that it can be programmed multiple ways—for novices with limited programming background or for those who simply like visual programming languages, you can use [MakeCode](https://learn.adafruit.com/adafruit-circuit-playground-express/makecode). More advanced users may choose Python via [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) or C/C++ via the [Arduino IDE](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino).
 
 ### MakeCode
+
 Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface for programming physical computing projects. This visual programming style—called block-based programming—was popularized by and is similar to [Scratch](https://scratch.mit.edu/). The animation below shows how you program the CPX simply by dragging-and-dropping "puzzle pieces" (blocks).
 
 <video class="img img-responsive lazy" preload="auto" muted="muted" loop="loop" autoplay="autoplay" playsinline="" poster="https://cdn-learn.adafruit.com/assets/assets/000/048/088/medium800thumb/makecodedragdemo.jpg?1510260958">
@@ -105,6 +153,8 @@ Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface f
 </video>
 **Video.** An animation showing how to program the CPX in MakeCode. Animation from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-makecode).
 {: .fs-1 }
+
+Amazingly, you can also test your program and see how it behaves with a "virtual" CPX directly in MakeCode.
 
 ## Learning Resources
 

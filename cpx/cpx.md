@@ -119,15 +119,14 @@ For more information, see [Adafruit's CPX Pinouts Guide](https://learn.adafruit.
 
 As the [Adafruit CPX guide describes](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#power-pads-2906283), there are six power pads equally spaced around the CPX's perimeter. Specifically, there are:
 
-* 3 x **GND** pads, which are all connected together
-* 2 x **3.3V out** pads
-* 1 x **USB/battery Vout** pad, which is a special power pad. This pin will supply either USB power (5V) or LiPoly power (3.7V). If both are connected, the CPX supplies the higher voltage. This output is not connected to the onboard regulator, so can supply up to 500mA continuous and 1A peak before tripping the internal fuse (if the fuse trips, just wait a minute and it will automatically reset)
+- 3 x **GND** pads, which are all connected together
+- 2 x **3.3V out** pads
+- 1 x **USB/battery Vout** pad, which is a special power pad. This pin will supply either USB power (5V) or LiPoly power (3.7V). If both are connected, the CPX supplies the higher voltage. This output is not connected to the onboard regulator, so can supply up to 500mA continuous and 1A peak before tripping the internal fuse (if the fuse trips, just wait a minute and it will automatically reset)
 
 ![A pinout diagram of the CPX highlighting the alligator power pads](assets/images/CPX_PowerPadsAnnotated_ByJonFroehlich.png)
 
 **Figure.** An annotated image of the CPX's GND and Vout power pads.
 {: .fs-1 .align-center}
-
 
 ### CPX Microcontroller
 
@@ -139,22 +138,32 @@ Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MID
 
 ## Programming
 
-An additional benefit of the CPX compared with traditional Arduino is that it can be programmed multiple ways—for novices with limited programming background or for those who simply like visual programming languages, you can use [MakeCode](https://learn.adafruit.com/adafruit-circuit-playground-express/makecode). More advanced users may choose Python via [CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython) or C/C++ via the [Arduino IDE](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino).
+An additional benefit of the CPX compared with traditional Arduino is that it can be programmed multiple ways. 
+
+For novices with limited programming background or for those who simply like visual programming languages, you can use **[MakeCode]**(https://learn.adafruit.com/adafruit-circuit-playground-express/makecode). More advanced users may choose Python via **[CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython)** or C/C++ via the **[Arduino IDE](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino)**.
 
 ### MakeCode
 
-Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface for programming physical computing projects. This visual programming style—called block-based programming—was popularized by and is similar to [Scratch](https://scratch.mit.edu/). The animation below shows how you program the CPX simply by dragging-and-dropping "puzzle pieces" (blocks).
+Microsoft's MakeCode was designed to provide a visual, drag-and-drop interface for programming physical computing projects. This visual programming style—called block-based programming—was popularized by and is similar to [Scratch](https://scratch.mit.edu/). The video below shows how you program the CPX simply by dragging-and-dropping "puzzle pieces" (blocks).
 
+Amazingly, you can also test your program and see how it behaves with a "virtual" CPX directly in MakeCode. Do you see that CPX on the left sidebar? That CPX is a simulator that shows how your code will run when eventually loaded on the CPX hardware itself!
+
+<!-- 
+This is the old Adafruit video we used to have here
 <video class="img img-responsive lazy" preload="auto" muted="muted" loop="loop" autoplay="autoplay" playsinline="" poster="https://cdn-learn.adafruit.com/assets/assets/000/048/088/medium800thumb/makecodedragdemo.jpg?1510260958">
     <source src="https://cdn-learn.adafruit.com/assets/assets/000/048/088/large1024mp4/makecodedragdemo.mp4?1510260958">
     <source src="https://cdn-learn.adafruit.com/assets/assets/000/048/088/large1024webm/makecodedragdemo.webm?1510260958" type="video/webm; codecs=vp8,vorbis">
     <source src="https://cdn-learn.adafruit.com/assets/assets/000/048/088/large1024ogv/makecodedragdemo.ogv?1510260958" type="video/ogg; codecs=theora,vorbis">
     Your browser does not support the video tag.
+</video> -->
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/Making_Blinky_MakeCode_Annotated.mp4" type="video/mp4" />
 </video>
-**Video.** An animation showing how to program the CPX in MakeCode. Animation from [Adafruit](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-makecode).
+**Video.** Rapidly creating a full program with MakeCode called "Blinky." We will turn on all the NeoPixels (by setting them red) then pause then turn them off (by setting them black) and repeat "forever." [Code link](https://makecode.com/_JdPfj8VrmWV3).
 {: .fs-1 }
 
-Amazingly, you can also test your program and see how it behaves with a "virtual" CPX directly in MakeCode.
+
 
 ## Learning Resources
 

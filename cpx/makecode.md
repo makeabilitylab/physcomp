@@ -24,7 +24,7 @@ In this lesson, we will make our first MakeCode+CPX program—called Blinky—wh
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/Making_SimpleFastAnimationProgram_MakeCode_ScreenRecording.mp4" type="video/mp4" />
 </video>
-**Video.** Rapidly creating a full program with MakeCode: a simple rainbow animation. [Code link](https://makecode.com/_8uY3D8Fc8A5t). 
+**Video.** Rapidly creating a full program with MakeCode: a simple rainbow animation. [Code link](https://makecode.com/_8uY3D8Fc8A5t).
 {: .fs-1 }
 
 MakeCode is a visual programming language—like [Scratch](https://scratch.mit.edu/)—built on [Blockly](https://developers.google.com/blockly). As the video above shows, to program the CPX, you simply drag-and-drop "puzzle pieces." We call these pieces *blocks.* As you fit blocks together, you can create interactive programs!
@@ -248,6 +248,22 @@ In this video, we walk you through how to directly download your MakeCode progra
 
 **Video.** Directly downloading your MakeCode program to the CPX using WebUSB ([YouTube link](https://youtu.be/7FjYEJhVeLY))
 {: .fs-1 }
+
+## Sharing your program
+
+If you want to share your program with others, click on the Share button in the navbar and copy/paste the provided URL. See the video below.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/MakeCode_SharingYourProject2.mp4" type="video/mp4" />
+</video>
+**Video.** To share your MakeCode program with others, click on the Share button in the navbar and copy/paste the url link. [Code link](https://makecode.com/_JdPfj8VrmWV3).
+{: .fs-1 }
+
+## Design Activity
+
+We did it! We successfully built our first program in MakeCode, ran it in the simulator, and then downloaded it to our actual CPX hardware. We also learned about adding sound and sharing our program with others.
+
+For your design challenge, try seeing how many different ways you can build interesting light patterns with MakeCode using commands such show animation, photon, and more!
 
 ## Next Lesson
 

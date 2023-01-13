@@ -93,7 +93,7 @@ In addition to the built-in input, the CPX also has built-in LEDs and speaker fo
 
 In addition to the built-in components, the CPX has 14 connection pads to support interfacing with external input/output (I/O), including buttons, LEDs, and more. You can use a variety of connection strategies from sewing with conductive thread to wire wrapping to even small metal screws, the most common connection is an alligator clip. 
 
-TODO: insert picture or animated movie of CPX with alligator clips
+<!-- TODO: insert picture or animated movie of CPX with alligator clips -->
 
 <!-- ![A pinout diagram of the CPX highlighting the 14 alligator pads](assets/images/CPX_14AlligatorClips_ByJonFroehlich.png) -->
 
@@ -111,7 +111,7 @@ Each pad can provide up to ~20mA of current so do not connect a motor or other h
 
 ![A pinout diagram of the CPX highlighting the CPX GPIO pads](assets/images/CPX_GPIOPadsAnnotated_ByJonFroehlich.png)
 
-TODO: consider adding brief .mp4 showing pressure sensor + CPX lights and a second .mp4 showing NeoPixel hookup.
+<!-- TODO: consider adding brief .mp4 showing pressure sensor + CPX lights and a second .mp4 showing NeoPixel hookup. -->
 
 For more information, see [Adafruit's CPX Pinouts Guide](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#each-pin-2906289).
 

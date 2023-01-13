@@ -44,6 +44,10 @@ Neopixel
 
 Lesson 3: Interaction, Sound, and Console Logging
 
+To start, let’s make a simple piano keyboard that lights up when we click on buttons
+
+https://makecode.com/_1pPDhAFx55u3
+
 - Show our paper keyboard? Similar to: https://makecode.adafruit.com/courses/maker/projects/music-maker
 
 Lesson 3: Sensors?
@@ -66,6 +70,7 @@ OTHER THINGS
 - What about haptics?
 - What about powering your projects: https://makecode.adafruit.com/courses/maker/general/maker-tools-techniques
 - Projects: https://makecode.adafruit.com/projects/
+- What about infrared communication?
 
 ----
 

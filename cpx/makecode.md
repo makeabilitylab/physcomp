@@ -273,11 +273,11 @@ For this lesson's design challenge, try seeing how many different ways you can b
 
 ## Next Lesson
 
-In the [next lesson](todo.md), we'll TODO.
+In the [next lesson](button-piano.md), we'll make our first interactive program: a button piano!
 
 <span class="fs-6">
 [Previous: Intro the CPX](cpx.md){: .btn .btn-outline }
-[Next: TODO](todo.md){: .btn .btn-outline }
+[Next: Button Piano](button-piano.md){: .btn .btn-outline }
 </span>
 
 <!-- TODO:

@@ -27,3 +27,12 @@ In this lesson, we will make our first interactive CPX program in MakeCode—a s
 
 **Video.** Creating a button piano. Here's [the full code](https://makecode.com/_EyqF3g3xb6Cy) and a [link to the video on YouTube](https://youtu.be/wCSWP6PhNvY).
 {: .fs-1 }
+
+## Next Lesson
+
+In the [next lesson](sensor-instrument.md), we'll create a light-responsive instrument!
+
+<span class="fs-6">
+[Previous: Button Piano](button-piano.md){: .btn .btn-outline }
+[Next: Light-Responsive Instrument](sensor-instrument.md){: .btn .btn-outline }
+</span>

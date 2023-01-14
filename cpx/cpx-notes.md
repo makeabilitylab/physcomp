@@ -17,6 +17,16 @@ usetocbot: true
 {:toc}
 ---
 
+Continued brainstorming:
+
+Lesson 3: discrete piano
+Lesson 4: analog w console logging and theremin
+Lesson 5: capacitive touch + touch piano
+Lesson 6: neopixel
+Lesson 7: external sensors
+Lesson 8: lofi sensors
+
+----
 Lesson 1: Our first MakeCode program
 In this lesson, we will learn about programming the CPX with MakeCode, including:
 

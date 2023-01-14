@@ -27,3 +27,7 @@ In [this lesson](cpx.md), you'll learn about the Circuit Playground Express (CPX
 ## [Lesson 2: Programming the CPX with MakeCode](makecode.md)
 
 In [this lesson](makecode.md), we will make our first MakeCode+CPX program—called Blinky. As we build, we will learn about the MakeCode programming environment, the simulator, and how to load our program on to the CPX.
+
+## [Lesson 3: Making a Simple Button Piano](button-piano.md)
+
+In [this lesson](button-piano.md), we will make our first interactive CPX program: a simple button piano, which uses the CPX's built-in buttons and the speaker to make sound.

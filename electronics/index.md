@@ -22,7 +22,10 @@ In this module, you will learn about the fundamentals of electricity—[voltage,
 
 Throughout, you'll use simulation tools like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and [Tinkercad Circuits](https://www.tinkercad.com/) to design and evaluate circuits and then actually build them using physical components.
 
-By the end of this module, you will be prepared to start [Module 2](../arduino/index.md)—which is our endeavor into using electronics with microcontrollers!
+By the end of this module, you will be prepared to start [Module 2](../arduino/index.md)—our [Intro to Arduino series](../arduino/index.md)—where you will begin making with electronics, microcontrollers, and programming!
+
+{: .note }
+If you have limited background in circuits and programming, you may also want to consider our series on [Making with the Circuit Playground Express (CPX)](../cpx/), which uses a wonderful prototyping platform called [CPX](https://www.adafruit.com/product/3333) along with a drag-and-drop visual programming language called [MakeCode](https://makecode.adafruit.com/) (that is similar to [Scratch](https://scratch.mit.edu/)).
 
 ## [Lesson 1: Voltage, current, and resistance](electricity-basics.md)
 

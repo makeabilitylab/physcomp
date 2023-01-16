@@ -1,7 +1,7 @@
 ---
 layout: default
 title: L1&#58; Intro to the CPX
-parent: Circuit Express (CPX)
+parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
 nav_exclude: false
@@ -49,7 +49,8 @@ We believe the CPX meets each of these criteria—making it a powerful prototypi
 
 One key benefit of the CPX hardware—compared with vanilla Arduino boards like the Uno—is that it's  full of amazing input/output (IO) components. Adafruit provides a detailed ["guided tour"](https://learn.adafruit.com/adafruit-circuit-playground-express/guided-tour) but, in short, the board includes five types of input include motion, temperature, light, sound, and buttons as well as two types of output (LEDs, sound).
 
-{: .note } It's OK if you don't understand all of the terminology used below. In fact, if this is the first time you've ever played with electronics, we fully expect that this is mostly all new to you. Still, it's worthwhile to skim over the sections below to get a sense of what's possible with the CPX before we start building!
+{: .note }
+It's OK if you don't understand all of the terminology used below. In fact, if this is the first time you've ever played with electronics, we fully expect that this is mostly all new to you. Still, it's worthwhile to skim over the sections below to get a sense of what's possible with the CPX before we start building!
 
 ### Built-in Input
 

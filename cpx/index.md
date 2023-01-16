@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Circuit Express (CPX)
+title: Circuit Playground Express
 has_toc: false # (on by default)
 usemathjax: true
 comments: false
@@ -20,6 +20,9 @@ nav_order: 5
 
 Welcome! These tutorials are designed to be completed **in order**.
 
+{: .note }
+We've written these CPX tutorials assuming you have limited background in circuits and/or programming. If these concepts are new to you, these tutorials are likely a great place to start before diving into our series on [Intro to Electronics](../electronics/) and [Intro to Arduino](../arduino/).
+
 ## [Lesson 1: Introduction to the CPX and MakeCode](cpx.md)
 
 In [this lesson](cpx.md), you'll learn about the Circuit Playground Express (CPX), how it differs from and relates to the Arduino platform, and how to program the board.
@@ -31,3 +34,7 @@ In [this lesson](makecode.md), we will make our first MakeCode+CPX program—cal
 ## [Lesson 3: Making a Simple Button Piano](button-piano.md)
 
 In [this lesson](button-piano.md), we will make our first interactive CPX program: a simple button piano, which uses the CPX's built-in buttons and the speaker to make sound.
+
+## [Lesson 4: Light-Level Instrument](sensor-instrument.md)
+
+In [this lesson](sensor-instrument.md), we will make our second interactive CPX program, which builds on our knowledge from the first: a light-responsive instrument.

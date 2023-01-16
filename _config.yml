@@ -68,7 +68,7 @@ callouts:
     title: Note
     color: purple
   information:
-    title: More Information
+    title: Information
     color: yellow
   warning:
     title: Warning

@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L2&#58; Programming with MakeCode
-parent: Circuit Express (CPX)
+title: L2&#58; Making with MakeCode
+parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
 nav_exclude: false

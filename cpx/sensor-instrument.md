@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L4&#58; Light-Responsive Instrument
-parent: Circuit Express (CPX)
+title: L4&#58; Light-Level Instrument
+parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
 nav_exclude: false

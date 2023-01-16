@@ -1,7 +1,7 @@
 ---
 layout: default
 title: L3&#58; Button Piano
-parent: Circuit Express (CPX)
+parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
 nav_exclude: false

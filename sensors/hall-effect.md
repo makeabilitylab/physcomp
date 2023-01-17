@@ -228,6 +228,7 @@ Which of these two sensors is right for your application depends on a number of 
 ## References
 - [TI DRV5055 datasheet](http://www.ti.com/lit/ds/symlink/drv5055.pdf), Texas Instruments
 - [Hall Effect Sensing and Applications](https://sensing.honeywell.com/hallbook.pdf), Honeywell
+- [5 Common Hall-effect Sensor Myths](https://e2e.ti.com/blogs_/b/analogwire/posts/5-common-hall-effect-sensor-myths), Texas Instruments
 
 ## Videos
 - [What is the Hall Effect and How do Hall Effect Sensors Work](https://youtu.be/wpAA3qeOYiI), How to Mechatronics

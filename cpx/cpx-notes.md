@@ -22,23 +22,30 @@ Continued brainstorming:
 
 [Done] Lesson 3: discrete piano
 [Done] Lesson 4: basic analog sensor w console logging and theremin [did this]
-Maybe here, do more sensors
+[Done] Lesson 4 or 5: Maybe here, do more sensors—I did add more to Lesson 4 just now
+
 Lesson 5: capacitive touch + touch piano
-    - Have one capactive touch. Use space bar. Have them play flappy bird.
+    - Have one capacitive touch. Use space bar. Have them play flappy bird.
     - Then show more complex example. Can share our Capacitive Touch Playground
     - Maybe introduce function here?
-Lesson 6: neopixel
+
+Lesson 6: CPX as a keyboard/mouse
+
 Lesson 7: external sensors
     - First use a potentiometer and use graph to show value along with console log
     - Then maybe a slide potentiometer
     - Then a pressure sensor
     - Then maybe a flex sensor?
 Lesson 8: lofi sensors
+    - Lo-fi resistive sensors
+Lesson 9: neopixel
 
 other things:
 - sound as input / loud sound
 - do we want to introduce variables? If so, we could do the hue sweep one https://makecode.com/_WsCHuiTjeUoD
 - how about infrared? if we do this, i want to do remote control servo motor
+- ultrasonic sensors
+  - Example: https://youtu.be/NIKu0-Tgh2M?t=3076
 
 ----
 Lesson 1: Our first MakeCode program

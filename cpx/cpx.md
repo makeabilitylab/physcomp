@@ -135,13 +135,19 @@ The CPX also has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M
 
 ## Using the CPX as Computer Input
 
+<video playsinline style="margin:0px" controls>
+  <source src="assets/videos/CPX_BananaPiano_OptimizedTrimmed.mp4" type="video/mp4" />
+</video>
+**Video.** The CPX can be used as an input controller to your computer. You can make your own keyboard, mouse, joystick, and more!
+{: .fs-1 }
+
 Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MIDI, or simply a serial port. So you can easily make custom input to your computer—neat!
 
 ## Programming
 
 An additional benefit of the CPX compared with traditional Arduino is that it can be programmed multiple ways. 
 
-For novices with limited programming background or for those who simply like visual programming languages, you can use **[MakeCode]**(https://learn.adafruit.com/adafruit-circuit-playground-express/makecode). More advanced users may choose Python via **[CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython)** or C/C++ via the **[Arduino IDE](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino)**.
+For novices with limited programming background or for those who simply like visual programming languages, you can use **[MakeCode](https://learn.adafruit.com/adafruit-circuit-playground-express/makecode)**. More advanced users may choose Python via **[CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-express/what-is-circuitpython)** or C/C++ via the **[Arduino IDE](https://learn.adafruit.com/adafruit-circuit-playground-express/arduino)**.
 
 ### MakeCode
 

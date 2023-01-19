@@ -24,8 +24,15 @@ Continued brainstorming:
 [Done] Lesson 4: basic analog sensor w console logging and theremin [did this]
 Maybe here, do more sensors
 Lesson 5: capacitive touch + touch piano
+    - Have one capactive touch. Use space bar. Have them play flappy bird.
+    - Then show more complex example. Can share our Capacitive Touch Playground
+    - Maybe introduce function here?
 Lesson 6: neopixel
 Lesson 7: external sensors
+    - First use a potentiometer and use graph to show value along with console log
+    - Then maybe a slide potentiometer
+    - Then a pressure sensor
+    - Then maybe a flex sensor?
 Lesson 8: lofi sensors
 
 other things:

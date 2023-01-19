@@ -19,12 +19,10 @@ usetocbot: true
 
 In this lesson, we will make our first interactive CPX program in MakeCode—a simple Button Piano—which makes sounds when we press the CPX's built-in buttons.
 
-<!-- Notes to self:
+<!-- Notes to self on lesson:
 * Introduce notion of button
 * Show how MakeCode supports four different button events: click, up, down, etc.
 * If you have a block that doesn't have a notch up top, it means it will run an event when -->
-
-
 <!-- Ref: https://youtu.be/NIKu0-Tgh2M (MakeCode Tutorial) -->
 
 ## Video Tutorial

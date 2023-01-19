@@ -19,6 +19,8 @@ usetocbot: true
 
 In this lesson, we will build on our last lesson—the [Button Piano](button-piano.md)—to make an interactive instrument that translates light levels into sound and light. It won't sound great but it will sound fun!
 
+<!-- TODO consider adding in a lil video of a theremin? -->
+
 ## Video Tutorial
 
 <div class="iframe-container">
@@ -70,6 +72,19 @@ We also used one [Logic block](https://makecode.adafruit.com/blocks/logic) to ch
 To ensure that our volume is properly set, we initialize it to 255 (the highest value) when the program first starts using the [on start](https://makecode.adafruit.com/blocks/on-start) block
 
 - **[on start](https://makecode.adafruit.com/blocks/on-start)** runs once and only once when the program starts
+
+## Design Activity
+
+How might you use the other built-in sensors to create music? Try playing with [**acceleration** (motion)](https://makecode.adafruit.com/reference/input/acceleration), [**sound level**](https://makecode.adafruit.com/reference/input/sound-level), and [**temperature**](https://makecode.adafruit.com/reference/input/temperature).
+
+Relatedly, how might you improve *how* the music sounds? In the [example below](https://makecode.com/_49zec62PC6eJ)—which is significantly more complicated so no worries if you do not understand it—we map the light level to notes in the C scale using a predefined array of frequencies (each frequency maps to a musical note in the C scale, which is indexed based on the light level).
+
+![A screenshot of the MakeCode showing the light sensor instrument mapped to the C Scale](assets/images/MakeCode_LightSensorInstrumentCScale.png)
+
+**Figure.** A more advanced light sensor instrument that translates the raw light levels to notes in the C scale. Here's [the full code](https://makecode.com/_49zec62PC6eJ).
+{: .fs-1 }
+
+<!-- <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.adafruit.com/---codeembed#pub:_bb6Musb9aVex" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div> -->
 
 ## Previous Lesson
 

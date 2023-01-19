@@ -40,7 +40,7 @@ Here's the final [code](https://makecode.com/_2dVi02gquH6h). Right-click on the 
 
 ## Blocks
 
-We use the following blocks in this example. You can read about the MakeCode blocks in the [Adafruit MakeCode Reference](https://makecode.adafruit.com/reference) guide.
+We use the following blocks in this example. See the [Adafruit MakeCode Reference](https://makecode.adafruit.com/reference) guide.
 
 ### Output
 

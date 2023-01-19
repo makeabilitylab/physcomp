@@ -21,7 +21,8 @@ search_exclude: true
 Continued brainstorming:
 
 [Done] Lesson 3: discrete piano
-Lesson 4: analog w console logging and theremin
+[Done] Lesson 4: basic analog sensor w console logging and theremin [did this]
+Maybe here, do more sensors
 Lesson 5: capacitive touch + touch piano
 Lesson 6: neopixel
 Lesson 7: external sensors
@@ -29,8 +30,8 @@ Lesson 8: lofi sensors
 
 other things:
 - sound as input / loud sound
-
 - do we want to introduce variables? If so, we could do the hue sweep one https://makecode.com/_WsCHuiTjeUoD
+- how about infrared? if we do this, i want to do remote control servo motor
 
 ----
 Lesson 1: Our first MakeCode program
@@ -84,6 +85,7 @@ Neopixel
 - We can use the MakeCode direct color to select specific colors
 - Or loop through our own colors
 - Talk about Neopixel strips: https://youtu.be/Bo0cM2qmuAE?t=238 at very end
+- Maybe talk about photon and pen down, etc. (see https://youtu.be/NIKu0-Tgh2M?t=1338)
 
 OTHER THINGS
 - What about haptics?
@@ -108,6 +110,7 @@ Servo motor (Behind MakeCode Series): https://www.youtube.com/watch?v=okxooamdAP
 - Servo with MakeCode demo: https://youtu.be/cofElsolYk4
 - Cool marble run with servo motors: https://makecode.adafruit.com/courses/maker/projects/marble-run
 - https://makecode.adafruit.com/courses/maker/projects/servo-box
+- Servo in MakeCode tutorial by Derek Banas: https://youtu.be/NIKu0-Tgh2M?t=1784
 
 Buttons (Behind MakeCode Series): https://www.youtube.com/watch?v=t_Qujjd_38o
 - Neat cutaway of a button: https://youtu.be/t_Qujjd_38o?t=217

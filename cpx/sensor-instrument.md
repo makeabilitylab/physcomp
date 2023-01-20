@@ -76,7 +76,7 @@ To ensure that our volume is properly set, we initialize it to 255 (the highest 
 ## Design Activity
 
 {: .note }
-The examples we include here are intentionally more complicated to show you the power and potential of MakeCode with the CPX. It's OK if you don't understand something. We'll get there!
+The examples we include here are intentionally more complicated to help demonstrate the power and potential of MakeCode with the CPX. It's OK if you don't understand something. We'll get there!
 
 How might you use the other built-in sensors to create music? Try playing with [**acceleration** (motion)](https://makecode.adafruit.com/reference/input/acceleration), [**sound level**](https://makecode.adafruit.com/reference/input/sound-level), and [**temperature**](https://makecode.adafruit.com/reference/input/temperature). For example, we've created an [example accelerometer-based instrument](https://makecode.com/_fbsJcbKMgJxv) that changes the pitch and volume based on the y and x acceleration, respectively. You need not create something so complicated but do try to experiment with different sensors!
 

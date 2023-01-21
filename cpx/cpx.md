@@ -116,6 +116,18 @@ Each pad can provide up to ~20mA of current so do not connect a motor or other h
 
 For more information, see [Adafruit's CPX Pinouts Guide](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#each-pin-2906289).
 
+### Capacitive Touch Sensor Pads
+
+<video playsinline style="margin:0px" controls>
+  <source src="assets/videos/CPX_CapacitiveSensing_SodaCanProximityDetector_MakeCode_Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** Pins A1-A7 on the CPX can be used for capacitive touch sensing. Here, I'm showing how we can use a soda can to build a simple hand proximity detector.
+{: .fs-1 }
+
+Of the eight GPIO pins, **seven** can be used for capacitive touch sensing (Pins A1-A7). You'll learn more about capacitive sensing in [Lesson 5](capacitive-touch.md)!
+
+![A pinout diagram of the CPX highlighting the capacitive touch pads](assets/images/CPX_CapacitiveTouchPadsAnnotated_ByJonFroehlich.png)
+
 ### Power Pads
 
 As the [Adafruit CPX guide describes](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#power-pads-2906283), there are six power pads equally spaced around the CPX's perimeter. Specifically, there are:

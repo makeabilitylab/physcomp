@@ -4,11 +4,38 @@ title: L5&#58; Capacitive Touch
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
-nav_exclude: true
+nav_exclude: false
 usetocbot: true
 ---
 
-Flow:
+In this three-part lesson, we will learn how to use the capacitive touch pads on the CPX.
+
+## Lesson 5.1: Intro to Capacitive Touch on the CPX
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/HKwtXrTdocE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+## Lesson 5.2: Interacting with Everyday Objects Using Capacitive Sensing
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/_eMAbP7ATOU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+## Lesson 5.3: Making a Capacitive Touch Keyboard
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/DrqrGA9OtvE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+## Lesson 5.4: Making a Lo-fi Capacitive Touch Nintendo Controller
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/2HasGGKsyI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+
+<!-- Flow:
 Remember A0 cannot be used for capacitive touch
 - Start with end result. A capacitive touch fruit piano (note: can edit this in)
 
@@ -22,7 +49,7 @@ Remember A0 cannot be used for capacitive touch
 - Then build it up on all touchpads A1 through A3
 - Now, here's the fun part. We can hook up external objects that are conductive. "Connecting an object to a touch pin can make it touch sensor. When some object is connected to a pin, it changes the capacitance that is measured for the pin. When your program starts, it calibrates its measurement of capacitance for the pin surface and any object connected to it. This allows it to properly detect your touch." https://makecode.adafruit.com/learnsystem/pins-tutorial/touch-input/sensor-objects
 
-- Then show to make hover gesture that changes pitch?
+- Then show to make hover gesture that changes pitch? -->
 
 <!-- Capacitive sensing technology works by measuring the change in capacitance (the ability of a system to store an electric charge) within its projected field due to the presence of a conductive object. See: https://www.rspinc.com/blog/contract-manufacturing/what-is-a-capacitive-touch-sensor-how-are-they-used/ -->
 
@@ -40,7 +67,7 @@ Adafruit Capacitive lesson: https://learn.adafruit.com/make-it-sense/makecode-6-
 
 <!-- https://makecode.adafruit.com/learnsystem/pins-tutorial/devices/capacitors -->
 
-- [Capacitive Touch Input](https://makecode.adafruit.com/learnsystem/pins-tutorial/touch-input), Adafruit MakeCode Documentation
+- [Capacitive Touch Input on the CPX](https://makecode.adafruit.com/learnsystem/pins-tutorial/touch-input), Adafruit MakeCode Documentation
 
 - [Calibrate Capacitive Sensitivity](https://makecode.adafruit.com/learnsystem/pins-tutorial/touch-input/calibrate-sensitivity), Adafruit MakeCode Documentation
 

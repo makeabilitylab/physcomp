@@ -118,7 +118,7 @@ For more information, see [Adafruit's CPX Pinouts Guide](https://learn.adafruit.
 
 ### Capacitive Touch Sensor Pads
 
-<video playsinline style="margin:0px" controls>
+<video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/CPX_CapacitiveSensing_SodaCanProximityDetector_MakeCode_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Pins A1-A7 on the CPX can be used for capacitive touch sensing. Here, I'm showing how we can use a soda can to build a simple hand proximity detector.

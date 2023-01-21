@@ -16,7 +16,7 @@ In this three-part lesson, we will learn how to use the capacitive touch pads on
   <iframe width="100%" src="https://www.youtube.com/embed/HKwtXrTdocE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
-## Lesson 5.2: Interacting with Everyday Objects Using Capacitive Sensing
+## Lesson 5.2: Capacitive Sensing with Everyday Objects
 
 <div class="iframe-container">
   <iframe width="100%" src="https://www.youtube.com/embed/_eMAbP7ATOU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

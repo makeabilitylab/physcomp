@@ -1,0 +1,23 @@
+
+---
+layout: default
+title: L7&#58; NeoPixels
+parent: Circuit Playground Express
+has_toc: true # (on by default)
+comments: true
+nav_exclude: true
+usetocbot: true
+---
+# {{ page.title | replace_first:'L','Lesson '}}
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+---
+
+## References
+
+[Handcrafting Textile Sensors](https://cdn-shop.adafruit.com/datasheets/HandcraftingSensors.pdf), Hannah Perner-Wilson

@@ -95,8 +95,11 @@ Similarly, [here's a version](https://makecode.com/_RCK2f5KhHLby) that maps the 
 
 <!-- <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.adafruit.com/---codeembed#pub:_bb6Musb9aVex" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div> -->
 
-## Previous Lesson
+## Next Lesson
+
+In the [next lesson](capacitive-touch), we'll introduce a multi-part series on using capacitive sensing to interact with everyday objects and more!
 
 <span class="fs-6">
 [Previous: Button Piano](button-piano.md){: .btn .btn-outline }
+[Next: Capacitive Sensing](capacitive-touch.md){: .btn .btn-outline }
 </span>

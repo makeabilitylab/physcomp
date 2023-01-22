@@ -69,6 +69,6 @@ To ensure that our volume is properly set, we initialize it to 255 (the highest 
 In the [next lesson](sensor-instrument.md), we'll create a light-responsive instrument!
 
 <span class="fs-6">
-[Previous: Button Piano](button-piano.md){: .btn .btn-outline }
+[Previous: How to use MakeCode](makecode.md){: .btn .btn-outline }
 [Next: Light-Responsive Instrument](sensor-instrument.md){: .btn .btn-outline }
 </span>

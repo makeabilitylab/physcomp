@@ -50,3 +50,11 @@ In [this lesson](sensor-instrument.md), we will make our second interactive CPX 
 ## [Lesson 5: Capacitive Sensing](capacitive-touch.md)
 
 In [this multi-part lesson](capacitive-touch.md), we will use the CPX's capacitive touch features to create a proximity sensor, a banana piano, and a lo-fi input controller made out of cardboard, copper tape, and tin foil.
+
+## [Lesson 6: CPX as a Keyboard]
+
+In [this multi-part lesson](cpx-keyboard.md), we will revisit using the CPX as a keyboard and walk through creating a custom keyboard and an accelerometer-based keyboard.
+
+## [Lesson 6: CPX as a Mouse]
+
+In [this multi-part lesson](cpx-mouse.md), we will build a custom mouse with the CPX and MakeCode. We'll start with a simple discrete mouse that moves the mouse cursor by a few pixels when you press the built-in CPX buttons before showing how to make an accelerometer-based mouse.

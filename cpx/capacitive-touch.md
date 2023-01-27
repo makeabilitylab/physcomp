@@ -128,8 +128,17 @@ If you want to learn more about how capacitive and resistive touchscreens work, 
 - [Using a resistive touchscreen](https://www.youtube.com/watch?v=_GT_sgbKQrc), DroneBot Workshop
 - [How to Add Capacitive Sensing to Any Arduino Project](https://www.digikey.com/en/maker/blogs/2021/how-to-add-capacitive-sensing-to-any-arduino-project), Maker.io
 
-## Previous Lesson
+<!-- ## Previous Lesson
 
 <span class="fs-6">
 [Previous: Light-Responsive Instrument](sensor-instrument.md){: .btn .btn-outline }
+</span> -->
+
+## Next Lesson
+
+In the [next lesson](cpx-keyboard.md), we'll revisit using the CPX as a programmable keyboard and deepen our understanding.
+
+<span class="fs-6">
+[Previous: Light-Responsive Instrument](sensor-instrument.md){: .btn .btn-outline }
+[Next: CPX as a Keyboard](cpx-keyboard.md){: .btn .btn-outline }
 </span>

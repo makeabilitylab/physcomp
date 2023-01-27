@@ -87,3 +87,12 @@ All project examples below provide tutorials with example MakeCode code.
 
 - [Mouse Painter](https://learn.adafruit.com/mouse-painter-emulate-mice-with-makecode/overview), John Park
 - [Make it a Mouse](https://learn.adafruit.com/make-it-a-mouse), Anne Barela
+
+## Next Lesson
+
+In the [next lesson](cpx-mouse.md), we'll extend our work to build a custom interactive mouse.
+
+<span class="fs-6">
+[Previous: Capacitive Sensing](capacitive-touch.md){: .btn .btn-outline }
+[Next: CPX as a Mouse](cpx-mouse.md){: .btn .btn-outline }
+</span>

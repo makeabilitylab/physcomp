@@ -59,3 +59,9 @@ All project examples below provide tutorials with example MakeCode code.
 
 - [Mouse Painter](https://learn.adafruit.com/mouse-painter-emulate-mice-with-makecode/overview), John Park
 - [Make it a Mouse](https://learn.adafruit.com/make-it-a-mouse), Anne Barela
+
+## Previous Lesson
+
+<span class="fs-6">
+[Previous: CPX as a Keyboard](cpx-keyboard.md){: .btn .btn-outline }
+</span>

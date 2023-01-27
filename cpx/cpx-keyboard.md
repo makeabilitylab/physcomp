@@ -20,7 +20,7 @@ usetocbot: true
 In Lesson 6 of our CPX series, we will learn how to use the CPX as a programmable keyboard. We'll begin by making the A and B buttons into keyboard presses and then create increasingly fun and interesting keyboards, including a media controller keyboard (Lesson 6.2: https://youtu.be/0Uwvc497r2w) and an accelerometer-based keyboard (Lesson 6.3: TODO).
 
 {: .note }
-Note: there is some overlapping content with Lesson 5.3: Making a Capacitive Keyboard (https://youtu.be/DrqrGA9OtvE) but we wanted to start from the beginning here and grow outward!
+Note: there is some overlapping content with [Lesson 5.3: Making a Capacitive Keyboard](capacitive-touch.md#lesson-53-making-a-capacitive-touch-keyboard) but we wanted to start from the beginning here and grow outward! So, you should be able to complete these lessons even if you have not completed Lesson 5.3.
 
 ## Lesson 6.1: Making a Programmable Keyboard with the CPX and MakeCode
 

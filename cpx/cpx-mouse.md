@@ -19,7 +19,7 @@ usetocbot: true
 
 In Lesson 7 of our CPX series, we will learn how to use the CPX as a programmable mouse. We'll begin by making a discrete mouse that shifts the mouse cursor by small amounts with button A and B presses before building a more complex accelerometer-based mouse with continuous input.
 
-## Lesson 7.1: Making a Programmable Mouse with CPX and MakeCode
+## Lesson 7.1: Making a Programmable Mouse
 
 In this lesson, we will show how to use the CPX as a programmable mouse.
 
@@ -27,7 +27,7 @@ In this lesson, we will show how to use the CPX as a programmable mouse.
   <iframe width="100%" src="https://www.youtube.com/embed/bOm1qXTDi-o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
-## Lesson 7.2: Making an Accelerometer Mouse
+## Lesson 7.2: Accelerometer Mouse
 
 In this lesson, we will show how to use the CPX's built-in accelerometer to make smooth, continuous mouse input.
 

@@ -77,6 +77,10 @@ Here is a link to the programs we built in Lesson 5.4.
 
 - [Code for capacitive-touch gamepad](https://makecode.com/_2q5bAx9ch5am)
 
+<!-- Ideas for Lesson 5.5 and beyond:
+- Make Simon Says with touchpads and sound. See: https://learn.adafruit.com/simon-game-clone-with-circuitplayground-express-and-circuitpython 
+- 
+- -->
 
 <!-- Flow:
 Remember A0 cannot be used for capacitive touch

@@ -50,6 +50,8 @@ other things:
 - sound as input / loud sound
 - do we want to introduce variables? If so, we could do the hue sweep one https://makecode.com/_WsCHuiTjeUoD
 - how about infrared? if we do this, i want to do remote control servo motor
+  - https://learn.adafruit.com/infrared-ir-receive-transmit-circuit-playground-express-circuit-python
+  - https://learn.adafruit.com/circuit-playground-express-laser-tag
 - ultrasonic sensors
   - Example: https://youtu.be/NIKu0-Tgh2M?t=3076
 

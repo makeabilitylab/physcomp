@@ -32,6 +32,8 @@ All project examples below provide tutorials with example MakeCode code.
 - [Capacitive Touch Pulsing Heart](https://learn.adafruit.com/3d-printed-heart-capacitive-touch), Dano Wall
 - [Lo-Fi Robotic Fish](https://learn.adafruit.com/trash-robo-fish), Dano Wall
 - [Color Spinner Light](https://learn.adafruit.com/camera-ring-light-with-CPX), Dano Wall
+- [Recreating the Rainbow Animation](https://makecode.com/_YvfVvjH5J1iv), Jon E. Froehlich
 
 ## References
+
 - [NeoPixels with MakeCode](https://learn.adafruit.com/neopixels-with-makecode), Peli de Halleux

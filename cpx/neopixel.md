@@ -1,11 +1,12 @@
 ---
 layout: default
-title: L7&#58; NeoPixels
+title: LX&#58; NeoPixels
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
 nav_exclude: true
 usetocbot: true
+search_exclude: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

@@ -1,11 +1,11 @@
-
 ---
 layout: default
-title: L7&#58; NeoPixels
+title: LX&#58; Lo-fi Resistive Sensors
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
 nav_exclude: true
+search_exclude: true
 usetocbot: true
 ---
 # {{ page.title | replace_first:'L','Lesson '}}

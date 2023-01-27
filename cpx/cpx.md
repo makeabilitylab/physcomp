@@ -150,10 +150,16 @@ The CPX also has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M
 <video playsinline style="margin:0px" controls>
   <source src="assets/videos/CPX_BananaPiano_OptimizedTrimmed.mp4" type="video/mp4" />
 </video>
-**Video.** The CPX can be used as an input controller to your computer. You can make your own keyboard, mouse, joystick, and more!
+**Video.** The CPX can be used as an input controller to your computer. You can make your own keyboard, mouse, joystick, and more! This example is from [Lesson 5.3: Making a Capacitive Keyboard](capacitive-touch.md#lesson-53-making-a-capacitive-touch-keyboard).
 {: .fs-1 }
 
 Like the Arduino Leonardo, the CPX can act like a keyboard, mouse, joystick, MIDI, or simply a serial port. So you can easily make custom input to your computer—neat!
+
+You can learn more about this in:
+
+- [Lesson 5.3: Making a Capacitive Keyboard](capacitive-touch.md#lesson-53-making-a-capacitive-touch-keyboard)
+- [Lesson 6: Using the CPX as a Keyboard](cpx-keyboard.md)
+- [Lesson 7: Using the CPX as a Mouse](cpx-mouse.md)
 
 ## Programming
 

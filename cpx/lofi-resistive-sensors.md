@@ -21,3 +21,4 @@ usetocbot: true
 ## References
 
 [Handcrafting Textile Sensors](https://cdn-shop.adafruit.com/datasheets/HandcraftingSensors.pdf), Hannah Perner-Wilson
+[CPX Read Analog](https://makecode.adafruit.com/learnsystem/pins-tutorial/analog-input/read-analog), Adafruit

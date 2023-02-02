@@ -28,20 +28,24 @@ Continued brainstorming:
     - Then show more complex example. Can share our Capacitive Touch Playground
     - Maybe introduce function here?
 
-Lesson 6: CPX as a keyboard
+[Done] Lesson 6: CPX as a keyboard
+[Done] Lesson 7: CPX as a mouse
 
-Lesson 7: CPX as a mouse
-
-Lesson 8: NeoPixel
-
-Lesson 9: resistive sensors
+Lesson 8: resistive sensors
     - First use a potentiometer and use graph to show value along with console log
     - Then maybe a slide potentiometer
     - Then a pressure sensor
     - Then maybe a flex sensor?
-    - 
-Lesson 10: lofi resistive sensors
+    - Make the CPX mouse and play pong
+
+Lesson 9: lofi resistive sensors
     - Lo-fi resistive sensors
+    - Refs:
+    - https://makeabilitylab.github.io/physcomp/electronics/variable-resistors.html#activity-build-your-own-diy-variable-resistor
+    - Adafruit's docs make a lo-fi slide potentiometer:
+      - https://makecode.adafruit.com/learnsystem/pins-tutorial/analog-input/read-analog
+
+Lesson 10: Neopixels
 
 Lesson 11: other sensors?
 Lesson 12: servos?

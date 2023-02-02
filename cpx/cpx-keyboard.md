@@ -30,6 +30,14 @@ In this lesson, we will show how to use the CPX as a programmable keyboard
   <iframe width="100%" src="https://www.youtube.com/embed/2ehFfhHLcNQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
+### Lesson 6.1 Code
+
+Here's a link to the MakeCode we wrote in this lesson:
+
+- [Button A as a spacebar](https://makecode.com/_R01JeR0doWvL)
+- [Left/right arrow + spacebar](https://makecode.com/_UkEUewXxhH07)
+- [Pressings keys down and up](https://makecode.com/_02tfJu5xp785)
+
 ## Lesson 6.2: The CPX as a Media Player Controller
 
 In this lesson, we will show how to use the media key functionality to control Spotify and YouTube.
@@ -38,6 +46,10 @@ In this lesson, we will show how to use the media key functionality to control S
   <iframe width="100%" src="https://www.youtube.com/embed/0Uwvc497r2w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
+### Lesson 6.2 Code
+
+Here's the [MakeCode](https://makecode.com/_Ks7Ftj2jqHHW) we created during this lesson, which shows how to use media key presses to control Spotify and YouTube.
+
 ## Lesson 6.3: Accelerometer Keyboard
 
 In this lesson, we show how to translate the accelerometer signal to key presses.
@@ -45,6 +57,15 @@ In this lesson, we show how to translate the accelerometer signal to key presses
 <div class="iframe-container">
   <iframe width="100%" src="https://www.youtube.com/embed/0Uwvc497r2w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
+
+### Lesson 6.3 Code
+
+- [Basic tilt program](https://makecode.com/_WJHbKkdeqEcx) 
+- [Real-time tilt tester](https://makecode.com/_VCPKbR341UyA)
+- [Tilt keyboard](https://makecode.com/_M3m2PA76F6TL)
+- [Improved tilt keyboard](https://makecode.com/_atTA20HkMV3j)  
+
+As promised, here's a different take ([code link](https://makecode.com/_e5kEupV4594H)) on the real-time tilt keyboard that we previously created but is different from the solution we came up with during the video.
 
 <!-- Ideas:
 - Start very simple. Hit button 'A' to send "I love making!" or "I love prototyping!"

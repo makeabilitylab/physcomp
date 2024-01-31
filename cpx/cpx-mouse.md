@@ -70,8 +70,11 @@ All project examples below provide tutorials with example MakeCode code.
 - [Mouse Painter](https://learn.adafruit.com/mouse-painter-emulate-mice-with-makecode/overview), John Park
 - [Make it a Mouse](https://learn.adafruit.com/make-it-a-mouse), Anne Barela
 
-## Previous Lesson
+## Next Lesson
+
+In the [next lesson](analog-input.md), we'll learn how to hook up external sensors like potentiometers using **analog input** on the CPX.
 
 <span class="fs-6">
 [Previous: CPX as a Keyboard](cpx-keyboard.md){: .btn .btn-outline }
+[Next: Analog Input on the CPX](analog-input.md){: .btn .btn-outline }
 </span>

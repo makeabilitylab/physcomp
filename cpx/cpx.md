@@ -54,6 +54,13 @@ It's OK if you don't understand all of the terminology used below. In fact, if t
 
 ### Built-in Input
 
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/CPX_PaintingWithCPXAccelerometerAsAMouse.mp4" type="video/mp4" />
+</video>
+
+**Video.** The CPX has lots of really fun and interesting on-board sensors, including an accelerometer, temperature, light, sound, and more. In the video above, I'm showing how to use the on-board accelerometer (motion sensor) to create a "motion mouse" with the CPX. See [L7.2: Accelerometer Mouse](cpx-mouse.md#lesson-72-accelerometer-mouse) for more! 
+{: .fs-1 }
+
 Specifically, the CPX includes the following built-in input/sensors:
 
 - 1 x Motion sensor (LIS3DH triple-axis accelerometer with tap detection, free-fall detection)
@@ -105,10 +112,10 @@ In addition to the built-in components, the CPX has 14 connection pads to suppor
 
 ### Input/Output (I/O) Pads
 
-The CPX has eight general purpose I/O pins (GPIO) for interfacing with external electronic components. All of the I/O pads can be used as digital I/O, analog input (12-bit ADC), and PWM. All but A0 can be used for capacitive touch (A0 is special and the only true analog output).
+The CPX has eight general purpose I/O pins (GPIO) for interfacing with external electronic components. All of the I/O pads can be used as digital I/O, analog input, and PWM. 
 
 {: .warning }
-Each pad can provide up to ~20mA of current so do not connect a motor or other high-power component directly. If you don't know what this means, that's OK! You can always ask the instruction team whether a component is safe to use!
+Each pad can provide up to ~20mA of current so **do not connect a motor** or other high-power component directly. If you don't know what this means, that's OK! You can always ask the instruction team whether a component is safe to use!
 
 ![A pinout diagram of the CPX highlighting the CPX GPIO pads](assets/images/CPX_GPIOPadsAnnotated_ByJonFroehlich.png)
 
@@ -116,12 +123,28 @@ Each pad can provide up to ~20mA of current so do not connect a motor or other h
 
 For more information, see [Adafruit's CPX Pinouts Guide](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#each-pin-2906289).
 
+### Analog Input
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/CPX_AnalogInput_PotentiometerOverview_Optimized.mp4" type="video/mp4" />
+</video>
+
+**Video.** Pins A1-A7 on the CPX can be used for analog input to read voltages between 0-3.3V, which the CPX converts to a number between 0-1023. Here, I'm using a [potentiometer](../electronics/variable-resistors.md#potentiometers), which dynamically changes its resistance (and splits the voltage levels) based on knob position. Learn more about analog input in [L8: Analog Input](analog-input.md)!
+{: .fs-1 }
+
+The CPX has six pins that can read analog input (A1-A7). Analog input pins read voltage levels that range between 0V (GND) to 3.3V. The CPX converts these voltages to a number between 0-1023 using what's called an analog-to-digital (ADC). The official CPX docs list the ADC as 12 bits (0-4096) but we've found that, in practice, it defaults to 10-bits. So, an analog signal is converted from 0 - 1023.
+
+Below is the pinout diagram for the CPX highlighting the analog input pins (A1-A7):
+
+![A pinout diagram of the CPX highlighting the analog input pins](assets/images/CPX_AnalogInputPads_ByJonFroehlich.png)
+
+You'll learn more about analog input in [L8: Analog Input](analog-input.md)!
+
 ### Capacitive Touch Sensor Pads
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/CPX_CapacitiveSensing_SodaCanProximityDetector_MakeCode_Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** Pins A1-A7 on the CPX can be used for capacitive touch sensing. Here, I'm showing how we can use a soda can to build a simple hand proximity detector.
+**Video.** Pins A1-A7 on the CPX can be used for capacitive touch sensing. Here, I'm showing how we can use a soda can to build a simple hand proximity detector. [Learn more here!](capacitive-touch.md)
 {: .fs-1 }
 
 Of the eight GPIO pins, **seven** can be used for capacitive touch sensing (Pins A1-A7). You'll learn more about capacitive sensing in [Lesson 5](capacitive-touch.md)!

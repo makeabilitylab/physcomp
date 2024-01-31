@@ -55,6 +55,10 @@ In [this multi-part lesson](capacitive-touch.md), we will use the CPX's capaciti
 
 In [this multi-part lesson](cpx-keyboard.md), we will revisit using the CPX as a keyboard and walk through creating a custom keyboard and an accelerometer-based keyboard.
 
-## [Lesson 6: CPX as a Mouse](cpx-mouse.md)
+## [Lesson 7: CPX as a Mouse](cpx-mouse.md)
 
 In [this multi-part lesson](cpx-mouse.md), we will build a custom mouse with the CPX and MakeCode. We'll start with a simple discrete mouse that moves the mouse cursor by a few pixels when you press the built-in CPX buttons before showing how to make an accelerometer-based mouse.
+
+## [Lesson 8: Analog Input](analog-input.md)
+
+In [this lesson](analog-input.md), we learn about how to use and hookup external sensors using **analog input** with the CPX and MakeCode.

@@ -52,6 +52,13 @@ In this lesson, we learn how to hook up **three-legged variable resistors** like
   <iframe width="100%" src="https://www.youtube.com/embed/7aujdrvN55w?si=ub-BLhdQSCc1gnSn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
+## Advanced Code
+Here is some more advanced code:
+* [Smoothing **A1** input using a **sliding window average** filter](https://makecode.com/_709gwz1vrLhC
+)
+
+* [Smoothing **A1** & **A2** input using a **sliding window average** filter](https://makecode.com/_asMfH6UqREW3)
+
 ## Previous Lesson
 
 <span class="fs-6">

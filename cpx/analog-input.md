@@ -33,6 +33,25 @@ In this lesson, we introduce **analog input** on the Circuit Playground Express 
 
 - [Analog Y Mouse Controller](https://makecode.com/_6HK2ucd74Aox). Controls mouse Y movement with A1 movement
 
+## Lesson 8.2: What is Analog Input?
+
+In this lesson, we learn more about *what* is **analog input** and *how* to use it on the CPX. We begin by introducing the 3.3V, GND, and A1 CPX connection pads and show how the function **[analog read](https://makecode.adafruit.com/learnsystem/pins-tutorial/analog-input/read-analog)** responds to different voltages (*e.g.,* 3.3V, GND). We then introduce the concept of dividing voltages via fixed resistors before building a lo-fi slide potentiometer using paper and a 2B pencil, which divides voltage dynamically.
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/jX9gMRW-D1c?si=Ejqh4Oo25gVSDn8t" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+{: .note }
+It's OK if you don't understand exactly how voltage dividers work. The key is in developing a bit of intuition about how the CPX analog read function works and what physical phenomena it is reading on A1 (it's voltage!). Any sensor that can manipulate voltage can be used as input. If you want to learn more about potentiometers and voltage dividers, see our [Arduino L4: Potentiometer lesson](../arduino/potentiometers.md)
+
+## Lesson 8.3: What is Analog Input?
+
+In this lesson, we learn how to hook up **three-legged variable resistors** like rotary and slide potentiometers as well as **two-legged variable resistors** like force-sensitive resistors, photo-sensitive resistors, and flex sensors.
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/7aujdrvN55w?si=ub-BLhdQSCc1gnSn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
 ## Previous Lesson
 
 <span class="fs-6">

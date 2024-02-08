@@ -44,7 +44,7 @@ In this lesson, we learn more about *what* is **analog input** and *how* to use 
 {: .note }
 It's OK if you don't understand exactly how voltage dividers work. The key is in developing a bit of intuition about how the CPX analog read function works and what physical phenomena it is reading on A1 (it's voltage!). Any sensor that can manipulate voltage can be used as input. If you want to learn more about potentiometers and voltage dividers, see our [Arduino L4: Potentiometer lesson](../arduino/potentiometers.md)
 
-## Lesson 8.3: What is Analog Input?
+## Lesson 8.3: Hooking up Resistive Sensors
 
 In this lesson, we learn how to hook up **three-legged variable resistors** like rotary and slide potentiometers as well as **two-legged variable resistors** like force-sensitive resistors, photo-sensitive resistors, and flex sensors.
 
@@ -58,6 +58,13 @@ Here is some more advanced code:
 )
 
 * [Smoothing **A1** & **A2** input using a **sliding window average** filter](https://makecode.com/_asMfH6UqREW3)
+
+<!-- OTHER LESSON IDEAS:
+8.4: Resistive sensors -> analog mouse
+8.5: Two resistive sensors -> analog mouse xy
+8.6: Show how to use joystick (like two resistive sensors)
+
+ -->
 
 ## Previous Lesson
 

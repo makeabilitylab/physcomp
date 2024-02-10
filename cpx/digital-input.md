@@ -45,7 +45,11 @@ In this video, we introduce external pull-up resistors and then using internal p
 
 ## Lesson 8.4: Hooking up Arcade Buttons to the CPX
 
-TODO
+In this video, we show how to hook up arcade buttons to the CPX, which have cool embedded LEDs that we can turn on/off. We'll show how to wire up the arcade button with without and with the embedded LED and, along the way, learn a bit about digital write.
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/nExLP211ZUA?si=5_z8wM0QDisPTTo8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
 
 <!-- TODO: add in circuit diagrams and code links 
 Post advance code for debouncing

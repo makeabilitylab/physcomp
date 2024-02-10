@@ -62,3 +62,9 @@ In [this multi-part lesson](cpx-mouse.md), we will build a custom mouse with the
 ## [Lesson 8: Analog Input](analog-input.md)
 
 In [this lesson](analog-input.md), we learn about how to use and hookup external sensors using **analog input** with the CPX and MakeCode.
+
+## [Lesson 9: Digital Input](digital-input.md)
+
+In [this lesson](digital-input.md), we learn about how to use and hookup external buttons using **digital input** with the CPX and MakeCode.
+
+<!-- TODO: add in little teaser videos that load underneath each lesson -->

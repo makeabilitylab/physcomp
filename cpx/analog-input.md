@@ -64,10 +64,16 @@ Here is some more advanced code:
 8.5: Two resistive sensors -> analog mouse xy
 8.6: Show how to use joystick (like two resistive sensors)
 
+9.1 Digital input, etc.
+
+Series 10 could be getting sensor data into computer (the hacky way)
  -->
 
-## Previous Lesson
+## Next Lesson
+
+In the next lesson, we'll learn how to use **digital input** like buttons!
 
 <span class="fs-6">
 [Previous: CPX as a Mouse](cpx-mouse.md){: .btn .btn-outline }
+[Next: Digital Input](digital-input.md){: .btn .btn-outline }
 </span>

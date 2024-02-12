@@ -27,7 +27,7 @@ In this lesson, we introduce **analog input** on the Circuit Playground Express 
   <iframe width="100%" src="https://www.youtube.com/embed/S6X4Y5gfekc?si=RysXDQ5unRU7n79H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
-### Lesson 8.1 Code
+### Code
 
 - [Graphing Analog Input](https://makecode.com/_TbV5Tx22rdTh). Graphs the A1 value between 0-1023 in console and uses onboard NeoPixels as a graph
 
@@ -93,7 +93,7 @@ In this lesson, we learn how to hook up **three-legged variable resistors** like
   <iframe width="100%" src="https://www.youtube.com/embed/7aujdrvN55w?si=ub-BLhdQSCc1gnSn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
-### Resistive Sensor Circuit Diagrams
+### Circuit Diagrams
 
 Below, we provide circuit diagrams covered in the video. You can right-click and open up each image in a new tab to enlarge.
 

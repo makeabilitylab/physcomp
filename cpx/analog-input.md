@@ -17,7 +17,7 @@ usetocbot: true
 {:toc}
 ---
 
-In Lesson 8, we move beyond working with internal sensors on the CPX (light, microphone, accelerometer) and show how to connect to external sensors using analog input. 
+In Lesson 8, we move beyond working with internal sensors on the CPX (light 💡, microphone 🔊, accelerometer 🍎) and show how to connect external sensors using **analog input**.
 
 ## Lesson 8.1: Overview of Analog Input
 

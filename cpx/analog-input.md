@@ -105,7 +105,7 @@ Hooking up a rotary potentiometer
 
 ![](assets/images/CPX_RotaryPotentiometer_CircuitDiagram.png)
 
-Hooking up two rotary potentiometers:
+Hooking up two rotary potentiometers ([try out this code!](https://makecode.com/_CLJ8U8F2d7sT)):
 
 ![](assets/images/CPX_2RotaryPotentiometers_CircuitDiagram.png)
 

@@ -44,9 +44,10 @@ begin(unsigned long baud)
 begin(unsigned long baud, byte config)
 {% endhighlight C %}
 
-Once `Serial.begin()` is called, the Arduino Uno and Leonardo take over Pins 1 and 0 for serial transmission and reception, respectively, and the RX and TX LEDs light up on the board. So, after `Serial.begin()` is called, you should not use Pins 1 and 0 (unless you're using them for cross-device communication or to hook up your [logic analyzer](https://en.wikipedia.org/wiki/Logic_analyzer)!).
-
 Thus far, in our lessons, we have been using the first function—`begin(unsigned long baud)`—which sets the data rate in bits per second (baud). But what about the second function with `byte config` and what does this parameter mean? We'll dig in to both below.
+
+{: .warning  }
+Once `Serial.begin()` is called, the Arduino Uno and Leonardo take over Pins 1 and 0 for serial transmission and reception, respectively. The RX and TX LEDs light up on the board corresponding to communication. So, after `Serial.begin()` is called, **you should not use Pins 1 and 0** (unless you're using them for cross-device communication or to hook up your [logic analyzer](https://en.wikipedia.org/wiki/Logic_analyzer)!).
 
 ### Baud rate
 

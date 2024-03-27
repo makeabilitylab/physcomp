@@ -21,15 +21,17 @@ nav_order: 5
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/CPX_CapacitiveSensing_SodaCanProximityDetector_MakeCode_Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** In this tutorial series, you will learn how to use [Adafruit's Circuit Playground Express (CPX) microcontroller platform](https://www.adafruit.com/product/3333) and the wonderfully powerful and easy-to-use visual programming language called [MakeCode](https://www.microsoft.com/en-us/makecode). In the video above, we are using capacitive sensing to measure the hand's distance from the soda can. See more in [Lesson 5: Capacitive Sensing](capacitive-touch.md).
+**Video.** In the video above, we are using the CPX and capacitive sensing to measure the hand's distance from the soda can. See more in [Lesson 5: Capacitive Sensing](capacitive-touch.md). Join us in this tutorial series to learn about the amazing [Circuit Playground Express (CPX)](https://www.adafruit.com/product/3333) microcontroller platform and drag-and-drop visual programming called [MakeCode](https://www.microsoft.com/en-us/makecode).
 {: .fs-1 }
 
-Welcome! These tutorials are designed to be completed **in order**.
+Welcome! 👋🏽
+
+In this tutorial series, you will learn how to use [Adafruit's Circuit Playground Express (CPX) microcontroller platform](https://www.adafruit.com/product/3333) and the wonderfully powerful and easy-to-use visual programming language called [MakeCode](https://www.microsoft.com/en-us/makecode). These tutorials are designed to be completed **in order**.
 
 {: .note }
 We've written these CPX tutorials assuming you have limited background in circuits and/or programming. If these concepts are new to you, these tutorials are likely a great place to start before diving into our series on [Intro to Electronics](../electronics/) and [Intro to Arduino](../arduino/).
 
-Many of the lessons have full video tutorials. If you want to view them conveniently in one place, see the [YouTube playlist here](https://youtube.com/playlist?list=PLW7IRNr2aHZNWbCav5ez_dOus3o_qkHzv).
+Many of the lessons have full video tutorials 📽. If you want to view them conveniently in one place, see the [YouTube playlist here](https://youtube.com/playlist?list=PLW7IRNr2aHZNWbCav5ez_dOus3o_qkHzv).
 
 ## [Lesson 1: Introduction to the CPX and MakeCode](cpx.md)
 

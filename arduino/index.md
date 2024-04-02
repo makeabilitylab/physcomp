@@ -19,13 +19,14 @@ usetocbot: true
 
 Welcome 👋 to the second module in your Physical Computing journey: **Introduction to Microcontrollers** (using Arduino).
 
-Although you can begin your journey here, we strongly recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content. We will refer back to content from the first module.
+{: .note }
+Although you can begin your journey here, we  recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content. We will refer back to content from the first module.
 
 <!-- Call this intro to Microcontrollers and then cast Arduino as an example? -->
 
 <!-- Add an Intro to Microcontrollers, talk about Arduino vs. RaspPi -->
 
-There are many Arduino resources online, many good, some bad. Our two favorites are, perhaps, [Adafruit’s 18-Step Guide](https://learn.adafruit.com/series/learn-arduino) and Jeremy Blum's [Exploring Arduino: Tools and Techniques for Engineering Wizardry](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451), 2nd Edition, Wiley, 2020. See our [Resources](../resources/index.md) page for more.
+**Why this tutorial series?** There are many Arduino resources online, many good, some bad. Our two favorites are, perhaps, [Adafruit’s 18-Step Guide](https://learn.adafruit.com/series/learn-arduino) and Jeremy Blum's [Exploring Arduino: Tools and Techniques for Engineering Wizardry](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451), 2nd Edition, Wiley, 2020. See our [Resources](../resources/index.md) page for more.
 
 Our lessons are different both in approach and scope. They are based on years of experience in teaching physical computing—to design students, computer scientists, and engineers at the undergraduate and graduate level—and attempts to address common confusions head-on.
 

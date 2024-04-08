@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L3&#58; Serial Debugging
+title: L3&#58; Debugging with Serial
 nav_order: 3
 parent: Output
 grand_parent: Intro to Arduino
@@ -19,17 +19,22 @@ usetocbot: true
 {:toc}
 ---
 
-Debugging code is always hard. Debugging code+circuits is even harder. Though we're only on our **third** Arduino lesson (woohoo!), it's time to introduce some Arduino debugging strategies.
-
-For **hardware debugging**, multimeters and oscilloscopes are useful. We realize that many (most!) of you do not have your own multimeters or oscilloscopes and that, due to COVID, our labs are closed. Thus, your only option here is to use something like [Tinkercad Circuits](tinkercad.com/). If you're physically building something and it's not working, you could try to replicate it in Tinkercad or some other simulation tool.
-
-For **code debugging**, it's common to use "print line" statements (yes, I know)—see video below. Currently, the Arduino IDE does not  support code debugging (*e.g.,* breakpoints, code stepping, memory stack dumps). Note: there is forthcoming debugging support in the [newest beta ](https://blog.arduino.cc/2021/03/01/announcing-the-arduino-ide-2-0-beta/) of the Arduino IDE and there is rudimentary debugging support in the Tinkercad Circuits code editor.
-
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
 </video>
-**Video.** A video of the blink program with serial prints ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
+**Video.** A video showing how to use Serial.println() to debug code. For this, we modified the simple blink program to add  serial prints ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
 {: .fs-1 }
+
+Debugging code is always hard. Debugging code+circuits is even harder! 💪🏽 Though we're only on our **third** Arduino lesson (woohoo!), it's time to introduce some Arduino debugging strategies.
+
+For **hardware debugging**, multimeters and oscilloscopes are useful. We realize that many of you may not (yet) have your own multimeters or oscilloscopes. In this case, we recommend building your circuits in a simulation tool like [Tinkercad Circuits](tinkercad.com/) and using their virtual instruments (*e.g.,* multimeters). If you're physically building something and it's not working, you could try to replicate it in Tinkercad or some other simulation tool.
+
+For **code debugging**, it's common to use "printline" statements (yes, I know! 🤣)—see video above. Currently, the Arduino IDE does not support code debugging (*e.g.,* breakpoints, code stepping, memory stack dumps); however, there is rudimentary debugging support (*e.g.,* stepping through code) in [Tinkercad Circuits](tinkercad.com/).
+
+{ .note }
+With the introduction of the Arduino IDE 2.0, there is [debugging support](https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-debugger/); however, only certain Arduino boards are supported and you need specialized hardware.
+
+<!-- TODO: consider having recommendations for a basic multimeter and oscilliscope here. -->
 
 ## Using Serial.print for debugging
 

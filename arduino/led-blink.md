@@ -44,7 +44,7 @@ Using the same resistor-wrapped red LED from [before](led-on.md#step-1-wrap-resi
 
 {: .highlight }
 **TIP:**
-Double check to make sure that you've correctly connected GND and Pin 3—it's easy to be "off-by-one-pin" (a frustrating error!).
+Double check to make sure that you've correctly connected GND and Pin 3. When building circuits, it's easy to be "off-by-one" pin (a frustrating error!).
 
 While it's not necessary to use a breadboard for this simple circuit, here are two functionally equivalent breadboard-based wiring options. As our circuits get more complex, you will need to use a breadboard—so it's good to start (or continue!) building up familiarity. Which breadboarded design makes most sense to you? Use your finger to trace the flow of current from Pin 3 to GND. To zoom in on the images, you can right click and select "Open Image in a New Tab."
 
@@ -56,12 +56,8 @@ You can always return to our [breadboard](../electronics/breadboards.md) lesson 
 
 Next, we'll write `C/C++` code for the Arduino's microcontroller to turn on the LED from Pin 3, which will programmatically set Pin 3 to 5V.
 
----
-**NOTE:**
-
+{: .note }
 The Arduino software is open source and consists of a development environment (called an IDE) and core libraries. The core libraries are written in the `C` and `C++` programming language and compiled using avr-gcc and AVR libc. The source code for Arduino is hosted on [GitHub](https://github.com/arduino). The libraries for AVR microcontrollers like the ATmega328 (which the Arduino Uno uses) is in [GitHub here](https://github.com/arduino/ArduinoCore-avr).
-
----
 
 ## Get the Arduino IDE
 
@@ -71,15 +67,37 @@ But first, we need to download and install the [Arduino IDE](https://www.arduino
 
 Now, we are going to write code to turn on our LED by setting Pin 3 to HIGH (or 5V). Then, we will modify this code to flash the LED both on *and* off. To do this, we have to introduce **digital output.**
 
-The Arduino Uno has 14 general-purpose input/output ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (`HIGH` or `LOW`) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. We could have selected any of these pins for this lesson but we chose Pin 3 (in part, because we want to use this same pin in [Lesson 4](led-fade.md) and using it now simplifies things!).
+The Arduino Uno has **20 general-purpose input/output** ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (`HIGH` or `LOW`) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. 
 
-![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
+We could have selected *any* of these pins for this lesson but we chose Pin 3 (in part, because we want to use this same pin in [Lesson 4](led-fade.md) and using it now simplifies things!).
 
-You can control any of these 14 digital I/O pins with three functions:
+<!-- ![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png) -->
+
+![Close-up image of the 20 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_DigitalIOPins.png)
+
+You can control any of these 20 digital I/O pins with three functions:
 
 1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`. In this case, we want to specify `OUTPUT` because we want to **output** a signal to turn on the LED.
 2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`. We will cover `digitalRead` in our [Intro to Input](intro-input.md) lesson series.
 3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`. We'll be using `digitalWrite` in this lesson.
+
+---
+**NOTE:**
+
+While the white silkscreening on the Uno (and Leonardo) makes it seem like these boards only have 14 digital I/O pins (the top part of the board), they in fact have 20! Indeed, you can consult the official [Arduino Uno pinout diagram](https://docs.arduino.cc/resources/pinouts/A000066-full-pinout.pdf).
+
+![The official Arduino Uno pinout diagram](assets/images/ArduinoUno_OfficialPinOutDiagram.png)
+
+And here's a version with the digital I/O pins highlighted for emphasis:
+
+![The official Arduino Uno pinout diagram with the 20 digital I/O pins marked](assets/images/ArduinoUno_OfficialPinOutDiagram_DigitalIOPinsMarked.png)
+
+It's the same with the Arduino Leonardo (see [official "printout diagram" here](https://content.arduino.cc/assets/Pinout-Leonardo_latest.pdf)):
+
+![The official Arduino Leonardo pinout diagram with the 20 digital I/O pins marked](assets/images/ArduinoLeonardo_OfficialPinOutDiagram_DigitalIOPinsMarked.png)
+
+---
+
 
 ### What do we mean by HIGH and LOW?
 
@@ -127,7 +145,7 @@ Start a new sketch in the Arduino IDE:
 
 ### Step 2: Set the pinMode for Pin 3
 
-Because the 14 digital I/O pins can used for either input or output, we need to specify that Pin 3 should be used for *output*. That is, we want the Arduino to **output** a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
+Because the 20 digital I/O pins can used for **either** **input** or **output**, we need to specify that Pin 3 should be used for *output*. That is, we want the Arduino to **output** a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
 
 {% highlight C %}
 void setup() {

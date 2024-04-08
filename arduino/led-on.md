@@ -51,7 +51,12 @@ To wire wrap your components, simply twist the legs together like this:
 
 ### Step 2: Connect components to Arduino
 
-Insert the LED + resistor into the Arduino: the LED's cathode (short leg) to GND and the LED's anode (long leg) + resistor to the Arduino's voltage supply, which you can access via the 5V pin. 
+Insert the LED + resistor into the Arduino:
+
+* Connect the **LED's cathode** (short leg) to **GND**
+* Connect the **LED's anode** (long leg) + resistor to the **Arduino's voltage supply**, which you can access via the **5V pin**
+
+Make sure to push the legs down so they are well seated inside the Arduino's female headers.
 
 ![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/movies/Arduino_LEDOn_5VFixed_InsertLED.gif)
 
@@ -121,7 +126,7 @@ There are a variety of discussions about the Arduino Uno and Leonardo's maximum 
 
 An interesting question to ponder then is: with the Arduino powered via USB (max 500mA current), how many red LEDs could you hook up in series to the 5V supply pin? How about in parallel? What is the limiting factor for each?
 
-Well, for a simple series configuration, the total number of series LEDs is limited to the voltage supply, which is 5V. With a 200Ω resistor and a red LED with a "forward" voltage of $$V_f=2V$$, we are limited to a maximum of two LEDS: $$2 * 2V = 4V$$. However, in practice, I was able to get three LEDs in series (because the LED begins to turn on a bit around ~1.7-1.8V) though they were quite dim. See the table and image below for my measurements.
+Well, for a **simple series** configuration, the total number of series LEDs is limited to the voltage supply, which is 5V. With a 200Ω resistor and a red LED with a "forward" voltage of $$V_f=2V$$, we are limited to a maximum of two LEDS: $$2 * 2V = 4V$$. However, in practice, I was able to get three LEDs in series (because the LED begins to turn on a bit around ~1.7-1.8V) though they were quite dim. See the table and image below for my measurements.
 
 <!-- | Resistor | Num Red LEDs in Series | Voltage Drop Across Each LED | Voltage Drop Across Resistor | Current |
 |----------|--------------|------------------------------|------------------------------|---------|
@@ -140,11 +145,13 @@ Well, for a simple series configuration, the total number of series LEDs is limi
 | 200Ω     | 4            | 1.01V                        | ~0V                          | ~0 mA   |
 
 **Table**. For this empirical measurement test, I used the [Sparkfun 5mm diffused RED LEDs](https://www.sparkfun.com/products/12062).
+{: .fs-1 }
 
 Here's a picture of the test setup and circuits for the measurements above:
 
 ![](assets/images/LEDSeries_5VSupply_TestPictures_ByJonFroehlich.png)
-**Figure**. Measuring the individual LED voltage drop and current through the circuit using two multimeters: the yellow multimeter configured as a voltmeter to measure the voltage drop $$V_D$$ over the first LED in the circuit and the red multimeter configured as a ammeter to measure the current $$I$$ through the circuit.
+**Figure**. Measuring the individual LED voltage drop and current through the circuit using two multimeters: the yellow multimeter configured as a voltmeter to measure the voltage drop $$V_D$$ over the first LED in the circuit and the red multimeter configured as an ammeter to measure the current $$I$$ through the circuit.
+{: .fs-1 }
 
 Finally, we can also examine this circuit in a simulator, which mirrors our empirical measurements:
 
@@ -156,7 +163,7 @@ Finally, we can also examine this circuit in a simulator, which mirrors our empi
 
 #### Maximum number of LEDs in parallel
 
-For the parallel configuration, the limiting factor is the total amount of current we can source, which with the 5V pin powered by USB, is 500mA. How many red LEDs does it take to exceed 500mA using 200Ω resistors?
+For the **parallel configuration**, the limiting factor is the total amount of current we can source, which with the 5V pin powered by USB, is 500mA. How many red LEDs does it take to exceed 500mA using 200Ω resistors?
 
 Well, in a parallel configuration, each resistor+LED branch is getting ~$$I=\frac{V_R}{R}=\frac{3V}{200}=15mA$$. Thus, the maximum number of LEDs in parallel is $$\frac{500mA}{15mA}=33.3$$ rounded to 34.
 

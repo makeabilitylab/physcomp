@@ -20,7 +20,7 @@ usetocbot: true
 Welcome 👋 to the second module in your Physical Computing journey: **Introduction to Microcontrollers** (using Arduino).
 
 {: .note }
-Although you can begin your journey here, we  recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content. We will refer back to content from the first module.
+Although you can begin your learning journey here, we  recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content in this section, and we will occassionally refer back to [Intro to Electronics](../electronics/index.md).
 
 <!-- Call this intro to Microcontrollers and then cast Arduino as an example? -->
 
@@ -34,9 +34,9 @@ Thus, while other resources **start** with digital/analog input (or quickly inte
 
 So, our lessons start and stick with **output** to solidify understanding of how you to programmatically control microcontroller pins before adding in **input**—where the fun, of course, really starts! Moreover, most resources—at least those we are aware of—strike a different balance between depth and breadth. We love Adafruit's [tutorials](http://learn.adafruit.com/) but they tend towards step-by-step construction recipes rather than explaining *why* or *how* things work. As a college-level resource, we attempt to provide a deeper understanding at a cost of complexity and longer lessons. But we think it's worth it.
 
-Let the fun begin!
+Let the fun begin! 🚀🥳
 
-These tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
+The following tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
 <!-- The [Adafruit lessons](https://learn.adafruit.com/series/learn-arduino) provide a rapid, broad taste of using microcontrollers for digital and analog I/O. As a book, Blum's [Exploring Arduino](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451) goes deeper; however, ne -->
 

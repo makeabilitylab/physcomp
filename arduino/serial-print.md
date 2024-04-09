@@ -31,7 +31,7 @@ For **hardware debugging**, multimeters and oscilloscopes are useful. We realize
 
 For **code debugging**, it's common to use "printline" statements (yes, I know! 🤣)—see video above. Currently, the Arduino IDE does not support code debugging (*e.g.,* breakpoints, code stepping, memory stack dumps); however, there is rudimentary debugging support (*e.g.,* stepping through code) in [Tinkercad Circuits](tinkercad.com/).
 
-{ .note }
+{: .note }
 With the introduction of the Arduino IDE 2.0, there is [debugging support](https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-debugger/); however, only certain Arduino boards are supported and you need specialized hardware.
 
 <!-- TODO: consider having recommendations for a basic multimeter and oscilliscope here. -->
@@ -54,13 +54,14 @@ In later lessons, we'll see how to use serial communication for more than just d
 > This is why many of our "starter" examples use **Pin 3** rather than Pins 0 or 1 (Pin 3 also has the added benefit of being configurable for analog output, which we'll get to in the [next lesson](led-fade.md)).
 
 ### Build a simple "Hello World!" Serial.print program
+
 Let's build a simple "Hello World!" program that uses `Serial.print` functionality to receive ASCII data over the serial port. We don't even need external hardware for this: just our Arduino Leonardo and a USB cable.
 
 #### Step 1: Initialize the serial port
 
-To use the serial port, we must first initialize it with [`Serial.begin(BAUD_RATE)`](https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/). The baud rate is the transmission speed in bits per second (bps) and is typically set to `9600` unless greater speeds are needed.
+To use the serial port, we must first initialize it with [`Serial.begin(BAUD_RATE)`](https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/). The baud rate is the transmission speed in bits per second (bps) and is typically set to `9600` unless greater speeds are needed. Because the [Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/) uses asynchronous communication, both the transmitter and receiver need to agree on the speed of communication (the baud rate). So, you will also have to set the baud rate in the "Serial Monitor" window (see Step 3 below).
 
-Typically, we initialize the serial port in `setup()`, as it only needs to run time.
+Typically, we initialize the serial port in `setup()`, as it only needs to run one time.
 
 {% highlight C %}
 void setup() {

@@ -65,16 +65,44 @@ To gradually fade an LED, we are going to use the [`analogWrite(int pin, int val
 
 Despite its name, the Arduino Uno, Leonardo, Nano, Mega, and many other Arduino boards do not actually provide **true analog** output via a [digital-to-analog converter (DAC)](https://en.wikipedia.org/wiki/Digital-to-analog_converter). Instead, they use a method called Pulse-Width Modulation (PWM) to *emulate* analog output. For most purposes—like changing the brightness of an LED or controlling the speed of a motor—this won't matter; however, if you want to output a high-frequency sinusoidal waveform—a true analog output signal—like playing music, then you'll need to either find an Arduino microcontroller with a built-in DAC like the [Due](https://store.arduino.cc/usa/due) (see this [SimpleAudioPlayer tutorial](https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer)) or connect your Uno to an external DAC board like this [SparkFun MP3 Player Shield](https://learn.sparkfun.com/tutorials/mp3-player-shield-hookup-guide-v15/all).
 
-So, what does the `analogWrite` function do, exactly? The 8-bit value (0-255) directly controls how long a 5V value is applied to the output pin during one "analog write" period. So, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). This fraction of the time the signal is `HIGH` is called the duty cycle.
+To understand PWM, let's first remind ourselves of the characteristics of a square waveform: there is the length of time for one full cycle (period), the frequency (how often the cycle occurs per second), the amplitude (a measure from the top to the bottom of the waveform; in this case, 5V), and the duty cycle (the amount of time the waveform is HIGH *vs.* LOW in a period).
 
-![Pulse-width modulation duty cycle graphic](assets/images/PulseWidthModulation_FromSparkfun.jpg)
+![An example square wave](assets/images/SquareWaveWithDutyCycle.png)
+
+And then take a look at [this video](https://www.youtube.com/watch?v=YmPziPfaByw) by Afrotechmods:
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/YmPziPfaByw?si=ECb8GM_a0wfC-8U3" frameborder="0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+So, what does the [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) function do, exactly? It simply varies the **duty cycle** of the output pin. That is, the 8-bit value (0-255) directly controls how long a 5V value is applied to the output pin during one "analog write" period. So, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). This fraction of the time the signal is `HIGH` is called the duty cycle.
+
+![Examples of pulse width modulation](assets/images/PulseWidthModulationSlide_ByJonEFroehlich.png)
+
+<!-- ![Pulse-width modulation duty cycle graphic](assets/images/PulseWidthModulation_FromSparkfun.jpg)
 
 Pulse-width modulation duty cycle graph from Sparkfun's [PWM Tutorial](https://learn.sparkfun.com/tutorials/pulse-width-modulation/all)
-{: .fs-1 }
+{: .fs-1 } -->
+
+### Why does the Uno have only six PWM outputs?
 
 Why does the Arduino Uno only have six PWM outputs? Because the ATmega328 microcontroller has three hardware timers, which control the six PWM outputs.
 
+The Arduino Leonardo has seven PWM pins (one more than the Uno) because it has four hardware timers (the new one is called `timer4`). See the pinout diagrams below.
+
+![Pin out diagram showing the six PWM pins on the Uno and seven on the Leonardo](assets/images/ArduinoUnoVsLeonardo_PWM_PinOuts_ByJonEFroehlich.png)
+
+### What is the frequency of the PWM outputs?
+
+On the Uno and Leonardo, PWM outputs are either 490Hz or 980Hz (depending on the underlying hardware timers)—you **cannot change the frequency** of these waveforms using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) . For the Uno, the PWM pins are 3, 5, 6, 9, 10, 11 (with all pins 490Hz except 5 & 6, which are 980Hz). For the Leonardo, the PWM pins are 3, 5, 6, 9, 10, 11, 13 (all pins 490Hz except 3 & 11, which are 980Hz).
+
+See the image below (and [Arduino Docs](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)).
+
+![Pin out diagram showing the six PWM pins on the Uno and seven on the Leonardo along with their frequencies](assets/images/ArduinoUnoVsLeonardo_PWM_PinOutFrequencies_ByJonEFroehlich.png)
+
+### Manually implementing PWM
+
 Could I manually implement PWM on any pin simply by rapidly turning the pin on and off at a desired frequency and duty cycle? Yes, however, the PWM waveform could be jittery (unless you disable interrupts). See: [SecretsOfArduinoPWM](https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM) and [example code](https://playground.arduino.cc/Main/PWMallPins/) that manually implements a PWM loop.
+
+### Learn more about PWM
 
 To learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/physcomp/lessons/microcontrollers/analog-output/) and watch their "analog output" video:
 
@@ -151,7 +179,9 @@ What's actually happening on Pin 3 when we write out different values to `analog
 
 ### Visualizing the PWM waveform
 
-To let you see how the PWM waveform changes with different `analogWrite` values, we wrote a [simple program](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/TrimpotLEDSmoothed/TrimpotLEDSmoothed.ino) that takes in an analog input (from a potentiometer, in this case) and uses it to set an `analogWrite` value to Pin 3. Other than the potentiometer, our circuit did not change (we still have an LED with a current-limiting resistor on Pin 3).
+To let you see how the PWM waveform changes with different `analogWrite` values on the Arduino Leonardo, we wrote a [simple program](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/TrimpotLEDSmoothed/TrimpotLEDSmoothed.ino) that takes in an analog input (from a potentiometer, in this case) and uses it to set an `analogWrite` value to Pin 3. Recall that on the Leonardo, the PWM frequency on Pin 3 is 980Hz ([see docs](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)).
+
+Other than the potentiometer, our circuit did not change (we still have an LED with a current-limiting resistor on Pin 3).
 
 Let's take a look:
 
@@ -161,9 +191,9 @@ To create this [program](https://github.com/makeabilitylab/arduino/blob/master/B
 
 ### Visualizing the effective voltage output
 
-In addition to visualzing the **actual** voltage output from `analogWrite` (the PWM waveform), we can also visualize the (effective) voltage output. For this, we can use Arduino's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter). To access this, open Tools -> Serial Plotter. The plotter will try to visualize any comma separated values you output via `Serial.print`.
+In addition to visualizing the **actual** voltage output from `analogWrite` (the PWM waveform), we can also visualize the (effective) voltage output. For this, we can use Arduino's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter). To access this, open Tools -> Serial Plotter. The plotter will try to visualize any comma separated values you output via `Serial.print`.
 
-In the video below, we see a simulation of our [fade code](https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time effective voltages output on Pin 3. 
+In the video below, we see a simulation of our [fade code](https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time effective voltages output on Pin 3.
 
 <video controls="controls">
   <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
@@ -194,13 +224,8 @@ Remember in the [LED blink lesson](led-blink.md) where we mentioned wanting to a
 
 So, let's rewrite the fade example but without for loops and, instead, rely on the fact that `loop()` is already a `loop` :). While the code below is different, the resulting LED fade behavior is the same (so you won't notice a difference if you try them both out).
 
----
-
-**NOTE:**
-
-I have a habit of prefixing my global variables by `_` but this is just my own convention and helps me easily discern between local variables and global variables.
-
----
+{: .note }
+I have a habit of prefixing my global variables by `_` but this is just my own convention and helps me easily discern between local variables and global variables. You need not do this, of course! 😊
 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;

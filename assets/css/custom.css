@@ -32,6 +32,15 @@ blockquote{
   border-left: 0.25em solid #6f777d;
 }
 
+blockquote.note,
+blockquote.warning,
+blockquote.info,
+blockquote.important,
+blockquote.new {
+  font-size: initial;
+  font-style: normal;
+}
+
 /* I had to add this in otherwise we were getting weird line breaks on links. The just-the-docs css sets
 this to white-space: no-wrap. Not sure why. See: https://developer.mozilla.org/en-US/docs/Web/CSS/white-space */
 .main-content a{

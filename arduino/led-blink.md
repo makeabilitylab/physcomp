@@ -67,7 +67,7 @@ But first, we need to download and install the [Arduino IDE](https://www.arduino
 
 Now, we are going to write code to turn on our LED by setting Pin 3 to HIGH (or 5V). Then, we will modify this code to flash the LED both on *and* off. To do this, we have to introduce **digital output.**
 
-The Arduino Uno has **20 general-purpose input/output** ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (`HIGH` or `LOW`) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively. 
+The Arduino Uno has **20 general-purpose input/output** ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O)—that is, to read or write digital information (`HIGH` or `LOW`) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively.
 
 We could have selected *any* of these pins for this lesson but we chose Pin 3 (in part, because we want to use this same pin in [Lesson 4](led-fade.md) and using it now simplifies things!).
 
@@ -97,7 +97,6 @@ It's the same with the Arduino Leonardo (see [official "printout diagram" here](
 ![The official Arduino Leonardo pinout diagram with the 20 digital I/O pins marked](assets/images/ArduinoLeonardo_OfficialPinOutDiagram_DigitalIOPinsMarked.png)
 
 ---
-
 
 ### What do we mean by HIGH and LOW?
 

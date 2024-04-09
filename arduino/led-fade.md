@@ -37,15 +37,15 @@ You will use the same materials as [before](led-blink.md), including the [Arduin
 
 ## Making the circuit
 
-As noted in our previous lesson, the Arduino Uno has 14 digital I/O pins:
+As noted in the ["Intro to Digital Input" lesson](./led-blink.md), the Arduino Uno has **20 general-purpose input/output** ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively.
 
-![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
+![Close-up image of the 20 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_DigitalIOPins.png)
 
-However, **6** of the 14 I/O pins can **also** be used for "analog" output—voltage output that is not just `HIGH` (5V) or `LOW` (0V) but between these two extremes. These analog output pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (silkscreened directly on the Arduino's PCB).
+However, **6** of the 20 I/O pins can **also** be used for **"analog" output**—voltage output that is not just `HIGH` (5V) or `LOW` (0V) but between these two extremes. These analog output pins are indicated by the tilde (`~`) printed next to the pin on the Arduino (silkscreened directly on the Arduino's PCB).
 
 ![Close up of the Arduino Uno highlighting the six analog output pins](assets/images/ArduinoUno_CloseUp_AnalogOutputPins.png)
 
-So, for this lesson, we **don't** have to change our circuit at all! You can keep the same circuit as the [LED Blink lesson](led-blink.md). Indeed, this is the reason why we selected Pin 3 in the first place.
+So, for this lesson, we **don't** have to change our circuit at all! You can keep the same circuit as the [LED blink lesson](led-blink.md). Indeed, this is the reason why we selected Pin 3 in the first place.
 
 ![Wiring diagram showing LED cathode wired to GND and LED anode wired to a 220 Ohm resistor and then to Pin 3](assets/images/Arduino_LEDFade_Pin3Circuit.png)
 

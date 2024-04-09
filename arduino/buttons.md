@@ -119,11 +119,11 @@ In our [Blink](led-blink.md) lesson, we introduced [digital I/O](led-blink.md#in
 
 ### Digital I/O refresher
 
-Recall that the Arduino Uno and Leonardo have 14 digital I/O pins that can be used either for input with [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) or output with [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively.
+Recall that the Arduino Uno and Leonardo have **20 general-purpose input/output** ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively.
 
-![Close-up image of the 14 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_DigitalIOPins.png)
+![Close-up image of the 20 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_DigitalIOPins.png)
 
-As noted in our [Blink](led-blink.md) lesson, you can control any of these 14 digital I/O pins with three functions:
+As noted in our [Intro to Digital Output](led-blink.md) lesson, you can control any of these 20 digital I/O pins with three functions:
 
 1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`. For our buttons, we'll be using `INPUT`—because a button is an input and not an output—and a variant of `INPUT` called `INPUT_PULLUP`.
 2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`. This is what we need to read the button's state (either pressed or not pressed)

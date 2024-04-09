@@ -37,7 +37,7 @@ You will use the same materials as [before](led-blink.md), including the [Arduin
 
 ## Making the circuit
 
-As noted in the ["Intro to Digital Input" lesson](./led-blink.md), the Arduino Uno has **20 general-purpose input/output** ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively.
+As noted in the ["Intro to Digital Output" lesson](./led-blink.md), the Arduino Uno has **20 general-purpose input/output** ([GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output)) pins that can be used for digital input/output (I/O) using [`digitalRead()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) and [`digitalWrite()`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/), respectively.
 
 ![Close-up image of the 20 digital I/O pins on the Arduino Uno](assets/images/ArduinoUno_DigitalIOPins.png)
 

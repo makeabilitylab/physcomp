@@ -229,7 +229,7 @@ Typically, this pull-down resistor value is 10kΩ, which is also what the offici
 The pull-down resistor is quite large: 10,000Ω (10kΩ)
 {: .fs-1 }
 
-Here's an animation showing how a pull-down resistor configuration works:
+Here's an animation showing how a pull-down resistor configuration works. Notice how (almost) none of the current goes into Pin 2. This is because, as stated above, the digital input pins “*are in a high-impedance state*” equivalent to a 100,000,000Ω (100MΩ) resistor (see [Arduino docs](https://docs.arduino.cc/learn/microcontrollers/digital-pins/)).
 
 ![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
 

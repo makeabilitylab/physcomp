@@ -133,6 +133,8 @@ As noted in our [Intro to Digital Output](led-blink.md) lesson, you can control 
 
 Digital input is any input that can be considered either **on** (typically, `HIGH` or 5V) or **off** (typically, `LOW` or 0V). Simple, right? However, using digital input with microcontrollers can be confusing, at least at first.
 
+![A graph demonstrating digital input](assets/images/WhatIsDigitalInput_Graph_ByJonEFroehlich.png)
+
 The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits.
 
 Indeed, the [Arduino documentation ](https://www.arduino.cc/en/Tutorial/DigitalPins) states that pins configured as digital input "*are in a high-impedance state*" equivalent to a 100,000,000Ω (100MΩ) resistor added to the front of the input pin. This means that once you configure a microcontroller pin as input, very little current will "seep" into the pin. More specifically, Section 26.2 (entitled *DC Characteristics*) of the [ATMega328 datasheet](../assets/datasheets/ATMega328.pdf) states that the input "leakage" current is 1 microamp (1 µA).
@@ -146,6 +148,8 @@ You might be wondering: what's the precise voltage-related definition of `HIGH` 
 As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "*the value returned from `digitalRead()` is only well-defined when the input pin voltage is **close** to $$V_{CC}$$ or $$0V$$. The precise meaning of "close" varies between microcontrollers*"
 
 For the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH` and between $$0$$ and $$0.3\cdot V_{CC}\to 0.3\cdot 5V=1.5V$$ to qualify as `LOW`. For the middle range $$0.3\cdot V_{CC}$$ to $$0.6\cdot V_{CC}$$, the behavior of the pin is undefined.
+
+![A graph showing what is considered HIGH or LOW by the ATmega328](assets/images/WhatIsHighOrLow_Graph_ByJonEFroehlich.png)
 
 In general, this is unlikely to affect how you wire your digital input circuits with switches, buttons, or binary sensors (like reed switches)—because your two states will be 5V and 0V—but it may affect whether and how you hook up other sensors to a microcontroller, if you want to interpret them as digital input.
 
@@ -231,7 +235,7 @@ Here's an animation showing how a pull-down resistor configuration works:
 
 And here's a video demonstrating the floating pin problem and fix:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qgyICqIVFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/4qgyICqIVFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Pull-up resistors
 
@@ -264,7 +268,12 @@ Some microcontrollers have both internal pull-up *and* pull-down resistors. The 
 
 ### What value should I use for my pull-down or pull-up resistors?
 
-The short answer: use a **10kΩ resistor**. As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
+The short answer: use a **10kΩ resistor**.
+
+As mentioned above, the official [Arduino docs](https://www.arduino.cc/en/Tutorial/DigitalPins) recommend a 10kΩ pull-down or pull-up resistor for digital input pins. On the ATmega microcontrollers (those on the Arduino Uno and Leonardo), the internal pull-up resistor is 20kΩ. On the Arduino Due, the internal pull-up is between 50kΩ and 150kΩ.
+
+{: .note }
+The following section detailing tradeoffs in selecting pull-up and pull-down resistor values is optional. You can skip to [Let's make stuff](#lets-make-stuff).
 
 #### Tradeoffs in selecting a pull-up resistor
 
@@ -390,7 +399,13 @@ void loop()
 }
 {% endhighlight C %}
 
-<!-- TODO: show video of this and then also modify code and include serial.print for button state -->
+### Tinkercad version with no breadboard
+
+As some of you may still find breadboards a bit confusing, here's a pull-down resistor version without a breadboard made in Tinkercad. We've also hooked up an external LED with a current limiting resistor to Pin 13 (`LED_BUILTIN` on the Uno and Leonardo).
+
+![Tinkercad Arduino circuit with pull-down resistor](assets/images/Tinkercad_PullDownResistor_WithLED_ByJonEFroehlich.png)
+
+You can [try this out on Tinkercad](https://www.tinkercad.com/things/hlkxqsvSz2E-button-with-pull-down-resistor-no-breadboard).
 
 ## Pull-up resistor configuration
 

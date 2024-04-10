@@ -8,7 +8,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 # remote_theme: pmarsceill/just-the-docs
-remote_theme: just-the-docs/just-the-docs@v0.4.0.rc1
+remote_theme: just-the-docs/just-the-docs@v0.8.1
 
 # Fixed at 0.2.8 because of: https://github.com/makeabilitylab/physcomp/issues/9
 # remote_theme: pmarsceill/just-the-docs@v0.2.8

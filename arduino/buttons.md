@@ -338,30 +338,15 @@ What about pull-down resistors? The same tradeoffs and factors apply here. But i
 
 The above sub-sections were strongly informed by Section 12.6.9 entitled "Pullup and Pulldown Resistors" of Scherz and Monk's [Practical Electronics for Inventors](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559).
 
-### Want to dive deeper?
-
-Still feeling confused or want to learn more about pull-up and pull-down resistors? Try watching this [video](https://youtu.be/wxjerCHCEMg) by AddOhms: 
-
-<iframe width="736" height="414" src="https://www.youtube.com/embed/wxjerCHCEMg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-[Video](https://youtu.be/wxjerCHCEMg) by AddOhms demonstrating floating pins and why pull-up resistors are necessary for digital input with microcontrollers.
-{: .fs-1 }
-
-Or this video by NYU ITP's Jeff Feddersen:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/241209240?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-[Video](https://vimeo.com/241209240) by NYU ITP’s Jeff Feddersen on pull-up and pull-down resistors.
-{: .fs-1 }
-
-See also:
-- [Sparkfun's tutorial on Pull-up Resistors](https://learn.sparkfun.com/tutorials/pull-up-resistors/all)
-- [Arduino's official `INPUT_PULLUP` tutorial](https://www.arduino.cc/en/Tutorial/InputPullupSerial)
-- [Electronics Tutorials' Pull-up Resistors](https://www.electronics-tutorials.ws/logic/pull-up-resistor.html)
-
 ## Let's make stuff!
 
 Whew, OK. We've now explained how to use four-legged tactile buttons, how to use pull-down, pull-up, and internal pull-up resistors and their purpose, and provided a general overview of digital input.
 
 It's time to make stuff. We're going to start with a button in a pull-down configuration before making circuits with external pull-up and internal pull-up configurations. Then, in the [next lesson](piano.md), we'll make a simple "piano" synthesizer that puts our skills to the test!
+
+![Screenshot of Tinkercad pull-down, pull-up, and internal pull-up circuits + code](assets/images/Tinkercad_ExternalPullDownAndUp_AndInternalPullUp_ByJonEFroehlich.png)
+**Figure:** In Tinkercad, we created interactive demos of [external pull-down resistors](https://www.tinkercad.com/things/hlkxqsvSz2E-button-with-pull-down-resistor-no-breadboard), [external pull-up resistors](https://www.tinkercad.com/things/15Jim4uneb7-button-with-pull-up-resistor-no-breadboard), and [internal pull-up resistors](https://www.tinkercad.com/things/5AADEXC7R1o-button-with-internal-pull-up-resistor-no-breadboard). For simplicity, we built these *without* breadboards to allow you to really focus on the circuit and wiring. Click on the links to try them yourself!
+{: .fs-1 }
 
 ## Pull-down resistor configuration
 
@@ -413,6 +398,12 @@ Here's the wiring for a pull-up resistor configuration. Modify the code above to
 
 ![Wiring diagram and schematic for a button with a pull-up resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_PullUpResistor_WiringDiagram.png)
 
+### Tinkercad external pull-up resistor example
+
+Here's the [interactive external pull-up resistor Tinkercad version](https://www.tinkercad.com/things/15Jim4uneb7-button-with-external-pull-up-resistor-no-breadboard) (sans breadboard).
+
+![Tinkercad version of external pull-up resistor](assets/images/Tinkercad_ExternalPullUpResistor_ByJonEFroehlich.png)
+
 ## Internal pull-up resistor configuration
 
 Now try it with the internal pull-up resistor.
@@ -422,13 +413,46 @@ Now try it with the internal pull-up resistor.
 The schematic is for illustrative purposes. The internal software controlled switch is a transistor so the actual circuit looks something like [this](assets/images/Arduino_InputPinWithPullUpResistor_Schematic.png) (from [Lee, Input/output pins on Arduino, Stanford ENGR40M](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf))
 {: .fs-1 }
 
+### Tinkercad internal pull-up resistor example
+
+Here's the [interactive internal pull-up resistor Tinkercad version](https://www.tinkercad.com/things/5AADEXC7R1o-button-with-internal-pull-up-resistor-no-breadboard).
+
+![Tinkercad version of internal pull-up resistor](assets/images/Tinkercad_InternalPullUpResistor_ByJonEFroehlich.png)
+
 ## Putting it all together
 
-For your prototyping journals, make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. Then write code to respond accordingly.
+For your prototyping journals, make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. You must use your breadboards. Then write code to respond accordingly.
 
 ![Workbench photo of three buttons with different pull-up and pull-down configurations](assets/images/ArduinoUno_ThreeButtonsWithDifferentResistorConfigurations_WorkbenchPhoto.png)
 
 <!-- TODO: add code for this and a workbench video showing it working -->
+
+### To get you started: initial version in Tinkercad
+
+To help you get started, here's an [initial version in Tinkercad](https://www.tinkercad.com/things/iVeBcYm6Pjp-pull-down-and-pull-up-resistor-demo-with-led-no-breadboard) (but without a breadboard) and it controls only one LED rather than three separate LEDs.
+
+![All three resistor configurations wired together](assets/images/Tinkercad_ExternalPullDownPullUpAndInternalPullUpOnSingleBoard_ByJonEFroehlich.png)
+**Figure.** An example [Tinkercad circuit+code](https://www.tinkercad.com/things/iVeBcYm6Pjp-pull-down-and-pull-up-resistor-demo-with-led-no-breadboard) that shows how to wire up and use an external pull-down resistor, external pull-up resistor, and internal pull-up resistor. When you click on any of the three buttons, the LED turns on.
+{: .fs-1 }
+
+## More resources
+
+Still feeling confused or want to learn more about pull-up and pull-down resistors? Try watching this [video](https://youtu.be/wxjerCHCEMg) by AddOhms: 
+
+<iframe width="736" height="414" src="https://www.youtube.com/embed/wxjerCHCEMg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Video](https://youtu.be/wxjerCHCEMg) by AddOhms demonstrating floating pins and why pull-up resistors are necessary for digital input with microcontrollers.
+{: .fs-1 }
+
+Or this video by NYU ITP's Jeff Feddersen:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/241209240?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+[Video](https://vimeo.com/241209240) by NYU ITP’s Jeff Feddersen on pull-up and pull-down resistors.
+{: .fs-1 }
+
+See also:
+- [Sparkfun's tutorial on Pull-up Resistors](https://learn.sparkfun.com/tutorials/pull-up-resistors/all)
+- [Arduino's official `INPUT_PULLUP` tutorial](https://www.arduino.cc/en/Tutorial/InputPullupSerial)
+- [Electronics Tutorials' Pull-up Resistors](https://www.electronics-tutorials.ws/logic/pull-up-resistor.html)
 
 ## Next Lesson
 

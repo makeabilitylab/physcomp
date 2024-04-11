@@ -84,7 +84,7 @@ You can control any of these 20 digital I/O pins with three functions:
 ---
 **NOTE:**
 
-While the white silkscreening on the Uno (and Leonardo) makes it seem like these boards only have 14 digital I/O pins (the top part of the board), they in fact have 20! Indeed, you can consult the official [Arduino Uno pinout diagram](https://docs.arduino.cc/resources/pinouts/A000066-full-pinout.pdf).
+While the white silkscreening on the Uno (and Leonardo) makes it seem like these boards only have 14 digital I/O pins (the top part of the board), they in fact have 20! Indeed, you can consult the official [Arduino Uno pinout diagram](https://docs.arduino.cc/resources/pinouts/A000066-full-pinout.pdf) for verification.
 
 ![The official Arduino Uno pinout diagram](assets/images/ArduinoUno_OfficialPinOutDiagram.png)
 

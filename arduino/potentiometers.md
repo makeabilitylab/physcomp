@@ -191,13 +191,13 @@ So, what's analog input?! The world—in all its beauty and complexity—is anal
 
 Analog input!
 
-More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, analog input enables us to read voltages between 0V and 5V. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
+More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, **analog input** enables us to **read voltages between 0V and 5V**. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
 <!-- TODO: The arduino.cc docs mention adding a short delay before using analogReads on successive pins: https://www.arduino.cc/en/Tutorial/AnalogInputPins. Add this? Here's the full quote: "The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins." -->
 
 ### Analog input pins
 
-The Arduino Uno and Leonardo have six analog inputs, which can be read using [`analogRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/). The `analogRead` function reads voltage values between 0 and the Arduino's operating voltage (5V on the Uno and Leonardo) and converts this into integer values between 0 and 1023.
+The Arduino Uno has **six analog inputs** (), which can be read using [`analogRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/). The `analogRead` function reads voltage values between 0 and the Arduino's operating voltage (5V on the Uno and Leonardo) and converts this into integer values between 0 and 1023.
 
 ![Close-up image of the six analog input pins on the Arduino Uno](assets/images/ArduinoUno_CloseUp_AnalogInputPins.png)
 
@@ -205,25 +205,55 @@ Often, students get confused between the analog **output** pins (which use PWM, 
 
 ![Close-up image of the Arduino Uno emphasizing that the Arduino analog input pins are different from the analog output pins](assets/images/ArduinoUno_CloseUp_WarningAnalogInputAndOutputPinsAreDifferent.png)
 
-You can access the analog input pins using `A0`, `A1` ... `AN`. For example, `analogRead(A0)` to read on analog input pin 0. On the Arduino Uno and Leonardo, there are six analog input pins: `A0` - `A6`.
+You can access the analog input pins using `A0`, `A1` ... `AN`. For example, `analogRead(A0)` to read analog input on pin 0. The Arduino Uno has six analog input pins: `A0` - `A6`.
 
----
+### Arduino Leonardo has 12 analog inputs
 
-**NOTE:**
+While at first glance, it appears that the Arduino Leonardo has just six analog inputs (like its close sibling the Arduino Uno). Once again, the PCB silkscreening throws us off!
 
-At risk of adding to pin confusions, if you run out of the general purpose input/output (GPIO) pins (pins 0 - 13 on the Uno and Leonardo), you can use the analog input pins as GPIO pins—they have all the same functionality. These analog pins also have pull-up resistors, which work identically to the pull-up resistors on the digital pins.
+![The standard six analog inputs on the Arduino Leonardo](assets/images/CloseUpPictureOfArduinoLeonardo_AnalogInputs_ByJonEFroehlich.png)
+
+In fact, if you flip over the Leonardo, you'll discover additional white silkscreening, which reveals **six more analog inputs** (for a total of **12**)
+
+![Arduino Leonardo has six extra analog inputs, as labeled on the back of the board](assets/images/CloseUpPictureOfBackOfArduinoLeonardo_ShowingExtraAnalogInputs_ByJonEFroehlich.png)
+
+You can access these by specifying `A6` - `A11` in your code. For example:
 
 ```
-pinMode(A0, INPUT_PULLUP);  // set pull-up on analog pin 0
+int analogVal = analogRead(A6); // A6 is same as D4
 ```
 
-See the [official Arduino docs ](https://www.arduino.cc/en/Tutorial/Foundations/AnalogInputPins)for more information.
+Another view of the back of the Arduino Leonardo board showing the additional analog input pins. Here, you can see the following mapping:
 
----
+![Showing extra analog input pins on Leonardo along with mapping to digital pins](assets/images/CloseUpPictureOfBackOfArduinoLeonardo_ShowingBothExtraAnalogInputPintsAndMappingWithDigitalPins_ByJonEFroehlich.png)
+
+### Analog input on common Arduino boards
+
+When reading [Arduino's analogRead docs](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/), you'll see a listing of analog input pins, operating voltage, and maximum ADC resolution on common Arduino boards.
+
+| Board | Operating voltage | Usable pins | Max resolution |
+| --- | --- | --- | --- |
+| UNO R3 | 5 Volts | A0 to A5 | 10 bits |
+| UNO R4 (Minima, WiFi) | 5 Volts | A0 to A5 | 14 bits** |
+| Mini | 5 Volts | A0 to A7 | 10 bits |
+| Nano | 5 Volts | A0 to A7 | 10 bits |
+| Nano 33 IoT BLE, RP2040, ESP32) | 3.3 Volts | A0 to A7 | 12 bits** |
+| Mega, Mega2560, MegaADK | 5 Volts | A0 to A14 | 10 bits |
+| Micro | 5 Volts | A0 to A11* | 10 bits |
+| Leonardo | 5 Volts | A0 to A11* | 10 bits |
+| Zero | 3.3 Volts | A0 to A5 | 12 bits** |
+
+\* Though A0-A5 are labeled on the board, A6 through A11 are available on pins 4, 6, 8, 9, 10, and 12—as is the case with the Arduino Leonardo.
+{: .fs-1 }
+
+\** Though these boards support higher resolution analog-to-digital conversions (e.g., 14 bits rather than 10), they are set to 10 bits for compatibility (because lots of code exists with 1023 hard-coded in as the max analog input whereas it would be 16383).
+{: .fs-1 }
 
 ### How does the Arduino read analog input?
 
-Remember how we said that Arduino input pins work like voltmeters? Just as voltmeters measure voltage in parallel—you connect the probes to two nodes in your circuit and the voltmeter measures the voltage difference between them—microcontrollers work similarly. Of course, microcontrollers have a single pin per input while voltmeters have two. Why the difference? Well, with voltmeters, you provide two reference points. With microcontrollers, the voltage at an input pin is always compared to `GND` (so, that second "probe point" is always ground).
+Remember how we said that Arduino input pins work like voltmeters? Just as voltmeters measure voltage in parallel—you connect the probes to two nodes in your circuit and the voltmeter measures the voltage difference between them—microcontrollers work similarly. 
+
+But, you might say: microcontrollers only have a single pin per input while voltmeters have two. Why the difference? Well, with voltmeters, you provide two reference points. With microcontrollers, the voltage at an input pin is always compared to `GND` (so, that second "probe point" is always ground).
 
 It's important that you conceptually understand that microcontrollers work by measuring voltages and not current. In fact, the [ATmega328 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf) says analog input pins have an effective resistance of 100,000,000Ω (100MΩ), which means almost **no current** goes into an input pin (see Table 29.8).
 
@@ -231,22 +261,29 @@ This means that we have to configure our variable resistor sensors as **voltage 
 
 ### Analog-to-digital converter (ADC)
 
-The Arduino's microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. On the Arduino and Leonardo, the ADC is 10 bits. So, it converts voltages between 0 and $$V_{cc}$$ (5V) to a $$0 - 2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
+The Arduino Uno's ATmega328 microcontroller contains an analog-to-digital converter (ADC), which converts analog voltage signals to computational bits that can be processed by a computer. On both the Uno and Leonardo, the ADC is 10 bits. So, the ADC converts voltages between 0 and $$V_{cc}$$ (5V) to a $$0 - 2^{10}$$ range (0-1023). Thus, the resolution between readings is 5V / 1024 or 0.0049 volts (4.9 mV).
 
-![](assets/images/VoltageToAnalogValue_10BitADC.png)
-
+![A graph showing the mapping between voltage values and analog values with 10-bit ADC and 5V board](assets/images/VoltageToAnalogValue_10BitADC.png)
 **Figure.** The Arduino Uno and Leonardo have 10-bit ADC's, which convert analog voltages between 0 - 5V to an integer range of 0 - 1023. Thus, the ADC resolution is 0.0049mV.
 {: .fs-1 }
 
-Why does this matter?
+Many newer Arduino boards use more modern 3.3V microcontrollers with higher-resolution ADCs. For example, The [Arduino Nano 33 IoT](https://store-usa.arduino.cc/products/arduino-nano-33-iot) and the ESP32 boards are both 3.3V with 12-bit ADCs.
 
-For many purposes, it probably doesn't. But the practical implication is that with a 0.0049V resolution, you won't be able to tell the difference between, for example, 2.0140V and 2.0152V (both which would convert to 411) or 4.9148V and 4.9190V (both which would be read as 1003). Does this matter? It depends on the context—for most things we do, it won't. We discuss quantization in more depth in the [Sensors](../sensors/index.md) and [Signals](../signals/index.md) sections.
+![A graph showing the mapping between voltage values and analog values with 12-bit ADC and 3.3V board](assets/images/VoltageToAnalogValue_12BitADC_3.3VBoard.png)
+**Figure.** The Arduino Nano 33 IoT, Arduino Zero, and the ESP32 all operate at 3.3V with 12-bit ADCs (0 - 4095). Thus, the ADC resolution is 0.81mV.
+{: .fs-1 }
+
+#### Why does the ADC resolution matter?
+
+For many purposes, it probably doesn't. But the practical implication is that with a 5V board and a 10-bit ADC (like the Uno and Leonardo), we have a 0.0049V resolution. So, you won't be able to tell the difference between, for example, 2.0140V and 2.0152V (both which would convert to 411) or 4.9148V and 4.9190V (both which would be read as 1003). Does this matter? It depends on the context—for most things we do, it won't. 
+
+We discuss quantization in more depth in the [Sensors](../sensors/index.md) and [Signals](../signals/index.md) sections.
 
 #### Changing the HIGH reference voltage
 
 If you want to improve the ADC resolution, you have two choices: (1) up the bitrate, which would require different hardware (you can use an external ADC like this 12-bit [ADS1015](https://www.adafruit.com/product/1083)) or (2) decrease the convertible voltage range (so, applying the same 10-bits across a smaller voltage range).
 
-It's possible to do the latter on the Arduino. You can change the `HIGH` reference voltage from $$V_{cc}$$ (which is 5V on the Uno and Leonardo) to a different value between 1.0V to $$V_{cc}$$ using [analogReference()](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/). The `LOW` reference voltage is fixed to $$GND$$.
+It's possible to do the latter on the Arduino. You can change the `HIGH` reference voltage from $$V_{cc}$$ (which is 5V on the Uno and Leonardo) to a different value—for example, to 2V (1.0V is the minimum) using [analogReference()](https://www.arduino.cc/reference/en/language/functions/analog-io/analogreference/). The `LOW` reference voltage is fixed to $$GND$$.
 
 Changing the reference voltage may be useful if you know your max analog input value is less than $$V_{cc}$$ because you will increase your ADC precision.
 
@@ -257,7 +294,9 @@ On the Uno and Leonardo, the options are:
 
 #### How does the ADC actually work?
 
-But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and even our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). According to the ATmega328 datasheet, "the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate." See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
+But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and even our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). 
+
+According to the ATmega328 datasheet, "*the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate.*" See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
 
 <!-- TODO: even more interesting discussions about how for one ADC clock period, the ADC has to charge a capacitor that it uses to measure voltage on the input pin. See: https://www.avrfreaks.net/forum/minumum-current-required-analog-pin-atmega328 -->
 

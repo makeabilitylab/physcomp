@@ -70,12 +70,18 @@ Potentiometers have three legs: the resistance between the outer two legs (Leg 1
 
 The power of a potentiometer is in that middle leg (Leg 2) whose resistance varies depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value like 1kΩ or 10kΩ). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
 
-<!-- As you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$. -->
-
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/PotentiometerIntroduction_TrimmedAndCropped.mp4" type="video/mp4" />
 </video>
 **Video.** Animation by Jon Froehlich. Created in PowerPoint.
+{: .fs-1 }
+
+Using two multimeters set to **measure resistances** across both Legs 1-2 and 2-3, we can examine this behavior directly. Notice how as you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$. We are using a 10kΩ potentiometer so $$R_{total}=10kΩ$$
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/Tinkercad_PotentiometerWithMultimeters.mp4" type="video/mp4" />
+</video>
+**Video.** Using two multimeters, we can examine how the resistances change between Legs 1-2 and 2-3. Note that the resistance between the outer legs (Legs 1-3) will always sum to potentiometers total value. In this case, we're using a 10kΩ, so it would sum to 10kΩ. Try it out on [Tinkercad here](https://www.tinkercad.com/things/4Aqy2AnmmMy-potentiometer-with-multimeters-measuring-resistance).
 {: .fs-1 }
 
 ### Potentiometer types

@@ -88,6 +88,12 @@ figure.highlight {
   font-size: 12px !important;
 }
 
+.table-max-width300 {
+  max-width: 300px;
+  min-width: 0px;
+  overflow-x: auto; /* This will add a scrollbar if the content exceeds 300px */
+}
+
 /** VIBRATION TABLE **/
 .vibro-table{
   min-width: 0px;

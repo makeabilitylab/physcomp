@@ -56,11 +56,22 @@ The power of a potentiometer is in that middle leg (Leg 2) whose resistance vari
 **Video.** Animation by Jon Froehlich. Created in PowerPoint.
 {: .fs-1 }
 
+Using two multimeters set to **measure resistances** across both Legs 1-2 and 2-3, we can examine this behavior directly. Notice how as you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$. We are using a 10kΩ potentiometer so $$R_{total}=10kΩ$$
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="../electronics/assets/videos/Tinkercad_PotentiometerWithMultimeters.mp4" type="video/mp4" />
+</video>
+**Video.** Using two multimeters, we can examine how the resistances change between Legs 1-2 and 2-3. Note that the resistance between the outer legs (Legs 1-3) will always sum to potentiometers total value. In this case, we're using a 10kΩ, so it would sum to 10kΩ. Try it out on [Tinkercad here](https://www.tinkercad.com/things/4Aqy2AnmmMy-potentiometer-with-multimeters-measuring-resistance).
+{: .fs-1 }
+
 ### Potentiomers as variable resistors vs. voltage dividers
 
-There are two common ways to use a potentiometer: as a variable resistor or rheostat—where you only hook up two legs (the wiper leg and an outer leg)—and as a voltage divider. The latter is how we'll use potentiometers as input to our microcontrollers.
+There are two common ways to use a potentiometer:
 
-<!-- To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. We'll show you how to do that in our [next lesson](force-sensitive-resistors.md). -->
+1. As a **variable resistor** or rheostat—where you only hook up two legs (the wiper leg and an outer leg)
+2. And as a [**voltage divider**](../electronics/series-parallel.md#voltage-dividers) where we hook up all three legs with the middle leg connected to the analog input of our microcontrollers.
+
+To use these two-leg variable resistors with a microcontroller, we will need to add an additional fixed resistor to create a voltage divider. We'll show you how to do that in our [next lesson](force-sensitive-resistors.md).
 
 Below, we are going to focus on using a potentiometer first as a two-legged variable resistor and then as a voltage divider with our Arduino.
 
@@ -223,9 +234,27 @@ You can access these by specifying `A6` - `A11` in your code. For example:
 int analogVal = analogRead(A6); // A6 is same as D4
 ```
 
-Another view of the back of the Arduino Leonardo board showing the additional analog input pins. Here, you can see the following mapping:
+Another view of the back of the Arduino Leonardo board showing the additional analog input pins. 
 
 ![Showing extra analog input pins on Leonardo along with mapping to digital pins](assets/images/CloseUpPictureOfBackOfArduinoLeonardo_ShowingBothExtraAnalogInputPintsAndMappingWithDigitalPins_ByJonEFroehlich.png)
+
+The mapping between analog input pins and digital I/O pins are described in the [docs](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/)):
+
+{: .table-max-width300 }
+| Analog Input Pin | Digital I/O Pin |
+| :---:|:---: |
+| A0  | 14  |
+| A1  | 15  |
+| A2  | 16  |
+| A3  | 17  |
+| A4  | 18  |
+| A5  | 19  |
+| A6  | 4  |
+| A7  | 6  |
+| A8  | 8  |
+| A9  | 9  |
+| A10 | 10  |
+| A11 | 12  |
 
 ### Analog input on common Arduino boards
 
@@ -294,7 +323,7 @@ On the Uno and Leonardo, the options are:
 
 #### How does the ADC actually work?
 
-But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class (and even our own knowledge); however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). 
+But wait, you might wonder, how does the actual conversion from analog-to-digital work? This question is beyond the scope of our class; however, from our research, we found that the ATmega328 uses a successive approximation ADC, which converts continuous analog signals via a binary search through all possible quantization levels before converging on a digital output for each conversion ([Wikipedia](https://en.wikipedia.org/wiki/Successive_approximation_ADC)). 
 
 According to the ATmega328 datasheet, "*the successive approximation circuity requires an input clock frequency between 50 kHz and 200kHz to get maximum resolution. If a lower resolution than 10 bits is needed, the input clock frequency to the ADC can be higher than 200 kHz to get a higher sample rate.*" See this [EE StackExchange discussion](https://electronics.stackexchange.com/questions/97606/analog-digital-conversion-clock-prescaling-atmega328p).
 

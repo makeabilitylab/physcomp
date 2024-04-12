@@ -204,6 +204,12 @@ Analog input!
 
 More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, **analog input** enables us to **read voltages between 0V and 5V**. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="../electronics/assets/videos/AnalogVsDigital.mp4" type="video/mp4" />
+</video>
+**Video.** While digital input is simply HIGH (5V) or LOW (0V), analog can be anywhere in between. Our ability to sense gradations in the voltage signal is based on the resolution of the analog-to-digital converter. In the case of the Arduino Uno and Leonardo, this is 10 bits.
+{: .fs-1 }
+
 <!-- TODO: The arduino.cc docs mention adding a short delay before using analogReads on successive pins: https://www.arduino.cc/en/Tutorial/AnalogInputPins. Add this? Here's the full quote: "The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins." -->
 
 ### Analog input pins
@@ -387,7 +393,7 @@ And here's an illustrative video of what's happening in our circuit:
 
 <iframe width="736" height="414"  src="https://www.youtube.com/embed/rJr4TgoFZ2Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 This is a circuit simulation of the potentiometer correctly hooked up to a microcontroller with Leg 1 hooked to 5V, Leg 2 (wiper leg) hooked to analog input A0, and Leg 3 to GND. The "inside the microcontroller" view is for illustrative purposes. The input pin circuitry does not actually look like this. Simulation made in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
-{: .fs-1 }
+{: .fs-1 } 
 
 ### Build it for real
 

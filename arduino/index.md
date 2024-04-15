@@ -41,9 +41,9 @@ The following tutorials are interactive and designed to be completed **in order*
 <!-- The [Adafruit lessons](https://learn.adafruit.com/series/learn-arduino) provide a rapid, broad taste of using microcontrollers for digital and analog I/O. As a book, Blum's [Exploring Arduino](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451) goes deeper; however, ne -->
 
 {: .highlight-title }
-> Arduino Uno vs. Arduino Leonardo
+> Arduino Uno R3 vs. Arduino Leonardo
 > 
-> For this lesson series, we use two of the most popular 5V Arduino models: the [Arduino Uno](https://store.arduino.cc/products/arduino-uno-rev3) and the [Arduino Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers); however, the lessons themselves should translate to almost any Arduino board (which is the beauty of the Arduino hardware-software ecosystem!).
+> For this lesson series, we use two of the most popular 5V Arduino models: the [Arduino Uno Rev3](https://store.arduino.cc/products/arduino-uno-rev3) and the [Arduino Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers); however, the lessons themselves should translate to almost any Arduino board (which is the beauty of the Arduino hardware-software ecosystem!).
 >
 > ![Image showing both the Arduino Uno and the Arduino Leonardo](assets/images/ArduinoUnoVsArduinoLeonardo.png)
 >

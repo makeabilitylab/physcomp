@@ -43,10 +43,10 @@ The following tutorials are interactive and designed to be completed **in order*
 {: .highlight-title }
 > Arduino Uno vs. Arduino Leonardo
 > 
-> For this lesson series, we use two of the most popular 5V Arduino models: the [Arduino Uno](https://store.arduino.cc/products/arduino-uno-rev3) and the [Arduino Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers); however, the lessons themselves should translate to almost any Arduino boards (which is the beauty of the Arduino hardware-software ecosystem!).
-> 
+> For this lesson series, we use two of the most popular 5V Arduino models: the [Arduino Uno](https://store.arduino.cc/products/arduino-uno-rev3) and the [Arduino Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers); however, the lessons themselves should translate to almost any Arduino board (which is the beauty of the Arduino hardware-software ecosystem!).
+>
 > ![Image showing both the Arduino Uno and the Arduino Leonardo](assets/images/ArduinoUnoVsArduinoLeonardo.png)
-> 
+>
 > Both the Uno and Leonardo have similar form factors, memory, clock speeds (16MHz), and GPIO pins (20 digital I/O pins); however, there are some differences:
 > * The Uno uses the [ATmega328P microcontroller](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) while the Leonardo uses the [ATmega32u4](http://www.atmel.com/devices/atmega32u4.aspx)
 > * The ATmega32u4 has built-in USB support whereas the Uno actually has a second microcontroller (the ATmega16U2) to provide USB communication. On the Uno, pins 0 and 1 are used to communicate with the 16u2 co-processor, which can conflict with components plugged into those pins (so our examples will often avoid using pins 0 or 1, even on the Leonardo)

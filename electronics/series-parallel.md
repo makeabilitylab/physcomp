@@ -188,7 +188,7 @@ $$V_{out} = V_{in} * \frac{R_2}{R_1 + R_2}$$
 **Figure.** The voltage divider pattern and equation. Image made in PowerPoint. See [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) for more.
 {: .fs-1 }
 
-Importantly, as you can tell from the equation, it is *not* the absolute resistances that matter but rather the ratio of $$R_1$$ to $$R_2$$ that controls $$V_{out}$$. Thus, for the purposes of *dividing voltages*, setting $$R_1 = 100Ω$$ and $$R_2 = 100Ω$$ would be the same as $$R_1 = 2.2kΩ$$ and $$R_2 = 2.2kΩ$$, they would both divide the voltages evenly. So, $$V_{out}$$ would equal $$4.5V$$ if $$V_{in}=9V$$.
+Importantly, as you can tell from the equation, it is *not* the absolute resistances that matter but rather **the ratio **of $$R_1$$ to $$R_2$$ that controls $$V_{out}$$. Thus, for the purposes of *dividing voltages*, setting $$R_1 = 100Ω$$ and $$R_2 = 100Ω$$ would be the same as $$R_1 = 2.2kΩ$$ and $$R_2 = 2.2kΩ$$, they would both divide the voltages evenly. So, $$V_{out}$$ would equal $$4.5V$$ if $$V_{in}=9V$$.
 
 However, the amount of current between the two circuits would be significantly different with the former: $$I = \frac{9V}{200Ω} \Rightarrow 45mA$$ and the latter: $$I = \frac{9V}{4.4kΩ} \Rightarrow 2.0mA$$.
 
@@ -206,7 +206,7 @@ Using the figure above, let's identify and write down what we know. We know that
 
 $$V_{out} = V_{R2} = I * R2$$
 
-We also know that $$V_in$$ is equal to $$V_R1 + V_R2$$ given [Kirchhoff's Voltage Law](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-kirchhoffs-laws).
+We also know that $$V_{in}$$ is equal to $$V_R1 + V_R2$$ given [Kirchhoff's Voltage Law](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-kirchhoffs-laws).
 
 $$V_{in} = V_{R1} + V_{R2}$$
 
@@ -244,7 +244,7 @@ Note: for this voltage divider equation to hold true, the current $$I$$ flowing 
 
 ## Parallel resistors
 
-Whereas **series resistors** have the same current but divide voltage, **[parallel resistors*](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors)* have the same voltage but divide current. Components in parallel look like this:
+Whereas **series resistors** have the same current but divide voltage, [**parallel resistors**](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors) have the same voltage but divide current. Components in parallel look like this:
 
 ![](assets/images/ComponentsInParallel_KhanAcademyAndJonFroehlich.png)
 
@@ -284,7 +284,7 @@ Using Ohm's Law, we can now solve for $$I_1$$ and $$I_2$$ where: $$I_1 = \frac{V
 
 Stop for a moment. Think about these results. Do they *conceptually* make sense?
 
-Using Ohm's Law, we found that **10 times** as much current flows through the $$I_2$$ branch as the $$I_1$$ branch. Indeed, this exactly matches the ratio of the two resistors $$R_1$$ to $$R_2$$—$$R_2$$ is **10 times** larger than $$R_1$$ and thus will restrict far more current. This makes sense: just as more water will flow through a branch with less resistance, so too will more current flow through the path of less resistance.
+Using Ohm's Law, we found that **10 times** as much current flows through the $$I_1$$ branch as the $$I_2$$ branch. Indeed, this exactly matches the ratio of the two resistors R1 and R2: R2 is 10 times larger than R1 and thus will restrict far more current. This makes sense: just as more water will flow through a branch with less resistance, so too will more current flow through the path of less resistance.
 
 #### Step 5: Finally, solve for $$I_{Total}$$
 

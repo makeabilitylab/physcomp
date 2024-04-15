@@ -17,7 +17,7 @@ usetocbot: true
 {:toc}
 ---
 
-Welcome 👋 to the second module in your Physical Computing journey: **Introduction to Microcontrollers** (using Arduino).
+Welcome 👋 to the second module in your Physical Computing journey: **Introduction to Microcontrollers** (using Arduino). Here, you will learn about [digital output](./led-blink.md), [analog output](./led-fade.md), [digital input](./buttons.md), and [analog input](./potentiometers.md) and build interesting musical instruments along the way from a [button piano](./piano.md) to a [Jedi-force instrument](./force-sensitive-resistors.md#jedi-force-instrument)! Get started with our first lesson: [L1: Turning on an LED](./led-on.md) and start building! ⚒🛠
 
 {: .note }
 Although you can begin your learning journey here, we  recommend that you complete the first module on [Intro to Electronics](../electronics/index.md) first. This will allow you to have a more deep understanding of the content in this section, and we will occassionally refer back to [Intro to Electronics](../electronics/index.md).
@@ -39,6 +39,21 @@ Let the fun begin! 🚀🥳
 The following tutorials are interactive and designed to be completed **in order**. All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 
 <!-- The [Adafruit lessons](https://learn.adafruit.com/series/learn-arduino) provide a rapid, broad taste of using microcontrollers for digital and analog I/O. As a book, Blum's [Exploring Arduino](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451) goes deeper; however, ne -->
+
+{: .highlight-title }
+> Arduino Uno vs. Arduino Leonardo
+> 
+> For this lesson series, we use two of the most popular 5V Arduino models: the [Arduino Uno](https://store.arduino.cc/products/arduino-uno-rev3) and the [Arduino Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers); however, the lessons themselves should translate to almost any Arduino boards (which is the beauty of the Arduino hardware-software ecosystem!).
+> 
+> ![Image showing both the Arduino Uno and the Arduino Leonardo](assets/images/ArduinoUnoVsArduinoLeonardo.png)
+> 
+> Both the Uno and Leonardo have similar form factors, memory, clock speeds (16MHz), and GPIO pins (20 digital I/O pins); however, there are some differences:
+> * The Uno uses the [ATmega328P microcontroller](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) while the Leonardo uses the [ATmega32u4](http://www.atmel.com/devices/atmega32u4.aspx)
+> * The ATmega32u4 has built-in USB support whereas the Uno actually has a second microcontroller (the ATmega16U2) to provide USB communication. On the Uno, pins 0 and 1 are used to communicate with the 16u2 co-processor, which can conflict with components plugged into those pins (so our examples will often avoid using pins 0 or 1, even on the Leonardo)
+> * Because the Leonardo natively supports USB, it can be mounted as a Human-Input Device and thus used as a mouse, keyboard, or joystick.
+> * The Leonardo has 12 analog inputs vs. the Uno's 6
+> 
+> In the lessons themselves, we'll mark specific differences between the Uno and Leonardo, when relevant.
 
 ## Intro to Output
 

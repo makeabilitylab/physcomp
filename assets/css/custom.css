@@ -36,7 +36,18 @@ blockquote.note,
 blockquote.warning,
 blockquote.info,
 blockquote.important,
+blockquote.highlight,
 blockquote.new {
+  font-size: initial;
+  font-style: normal;
+}
+
+blockquote.note-title,
+blockquote.warning-title,
+blockquote.info-title,
+blockquote.important-title,
+blockquote.highlight-title,
+blockquote.new-title {
   font-size: initial;
   font-style: normal;
 }

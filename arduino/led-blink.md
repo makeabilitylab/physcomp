@@ -81,10 +81,9 @@ You can control any of these 20 digital I/O pins with three functions:
 2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`. We will cover `digitalRead` in our [Intro to Input](intro-input.md) lesson series.
 3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`. We'll be using `digitalWrite` in this lesson.
 
----
-**NOTE:**
+### How did we count 20 digital I/O pins?
 
-While the white silkscreening on the Uno (and Leonardo) makes it seem like these boards only have 14 digital I/O pins (the top part of the board), they in fact have 20! Indeed, you can consult the official [Arduino Uno pinout diagram](https://docs.arduino.cc/resources/pinouts/A000066-full-pinout.pdf) for verification.
+While the white silkscreening on the Uno and Leonardo makes it seem like these boards only have **14 digital I/O pins** (the top part of the board), they in fact have **20**! Indeed, you can consult the official [Arduino Uno pinout diagram](https://docs.arduino.cc/resources/pinouts/A000066-full-pinout.pdf) for verification.
 
 ![The official Arduino Uno pinout diagram](assets/images/ArduinoUno_OfficialPinOutDiagram.png)
 
@@ -96,7 +95,13 @@ It's the same with the Arduino Leonardo (see [official "printout diagram" here](
 
 ![The official Arduino Leonardo pinout diagram with the 20 digital I/O pins marked](assets/images/ArduinoLeonardo_OfficialPinOutDiagram_DigitalIOPinsMarked.png)
 
----
+Finally, here's a [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) demonstrating the use of all 20 digital I/O pins as digital output.
+
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/movies/ArduinoUno_UsingAll20GPIOPinsAsDigitalOutput.mp4" type="video/mp4" />
+</video>
+**Video.** A [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) showing how to use all 20 GPIO pins as digital output on the Arduino Uno. You can try the simulation yourself [here](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) and view the code on [GitHub here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkAll20Pins/BlinkAll20Pins.ino).
+{: .fs-1 }
 
 ### What do we mean by HIGH and LOW?
 

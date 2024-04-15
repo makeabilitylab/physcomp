@@ -76,7 +76,9 @@ All code on this website is open source, including the [website itself](https://
 
 ### Use of this website in your courses/workshops
 
-Since our launch in Spring 2020, we have received nearly 600k views from over 209 countries (according to Google Analytics). 🚀
+In short, we ♥ it when others use and benefit from this material! 
+
+Since our launch in Spring 2020, we have received **nearly 600k views** from over **209 countries** (according to Google Analytics). 🚀
 
 From personal communication, we know that our materials have been used in university courses and maker workshops across the globe 🌎, including at CMU, Stanford, UW ECE, UW HCDE, Purdue, OCAD, Wayne State Univ., Univ. of Victoria, [UDIT](https://girardin.medium.com/teaching-emerging-technologies-to-ux-designers-c2d329ff83cd), Sussex, Dundee, and beyond.
 

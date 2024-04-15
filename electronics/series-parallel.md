@@ -284,7 +284,7 @@ Using Ohm's Law, we can now solve for $$I_1$$ and $$I_2$$ where: $$I_1 = \frac{V
 
 Stop for a moment. Think about these results. Do they *conceptually* make sense?
 
-Using Ohm's Law, we found that **10 times** as much current flows through the $$I_1$$ branch as the $$I_2$$ branch. Indeed, this exactly matches the ratio of the two resistors R1 and R2: R2 is 10 times larger than R1 and thus will restrict far more current. This makes sense: just as more water will flow through a branch with less resistance, so too will more current flow through the path of less resistance.
+Using Ohm's Law, we found that **10 times** as much current flows through the $$I_1$$ branch as the $$I_2$$ branch. Indeed, this exactly matches the ratio of the two resistors R1 and R2: R1 is 10 times smaller than R2 and thus, more current will flow through $$I_1$$ branch (10x more!). This makes sense: just as more water will flow through a branch with less resistance, so too will more current flow through the path of less resistance.
 
 #### Step 5: Finally, solve for $$I_{Total}$$
 

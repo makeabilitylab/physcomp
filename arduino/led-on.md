@@ -26,7 +26,7 @@ For our first learning activity, we are going to use Arduino to turn on an [LED]
 
 ## Materials
 
-For this lesson, you will need the following materials. Please build with us to advance your understanding and skillset—the best way to learn is by **doing!**. For those students enrolled in our courses, please document your creation journeys in your prototyping journals and attempt to answer and reflect on posed questions.
+For this lesson, you will need the following materials. Please build with us to advance your understanding and skillset—the best way to learn is by **doing!** For those students enrolled in our courses, please document your creation journeys in your prototyping journals and attempt to answer and reflect on posed questions.
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
@@ -84,15 +84,21 @@ Just as we did in our [LED lesson](../electronics/leds.md), let's analyze how mu
 ![](assets/images/LEDOn5V_HowMuchCurrentThroughCircuit_Step0.png)
 
 {: .note }
-> While it's not totally necessary to understand **circuit basics** to work with Arduino—indeed, you can get pretty far just following online tutorials—we think it's pretty important. As my colleague [Professor Andy Davidson](https://www.hcde.washington.edu/davidson) likes to say: there is a difference between a chef who understands how ingredients go together and creates their own dishes and a novice baker who simply follows recipes. We want to develop you more into the former! Let us all become chefs! 👩🏽‍🍳👨🏽‍🍳
+> While it's not totally necessary to understand **circuit basics** to work with Arduino—indeed, you can get pretty far just by following online tutorials—we think it's pretty important. As my colleague [Professor Andy Davidson](https://www.hcde.washington.edu/davidson) likes to say: there is a difference between a chef who understands how ingredients go together and creates their own dishes vs. a novice baker who simply follows recipes. We all start like the latter but we want to develop you more into the former! Let us all become chefs! 👩🏽‍🍳👨🏽‍🍳
 >
 > So, while you could skip this section and go on to [Maximum current draw](#maximum-current-draw) below, we recommend that you instead invest in this circuit analysis and do your best to understand it. If you're confused, try going through our [Intro to Electronics series](../electronics/), particularly [Ohm's Law](../electronics/ohms-law.md) and [LEDs](../electronics/leds.md). 
 
 #### Step 1: Identify nodes and what we know
 
-We always start by **identifying nodes** and **what we know**. We know that as long as the forward voltage ($$V_f$$) of the red LED is satisfied, then there will be both a voltage drop $$V_R$$ across our resistor and a voltage drop $$V_D$$ across our LED.
+When analyzing a circuit, we always start by **identifying nodes** and **what we know**. We know that: 
 
-Due to Kirchhoff's Circuit Laws, we know that the total voltage drop across both the resistor and LED ($$V_R + V_D$$) must equal our supply voltage $$V_S=5V$$. From our [LED lesson](../electronics/leds.md), we know that our circuit is off until the "on" or "forward" voltage of our LED is met, which for a red LED is ~2V. Thus, we can set $$V_D=2V$$ and solve for $$V_R$$.
+* As long as the forward voltage ($$V_f$$) of the red LED is satisfied, then there will be both a voltage drop $$V_R$$ across our resistor and a voltage drop $$V_D$$ across our LED.
+
+* Due to Kirchhoff's Circuit Laws, we know that the total voltage drop across both the resistor and LED ($$V_R + V_D$$) must equal our supply voltage $$V_S=5V$$. 
+
+* Finally, from our [LED lesson](../electronics/leds.md), we know that our circuit is off until the "on" or "forward" voltage of our LED is met, which for a red LED is ~2V. 
+
+From the above, we can set $$V_D=2V$$ and solve for $$V_R$$.
 
 ![](assets/images/LEDOn5V_HowMuchCurrentThroughCircuit_Step1.png)
 
@@ -111,7 +117,7 @@ Thus, the voltage drop across the resistor is $$V_R=3V$$. Let's take a look pict
 
 #### Step 3: Solve for current
 
-We now know the resistance in our circuit ($$V_R=3V$$), so we can solve for current.
+We now know the voltage drop over the resistor in our circuit ($$V_R=3V$$), so we can solve for current.
 
 From Ohm's Law, we know that the total current in our circuit is equal to the voltage drop across our resistor $$V_R$$ divided by the resistance value $$R$$. That is, $$I = \frac{V_R}{R}$$. And we know that $$V_R=3V$$ and $$R=220Ω$$. Thus, the current through our circuit is:
 

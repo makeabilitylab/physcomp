@@ -26,7 +26,7 @@ Breadboards allow us to prototype physical computing circuits quickly and effici
 **Figure** The left image is from an Instructable on "[Using a Real Breadboard for Prototyping Your Circuit](https://www.instructables.com/Use-a-real-Bread-Board-for-prototyping-your-circui/)" and the center image is originally from Wikipedia (user Wikinaut); however, both images were found on Sparkfun.com's [breadboard tutorial](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard).
 {: .fs-1 }
 
-That said, breadboards are a bit obscure at first and do take time to get used to and understand. In this lesson, we'll learn about breadboards, prototype with them in the simulation environment called [Tinkercad Circuits]((https://www.tinkercad.com/)), and build some simple circuits with resistors and LEDs.
+That said, breadboards are a bit obscure at first and do take time to get used to and understand. In this lesson, we'll learn about breadboards, prototype with them in the simulation environment called [Tinkercad Circuits](https://www.tinkercad.com/circuits), and build some simple circuits with resistors and LEDs.
 
 ## Inside a breadboard
 

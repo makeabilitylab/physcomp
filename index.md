@@ -4,6 +4,7 @@ title: Home
 nav_order: 0
 usemathjax: true
 description: "Website Overview"
+usetocbot: true
 permalink: /
 ---
 
@@ -61,6 +62,7 @@ Example projects from our courses.
 
 Here are some example hardware kits that we provide students in our classes.
 
+- CSE493F Prototyping Interactive Systems with AI: [Spring'24](https://docs.google.com/spreadsheets/d/1JK4UFWCBNOjAkROK0xIcQqoCxdTe6ltC_HgbnESMkwE/edit#gid=0)
 - CSE490 Physical Computing: [Spring'21](https://docs.google.com/spreadsheets/d/1R2JqlGt5uzvqELevAIm99jlwRd08RPa6LtFQGwu32eM/edit#gid=0)
 - CSE590 Ubiquitous Computing: [Spring'20](https://docs.google.com/spreadsheets/d/177bLxoFWkBTETf0IBI6YSj0D7ARB_cDI5G91fDpNaeg/edit?usp=sharing)
 - HCID521 Prototyping Studio: [Winter'20](https://docs.google.com/spreadsheets/d/1KeoEjHCCumzPbEeb42TR2nPVxbmhVrfT0AzasvnKFPU/edit?usp=sharing)
@@ -68,9 +70,23 @@ Here are some example hardware kits that we provide students in our classes.
 
 ## About this website
 
-This website began as a response to teaching physical computing remotely due to Covid-19. My initial (humble) goal is simply to translate my lectures slides to more readable online versions; however, I am hopeful that it will expand further.
+This website, which we call an "interactive textbook", began as a response to teaching physical computing remotely due to Covid-19. My original (humble) goal was simply to translate my lectures slides to more readable online versions; however, I have continued to work on it post COVID as a resource to complement my in-person teaching.
 
 All code on this website is open source, including the [website itself](https://github.com/makeabilitylab/physcomp). If you'd like to contribute, please read the [web dev setup guide here](website-install.md), start coding, and make a pull request!
+
+### Use of this website in your courses/workshops
+
+Since our launch in Spring 2020, we have received nearly 600k views from over 209 countries (according to Google Analytics). 🚀
+
+From personal communication, we know that our materials have been used in university courses and maker workshops across the globe 🌎, including at CMU, Stanford, UW ECE, UW HCDE, Purdue, OCAD, Wayne State Univ., Univ. of Victoria, [UDIT](https://girardin.medium.com/teaching-emerging-technologies-to-ux-designers-c2d329ff83cd), Sussex, Dundee, and beyond.
+
+As one example, I received the following note from a professor:
+
+> Your [website on Intro to Electronics](https://makeabilitylab.github.io/physcomp/) is just fantastic. My students and I are grateful to your intuitive explanations, animations, and step by step problems solving approaches. Your site is exactly what I was looking for.
+
+We receive similarly glowing notes from students.
+
+If you incorporate or use any pieces of this website in your teaching or workshops, we'd love to hear from you! Please email jonf@cs.uw.edu. I love hearing about the ways that our materials have helped you learn and/or teach!
 
 ### Code links
 

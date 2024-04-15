@@ -69,9 +69,9 @@ Answer: via timer interrupts.
 The ATmega328 supports a variety of interrupts, including interrupts to detect when a voltage value on a pin changes as well as time. The timer interrupts, for example, are used by the [millis()](https://www.arduino.cc/reference/en/language/functions/time/millis/) and [micros()](https://www.arduino.cc/reference/tr/language/functions/time/micros/) functions to count precisely. They are also used to generate square waves at specific frequencies, which is what tone() does.
 
 The ATmega328 has three timers:
-- Timer0: 8-bit timer used by millis() and micros().
-- Timer1: 16-bit timer used by the [Servo](https://www.arduino.cc/en/reference/servo)() library
-- Timer2: An-8 bit timer used by the [Tone()](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library
+- Timer0: An 8-bit timer used by millis() and micros().
+- Timer1: A 16-bit timer used by the [Servo](https://www.arduino.cc/en/reference/servo)() library
+- Timer2: An 8-bit timer used by the [Tone()](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) library
 
 If you want to take a (super) deep dive into how tone works, see the [source code here](https://github.com/bhagman/Tone/blob/master/Tone.cpp) and accompanying [notes](https://github.com/bhagman/Tone). If you want to learn more about interrupts on the Arduino, see [Nick Gammon's blog post](https://gammon.com.au/interrupts) and this [Adafruit Learn series](https://learn.adafruit.com/multi-tasking-the-arduino-part-2/timers).
 

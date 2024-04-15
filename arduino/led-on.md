@@ -26,7 +26,7 @@ For our first learning activity, we are going to use Arduino to turn on an [LED]
 
 ## Materials
 
-For this lesson, you will need the following materials. Please build with us to advance your understanding and skillset—the best way to learn is by **doing!**. For those students enrolled in our courses, please document your creation journeys in your prototyping journals and attempt to answer and reflection on posed questions. 
+For this lesson, you will need the following materials. Please build with us to advance your understanding and skillset—the best way to learn is by **doing!**. For those students enrolled in our courses, please document your creation journeys in your prototyping journals and attempt to answer and reflect on posed questions.
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
@@ -36,6 +36,8 @@ For this lesson, you will need the following materials. Please build with us to 
 We'll be using the [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) for these introductory microcontroller lessons but any 5V board will work, including the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3), Adafruit's [METRO 328](https://www.adafruit.com/product/50), Sparkfun's [RedBoard](https://www.sparkfun.com/products/13975), *etc.* Each of these boards have the same pin layout and general specifications.
 
 ## Hook up LED to Arduino's 5V supply pin
+
+Let's begin by hooking up an LED with a current limiting resistor to the Arduino's 5V supply pin.
 
 ### Step 1: Wrap resistor around LED leg
 
@@ -81,42 +83,54 @@ Just as we did in our [LED lesson](../electronics/leds.md), let's analyze how mu
 
 ![](assets/images/LEDOn5V_HowMuchCurrentThroughCircuit_Step0.png)
 
+{: .note }
+> While it's not totally necessary to understand **circuit basics** to work with Arduino—indeed, you can get pretty far just following online tutorials—we think it's pretty important. As my colleague [Professor Andy Davidson](https://www.hcde.washington.edu/davidson) likes to say: there is a difference between a chef who understands how ingredients go together and creates their own dishes and a novice baker who simply follows recipes. We want to develop you more into the former! Let us all become chefs! 👩🏽‍🍳👨🏽‍🍳
+>
+> So, while you could skip this section and go on to [Maximum current draw](#maximum-current-draw) below, we recommend that you instead invest in this circuit analysis and do your best to understand it. If you're confused, try going through our [Intro to Electronics series](../electronics/), particularly [Ohm's Law](../electronics/ohms-law.md) and [LEDs](../electronics/leds.md). 
+
 #### Step 1: Identify nodes and what we know
 
-We always start by identifying nodes and what we know. We know that as long as $$V_f$$ is satisfied, that there will be a voltage drop $$V_R$$ across our resistor and a voltage drop $$V_D$$ across our LED.
+We always start by **identifying nodes** and **what we know**. We know that as long as the forward voltage ($$V_f$$) of the red LED is satisfied, then there will be both a voltage drop $$V_R$$ across our resistor and a voltage drop $$V_D$$ across our LED.
 
 Due to Kirchhoff's Circuit Laws, we know that the total voltage drop across both the resistor and LED ($$V_R + V_D$$) must equal our supply voltage $$V_S=5V$$. From our [LED lesson](../electronics/leds.md), we know that our circuit is off until the "on" or "forward" voltage of our LED is met, which for a red LED is ~2V. Thus, we can set $$V_D=2V$$ and solve for $$V_R$$.
 
 ![](assets/images/LEDOn5V_HowMuchCurrentThroughCircuit_Step1.png)
 
 #### Step 2: Solve for voltage drop across the resistor
-Solving for $$V_R$$:
+
+Using the RED LED's forward voltage of $$V_D=2V$$, we can now solve for the **voltage drop** across the resistor $$V_R$$. This will enable us to then calculate the current.
 
 $$
 V_S = V_R + V_D \\
 V_R = V_S - V_D \\
 V_R = 5V - 2V = 3V$$
 
+Thus, the voltage drop across the resistor is $$V_R=3V$$. Let's take a look pictorially below:
+
 ![](assets/images/LEDOn5V_HowMuchCurrentThroughCircuit_Step2.png)
 
 #### Step 3: Solve for current
+
+We now know the resistance in our circuit ($$V_R=3V$$), so we can solve for current.
 
 From Ohm's Law, we know that the total current in our circuit is equal to the voltage drop across our resistor $$V_R$$ divided by the resistance value $$R$$. That is, $$I = \frac{V_R}{R}$$. And we know that $$V_R=3V$$ and $$R=220Ω$$. Thus, the current through our circuit is:
 
 $$I = \frac{V_R}{R} \\
 I = \frac{3V}{220Ω} = 0.014A = 13.6mA$$
 
+Let's again take a look at this pictorially:
+
 ![](assets/images/LEDOn5V_HowMuchCurrentThroughCircuit_Step3.png)
 
-So, with the 5V supply pin, our circuit is drawing 13.6mA of current. Is this a lot or a little? Let's put this in context below.
+So, with the 5V supply pin, our simple LED-based circuit is **drawing 13.6mA of current**. Is this a lot or a little? Short answer: it's not very much but let's put this in context below.
 
 ### Maximum current draw
 
 The Arduino has a variety of pin types, each with their own maximum current ratings. 
 
-- **I/O Pins**: The maximum current draw of any **single** I/O pin—which we haven't used yet but we will in the [next lesson](led-blink.md)—is **40 mA** (a safer, continuous range is ~20mA). The total current across all I/O pins together is **200mA**. If we exceed these values, we could damage our Arduino board or the underlying microcontroller (the ATmega328 for the Uno or the ATmega32u4 for the Leonardo)
+* **I/O Pins**: The maximum current draw of any **single** I/O pin—which we haven't used yet but we will in the [next lesson](led-blink.md)—is **40 mA** (a safer, continuous range is ~20mA). The total current across all I/O pins together is **200mA**. If we exceed these values, we could damage our Arduino board or the underlying microcontroller (the ATmega328 for the Uno or the ATmega32u4 for the Leonardo)
 
-- **Power supply pins**: The **5V output pin** can supply ~400-500mA when powered by USB and ~900-1000mA when using an external power adapter. The **3.3V output pin** can supply ~150mA; however, if you have both 3.3V and 5V output pins connected, any current drawn from the 3.3V pin will be counted against 5V's total current. 
+* **Power supply pins**: The **5V output pin** can supply ~400-500mA when powered by USB and ~900-1000mA when using an external power adapter. The **3.3V output pin** can supply ~150mA; however, if you have both 3.3V and 5V output pins connected, any current drawn from the 3.3V pin will be counted against 5V's total current. 
 
 The only protection fuse is a [resettable polyfuse](https://www.littelfuse.com/products/polyswitch-resettable-ptcs.aspx) on the USB port, which limits current to 500mA on the 5V output pin (but only when powered by USB).
 

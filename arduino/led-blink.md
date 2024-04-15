@@ -102,7 +102,7 @@ It's the same with the Arduino Leonardo (see [official "printout diagram" here](
 
 An Arduino's supply voltage is often written as $$V_S$$, $$V_{CC}$$, and $$V_{DD}$$ in datasheets. Sadly, there does not appear to be a consistent naming convention ([link1](https://forum.arduino.cc/index.php?topic=374042.0), [link2](https://electronics.stackexchange.com/questions/17382/what-is-the-difference-between-v-cc-v-dd-v-ee-v-ss)). We'll try to consistently use $$V_{CC}$$ or $$V_S$$ but occasionally you'll see others (e.g., $$V_{DD}$$).
 
-On the Arduino Uno and Leonardo, the supply voltage ($$V_{CC}$$) is **5V**. So, when a pin as configured as an output via `pinMode(<pin>, OUTPUT)`, the pin can provide either a `HIGH` voltage ($$V_{CC}$$) or a `LOW` voltage (0V). Some microcontrollers operate at 3.3V. In this case, a `HIGH` state would be 3.3V but a `LOW` state would still be 0V.
+On the Arduino Uno and Leonardo, the supply voltage ($$V_{CC}$$) is **5V**. So, when a pin is configured as an output via `pinMode(<pin>, OUTPUT)`, the pin can provide either a `HIGH` voltage ($$V_{CC}$$) or a `LOW` voltage (0V). Some microcontrollers operate at 3.3V. In this case, a `HIGH` state would be 3.3V but a `LOW` state would still be 0V.
 
 We'll look at actual digital output signals on an oscilloscope later in this lesson (in the section ["What does digital output look like?"](#what-does-the-digital-output-look-like)).
 

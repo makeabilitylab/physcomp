@@ -8,6 +8,9 @@
         data.math = data.math.replace(/^% <!\[CDATA\[/, '').replace(/%\]\]>$/, '');
       });
     });
+    MathJax.Hub.Config({
+      displayAlign: 'left'
+    });
   </script>
 
   <script type="text/javascript" async

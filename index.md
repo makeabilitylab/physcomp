@@ -76,7 +76,7 @@ All code on this website is open source, including the [website itself](https://
 
 ### Use of this website in your courses/workshops
 
-In short, we ♥ it when others use and benefit from this material! 
+In short, we ♥ it when others use and benefit from this material!
 
 Since our launch in Spring 2020, we have received **nearly 600k views** from over **209 countries** (according to Google Analytics). 🚀
 

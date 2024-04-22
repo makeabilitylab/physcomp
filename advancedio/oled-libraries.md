@@ -10,7 +10,7 @@ usemathjax: true
 usetocbot: true
 nav_exclude: true
 ---
-# {{ page.title | replace_first:'L','Lesson '}}
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of Contents

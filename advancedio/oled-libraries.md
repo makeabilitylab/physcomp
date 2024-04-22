@@ -35,7 +35,7 @@ Open your Arduino IDE, then go to `Tools -> Manage Libraries`.
 
 ## Step 2: Search for Adafruit SSD1306
 
-In the Library Manager, search for "Adafruit SSD1306". There are other SSD1306 libraries so make sure you find the one by Adafruit. In this screenshot, the current version is 2.4.4.
+In the Library Manager, search for "Adafruit SSD1306". There are other SSD1306 libraries so make sure you find the one by Adafruit. In this screenshot, the current version is 2.4.4 but as of April 2024, they are on [release 2.5.9](https://github.com/adafruit/Adafruit_SSD1306/releases).
 
 ![](assets/images/ArduinoIDE_LibraryManager_SearchForAdafruitSSD1306.png)
 

@@ -60,7 +60,11 @@ The following tutorials are interactive and designed to be completed **in order*
 <!-- TODO:
 
     * [Done] Consider adding a debugging with Serial Monitor lesson -- maybe after Lesson 3? Update: I put it after Lesson 2
-    * I'm tempted to put in a tone lesson after LED fading because we are just too LED heavy here imo
+    * I'm tempted to put in a tone lesson after LED fading because we are just too LED heavy here imo.
+        - Putting it after LED fading (analogWrite) let's us bring up difference between changing PWM duty cycle (with analogWrite) and changing square wave freq (with tone)
+        - Could demonstrate the above by hooking up a potentiometer that changes the PWM wave using a pot; then switch to changing freq with pot
+        - Could also demonstrate by hooking up piezo two one pin that is 490 for PWM and another that is 980Hz
+        - Some great ideas in our https://makeabilitylab.github.io/physcomp/esp32/tone.html lesson too
     
     -->
 

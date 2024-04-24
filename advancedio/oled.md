@@ -151,13 +151,8 @@ Now that we've got our OLED display wired up correctly and tested that it's work
 
 To provide a common API for drawing across all Adafruit LCD and OLED displays, Adafruit created a general-purpose graphics rendering library, called [Adafruit GFX](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview). Put simply, rather than having to individually turn on/off OLEDs in the OLED matrix—which would be tedious (though perhaps a useful learning exercise)—the Adafruit GFX library provides higher level drawing routines to do this for you, like drawing rectangles, circles, text, and bitmaps.
 
----
-
-**NOTE:**
-
-You certainly do not *have* to use the Adafruit [SSD1306](https://github.com/adafruit/Adafruit_SSD1306) and [GFX](https://github.com/adafruit/Adafruit-GFX-Library) libraries to use OLED displays. There are many tutorials online that describe how to directly interface with the SSD1306 OLED driver and create drawing routines. For example, this "[Getting Started With OLED Displays](https://www.instructables.com/Getting-Started-With-OLED-Displays/)" by JayconSystems on Instructables. Remember, the Adafruit engineers simply built their libraries to make it *easier* to program OLEDs... and we're thankful! But you could also follow the [SSD1306](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf) and I<sup>2</sup>C specs and build your own libraries!
-
----
+{: .note }
+Though we highly recommend them, you certainly do not *have* to use the Adafruit [SSD1306](https://github.com/adafruit/Adafruit_SSD1306) and [GFX](https://github.com/adafruit/Adafruit-GFX-Library) libraries to use OLED displays. There are many tutorials online that describe how to directly interface with the SSD1306 OLED driver and create drawing routines. For example, this "[Getting Started With OLED Displays](https://www.instructables.com/Getting-Started-With-OLED-Displays/)" by JayconSystems on Instructables. Remember, the Adafruit engineers simply built their libraries to make it *easier* to program OLEDs... and we're thankful! But you could also follow the [SSD1306](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf) and I<sup>2</sup>C specs and build your own libraries!
 
 ### Coordinate system and pixels
 
@@ -175,7 +170,24 @@ Thus, to turn "on" the LED at pixel `(18, 6)` using [Adafruit GFX](https://learn
 
 Below, we describe how to draw shapes, text, and bitmaps. Importantly, when you call any of the drawing routines—from `drawLine` to `drawTriangle`—you are **not** drawing directly to the OLED display. Instead, you are drawing to an offscreen buffer handled by the SSD1306 driver. So, after you call your drawing routines, you must then call the `void Adafruit_SSD1306::display()` function to push the data from RAM to the display. We'll show how to do this step-by-step in our examples below.
 
-In short, the drawing pipeline looks like this:
+![](assets/images/OLEDDisplay_DrawingCircleAt5020With10Radius.png)
+**Figure.** Let's begin by drawing a simple circle at `x,y` location of `50,20` with a radius of `10`. This code is also in GitHub as [DrawCircle.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawCircle/DrawCircle.ino)); however, that code is slightly different in that it centers the circle in the middle of the screen. 
+{: .fs-1 }
+
+Let's begin by drawing a circle at `x,y` location of `50,20` with a radius of `10`. We'll start first with pseudo code to understand the drawing pipeline then actual C++. 
+
+```
+// One-time initialization
+Adafruit_SSD1306 _disp = new Display();   // Create new SSD1306 display object
+_disp.begin(SSD1306_SWITCHCAPVCC, 0x3D); // Allocate RAM for image buffer, set VCC, and address
+
+// Drawing
+_disp.clearDisplay();                        // Set all pixels to off
+_disp.fillCircle(50, 20, 10, SSD1306_WHITE); // Draw to offscreen buffer
+_disp.display();                             // Render offscreen buffer to display
+```
+
+And here's the actual C++ implementation (the full code is on GitHub as [DrawCircle.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawCircle/DrawCircle.ino)).
 
 {% highlight C++ %}
 // Instantiate SSD1306 driver display object
@@ -184,8 +196,10 @@ Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 void setup(){
   Serial.begin(9600);
   
-  // Initialize the display. If it fails, print failure to Serial
-  // and enter an infinite loop
+  // Initialize the display using begin() 
+  // The first parameter is the VCC selection. Typically, pass SSD1306_SWITCHCAPVCC.
+  // The second is the address of the display for i2c. Even if you have the display configured
+  // for SPI (which doesn't use addresses), you still need to pass a param here (can be 0)
   if (!_display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) { // Address 0x3D for 128x64
     Serial.println(F("SSD1306 allocation failed"));
     for (;;); // Don't proceed, loop forever
@@ -224,8 +238,7 @@ void setup(){
   // Clear the display
   _display.clearDisplay();
 
-  // Put in drawing routines
-  // In this case, draw a circle at x,y location of 50,20 with a radius of 10
+  // Draw a circle at x,y location of 50,20 with a radius of 10
   _display.fillCircle(50, 20, 10, SSD1306_WHITE);
 
   // Render graphics buffer to screen
@@ -238,7 +251,12 @@ void loop(){
 }
 {% endhighlight C++ %}
 
-However, for practical purposes, we always want to put our drawing methods in `loop()` because we want so support **dynamic graphics**, which are animated (*e.g.,* graphics that change over time) and/or responsive (*e.g.,* graphics that change in response to input).
+However, for practical purposes, we always want to put our drawing methods in `loop()` because we want to support **dynamic graphics**, which are animated (*e.g.,* graphics that change over time) and/or responsive (*e.g.,* graphics that change in response to input).
+
+{: .highlight }
+> Important Reminder
+>
+> You need to call `_display.display()` in order to render the graphics buffer to the screen. It's not sufficient to display call `drawCircle`, `fillRect`, `drawBitmap` as those functions "draw" to an offscreen buffer. Indeed, if you look at the [Adafruit_SSD1306.cpp source](https://github.com/adafruit/Adafruit_SSD1306/blob/1d52453e3b722e4c7a7bc6b81128138d721b5c27/Adafruit_SSD1306.cpp#L992) (available online in GitHub), you'll see that the function [`void Adafruit_SSD1306::display(void)`](https://github.com/adafruit/Adafruit_SSD1306/blob/1d52453e3b722e4c7a7bc6b81128138d721b5c27/Adafruit_SSD1306.cpp#L992) "pushes data currently in RAM to the SSD1306 display."
 
 ### Drawing shapes
 

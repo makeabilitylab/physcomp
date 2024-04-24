@@ -57,7 +57,12 @@ The following tutorials are interactive and designed to be completed **in order*
 
 ## Intro to Output
 
-<!-- Consider adding a debugging with Serial Monitor lesson -- maybe after Lesson 3? -->
+<!-- TODO:
+
+    * [Done] Consider adding a debugging with Serial Monitor lesson -- maybe after Lesson 3? Update: I put it after Lesson 2
+    * I'm tempted to put in a tone lesson after LED fading because we are just too LED heavy here imo
+    
+    -->
 
 ### [Lesson 1: Turning on an LED](led-on.md)
 
@@ -65,7 +70,7 @@ Introduces the Arduino power and ground pins, powering an initial LED circuit wi
 
 ### [Lesson 2: Blinking an LED](led-blink.md)
 
-Introduces the Arduino IDE and the ability to programmatically control Arduino GPIO pins to turn an LED on and off via [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
+Introduces the Arduino IDE, digital output, and the ability to programmatically control Arduino GPIO pins to turn an LED on and off via [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
 
 ### [Lesson 3: Serial debugging](serial-print.md)
 
@@ -73,7 +78,7 @@ Introduces some basic debugging approaches for Arduino, with a specific focus on
 
 ### [Lesson 4: Fading an LED](led-fade.md)
 
-Demonstrates how to gradually fade an LED on and off by using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)
+Introduces analog output, pulse-width modulation (PWM), and demonstrates how to gradually fade an LED on and off by using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)
 
 ### [Lesson 5: Blinking an LED Part 2](led-blink2.md)
 

@@ -39,8 +39,9 @@ In [this lesson](smoothing-input.md), we will learn how to smooth incoming senso
 
 <!-- ## Output:
 ### L1: Vibro motors
-### L2: Servo motors
 ### L3: OLED Displays
+### L3: Servo motors
+### L4: RGB LED Neopixels and beyond
 
 ## Input
 ### L1: Smoothing Input

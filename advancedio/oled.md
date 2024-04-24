@@ -256,7 +256,7 @@ However, for practical purposes, we always want to put our drawing methods in `l
 {: .highlight }
 > Important Reminder
 >
-> You need to call `_display.display()` in order to render the graphics buffer to the screen. It's not sufficient to display call `drawCircle`, `fillRect`, `drawBitmap` as those functions "draw" to an offscreen buffer. Indeed, if you look at the [Adafruit_SSD1306.cpp source](https://github.com/adafruit/Adafruit_SSD1306/blob/1d52453e3b722e4c7a7bc6b81128138d721b5c27/Adafruit_SSD1306.cpp#L992) (available online in GitHub), you'll see that the function [`void Adafruit_SSD1306::display(void)`](https://github.com/adafruit/Adafruit_SSD1306/blob/1d52453e3b722e4c7a7bc6b81128138d721b5c27/Adafruit_SSD1306.cpp#L992) "pushes data currently in RAM to the SSD1306 display."
+> You need to call `_display.display()` in order to render the graphics buffer to the screen. It's not sufficient to simply call `drawCircle`, `fillRect`, `drawBitmap` as those functions "draw" to an offscreen buffer. Indeed, if you look at the [Adafruit_SSD1306.cpp source](https://github.com/adafruit/Adafruit_SSD1306/blob/1d52453e3b722e4c7a7bc6b81128138d721b5c27/Adafruit_SSD1306.cpp#L992) (available online in GitHub), you'll see that the function [`void Adafruit_SSD1306::display(void)`](https://github.com/adafruit/Adafruit_SSD1306/blob/1d52453e3b722e4c7a7bc6b81128138d721b5c27/Adafruit_SSD1306.cpp#L992) "pushes data currently in RAM to the SSD1306 display."
 
 ### Drawing shapes
 

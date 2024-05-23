@@ -32,6 +32,10 @@ blockquote{
   border-left: 0.25em solid #6f777d;
 }
 
+blockquote.block-quote--small {
+  font-size: 16px; /* Override font-size for the variant */
+}
+
 blockquote.note,
 blockquote.warning,
 blockquote.info,
@@ -87,6 +91,20 @@ figure.highlight {
 
 .img-50{
   width: 50px;
+}
+
+/** FOR TABLES **/ 
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) td,
+table tr:nth-child(even) th {
+  background-color: inherit;
 }
 
 /** FOR SMALL TABLES **/

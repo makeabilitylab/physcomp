@@ -23,6 +23,14 @@ description: A learning resource for prototyping interactive digital-physical sy
 # See: https://jekyllrb.com/docs/configuration/incremental-regeneration/
 incremental: true
 
+# Google Gemini suggested I try this to reduce build time, which is often 20 secs
+# or longer on my desktop (AMD Ryzen 7 3800X 8-Core Processor 3.90 GHz with 32 GB RAM)
+cache: true 
+
+# Gemini also suggested I disable search for local builds
+# Note: Search is enabled by default (and this follows just-the-docs defaults)
+search_enabled: true
+
 # site.url: https://jonfroehlich.github.io/physcomp
 # Make absolute paths work with GitHub pages
 # See: https://stackoverflow.com/a/19173888/388117
@@ -39,10 +47,6 @@ comments: false
 
 # Set a path/url to a logo that will be displayed instead of the title
 # logo: "/assets/images/logo.png"
-
-# Enable or disable the site search
-# Supports true (default) or false
-search_enabled: true
 
 # Added this excerpt_separator due to the following:
 # https://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed/

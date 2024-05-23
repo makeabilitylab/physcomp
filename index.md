@@ -22,11 +22,27 @@ permalink: /
 
 Welcome 👋!
 
-This website is a place to learn and explore the materiality of computing, the physicality of humans, and harnessing the wonderful expressivity and potential interplay of both. It was built to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but has proved more broadly useful. 
+This website is a place to **learn**, to **invent**, and to have **fun** as we explore concepts related to [physical computing](https://en.wikipedia.org/wiki/Physical_computing) and interaction device design. We'll learn about [electronics](./electronics/index.md), [Arduino](./arduino/index.md), [communicating with computers](./communication/index.md), [designing custom input controllers](./cpx/cpx-keyboard.md), [basic signal processing](./signals/index.md), and more.
 
-Join us in learning and making together! 🚀
+Hi 🙋🏽‍♂️, I'm [Jon E. Froehlich](https://jonfroehlich.github.io/), a professor in computer science and human-computer interaction at the University of Washington and the author of this website—which we lovingly call an interactive textbook because you'll learn through animations, movies, embedded code, and simulation. I started building this site during the pandemic as a way of remotely teaching interaction device design. Over time, it's grown far beyond my original intent!
+
+Since our launch in Spring 2020, we have received **nearly 600k views** from over **209 countries** (according to Google Analytics). 🚀
+
+From personal communication, we know that our materials have been used in university courses and maker workshops across the globe 🌎, including at CMU, Stanford, UW ECE, UW HCDE, Purdue, OCAD, Wayne State Univ., Univ. of Victoria, [UDIT](https://girardin.medium.com/teaching-emerging-technologies-to-ux-designers-c2d329ff83cd), Sussex, Dundee, and beyond.
+
+As one example, I received the following note from a professor:
+
+> Your [teaching website](https://makeabilitylab.github.io/physcomp/) is just fantastic. My students and I are grateful to your intuitive explanations, animations, and step-by-step problem-solving approaches. Your site is exactly what I was looking for.
+{: .block-quote--small }
+
+We receive similarly glowing notes from students.
+
+<!-- It was originally built to complement the physical and ubiquitous computing courses at the [University of Washington](resources/uw-courses.md) but has proved more broadly useful. -->
+
+So, what are you waiting for? Join us in learning and making together! 🚀
 
 ## Why learn physical computing?
+<!-- TODO add a video or image here from my teaching or projects to capture the wonder -->
 
 This is a particularly interesting time to survey and explore physical computing because of three, interrelated technology and social trends:
 
@@ -42,15 +58,18 @@ And we are not alone, the content here is inspired by a rich set of courses, inc
 
 We assume the following background about our learners:
 
-- **Some coding experience.** For the [introductory lessons](arduino/index.md), we assume comfort and familiarity with basic coding concepts such as functions, loops, variables, and conditionals. We'll be using `C/C++` to program our microcontrollers; however, no previous `C/C++` experience is expected and, indeed, the language itself is rather unimportant. If you've programmed in a typed, compiled language like Java, Processing, C#, or other similar languages, you should be fine. If you've programmed in a dynamically-typed language like JavaScript, Python, or Ruby, then `C/C++` may take some getting used to but the overall structure of coding is not that different. Later lessons require more advanced programming concepts such as memory management, library development, classes, *etc.*
+- **Some coding experience.** For the [introductory lessons](arduino/index.md), we assume comfort and familiarity with basic coding concepts such as functions, loops, variables, and conditionals. We'll be using `C/C++` to program our microcontrollers; however, no previous `C/C++` experience is expected and, indeed, the language itself is rather unimportant (at least at first). If you've programmed in a typed, compiled language like Java, Processing, C#, or other similar languages, you should be fine. If you've programmed in a dynamically-typed language like JavaScript, Python, or Ruby, then `C/C++` may take some getting used to but the overall structure of coding is not that different. Later lessons require more advanced programming concepts such as memory management, library development, classes, *etc.*
 
 - **No previous experience with hardware.** In contrast, we assume no previous experience with electronics or microcontrollers.
 
-As physical and ubiquitous computing are inherently multidisciplinary fields spanning electrical engineering, computer science, signal processing, human-computer interaction, machine learning, and more (*e.g.,* applied anthropology) there are many diverse topic areas—and too many to cover in one course or website. The content here reflects what we teach to graduate and upper-level bachelor students (typically with engineering and/or computer science backgrounds). 
+As physical and ubiquitous computing are inherently multidisciplinary fields spanning electrical engineering, computer science, signal processing, human-computer interaction, machine learning, and more (*e.g.,* applied anthropology) there are many diverse topic areas—and too many to cover in one course or website. The content here reflects what we teach to graduate and upper-level bachelor students (typically with engineering and/or computer science backgrounds).
 
-The [Intro to Arduino](arduino/index.md) lessons were written for a more general audience and should be suitable for interaction design courses in information science or design fields (but again, do assume some coding experience). 
+{: .note }
+If you have limited (or no) experience in electronics and coding, then we have a [new(ish) lesson series using the Circuit Playground Express](./cpx/index.md) and the drag-and-drop visual programming language MakeCode. Check it out [here](./cpx/index.md)! We use these materials in our Prototyping Studio course with HCI+design students.
 
-## Learning philosphy: learn by doing
+The [Intro to Arduino](arduino/index.md) lessons were written for a more general audience and should be suitable for interaction design courses in information science or design fields (but again, do assume some coding experience).
+
+## Learning philosophy: learn by doing
 
 A key pedagogical philosophy underlying our teaching is **learn by doing**. From years of experience, we've found that the best way to teach physical computing is via hands-on exercises. So, we we expect that you will build along with our guides and lessons.
 
@@ -77,16 +96,6 @@ All code on this website is open source, including the [website itself](https://
 ### Use of this website in your courses/workshops
 
 In short, we ♥ it when others use and benefit from this material!
-
-Since our launch in Spring 2020, we have received **nearly 600k views** from over **209 countries** (according to Google Analytics). 🚀
-
-From personal communication, we know that our materials have been used in university courses and maker workshops across the globe 🌎, including at CMU, Stanford, UW ECE, UW HCDE, Purdue, OCAD, Wayne State Univ., Univ. of Victoria, [UDIT](https://girardin.medium.com/teaching-emerging-technologies-to-ux-designers-c2d329ff83cd), Sussex, Dundee, and beyond.
-
-As one example, I received the following note from a professor:
-
-> Your [website on Intro to Electronics](https://makeabilitylab.github.io/physcomp/) is just fantastic. My students and I are grateful to your intuitive explanations, animations, and step by step problems solving approaches. Your site is exactly what I was looking for.
-
-We receive similarly glowing notes from students.
 
 If you incorporate or use any pieces of this website in your teaching or workshops, we'd love to hear from you! Please email jonf@cs.uw.edu. I love hearing about the ways that our materials have helped you learn and/or teach!
 

@@ -17,7 +17,14 @@ usetocbot: true
 {:toc}
 ---
 
+![A collage of ESP32 boards](assets/images/ESP32Variants_FromS1-S3.png)
+**Figure.** The [ESP32](https://www.espressif.com/en/products/socs/esp32) has quickly become **the** platform to learn and use for IoT projects. The ESP32s are fast, have WiFi and Bluetooth, and many are around $10 USD! And the best part is: you can program them with Arduino! So, all of your learning from [previous lessons](../arduino/index.md) can be applied here!
+{: .fs-1 }
+
 These tutorials are interactive and designed to be completed **in order**. All ESP32 code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino/tree/master/ESP32).
+
+{: .note }
+If this is your first time on our website, welcome 👋🏽! The following ESP32 lessons assume that you have completed both our [Intro to Electronics](../electronics/index.md) and [Intro to Arduino](../arduino/index.md) tutorial series. While not absolutely necessary, we recommend you start there!
 
 <!-- TODO: add in link to Tinkercad circuits here... -->
 

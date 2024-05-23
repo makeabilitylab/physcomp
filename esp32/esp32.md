@@ -32,13 +32,49 @@ nav_order: 1
 Image from [makeradvisor.com](https://makeradvisor.com/esp32-development-boards-review-comparison/). There are literally dozens of ESP32 boards. Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)).
 {: .fs-1 } 
 
-The [ESP32](https://en.wikipedia.org/wiki/ESP32) is a low-cost, "system-on-a-chip" board with integrated WiFi, Bluetooth, and a Tensilica Xtensa LX6 microprocessor running at 160 or 240 MHz. It is a successor to the massively successful [ESP8266](https://en.wikipedia.org/wiki/ESP8266). The ESP32 is far more powerful than introductory Arduino boards like the Uno or Leonardo but also more complex.
+The [ESP32](https://en.wikipedia.org/wiki/ESP32) is a low-cost, "system-on-a-chip" board with integrated WiFi, Bluetooth, ultra-low power consumption, and a fast microprocessor created by [Espressif](https://www.espressif.com/en/products/socs/esp32). It is the successor to Espressif's massively successful [ESP8266](https://en.wikipedia.org/wiki/ESP8266). The ESP32 is far more powerful than the ESP8266 as well as the 16-bit microcontrollers in the Arduino Uno or Leonardo—which we used in our [introductory lessons](../arduino/).
 
 There are literally dozens of ESP32 boards on the market, including Adafruit's [Huzzah32](https://www.adafruit.com/product/3405) and Sparkfun's [ESP32 Thing](https://www.sparkfun.com/products/13907). Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)). We will be using the [Huzzah32](https://www.adafruit.com/product/3405).
 
 ### Programming environment
 
-You can program the ESP32 in variety of languages and programming environments, including `C/C++`, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, you can use Espressif's IoT Development Framework ([IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/)) or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html). Many ESP32 boards have Arduino libraries so you can also use the [Arduino IDE](https://www.arduino.cc/en/main/software), which is what we will do. This greatly simplifies programming the ESP32 (but at a cost of flexibility and efficiency).
+You can program the ESP32 in variety of languages and programming environments, including C/C++, [Micropython](https://github.com/pvanallen/esp32-getstarted), [Lua](https://nodemcu.readthedocs.io/en/dev-esp32/), and more. For programming environments, you can use Espressif's IoT Development Framework ([IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/)) or [VSCode with PlatformIO](https://docs.platformio.org/en/latest/tutorials/espressif32/arduino_debugging_unit_testing.html). Many ESP32 boards have Arduino libraries so you can also use the [Arduino IDE](https://www.arduino.cc/en/main/software), which is what we will do. This greatly simplifies programming the ESP32 (but at a cost of flexibility and efficiency).
+
+## Comparison Table
+
+Here's a comparison table of ESP32s derived from [Espressif's official documentation](https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32s3/hw-reference/chip-series-comparison.html). See also this [comparison table on gist](https://gist.github.com/sekcompsci/2bf39e715d5fe47579fa184fa819f421).
+
+|Feature|ESP32 Series|ESP32-S2 Series|ESP32-S3 Series|
+|--- |--- |--- |--- |
+|Launch year|2016|2020|2020|
+|Datasheet| [ESP Datasheet (PDF)](https://espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) | [ESP-S2 Datasheet (PDF)](https://www.espressif.com/sites/default/files/documentation/esp32-s2_datasheet_en.pdf) | [ESP-S3 Datasheet (PDF)](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf) |
+|Core|Xtensa® dual-/single core 32-bit LX6|Xtensa® single-core 32-bit LX7|Xtensa® dual-core 32-bit LX7|
+|Wi-Fi protocols|802.11 b/g/n, 2.4 GHz|802.11 b/g/n, 2.4 GHz|802.11 b/g/n, 2.4 GHz|
+|Bluetooth®|Bluetooth v4.2 & Bluetooth LE |✖️|Bluetooth 5.0|
+|Typical frequency|240 MHz|240 MHz|240 MHz|
+|SRAM|520 KB|320 KB|512 KB|
+|ROM|448 KB |128 KB |384 KB |
+|Embedded flash|2 MB, 4 MB, or none|2 MB, 4 MB, or none|8 MB or none|
+|External flash|Up to 16 MB device|Up to 1 GB device|Up to 1 GB device|
+|External RAM|Up to 8 MB device|Up to 1 GB device|Up to 1 GB device|
+|**Peripherals**||||
+|ADC|Two 12-bit, 18 channels|Two 12-bit, 20 channels|Two 12-bit SAR ADCs, 20 channels|
+|DAC|Two 8-bit channels|Two 8-bit channels|✖️|
+|Timers|Four 64-bit general-purpose timers|Four 64-bit general-purpose timers|Four 54-bit general-purpose timers|
+|Watchdog Timers|Three|Three|Three|
+|Temperature sensor|✖️|1|1|
+|Touch sensor|10|14|14|
+|Hall sensor|1|✖️|✖️|
+|GPIO|34|43|45|
+|SPI|4|4|4|
+|LCD interface|1|1|1|
+|UART|3|2|3|
+|I2C|2|2|2|
+|I2S|2, can be configured to operate with 8/16/32/40/48-bit resolution as an input or output channel.|1, can be configured to operate with 8/16/24/32/48/64-bit resolution as an input or output channel.|2, can be configured to operate with 8/16/24/32-bit resolution as an input or output channel.|
+|Camera interface|1|1|1|
+|Pulse counter|8 channels|4 channels|4 channels|
+|LED PWM|16 channels|8 channels 1|8 channels|
+|Motor Control PWM|2, six PWM outputs|✖️|2, six PWM outputs|
 
 ## The Adafruit ESP32 Huzzah32 Feather
 

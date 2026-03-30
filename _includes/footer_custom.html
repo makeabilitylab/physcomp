@@ -121,6 +121,23 @@
     return window.innerWidth >= minWidth;
   }
 
+  /*
+  * Visibility state tracked separately so positionTocPanel() and
+  * watchInPageToc() don't overwrite each other's decisions.
+  */
+  var _inPageTocVisible = false;  /* true when #markdown-toc is in viewport */
+  var _hasRoom = true;            /* true when viewport is wide enough */
+
+  /**
+   * Updates the TOC panel's visibility based on both conditions:
+   * it shows only when there is room AND the in-page TOC is not visible.
+   */
+  function updateTocVisibility() {
+    var tocPanel = document.getElementById('tocbot-toc');
+    if (!tocPanel) { return; }
+    tocPanel.style.visibility = (_hasRoom && !_inPageTocVisible) ? 'visible' : 'hidden';
+  }
+
   /* ─── Mount / Unmount ────────────────────────────────────────────────── */
 
   /**
@@ -201,11 +218,14 @@
     /* If there's not enough room, hide rather than overlap */
     var tocWidth = parsePx(getCSSVar('--toc-width'));
     if (rightEdgeFromViewport < tocWidth + GAP_PX) {
-      tocPanel.style.visibility = 'hidden';
+      _hasRoom = false;
+      updateTocVisibility();
       return;
     }
 
     tocPanel.style.right = (rightEdgeFromViewport - tocWidth - GAP_PX) + 'px';
+    _hasRoom = true;
+    updateTocVisibility();
   }
 
   /**
@@ -229,7 +249,8 @@
 
     /* No in-page TOC on this page — show tocbot unconditionally */
     if (!inPageToc) {
-      tocPanel.style.visibility = 'visible';
+      _inPageTocVisible = false;  /* no in-page TOC, so it's never "visible" */
+      updateTocVisibility();
       return;
     }
 
@@ -240,7 +261,8 @@
      * @param {boolean} inPageTocIsVisible - True when #markdown-toc is in viewport.
      */
     function setTocPanelVisibility(inPageTocIsVisible) {
-      tocPanel.style.visibility = inPageTocIsVisible ? 'hidden' : 'visible';
+      _inPageTocVisible = inPageTocIsVisible;
+      updateTocVisibility();
     }
 
     var observer = new IntersectionObserver(
@@ -255,7 +277,7 @@
          * than the moment its bottom pixel crosses the edge.
          * Adjust the '0px' values if you want a larger/smaller buffer.
          */
-        rootMargin: '0px 0px 0px 0px',
+        rootMargin: '-150px 0px 0px 0px',
         /* threshold 0: fires as soon as any part enters or leaves viewport */
         threshold: 0,
       }

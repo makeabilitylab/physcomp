@@ -226,7 +226,6 @@ table tr:nth-child(even) th {
 #tocbot-toc {
   position: fixed;
   top: var(--toc-top-offset);
-  right: 1.5rem;
   width: var(--toc-width);
   max-height: calc(100vh - 2rem);
   overflow-y: visible;
@@ -263,17 +262,6 @@ table tr:nth-child(even) th {
   list-style: none;
   padding-left: 0;
   margin: 0;
-}
-
-/*
- * Belt-and-suspenders: hide via CSS on narrow viewports even if JS hasn't
- * had a chance to remove the element yet (e.g., on a slow resize event).
- * The JS uses the same threshold via --toc-min-viewport-width.
- */
-@media (max-width: 1399px) {
-  #tocbot-toc {
-    display: none;
-  }
 }
 
 /**** FOR EMBEDDED YOUTUBE VIDEOS TO BE RESPONSIVE ****/

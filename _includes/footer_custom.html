@@ -42,48 +42,271 @@
 </p>
 
 
-{% if page.usetocbot %} 
-    <!-- tocbot is an awesome table of contents generator, see: https://tscanlin.github.io/tocbot/ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
+{% if page.usetocbot %}
+<!--
+  Tocbot: dynamic "On this page" right-side navigation panel.
 
-    <script>
-      /* Dynamically add the toc navbar after the side-bar element. This allows us
-         to *not* have to override default.html in _layouts */
-      let sideBarElements = document.getElementsByClassName('side-bar');
-      if (sideBarElements.length > 0){
-        let tocNav = document.createElement('nav');
-        tocNav.setAttribute("id", "tocbot-toc");
-        tocNav.classList.add("js-toc");
-        tocNav.classList.add("tocbot-right");
-        sideBarElements[0].after(tocNav);
+  Initialization is deferred to DOMContentLoaded so that all headings are
+  present in the DOM before tocbot scans them. The nav element is appended
+  to <body> (rather than inserted adjacent to .side-bar) so it lives outside
+  any flex/grid layout context and cannot disturb page flow before its
+  position:fixed CSS kicks in.
+
+  The viewport-width threshold is read from the CSS custom property
+  --toc-min-viewport-width so that JS and CSS share a single source of truth.
+  See assets/css/custom.css for the value and the reasoning behind it.
+
+  Dependencies (loaded below):
+    - tocbot 4.32.2  https://tscanlin.github.io/tocbot/
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ─── Configuration ──────────────────────────────────────────────────────
+   *
+   * All magic numbers live in CSS custom properties (see custom.css).
+   * We read them here at runtime so there is no duplication between JS
+   * and CSS. If you need to change a threshold, change it in the CSS only.
+   *
+   * CSS property           What it controls
+   * ─────────────────────  ──────────────────────────────────────────────
+   * --toc-min-viewport-width  Minimum px width at which TOC is displayed
+   * --toc-top-offset          Top offset in rem; passed to tocbot as px
+   * ─────────────────────────────────────────────────────────────────────── */
+
+  /**
+   * Reads a CSS custom property from :root and returns its trimmed string value.
+   *
+   * @param {string} propertyName - The CSS custom property name, e.g. '--toc-width'.
+   * @returns {string} The trimmed value string, e.g. '1400px' or '4rem'.
+   */
+  function getCSSVar(propertyName) {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(propertyName)
+      .trim();
+  }
+
+  /**
+   * Parses a CSS length string and returns a number in pixels.
+   * Supports 'px' and 'rem' units only; other units return NaN.
+   *
+   * @param {string} cssValue - A CSS length string, e.g. '1400px' or '4rem'.
+   * @returns {number} The equivalent value in pixels.
+   *
+   * @example
+   * parsePx('1400px'); // → 1400
+   * parsePx('4rem');   // → 64  (assuming 16px root font size)
+   */
+  function parsePx(cssValue) {
+    if (cssValue.endsWith('px')) {
+      return parseFloat(cssValue);
+    }
+    if (cssValue.endsWith('rem')) {
+      var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      return parseFloat(cssValue) * rootFontSize;
+    }
+    return NaN;
+  }
+
+  /**
+   * Returns true if the current viewport is wide enough to display the TOC
+   * without overlapping the main content. Threshold is read from CSS.
+   *
+   * @returns {boolean}
+   */
+  function isWideEnough() {
+    var minWidth = parsePx(getCSSVar('--toc-min-viewport-width'));
+    return window.innerWidth >= minWidth;
+  }
+
+  /* ─── Mount / Unmount ────────────────────────────────────────────────── */
+
+  /**
+   * Creates the TOC <nav> element, appends it to <body>, and initializes
+   * tocbot. The panel starts hidden; the IntersectionObserver in
+   * watchInPageToc() controls actual visibility based on whether the
+   * in-page markdown TOC (#markdown-toc) is currently visible.
+   *
+   * Appending to <body> keeps the element outside just-the-docs'
+   * flex/grid layout containers so it cannot disrupt page flow.
+   *
+   * Safe to call multiple times: exits early if already mounted.
+   */
+  function mountToc() {
+    if (document.getElementById('tocbot-toc')) {
+      return;
+    }
+
+    var tocNav = document.createElement('nav');
+    tocNav.id = 'tocbot-toc';
+    tocNav.setAttribute('aria-label', 'On this page');
+    tocNav.classList.add('js-toc');
+
+    var label = document.createElement('p');
+    label.className = 'toc-label';
+    label.textContent = 'On this page';
+    label.setAttribute('aria-hidden', 'true');
+    tocNav.appendChild(label);
+
+    /* Start hidden — watchInPageToc() will reveal it at the right time */
+    tocNav.style.visibility = 'hidden';
+
+    document.body.appendChild(tocNav);
+
+    var topOffsetPx = Math.round(parsePx(getCSSVar('--toc-top-offset')));
+
+    tocbot.init({
+      tocSelector: '.js-toc',
+      contentSelector: '.main-content',
+      headingSelector: 'h2, h3, h4',
+      collapseDepth: 2,
+      headingsOffset: topOffsetPx,
+      scrollSmoothOffset: -topOffsetPx,
+    });
+
+    watchInPageToc();
+    positionTocPanel();
+  }
+
+  /**
+   * Positions the tocbot panel flush with the right edge of .main-content-wrap
+   * plus a small gap. Called on mount and on window resize so the panel tracks
+   * the content edge at any viewport width.
+   *
+   * We compute this in JS rather than CSS because position:fixed elements are
+   * positioned relative to the viewport, while we want to track a content
+   * element's edge — something CSS alone cannot express without JS measurement.
+   */
+  function positionTocPanel() {
+    var tocPanel = document.getElementById('tocbot-toc');
+    if (!tocPanel) { return; }
+
+    var contentWrap = document.querySelector('.main-content-wrap');
+    if (!contentWrap) { return; }
+
+    /* getBoundingClientRect() gives us the content area's position
+      relative to the viewport — exactly the coordinate space that
+      position:fixed uses */
+    var rect = contentWrap.getBoundingClientRect();
+
+    /* Gap between the right edge of content and the left edge of the TOC panel */
+    var GAP_PX = 16;
+
+    /* viewport width minus the content's right edge gives us the space
+      available to the right; we place the TOC panel within that space */
+    var rightEdgeFromViewport = window.innerWidth - rect.right;
+
+    /* If there's not enough room, hide rather than overlap */
+    var tocWidth = parsePx(getCSSVar('--toc-width'));
+    if (rightEdgeFromViewport < tocWidth + GAP_PX) {
+      tocPanel.style.visibility = 'hidden';
+      return;
+    }
+
+    tocPanel.style.right = (rightEdgeFromViewport - tocWidth - GAP_PX) + 'px';
+  }
+
+  /**
+   * Uses IntersectionObserver to show or hide the tocbot panel based on
+   * whether the in-page markdown TOC (#markdown-toc) is visible.
+   *
+   * Behavior:
+   *   - If #markdown-toc does not exist on this page, show tocbot immediately.
+   *   - If #markdown-toc is visible in the viewport, hide tocbot (redundant).
+   *   - If #markdown-toc has scrolled out of view, show tocbot.
+   *
+   * Using IntersectionObserver (rather than a scroll event listener) is
+   * both more performant and handles the direct-anchor-load case correctly,
+   * since the observer fires once on load with the current intersection state.
+   *
+   * @returns {void}
+   */
+  function watchInPageToc() {
+    var inPageToc = document.getElementById('markdown-toc');
+    var tocPanel  = document.getElementById('tocbot-toc');
+
+    /* No in-page TOC on this page — show tocbot unconditionally */
+    if (!inPageToc) {
+      tocPanel.style.visibility = 'visible';
+      return;
+    }
+
+    /**
+     * Shows or hides the tocbot panel.
+     * Called by the observer each time #markdown-toc's visibility changes.
+     *
+     * @param {boolean} inPageTocIsVisible - True when #markdown-toc is in viewport.
+     */
+    function setTocPanelVisibility(inPageTocIsVisible) {
+      tocPanel.style.visibility = inPageTocIsVisible ? 'hidden' : 'visible';
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        /* entries[0] is always #markdown-toc since that's all we observe */
+        setTocPanelVisibility(entries[0].isIntersecting);
+      },
+      {
+        /*
+         * rootMargin: slight top extension so the tocbot panel appears
+         * just *after* the in-page TOC fully exits the viewport rather
+         * than the moment its bottom pixel crosses the edge.
+         * Adjust the '0px' values if you want a larger/smaller buffer.
+         */
+        rootMargin: '0px 0px 0px 0px',
+        /* threshold 0: fires as soon as any part enters or leaves viewport */
+        threshold: 0,
       }
+    );
 
-      /** WARNING: YOU MUST USE C MULTI-LINE COMMENT STYLE RATHER THAN // BECAUSE 
-       *  OF HOW JEKYLL COMPILES THIS FILE INTO SINGLE LINES **/
-      tocbot.init({
-        /* Where to render the table of contents. */
-        tocSelector: '.js-toc',
-        /* Where to grab the headings to build the table of contents. */
-        contentSelector: '.main-content',
-        /* How many heading levels should collapse. Default is 0 */
-        collapseDepth: 2,
-        /* Which headings to grab inside of the contentSelector element. */
-        headingSelector: 'h1, h2, h3, h4',
-      });
+    observer.observe(inPageToc);
+  }
 
-      /* Track scrolling to show/hide the tocbot navigation bar on right side */
-      var onScrollHandler = function (event) {
+  /**
+   * Destroys the tocbot instance and removes the TOC element from the DOM.
+   * Safe to call when no TOC is mounted.
+   */
+  function unmountToc() {
+    var el = document.getElementById('tocbot-toc');
+    if (el) {
+      el.remove();
+    }
+    tocbot.destroy();
+  }
 
-        /* End event listener after visitor scrolls past 500px */
-        if (window.pageYOffset > 500) {
-          window.removeEventListener('scroll', onScrollHandler, false);
-          document.getElementById("tocbot-toc").style.visibility = "visible";
-        }
-        /* console.log("window scroll event:", window.pageYOffset); */
-      };
+  /* ─── Responsive handler ─────────────────────────────────────────────── */
 
-      /* Listen for scroll events */
-      window.addEventListener('scroll', onScrollHandler, false);
-    </script>
-  {% endif %}
+  /**
+   * Debounced resize handler: mounts or unmounts the TOC depending on
+   * whether the viewport has crossed the minimum-width threshold.
+   * Debouncing prevents excessive DOM work during a drag-resize.
+   */
+  var resizeDebounceTimer = null;
 
+  function onResize() {
+    clearTimeout(resizeDebounceTimer);
+    resizeDebounceTimer = setTimeout(function () {
+      var mounted = Boolean(document.getElementById('tocbot-toc'));
+      if (isWideEnough() && !mounted) {
+        mountToc();
+      } else if (!isWideEnough() && mounted) {
+        unmountToc();
+      }
+      positionTocPanel();
+    }, 150 /* ms — fast enough to feel responsive, slow enough to not thrash */);
+  }
+
+  /* ─── Entry point ────────────────────────────────────────────────────── */
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (isWideEnough()) {
+      mountToc();
+    }
+    window.addEventListener('resize', onResize);
+  });
+
+}());
+</script>
+{% endif %}

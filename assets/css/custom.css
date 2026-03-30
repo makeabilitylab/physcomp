@@ -19,12 +19,16 @@
   }
 
   .site-logo {
-    min-height: 6rem;
+    min-height: 8rem;
     display: block;
   }
 
   .site-title::before {
     content: none;
+  }
+
+  .site-title{
+    padding-right: 0.5rem;
   }
 }
 
@@ -186,21 +190,90 @@ table tr:nth-child(even) th {
   font-family: 'Courier New', Courier, monospace;
 }
 
-/**** FOR TOCBOT ******/
+/**** TOCBOT RIGHT-SIDE TOC ****/
 /** See: https://tscanlin.github.io/tocbot/ **/
-#tocbot-toc{
-  position: fixed !important;
-  visibility: hidden;
-  top: 90px;
-  left: calc((100% - 1064px) / 2 + 264px + 800px); 
-  width:250px;
-  right: 0px;
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.9);
+/*
+ * Tocbot right-side "On this page" navigation panel.
+ *
+ * Layout strategy: position: fixed, anchored to the right edge of the
+ * viewport. The panel is only shown when the viewport is wide enough that
+ * it won't overlap the main content column. That breakpoint is stored in
+ * --toc-min-viewport-width so that the JavaScript can read it from the DOM
+ * rather than duplicating the magic number in two places.
+ *
+ * Single source of truth for shared values:
+ *   --toc-min-viewport-width  JS reads this to decide whether to mount tocbot
+ *   --toc-width               JS could read this if it ever needs the width
+ *   --toc-top-offset          JS passes this to tocbot's headingsOffset option
+ */
+:root {
+  /*
+   * Minimum viewport width at which the TOC panel is shown.
+   * Derived from: left-sidebar (~264px) + content max-width (~800px)
+   *   + toc-width (220px) + gutters (~120px) ≈ 1404px → round to 1400px.
+   * If you change the layout widths, update this value.
+   */
+  --toc-min-viewport-width: 1400px;
+
+  /* Width of the TOC panel itself */
+  --toc-width: 220px;
+
+  /* Distance from the top of the viewport; should clear the site header */
+  --toc-top-offset: 6rem;
 }
 
-#tocbot-toc ol {
+/* TOC panel container */
+#tocbot-toc {
+  position: fixed;
+  top: var(--toc-top-offset);
+  right: 1.5rem;
+  width: var(--toc-width);
+  max-height: calc(100vh - 2rem);
+  overflow-y: visible;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-left: 2px solid #e8e8e8;
+  padding: 0 0 1rem 0.25rem;
+  font-size: 0.8rem;
+    transition: visibility 0s, opacity 0.2s ease;
+  opacity: 1; /* default */
+}
+
+#tocbot-toc[style*="hidden"] {
+  opacity: 0;
+}
+
+
+/* "On this page" label above the TOC link list */
+.toc-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6f777d;
+  margin: 0.75rem 0 0.5rem 0;
+}
+
+.toc-list-item {
+  margin-left: 0.3em;
+}
+
+/* Only reset padding on the root list, not nested ones */
+#tocbot-toc > ol {
   list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/*
+ * Belt-and-suspenders: hide via CSS on narrow viewports even if JS hasn't
+ * had a chance to remove the element yet (e.g., on a slow resize event).
+ * The JS uses the same threshold via --toc-min-viewport-width.
+ */
+@media (max-width: 1399px) {
+  #tocbot-toc {
+    display: none;
+  }
 }
 
 /**** FOR EMBEDDED YOUTUBE VIDEOS TO BE RESPONSIVE ****/

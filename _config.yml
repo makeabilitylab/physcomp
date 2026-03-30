@@ -46,7 +46,13 @@ arduino_github_baseurl: "https://makeabilitylab.github.io/physcomp/"
 comments: false
 
 # Set a path/url to a logo that will be displayed instead of the title
-# logo: "/assets/images/logo.png"
+logo: "/assets/images/physcomp-logo-800w.jpg"
+
+defaults:
+  - scope:
+        path: ""
+    values:
+      image: /assets/images/physcomp-og-card.png
 
 # Added this excerpt_separator due to the following:
 # https://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed/

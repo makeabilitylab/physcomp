@@ -16,54 +16,54 @@ nav_exclude: false
 {:toc}
 ---
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A force-sensitive resistor dimming and brightening an LED as pressure is applied and released.">
   <source src="assets/videos/FSR-TopDown9VCircuit-IMG_5683_Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A video demonstration of a force-sensitive resistor (aka a "pressure sensor") that varies its resistance in proportion to an applied force. This is just one of the many things you will learn about and build in this "Intro to Electronics" tutorial series. See more in [L8: Variable Resistors](variable-resistors.md).
+**Video.** A demonstration of a force-sensitive resistor (aka a "pressure sensor") that varies its resistance in proportion to an applied force. This is just one of the many things you will learn about and build in this "Intro to Electronics" tutorial series. See more in [L8: Variable Resistors](variable-resistors.md).
 {: .fs-1 }
 
 Welcome 👋 to the first "step" in your Physical Computing journey!
 
-In this tutorial series, you will learn about the fundamentals of electricity—[voltage, current, and resistance](electricity-basics.md)—and how these elements can be used to build circuits that turn on lights, spin motors, and do other "work." You'll also learn about an empirically derived relationship, called [Ohm's Law](ohms-law.md), that relates voltage, current, and resistance together and methods to analyze circuits using Ohm's Law. Finally, you'll learn about three common circuit elements (resistors,  LEDs, variable resistors), how they work, and how to use them in circuits.
+In this tutorial series, you will learn about the fundamentals of electricity—[voltage, current, and resistance](electricity-basics.md)—and how these elements can be used to build circuits that turn on lights, spin motors, and do other "work." You'll also learn about an empirically derived relationship, called [Ohm's Law](ohms-law.md), that relates voltage, current, and resistance together and methods to analyze circuits using Ohm's Law. Finally, you'll learn about three common circuit elements (resistors, LEDs, variable resistors), how they work, and how to use them in circuits.
 
 Throughout, you'll use simulation tools like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and [Tinkercad Circuits](https://www.tinkercad.com/) to design and evaluate circuits and then actually build them using physical components.
 
-By the end of this module, you will be prepared to start [Module 2](../arduino/index.md)—our [Intro to Arduino series](../arduino/index.md)—where you will begin making with electronics, microcontrollers, and programming!
+By the end of this module, you will be prepared to start our [Intro to Arduino series](../arduino/index.md), where you will begin making with electronics, microcontrollers, and programming!
 
 {: .note }
 If you have limited background in circuits and programming, you may also want to consider our series on [Making with the Circuit Playground Express (CPX)](../cpx/), which uses a wonderful prototyping platform called [CPX](https://www.adafruit.com/product/3333) along with a drag-and-drop visual programming language called [MakeCode](https://makecode.adafruit.com/) (that is similar to [Scratch](https://scratch.mit.edu/)).
 
 ## [Lesson 1: Voltage, current, and resistance](electricity-basics.md)
 
-Introduces three key electricity concepts, [current, voltage, and resistance](electricity-basics.md), which form the foundation of electronics and circuits.
+You'll learn three foundational electricity concepts—[current, voltage, and resistance](electricity-basics.md)—that underpin all electronics and circuits.
 
 ## [Lesson 2: Circuit Schematics](schematics.md)
 
-Introduces a visual language for describing circuits called [circuit schematics](schematics.md), which are used in component datasheets, CAD programs (*e.g.,* circuit simulators, PCB layout software), and circuit analyses. Also includes an activity using [Fritzing](https://fritzing.org/) to build your own schematics.
+You'll learn [circuit schematics](schematics.md)—the visual language used in datasheets, circuit simulators, and PCB layout software to describe circuits. Includes a hands-on activity using [Fritzing](https://fritzing.org/) to build your own schematics.
 
 ## [Lesson 3: Ohm's Law](ohms-law.md)
 
-Introduces [Ohm’s Law](ohms-law.md), one of the most important empirical laws in electrical circuits that describes how current, voltage, and resistance relate together. Also includes an activity to build and explore resistive circuits in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
+You'll learn [Ohm's Law](ohms-law.md), one of the most important relationships in electrical circuits, describing how current, voltage, and resistance relate. Includes an activity to build and explore resistive circuits in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
 ## [Lesson 4: Series vs. Parallel Resistors](series-parallel.md)
 
-Introduces [series and parallel resistor circuits](series-parallel.md), how to analyze them, and why they're important. Also includes an activity to build and explore series and parallel resistor configurations in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
+You'll explore [series and parallel resistor circuits](series-parallel.md), learn how to analyze them, and understand why they matter. Includes an activity building these configurations in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
 ## [Lesson 5: Resistors](resistors.md)
 
-Building on Lessons 1 - 4, let's dive more deeply into [resistors](resistors.md) and learn about how resistors work, how they're made, how they're characterized in terms of both resistance $$R$$ and power $$P$$, and how to "read" them.
+Building on Lessons 1–4, you'll dive more deeply into [resistors](resistors.md) and learn about how resistors work, how they're made, how they're characterized in terms of both resistance $$R$$ and power $$P$$, and how to "read" them.
 
 ## [Lesson 6: LEDs](leds.md)
 
-In [this lesson](leds.md), we'll introduce one of the most common electrical components in the world: [light-emitting diodes](leds.md) or [LEDs](leds.md). You'll learn about your first semiconductor device, diodes, and how they're non-ohmic and only allow current to pass in one direction. Then, we'll introduce a special kind of diode, called an LED, and show how to use them, how to select an appropriate current-limiting resistor, and why resistors are necessary. You'll also get to physically build stuff, yay!
+You'll meet your first semiconductor device—the diode—and learn how it only allows current in one direction. Then you'll explore a special kind of diode, the [LED](leds.md), and learn how to select an appropriate current-limiting resistor. You'll also physically build your first LED circuit!
 
 ## [Lesson 7: Breadboards](breadboards.md)
 
-In [this lesson](breadboards.md), we'll learn about a very useful circuit prototyping tool called breadboards, which makes it easy to rapidly build circuits (and plug/unplug components and wires).
+You'll learn about a very useful circuit prototyping tool called [breadboards](breadboards.md), which makes it easy to rapidly build circuits (and plug/unplug components and wires).
 
 ## [Lesson 8: Variable resistors](variable-resistors.md)
 
-In [this lesson](variable-resistors.md), we'll learn about variable resistors, a certain kind of variable resistor called a potentiometer, and then we'll design, simulate, and build some LED circuits using variable resistors. At the end, you'll even make your own DIY variable resistor!
+You'll learn about [variable resistors](variable-resistors.md), a certain kind of variable resistor called a potentiometer, and then design, simulate, and build some LED circuits using variable resistors. At the end, you'll even make your own DIY variable resistor!
 
 <!-- ## [Lesson 9: Using a multimeter](multimeter.md)
 

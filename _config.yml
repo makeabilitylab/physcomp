@@ -36,7 +36,7 @@ search_enabled: true
 # See: https://stackoverflow.com/a/19173888/388117
 baseurl: /physcomp
 
-url: "https://just-the-docs.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://makeabilitylab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # For copy button on code
 enable_copy_code_button: true

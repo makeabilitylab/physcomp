@@ -16,7 +16,24 @@ usetocbot: true
 {:toc}
 ---
 
-This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css. We use a Jekyll template called ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/).
+This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css. 
+
+We use a Jekyll template called ['Just the Docs'](https://just-the-docs.com/).
+
+## Quick start (for repeat installs)
+
+If you've done this before and just need the commands:
+
+```bash
+git clone https://github.com/makeabilitylab/physcomp.git
+cd physcomp          # ⚠️ All bundle commands must be run from inside this folder!
+bundle install
+bundle exec jekyll serve
+```
+
+Then open [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/). If something goes wrong, see the detailed platform-specific instructions below.
+
+> **Common mistake:** Running `bundle add webrick` or `bundle install` from your home directory (`~`) will fail with `Could not locate Gemfile`. Always `cd physcomp` first.
 
 ## Dev environment setup
 Below, we will walk you through dev environment setup on both Mac and Windows. 
@@ -24,45 +41,88 @@ Below, we will walk you through dev environment setup on both Mac and Windows.
 Regardless of which platform you're using, the first step is to clone the [physcomp repo](https://github.com/makeabilitylab/physcomp). Open your command prompt and run:
 
 ```
-> git clone https://github.com/makeabilitylab/physcomp.git`
+> git clone https://github.com/makeabilitylab/physcomp.git
 ```
 
 Note: I use [GitHub Desktop](https://desktop.github.com/), which I strongly recommend. VSCode also has built-in git support.
 
 ### Mac
-Installing the prequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). 
+Installing the prerequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). 
 
 #### Follow official installation guide
 For MacOS, simply follow the [official installation guide](https://jekyllrb.com/docs/installation/macos/). Because you have to install the XCode development environment, [Homebrew](https://brew.sh/), [Ruby](https://www.ruby-lang.org/en/), and [Jekyll](https://jekyllrb.com/), this installation process may take ~1 hour (depending on your download speeds).
 
 Follow the installation guide closely. I did each step except for I skipped the [rbenv part](https://jekyllrb.com/docs/installation/macos/#rbenv) (as I only use Ruby for Jekyll, no need for selecting between multiple Ruby versions on my dev environment).
 
-#### Run 'bundle install' in physcomp dir
-After finishing the last step in the [MacOS installation guide](https://jekyllrb.com/docs/installation/macos/), which is running the command `> sudo gem install -n /usr/local/bin/ jekyll`, then go to the `physcomp` folder and type `> bundle install`. Note: I typically do this from within VSCode's Terminal.
+**Note on Ruby version:** Homebrew will install Ruby 3.x (currently 3.4.x as of early 2026). This works fine with Jekyll 4.4+.
+
+#### Install Jekyll globally
+
+Once Ruby is installed, run:
+
+```
+> gem install jekyll
+```
+
+As of Jekyll 4.4+, this also installs `webrick` automatically, so you do **not** need a separate `bundle add webrick` step.
+
+#### cd into physcomp, then run 'bundle install'
+
+> ⚠️ **All `bundle` commands must be run from inside the `physcomp` folder.** Running them from your home directory (`~`) will fail with `Could not locate Gemfile`.
+
+Change into the `physcomp` directory and run `bundle install`:
+
+```
+> cd physcomp
+> bundle install
+```
+
+Note: I typically do this from within VSCode's Terminal.
 
 #### Run 'bundle exec jekyll serve' in physcomp dir
-Finally, type `> bundle exec jekyll serve` in the `physcomp` folder. Again, I typically do this from within VSCode's Terminal.
+Finally, from within the `physcomp` folder, type:
 
-And that's it! Hopefully the server will be running at at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).
+```
+> bundle exec jekyll serve
+```
+
+And that's it! Hopefully the server will be running at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).
 
 #### Potential problems
-I just tried this full installation process from end-to-end and ran into the following issue on this last command:
+
+**webrick missing error (older Jekyll / Ruby 3.0)**
+
+If you see an error like the following when running `bundle exec jekyll serve`:
 
 ```
-jonf-macbook:physcomp jonf$ bundle exec jekyll serve
-Configuration file: /Users/jonf/Git/physcomp/_config.yml
-            Source: /Users/jonf/Git/physcomp
-       Destination: /Users/jonf/Git/physcomp/_site
- Incremental build: disabled. Enable with --incremental
-      Generating... 
-      Remote Theme: Using theme pmarsceill/just-the-docs
-                    done in 17.425 seconds.
- Auto-regeneration: enabled for '/Users/jonf/Git/physcomp'
-bundler: failed to load command: jekyll (/usr/local/lib/ruby/gems/3.0.0/bin/jekyll)
-
-/usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in `require': cannot load such file -- webrick (LoadError)
+/usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in
+  `require': cannot load such file -- webrick (LoadError)
 ```
-The problem is that webrick no longer comes with Ruby 3.0. To solve this, I simply typed `> bundle add webrick` and then again `> bundle exec jekyll serve`. And then things worked!
+
+This means webrick isn't in your bundle. Fix it by running (from inside `physcomp`!):
+
+```
+> bundle add webrick
+> bundle exec jekyll serve
+```
+
+This was required for Ruby 3.0+ with older versions of Jekyll. With Jekyll 4.4+, webrick is included automatically and you should not need this step.
+
+**"Could not locate Gemfile" error**
+
+```
+Could not locate Gemfile
+```
+
+This means you ran a `bundle` command from the wrong directory. Make sure you `cd physcomp` first.
+
+**"bundle exec jekyll serve" ran successfully once but now shows the old theme**
+
+If the remote theme (just-the-docs) isn't updating, try stopping the server (Ctrl-C) and running with `--incremental` disabled:
+
+```
+> bundle exec jekyll serve --no-incremental
+```
 
 ### Windows
 
@@ -76,7 +136,7 @@ However, here's how I eventually got it to work. These instructions have since b
 #### Download and run Ruby Installer
 **First**, although this documentation is old, I started with this [Run Jekyll on Windows](https://jekyll-windows.juthilo.com/) guide. The first step states to Install Ruby via the [rubyinstaller.org](http://rubyinstaller.org/downloads/) website and then to install the Ruby Devkit; however, the most recent versions of Ruby Installer for Windows also allows you to install the Devkit. So, that's what I did. 
 
-Specifically, I downloaded and installed the [Ruby+Devkit 2.7.X (x64) installer](https://rubyinstaller.org/downloads/), which according to the RubyInstaller website "provides the biggest number of compatible gems and installs the MSYS2 Devkit alongside Ruby, so gems with C-extensions can be compiled immediately."
+Specifically, I downloaded and installed the [Ruby+Devkit installer](https://rubyinstaller.org/downloads/) (as of early 2026, Ruby+Devkit 3.4.x (x64) is recommended; Ruby 4.0 is also available but may have compatibility issues with the `github-pages` gem). According to the RubyInstaller website, this "provides the biggest number of compatible gems and installs the MSYS2 Devkit alongside Ruby, so gems with C-extensions can be compiled immediately."
 
 When the Ruby Installer command prompt asks you which option to install (see screenshot below), just press 'Enter'.
 
@@ -122,9 +182,12 @@ Here's a screenshot:
 > gem install github-pages
 ```
 
-This worked well on some of our Windows systems but others failed with. If this succeeded for you, great! Skip to the next step. If not, check out the error below and see if it matches your problem (or contact us to help and copy/paste the error outcome in your email or Slack message).
+This worked well on some of our Windows systems but others failed. If this succeeded for you, great! Skip to the next step. If not, see the troubleshooting section below.
 
-##### Handling error installing github-pages
+<details>
+<summary><strong>Troubleshooting: Error installing github-pages (Nokogiri)</strong></summary>
+
+When running `gem install github-pages`, you may encounter an error about Nokogiri versions:
 
 ```
 ERROR:  Error installing github-pages:
@@ -167,8 +230,14 @@ ERROR:  Error installing github-pages:
 
 So, then I just skipped to the final step and ran `bundle install` and things worked. Hope it does for you too!
 
+**Note:** This Nokogiri issue was originally encountered with Ruby 2.7. With Ruby 3.4.x, Nokogiri compatibility is much better and you may not hit this at all. If `gem install github-pages` fails, try just skipping straight to `bundle install`.
+
+</details>
+
 #### Run 'bundle install'
 ![Screenshot of bundle install command](assets/images/BundleInstallScreenshot.png)
+
+> ⚠️ **Make sure you are inside the `physcomp` folder before running `bundle` commands.** Running from the wrong directory will fail with `Could not locate Gemfile`.
 
 From the shell, change directories to `physcomp`. On my machine:
 

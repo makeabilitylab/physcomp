@@ -16,7 +16,23 @@ usetocbot: true
 {:toc}
 ---
 
-This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css. We use a Jekyll template called ['Just the Docs'](https://pmarsceill.github.io/just-the-docs/).
+This website is built in [Jekyll](https://jekyllrb.com/), which is a static site generator built in the [Ruby](https://www.ruby-lang.org/en/) language. You do not need to know Ruby to build sites with Jekyll but you do need to know [markdown](https://www.markdownguide.org/) and html/css. 
+
+We use a Jekyll template called ['Just the Docs'](https://just-the-docs.com/).
+
+## Quick start (for repeat installs)
+
+If you've done this before and just need the commands:
+
+```bash
+git clone https://github.com/makeabilitylab/physcomp.git
+cd physcomp
+bundle install
+bundle add webrick   # needed for Ruby 3.0+
+bundle exec jekyll serve
+```
+
+Then open [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/). If something goes wrong, see the detailed platform-specific instructions below.
 
 ## Dev environment setup
 Below, we will walk you through dev environment setup on both Mac and Windows. 
@@ -24,21 +40,30 @@ Below, we will walk you through dev environment setup on both Mac and Windows.
 Regardless of which platform you're using, the first step is to clone the [physcomp repo](https://github.com/makeabilitylab/physcomp). Open your command prompt and run:
 
 ```
-> git clone https://github.com/makeabilitylab/physcomp.git`
+> git clone https://github.com/makeabilitylab/physcomp.git
 ```
 
 Note: I use [GitHub Desktop](https://desktop.github.com/), which I strongly recommend. VSCode also has built-in git support.
 
 ### Mac
-Installing the prequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). 
+Installing the prerequisite libraries and setting up your dev environment is easy on the Mac (much harder on Windows). 
 
 #### Follow official installation guide
 For MacOS, simply follow the [official installation guide](https://jekyllrb.com/docs/installation/macos/). Because you have to install the XCode development environment, [Homebrew](https://brew.sh/), [Ruby](https://www.ruby-lang.org/en/), and [Jekyll](https://jekyllrb.com/), this installation process may take ~1 hour (depending on your download speeds).
 
 Follow the installation guide closely. I did each step except for I skipped the [rbenv part](https://jekyllrb.com/docs/installation/macos/#rbenv) (as I only use Ruby for Jekyll, no need for selecting between multiple Ruby versions on my dev environment).
 
+**Important:** Homebrew will install Ruby 3.x (currently 3.4.x as of early 2026). This works fine but you will need to add `webrick` (see below).
+
 #### Run 'bundle install' in physcomp dir
 After finishing the last step in the [MacOS installation guide](https://jekyllrb.com/docs/installation/macos/), which is running the command `> sudo gem install -n /usr/local/bin/ jekyll`, then go to the `physcomp` folder and type `> bundle install`. Note: I typically do this from within VSCode's Terminal.
+
+#### Add webrick (required for Ruby 3.0+)
+`webrick` no longer comes bundled with Ruby 3.0+, so you need to add it:
+
+```
+> bundle add webrick
+```
 
 #### Run 'bundle exec jekyll serve' in physcomp dir
 Finally, type `> bundle exec jekyll serve` in the `physcomp` folder. Again, I typically do this from within VSCode's Terminal.
@@ -62,7 +87,7 @@ bundler: failed to load command: jekyll (/usr/local/lib/ruby/gems/3.0.0/bin/jeky
 
 /usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in `require': cannot load such file -- webrick (LoadError)
 ```
-The problem is that webrick no longer comes with Ruby 3.0. To solve this, I simply typed `> bundle add webrick` and then again `> bundle exec jekyll serve`. And then things worked!
+The problem is that webrick no longer comes with Ruby 3.0+. To solve this, I simply typed `> bundle add webrick` and then again `> bundle exec jekyll serve`. And then things worked!
 
 ### Windows
 
@@ -76,7 +101,7 @@ However, here's how I eventually got it to work. These instructions have since b
 #### Download and run Ruby Installer
 **First**, although this documentation is old, I started with this [Run Jekyll on Windows](https://jekyll-windows.juthilo.com/) guide. The first step states to Install Ruby via the [rubyinstaller.org](http://rubyinstaller.org/downloads/) website and then to install the Ruby Devkit; however, the most recent versions of Ruby Installer for Windows also allows you to install the Devkit. So, that's what I did. 
 
-Specifically, I downloaded and installed the [Ruby+Devkit 2.7.X (x64) installer](https://rubyinstaller.org/downloads/), which according to the RubyInstaller website "provides the biggest number of compatible gems and installs the MSYS2 Devkit alongside Ruby, so gems with C-extensions can be compiled immediately."
+Specifically, I downloaded and installed the [Ruby+Devkit installer](https://rubyinstaller.org/downloads/) (as of early 2026, Ruby+Devkit 3.4.x (x64) is recommended; Ruby 4.0 is also available but may have compatibility issues with the `github-pages` gem). According to the RubyInstaller website, this "provides the biggest number of compatible gems and installs the MSYS2 Devkit alongside Ruby, so gems with C-extensions can be compiled immediately."
 
 When the Ruby Installer command prompt asks you which option to install (see screenshot below), just press 'Enter'.
 
@@ -122,9 +147,12 @@ Here's a screenshot:
 > gem install github-pages
 ```
 
-This worked well on some of our Windows systems but others failed with. If this succeeded for you, great! Skip to the next step. If not, check out the error below and see if it matches your problem (or contact us to help and copy/paste the error outcome in your email or Slack message).
+This worked well on some of our Windows systems but others failed. If this succeeded for you, great! Skip to the next step. If not, see the troubleshooting section below.
 
-##### Handling error installing github-pages
+<details>
+<summary><strong>Troubleshooting: Error installing github-pages (Nokogiri)</strong></summary>
+
+When running `gem install github-pages`, you may encounter an error about Nokogiri versions:
 
 ```
 ERROR:  Error installing github-pages:
@@ -166,6 +194,10 @@ ERROR:  Error installing github-pages:
 ```
 
 So, then I just skipped to the final step and ran `bundle install` and things worked. Hope it does for you too!
+
+**Note:** This Nokogiri issue was originally encountered with Ruby 2.7. With Ruby 3.4.x, Nokogiri compatibility is much better and you may not hit this at all. If `gem install github-pages` fails, try just skipping straight to `bundle install`.
+
+</details>
 
 #### Run 'bundle install'
 ![Screenshot of bundle install command](assets/images/BundleInstallScreenshot.png)

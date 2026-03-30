@@ -1,4 +1,12 @@
-/* Custom CSS for displaying the logo in the left sidebar */
+/* Custom CSS for displaying the logo and text  in the left sidebar */
+.site-logo {
+  display: none;
+}
+
+.site-title::before {
+  content: "Physical Computing";
+}
+
 .site-header {
   padding-left: 0;
   padding-right: 0;
@@ -11,9 +19,15 @@
   }
 
   .site-logo {
-    min-height: 9rem;
+    min-height: 6rem;
+    display: block;
+  }
+
+  .site-title::before {
+    content: none;
   }
 }
+
 
 /* custom css for the footer */
 .footer-logos{

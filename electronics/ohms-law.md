@@ -54,12 +54,9 @@ Does this equation sound familiar? It should. It is exactly Ohm's Law! Current f
 **Figure.** [Poiseuille's Law](http://hyperphysics.phy-astr.gsu.edu/hbase/ppois.html#poi) for the smooth flow of fluids and [Ohm's Law](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/ohmlaw.html#c1) for electric current are similar. Image based on [HyperPhysics at Georgia State ](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/watcir2.html) and created in PowerPoint. Images of Poiseuille and Ohm are from Wikipedia.
 {: .fs-1 }
 
----
-**NOTE:**
-
+{: .note }
 Poiseuille's Law equation only holds for the smooth (laminar rather than turbulent) flow of a Newtonian fluid like water. But such a stipulation is not relevant to electrical current.
 
----
 
 ### Why $$I$$ and not $$C$$?
 

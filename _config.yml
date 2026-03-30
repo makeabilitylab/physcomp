@@ -8,7 +8,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 # remote_theme: pmarsceill/just-the-docs
-remote_theme: just-the-docs/just-the-docs@v0.8.1
+remote_theme: just-the-docs/just-the-docs@v0.12.0
 
 # Fixed at 0.2.8 because of: https://github.com/makeabilitylab/physcomp/issues/9
 # remote_theme: pmarsceill/just-the-docs@v0.2.8
@@ -17,7 +17,8 @@ remote_theme: just-the-docs/just-the-docs@v0.8.1
 # - https://pmarsceill.github.io/just-the-docs/docs/configuration/
 
 title: Physical Computing
-description: A learning resource for prototyping interactive digital-physical systems
+description: An open-source interactive textbook for learning physical computing, including Arduino, ESP32, sensors, and signal processing. By the Makeability Lab at UW.
+tagline: Learn Arduino, ESP32, sensors, and more with this open-source interactive textbook for physical computing.
 
 # Turn on incremental building to reduce overall build time (still in beta)
 # See: https://jekyllrb.com/docs/configuration/incremental-regeneration/
@@ -36,7 +37,7 @@ search_enabled: true
 # See: https://stackoverflow.com/a/19173888/388117
 baseurl: /physcomp
 
-url: "https://just-the-docs.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://makeabilitylab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # For copy button on code
 enable_copy_code_button: true
@@ -46,7 +47,13 @@ arduino_github_baseurl: "https://makeabilitylab.github.io/physcomp/"
 comments: false
 
 # Set a path/url to a logo that will be displayed instead of the title
-# logo: "/assets/images/logo.png"
+logo: "/assets/images/physcomp-logo-800w.jpg"
+
+defaults:
+  - scope:
+        path: ""
+    values:
+      image: /assets/images/physcomp-og-card.jpg
 
 # Added this excerpt_separator due to the following:
 # https://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed/

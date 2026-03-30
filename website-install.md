@@ -26,13 +26,14 @@ If you've done this before and just need the commands:
 
 ```bash
 git clone https://github.com/makeabilitylab/physcomp.git
-cd physcomp
+cd physcomp          # ⚠️ All bundle commands must be run from inside this folder!
 bundle install
-bundle add webrick   # needed for Ruby 3.0+
 bundle exec jekyll serve
 ```
 
 Then open [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/). If something goes wrong, see the detailed platform-specific instructions below.
+
+> **Common mistake:** Running `bundle add webrick` or `bundle install` from your home directory (`~`) will fail with `Could not locate Gemfile`. Always `cd physcomp` first.
 
 ## Dev environment setup
 Below, we will walk you through dev environment setup on both Mac and Windows. 
@@ -53,41 +54,75 @@ For MacOS, simply follow the [official installation guide](https://jekyllrb.com/
 
 Follow the installation guide closely. I did each step except for I skipped the [rbenv part](https://jekyllrb.com/docs/installation/macos/#rbenv) (as I only use Ruby for Jekyll, no need for selecting between multiple Ruby versions on my dev environment).
 
-**Important:** Homebrew will install Ruby 3.x (currently 3.4.x as of early 2026). This works fine but you will need to add `webrick` (see below).
+**Note on Ruby version:** Homebrew will install Ruby 3.x (currently 3.4.x as of early 2026). This works fine with Jekyll 4.4+.
 
-#### Run 'bundle install' in physcomp dir
-After finishing the last step in the [MacOS installation guide](https://jekyllrb.com/docs/installation/macos/), which is running the command `> sudo gem install -n /usr/local/bin/ jekyll`, then go to the `physcomp` folder and type `> bundle install`. Note: I typically do this from within VSCode's Terminal.
+#### Install Jekyll globally
 
-#### Add webrick (required for Ruby 3.0+)
-`webrick` no longer comes bundled with Ruby 3.0+, so you need to add it:
+Once Ruby is installed, run:
+
+```
+> gem install jekyll
+```
+
+As of Jekyll 4.4+, this also installs `webrick` automatically, so you do **not** need a separate `bundle add webrick` step.
+
+#### cd into physcomp, then run 'bundle install'
+
+> ⚠️ **All `bundle` commands must be run from inside the `physcomp` folder.** Running them from your home directory (`~`) will fail with `Could not locate Gemfile`.
+
+Change into the `physcomp` directory and run `bundle install`:
+
+```
+> cd physcomp
+> bundle install
+```
+
+Note: I typically do this from within VSCode's Terminal.
+
+#### Run 'bundle exec jekyll serve' in physcomp dir
+Finally, from within the `physcomp` folder, type:
+
+```
+> bundle exec jekyll serve
+```
+
+And that's it! Hopefully the server will be running at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).
+
+#### Potential problems
+
+**webrick missing error (older Jekyll / Ruby 3.0)**
+
+If you see an error like the following when running `bundle exec jekyll serve`:
+
+```
+/usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in
+  `require': cannot load such file -- webrick (LoadError)
+```
+
+This means webrick isn't in your bundle. Fix it by running (from inside `physcomp`!):
 
 ```
 > bundle add webrick
+> bundle exec jekyll serve
 ```
 
-#### Run 'bundle exec jekyll serve' in physcomp dir
-Finally, type `> bundle exec jekyll serve` in the `physcomp` folder. Again, I typically do this from within VSCode's Terminal.
+This was required for Ruby 3.0+ with older versions of Jekyll. With Jekyll 4.4+, webrick is included automatically and you should not need this step.
 
-And that's it! Hopefully the server will be running at at [http://127.0.0.1:4000/physcomp/](http://127.0.0.1:4000/physcomp/).
-
-#### Potential problems
-I just tried this full installation process from end-to-end and ran into the following issue on this last command:
+**"Could not locate Gemfile" error**
 
 ```
-jonf-macbook:physcomp jonf$ bundle exec jekyll serve
-Configuration file: /Users/jonf/Git/physcomp/_config.yml
-            Source: /Users/jonf/Git/physcomp
-       Destination: /Users/jonf/Git/physcomp/_site
- Incremental build: disabled. Enable with --incremental
-      Generating... 
-      Remote Theme: Using theme pmarsceill/just-the-docs
-                    done in 17.425 seconds.
- Auto-regeneration: enabled for '/Users/jonf/Git/physcomp'
-bundler: failed to load command: jekyll (/usr/local/lib/ruby/gems/3.0.0/bin/jekyll)
-
-/usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in `require': cannot load such file -- webrick (LoadError)
+Could not locate Gemfile
 ```
-The problem is that webrick no longer comes with Ruby 3.0+. To solve this, I simply typed `> bundle add webrick` and then again `> bundle exec jekyll serve`. And then things worked!
+
+This means you ran a `bundle` command from the wrong directory. Make sure you `cd physcomp` first.
+
+**"bundle exec jekyll serve" ran successfully once but now shows the old theme**
+
+If the remote theme (just-the-docs) isn't updating, try stopping the server (Ctrl-C) and running with `--incremental` disabled:
+
+```
+> bundle exec jekyll serve --no-incremental
+```
 
 ### Windows
 
@@ -201,6 +236,8 @@ So, then I just skipped to the final step and ran `bundle install` and things wo
 
 #### Run 'bundle install'
 ![Screenshot of bundle install command](assets/images/BundleInstallScreenshot.png)
+
+> ⚠️ **Make sure you are inside the `physcomp` folder before running `bundle` commands.** Running from the wrong directory will fail with `Could not locate Gemfile`.
 
 From the shell, change directories to `physcomp`. On my machine:
 

@@ -1,0 +1,7 @@
+{
+  // Disable inline HTML warnings because Jekyll relies heavily on HTML tags
+  "MD033": false,
+
+  // Disable strict 80-character line limits since VS Code handles word wrapping
+  "MD013": false
+}

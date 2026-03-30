@@ -27,7 +27,9 @@ We’re so glad you are here. This interactive textbook is a place to **learn**,
 Hi 🙋🏽‍♂️, I'm [Jon E. Froehlich](https://jonfroehlich.github.io/), a professor in computer science and human-computer interaction at the University of Washington. I originally built this site to help teach my **physical computing courses** at UW but it's grown beyond my imagination! The website is designed to help you learn through animations, movies, embedded code, and simulation.
 
 ## What you'll learn
+
 By following along with our lessons and guides, you will explore:
+
 * ⚡**[Intro to Electronics](./electronics/index.md):** The fundamentals of electricity (voltage, current, resistance), circuit schematics, and safely building circuits with LEDs and resistors.
 * 🤖 **[Intro to Arduino](./arduino/index.md):** Programming microcontrollers in `C/C++` to read analog/digital inputs, control actuators, and build your first interactive devices.
 * 📡 **[Sensors](./sensors/index.md) & [Advanced I/O](./advanced-io/index.md):** Deep dives into how sensors capture the world (force, light, distance, motion) and how to control advanced outputs like OLED displays and haptic vibromotors.
@@ -39,6 +41,7 @@ By following along with our lessons and guides, you will explore:
 ## Why learn physical computing?
 
 This is a particularly exciting time to explore physical computing, driven by three interrelated trends:
+
 * **The Maker Movement:** Low barriers to entry for hardware interfacing and digital fabrication have made it easier than ever to couple physical form with computation.
 * **Pervasive IoT & Mobile:** Ubiquitous, sensor-rich devices allow us to break away from traditional keyboards and mice, exploring off-the-desktop interaction models.
 * **AI & Computer Vision:** Maturing toolkits allow us to process complex sensor data for human-computer interaction without needing to be machine learning experts.
@@ -46,6 +49,7 @@ This is a particularly exciting time to explore physical computing, driven by th
 ## Learning prerequisites
 
 We assume the following background:
+
 * **Some coding experience:** For the [introductory Arduino lessons](arduino/index.md), we assume familiarity with basic concepts like functions, loops, variables, and conditionals. We use `C/C++`, but previous experience with it is not required. If you know Java, Python, or JavaScript, you will be fine.
 * **No hardware experience:** We assume zero previous experience with electronics or microcontrollers.
 

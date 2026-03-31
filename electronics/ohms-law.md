@@ -45,34 +45,33 @@ Notice how these equations map to the concepts we explained in our first lesson 
 
 ### Relating Ohm's Law to our water analogies
 
-Drawing again on our hydraulic-electric analogies (which we used amply in [previous lessons](electricity-basics.md)), we can highlight another similarity. In the 1840s, [Poiseuille](https://en.wikipedia.org/wiki/Hagen%E2%80%93Poiseuille_equation) empirically showed that the flow rate of water through a pipe is equal to the pressure drop across the pipe divided by the pipe's resistance—this is called **Poiseuille's Law**. And it conceptually makes sense: a higher pressure difference between two ends of a pipe creates more force and a lower resistance allows more water flow. 
+Drawing again on our hydraulic-electric analogies (which we used amply in [previous lessons](electricity-basics.md)), we can highlight another similarity. In the 1840s, [Poiseuille](https://en.wikipedia.org/wiki/Hagen%E2%80%93Poiseuille_equation) empirically showed that the flow rate of water through a pipe is equal to the pressure drop across the pipe divided by the pipe's resistance—this is called **Poiseuille's Law**. And it conceptually makes sense: a higher pressure difference between two ends of a pipe creates more force and a lower resistance allows more water flow.
 
 Does this equation sound familiar? It should. It is exactly Ohm's Law! Current flow in a circuit is directly proportional to the voltage drop in a circuit divided by its resistance. See image below.
 
 ![An image showing that for laminar (smooth) flow of water in pipes, the equation for determining the water flow rate (called Poiseuille's Law) is an equivalent to determining the current flow in a circuit using Ohm's Law.](assets/images/PoseuillesLawAndOhmsLaw_FigureByJonFroehlich.png)
 
-**Figure.** [Poiseuille's Law](http://hyperphysics.phy-astr.gsu.edu/hbase/ppois.html#poi) for the smooth flow of fluids and [Ohm's Law](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/ohmlaw.html#c1) for electric current are similar. Image based on [HyperPhysics at Georgia State ](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/watcir2.html) and created in PowerPoint. Images of Poiseuille and Ohm are from Wikipedia.
+**Figure.** [Poiseuille's Law](http://hyperphysics.phy-astr.gsu.edu/hbase/ppois.html#poi) for the smooth flow of fluids and [Ohm's Law](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/ohmlaw.html#c1) for electric current are similar. Image based on [HyperPhysics at Georgia State](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/watcir2.html) and created in PowerPoint. Images of Poiseuille and Ohm are from Wikipedia.
 {: .fs-1 }
 
 {: .note }
 Poiseuille's Law equation only holds for the smooth (laminar rather than turbulent) flow of a Newtonian fluid like water. But such a stipulation is not relevant to electrical current.
 
-
 ### Why $$I$$ and not $$C$$?
 
-You might be asking, "If $$R$$ is the **r**esistance in ohms (Ω) and V is the **v**oltage in volts (V) then why is $$I$$ used to represent the **c**urrent in amperes (A) rather than $$C$$?" Two reasons: first, $$C$$ is already reserved for the SI unit of coloumbs (C), which is used in the very definition of amperes (recall that $$1\ A = 1\ C / s$$) and thus, could get confusing! Second, the ampere is named after [André-Marie Ampère](https://en.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re), considered the father of electromagnetism, who referred to amperage as the "**i**ntensité du courant" or "**i**ntensity of current." So, current is $$I$$ and not $$C$$.
+You might be asking, "If $$R$$ is the **r**esistance in ohms (Ω) and V is the **v**oltage in volts (V) then why is $$I$$ used to represent the **c**urrent in amperes (A) rather than $$C$$?" Two reasons: first, $$C$$ is already reserved for the SI unit of coulombs (C), which is used in the very definition of amperes (recall that $$1\ A = 1\ C / s$$) and thus, could get confusing! Second, the ampere is named after [André-Marie Ampère](https://en.wikipedia.org/wiki/Andr%C3%A9-Marie_Amp%C3%A8re), considered the father of electromagnetism, who referred to amperage as the "**i**ntensité du courant" or "**i**ntensity of current." So, current is $$I$$ and not $$C$$.
 
 ## Make sure to use base units
 
-A common "gotcha" in applying Ohm's Law—or analyzing circuits in general—is messing up base units. In digital circuits, we often deal with **kilohms (kΩ)**—which is 1,000 ohms—**milliamps (ma)**—which is $$\frac{1}{1000}$$ (0.001) of an amp—or even microamps (μA)—which is one millionth ($$\frac{1}{1,000,000}$$ or 0.000001) of an amp—and so on. We need to convert these units to **base units** in volts (V), ohms (Ω), and amps (A) to perform our analysis.
+A common "gotcha" in applying Ohm's Law—or analyzing circuits in general—is messing up base units. In digital circuits, we often deal with **kilohms (kΩ)**—which is 1,000 ohms—**milliamps (mA)**—which is $$\frac{1}{1000}$$ (0.001) of an amp—or even microamps (μA)—which is one millionth ($$\frac{1}{1,000,000}$$ or 0.000001) of an amp—and so on. We need to convert these units to **base units** in volts (V), ohms (Ω), and amps (A) to perform our analysis.
 
-For example, if a circuit contains a 2.2kΩ resistor with a 9V battery, to calculate the current do not mistakenly write $$I = \frac{9V}{2.2Ω}A$$ but, instead, $$I = \frac{9V}{2200Ω}A$$. The former would give you 4.1A (a large amperage and incorrect!) while the latter gives you the correct value of 0.0041A—which is 4.1mA. 
+For example, if a circuit contains a 2.2kΩ resistor with a 9V battery, to calculate the current do not mistakenly write $$I = \frac{9V}{2.2Ω}A$$ but, instead, $$I = \frac{9V}{2200Ω}A$$. The former would give you 4.1A (a large amperage and incorrect!) while the latter gives you the correct value of 0.0041A—which is 4.1mA.
 
 So, always make sure you double check your units!
 
 ### Common SI prefixes
 
-Below, we've written some common SI prefixes—most of which should be familiar to you from other measurement quantities. 
+Below, we've written some common SI prefixes—most of which should be familiar to you from other measurement quantities.
 
 | Conversion factor   | Scientific notation | Prefix | Abbreviation | English word | Examples |
 |:--------------------|:--------------------|:-------|:-------------|:-------------|:---------|
@@ -84,10 +83,10 @@ Below, we've written some common SI prefixes—most of which should be familiar 
 | 0.001               | $$10^{-3}$$         | milli  | m            | thousandth   | millimeter, milliamp, millivolt |
 | 0.000001            | $$10^{-6}$$         | micro  | μ            | millionth    | micrometer, microamp |
 | 0.000000001         | $$10^{-9}$$         | nano   | n            | billionth    | nanosecond, nanoamp |
-| 0.000000000001      | $$10^{-12}$$        | pico   | n            | trillionth    | picosecond, picoamp |
+| 0.000000000001      | $$10^{-12}$$        | pico   | p            | trillionth   | picosecond, picoamp |
 {: .fs-1 .condensed-table }
 
-**Table** This chart is based on NIST's [Metric SI Prefixes webpage](https://www.nist.gov/pml/weights-and-measures/metric-si-prefixes) and Figure 2.2 in [Bartlett's book](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_2_Chapter.xhtml).
+**Table.** This chart is based on NIST's [Metric SI Prefixes webpage](https://www.nist.gov/pml/weights-and-measures/metric-si-prefixes) and Figure 2.2 in [Bartlett's book](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_2_Chapter.xhtml).
 {: .fs-1 }
 
 ### Converting units
@@ -104,9 +103,9 @@ In addition, it's helpful to have a way to check our work, which we can do in a 
 
 Before we begin, let's watch this video of me building a simple resistive circuit in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and calculating its current, given a voltage source and resistor.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ZxNHcUp-CFY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/ZxNHcUp-CFY" title="Building a simple resistive circuit in CircuitJS and calculating current using Ohm's Law" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-**Video** The video was created using the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulator. Direct link is [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cDQkbNbrxQ0qo2lSRiYCNgAdBIYVSWKR4KFDkL+ytTvWi2AdwUqwPcMRSaT53mCt9INS9cjGnLh9dwuV7+V9VKmxCPGCDG20BOz4wqNjQ8KCk8A8U+JSBAM8+AVT9CEMAJ1yVLLEweDYgA).
+**Video.** The video was created using the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulator. Direct link is [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cDQkbNbrxQ0qo2lSRiYCNgAdBIYVSWKR4KFDkL+ytTvWi2AdwUqwPcMRSaT53mCt9INS9cjGnLh9dwuV7+V9VKmxCPGCDG20BOz4wqNjQ8KCk8A8U+JSBAM8+AVT9CEMAJ1yVLLEweDYgA).
 {: .fs-1 }
 
 ### Example 1: Solve for current
@@ -120,11 +119,11 @@ Imagine a battery-powered circuit with a single resistor (basic, yes but pedagog
 
 #### Step 1: Identify knowns
 
-To begin your analysis, you'll want to identify everything that you *know* about this circuit. 
+To begin your analysis, you'll want to identify everything that you *know* about this circuit.
 
 Observe that all wires touching the *positive* battery terminal have the same electric potential ($$9V$$)—which we've now marked in red—and all wires touching the *negative* battery terminal have the same electric potential ($$0V$$)—which we've marked in black. Note that even though copper wires have some resistance, it's so small (especially for the lengths in a digital circuit), that we can model it as $$0Ω$$ (indeed, wires are always assumed $$0Ω$$ in this sort of circuit analysis).
 
-And because we are solving for current, we we need to use the Ohm's Law formulation: $$I = \frac{V}{R}$$. More specifically, as voltage is always relative—an electric potential *difference*—we use $$I = \frac{V_1 - V_2}{R}$$
+And because we are solving for current, we need to use the Ohm's Law formulation: $$I = \frac{V}{R}$$. More specifically, as voltage is always relative—an electric potential *difference*—we use $$I = \frac{V_1 - V_2}{R}$$
 
 ![A diagram showing that all wires touching the battery's positive terminal have the same voltage (9V). Similarly, all wires touching the battery's negative terminal have the same voltage (0V)](assets/images/OhmsLawBasic_SolveForCurrentI_Step1_ByJonFroehlich.png)
 
@@ -148,7 +147,8 @@ Finally, we are ready to solve for current $$I = \frac{9V - 0V}{100Ω} \Rightarr
 
 ![The final solution with I = 90mA](assets/images/OhmsLawBasic_SolveForCurrentI_Step3_ByJonFroehlich.png)
 
-We did it. We successfully applied Ohm's Law to solve for current!
+**Figure.** We successfully applied Ohm's Law to solve for current: $$I = 90mA$$.
+{: .fs-1 }
 
 ### Example 2: Solve for current again (but with different resistance)
 
@@ -190,7 +190,7 @@ Again, the first thing to do is convert all units to base units. So, $$1.32mA \R
 
 Now, we can solve for $$R = \frac{9V}{0.00132A} \Rightarrow 6818.2Ω \Rightarrow 6.8kΩ$$
 
-![Diagram shows a similar circuit as before but with an unknown resistance R and a known voltage (V=9V) and a known current (I=50mA) . Given this information, we can use R = V / I to solve for R. So, R = 9V/50mA => 6.82kΩ](assets/images/OhmsLAwBasic_SolveForResistance_ByJonFroehlich.png)
+![Diagram shows a circuit with a 9V battery, an unknown resistance R, and a known current of I=1.32mA. Using R = V / I, we solve for R = 9V / 0.00132A = 6818.2 ohms or approximately 6.8 kilohms.](assets/images/OhmsLAwBasic_SolveForResistance_ByJonFroehlich.png)
 
 **Figure.** Using the $$R=\frac{V}{I}$$ formulation of Ohm's Law, we can solve for the resistance $$R$$ given a known voltage $$V$$ and a known current $$I$$. Images made in [Fritzing](https://fritzing.org/) and PowerPoint.
 {: .fs-1 }
@@ -199,7 +199,7 @@ Now, we can solve for $$R = \frac{9V}{0.00132A} \Rightarrow 6818.2Ω \Rightarrow
 
 ## Activity: Using a circuit simulator
 
-Now that we've built up an initial understanding of Ohm's Law, it's time to build and play with some circuits in a circuit simulator. 
+Now that we've built up an initial understanding of Ohm's Law, it's time to build and play with some circuits in a circuit simulator.
 
 Using [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), build and analyze five different types of resistive circuits. You can build whatever circuits you want with a few requirements:
 * All circuits should have only a single power supply
@@ -207,7 +207,7 @@ Using [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), build and ana
 * You can use as many resistors per circuit as you'd like but double click on the wires to show current/voltage
 * For each circuit, take a screenshot and put it in your prototyping journal along with a brief reflection of what you observed/learned.
 
-You can save your circuits in one of two ways: (1) download them locally (File -> Save As) or (2) export them as a shareable link (File -> Export as Link)—use this latter option for your prototyping journals. 
+You can save your circuits in one of two ways: (1) download them locally (File -> Save As) or (2) export them as a shareable link (File -> Export as Link)—use this latter option for your prototyping journals.
 
 In your prototyping journals, include a screenshot of each CircuitJS circuit along with a brief description of what you observed and a link directly back to the CircuitJS circuit that you made.
 

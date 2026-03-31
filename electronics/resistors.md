@@ -44,8 +44,8 @@ As noted in [Lesson 1](electricity-basics.md), some materials like metals—silv
 But why?
 
 There are three main factors that determine conductivity (see [UIUC ECE110 notes](https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M001_What_is_Resistor.pdf)):
-1. The ease at which electrons can be dislodged by an applied electric field. Metals like copper have easily displaceable electrons in their atom's valence (outer) shells. It takes very little energy to cause electrons to "jump" or "move."
-2. The atomic arrangement of the material. If you were able to look microscopically at metal, you would see a particular structural arrangement of atoms called a [lattice](https://opentextbc.ca/chemistry/chapter/10-6-lattice-structures-in-crystalline-solids/)—this structure depends on the material. For metals, atoms are densely packed that lets electrons move relatively freely through the lattice, again reducing resistance.
+1. The ease with which electrons can be dislodged by an applied electric field. Metals like copper have easily displaceable electrons in their atom's valence (outer) shells. It takes very little energy to cause electrons to "jump" or "move."
+2. The atomic arrangement of the material. If you were able to look microscopically at metal, you would see a particular structural arrangement of atoms called a [lattice](https://opentextbc.ca/chemistry/chapter/10-6-lattice-structures-in-crystalline-solids/)—this structure depends on the material. For metals, atoms are densely packed, which lets electrons move relatively freely through the lattice, again reducing resistance.
 3. The temperature of the material. As a material heats up, its atoms vibrate with greater amplitude. This atomic motion has a negative effect on the material's ability to conduct electric current, causing greater electrical resistance ([link](http://matse1.matse.illinois.edu/sc/b.html)).
 
 ## Resistors slow current everywhere

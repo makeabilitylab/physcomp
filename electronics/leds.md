@@ -20,19 +20,19 @@ search_exclude: false
 {:toc}
 ---
 
-Second only to [resistors](resistors.md), light-emitting diodes (LEDs) are the most common electrical components used in physical computing. LEDs are power-efficient light sources *not* based on resistive properties and thus, are non-ohmic devices. They come in a variety of shapes and sizes (see image below). In this lesson, you will learn about diodes and how they work before diving into LEDS, the importance of current-limiting resistors, and how to use them.
+Second only to [resistors](resistors.md), light-emitting diodes (LEDs) are the most common electrical components used in physical computing. LEDs are power-efficient light sources *not* based on resistive properties and thus, are non-ohmic devices. They come in a variety of shapes and sizes (see image below). In this lesson, you will learn about diodes and how they work before diving into LEDs, the importance of current-limiting resistors, and how to use them.
 
-![](assets/images/Verschiedene_LEDs_FromWikipedia.jpg)
+![LEDs of various colors, sizes, and shapes including through-hole and surface mount types](assets/images/Verschiedene_LEDs_FromWikipedia.jpg)
 **Figure.**  LEDs range in color, size, and shape. Image from [Wikipedia](https://en.wikipedia.org/wiki/File:Verschiedene_LEDs.jpg).
 {: .fs-1 }
 
 ## What are LEDs?
 
-LEDs are a type of [diode](https://en.wikipedia.org/wiki/Diode), which is an electrical component that only allows current to flow in one direction—like a one way street or a back flow valve in plumbing. In contrast to traditional lamps (incandescent light sources), LEDs have many advantages including: lower energy consumption, longer lifetimes, improved physical robustness, smaller size, and faster switching (you can turn them on and off very quickly). 
+LEDs are a type of [diode](https://en.wikipedia.org/wiki/Diode), which is an electrical component that only allows current to flow in one direction—like a one-way street or a backflow valve in plumbing. In contrast to traditional lamps (incandescent light sources), LEDs have many advantages including: lower energy consumption, longer lifetimes, improved physical robustness, smaller size, and faster switching (you can turn them on and off very quickly). 
 
-For example, an incandescent bulb converts roughly 5% of its energy into visible light, the rest is lost to heat. More specifically, the typical incandescent bulb at 120V can output 16 lumens per watt *vs.* 60 lm/W for compact fluorescent bulbs and 150 lm/W for white LED lamps ([source](https://en.wikipedia.org/wiki/Incandescent_light_bulb)). Moreover, a typical incandescent bulb lasts for roughly 1,000 hours compared to 20,000-30,000 hours for LEDs.
+For example, an incandescent bulb converts roughly 5% of its energy into visible light; the rest is lost to heat. More specifically, the typical incandescent bulb at 120V can output 16 lumens per watt *vs.* 60 lm/W for compact fluorescent bulbs and 150 lm/W for white LED lamps ([source](https://en.wikipedia.org/wiki/Incandescent_light_bulb)). Moreover, a typical incandescent bulb lasts for roughly 1,000 hours compared to 20,000-30,000 hours for LEDs.
 
-While the basis for LED technology was discovered in 1927 ([Wikipedia](https://en.wikipedia.org/wiki/Light-emitting_diode#History)), it was not until the 1960s that the first visible-spectrum LEDs were demonstrated (red LEDs) and much later until they were commercially viable. Incredibly, the blue LED was not invented until the 1990s—earning co-inventors [Shuji Nakamura](https://en.wikipedia.org/wiki/Shuji_Nakamura), [Hiroshi Amano](https://en.wikipedia.org/wiki/Hiroshi_Amano), and [Isamu Akasaki](https://en.wikipedia.org/wiki/Isamu_Akasaki) the 2014 Nobel Prize in Physics—and there are still LED-based breakthroughs today (*e.g.,* high-efficiency, experimental white LEDs were demonstrated in the mid 2010s producing 303 lumens per watt of electricity). Akasaki recently passed away (in April 2021) and the [New York Times](https://www.nytimes.com/2021/04/06/science/isamu-akasaki-dead.html?referringSource=articleShare) has a nice obituary with an interesting history of the blue LED invention.
+While the basis for LED technology was discovered in 1927 ([Wikipedia](https://en.wikipedia.org/wiki/Light-emitting_diode#History)), it was not until the 1960s that the first visible-spectrum LEDs were demonstrated (red LEDs) and much later until they were commercially viable. Incredibly, the blue LED was not invented until the 1990s—earning co-inventors [Shuji Nakamura](https://en.wikipedia.org/wiki/Shuji_Nakamura), [Hiroshi Amano](https://en.wikipedia.org/wiki/Hiroshi_Amano), and [Isamu Akasaki](https://en.wikipedia.org/wiki/Isamu_Akasaki) the 2014 Nobel Prize in Physics—and there are still LED-based breakthroughs today (*e.g.,* high-efficiency, experimental white LEDs were demonstrated in the mid 2010s producing 303 lumens per watt of electricity). Akasaki passed away in April 2021 and the [New York Times](https://www.nytimes.com/2021/04/06/science/isamu-akasaki-dead.html?referringSource=articleShare) has a nice obituary with an interesting history of the blue LED invention.
 
 So, while LEDs are now pervasive, they're relatively new technology with active research.
 
@@ -44,23 +44,23 @@ To better understand light-emitting diodes, it's first useful to learn a bit abo
   <source src="assets/videos/DiodeOnlyWorksInOneDirection_CircuitJS_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 
-**Video.** Diodes allow current to flow in only one direction—like traffic cops directing cars on a one way street. In the video above, we show how current flows through a diode from its anode lead to its cathode. But if we swap the orientation, current stops! You can play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWub3mEJURfEMSiSYCNgHcB4YRRR5FVdgCdlqsBkLaQKBPqrZcchTX4IVfdRZs6lj8HsMPbR-S5WqUH1WwbAysqfwAPRV4iCTA8CExeGkVxADU2ABMDXwMg6JAMhgAzAEMAVwAbABc2IA).
+**Video.** Diodes allow current to flow in only one direction—like traffic cops directing cars on a one-way street. In the video above, we show how current flows through a diode from its anode lead to its cathode. But if we swap the orientation, current stops! You can play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWub3mEJURfEMSiSYCNgHcB4YRRR5FVdgCdlqsBkLaQKBPqrZcchTX4IVfdRZs6lj8HsMPbR-S5WqUH1WwbAysqfwAPRV4iCTA8CExeGkVxADU2ABMDXwMg6JAMhgAzAEMAVwAbABc2IA).
 {: .fs-1 }
 
 Similar to a resistor, a diode has two leads (aka terminals or legs). Unlike resistors, they are non-ohmic and thus, do not follow Ohm's Law. And a diode is a *polarized* component—which means its orientation matters (as the video above highlights). The schematic symbol for a diode indicates its directional placement: the arrow faces the direction of current (and, similarly, the vertical cathode line, which is visible both on the symbol and on the device itself, should point towards `-`).
 
-![](assets/images/DiodeSymbolAnd1N4002Picture_ByJonFroehlich.png)
+![The diode schematic symbol showing the anode and cathode, alongside an image of a 1N4001 diode with its cathode band marked](assets/images/DiodeSymbolAnd1N4002Picture_ByJonFroehlich.png)
 
 **Figure.**  The diode schematic symbol and an image of a real diode, the popular [1N4001](https://www.adafruit.com/product/755). Image made in PowerPoint.
 {: .fs-1 }
 
 ### A diode's "on" or "forward" voltage
 
-To use a diode, you must apply a *minimum voltage*, which is typically called the "on voltage" ($$V_{on}$$) or "forward voltage" ($$V_{f}$$). Drawing again on a hydraulic analogy, think of a diode like a spring-triggered door in a water pipe (see image below). The door will only open when the water pressure exceeds a certain threshold (overcoming the strength of the spring). The door also prevents back flow as it can only open in one direction (thus, water can only travel in one direction in the pipe). Pretty cool!
+To use a diode, you must apply a *minimum voltage*, which is typically called the "on voltage" ($$V_{on}$$) or "forward voltage" ($$V_{f}$$). Drawing again on a hydraulic analogy, think of a diode like a spring-triggered door in a water pipe (see image below). The door will only open when the water pressure exceeds a certain threshold (overcoming the strength of the spring). The door also prevents backflow as it can only open in one direction (thus, water can only travel in one direction in the pipe). Pretty cool!
 
 A typical value for $$V_{f}$$ is 0.6-0.7V—so it "costs" only ~0.7V to install a "current" backflow preventer in your circuit. Why would you need this? For example, to protect your circuit in case you stick a battery in the wrong way.
 
-![](assets/images/DiodeWaterTrapdoorAnalogy.png)
+![A hydraulic analogy showing a diode as a spring-loaded trap door in a water pipe that only opens when pressure exceeds a threshold and only in one direction](assets/images/DiodeWaterTrapdoorAnalogy.png)
 
 **Figure.**  A hydraulic analogy for diodes. I cannot find the original source for this image. It originally came from [Bjoern Hartmann's CS294 course at UC Berkeley](http://husk.eecs.berkeley.edu/courses/cs294-84-fall14/images/a/a3/Slides-02-electronics101.pdf) (but that webpage is long gone!).
 {: .fs-1 }
@@ -69,14 +69,14 @@ A typical value for $$V_{f}$$ is 0.6-0.7V—so it "costs" only ~0.7V to install 
 
 With resistors, there is a linear relationship between voltage and current. With diodes, this current-voltage relationship is *non-linear*. When the applied voltage is less than $$V_f$$, the diode is similar to an open circuit (disconnected). When the applied voltage $$V_s$$ exceeds $$V_f$$, the "valve" opens causing a voltage drop of $$V_{D} = V_{f}$$ over the component, and current flows with very little resistance (in the ideal, like a closed switch).
 
-![](assets/images/CurrentVoltageGraphsDiodes_ByJonFroehlich.png)
+![Approximate current-voltage (I-V) graphs comparing the linear relationship for resistors and the non-linear relationship for diodes, showing the forward voltage threshold](assets/images/CurrentVoltageGraphsDiodes_ByJonFroehlich.png)
 
 **Figure.**  An approximate current-voltage (or I-V) graph for resistors and diodes. Notice that after the applied voltage $$V$$ exceeds the forward voltage $$V_f$$ of the diode, that the diode "turns on" and current flows (and flows as if the diode were just a closed switch). Image made in PowerPoint.
 {: .fs-1 }
 
 Typically, once $$V_f$$ is reached, we assume that the voltage drop $$V_D$$ across a diode remains relatively constant (at, say, 0.7V) regardless of the current through it. But this is not entirely true. In fact, $$V_D$$ continues to change slightly—however, this change is so small over a wide range of currents that we can model $$V_D$$ as constant. And this approximation is fine for our purposes.
 
-![](assets/images/CurrentVoltageGraphDiodeSimplication2_JonFroehlichAndUIUCECE110.png)
+![A simplified I-V graph for a diode showing how the voltage drop is modeled as constant once the forward voltage is reached, compared to the actual slight increase](assets/images/CurrentVoltageGraphDiodeSimplication2_JonFroehlichAndUIUCECE110.png)
 **Figure.**  The current-voltage relationship of a diode is often simplified like the figure on the right, even though $$V_D$$ does indeed change slightly as current increases. Image on right from [UIUC ECE110](https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?diodes).
 {: .fs-1 }
 
@@ -86,7 +86,7 @@ Just like resistors, which have [maximum power capacity ratings](resistors.md#ca
 
 ### Breakdown voltage
 
-Ideally, diodes would block any current flowing in the *reverse* direction; however, if a large enough "reverse" voltage is applied (*e.g.,* -50V to -100V), then the "trap door" is overpowered and current will begin flowing in the reverse direction (again, just like a closed switch). This is called the "breakdown voltage" or "peek inverse voltage" rating in a diode's datasheet.
+Ideally, diodes would block any current flowing in the *reverse* direction; however, if a large enough "reverse" voltage is applied (*e.g.,* -50V to -100V), then the "trap door" is overpowered and current will begin flowing in the reverse direction (again, just like a closed switch). This is called the "breakdown voltage" or "peak inverse voltage" rating in a diode's datasheet.
 
 How would you get a "reverse voltage"? Well, the easiest way would be to hook up your voltage source backwards. Generally, for our purposes, you need not worry about this. See [more here](https://learn.sparkfun.com/tutorials/diodes/all#real-diode-characteristics).
 
@@ -96,11 +96,11 @@ This is why we use the term "forward voltage" and "forward current" to distingui
 
 ### Analyzing a diode in a circuit
 
-Let's analyze a [1N4001 general-purpose diode](https://www.mouser.com/datasheet/2/149/1N4001-81693.pdf) in a simple circuit with a 9V battery and a 100Ω resistor. The key here is to recognize that once our supplied voltage exceeds the "on" voltage of our diode $$V_f$$, that we can model the diode as a wire. Though imperfect, it's a reasonable simplification for our purposes.
+Let's analyze a [1N4001 general-purpose diode](https://www.mouser.com/datasheet/2/149/1N4001-81693.pdf) in a simple circuit with a 9V battery and a 100Ω resistor. The key here is to recognize that once our supplied voltage exceeds the "on" voltage of our diode $$V_f$$, we can model the diode as a wire. Though imperfect, it's a reasonable simplification for our purposes.
 
 So, let's solve for current $$I$$ in the following circuit.
 
-![](assets/images/ResistorDiodeCircuit_SolveForCurrentI_ByJonFroehlich.png)
+![A simple circuit with a 9V battery, 100 ohm resistor, and 1N4001 diode in series](assets/images/ResistorDiodeCircuit_SolveForCurrentI_ByJonFroehlich.png)
 **Figure.**  In this simple circuit, we have a 9V battery, a 100Ω resistor, and a 1N4001 diode. How can we solve for current $$I$$? Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
@@ -108,13 +108,13 @@ So, let's solve for current $$I$$ in the following circuit.
 
 As we've done before, when we first begin analyzing a circuit, we identify what we know. In this circuit, there are no branches. Thus, we know that current $$I$$ is shared throughout. We can also identify three separate nodes with different voltage levels, *Node A*, which is directly connected to our battery, and thus is $$9V$$, *Node C*, which is connected to our battery's negative terminal, so is $$0V$$, and *Node B*, which is between the resistor $$R_1$$ and the diode $$D_1$$, so must have a voltage somewhere between *Node A* and *Node C*.
 
-![](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step1_ByJonFroehlich.png)
+![The same circuit with three nodes labeled A, B, and C at different voltage levels, color-coded for clarity](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step1_ByJonFroehlich.png)
 **Figure.** When analyzing a circuit, the first thing to do is to observe and identify what we know. I like to label my individual nodes (colored here for clarity). Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
 #### Step 2: Solve for $$V_R$$
 
-[Kirchhoff’s Voltage Law](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/v/ee-kirchhoffs-voltage-law) states that for a closed loop series path the algebraic sum of all the voltages is zero. This is due to the conservation of energy—the circuit loop is a closed conducting path, so no energy is lost.
+[Kirchhoff's Voltage Law](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/v/ee-kirchhoffs-voltage-law) states that for a closed loop series path the algebraic sum of all the voltages is zero. This is due to the conservation of energy—the circuit loop is a closed conducting path, so no energy is lost.
 
 In this case, the voltage supply of 9V plus the voltage drop $$V_R$$ over the resistor $$R_1$$ and the voltage drop $$V_D$$ over the diode $$D_1$$ must equal zero. Another way to write this is:
 
@@ -130,15 +130,15 @@ $$
 
 Thus, $$V_R$$ is equal to 8.3V.
 
-![](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step2_ByJonFroehlich.png)
-**Figure.** Using Kirchhoff’s Voltage Law, we know that $$V_{CC} = V_R + V_D$$. Substituting knowns for $$V_{CC}=9V$$ and $$V_D=0.7V$$, let's us solve for the voltage drop $$V_R$$ around the resistor $$R_1$$, which is 8.3V. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
+![The circuit with voltage drops labeled: V_R = 8.3V across the resistor and V_D = 0.7V across the diode](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step2_ByJonFroehlich.png)
+**Figure.** Using Kirchhoff's Voltage Law, we know that $$V_{CC} = V_R + V_D$$. Substituting knowns for $$V_{CC}=9V$$ and $$V_D=0.7V$$, lets us solve for the voltage drop $$V_R$$ around the resistor $$R_1$$, which is 8.3V. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
 #### Step 3: Solve for current $$I$$
 
 Now that we know $$V_R=8.3V$$, we can use Ohm's Law to solve for the current $$I$$ in our circuit, which is simply $$I = \frac{V_R}{R_1} = \frac{8.3V}{100Ω} = 0.083A = 83mA$$. Thus, there is $$83mA$$ of current flowing around our circuit (through the resistor and diode).
 
-![](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step3_ByJonFroehlich.png)
+![The circuit showing the solved current I = 83mA flowing through the entire loop](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step3_ByJonFroehlich.png)
 **Figure.** Using Ohm's Law, we can solve for current $$I$$ in our circuit. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
@@ -163,14 +163,14 @@ For the diode:
 
 $$P_D = V_D * I = 0.7V * 0.083A = 0.058W$$
 
-![](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step4_ByJonFroehlich.png)
+![The circuit with power calculations shown for both the resistor (0.69W) and the diode (0.058W)](assets/images/ResistorDiodeCircuit_SolveForCurrentI_Step4_ByJonFroehlich.png)
 **Figure.** As the last step, let's figure out the power demands at each electrical component. We can use the power equation: $$P = I * V$$. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
 Thus, for this circuit, we would need a bulkier resistor than the 0.25W resistors we put in our hardware kits (you can get a pack of 1,000 1 Watt resistors on [Amazon for $19.99](https://www.amazon.com/WiMas-Resistor-Resistance-Assorted-1000Pcs/dp/B0797QLGGB/), which is about 2 cents a resistor). However, from the [1N4001 datasheet](https://www.mouser.com/datasheet/2/149/1N4001-81693.pdf), 0.058W is well within the maximum rating of 3W, so the 1N4001 is fine.
 
-![](assets/images/1N4001DataSheet_PowerDissipationRating_FairchildSemiconductor.png)
-**Figure.** Screenshot of the the [1N4001 datasheet](https://www.mouser.com/datasheet/2/149/1N4001-81693.pdf).
+![Screenshot of the 1N4001 datasheet highlighting the maximum power dissipation rating of 3W](assets/images/1N4001DataSheet_PowerDissipationRating_FairchildSemiconductor.png)
+**Figure.** Screenshot of the [1N4001 datasheet](https://www.mouser.com/datasheet/2/149/1N4001-81693.pdf).
 {: .fs-1 }
 
 #### Reflecting on our solution
@@ -188,7 +188,7 @@ Where $$I_S$$ is the saturation current, $$V_D$$ is the voltage across the diode
 
 Whew, we finally made it back to LEDs, which are amazingly flexible, fun, and elegant electronic components (see image below). LEDs are essential to physical computing and we rely on them in many of our [Intro to Arduino](../arduino/index.md) lessons. So, it's important that you understand how to use them. 
 
-![](assets/images/LEDBasedProjects.png)
+![A gallery of LED-based projects including a flower lamp, paper nightlights, an 8x8x8 LED cube, a hanging LED cloud, and air quality balloons](assets/images/LEDBasedProjects.png)
 **Figure.** A variety of relatively simple LED-based projects. The top row projects are built with just LEDs, resistors, and a battery. The bottom row are built with microcontrollers. From top-left: (a) Flower LED lamp built with plastic spoons by [Wemyour](https://www.youtube.com/watch?v=OsTKdKdMXKU); (b and c)  Paper-based nightlights and a starry water bottle built by [I Love Creativity](https://youtu.be/3frVM7J0nO8); (d) an 8x8x8 LED cube built with Arduino Uno by [Harry Le](https://youtu.be/T5Aq7cRc-mU); (e) hanging LED cloud by [Richard Clarkson](https://vimeo.com/111889143); (f) air quality balloons by Stacey Kuznetsov and colleagues ([UbiComp'11 paper](http://doi.acm.org/10.1145/2030112.2030145), [Instructables](https://www.instructables.com/Air-quality-balloons/))
 {: .fs-1 }
 
@@ -200,14 +200,14 @@ LEDs are like super diodes—they function similarly but have this magical prope
 
 Just like other diodes, an LED has two legs and is a polarized component—it will only work in one direction. The anode `+` is indicated by the *longer* leg of the LED and the cathode `-` is subtly indicated by the flat side of the LED's casing (see image below). The anode must face toward the higher electric potential part of your circuit and current flows from the anode to the cathode.
 
-![](assets/images/LEDSymbolAndPartsLabeled_ByJonFroehlich.png)
+![The LED schematic symbol and a labeled photograph of an LED showing the anode (longer leg) and cathode (flat side of epoxy casing)](assets/images/LEDSymbolAndPartsLabeled_ByJonFroehlich.png)
 
 **Figure.** The schematic symbol and labeled parts of a light-emitting diode (LED). There are two key ways to discern an LED's orientation. First, by looking for the long leg, which is the anode. If the LED legs (or leads) have been trimmed or are otherwise not visible, then you can also look at the shape of the epoxy casing, which has a subtle *flat* side. This flat side is pointed towards the cathode leg. Image made in PowerPoint. I don't know the source of the LED picture.
 {: .fs-1 }
 
-LEDs are semiconductor devices that use [electroluminscence](https://en.wikipedia.org/wiki/Electroluminescence) to emit light in response to current. More specifically, when electrons pass through an LED they release energy in the form of photons. If you're curious to learn more, see this [video by Today I Found Out](https://youtu.be/uyse_I-zo4Q).
+LEDs are semiconductor devices that use [electroluminescence](https://en.wikipedia.org/wiki/Electroluminescence) to emit light in response to current. More specifically, when electrons pass through an LED they release energy in the form of photons. If you're curious to learn more, see this [video by Today I Found Out](https://youtu.be/uyse_I-zo4Q).
 
-![](assets/images/InsideAnLED_ModifiedImageFromTubeTimeUS.png)
+![A macro photograph looking inside a functioning LED, showing the semiconductor die, bond wire, and reflector cup](assets/images/InsideAnLED_ModifiedImageFromTubeTimeUS.png)
 **Figure.** An incredibly cool inside look a functioning LED by [TubeTimeUS](https://twitter.com/tubetimeus/status/1111807450141745152?s=11) on Twitter. Slight modifications to annotations by Jon E. Froehlich.
 {: .fs-1 }
 
@@ -222,7 +222,7 @@ We can also graph the IV curve for LEDs, which again demonstrates non-linearity 
 1. First, like diodes, very little current flows through an LED until its "on" or "forward" voltage $$V_f$$ is reached. 
 2. Second, the forward voltage $$V_f$$ differs by the LED's color. For example, notice how blue (B) and white (W) LEDs require more $$V_f$$ than red (R) and orange (O) in the graph below.
 
-![](assets/images/IVCurves_FromLEDnique.com.png)
+![Two IV curve graphs side by side: resistor IV curves showing linear relationships at different resistance values on the left, and LED IV curves showing non-linear relationships with different forward voltages for different LED colors on the right](assets/images/IVCurves_FromLEDnique.com.png)
 **Figure.** This figure shows the IV curve for various resistor values (following $$I=\frac{V}{R}$$) and for various LED values (on the right). Notice how the forward voltage, $$V_f$$ is different based on the LED color. Image from [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/).
 {: .fs-1 }
 
@@ -232,7 +232,7 @@ Because differently colored LEDs have unique "on" voltages $$V_f$$, you need to 
 
 For the LEDs used to produce these IV graphs, the red LED draws 40mA at 2V while the green and blue LEDs only draw 12mA and 3mA, respectively.
 
-![](assets/images/IVCurveZoomIn_FromLEDnique.com.png)
+![A zoomed-in IV curve showing current draw differences between red, green, and blue LEDs at the same voltage](assets/images/IVCurveZoomIn_FromLEDnique.com.png)
 **Figure.** Image based on [LEDnique.com](http://lednique.com/current-voltage-relationships/iv-curves/).
 {: .fs-1 }
 
@@ -242,7 +242,7 @@ To evaluate the current-voltage response curve for the LEDs in our hardware kits
 
 I conducted two small experiments. First, using both a red LED and then a blue LED, I output a fixed voltage starting at 0V and incremented by 0.1V (ending at 3.2V for the red LED and 5V for the blue LED). For each step, I measured the current $$I_F$$ through the LED using my multimeter (using the ammeter setting). The results are shown below (left graph). For the second experiment, I only used the red LED. This time, I started at 1.6V and incremented by 0.01V (ending at 2.4V)—again measuring the current draw. The results are shown on the right graph below.
 
-![](assets/images/IVCurveExperiments_ByJonFroehlich.png)
+![Two IV graphs from experiments with the Adafruit 5mm LED pack: the left shows red and blue LED curves from 0-5V, the right shows a detailed red LED curve from 1.6-2.4V](assets/images/IVCurveExperiments_ByJonFroehlich.png)
 **Figure.** IV graphs from my own experiments with the [Adafruit 5mm LED pack](https://www.adafruit.com/product/4203). 
 {: .fs-1 }
 
@@ -250,7 +250,7 @@ Notably, the IV curve generally matches [LEDnique.com](http://lednique.com/curre
 
 To show how the LED brightness varies with current, I've replotted the results of the second experiment and overlaid corresponding images of my experimental setup plus the red LED output. At $$V_f=1.6V$$, the red LED was drawing $$4μA$$ of current but was not illuminated. At $$V_f=1.8V$$, the red LED was drawing $$0.57mA$$ of current and on. By $$V_f=2V$$ and beyond, the red LED was very bright and the exponential curve began!
 
-![](assets/images/IVCurveExperiments_GraphPlusRedLEDPictures_ByJonFroehlich.png)
+![The second experiment's IV graph with photographs overlaid showing the red LED at different brightness levels corresponding to different voltage and current values](assets/images/IVCurveExperiments_GraphPlusRedLEDPictures_ByJonFroehlich.png)
 **Figure.** The second experiment shown with images overlaid.
 {: .fs-1 }
 
@@ -261,11 +261,11 @@ As our IV graphs demonstrate, once $$V_f$$ is surpassed, LED's current draw incr
 We need a resistor to limit the current in the circuit. But how can we determine what resistor to use? Using the same process that we did for the [diodes](#analyzing-a-diode-in-a-circuit).
 
 ---
-**NOTE:**
 
-As an important aside, once you get used to prototyping circuits and working with LEDs, you'll often just choose a 330Ω or 470Ω resistor (with a 9V supply) or a 220Ω resistor (with a 5V supply) and start building. If the LED is too bright, just grab a bigger resistor. Too dim, smaller resistor.
-
-You'll not go through the detailed process of picking out a perfect resistor unless it's critical to your construction (and LEDs play a key role). But we want to show you how to do it right, so read on!
+{: .note }
+> As an important aside, once you get used to prototyping circuits and working with LEDs, you'll often just choose a 330Ω or 470Ω resistor (with a 9V supply) or a 220Ω resistor (with a 5V supply) and start building. If the LED is too bright, just grab a bigger resistor. Too dim, smaller resistor.
+>
+> You'll not go through the detailed process of picking out a perfect resistor unless it's critical to your construction (and LEDs play a key role). But we want to show you how to do it right, so read on!
 
 ---
 
@@ -275,15 +275,15 @@ To determine a current-limiting resistor, you first need to consult your LED's d
 
 The datasheet states that the forward voltage $$V_f$$ for the red LED is between $$1.9V$$ and $$2.1V$$ with a typical value of $$2.0V$$. The datasheet also states that in this range, the forward current $$I_f$$ is $$20mA$$. All specifications are for 25℃. 
 
-![](assets/images/ScreenshotOfTheRedLEDDatasheet-C53-002_Fedy_FD-5AR35-1.pdf.png.png)
-**Figure.** A screenshot of the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf) for the LEDS purchased from Adafruit.
+![Screenshot of the red LED datasheet showing the forward voltage and forward current specifications](assets/images/ScreenshotOfTheRedLEDDatasheet-C53-002_Fedy_FD-5AR35-1.pdf.png.png)
+**Figure.** A screenshot of the [red LED datasheet](https://cdn-shop.adafruit.com/product-files/4203/C53-002_Fedy_FD-5AR35-1.pdf) for the LEDs purchased from Adafruit.
 {: .fs-1 }
 
 Perfect, we can use this information to solve for our resistor! 
 
 Let's build a simple LED circuit with a 9V battery, a red LED, and a yet-to-be-determined resistor.
 
-![](assets/images/SolveForResistor_LEDCircuit_Step0_ByJonFroehlich.png)
+![A simple LED circuit with a 9V battery and red LED but with a question mark for the resistor value](assets/images/SolveForResistor_LEDCircuit_Step0_ByJonFroehlich.png)
 **Figure.** To limit the current in our LED-based circuit, we need to add a current-limiting resistor. But what value of resistance do we need? Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
@@ -291,7 +291,7 @@ Let's build a simple LED circuit with a 9V battery, a red LED, and a yet-to-be-d
 
 As usual, our first step is to analyze what we know about our circuit and identify the nodes. This will help us solve any open questions. There are two key things of interest: What is the voltage drop $$V_R$$ over the resistor $$R_1$$ and what resistance value should $$R_1$$ be?
 
-![](assets/images/SolveForResistor_LEDCircuit_Step1_ByJonFroehlich.png)
+![The LED circuit with nodes labeled and known values identified](assets/images/SolveForResistor_LEDCircuit_Step1_ByJonFroehlich.png)
 **Figure.** The first step in any circuit analysis is to identify and label your knowns. Get situated! Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
@@ -299,7 +299,7 @@ As usual, our first step is to analyze what we know about our circuit and identi
 
 Just as we did with our regular diode circuit above, we can observe that $$V_R$$ plus $$V_D$$ must equal $$V_{CC}$$ due to Kirchhoff's Voltage Law. From the datasheet, we know that $$V_F = 2V$$. So, $$V_D=V_F=2V$$. Thus, it's quite easy to solve for $$V_R$$, which is simply $$V_{CC}-V_D = 9V - 2V = 7V$$.
 
-![](assets/images/SolveForResistor_LEDCircuit_Step2_ByJonFroehlich.png)
+![The LED circuit showing V_R = 7V solved using Kirchhoff's Voltage Law](assets/images/SolveForResistor_LEDCircuit_Step2_ByJonFroehlich.png)
 **Figure.** We can solve for $$V_R$$ using the LED datasheet value for $$V_F$$ and Kirchhoff's Voltage Law. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
@@ -307,7 +307,7 @@ Just as we did with our regular diode circuit above, we can observe that $$V_R$$
 
 Now, we need to consult the LED datasheet again to get the forward current $$I_F$$ at $$V_F=2V$$. The datasheet states that $$I_F=20mA = 0.02A$$. So, we want $$20mA$$ flowing around our circuit.
 
-![](assets/images/SolveForResistor_LEDCircuit_Step3_ByJonFroehlich.png)
+![The LED circuit with the forward current I_F = 20mA identified from the datasheet](assets/images/SolveForResistor_LEDCircuit_Step3_ByJonFroehlich.png)
 **Figure.** Consulting the LED datasheet again for the current $$I_F$$ at $$V_F=2V$$ shows us that $$I_F=20mA$$. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
@@ -315,7 +315,7 @@ Now, we need to consult the LED datasheet again to get the forward current $$I_F
 
 Finally, we have all the information we need to solve for $$R_1$$ using Ohm's Law. More specifically, we can rearrange $$V_R = IR$$ to solve for resistance $$R=\frac{V_R}{I}=\frac{7V}{0.02A}=350Ω$$.
 
-![](assets/images/SolveForResistor_LEDCircuit_Step4_ByJonFroehlich.png)
+![The LED circuit with R_1 = 350 ohms solved using Ohm's Law](assets/images/SolveForResistor_LEDCircuit_Step4_ByJonFroehlich.png)
 **Figure.** Using everything we know, we can solve for resistance value $$R_1$$ using Ohm's Law. More specifically, the resistance of $$R_1$$ must be equal to the voltage drop across the resistor divided by the current: $$R=\frac{V_R}{I}$$. Image made in [Fritzing](http://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
@@ -323,17 +323,17 @@ Finally, we have all the information we need to solve for $$R_1$$ using Ohm's La
 
 But there's just one problem: 350Ω is an unusual resistor value and it doesn't exist in your kits. You have a 330Ω resistor and a 470Ω resistor. So, which one should you use?
 
-![](assets/images/SolveForResistor_LEDCircuit_330Or470Ohm.png)
+![Side-by-side comparison of using a 330 ohm versus 470 ohm resistor in the LED circuit](assets/images/SolveForResistor_LEDCircuit_330Or470Ohm.png)
 
 Well, again we can use Ohm's Law to address this question. In this case, we have a known voltage drop $$V_R$$ over our resistor (that's 7V and does not change regardless of resistance value). We also know $$R$$—it's either 330Ω or 470Ω. So, let's solve for both cases and see what current we get.
 
 For **330Ω**:
 
-$$I=\frac{V_R}{I} = \frac{7V}{330Ω} = 21.2mA$$
+$$I=\frac{V_R}{R} = \frac{7V}{330Ω} = 21.2mA$$
 
 For **470Ω**:
 
-$$I=\frac{V_R}{I} = \frac{7V}{470Ω} = 14.9mA$$
+$$I=\frac{V_R}{R} = \frac{7V}{470Ω} = 14.9mA$$
 
 The [LED datasheet ](https://cdn-shop.adafruit.com/product-files/4203/C4277-001_Fedy_FD-5AB35-1.pdf) suggests that the maximum forward current $$I_F$$ is 20mA though the LED can support up to 100mA in very short bursts. Other [datasheets](https://www.sparkfun.com/datasheets/Components/LED/COM-09590-YSL-R531R3D-D2.pdf?_ga=2.92054106.1544287808.1617798899-935977820.1612992862) I've seen for red LEDs suggest a peak forward current of $$30mA$$.
 
@@ -353,11 +353,16 @@ P_D=0.0149A * 2V = 0.03W$$
 
 In our kits, we have 0.25 watt resistors, which are capable of handling either the 0.15W (for the 330Ω circuit) or the 0.10W (for the 470Ω circuit). And the [LED datasheet ](https://cdn-shop.adafruit.com/product-files/4203/C4277-001_Fedy_FD-5AB35-1.pdf) states that these LEDs can dissipate up to 100mW (or 0.1W), which is within 0.04W and 0.03W.
 
-#### Use resistor equivalance rules
+{: .note }
+> **A Quick Note on Power Derating.** You might notice that our 330Ω resistor dissipates 0.15W, which is under the 0.25W maximum rating of the resistors in our kits. But is it safe?
+>
+> Yes, but it's getting close! If you recall the **power derating** rule of thumb from our [Resistors lesson](resistors.md), we generally want to use a component rated for *twice* the expected power dissipation to prevent overheating. Because 0.15W is more than half of 0.25W, this resistor will get a bit warm. For our quick breadboard prototypes, the 0.25W kit resistors are totally fine! But if you were designing a permanent product, you would likely want to step up to a 0.5W resistor, or use the 470Ω resistor (which sits comfortably at a cooler 0.10W).
 
-We could, of course, also use our resistor equivalance rules to combine a resistor network (in series and/or in parallel) to obtain the exact 350Ω value. In this case, it's quite simple because we can add two 10Ω to a 330Ω resistor.
+#### Use resistor equivalence rules
 
-![](assets/images/SolveForResistor_LEDCircuit_UseResistorEquivalanceRules.png)
+We could, of course, also use our resistor equivalence rules to combine a resistor network (in series and/or in parallel) to obtain the exact 350Ω value. In this case, it's quite simple because we can add two 10Ω to a 330Ω resistor.
+
+![Diagram showing how to combine a 330 ohm resistor with two 10 ohm resistors in series to get exactly 350 ohms](assets/images/SolveForResistor_LEDCircuit_UseResistorEquivalanceRules.png)
 
 #### Check work with simulator
 
@@ -366,7 +371,7 @@ We can also check our work in a circuit simulator like [CircuitJS](https://www.f
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ThreeLEDCircuitsWithDifferentCurrentLimitingResistors_CircuitJS.mp4" type="video/mp4" />
 </video>
-**Video.** This is a screen recording of the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of the 330Ω, 350Ω, and 470Ω LED-based circuits. Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7LwGQlpQJdVbLjkKa-c1UvhT11VrA6QKW-327rKPHmeujCFC1PNgAPEGxeIgkEekxAwV1iADU2IXi3by1sAOcQABMGADMAQwBXABsAFyZyhjzwKShYdjTwGnNnTLB2-0DAgpKK6tr6iFEYSHYwsEgMSJJkYliMeMVxFPlujuzAras3Uz3nAzaOrx8XTZ7FFWvHXUvwGd47a7sNU5UnI-dJGgxIIdnjdPiD2FxWJAXvxIQlxmIJONoDIAOZmfg8WhCKRsNGwhzAmjYkS4ijEdJUBDkrGGKCcMkUhkg0QdRFSZGmKm7JTknz2diaXnaRJeY607KA+RcrRC97yIX2BVOR5C36qzIq0U7cSi4JhAx9BYIPAQOK0NbJVKEQLqnxC7X9IplKo1OoNJGTNhAA) in CircuitJS.
+**Video.** This is a screen recording of the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of the 330Ω, 350Ω, and 470Ω LED-based circuits. Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7LwGQlpQJdVbLjkKa-c1UvhT11VrA6QKW-327rKPHmeujCFC1PNgAPEGxeIgkEekxAwV1iADU2IXi3by1sAOcQABMGADMAQwBXABsAFyZyhjzwKShYdjTwGnNnTLB2-0DAgpKK6tr6iFEYSHYwsEgMSJJkYliMeMVxFPlujuzAvas3Uz3nAzaOrx8XTZ7FFWvHXUvwGd47a7sNU5UnI-dJGgxIIdnjdPiD2FxWJAXvxIQlxmIJONoDIAOZmfg8WhCKRsNGwhzAmjYkS4ijEdJUBDkrGGKCcMkUhkg0QdRFSZGmKm7JTknz2diaXnaRJeY607KA+RcrRC97yIX2BVOR5C36qzIq0U7cSi4JhAx9BYIPAQOK0NbJVKEQLqnxC7X9IplKo1OoNJGTNhAA) in CircuitJS.
 {: .fs-1 }
 
 #### Check work in reality
@@ -375,7 +380,7 @@ Once we're satisfied with our predictions (and/or simulations), we can build the
 
 For the theoretical predictions using Ohm's Law, I plugged in measured values for the resistors and the 9V battery (which was a fresh battery supplying more than 9V). 
 
-![](assets/images/SolveForResistor_LEDCircuit_PhysicalBuildsOf330Ohm350OhmAnd470Ohm.png)
+![Photographs of three breadboarded LED circuits with 330, 350, and 470 ohm resistors, each with multimeters showing measured voltage and current](assets/images/SolveForResistor_LEDCircuit_PhysicalBuildsOf330Ohm350OhmAnd470Ohm.png)
 **Figure.** I built each of the three LED-based circuits (330Ω, 350Ω, and 470Ω) on my breadboard and measured the total voltage drop over our circuit (yellow multimeter) as well as the total current $$I$$ (red multimeter shown in milliamps). You can right click on this image and "open image in new tab" to expand. 
 {: .fs-1 }
 
@@ -390,7 +395,7 @@ Don't believe me? Try performing the same circuit analysis we stepped through ab
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/ResistorBeforeOrAfterTheLED_CircuitJS.mp4" type="video/mp4" />
 </video>
-**Video.** [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a LED-based circuit with the 350Ω current-limiting resistor either before or after the LED. Do you observe any differences? Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7KQKPHi3ZCeqtkpyFNfhapXwZm6q1hiKbXf4oLWnXpRvjhrRtfAA8QbF4iCQR6TBdBQnEANTYhOP4nNKoPLJAAEwYAMwBDAFcAGwAXJjKGXPApKFh2AHNzfh5aISk2VoRnLT64rpFOCn6bQcVRayoJaegZeUmHZz0Hdk1V8AwErZQEBONTJfH+LfszLZWdbYTfeT2D8RvvVwebkxdz9zZQg5dIhQ8BBYrRFEkUoQvi9dM89J9tHlCqVKtVavV5pB2EA).
+**Video.** [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a LED-based circuit with the 350Ω current-limiting resistor either before or after the LED. Do you observe any differences? Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YRRR5FVdgCdlqsBkLaQKBPvVw5CmvwQq+689Z1KH4PYfs2j+5ytUp3q7GsDSyo-AA9FXiIJMDwITF4aRXEANTYAEwMfA0CokHSGADMAQwBXABsAFzYgA).
 {: .fs-1 }
 
 ### What happens if you forget the current-limiting resistor?
@@ -407,7 +412,7 @@ There are lots of fun YouTube videos of supplying too much current to LEDs and o
 
 ## Still confused?
 
-Still a bit confused? Try watching [this video](https://vimeo.com/78674965) by NYU ITP's Jeff Feddersen or see the [Resource](#resources) links at the bottom.
+Still a bit confused? Try watching [this video](https://vimeo.com/78674965) by NYU ITP's Jeff Feddersen or see the [Resources](#resources) links at the bottom.
 
 <div style="padding:66.67% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/78674965" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
@@ -427,7 +432,7 @@ To wire wrap your components, simply twist the legs together like this:
 
 Here's an example picture of a simple LED circuit with alligator clips and wire wrapping:
 
-![](assets/images/SimpleLEDCircuitWithWireWrapping_ByJonFroehlich.png)
+![A simple LED circuit built with alligator clips and wire wrapping, showing a resistor and multiple LEDs in series connected to a 9V battery](assets/images/SimpleLEDCircuitWithWireWrapping_ByJonFroehlich.png)
 **Figure.** An example of a simple LED circuit with a single resistor (to limit current) and multiple LEDs in series. This circuit draws ~10mA. Notice how the red LED is brightest at this amperage. 
 {: .fs-1 }
 

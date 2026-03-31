@@ -26,7 +26,7 @@ In previous lessons, you learned about the [concept of resistance](electricity-b
 
 ![An image of multiple resistors showing 1/4W resistors, 1/2W resistors, and 4W and 5W resistors. Typically, resistors with higher power capacity ratings are bigger](assets/images/OverviewOfResistorsPicture.png)
 
-**Figure.**  The above image shows a variety of resistor types from $$\frac{1}{4}W$$ to $$5W$$ resistors. I no longer have the source for the original image. Annotations made by Jon Froehlich in PowerPoint.
+**Figure.** The above image shows a variety of resistor types from $$\frac{1}{4}W$$ to $$5W$$ resistors. I no longer have the source for the original image. Annotations made by Jon Froehlich in PowerPoint.
 {: .fs-1 }
 
 ## How do resistors work?
@@ -37,15 +37,15 @@ In previous lessons, you learned about the [concept of resistance](electricity-b
 
 In a resistor, flowing electrons collide with atoms making them vibrate, which converts *electrical energy* to *heat energy* and induces a voltage drop $$V$$. The amount by which a resistor *resists* the flow of charge is called its resistance $$R$$ and is measured in Ohms (Ω). The amount of voltage drop over a resistor is captured by Ohm's Law: $$V = I * R$$.
 
-### Factors determining resitivity
+### Factors determining resistivity
 
 As noted in [Lesson 1](electricity-basics.md), some materials like metals—silver, copper, and gold—have low resistances. Other materials such as glass, rubber, and air have high resistance and poor conductivity ("low electron mobility")—these materials are called *insulators*.
 
 But why?
 
 There are three main factors that determine conductivity (see [UIUC ECE110 notes](https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M001_What_is_Resistor.pdf)):
-1. The ease at which electrons can be dislodged by an applied electric field. Metals like copper have easily displaceable electrons in their atom's valance (outer) shells. It takes very little energy to cause electrons to "jump" or "move."
-2. The atomic arrangement of the material. If you were able to look microscopically at metal, you would see a particular structural arrangement of atoms called a [lattice](https://opentextbc.ca/chemistry/chapter/10-6-lattice-structures-in-crystalline-solids/)—this structure depends on the material. For metals, atoms are densely packed that lets electrons move relatively freely through the lattice, again reducing resistance.
+1. The ease with which electrons can be dislodged by an applied electric field. Metals like copper have easily displaceable electrons in their atom's valence (outer) shells. It takes very little energy to cause electrons to "jump" or "move."
+2. The atomic arrangement of the material. If you were able to look microscopically at metal, you would see a particular structural arrangement of atoms called a [lattice](https://opentextbc.ca/chemistry/chapter/10-6-lattice-structures-in-crystalline-solids/)—this structure depends on the material. For metals, atoms are densely packed, which lets electrons move relatively freely through the lattice, again reducing resistance.
 3. The temperature of the material. As a material heats up, its atoms vibrate with greater amplitude. This atomic motion has a negative effect on the material's ability to conduct electric current, causing greater electrical resistance ([link](http://matse1.matse.illinois.edu/sc/b.html)).
 
 ## Resistors slow current everywhere
@@ -54,7 +54,7 @@ A common confusion is that resistors only reduce current at the resistors themse
 
 Resistors restrict the flow of electrons throughout a circuit path. Think of a small valve in a water pipe: this valve restricts the total water flow through the pipe—both before and after the valve. The animation below shows three simple circuits with different amounts of resistance: notice how the current flow is the same throughout each circuit, it is not faster or slower before or after a resistor.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Three side-by-side CircuitJS circuit simulations with different resistor values, showing that current flow is uniform throughout each individual circuit — it does not speed up or slow down before or after the resistor.">
   <source src="assets/videos/ResistorsSlowCurrentEverywhereOnCircuitPath.mp4" type="video/mp4" />
 </video>
 **Video.** In the animation above, we are showing how current is the *same* for each individual circuit. It does not speed up before or after a resistor. Animations made in CircuitJS ([left](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWsQ7rxQIBVKjSrEo0mAjYB3QSGEDshPMpHg2AJxBqNuGvvX68xqpUgKlNfiY12B7RQc2rTR5TbfZzDvgEUNgAPcEJjbBR6MDx6KIFje2IANTYgA), [middle](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWsQ7rxQIBVKjSrEo0mAjYB3QSGECUKGspHg2AJxDZCefZA0Gj2PBqqVIC-Yc0CzxjSjvOLphzX7K2AD3BCUxR6MDx6bCJaIJBiADVdfQM+VXVU6Rs7MB4MtQ0fAXY9bBSVZXTy6zh3Mq1nKtqBQvsjFtsgA), [right](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWsQ7rxQIBVKjSrEo0mAjYB3QSGECUKGspHg2AJxDZCefZA0Gj2PBqph4C-Yc0CzxjSjvOLphzX7K2AD3BCUxR6MDx6bCJaIJBiADVdfQM+VXVU6Rs4OzAeDLUNHwF2PWwUlWV0iutbRTLVLWdq9xSi+yM2yDYgA))
@@ -64,13 +64,13 @@ Resistors restrict the flow of electrons throughout a circuit path. Think of a s
 
 To make a resistor with a specific resistance $$R$$, component manufacturers carefully select the *type*, *amount*, and *shape* of a resistive material and embed it into insulated packaging. In the image below, for example, a resistive material (like carbon) is wrapped around an insulator and covered by a tan insulating material. The more wraps, the higher resistance. And this should intuitively make sense: increasing the number of wraps simply increases the *length* of the resistive material (or the amount of resistive material electrons have to navigate through).
 
-![](assets/images/InsideResistors_FromSparkfunWithSlightModificationsByJonFroehlich.png)
-**Figure.**  Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/resistors) with annotations by Jon Froehlich.
+![Cutaway diagram of a resistor showing a resistive material (such as carbon) wrapped in a spiral around an insulating core, with metal leads on each end and a tan insulating outer coating. More wraps of resistive material produce higher resistance.](assets/images/InsideResistors_FromSparkfunWithSlightModificationsByJonFroehlich.png)
+**Figure.** Image from [Sparkfun.com](https://learn.sparkfun.com/tutorials/resistors) with annotations by Jon Froehlich.
 {: .fs-1 }
 
 Other resistors look like this inside:
 
-![](assets/images/ResistorCrossSections_ByTubeTimeUS.png)
+![Cross-section photographs of two resistors cut in half, showing their internal construction: one with a carbon composition core and another with a carbon film deposited on a ceramic rod.](assets/images/ResistorCrossSections_ByTubeTimeUS.png)
 **Figure.** Two cross sections of non-wrapping resistors. Image from [TubeTimeUS](https://twitter.com/tubetimeus/status/1111785671650242560?s=11) on Twitter with adapted annotations by Jon Froehlich. Right-click and "Open image in new tab" to expand.
 {: .fs-1 }
 
@@ -102,11 +102,11 @@ These [UIUC ECE110 notes](https://courses.engr.illinois.edu/ece110/sp2021/conten
 > Voltage drop is the amount of electrical energy absorbed per +1 C of charge as it moves from the + label to the − label. Current is the amount of positive charge that flows per second in the direction of the arrow label. Multiplying these two quantities cancels out charge, and produces the amount of electrical energy absorbed per second, which is power.
 {: .fs-3 }
 
-That is, we know that $$P = V * I$$. Adding in units, we get $$P = 1 V * 1 A$$. From here, we can determine joules/second, which is the definition of power.  
+That is, we know that $$P = V * I$$. Adding in units, we get $$P = 1 V * 1 A$$. From here, we can determine joules/second, which is the definition of power.
 
 $$P = (1V)(1A) \Rightarrow (1 \frac{J}{C})(1\frac{C}{s}) \Rightarrow 1 \frac{J}{s} \Rightarrow 1 W$$
 
-Thus, electric power is the amount of charge $$Q$$ coloumbs passing through an electric potential (voltage) difference $$V$$ over time $$t$$.
+Thus, electric power is the amount of charge $$Q$$ coulombs passing through an electric potential (voltage) difference $$V$$ over time $$t$$.
 
 But the most critical thing to understand and remember is $$P=V * I$$!
 
@@ -125,9 +125,14 @@ For example, consider a circuit with a 9V battery and a 100Ω resistor, how much
 
 To meet the minimum power ratings of our $$\frac{1}{4}W$$ resistors, we would need to replace the 100Ω resistor with a ~330Ω resistor. To determine this, we can simply solve for $$R$$ with $$P=\frac{1}{4}W$$. That is, $$P = \frac{V^2}{R} \Rightarrow 0.25W = \frac{9^2V}{R}$$. Solving for $$R$$, we get: $$R = \frac{9^2 V}{0.25W} = 324Ω$$.
 
+{: .note }
+> **Engineering Rule of Thumb: Power Derating.** While our math shows exactly how much power a resistor will absorb, running a component at or near its maximum rating in the real world causes it to get very hot and drastically shortens its lifespan! 
+>
+> To account for this, engineers apply a **derating factor**—usually 50%. This means you should select a resistor with a power rating *at least double* what your circuit calculates. So, if your math says you need to dissipate 0.125W, a 0.25W resistor is perfect. If you need to dissipate 0.2W, you should step up to a 0.5W resistor for a reliable, cool-running circuit.
+
 <!-- We define power $$P$$ at a circuit element as the amount of electrical energy absorbed per second. In a circuit, some elements
 
-The SI unit of power is the *watt*, one joule per second, and is represented by the letter *P*. More specifically, electric power is the amount of charge $$Q$$ coloumbs passing through an electric potential (voltage) difference $$V$$ over time $$t$$:
+The SI unit of power is the *watt*, one joule per second, and is represented by the letter *P*. More specifically, electric power is the amount of charge $$Q$$ coulombs passing through an electric potential (voltage) difference $$V$$ over time $$t$$:
 
 $$P = work done per unit time \Rightarrow \frac{V * Q}{t} \Rightarrow V * I$$
 
@@ -147,8 +152,8 @@ $$P = I^2 * R => \frac{V^2}{R}$$ -->
 
 If we exceed a resistor's power capacity, it will begin to heat up and eventually burn out. Once a resistor "burns out", it typically creates an "open circuit"—that is, current will no longer travel through that path (air is a good insulator).
 
-![An image of a resistor overheating a someone's finger having a slight burn (in the shape of a resistor) due to an overheated resistor](assets/images/OverheatedResistor_FromBeingEngineersAndReddit.png)
-**Figure.** Resistors are made of materials that cause electron collisions with atoms, generating heat. Resistors have "power ratings" that, when exceeded, can heat up too much and burn out (left image). If you overpower your resistor, it could burn you—be careful. On the right image, a Reddit user posted their resistor burn imprint on their finger. Image on left from this [Being Engineers video](https://youtu.be/HhUiWLlx1oA) and image on the right from the Electrical Engineering sub-reddit by user Xil0Sil0 ([link](https://www.reddit.com/r/ElectricalEngineering/comments/mh6jee/my_cute_little_resistor_burn/?utm_source=share&utm_medium=web2x&context=3))
+![An image of a resistor overheating and someone's finger having a slight burn (in the shape of a resistor) due to an overheated resistor](assets/images/OverheatedResistor_FromBeingEngineersAndReddit.png)
+**Figure.** Resistors are made of materials that cause electron collisions with atoms, generating heat. Resistors have "power ratings" that, when exceeded, can heat up too much and burn out (left image). If you overpower your resistor, it could burn you—be careful. On the right image, a Reddit user posted their resistor burn imprint on their finger. Image on left from this [Being Engineers video](https://youtu.be/HhUiWLlx1oA) and image on the right from the Electrical Engineering sub-reddit by user Xil0Sil0 ([link](https://www.reddit.com/r/ElectricalEngineering/comments/mh6jee/my_cute_little_resistor_burn/?utm_source=share&utm_medium=web2x&context=3)).
 {: .fs-1 }
 
 Notably, I've never had a resistor start on fire or burn up (though I have had them heat up to the point in which they are "hot to the touch"). If you smell something burning, immediately unplug your power supply.
@@ -161,21 +166,21 @@ There are three ways to "read" resistors: (1) keep them arranged in pre-labeled 
 
 In our prototyping classes, we tend to purchase $$\frac{1}{4}W$$ resistor kits, which come with a set of resistors organized by resistance value and labeled (though you pay more per resistor for the convenience).
 
-![](assets/images/ResistorKits_Sparkfun_Plusivo.png)
+![Two resistor kits: the SparkFun kit containing 500 quarter-watt resistors with 5% tolerance in labeled compartments, and the Plusivo kit containing 600 quarter-watt resistors with 1% tolerance on labeled strips.](assets/images/ResistorKits_Sparkfun_Plusivo.png)
 **Figure.** The Sparkfun resistor kit comes with 500 $$\frac{1}{4}W$$ resistors with ±5% tolerance (and costs ~$7.55 in bulk, which is $0.015/resistor) while the Plusivo resistor kit comes with 600 $$\frac{1}{4}W$$ resistors with ±1% tolerance (currently $8.99 on Amazon, which is $0.015/resistor).
 {: .fs-1 }
 
 ### Reading resistor color bands
 
-If you don't have your resistors pre-labeled in a pack, you'll need a method to determine their resistance value. Unfortunately, unlike capacitors, resistors do *not* have textual labels printed on them. Instead, they use a color coding system that has long been standardized but is a bit arcane (and not particularly accessible to people with [color vision deficiency](https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/color-vision-deficiency?sso=y#:~:text=Color%20vision%20deficiency%20is%20the,the%20eye%20known%20as%20cones.)). 
+If you don't have your resistors pre-labeled in a pack, you'll need a method to determine their resistance value. Unfortunately, unlike capacitors, resistors do *not* have textual labels printed on them. Instead, they use a color coding system that has long been standardized but is a bit arcane (and not particularly accessible to people with [color vision deficiency](https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/color-vision-deficiency?sso=y#:~:text=Color%20vision%20deficiency%20is%20the,the%20eye%20known%20as%20cones.)).
 
 But knowing *how* to read these color bands is a nice skill for any prototyper, even if you do not memorize the color legend (I tend to look back at a reference, even now!).
 
-![](assets/images/ResistorColorBands.png)
-**Figure** A legend for the color bands used on resistors and two examples: on the top, a tan ±5% tolerance resistor with green (5) and blue (6) digits and an orange multiplier (1000) color bands, which is $$56 * 1000 = 56kΩ$$. On the bottom, a blue ±1% tolerance resistor with yellow (4), purple (7), black (0) digits and a multipler of red (100), which is $$470 * 100 = 47kΩ$$. Image modified from [here](http://www.imajeenyus.com/electronics/20120315_resistor_colour_code/resistor-color-code2.jpg).
+![A color band legend for reading resistor values, with two example resistors. The top example is a tan 5% tolerance resistor with green (5), blue (6), and orange (x1000) bands, giving 56 kilohms. The bottom example is a blue 1% tolerance resistor with yellow (4), purple (7), black (0), and red (x100) bands, giving 47 kilohms.](assets/images/ResistorColorBands.png)
+**Figure.** A legend for the color bands used on resistors and two examples: on the top, a tan ±5% tolerance resistor with green (5) and blue (6) digits and an orange multiplier (1000) color bands, which is $$56 * 1000 = 56kΩ$$. On the bottom, a blue ±1% tolerance resistor with yellow (4), purple (7), black (0) digits and a multiplier of red (100), which is $$470 * 100 = 47kΩ$$. Image modified from [here](http://www.imajeenyus.com/electronics/20120315_resistor_colour_code/resistor-color-code2.jpg).
 {: .fs-1 }
 
-To read the resistor color bands, orient the resistor such that the "tolerance" band (*e.g.,* the gold band for tan resistors or a brown band for blue resistors) is on the *right*. Then you read the color bands left-to-right based on the color chart below. Notably, the color band just before the tolerance band is a *multiplier* and the preceding bands are *digit* bands that tell you what to multiply. 
+To read the resistor color bands, orient the resistor such that the "tolerance" band (*e.g.,* the gold band for tan resistors or a brown band for blue resistors) is on the *right*. Then you read the color bands left-to-right based on the color chart below. Notably, the color band just before the tolerance band is a *multiplier* and the preceding bands are *digit* bands that tell you what to multiply.
 
 So, if you have a four band resistor that ends in a gold stripe (±5% tolerance) and has the colors red, red, brown. Then those colors correspond to 2, 2, and a multiplier of 10, which would be $$22 * 10 = 220Ω$$. If you have a 4.7kΩ resistor, you would have colors yellow (4), purple (7), and a multiplier of red (100) so that $$47 * 100 = 4700 \Rightarrow 4.7kΩ$$.
 
@@ -183,15 +188,15 @@ Confused? That's ok!
 
 In the video below, I slowly walk through how to decode the color bands on resistors with some examples. Then I show how to use a multimeter to read the resistance values directly. Hopefully, this will make things clearer.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/rHiSMNXyuHI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-**Video** A [video tutorial](https://youtu.be/rHiSMNXyuHI) of how to decode the resistor color codes and how to "read" a resistor's value using a multimeter.
+<iframe width="736" height="414" src="https://www.youtube.com/embed/rHiSMNXyuHI" title="Tutorial on decoding resistor color bands and using a multimeter to read resistance values" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+**Video.** A [video tutorial](https://youtu.be/rHiSMNXyuHI) of how to decode the resistor color codes and how to "read" a resistor's value using a multimeter.
 {: .fs-1 }
 
 ## Activity
 
 For your learning activity, pick out three different resistors from your kits. In your prototyping journals, for each selected resistor, take a picture, write down the color bands, and then manually calculate the resistance (showing your work). In the Plusivo kits, the resistors come in labeled strips, which you can use to check your work (ground truth!) or, if you have access to a multimeter, you could do that too. If you do use a multimeter, do you notice any differences between the color-coded value and the measured resistance in practice? Why do you think this might be?
 
-![](assets/images/PlusivoKitResistors.png)
+![A photograph of resistor strips from a Plusivo kit, showing multiple resistors attached to labeled paper strips indicating their resistance values.](assets/images/PlusivoKitResistors.png)
 
 <!-- ACTIVITY IDEA: have them make their own resistors with graphite pencils. I think this activity is better suited for the LEDs lesson... -->
 

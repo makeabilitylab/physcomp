@@ -5,7 +5,7 @@ nav_order: 8
 parent: Intro to Electronics
 has_toc: false # on by default
 nav_exclude: false
-search_exclude: true
+search_exclude: false
 usemathjax: true
 comments: true
 usetocbot: true

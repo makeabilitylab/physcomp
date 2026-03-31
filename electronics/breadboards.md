@@ -205,6 +205,9 @@ Then, select your two favorite ideas and actually build them using the component
 
 Note that you'll need to use the alligator clips on the 9V battery to supply power to your breadboard rails. I suggest using the black alligator clip for the battery's negative terminal, the red alligator clip for the battery's positive terminal, and matching jumper wires to connect to your breadboard.
 
+{: .warning }
+> **A Note on 9V Batteries:** While convenient for simple LED breadboard circuits, standard 9V alkaline batteries have high internal resistance and very low capacity (~500 mAh) compared to AA or LiPo batteries. They struggle to supply quick bursts of current, which can cause sudden voltage drops that reset microcontrollers or fail to drive motors. As your projects get more complex, you will likely transition to 5V USB power banks or 3.7V LiPo batteries.
+
 
 <!-- https://www.baldengineer.com/9v-batteries-suck.html -->
 

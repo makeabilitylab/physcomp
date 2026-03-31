@@ -20,6 +20,8 @@ usetocbot: true
 
 In this lesson, we are going to learn about three key electricity concepts, **current**, **voltage**, and **resistance**, which form the foundation of electronics and circuits. We will also use an online circuit simulator to play with basic components and advance understanding.
 
+But first—what is a circuit? A **circuit** is a closed loop that provides a path for electric current to flow. At minimum, a circuit requires a voltage source (*e.g.,* a battery), a conductive path (*e.g.,* wires), and a load (*e.g.,* a light bulb or resistor) that does useful work. If the loop is broken at any point, current cannot flow and we call it an "open circuit" (more on this [later](#what-is-an-open-circuit)).
+
 <!-- TODO: Include a nice overview animation? [here](https://kaiserscience.wordpress.com/physics/electromagnetism/electric-current/) -->
 
 {: .note }
@@ -27,7 +29,7 @@ This material is important. Depending on your previous background in physics or 
 
 ## A brief overview
 
-So, what is voltage, current, and resistance?
+So, what are voltage, current, and resistance?
 
 In short, **voltage** "pushes" **electrons** through conductive material (*e.g.,* a wire). The amount of **electron flow** is called **current** (measured in amps). Some materials are better at conducting current than others. Resistors are specially formulated to *resist* the flow of electrons (the **resistance** is measured in ohms).
 
@@ -52,7 +54,7 @@ Just like we measure weight in kilograms and temperature in Celsius, so too do w
 
 In circuits, we often use hydraulic analogies to aid understanding. For example, we can think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through pipes. Water flows from **high pressure** (intake supply) to **low pressure** (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons from **high** electric potential to **low** electric potential through a circuit.
 
-Just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. These obstructions are similar to resistors, which we can insert into circuits to impede the flow of current (resistors are electronic components with less displaceable electrons).
+Just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. These obstructions are similar to resistors, which we can insert into circuits to impede the flow of current ((resistors are made from materials whose electrons are less easily displaced)).
 
 |            | Electric                       | Hydraulic                                |
 |------------|--------------------------------|------------------------------------------|
@@ -74,7 +76,7 @@ Let's dive into each of these concepts more deeply, starting with current.
 **Figure.** **[Current](https://en.wikipedia.org/wiki/Electric_current)** is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Note that this is actually opposite from *conventional current* flow, but we'll get to that below. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
 {: .fs-1 }
 
-*Current* is the flow of charged particles through a conductor. In digital circuits, these charged particles are *electrons* (negatively charged particles) propelled by an electromotive force (voltage) to move from "high pressure" to "low pressure" in a circuit.
+*Current* is the flow of charged particles through a conductor. In circuits, these charged particles are *electrons* (negatively charged particles) propelled by an electromotive force (voltage) to move from "high pressure" to "low pressure" in a circuit.
 
 Electric current is similar to water current moving through a pipe. Just like with water where we can guide water flow through various pipe configurations and harness its kinetic energy (*e.g.,* by spinning a turbine), so too can we use wires to guide the flow of electrons and use it to power lamps, turn motors, or perform other work.
 
@@ -135,17 +137,20 @@ Why? Blame [Benjamin Franklin](https://hackaday.com/2017/07/17/conventional-curr
 **Figure.** Franklin thought that positive charge carriers moved in a conductor from positive to negative. This is called the *conventional current* direction, which is still used today. Instead, as Thomson discovered, it's electrons that move in a conductor (which are negatively charged) and they move from negative to positive. This is called *electron flow*. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors*.
 {: .fs-1 }
 
-Despite this confusion, it turns out that as long as you're consistent, it does not matter: negative electrons flowing one way is equivalent to modeling positive charges flowing the other. So, we tend to use *conventional current* (modeling flow of charge from positive to negative) in electronics (*e.g.,* in diagrams, formulas, *etc.*). The math will still work out and even mnemonics like the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule) are based on conventional current (point thumb in direction of current $$I$$, see direction of electric field $$B$$).
+Despite this confusion, it turns out that as long as you're consistent, it does not matter: negative electrons flowing one way is equivalent to modeling positive charges flowing the other. So, we tend to use *conventional current* (modeling flow of charge from positive to negative) in electronics (*e.g.,* in diagrams, formulas, *etc.*). The math will still work out and even mnemonics like the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule) are based on conventional current (point thumb in direction of current $$I$$, see direction of magnetic field $$B$$).
 
 <!-- For more, see [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* and this lovely [video](https://youtu.be/kcL2_D33k3o?t=224) by The Engineering Mindset. -->
 
 ### Common operating currents in circuits
 
-As you begin working in physical computing, you'll gain a better understanding of "*What's a lot of current?*" vs. "*What's a little current?*"
+As you begin working in physical computing, you'll gain a better understanding of "*What's a lot of current?*" *vs.* "*What's a little current?*"
 
-With digital circuits, we typically work with **low amperages**. For example, an LED may require 2V but only ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$2.5 × 10^{17}$$ electrons/second.
+With digital circuits, we typically work with **low amperages**. For example, an LED may require 2V but only ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$2.5 × 10^{17}$$ electrons/second. 
 
-Older standard USB ports (USB 2.0) supply 5V of electricity with a maximum current of 0.5A (500 mA), while modern laptop ports (USB 3.0 and USB-C) can supply anywhere from 0.9A up to 3A. Some electrical components, like [motors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-a-high-current-load/) or a [long string of LED lights](https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/), require more current (called "[high current loads](https://itp.nyu.edu/physcomp/lessons/electronics/transistors-relays-and-controlling-high-current-loads/)") than a microcontroller or USB port can supply. In these cases, we can use an external power supply controlled by a transistor.
+Older standard USB ports (USB 2.0) supply 5V of electricity with a maximum current of 0.5A (500 mA). Modern laptop ports (USB 3.0 and standard USB-C) typically supply anywhere from 0.9A up to 3A at 5V. Furthermore, with the advent of USB Power Delivery (USB PD), modern USB-C ports can negotiate much higher voltages and currents—up to 240W (48V at 5A)—making USB-C a powerful and universal standard for driving even high-demand microcontrollers and peripherals.
+
+{: .note }
+Some electrical components, like [motors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-a-high-current-load/) or a [long string of LED lights](https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/), require more current (called "[high current loads](https://itp.nyu.edu/physcomp/lessons/electronics/transistors-relays-and-controlling-high-current-loads/)") than a microcontroller or USB 2.0 port can supply. In these cases, we can use an external power supply controlled by a transistor.
 
 ## What is voltage?
 
@@ -155,7 +160,7 @@ Older standard USB ports (USB 2.0) supply 5V of electricity with a maximum curre
 **Figure.** You can think of *voltage* as what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
 {: .fs-1 }
 
-OK, so if current is the *flow* of charge in a circuit? What's compelling these charges to move?
+OK, so if current is the *flow* of charge in a circuit, what's compelling these charges to move?
 
 Similar to magnets, charges with the *same sign* repel each other (*e.g.,* electrons repel each other because they are all negatively charged) and charges with opposite signs *attract* each other (*e.g.,* electrons and protons). A battery uses chemical reactions to cause a *build up* of electrons at the negative terminal—this creates a "pressure" or electrical difference between the battery's two terminals.
 
@@ -222,7 +227,9 @@ So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the ne
 
 ### Common operating voltages
 
-In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone charger outputs 5V and can supply up to 2A. Importantly, you do not want to supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone 8 USB-A Lightning charger outputs 5V and can supply up to 2A. Newer Apple chargers, like the Apple 20W USB-C Power Adapter, can supply 9V at 2.2A (it can fast charge an iPhone 17 to about 50% in 30 mins).
+
+Importantly, you do not want to supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
 
 <!-- **TODO: UPDATE THIS DESCRIPTION**
 Some potential references:
@@ -292,14 +299,14 @@ Depending on their atomic composition, some materials have lower resistance than
 The SI unit of electrical resistance is the ohm (Ω). The direct inverse of resistance is *conductance*. Materials with low resistance are called *conductors*. In contrast, materials such as glass, rubber, and air have high resistance and poor conductivity ("low electron mobility")—these materials are called *insulators*.
 
 ![This image shows PVC insulated wire with two annotations: the annotation on the left points to the internal part of the wire, which is highly conductive and made of copper. The annotation on the right points to the insulation around the wire, which has low conductivity and is made of PVC.](assets/images/PVCWrappedWire-ConductorVsInsulator.png)
-**Figure.** The image shows PVC-insulated copper wire.
+**Figure.** PVC-insulated copper wire. The copper core (left annotation) is a good **conductor** with low resistance, while the PVC coating (right annotation) is an **insulator** with high resistance, preventing current from leaking out of the wire or shocking the user.
 {: .fs-1 }
 
 The resistance $$R$$ of an object is defined as the ratio of voltage $$V$$ across it to current $$I$$ through it while conductance $$G$$ is the reciprocal:
 
 $$R = \frac{V}{I}$$, $$G = \frac{1}{R}$$
 
-With enough voltage (pressure), almost any material can conduct electrical current (even air, as evident by lightning). The resistance (or conductance) of a wire is not just a function of material type but also its temperature and its size (both length and thickness). In short, for metal wires, resistance drops with increases to wire diameter or temperature. And resistance increases as wire length increases.
+With enough voltage (pressure), almost any material can conduct electrical current (even air, as evident by lightning). The resistance (or conductance) of a wire is not just a function of material type but also its temperature and its size (both length and thickness). In short, for metal wires, resistance drops with increases to wire diameter. Conversely, resistance increases as wire length or temperature increases.
 
 [Wikipedia](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) provides a nice water-based analogy:
 
@@ -311,6 +318,9 @@ To help illustrate this idea visually, [Professor Squier](http://people.cs.georg
 ![Image shows a water analogy for electricity. There are two pipes visible: one filled with gravel (less resistance) and one filled with clay (more resistance). There is an equal amount of water pressure (voltage) "pushing" water through both pipes. The pipe with less resistance (gravel) will have more water flow (current).](assets/images/ElectricityPrimer_WaterAnalogy_SquierGeorgetown.png)
 **Figure.** Continuing our water analogies: imagine two pipes filled with resistive materials, one with gravel (less resistance) and one filled with clay (more resistance). Both pipes have an equal amount of water pressure (voltage) "pushing" water through them. The pipe with less resistance (gravel) will have more water flow (current). Image from Professor Richard Squier's [Electricity Primer](http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf).
 {: .fs-1 }
+
+{: .note}
+For metal wires, **resistance** **increases** as **temperature** **increases**. Why? When a metal heats up, its atoms vibrate more vigorously. This increased vibration causes more collisions with the flowing electrons, which impedes their movement and *increases* the electrical resistance.
 
 ### Electrical resistivity
 
@@ -332,16 +342,16 @@ The SI units of conductivity are in siemens per meter (S/m).
 
 | Material  | Classification | Resistivity $$\rho$$ (Ωm) | Conductivity $$\sigma$$ (S/m) |
 |-----------|----------------|--------------------------|-------------------------------|
-|Aluminum   | Conductor      | $$2.82 × 10^{-8}$$       | 3.55 × 10^7                   |
-|Gold       | Conductor      | $$2.44 × 10^{-8}$$       | 4.10 × 10^7                   |
-|Silver     | Conductor      | $$1.59 × 10^{-8}$$       | 6.29 × 10^7                   |
-|Copper     | Conductor      | $$1.72 × 10^{-8}$$       | 5.81 × 10^7                   |
-|Brass      | Conductor      | $$7 × 10^{-8}$$          | 1.4 × 10^7                   |
-|Carbon     | Semi-Conductor | $$3.5 × 10^{-5}$$        | 2.9 × 10^4                   |
-|Silicon    | Semi-Conductor | $$640$$                  | 3.5 × 10^{-3}                   |
-|Glass      | Insulator      | $$~10^{10}$$             | 10^{-10}                      |
-|Rubber     | Insulator      | $$10^{9}$$               | 10^{-9}                   |
-|Teflon     | Insulator      | $$10^{14}$$              | 10^{-14}                   |
+|Aluminum   | Conductor      | $$2.82 × 10^{-8}$$       | $$3.55 × 10^{7}$$            |
+|Gold       | Conductor      | $$2.44 × 10^{-8}$$       | $$4.10 × 10^{7}$$            |
+|Silver     | Conductor      | $$1.59 × 10^{-8}$$       | $$6.29 × 10^{7}$$            |
+|Copper     | Conductor      | $$1.72 × 10^{-8}$$       | $$5.81 × 10^{7}$$            |
+|Brass      | Conductor      | $$7 × 10^{-8}$$          | $$1.4 × 10^{7}$$             |
+|Carbon     | Semi-Conductor | $$3.5 × 10^{-5}$$        | $$2.9 × 10^{4}$$             |
+|Silicon    | Semi-Conductor | $$640$$                   | $$3.5 × 10^{-3}$$            |
+|Glass      | Insulator      | $$\sim10^{10}$$           | $$10^{-10}$$                  |
+|Rubber     | Insulator      | $$10^{9}$$                | $$10^{-9}$$                   |
+|Teflon     | Insulator      | $$10^{14}$$               | $$10^{-14}$$ 
 
 <!-- See also http://spiff.rit.edu/classes/phys213/lectures/resist/resist_long.html -->
 
@@ -385,6 +395,9 @@ Resistors are specially formulated electrical components that restrict current a
 
 Just as there is a pressure drop after a kink in a hose, so too is there a voltage drop after a resistor. That is, electric charges before a resistor have a higher electric potential than those after.
 
+{: .note }
+We will dive deeper into resistors in [Lesson 5: Using Resistors](resistors.md), where you'll learn how they're made, how to read their color bands, and how to calculate their power dissipation.
+
 <!-- **TODO: We'll talk more about this in Lesson X.** -->
 
 ## Some common questions
@@ -421,11 +434,16 @@ While a **closed** circuit is a complete circuit (a "circle" for current flow), 
 
 ### What's the difference between AC and DC?
 
-Digital circuits use *direct current* (DC), which is supplied by batteries or by AC adapters that convert the *alternating current* from your wall socket into DC current used by your phone or laptop chargers.
+Digital circuits use **Direct Current** (**DC**), where current flows in only one direction—this is exactly what batteries produce. In contrast, your wall outlet provides **Alternating Current** (**AC**), where the current periodically reverses direction, typically oscillating as a sine wave. AC is used for the power grid because it is much more efficient to transmit over long distances, as the voltage can be easily stepped up or down using transformers.
+
+However, microcontrollers and digital logic rely on stable voltage thresholds to reliably read binary 1s and 0s. Because of this, almost all electronic devices—including your phone, laptop, and Arduino—internally require DC. The "AC adapter" or "power brick" that comes with your electronics handles the heavy lifting of converting the AC from the wall into the smooth, steady DC voltage your circuits need.
 
 There are lots of great videos on YouTube explaining the difference between AC and DC, like [this one](https://youtu.be/vN9aR2wKv0U) by AddOhms and [this one](https://youtu.be/Wm75XgbqHBY) by KEMET Electronics.
 
 ## Activity
+
+{: .note }
+> **Learning objective.** By the end of this activity, you should be able to identify the input and output voltage and current ratings on common AC-to-DC adapters, and appreciate the range of voltages and currents used by everyday electronic devices.
 
 To gain a better understanding of common operating voltages/currents, we would like you to document the AC input voltages/current and the DC output voltages/current of devices in your home. Select five devices and take a picture of the device and its AC-to-DC adapter with the operating AC/DC information visible (if you can't find this sticker, it may be on the device itself, which is also fine). In your prototyping journals, include these pictures along with a table of operating input/output voltages/current and a brief summary of what you found.
 

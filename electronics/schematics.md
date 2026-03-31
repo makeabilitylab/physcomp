@@ -163,6 +163,8 @@ There are a number of schematic building tools aimed at makers, each with their 
 
 - [Tinkercad Circuits](https://www.tinkercad.com/learn/circuits). Allows you to design Arduino-based circuits, write code, and simulate. Does not provide schematic representations.
 
+- [Wokwi](https://wokwi.com/). A new'ish and popular web-based simulator tailored for microcontrollers (Arduino, ESP32, Raspberry Pi Pico)..
+
 ## Resources
 
 - [How to Read a Schematic](https://learn.sparkfun.com/tutorials/how-to-read-a-schematic/all), sparkfun.com

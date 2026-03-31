@@ -1,4 +1,30 @@
-/* Custom CSS for displaying the logo and text  in the left sidebar */
+/*
+ * custom.css — PhysComp site overrides for just-the-docs
+ *
+ * Load order: just-the-docs' compiled CSS loads first, then this file,
+ * so rules here override theme defaults without modifying theme source.
+ *
+ * Sections:
+ *   1. Left Sidebar (logo, header, width cap)
+ *   2. Footer (logos grid, attribution text)
+ *   3. Typography overrides (blockquotes, links)
+ *   4. Utility classes (alignment, sizing)
+ *   5. Code blocks
+ *   6. Tables
+ *   7. Tocbot right-side TOC panel
+ *   8. Embedded media (video, YouTube iframes)
+ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   1. LEFT SIDEBAR
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * On narrow viewports (<50rem), hide the logo image and show the site title
+ * as plain text via ::before so the header doesn't collapse to nothing.
+ * On wider viewports, show the logo image and suppress the text fallback.
+ */
 .site-logo {
   display: none;
 }
@@ -14,6 +40,7 @@
 
 @media (min-width: 50rem) {
   .site-header {
+    /* Allow the header to grow tall enough to fit the logo image */
     height: auto;
     max-height: none;
   }
@@ -23,18 +50,57 @@
     display: block;
   }
 
+  /* Logo is visible — suppress the text fallback */
   .site-title::before {
     content: none;
   }
 
-  .site-title{
+  .site-title {
     padding-right: 0.5rem;
   }
 }
 
+/*
+ * Constrain the sidebar's inner content width on large viewports.
+ *
+ * Just-the-docs' sidebar grows unboundedly via calc() above 66.5rem viewport
+ * width, reaching ~467px at 1470px (a typical MacBook). This steals space
+ * from the main content and the tocbot TOC panel.
+ *
+ * IMPORTANT: We do NOT cap .side-bar itself, because .side-bar's width
+ * controls the flex layout and the .side-bar + .main margin-left offset.
+ * Capping .side-bar directly collapses the inner flex children (.site-nav,
+ * .site-header, .site-footer) and breaks the layout entirely.
+ *
+ * Instead, we cap only the inner elements. The sidebar background still
+ * grows (uniform gray, so this is invisible), but the nav text and logo
+ * stay contained within a reasonable width.
+ *
+ * Adjust --sidebar-content-max-width to taste. 20rem (~320px) allows some
+ * growth while preventing extreme widths on very wide monitors.
+ */
+:root {
+  --sidebar-content-max-width: 20rem;
+}
 
-/* custom css for the footer */
-.footer-logos{
+@media (min-width: 66.5rem) {
+  .site-nav,
+  .site-header,
+  .site-footer {
+    max-width: var(--sidebar-content-max-width);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2. FOOTER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Four-column logo grid displayed above the attribution text in the footer.
+ * Each column holds one institution logo (Makeability Lab, DUB, MHCID, Allen School).
+ */
+.footer-logos {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 15px;
@@ -43,22 +109,27 @@
   justify-items: center;
 }
 
-.footer-logos img{
+.footer-logos img {
   max-height: 60px;
 }
 
-.footer-logos a{
+/* Remove underline decoration from logo anchor links */
+.footer-logos a {
   text-decoration: none;
   background-image: none;
 }
 
-video {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 16px;
-}
 
-blockquote{
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. TYPOGRAPHY OVERRIDES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Default blockquote style for pull-quotes and callout quotes.
+ * just-the-docs uses blockquote for its callout components (note, warning,
+ * etc.) so we reset those back to normal below.
+ */
+blockquote {
   margin: 2em 1em 2em 0;
   padding-left: 1em;
   padding-right: 1em;
@@ -67,20 +138,22 @@ blockquote{
   border-left: 0.25em solid #6f777d;
 }
 
+/* Smaller variant for less prominent pull-quotes */
 blockquote.block-quote--small {
-  font-size: 16px; /* Override font-size for the variant */
+  font-size: 16px;
 }
 
+/*
+ * Reset font overrides for just-the-docs callout blockquotes so they render
+ * normally rather than inheriting the pull-quote italic/large style above.
+ */
 blockquote.note,
 blockquote.warning,
 blockquote.info,
 blockquote.important,
 blockquote.highlight,
-blockquote.new {
-  font-size: initial;
-  font-style: normal;
-}
-
+blockquote.new,
+blockquote.tip,
 blockquote.note-title,
 blockquote.warning-title,
 blockquote.info-title,
@@ -91,93 +164,52 @@ blockquote.new-title {
   font-style: normal;
 }
 
-/* I had to add this in otherwise we were getting weird line breaks on links. The just-the-docs css sets
-this to white-space: no-wrap. Not sure why. See: https://developer.mozilla.org/en-US/docs/Web/CSS/white-space */
-.main-content a{
+/*
+ * just-the-docs sets white-space: nowrap on links inside .main-content,
+ * which causes long URLs and link text to overflow their containers.
+ * Restoring normal wrapping behavior fixes this.
+ * See: https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
+ */
+.main-content a {
   white-space: normal;
 }
 
-.margin-zero{
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Remove all margins from an element */
+.margin-zero {
   margin: 0;
 }
 
-.text-right{
+/* Right-align text (supplement to just-the-docs' .text-right utility) */
+.text-right {
   text-align: right;
 }
 
-cite{
+/* Citation text — right-aligned and slightly smaller than body copy */
+cite {
   text-align: right;
   font-size: smaller;
 }
 
-/* to add a margin at the bottom of our code blocks */
-figure.highlight {
-  margin-bottom: 1em;
-} 
-
-/* Without this, the gist it script's prettify font is too large */
-.gist-it-gist{
-  font-size: small;
-}
-
-.width-100{
+/* Full-width block, useful for images and videos that should span the column */
+.width-100 {
   width: 100%;
 }
 
-.img-50{
+/* Fixed small icon size, e.g. for inline component images */
+.img-50 {
   width: 50px;
 }
 
-/** FOR TABLES **/ 
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-table tr:nth-child(even) td,
-table tr:nth-child(even) th {
-  background-color: inherit;
-}
-
-/** FOR SMALL TABLES **/
-.condensed-table{
-  min-width: 0px;
-}
-
-.condensed-table th, td{
-  min-width: 0px;
-  font-size: 12px !important;
-}
-
-.table-max-width300 {
-  max-width: 300px;
-  min-width: 0px;
-  overflow-x: auto; /* This will add a scrollbar if the content exceeds 300px */
-}
-
-/** VIBRATION TABLE **/
-.vibro-table{
-  min-width: 0px;
-  padding: 0.25rem;
-}
-
-.vibro-table th, td{
-  padding: 0.25rem;
-  min-width: 0px;
-  font-size: 12px !important;
-}
-
-.vibro-table img{
-  width: 60px !important;
-  min-width: 60px;
-}
-
-/* image align center */
-/* See: https://mmistakes.github.io/minimal-mistakes/docs/utility-classes/
-/* https://github.com/mmistakes/minimal-mistakes/blob/a2385e25840f38d573d057f427396eaf09f41e81/_sass/minimal-mistakes/_utilities.scss */
+/*
+ * Centered image utility.
+ * Renders the element as a block and auto-margins it to center horizontally.
+ * The 50% width keeps large images from filling the full content column.
+ */
 .align-center {
   display: block;
   margin-left: auto;
@@ -185,65 +217,159 @@ table tr:nth-child(even) th {
   width: 50%;
 }
 
-.test-css{
-  font-size: 14 pt;
+/* Debug/test class — visible monospace style to spot-check CSS is loading */
+.test-css {
+  font-size: 14pt;
   font-family: 'Courier New', Courier, monospace;
 }
 
-/**** TOCBOT RIGHT-SIDE TOC ****/
-/** See: https://tscanlin.github.io/tocbot/ **/
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. CODE BLOCKS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Add breathing room below fenced code blocks */
+figure.highlight {
+  margin-bottom: 1em;
+}
+
+/* Gist-it embeds use Google Prettify, which defaults to a large font size */
+.gist-it-gist {
+  font-size: small;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. TABLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Zebra striping for all content tables */
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 /*
- * Tocbot right-side "On this page" navigation panel.
+ * Prevent the zebra stripe from being overridden by just-the-docs'
+ * per-cell background-color rules on th/td.
+ */
+table tr:nth-child(even) td,
+table tr:nth-child(even) th {
+  background-color: inherit;
+}
+
+/*
+ * Condensed table variant — tighter minimum widths and smaller font for
+ * dense reference tables (e.g. pin tables, component specs).
  *
- * Layout strategy: position: fixed, anchored to the right edge of the
- * viewport. The panel is only shown when the viewport is wide enough that
- * it won't overlap the main content column. That breakpoint is stored in
- * --toc-min-viewport-width so that the JavaScript can read it from the DOM
- * rather than duplicating the magic number in two places.
+ * NOTE: Both selectors must be scoped to .condensed-table to avoid
+ * accidentally applying font-size: 12px to every td on the page.
+ */
+.condensed-table {
+  min-width: 0px;
+}
+
+.condensed-table th,
+.condensed-table td {
+  min-width: 0px;
+  font-size: 12px !important;
+}
+
+/* Scrollable table variant capped at 300px wide */
+.table-max-width300 {
+  max-width: 300px;
+  min-width: 0px;
+  overflow-x: auto;
+}
+
+/*
+ * Vibration motor reference table — extra compact with small images.
+ * Same scoping note as .condensed-table above.
+ */
+.vibro-table {
+  min-width: 0px;
+  padding: 0.25rem;
+}
+
+.vibro-table th,
+.vibro-table td {
+  padding: 0.25rem;
+  min-width: 0px;
+  font-size: 12px !important;
+}
+
+.vibro-table img {
+  width: 60px !important;
+  min-width: 60px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7. TOCBOT RIGHT-SIDE TOC PANEL
+   ═══════════════════════════════════════════════════════════════════════════
+   See: https://tscanlin.github.io/tocbot/
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * CSS custom properties used by both this stylesheet and footer_custom.html.
+ * Storing them here means JS reads values from CSS rather than duplicating
+ * magic numbers in two places. Change a value here only — not in the JS.
  *
- * Single source of truth for shared values:
- *   --toc-min-viewport-width  JS reads this to decide whether to mount tocbot
- *   --toc-width               JS could read this if it ever needs the width
- *   --toc-top-offset          JS passes this to tocbot's headingsOffset option
+ *   --toc-min-viewport-width   Minimum viewport px width before TOC appears.
+ *                              Derived from: sidebar content max (~320px at cap)
+ *                              + content max-width (~800px) + toc-width (220px)
+ *                              + gutters (~80px) ≈ 1420px → rounded to 1400px.
+ *                              Recalculate if --sidebar-content-max-width or
+ *                              --toc-width changes.
+ *
+ *   --toc-width                Width of the TOC panel. JS reads this to
+ *                              calculate available space in positionTocPanel().
+ *
+ *   --toc-top-offset           Distance from top of viewport. Passed to
+ *                              tocbot's headingsOffset so clicked links land
+ *                              below the top of the viewport. 6rem provides
+ *                              extra clearance below the site header/logo area.
  */
 :root {
-  /*
-   * Minimum viewport width at which the TOC panel is shown.
-   * Derived from: left-sidebar (~264px) + content max-width (~800px)
-   *   + toc-width (220px) + gutters (~120px) ≈ 1404px → round to 1400px.
-   * If you change the layout widths, update this value.
-   */
   --toc-min-viewport-width: 1400px;
-
-  /* Width of the TOC panel itself */
   --toc-width: 220px;
-
-  /* Distance from the top of the viewport; should clear the site header */
   --toc-top-offset: 6rem;
 }
 
-/* TOC panel container */
+/* TOC panel container — position:fixed, right edge set by JS in positionTocPanel() */
 #tocbot-toc {
   position: fixed;
   top: var(--toc-top-offset);
   width: var(--toc-width);
   max-height: calc(100vh - 2rem);
-  overflow-y: visible;
+  overflow-y: visible;    /* no scrollbar on the panel itself */
   z-index: 10;
   background-color: rgba(255, 255, 255, 0.95);
   border-left: 2px solid #e8e8e8;
   padding: 0 0 1rem 0.25rem;
   font-size: 0.8rem;
-    transition: visibility 0s, opacity 0.2s ease;
-  opacity: 1; /* default */
+
+  /*
+   * Fade transition on visibility changes.
+   * JS sets both opacity and visibility together so the panel fades out
+   * rather than snapping. The transition-delay on visibility ensures the
+   * element is fully hidden only after the opacity animation completes,
+   * preventing it from remaining clickable while invisible.
+   */
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+  opacity: 1;
+  visibility: visible;
 }
 
+/*
+ * Hidden state — matched when JS sets inline style="visibility: hidden".
+ * Pairs with the transition above to produce a fade-out effect.
+ */
 #tocbot-toc[style*="hidden"] {
   opacity: 0;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
 }
 
-
-/* "On this page" label above the TOC link list */
+/* "On this page" section label above the TOC links */
 .toc-label {
   font-size: 0.7rem;
   font-weight: 600;
@@ -253,33 +379,55 @@ table tr:nth-child(even) th {
   margin: 0.75rem 0 0.5rem 0;
 }
 
+/* Slight indent on all list items for visual breathing room */
 .toc-list-item {
   margin-left: 0.3em;
 }
 
-/* Only reset padding on the root list, not nested ones */
+/*
+ * Reset padding on the root <ol> only.
+ * Nested <ol> elements (H3, H4 entries) intentionally keep tocbot's
+ * default indentation to show visual hierarchy.
+ */
 #tocbot-toc > ol {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
-/**** FOR EMBEDDED YOUTUBE VIDEOS TO BE RESPONSIVE ****/
-/** See: https://youtu.be/9YffrCViTVk **/
-.iframe-container{
+/* H3 links get a small left indent to visually distinguish them from H2s */
+#tocbot-toc .toc-link.node-name--H3 {
+  padding-left: 0.75rem;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8. EMBEDDED MEDIA
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Responsive full-width video (HTML5 <video> elements) */
+video {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+/*
+ * Responsive YouTube iframe container using the padding-bottom aspect ratio trick.
+ * 56.25% = 9/16 (standard 16:9 video aspect ratio).
+ * See: https://youtu.be/9YffrCViTVk
+ */
+.iframe-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; 
+  padding-bottom: 56.25%;
   height: 0;
 }
-.iframe-container iframe{
+
+.iframe-container iframe {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-
-
-
-

@@ -418,11 +418,10 @@ table tr:nth-child(even) th {
   margin: 0;
 }
 
-/* H3 links get a small left indent to visually distinguish them from H2s */
-#tocbot-toc .toc-link.node-name--H3 {
+/* Indents on nested <ol> elements (H3, H4 entries) are intentional to show hierarchy */
+#tocbot-toc ol ol {
   padding-left: 0.75rem;
 }
-
 
 /* ═══════════════════════════════════════════════════════════════════════════
    8. EMBEDDED MEDIA

@@ -61,33 +61,59 @@
 }
 
 /*
- * Constrain the sidebar's inner content width on large viewports.
+ * CAP THE SIDEBAR WIDTH ON LARGE VIEWPORTS
  *
- * Just-the-docs' sidebar grows unboundedly via calc() above 66.5rem viewport
- * width, reaching ~467px at 1470px (a typical MacBook). This steals space
- * from the main content and the tocbot TOC panel.
+ * Problem: just-the-docs' sidebar uses this formula at the lg breakpoint
+ * (≥66.5rem ≈ 1064px):
  *
- * IMPORTANT: We do NOT cap .side-bar itself, because .side-bar's width
- * controls the flex layout and the .side-bar + .main margin-left offset.
- * Capping .side-bar directly collapses the inner flex children (.site-nav,
- * .site-header, .site-footer) and breaks the layout entirely.
+ *   .side-bar        width:       calc((100% - 66.5rem) / 2 + 16.5rem)
+ *   .side-bar + .main margin-left: Max(16.5rem, calc((100% - 66.5rem) / 2 + 16.5rem))
  *
- * Instead, we cap only the inner elements. The sidebar background still
- * grows (uniform gray, so this is invisible), but the nav text and logo
- * stay contained within a reasonable width.
+ * Both grow linearly with viewport width. At 1470px (MacBook) the sidebar
+ * reaches ~467px — nearly 30% of the screen — leaving no room for a
+ * right-side tocbot panel.
  *
- * Adjust --sidebar-content-max-width to taste. 20rem (~320px) allows some
- * growth while preventing extreme widths on very wide monitors.
+ * What FAILED: capping .side-bar width alone via max-width. The sidebar's
+ * inner flex children (.site-nav, .site-header, .site-footer) lost their
+ * width and the footer rendered vertically. This happened because
+ * .side-bar + .main's margin-left was still growing, creating a gap, and
+ * the inner elements use align-items: flex-end which needs the full width.
+ *
+ * What also doesn't help: capping only the inner elements (.site-nav,
+ * .site-header, .site-footer) with max-width. The nav content looks nicer,
+ * but the .side-bar element itself and .main's margin-left both still grow,
+ * so no space is actually reclaimed for the tocbot panel.
+ *
+ * SOLUTION: Override BOTH .side-bar width AND .side-bar + .main margin-left
+ * with CSS min() so they grow together (preserving alignment) but stop at
+ * --sidebar-max-width. The sidebar background may show a sliver of extra
+ * gray beyond the nav content on very wide monitors — this is invisible
+ * since it's a uniform color.
+ *
+ * The min() function is supported in all modern browsers (Chrome 79+,
+ * Firefox 75+, Safari 11.1+, Edge 79+).
+ *
+ * Adjust --sidebar-max-width to taste. 20rem (320px) is a comfortable cap
+ * that leaves room for ~800px content + 220px tocbot + gutters on a 1470px
+ * MacBook screen.
  */
 :root {
-  --sidebar-content-max-width: 20rem;
+  --sidebar-max-width: 23rem;
 }
 
 @media (min-width: 66.5rem) {
-  .site-nav,
-  .site-header,
-  .site-footer {
-    max-width: var(--sidebar-content-max-width);
+  .side-bar {
+    width: min(
+      var(--sidebar-max-width),
+      calc((100% - 66.5rem) / 2 + 16.5rem)
+    );
+  }
+
+  .side-bar + .main {
+    margin-left: min(
+      var(--sidebar-max-width),
+      Max(16.5rem, calc((100% - 66.5rem) / 2 + 16.5rem))
+    );
   }
 }
 
@@ -261,8 +287,9 @@ table tr:nth-child(even) th {
  * Condensed table variant — tighter minimum widths and smaller font for
  * dense reference tables (e.g. pin tables, component specs).
  *
- * NOTE: Both selectors must be scoped to .condensed-table to avoid
- * accidentally applying font-size: 12px to every td on the page.
+ * BUG FIX: The original CSS had `.condensed-table th, td` which is parsed
+ * as TWO selectors: `.condensed-table th` and `td` — applying font-size:
+ * 12px to EVERY td on the page. Fixed by scoping both to .condensed-table.
  */
 .condensed-table {
   min-width: 0px;
@@ -283,7 +310,7 @@ table tr:nth-child(even) th {
 
 /*
  * Vibration motor reference table — extra compact with small images.
- * Same scoping note as .condensed-table above.
+ * Same scoping fix as .condensed-table above.
  */
 .vibro-table {
   min-width: 0px;
@@ -311,23 +338,19 @@ table tr:nth-child(even) th {
 
 /*
  * CSS custom properties used by both this stylesheet and footer_custom.html.
- * Storing them here means JS reads values from CSS rather than duplicating
- * magic numbers in two places. Change a value here only — not in the JS.
+ * JS reads values from CSS rather than duplicating magic numbers.
  *
  *   --toc-min-viewport-width   Minimum viewport px width before TOC appears.
- *                              Derived from: sidebar content max (~320px at cap)
- *                              + content max-width (~800px) + toc-width (220px)
- *                              + gutters (~80px) ≈ 1420px → rounded to 1400px.
- *                              Recalculate if --sidebar-content-max-width or
- *                              --toc-width changes.
+ *                              With the sidebar now capped at 320px, the math
+ *                              becomes: sidebar (320px) + content (~800px)
+ *                              + toc-width (220px) + gutters (~60px) = 1400px.
  *
  *   --toc-width                Width of the TOC panel. JS reads this to
  *                              calculate available space in positionTocPanel().
  *
  *   --toc-top-offset           Distance from top of viewport. Passed to
  *                              tocbot's headingsOffset so clicked links land
- *                              below the top of the viewport. 6rem provides
- *                              extra clearance below the site header/logo area.
+ *                              below the top of the viewport.
  */
 :root {
   --toc-min-viewport-width: 1400px;

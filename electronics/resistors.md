@@ -125,6 +125,11 @@ For example, consider a circuit with a 9V battery and a 100Ω resistor, how much
 
 To meet the minimum power ratings of our $$\frac{1}{4}W$$ resistors, we would need to replace the 100Ω resistor with a ~330Ω resistor. To determine this, we can simply solve for $$R$$ with $$P=\frac{1}{4}W$$. That is, $$P = \frac{V^2}{R} \Rightarrow 0.25W = \frac{9^2V}{R}$$. Solving for $$R$$, we get: $$R = \frac{9^2 V}{0.25W} = 324Ω$$.
 
+{: .note }
+> **Engineering Rule of Thumb: Power Derating.** While our math shows exactly how much power a resistor will absorb, running a component at or near its maximum rating in the real world causes it to get very hot and drastically shortens its lifespan! 
+>
+> To account for this, engineers apply a **derating factor**—usually 50%. This means you should select a resistor with a power rating *at least double* what your circuit calculates. So, if your math says you need to dissipate 0.125W, a 0.25W resistor is perfect. If you need to dissipate 0.2W, you should step up to a 0.5W resistor for a reliable, cool-running circuit.
+
 <!-- We define power $$P$$ at a circuit element as the amount of electrical energy absorbed per second. In a circuit, some elements
 
 The SI unit of power is the *watt*, one joule per second, and is represented by the letter *P*. More specifically, electric power is the amount of charge $$Q$$ coulombs passing through an electric potential (voltage) difference $$V$$ over time $$t$$:

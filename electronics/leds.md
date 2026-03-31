@@ -353,6 +353,11 @@ P_D=0.0149A * 2V = 0.03W$$
 
 In our kits, we have 0.25 watt resistors, which are capable of handling either the 0.15W (for the 330Ω circuit) or the 0.10W (for the 470Ω circuit). And the [LED datasheet ](https://cdn-shop.adafruit.com/product-files/4203/C4277-001_Fedy_FD-5AB35-1.pdf) states that these LEDs can dissipate up to 100mW (or 0.1W), which is within 0.04W and 0.03W.
 
+{: .note }
+> **A Quick Note on Power Derating.** You might notice that our 330Ω resistor dissipates 0.15W, which is under the 0.25W maximum rating of the resistors in our kits. But is it safe?
+>
+> Yes, but it's getting close! If you recall the **power derating** rule of thumb from our [Resistors lesson](resistors.md), we generally want to use a component rated for *twice* the expected power dissipation to prevent overheating. Because 0.15W is more than half of 0.25W, this resistor will get a bit warm. For our quick breadboard prototypes, the 0.25W kit resistors are totally fine! But if you were designing a permanent product, you would likely want to step up to a 0.5W resistor, or use the 470Ω resistor (which sits comfortably at a cooler 0.10W).
+
 #### Use resistor equivalence rules
 
 We could, of course, also use our resistor equivalence rules to combine a resistor network (in series and/or in parallel) to obtain the exact 350Ω value. In this case, it's quite simple because we can add two 10Ω to a 330Ω resistor.

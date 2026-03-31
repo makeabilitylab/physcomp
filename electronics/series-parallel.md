@@ -195,6 +195,11 @@ However, the amount of current between the two circuits would be significantly d
 
 Wouldn't it be cool to dynamically control one of those resistor values to output a variable voltage at $$V_{out}$$? Yes! And this is the basis of a [potentiometer](variable-resistors.md), which we will learn about in a later lesson.
 
+{: .note }
+> **Real-World Tolerance and Voltage Dividers.** In our math, we assume our resistors are completely perfect. But remember that physical resistors have a **tolerance** rating! 
+>
+> If you build a 50/50 voltage divider using two 10kΩ resistors with a ±5% tolerance, one might actually measure 9.5kΩ and the other 10.5kΩ. Because of this slight imbalance, your real-world output voltage won't be *exactly* half of your input voltage. If you measure your physical circuit with a multimeter and the numbers are slightly off from your theoretical math, component tolerance is almost certainly the culprit!
+
 #### Deriving the voltage divider equation
 
 Given what you are learning about circuits, you now have the knowledge to derive the voltage divider equation or, at the very least, understand *how* it is derived. Let's take a look!

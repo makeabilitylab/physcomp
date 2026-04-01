@@ -330,7 +330,7 @@ There are lots of great resources for building lo-fi sensors, buttons, and conne
 
 ## What's next?
 
-Congratulations — you've completed the **Intro to Electronics** tutorial series! You now understand the fundamentals of voltage, current, and resistance; how to analyze circuits using Ohm's Law; how to work with resistors, LEDs, and variable resistors; and how to prototype circuits on breadboards.
+Congratulations — you've completed the **[Intro to Electronics](index.md)** tutorial series! You now understand the fundamentals of voltage, current, and resistance; how to analyze circuits using Ohm's Law; how to work with resistors, LEDs, and variable resistors; and how to prototype circuits on breadboards.
 
 You're now ready to start our **[Intro to Arduino](../arduino/index.md)** series, where you'll combine everything you've learned with a programmable microcontroller to build truly interactive devices!
 

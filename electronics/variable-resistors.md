@@ -20,7 +20,7 @@ usetocbot: true
 {:toc}
 ---
 
-In previous lessons, we worked with [fixed-value resistors](resistors.md). In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance based in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light). We've listed some examples below.
+In previous lessons, we worked with [fixed-value resistors](resistors.md). In this lesson, we'll learn about **variable resistors**—resistors that *change* their resistance in response to some physical input (like potentiometers) or environmental input like thermistors (temperature), force-sensitive resistors (force), or photo-sensitive resistors (light). We've listed some examples below.
 
 ![Grid of images showing different types of variable resistors, including: potentiometers, touch membranes, photocells, thermistors, force-sensitive resistors, and flex sensors](assets/images/VariableResistors_ExampleGallery.png)
 **Figure.** Many common **sensors** are actually variable resistors—they dynamically change their resistance in response to some human or environmental input. For example, thermistors change their resistance based on temperature, photocells based on light, force-sensitive resistors (FSRs) based on force. In fact, you have thermistors, photocells, and FSRs in your hardware kits! Prices and pictures are from Sparkfun.com; parts can often be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
@@ -60,13 +60,13 @@ Potentiometers are truly ubiquitous electronic components found in everything fr
 **Figure.** Two example potentiometers commonly included in our hardware kits: a 10kΩ panel mount and a 10kΩ trim potentiometer.
 {: .fs-1 }
 
-While potentiometers are often used as human input devices, this is not always the case. For example, a potentiometer might be used in a feedback circuit for a servo motor. As the motor rotates, it also rotates an embedded potentiometer's control dial (wiper), which feedsback rotational information to the control circuit (see [Chapter 15.4 on RC Servos](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/26_Chapter_15.xhtml) in [Scherz and Monk, 2016](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/)).
+While potentiometers are often used as human input devices, this is not always the case. For example, a potentiometer might be used in a feedback circuit for a servo motor. As the motor rotates, it also rotates an embedded potentiometer's control dial (wiper), which feeds back rotational information to the control circuit (see [Chapter 15.4 on RC Servos](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/26_Chapter_15.xhtml) in [Scherz and Monk, 2016](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/)).
 
 Though still widely used, some of a potentiometer's application spaces have been subsumed by digital controls like rotary encoders and buttons. Don't get confused: [rotary encoders](https://learn.adafruit.com/rotary-encoder) can look very similar to potentiometers—indeed, with knobs attached they can look identical. However, [rotary encoders](https://en.wikipedia.org/wiki/Rotary_encoder) are not resistive devices, require digital circuits to use, and can be spun around continuously. In contrast, potentiometers are resistive components, can be used in analog or digital circuits, and typically have a controllable angle of 200°-270°.
 
 ### How does a potentiometer work?
 
-Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will always be 10kΩ regardless of wiper position (Leg 2). If you're using a 1kΩ resistor, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
+Potentiometers have three legs: the resistance between the outer two legs (Leg 1 and Leg 3) will not vary. For example, if you are using a 10kΩ potentiometer, then the resistance between Legs 1 and 3 will always be 10kΩ regardless of wiper position (Leg 2). If you're using a 1kΩ potentiometer, then the resistance between Legs 1 and 3 will be 1kΩ, and so on.
 
 The power of a potentiometer is in that middle leg (Leg 2) whose resistance varies depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value like 1kΩ or 10kΩ). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
 
@@ -81,7 +81,7 @@ Using two multimeters set to **measure resistances** across both Legs 1-2 and 2-
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/Tinkercad_PotentiometerWithMultimeters.mp4" type="video/mp4" />
 </video>
-**Video.** Using two multimeters, we can examine how the resistances change between Legs 1-2 and 2-3. Note that the resistance between the outer legs (Legs 1-3) will always sum to potentiometers total value. In this case, we're using a 10kΩ, so it would sum to 10kΩ. Try it out on [Tinkercad here](https://www.tinkercad.com/things/4Aqy2AnmmMy-potentiometer-with-multimeters-measuring-resistance).
+**Video.** Using two multimeters, we can examine how the resistances change between Legs 1-2 and 2-3. Note that the resistance between the outer legs (Legs 1-3) will always sum to potentiometer's total value. In this case, we're using a 10kΩ, so it would sum to 10kΩ. Try it out on [Tinkercad here](https://www.tinkercad.com/things/4Aqy2AnmmMy-potentiometer-with-multimeters-measuring-resistance).
 {: .fs-1 }
 
 ### Potentiometer types
@@ -110,7 +110,7 @@ Potentiometers differ primarily in terms of:
 
 If you're curious about how a potentiometer is constructed, this video by John Cooper provides a wonderful deconstruction of rotary potentiometers and how they work.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/rUkrpqEmXb8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/rUkrpqEmXb8" title="Inside a potentiometer - deconstruction video by John Cooper" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 **Video.** A [video](https://youtu.be/rUkrpqEmXb8) deconstruction of potentiometers and how they work by John Cooper (on YouTube).
 {: .fs-1 }
 
@@ -158,7 +158,7 @@ By moving the analog joystick, you independently control the two potentiometers 
 
 ### Potentiometers as voltage dividers
 
-Potentiometers are actually conveniently packaged voltage dividers, which we first described in [Lesson 3](series-parallel.md): $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves.
+Potentiometers are actually conveniently packaged voltage dividers, which we first described in [Lesson 4](series-parallel.md): $$R_{1}$$ and $$R_{2}$$ divide the voltage as the potentiometer wiper moves.
 
 ![Diagram showing how a potentiometer is equivalent to a voltage divider with two resistors R1 and R2 whose values change as the wiper moves](assets/images/PotentiometersAsVoltageDividers2_ByJonFroehlich.png)
 **Figure.** A potentiometer is a compact voltage divider. Image made in PowerPoint.
@@ -189,19 +189,22 @@ Video shows how the voltage output at Leg 2 changes based on the wiper position,
 
 ### Using a potentiometer as a two-terminal variable resistor
 
-When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as **rheostat** or a two-terminal **variable resistor**. You might use a potentiometer in this configuration to vary the resistance in your circuit rather than as a voltage divider. In fact, this is what we'll do below. We'll return to using a potentiometer as a voltage divider when we start working with microcontrollers.
+When only two terminals (or legs) of the potentiometer are used—an outer leg and the wiper (or signal) leg—the potentiometer acts as a **rheostat** or a two-terminal **variable resistor**. You might use a potentiometer in this configuration to vary the resistance in your circuit rather than as a voltage divider. In fact, this is what we'll do below. We'll return to using a potentiometer as a voltage divider when we start working with microcontrollers.
 
 ## Activity: Build LED circuit with potentiometer as variable resistor
 
 Whew, now we're ready to build stuff! Let's start by building a simple LED circuit with our potentiometer as a two-terminal variable resistor. Here, we will only use one outer leg (either Leg 1 or 3, it doesn't matter) and the signal leg (Leg 2). Let's take a look at the circuit diagram—is it what you expected? Why or why not?
 
 ![Circuit diagram and breadboard layout showing a potentiometer used as a two-terminal variable resistor in series with a backup resistor and an LED](assets/images/HookingUpPotentiometerAsTwoTerminalVariableResistor_ByJonFroehlich.png)
-**Figure.** An example of how to hook up a potentiometer as a variable resistor. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
+**Figure.** An example of how to hook up a potentiometer as a variable resistor. Image made in [Fritzing](https://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
 Do you notice that additional fixed-value resistor in our circuit? Why do you think we have it?
 
-Answer: because many potentiometers go from 0Ω to their max value, we must use a "backup" resistor in **series** with our potentiometer. Otherwise, when we rotate the potentiometer to low resistance values, too much current will go through our LED. For example, with a typical red LED with $$V_f=2V$$ and a 9V battery, if we set the potentiometer to 50Ω, then we will have $$I=\frac{7V}{50Ω}=140mA$$, which is far beyond the 20-30mA threshold of the LED.
+Because many potentiometers go from 0Ω to their max value, we must use a "backup" resistor in **series** with our potentiometer. Otherwise, when we rotate the potentiometer to low resistance values, too much current will go through our LED. For example, with a typical red LED with $$V_f=2V$$ and a 9V battery, if we set the potentiometer to 50Ω, then we will have $$I=\frac{7V}{50Ω}=140mA$$, which is far beyond the 20–30mA threshold of the LED.
+
+{: .warning }
+> **Always use a backup resistor with variable resistors and LEDs.** This applies not just to potentiometers but to *all* variable resistors, including FSRs and photocells. A 220Ω or 330Ω backup resistor in series ensures the current never exceeds safe levels regardless of the variable resistor's position.
 
 <video autoplay loop muted playsinline style="margin:0px">
   <source src="assets/videos/PotentiometerWithBackupResistor_TinkercadCircuits_Cropped_ByJonFroehlich.mp4" type="video/mp4" />
@@ -213,10 +216,10 @@ You can, of course, also build a potentiometer-based circuit in [CircuitJS](http
 
 ### Prototype circuit in Tinkercad Circuits
 
-We'd like you to prototype two potentiometer-based LED circuits in Tinkercad Circuits: the first **without** a breadboard and the second **with** a breadboard. If you'd like, you can include a ammeter and voltmeter showing how the current and voltage drops change as you rotate the potentiometer knob. Here are two possible examples of potentiometer-based LED circuit. Make sure both the pictorial representations and circuit schematics make sense. Remember, we are only using **two** of the **three** legs of the potentiometer.
+We'd like you to prototype two potentiometer-based LED circuits in Tinkercad Circuits: the first **without** a breadboard and the second **with** a breadboard. If you'd like, you can include an ammeter and voltmeter showing how the current and voltage drops change as you rotate the potentiometer knob. Here are two possible examples of potentiometer-based LED circuit. Make sure both the pictorial representations and circuit schematics make sense. Remember, we are only using **two** of the **three** legs of the potentiometer.
 
 ![Two example breadboard layouts for a potentiometer-based LED circuit: one without a breadboard using direct wiring, and one with a breadboard showing the component placement](assets/images/BreadboardingPotentiometerAsTwoTerminalVariableResistorWithLED_ByJonFroehlich.png)
-**Figure.** An example of how to hook up a potentiometer as a variable resistor with a breadboard. Many other possible functionally equivalent circuits exist. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
+**Figure.** An example of how to hook up a potentiometer as a variable resistor with a breadboard. Many other possible functionally equivalent circuits exist. Image made in [Fritzing](https://fritzing.org/) and PowerPoint. 
 {: .fs-1 }
 
 For both Tinkercad Circuits, include a screenshot in your prototyping journals and describe your observations (just a sentence or two is fine).
@@ -244,7 +247,7 @@ We provide two examples below.
 The force-sensitive resistor (FSR) responds to force or pressure. As an applied force increases, the resistance across the two terminals decreases. In the simple circuit below, the LED will receive more current (and emit more light as a result) as more pressure is applied to the FSR.
 
 ![Circuit diagram and breadboard layout showing a force-sensitive resistor connected in series with a backup resistor and LED, where pressing the FSR decreases resistance and increases LED brightness](assets/images/ForceSensitiveResistor_BasicLEDCircuit_ByJonFroehlich.png)
-**Figure.** An example of how to hook-up a force-sensitive resistor for a simple LED circuit. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
+**Figure.** An example of how to hook-up a force-sensitive resistor for a simple LED circuit. Image made in [Fritzing](https://fritzing.org/) and PowerPoint. 
 {: .fs-1 }
 
 Here's a video demonstration:
@@ -257,10 +260,10 @@ Here's a video demonstration:
 
 ### Light-dependent resistor circuit
 
-A light-dependent resistor (LDR)—sometimes called a photocell or photo-sensitive resistor—reduces its resistance in response to light. In the simple circuit below, you'll notice that the red LED illuminates brightly in response to a flashlight. Often, we want just the opposite behavior: brighten an LED inversely proportional to light.
+A light-dependent resistor (LDR)—sometimes called a photocell or photo-sensitive resistor—reduces its resistance in response to light. In the simple circuit below, you'll notice that the red LED illuminates brightly in response to a flashlight. In many practical applications, you'd actually want the *opposite* behavior—for example, an automatic nightlight that brightens an LED when it gets dark. Achieving inverted behavior with just passive components requires more complex circuitry, but it becomes straightforward once we start using [microcontrollers](../arduino/index.md), which can read the LDR voltage and programmatically control the LED.
 
 ![Circuit diagram and breadboard layout showing a light-dependent resistor connected in series with a backup resistor and LED, where increased light on the LDR decreases resistance and increases LED brightness](assets/images/LightDependentResistor_BasicLEDCircuit_ByJonFroehlich.png)
-**Figure.** An example light-dependent resistor (LDR) circuit with an LED. In this configuration, the LED brightness will increase in proportion to the amount of light cast on the LDR sensor. Image made in [Fritzing](http://fritzing.org/) and PowerPoint. 
+**Figure.** An example light-dependent resistor (LDR) circuit with an LED. In this configuration, the LED brightness will increase in proportion to the amount of light cast on the LDR sensor. Image made in [Fritzing](https://fritzing.org/) and PowerPoint. 
 {: .fs-1 }
 
 And the video demonstration:
@@ -273,7 +276,7 @@ And the video demonstration:
 
 ## Activity: build your own DIY variable resistor
 
-For the final activity, we'd like you to build your own DIY variable resistor. We included [12B graphite pencils](https://www.amazon.com/XDT-Pencils-Art-Drawing-Graphite/dp/B08269G6QQ/ref=sr_1_44?dchild=1&keywords=graphite+pencils+12B+graphite&qid=1603388081&sr=8-44) in your hardware kits for just this purpose but you can use other materials if you so choose. 
+For the final activity, we'd like you to build your own DIY variable resistor. We included [12B graphite pencils](https://www.amazon.com/dp/B08269G6QQ) in your hardware kits for just this purpose but you can use other materials if you so choose. 
 
 Pencil leads are mixtures of clay and graphite—the more graphite, the more conductive. The more graphite, the higher the **B** rating (you can get 1B, 2B, 3B... 14B pencils). For your kits, we got 12B.
 
@@ -305,17 +308,33 @@ Here is an example DIY slider potentiometer I made out of similar materials: car
 **Video.** A lo-fi slider potentiometer made out of some cardboard, paper, copper tape-wrapped cardboard (for the slider), and a 12B pencil sketch (for the resistive track).
 {: .fs-1 }
 
+### Other variable resistors worth knowing about
+
+Beyond the sensors in your kits, there are many other variable resistors used in physical computing. **Flex sensors** (or bend sensors) change resistance as they are bent—they're commonly used in wearable computing, robotic gloves, and game controllers (the original [Nintendo Power Glove](https://en.wikipedia.org/wiki/Power_Glove) used flex sensors!). **Stretch sensors** use conductive materials that change resistance as they are stretched, useful for wearable applications that track body movement.
+
 ### DIY lo-fi electronics
+
 There are lots of great resources for building lo-fi sensors, buttons, and connectors using everyday craft materials like tinfoil, cardboard, and paper clips. See these resources to help kickstart your brainstorming!
 
 - The [KOBAKANT DIY Wearable Technology website](https://www.kobakant.at/DIY/) by Mika Satomi and Hannah Perner-Wilson has a wonderful set of resources for crafting your own electronic components, including [sensors](https://www.kobakant.at/DIY/?cat=26), [actuators](https://www.kobakant.at/DIY/?cat=28), [traces](https://www.kobakant.at/DIY/?cat=38), and [connectors](https://www.kobakant.at/DIY/?cat=32).
 
-- Similarly, the ["kit-of-no-parts" website ](http://konp.plusea.at/) describes multiple methods for handcrafting electronics and sensors.
+- Similarly, the ["kit-of-no-parts" website ](https://konp.plusea.at/) describes multiple methods for handcrafting electronics and sensors.
 
-- [Scrappy Circuits](https://www.kickstarter.com/projects/deweymac/scrappy-circuits) by Michael Carroll covers cardboard-based circuits. See [their Twitter](https://twitter.com/ScrappyCircuits) for more ideas.
+- [Scrappy Circuits](https://www.kickstarter.com/projects/deweymac/scrappy-circuits) by Michael Carroll covers cardboard-based circuits. See [their social media](https://twitter.com/ScrappyCircuits) for more ideas.
 
 ## Resources
 
-- [Chapter 8, Variable Resistors](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch08.html), Hughes, *Practical Electronics: Components and Techniques*, O'Reilly Media, 2015 
+- [Chapter 8, Variable Resistors](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch08.html), Hughes, *Practical Electronics: Components and Techniques*, O'Reilly Media, 2015.
 
 - [Chapter 11: Potentiometer](https://learning.oreilly.com/library/view/Encyclopedia+of+Electronic+Components+Volume+1/9781449333881/ch11.html) in Platt, *Make: Encyclopedia of Electronic Components Volume 1: Resistors, Capacitors, Inductors, Switches, Encoders, Relays, Transistors*, O'Reilly, 2012.
+
+## What's next?
+
+Congratulations — you've completed the **Intro to Electronics** tutorial series! You now understand the fundamentals of voltage, current, and resistance; how to analyze circuits using Ohm's Law; how to work with resistors, LEDs, and variable resistors; and how to prototype circuits on breadboards.
+
+You're now ready to start our **[Intro to Arduino](../arduino/index.md)** series, where you'll combine everything you've learned with a programmable microcontroller to build truly interactive devices!
+
+<span class="fs-6">
+[Previous: Breadboards](breadboards.md){: .btn .btn-outline }
+[Next: Intro to Arduino](../arduino/index.md){: .btn .btn-outline }
+</span>

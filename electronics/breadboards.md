@@ -20,7 +20,9 @@ search_exclude: false
 {:toc}
 ---
 
-Breadboards allow us to prototype physical computing circuits quickly and efficiently. They have standardized holes that allow integrated circuits and other components to sit snugly in the board. You use "jumper wires" to connect placed components. These so-called "solderless breadboards"—or just "breadboards" for short—dramatically simplify prototyping circuits. In the past, you would have had to painfully wrap wires around mounted conductive poles or screws.
+Breadboards allow us to prototype physical computing circuits quickly and efficiently without soldering. They have standardized holes arranged in a grid that allow integrated circuits, resistors, LEDs, and other components to sit snugly in the board, and you use "jumper wires" to connect components together.
+
+These so-called "solderless breadboards"—or just "breadboards" for short—dramatically simplify prototyping circuits. Before breadboards became common, prototypers had to painfully wrap wires around mounted conductive poles or screws (see the image below).
 
 ![A progression of breadboarding techniques: a literal wooden bread board used for circuit prototyping on the left, wire-wrapping on a perforated board in the center, and a modern solderless breadboard on the right](assets/images/Breadboarding_FromLiteralBreadboardingToWireWrappingToSolderlessBreadboards_FromSparkfun.png)
 **Figure.** The left image is from an Instructable on "[Using a Real Breadboard for Prototyping Your Circuit](https://www.instructables.com/Use-a-real-Bread-Board-for-prototyping-your-circui/)" and the center image is originally from Wikipedia (user Wikinaut); however, both images were found on Sparkfun.com's [breadboard tutorial](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard).
@@ -38,7 +40,7 @@ Unfortunately, it is not immediately clear *which* holes are pre-wired to one an
 **Figure.** Images originally from [here](https://slideplayer.com/slide/7059660/) and [here](http://www.captaincredible.com/abc/?page_id=92). Annotations in PowerPoint.
 {: .fs-1 }
 
-In the image below, we've highlighted *where* the pre-wired connections (those internal metal strips) exist. You can think of each of these highlighted lines as individual nodes. Just like the breadboards in your kit, this breadboard has two power rails on each side, individual columns for placing components, and a ravine (or center divider) in the middle that separates the columns on each side of the board.
+In the image below, we've highlighted *where* the pre-wired connections (those internal metal strips) exist. You can think of each of these highlighted lines as individual nodes. Just like the breadboards in your kit, this breadboard has two power rails on each side, individual columns for placing components, and a ravine (or center divider) in the middle that separates the columns on each side of the board. This gap is specifically sized so that DIP (dual in-line package) integrated circuits can straddle it with their legs on opposite sides.
 
 ![Top-down view of a breadboard with colored overlays highlighting the pre-wired connections: horizontal power rails marked in red and blue on each side, and vertical columns of five connected holes in the center area](assets/images/BreadboardOverviewWithConnectionsMarked.png)
 **Figure.** Breadboard image from [Fritzing](https://fritzing.org/). Annotations in PowerPoint.
@@ -141,6 +143,20 @@ Use red wires for positive voltage, black wires for ground, and other colors for
 
 ![Diagram showing color-coded wires: red for positive voltage, black for ground, and other colors for signal connections](assets/images/BreadboardTips_UseWireColorsToConveyMeaning.png)
 
+## Common breadboarding mistakes
+
+As you start breadboarding, here are the most frequent errors to watch out for:
+
+**Off-by-one errors.** You intend to connect two components in the same column, but one leg lands in the adjacent column. The circuit doesn't work and everything *looks* correct—maddening! Double-check your column alignment, especially in the crowded middle of the board.
+
+**Shorting across the same column.** Remember that all five holes in a vertical column are connected. If you place both legs of a component (like an LED or resistor) into the *same* column, you create a short circuit and the current will bypass the component entirely.
+
+**Straddling the ravine incorrectly.** Remember that the ravine electrically separates the two halves of the board. If you place a component so that both legs are on the *same side* of the ravine (in two adjacent columns), that's fine. But if you intended to bridge the ravine (like with an IC chip), make sure the legs are actually in the correct columns on each side.
+
+**Assuming power rails are continuous.** On some larger breadboards, the power rails have a *break* in the middle (often marked by a gap in the colored line). If your circuit works on one half of the board but not the other, check whether your power rails are actually connected all the way across. When in doubt, use a jumper wire to bridge the gap.
+
+**Forgetting LED polarity.** LEDs only work in one direction. If your LED doesn't light up and your circuit looks correct, try flipping the LED around before troubleshooting anything else.
+
 ## Video tutorial
 
 If you're still feeling lost, we highly recommend this breadboard tutorial video by *Science Buddies*.
@@ -152,13 +168,16 @@ If you're still feeling lost, we highly recommend this breadboard tutorial video
 
 ## Breadboard voltage and current specifications
 
-Generally, breadboards are designed to work with low-voltage digital circuits (0-5V) and low amperages (0-1A). The breadboards we purchase for our courses ([link](https://www.amazon.com/Breadboards-Solderless-Breadboard-Distribution-Connecting/dp/B07DL13RZH/ref=sxin_2_ac_d_rm?ac_md=2-2-YnJlYWRib2FyZA%3D%3D-ac_d_rm&cv_ct_cx=perf+board&keywords=perf+board&pd_rd_i=B07DL13RZH&pd_rd_r=a9be70ad-f0e7-4956-b683-f1266bde56b4&pd_rd_w=mD02O&pd_rd_wg=faDF0&pf_rd_p=de19e82a-2d83-4ae8-9f5c-212586b8b9a0&pf_rd_r=H52F2FG970MN56W91230&psc=1&qid=1583787088)) specify a "300V/3-5A" rating—but I'm highly skeptical of those numbers. If you need to prototype a circuit with ~12V and greater than 500mA–1A, it's better to use a [perfboard](https://learn.adafruit.com/collins-lab-breadboards-and-perfboards/learn-more) and a soldering iron.
+Generally, breadboards are designed to work with low-voltage circuits (0–12V) and low amperages (under ~1A). Some breadboard listings claim ratings of "300V/3–5A"—but I'm highly skeptical of those numbers. If you need to prototype a circuit with higher voltages or currents exceeding ~500mA–1A, it's better to use a [perfboard](https://learn.adafruit.com/collins-lab-breadboards-and-perfboards/learn-more) and a soldering iron.
 
 ## Limitations
 
-Breadboards have a number of limitations. First, their connections can wear over time (as you push in and pull out components) leading to unreliable contact points. Second, the internal metal clips and contact points add parasitic resistance and capacitance. I've seen estimates of about 0.1Ω of contact resistance and a stray capacitance of 2–20 picofarads (pFs) per connection ([link](https://www.circuitspecialists.com/blog/common-breadboard-specifications/), [link](https://www.baldengineer.com/electronics-introduction-to-breadboards.html)). Finally, due to these factors, high-frequency digital circuits—that switch on/off voltages at ~16 MHz and beyond—won't work reliably.
+Breadboards have a number of limitations. First, their connections can wear over time (as you push in and pull out components) leading to unreliable contact points. Second, the internal metal clips and contact points add parasitic resistance and capacitance. I've seen estimates of about 0.1Ω of contact resistance and a stray capacitance of 2–20 picofarads (pF) per connection ([link](https://www.circuitspecialists.com/blog/common-breadboard-specifications/), [link](https://www.baldengineer.com/electronics-introduction-to-breadboards.html)). Finally, due to these factors, high-frequency digital circuits—that switch on/off voltages at ~16 MHz and beyond—won't work reliably.
 
 In physical computing, however, breadboards are often the perfect rapid prototyping tool.
+
+{: .note }
+> **When to move beyond breadboards.** Breadboards are ideal for prototyping and learning, but once your design is finalized and you want something permanent, you'll want to move to soldered connections. Options include **perfboards** (solder your components onto a board with pre-drilled holes), **stripboards/veroboard** (perfboards with pre-connected copper strips), or custom **printed circuit boards (PCBs)**, which you can design in tools like [KiCad](https://www.kicad.org/) and order from manufacturers for a few dollars. We won't cover PCB design in this course, but it's good to know the path forward.
 
 ## Experimenting with breadboards in Tinkercad
 
@@ -223,7 +242,7 @@ Note that you'll need to use the alligator clips on the 9V battery to supply pow
 
 ## Next Lesson
 
-In the [next lesson](variable-resistors), we will learn more about **variable resistors** and how to use them.
+In the [next lesson](variable-resistors.md), we will learn more about **variable resistors** and how to use them.
 
 <span class="fs-6">
 [Previous: LEDs](leds.md){: .btn .btn-outline }

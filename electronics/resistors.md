@@ -46,13 +46,13 @@ But why?
 There are three main factors that determine conductivity (see [UIUC ECE110 notes](https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M001_What_is_Resistor.pdf)):
 1. The ease with which electrons can be dislodged by an applied electric field. Metals like copper have easily displaceable electrons in their atom's valence (outer) shells. It takes very little energy to cause electrons to "jump" or "move."
 2. The atomic arrangement of the material. If you were able to look microscopically at metal, you would see a particular structural arrangement of atoms called a [lattice](https://opentextbc.ca/chemistry/chapter/10-6-lattice-structures-in-crystalline-solids/)—this structure depends on the material. For metals, atoms are densely packed, which lets electrons move relatively freely through the lattice, again reducing resistance.
-3. The temperature of the material. As a material heats up, its atoms vibrate with greater amplitude. This atomic motion has a negative effect on the material's ability to conduct electric current, causing greater electrical resistance ([link](http://matse1.matse.illinois.edu/sc/b.html)).
+3. The temperature of the material. As a material heats up, its atoms vibrate with greater amplitude. This atomic motion has a negative effect on the material's ability to conduct electric current, causing greater electrical resistance ([link](http://matse1.matse.illinois.edu/sc/b.html)). Interestingly, the opposite is true for **semiconductors**—their resistance *decreases* with temperature, which is the operating principle behind [thermistors](variable-resistors.md) that you'll encounter later.
 
 ## Resistors slow current everywhere
 
 A common confusion is that resistors only reduce current at the resistors themselves or that resistors are like a traffic jam, slowing "traffic" (electrons) before the resistor but then the electrons (cars) "can pick up the pace" again after getting through the jam (the resistor). No, this is not correct!
 
-Resistors restrict the flow of electrons throughout a circuit path. Think of a small valve in a water pipe: this valve restricts the total water flow through the pipe—both before and after the valve. The animation below shows three simple circuits with different amounts of resistance: notice how the current flow is the same throughout each circuit, it is not faster or slower before or after a resistor.
+Resistors restrict the flow of electrons throughout a circuit path. Think of a small valve in a water pipe: this valve restricts the total water flow through the pipe—both before and after the valve. The animation below shows three simple circuits with different amounts of resistance: notice how the current flow is the same throughout each circuit—it is not faster or slower before or after a resistor.
 
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Three side-by-side CircuitJS circuit simulations with different resistor values, showing that current flow is uniform throughout each individual circuit — it does not speed up or slow down before or after the resistor.">
   <source src="assets/videos/ResistorsSlowCurrentEverywhereOnCircuitPath.mp4" type="video/mp4" />
@@ -74,7 +74,7 @@ Other resistors look like this inside:
 **Figure.** Two cross sections of non-wrapping resistors. Image from [TubeTimeUS](https://twitter.com/tubetimeus/status/1111785671650242560?s=11) on Twitter with adapted annotations by Jon Froehlich. Right-click and "Open image in new tab" to expand.
 {: .fs-1 }
 
-Depending on their type and manufacturing, resistors have a certain "accuracy" tolerance. For example a 100Ω resistor with a ±5% tolerance could be, in actuality, a 95Ω or 105Ω resistor.
+Depending on their type and manufacturing, resistors have a certain "accuracy" tolerance. For example, a 100Ω resistor with a ±5% tolerance could be, in actuality, a 95Ω or 105Ω resistor.
 
 <!-- 
 I'm not sure what to do with the video below. I think it's possibly conceptually helpful but also maybe not. Keeping commented out for now.
@@ -87,7 +87,7 @@ I'm not sure what to do with the video below. I think it's possibly conceptually
 
 ## Characterizing resistors
 
-Resistors are characterized according to their **resistance value** (in Ohms or Ω) and **maximum power capacity** (in Watts), which is the maximum rate at which they can convert electrical energy to thermal energy (heat). We've previously described resistance but what do we mean by power capacity?
+Resistors are characterized according to their **resistance value** (in Ohms or Ω) and **maximum power capacity** (in Watts), which is the maximum rate at which they can convert electrical energy to thermal energy (heat). We've previously described resistance, but what do we mean by power capacity?
 
 ### What is electrical power?
 
@@ -158,9 +158,12 @@ If we exceed a resistor's power capacity, it will begin to heat up and eventuall
 
 Notably, I've never had a resistor start on fire or burn up (though I have had them heat up to the point in which they are "hot to the touch"). If you smell something burning, immediately unplug your power supply.
 
+{: .note }
+> **Identifying a burnt resistor.** A burnt-out resistor often shows visible signs: darkened or charred body, a burnt smell, or discoloration of the circuit board underneath. If you suspect a resistor has failed, measure it with a multimeter—a burnt resistor will typically show an extremely high or infinite resistance reading (because the internal connection is broken, creating an open circuit).
+
 ## Reading resistors
 
-There are three ways to "read" resistors: (1) keep them arranged in pre-labeled packs (sidestepping the problem a bit); (2) learn how to decode the color-coded bands; or (3) use a multimeter on the "read resistance" setting.
+There are three ways to determine a resistor's value: (1) keep them organized in pre-labeled packs (sidestepping the problem entirely); (2) decode the color-coded bands printed on the resistor body; or (3) measure the resistance directly using a multimeter—this is the most reliable method and works regardless of color band condition or visibility.
 
 ### Resistor kits
 
@@ -191,6 +194,9 @@ In the video below, I slowly walk through how to decode the color bands on resis
 <iframe width="736" height="414" src="https://www.youtube.com/embed/rHiSMNXyuHI" title="Tutorial on decoding resistor color bands and using a multimeter to read resistance values" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 **Video.** A [video tutorial](https://youtu.be/rHiSMNXyuHI) of how to decode the resistor color codes and how to "read" a resistor's value using a multimeter.
 {: .fs-1 }
+
+{: .note }
+> **Accessibility alternatives to color bands.** If you have difficulty distinguishing resistor color bands, there are several alternatives. Smartphone apps like *Electrodoc* or *Resistor Scanner* can use your phone's camera to identify resistor values. A multimeter remains the most reliable method regardless of visual ability. Additionally, surface-mount (SMD) resistors—commonly found on printed circuit boards—use numerical codes rather than colors (*e.g.,* "472" means 4700Ω or 4.7kΩ).
 
 ## Activity
 

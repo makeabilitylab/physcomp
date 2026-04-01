@@ -40,13 +40,13 @@ For parallel resistors, it's a bit more complicated:
 
 $$R_{equivalent} = \frac{1}{\frac{1}{R_{1}} + \frac{1}{R_{2}} + ... + \frac{1}{R_{N-1}} + \frac{1}{R_{N}}}$$
 
-Yes, the parallel resistance equation is a bit enigmatic but you can derive it yourself (or even forget it all together) if you know Ohm's Law and [Kirchhoff's Laws](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/v/ee-kirchhoffs-current-law).
+Yes, the parallel resistance equation is a bit enigmatic but you can derive it yourself (or even forget it altogether) if you know Ohm's Law and [Kirchhoff's Laws](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/v/ee-kirchhoffs-current-law).
 
 For us, the most important and useful concept to understand is that **series resistors** divide voltage (we'll use this later in our microcontroller circuits) and that **parallel resistors** divide current (with *more* current flowing through branches with less resistance). The image below attempts to concisely explain this.
 
 ![A detailed comparison of series and parallel resistor circuits. The series circuit (left) shows that current is the same through each resistor but voltage is divided proportionally across them. The parallel circuit (right) shows that voltage is the same across each branch but current is divided, with more current flowing through the branch with lower resistance.](assets/images/OhmsLaw_IntroToSeriesVsParallelResistorCircuits_PictorialDiagram_ByJonFroehlich.png)
 
-**Figure.** An overview of how **series resistors** work (current is the same across each resistor but *voltage is divided*) and how **parallel resistors** work (voltage is the same across each resistor but *current is divided*). Take a moment to study and understand why this might be. Right-click on the image and select 'Open in new tab' to enlarge. Image made in PowerPoint.
+**Figure.** An overview of how **series resistors** work (current is the same through each resistor but *voltage is divided*) and how **parallel resistors** work (voltage is the same across each resistor but *current is divided*). Take a moment to study and understand why this might be. Right-click on the image and select 'Open in new tab' to enlarge. Image made in PowerPoint.
 {: .fs-1 }
 
 And, while the ability to manually understand and analyze a circuit is important in physical computing, if you become confused, you can always use a circuit simulator like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
@@ -105,11 +105,11 @@ $$R_{Total} = R_{1} + R_{2} + R_{3} \\
 R_{Total} = 2200Ω + 1000Ω + 470Ω \\
 R_{Total} = 3670Ω$$
 
-We can then use this equivalent resistance value to solve for current $$I$$, which is $$I=\frac{9V}{3670Ω} \Rightarrow 0.0025A \Rightarrow 2.5mA$$.
+We can then use this equivalent resistance value to solve for current $$I$$, which is $$I=\frac{9V}{3670Ω} \Rightarrow 0.002452A \Rightarrow 2.45mA$$.
 
-![A series circuit with three resistors (2.2 kilohms, 1 kilohm, and 470 ohms) and a 9V battery. The resistors are combined into R_Total = 3670 ohms, and the solved current is I = 2.5 milliamps.](assets/images/SeriesResistorCircuit_ThreeResistors_Solved.png)
+![A series circuit with three resistors (2.2 kilohms, 1 kilohm, and 470 ohms) and a 9V battery. The resistors are combined into R_Total = 3670 ohms, and the solved current is I = 2.45 milliamps.](assets/images/SeriesResistorCircuit_ThreeResistors_Solved.png)
 
-**Figure.** In the image above, we solve for current with three series resistors. First, sum the resistances (because they are in series) and then use this aggregate resistance ($$R_{Total}$$) to determine current with Ohm's Law: $$I=\frac{V}{R_{Total}} \Rightarrow \frac{9V}{3670Ω} \Rightarrow 2.5mA$$
+**Figure.** In the image above, we solve for current with three series resistors. First, sum the resistances (because they are in series) and then use this aggregate resistance ($$R_{Total}$$) to determine current with Ohm's Law: $$I=\frac{V}{R_{Total}} \Rightarrow \frac{9V}{3670Ω} \Rightarrow 2.45mA$$ (rounded to 2.5A in the figure).
 {: .fs-1 }
 
 #### Check our work in a circuit simulator
@@ -193,12 +193,16 @@ Importantly, as you can tell from the equation, it is *not* the absolute resista
 
 However, the amount of current between the two circuits would be significantly different with the former: $$I = \frac{9V}{200Ω} \Rightarrow 45mA$$ and the latter: $$I = \frac{9V}{4.4kΩ} \Rightarrow 2.0mA$$.
 
-Wouldn't it be cool to dynamically control one of those resistor values to output a variable voltage at $$V_{out}$$? Yes! And this is the basis of a [potentiometer](variable-resistors.md), which we will learn about in a later lesson.
-
 {: .note }
 > **Real-World Tolerance and Voltage Dividers.** In our math, we assume our resistors are completely perfect. But remember that physical resistors have a **tolerance** rating! 
 >
 > If you build a 50/50 voltage divider using two 10kΩ resistors with a ±5% tolerance, one might actually measure 9.5kΩ and the other 10.5kΩ. Because of this slight imbalance, your real-world output voltage won't be *exactly* half of your input voltage. If you measure your physical circuit with a multimeter and the numbers are slightly off from your theoretical math, component tolerance is almost certainly the culprit!
+
+Wouldn't it be cool to dynamically control one of those resistor values to output a variable voltage at $$V_{out}$$? Yes! And this is the basis of a [potentiometer](variable-resistors.md), which we will learn about in a later lesson.
+
+### Why do voltage dividers matter for physical computing?
+
+Microcontrollers like the Arduino can only "read" voltage levels (through their analog-to-digital converters), not resistance directly. So, when we use resistive sensors like photocells, force-sensitive resistors, or thermistors, we place them in a voltage divider configuration. As the sensor's resistance changes in response to light, pressure, or temperature, the voltage at $$V_{out}$$ changes proportionally—and *that's* what the microcontroller reads. You'll see this pattern repeatedly starting in the [Arduino lessons](../arduino/index.md).
 
 #### Deriving the voltage divider equation
 
@@ -233,7 +237,7 @@ Finally, rearrange the above to achieve the popular voltage divider equation:
 $$V_{out} = V_{in} * \frac{R2}{(R1 + R2)}$$
 
 {: .note }
-For this voltage divider equation to hold true, the current $$I$$ flowing through $$R_1$$ must be (largely) equal to $$R_2$$. That is, if we hook up a branch to $$V_{out}$$, as we've done below, then this branch must have very **high resistance** so that very little current "leaks" out into that branch: $$R_{Load}$$ must be magnitudes greater than $$R1 + R2$$. In the case of microcontroller inputs, this is *fortunately* the case, which we will return to later (*e.g.,* in the ["Using buttons" lesson](../arduino/buttons.md)).
+For this voltage divider equation to hold true, the current $$I$$ flowing through $$R_1$$ must be (largely) equal to the current flowing through $$R_2$$. That is, if we hook up a branch to $$V_{out}$$, as we've done below, then this branch must have very **high resistance** so that very little current "leaks" out into that branch: $$R_{Load}$$ must be orders of magnitude greater than $$R1 + R2$$. In the case of microcontroller inputs, this is *fortunately* the case, which we will return to later (*e.g.,* in the ["Using buttons" lesson](../arduino/buttons.md)).
 
 ![A voltage divider circuit with a load resistor R_Load connected at V_out. An annotation notes that R_Load must be much larger than R1 + R2 for the voltage divider equation to remain accurate.](assets/images/VoltageDividerWithHighResistanceLoad.png)
 **Figure.** The voltage divider equation only holds when $$R_{Load}$$ is large, which it will be when we start using microcontrollers (which read changes in voltage levels and have "high input impedance").
@@ -251,7 +255,7 @@ For this voltage divider equation to hold true, the current $$I$$ flowing throug
 
 ## Parallel resistors
 
-Whereas **series resistors** have the same current but divide voltage, [**parallel resistors**](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors) have the same voltage but divide current. Components in parallel look like this:
+Whereas **series resistors** carry the same current but divide voltage, [**parallel resistors**](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors) have the same voltage but divide current. Components in parallel look like this:
 
 ![Two diagrams showing components in parallel: on the left, a generic representation of three components whose tops all connect at one shared node and bottoms all connect at another shared node; on the right, a circuit schematic with parallel resistors between two nodes.](assets/images/ComponentsInParallel_KhanAcademyAndJonFroehlich.png)
 
@@ -266,7 +270,7 @@ In the circuit below, we have two parallel resistors $$R_1=100Ω$$ and $$R_2=1k�
 
 #### Step 1: Observe that $$I_{Total}$$ splits into branches
 
-The first thing to recognize is that $$I_{Total}$$ splits into two branches. Let's call the current down those two branches $$I_1$$ and $$I_2$$. From Kirchhoff's Laws, we know that $$I_{Total} = I_1 + I_2$$. This is due to the conservation of energy—no charges are lost in our circuit (they simply flow around and around).
+The first thing to recognize is that $$I_{Total}$$ splits into two branches. Let's call the current down those two branches $$I_1$$ and $$I_2$$. From Kirchhoff's Laws, we know that $$I_{Total} = I_1 + I_2$$. This is due to the conservation of charge—no charges are lost in our circuit (they simply flow around and around).
 
 ![The same parallel circuit with annotations showing I_Total splitting into two branch currents: I1 flowing through R1 and I2 flowing through R2.](assets/images/ParallelResistorCircuit_TwoResistors_Step1_ByJonFroehlich.png)
 
@@ -325,7 +329,12 @@ Does the visualization match your expectation?
 **Figure.** This video shows a [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a basic two resistor parallel circuit. You can play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rxR48UMTSrExVGAjYB3QSGGjsCISPBsATiDW9s2QnvW0wxqmDg7axY4eM07Zi8muL9yzU+MqoCpRp+E14ggXYPUzDbR2DIAM8-TwctRR8vUXSUiJCXXOj4tOcacxi+AXigA).
 {: .fs-1 }
 
-<!-- TODO: add in parallel simplication with only two parallel resistors: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors
+{: .note }
+> **Two-resistor shortcut.** When you have exactly two resistors in parallel, the equivalent resistance formula simplifies to the "product over sum" shortcut:
+>
+> $$R_{equivalent} = \frac{R_1 \times R_2}{R_1 + R_2}$$
+>
+> For our example: $$R_{equivalent} = \frac{100 \times 1000}{100 + 1000} = \frac{100000}{1100} = 90.9Ω$$. This is much easier to compute than the reciprocal-of-reciprocals form, especially on paper. Note that this shortcut only works for exactly two resistors in parallel.
 
 TODO: add in strategy for simplifying: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-simplifying-resistor-networks -->
 
@@ -340,7 +349,7 @@ In your prototyping journals, include a sketch of the circuit (can be a smartpho
 * [Resistors in series and parallel](https://opentextbc.ca/universityphysicsv2openstax/chapter/resistors-in-series-and-parallel/), opentextbc.ca
 * [Series and Parallel Resistors](https://www.khanacademy.org/science/ap-physics-1/ap-circuits-topic/series-circuits-ap/v/ee-series-resistors), Khan Academy
 * [Voltage Divider](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider), Khan Academy
-* [Circuit Analysis Shortcuts](https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?circuitAnalysisShortcuts), UIUC ECE101
+* [Circuit Analysis Shortcuts](https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?circuitAnalysisShortcuts), UIUC ECE110
 * [Chapter 9.3 Voltage Divider Pattern](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_9_Chapter.xhtml), Bartlett, Electronics for Beginners, APress 2020
 
 <!-- The UIUC lab page "Module 100: The Voltage Divider" has a nice description: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/Modules/M100_Voltage%20Divider.pdf -->

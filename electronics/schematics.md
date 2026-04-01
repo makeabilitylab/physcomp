@@ -39,15 +39,18 @@ For more examples, see [Wikipedia's entry](https://en.wikipedia.org/wiki/Electro
 **Figure.** Common electronic symbols. For the battery, the long line is used to indicate the positive terminal and the short line is the negative terminal (which is typically used as ground). Image made in PowerPoint.
 {: .fs-1 }
 
+{: .note }
+We have not included the **ground** (GND) symbol in the chart above, but it is one of the most important symbols you'll encounter. We cover it later in [Voltage Sources and Ground Nodes](#voltage-source-and-ground-nodes).
+
 ## Pictorial vs. circuit schematics
 
 To demonstrate the difference and utility of pictorial *vs.* circuit schematics, we provide some examples below.
 
 In the first example, we have a 1.5V battery with a 100Ω resistor. Unlike pictorial diagrams (on the left), circuit diagrams can be more visually compact as well as legible in black-and-white.
 
-![A side-by-side comparison of a pictorial diagram and a circuit schematic for a basic switching circuit with a 1.5V battery, a switch, a resistor, and an LED.](assets/images/PictorialDiagramVsCircuitSchematic_ByJonFroehlich.png)
+![A side-by-side comparison of a pictorial diagram and a circuit schematic for a basic switching circuit with a 1.5V battery and a resistor.](assets/images/PictorialDiagramVsCircuitSchematic_ByJonFroehlich.png)
 
-**Figure.** An example pictorial diagram and circuit schematic of a basic switching circuit with a 1.5V battery, a switch, a resistor, and an LED. Note: in a circuit schematic, the long line on the battery is used to indicate the positive terminal. Image made in [Fritzing](https://fritzing.org/) and PowerPoint.
+**Figure.** An example pictorial diagram and circuit schematic of a basic circuit with a 1.5V battery and a resistor. Note: in a circuit schematic, the long line on the battery is used to indicate the positive terminal. Image made in [Fritzing](https://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
 Below, we have two additional examples. On the left, a 9V circuit with three components: a switch, a 470Ω resistor, and an LED. On the right, we have two 1.5V batteries in series (stacked together, which creates a 3V voltage source) and a resistive light bulb (lamp). Do the schematic representations make sense? Do they seem to match their pictorial counterparts? Why or why not?
@@ -59,7 +62,7 @@ Below, we have two additional examples. On the left, a 9V circuit with three com
 
 ## Schematics do not capture physical arrangement
 
-While a circuit schematic captures the relative ordering of and connections between components, the spacing and overall layout is *not* captured. When followed, you can use circuit schematics to build a circuit—a bit like following Ikea instructions. But, in this case, the schematic only captures the electrical relationships between components. So, you can use whatever spatial layout you want—as long as it is functionally equivalent to the diagram.
+A circuit schematic captures the relative ordering of and connections between components, but the spacing and physical layout are *not* represented. You can use a circuit schematic to build a circuit—a bit like following Ikea instructions—but the schematic only specifies the *electrical* relationships between components. So, you can use whatever spatial layout you want, as long as it is functionally equivalent to the diagram.
 
 For example, the following five schematics of a basic LED circuit are all functionally equivalent! Take your time reading them—do you agree that they are all equivalent? What stands out to you?
 
@@ -72,7 +75,9 @@ For example, the following five schematics of a basic LED circuit are all functi
 
 When reading a circuit schematic, it can be difficult to properly interpret crossing wires—*i.e.,* "*are those wires connected or not?*" Thankfully, there is a standard for this as well (though some deviations are possible).
 
-A wire is shown as a solid line. When two or more wires **connect**, the junction is *typically* depicted by a black dot—we call this junction a **node**. For **crossing** (unconnected) wires, there is *no* black dot. As [Hughes notes](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/app02.html), schematics created before ~1980 used a *hump* or *arc* to indicate that one wire crossed another without connecting (far right in image below). While valuable, this practice is far less common today perhaps because of the greater complexity of modern circuits, which have more crossing wires (thus, those humps could be visually distracting).
+A wire is shown as a solid line. When two or more wires **connect**, the junction is *typically* depicted by a black dot—we call this junction a **node**. 
+
+For **crossing** (unconnected) wires, there is *no* black dot. As [Hughes notes](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/app02.html), schematics created before ~1980 used a *hump* or *arc* to indicate that one wire crossed another without connecting (far right in image below). While valuable, this practice is far less common today perhaps because of the greater complexity of modern circuits, which have more crossing wires (thus, those humps could be visually distracting).
 
 ![A reference diagram showing how to differentiate between connected and unconnected wires in a circuit schematic. Connected wires have a black dot at the junction (a node). Unconnected crossing wires have no dot. Older schematics used a hump or arc for unconnected crossings.](assets/images/ConnectedVsUnconnectedWires_CircuitSchematics_ByJonFroehlich.png)
 
@@ -91,7 +96,7 @@ But this can quickly get confusing. For example, are the two circuits below equi
 
 ## Voltage source and ground nodes
 
-On many circuit diagrams, you'll see special symbols used to denote the voltage source and ground nodes. As introduced in [Lesson 1](electricity-basics.md#relative-voltages-and-ground), **ground** (GND) is the reference point we define as 0V. Positive voltage source nodes are usually indicated by an arrow pointing up while ground nodes are typically pointed down (with a flat line, downward pointing triangle, or three lines).
+On many circuit diagrams, you'll see special symbols used to denote the voltage source and ground nodes. As introduced in [Lesson 1](electricity-basics.md#relative-voltages-and-ground), **ground** (GND) is the reference point we define as 0V. Positive voltage source nodes are usually indicated by an upward-pointing arrow labeled with a voltage value (*e.g.,* "5V" or "$$V_{CC}$$"). Ground nodes are typically pointed downward and come in several visual styles: a single flat horizontal line, a downward-pointing triangle, or three progressively shorter horizontal lines stacked vertically.
 
 ![Diagram showing examples of positive voltage source symbols (upward arrows labeled with voltage values) and ground node symbols (downward-pointing triangles and three horizontal lines).](assets/images/VoltageSourceAndGroundNodes_ByJonFroehlich.png)
 
@@ -116,6 +121,30 @@ In the schematic below, you can see how the circuit designer made use of the vol
 
 The circuit schematic above also has a number of other symbols, including polarized and non-polarized [capacitors](https://en.wikipedia.org/wiki/Capacitor) (two parallel lines), a [zener diode](https://en.wikipedia.org/wiki/Zener_diode), and the [LM1117 linear regulator](https://www.ti.com/lit/ds/symlink/lm1117.pdf).
 
+### Tips for reading unfamiliar schematics
+
+As you encounter more complex schematics—like the RedBoard example above—you may feel overwhelmed by unfamiliar symbols. Here are a few practical tips:
+
+1. **Start with what you know.** Identify the components you recognize (resistors, LEDs, battery/voltage source, ground) and trace current paths from those.
+2. **Look for the power supply and ground symbols.** These anchor the schematic and help you understand which nodes are at high vs. low potential.
+3. **Don't panic about unknown components.** You don't need to understand every symbol to get the overall picture. Focus on the *topology*—what's connected to what—before worrying about individual component behavior.
+4. **Read left-to-right, top-to-bottom.** Many schematics (though not all) place the input on the left and output on the right, with positive voltage at the top and ground at the bottom.
+5. **Consult the datasheet.** If you encounter an IC (integrated circuit) you don't recognize, search for its part number (*e.g.,* "LM1117 datasheet") to find its pinout and function.
+
+## Schematic building tools
+
+There are a number of schematic building tools aimed at makers, each with their own tradeoffs.
+
+- [Fritzing](https://fritzing.org/). Provides both pictorial ("breadboard") plus schematic representations. Long a favorite in the maker and education communities, though the production version is now a paid download (€ 8). Free development builds are available on [GitHub](https://github.com/fritzing/fritzing-app/releases).
+
+- [KiCad](https://www.kicad.org/). A free, open-source EDA tool used widely in both hobbyist and professional settings. KiCad offers powerful schematic capture and PCB layout, with a large parts library. More full-featured (and more complex) than Fritzing, but excellent once you're ready to go beyond breadboard prototyping.
+
+- [Circuito.io](https://www.circuito.io/). Has some very interesting auto-completion features—you select components and it automatically generates a wiring diagram and test code. Purely a web app. No simulation support.
+
+- [Tinkercad Circuits](https://www.tinkercad.com/learn/circuits). Allows you to design Arduino-based circuits, write code, and simulate. Does not provide schematic representations.
+
+- [Wokwi](https://wokwi.com/). A new'ish and popular web-based simulator tailored for microcontrollers (Arduino, ESP32, Raspberry Pi Pico).
+
 ## Activity: Building circuit diagrams in Fritzing
 
 For your learning activity, we would like you to build both a *pictorial* representation and a *schematic* representation of the same circuit in the open-source hardware layout tool [Fritzing](https://fritzing.org/).
@@ -130,6 +159,7 @@ While the production version of Fritzing is now [€ 8 (version 1.0.6)](https://
 {: .fs-1 }
 
 ### Download and install Adafruit Fritzing library
+
 Adafruit maintains an [open-source repository on GitHub](https://github.com/adafruit/Fritzing-Library) of all their custom electronic parts for Fritzing (cool!). If you're using Adafruit parts in your projects, we strongly recommend downloading and installing the Adafruit Fritzing Library—just follow the [installation instructions here](https://learn.adafruit.com/using-the-adafruit-library-with-fritzing)!
 
 ### Using Fritzing
@@ -150,20 +180,6 @@ For your prototyping journal, take a screenshot of what you made following the t
 As usual, you should also report on any challenges or confusions you experienced!
 
 Have fun!
-
-## Schematic building tools
-
-There are a number of schematic building tools aimed at makers, each with their own tradeoffs.
-
-- [Fritzing](https://fritzing.org/). Provides both pictorial ("breadboard") plus schematic representations. Long a favorite in the maker and education communities, though the production version is now a paid download (€ 8). Free development builds are available on [GitHub](https://github.com/fritzing/fritzing-app/releases).
-
-- [KiCad](https://www.kicad.org/). A free, open-source EDA tool used widely in both hobbyist and professional settings. KiCad offers powerful schematic capture and PCB layout, with a large parts library. More full-featured (and more complex) than Fritzing, but excellent once you're ready to go beyond breadboard prototyping.
-
-- [Circuito.io](https://www.circuito.io/). Has some very interesting auto-completion features—you select components and it automatically generates a wiring diagram and test code. Purely a web app. No simulation support.
-
-- [Tinkercad Circuits](https://www.tinkercad.com/learn/circuits). Allows you to design Arduino-based circuits, write code, and simulate. Does not provide schematic representations.
-
-- [Wokwi](https://wokwi.com/). A new'ish and popular web-based simulator tailored for microcontrollers (Arduino, ESP32, Raspberry Pi Pico)..
 
 ## Resources
 

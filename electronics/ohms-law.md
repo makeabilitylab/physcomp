@@ -18,13 +18,13 @@ usetocbot: true
 {:toc}
 ---
 
-In this lesson, we will learn about **Ohm's Law**, one of the most important empirical laws in electrical circuits that describes how *current*, *voltage*, and *resistance* relate together. While Ohm's Law is incredibly useful in analyzing and understanding how circuits work, like many "laws", it is not always obeyed (particularly for what are called "non-ohmic" devices like LEDs or other diodes). But we'll get to that.
+In this lesson, we will learn about **Ohm's Law**, one of the most important empirical laws in electrical circuits that describes how *current*, *voltage*, and *resistance* relate together. While Ohm's Law is incredibly useful in analyzing and understanding how circuits work, like many "laws", it is not always obeyed (particularly for what are called "non-ohmic" devices like LEDs or other diodes—which we will explore in [Lesson 6: LEDs](leds.md)).
 
 For now, on to Georg Ohm's Law!
 
 ## Ohm's Law
 
-In 1827, after years of experimentation, German physicist Georg Simon Ohm published the "[*Galvanic Circuit Investigated Mathematically*](https://en.wikipedia.org/wiki/Ohm%27s_law#History)", which became the foundation for Ohm's Law. Ohm's Law states that the current ($$I$$ in amperes) in a conductor is directly proportional to the applied voltage ($$V$$ in volts) *vs.* the conductor's resistance ($$R$$ in ohms):
+In 1827, after years of experimentation, German physicist Georg Simon Ohm published the "[*Galvanic Circuit Investigated Mathematically*](https://en.wikipedia.org/wiki/Ohm%27s_law#History)", which became the foundation for Ohm's Law. Ohm's Law states that the current ($$I$$ in amperes) through a conductor equals the applied voltage ($$V$$ in volts) divided by the conductor's resistance ($$R$$ in ohms):
 
 $$I = \frac{V}{R}$$
 
@@ -91,7 +91,7 @@ Below, we've written some common SI prefixes—most of which should be familiar 
 
 ### Converting units
 
-To convert between a prefixed unit and a base unit, we *multiply* by the conversion factor. To convert between a base unit and a prefixed unit, we *divide* the conversion factor.
+To convert **from** a prefixed unit **to** a base unit, *multiply* by the conversion factor. To convert **from** a base unit **to** a prefixed unit, *divide* by the conversion factor.
 
 So, for example, to convert 2.2kΩ to ohms, we would multiply by the conversion factor for *kilo* (k), which is 1,000. So, $$2.2 * 1,000 = 2,200 Ω$$. To convert 0.000037A to microamps, we would divide by the conversion factor for *micro* (μ), which is 0.000001 (or $$10^{-6}$$). So, $$\frac{0.000037}{10^{-6}} = 37 μA$$.
 
@@ -99,7 +99,7 @@ So, for example, to convert 2.2kΩ to ohms, we would multiply by the conversion 
 
 Whew, OK, now we are ready to start analyzing some circuits. We'll start with a simple circuit and go from there. When analyzing (or even preparing to build) circuits, it's always a good idea to get out a pencil and paper. So, please do that now.
 
-In addition, it's helpful to have a way to check our work, which we can do in a circuit simulator. I like to use [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) but I have also used [EveryCircuit](http://everycircuit.com/) and [CircuitLab](https://www.circuitlab.com/)—the latter costs money.
+In addition, it's helpful to have a way to check our work, which we can do in a circuit simulator. I like to use [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) but I have also used [EveryCircuit](https://everycircuit.com/) and [CircuitLab](https://www.circuitlab.com/)—the latter costs money.
 
 Before we begin, let's watch this video of me building a simple resistive circuit in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and calculating its current, given a voltage source and resistor.
 
@@ -154,7 +154,7 @@ Finally, we are ready to solve for current $$I = \frac{9V - 0V}{100Ω} \Rightarr
 
 Let's try to solve for current again with a similar circuit. This time the resistance has been increased from $$100Ω$$ to $$4.7kΩ$$.
 
-Before doing anything else: it's useful to think of *conceptually* what will happen?
+Before doing anything else, it's useful to think *conceptually* about what will happen.
 
 Current decreases, right? And does so proportionally.
 
@@ -195,7 +195,16 @@ Now, we can solve for $$R = \frac{9V}{0.00132A} \Rightarrow 6818.2Ω \Rightarrow
 **Figure.** Using the $$R=\frac{V}{I}$$ formulation of Ohm's Law, we can solve for the resistance $$R$$ given a known voltage $$V$$ and a known current $$I$$. Images made in [Fritzing](https://fritzing.org/) and PowerPoint.
 {: .fs-1 }
 
-<!-- TODO: consider giving them example problems for pencil/paper here? -->
+### Try it yourself
+
+Before moving on to the activity, try solving these three problems on your own. Check your work using the formulas above—and pay attention to units!
+
+1. A circuit has a 5V battery and a 1kΩ resistor. What is the current?
+2. A circuit draws 15mA of current through a 330Ω resistor. What is the voltage drop across the resistor?
+3. A 9V battery produces 4.5mA of current in a circuit with a single resistor. What is the resistance?
+
+{: .note }
+> **Answers.** (1) $$I = \frac{5V}{1000Ω} = 5mA$$. (2) $$V = 0.015A \times 330Ω = 4.95V$$. (3) $$R = \frac{9V}{0.0045A} = 2000Ω = 2kΩ$$.
 
 ## Activity: Using a circuit simulator
 
@@ -214,11 +223,11 @@ In your prototyping journals, include a screenshot of each CircuitJS circuit alo
 ## Lesson summary
 
 In this lesson, we learned:
-- That there is an empirical law, called Ohm's Law, that describes the linear relationship between voltage, current, and resistance
-- Specifically, Ohm's Law states that the current in a circuit is the total voltage divided by the total resistance ($$I = \frac{V}{R}$$). This law builds on the concepts and intuitions we were developing in [the first lesson](electricity-basics.md) in this series
-- We also learned how to apply Ohm's Law to some simple circuits to solve for unknown currents, voltages, and resistances
-- That a common "gotcha" for beginners is forgetting to convert measurements to base units
-- We then played around with circuits in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and made observations.
+- **Ohm's Law** is an empirical law that describes the linear relationship between voltage, current, and resistance: $$I = \frac{V}{R}$$
+- This law builds on the concepts and intuitions we developed in [Lesson 1](electricity-basics.md), and can be rearranged to solve for any one of the three quantities given the other two
+- A common "gotcha" for beginners is forgetting to convert measurements to **base units** (volts, amps, ohms) before applying Ohm's Law
+- We applied Ohm's Law to simple single-resistor circuits and verified our calculations using [CircuitJS](https://www.falstad.com/circuit/circuitjs.html)
+
 
 ## Resources
 

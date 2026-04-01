@@ -20,7 +20,9 @@ search_exclude: false
 {:toc}
 ---
 
-Second only to [resistors](resistors.md), light-emitting diodes (LEDs) are the most common electrical components used in physical computing. LEDs are power-efficient light sources *not* based on resistive properties and thus, are non-ohmic devices. They come in a variety of shapes and sizes (see image below). In this lesson, you will learn about diodes and how they work before diving into LEDs, the importance of current-limiting resistors, and how to use them.
+Second only to [resistors](resistors.md), light-emitting diodes (LEDs) are the most common electrical components used in physical computing. LEDs are power-efficient light sources that produce light via electroluminescence rather than by heating a filament (incandescence). Because their current-voltage relationship is non-linear, they are classified as non-ohmic devices.
+
+They come in a variety of shapes and sizes (see image below). In this lesson, you will learn about diodes and how they work before diving into LEDs, the importance of current-limiting resistors, and how to use them.
 
 ![LEDs of various colors, sizes, and shapes including through-hole and surface mount types](assets/images/Verschiedene_LEDs_FromWikipedia.jpg)
 **Figure.**  LEDs range in color, size, and shape. Image from [Wikipedia](https://en.wikipedia.org/wiki/File:Verschiedene_LEDs.jpg).
@@ -30,9 +32,9 @@ Second only to [resistors](resistors.md), light-emitting diodes (LEDs) are the m
 
 LEDs are a type of [diode](https://en.wikipedia.org/wiki/Diode), which is an electrical component that only allows current to flow in one direction—like a one-way street or a backflow valve in plumbing. In contrast to traditional lamps (incandescent light sources), LEDs have many advantages including: lower energy consumption, longer lifetimes, improved physical robustness, smaller size, and faster switching (you can turn them on and off very quickly). 
 
-For example, an incandescent bulb converts roughly 5% of its energy into visible light; the rest is lost to heat. More specifically, the typical incandescent bulb at 120V can output 16 lumens per watt *vs.* 60 lm/W for compact fluorescent bulbs and 150 lm/W for white LED lamps ([source](https://en.wikipedia.org/wiki/Incandescent_light_bulb)). Moreover, a typical incandescent bulb lasts for roughly 1,000 hours compared to 20,000-30,000 hours for LEDs.
+For example, an incandescent bulb converts roughly 5% of its energy into visible light; the rest is lost to heat. More specifically, the typical incandescent bulb at 120V can output 16 lumens per watt *vs.* 60 lm/W for compact fluorescent bulbs and over 150 lm/W for white LED lamps (with some modern LEDs exceeding 200 lm/W) ([source](https://en.wikipedia.org/wiki/Incandescent_light_bulb)). Moreover, a typical incandescent bulb lasts for roughly 1,000 hours compared to 20,000-30,000 hours for LEDs.
 
-While the basis for LED technology was discovered in 1927 ([Wikipedia](https://en.wikipedia.org/wiki/Light-emitting_diode#History)), it was not until the 1960s that the first visible-spectrum LEDs were demonstrated (red LEDs) and much later until they were commercially viable. Incredibly, the blue LED was not invented until the 1990s—earning co-inventors [Shuji Nakamura](https://en.wikipedia.org/wiki/Shuji_Nakamura), [Hiroshi Amano](https://en.wikipedia.org/wiki/Hiroshi_Amano), and [Isamu Akasaki](https://en.wikipedia.org/wiki/Isamu_Akasaki) the 2014 Nobel Prize in Physics—and there are still LED-based breakthroughs today (*e.g.,* high-efficiency, experimental white LEDs were demonstrated in the mid 2010s producing 303 lumens per watt of electricity). Akasaki passed away in April 2021 and the [New York Times](https://www.nytimes.com/2021/04/06/science/isamu-akasaki-dead.html?referringSource=articleShare) has a nice obituary with an interesting history of the blue LED invention.
+While the basis for LED technology was discovered in 1927 ([Wikipedia](https://en.wikipedia.org/wiki/Light-emitting_diode#History)), it was not until the 1960s that the first visible-spectrum LEDs were demonstrated (red LEDs) and much later until they were commercially viable. Incredibly, the blue LED was not invented until the 1990s—earning co-inventors [Shuji Nakamura](https://en.wikipedia.org/wiki/Shuji_Nakamura), [Hiroshi Amano](https://en.wikipedia.org/wiki/Hiroshi_Amano), and [Isamu Akasaki](https://en.wikipedia.org/wiki/Isamu_Akasaki) the 2014 Nobel Prize in Physics. LED research continues to push boundaries. For example, laboratory demonstrations have exceeded 300 lumens per watt, far beyond what's commercially available today. Akasaki passed away in April 2021 and the [New York Times](https://www.nytimes.com/2021/04/06/science/isamu-akasaki-dead.html?referringSource=articleShare) has a nice obituary with an interesting history of the blue LED invention.
 
 So, while LEDs are now pervasive, they're relatively new technology with active research.
 
@@ -96,7 +98,7 @@ This is why we use the term "forward voltage" and "forward current" to distingui
 
 ### Analyzing a diode in a circuit
 
-Let's analyze a [1N4001 general-purpose diode](https://www.mouser.com/datasheet/2/149/1N4001-81693.pdf) in a simple circuit with a 9V battery and a 100Ω resistor. The key here is to recognize that once our supplied voltage exceeds the "on" voltage of our diode $$V_f$$, we can model the diode as a wire. Though imperfect, it's a reasonable simplification for our purposes.
+Let's analyze a [1N4001 general-purpose diode](https://www.mouser.com/datasheet/2/149/1N4001-81693.pdf) in a simple circuit with a 9V battery and a 100Ω resistor. The key here is to recognize that once our supplied voltage exceeds the "on" voltage of our diode $$V_f$$, we can model the diode as having a constant voltage drop of $$V_f$$ (essentially acting like a small $$0.7V$$ tollbooth for the current). Though imperfect—as the voltage drop does fluctuate slightly with current—it's a standard and reasonable simplification for our purposes.
 
 So, let's solve for current $$I$$ in the following circuit.
 
@@ -208,7 +210,7 @@ Just like other diodes, an LED has two legs and is a polarized component—it wi
 LEDs are semiconductor devices that use [electroluminescence](https://en.wikipedia.org/wiki/Electroluminescence) to emit light in response to current. More specifically, when electrons pass through an LED they release energy in the form of photons. If you're curious to learn more, see this [video by Today I Found Out](https://youtu.be/uyse_I-zo4Q).
 
 ![A macro photograph looking inside a functioning LED, showing the semiconductor die, bond wire, and reflector cup](assets/images/InsideAnLED_ModifiedImageFromTubeTimeUS.png)
-**Figure.** An incredibly cool inside look a functioning LED by [TubeTimeUS](https://twitter.com/tubetimeus/status/1111807450141745152?s=11) on Twitter. Slight modifications to annotations by Jon E. Froehlich.
+**Figure.** An incredibly cool look inside a functioning LED by [TubeTimeUS](https://twitter.com/tubetimeus/status/1111807450141745152?s=11) on Twitter. Slight modifications to annotations by Jon E. Froehlich.
 {: .fs-1 }
 
 ### The IV graph for LEDs
@@ -384,7 +386,7 @@ For the theoretical predictions using Ohm's Law, I plugged in measured values fo
 **Figure.** I built each of the three LED-based circuits (330Ω, 350Ω, and 470Ω) on my breadboard and measured the total voltage drop over our circuit (yellow multimeter) as well as the total current $$I$$ (red multimeter shown in milliamps). You can right click on this image and "open image in new tab" to expand. 
 {: .fs-1 }
 
-As you can see, our theoretical predictions were quite close to actual performance. Yay!
+As you can see, our theoretical predictions were quite close to actual performance. Yay! The small discrepancies are due to resistor tolerance (our resistors aren't exactly their labeled values), the battery supplying slightly more than 9V, and the LED's $$V_f$$ not being exactly 2.0V at every current level
 
 ### Does it matter which side of the LED I place the resistor?
 
@@ -433,7 +435,7 @@ To wire wrap your components, simply twist the legs together like this:
 Here's an example picture of a simple LED circuit with alligator clips and wire wrapping:
 
 ![A simple LED circuit built with alligator clips and wire wrapping, showing a resistor and multiple LEDs in series connected to a 9V battery](assets/images/SimpleLEDCircuitWithWireWrapping_ByJonFroehlich.png)
-**Figure.** An example of a simple LED circuit with a single resistor (to limit current) and multiple LEDs in series. This circuit draws ~10mA. Notice how the red LED is brightest at this amperage. 
+**Figure.** An example of a simple LED circuit with a single resistor (to limit current) and multiple LEDs in series. This circuit draws ~10mA. Notice how the red LED appears brightest at this amperage—different LED colors have different luminous efficiencies, and red LEDs tend to produce more visible light per milliamp at low currents.
 {: .fs-1 }
 
 We'd also like you to begin experimenting with light diffusion and ideas for enclosures. For one of your LED designs, rapidly prototype a diffusive cover or case. As an example, here are simple light sabers my children and I made out of toilet paper rolls (for the hilt), paper (for the "plasma energy" blade), a 9V battery, a resistor, and some LEDs.
@@ -502,3 +504,12 @@ Outline:
 * [Diodes and How to Use Them](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_8_Chapter.xhtml) in Bartlett, *Electronics for Beginners*, Apress, 2020 
 
 * [Diodes](https://courses.engr.illinois.edu/ece110/sp2021/content/courseNotes/files/?diodes), UIUC ECE 110
+
+## Next Lesson
+
+In the [next lesson](breadboards.md), we will learn about **breadboards**—a prototyping tool that makes it easy to rapidly build, test, and modify circuits without soldering.
+
+<span class="fs-6">
+[Previous: Resistors](resistors.md){: .btn .btn-outline }
+[Next: Breadboards](breadboards.md){: .btn .btn-outline }
+</span>

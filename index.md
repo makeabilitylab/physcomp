@@ -78,10 +78,14 @@ Here are some example hardware kits that we provide students in our classes:
 
 Since our launch in Spring 2020, we have received **over 700k views** from **209+ countries** (via Google Analytics). 🚀
 
-Our materials have been used in university courses and maker workshops **across the globe**, including at CMU, Stanford, UW ECE, Purdue, OCAD, Wayne State, NYU Shanghai, Univ. of Victoria, [UDIT in Madrid](https://girardin.medium.com/teaching-emerging-technologies-to-ux-designers-c2d329ff83cd), Sussex, Dundee, and beyond.
+Our materials have been used in university courses and maker workshops **across the globe**, including at CMU, Stanford, UW ECE, Purdue, OCAD, Wayne State, NYU Shanghai, RPI, Univ. of Victoria, [UDIT in Madrid](https://girardin.medium.com/teaching-emerging-technologies-to-ux-designers-c2d329ff83cd), Sussex, Dundee, and beyond.
 
 > "Your site is exactly what I was looking for. My students and I are grateful to your intuitive explanations, animations, and step-by-step problem-solving approaches."
 > — *University Professor*
+{: .block-quote--small }
+
+> "Insanely useful & highly relevant."
+> - *University of Queensland Professor*
 {: .block-quote--small }
 
 > "I'd highly recommend taking this class; it was one of my favorites at UW. I don't come from too much of a tinkering, embedded, hardware background. This class helped me think about HCI in a really different way."
@@ -103,8 +107,8 @@ All code on this website is open source, including the [website itself](https://
 
 ### Acknowledgments
 
-Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted, created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](http://fritzing.org/), [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview), and Microsoft PowerPoint. Fritzing diagrams often use the [Adafruit Fritzing Library](https://learn.adafruit.com/using-the-adafruit-library-with-fritzing?view=all).
+Diagrams, animations, pictures, and videos are by Jon E. Froehlich unless otherwise noted, created using [Tinkercad Circuits](https://www.tinkercad.com/circuits), [Fritzing](https://fritzing.org/), [Autodesk Eagle](https://www.autodesk.com/products/eagle/overview), and Microsoft PowerPoint. Fritzing diagrams often use the [Adafruit Fritzing Library](https://learn.adafruit.com/using-the-adafruit-library-with-fritzing?view=all).
 
-The content here is inspired by a rich set of courses, including [NYU's ITP Physical Computing](https://itp.nyu.edu/physcomp/), UC Berkeley's [Critical Making](http://make.berkeley.edu/) and [Interactive Device Design](http://web.archive.org/web/20150712080846/http://husk.eecs.berkeley.edu/courses/cs294-84-fall14/index.php/Main_Page). See [Inspirations](resources/inspirations.md) and the [Resource list](resources/index.md) for more.
+The content here is inspired by a rich set of courses, including [NYU's ITP Physical Computing](https://itp.nyu.edu/physcomp/), UC Berkeley's [Critical Making](https://make.berkeley.edu/) and [Interactive Device Design](https://web.archive.org/web/20150712080846/https://husk.eecs.berkeley.edu/courses/cs294-84-fall14/index.php/Main_Page). See [Inspirations](resources/inspirations.md) and the [Resource list](resources/index.md) for more.
 
 This website is built in [Jekyll](https://jekyllrb.com/) with the [Just the Docs](https://github.com/pmarsceill/just-the-docs) theme.

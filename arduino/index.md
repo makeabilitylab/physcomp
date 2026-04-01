@@ -34,23 +34,23 @@ Our lessons are different both in approach and scope. They are based on years of
 
 Thus, while other resources **start** with digital/analog input (or quickly intermix input and output), we've found that it's easier to start with **output**. For novices, input is simply harder—it requires an understanding (or at least an awareness) of concepts like pull-down resistors, voltage dividers, and that a microcontroller reads *voltages* rather than current or resistance.
 
-So, our lessons start and stick with **output** to solidify understanding of how to programmatically control microcontroller pins before adding in **input**—where the fun, of course, really starts! Moreover, most resources—at least those we are aware of—strike a different balance between depth and breadth. We love Adafruit's [tutorials](http://learn.adafruit.com/) but they tend towards step-by-step construction recipes rather than explaining *why* or *how* things work. As a college-level resource, we attempt to provide a deeper understanding at a cost of complexity and longer lessons. But we think it's worth it.
+So, our lessons start and stick with **output** to solidify understanding of how to programmatically control microcontroller pins before adding in **input**—where the fun, of course, really starts! Moreover, most resources—at least those we are aware of—strike a different balance between depth and breadth. We love Adafruit's [tutorials](https://learn.adafruit.com/) but they tend towards step-by-step construction recipes rather than explaining *why* or *how* things work. As a college-level resource, we attempt to provide a deeper understanding at a cost of complexity and longer lessons. But we think it's worth it.
 
 <!-- The [Adafruit lessons](https://learn.adafruit.com/series/learn-arduino) provide a rapid, broad taste of using microcontrollers for digital and analog I/O. As a book, Blum's [Exploring Arduino](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451) goes deeper; however, ne -->
 
 ## Arduino Uno R3 vs. Arduino Leonardo
 
-For this introductory lesson series, we use two of the most popular 5V Arduino models: the [Arduino Uno Rev3](https://store.arduino.cc/products/arduino-uno-rev3) and the [Arduino Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers); however, the lessons themselves should translate to almost any Arduino board—which is the beauty of the Arduino hardware-software ecosystem!.
+For this introductory lesson series, we use two of the most popular 5V Arduino models: the [Arduino Uno Rev3](https://store.arduino.cc/products/arduino-uno-rev3) and the [Arduino Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers); however, the lessons themselves should translate to almost any Arduino board—which is the beauty of the Arduino hardware-software ecosystem!
 
 ![Image showing both the Arduino Uno and the Arduino Leonardo](assets/images/ArduinoUnoVsArduinoLeonardo.png)
 
 Both the [Uno](https://store.arduino.cc/products/arduino-uno-rev3) and [Leonardo](https://store-usa.arduino.cc/products/arduino-leonardo-with-headers) have similar form factors, memory, clock speeds (16MHz), and GPIO pins (20 digital I/O pins); however, there are some differences:
 
-* The **Uno** uses the [**ATmega328P** microcontroller](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) while the **Leonardo** uses the [**ATmega32u4**](http://www.atmel.com/devices/atmega32u4.aspx)
+* The **Uno** uses the [**ATmega328P** microcontroller](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) while the **Leonardo** uses the [**ATmega32u4**](https://www.atmel.com/devices/atmega32u4.aspx)
 
 * The Leonardo's **ATmega32u4** has **built-in USB support** whereas the Uno actually has a second microcontroller (the ATmega16U2) to provide USB communication. On the Uno, pins 0 and 1 are used to communicate with the 16u2 co-processor, which can conflict with components plugged into those pins (so our examples will often avoid using pins 0 or 1, even on the Leonardo)
 
-* Because the **Leonardo** natively supports USB, it can be mounted as a **Human-Input Device** and thus used as a mouse, keyboard, or joystick.
+* Because the **Leonardo** natively supports USB, it can be mounted as a **Human Interface Device (HID)** and thus used as a mouse, keyboard, or joystick.
 
 * The **Leonardo** has **12 analog inputs** vs. the **Uno's 6**
 
@@ -65,7 +65,7 @@ The following tutorials are interactive and designed to be completed **in order*
 
     * [Done] Consider adding a debugging with Serial Monitor lesson -- maybe after Lesson 3? Update: I put it after Lesson 2
     * I'm tempted to put in a tone lesson after LED fading because we are just too LED heavy here imo.
-        - Putting it after LED fading (analogWrite) let's us bring up difference between changing PWM duty cycle (with analogWrite) and changing square wave freq (with tone)
+        - Putting it after LED fading (analogWrite) lets us bring up difference between changing PWM duty cycle (with analogWrite) and changing square wave freq (with tone)
         - Could demonstrate the above by hooking up a potentiometer that changes the PWM wave using a pot; then switch to changing freq with pot
         - Could also demonstrate by hooking up piezo two one pin that is 490 for PWM and another that is 980Hz
         - Some great ideas in our https://makeabilitylab.github.io/physcomp/esp32/tone.html lesson too
@@ -86,23 +86,23 @@ Introduces some basic debugging approaches for Arduino, with a specific focus on
 
 ### [Lesson 4: Fading an LED](led-fade.md)
 
-Introduces analog output, pulse-width modulation (PWM), and demonstrates how to gradually fade an LED on and off by using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)
+Introduces analog output, pulse-width modulation (PWM), and demonstrates how to gradually fade an LED on and off by using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
 
 ### [Lesson 5: Blinking an LED Part 2](led-blink2.md)
 
-Introduces the concept of using Arduino GPIO pins as either current **sources** or **sinks** by hooking up two LED circuit configurations: one circuit with the LED cathode towards GND and another with the LED anode towards GND.
+Introduces the concept of using Arduino GPIO pins as either current **sources** or **sinks** by hooking up two LED circuit configurations: one circuit with the LED anode facing the I/O pin (current source) and another with the LED cathode facing the I/O pin (current sink).
 
 ### [Lesson 6: RGB LEDs](rgb-led.md)
 
-Introduces RGB LEDs, using both common anode and cathode versions, and independently controlling brightness and hue.
+Introduces RGB LEDs, using both common anode and cathode versions, and controlling color output with `digitalWrite`.
 
 ### [Lesson 7: Crossfading RGB LEDs](rgb-led-fade.md)
 
-Shows how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and to use and load local `C/C++` libraries
+Shows how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and to use and load local `C/C++` libraries.
 
 ### [Lesson 8: Rate Blinking Multiple LEDs](led-blink3.md)
 
-In this lesson, we will learn how to blink multiple LEDs at different rates and build our first [C/C++ class](http://www.cplusplus.com/doc/tutorial/classes/), which will greatly simplify our code and, as an added bonus, reduce its size by eliminating code redundancy.
+In this lesson, we will learn how to blink multiple LEDs at different rates and build our first [C/C++ class](https://en.cppreference.com/w/cpp/language/classes), which will greatly simplify our code and, as an added bonus, reduce its size by eliminating code redundancy.
 
 ## Intro to Input
 

@@ -59,6 +59,17 @@ Both the [Uno](https://store.arduino.cc/products/arduino-uno-rev3) and [Leonardo
 
 In the lessons themselves, we'll mark specific differences between the Uno and Leonardo, when relevant.
 
+## Arduino uses C++
+
+Before we begin, a note about Arduino's programming language.
+
+Arduino programs ("sketches" in Arduino parlance) are written in standard C++ (which inherently supports C). When you compile a sketch, the Arduino IDE processes the code and feeds it to a standard GNU C++ compiler (such as avr-g++ for traditional AVR boards or an ARM equivalent for newer ones).
+
+What is often referred to as the "Arduino language" is simply C++ combined with the Arduino core libraries. These libraries provide the built-in functions (like `digitalWrite()`, `analogRead()`, *etc.*) and the hidden `main()` function that calls your `setup()` and `loop()`, abstracting away the raw microcontroller register manipulations.
+
+{: .note }
+**Programming background** In our lessons, it's helpful to have some programming experience, especially with a typed, compiled language like C++, Java, C#; however, it is not absolutely necessary. The programming requirements in the intro lessons are relatively minor though you should know how to use loops, conditionals, functions, variables, and more. As we move to the more advanced lessons, we expect stronger programming background.
+
 Now, let the fun begin! 🚀🥳
 
 ## Intro to Output

@@ -17,7 +17,7 @@ usetocbot: true
 {:toc}
 ---
 
-Welcome 👋 to the second module in your Physical Computing journey: **Introduction to Microcontrollers** (using Arduino). Here, you will learn about [digital output](./led-blink.md), [analog output](./led-fade.md), [digital input](./buttons.md), and [analog input](./potentiometers.md) and build interesting musical instruments along the way from a [button piano](./piano.md) to a [Jedi-force instrument](./force-sensitive-resistors.md#jedi-force-instrument)! Get started with our first lesson: [L1: Turning on an LED](./led-on.md) and start building! ⚒🛠
+Welcome 👋 to the second module in your Physical Computing journey: **Introduction to Microcontrollers** using Arduino. Here, you will learn about [digital output](./led-blink.md), [analog output](./led-fade.md), [digital input](./buttons.md), and [analog input](./potentiometers.md) and build interesting musical instruments along the way from a [button piano](./piano.md) to a [Jedi-force instrument](./force-sensitive-resistors.md#jedi-force-instrument)! Get started with our first lesson: [L1: Turning on an LED](./led-on.md) and start building! ⚒🛠
 
 {: .note }
 **New to this interactive textbook?** While you can start here (with learning Arduino, woohoo! 🥳), we highly recommend completing [Intro to Electronics](../electronics/index.md) first. We frequently build on fundamental concepts from that module—like voltage, current, resistance, and circuit analysis—without re-explaining them here.

@@ -26,7 +26,7 @@ Welcome 👋 to the second module in your Physical Computing journey: **Introduc
 
 <!-- Add an Intro to Microcontrollers, talk about Arduino vs. RaspPi -->
 
-## Why this Tutorial Series?
+## Why this Learning Series?
 
 There are many Arduino resources online, many good, some bad. Our two favorites are, perhaps, [Adafruit’s 18-Step Guide](https://learn.adafruit.com/series/learn-arduino) and Jeremy Blum's [Exploring Arduino: Tools and Techniques for Engineering Wizardry](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP51311244450001451), 2nd Edition, Wiley, 2020. See our [Resources](../resources/index.md) page for more.
 

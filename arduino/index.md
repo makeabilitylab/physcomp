@@ -64,7 +64,7 @@ Now, let the fun begin! 🚀🥳
 ## Intro to Output
 <!-- TODO: ADD a fun and catchy video that highlights something awesome from this output series to put here -->
 
-🚦 **Start Here!** We highly recommend completing the [Output lessons](intro-output.md) first to build a solid foundation before moving on to the [Input series](intro-input.md).
+🚦 **Start Here!** We highly recommend completing the [Output lessons](intro-output.md) first to build a solid foundation before moving on to the [Input series](intro-input.md). We've learned from years of teaching this material that output is easier to start with than input!
 {: .important }
 
 In the [Output lesson series](intro-output.md), you will learn how to programmatically control Arduino's GPIO pins to drive LEDs, produce colors with RGB LEDs, and build your first C++ class. Topics include digital output (`digitalWrite`), debugging with `Serial.print`, analog output (`analogWrite` and PWM), current sourcing vs. sinking, and multi-rate blinking without `delay()`.

@@ -57,7 +57,7 @@ You can always return to our [breadboard](../electronics/breadboards.md) lesson 
 Next, we'll write `C/C++` code for the Arduino's microcontroller to turn on the LED from Pin 3, which will programmatically set Pin 3 to 5V.
 
 {: .note }
-The Arduino software is open source and consists of a development environment (called an IDE) and core libraries. The core libraries are written in the `C` and `C++` programming language and compiled using avr-gcc and AVR libc. The source code for Arduino is hosted on [GitHub](https://github.com/arduino). The libraries for AVR microcontrollers like the ATmega328 (which the Arduino Uno uses) is in [GitHub here](https://github.com/arduino/ArduinoCore-avr).
+The Arduino software is open source and consists of a development environment (called an IDE) and core libraries. The core libraries are written in `C` and `C++` and compiled using avr-gcc and AVR libc. The source code for Arduino is hosted on [GitHub](https://github.com/arduino). The core libraries for AVR microcontrollers—such as the ATmega328P (which the Arduino Uno uses) and the ATmega32U4 (which the Arduino Leonardo uses)—are shared in the [ArduinoCore-avr GitHub repository](https://github.com/arduino/ArduinoCore-avr).
 
 ## Get the Arduino IDE
 
@@ -91,16 +91,16 @@ And here's a version with the digital I/O pins highlighted for emphasis:
 
 ![The official Arduino Uno pinout diagram with the 20 digital I/O pins marked](assets/images/ArduinoUno_OfficialPinOutDiagram_DigitalIOPinsMarked.png)
 
-It's the same with the Arduino Leonardo (see [official "printout diagram" here](https://content.arduino.cc/assets/Pinout-Leonardo_latest.pdf)):
+It's the same with the Arduino Leonardo (see [official pinout diagram here](https://content.arduino.cc/assets/Pinout-Leonardo_latest.pdf)):
 
 ![The official Arduino Leonardo pinout diagram with the 20 digital I/O pins marked](assets/images/ArduinoLeonardo_OfficialPinOutDiagram_DigitalIOPinsMarked.png)
 
 Finally, here's a [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) demonstrating the use of all 20 digital I/O pins as digital output.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Tinkercad simulation showing all 20 GPIO pins used as digital output on an Arduino Uno">
   <source src="assets/movies/ArduinoUno_UsingAll20GPIOPinsAsDigitalOutput.mp4" type="video/mp4" />
 </video>
-**Video.** A [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) showing how to use all 20 GPIO pins as digital output on the Arduino Uno. You can try the simulation yourself [here](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) and view the code on [GitHub here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkAll20Pins/BlinkAll20Pins.ino).
+**Figure.** A [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) showing how to use all 20 GPIO pins as digital output on the Arduino Uno. You can try the simulation yourself [here](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) and view the code on [GitHub here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkAll20Pins/BlinkAll20Pins.ino).
 {: .fs-1 }
 
 ### What do we mean by HIGH and LOW?
@@ -119,9 +119,9 @@ NYU's ITP course has a [nice tutorial](https://itp.nyu.edu/physcomp/labs/motors-
 
 ### What's the maximum amount of current a digital output pin can supply?
 
-The Arduino Uno uses the [ATmega328P](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller and the Leonardo uses the [ATmega32U4](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)—both which can supply an absolute maximum of 0.04A (40 mA) per digital output pin or about ~4 LEDs in parallel (with 10mA per branch).
+The Arduino Uno uses the [ATmega328P](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) microcontroller and the Leonardo uses the [ATmega32U4](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)—both which can supply an absolute maximum of 0.04A (40 mA) per digital output pin or about ~4 LEDs in parallel (with 10mA per branch).
 
-According to Section 28.1 in the [ATmega328P datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf), anything beyond these limits "*may cause permanent damage to the chip*". The maximum total current draw **across all I/O pins** together should not exceed 200mA. This is the same limit for the [ATmega32U4](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf).
+According to Section 28.1 in the [ATmega328P datasheet](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf), anything beyond these limits "*may cause permanent damage to the chip*". The maximum total current draw **across all I/O pins** together should not exceed 200mA. This is the same limit for the [ATmega32U4](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf).
 
 Again, this limit is not a concern for our introductory lessons (unless you deviate significantly from them).
 
@@ -131,10 +131,10 @@ You may be thinking: "um, what?" That's OK. In our years of teaching, we have ha
 
 ### Internally, how does the Arduino set a pin HIGH or LOW?
 
-Though it's not necessary to understand the following in order to *use* an Arduino, you might be curious about how the Arduino controls the voltage output of a pin? Using transistors. As the (simplified) schematic below highlights, a digital output pin provides either $$V_{DD}$$ (5V on the Uno and Leonardo) or $$GND$$ (0V) by dynamically turning on/off transistors (an inverter ensures that only one transistor can be on at a time).
+Though it's not necessary to understand the following in order to *use* an Arduino, you might be curious about how the Arduino controls the voltage output of a pin. Understanding this also helps explain why you shouldn't connect an output pin directly to $$V_{CC}$$ or `GND`. The answer: transistors. As the (simplified) schematic below highlights, a digital output pin provides either $$V_{DD}$$ (5V on the Uno and Leonardo) or $$GND$$ (0V) by dynamically turning on/off transistors (an inverter ensures that only one transistor can be on at a time).
 
 ![A simplified schematic by Chuan-Zheng Lee showing that an output pin provides VDD or 0 V by making a connection to VDD or ground via a transistor](assets/images/Arduino_DigitalOutputPin_Schematic.png)
-Schematic by Chuan-Zheng Lee for his ["Intro to Arduino"](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/arduino.pdf) course at Stanford.
+**Figure.** Schematic by Chuan-Zheng Lee for his ["Intro to Arduino"](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides/arduino.pdf) course at Stanford.
 {: .fs-1 }
 
 ## Turn on LED programmatically via Pin 3
@@ -149,7 +149,7 @@ Start a new sketch in the Arduino IDE:
 
 ### Step 2: Set the pinMode for Pin 3
 
-Because the 20 digital I/O pins can used for **either** **input** or **output**, we need to specify that Pin 3 should be used for *output*. That is, we want the Arduino to **output** a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
+Because the 20 digital I/O pins can be used for **either** **input** or **output**, we need to specify that Pin 3 should be used for *output*. That is, we want the Arduino to **output** a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
 
 {% highlight C %}
 void setup() {
@@ -186,15 +186,15 @@ Finally, upload the code to the Arduino by clicking on the "right arrow" button 
 
 Once uploading is complete, the code automatically runs on the Arduino and the LED should immediately turn on!
 
-<video controls="controls">
+<video controls="controls" aria-label="Video showing the LED turning on after uploading code to the Arduino">
   <source src="assets/movies/ArduinoUno_TurnOnLEDPin3_WorkbenchWithCode-Cropped.mov" type="video/mp4">
 </video>
-**Note:** On my Windows machine, I use a [dark theme](https://create.arduino.cc/projecthub/konradhtc/one-dark-arduino-modern-dark-theme-for-arduino-ide-2fca81) for the Arduino IDE.
+**Figure.** Uploading and running the LED-on code on an Arduino Uno. Note: on my Windows machine, I use a [dark theme](https://create.arduino.cc/projecthub/konradhtc/one-dark-arduino-modern-dark-theme-for-arduino-ide-2fca81) for the Arduino IDE. Since the 2.x version of the IDE, there are several pre-installed dark themes.
 {: .fs-1 }
 
 Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`—hopefully, this matches your conceptual understanding as well:
 
-![Animation showing the LED on Pin 3 turning on)](assets/movies/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
+![Animation showing the LED on Pin 3 turning on](assets/movies/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
 
 ## Turn on and off the LED programmatically via Pin 3
 
@@ -237,7 +237,7 @@ void loop() {
 
 We're done! Now, compile and upload the code and see it run!
 
-<video controls="controls">
+<video controls="controls" aria-label="Video showing the LED blinking on and off with the Arduino code visible">
   <source src="assets/movies/BlinkWithCodeAndWorkbenchCamera.mp4" type="video/mp4">
 </video>
 
@@ -262,21 +262,21 @@ void loop() {
 
 ### Walking through the code
 
-How does this work? See the code walkthrough video below:
+How does this work? See the code walkthrough video below. The key idea is that `setup()` runs once to configure Pin 3 as output, then `loop()` runs repeatedly: it sets Pin 3 `HIGH` (turning the LED on), waits one second, sets Pin 3 `LOW` (turning the LED off), waits another second, and then `loop()` is automatically called again—creating a continuous blink.
 
-<video controls="controls">
+<video controls="controls" aria-label="Animated walkthrough of the Blink code executing on an Arduino">
   <source src="assets/movies/Arduino_BlinkWithCode_Pin3.mp4" type="video/mp4">
 </video>
 
 ### Our Blink code is in GitHub
 
-You can access our Blink code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). A "live" version is also embedded directly from the GitHub repo below.
+You can access our Blink code in our [Arduino GitHub repository](https://github.com/makeabilitylab/arduino). A "live" version is also embedded directly from the GitHub repo below.
 
 <!-- gist-it is down, so now using emgithub -->
 <!-- <script src="https://gist-it.appspot.com/https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino?footer=minimal"></script> -->
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fjonfroehlich%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlink%2FBlink.ino&style=github&showCopy=on"></script>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FBasics%2FdigitalWrite%2FBlink%2FBlink.ino&style=github&showCopy=on"></script>
 
-This [source code](https://github.com/jonfroehlich/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino) is on GitHub.
+This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/Blink/Blink.ino) is on GitHub.
 {: .fs-1 }
 
 ## What does the digital output look like?
@@ -285,15 +285,15 @@ A common and important question when first working with microcontrollers is: wha
 
 In your mind, imagine what the voltage out of Pin 3 looks like over time (the x-axis is time and the y-axis is voltage output). You should envision a 5V output signal `HIGH` for the delay length followed by a 0V output signal, which is `LOW` delay length. Indeed, this type of graph is exactly what an oscilloscope is for—it graphs voltage values over time.
 
-Using Tinkercad Circuits, we built the same LED-based circuit as above running the Blink program and hooked it up to an oscilliscope. Then, we recorded different `delay` values (400, 200, and 50) and created this movie. Is the graph what you expected? Why or why not. We suggest opening the video in its own tab or viewing it in fullscreen to see the details.
+Using Tinkercad Circuits, we built the same LED-based circuit as above running the Blink program and hooked it up to an oscilloscope. Then, we recorded different `delay` values (400, 200, and 50) and created this movie. Is the graph what you expected? Why or why not? We suggest opening the video in its own tab or viewing it in fullscreen to see the details.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Tinkercad oscilloscope showing LED blink waveform at different delay values">
   <source src="assets/movies/LedBlinkOscilliscope_TinkercadCircuits_Trim.mp4" type="video/mp4" />
 </video>
-**Video.** A video of this [Tinkercad project](https://www.tinkercad.com/things/17q2GFeYwP9) with three different `delay` values for both `HIGH` and `LOW`: 400, 200, and 50.
+**Figure.** A video of this [Tinkercad project](https://www.tinkercad.com/things/17q2GFeYwP9) with three different `delay` values for both `HIGH` and `LOW`: 400, 200, and 50.
 {: .fs-1 }
 
-We encourage you to play with this [Tinkercad project ](https://www.tinkercad.com/things/17q2GFeYwP9)yourself and investigate different delays and their output on the oscilloscope. 
+We encourage you to play with this [Tinkercad project](https://www.tinkercad.com/things/17q2GFeYwP9) yourself and investigate different delays and their output on the oscilloscope. 
 
 <iframe width="725" height="453" src="https://www.tinkercad.com/embed/17q2GFeYwP9?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
@@ -301,39 +301,37 @@ We encourage you to play with this [Tinkercad project ](https://www.tinkercad.co
 
 We duplicated the above Tinkercad setup (circuit + oscilloscope) in our laboratory and recorded a video. Notably, we used slightly different [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/SettableBlinkWithoutDelay/SettableBlinkWithoutDelay.ino) that allows us to set the blink frequency by rotating a [potentiometer](../electronics/variable-resistors.md).
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/_ByA8Q-hL8I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/_ByA8Q-hL8I" title="Video showing digital output voltage waveform at different blinking frequencies" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-**Video** A [video](https://youtu.be/_ByA8Q-hL8I) showing the digital output voltage waveform at different "blinking" frequencies.
+**Figure.** A [video](https://youtu.be/_ByA8Q-hL8I) showing the digital output voltage waveform at different "blinking" frequencies.
 {: .fs-1 }
 
 You can play with the Tinkercad version of this experiment [here](https://www.tinkercad.com/things/42O2UlRJFrZ):
 
-![](assets/images/SettableBlinkLedOnAndOffWithOscilliscope_Tinkercad.png)
-**Figure**. Tinkercad Circuits version of the settable delay circuit+code ([link](https://www.tinkercad.com/things/42O2UlRJFrZ)).
+![Screenshot of the Tinkercad Circuits settable blink delay project with oscilloscope](assets/images/SettableBlinkLedOnAndOffWithOscilliscope_Tinkercad.png)
+**Figure.** Tinkercad Circuits version of the settable delay circuit+code ([link](https://www.tinkercad.com/things/42O2UlRJFrZ)).
 {: .fs-1 }
 
 ## Mental model check: code is loaded and running on the Arduino
 
 As a quick mental model check, it's worth emphasizing that once you upload the code to your Arduino, you no longer need the USB cable. Why? Because a compiled version of the code is stored **locally** on your Arduino and stays there even when the Arduino loses power. Your Arduino *is* the computer! So, you could use some other power source like a 9V battery plugged in to the barrel jack port.
 
-<video controls="controls">
+Note: when you upload a *new* program, it replaces the previous one—only one program can be stored on the Arduino at a time. You don't need to manually erase the old program first.
+
+<video controls="controls" aria-label="Video showing the Arduino running the Blink program powered by a 9V battery">
   <source src="assets/movies/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">
 </video>
 
-## Blink without using delays()
+## Blink without using delay()
 
 Before moving on, it's worth emphasizing that, in general, long `delay()` calls should be avoided. Why? Because while in a `delay()`, the Arduino is no longer responsive. So, for example, imagine updating your Blink program to also react to a button press from the user. If the user happens to press the button while the Arduino is in a `delay()`, your program would never be able to process that a button was pressed! This is a problem.
 
----
-**NOTE:**
+{: .note }
+> It's OK to stop here and move on to the [next lesson](serial-print.md). It's sufficient to be **aware** that long `delay()` calls can be dangerous and should probably be avoided. However, if you're curious, you can continue this sub-section to see a Blink example that works without delays. We will return to this concept for our final [Intro to Output](intro-output.md) lesson on [multi-rate blinking LEDs](led-blink3.md).
+>
+> If you want to know how `delay()` actually works, read ["What does delay() actually do"](inside-arduino.md#what-does-delay-actually-do) in our [Inside Arduino guide](inside-arduino.md).
 
-It's OK to stop here and move on to the [next lesson](serial-print.md). It's sufficient to be **aware** that long `delay()` calls can be dangerous and should probably be avoided. However, if you're curious, you can continue this sub-section to see a Blink example that works without delays. We will return to this concept for our final [Intro to Output](intro-output.md) lesson on [multi-rate blinking LEDs](led-blink3.md).
-
-If you want to know how `delay()` actually works, read ["What does delay() actually do"](inside-arduino.md#what-does-delay-actually-do) in our [Inside Arduino guide](#inside-arduino).
-
----
-
-Because `delay()` usage can be so troublesome, as part of their introductory tutorial series, Arduino publishes another Blink example with a tutorial called [BlinkWithoutDelay](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay). As with the regular [Blink](http://www.arduino.cc/en/Tutorial/Blink), this example can be accessed directly in the Arduino IDE:
+Because `delay()` usage can be so troublesome, as part of their introductory tutorial series, Arduino publishes another Blink example with a tutorial called [BlinkWithoutDelay](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay). As with the regular [Blink](https://www.arduino.cc/en/Tutorial/Blink), this example can be accessed directly in the Arduino IDE:
 
 ![Screenshot of accessing the official BlinkWithoutDelay example directly from the Arduino IDE](assets/images/ArduinoIDE_FileMenuToBlinkWithoutDelayExample.png)
 
@@ -372,6 +370,14 @@ We've also made our own [BlinkWithoutDelay](https://github.com/makeabilitylab/ar
 
 This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino) is on GitHub.
 {: .fs-1 }
+
+## Exercises
+
+Want to go further? Here are some design challenges to reinforce what you've learned:
+
+- **Change the blink rate.** Modify the `delay` values to 250ms or 100ms. At what point does the blinking become imperceptible to your eye?
+- **Asymmetric blink.** Try using different delay values for `HIGH` and `LOW` (*e.g.,* 200ms on, 800ms off). How does this change the perceived brightness?
+- **Morse code.** Can you make the LED blink out "SOS" in [Morse code](https://en.wikipedia.org/wiki/Morse_code) (three short blinks, three long blinks, three short blinks)?
 
 ## Next Lesson
 

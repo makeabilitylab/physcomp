@@ -205,7 +205,7 @@ I attempted to "stress" test the maximum values a bit using the USB port on an o
 
 ## Stepping down power supply voltages
 
-If we plug in a 7-12V wall adapter or a 9V battery to the Arduino's barrel jack, then how does the Arduino convert these higher voltages to 5V? Using a component called a [voltage regulator](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/#Voltage_Regulator), which can take in a range of DC voltages and step it down (but not up) to a stable constant voltage. You can buy and use voltage regulators in your own projects. If you want to learn more about about the Arduino Uno's power supply sub-system, read this [technobyte blog post](https://www.technobyte.org/arduino-uno-power-supply-arduino-hardware-core/).
+If we plug in a 7-12V wall adapter or a 9V battery to the Arduino's barrel jack, then how does the Arduino convert these higher voltages to 5V? Using a component called a [voltage regulator](https://itp.nyu.edu/physcomp/labs/labs-electronics/components/#Voltage_Regulator), which can take in a range of DC voltages and step it down (but not up) to a stable constant voltage. The Arduino Uno uses a linear voltage regulator (the NCP1117), which dissipates the excess voltage as heat—this is why your Arduino can get warm when powered by a higher-voltage supply. You can buy and use voltage regulators in your own projects. If you want to learn more about the Arduino Uno's power supply sub-system, read this [technobyte blog post](https://www.technobyte.org/arduino-uno-power-supply-arduino-hardware-core/).
 
 
 ## How can we make the LED less bright?
@@ -307,7 +307,17 @@ If you want to know more about how to use a multimeter, here are a few "getting 
 
 They have multimeters in [Tinkercad Circuits](https://www.tinkercad.com/things/d6wWCmUhl7g), so you can also use and play with them there (if you do not have one at home).
 
+## Exercises
+
+Want to go further? Here are some things to try:
+
+- **Swap in different LED colors.** Try a green or blue LED with the same 220Ω resistor. Are they the same brightness as the red LED? Why or why not? (Hint: different LED colors have different forward voltages $$V_f$$.)
+- **Remove the resistor.** What happens if you connect the LED directly to the 5V pin without a current-limiting resistor? (You can try this briefly, but don't leave it connected—the excess current can damage the LED over time.)
+- **Reverse the LED.** Connect the LED backwards (anode to GND, cathode to 5V). What happens and why?
+
 ## Next Lesson
+
+In this lesson, we learned that Arduino's power pins can supply 5V and 3.3V, that LEDs always need a current-limiting resistor, and that we can control LED brightness by changing either the supply voltage or the resistance. We also practiced analyzing a simple circuit using Ohm's Law and Kirchhoff's Voltage Law.
 
 In the next lesson, we will learn how to programmatically control the output voltage of a digital I/O pin to switch between `LOW` (0V) or `HIGH` (5V) using [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
 

@@ -251,7 +251,7 @@ cite {
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   5. CODE BLOCKS
+   5. CODE BLOCKS & NOTES
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* Add breathing room below fenced code blocks */
@@ -262,6 +262,47 @@ figure.highlight {
 /* Gist-it embeds use Google Prettify, which defaults to a large font size */
 .gist-it-gist {
   font-size: small;
+}
+
+/* ==========================================================================
+   Code formatting overrides for just-the-docs
+   Restores faint gray backgrounds and improves inline code visibility
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Block-level Code (<pre> blocks)
+   -------------------------------------------------------------------------- */
+
+/* Target the specific just-the-docs <figure> structure for code blocks */
+figure.highlight pre,
+.highlight pre {
+  background-color: #f4f5f7 !important; /* Faint gray background */
+  border: none !important;              /* Remove the dark default border */
+  border-radius: 4px;
+}
+
+/* Ensure the inline text container inside the block stays transparent */
+figure.highlight pre code,
+.highlight pre code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0;
+  font-size: inherit;
+  color: inherit !important;            /* Let the Rouge lexer handle syntax coloring */
+}
+
+/* --------------------------------------------------------------------------
+   Inline Code (`loop()`, etc.)
+   -------------------------------------------------------------------------- */
+
+/* Target inline code snippets outside of <pre> blocks */
+code {
+  background-color: #f4f5f7 !important; /* Faint gray background */
+  border: 1px solid #e1e4e8 !important; /* Subtle gray border */
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+  color: #c7254e !important;            /* Classic dark pink/red text to stand out */
 }
 
 

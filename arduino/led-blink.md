@@ -18,6 +18,12 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+<!-- <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing how blink LED program works">
+  <source src="assets/movies/Arduino_BlinkWithCode_Pin3_web_muted.mp4" type="video/mp4" />
+</video>
+**Figure.** In this lesson, we'll learn how to blink an LED programmatically with Arduino and how and why this works!
+{: .fs-1 } -->
+
 In our [first lesson](led-on.md), we directly hooked up an LED circuit to the Arduino's 5V and 3.3V pins. While this enabled us to learn about Arduino's supply voltage and GND pins and gave us practical experience wiring electrical components into the Arduino ports, it was admittedly, a toy exercise.
 
 In this lesson, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programmatically* controlling the output voltage on one of Arduino's GPIO pins. This begins our entrée into the two key aspects of working with microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.

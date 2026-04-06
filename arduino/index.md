@@ -61,9 +61,9 @@ In the lessons themselves, we'll mark specific differences between the Uno and L
 
 ## Arduino uses C++
 
-Before we begin, a note about Arduino's programming language.
+Before we begin, a note about **Arduino's programming language**.
 
-Arduino programs ("sketches" in Arduino parlance) are written in standard C++ (which inherently supports C). When you compile a sketch, the Arduino IDE processes the code and feeds it to a standard GNU C++ compiler (such as avr-g++ for traditional AVR boards or an ARM equivalent for newer ones).
+Arduino programs—aka "sketches" in Arduino parlance—are written in standard C++ (which inherently supports C). When you compile a sketch, the Arduino IDE processes the code and feeds it to a standard GNU C++ compiler (such as avr-g++ for traditional AVR boards or an ARM equivalent for newer ones).
 
 What is often referred to as the "Arduino language" is simply C++ combined with the Arduino core libraries. These libraries provide the built-in functions (like `digitalWrite()`, `analogRead()`, *etc.*) and the hidden `main()` function that calls your `setup()` and `loop()`, abstracting away the raw microcontroller register manipulations.
 

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L5&#58; Blinking Two LEDs
+nav_order: 6
 parent: Output
 grand_parent: Intro to Arduino
 usemathjax: true
@@ -42,7 +43,7 @@ Our materials are *almost* the same as before but this time, we are going to mak
 
 We will increasingly be using our breadboards in these lessons so now is a good opportunity to revisit how to use them. If you're unfamiliar please read our [breadboarding guide](../electronics/breadboards.md) and watch the following [video](https://youtu.be/6WReFkfrUIk):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/6WReFkfrUIk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/6WReFkfrUIk" title="Video explaining how breadboards work" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Making the circuit
 
@@ -54,23 +55,23 @@ We will increasingly be using our breadboards in these lessons so now is a good 
 
 Now let's wire up the exact same circuit as before (*e.g.,* [LED Blink](led-blink.md) and [LED Fade](led-fade.md)) but this time we'll use a breadboard. Make sure the LED anode (the long leg) is facing Pin 3.
 
-![Diagram showing the LED circuit with with LED anode connected to Pin 3 and the resistor connected to the LED cathode and then to GND](assets/images/ArduinoUnoLEDBlink2_Circuit_Step2WithSchematic.png)
+![Diagram showing the LED circuit with LED anode connected to Pin 3 and the resistor connected to the LED cathode and then to GND](assets/images/ArduinoUnoLEDBlink2_Circuit_Step2WithSchematic.png)
 
 ### Step 3: Wire up the second LED circuit
 
 Now wire up the second LED circuit. This time, however, connect the LED cathode (short leg) to Pin 4 and the resistor to the 5V rail.
 
-![Diagram showing the LED circuit with with LED cathode connected to Pin 4 and the resistor connected to the LED anode and then to GND](assets/images/ArduinoUno_LEDBlink2_Circuit_Step3WithSchematic.png.png)
+![Diagram showing the LED circuit with LED cathode connected to Pin 4 and the resistor connected to the LED anode and then to 5V](assets/images/ArduinoUno_LEDBlink2_Circuit_Step3WithSchematic.png.png)
 
 ## Writing the code: blinking Pins 3 and 4
 
 Let's write code to blink the LEDs hooked up to Pins 3 and 4.
 
-Importantly, the Pin 3 circuit (**LED Circuit 1** i) will turn ***on*** with `digitalWrite(3, HIGH)` whereas the Pin 4 circuit (**LED Circuit 2**) will turn ***off*** with `digitalWrite(4, HIGH)`. Why? Recall that current always flows from **high** voltage potential to **low** voltage potential. 
+Importantly, the Pin 3 circuit (**LED Circuit 1**) will turn ***on*** with `digitalWrite(3, HIGH)` whereas the Pin 4 circuit (**LED Circuit 2**) will turn ***off*** with `digitalWrite(4, HIGH)`. Why? Recall that current always flows from **high** voltage potential to **low** voltage potential. 
 
 When Pin 3 is `HIGH` (5V), there is a voltage difference between Pin 3 and `GND` so current flows from Pin 3 to ground. When Pin 4 is `HIGH` (5V), however, there is no voltage difference across the circuit (from Pin 4 to 5V) and thus, no current. This behavior is illustrated in the animation below.
 
-<video controls="controls">
+<video controls="controls" aria-label="Animation showing current flow in both LED circuits when pins are driven HIGH and LOW">
   <source src="assets/movies/Arduino_Blink2Animation_Pins3And4.mp4" type="video/mp4">
 </video>
 
@@ -116,13 +117,13 @@ We did it! Now compile and upload the code.
 
 And here's a top-down video with the code window:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/q6KcPYfum7c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/q6KcPYfum7c" title="Top-down workbench video showing two LEDs blinking with current sourcing and sinking" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
 
 ## Our Blink2 code on GitHub
 
-You can access our Blink2 code in our [Arduino GitHub repository](https://github.com/jonfroehlich/arduino). It's also displayed below:
+You can access our Blink2 code in our [Arduino GitHub repository](https://github.com/makeabilitylab/arduino). It's also displayed below:
 
 <!-- gist-it is down, so now using emgithub -->
 <!-- <script src="https://gist-it.appspot.com/{{ site.arduino_github_baseurl }}/blob/master/Basics/digitalWrite/Blink2LEDs/Blink2LEDs.ino?footer=minimal"></script> -->
@@ -132,7 +133,17 @@ You can access our Blink2 code in our [Arduino GitHub repository](https://github
 This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/Blink2LEDs/Blink2LEDs.ino) is on GitHub.
 {: .fs-1 }
 
+## Exercises
+
+Want to go further? Here are some things to try:
+
+- **Same configuration.** What happens if you wire *both* LEDs in the current-source configuration (anode toward the pin, cathode toward GND)? How does the blinking behavior change compared to having one source and one sink?
+- **Different blink rates.** Try using different delay values for turning each LED on and off. Can you make LED Circuit 1 blink faster than LED Circuit 2 using this code structure? What limitations do you run into? (Hint: we'll solve this properly in [L8: Rate Blinking LEDs](led-blink3.md).)
+- **Add Serial debugging.** Add `Serial.print` statements to output which LEDs are on and off at each step. Use the [Serial Plotter](serial-print.md#visualizing-data-with-the-serial-plotter) to graph the pin states—you should see two inverted square waves.
+
 ## Next Lesson
+
+In this lesson, we learned that Arduino GPIO pins can act as either **current sources** (driving current *out* of the pin) or **current sinks** (allowing current to flow *into* the pin). This is a fundamental concept that will come up again when we work with Common Anode RGB LEDs in the next lesson.
 
 In the [next lesson](rgb-led.md), we will use a new component—an RGB LED—to output a variety of LED colors beyond just red and learn about the difference and how to use Common Anode *vs.* Common Cathode RGB LED designs.
 

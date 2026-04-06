@@ -351,7 +351,7 @@ Congratulations! You've graduated from basic blinking to state-machine-driven, o
 
 ## Next Lesson
 
-We did it! This completes our [Intro to Output](intro-output.md) series. Let's now begin [Intro to Input](intro-output.md) to learn about buttons, sensors, voltage dividers, and more!
+We did it! This completes our [Intro to Output](intro-output.md) series. Let's now begin [Intro to Input](intro-input.md) to learn about buttons, sensors, voltage dividers, and more!
 
 <!-- In the next lesson, we'll learn about making sound with passive piezoelectric buzzers and the [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/).
 

@@ -267,6 +267,14 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 <!-- TODO: add in workbench video of common anode version -->
 
+## Lesson Summary
+
+In this lesson, you added color to your output capabilities! You learned:
+* That an RGB LED actually contains three separate microscopic LEDs (Red, Green, Blue) in one package.
+* The critical difference between **Common Cathode** (shares a ground leg) and **Common Anode** (shares a 5V supply leg) components.
+* How to wire and write code for a Common Cathode RGB LED (driving pins `HIGH` to turn on colors).
+* How to adapt code for a Common Anode RGB LED using your knowledge of current sinking (driving pins `LOW` to turn on colors).
+
 ## Next Lesson
 
 In the next lesson, we will learn how to fade between RGB colors and how to convert to the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness.

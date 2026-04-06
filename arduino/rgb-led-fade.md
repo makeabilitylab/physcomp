@@ -263,6 +263,14 @@ CrossFadeHue
 - **New crossfade algorithms**. Develop your own crossfade algorithm to fade between colors. Play around with hue, saturation, and lightness. How do they seem to affect the RGB LED?
 - **Fade multiple RGB LEDs**. How could we modify our code to fade multiple RGB LEDs at different rates? **Hint:** We'll work on one potential solution in the [next lesson](led-blink3.md)
 
+## Lesson Summary
+
+In this lesson, you explored advanced color control and multi-file programming. You learned:
+* How to use arrays, `enums`, and state-tracking variables to create a complex, non-blocking crossfade algorithm.
+* Why the **HSL (Hue, Saturation, Lightness)** color space is often far more intuitive for programmatic color manipulation than the raw RGB color space.
+* The trade-offs of using floating-point math (`floats`) on 8-bit microcontrollers like the ATmega328.
+* How to properly import, structure, and use local external `C/C++` libraries (`.h` and `.cpp` files) within an Arduino sketch.
+
 ## Next Lesson
 
 For our next and final [Intro to Output](intro-output.md) lesson, we are going to learn how to blink multiple LEDs at different frequencies, which is one of the most common questions on Arduino forums—perhaps because of the way the [official Arduino Blink tutorial](https://www.arduino.cc/en/tutorial/blink) uses `delay()` to control blinking rates (which is fine for one LED but doesn't scale). Before starting the lesson, it's worth thinking about how *you* would blink multiple frequencies at different rates. :)

@@ -315,9 +315,15 @@ Want to go further? Here are some things to try:
 - **Remove the resistor.** What happens if you connect the LED directly to the 5V pin without a current-limiting resistor? (You can try this briefly, but don't leave it connected—the excess current can damage the LED over time.)
 - **Reverse the LED.** Connect the LED backwards (anode to GND, cathode to 5V). What happens and why?
 
-## Next Lesson
+## Lesson Summary
 
-In this lesson, we learned that Arduino's power pins can supply 5V and 3.3V, that LEDs always need a current-limiting resistor, and that we can control LED brightness by changing either the supply voltage or the resistance. We also practiced analyzing a simple circuit using Ohm's Law and Kirchhoff's Voltage Law.
+In this lesson, we established our first physical connections to the Arduino. You learned:
+* How to draw power directly from the Arduino's **5V** and **3.3V** supply pins.
+* How to limit current through an LED using a resistor to prevent it from burning out.
+* How Ohm's Law and Kirchhoff's Voltage Law apply to our basic LED circuits.
+* The maximum current draw limits for Arduino's power supply pins.
+
+## Next Lesson
 
 In the next lesson, we will learn how to programmatically control the output voltage of a digital I/O pin to switch between `LOW` (0V) or `HIGH` (5V) using [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
 

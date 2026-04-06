@@ -385,14 +385,20 @@ Want to go further? Here are some design challenges to reinforce what you've lea
 - **Asymmetric blink.** Try using different delay values for `HIGH` and `LOW` (*e.g.,* 200ms on, 800ms off). How does this change the perceived brightness?
 - **Morse code.** Can you make the LED blink out "SOS" in [Morse code](https://en.wikipedia.org/wiki/Morse_code) (three short blinks, three long blinks, three short blinks)?
 
+## Lesson Summary
+
+In this lesson, you wrote your very first Arduino program! You learned:
+* How to configure a digital I/O pin as an output using `pinMode()`.
+* How to programmatically set a pin to 5V (`HIGH`) or 0V (`LOW`) using `digitalWrite()`.
+* How to use `delay()` to pause program execution and create a blinking effect.
+* What a digital output signal actually looks like when viewed on an oscilloscope.
+* Why relying heavily on `delay()` can be problematic for more complex, responsive programs.
+
 ## Next Lesson
 
-In the [next lesson](serial-print.md), we are going to learn about a few basic debugging strategies before moving on to [analog output](led-fade.md), which lets us control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). 
-
-<!-- In the [next lesson](led-fade.md), we will learn how to control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). -->
+In the next lesson, we are going to learn about a few basic debugging strategies using [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) before moving on to [analog output](led-fade.md), which lets us control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
 
 <span class="fs-6">
 [Previous: Turning on an LED with Arduino](led-on.md){: .btn .btn-outline }
 [Next: Debugging Arduino code with Serial.print](serial-print.md){: .btn .btn-outline }
-<!-- [Next: Fading an LED with Arduino](led-fade.md){: .btn .btn-outline } -->
 </span>

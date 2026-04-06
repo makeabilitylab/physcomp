@@ -353,6 +353,15 @@ Want to go further? Here are some things to try:
 - **How fast is loop()?** Remove all `delay()` calls from a simple program that just prints `millis()`. How fast does `loop()` execute? What do you observe in the Serial Monitor?
 - **Experiment with baud rates.** Try changing the baud rate in `Serial.begin()` to `115200` instead of `9600`. What happens if the baud rate in your code doesn't match the baud rate selected in the Serial Monitor?
 
+## Lesson Summary
+
+Debugging is an essential skill for physical computing. In this lesson, you learned:
+* How to initialize serial communication using `Serial.begin()`.
+* How to send text and variable data from the Arduino to your computer using `Serial.print()` and `Serial.println()`.
+* How to use the Serial Monitor to view text-based debugging information in real-time.
+* How to use the Serial Plotter to visualize numerical data and thresholds graphically.
+* How to use the Arduino's `LED_BUILTIN` as a quick visual debugging tool without needing to wire external circuits.
+
 ## Next Lesson
 
 Now that we know a bit about debugging with [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) and the Serial Plotter, it's time to learn about ["analog output"](led-fade.md) on the Arduino. We'll be using `Serial.print()` throughout the rest of our tutorials.

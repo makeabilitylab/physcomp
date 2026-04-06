@@ -19,19 +19,18 @@ usetocbot: true
 {:toc}
 ---
 
-In the [previous lesson](led-blink.md), we learned how to turn on and off an LED using [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)—which worked by alternatively setting Pin 3 to 5V (`HIGH`) and 0V (`LOW`). In this lesson, we'll learn how to programmatically control the output voltage at finer gradations using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). More specifically, we will gradually fade an LED on and off like the animation below illustrates.
+In the [previous lesson](led-blink.md), we learned how to turn on and off an LED using [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)—which worked by alternately setting Pin 3 to 5V (`HIGH`) and 0V (`LOW`). In this lesson, we'll learn how to programmatically control the output voltage at finer gradations using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). More specifically, we will gradually fade an LED on and off like the animation below illustrates.
 
 ![Animation showing the LED on Pin 3 gradually fading on and off](assets/movies/Arduino_LEDFade_Pin3.gif)
-This illustrative animation doesn't show current (the yellow circles) only due to my limited animation skills. But hopefully you can visualize (in your mind) how the LED varies in brightness with current just the same. :)
+**Figure.** This illustrative animation doesn't show current (the yellow circles) only due to my limited animation skills. But hopefully you can visualize (in your mind) how the LED varies in brightness with current just the same. :)
 {: .fs-1 }
 
 ## Materials
 
-You will use the same materials as [before](led-blink.md), including the [Arduino IDE](https://www.arduino.cc/en/main/software) and a USB cable to upload your program from your computer to your Arduino.
+You will use the same materials as [before](led-blink.md), including the [Arduino IDE](https://www.arduino.cc/en/software) and a USB cable to upload your program from your computer to your Arduino.
 
 | Arduino | LED | Resistor |
 |:-----:|:-----:|:-----:|
-| Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Arduino Uno, Leonardo, or similar  | Red LED | 220Ω Resistor |
 
@@ -51,11 +50,11 @@ So, for this lesson, we **don't** have to change our circuit at all! You can kee
 
 ### A common confusion: analog I/O pins are different!
 
-A common confusion amongst beginners is mixing up the analog **output** pins and the analog **input** pins. For digital I/O, the input and output pins are the same and configurable to `INPUT` or `OUTPUT` using the [`pinMode`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, the analog I/O pins are different! See the figure below:
+A common confusion amongst beginners is mixing up the analog **output** pins and the analog **input** pins. For digital I/O, the input and output pins are the same and configurable to `INPUT` or `OUTPUT` using the [`pinMode`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command. However, the analog I/O pins are different! See the figure below:
 
 ![Annotated image of an Arduino Uno showing the difference between analog input and output pins](assets/images/ArduinoUno_AnalogInputAndOutputPinsAreDifferent.png)
 
-We'll learn about analog output in this lesson (using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)). In a future lesson, we will learn about analog input (using [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/))
+We'll learn about analog output in this lesson (using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)). In a future lesson, we will learn about analog input (using [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/)).
 
 ## Using analogWrite
 
@@ -71,7 +70,7 @@ To understand PWM, let's first remind ourselves of the characteristics of a squa
 
 And then take a look at [this video](https://www.youtube.com/watch?v=YmPziPfaByw) by Afrotechmods:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/YmPziPfaByw?si=ECb8GM_a0wfC-8U3" frameborder="0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/YmPziPfaByw?si=ECb8GM_a0wfC-8U3" title="Afrotechmods video explaining pulse-width modulation (PWM)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 So, what does the [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) function do, exactly? It simply varies the **duty cycle** of the output pin. That is, the 8-bit value (0-255) directly controls how long a 5V value is applied to the output pin during one "analog write" period. So, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). This fraction of the time the signal is `HIGH` is called the duty cycle.
 
@@ -100,7 +99,7 @@ See the image below (and [Arduino Docs](https://www.arduino.cc/reference/en/lang
 
 ### Manually implementing PWM
 
-Could I manually implement PWM on any pin simply by rapidly turning the pin on and off at a desired frequency and duty cycle? Yes, however, the PWM waveform could be jittery (unless you disable interrupts). See: [SecretsOfArduinoPWM](https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM) and [example code](https://playground.arduino.cc/Main/PWMallPins/) that manually implements a PWM loop.
+Could I manually implement PWM on any pin simply by rapidly turning the pin on and off at a desired frequency and duty cycle? Yes, however, the PWM waveform could be jittery (unless you disable interrupts). See: [Secrets of Arduino PWM](https://docs.arduino.cc/tutorials/generic/secrets-of-arduino-pwm) and [example code](https://playground.arduino.cc/Main/PWMallPins/) that manually implements a PWM loop.
 
 ### Learn more about PWM
 
@@ -108,7 +107,7 @@ To learn more about PWM, read this [guide from ITP NYU](https://itp.nyu.edu/phys
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/93554355" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
-<!-- TODO: in the future, it would be cool to hook up OLED to display analogOut value + show PWM signal on Oscilliscope with
+<!-- TODO: in the future, it would be cool to hook up OLED to display analogOut value + show PWM signal on oscilloscope with
      top-down workbench camera. Could do two versions: (1) with the code running as written and another (2) with a pot
      to control the PWM signal -->
 
@@ -171,11 +170,11 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Now, compile, upload, and run the code. After upload completes, the LED should immediately begin fading on then off. See video below.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/Y0mSFmW7G4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/Y0mSFmW7G4U" title="Video demonstrating LED fading with analogWrite on an Arduino" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Visualizing the voltage output
 
-What's actually happening on Pin 3 when we write out different values to `analogWrite`? Well, remember, basic Arduino boards like the Uno and Leonardo do not have the ability to write out intermediate voltages (they lack digital-to-analog converters or DACs). So, instead, they "fake it" by using pulse-width modulation (PWM) and modulating the *fraction* of time that a 5V output waveform is `HIGH` vs. `LOW`. This is called the **duty cycle**.
+What's **actually happening on Pin 3** when we write out different values to `analogWrite`? Well, remember, basic Arduino boards like the Uno and Leonardo do not have the ability to write out intermediate voltages (they lack digital-to-analog converters or DACs). So, instead, they "fake it" by using pulse-width modulation (PWM) and modulating the *fraction* of time that a 5V output waveform is `HIGH` vs. `LOW`. This is called the **duty cycle**.
 
 ### Visualizing the PWM waveform
 
@@ -185,7 +184,7 @@ Other than the potentiometer, our circuit did not change (we still have an LED w
 
 Let's take a look:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/h-K0q18BRIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/h-K0q18BRIE" title="Video showing PWM waveform on an oscilloscope with different analogWrite values" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 To create this [program](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/TrimpotLEDSmoothed/TrimpotLEDSmoothed.ino), we had to use both `analogRead` and `analogWrite`. By the end of this lesson, you should have a strong understanding of `analogWrite` and PWM. But we won't learn more about `analogRead` until we get to the [Introduction to Input](intro-input.md) microcontroller lessons.
 
@@ -193,9 +192,9 @@ To create this [program](https://github.com/makeabilitylab/arduino/blob/master/B
 
 In addition to visualizing the **actual** voltage output from `analogWrite` (the PWM waveform), we can also visualize the (effective) voltage output. For this, we can use Arduino's [Serial Plotter](https://learn.adafruit.com/experimenters-guide-for-metro/circ08-using%20the%20arduino%20serial%20plotter). To access this, open Tools -> Serial Plotter. The plotter will try to visualize any comma separated values you output via `Serial.print`.
 
-In the video below, we see a simulation of our [fade code](https://github.com/jonfroehlich/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time effective voltages output on Pin 3.
+In the video below, we see a simulation of our [fade code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time effective voltages output on Pin 3.
 
-<video controls="controls">
+<video controls="controls" aria-label="Tinkercad simulation showing LED fading with a real-time voltage graph on the Serial Plotter">
   <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
 </video>
 
@@ -214,7 +213,7 @@ See the table below for example 8-bit output values for `analogWrite` on Pin 3 a
 | 220Ω | 5V | 0 | $$\frac{0}{255}=0.0$$ | $$I = \frac{5V-2V}{220Ω} * 0.0=0.0mA $$ |
 | 220Ω | 5V | 45 | $$\frac{45}{255}=0.176$$ | $$I = \frac{5V-2V}{220Ω} * 0.176=2.4mA $$ |
 | 220Ω | 5V | 103 | $$\frac{103}{255}=0.404$$ | $$I = \frac{5V-2V}{220Ω} * 0.404=5.5mA $$ |
-| 220Ω | 5V | 128 | $$\frac{128}{255}=0.502$$ | $$I = \frac{5V-2V}{220Ω} * 0.780=6.8mA $$ |
+| 220Ω | 5V | 128 | $$\frac{128}{255}=0.502$$ | $$I = \frac{5V-2V}{220Ω} * 0.502=6.8mA $$ |
 | 220Ω | 5V | 199 | $$\frac{199}{255}=0.780$$ | $$I = \frac{5V-2V}{220Ω} * 0.780=10.5mA $$ |
 | 220Ω | 5V | 255 | $$\frac{255}{255}=1.0$$ | $$I = \frac{5V-2V}{220Ω} * 1.0=13.4mA $$ |
 
@@ -225,7 +224,7 @@ Remember in the [LED blink lesson](led-blink.md) where we mentioned wanting to a
 So, let's rewrite the fade example but without for loops and, instead, rely on the fact that `loop()` is already a `loop` :). While the code below is different, the resulting LED fade behavior is the same (so you won't notice a difference if you try them both out).
 
 {: .note }
-I have a habit of prefixing my global variables by `_` but this is just my own convention and helps me easily discern between local variables and global variables. You need not do this, of course! 😊
+> I have a habit of prefixing my global variables by `_` but this is just my own convention and helps me easily discern between local variables and global variables. You need not do this, of course! 😊
 
 {% highlight C %}
 const int LED_OUTPUT_PIN = 3;
@@ -263,11 +262,24 @@ void loop() {
 
 You can find [this code in GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOff/FadeOnAndOff.ino).
 
-## Improved fading approach 2: eliminating delays
+## Exercises
 
-Can you improve the above code even more? How about by eliminating the `delay()` all together but still allowing for a set interval to "pause" on each LED fade value?
+Want to go further? Here are some design challenges to reinforce what you've learned:
 
-Try writing a solution yourself then look at [ours](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOffWithoutDelay/FadeOnAndOffWithoutDelay.ino). Are they the same or different? How?
+- **Eliminate delays entirely.** Can you rewrite the fade code without using `delay()` at all, using the `millis()`-based approach from [Blink without delay](led-blink.md#blink-without-using-delay)? Try it yourself, then compare with [our solution](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOffWithoutDelay/FadeOnAndOffWithoutDelay.ino).
+- **Different fade step sizes.** Try changing `_fadeAmount` to `1`, `10`, or `25`. How does the step size affect the smoothness of the fade? What about the fade speed?
+- **Non-PWM pin.** What happens if you use `analogWrite` on a pin that doesn't support PWM (*e.g.,* Pin 4)? Try it and observe the result.
+- **Graph it.** Use the [Serial Plotter](serial-print.md#visualizing-data-with-the-serial-plotter) to graph the `_curBrightness` value over time. Does the graph match what you'd expect?
+
+## Lesson Summary
+
+In this lesson, you unlocked the ability to create intermediate voltage levels using code! You learned:
+
+* How to use `analogWrite()` to output an 8-bit value (0-255).
+* What Pulse-Width Modulation (PWM) is, and how it emulates analog output by varying the **duty cycle** of a square wave.
+* Why LEDs appear to dim when driven by a PWM signal (our eyes average out the high-speed flashing).
+* How to calculate the effective current through an LED when using PWM.
+* How to write a non-blocking fade loop by stepping a variable rather than using long `for` loops.
 
 ## Next Lesson
 

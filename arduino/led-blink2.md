@@ -141,11 +141,17 @@ Want to go further? Here are some things to try:
 - **Different blink rates.** Try using different delay values for turning each LED on and off. Can you make LED Circuit 1 blink faster than LED Circuit 2 using this code structure? What limitations do you run into? (Hint: we'll solve this properly in [L8: Rate Blinking LEDs](led-blink3.md).)
 - **Add Serial debugging.** Add `Serial.print` statements to output which LEDs are on and off at each step. Use the [Serial Plotter](serial-print.md#visualizing-data-with-the-serial-plotter) to graph the pin states—you should see two inverted square waves.
 
+## Lesson Summary
+
+In this lesson, you explored two fundamental output configurations. You learned:
+
+* How Arduino GPIO pins can act as **current sources** (driving current *out* of the pin to `GND`).
+* How Arduino GPIO pins can act as **current sinks** (allowing current to flow *into* the pin from a higher voltage source like 5V).
+* That driving a sink pin `HIGH` (5V) actually turns the connected LED *off* because there is no voltage difference across the circuit.
+
 ## Next Lesson
 
-In this lesson, we learned that Arduino GPIO pins can act as either **current sources** (driving current *out* of the pin) or **current sinks** (allowing current to flow *into* the pin). This is a fundamental concept that will come up again when we work with Common Anode RGB LEDs in the next lesson.
-
-In the [next lesson](rgb-led.md), we will use a new component—an RGB LED—to output a variety of LED colors beyond just red and learn about the difference and how to use Common Anode *vs.* Common Cathode RGB LED designs.
+In the [next lesson](rgb-led.md), we will use a new component—an RGB LED—to output a variety of colors beyond just red, and we will apply our new knowledge of sourcing and sinking to understand Common Anode *vs.* Common Cathode RGB LED designs!
 
 <span class="fs-6">
 [Previous: LED Fade](led-fade.md){: .btn .btn-outline }

@@ -339,6 +339,16 @@ Some additional references:
 - [Multi-tasking the Arduino: Part 3](https://learn.adafruit.com/multi-tasking-the-arduino-part-3/overview), Adafruit Learn
 - [How to do multiple things at once](https://www.gammon.com.au/blink), Nick Gammon
 
+## Lesson Summary
+
+Congratulations! You've graduated from basic blinking to state-machine-driven, object-oriented programming. In this lesson, you learned:
+
+* Why using `delay()` prevents an Arduino from performing multiple timing tasks simultaneously.
+* How to use `millis()` to track time and trigger events asynchronously.
+* How integer overflow works with `unsigned long` data types, ensuring `millis()` math remains accurate even after 50 days of uptime.
+* How to encapsulate timing logic into a reusable `C++` class (`Blinker`) to drastically reduce code redundancy.
+* How to separate `C++` classes into external `.h` and `.cpp` files.
+
 ## Next Lesson
 
 We did it! This completes our [Intro to Output](intro-output.md) series. Let's now begin [Intro to Input](intro-output.md) to learn about buttons, sensors, voltage dividers, and more!

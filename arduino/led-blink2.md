@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L5&#58; Blinking Two LEDs
+title: L6&#58; Blinking Two LEDs
 nav_order: 6
 parent: Output
 grand_parent: Intro to Arduino
@@ -154,6 +154,7 @@ In this lesson, you explored two fundamental output configurations. You learned:
 In the [next lesson](rgb-led.md), we will use a new component—an RGB LED—to output a variety of colors beyond just red, and we will apply our new knowledge of sourcing and sinking to understand Common Anode *vs.* Common Cathode RGB LED designs!
 
 <span class="fs-6">
-[Previous: LED Fade](led-fade.md){: .btn .btn-outline }
+<!-- [Previous: LED Fade](led-fade.md){: .btn .btn-outline } -->
+[Previous: Playing Tones](tone.md){: .btn .btn-outline }
 [Next: RGB LEDs](rgb-led.md){: .btn .btn-outline }
 </span>

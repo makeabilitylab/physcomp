@@ -388,6 +388,7 @@ Want to go further? Here are some design challenges to reinforce what you've lea
 ## Lesson Summary
 
 In this lesson, you wrote your very first Arduino program! You learned:
+
 * How to configure a digital I/O pin as an output using `pinMode()`.
 * How to programmatically set a pin to 5V (`HIGH`) or 0V (`LOW`) using `digitalWrite()`.
 * How to use `delay()` to pause program execution and create a blinking effect.

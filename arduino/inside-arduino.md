@@ -336,3 +336,32 @@ If you use high-value resistors in a voltage divider (*e.g.,* a 1 MΩ photoresis
 For a deep dive into how PWM works on the ATmega microcontrollers, including how to change PWM frequencies and use different timer modes, see the official [Secrets of Arduino PWM](https://docs.arduino.cc/tutorials/generic/secrets-of-arduino-pwm) tutorial.
 
 <!-- Another nice article is Protecting Inputs in Digital Electronics: https://www.digikey.com/en/articles/protecting-inputs-in-digital-electronics -->
+
+## Reverse Polarity Protection: Uno vs. Leonardo
+
+If you accidentally plug a power supply in backward, how does the Arduino protect itself? It depends on the board!
+
+**The Arduino Uno (Series Protection)**
+The Uno uses an M7 diode in **series** between the barrel jack's positive terminal and the `VIN` pin. If you connect power backward, the diode simply blocks the current, protecting the board. The tradeoff is a ~0.7V forward voltage drop across the diode, and the total current you can draw from `VIN` is limited to the diode's maximum rating (typically 1A).
+
+**The Arduino Leonardo (Shunt Diode)**
+The Leonardo connects the barrel jack directly to the `VIN` pin. However, it has a diode wired in **parallel** between `GND` and `VIN` that conducts under reverse-polarity conditions, acting as a shunt.
+
+* **The Advantage:** There is no 0.7V voltage drop, and the current limit is dictated only by the PCB traces. This makes the Leonardo slightly better for driving high-current loads (like servos) directly from the `VIN` pin.
+* **The Danger:** If you connect a reverse-polarity supply, this parallel diode intentionally shorts the circuit to ground. If you are using a power supply with overcurrent protection (like a fused wall adapter), it will safely trip. However, if you use an unprotected high-current source like a AA or 9V battery pack, the diode will take the full brunt of the short, overheat, and fail—often destroying the 5V voltage regulator and the rest of the board in the process. 
+
+{: .warning }
+> **Always double-check battery polarity** if using external battery packs via the barrel jack on the Arduino Leonardo!
+
+### How Does Reverse Polarity Happen?
+
+A barrel jack only plugs in one way, so how can polarity get reversed? The mistake almost always happens *before* the plug reaches the board.
+
+**Center-negative power adapters.** The Arduino expects a center-positive barrel plug (the inner pin is `+`, the outer sleeve is `GND`). However, many consumer devices use center-negative adapters—most notably guitar effect pedals, which have standardized on center-negative 9V. If you grab a spare 9V adapter from a music setup, it will fit the Arduino's barrel jack perfectly but deliver reversed polarity. Always check the polarity symbol printed on the adapter (a small diagram showing which conductor is `+`) before plugging in.
+
+**Screw-terminal barrel jack adapters.** Many starter kits include a barrel jack breakout with a screw-terminal block for connecting bare wires from a battery snap or battery pack. It is very easy to accidentally screw the red wire into the `−` terminal and the black wire into the `+` terminal, especially when the terminal labels are small or hard to read.
+
+**Wiring directly to `VIN` and `GND` headers.** Students sometimes power the board by plugging jumper wires from a battery pack directly into the header pins. If you swap the wires—red into `GND`, black into `VIN`—you get reverse polarity that bypasses *all* on-board protection, even the Uno's series diode. Both boards are equally vulnerable in this case.
+
+{: .tip }
+> **When in doubt, use a multimeter.** Before connecting any unfamiliar power source, use a multimeter set to DC voltage to confirm which wire or terminal is positive. It takes ten seconds and can save your board.

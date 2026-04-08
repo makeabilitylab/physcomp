@@ -157,7 +157,15 @@ We'll use this basic circuit throughout the lesson as most of the fun is in soft
 
 The word "piezoelectric" comes from the Greek word *piezein*, which means to press or squeeze. Piezoelectric materials have a fascinating property: when you apply a voltage to them, they physically change shape. Inside your passive buzzer is a thin metal plate with a piezoceramic disk glued to it. When the Arduino rapidly pulses voltage `HIGH` and `LOW`, the ceramic disk quickly bends back and forth. This rapid flexing pushes the surrounding air back and forth, generating the physical sound waves that reach your ears. The frequency of the electrical pulses directly dictates how fast the disk vibrates, which determines the pitch.
 
-<!-- TODO: Add a simple diagram showing the piezo disk flexing when voltage is applied, producing sound waves -->
+To help you visualize this, we built an interactive simulation. Try both modes:
+
+- **Pulse (Tone) mode** simulates what happens when `tone()` drives the buzzer: the Arduino rapidly alternates the pin between 0V and 5V, and you can see the ceramic disk flexing back and forth in sync with the square wave. Notice the sound wave arcs radiating outward—that's the air being pushed back and forth by the vibrating disk. Try increasing the frequency and watch the disk flex faster.
+
+- **Manual mode** lets you set a static DC voltage with the slider. Drag it to 5V and the disk bends—but stays bent. No oscillation means no vibration, which means no sound! This is why simply calling `digitalWrite(pin, HIGH)` won't produce a tone. You need the continuous pulsing that `tone()` provides.
+
+<iframe src="https://editor.p5js.org/jonfroehlich/embed/mU7YwoUol" width="100%" height="620" style="border: none;"></iframe>
+**Figure.** An interactive simulation of piezoelectric buzzer mechanics. In Pulse (Tone) mode, a square wave drives the ceramic disk to flex rapidly, producing sound waves. In Manual mode, you can apply a static voltage to see that a constant signal bends the disk but produces no sound. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/mU7YwoUol).
+{: .fs-1 }
 
 ### Why do they sound so... weird?
 
@@ -176,6 +184,8 @@ To let you interactively explore the difference, we built this p5js sound visual
 <!-- Old p5js sketch <iframe src="https://editor.p5js.org/jonfroehlich/embed/t4DHmkij3" width="100%" height="460" style="border: none;"></iframe> -->
 
 <iframe src="https://editor.p5js.org/jonfroehlich/embed/tLMt8T83M" width="100%" height="460" style="border: none;"></iframe>
+**Figure.** An interactive square vs. sine wave explorer. Toggle between waveform types and adjust the frequency to hear and see the difference. The square wave produced by `tone()` sounds harsher due to its harmonic content, while a sine wave produces a pure, clean tone. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/tLMt8T83M).
+{: .fs-1 }
 
 ## Playing individual tones
 

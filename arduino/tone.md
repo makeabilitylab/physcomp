@@ -153,6 +153,30 @@ The circuit couldn't be simpler. Connect one leg of the piezo buzzer to a digita
 
 We'll use this basic circuit throughout the lesson as most of the fun is in software.
 
+## How do piezo buzzers actually work?
+
+The word "piezoelectric" comes from the Greek word *piezein*, which means to press or squeeze. Piezoelectric materials have a fascinating property: when you apply a voltage to them, they physically change shape. Inside your passive buzzer is a thin metal plate with a piezoceramic disk glued to it. When the Arduino rapidly pulses voltage `HIGH` and `LOW`, the ceramic disk quickly bends back and forth. This rapid flexing pushes the surrounding air back and forth, generating the physical sound waves that reach your ears. The frequency of the electrical pulses directly dictates how fast the disk vibrates, which determines the pitch.
+
+<!-- TODO: Add a simple diagram showing the piezo disk flexing when voltage is applied, producing sound waves -->
+
+### Why do they sound so... weird?
+
+If you've listened to the Tinkercad simulations, you've probably noticed that the buzzer sounds a bit harsh, buzzy, and reminiscent of old 8-bit video games. There are two main reasons for this:
+
+1. **The Square Wave:** The `tone()` function generates a perfect square wave, instantly snapping between 0V and 5V (or 3.3V on 3.3V boards). Unlike the smooth, continuous curve of a sine wave—which produces a pure, clean tone like a tuning fork—a square wave is composed of many overlapping frequencies called *harmonics* (we explore this in [Frequency Analysis](../signals/frequency-analysis.html)). Our ears perceive these extra harmonics as a buzzy, aggressive sound.
+
+2. **Physical Resonance:** Piezo buzzers are designed primarily as alert buzzers (think microwave beeps or smoke detectors), not high-fidelity speakers. They are physically tuned to resonate and be loudest at a specific frequency—usually around 4 kHz. As you play different notes, the buzzer's physical characteristics will cause some pitches to sound overwhelmingly loud while others sound thin or muted.
+
+### Square waves vs. sine waves
+
+Because neither the Arduino Uno nor the Leonardo have built-in digital-to-analog converters (DACs), they cannot natively produce the smooth, analog sine waves that music is composed of. Instead, they can only produce digital square waves, which results in that distinctively harsh sound.
+
+To let you interactively explore the difference, we built this p5js sound visualization tool. Make sure your computer speakers are on: do you hear the difference between a sine wave and a square wave? So, it's not just the type and quality of speaker (piezo buzzer) that matters but also the input waveform!
+
+<!-- Old p5js sketch <iframe src="https://editor.p5js.org/jonfroehlich/embed/t4DHmkij3" width="100%" height="460" style="border: none;"></iframe> -->
+
+<iframe src="https://editor.p5js.org/jonfroehlich/embed/tLMt8T83M" width="100%" height="460" style="border: none;"></iframe>
+
 ## Playing individual tones
 
 Let's start by playing a single tone. The following code plays concert A (440 Hz) for one second, pauses for half a second, then repeats. You can [play with it interactively on Tinkercad](https://www.tinkercad.com/things/aqUoDUiMU7x-simple-tone) or copy/paste it into the Arduino IDE and run it for real!

@@ -1,6 +1,7 @@
 ---
 layout: default
-title: L7&#58; Crossfading RGB LEDs
+title: L8&#58; Crossfading RGB LEDs
+nav_order: 8
 parent: Output
 grand_parent: Intro to Arduino
 usemathjax: false

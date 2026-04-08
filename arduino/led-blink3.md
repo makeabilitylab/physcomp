@@ -1,6 +1,7 @@
 ---
 layout: default
-title: L8&#58; Rate Blinking LEDs
+title: L9&#58; Rate Blinking LEDs
+nav_order: 9
 parent: Output
 grand_parent: Intro to Arduino
 usemathjax: false

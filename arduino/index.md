@@ -54,6 +54,8 @@ Both the [Uno](https://store.arduino.cc/products/arduino-uno-rev3) and [Leonardo
 
 * The **Leonardo** has **12 analog inputs** vs. the **Uno's 6**
 
+* The **Uno** has series reverse-polarity protection on its barrel jack, which drops the voltage by ~0.7V but safely protects the board if a power supply is plugged in backward. The **Leonardo** wires the barrel jack directly to `VIN` (no voltage drop, better for high-current loads like servos) but uses a parallel shunt diode for protection. If you plug an unprotected battery pack into the Leonardo backward, it will likely destroy the diode and the board. See [Reverse Polarity Protection: Uno vs. Leonardo](inside-arduino.md#reverse-polarity-protection-uno-vs-leonardo).
+
 **A Note on the Arduino Uno R4** Released in June 2023, the [Arduino Uno R4](https://store.arduino.cc/pages/uno-r4) (available in "Minima" and "WiFi" versions) is a significant hardware leap from the R3 while maintaining the same physical footprint and 5V operating voltage. It upgrades from an 8-bit AVR chip to a 32-bit ARM Cortex-M4 microcontroller, boasting a 48 MHz clock speed (3x faster), vastly expanded memory (256 kB Flash, 32 kB SRAM), a modern USB-C connector, and a true built-in DAC for actual analog output. Because it maintains backward compatibility, the code and concepts in these lessons translate perfectly to the R4!
 {: .note }
 
@@ -78,7 +80,7 @@ Now, let the fun begin! 🚀🥳
 🚦 **Start Here!** We highly recommend completing the [Output lessons](intro-output.md) first to build a solid foundation before moving on to the [Input series](intro-input.md). We've learned from years of teaching this material that output is easier to start with than input!
 {: .important }
 
-In the [Output lesson series](intro-output.md), you will learn how to programmatically control Arduino's GPIO pins to drive LEDs, produce colors with RGB LEDs, and build your first C++ class. Topics include digital output (`digitalWrite`), debugging with `Serial.print`, analog output (`analogWrite` and PWM), current sourcing vs. sinking, and multi-rate blinking without `delay()`.
+In the [Output lesson series](intro-output.md), you will learn how to programmatically control Arduino's GPIO pins to drive LEDs, produce colors with RGB LEDs, generate sounds with piezo buzzers, and build your first C++ class. Topics include digital output (`digitalWrite`), debugging with `Serial.print`, analog output (`analogWrite` and PWM), sound generation (`tone`), current sourcing vs. sinking, and multi-rate blinking without `delay()`.
 
 All Arduino code is open source and in this [GitHub repository](https://github.com/makeabilitylab/arduino).
 

@@ -49,11 +49,11 @@ Before we start making sounds, it's important to understand how `tone()` differs
 
 <!-- TODO: Create a side-by-side diagram or animation showing: (1) analogWrite with varying duty cycles at fixed frequency, (2) tone() with varying frequencies at fixed 50% duty cycle -->
 
-Here's a fun experiment to make this concrete: try connecting a piezo buzzer to a PWM pin and running `analogWrite(pin, 127)`. You'll hear a steady buzz at the PWM frequency of that pin (~490 Hz or ~980 Hz on the Uno, depending on the pin). Now try `tone(pin, 440)`. You'll hear concert A—a completely different pitch. With `analogWrite`, you can make the buzz louder or softer (by changing the duty cycle), but you can't change the pitch. With `tone()`, you control the pitch directly.
+Here's a fun experiment to make this concrete: try connecting a piezo buzzer to a PWM pin and running `analogWrite(pin, 127)`. You'll hear a steady buzz at the PWM frequency of that pin (~490 Hz or ~980 Hz on the Uno, depending on the pin). Now try `tone(pin, 440)`. You'll hear concert A—a completely different pitch. With `analogWrite`, you can change the duty cycle, which alters the harshness or distortion of the buzz, but you can't cleanly change the pitch or lower the volume.
 
 To make this more clear, we built a [Tinkercad Circuit example](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input) that allows you to control either the **duty cycle** of the output waveform (via `analogWrite()`) or the **frequency** of the output waveform (via `tone()`). You control the analog input value with a [rotating potentiometer](potentiometers.md) and the mode `analogWrite()` vs. `tone()` via a slider switch (`tone()` is activated when the switch is to the left, `analogWrite()` is activated when the switch is to the right).
 
-As you turn the potentiometer, listen carefully: in the `analogWrite()` mode, the buzzer stays at the same pitch but gets louder and softer while in the `tone()` mode, the buzzer changes pitch. Watch the oscilloscopes: one waveform gets wider/narrower (duty cycle), the other gets faster/slower (frequency). This is the core distinction between PWM brightness control and tone frequency control!
+As you turn the potentiometer, listen carefully: in the `analogWrite()` mode, the buzzer stays at the same pitch but the volume changes slightly while in the `tone()` mode, the buzzer changes pitch. Watch the oscilloscopes: one waveform gets wider/narrower (duty cycle), the other gets faster/slower (frequency). This is the core distinction between PWM brightness control and tone frequency control!
 
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing diff between the tone() function, which controls the waveform output frequency, and the analogWrite() function, which controls the waveform output duty cycle">
   <source src="assets/videos/analogWriteVersusToneWithPot_Tinkercad_web_muted.mp4" type="video/mp4" />
@@ -124,14 +124,15 @@ noTone(pin)                       // stop playing
 
 A few important details:
 
+- `tone()` is non-blocking. This means your Arduino will immediately move to the next line of code while the hardware timer continues playing the sound in the background. If you want the program to wait until the note finishes, you must add a delay(duration) immediately after.
 - `tone()` can work on **any digital pin**—not just PWM pins. This is because it uses its own timer (Timer2 on AVR boards) rather than the PWM hardware timers.
 - Only **one tone** can play at a time. If you call `tone()` on a different pin while a tone is already playing, the first tone will stop. This is a limitation of using a single hardware timer.
-- Because `tone()` relies on built-in hardware timers, it will **interfere with PWM output** on certain pins. On the Uno, it uses Timer2 (affecting Pins 3 and 11). On the Leonardo, it uses Timer3 (affecting Pins 5 and 13). Keep this in mind if you're combining `tone()` with `analogWrite`.
+- Because `tone()` relies on built-in hardware timers, it will **interfere with PWM output** on certain pins. On the Uno, it uses Timer2 (affecting Pins 3 and 11). On the Leonardo, it uses Timer3 (affecting Pin 5). Keep this in mind if you're combining `tone()` with `analogWrite`.
 
 > **Hardware Conflict:**
 > While a tone is playing, PWM `analogWrite()` functionality is disabled on specific pins depending on your board.
 > * **Arduino Uno:** PWM is disabled on **Pins 3 and 11**.
-> * **Arduino Leonardo:** PWM is disabled on **Pins 5 and 13**.
+> * **Arduino Leonardo:** PWM is disabled on **Pin 5**.
 >
 > If you need both `tone()` and `analogWrite` simultaneously, make sure to use PWM pins that don't conflict!
 {: .warning }
@@ -152,6 +153,23 @@ The circuit couldn't be simpler. Connect one leg of the piezo buzzer to a digita
 > We're using **Pin 9** rather than Pin 3 for the buzzer because `tone()` uses Timer2, which conflicts with PWM on Pins 3 and 11. By using Pin 9, we keep Pin 3 free for `analogWrite` in case we want to fade an LED at the same time (which we will, later in this lesson!).
 
 We'll use this basic circuit throughout the lesson as most of the fun is in software.
+
+### Why no series resistor?
+
+In our previous lessons, we stressed the importance of using a current-limiting resistor with every LED. Without one, an LED will pull as much current as it can until it burns out—and potentially damages the Arduino pin in the process.
+
+So, why are we wiring the piezo buzzer directly to Pin 9 and GND without a resistor?
+
+The simple answer is that unlike LEDs, passive piezo buzzers draw very little current. They behave more like a small capacitor than a simple resistive load. The internal piezoceramic disk flexes when voltage is applied, and this process only requires a tiny amount of current—typically under 5 mA. Since an Arduino digital pin can safely supply up to 20 mA of continuous current, connecting the piezo buzzer directly is perfectly safe.
+
+{: .note }
+> **Piezo buzzers vs. electromagnetic speakers**
+> 
+> You may have seen Arduino speaker circuits online that include an inline resistor (typically 100Ω–1kΩ). Those circuits use **electromagnetic speakers**, which have a low-impedance coil (commonly 8Ω or 16Ω) and can draw significant current—easily exceeding the Arduino's per-pin limit. A series resistor is essential in those circuits to protect the microcontroller.
+> 
+> **Piezo buzzers** are fundamentally different: they are **capacitive** devices, not resistive, allowing them to be safely driven directly.
+> 
+> This capacitance also explains why you can't easily use a series resistor to reduce the volume of a piezo buzzer. Because a piezo's impedance varies with frequency, adding a series resistor attenuates different frequencies by different amounts—high notes get much quieter while low notes stay loud—rather than uniformly reducing the volume. That's why the tape trick mentioned earlier is the simplest, most practical solution!
 
 ## How do piezo buzzers actually work?
 
@@ -179,7 +197,7 @@ If you've listened to the Tinkercad simulations, you've probably noticed that th
 
 Because neither the Arduino Uno nor the Leonardo have built-in digital-to-analog converters (DACs), they cannot natively produce the smooth, analog sine waves that music is composed of. Instead, they can only produce digital square waves, which results in that distinctively harsh sound.
 
-To let you interactively explore the difference, we built this p5js sound visualization tool. Make sure your computer speakers are on: do you hear the difference between a sine wave and a square wave? So, it's not just the type and quality of speaker (piezo buzzer) that matters but also the input waveform!
+To let you interactively explore the difference, we built this p5js sound visualization tool. Make sure your computer speakers are on: do you hear the difference between a sine wave and a square wave? So, it's not just the type and quality of speaker (piezo buzzer) that matters but also the input waveform to the speaker!
 
 <!-- Old p5js sketch <iframe src="https://editor.p5js.org/jonfroehlich/embed/t4DHmkij3" width="100%" height="460" style="border: none;"></iframe> -->
 
@@ -206,12 +224,10 @@ void loop() {
 }
 {% endhighlight cpp %}
 
-Try changing the frequency: 262 is middle C, 523 is one octave higher (C5), and 1000 produces a high-pitched tone. What's the lowest frequency you can hear? The highest? (Most humans can hear roughly 20 Hz to 20 kHz, but this varies with age.)
+Try changing the frequency: 262 is middle C, 523 is one octave higher (C5), and 1000 produces a high-pitched tone. What's the lowest frequency you can hear? The highest? (Most humans can hear roughly 20 Hz to 20 kHz, but this varies with age.) Note: The standard Arduino `tone()` function has a minimum frequency of 31 Hz due to hardware timer limitations, so you won't be able to test the absolute bottom of human hearing (20 Hz).
 
 > **Pro Tip: How do I make it quieter?**
-> Once you get your buzzer working, your first question will probably be: *"How do I turn the volume down?"* Because the `tone()` function always outputs a fixed 50% duty cycle square wave, you **cannot** control the volume (amplitude) via code. 
-> 
-> Instead, we use a classic physical computing hack: **put a piece of tape over it!** Placing a small piece of masking tape or painter's tape directly over the hole on top of the piezo buzzer will significantly muffle the sound.
+> Once you get your buzzer working, your first question will probably be: *"How do I turn the volume down?"* Because the `tone()` function always outputs a fixed 50% duty cycle square wave, you **cannot** control the volume (amplitude) via code. Instead, we use a classic physical computing hack: **put a piece of tape over it!** Placing a small piece of masking tape or painter's tape directly over the hole on top of the piezo buzzer will significantly muffle the sound. As we discussed [above](#why-no-series-resistor), adding a series resistor doesn't work well here because the piezo's capacitive nature causes different frequencies to be muffled unevenly.
 {: .note }
 
 {: .highlight }
@@ -279,7 +295,7 @@ void loop() {
 }
 {% endhighlight cpp %}
 
-Notice that we use the `duration` parameter of `tone()` here, so we don't need to call `noTone()` manually—the tone stops automatically after `NOTE_DURATION_MS` milliseconds.
+Notice that we use the `duration` parameter of `tone()` here, so we don't need to call `noTone()` manually—the tone stops automatically after `NOTE_DURATION_MS` milliseconds. One subtlety: `tone()` is **non-blocking**, meaning the sketch continues executing immediately even while the tone is still playing. That's why we still need the `delay()` call—without it, the loop would race ahead to the next note before the current one finishes.
 
 You can play with [this project interactively in Tinkercad](https://www.tinkercad.com/things/2SqhVejLRNi). 
 
@@ -348,8 +364,10 @@ void setup() {
     // Calculate note duration from the base tempo value
     // e.g., quarter note = 2308/4 = 577ms, dotted eighth = 2308/6 ≈ 385ms
     int duration = DURATION_BASE / noteDurations[i];
-    tone(BUZZER_PIN, melody[i], duration);
-    delay(duration); // music
+    if (melody[i] > 0) {
+      tone(BUZZER_PIN, melody[i], duration);
+    }
+    delay(duration); // Wait for the duration whether playing a note or resting
 
     // Pause between notes
     int pauseBetweenNotes = duration * NOTE_GAP_FACTOR;
@@ -364,7 +382,7 @@ void loop() {
 }
 {% endhighlight cpp %}
 
-A note value of `0` in the melody array produces silence (since `tone(pin, 0)` doesn't generate a waveform), which acts as a rest.
+To represent a rest (silence), use a note value of `0` in the melody array. The code checks for this and simply skips the `tone()` call, relying on the `delay()` to produce a silent pause. Avoid calling `tone(pin, 0)` directly—while it happens to produce silence on AVR boards, it causes crashes on other platforms (like SAMD) due to a division by zero in the timer math.
 
 <video controls playsinline style="margin:0px" aria-label="Star Wars Imperial March playing on an Arduino Leonardo">
   <source src="assets/videos/Arduino_Tone-PlayImperialMarch_Handheld_web.mp4" type="video/mp4" />
@@ -482,7 +500,7 @@ In this lesson, you added a completely new sensory modality to your output toolk
 - The conceptual difference between `analogWrite()` (which varies the duty cycle of a fixed-frequency wave) and `tone()` (which varies the frequency of a fixed 50% duty cycle wave).
 - How to use `tone(pin, frequency)` and `noTone(pin)` to play notes, scales, and melodies.
 - How to combine visual feedback (LEDs) and audio feedback (buzzers) to create engaging, multimodal outputs.
-- How hardware timers limit which pins can use PWM while a tone is actively playing (Pins 3/11 on the Uno, Pins 5/13 on the Leonardo).
+- How hardware timers limit which pins can use PWM while a tone is actively playing (Pins 3/11 on the Uno, Pin 5 on the Leonardo).
 
 ## A peek ahead
 

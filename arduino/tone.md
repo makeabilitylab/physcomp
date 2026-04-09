@@ -58,7 +58,7 @@ As you turn the potentiometer, listen carefully: in the `analogWrite()` mode, th
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing diff between the tone() function, which controls the waveform output frequency, and the analogWrite() function, which controls the waveform output duty cycle">
   <source src="assets/videos/analogWriteVersusToneWithPot_Tinkercad_web_muted.mp4" type="video/mp4" />
 </video>
-**Figure.** A Tinkercad simulation video showing the difference between the `tone()` function, which controls the waveform output frequency (pitch) with a fixed 50% duty cycle, and the `analogWrite()` function, which controls the waveform output duty cycle at a fixed frequency. The version above is muted. To play a version with sound (warning: wear headphones but at lower volumes), [click here](assets/videos/analogWriteVersusToneWithPot_Tinkercad.mp4). To play with our simulation interactively on Tinkercad, [click here](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input).
+**Figure.** A [Tinkercad simulation](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input) video showing the difference between the `tone()` function, which controls the waveform output frequency (pitch) with a fixed 50% duty cycle, and the `analogWrite()` function, which controls the waveform output duty cycle at a fixed frequency. The version above is muted. To play a version with sound (warning: wear headphones but at lower volumes), [click here](assets/videos/analogWriteVersusToneWithPot_Tinkercad.mp4). To play with our simulation interactively on Tinkercad, [click here](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input).
 {: .fs-1 }
 
 > **Note:**

@@ -23,11 +23,19 @@ This is the first lesson in the [**Intro to Arduino Input**](intro-input.md) les
 
 In this lesson, we'll finally get to build something interactive: turning on an LED with a push button. We'll cover buttons (aka momentary switches), how to use digital input with the [`digitalRead`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) function, and pull-up and pull-down resistors.
 
-Switches themselves are conceptually easy to understand—they are either "closed" or "open". We use switches everyday when we turn on and off our light circuits in our home. However, when **using switches with microcontrollers**, we've found that students often struggle to understand why pull-up or pull-down resistors are necessary. So, take your time with this lesson. Try to understand the **why**  and **how** of these resistors in your circuits.
+Switches themselves are conceptually easy to understand—they are either "closed" or "open". We use switches every day when we turn on and off our light circuits in our home. However, when **using switches with microcontrollers**, we've found that students often struggle to understand why pull-up or pull-down resistors are necessary. So, take your time with this lesson. Try to understand the **why** and **how** of these resistors in your circuits.
 
 For example, in the animation below, we show a button circuit with a pull-down resistor hooked up to Pin 2. Importantly, notice **where** the current flows when the button is pressed—perhaps surprisingly, it does **not** flow into Pin 2. In fact, (virtually) no current flows into Pin 2! Why not? We'll talk about this and more in this lesson!
 
-![Animation showing a Arduino Uno and a button hooked up to Pin 2 with a pull-down resistor configuration. When the button is pressed, the animation shows the current going from Vcc through the button and down through the pull-down resistor](assets/movies/Arduino_Button_InternalLED_Animation_Edited.gif)
+{: .note }
+> **In this lesson, you will learn:**
+> - How momentary switches (buttons) work, including four-legged tactile buttons
+> - What the "floating pin" problem is and why it occurs
+> - How pull-down, pull-up, and internal pull-up resistors solve the floating pin problem
+> - How to use `digitalRead()` and `pinMode()` for digital input
+> - How to select appropriate pull-up/pull-down resistor values
+
+![Animation showing an Arduino Uno and a button hooked up to Pin 2 with a pull-down resistor configuration. When the button is pressed, the animation shows the current going from Vcc through the button and down through the pull-down resistor](assets/movies/Arduino_Button_InternalLED_Animation_Edited.gif)
 Animation shows the Arduino's built-in LED illuminating when the button on Pin 2 is pressed. When the button is pressed, current flows from $$V_{CC}$$ through the pull-down resistor to GND. We'll learn more about this circuit in this lesson.
 {: .fs-1 }
 
@@ -39,7 +47,7 @@ As noted above, switches are simple components: they're typically either "open" 
 Prices and pictures are from Sparkfun.com, Jan 2020; parts can be cheaper in bulk from suppliers like [Digi-Key](https://www.digikey.com/) or [Mouser Electronics](https://www.mouser.com/).
 {: .fs-1 }
 
-In this lesson, we are going to use a **four-legged push button** (momentary switch), which look like:
+In this lesson, we are going to use a **four-legged push button** (momentary switch), which looks like this:
 
 ![Examples of four-legged buttons from Sparkfun and Adafruit](assets/images/FourLeggedButtonExamplesFromSparkfunAndAdafruit.png)
 <!-- TODO: in future, make this into a table with links for improved accessibility -->
@@ -73,7 +81,7 @@ The key thing to remember is that the two legs closest together (on the same sid
 
 <!-- ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif) -->
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing which two sides of a four-legged tactile button are disconnected until pressed">
   <source src="assets/movies/FourLeggedTactileButtons_Animation.mp4" type="video/mp4" />
 </video>
 **Video.** Animation shows which two sides of a four-legged tactile button are disconnected until the button is pressed, creating a connection between all four legs.
@@ -93,7 +101,7 @@ Below, we've included two wiring diagrams: one using an external power source li
 
 | With 9V Battery | With Arduino 5V Pin |
 |:-------------:|:-----------:|
-| ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_WithArduino_5VPin.png) | ![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_With9VBattery.png) |
+| ![Four-legged button circuit with 9V battery](assets/images/FourLeggedButtonCircuit_PoweredWith9V.png) | ![Four-legged button circuit with 5V pin](assets/images/FourLeggedButtonCircuit_PoweredWithArduino5V.png) |
 | Circuit powered by 9V battery | Circuit powered by 5V Arduino pin | 
 
 If you build the 9V battery circuit, then we suggest a 680Ω or 1kΩ resistor rather than a 220Ω resistor.
@@ -103,7 +111,7 @@ That's it! Once you've created the circuit, give it a try by pushing the button 
 
 <!-- ![Animation showing both the 9V battery and Arduino 5V power LED circuits with four-legged button working](assets/movies/FourLeggedTactileButton_LEDCircuitBreadboard_Animation.gif) -->
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing two button LED circuits with different voltage sources turning on when pressed">
   <source src="assets/movies/Button_LEDCircuit_Breadboard_Animation-Edited-Cropped_Trim.mp4" type="video/mp4" />
 </video>
 **Video.** Animation showing two different voltage sources for a basic LED-based circuit with a four-legged button to control "on" and "off." When no button is pressed, there is no current flow and the LED is off.
@@ -126,7 +134,7 @@ Recall that the Arduino Uno and Leonardo have **20 general-purpose input/output*
 As noted in our [Intro to Digital Output](led-blink.md) lesson, you can control any of these 20 digital I/O pins with three functions:
 
 1. [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) configures a specified pin as either an `INPUT` or `OUTPUT`. For our buttons, we'll be using `INPUT`—because a button is an input and not an output—and a variant of `INPUT` called `INPUT_PULLUP`.
-2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`. This is what we need to read the button's state (either pressed or not pressed)
+2. [`digitalRead(int pin)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/) reads digital input from the specified pin, either `HIGH` or `LOW`. This is what we need to read the button's state (either pressed or not pressed).
 3. [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) writes digital output to the specified pin, either `HIGH` or `LOW`. This is not relevant to us here because we don't write out data to a button.
 
 ### What is digital input?
@@ -135,9 +143,9 @@ Digital input is any input that can be considered either **on** (typically, `HIG
 
 ![A graph demonstrating digital input](assets/images/WhatIsDigitalInput_Graph_ByJonEFroehlich.png)
 
-The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we setup our input circuits.
+The **most critical** concept to understand is that microcontrollers read voltage, not current. This directly (and dramatically) affects how we set up our input circuits.
 
-Indeed, the [Arduino documentation ](https://www.arduino.cc/en/Tutorial/DigitalPins) states that pins configured as digital input "*are in a high-impedance state*" equivalent to a 100,000,000Ω (100MΩ) resistor added to the front of the input pin. This means that once you configure a microcontroller pin as input, very little current will "seep" into the pin. More specifically, Section 26.2 (entitled *DC Characteristics*) of the [ATMega328 datasheet](../assets/datasheets/ATMega328.pdf) states that the input "leakage" current is 1 microamp (1 µA).
+Indeed, the [Arduino documentation](https://www.arduino.cc/en/Tutorial/DigitalPins) states that pins configured as digital input "*are in a high-impedance state*" equivalent to a 100,000,000Ω (100MΩ) resistor added to the front of the input pin. This means that once you configure a microcontroller pin as input, very little current will "seep" into the pin. More specifically, Section 26.2 (entitled *DC Characteristics*) of the [ATMega328 datasheet](../assets/datasheets/ATMega328.pdf) states that the input "leakage" current is 1 microamp (1 µA).
 
 <!-- TODO: consider adding illustrative figure here. -->
 
@@ -145,9 +153,9 @@ Indeed, the [Arduino documentation ](https://www.arduino.cc/en/Tutorial/DigitalP
 
 You might be wondering: what's the precise voltage-related definition of `HIGH` and `LOW` from the microcontroller's perspective? And what does `digitalRead` read if our voltage signal is not 0V and not 5V? Great questions!
 
-As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "*the value returned from `digitalRead()` is only well-defined when the input pin voltage is **close** to $$V_{CC}$$ or $$0V$$. The precise meaning of "close" varies between microcontrollers*"
+As Lee describes in [his Arduino lecture notes](https://web.stanford.edu/class/archive/engr/engr40m.1178/slides_sp17/arduino-io.pdf), "*the value returned from `digitalRead()` is only well-defined when the input pin voltage is **close** to $$V_{CC}$$ or $$0V$$. The precise meaning of "close" varies between microcontrollers.*"
 
-For the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH` and between $$0$$ and $$0.3\cdot V_{CC}\to 0.3\cdot 5V=1.5V$$ to qualify as `LOW`. For the middle range $$0.3\cdot V_{CC}$$ to $$0.6\cdot V_{CC}$$, the behavior of the pin is undefined.
+For the ATmega328, the input voltage needs to be at least $$0.6 \cdot V_{CC}$$ (that is, $$0.6 \times 5 = 3$$V) to qualify as `HIGH` and at most $$0.3 \cdot V_{CC}$$ (that is, $$0.3 \times 5 = 1.5$$V) to qualify as `LOW`. The middle range (1.5V to 3V) is undefined.
 
 ![A graph showing what is considered HIGH or LOW by the ATmega328](assets/images/WhatIsHighOrLow_Graph_ByJonEFroehlich.png)
 
@@ -165,15 +173,15 @@ Given how we built button-based circuits above—without a microcontroller—you
 **Figure.** Button circuit for microcontroller hooked up similarly to our non-microcontroller version above. This circuit will "sort of" work but has a problem related to a "floating pin" when the switch is open.
 {: .fs-1 }
 
-However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed)? Well, this is called a "floating pin" and it's not good. A floating pin is susceptible to randomly oscillating between `HIGH` and `LOW`. See the animation below. <!-- TODO: add in reasons why pin could oscillate -->
+However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed)? Well, this is called a "floating pin" and it's not good. Because the input pin has extremely high impedance, it effectively acts like a tiny antenna—even minuscule charge transfers from nearby electric fields, your body's capacitance, or crosstalk between wires can swing the voltage. A floating pin is susceptible to picking up this stray electromagnetic interference, causing it to randomly oscillate between `HIGH` and `LOW`. See the animation below.
 
 ![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
 **Figure.** Animation of what happens when you press a button with the simple circuit configuration.
 {: .fs-1 }
 
-In fact, try wiring up this configuration yourself and running the following program with the [Serial Monitor](../electronics/serial-print#step-3-open-serial-monitor-in-the-arduino-ide) open. What happens when you press the button? Try touching the button legs with your fingers but not actually pressing the button, what happens to the `digitalRead` value? Are you reliably tracking the button state?
+In fact, try wiring up this configuration yourself and running the following program with the [Serial Monitor](../electronics/serial-print#step-3-open-serial-monitor-in-the-arduino-ide) open. What happens when you press the button? Try touching the button legs with your fingers but not actually pressing the button—what happens to the `digitalRead` value? Are you reliably tracking the button state?
 
-{% highlight C %}
+{% highlight cpp %}
 const int INPUT_BUTTON_PIN = 2;
 void setup()
 {
@@ -187,11 +195,11 @@ void loop()
   Serial.println(buttonVal);                     // print value to Serial
   delay(5);                                      // small delay
 }
-{% endhighlight C %}
+{% endhighlight cpp %}
 
 Here's a quick video demonstration of what happens—the floating pin problem! Note: we are using a slightly modified version of this code where an LED is turned on if the button is pressed (*i.e.,* if `buttonVal == 1`). This just makes it easier to see the fluctuating button state.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video demonstrating a floating pin problem where button state oscillates erratically">
   <source src="assets/movies/Arduino_Button_FloatingPinProblem720p.mp4" type="video/mp4" />
 </video>
 **Video.** Floating pins are digital input pins that are not tied to a specific input voltage (either 0V or 5V) and thus, are subject to electromagnetic interference. Here, the button state is oscillating between `HIGH` and `LOW` simply due to the electromagnetic interference from my body. Makes me feel like Dumbledore! The source code is [here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/ButtonPressedFloatingPin/ButtonPressedFloatingPin.ino).
@@ -235,7 +243,7 @@ Here's an animation showing how a pull-down resistor configuration works. Notice
 
 And here's a video demonstrating the floating pin problem and fix:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/4qgyICqIVFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/4qgyICqIVFA" title="Video demonstrating the floating pin problem and pull-down resistor fix" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Pull-up resistors
 
@@ -252,13 +260,13 @@ Pull-up resistor configurations can be confusing because the `HIGH` and `LOW` va
 
 For convenience, here are side-by-side diagrams of a pull-down *vs.* pull-up resistor configuration:
 
-![Difference between a pull-down vs. pull-up resistor](assets/images/Arduino_Button_PullDownVsPullUpResistor.png) 
+![Side-by-side schematics comparing pull-down and pull-up resistor configurations. The pull-down connects the resistor to ground, biasing the pin LOW when open. The pull-up connects the resistor to 5V, biasing the pin HIGH when open.](assets/images/Arduino_Button_PullDownVsPullUpResistor.png) 
 
 ### Internal pull-up resistors
 
 Finally, many microcontrollers include an internal pull-up resistor that can be activated with software. On the Arduino, we can configure an input pin to use its internal pull-up resistor with: `pinMode(<pin>, INPUT_PULLUP);`. This eliminates the need for any external resistors (thus simplifying your circuit).
 
-![Difference between a pull-down, pull-up, and internal pull-up resistor](assets/images/Arduino_Button_InternalPullUpResistor.png)
+![Three schematics showing a pull-down, external pull-up, and internal pull-up configuration. The internal pull-up simplifies the physical circuit by using a software-enabled resistor inside the microcontroller.](assets/images/Arduino_Button_InternalPullUpResistor.png)
 
 Some microcontrollers have both internal pull-up *and* pull-down resistors. The popular ESP32 chip, for example, used in the [Adafruit Huzzah32](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview) has built-in pull-up and pull-down resistors on all GPIO pins except for GPIO34-GPIO39 (see [link](https://github.com/espressif/arduino-esp32/issues/316)). These can be enabled with either `pinMode(<pin>, INPUT_PULLUP);` or `pinMode(<pin>, INPUT_PULLDOWN);`
 
@@ -280,34 +288,36 @@ The following section detailing tradeoffs in selecting pull-up and pull-down res
 The longer answer: there are multiple factors to consider, but the primary tradeoff is in selecting a resistor that is small enough to "pull-up" the voltage to `HIGH` when the switch is open but large enough to not "waste" power due to too much current through the resistor when the switch is closed. Remember, a "strong" pull-up is a low-resistance value while a "weak" pull-up is a high-resistance value. Why? Let's read more below.
 
 ![Two schematics showing pull-up resistor when switch is open and closed](assets/images/PullUpResistor_Schematics_CurrentLeakageAndPowerDissipation.png)
-**Figure.** On the ATmega328, the digital input pin voltage ($$V_{pin}$$) needs to be greater than 3V to quality as `HIGH` and less than 1.5V to qualify as `LOW`. The in-between voltage range (1.5-3V) is undefined.  
+**Figure.** On the ATmega328, the digital input pin voltage ($$V_{pin}$$) needs to be greater than 3V to qualify as `HIGH` and less than 1.5V to qualify as `LOW`. The in-between voltage range (1.5-3V) is undefined.  
 {: .fs-1 }
 
 Above, we show two diagrams: one for when the switch is **closed** and the other for when the switch is **open**. We'll walk through each scenario and their relevance to selecting a pull-up resistor. 
 
 ##### Scenario 1: Switch is open
 
-When the switch is open (not pressed), we have a leakage current $$I_{IH}$$ into our input pin of $$0.000001A$$ or ($$1µA$$)—as specified in the [ATmega328 datasheet](../assets/datasheets/ATMega328.pdf) (Section 26.2). We can thus calculate the voltage on the input pin ($$V_{pin}$$) using Ohm's Law: $$V_{pin} = V_{in} - I_{IH} * R$$ where $$V_{in}=5V$$, $$I_{IH}=1µA$$, and $$R$$ is our pull-up resistor value. Recall that on the ATmega328, the input voltage needs to be at least $$0.6\cdot V_{CC}\to 0.6\cdot5 V=3V$$ to qualify as `HIGH`. So, we must ensure that our selection of $$R$$ is not so high as to drop below this threshold for $$V_{pin}$$. So, what's the theoretical maximum pull-up resistor value to meet this limit?
+When the switch is open (not pressed), a tiny leakage current $$I_{IH}$$ flows into the input pin—just 1µA, as specified in the [ATmega328 datasheet](../assets/datasheets/ATMega328.pdf) (Section 26.2). Using Ohm's Law, we can calculate the voltage on the input pin: $$V_{pin} = V_{in} - I_{IH} \cdot R$$, where $$V_{in}$$ = 5V, $$I_{IH}$$ = 1µA, and $$R$$ is our pull-up resistor value.
+
+Recall that on the ATmega328, the input voltage must be at least $$0.6 \cdot V_{CC}$$ (3V) to qualify as `HIGH`. So we must ensure our choice of $$R$$ doesn't drop $$V_{pin}$$ below this threshold. What's the theoretical maximum pull-up resistor value? Substituting $$V_{pin} = 3$$ (the minimum for `HIGH`), $$V_{in} = 5$$, and $$I_{IH} = 0.000001$$ (all in volts and amps):
 
 $$
-V_{pin} = V_{in} - I_{IH} * R \\ 
-3V = 5V - 0.000001A * R \\
-0.000001A * R = 2V \\
-R = 2,000,000Ω = 2MΩ
+V_{pin} = V_{in} - (I_{IH} \cdot R) \\ 
+3 = 5 - (0.000001 \cdot R) \\
+0.000001 \cdot R = 2 \\
+R = 2{,}000{,}000 \text{ Ω} = 2 \text{ MΩ}
 $$
 
 Using this formula alone to drive our decision, we can determine that $$R$$ should not exceed 2MΩ—which would be a very large (weak) pull-up resistor. 
 
 ##### Scenario 2: Switch is closed
 
-When the switch is closed (button pressed), the leakage current of ($$1µA$$) can be ignored as the current is dominated by the $$V_{in}$$ to $$GND$$ branch. And here, the key factor is how much current is flowing when the switch is closed: from Ohm's Law ($$I=\frac{V_{in}}{R}$$), we know that a small resistor will result in more current. We can characterize this as how much power is being dissipated by the resistor—ideally, we want to minimize this. The formula for power is $$P = I \cdot V$$ (in watts), which, using Ohm's Law to replace $$I$$ with $$\frac{V}{R}$$, can be rewritten as $$P = \frac{V^2}{R}$$. Or, in this case, $$P = \frac{V_{in}^2}{R}$$. Given the exponential, when $$R$$ is small, power dissipation is quite large.
+When the switch is closed (button pressed), the leakage current of 1µA can be ignored as the current is dominated by the $$V_{in}$$ to GND branch. And here, the key factor is how much current is flowing when the switch is closed: from Ohm's Law ($$I=\frac{V_{in}}{R}$$), we know that a small resistor will result in more current. We can characterize this as how much power is being dissipated by the resistor—ideally, we want to minimize this. The formula for power is $$P = I \cdot V$$ (in watts), which, using Ohm's Law to replace $$I$$ with $$\frac{V}{R}$$, can be rewritten as $$P = \frac{V^2}{R}$$. Or, in this case, $$P = \frac{V_{in}^2}{R}$$. Because power is inversely proportional to resistance, when $$R$$ is small, power dissipation is quite large.
 
 ##### Calculating tradeoffs in selecting a resistance value
 
-We can use the two formulas from above to determine the the tradeoff in selecting a resistance value for the pull-up resistor $$R$$ and the effect on $$V_{pin}$$ and power dissipation. Given that we are using a 5V microcontroller, we can set $$V_{in}=5V$$.
+We can use the two formulas from above to determine the tradeoff in selecting a resistance value for the pull-up resistor $$R$$ and the effect on $$V_{pin}$$ and power dissipation. Given that we are using a 5V microcontroller, we can set $$V_{in}$$ = 5V. Substituting:
 
 $$
-V_{pin} = V_{in} - I_{IH} * R = 5V - 0.000001A * R \\
+V_{pin} = V_{in} - (I_{IH} \cdot R) = 5 - (0.000001 \cdot R) \\
 P = \frac{V_{in}^2}{R} = \frac{25}{R}
 $$
 
@@ -316,23 +326,18 @@ Below, we are graphing these two equations together for varying values of the pu
 <!-- ![A graph of the tradeoff in selecting a resistance value for pull-up resistor](assets/images/PullUpResistor_VpinAndPowerDissipationGraph.png)
 Calculated using $$V_{in}=5V$$ -->
 
-![](assets/images/PullUpResistor_InputVoltageAndPowerDissipationGraph2_LinearAxes.png)
+![Graph showing input voltage and power dissipation as a function of pull-up resistor value, with the 10 kilohm value and HIGH threshold marked](assets/images/PullUpResistor_InputVoltageAndPowerDissipationGraph2_LinearAxes.png)
 **Figure.** Graphing the input voltage $$V_{pin}$$ and the power dissipation $$P$$ as a function of pull-up resistor value. Both graphs are the same but differ in the x-axis: the right graph zooms in so that you can better see the 10kΩ pull-up value.
 {: .fs-1 }
 
-When the switch is closed (button is pressed), with a pull-up resistor of $$R=100Ω$$ (an unnecessarily strong pull-up), we are drawing 50mA (and consuming 250 milliwatts of power)—a non-trivial amount for a battery-powered circuit (*e.g.,* for a mobile or wearable). In contrast, with a 10kΩ pull-up—the recommended value for the ATmega328 microcontroller—we would draw a more reasonable $$I=0.5mA$$ and consume 2.5mW of power.
+When the switch is closed (button is pressed), with a pull-up resistor of $$R$$ = 100Ω (an unnecessarily strong pull-up), we are drawing 50mA (and consuming 250 milliwatts of power)—a non-trivial amount for a battery-powered circuit (*e.g.,* for a mobile or wearable). In contrast, with a 10kΩ pull-up—the recommended value for the ATmega328 microcontroller—we would draw a more reasonable $$I$$ = 0.5mA and consume 2.5mW of power.
 
----
-
-**OTHER FACTORS**
-
-Though beyond the scope of this class, there are other factors to consider as well—for example, including line capacitance and capacitive coupling. For the former, the input line will have some "stray capacitance" to ground, which creates an "RC circuit" that has associated rise and fall times. Larger resistors can slow down the responsiveness of the circuit. But these factors are beyond the scope of our class. See these forum posts for more details: [AVR Freaks](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) and ([EE StackExchange](https://electronics.stackexchange.com/questions/23645/how-do-i-calculate-the-required-value-for-a-pull-up-resistor)).
-
----
+{: .note }
+> **Other factors.** Beyond the scope of this class, there are additional factors to consider, such as line capacitance and capacitive coupling. The input line will have some "stray capacitance" to ground, which creates an RC circuit with associated rise and fall times. Larger resistors can slow down the responsiveness of the circuit. See these forum posts for details: [AVR Freaks](https://www.avrfreaks.net/forum/input-impedance-digital-ios-atmega328p) and [EE StackExchange](https://electronics.stackexchange.com/questions/23645/how-do-i-calculate-the-required-value-for-a-pull-up-resistor).
 
 #### Tradeoffs in selecting a pull-down resistor
 
-What about pull-down resistors? The same tradeoffs and factors apply here. But instead of $$I_{IH}$$, we need to know the leakage current $$I_{IL}$$ from an input pin to ground. The [ATmega328 datasheet](../assets/datasheets/ATMega328.pdf) specifies the same leakage current for $$I_{IH}$$ and $$I_{IL}$$ as $$1µA$$. 
+What about pull-down resistors? The same tradeoffs and factors apply here. But instead of $$I_{IH}$$, we need to know the leakage current $$I_{IL}$$ from an input pin to ground. The [ATmega328 datasheet](../assets/datasheets/ATMega328.pdf) specifies the same leakage current for $$I_{IH}$$ and $$I_{IL}$$ as 1µA. 
 
 ![Two schematics showing a pull-down resistor when switch is open and closed and the amount of current and power](assets/images/PullDownResistor_Schematics_CurrentLeakageAndPowerDissipation.png)
 
@@ -365,7 +370,7 @@ To zoom in on this image, right-click and select 'Open image in a new tab.'
 
 ### Code to turn on LED with button press
 
-{% highlight C %}
+{% highlight cpp %}
 const int INPUT_BUTTON_PIN = 2;
 const int OUTPUT_LED_PIN = LED_BUILTIN;
 
@@ -382,11 +387,11 @@ void loop()
   digitalWrite(OUTPUT_LED_PIN, buttonState);
   delay(30);
 }
-{% endhighlight C %}
+{% endhighlight cpp %}
 
 ### Tinkercad version with no breadboard
 
-As some of you may still find breadboards a bit confusing, here's a pull-down resistor version without a breadboard made in Tinkercad. We've also hooked up an external LED with a current limiting resistor to Pin 13 (`LED_BUILTIN` on the Uno and Leonardo).
+As some of you may still find breadboards a bit confusing, here's a pull-down resistor version without a breadboard made in Tinkercad. We've also hooked up an external LED with a current-limiting resistor to Pin 13 (`LED_BUILTIN` on the Uno and Leonardo).
 
 ![Tinkercad Arduino circuit with pull-down resistor](assets/images/Tinkercad_PullDownResistor_WithLED_ByJonEFroehlich.png)
 
@@ -395,6 +400,9 @@ You can [try this out on Tinkercad](https://www.tinkercad.com/things/hlkxqsvSz2E
 ## Pull-up resistor configuration
 
 Here's the wiring for a pull-up resistor configuration. Modify the code above to turn on the LED when the button is pressed.
+
+{: .highlight }
+**Try it yourself:** With a pull-up resistor, the button reads `HIGH` when *not* pressed and `LOW` when pressed—the opposite of pull-down! How would you modify the code to turn the LED on when the button is pressed? (Hint: you only need to change one line!)
 
 ![Wiring diagram and schematic for a button with a pull-up resistor wired to digital I/O Pin 2](assets/images/ArduinoUno_Button_PullUpResistor_WiringDiagram.png)
 
@@ -419,15 +427,19 @@ Here's the [interactive internal pull-up resistor Tinkercad version](https://www
 
 ![Tinkercad version of internal pull-up resistor](assets/images/Tinkercad_InternalPullUpResistor_ByJonEFroehlich.png)
 
-## Putting it all together
+## Exercises
 
-For your prototyping journals, make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. You must use your breadboards. Then write code to respond accordingly.
+These exercises will help solidify your understanding of digital input and pull-up/pull-down resistors.
+
+### Exercise 1: Three-button challenge
+
+Make a circuit that has three buttons wired to digital input and three corresponding (external) LEDs wired to digital output. Use a different pull-down or pull-up configuration for each button. You must use your breadboards. Then write code to respond accordingly.
 
 ![Workbench photo of three buttons with different pull-up and pull-down configurations](assets/images/ArduinoUno_ThreeButtonsWithDifferentResistorConfigurations_WorkbenchPhoto.png)
 
 <!-- TODO: add code for this and a workbench video showing it working -->
 
-### To get you started: initial version in Tinkercad
+#### To get you started: initial version in Tinkercad
 
 To help you get started, here's an [initial version in Tinkercad](https://www.tinkercad.com/things/iVeBcYm6Pjp-pull-down-and-pull-up-resistor-demo-with-led-no-breadboard) (but without a breadboard) and it controls only one LED rather than three separate LEDs.
 
@@ -435,17 +447,29 @@ To help you get started, here's an [initial version in Tinkercad](https://www.ti
 **Figure.** An example [Tinkercad circuit+code](https://www.tinkercad.com/things/iVeBcYm6Pjp-pull-down-and-pull-up-resistor-demo-with-led-no-breadboard) that shows how to wire up and use an external pull-down resistor, external pull-up resistor, and internal pull-up resistor. When you click on any of the three buttons, the LED turns on.
 {: .fs-1 }
 
+### Exercise 2: Toggle behavior
+
+Can you modify your code so that the LED **toggles** on and off with each button press (rather than only being on while the button is held down)? Think about what state you need to track. You'll likely run into a "contact bouncing" issue—we'll cover that in [Lesson 3](debouncing.md)!
+
+### Exercise 3: Button-controlled blink rate
+
+Use two buttons to control the blink rate of an LED: one button increases the rate, the other decreases it. Use the `millis()`-based approach from [Multi-rate Blinking](led-blink3.md) to avoid `delay()`.
+
+### Exercise 4: Serial detective
+
+Wire up three buttons — one with a pull-down resistor, one with an external pull-up, and one with `INPUT_PULLUP`. Use `Serial.println` to print the `digitalRead` value of each button on a single line (separated by commas or tabs). Open the Serial Monitor and press each button one at a time. Which buttons read `HIGH` when pressed? Which read `LOW`? Can you explain why? This exercise builds your Serial debugging skills, which you'll rely on throughout the course.
+
 ## More resources
 
 Still feeling confused or want to learn more about pull-up and pull-down resistors? Try watching this [video](https://youtu.be/wxjerCHCEMg) by AddOhms: 
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/wxjerCHCEMg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/wxjerCHCEMg" title="AddOhms video on floating pins and pull-up resistors" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 [Video](https://youtu.be/wxjerCHCEMg) by AddOhms demonstrating floating pins and why pull-up resistors are necessary for digital input with microcontrollers.
 {: .fs-1 }
 
 Or this video by NYU ITP's Jeff Feddersen:
 
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/241209240?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/241209240?title=0&byline=0&portrait=0" title="Jeff Feddersen on pull-up and pull-down resistors" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 [Video](https://vimeo.com/241209240) by NYU ITP’s Jeff Feddersen on pull-up and pull-down resistors.
 {: .fs-1 }
 
@@ -454,11 +478,24 @@ See also:
 - [Arduino's official `INPUT_PULLUP` tutorial](https://www.arduino.cc/en/Tutorial/InputPullupSerial)
 - [Electronics Tutorials' Pull-up Resistors](https://www.electronics-tutorials.ws/logic/pull-up-resistor.html)
 
+## Lesson summary
+
+In this lesson, you learned how to use buttons for digital input with Arduino. The key concepts were:
+
+- **Buttons (momentary switches)** are either open or closed. Four-legged tactile buttons have two internally-connected pairs that join when pressed.
+- **Digital input** pins on the Arduino read voltage, not current. Pins configured as `INPUT` have extremely high impedance (~100MΩ), so virtually no current flows into them.
+- A **floating pin** occurs when an input pin is not connected to a defined voltage level, causing it to oscillate unpredictably between `HIGH` and `LOW`.
+- **Pull-down resistors** bias the input pin to `LOW` (0V) when the switch is open; the pin reads `HIGH` when pressed.
+- **Pull-up resistors** bias the input pin to `HIGH` ($$V_{CC}$$) when the switch is open; the pin reads `LOW` when pressed.
+- The Arduino supports **internal pull-up resistors** via `pinMode(pin, INPUT_PULLUP)`, which simplifies your circuit by eliminating the need for an external resistor.
+- A **10kΩ resistor** is the standard recommendation for external pull-up or pull-down resistors.
+
 ## Next Lesson
 
 In the [next lesson](piano.md), we'll get to apply our newfound digital input skills to build a simple interactive piano with tactile buttons and a piezo buzzer.
 
 <span class="fs-6">
+[Previous: Intro to Input](intro-input.md){: .btn .btn-outline }
 [Next: Make a simple piano](piano.md){: .btn .btn-outline }
 </span>
 

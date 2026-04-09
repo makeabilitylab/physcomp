@@ -214,20 +214,18 @@ This solution is nicely captured by user [cdvma](https://www.reddit.com/r/embedd
 > I have learned two truths when it comes to debouncing:
 >
 > 1. Buttons don't push themselves
->
 > 2. Humans can't do repeated button presses faster than 30 ms
 >
 > So my go-to to avoid tuning things for various mechanical buttons has been:
 >
 > 1. As soon as the GPIO state changes to active, you declare the button is pressed (due to rule #1 above).
->
->2. Ignore all further input on that button for 30 ms.
->
+> 2. Ignore all further input on that button for 30 ms.
 > 3. Go back to step #1.
 >
 > This allows for interrupt-driven input and has zero delay between user action and input processing because you don't wait the debounce period before declaring it pressed. It is important to have that low delay in highly reactive control surfaces (games).
 >
 > The downside is that it won't work if you need to pass regulatory ESD testing.
+{: .block-quote--small }
 
 Here's a quick implementation:
 

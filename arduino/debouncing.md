@@ -21,9 +21,19 @@ search_exclude: false
 {:toc}
 ---
 
-In this lesson, we're going to learn about [contact bouncing ](https://en.wikipedia.org/wiki/Switch#Contact_bounce) (or chatter), a common problem with mechanical switches, buttons, and [relays](https://en.wikipedia.org/wiki/Relay), and how to address it. As electromechanical devices, switch contact points are subject to momentum and elasticity, which act together to create rapid contact oscillations ("bounces") when a switch is "opened" or "closed". As an exaggerated but helpful analog, think of a hammer striking a surface: the hammer will "bounce" with dampened oscillations before entering a steady resting state with a surface.
+In this lesson, we're going to learn about [contact bouncing](https://en.wikipedia.org/wiki/Switch#Contact_bounce) (or chatter)—a common problem with mechanical switches, buttons, and [relays](https://en.wikipedia.org/wiki/Relay). As electromechanical devices, switch contact points are subject to momentum and elasticity. These forces act together to create rapid contact oscillations ("bounces") when a switch is "opened" or "closed". As an exaggerated but helpful analog, think of a hammer striking a surface: the hammer will "bounce" with dampened oscillations before entering a steady resting state.
 
-<video autoplay loop muted playsinline style="margin:0px">
+If you built the [button piano](piano.md) in the previous lesson, you may have already experienced this: occasionally a note might "stutter" or a button press registers twice. That's contact bounce in action!
+
+{: .note }
+> **In this lesson, you will learn:**
+> - What contact bouncing is and why it occurs in mechanical switches
+> - How long switches typically bounce (and why it matters for microcontrollers)
+> - Three different software approaches to debouncing, with increasing sophistication
+> - How to choose an appropriate debounce window for your application
+> - Hardware debouncing solutions using capacitors and Schmitt Triggers
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Slow-motion video of a hammer bouncing off a table, illustrating how switch contacts bounce before settling">
   <source src="assets/movies/DebouncingHammer_CurrentSource_720p-Optimized.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a hammer bouncing off a table to help illustrate how switch contacts bounce before entering a steady state. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
@@ -37,7 +47,7 @@ So, what can you do? The solution is to "debounce" your switches, which can be d
 
 [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) recorded slow motion videos of switches bouncing during activations and deactivations. Just like the hammer, this electrical contact visibly bounces when first activated, creating a noisy contact signal.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Slow-motion video of a switch mechanically bouncing off its contacts before settling">
   <source src="assets/movies/DebouncingButton_CurrentSource_720p-Optimized-WithLabels.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a switch mechanically bouncing off its contacts. Buttons are mechanical devices. When a button is pressed or a contact switch moved, it creates a rapid oscillation of open- and closed-circuits before settling to its final state. In comparison to computation, mechanical motion is slow. Microcontrollers—even old, slow ones like the ATmega328—work so fast that they will read these rapid oscillations as `HIGH` and `LOW` input state changes. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
@@ -58,7 +68,7 @@ Indeed, if you look at a switch signal with an oscilloscope, you can see the "bo
 
 Yes! Take a look at the bouncing graphs below from an oscilloscope reading of both a switch activation (open to close) and deactivation (close to open). Depending on the switch type, the bouncing action may be more extreme for either action.
 
-![](assets/images/ContactBounce_ActivationAndDeactivation_FromCurrentSource.png)
+![Oscilloscope readings showing contact bounce during both switch activation (open to close) and deactivation (close to open)](assets/images/ContactBounce_ActivationAndDeactivation_FromCurrentSource.png)
 **Figure.** Switches can bounce during both closing and opening operations. Image derived from [The Current Source](https://youtu.be/jI-rC2FCKo4).
 {: .fs-1 }
 
@@ -68,32 +78,32 @@ So, how long do buttons bounce for? The answer: it varies depending on the switc
 
 Thankfully, we have [Jack Ganssle](http://www.ganssle.com/), an expert in embedded systems, to help answer this question. He painstakingly tested nearly twenty different switches ranging from cheap joystick and old mouse buttons to toggle and slide switches (see figure below). For each switch, he hooked up their contact signals to an oscilloscope, individually pressed them 300 times, and logged the min and max amount of bouncing for both *closing* and *opening* activations. The results of his research are documented [here](https://my.eng.utah.edu/~cs5780/debouncing.pdf).
 
-![](assets/images/Ganssle_SwitchesTested.png)
-**Figure.** Switches tested by Jack Ganssle in his "switch bouncing" experiences ([source](https://my.eng.utah.edu/~cs5780/debouncing.pdf)).
+![Photo grid of the nearly twenty different switches tested by Jack Ganssle, including joystick buttons, toggle switches, slide switches, and pushbuttons](assets/images/Ganssle_SwitchesTested.png)
+**Figure.** Switches tested by Jack Ganssle in his "switch bouncing" experiments ([source](https://my.eng.utah.edu/~cs5780/debouncing.pdf)).
 {: .fs-1 }
 
-In sum, most switches exhibited an average of 1.5 milliseconds (ms) of bouncing; however, two outlier switches exceeded 6.2ms. The worst  was a red pushbutton, which had an *open* bounce of 157ms but only 20 microseconds (μs) on close. Interestingly, each switch seemed to have its own "bounce pattern" off rapid oscillations.
+In sum, most switches exhibited an average of 1.5 milliseconds (ms) of bouncing; however, two outlier switches exceeded 6.2ms. The worst was a red pushbutton, which had an *open* bounce of 157ms but only 20 microseconds (μs) on close. Interestingly, each switch seemed to have its own "bounce pattern" of rapid oscillations.
 
 ### What happens if we don't debounce?
 
-I made a [small test program](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceTest/DebounceTest.ino) to help illustrate how problematic contact bouncing can be. I have a simple button circuit (like [this one](assets/images/ArduinoButtonPlusLEDCircuit.png)), which turns on a red LED when pressed.
+We made a [small test program](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceTest/DebounceTest.ino) to help illustrate how problematic contact bouncing can be. We have a simple button circuit (like [this one](assets/images/ArduinoButtonPlusLEDCircuit.png)), which turns on a red LED when pressed.
 
-I am tracking both **non-debounced button presses** ("raw" button presses) and **debounced button presses**. In the video, you'll observe how errant the non-debounced button press count gets (shown with the blue line)!
+We are tracking both **non-debounced button presses** ("raw" button presses) and **debounced button presses**. In the video, you'll observe how errant the non-debounced button press count gets (shown with the blue, rapidly-increasing line) compared to the accurate debounced count (the red staircase line)!
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/tw-pndJQFqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/tw-pndJQFqw" title="Video demonstrating the importance of debouncing buttons with raw vs debounced press counts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-**Video.** A video demonstrating the importance of debouncing your buttons. We track the number of "raw" button presses (in blue) and the number of debounced button presses (in red) and plot the values in Serial Plotter.
+**Video.** A video demonstrating the importance of debouncing your buttons. We track the number of "raw" button presses (blue, rapidly increasing) and the number of debounced button presses (red, clean staircase) and plot the values in Serial Plotter.
 {: .fs-1 }
 
 ## Debouncing solutions
 
-Like with many problems involving microcontrollers and circuit, there are multiple solution approaches including those that rely purely on software, on hardware, or some combination of both. In this lesson, we'll primarily focus on software solutions but briefly describe a common hardware solution below.
+Like with many problems involving microcontrollers and circuits, there are multiple solution approaches including those that rely purely on software, on hardware, or some combination of both. In this lesson, we'll primarily focus on software solutions but briefly describe a common hardware solution below.
 
 ### Pure hardware solutions
 
-Although in physical computing, we often emphasize software solutions, hardware solution can be just as functionally good (though it does complicate the build and require more components). For example, in this Texas Instruments video, the instructor shows how to use a capacitor and a [Schmitt Trigger](https://en.wikipedia.org/wiki/Schmitt_trigger) to debounce a switch. The capacitor smooths out the rising and falling edges of a button state transition and the Schmitt Trigger converts this smoothed signal back into digital output.
+Although in physical computing, we often emphasize software solutions, hardware solutions can be just as functionally good (though it does complicate the build and require more components). For example, in this Texas Instruments video, the instructor shows how to use a capacitor and a [Schmitt Trigger](https://en.wikipedia.org/wiki/Schmitt_trigger) to debounce a switch. The capacitor smooths out the rising and falling edges of a button state transition and the Schmitt Trigger converts this smoothed signal back into digital output.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/e1-kc04jSE4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/e1-kc04jSE4" title="Texas Instruments video on hardware debouncing with a capacitor and Schmitt Trigger" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 **Video.** This [Texas Instruments video](https://youtu.be/e1-kc04jSE4) shows how to use a capacitor and a Schmitt Trigger to debounce a switch.
 {: .fs-1 }
 
@@ -101,7 +111,7 @@ Although in physical computing, we often emphasize software solutions, hardware 
 
 So, how do we solve debouncing in software? The key is to first detect a switch state change (let's call this `state1`), then wait for a set amount of time (a "debouncing window"), then check the switch state again (let's call this `state2`). If the initial state and the post-debouncing window state match (*i.e.,* `state1 == state2`), then we can confidently conclude that the switch has transitioned from one steady state to another. See graph below.
 
-![](assets/images/DebounceSwitchGraph_DebouncingWindow.png)
+![Two graphs showing the same open-to-close switch state change. The left graph highlights steady state LOW, the bouncing transition, and steady state HIGH. The right graph shows the debouncing window approach where we wait and re-read.](assets/images/DebounceSwitchGraph_DebouncingWindow.png)
 **Figure.** Both graphs are showing the same open-to-close switch state change but with different annotations. The graph on the left highlights the first steady state (`LOW`), the transition and bouncing contact state, and the second steady state (`HIGH`). The graph on the right shows a depiction of our "debouncing window", which is key to the software solution. Image made in PowerPoint.
 {: .fs-1 }
 
@@ -115,7 +125,7 @@ As a second consideration, what's a human perceptible amount of lag? Wikipedia s
 
 Let's build the following test circuit and then walk through some possible software solutions to debouncing.
 
-![](assets/images/ArduinoButtonPlusLEDCircuit.png)
+![Wiring diagram and schematic of a button with a pull-down resistor on pin 2 and an LED with current-limiting resistor on pin 3](assets/images/ArduinoButtonPlusLEDCircuit.png)
 **Figure.** The button-based circuit. Image made in Fritzing and PowerPoint.
 {: .fs-1 }
 
@@ -134,7 +144,7 @@ For our first and most basic solution, we will read the button state, wait a giv
 
 We're going to use [`delay`](https://www.arduino.cc/reference/en/language/functions/time/delay/) here to wait for the "debouncing window" time period, which we already know should generally be avoided but is sometimes helpful and appropriate (if it's not negatively impacting the responsiveness of your program, for example).
 
-{% highlight C %}
+{% highlight cpp %}
 
 const int BUTTON_INPUT_PIN = 2;
 const int LED_OUTPUT_PIN = 3;
@@ -160,7 +170,7 @@ void loop() {
   int buttonVal2 = digitalRead(BUTTON_INPUT_PIN);
 
   // If buttonVal and buttonVal2 are the same, then we are in steady state
-  // If this stead state value does not match our _lastButtonVal, then
+  // If this steady state value does not match our _lastButtonVal, then
   // a transition has occurred and we should save the new buttonVal
   // This works both for open-to-close transitions and close-to-open transitions
   if(buttonVal == buttonVal2 && _savedButtonVal != buttonVal){
@@ -170,7 +180,7 @@ void loop() {
   // Write out HIGH or LOW
   digitalWrite(LED_OUTPUT_PIN, _savedButtonVal);
 }
-{% endhighlight C %}
+{% endhighlight cpp %}
 
 This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithDelays/DebounceWithDelays.ino) is on GitHub.
 {: .fs-1 }
@@ -195,7 +205,7 @@ For the two debouncing solutions above, we observed an initial state change on o
 
 However, if we soften our requirement and assume that the `state1` change was correct and not some errant signal, then we can apply a few other solutions. In these cases, we do **not read** from the digital input pin **again** after the debouncing window but, instead, simply ignore input for that time period.
 
-![](assets/images/DebouncingStateChangeGraph_TwoSolutions.png)
+![Comparison of two debouncing approaches: the first reads the pin twice with a delay between reads to verify state, while the second trusts the initial state change and simply ignores further input for the debounce window](assets/images/DebouncingStateChangeGraph_TwoSolutions.png)
 **Figure.** Two approaches to debouncing buttons.
 {: .fs-1 }
 
@@ -218,11 +228,10 @@ This solution is nicely captured by user [cdvma](https://www.reddit.com/r/embedd
 > This allows for interrupt-driven input and has zero delay between user action and input processing because you don't wait the debounce period before declaring it pressed. It is important to have that low delay in highly reactive control surfaces (games).
 >
 > The downside is that it won't work if you need to pass regulatory ESD testing.
-{: .fs-4 }
 
 Here's a quick implementation:
 
-{% highlight C %}
+{% highlight cpp %}
 
 const int BUTTON_INPUT_PIN = 2;
 const int LED_OUTPUT_PIN = 3;
@@ -245,7 +254,7 @@ void loop() {
   if(_savedButtonVal != buttonVal){
     _savedButtonVal = buttonVal;
 
-    // Delay here for a very short time to ensure we get passed
+    // Delay here for a very short time to ensure we get past
     // the debouncing period. Obviously, you could (and should) do this
     // without a delay() call by simply tracking timestamps
     delay(DEBOUNCE_WINDOW); 
@@ -254,7 +263,7 @@ void loop() {
   // Write out HIGH or LOW
   digitalWrite(LED_OUTPUT_PIN, _savedButtonVal);
 }
-{% endhighlight C %}
+{% endhighlight cpp %}
 
 This solution is less robust but works well for human input in environments with limited electrical noise (see this [Reddit discussion](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fprrygg?utm_source=share&utm_medium=web2x&context=3)). However, as is pointed out in the Reddit thread ([link](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fpw7xpf?utm_source=share&utm_medium=web2x&context=3)), this simple solution does not protect against electrostatic discharge (ESD) and thus fails regulatory requirements (which require the two state reads like we did in Solutions 1 and 2).
 
@@ -262,7 +271,7 @@ This solution is less robust but works well for human input in environments with
 
 Debouncing a single button is relatively simple but our state tracking code does not scale well to multiple buttons (it would look very messy). So, what should we do?
 
-This problem is very similar to our state tracking issue for [rate blinking LEDs](led-blink3.md). For that, we developed an object-oriented approach called [`Blinker`](led-blink3.md##multi-rate-blinking-an-object-oriented-approach). Similarly, we could develop a `Button` class that works largely the same way—and could even have special features like tracking *double clicks*, *long presses*, etc.
+This problem is very similar to our state tracking issue for [rate blinking LEDs](led-blink3.md). For that, we developed an object-oriented approach called [`Blinker`](led-blink3.md#multi-rate-blinking-an-object-oriented-approach). Similarly, we could develop a `Button` class that works largely the same way—and could even have special features like tracking *double clicks*, *long presses*, etc.
 
 Indeed, there are a number of custom `Button` classes online for Arduino, including:
 
@@ -272,39 +281,29 @@ Indeed, there are a number of custom `Button` classes online for Arduino, includ
 
 - ThomasGravekamp's [Arduino Debounced Switched Library](https://github.com/ThomasGravekamp/Arduino-Debounced-Switch), which includes support for callback functions when a trigger state is reached.
 
-As a disclaimer, I have not tested these libraries myself but please do peruse them (to learn about how they work) and try them out yourself, if you'd like.
+As a disclaimer, we have not tested these libraries ourselves but please do peruse them (to learn about how they work) and try them out yourself, if you'd like.
 
 ### Other solutions
 
 There are many other software debouncing solutions, including using [interrupts](https://www.arduino.cc/reference/en/language/functions/external-interrupts/attachinterrupt/). For example, here's a version we made for the [Redbear Duo boards](https://github.com/makeabilitylab/arduino/blob/master/RedBearDuo/RedBearDuoButtonInterruptWithDebouncing/RedBearDuoButtonInterruptWithDebouncing.ino). See [Resources](#resources) below.
 
-## Activity
+## Exercises
 
-For your prototyping journals, modify your [piano code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) from the [previous activity](piano.md) to use debouncing. You can use one of the aforementioned button classes or roll your own solution. Do you notice anything different? Why or why not?
+### Exercise 1: Debounce your piano
 
-<!-- ## Solution 3
-Uses interrupts. Assumes any initial state change is not spurious but due to human input.
+Modify your [piano code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/SimplePiano/SimplePiano.ino) from the [previous lesson](piano.md) to use debouncing. Start with the delay-based approach (Solution 1), then try the timestamp-based approach (Solution 2). Do you notice anything different? Why or why not? (Hint: think about how `tone()` works — does contact bounce actually cause audible problems for a piano, or is it more of an issue for *counting* presses?)
 
-https://github.com/makeabilitylab/arduino/blob/fd5a1403148cd98b7dcfa3a3be2ab64e0d231b76/RedBearDuo/RedBearDuoButtonInterruptWithDebouncing/RedBearDuoButtonInterruptWithDebouncing.ino 
+### Exercise 2: Button press counter
 
-Problem is: is susceptible to electromagnetic interference (ESD testing) but is simple
+Build a circuit with a button and an LED. Each button press should toggle the LED on or off (like Exercise 2 from the [buttons lesson](buttons.md)). Use the Serial Monitor to print the press count. First try it *without* debouncing, then add debouncing. How do the counts compare?
 
--->
+### Exercise 3: Try a library
 
+Pick one of the Arduino button libraries mentioned in [Reflecting on our solutions](#reflecting-on-our-solutions) (such as [PushButton](https://github.com/kristianklein/PushButton) or [JC_Button](https://github.com/JChristensen/JC_Button)). Refactor your piano or button code to use it. How does the library's API compare to your hand-rolled solution?
 
-<!-- ## Outline
-- [Done] Describe problem and include snippets (or animated gifs) of videos we typically show in class
-- [Done] Talk about potential solutions
-- [Done] Show off the simplest: just check value wait for some amount of time and then check value again (using sleep)
-- [Done] Show and talk about test code that shows why debouncing is important (maybe with video?). Could have top-down video of OLED display showing counting differences. Update: had video with serial monitor.
-- [done] Introduce class to do debouncing for us (and other things like deal with both pull-down and pull-up resistor configs)
-  - Maybe talk about callback functions for handling buttonDown vs. buttonUp events? Or even like double click?
-  - Some potential libraries to check out:
-    -  [PushButton](https://github.com/kristianklein/PushButton) (looks quite nice)
-    -  [SensorToButton](https://github.com/nathanRamaNoodles/SensorToButton) includes setting thresholds to interpret sensor states as "button" triggers
-    -  [DebounchedSwitch](https://github.com/ThomasGravekamp/Arduino-Debounced-Switch) uses callback functions
- -  Consider also showing how to use a tilt switch? (just as another example digital input?)
- -  [Done] There are also hardware solutions using, for example, RC circuits (could include links?) -->
+### Exercise 4: Experiment with debounce windows
+
+Write a program that lets you change the debounce window in real time using `Serial.read()`. Start with 5ms and increase to 200ms. At what point does the debounce window start to feel laggy? At what point does contact bounce become noticeable? Document your findings.
 
 ## Resources
 
@@ -314,17 +313,28 @@ There are lots of debouncing resources and various solutions covered online and 
 
 - [Debounce Code: One Post To Rule Them All](https://hackaday.com/2010/11/09/debounce-code-one-post-to-rule-them-all/), Hackaday
 
-- [Switch Bounce and How to Deal with It](https://www.allaboutcircuits.com/technical-articles/switch-bounce-how-to-deal-with-it/) Jens Christoffersen at [allaboutcircuits.com](https://www.allaboutcircuits.com/)
+- [Switch Bounce and How to Deal with It](https://www.allaboutcircuits.com/technical-articles/switch-bounce-how-to-deal-with-it/), Jens Christoffersen at [allaboutcircuits.com](https://www.allaboutcircuits.com/)
 
 - [Reliable User Input with Unreliable Physical Switches](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/), Reddit discussion
 
 - [Debounce](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce), Official Arduino tutorial
+
+## Lesson summary
+
+In this lesson, you learned about contact bouncing — a fundamental challenge when using mechanical switches with microcontrollers. Key takeaways:
+
+- **Contact bouncing** is caused by the physical momentum and elasticity of switch contacts, which rapidly oscillate between open and closed before settling. This typically lasts 1–20ms but can exceed 100ms for some switches.
+- **Microcontrollers are fast enough to read these bounces** as distinct state changes, which can cause erroneous input if not handled.
+- **Software debouncing** can be implemented by reading the pin twice with a delay between reads (Solutions 1 and 2) or by trusting the first state change and ignoring further input for a debounce window (Solution 3).
+- **Timestamp-based debouncing** (Solution 2) is preferred over `delay()`-based approaches because it doesn't block the rest of your program.
+- **Hardware debouncing** using capacitors and Schmitt Triggers is also possible but adds circuit complexity.
+- A **debounce window of 30–50ms** works well for most human-input applications.
 
 ## Next Lesson
 
 In the [next lesson](potentiometers.md), we'll move beyond digital input to the far more exciting and flexible world of analog input!
 
 <span class="fs-6">
-[Previous: Building a piano](piano.md){: .btn .btn-outline }
+[Previous: A simple piano](piano.md){: .btn .btn-outline }
 [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline }
 </span>

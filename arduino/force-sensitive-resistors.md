@@ -23,7 +23,15 @@ In this lesson, you'll learn about force-sensitive resistors (FSRs) and how to u
 
 This lesson directly builds on the prior one ([potentiometers](potentiometers.md)), so definitely complete that first.
 
-![Animation showing an FSR](/assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif)
+{: .note }
+> **In this lesson, you will learn:**
+> - What force-sensitive resistors (FSRs) are and how they work
+> - How to use any two-legged variable resistor with a microcontroller by adding a fixed resistor to form a voltage divider
+> - How to select an appropriate fixed resistor value for your sensor
+> - How to use `map()` to convert between different value ranges
+> - How to build a force-controlled musical instrument combining `analogRead` and `tone()`
+
+![Animation showing an FSR pressing down and an LED getting brighter as resistance drops](assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif)
 
 **Figure.** Animation shows how the resistance of the FSR drops with applied pressure (higher pressure, lower resistance, brighter LED).
 {: .fs-1 }
@@ -34,14 +42,14 @@ We'll need the following materials:
 
 | Breadboard | Arduino | FSR | Resistor | Piezo Buzzer |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Arduino Uno]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![FSR]({{ site.baseurl }}/assets/images/FSR_200h.png) | ![Image of 10KOhm resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | ![Piezo buzzer]({{ site.baseurl }}/assets/images/PiezoBuzzer_100h.png) |
+| ![A half-sized breadboard for prototyping]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![An Arduino Uno microcontroller board]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![A force-sensitive resistor (FSR)]({{ site.baseurl }}/assets/images/FSR_200h.png) | ![A 10 kilohm fixed resistor]({{ site.baseurl }}/assets/images/Resistor10K_Fritzing_100w.png) | ![A passive piezo buzzer]({{ site.baseurl }}/assets/images/PiezoBuzzer_100h.png) |
 | Breadboard | Arduino Uno, Leonardo, or similar  | [Force-Sensitive Resistor](https://www.adafruit.com/product/166) | 10kΩ Resistor | [Piezo Buzzer](https://www.mouser.com/ProductDetail/810-PS1240P02BT) |
 
 ## Force-sensitive resistors (FSRs)
 
 Force-sensing (or force-sensitive) resistors (FSRs) are two-legged variable resistors that **decrease** in resistance with an **increase** in applied force. 
 
-FSRs can differ in size, shape, and force sensing sensitivity. There are a variety form factors, including square and circular (which host the active sensor area). In our hardware kits, we typically purchase and provide the popular [Interlink FSR 402]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) (either from [Sparkfun](https://www.sparkfun.com/products/9375) or [Adafruit](https://www.adafruit.com/product/166)), which is the product in the upper-left below.
+FSRs can differ in size, shape, and force sensing sensitivity. There are a variety of form factors, including square and circular (which host the active sensor area). In our hardware kits, we typically purchase and provide the popular [Interlink FSR 402]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) (either from [Sparkfun](https://www.sparkfun.com/products/9375) or [Adafruit](https://www.adafruit.com/product/166)), which is the product in the upper-left below.
 
 ![Grid of example force sensitive resistors from Sparkfun's website](assets/images/ForceSensitiveResistors_Examples_Sparkfun.png)
 Prices and products from [Sparkfun.com](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all)
@@ -56,7 +64,7 @@ The [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResis
 - **Using force for UI feedback.** Detect user's touch force to make a more intuitive interface
 - **Enhancing tool safety.** Differentiate a grip from a touch as a safety lock
 - **Finding centroid of force.** Use multiple sensors to determine centroid of force
-- **Detecting presence, position, or motion** Sense a person/patient in a bed, chair, or medical device
+- **Detecting presence, position, or motion.** Sense a person/patient in a bed, chair, or medical device
 - **Detecting liquid blockage.** Detect tube or pump occlusion or blockage by measuring back pressure
 
 While FSRs respond to force, they are not precision measurement instruments like [load cells](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells) or [strain gauges](https://learn.sparkfun.com/tutorials/getting-started-with-load-cells/strain-gauge-basics), so use those if you want to precisely measure weight, load, or strain.
@@ -82,7 +90,7 @@ A graph of the force (g) vs. resistance (kΩ) of the FSR 402 is shown below (plo
 1. An initial "break force" or "turn on threshold" that dramatically swings the resistance from >10MΩ to roughly 10kΩ
 2. After this threshold, the FSR resistance becomes inversely proportional to the applied force (following an inverse power-law characteristic).  
 
-At the high-end of the force range (greater than 1000g), the FSR saturates and does not continue to drop resistance.
+At the high-end of the force range, the FSR's sensitivity diminishes significantly and the resistance curve begins to saturate.
 
 ![Graph of the resistance vs. force curve for the Interlink FSR 402 showing that resistance drops with applied pressure](assets/images/ForceSensitiveResistor_ResistanceForceCurve_InterlinkFSR402.png)
 A graph of the force (g) vs. resistance (kΩ) plotted on a log-log scale for the Interlink FSR 402. Graph from the [Interlink FSR Integration Guide]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_Interlink_IntegrationGuide.pdf).
@@ -94,7 +102,7 @@ For more details, see the Interlink [FSR 402 datasheet]({{ site.baseurl }}/asset
 
 Let's make something!
 
-To begin, just like we did with the [buttons](buttons.md) and [potentiometers](potentiometers.md) lessons, we'll make a simple LED circuit without a microcontroller. In fact, this circuit will be the exact same as the "rheostat" potentiometer circuit [here](potentiometers.md#build-the-potentiomer-based-led-dimmer) (but we'll replace the rheostat with an FSR).
+To begin, just like we did with the [buttons](buttons.md) and [potentiometers](potentiometers.md) lessons, we'll make a simple LED circuit without a microcontroller. In fact, this circuit will be the exact same as the "rheostat" potentiometer circuit [here](potentiometers.md#build-the-potentiometer-based-led-dimmer) (but we'll replace the rheostat with an FSR).
 
 Below, we show two possible wiring diagrams: the first (preferred) shows the FSR circuit powered by a 9V battery while the second shows power derived from the 5V and GND pins on the Arduino. (Again, we prefer the former just to further emphasize that at this point, we're not using microcontrollers!)
 
@@ -104,7 +112,7 @@ Two wiring options of an FSR using a breadboard. Like typical resistors, FSRs ca
 
 With the 9V wiring, we include a backup resistor; however, with the 5V wiring (with Arduino), we do not. This is because both the [FSR 402 datasheet]({{ site.baseurl }}/assets/datasheets/ForceSensitiveResistor_InterlinkFSR402_2010-10-26-DataSheet-FSR402-Layout2.pdf) and our own empirical use demonstrate that even with significant force (roughly 1,000g according to the datasheet), the FSR still has ~200Ω-500Ω of resistance. So, while a potentiometer may drop to 0Ω at the lowest setting, the FSR does not, and thus does not require a backup resistor.
 
-For the 9V wiring, if we assume the red LED's $$V_f=2V$$ and the lowest FSR resistance of 200Ω, then $$I=\frac{9V-2V}{200Ω}=35mA$$, which exceeds the max current of the LED. We thus added a 470Ω backup resistor to be safe. So, $$I=\frac{9V-2V}{200Ω + 470Ω}=10.4mA$$.
+For the 9V wiring, if we assume the red LED's forward voltage ($$V_f$$) is 2V and the lowest FSR resistance is 200Ω, then the current is (9V - 2V) / 200Ω = 35mA, which exceeds the max continuous current of the LED (typically 20mA). We thus added a 470Ω backup resistor to be safe. Now, the current is (9V - 2V) / (200Ω + 470Ω) = 10.4mA.
 
 ### Positioning FSR on breadboard
 
@@ -126,7 +134,7 @@ Once you've made the circuit, have fun playing with the FSR. Get a sense of its 
 
 Here's a workbench video of our completed circuit (this is the same video as the one in the [potentiometers](potentiometers.md) lesson, so there is a backup resistor):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/YMCqDcnwMYo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/YMCqDcnwMYo" title="Workbench video of an FSR-based LED dimmer circuit" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 Workbench video of the FSR LED dimmer circuit
 {: .fs-1 }
 
@@ -139,7 +147,7 @@ First, like usual, we'll show you the wrong way to hook up a component to a micr
 
 Why doesn't this work?
 
-Recall from our [potentiometers](potentiometers.md) lesson, microcontrollers read voltages, not current. We have to setup a circuit that enables our microcontroller to "see" changes in voltages. 
+Recall from our [potentiometers](potentiometers.md) lesson, microcontrollers read voltages, not current. We have to set up a circuit that enables our microcontroller to "see" changes in voltages. 
 
 <!-- make and show an animation of the pot splitting into two resistors and how this is the same thing that we have to do for our FSR -->
 
@@ -173,7 +181,7 @@ We're going to begin with a simple circuit to read the FSR and proportionally se
 
 ### FSR-based LED fade circuit
 
-Let's make a simple FSR circuit with the fixed resistor (10kΩ) in the pull-down position. In this configuration, the analog input A0 (VA0) will increase with increasing force and start at 0V when the FSR is not pressed.
+Let's make a simple FSR circuit with the fixed resistor (10kΩ) in the pull-down position. In this configuration, the analog input A0 ($$V_{A0}$$) will increase with increasing force and start at 0V when the FSR is not pressed.
 
 ![FSR wiring diagram for Arduino Uno with FSR Leg 1 hooked to 5V, and Leg 2 hooked to a fixed resistor 10kΩ in the pull-down resistor position](assets/images/ArduinoUno_FSR_FixedResistorInPullDown_SchematicAndDiagram.png)
 
@@ -187,15 +195,17 @@ There is one small issue, which is that `analogRead` (on the Uno and Leonardo) u
 
 If we assume both ranges start at zero (as they do in this case), our conversion is simply: `int outputVal = (int)(inputVal/1023.0 * 255);`. 
 
-If, instead, we can't assume that both ranges start at zero, the more general conversion algorithm is: `int outputVal = OUTPUT_MIN + (inputVal - INPUT_MIN)/(INPUT_MAX - INPUT_MIN) * (OUTPUT_MAX - OUTPUT_MIN);` This type of range conversion is so common that Arduino (and Processing and many other programming libraries) have a built-in function for it called [`map`](https://www.arduino.cc/reference/en/language/functions/math/map/). It's called "map" because we want to re-map a number from one range to another. Indeed, here's the entire `map` function from the Arduino source code:
+If, instead, we can't assume that both ranges start at zero, the more general conversion algorithm is: `int outputVal = ((inputVal - INPUT_MIN) * (OUTPUT_MAX - OUTPUT_MIN) / (INPUT_MAX - INPUT_MIN)) + OUTPUT_MIN;`. Notice that we must do the multiplication *before* the division to avoid C++ integer math truncating to zero! (If you divided first, `(inputVal - INPUT_MIN) / (INPUT_MAX - INPUT_MIN)` would almost always evaluate to `0` since the numerator is typically smaller than the denominator.)
 
-{% highlight C %}
+This type of range conversion is so common that Arduino (and Processing and many other programming libraries) have a built-in function for it called [`map`](https://www.arduino.cc/reference/en/language/functions/math/map/). It's called "map" because we want to re-map a number from one range to another. Indeed, here's the entire `map` function from the Arduino source code—notice it also multiplies before dividing:
+
+{% highlight cpp %}
 long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-{% endhighlight C %}
+{% endhighlight cpp %}
 
-Importantly, as the [docs](https://www.arduino.cc/reference/en/language/functions/math/map/) make abundantly clear, notice that this built-in method using **integer** math and so will not return fractions (floats). If you need more precise conversions, implement your own mapping function (which also provides the opportunity to implement non-linear conversions like logarithmic mappings). 
+Importantly, as the [docs](https://www.arduino.cc/reference/en/language/functions/math/map/) make abundantly clear, notice that this built-in method uses **integer** math and so will not return fractions (floats). If you need more precise conversions, implement your own mapping function (which also provides the opportunity to implement non-linear conversions like logarithmic mappings). 
 
 OK, now that we have that out of the way, let's write our code!
 
@@ -210,9 +220,9 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 ### Workbench video with serial plotter
 
-Here's a workbench video with a corresponding Serial Plotter screen recording. The `analogRead` FSR values are in blue, the `analogWrite` LED PWM values are in orange. We're using the built-in LED, so the LED brightness changes may be difficult to see in the video.
+Here's a workbench video with a corresponding Serial Plotter screen recording. The `analogRead` FSR values are in blue (the taller, more dynamic trace), and the `analogWrite` LED PWM values are in orange (the shorter, scaled-down trace). We're using the built-in LED, so the LED brightness changes may be difficult to see in the video.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/MTpmVaVi92o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/MTpmVaVi92o" title="Workbench video of FSR-based LED fading with Serial Plotter showing analogRead and analogWrite values" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Jedi force instrument
 
@@ -222,7 +232,7 @@ For our final creation, we're going to make a Jedi force instrument: the harder 
 
 Simply add in a piezo buzzer and connect it to a GPIO pin.
 
-![The FSR-based piezo instrument wiring diagram](assets/images/ArduinoUno_FSRPiezoInstrument_BreadboardDiagram.png)
+![Breadboard wiring diagram of the Jedi force instrument, showing an FSR connected to analog pin A0 as a voltage divider with a 10 kilohm fixed resistor, and a piezo buzzer connected to digital pin 9](assets/images/ArduinoUno_FSRPiezoInstrument_BreadboardDiagram.png)
 
 ### Jedi force code
 
@@ -239,16 +249,27 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Here's our take on it! Make sure to have your sound on (or not) if you want to hear the piezo buzzer! 
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/OuEABPQV9_k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="736" height="414" src="https://www.youtube.com/embed/OuEABPQV9_k" title="Workbench video of the Jedi force instrument playing tones controlled by FSR pressure" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Exercises
 
-For your prototyping journals, choose of the following extensions and implement it!
+For your prototyping journals, choose one or more of the following extensions and implement it!
 
-- Can you improve the Jedi force instrument so that it sounds better (well, as good as we can make a piezo with square waves sound). How about only playing notes on a scale, for example.
-- Add in some LEDs that work as a "bar graph" for the FSR value.
-- Try making a lo-fi pressure sensor using everyday materials and use it to make a new Jedi force instrument!
-- Another idea that you can think of (that should take ~15-20 minutes to accomplish!)
+### Exercise 1: Quantized Jedi instrument
+
+Improve the Jedi force instrument so that instead of playing arbitrary frequencies, it only plays notes on a musical scale (for example, C major: C4, D4, E4, F4, G4, A4, B4, C5). Use `map()` to divide the FSR's analog input range into discrete note bins. Does it sound more musical?
+
+### Exercise 2: LED bar graph
+
+Add three or more LEDs that work as a "bar graph" for the FSR value — the harder you press, the more LEDs light up. This is a great way to provide visual feedback for an analog sensor.
+
+### Exercise 3: DIY pressure sensor
+
+Try making a lo-fi pressure sensor using everyday materials (aluminum foil, conductive foam, pencil graphite on paper, or velostat) and use it to make a new instrument or LED controller. How does it compare to the FSR in sensitivity and range?
+
+### Exercise 4: Combined instrument
+
+Build an instrument that uses *both* a potentiometer and an FSR. For example, the potentiometer could select the octave (low, mid, high) while the FSR controls the specific note within that octave. Or the potentiometer could control volume (using `analogWrite` to the piezo) while the FSR controls pitch.
 
 <!-- ### Make your own lo-fi pressure sensor. TODO: show super simple lo-fi pressure sensor out of pencil. Show both alligator clip version and taped jumper wire version. -->
 
@@ -259,3 +280,25 @@ For your prototyping journals, choose of the following extensions and implement 
 - [Force Sensitive Resistors (FSRs)](http://www.openmusiclabs.com/learning/sensors/fsr/), Open Music Labs
 - [Force Sensitive Resistor (FSR)](https://learn.adafruit.com/force-sensitive-resistor-fsr), Adafruit Learn
 - [Force Sensitive Resistor Hookup Guide](https://learn.sparkfun.com/tutorials/force-sensitive-resistor-hookup-guide/all), Sparkfun Tutorials
+
+## Lesson summary
+
+Congratulations — you've completed the entire **Intro to Input** lesson series! In this final lesson, you learned:
+
+- **Force-sensitive resistors (FSRs)** are two-legged variable resistors whose resistance decreases with applied force. They have a characteristic "break force" threshold followed by an inverse power-law response.
+- To use **any two-legged variable resistor** (FSR, photocell, thermistor, *etc.*) with a microcontroller, you must add a **fixed resistor** to create a voltage divider. This is the key generalizable takeaway — the same pattern applies to dozens of analog sensors.
+- The **`map()` function** re-maps a value from one range to another and is essential for converting between `analogRead` (0–1023) and `analogWrite` (0–255) ranges. Remember that Arduino's `map()` uses integer math.
+- The position of the fixed resistor in the voltage divider (pull-up vs. pull-down) determines whether the analog input increases or decreases with the sensor's response.
+- By combining `analogRead`, `map()`, and `tone()`, you built a **Jedi force instrument** — a force-controlled musical instrument that brings together everything you've learned across the Input series.
+
+## What's next?
+
+You've come a long way — from blinking an LED to building force-controlled instruments! Here are some paths forward:
+
+- **[Communication](../communication/index.md):** Learn about serial communication between Arduino and your computer, enabling richer data visualization and computer-Arduino interaction.
+- **[Advanced I/O](../advancedio/index.md):** Explore OLED displays, vibromotors, servo motors, and input smoothing techniques.
+- **[Sensors](../sensors/index.md):** Dive deeper into analog and digital sensors, signal conditioning, and sensor fusion.
+
+<span class="fs-6">
+[Previous: Potentiometers](potentiometers.md){: .btn .btn-outline }
+</span>

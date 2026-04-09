@@ -60,7 +60,7 @@ Quick recap of what we'll need from that lesson:
 
 ## Making a simple piano
 
-Alright, let's make that piano.
+Alright, let's make that piano 🎹.
 
 ### Making the piano circuit
 

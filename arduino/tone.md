@@ -173,6 +173,8 @@ The simple answer is that unlike LEDs, passive piezo buzzers draw very little cu
 
 ## How do piezo buzzers actually work?
 
+Before diving in, it's worth noting that there are two main types of buzzers you'll encounter: **magnetic** and **piezo**. A magnetic buzzer operates like a tiny speaker—current through a coil moves a magnetic disk to produce sound. A piezo buzzer, which is what we're using, works on a completely different principle: it's driven by *voltage* rather than current.
+
 The word "piezoelectric" comes from the Greek word *piezein*, which means to press or squeeze. Piezoelectric materials have a fascinating property: when you apply a voltage to them, they physically change shape. Inside your passive buzzer is a thin metal plate with a piezoceramic disk glued to it. When the Arduino rapidly pulses voltage `HIGH` and `LOW`, the ceramic disk quickly bends back and forth. This rapid flexing pushes the surrounding air back and forth, generating the physical sound waves that reach your ears. The frequency of the electrical pulses directly dictates how fast the disk vibrates, which determines the pitch.
 
 To help you visualize this, we built an interactive simulation. Try both modes:
@@ -196,6 +198,8 @@ If you've listened to the Tinkercad simulations, you've probably noticed that th
 ### Square waves vs. sine waves
 
 Because neither the Arduino Uno nor the Leonardo have built-in digital-to-analog converters (DACs), they cannot natively produce the smooth, analog sine waves that music is composed of. Instead, they can only produce digital square waves, which results in that distinctively harsh sound.
+
+If you want to build deeper intuition for how different waveforms sound and look, we recommend this short, interactive guide by Josh Comeau called "[Let's Learn About Waveforms](https://pudding.cool/2018/02/waveforms/)." Make sure to have your sound on (the website defaults to muted, so press 'm' to unmute).
 
 To let you interactively explore the difference, we built this p5js sound visualization tool. Make sure your computer speakers are on: do you hear the difference between a sine wave and a square wave? So, it's not just the type and quality of speaker (piezo buzzer) that matters but also the input waveform to the speaker!
 
@@ -297,6 +301,15 @@ void loop() {
 
 Notice that we use the `duration` parameter of `tone()` here, so we don't need to call `noTone()` manually—the tone stops automatically after `NOTE_DURATION_MS` milliseconds. One subtlety: `tone()` is **non-blocking**, meaning the sketch continues executing immediately even while the tone is still playing. That's why we still need the `delay()` call—without it, the loop would race ahead to the next note before the current one finishes.
 
+{: .note }
+> **How does `tone()` work in the background?** You might wonder how `tone()` can play sound asynchronously on a single-core chip with no multi-threading. The answer: timer interrupts. The ATmega328 (used by the Uno) has three hardware timers that can trigger code at precise intervals:
+>
+> - **Timer0** (8-bit): Used by `millis()` and `micros()`
+> - **Timer1** (16-bit): Used by the [Servo](https://www.arduino.cc/en/reference/servo) library
+> - **Timer2** (8-bit): Used by `tone()`
+>
+> When you call `tone()`, it configures Timer2 to toggle the output pin at the requested frequency. The timer runs independently of your `loop()` code, which is why `tone()` returns immediately. For a deep dive, see the [tone() source code](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Tone.cpp), [Nick Gammon's interrupts tutorial](https://gammon.com.au/interrupts), and this [Adafruit Learn series on timers](https://learn.adafruit.com/multi-tasking-the-arduino-part-2/timers).
+
 You can play with [this project interactively in Tinkercad](https://www.tinkercad.com/things/2SqhVejLRNi). 
 
 ## Playing a melody
@@ -392,6 +405,8 @@ To represent a rest (silence), use a note value of `0` in the melody array. The 
 
 {: .note }
 > **Want to play more complex melodies?** Search online for "Arduino tone songs" or "Arduino buzzer melodies" — the community has transcribed hundreds of songs into Arduino `tone()` format. The [arduino-songs](https://github.com/robsoncouto/arduino-songs) repository by Robson Couto is a great collection. Just remember that the piezo buzzer can only play one note at a time (no chords!).
+>
+> **What about chords?** The default `tone()` library cannot generate multiple simultaneous frequencies. However, Brett Hagman, the original author of the Arduino tone function, wrote a more [advanced tone library](https://code.google.com/archive/p/rogue-code/wikis/ToneLibraryDocumentation.wiki) that supports multiple simultaneous tones on separate pins. This is also described in the [Arduino Cookbook (Section 9.3)](https://learning.oreilly.com/library/view/arduino-cookbook-2nd/9781449321185/ch09.html).
 
 ## Combining tone with an LED
 

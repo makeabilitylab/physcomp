@@ -17,12 +17,18 @@ usetocbot: true
 {:toc}
 ---
 
+<video autoplay loop muted playsinline style="margin:0px">
+  <source src="assets/videos/Arduino_OLED_Games_Overview_720p_optimized.mp4" type="video/mp4" />
+</video>
+**Video.** In this lesson series, you will learn about OLED displays, joysticks, servo motors, vibro motors, RGB string lights, and more! You can combine your learning to create interactive mobile video games like [Flappy Bird](https://github.com/makeabilitylab/arduino/tree/master/OLED/FlappyBird) and [Pong](https://github.com/makeabilitylab/arduino/tree/master/OLED/Pong).
+{: .fs-1 }
+
 Welcome 👋 to the third module in your Physical Computing adventure: **Advanced I/O**. In this module, you'll move beyond basic LEDs and buttons to explore new output modalities—like OLED displays and vibration motors for haptic feedback—and new input techniques like signal smoothing to tame noisy sensor data. Don't be intimidated by the **advanced** prefix. The content here isn't more complicated than the first two modules; it simply builds on them!
 
 {: .note }
 > **Prerequisites:** These lessons assume you've completed (or are comfortable with) the material in:
-> 1. [Introduction to Electronics](../electronics/index.md)
-> 2. [Introduction to Microcontrollers Using Arduino](../arduino/index.md)
+> 1. [Intro to Electronics](../electronics/index.md)
+> 2. [Intro to Microcontrollers Using Arduino](../arduino/index.md)
 >
 > In particular, you should be familiar with `analogRead`, `analogWrite`, digital I/O, and basic circuit building before starting here.
 

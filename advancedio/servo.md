@@ -109,7 +109,7 @@ Before we start wiring, let's clear up a common source of confusion. You've alre
 
 With `analogWrite()`, a 50% duty cycle delivers 50% of the available power—useful for dimming LEDs or slowing motors. With servo PWM, the duty cycle doesn't matter for power delivery. Instead, the servo's control circuit *measures the width of each pulse* to determine the target angle.
 
-<!-- TODO: Create a side-by-side diagram or animation showing:
+<!-- TODO: Create a side-by-side diagram or animation showing (perhaps we make a p5js example visualization like we did for the tone lesson with piezo buzzers):
      (1) analogWrite PWM with varying duty cycles at fixed ~490Hz frequency
      (2) Servo PWM at fixed 50Hz with varying pulse widths (1ms, 1.5ms, 2ms)
      Label the key differences clearly -->

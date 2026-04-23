@@ -121,6 +121,8 @@ With `analogWrite()`, a 50% duty cycle delivers 50% of the available power—use
 
 The Arduino Servo library ships with the Arduino IDE—no installation needed. It handles all the precise signal timing so you can simply tell the servo which angle you want.
 
+<!-- TODO: link directly to Arduino open source servo code and explain it a bit. Here's the .h file: https://github.com/arduino-libraries/Servo/blob/master/src/Servo.h>
+
 ### Key API
 
 {% highlight C++ %}

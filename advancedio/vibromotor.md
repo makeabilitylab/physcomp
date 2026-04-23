@@ -34,7 +34,7 @@ Haptic or tactile actuator technology provides feedback to the user **via touch*
 > - How to use an NPN transistor as a switch to safely control higher-current loads
 > - Why motors need a flyback diode and how to calculate a base resistor value
 > - How to use PWM through a transistor to control vibration intensity
-> - How to design distinct haptic patterns that communicate information through touch
+> - How to design distinct haptic patterns that communicate information to human touch
 
 ![Examples of ERM motors and LRA actuators disassembled from mobile phones and watches, showing the small form factors used in consumer devices](assets/images/VibrationMotorExamplesInMobilePhonesAndWatches.png)
 **Figure.** Examples of *eccentric rotating mass (ERM)* motors and *linear resonant actuators (LRA)* in mobile phones and watches. Images from [NFP Motors](https://youtu.be/k1iTLqAtd0U) and [Sosav](https://www.sosav.com/guides/mobiles/samsung/galaxy-s10/vibrator/).

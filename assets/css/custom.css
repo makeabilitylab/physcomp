@@ -200,6 +200,19 @@ blockquote.new-title {
   white-space: normal;
 }
 
+/*
+ * Override just-the-docs' H4 style, which uses text-transform: uppercase
+ * and a very small font size — making it look like a label rather than a
+ * heading. This restores it to a normal heading style, slightly smaller
+ * than H3 (which is ~1.125rem in the theme).
+ */
+.main-content h4 {
+  text-transform: none;
+  font-size: 1.05rem !important;
+  font-weight: 500;
+  letter-spacing: 0em;
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    4. UTILITY CLASSES

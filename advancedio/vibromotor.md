@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L2&#58; Vibromotors
-nav_order: 2
+title: L4&#58; Vibromotors
+nav_order: 4
 parent: Output
 grand_parent: Advanced I/O
 has_toc: true # (on by default)
@@ -18,6 +18,10 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+
+<!-- TODO: have hero video showing the vibration motor working -->
+
+In the previous three lessons, every output device we used had built-in intelligence—the [OLED](oled.md) had an SSD1306 display controller, [addressable LEDs](addressable-leds.md) had WS2812B driver chips, and [servos](servo.md) had an internal feedback circuit. In each case, a library handled the communication protocol and we wired up just 3-4 wires. In this lesson, we're working with something much simpler: a **raw DC motor**. There's no driver chip, no library, and no built-in smarts—and that changes everything about how we wire it up.
 
 Haptic or tactile actuator technology provides feedback to the user **via touch** through force, motion, or temperature. In this lesson, we will learn about vibration motors, which are commonly used to provide haptic feedback in game controllers, mobile phones, and smartwatches.
 
@@ -605,5 +609,5 @@ In this lesson, you learned about vibration motors and how to safely control the
 In the [next lesson](../smoothing-input.md), we will switch from output to input and learn how to smooth noisy sensor data using digital signal processing techniques.
 
 <span class="fs-6">
-[Previous: OLED Displays](oled.md){: .btn .btn-outline }
+[Previous: Servo Motors](servo.md){: .btn .btn-outline }
 </span>

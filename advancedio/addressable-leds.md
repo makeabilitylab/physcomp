@@ -21,7 +21,7 @@ usetocbot: true
 
 <!-- TODO: Record a hero video showing a rainbow animation cycling across an LED stick or strip and embed here -->
 
-From holiday lights to wearable costumes to interactive art installations, addressable RGB LEDs are everywhere. Unlike the [single RGB LEDs](../arduino/rgb-led.md) we used in Intro to Arduino—which required three PWM pins and careful `analogWrite()` mixing for just *one* LED—addressable LEDs have a tiny driver chip built into *each* LED, allowing you to individually control hundreds of pixels from a single Arduino pin. In this lesson, we'll learn how they work and build some colorful projects!
+From holiday lights to wearable costumes to interactive art installations, addressable RGB LEDs are everywhere. Unlike the [single RGB LEDs](../arduino/rgb-led.md) we used in the [Intro to Arduino lessons](../arduino/index.md)—which required three PWM pins and careful `analogWrite()` mixing for just *one* LED—addressable LEDs have a tiny driver chip built into *each* LED, allowing you to individually control hundreds of pixels from a single Arduino pin. In this lesson, we'll learn how they work and build some colorful projects!
 
 {: .note }
 > **In this lesson, you will learn:**
@@ -55,11 +55,11 @@ You will also need jumper wires. For longer strips (more than ~10 LEDs), you wil
 
 In the [Intro to Arduino RGB LED lesson](../arduino/rgb-led.md), you learned how to control a single RGB LED by connecting its red, green, and blue legs to three separate PWM pins and calling `analogWrite()` on each channel to mix colors. It worked, but it was pin-hungry: controlling just one LED required three PWM pins. To control 10 LEDs individually, you would need 30 PWM pins—more than most Arduino boards even have!
 
-Addressable RGB LEDs solve this problem elegantly. Each LED package contains a tiny integrated circuit (IC) that handles the color mixing and current limiting internally. Instead of three analog wires per LED, the entire strip of LEDs is controlled through a **single digital data pin**. The Arduino sends color data for all pixels down one wire, and each LED's built-in chip reads its own data and passes the rest downstream.
+Addressable RGB LEDs solve this problem elegantly. Each LED package **contains a tiny integrated circuit (IC)** that handles the color mixing and current limiting internally. Instead of three analog wires per LED, the entire strip of LEDs is controlled through a **single digital data pin**. The Arduino sends color data for all pixels down one wire, and each LED's built-in chip reads its own data and passes the rest downstream.
 
 ### How addressable LEDs work
 
-The most common addressable LED chipsets are the **WS2812B** and the **SK6812** (an enhanced clone with wider color gamut and better voltage stability). Both use the same single-wire protocol and are fully compatible with the same software libraries. You'll find them sold under many brand names—Adafruit calls theirs "[NeoPixels](https://learn.adafruit.com/adafruit-neopixel-uberguide)"—but they all work the same way.
+The most common addressable LED chipsets are the **WS2812B** and the **SK6812** (a compatible alternative that offers RGBW variants with a dedicated white LED element, a higher PWM frequency, and improved signal reshaping). Both use the same single-wire protocol and are fully compatible with the same software libraries. You'll find them sold under many brand names—Adafruit calls theirs "[NeoPixels](https://learn.adafruit.com/adafruit-neopixel-uberguide)"—but they all work the same way.
 
 {: .note }
 > **"NeoPixel" is Adafruit's brand name** for WS2812B/SK6812-compatible LEDs, much like "Band-Aid" is a brand name for adhesive bandages. The Adafruit NeoPixel library works with *any* WS2812B or SK6812 LEDs regardless of manufacturer. Throughout this lesson, we'll use "NeoPixel library" to refer to the software and "addressable LEDs" or "WS2812B/SK6812" to refer to the hardware generically.
@@ -70,13 +70,28 @@ Here's how the data flows:
 2. The **first LED** in the chain reads the first 3 bytes (its own color), latches them, and passes the remaining data downstream to the next LED.
 3. The **second LED** reads the next 3 bytes, latches them, and passes the rest along.
 4. This continues down the chain until every LED has received its color.
-5. After a brief pause (~50µs) in the data stream, the LEDs treat the next transmission as a new frame.
+5. After a brief pause (50µs or more) in the data stream, the LEDs treat the next transmission as a new frame.
 
 <!-- TODO: Create a diagram showing the daisy-chain data flow:
      Arduino Pin 2 → [LED 1] → [LED 2] → [LED 3] → ... → [LED N]
      With labeled arrows showing "3 bytes consumed" at each LED and "remaining bytes passed downstream" -->
 
 This daisy-chain architecture is what makes addressable LEDs so powerful: you can control hundreds of LEDs from a single pin, with each LED individually addressable.
+
+### The single-wire timing protocol
+
+What makes the WS2812B protocol unusual is that it encodes data using **precisely timed pulses on a single wire**. There is no separate clock signal—instead, each bit is represented by a fixed-length pulse (1.25µs total), and the LED distinguishes a "1" from a "0" based on how long the signal stays high within that period. A long high followed by a short low means "1"; a short high followed by a long low means "0." This is called a **Non-Return-to-Zero (NRZ)** encoding.
+
+<!-- TODO: Create a timing diagram showing the NRZ encoding:
+     - One bit period = 1.25µs total
+     - "0" bit: ~0.4µs high, ~0.85µs low
+     - "1" bit: ~0.8µs high, ~0.45µs low
+     - Show a few bits in sequence with labels -->
+
+Because there is no clock line, the timing must be extremely precise—accurate to within a few hundred nanoseconds. This is why the NeoPixel library uses hand-tuned assembly code and **temporarily disables interrupts** during `show()` to prevent any timing jitter from corrupting the data. For an 8-LED stick, interrupts are disabled for only ~240µs (barely noticeable), but for a 144-LED strip, it can be ~4.3ms—long enough to occasionally interfere with `Serial` communication or `millis()` accuracy.
+
+{: .note }
+> **Not all addressable LEDs use this timing-based protocol.** The **APA102** (sold by Adafruit as "[DotStars](https://learn.adafruit.com/adafruit-dotstar-leds)") uses a two-wire SPI interface with a separate clock line, making it completely **timing-insensitive**. This means APA102 LEDs can be driven reliably from multitasking systems like the Raspberry Pi (where the WS2812B protocol struggles), and they achieve a much higher refresh rate (~20kHz *vs.* ~400Hz for WS2812B). The trade-off is an extra wire and higher cost. For this course, we use WS2812B/SK6812 LEDs because they are the most common and affordable, and the NeoPixel library handles all the timing complexity for us.
 
 ### Form factors
 
@@ -94,7 +109,7 @@ Regardless of form factor, the wiring and code are identical—only the number o
 
 ## Power considerations
 
-Power management is one of the most important practical skills when working with addressable LEDs. Each LED can draw a surprising amount of current, and miscalculating power can lead to dim LEDs, flickering, Arduino resets, or even damaged components.
+Power management is one of the most important considerations when working with addressable LEDs. Each LED can draw a surprising amount of current, and miscalculating power can lead to dim LEDs, flickering, Arduino resets, or even damaged components.
 
 ### Per-LED current draw
 
@@ -133,10 +148,10 @@ This is the simplest wiring: just three connections from the LED stick to the Ar
      - 5V → VCC on LED stick
      - GND → GND on LED stick
      - Pin 2 → DIN on LED stick
-     Include a 300-470Ω resistor on the data line (recommended but optional for short runs) -->
+     No external resistor needed — the stick has a built-in one (R1) -->
 
-![Wiring diagram showing an 8-LED WS2812B stick connected to an Arduino Uno with three wires: 5V to VCC, GND to GND, and Pin 2 to DIN through a small resistor](assets/images/Arduino_WS2812B_8LED_BasicWiring.png)
-**Figure.** Basic wiring for an 8-LED stick powered from the Arduino's 5V pin. This setup is fine for small numbers of LEDs at moderate brightness. The 300-470Ω resistor on the data line is recommended by Adafruit to protect the first LED's data input from voltage spikes, but the circuit often works without it for short connections.
+![Wiring diagram showing an 8-LED WS2812B stick connected to an Arduino Uno with three wires: 5V to VCC, GND to GND, and Pin 2 to DIN](assets/images/Arduino_WS2812B_8LED_BasicWiring.png)
+**Figure.** Basic wiring for an 8-LED stick powered from the Arduino's 5V pin. This setup is fine for small numbers of LEDs at moderate brightness. No external resistor is needed on the data line because our sticks have one built into the PCB (R1)—see [What's already on the board](#whats-already-on-the-board).
 {: .fs-1 }
 
 {: .warning }
@@ -175,7 +190,12 @@ In practice, you almost never need to run all LEDs at full white brightness. Cal
 
 The Adafruit NeoPixel library can be installed directly from the Arduino Library Manager. Go to `Sketch → Include Library → Manage Libraries`, search for "Adafruit NeoPixel", and click Install.
 
-<!-- TODO: Screenshot of the Arduino Library Manager showing the Adafruit NeoPixel library -->
+![A screenshot of the Arduino IDE searching for the neopixel library and installing](assets/images/ArduinoIDE_InstallNeopixelLibrary.png)
+**Figure.** Installing the open-source [Adafruit Neopixel Library](https://github.com/adafruit/adafruit_neopixel) in the Arduino IDE.
+{: .fs-1 }
+
+{: .note }
+> **What about FastLED?** If you search online for WS2812B tutorials, you'll find many that use the [FastLED library](https://fastled.io/) instead. FastLED is a popular alternative that supports the same hardware and offers advanced features like built-in color palettes and noise functions. We use the NeoPixel library in this course because its API is simpler and more consistent with the other Adafruit libraries we use (like the SSD1306 OLED library). Once you're comfortable with the basics, FastLED is worth exploring—see [Resources](#resources) for the link.
 
 ### Key API
 
@@ -203,7 +223,7 @@ void setup() {
 > Notice the same **buffer → show** pattern from the [OLED lesson](oled.md): `setPixelColor()` writes to a buffer in RAM, and `show()` pushes the data to the LEDs. If you forget to call `show()`, nothing will change on the LEDs—just like forgetting `_display.display()` on the OLED!
 
 {: .note }
-> **Why Pin 2 (not a PWM pin)?** You might expect addressable LEDs to require a PWM pin since they involve precise signal timing. But the NeoPixel library generates its timing entirely in software using carefully timed bit-banging—no hardware PWM is involved. Any digital pin works! We intentionally chose Pin 2 (a non-PWM pin) to make this clear and to keep the PWM pins free for other uses like [vibromotors](vibromotor.md) or [LED fading](../arduino/led-fade.md).
+> **Why Pin 2 (not a PWM pin)?** You might expect addressable LEDs to require a PWM pin since they involve precise signal timing. But the NeoPixel library doesn't use the Arduino's hardware PWM timers—it generates the WS2812B protocol signal entirely in software using carefully timed bit-banging (see [The single-wire timing protocol](#the-single-wire-timing-protocol) above). Any digital pin works! We intentionally chose Pin 2 (a non-PWM pin) to make this clear and to keep the PWM pins free for other uses like [vibromotors](vibromotor.md) or [LED fading](../arduino/led-fade.md).
 
 Here are the most commonly used functions:
 
@@ -255,6 +275,24 @@ strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(hue, 255, 255)));
 
 One common "gotcha": not all addressable LEDs use the same color channel order. Most WS2812B strips use **GRB** (green-red-blue) order, but some use RGB, and SK6812 RGBW strips use GRBW. If you set a pixel to red but it lights up green, try changing `NEO_GRB` to `NEO_RGB` (or vice versa) in your strip constructor.
 
+### Memory considerations
+
+Remember that `setPixelColor()` writes to a buffer in RAM, and `show()` pushes that buffer to the LEDs. That buffer has to live somewhere—and on an Arduino Uno or Leonardo, RAM is scarce. The NeoPixel library allocates **3 bytes per pixel** for RGB LEDs (or 4 bytes for RGBW), so the memory cost grows linearly with your strip length:
+
+| Strip length | NeoPixel buffer | Uno SRAM remaining (of 2,048 bytes) |
+|---|---|---|
+| 8 LEDs (your stick) | 24 bytes | ~2,024 bytes — plenty |
+| 60 LEDs (1m strip) | 180 bytes | ~1,868 bytes — fine |
+| 144 LEDs (1m dense strip) | 432 bytes | ~1,616 bytes — getting tight |
+| 300 LEDs (5m strip) | 900 bytes | ~1,148 bytes — caution |
+
+These numbers might look fine in isolation, but keep in mind that the Arduino's SRAM also holds all your global variables, local variables, the stack, and buffers allocated by other libraries. If you've completed the [OLED lesson](oled.md), you may recall that the SSD1306 display driver allocates a **1,024-byte framebuffer** for a 128×64 display. Running an OLED *and* a 300-LED strip on an Uno would consume 1,024 + 900 = 1,924 bytes of buffer alone—leaving almost nothing for the rest of your sketch.
+
+When SRAM runs out, the symptoms are not helpful: variables silently corrupt, the sketch crashes or resets at random, or Serial output turns to garbage. The Arduino IDE won't warn you at compile time because SRAM usage depends on runtime behavior.
+
+{: .note }
+> **For the 8-LED stick in this lesson, memory is not a concern.** But if you later scale up to longer strips—especially while also using an OLED or other memory-hungry libraries—keep this constraint in mind. If you hit mysterious crashes, try reducing `NUM_LEDS`, removing other large buffers, or upgrading to a board with more SRAM (the Arduino Mega has 8KB; the ESP32 has 520KB).
+
 ## Wiring
 
 The wiring for addressable LEDs is refreshingly simple—just three connections:
@@ -263,7 +301,7 @@ The wiring for addressable LEDs is refreshingly simple—just three connections:
 |------|-------------|-------------|-----------------|
 | Power | VCC / 5V | 5V | Red |
 | Ground | GND | GND | Black |
-| Data | DIN (Data In) | Pin 2 (or any digital pin) | Green or White |
+| Data | DIN (Data In) | Pin 2 (or any digital pin) | Green, White, or Yellow |
 
 ### Preparing the LED stick
 
@@ -273,13 +311,38 @@ Our sticks have **four pads on each end**—both ends have GND, +5V, a data pad,
 
 <!-- TODO: Add a photo showing both ends of the LED stick with the solder pads labeled (DI end and DO end), plus a photo of the stick with header pins soldered on and inserted into a breadboard -->
 
+#### What's already on the board
+
+If you look closely at the PCB, you'll notice some tiny surface-mount components already soldered on. On our sticks, you'll see:
+
+- **C1–C8**: One small bypass capacitor per LED (typically 100nF ceramic), placed between VCC and GND. These stabilize the power supply locally at each LED, as recommended by the WS2812B datasheet.
+- **R1** (next to the first LED): A data line resistor on the **DIN** line. This protects the first LED's data input from voltage spikes caused by signal ringing—see [The data line resistor](#the-data-line-resistor-300-470ω) below for a full explanation.
+- **R2** (next to the last LED): A matching resistor on the **DOUT** line, which provides the same protection for whatever device you daisy-chain off the output.
+
+<!-- TODO: Add an annotated close-up photo of the LED stick PCB showing R1, R2, and a few of the C1–C8 bypass capacitors with labels -->
+
+Because these components are already built into the stick, **you do not need to add an external resistor or capacitor**—just solder wires or header pins directly to the pads and you're ready to go.
+
 {: .note }
 > **First time soldering?** This is a great beginner soldering project—the pads are large and widely spaced. If you need guidance, see the [Adafruit Guide to Excellent Soldering](https://learn.adafruit.com/adafruit-guide-excellent-soldering). The key tips: tin both the pad and the wire first, then bring them together with the iron. You only need to solder three connections to get started: **DIN** (data in), **+5V**, and one of the **GND** pads.
 
 {: .warning }
 > **Watch the data direction!** Most LED strips and sticks have directional arrows printed on the PCB. Data flows from **DIN** (data in) to **DOUT** (data out). Make sure you connect the Arduino to the **DIN** end. If you wire it to the DOUT end, nothing will work—and there will be no error message to help you debug it!
 
-A 300-470Ω resistor on the data line between the Arduino and the first LED's DIN pin is recommended by Adafruit to protect against voltage spikes. For short connections (like plugging a stick into a breadboard), it often works without the resistor, but it's a good habit.
+### The data line resistor (300-470Ω)
+
+As noted in [What's already on the board](#whats-already-on-the-board), our LED sticks have a built-in data line resistor (R1) on the DIN input. Many pre-made LED strips include one as well. But what does it actually do, and when do you need to add one yourself?
+
+The [Adafruit NeoPixel Überguide's Best Practices](https://learn.adafruit.com/adafruit-neopixel-uberguide/best-practices) section recommends placing a 300-500Ω resistor between the microcontroller's data output and the first LED's data input. Here's why.
+
+The WS2812B data signal switches between 0V and 5V extremely fast (each bit lasts only 1.25µs). When a fast-changing signal travels down a wire, the wire's parasitic inductance and capacitance can cause the signal to **overshoot** at the receiving end—momentarily spiking above 5V. This is called **ringing**, and it's the same transmission-line effect that happens when a wave hits a sudden impedance change (the data input pin of the LED has much higher impedance than the wire). These voltage spikes can stress or damage the first LED's data input pin over time.
+
+A small series resistor placed **close to the first LED's DIN pin** absorbs this energy. The resistor converts the excess voltage into a tiny amount of heat before it reaches the LED, effectively damping the ringing. The value isn't critical—anything from 300Ω to 470Ω works well—but the **placement** matters: the resistor should be as close to the LED's input as possible, not back at the Arduino end of the wire.
+
+This applies to **all WS2812B/SK6812 form factors**—sticks, strips, rings, and matrices alike—because the underlying electrical issue is the same. If you're using our LED sticks or a pre-made strip that already has a resistor on the PCB, you're covered. But if you ever use an LED product without a built-in resistor (check the area near the DIN pad for a tiny SMD component), you should add one externally. Adding a second resistor to a product that already has one does no harm.
+
+{: .warning }
+> **Best practice: always verify a data line resistor is present.** If your LED product doesn't include one on the PCB, add a 300-470Ω resistor as close to the first LED's DIN pin as possible. It takes five seconds to add and prevents a class of failures that are rare but frustrating to diagnose. For the 1000µF capacitor across the power supply (relevant when using an external supply), see [Tier 2](#tier-2-external-5v-supply-10-60-leds) above.
 
 ### Using addressable LEDs with 3.3V boards (ESP32)
 
@@ -290,7 +353,7 @@ However, if you're using a **3.3V board** like the [ESP32](../esp32/index.md), t
 There are two common solutions:
 
 - **Level shifter (recommended):** Use a level-shifting chip like the [74AHCT125](https://www.adafruit.com/product/1787) to convert the 3.3V data signal to 5V. This is the most reliable approach and only requires one extra chip.
-- **Sacrificial first pixel:** Power the first LED at 3.3V (from the ESP32's 3.3V pin) instead of 5V. Its data output will be at 3.3V logic levels, which the *next* LED in the chain—powered at 5V—will interpret correctly (since 3.3V > 0.7 × 3.3V = 2.31V). This is a clever hack but wastes one LED and its color may look slightly different due to the lower voltage.
+- **Sacrificial first pixel:** Power the first LED at 3.3V (from the ESP32's 3.3V pin) instead of 5V. Because this LED is powered at 3.3V, it will accept the ESP32's 3.3V data signal (which comfortably exceeds 0.7 × 3.3V = 2.31V). Its data *output* will then be at 3.3V logic levels, which—in practice—the next LED in the chain (powered at 5V) tends to accept, even though 3.3V is technically below the 3.5V threshold specified in the datasheet. This trick works reliably for many people, but it is not guaranteed by the spec. It also wastes one LED and its color may look slightly different due to the lower supply voltage.
 
 {: .note }
 > For the projects in this lesson using an Arduino Uno or Leonardo (5V boards), you don't need to worry about any of this—just wire it up and go!
@@ -454,7 +517,7 @@ void setup() {
 void loop() {
   // Read both potentiometers
   int huePotVal = analogRead(HUE_POT_PIN);
-  delay(1);  // Brief delay between analogReads for ADC stability
+  delay(1);  // Brief delay for ADC multiplexer settling when switching analog channels
   int brightPotVal = analogRead(BRIGHTNESS_POT_PIN);
 
   // Map to HSV parameters
@@ -496,6 +559,8 @@ const int SENSOR_PIN = A0;
 Adafruit_NeoPixel strip(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 // Colors for the level meter (green → yellow → red)
+// Note: strip.Color() is a pure math function (it just packs RGB into a uint32_t),
+// so it's safe to call here at global scope before strip.begin().
 uint32_t levelColors[] = {
   strip.Color(0, 255, 0),     // LED 0: Green
   strip.Color(0, 255, 0),     // LED 1: Green
@@ -536,6 +601,25 @@ Turn the potentiometer and watch the LEDs fill up like a progress bar! This is a
 {: .note }
 > **Connecting to the previous lessons:** Notice how the same `analogRead()` → `map()` → output pattern appears in every lesson in this module. In the [OLED lesson](oled.md), it controlled a circle's size. In the [vibromotor lesson](vibromotor.md), it controlled vibration intensity. Here, it controls the number of lit LEDs. Learning to recognize this pattern is a key physical computing skill—once you can map sensor input to output, you can build almost anything!
 
+## Troubleshooting
+
+If your LEDs aren't behaving as expected, work through this list. These are the most common issues students encounter, roughly in order of likelihood:
+
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| No LEDs light up at all | Wired to **DOUT** instead of **DIN** | Check the directional arrows on the PCB. Data flows from DIN to DOUT—the Arduino must connect to the DIN end. |
+| No LEDs light up at all | Wrong pin number in code | Make sure `LED_PIN` in your sketch matches the physical Arduino pin you wired to. |
+| No LEDs light up at all | Forgot to call `strip.show()` | `setPixelColor()` only writes to a buffer in RAM. Nothing appears on the LEDs until you call `show()`. |
+| Colors are wrong (*e.g.,* red shows as green) | Wrong color order in constructor | Change `NEO_GRB` to `NEO_RGB` (or vice versa) in the `Adafruit_NeoPixel` constructor. |
+| LEDs flicker or Arduino resets | Insufficient power | At full white, 8 LEDs draw ~480mA—close to the USB limit. Reduce brightness with `setBrightness()` or use an external 5V supply. |
+| LEDs flicker or show random colors | Missing common ground | When using an external power supply, the Arduino and the supply **must** share a ground connection. |
+| First LED died or behaves erratically | Missing data line resistor | Our sticks have a built-in resistor (R1), but if you're using a different LED product, verify it has one near the DIN pad. If not, add a 300-470Ω resistor externally. See [The data line resistor](#the-data-line-resistor-300-470ω). |
+| Only some LEDs work | Damaged LED in the chain | A dead LED breaks the data chain for all LEDs after it. Cut out the bad LED, resolder, and the rest should work again. |
+| Colors look washed out or gradients look "steppy" | Missing gamma correction | Pass colors through `strip.gamma32()` for perceptually smooth transitions. |
+
+{: .note }
+> **When in doubt, go back to basics.** Upload the [Activity 1](#activity-1-light-em-up) sketch with no modifications and confirm that all 8 LEDs light up in distinct colors. If that works, the issue is in your code. If it doesn't, the issue is in your wiring.
+
 ## Exercises
 
 Want to go further? Here are some challenges to reinforce what you've learned:
@@ -551,6 +635,7 @@ In this lesson, you learned about addressable RGB LEDs and how to create colorfu
 
 - **Addressable LEDs** (WS2812B/SK6812) contain a built-in driver chip at each LED, allowing individual control of hundreds of pixels from a single data pin. This is fundamentally different from standard RGB LEDs, which require three PWM pins per LED.
 - The LEDs use a **daisy-chain protocol**: data flows from the Arduino to the first LED, which reads its color and passes the remaining data downstream. Each LED in the chain receives its own color data automatically.
+- The WS2812B protocol encodes bits using **precisely timed pulses** on a single wire (NRZ encoding), with no clock signal. The NeoPixel library handles this timing in software and must briefly disable interrupts during `show()`. Alternative chipsets like the APA102 use a clocked SPI interface that avoids these timing constraints.
 - The **Adafruit NeoPixel library** provides a clean API that follows the same buffer → show pattern as the OLED: `setPixelColor()` writes to RAM, and `show()` pushes the data to the LEDs.
 - **Power management** is critical: each LED can draw up to 60mA at full white. For 8 LEDs, Arduino USB power is usually sufficient; for longer strips, an external 5V power supply with a **shared ground** is required.
 - The **HSV color space** (via `ColorHSV()`) makes it easy to create rainbow effects by sweeping the hue value, and `gamma32()` applies perceptual brightness correction for smoother gradients.

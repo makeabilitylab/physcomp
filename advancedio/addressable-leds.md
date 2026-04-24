@@ -407,10 +407,12 @@ Now let's create a classic rainbow animation that cycles smoothly across all 8 L
 
 const int LED_PIN = 2;
 const int NUM_LEDS = 8;
+const int HUE_STEP = 256;
+const uint32_t MAX_HUE = 65536; // Full circle (360 degrees) in 16-bit hue
 
 Adafruit_NeoPixel strip(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-long firstPixelHue = 0;  // Tracks the hue offset for animation
+uint32_t firstPixelHue = 0; 
 
 void setup() {
   strip.begin();
@@ -419,21 +421,19 @@ void setup() {
 }
 
 void loop() {
-  // Spread the rainbow evenly across all pixels
   for (int i = 0; i < strip.numPixels(); i++) {
-    // Calculate hue for this pixel, evenly spaced around the color wheel
-    int pixelHue = firstPixelHue + (i * 65536L / strip.numPixels());
+    // Offset each pixel's hue to spread the rainbow across the strip
+    uint32_t pixelHue = firstPixelHue + (i * MAX_HUE / strip.numPixels());
+    
+    // ColorHSV accepts a 16-bit hue; gamma32 provides more natural color transitions
     strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue)));
   }
   strip.show();
 
-  // Advance the starting hue for the next frame
-  firstPixelHue += 256;
-  if (firstPixelHue >= 65536) {
-    firstPixelHue = 0;
-  }
+  // Increment and wrap around using modulo to stay within 0-65535
+  firstPixelHue = (firstPixelHue + HUE_STEP) % MAX_HUE;
 
-  delay(20);  // ~50 fps
+  delay(20); // ~50 fps
 }
 {% endhighlight C++ %}
 

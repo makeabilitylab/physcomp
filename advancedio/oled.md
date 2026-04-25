@@ -61,7 +61,7 @@ You will need the following materials for this lesson:
 
 | Arduino | OLED Display | Breadboard | Potentiometer |
 |:-----:|:-----:|:-----:|:-----:|
-| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Adafruit monochrome 128x64 OLED display](assets/images/AdafruitOLED_128x64.png) | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![10K potentiometer](assets/images/PanelMountPotentiometer_NoCap.png) |
+| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Adafruit monochrome 128x64 OLED display](assets/images/AdafruitOLED_128x64.png) | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![10K potentiometer](assets/images/PanelMountPotentiometer_NoCap_150h.jpg) |
 | Arduino Uno, Leonardo, or similar | [Adafruit 128x64 OLED](https://www.adafruit.com/product/938) | Breadboard | 10KΩ Potentiometer (for [building interactive demos](#activity-interactive-graphics)) |
 
 You will also need jumper wires. If your OLED breakout board has [STEMMA QT](#stemma-qt-wiring) connectors, you can optionally use a STEMMA QT cable instead of individual jumper wires.

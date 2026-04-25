@@ -39,10 +39,8 @@ You will need the following materials for this lesson:
 
 | Arduino | LED Stick or Strip | Breadboard | Potentiometer |
 |:-----:|:-----:|:-----:|:-----:|
-| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![WS2812B 8-LED stick](assets/images/WS2812B_8LED_Stick.png) | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![10K potentiometer]({{ site.baseurl }}/assets/images/Potentiometer_Fritzing.png) |
+| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | <img src="assets/images/WS2812_RGB_Stick_8_LEDs.jpg" alt="WS2812B 8-LED stick" style="height: 175px !important;"> | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![10K potentiometer](assets/images/PanelMountPotentiometer_NoCap_150h.jpg) |
 | Arduino Uno, Leonardo, or similar | WS2812B or SK6812 LED stick (8 LEDs) or strip | Breadboard | 10KΩ Potentiometer (for interactive demos) |
-
-<!-- TODO: Take a photo of the actual 8-LED stick from the student kit and use it for the materials image -->
 
 You will also need jumper wires. For longer strips (more than ~10 LEDs), you will need an external 5V power supply—see [Power considerations](#power-considerations) below.
 

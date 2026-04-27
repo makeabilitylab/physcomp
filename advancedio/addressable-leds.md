@@ -19,7 +19,11 @@ usetocbot: true
 {:toc}
 ---
 
-<!-- TODO: Record a hero video showing a rainbow animation cycling across an LED stick or strip and embed here -->
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing an LED stick with 8 RGB LEDs being controlled by two potentiometers: one for hue and one for brightness.">
+  <source src="assets/videos/LEDStickOverview_optimized_720p.mp4" type="video/mp4" />
+</video>
+**Video.** Setting the hue and brightness on a WS2812B LED stick with 8 RGB LEDs. The first part of the video is running the [ManualRainbowHueBriPotNeoPixelOLEDGraph sketch](https://github.com/makeabilitylab/arduino/tree/master/AddressableLEDs/NeoPixel/ManualRainbowHueBriPotNeoPixelOLEDGraph) and the second is running [HueBrightnessPotNeoPixelOLEDSimple](https://github.com/makeabilitylab/arduino/tree/master/AddressableLEDs/NeoPixel/HueBrightnessPotNeoPixelOLEDSimple). The OLED is, of course, unnecessary but used to show underlying operation.
+{: .fs-1 }
 
 From holiday lights to wearable costumes to interactive art installations, addressable RGB LEDs are everywhere. Unlike the [single RGB LEDs](../arduino/rgb-led.md) we used in the [Intro to Arduino lessons](../arduino/index.md)—which required three PWM pins and careful `analogWrite()` mixing for just *one* LED—addressable LEDs have a tiny driver chip built into *each* LED, allowing you to individually control hundreds of pixels from a single Arduino pin. In this lesson, we'll learn how they work and build some colorful projects!
 
@@ -70,7 +74,7 @@ Here's how the data flows:
 4. This continues down the chain until every LED has received its color.
 5. After a brief pause (50µs or more) in the data stream, the LEDs treat the next transmission as a new frame.
 
-<!-- TODO: Create a diagram showing the daisy-chain data flow:
+<!-- Potential future TODO: Create a diagram showing the daisy-chain data flow:
      Arduino Pin 2 → [LED 1] → [LED 2] → [LED 3] → ... → [LED N]
      With labeled arrows showing "3 bytes consumed" at each LED and "remaining bytes passed downstream" -->
 
@@ -80,7 +84,7 @@ This daisy-chain architecture is what makes addressable LEDs so powerful: you ca
 
 What makes the WS2812B protocol unusual is that it encodes data using **precisely timed pulses on a single wire**. There is no separate clock signal—instead, each bit is represented by a fixed-length pulse (1.25µs total), and the LED distinguishes a "1" from a "0" based on how long the signal stays high within that period. A long high followed by a short low means "1"; a short high followed by a long low means "0." This is called a **Non-Return-to-Zero (NRZ)** encoding.
 
-<!-- TODO: Create a timing diagram showing the NRZ encoding:
+<!-- Potential future TODO: Create a timing diagram showing the NRZ encoding:
      - One bit period = 1.25µs total
      - "0" bit: ~0.4µs high, ~0.85µs low
      - "1" bit: ~0.8µs high, ~0.45µs low
@@ -93,9 +97,13 @@ Because there is no clock line, the timing must be extremely precise—accurate 
 
 ### Form factors
 
-Addressable LEDs come in a wide variety of form factors, all using the same protocol and code:
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a grid of NeoPixel form factors from matrices to strips">
+  <source src="assets/videos/Adafruit_NeoPixel_VideoMontageGrid_optimized_720p.mp4" type="video/mp4" />
+</video>
+**Video.** A video highlighting the diverse form factors of addressable LEDs from sticks and strips to rings and matrices. All of these videos are from [Adafruit](https://www.adafruit.com/search?q=neopixel).
+{: .fs-1 }
 
-<!-- TODO: Create a figure showing different form factors — individual LEDs, sticks, rings, strips, matrices — with brief labels -->
+Addressable LEDs come in a wide variety of form factors, all using the same protocol and code:
 
 - **Sticks** (like the 8-LED stick in your kit) — compact, easy to breadboard, great for learning
 - **Strips** — the most common form factor, available in densities of 30, 60, or 144 LEDs per meter
@@ -142,12 +150,6 @@ For small projects like your 8-LED stick, the Arduino's **5V pin** powered by US
 
 This is the simplest wiring: just three connections from the LED stick to the Arduino.
 
-<!-- TODO: Create a Fritzing wiring diagram showing the 8-LED stick connected directly to Arduino:
-     - 5V → VCC on LED stick
-     - GND → GND on LED stick
-     - Pin 2 → DIN on LED stick
-     No external resistor needed — the stick has a built-in one (R1) -->
-
 ![Wiring diagram showing an 8-LED WS2812B stick connected to an Arduino Uno with three wires: 5V to VCC, GND to GND, and Pin 2 to DIN](assets/images/Arduino_WS2812B_8LED_BasicWiring.png)
 **Figure.** Basic wiring for an 8-LED stick powered from the Arduino's 5V pin. This setup is fine for small numbers of LEDs at moderate brightness. No external resistor is needed on the data line because our sticks have one built into the PCB (R1)—see [What's already on the board](#whats-already-on-the-board).
 {: .fs-1 }
@@ -157,7 +159,9 @@ This is the simplest wiring: just three connections from the LED stick to the Ar
 
 #### Tier 2: External 5V supply (10-60+ LEDs)
 
-For longer strips, you **must** use a dedicated external 5V power supply. A USB phone charger (rated 2A or higher), a 5V wall adapter, or a bench power supply all work well. The key requirement is that the supply is rated for the total current your LEDs could draw.
+For longer strips, you **must** use a dedicated external 5V power supply. A USB phone charger (rated 2A or higher), a 5V wall adapter, or a bench power supply all work well. The key requirement is that the supply is rated for the total current your LEDs could draw. 
+
+Place a large electrolytic capacitor (*e.g.,* 1000 µF rated for 6.3V or higher) across the VDD and VSS lines as close to the LED strip as possible. This buffers sudden current draws and protects the strip from initial power-on surges.
 
 <!-- TODO: Create a Fritzing wiring diagram showing:
      - External 5V supply → VCC and GND on LED strip
@@ -168,7 +172,7 @@ For longer strips, you **must** use a dedicated external 5V power supply. A USB 
      - Clear labels showing "COMMON GROUND" connection -->
 
 ![Wiring diagram showing an LED strip powered by an external 5V supply with a shared ground connection to the Arduino, a 1000µF capacitor across the power supply, and the data line connected from Pin 2 through a resistor](assets/images/Arduino_WS2812B_Strip_ExternalPower.png)
-**Figure.** Wiring for longer LED strips with an external 5V power supply. The Arduino and the external supply **must share a common ground** connection—without this, the data signal won't work. The 1000µF capacitor across the power supply protects the LEDs from the initial power surge when the supply is first connected.
+**Figure.** Wiring for longer LED strips with an external 5V power supply. The Arduino and the external supply **must share a common ground** connection—without this, the data signal won't work. The 1000µF capacitor across the power supply protects the LEDs from the initial power surge when the supply is first connected. Finally, in this case, we added a series resistor (470Ω) because the RGB LED strip did not have an inline resistor on DIN.
 {: .fs-1 }
 
 {: .warning }
@@ -223,7 +227,7 @@ void setup() {
 {: .note }
 > **Why Pin 2 (not a PWM pin)?** You might expect addressable LEDs to require a PWM pin since they involve precise signal timing. But the NeoPixel library doesn't use the Arduino's hardware PWM timers—it generates the WS2812B protocol signal entirely in software using carefully timed bit-banging (see [The single-wire timing protocol](#the-single-wire-timing-protocol) above). Any digital pin works! We intentionally chose Pin 2 (a non-PWM pin) to make this clear and to keep the PWM pins free for other uses like [vibromotors](vibromotor.md) or [LED fading](../arduino/led-fade.md).
 
-Here are the most commonly used functions:
+Here are the most commonly used functions from the [Adafruit NeoPixel library](https://github.com/adafruit/adafruit_neopixel):
 
 | Function | Description |
 |----------|-------------|
@@ -293,31 +297,43 @@ When SRAM runs out, the symptoms are not helpful: variables silently corrupt, th
 
 ## Wiring
 
-The wiring for addressable LEDs is refreshingly simple—just three connections:
+The wiring for addressable LEDs is simple—just three connections:
 
 | Wire | LED Stick Pin | Arduino Pin | Color (typical) |
 |------|-------------|-------------|-----------------|
 | Power | VCC / 5V | 5V | Red |
 | Ground | GND | GND | Black |
-| Data | DIN (Data In) | Pin 2 (or any digital pin) | Green, White, or Yellow |
+| Data | DIN (Data In) | Pin 2 (or any digital pin) | Your Choice (Green, White, Yellow, *etc.*) |
 
 ### Preparing the LED stick
+
+![](assets/images/RGBLEDStick_8LEDs_SolderPadsAndLEDS.png)
+**Figure.** The back and front sides of an 8-LED WS2812B stick. We will need to solder either jumper wires or header pins to the pads.
+{: .fs-1 }
 
 Many LED sticks (including the 8-LED WS2812B sticks in our kits) come with **bare solder pads** on the back—there are no pre-attached wires or header pins. You'll need to solder either jumper wires or header pins to the pads before you can connect the stick to your breadboard.
 
 Our sticks have **four pads on each end**—both ends have GND, +5V, a data pad, and GND again. The difference is the data pad: one end is labeled **DI** (data in) and the other end is labeled **DO** (data out). You connect the Arduino to the **DI end**. The DO end is used to daisy-chain the data signal out to another stick or strip. The duplicate GND pads on each end make it easy to share a ground connection when chaining.
 
-<!-- TODO: Add a photo showing both ends of the LED stick with the solder pads labeled (DI end and DO end), plus a photo of the stick with header pins soldered on and inserted into a breadboard -->
+![An annotated image showing three different soldering options: a 90-degree header, a straight header, and some jumper wires](assets/images/RGBLEDStick_8LEDS_SolderedPadsExamples.png)
+**Figure.** Three different example soldering options: a 90-degree header, a straight header, and some jumper wires. Make sure you solder the **DI** side (data in).
+{: .fs-1 }
+
+![An example fully soldered RGB LED stick with jumper wire hooked up to the Arduino](assets/images/RGBLEDStick_8LEDs_SolderedAndHookedUpToArduino.png)
+**Figure.** Hooking up the soldered wire version to Arduino.
+{: .fs-1 }
 
 #### What's already on the board
+
+![An annotated image of the RGB LED stick showing the two resistors and eight capacitors](assets/images/RGBLEDStick_8LEDS_CloseUpAnnotationsOfOnboardComponents.png)
+**Figure.** If you examine the RGB LED stick closely, you'll notice that there are some tiny surface-mount components already soldered on. In addition to the white RGB LEDs, there is a data line resistor on the **DIN** line (R1), a series of bypass capacitors (C1-C8) stabilizing the power supply locally at each LED, and a output line resistor (R2) on **DOUT**, which protects whatever device you daisy-chain off the output
+{: .fs-1 }
 
 If you look closely at the PCB, you'll notice some tiny surface-mount components already soldered on. On our sticks, you'll see:
 
 - **C1–C8**: One small bypass capacitor per LED (typically 100nF ceramic), placed between VCC and GND. These stabilize the power supply locally at each LED, as recommended by the WS2812B datasheet.
 - **R1** (next to the first LED): A data line resistor on the **DIN** line. This protects the first LED's data input from voltage spikes caused by signal ringing—see [The data line resistor](#the-data-line-resistor-300-470ω) below for a full explanation.
 - **R2** (next to the last LED): A matching resistor on the **DOUT** line, which provides the same protection for whatever device you daisy-chain off the output.
-
-<!-- TODO: Add an annotated close-up photo of the LED stick PCB showing R1, R2, and a few of the C1–C8 bypass capacitors with labels -->
 
 Because these components are already built into the stick, **you do not need to add an external resistor or capacitor**—just solder wires or header pins directly to the pads and you're ready to go.
 
@@ -329,7 +345,7 @@ Because these components are already built into the stick, **you do not need to 
 
 ### The data line resistor (300-470Ω)
 
-As noted in [What's already on the board](#whats-already-on-the-board), our LED sticks have a built-in data line resistor (R1) on the DIN input. Many pre-made LED strips include one as well. But what does it actually do, and when do you need to add one yourself?
+As noted in [above](#whats-already-on-the-board), our LED sticks have a built-in data line resistor (R1) on the DIN input. Many pre-made LED strips include one as well. But what does it actually do, and when do you need to add one yourself?
 
 The [Adafruit NeoPixel Überguide's Best Practices](https://learn.adafruit.com/adafruit-neopixel-uberguide/best-practices) section recommends placing a 300-500Ω resistor between the microcontroller's data output and the first LED's data input. Here's why.
 
@@ -396,6 +412,12 @@ void loop() {
 
 If your colors look wrong (*e.g.,* you asked for red but got green), try changing `NEO_GRB` to `NEO_RGB` in the strip constructor. This is the most common issue students encounter!
 
+![](assets/images/AddressableLEDs_RainbowStatic8.png)
+**Figure.** An image of the RGB LED stick running the above code. You can also view and play with this on [Tinkercad](https://www.tinkercad.com/things/lSqArYGju94-neopixel-strip-8-static-rainbow). See our [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino) and [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino) sketches in GitHub.
+{: .fs-1 }
+
+Try playing with the colors by changing the RGB values above. Our code for this is in GitHub as [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino). We also have a slightly more complicated version that scales the rainbow to N number of RGB LEDs, called [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino).
+
 ### Activity 2: Rainbow animation
 
 Now let's create a classic rainbow animation that cycles smoothly across all 8 LEDs. This introduces the concept of **animation on LED strips**: update pixel colors, call `show()`, wait a bit, repeat. It's the same pattern we used for the [bouncing ball](oled.md#activity-draw-a-bouncing-ball) on the OLED.
@@ -435,7 +457,21 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-Try changing the `+= 256` increment to `+= 64` (slower rainbow) or `+= 1024` (faster rainbow). What happens if you change `setBrightness()` to 255? (Shield your eyes!)
+Try changing the `+= 256` increment to `+= 64` (slower rainbow) or `+= 1024` (faster rainbow). What happens if you change `setBrightness()` to 255? (Shield your eyes!).
+
+Below, we have two versions: [RainbowAnimationUnidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationUnidirectional/RainbowAnimationUnidirectional.ino), which shows a one-way rainbow, and [RainbowAnimationBidrectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationBidirectional/RainbowAnimationBidirectional.ino), which oscillates the rainbow back-and-forth. 
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the RainbowAnimationUnidirectional.ino sketch.">
+  <source src="assets/videos/RainbowAnimationUnidirectional_IMG_8991_optimized_720p.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of the unidirectional rainbow animation (see [RainbowAnimationUnidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationUnidirectional/RainbowAnimationUnidirectional.ino) on GitHub).
+{: .fs-1 }
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the RainbowAnimationBidirectional.ino sketch.">
+  <source src="assets/videos/RainbowAnimationBidrectional_IMG_8992_optimized_720p.mp4" type="video/mp4" />
+</video>
+**Video.** A demonstration of the bidirectional rainbow animation (see [RainbowAnimationBidrectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationBidirectional/RainbowAnimationBidirectional.ino) on GitHub).
+{: .fs-1 }
 
 ### Activity 3: Potentiometer-controlled color
 
@@ -541,7 +577,7 @@ void loop() {
 
 Try turning each knob independently—you can dial in any color at any brightness level. Notice how the `ColorHSV()` function's three parameters (hue, saturation, value) map perfectly to physical controls. What would you use a *third* potentiometer for? (Hint: saturation controls how vivid *vs.* pastel the color looks!)
 
-### Activity 4: LED level meter
+<!-- ### Activity 4: LED level meter
 
 For our final activity, let's build a **level meter** (or VU meter)—a bar-graph display where the number of lit LEDs corresponds to an analog input value. This is similar to the [analog graph we built on the OLED](oled.md#demo-3-basic-real-time-analog-graph), but using physical LEDs instead of on-screen pixels. It's a great way to visualize sensor data in the physical world!
 
@@ -597,7 +633,7 @@ void loop() {
 Turn the potentiometer and watch the LEDs fill up like a progress bar! This is a simple but satisfying example of mapping data to a physical display. Try replacing the potentiometer with a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) or a [photoresistor](../sensors/photoresistors.md) for a more interactive experience.
 
 {: .note }
-> **Connecting to the previous lessons:** Notice how the same `analogRead()` → `map()` → output pattern appears in every lesson in this module. In the [OLED lesson](oled.md), it controlled a circle's size. In the [vibromotor lesson](vibromotor.md), it controlled vibration intensity. Here, it controls the number of lit LEDs. Learning to recognize this pattern is a key physical computing skill—once you can map sensor input to output, you can build almost anything!
+> **Connecting to the previous lessons:** Notice how the same `analogRead()` → `map()` → output pattern appears in every lesson in this module. In the [OLED lesson](oled.md), it controlled a circle's size. In the [vibromotor lesson](vibromotor.md), it controlled vibration intensity. Here, it controls the number of lit LEDs. Learning to recognize this pattern is a key physical computing skill—once you can map sensor input to output, you can build almost anything! -->
 
 ## Troubleshooting
 

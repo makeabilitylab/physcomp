@@ -19,6 +19,9 @@ usetocbot: true
 {:toc}
 ---
 
+{: .warning }
+> This lesson is in draft form. The circuit diagrams and videos have not yet been inserted; however, the content is complete and can be followed.
+
 <!-- TODO: Record a hero video showing a servo sweeping back and forth (or a more creative servo project like a pointing gauge or waving hand) and embed here -->
 
 In the previous two lessons, we controlled pixels—on an [OLED screen](oled.md) and on an [LED strip](addressable-leds.md). Now let's make things **move**! Servo motors let you precisely control angular position, making them essential components in robotics, RC vehicles, pan/tilt camera mounts, automated door locks, and countless other projects. Best of all, like the OLED and addressable LEDs, servos have a built-in control circuit—so the wiring is simple and a library handles the tricky signal timing.
@@ -39,7 +42,7 @@ You will need the following materials for this lesson:
 
 | Arduino | Servo Motor | Breadboard | Potentiometer |
 |:-----:|:-----:|:-----:|:-----:|
-| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![SG90 micro servo motor](assets/images/SG90_Servo_Fritzing.png) | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![10K potentiometer]({{ site.baseurl }}/assets/images/Potentiometer_Fritzing.png) |
+| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![SG90 micro servo motor](assets/images/SG90_Servo.png) | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![10K potentiometer](assets/images/PanelMountPotentiometer_NoCap_150h.jpg) |
 | Arduino Uno, Leonardo, or similar | SG90 or SG92R micro servo (9g) | Breadboard | 10KΩ Potentiometer |
 
 <!-- TODO: Take a photo of the actual servo from the student kit and use as the materials image -->

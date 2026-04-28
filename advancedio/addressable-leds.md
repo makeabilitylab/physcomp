@@ -414,7 +414,7 @@ void loop() {
 If your colors look wrong (*e.g.,* you asked for red but got green), try changing `NEO_GRB` to `NEO_RGB` in the strip constructor. This is the most common issue students encounter!
 
 ![](assets/images/AddressableLEDs_RainbowStatic8.png)
-**Figure.** An image of the RGB LED stick running the above code. You can also view and play with this on [Tinkercad](https://www.tinkercad.com/things/lSqArYGju94-neopixel-strip-8-static-rainbow). See our [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino) and [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino) sketches in GitHub.
+**Figure.** An image of the RGB LED stick running the above code. You can also view and play with this on [Tinkercad](https://www.tinkercad.com/things/lSqArYGju94-neopixel-strip-8-static-rainbow). See our [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic8/RainbowStatic8.ino) and [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino) sketches in GitHub.
 {: .fs-1 }
 
 Try playing with the colors by changing the RGB values above. Our code for this is in GitHub as [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino). We also have a slightly more complicated version that scales the rainbow to N number of RGB LEDs, called [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino).

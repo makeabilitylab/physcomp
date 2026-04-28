@@ -46,7 +46,7 @@ You will need the following materials for this lesson:
 
 | Arduino | Coin ERM Motor | NPN Transistor | 1KΩ Resistor | 1N4001 Diode |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Adafruit vibrating mini motor disc](assets/images/Adafruit_VibratingMiniMotorDisc.png) | ![PN2222A NPN transistor]({{ site.baseurl }}/assets/images/Transistor_Fritzing.png) | ![1K Ohm resistor]({{ site.baseurl }}/assets/images/Resistor1K_Fritzing.png) | ![1N4001 flyback diode]({{ site.baseurl }}/assets/images/Diode1N4001_Fritzing.png) |
+| ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![Adafruit vibrating mini motor disc](assets/images/Adafruit_VibratingMiniMotorDisc.png) | ![PN2222A NPN transistor](assets/images/PN2222ATransistor.png) | ![1K Ohm resistor]({{ site.baseurl }}/assets/images/Resistor1K_Fritzing.png) | ![1N4001 flyback diode](assets/images/1N4001Diode_Annotated.png) |
 | Arduino Uno, Leonardo, or similar | [Adafruit Vibrating Mini Motor Disc](https://www.adafruit.com/product/1201) | [PN2222A](https://www.adafruit.com/product/756) NPN BJT | 1KΩ Resistor | [1N4001](https://www.digikey.com/en/products/detail/onsemi/1N4001/458986) Flyback Diode |
 
 You will also need jumper wires and a breadboard. A small ceramic capacitor (0.1µF) is optional but recommended for filtering motor noise.

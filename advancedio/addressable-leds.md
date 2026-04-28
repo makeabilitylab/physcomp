@@ -485,7 +485,7 @@ Use the same LED wiring as before, and add a 10KΩ potentiometer with its wiper 
 <video autoplay loop muted playsinline style="margin:0px" aria-label="A circuit diagram for the potentiometer-controlled color example.">
   <source src="assets/videos/HuePotNeoPixel-NoOLED-Tinkercad-WiringDiagram.mp4" type="video/mp4" />
 </video>
-**Video.** A circuit diagram for the potentiometer-controlled hue example.
+**Video.** A circuit diagram for the potentiometer-controlled hue example. You can play with this example directly in [Tinkercad](https://www.tinkercad.com/things/3Z4eWd23kGU-neopixel-strip-8-pot-controlled-hue).
 {: .fs-1 }
 
 #### The code
@@ -536,7 +536,7 @@ I also made a version with the OLED to make the controls more clear.
 <video autoplay loop muted playsinline style="margin:0px" aria-label="A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback.">
   <source src="assets/videos/HuePotNeoPixelOLED_IMG_8994_optimized_720p.mp4" type="video/mp4" />
 </video>
-**Video.** A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback.
+**Video.** A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback. To be clear, you do **not need an OLED** to use the addressable RGB LEDs. I've added this only for additional feedback and clarity on how this example works.
 {: .fs-1 }
 
 #### Part 2: Two-pot color and brightness control
@@ -546,7 +546,7 @@ Now let's add a **second potentiometer** on `A1` to independently control bright
 <video autoplay loop muted playsinline style="margin:0px" aria-label="A circuit diagram for the potentiometer-controlled hue and brightness example.">
   <source src="assets/videos/HueBrightnessPotNeoPixel-NoOLED-Tinkercad-WiringDiagram.mp4" type="video/mp4" />
 </video>
-**Video.** A circuit diagram for the potentiometer-controlled hue and brightness example.
+**Video.** A circuit diagram for the potentiometer-controlled hue and brightness example. You can view and play with this example on [Tinkercad](https://www.tinkercad.com/things/53EaKIvUCsX-neopixel-strip-8-pot-controlled-hue-and-brightness).
 {: .fs-1 }
 
 {% highlight C++ %}
@@ -599,7 +599,7 @@ Similar to above, I also made a version with the OLED to make the controls and r
 <video autoplay loop muted playsinline style="margin:0px" aria-label="A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback.">
   <source src="assets/videos/HueBrightnessPotNeoPixelOLEDSimple_IMG_8979_LightsOn_optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback.
+**Video.** A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback. As noted previously, you do **not need an OLED** to use the addressable RGB LEDs. I've added this only for additional feedback and clarity on how this example works.
 {: .fs-1 }
 
 <!-- ### Activity 4: LED level meter

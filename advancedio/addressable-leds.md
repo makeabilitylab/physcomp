@@ -82,7 +82,7 @@ This daisy-chain architecture is what makes addressable LEDs so powerful: you ca
 
 ### The single-wire timing protocol
 
-What makes the WS2812B protocol unusual is that it encodes data using **precisely timed pulses on a single wire**. There is no separate clock signal—instead, each bit is represented by a fixed-length pulse (1.25µs total), and the LED distinguishes a "1" from a "0" based on how long the signal stays high within that period. A long high followed by a short low means "1"; a short high followed by a long low means "0." This is called a **Non-Return-to-Zero (NRZ)** encoding.
+What makes the WS2812B protocol unusual is that it encodes data using **precisely timed pulses on a single wire**. There is no separate clock signal—instead, each bit is represented by a fixed-length pulse (1.25µs total), and the LED distinguishes a "1" from a "0" based on how long the signal stays high within that period. A long high followed by a short low means "1"; a short high followed by a long low means "0." The [WS2812B datasheet](https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf) calls this "NZR" communication (and you'll often see it referred to as "NRZ" online), but it's more precisely described as pulse-width encoding—each bit's value is determined by how long the signal stays high within the fixed 1.25µs window.
 
 <!-- Potential future TODO: Create a timing diagram showing the NRZ encoding:
      - One bit period = 1.25µs total
@@ -93,7 +93,7 @@ What makes the WS2812B protocol unusual is that it encodes data using **precisel
 Because there is no clock line, the timing must be extremely precise—accurate to within a few hundred nanoseconds. This is why the NeoPixel library uses hand-tuned assembly code and **temporarily disables interrupts** during `show()` to prevent any timing jitter from corrupting the data. For an 8-LED stick, interrupts are disabled for only ~240µs (barely noticeable), but for a 144-LED strip, it can be ~4.3ms—long enough to occasionally interfere with `Serial` communication or `millis()` accuracy.
 
 {: .note }
-> **Not all addressable LEDs use this timing-based protocol.** The **APA102** (sold by Adafruit as "[DotStars](https://learn.adafruit.com/adafruit-dotstar-leds)") uses a two-wire SPI interface with a separate clock line, making it completely **timing-insensitive**. This means APA102 LEDs can be driven reliably from multitasking systems like the Raspberry Pi (where the WS2812B protocol struggles), and they achieve a much higher refresh rate (~20kHz *vs.* ~400Hz for WS2812B). The trade-off is an extra wire and higher cost. For this course, we use WS2812B/SK6812 LEDs because they are the most common and affordable, and the NeoPixel library handles all the timing complexity for us.
+> **Not all addressable LEDs use this timing-based protocol.** The **APA102** (sold by Adafruit as "[DotStars](https://learn.adafruit.com/adafruit-dotstar-leds)") uses a two-wire SPI interface with a separate clock line, making it completely **timing-insensitive**. This means APA102 LEDs can be driven reliably from multitasking systems like the Raspberry Pi (where the WS2812B protocol struggles), and they achieve a much higher PWM frequency (~20kHz vs. ~400Hz for WS2812B) and faster data refresh rates. The trade-off is an extra wire and higher cost. For this course, we use WS2812B/SK6812 LEDs because they are the most common and affordable, and the NeoPixel library handles all the timing complexity for us.
 
 ### Form factors
 
@@ -417,7 +417,7 @@ If your colors look wrong (*e.g.,* you asked for red but got green), try changin
 **Figure.** An image of the RGB LED stick running the above code. You can also view and play with this on [Tinkercad](https://www.tinkercad.com/things/lSqArYGju94-neopixel-strip-8-static-rainbow). See our [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic8/RainbowStatic8.ino) and [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino) sketches in GitHub.
 {: .fs-1 }
 
-Try playing with the colors by changing the RGB values above. Our code for this is in GitHub as [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino). We also have a slightly more complicated version that scales the rainbow to N number of RGB LEDs, called [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino).
+Try playing with the colors by changing the RGB values above. Our code for this is in GitHub as [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic8/RainbowStatic8.ino). We also have a slightly more complicated version that scales the rainbow to N number of RGB LEDs, called [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino).
 
 ### Activity 2: Rainbow animation
 
@@ -458,7 +458,7 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-Try changing the `+= 256` increment to `+= 64` (slower rainbow) or `+= 1024` (faster rainbow). What happens if you change `setBrightness()` to 255? (Shield your eyes!).
+Try changing the `HUE_STEP` constant to `64` (slower rainbow) or `512` (faster rainbow). What happens if you change `setBrightness()` to 255? (Shield your eyes!).
 
 Below, we have two versions: [RainbowAnimationUnidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationUnidirectional/RainbowAnimationUnidirectional.ino), which shows a one-way rainbow, and [RainbowAnimationBidrectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationBidirectional/RainbowAnimationBidirectional.ino), which oscillates the rainbow back-and-forth. 
 
@@ -471,7 +471,7 @@ Below, we have two versions: [RainbowAnimationUnidirectional.ino](https://github
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the RainbowAnimationBidirectional.ino sketch.">
   <source src="assets/videos/RainbowAnimationBidrectional_IMG_8992_optimized_720p.mp4" type="video/mp4" />
 </video>
-**Video.** A demonstration of the bidirectional rainbow animation (see [RainbowAnimationBidrectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationBidirectional/RainbowAnimationBidirectional.ino) on GitHub).
+**Video.** A demonstration of the bidirectional rainbow animation (see [RainbowAnimationBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationBidirectional/RainbowAnimationBidirectional.ino) on GitHub).
 {: .fs-1 }
 
 ### Activity 3: Potentiometer-controlled color
@@ -694,7 +694,7 @@ In this lesson, you learned about addressable RGB LEDs and how to create colorfu
 
 - **Addressable LEDs** (WS2812B/SK6812) contain a built-in driver chip at each LED, allowing individual control of hundreds of pixels from a single data pin. This is fundamentally different from standard RGB LEDs, which require three PWM pins per LED.
 - The LEDs use a **daisy-chain protocol**: data flows from the Arduino to the first LED, which reads its color and passes the remaining data downstream. Each LED in the chain receives its own color data automatically.
-- The WS2812B protocol encodes bits using **precisely timed pulses** on a single wire (NRZ encoding), with no clock signal. The NeoPixel library handles this timing in software and must briefly disable interrupts during `show()`. Alternative chipsets like the APA102 use a clocked SPI interface that avoids these timing constraints.
+- The WS2812B protocol encodes bits using precisely timed pulses on a single wire (pulse-width encoding), with no clock signal. The NeoPixel library handles this timing in software and must briefly disable interrupts during `show()`. Alternative chipsets like the APA102 use a clocked SPI interface that avoids these timing constraints.
 - The **Adafruit NeoPixel library** provides a clean API that follows the same buffer → show pattern as the OLED: `setPixelColor()` writes to RAM, and `show()` pushes the data to the LEDs.
 - **Power management** is critical: each LED can draw up to 60mA at full white. For 8 LEDs, Arduino USB power is usually sufficient; for longer strips, an external 5V power supply with a **shared ground** is required.
 - The **HSV color space** (via `ColorHSV()`) makes it easy to create rainbow effects by sweeping the hue value, and `gamma32()` applies perceptual brightness correction for smoother gradients.

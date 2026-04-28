@@ -111,7 +111,7 @@ Addressable LEDs come in a wide variety of form factors, all using the same prot
 - **Matrices** — rectangular grids (*e.g.,* 8x8 or 16x16) for pixel-art displays
 - **Individual LEDs** — for custom PCB designs or embedding into 3D-printed enclosures
 
-Regardless of form factor, the wiring and code are identical—only the number of LEDs changes.
+Aren't these form factors cool?! And what's **truly amazing** about this: regardless of form factor, the wiring and code are identical—only the number of LEDs changes! So, if you become an expert in one form factor, it will transfer to others.
 
 ## Power considerations
 
@@ -155,13 +155,13 @@ This is the simplest wiring: just three connections from the LED stick to the Ar
 {: .fs-1 }
 
 {: .warning }
-> Even with just 8 LEDs, calling `strip.fill(strip.Color(255, 255, 255))` (full white at max brightness) draws ~480mA from USB—very close to the 500mA limit. If your Arduino resets or behaves erratically when all LEDs are full white, reduce the brightness with `strip.setBrightness(128)` or use an external power supply.
+> Even with just 8 LEDs, calling `strip.fill(strip.Color(255, 255, 255))` (full white at max brightness) draws ~480mA from USB—very close to the 500mA limit. If your Arduino resets or behaves erratically when all LEDs are full white, reduce the brightness with `strip.setBrightness(128)` or use an external power supply (see below for more!).
 
 #### Tier 2: External 5V supply (10-60+ LEDs)
 
 For longer strips, you **must** use a dedicated external 5V power supply. A USB phone charger (rated 2A or higher), a 5V wall adapter, or a bench power supply all work well. The key requirement is that the supply is rated for the total current your LEDs could draw. 
 
-Place a large electrolytic capacitor (*e.g.,* 1000 µF rated for 6.3V or higher) across the VDD and VSS lines as close to the LED strip as possible. This buffers sudden current draws and protects the strip from initial power-on surges.
+Place a large electrolytic capacitor (*e.g.,* 1000 µF rated for 6.3V or higher) across the VDD and VSS lines on the LED strip and as close to the LED strip as possible. This buffers sudden current draws and protects the strip from initial power-on surges.
 
 <!-- TODO: Create a Fritzing wiring diagram showing:
      - External 5V supply → VCC and GND on LED strip
@@ -172,7 +172,7 @@ Place a large electrolytic capacitor (*e.g.,* 1000 µF rated for 6.3V or higher)
      - Clear labels showing "COMMON GROUND" connection -->
 
 ![Wiring diagram showing an LED strip powered by an external 5V supply with a shared ground connection to the Arduino, a 1000µF capacitor across the power supply, and the data line connected from Pin 2 through a resistor](assets/images/Arduino_WS2812B_Strip_ExternalPower.png)
-**Figure.** Wiring for longer LED strips with an external 5V power supply. The Arduino and the external supply **must share a common ground** connection—without this, the data signal won't work. The 1000µF capacitor across the power supply protects the LEDs from the initial power surge when the supply is first connected. Finally, in this case, we added a series resistor (470Ω) because the RGB LED strip did not have an inline resistor on DIN.
+**Figure.** Wiring for longer LED strips with an external 5V power supply. I am using a benchtop power supply because a 5V/2A wall adapter is not an available component in Tinkercad. The Arduino and the external supply **must share a common ground** connection—without this, the data signal won't work. The 1000µF capacitor across the power supply protects the LEDs from the initial power surge when the supply is first connected. Finally, in this case, we added a series resistor (470Ω) because the RGB LED strip did not have an inline resistor on DIN.
 {: .fs-1 }
 
 {: .warning }
@@ -216,7 +216,7 @@ Adafruit_NeoPixel strip(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
   strip.begin();             // Initialize the strip
-  strip.setBrightness(50);   // Set brightness (0-255). 50 is a good starting point!
+  strip.setBrightness(50);   // Set brightness (0-255). 50 is ~20% bright
   strip.show();              // Initialize all pixels to 'off'
 }
 {% endhighlight C++ %}
@@ -245,7 +245,7 @@ Here are the most commonly used functions from the [Adafruit NeoPixel library](h
 
 ### Color representation
 
-Each pixel's color is specified using RGB values from 0-255 per channel, just like the [RGB LED lesson](../arduino/rgb-led.md). Some examples:
+Each pixel's color is specified using RGB values from an 8-bit value—0-255 per channel—just like the [RGB LED lesson](../arduino/rgb-led.md). Some examples:
 
 {% highlight C++ %}
 // Named colors using strip.Color(R, G, B)
@@ -264,7 +264,8 @@ For animations that cycle through colors, the **HSV** (hue, saturation, value) c
 // 0 = red, ~10922 = yellow, ~21845 = green, ~32768 = cyan,
 // ~43690 = blue, ~54613 = magenta, 65535 wraps back to red
 
-uint32_t color = strip.ColorHSV(hue, 255, 255); // Full saturation, full brightness
+uint32_t color = strip.ColorHSV(hue, 255, 255); // Full sat, full brightness
+
 // Note: ColorHSV returns a value that should be passed through strip.gamma32()
 // for perceptually accurate colors:
 strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(hue, 255, 255)));
@@ -320,7 +321,7 @@ Our sticks have **four pads on each end**—both ends have GND, +5V, a data pad,
 {: .fs-1 }
 
 ![An example fully soldered RGB LED stick with jumper wire hooked up to the Arduino](assets/images/RGBLEDStick_8LEDs_SolderedAndHookedUpToArduino.png)
-**Figure.** Hooking up the soldered wire version to Arduino.
+**Figure.** Hooking up the soldered wire version to Arduino. In this case, I've hooked up the data line to Pin 2 and I'm running our ["static rainbow" code](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino). See the [Tinkercad version here](https://www.tinkercad.com/things/lSqArYGju94-neopixel-strip-8-static-rainbow).
 {: .fs-1 }
 
 #### What's already on the board
@@ -481,7 +482,11 @@ Now let's add **analog input** to control the LED colors. We'll use a potentiome
 
 Use the same LED wiring as before, and add a 10KΩ potentiometer with its wiper connected to `A0`.
 
-<!-- TODO: Create a Fritzing wiring diagram showing the 8-LED stick plus a potentiometer on A0 -->
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A circuit diagram for the potentiometer-controlled color example.">
+  <source src="assets/videos/HuePotNeoPixel-NoOLED-Tinkercad-WiringDiagram.mp4" type="video/mp4" />
+</video>
+**Video.** A circuit diagram for the potentiometer-controlled hue example.
+{: .fs-1 }
 
 #### The code
 
@@ -526,11 +531,23 @@ void loop() {
 
 As you turn the potentiometer, you should see all 8 LEDs smoothly cycle through the rainbow together.
 
+I also made a version with the OLED to make the controls more clear. 
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback.">
+  <source src="assets/videos/HuePotNeoPixelOLED_IMG_8994_optimized_720p.mp4" type="video/mp4" />
+</video>
+**Video.** A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback.
+{: .fs-1 }
+
 #### Part 2: Two-pot color and brightness control
 
 Now let's add a **second potentiometer** on `A1` to independently control brightness while the first pot controls hue. This gives you two physical knobs—one for color, one for intensity—which is a nice introduction to **multi-input control**. It also demonstrates why the HSV color space is so useful: hue and brightness are independent parameters, so two knobs map naturally to two HSV axes.
 
-<!-- TODO: Create a Fritzing wiring diagram showing the 8-LED stick plus two potentiometers on A0 and A1 -->
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A circuit diagram for the potentiometer-controlled hue and brightness example.">
+  <source src="assets/videos/HueBrightnessPotNeoPixel-NoOLED-Tinkercad-WiringDiagram.mp4" type="video/mp4" />
+</video>
+**Video.** A circuit diagram for the potentiometer-controlled hue and brightness example.
+{: .fs-1 }
 
 {% highlight C++ %}
 #include <Adafruit_NeoPixel.h>
@@ -576,6 +593,14 @@ void loop() {
 {% endhighlight C++ %}
 
 Try turning each knob independently—you can dial in any color at any brightness level. Notice how the `ColorHSV()` function's three parameters (hue, saturation, value) map perfectly to physical controls. What would you use a *third* potentiometer for? (Hint: saturation controls how vivid *vs.* pastel the color looks!)
+
+Similar to above, I also made a version with the OLED to make the controls and resulting output more clear.
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback.">
+  <source src="assets/videos/HueBrightnessPotNeoPixelOLEDSimple_IMG_8979_LightsOn_optimized.mp4" type="video/mp4" />
+</video>
+**Video.** A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback.
+{: .fs-1 }
 
 <!-- ### Activity 4: LED level meter
 

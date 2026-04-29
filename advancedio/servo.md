@@ -114,7 +114,7 @@ Before we start wiring, let's clear up a common source of confusion. You've alre
 | **What you control** | Duty cycle: 0–255 → 0–100% average power | Pulse width: ~1ms → 0°, ~1.5ms → 90°, ~2ms → 180° |
 | **Arduino API** | `analogWrite(pin, 0-255)` | `servo.write(0-180)` via the Servo library |
 
-An LED connected to `analogWrite()` at 50% duty cycle sees ~2.5V average and glows at half brightness—it doesn't care *when* the pulses arrive, only how much total energy it receives. A servo's control circuit does the opposite: it ignores the average power level and instead precisely **measures the width of each HIGH pulse** to determine the target angle. A 1.5ms pulse means "go to 90°" whether the period is 20ms (50 Hz) or 10ms (100 Hz)—the pulse width *is* the message.
+An LED connected to `analogWrite()` at 50% duty cycle sees ~2.5V average and glows at half brightness—it doesn't care *when* the pulses arrive, only how much total energy it receives. A servo's control circuit does the opposite: it ignores the average power level and instead precisely **measures the width of each HIGH pulse** to determine the target angle. A 1.5ms pulse means 'go to 90°' regardless of frequency—*in principle*. In practice, hobby servos are designed for 50 Hz, but the point is that the position information lives in the pulse width, not the duty cycle ratio.
 
 <!-- Potential TODO (though this confuses me): Create a side-by-side diagram or animation showing (perhaps we make a p5js example visualization like we did for the tone lesson with piezo buzzers):
      (1) analogWrite PWM with varying duty cycles at fixed ~490Hz frequency
@@ -160,7 +160,7 @@ Here are the most commonly used functions:
 | `myServo.detach()` | Stop sending the control signal. The servo will no longer hold its position. |
 
 {: .note }
-> **Any digital pin works!** Like the [NeoPixel library](addressable-leds.md), the Servo library generates its signal timing in software—it does not use hardware PWM. You can attach a servo to *any* digital pin, not just PWM-capable pins. We use Pin 3 in our examples for consistency with the rest of the textbook, but Pin 2, Pin 7, or Pin 13 would work just as well.
+> **Any digital pin works!** Like the [NeoPixel library](addressable-leds.md), the Servo library uses Timer1 interrupts to generate the signal—it does not use the hardware PWM output compare mode that `analogWrite()` relies on. You can attach a servo to *any* digital pin, not just PWM-capable pins. We use Pin 3 in our examples for consistency with the rest of the textbook, but Pin 2, Pin 7, or Pin 13 would work just as well.
 
 ### `write()` vs. `writeMicroseconds()`
 
@@ -171,6 +171,8 @@ For most projects, `write(angle)` is all you need. However, if you need finer-gr
 - `write(180)` → `writeMicroseconds(2400)` (default maximum)
 
 The Arduino Servo library maps 0-180° to 544-2400µs by default, which is slightly wider than the traditional 1000-2000µs range. This means `write(90)` actually sends ~1472µs, not 1500µs. For most projects this doesn't matter, but if you need precise calibration, use `writeMicroseconds()` directly.
+
+**Watch out for values above 543!** If you pass `write()` a value of 544 or greater, the Servo library interprets it as a microsecond pulse width rather than an angle in degrees. Values less than 544 are treated as angles and clamped to a maximum of 180°. So `myServo.write(500)` will be clamped to 180°, but `myServo.write(600)` will send a 600µs pulse. If you're doing math that might produce unpredictable values, always clamp first using `constrain(angle, 0, 180)`!
 
 {: .warning }
 > **Timer conflict:** The Servo library uses Timer1 to generate its 50 Hz signal, which **disables `analogWrite()` on certain pins**—even if your servo isn't connected to those pins:
@@ -219,6 +221,8 @@ Wiring a servo is simple—just three connections, with no transistor, no diode,
 
 {: .note }
 > **No transistor needed!** In the [vibromotor lesson](vibromotor.md), you'll learn that raw DC motors need a transistor because they draw more current than a GPIO pin can supply. Servos are different—the signal wire carries only a *control signal* (a few milliamps), not the motor's power. The servo's internal driver circuit handles the heavy lifting. The motor power comes directly from the 5V pin, not through the Arduino's GPIO.
+
+### Decoupling capacitor
 
 You may want to **add a decoupling capacitor.** Servos draw sharp current spikes during rapid movements, which can cause voltage dips that reset the Arduino or introduce jitter. Adding a **100µF electrolytic capacitor** across the servo's power (red) and ground (brown) wires helps absorb these spikes—the same principle as the capacitor recommended for [NeoPixels](addressable-leds.md#power-considerations). For multiple servos, use a larger capacitor (470µF or more).
 
@@ -286,7 +290,7 @@ void loop() {
 
 <!-- TODO: Record a video of the servo sweeping back and forth and embed here. The Tinkercad version is here: https://www.tinkercad.com/things/hNVrJEXGKrT-simple-servo-sweep -->
 
-The `delay(15)` gives the servo time to reach each position before advancing to the next degree. Try changing the delay—a shorter delay means faster sweeping, but if it's too short, the servo can't keep up and will jitter. What happens if you change `delay(15)` to `delay(1)`? What about changing the range to `for (int angle = 30; angle <= 150; ...)`?
+The `delay(15)` gives the servo time to reach each position before advancing to the next degree. Try changing the delay—a shorter delay means faster sweeping, but if it's too short, the servo can't keep up and will jitter. What happens if you change `delay(15)` to `delay(1)`? (Hint: the servo may not have time to reach each position before the next command arrives.) What about changing the range to `for (int angle = 30; angle <= 150; ...)`?
 
 {: .warning }
 > **Avoid driving to the mechanical limits.** If your servo makes a grinding or buzzing sound at 0° or 180°, it's hitting its mechanical stops and stalling. This draws high current and can strip the plastic gears over time. Try reducing your range to 10-170° or experiment to find your servo's actual safe limits.
@@ -382,7 +386,10 @@ Use the same servo + potentiometer wiring, and add two tactile buttons on Pins 8
 const int SERVO_PIN = 3;
 const int SENSOR_PIN = A0;
 const int FREEZE_BTN = 8;
-const int RESET_BTN = 9;
+
+// The Servo library disables analogWrite() on Pins 9 and 10 on the Uno
+// However, you can still use the pins for digitalRead
+const int RESET_BTN = 9; 
 
 Servo gaugeServo;
 bool isFrozen = false;
@@ -416,12 +423,13 @@ void loop() {
   }
   lastFreezeState = freezeState;
 
-  // Reset button. Reset on press
+  // Reset button: reset to 0° and freeze there
   int resetState = digitalRead(RESET_BTN);
   if (resetState == LOW && lastResetState == HIGH) {
-    isFrozen = false;
+    isFrozen = true;
+    frozenAngle = 0;
     gaugeServo.write(0);
-    Serial.println("Reset to 0");
+    Serial.println("Reset to 0 (frozen)");
     delay(50);
   }
   lastResetState = resetState;
@@ -467,7 +475,7 @@ If your servo isn't behaving as expected, work through this list. These are the 
 | Arduino resets when servo moves | Current draw exceeds USB power supply capacity | Use an external 5V supply with a shared ground. See [Power considerations](#power-considerations). |
 | `analogWrite()` stopped working on pin 9 or 10 | Servo library claimed Timer1 | The Servo library disables `analogWrite()` on Timer1 pins even if the servo isn't on those pins. Use different pins for your PWM outputs. |
 | Servo moves erratically or to wrong angles | Using `analogWrite()` instead of Servo library | Never use `analogWrite()` to drive a servo. Use `myServo.write(angle)` instead. |
-| Servo overshoots or won't reach full range | Default pulse width limits don't match your servo | Use `myServo.attach(pin, min, max)` with custom microsecond values. Try `attach(pin, 600, 2400)` and adjust from there. |
+| Servo overshoots or won't reach full range | Default pulse width limits don't match your servo | Use `myServo.attach(pin, min, max)` with custom microsecond values calibrated to your specific servo. Start with the defaults (544, 2400) and adjust. |
 
 {: .note }
 > **When in doubt, go back to basics.** Upload the [Activity 1: Servo sweep](#activity-1-servo-sweep) sketch with no modifications and confirm that the servo sweeps smoothly. If it does, the issue is in your code. If it doesn't, the issue is in your wiring or power supply.

@@ -292,6 +292,8 @@ void loop() {
 
 The `delay(15)` gives the servo time to reach each position before advancing to the next degree. Try changing the delay—a shorter delay means faster sweeping, but if it's too short, the servo can't keep up and will jitter. What happens if you change `delay(15)` to `delay(1)`? (Hint: the servo may not have time to reach each position before the next command arrives.) What about changing the range to `for (int angle = 30; angle <= 150; ...)`?
 
+If you **compile this code** and it gives an error similar to `Compilation error: Servo.h: No such file or directory`, then you need to install the official Arduino servo library authored by Michael Margolis. Open the Library Manager (or go to Sketch > Include Library > Manage Libraries...), search for "Servo", and scroll to find the Servo library. Then click "Install."
+
 {: .warning }
 > **Avoid driving to the mechanical limits.** If your servo makes a grinding or buzzing sound at 0° or 180°, it's hitting its mechanical stops and stalling. This draws high current and can strip the plastic gears over time. Try reducing your range to 10-170° or experiment to find your servo's actual safe limits.
 

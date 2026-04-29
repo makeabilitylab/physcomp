@@ -230,8 +230,10 @@ The Arduino's USB power supply provides about 500mA total. A single SG90 moving 
 
 For projects with **multiple servos**, you will almost certainly need an external power supply. Two or more servos moving simultaneously can easily exceed 1A. For larger builds, consider a dedicated [servo driver board](https://www.adafruit.com/product/815) like the PCA9685, which provides its own power bus and can control up to 16 servos via I<sup>2</sup>C.
 
-![Example wiring diagram with multiple servos connected to Arduino with an external power supply](Tinkercad_MultipleServosWithExternalPowerSupply_optimized_720p_muted.mp4)
-**Figure.** Wiring multiple servo motors together with an external power supply. Importantly, both the Arduino GND and the external power supply GND must be connected. You can [play with this multi-servo circuit on Tinkercad here](https://www.tinkercad.com/things/9uPF2TKXYW3-simple-servo-with-external-power).
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Example wiring diagram with multiple servos connected to Arduino with an external power supply">
+  <source src="assets/videos/Tinkercad_MultipleServosWithExternalPowerSupply_optimized_720p_muted.mp4" type="video/mp4" />
+</video>
+**Video.** Wiring multiple servo motors together with an external power supply. Importantly, both the Arduino GND and the external power supply GND must be connected. You can [play with this multi-servo circuit on Tinkercad here](https://www.tinkercad.com/things/9uPF2TKXYW3-simple-servo-with-external-power).
 {: .fs-1 }
 
 ## Let's make stuff!
@@ -267,7 +269,7 @@ void loop() {
 }
 {% endhighlight C++ %}
 
-<!-- TODO: Record a video of the servo sweeping back and forth and embed here -->
+<!-- TODO: Record a video of the servo sweeping back and forth and embed here. The Tinkercad version is here: https://www.tinkercad.com/things/hNVrJEXGKrT-simple-servo-sweep -->
 
 The `delay(15)` gives the servo time to reach each position before advancing to the next degree. Try changing the delay—a shorter delay means faster sweeping, but if it's too short, the servo can't keep up and will jitter. What happens if you change the range to `for (int angle = 30; angle <= 150; ...)`?
 
@@ -282,7 +284,9 @@ Now let's add a potentiometer to directly control the servo's position—turn th
 
 Use the same servo wiring as before, and add a 10KΩ potentiometer with its wiper connected to `A0`.
 
-<!-- TODO: Create a Fritzing wiring diagram showing the servo plus a potentiometer on A0 -->
+![](assets/images/ServoWithPotCircuit_Tinkercad.png)
+**Figure.** The wiring diagram for controlling a servo motor with a potentiometer. [Play with the circuit on Tinkercad here](https://www.tinkercad.com/things/idpwDlLVTNL-servo-pot-control); alternatively, you can play with [this version](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope), which is the same circuit but with the addition of an oscilloscope to see the PWM control waveform.
+{: .fs-1 }
 
 #### The code
 
@@ -326,7 +330,7 @@ This is essentially the Arduino's built-in ["Knob" example](https://www.arduino.
 You can hook up an oscilloscope to examine the underlying PWM signal, which we've done in [Tinkercad here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope):
 
 <video autoplay loop muted playsinline style="margin:0px" aria-label="A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal">
-  <source src="assets/videos/EngineeringMindset_DrivingServoMotorWithArduinoPotPWM_Oscilliscope_optimized_720p_muted.mp4" type="video/mp4" />
+  <source src="assets/videos/Tinkercad_ServoPotWithOscilliscope_50msWindow_optimized_720p_muted.mp4" type="video/mp4" />
 </video>
 **Video.** A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal. Play with the [circuit directly here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope)!
 {: .fs-1 }

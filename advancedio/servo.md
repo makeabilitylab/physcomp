@@ -45,8 +45,6 @@ You will need the following materials for this lesson:
 | ![Arduino Uno or Leonardo]({{ site.baseurl }}/assets/images/ArduinoUno_Fritzing.png) | ![SG90 micro servo motor](assets/images/SG90_Servo.png) | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![10K potentiometer](assets/images/PanelMountPotentiometer_NoCap_150h.jpg) |
 | Arduino Uno, Leonardo, or similar | SG90 or SG92R micro servo (9g) | Breadboard | 10KΩ Potentiometer |
 
-<!-- TODO: Take a photo of the actual servo from the student kit and use as the materials image -->
-
 You will also need jumper wires and, for [Activity 3](#activity-3-sensor-driven-servo-gauge), a couple of tactile buttons.
 
 {: .note }
@@ -72,6 +70,9 @@ This is called a **closed-loop feedback system**—the control circuit constantl
 {: .note }
 > **Built-in smarts!** Notice the pattern across this module: the [OLED](oled.md) has a built-in SSD1306 display controller, [addressable LEDs](addressable-leds.md) have built-in WS2812B driver chips, and servos have a built-in feedback control circuit. Each device handles the complex low-level work internally, and you communicate with it through a simple signal. In the [next lesson](vibromotor.md), we'll encounter a component that *doesn't* have built-in intelligence—and you'll appreciate the difference!
 
+
+<!-- TODO: consider adding a section on "how to choose a servo" and include things like open vs. closed, accuracy, metal gears vs. plastic, total torque and weight, etc. -->
+
 ### Standard vs. continuous rotation servos
 
 There are two types of hobby servos:
@@ -83,7 +84,7 @@ For this lesson, we'll focus on **standard (positional) servos**, specifically t
 
 ### The SG90 micro servo
 
-The SG90 is a class of tiny, inexpensive servo motors that weigh only 9 grams. Despite their small size, they're surprisingly capable for learning projects. You'll find SG90-class servos from many manufacturers (TowerPro, Miuzei, and others)—they all share the same basic form factor, connector, and specs:
+The SG90 is a class of tiny, inexpensive servo motors that weigh only 9 grams. Despite their small size, they're surprisingly capable! You'll find SG90-class servos from many manufacturers (TowerPro, Miuzei, and others)—they all share the same basic form factor, connector, and specs:
 
 | Attribute | Rating |
 |-----------|--------|
@@ -112,19 +113,43 @@ Before we start wiring, let's clear up a common source of confusion. You've alre
 
 With `analogWrite()`, a 50% duty cycle delivers 50% of the available power—useful for dimming LEDs or slowing motors. With servo PWM, the duty cycle doesn't matter for power delivery. Instead, the servo's control circuit *measures the width of each pulse* to determine the target angle.
 
-<!-- TODO: Create a side-by-side diagram or animation showing (perhaps we make a p5js example visualization like we did for the tone lesson with piezo buzzers):
+<!-- Potential TODO (though this confuses me): Create a side-by-side diagram or animation showing (perhaps we make a p5js example visualization like we did for the tone lesson with piezo buzzers):
      (1) analogWrite PWM with varying duty cycles at fixed ~490Hz frequency
      (2) Servo PWM at fixed 50Hz with varying pulse widths (1ms, 1.5ms, 2ms)
      Label the key differences clearly -->
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A video snippet from [Engineering Mindset](https://youtu.be/1WnGv-DPexc) showing the PWM waveform driving a servo motor. Notice how the duty cycle—the duration of the HIGH pulse within a waveform period—controls the servo's target angle.">
+  <source src="assets/videos/EngineeringMindset_DrivingServoMotorWithPWM_Oscilliscope_optimized_720p_muted.mp4" type="video/mp4" />
+</video>
+**Video.** A video snippet from [Engineering Mindset](https://youtu.be/1WnGv-DPexc) showing the PWM waveform driving a servo motor. Notice how the duty cycle—the duration of the HIGH pulse within a waveform period—controls the servo's target angle.
+{: .fs-1 }
 
 {: .warning }
 > **Do not use `analogWrite()` to control servos!** The `analogWrite()` function produces PWM at 490 Hz or 980 Hz—much too fast for servos, which expect 50 Hz. Sending the wrong signal can cause erratic behavior or damage. Always use the Arduino `Servo` library, which generates the correct 50 Hz signal for you.
 
 ## The Arduino Servo library
 
-The Arduino Servo library ships with the Arduino IDE—no installation needed. It handles all the precise signal timing so you can simply tell the servo which angle you want.
+The [Arduino Servo library](https://github.com/arduino-libraries/Servo/blob/master/src/Servo.h) ships with the Arduino IDE—no installation needed. It handles all the precise signal timing so you can simply tell the servo which angle you want. If you visit the [GitHub source tree for the Servo library](https://github.com/arduino-libraries/Servo/tree/master/src), you'll notice that it has many subfolders, including `avr`, `esp32`, `samd`, and more. This is because Arduino supports multiple hardware types—each subfolder maps to a different hardware architecture, which requires separate source code. For the Arduino Uno and Leonardo, which use the AVR architecture, the library uses [avr/Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/avr/Servo.cpp); for the Arduino Nano 33 IoT and Zero boards, which use the SAMD architecture, the library uses [samd/Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/samd/Servo.cpp).
 
-<!-- TODO: link directly to Arduino open source servo code and explain it a bit. Here's the .h file: https://github.com/arduino-libraries/Servo/blob/master/src/Servo.h>
+In fact, if you look at [Servo.h](https://github.com/arduino-libraries/Servo/blob/master/src/Servo.h), you'll see
+
+{% highlight C++ %}
+#if defined(ARDUINO_ARCH_AVR)
+#include "avr/ServoTimers.h"
+#elif defined(ARDUINO_ARCH_SAM)
+#include "sam/ServoTimers.h"
+#elif defined(ARDUINO_ARCH_SAMD)
+...
+#elif defined(ARDUINO_ARCH_ZEPHYR)
+#include "zephyr/ServoTimers.h"
+#else
+#error "This library only supports boards with an AVR, SAM, SAMD, NRF52, STM32F4, Renesas, XMC, ESP32 or Zephyr core."
+#endif
+{% endhighlight C++ %}
+
+Servo libraries rely heavily on hardware Timers. Since an Arduino Uno (AVR) and an Nano 33 IoT (SAMD) have completely different timer hardware, the library must maintain separate codebases for each. If you look inside the avr folder, you'll find custom [Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/avr/Servo.cpp) and [ServoTimers.h](https://github.com/arduino-libraries/Servo/blob/master/src/avr/ServoTimers.h) code specifically written to manipulate the ATmega registers.
+
+Thankfully, you do not need to worry about these different files. Once you select your board type in the Arduino IDE, the compiler determines which files to use based on those `#if defined` statements.
 
 ### Key API
 
@@ -181,13 +206,7 @@ Wiring a servo is remarkably simple—just three connections, with no transistor
 | Red | Power (+) | 5V |
 | Brown/Black | Ground (−) | GND |
 
-<!-- TODO: Create a Fritzing wiring diagram showing the SG90 servo connected to Arduino:
-     - Orange wire → Pin 3
-     - Red wire → 5V
-     - Brown wire → GND
-     Show the servo connector plugged into a breadboard for clarity -->
-
-![Wiring diagram showing an SG90 servo connected to an Arduino Uno with three wires: orange signal wire to Pin 3, red power wire to 5V, and brown ground wire to GND](assets/images/Arduino_SG90_BasicWiring.png)
+![Wiring diagram showing an SG90 servo connected to an Arduino Uno with three wires: orange signal wire to Pin 3, red power wire to 5V, and brown ground wire to GND](assets/images/Arduino_Servo_BasicWiring.png)
 **Figure.** Wiring the SG90 servo requires just three connections. No transistor or external components needed—the servo has its own built-in driver circuit.
 {: .fs-1 }
 
@@ -210,6 +229,10 @@ The Arduino's USB power supply provides about 500mA total. A single SG90 moving 
 > **If your Arduino resets when the servo moves**, the servo is drawing too much current from USB. Power the servo from an **external 5V supply** (like a USB phone charger rated 1A+). Connect the supply's 5V directly to the servo's red wire and the supply's GND to both the servo's brown wire and the Arduino's GND (shared ground). Do **not** connect the external 5V to the Arduino's 5V pin.
 
 For projects with **multiple servos**, you will almost certainly need an external power supply. Two or more servos moving simultaneously can easily exceed 1A. For larger builds, consider a dedicated [servo driver board](https://www.adafruit.com/product/815) like the PCA9685, which provides its own power bus and can control up to 16 servos via I<sup>2</sup>C.
+
+![Example wiring diagram with multiple servos connected to Arduino with an external power supply](Tinkercad_MultipleServosWithExternalPowerSupply_optimized_720p_muted.mp4)
+**Figure.** Wiring multiple servo motors together with an external power supply. Importantly, both the Arduino GND and the external power supply GND must be connected. You can [play with this multi-servo circuit on Tinkercad here](https://www.tinkercad.com/things/9uPF2TKXYW3-simple-servo-with-external-power).
+{: .fs-1 }
 
 ## Let's make stuff!
 
@@ -299,6 +322,23 @@ void loop() {
 <!-- TODO: Record a video of the potentiometer controlling the servo and embed here -->
 
 This is essentially the Arduino's built-in ["Knob" example](https://www.arduino.cc/en/Tutorial/Knob), which you can also find in the Arduino IDE under `File → Examples → Servo → Knob`. Turn the potentiometer and watch the servo track your input in real time. Try replacing the potentiometer with a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) or a [photoresistor](../sensors/photoresistors.md)—squeeze to point, or let light control the angle!
+
+You can hook up an oscilloscope to examine the underlying PWM signal, which we've done in [Tinkercad here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope):
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal">
+  <source src="assets/videos/EngineeringMindset_DrivingServoMotorWithArduinoPotPWM_Oscilliscope_optimized_720p_muted.mp4" type="video/mp4" />
+</video>
+**Video.** A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal. Play with the [circuit directly here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope)!
+{: .fs-1 }
+
+The Engineering Mindset YouTube channel did this for real with an oscilloscope, nicely matching the above simulation:
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="A video snippet from [Engineering Mindset](https://youtu.be/1WnGv-DPexc) showing a potentiometer-controlled PWM waveform driving a servo motor with an Arduino. Notice how the duty cycle—the duration of the HIGH pulse within a waveform period—controls the servo's target angle">
+  <source src="assets/videos/EngineeringMindset_DrivingServoMotorWithArduinoPotPWM_Oscilliscope_optimized_720p_muted.mp4" type="video/mp4" />
+</video>
+**Video.** A video snippet from [Engineering Mindset](https://youtu.be/1WnGv-DPexc) showing a potentiometer-controlled PWM waveform driving a servo motor with an Arduino. Notice how the duty cycle—the duration of the HIGH pulse within a waveform period—controls the servo's target angle.
+{: .fs-1 }
+
 
 ### Activity 3: Sensor-driven servo gauge
 

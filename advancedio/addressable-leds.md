@@ -84,11 +84,9 @@ This daisy-chain architecture is what makes addressable LEDs so powerful: you ca
 
 What makes the WS2812B protocol unusual is that it encodes data using **precisely timed pulses on a single wire**. There is no separate clock signal—instead, each bit is represented by a fixed-length pulse (1.25µs total), and the LED distinguishes a "1" from a "0" based on how long the signal stays high within that period. A long high followed by a short low means "1"; a short high followed by a long low means "0." The [WS2812B datasheet](https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf) calls this "NZR" communication (and you'll often see it referred to as "NRZ" online), but it's more precisely described as pulse-width encoding—each bit's value is determined by how long the signal stays high within the fixed 1.25µs window.
 
-<!-- Potential future TODO: Create a timing diagram showing the NRZ encoding:
-     - One bit period = 1.25µs total
-     - "0" bit: ~0.4µs high, ~0.85µs low
-     - "1" bit: ~0.8µs high, ~0.45µs low
-     - Show a few bits in sequence with labels -->
+![Timing diagram showing the NRZ encoding for WS2812B LEDs with pulse widths for 1 and 0 bits](assets/images/ws2812b_bit_timing_diagram.svg)
+**Figure.** The single-wire protocol encodes bits using pulse-width encoding within a fixed 1.25µs period.
+{: .fs-1 }
 
 Because there is no clock line, the timing must be extremely precise—accurate to within a few hundred nanoseconds. This is why the NeoPixel library uses hand-tuned assembly code and **temporarily disables interrupts** during `show()` to prevent any timing jitter from corrupting the data. For an 8-LED stick, interrupts are disabled for only ~240µs (barely noticeable), but for a 144-LED strip, it can be ~4.3ms—long enough to occasionally interfere with `Serial` communication or `millis()` accuracy.
 

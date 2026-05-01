@@ -74,9 +74,9 @@ Here's how the data flows:
 4. This continues down the chain until every LED has received its color.
 5. After a brief pause (50µs or more) in the data stream, the LEDs treat the next transmission as a new frame.
 
-<!-- Potential future TODO: Create a diagram showing the daisy-chain data flow:
-     Arduino Pin 2 → [LED 1] → [LED 2] → [LED 3] → ... → [LED N]
-     With labeled arrows showing "3 bytes consumed" at each LED and "remaining bytes passed downstream" -->
+<iframe src="https://editor.p5js.org/jonfroehlich/full/sZOjC89VM" width="100%" height="450" style="border: none;"></iframe>
+**Figure.** An interactive visualization of the WS2812B daisy-chain protocol. Press "Send Data" to watch the Arduino transmit 24-bit color packets (in GRB order) down a single wire. Each LED consumes its 24 bits, latches the color, and forwards the remaining data downstream. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/sZOjC89VM).
+{: .fs-1 }
 
 This daisy-chain architecture is what makes addressable LEDs so powerful: you can control hundreds of LEDs from a single pin, with each LED individually addressable.
 
@@ -159,7 +159,7 @@ This is the simplest wiring: just three connections from the LED stick to the Ar
 
 #### Tier 2: External 5V supply (10-60+ LEDs)
 
-For longer strips, you **must** use a dedicated external 5V power supply. A USB phone charger (rated 2A or higher), a 5V wall adapter, or a bench power supply all work well. The key requirement is that the supply is rated for the total current your LEDs could draw. 
+For longer strips, you **must** use a dedicated external 5V power supply and a **capacitor**. A USB phone charger (rated 2A or higher), a 5V wall adapter, or a bench power supply all work well. The key requirement is that the supply is rated for the total current your LEDs could draw. 
 
 Place a large electrolytic capacitor (*e.g.,* 1000 µF rated for 6.3V or higher) across the VDD and VSS lines on the LED strip and as close to the LED strip as possible. This buffers sudden current draws and protects the strip from initial power-on surges.
 

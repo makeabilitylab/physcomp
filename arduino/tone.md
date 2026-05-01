@@ -51,7 +51,31 @@ Before we start making sounds, it's important to understand how `tone()` differs
 
 Here's a fun experiment to make this concrete: try connecting a piezo buzzer to a PWM pin and running `analogWrite(pin, 127)`. You'll hear a steady buzz at the PWM frequency of that pin (~490 Hz or ~980 Hz on the Uno, depending on the pin). Now try `tone(pin, 440)`. You'll hear concert A—a completely different pitch. With `analogWrite`, you can change the duty cycle, which alters the harshness or distortion of the buzz, but you can't cleanly change the pitch or lower the volume.
 
-To make this more clear, we built a [Tinkercad Circuit example](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input) that allows you to control either the **duty cycle** of the output waveform (via `analogWrite()`) or the **frequency** of the output waveform (via `tone()`). You control the analog input value with a [rotating potentiometer](potentiometers.md) and the mode `analogWrite()` vs. `tone()` via a slider switch (`tone()` is activated when the switch is to the left, `analogWrite()` is activated when the switch is to the right).
+We can even hook up an oscilloscope to examine the `analogWrite()` (which varies the duty cycle) *vs.* `tone()` (which varies the frequency) output waveforms.
+
+### The `analogWrite()` waveform
+
+This video shows the **`analogWrite(pin, value)`** waveform, which varies the **duty cycle** but keeps the frequency **fixed** at either 490Hz or 980Hz, depending on the pin (you can see its 490Hz in this case by looking closely at the bottom-right of the oscilloscope screen).
+
+<video loop controls playsinline style="margin:0px" aria-label="Video showing the analogWrite waveform with an oscilliscope">
+  <source src="assets/videos/AnalogWrite_PiezoBuzzerDutyCycleStepWithOLED_WithOscilloscope_Trimmed_optimized_720p.mp4" type="video/mp4" />
+</video>
+**Video.** This video incrementally steps through output values sent to `analogWrite()` and shows the resulting effect on the output waveform—which does not change its frequency from 490Hz but does change its duty cycle. You can also hear how the overall pitch of the piezo buzzer doesn't change, because pitch is literally defined by the sound waveforms's frequency (which in this case is frozen at 490Hz). This oscilloscope nicely infers the waveform frequency and shows its on the bottom-right of the screen. Can you see that it reads 490Hz to 491Hz?
+{: .fs-1 }
+
+### The `tone()` waveform
+
+This video shows the **`tone(pin, frequency)`** waveform, which varies the **frequency** while keeping the duty cycle **fixed** at 50%. We need to use the `tone()` function with our piezo buzzers and not `analogWrite()`.
+
+<video loop controls playsinline style="margin:0px" aria-label="Video showing the tone waveform with an oscilliscope">
+  <source src="assets/videos/Tone_PiezoBuzzerPlayScaleWithOLED_WithOscilloscope_Trimmed_optimized_720p.mp4" type="video/mp4" />
+</video>
+**Video.** In contrast, this video shows the resulting output waveform when using `tone()` and stepping through the C major scale. Here, the duty cycle is frozen at 50% but the frequency changes.
+{: .fs-1 }
+
+### Interactive `analogWrite` vs. `tone()` example
+
+To make this even more clear, we built an interactive [Tinkercad Circuit example](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input) that allows you to control either the **duty cycle** of the output waveform (via `analogWrite()`) or the **frequency** of the output waveform (via `tone()`). You control the analog input value with a [rotating potentiometer](potentiometers.md) and the mode `analogWrite()` vs. `tone()` via a slider switch (`tone()` is activated when the switch is to the left, `analogWrite()` is activated when the switch is to the right).
 
 As you turn the potentiometer, listen carefully: in the `analogWrite()` mode, the buzzer stays at the same pitch but the volume changes slightly while in the `tone()` mode, the buzzer changes pitch. Watch the oscilloscopes: one waveform gets wider/narrower (duty cycle), the other gets faster/slower (frequency). This is the core distinction between PWM brightness control and tone frequency control!
 
@@ -127,7 +151,7 @@ A few important details:
 - `tone()` is non-blocking. This means your Arduino will immediately move to the next line of code while the hardware timer continues playing the sound in the background. If you want the program to wait until the note finishes, you must add a delay(duration) immediately after.
 - `tone()` can work on **any digital pin**—not just PWM pins. This is because it uses its own timer (Timer2 on AVR boards) rather than the PWM hardware timers.
 - Only **one tone** can play at a time. If you call `tone()` on a different pin while a tone is already playing, the first tone will stop. This is a limitation of using a single hardware timer.
-- Because `tone()` relies on built-in hardware timers, it will **interfere with PWM output** on certain pins. On the Uno, it uses Timer2 (affecting Pins 3 and 11). On the Leonardo, it uses Timer3 (affecting Pin 5). Keep this in mind if you're combining `tone()` with `analogWrite`.
+- Because `tone()` relies on built-in hardware timers, it will **interfere with PWM output** on certain pins. On the Uno, it uses Timer2 (affecting Pins 3 and 11). On the Leonardo, it uses Timer3 (affecting Pin 5). Keep this in mind if you're combining `tone()` with `analogWrite()`.
 
 > **Hardware Conflict:**
 > While a tone is playing, PWM `analogWrite()` functionality is disabled on specific pins depending on your board.

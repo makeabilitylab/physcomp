@@ -263,7 +263,7 @@ Remember, the ERM vibromotor is a type of DC motor—though a very tiny one. You
 
 While the operating range of the Adafruit ERMs is 2.5-3.8V, the Adafruit docs suggest that 2-5V works. You face a slight engineering tradeoff here:
 
-- **The 3.3V pin** matches the motor's rated voltage, preserving its lifespan. However, the Arduino Uno's onboard 3.3V regulator (the [LP2985-33](https://www.ti.com/lit/ds/symlink/lp2985-33.pdf)) can only supply a maximum of **150mA**. Because the motor's startup current can reach 120mA, you are close to that limit. If a student stalls the motor or connects other devices to the 3.3V line, the regulator could overheat and temporarily shut down (causing the Arduino to reset).
+- **The 3.3V pin** matches the motor's rated voltage, preserving its lifespan. However, the Arduino Uno's onboard 3.3V regulator (the [LP2985-33](https://www.ti.com/lit/ds/symlink/lp2985-33.pdf)) can only supply a maximum of **150mA**. Because the motor's startup current can reach 120mA, you are close to that limit. If you stall the motor, accidentally block it (which prevents it from turning), or connect other devices to the 3.3V line, the regulator could overheat and temporarily shut down (causing the Arduino to reset).
 - **The 5V pin** gives you much more current headroom—up to 500mA via USB power, or more via the barrel jack—and produces stronger vibrations. The tradeoff is that you are over-volting the motor beyond its rated range, which may reduce its lifespan over extended use.
 
 For our class projects, either option works fine. We'll use **5V** below but 3.3V is the conservative alternative.

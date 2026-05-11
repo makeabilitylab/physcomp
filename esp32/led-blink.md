@@ -20,7 +20,7 @@ nav_order: 3
 
 In this lesson, we'll write our first ESP32 program: blinking an LED! If you've completed the Arduino [Blink lesson](../arduino/led-blink.md), you'll find that the code is *identical*—the beauty of the Arduino ecosystem. The challenge here is getting comfortable with the new board's pin layout and the 3.3V operating voltage.
 
-We'll start with the **onboard LED** (no wiring required!), then move to an **external LED circuit**, and finish with a fun bonus: blinking the **onboard NeoPixel** in any color you want. 🌈
+We'll start with the **onboard LED** (no wiring required!), then move to an **external LED circuit**, try it in the **Wokwi simulator**, and finish with a fun bonus: blinking the **onboard NeoPixel** in any color you want. 🌈
 
 {: .note }
 > **In this lesson, you will learn:**
@@ -110,12 +110,16 @@ On the Huzzah32, our original code examples and Fritzing diagrams use **GPIO 21*
 
 Our circuit is about as simple as they come: an LED connected to a GPIO pin through a current-limiting resistor.
 
-<!-- TODO: Create a new Fritzing diagram showing the ESP32-S3 Feather with LED on GPIO 13.
-     Keep the Huzzah32 version in a collapsible block. -->
+![Circuit showing LED connected to a GPIO pin via a current limiting resistor](assets/images/Adaruit_ESP32-S3-Feather_Blinky_CircuitDiagram.png)
+**Figure.** Circuit diagram showing a red LED connected to GPIO 13 on the ESP32 via a 220Ω current-limiting resistor.
+{: .fs-1 }
 
+<details markdown="1">
+<summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>
 ![Circuit showing LED connected to a GPIO pin via a current limiting resistor](assets/images/Huzzah32_Blink_CircuitDiagramAndSchematic_Fritzing.png)
 **Figure.** Circuit diagram showing an LED connected to GPIO 21 on the Huzzah32 via a 220Ω current-limiting resistor. If you're using the ESP32-S3 Feather, use GPIO 13 (or any output-capable pin) instead.
 {: .fs-1 }
+</details>
 
 Seating the ESP32 into the breadboard might take some effort. Please take care not to bend pins when placing and removing the board. Given that the ESP32 Feather boards take up so much room on a half-sized breadboard, you might consider using a full-sized breadboard instead.
 
@@ -130,7 +134,7 @@ $$I = \frac{V_{cc} - V_f}{R} = \frac{3.3V - 2V}{220Ω} = 5.9mA$$
 Compare this to the ~13.6mA we'd get on a 5V Arduino Uno ($$\frac{5V - 2V}{220Ω} = 13.6mA$$). Your LED will be slightly dimmer—but still clearly visible. If you want to match the Arduino brightness, use a smaller resistor like 100Ω ($$\frac{3.3V - 2V}{100Ω} = 13mA$$).
 
 {: .warning }
-> The ESP32's GPIO pins can source up to ~40mA per pin, but Espressif recommends staying under **20mA** for long-term reliability. Our 5.9mA is well within the safe range!
+> The ESP32-S3's GPIO pins can source up to **20mA** per pin (the original ESP32 could do ~40mA). Our 5.9mA is well within the safe range!
 
 ### The code
 
@@ -157,7 +161,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/B
 ### Workbench video
 
 <!-- TODO: Record a workbench video showing the blink circuit on the ESP32-S3 Feather.
-     Use <video> with aria-label. For now, reusing the Huzzah32 animation. -->
+     Use <video> with aria-label.-->
 
 <video autoplay loop muted playsinline aria-label="Animation showing an LED blinking on and off, connected to an ESP32 Huzzah32 on a breadboard">
   <source src="assets/movies/Huzzah32_Blink-optimized.mp4" type="video/mp4">
@@ -167,19 +171,16 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/B
 {: .fs-1 }
 
 ## Part 3: Try it in the Wokwi simulator
+
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing blinky running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-Blink_optimized.mp4" type="video/mp4" />
 </video>
-**Video.** This video shows the basic blinky program running on the ESP32-S3 DevKitC board. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
+**Video.** Blinky running on the ESP32-S3 DevKitC in the Wokwi simulator. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
 {: .fs-1 }
-
-If you don't have hardware handy, you can build and run this circuit in **[Wokwi](https://wokwi.com/)**, a free browser-based microcontroller simulator. We'll link to Wokwi projects throughout these ESP32 lessons so you can experiment without hardware. You can start a fresh ESP32-S3 project by going here
-
-**[→ Open the external LED Blink simulation in Wokwi](https://wokwi.com/projects/463754140590397441)**
 
 ### What is Wokwi?
 
-In our [Arduino lessons](../arduino/), we use [Autodesk Tinkercad](https://www.tinkercad.com/circuits) for circuit simulation—but unfortunately, Tinkercad does not support the ESP32. [Wokwi](https://wokwi.com/) is the best available alternative: it simulates the ESP32, ESP32-S3, and many other boards, and even supports WiFi simulation.
+In our [Arduino lessons](../arduino/), we use [Autodesk Tinkercad](https://www.tinkercad.com/circuits) for circuit simulation—but unfortunately, Tinkercad does not support the ESP32. [Wokwi](https://wokwi.com/) is the best available alternative: it simulates the ESP32, ESP32-S3, and many other boards, and even supports WiFi simulation. If you don't have hardware handy, you can build and run circuits in Wokwi entirely in the browser. We'll link to Wokwi projects throughout these ESP32 lessons so you can experiment without hardware.
 
 A few things to be aware of:
 
@@ -187,13 +188,15 @@ A few things to be aware of:
 
 - **Compile times are slower** than Tinkercad—you may wait 10–20 seconds for your code to compile on the free tier. The site will also occasionally prompt you to upgrade to a paid plan. The free tier is sufficient for everything in our lessons.
 
-- **Wokwi is a small company**, not backed by a large corporation like Autodesk. We always provide real hardware instructions as the primary path. The Woki simulations are a helpful complement.
+- **Wokwi is a small company**, not backed by a large corporation like Autodesk. We always provide real hardware instructions as the primary path. The Wokwi simulations are a helpful complement.
+
+**[→ Open the external LED Blink simulation in Wokwi](https://wokwi.com/projects/463754140590397441)**
 
 ### Building blinky in Wokwi
 
-In less than 60 seconds, we build blinky on the ESP32-S3 in the Wokwi simulation environment.
+In less than 60 seconds, we built blinky on the ESP32-S3 in the Wokwi simulation environment. See below. The video also shows the long compile times in Wokwi. This is because Wokwi actually compiles the C++ Arduino code using a real compiler toolchain and compiling the ESP32 takes longer than just compiling the traditional Arduino libraries.
 
-<video loop controls playsinline style="margin:0px" aria-label="Video showing us building blocky in the Wokwi simulation environment">
+<video loop controls playsinline style="margin:0px" aria-label="Video showing us building blinky in the Wokwi simulation environment">
   <source src="assets/videos/Wokwi_ESP32-S3-BuildingBlink_SpedUp_optimized_muted.mp4" type="video/mp4" />
 </video>
 **Video.** This video shows the basic blinky program running on the ESP32-S3 DevKitC board. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
@@ -210,12 +213,12 @@ In less than 60 seconds, we build blinky on the ESP32-S3 in the Wokwi simulation
 {: .warning }
 > **Why not simulate Part 1 (onboard LED)?** Wokwi's default ESP32-S3 board is the generic Espressif DevKitC, which does not have a standard red LED on GPIO 13 like the Adafruit Feather does. On the DevKitC, `LED_BUILTIN` maps to an internal NeoPixel hack (pin 97!) that doesn't respond to `digitalWrite`. That's why we start with an external LED in the simulator—it works the same regardless of which ESP32-S3 board Wokwi emulates.
 
-### Start your own Woki projects
+### Start your own Wokwi projects
 
 Here are the standard template URLs you'll want to bookmark to spin up fresh projects:
 
-* ESP32-S3 (Arduino): https://wokwi.com/projects/new/esp32-s3
-* Classic ESP32 (Arduino): https://wokwi.com/projects/new/esp32
+- ESP32-S3 (Arduino): https://wokwi.com/projects/new/esp32-s3
+- Classic ESP32 (Arduino): https://wokwi.com/projects/new/esp32
 
 Once you open one of those, you can add components (like the NeoPixel ring or an OLED), write your code, and click Save. Wokwi will then generate a unique, permanent URL for that specific circuit and code that you can share.
 
@@ -240,7 +243,7 @@ The ESP32-S3 Feather has a built-in **NeoPixel** RGB LED—the same type of addr
 #include <Adafruit_NeoPixel.h>
 
 // One NeoPixel on the board, on the pin defined by PIN_NEOPIXEL
-Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel _pixel(1, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 
 // Blink delay
 const int BLINK_DELAY_MS = 200;
@@ -253,38 +256,43 @@ void setup() {
     digitalWrite(NEOPIXEL_POWER, HIGH);
   #endif
 
-  pixel.begin();
-  pixel.setBrightness(30);  // 0-255; keep it low to avoid blinding yourself!
+  _pixel.begin();
+  _pixel.setBrightness(30);  // 0-255; keep it low to avoid blinding yourself!
 }
 
 void loop() {
-  pixel.setPixelColor(0, pixel.Color(255, 0, 0));    // Red
-  pixel.show();
+  _pixel.setPixelColor(0, pixel.Color(255, 0, 0));    // Red
+  _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
-  pixel.show();
+  _pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
+  _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  pixel.setPixelColor(0, pixel.Color(0, 255, 0));    // Green
-  pixel.show();
+  _pixel.setPixelColor(0, pixel.Color(0, 255, 0));    // Green
+  _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
-  pixel.show();
+  _pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
+  _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  pixel.setPixelColor(0, pixel.Color(0, 0, 255));    // Blue
-  pixel.show();
+  _pixel.setPixelColor(0, pixel.Color(0, 0, 255));    // Blue
+  _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
-  pixel.show();
+  _pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
+  _pixel.show();
   delay(BLINK_DELAY_MS);
 }
 ```
 
 Upload this and watch your NeoPixel cycle through red, green, and blue! Try changing the color values to create your own colors—remember, each value (R, G, B) ranges from 0 to 255.
+
+We also built a version on Wokwi, which you can [simulate here](https://wokwi.com/projects/463762124548962305).
+
+<!-- TODO: Record a workbench video showing the blink RGB LED circuit on the ESP32-S3 Feather.
+     Use <video> with aria-label.-->
 
 {: .note }
 > Notice the `#if defined(NEOPIXEL_POWER)` guard. This makes the code portable across Adafruit boards—some have a NeoPixel power pin, some don't. The `PIN_NEOPIXEL` constant is also board-specific and defined automatically by the board support package.
@@ -298,11 +306,12 @@ The original Huzzah32 **does not** have an onboard NeoPixel. If you want to try 
 
 ## Summary
 
-In this lesson, you blinked LEDs on the ESP32 in three different ways:
+In this lesson, you blinked LEDs on the ESP32 in four parts:
 
 - **Part 1:** Blinked the onboard red LED using `LED_BUILTIN` and `digitalWrite`—zero wiring, identical code to the Arduino Uno.
 - **Part 2:** Wired an external LED circuit and calculated the current with the ESP32's 3.3V supply (5.9mA with a 220Ω resistor vs. 13.6mA on the 5V Uno).
-- **Part 3:** Blinked the onboard NeoPixel RGB LED using the Adafruit NeoPixel library, learning about `NEOPIXEL_POWER` and `PIN_NEOPIXEL` along the way.
+- **Part 3:** Built and ran the blink circuit in the Wokwi simulator—our browser-based alternative to Tinkercad for ESP32.
+- **Part 4:** Blinked the onboard NeoPixel RGB LED using the Adafruit NeoPixel library, learning about `NEOPIXEL_POWER` and `PIN_NEOPIXEL` along the way.
 
 The key takeaway: `pinMode`, `digitalWrite`, and `delay` work **identically** on the ESP32 and Arduino. The differences are in the pin layout, the 3.3V voltage, and the extra hardware features (like the NeoPixel) that the ESP32-S3 Feather provides.
 

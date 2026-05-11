@@ -6,7 +6,7 @@ has_toc: true # (on by default)
 usemathjax: true
 comments: true
 usetocbot: true
-nav_order: 3
+nav_order: 4
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
@@ -18,11 +18,20 @@ nav_order: 3
 {:toc}
 ---
 
-In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/PWM) output on the ESP32 to fade an LED on and off. This is where our lessons begin to differ from the [Intro to Output](../arduino/intro-output.md) series in the [Intro to Arduino section](../arduino/).
+In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/PWM) output on the ESP32 to smoothly fade an LED on and off. This is where our ESP32 lessons begin to diverge from the [Intro to Output](../arduino/intro-output.md) series—the ESP32 uses a different, more powerful PWM system than the Arduino Uno.
 
-Importantly, the [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) method—which was always a misnomer in the Arduino library because it output a pulse-width modulation (PWM) waveform rather than a true analog voltage—is not implemented in the ESP32 Arduino library. Instead, there is a set of PWM methods, which provide additional control but at a cost of complexity. So, it's good that, by now, you understand PWM. If you want a refresher, see our description and watch the videos [here](../arduino/led-fade.md#Pulse-width-modulation-PWM).
+<!-- TODO: Replace GIF with <video> element showing fade on ESP32-S3 Feather -->
+<video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
+  <source src="assets/movies/Huzzah32_Fade-optimized.mp4" type="video/mp4">
+  <img src="assets/movies/Huzzah32_Fade-optimized.gif" alt="Animation of an LED fading on and off on an ESP32 board">
+</video>
 
-![Animation of Fade on the ESP32](assets/movies/Huzzah32_Fade-optimized.gif)
+{: .note }
+> **In this lesson, you will learn:**
+> - How PWM works on the ESP32 using the LEDC (LED Control) library
+> - The relationship between PWM frequency and duty cycle resolution
+> - How to use the ESP32 Arduino LEDC API to fade an LED
+> - The difference between the v2.x and v3.x LEDC APIs
 
 ## Materials
 
@@ -30,71 +39,115 @@ You'll need the same materials as the [last lesson](led-blink.md):
 
 | Breadboard | ESP32 | LED | Resistor |
 | ---------- |:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Huzzah32]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png)    | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
-| Breadboard | Huzzah32  | Red LED | 220Ω Resistor |
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather]({{ site.baseurl }}/assets/images/ESP32S3Feather_Adafruit_vertical_h200.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
+| Breadboard | ESP32-S3 Feather | Red LED | 220Ω Resistor |
 
-## PWM on ESP32
+## PWM on the ESP32
 
-To fade an LED on and off with an Arduino Uno (or other basic Arduino boards), you use the [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) method. As we know by now, `analogWrite` does not actually drive an analog voltage to the specified pin but, instead, uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers, which precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 = ~50%) on Pin 3 and `analogWrite(3, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). The fraction of the time the signal is `HIGH` is called the duty cycle. The Arduino Uno (and Leonardo) only have six PWM outputs because they have three timers, each which can be used to control two PWM pins.
+To fade an LED on an Arduino Uno, you use [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). As we know by now, `analogWrite` doesn't actually drive an analog voltage to the pin—it uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers that precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 ≈ 50%) on Pin 3. The Arduino Uno and Leonardo only have **six** PWM outputs because they have three timers, each of which can control two PWM pins.
 
-On the ESP32, all 18 GPIO pins support PWM but the programming approach is different. Rather than `analogWrite`, we'll use Espressif's [LED control (LEDC)](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html) library. More specifically, we'll use an Arduino-based abstraction layer above this. While the available documentation for the Arduino LEDC library is a bit light (indeed, I never found formal API docs), the code is open source and available here ([.h file](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.h), [.c file](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.c)). And we'll show you how to use it below.
+On the ESP32, **all** GPIO pins support PWM, but the programming approach is different. The ESP32 uses a dedicated hardware peripheral called **LEDC** (LED Control) for PWM generation. The LEDC module was designed primarily for LED dimming but can also drive motors, generate tones, and produce any PWM waveform.
+
+{: .note }
+> **What about `analogWrite` on the ESP32?** In **ESP32 Arduino core v3.x**, `analogWrite()` is now supported as a convenience wrapper around the LEDC library. So you *can* use `analogWrite()` on the ESP32, and it will work! However, we teach the LEDC API directly because it gives you more control over PWM frequency, resolution, and channel management—things you'll need for more advanced projects. And understanding the LEDC library helps you understand what `analogWrite` is doing under the hood.
 
 ### The LEDC PWM library
 
-The LEDC library was written primarily to control LEDs but can also be used for other purposes where PWM waveforms are useful like playing "music" to piezo speakers (just like we did with [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) in our [simple piano](../arduino/piano.md) lesson) and driving motors. The Arduino version of this library is part of the core ESP32 Arduino library, so you don't need any `include` statements to use it.
+The LEDC library provides fine-grained control over PWM output. Unlike the Arduino `analogWrite` (which defaults to ~490 Hz, 8-bit resolution), the LEDC library lets you choose your own PWM frequency (up to 40 MHz) and resolution (1 to 16 bits). The Arduino version of this library is part of the core ESP32 Arduino library, so you don't need any `#include` statements to use it.
 
-Unlike all the other I/O we've done thus far with the Arduino, the LEDC library works on **channels** rather than individual **pins**. To apply a PWM wave to a pin, first setup a channel with a PWM waveform frequency and duty cycle and then subscribe or "attach" that pin to this channel. Multiple pins can attach to the same channel and will receive the same PWM waveform. The ESP32 has 16 channels in total, each which can generate an independent waveform. So, while all 18 GPIO pins support PWM, we can only drive 16 of them at once with **unique** waveforms. However, we can attach all 18 GPIO pins to a single channel (or divide them across channels). In the animation below, we've attached all 18 GPIO pins to channel 0.
+#### Understanding channels (the hardware)
 
-![Animation of all 18 GPIO output pins fading in and out](assets/movies/Huzzah32_GPIOFadeTestAllPinsSimultaneously-Optimized3.gif)
+Under the hood, the LEDC module works on **channels** rather than individual **pins**. The ESP32-S3 has **8 PWM channels**, each of which can generate an independent waveform. To apply a PWM wave to a pin, you configure a channel with a PWM frequency and resolution, then attach a pin to that channel. Multiple pins can attach to the same channel and will receive the same PWM waveform.
 
-All 18 GPIO pins are subscribed to the same PWM channel.
-{: .fs-1 } 
+{: .note }
+> In **ESP32 Arduino core v3.x**, the channel abstraction was removed from the public API—you attach PWM directly to a pin with `ledcAttach(pin, freq, resolution)`, and the library assigns a channel automatically behind the scenes. The channels still exist in hardware, but you don't need to manage them yourself. This is much simpler! We'll show both the v3.x and legacy v2.x APIs below.
 
-#### The LEDC API
+#### The LEDC API (v3.x)
 
-<!-- https://github.com/espressif/arduino-esp32/blob/96822d783f3ab6a56a69b227ba4d1a1a36c66268/tools/sdk/include/driver/driver/ledc.h -->
+In ESP32 Arduino core v3.x (which we use in this course), the LEDC API has three key methods:
 
-The LEDC API has four relevant methods:
-
-{% highlight C %}
+```cpp
 /**
- * Sets up a channel (0-15), a PWM duty cycle frequency, and a PWM resolution (1 - 16 bits) 
+ * Attach a PWM channel to a pin with the specified frequency and resolution.
+ * The library automatically assigns an available hardware channel.
+ * Returns true on success, false if no channels are available.
  */
-double      ledcSetup(uint8_t channel, double freq, uint8_t resolution_bits);
-
-/**
- * Writes out a duty cycle value to the specified channel. The duty cycle value should be
- * between 0 - 2^PWM resolution
- */
-void        ledcWrite(uint8_t channel, uint32_t duty);
+bool ledcAttach(uint8_t pin, uint32_t freq, uint8_t resolution);
 
 /**
- * Attach the given pin to the specified channel (0-15)
+ * Write a duty cycle value to the specified pin.
+ * The value should be between 0 and (2^resolution - 1).
  */
-void        ledcAttachPin(uint8_t pin, uint8_t channel);
+void ledcWrite(uint8_t pin, uint32_t duty);
 
 /**
- * Detach the previously attached pin
+ * Detach the PWM channel from the specified pin.
  */
-void        ledcDetachPin(uint8_t pin);
-{% endhighlight C %}
-
-The Espressif [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#supported-range-of-frequency-and-duty-resolutions) emphasize that the PWM frequency and resolution are interdependent; however, they do not precisely describe this relationship but rather provide examples:
-- A PWM frequency of **5 kHz** can have a maximum duty resolution of **13 bits**, which results in a resolution of ~0.012% or $$2^{13}=8192$$ discrete levels of LED intensity
-- A PWM frequency of **20 MHz** can have a maximum duty resolution of **2 bits**, which results in a resolution of 25% or $$2^2=4$$ discrete levels
-- A PWM frequency of **40 MHz** can have a duty resolution of 1 bit, which means the duty cycle is fixed at 50% and cannot be adjusted
-
-If you attempt to set incompatible frequency and duty resolution combinations, the following error will be reported on serial monitor:
-
-```
-E (196) ledc: requested frequency and duty resolution cannot be achieved, try reducing freq_hz or duty_resolution.
+void ledcDetach(uint8_t pin);
 ```
 
-**UPDATE:** I found that this error is not shown when using the Arduino LEDC library because internally, the `ledcSetup` function does bounds checking and, if a threshold is exceeded, sets things to their maximum values ([link](https://github.com/espressif/arduino-esp32/blob/a4305284d085caeddd1190d141710fb6f1c6cbe1/cores/esp32/esp32-hal-ledc.c)).
+Notice how much simpler this is compared to the old v2.x API (shown below for reference). You no longer need to manually manage channel numbers—just attach a pin, write a duty cycle, done!
 
-<!-- The LEDC on ESP32 has a total of 16 channels (0-15), divided into high and low speed channels (0-7) driven by 80MHz clock and low speed channels (8-15) driven by 1MHz clock. http://forum.banana-pi.org/t/arduino-for-bpi-bit-3-using-ledc-pwm/9394 --->
+<details markdown="1">
+<summary><strong>Legacy v2.x API</strong> (click to expand)</summary>
+
+In ESP32 Arduino core v2.x, you had to explicitly manage channels:
+
+```cpp
+// Step 1: Configure a channel (0-15) with a frequency and resolution
+double ledcSetup(uint8_t channel, double freq, uint8_t resolution_bits);
+
+// Step 2: Attach a pin to that channel
+void ledcAttachPin(uint8_t pin, uint8_t channel);
+
+// Step 3: Write a duty cycle to the channel (not the pin!)
+void ledcWrite(uint8_t channel, uint32_t duty);
+
+// Detach a pin
+void ledcDetachPin(uint8_t pin);
+```
+
+The key difference: in v2.x, `ledcWrite` takes a **channel** number. In v3.x, `ledcWrite` takes a **pin** number. If you're following older tutorials online, this is the most common source of confusion. See the [migration guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/migration_guides/2.x_to_3.0.html) for full details.
+
+</details>
+
+### PWM frequency and resolution tradeoff
+
+The LEDC library lets you choose both the PWM frequency and the duty cycle resolution (in bits). But these two parameters are **interdependent**—you can't max out both simultaneously. The Espressif [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#supported-range-of-frequency-and-duty-resolutions) provide some examples:
+
+- A PWM frequency of **5 kHz** can have a maximum duty resolution of **13 bits** ($$2^{13}=8192$$ discrete brightness levels)
+- A PWM frequency of **20 MHz** can have a maximum duty resolution of **2 bits** (only $$2^2=4$$ discrete levels)
+- A PWM frequency of **40 MHz** can have a duty resolution of 1 bit—meaning the duty cycle is fixed at 50% and cannot be adjusted!
+
+If you attempt to set incompatible frequency and resolution combinations, you'll see an error on the Serial Monitor:
+
+```
+E (196) ledc: requested frequency and duty resolution cannot be achieved,
+try reducing freq_hz or duty_resolution.
+```
+
+<!-- NOTE: In the Arduino LEDC library, ledcAttach (v3.x) / ledcSetup (v2.x) does bounds
+     checking internally and may silently clamp values rather than showing this error.
+     See: https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c -->
 
 <!-- TODO: experiment with different resolutions and frequency combos and report back -->
+
+#### Why are frequency and resolution linked?
+
+So *why* and *how* are the PWM frequency and resolution interdependent? Here's the explanation.
+
+Imagine you have a clock running at some frequency (say 40 MHz), and you want to generate a PWM waveform at some frequency and resolution. The maximum PWM frequency is bounded by the clock—you can't produce a PWM wave faster than your clock.
+
+But what about **resolution**? Resolution is about how finely you can slice up one period of the PWM wave into different duty cycles. And here's the key insight: slicing up the PWM wave requires a clock running at $$PWM_{freq} \times 2^{resolution}$$. Why? Because to generate those fine-grained duty cycles, the clock must be fast enough to create those time slices.
+
+Here's a visual example. The clock runs at 40 MHz, the PWM frequency is set to 1 MHz, and we show how increasing the resolution requires finer and finer time slices—which in turn demand a faster clock:
+
+![A figure showing the relationship between frequency and duty cycle resolution for PWM](assets/images/PWM_FrequencyAndDutyCycleRelationship.png)
+**Figure.** As PWM resolution increases, the clock must be fast enough to support the finer time slices. At 1 MHz with 5-bit resolution, we need a clock of at least 32 MHz. At 6 bits, we'd exceed our 40 MHz clock. See this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pdf) for more examples.
+{: .fs-1 }
+
+<!-- some discussion of max pwm freq on esp32:
+https://forum.micropython.org/viewtopic.php?t=3717. Appears to be 40MHz, which is 1/6 clock speed of 240MHz -->
 
 <!-- I read more about the relationship between PWM frequency and duty cycle resolution. Still reading. No definitive answers, but some potentially helpful posts:
 - https://www.microchip.com/forums/m79448.aspx. Which says: 
@@ -111,153 +164,224 @@ https://electrosome.com/pwm-pulse-width-modulation/
 http://inst.eecs.berkeley.edu/~ee40/calbot/pdf/ChapterFive/ChapterFive.pdf
 -->
 
-<!-- some discussion of max pwm freq on esp33:
-https://forum.micropython.org/viewtopic.php?t=3717. Appears to be 40MHz, which is 1/6 clock speed of 240MHz -->
+#### What frequency and resolution should I use?
 
-#### Relationship between PWM frequency and resolution
-
-So *why* and *how* are the PWM frequency and resolution interdependent? While the ESP32 [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#supported-range-of-frequency-and-duty-resolutions) are, unfortunately, sparse, here's the explanation.
-
-Imagine you have a clock (CPU clock or a timer, doesn't matter) running at some frequency, and we want to set some PWM wave frequency and resolution. Our maximum PWM wave frequency is bound by the clock. If it's 40MHz, then our max PWM frequency is also 40MHz. We cannot produce a PWM wave faster than our clock.
-
-But what about **resolution**? Well, resolution is really about how much we can slice up one period of the PWM wave into different duty cycles. And here's the insight: slicing up the PWM wave requires a CPU clock running at the $$PWM_{freq} * 2^{PWM resolution}$$. Why? Because to generate those duty cycles, you need to be able to create those time slices. And the only way to do so is with an even faster clock. (Note: this is the *ideal*. In reality, all things have overhead and so my understanding is that you generally want a CPU clock to be 30-50% faster than your fastest PWM freq; again, it would be nice if ESP32 actually gave us the equation).
-
-Here's a visual example that, hopefully, further clarifies the concept. Here, you can see the clock running at 40MHz, the PWM freq at 1MHz, and then various PWM resolutions. For each of the PWM resolutions, I put in their "time slices"—this is when the PWM waveform generator would be able to potentially set the PWM wave HIGH or LOW for a given duty cycle. Notice how as the PWM resolution increases, the need for a faster and faster CPU clock also increases (to be able to meet those increasingly demanding duty cycle resolutions).
-
-So, for example, if we want to set a PWM resolution of 5 bits running at 1MHz, then we need a clock running at least 32MHz. If we want a resolution of 6 bits at 1MHz, then we exceed our 40MHz clock speed.
-
-![A figure showing the relationship between frequency and duty cycle resolution for PWM](assets/images/PWM_FrequencyAndDutyCycleRelationship.png)
-
-For more PWM examples, see this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pdf) that we made.
-
-#### So what PWM frequency and resolution should I use?
-
-So, what PWM frequency and resolution should you use? This is context dependent. Remember, the Arduino Uno supplies a ~490 Hz PWM waveform at 8 bits—though pins 5 and 6 are can drive a waveform at 980 Hz ([link](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)). And this is more than fast enough to smoothly fade between different LED brightness levels. So, you can always start there (~490 Hz freq, 8-bit resolution) and then play around.
-
-#### Using the LEDC API
-
-Despite the somewhat confusing (and lacking) documentation, using the LEDC API is relatively straightforward: 
-- First call `ledcSetup` to configure a channel with a specific PWM frequency and resolution
-- Then attach a pin to that channel using `ledcAttachPin`
-- Finally, to set the actual duty cycle value to a given channel, we call `ledcWrite` (this latter function is somewhat analogous to `analogWrite`; however, `ledcWrite` works on the "channel" abstraction whereas `analogWrite` works on pins).
+For LED fading, you don't need extreme values. The Arduino Uno uses ~490 Hz at 8-bit resolution, and that's more than fast enough for smooth, flicker-free fading. A good starting point on the ESP32 is **5000 Hz at 8 bits**—comfortably within the clock's capability, with 256 brightness levels. Feel free to experiment!
 
 ### Alternatives to LEDC
 
-In addition to the LEDC module, the ESP32 supports two other analog output options:
+In addition to the LEDC module, the ESP32 supports other analog output options:
 
-1. A **sigma-delta modulation module** ([docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sigmadelta.html)). In comparison to PWM, [sigma-delta modulation](https://en.wikipedia.org/wiki/Delta-sigma_modulation) has a built-in feedback loop to try and minimize timer errors and produce more accurate waveforms. There is a sigma-delta example in the Arduino IDE. Go to File -> Examples -> ESP32 -> AnalogOut -> SigmaDelta. Similar to the LEDC library, you attach pins to preconfigured sigma-delta channels.
+- **Sigma-delta modulation** ([docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sigmadelta.html)): Uses a feedback loop to minimize timer errors and produce more accurate waveforms than PWM. There is a sigma-delta example in the Arduino IDE: File → Examples → ESP32 → AnalogOut → SigmaDelta.
 
-2. **True analog output** via a digital-to-analog (DAC) converter ([docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/dac.html)). The ESP32 has two 8-bit DACs connected to GPIO25 (Channel 1) and GPIO26 (Channel 2). The DAC driver allows these channels to be set to arbitrary voltages, which means you can finally produce beautiful sinusoidal voltage waveforms rather than those boring square waves. There are many examples online of folks using the ESP32's DAC to play music. Here's a tutorial by [Xtronical](https://www.xtronical.com/introduction-to-dac-audio/) but search online for more!
+- **DAC (original ESP32 only):** The original ESP32 has two 8-bit digital-to-analog converter channels on GPIO25 and GPIO26, which can output true analog voltages (not PWM!). This enables smooth sinusoidal waveforms and audio output. There are many examples online of using the ESP32's DAC to play music—see this [tutorial by Xtronical](https://www.xtronical.com/introduction-to-dac-audio/).
 
-In this lesson, however, we are going to focus on using the LEDC library to produce PWM waveforms that will fade in and out an LED.
+{: .warning }
+> The **ESP32-S3 does not have a DAC**. If you need true analog output on the ESP32-S3, you'll need an external DAC module (like the MCP4725) connected via I2C, or you can use PWM with a low-pass RC filter to approximate an analog voltage.
 
 ## Let's make an ESP32-based LED fader!
 
-Let's make an ESP32-based LED fader.
+Let's put it all together and fade an LED.
 
-### The Circuit
+### The circuit
 
-We can use the same circuit as before:
+We can use the same circuit as the [Blink lesson](led-blink.md):
 
-![Circuit showing LED connected to GPIO #21 via a current limiting resistor](assets/images/Huzzah32_Blink_CircuitDiagramAndSchematic_Fritzing.png)
+![Circuit showing LED connected to a GPIO pin via a current limiting resistor](assets/images/Huzzah32_Blink_CircuitDiagramAndSchematic_Fritzing.png)
+**Figure.** Same circuit as the Blink lesson. If you're using the ESP32-S3 Feather, use GPIO 13 (or any output-capable pin).
+{: .fs-1 }
 
-### The Code
+<!-- TODO: Create an ESP32-S3 Feather version of this Fritzing diagram -->
 
-We'll walk you through the code just as we did for some of the original Arduino [Intro to Output lessons](../arduino/intro-output.md). While our code is different, you may want to also access ESP32's official fade example in the Arduino IDE by clicking on File -> Examples -> ESP32 -> AnalogOut -> LEDCSoftwareFade. It's also open source and on [github](https://github.com/espressif/arduino-esp32/blob/master/libraries/ESP32/examples/AnalogOut/LEDCSoftwareFade/LEDCSoftwareFade.ino).
+### The code (v3.x API)
 
-![Screenshot of accessing ESP32's official fade example in the Arduino IDE by clicking on File -> Examples -> ESP32 -> AnalogOut -> LEDCSoftwareFade](assets/images/ArduinoIDE_ESP32Example_LEDCSoftwareFade_Screenshot.png)
-You can also access ESP32's official fade example in the Arduino IDE by clicking on File -> Examples -> ESP32 -> AnalogOut -> LEDCSoftwareFade.
-{: .fs-1 } 
+We'll walk through the code step by step. You may also want to check out the official ESP32 fade example in the Arduino IDE: File → Examples → ESP32 → AnalogOut → LEDCSoftwareFade ([source on GitHub](https://github.com/espressif/arduino-esp32/blob/master/libraries/ESP32/examples/AnalogOut/LEDCSoftwareFade/LEDCSoftwareFade.ino)).
 
-#### Step 1: Setup the PWM values
+#### Step 1: Set up the PWM and pin constants
 
-First, let's setup some PWM constants. Feel free to play with these.
+```cpp
+const int LED_OUTPUT_PIN = 13;  // GPIO 13 = LED_BUILTIN on ESP32-S3 Feather and Huzzah32
+                                // Change to match your wiring if using a different pin
 
-{% highlight C %}
+const int PWM_FREQ = 5000;     // 5 kHz PWM frequency (Arduino Uno uses ~490 Hz)
+const int PWM_RESOLUTION = 8;  // 8-bit resolution (0-255), same as Arduino Uno
+                                // ESP32 supports up to 16-bit resolution!
 
-const int PWM_CHANNEL = 0;    // ESP32 has 16 channels which can generate 16 independent waveforms
-const int PWM_FREQ = 500;     // Recall that Arduino Uno is ~490 Hz. Official ESP32 example uses 5,000Hz
-const int PWM_RESOLUTION = 8; // We'll use same resolution as Uno (8 bits, 0-255) but ESP32 can go up to 16 bits 
+// The max duty cycle value based on PWM resolution (255 for 8 bits)
+const int MAX_DUTY_CYCLE = (int)(pow(2, PWM_RESOLUTION) - 1);
 
-// The max duty cycle value based on PWM resolution (will be 255 if resolution is 8 bits)
-const int MAX_DUTY_CYCLE = (int)(pow(2, PWM_RESOLUTION) - 1); 
-{% endhighlight C %}
+const int DELAY_MS = 4;        // delay between fade increments
+int _ledFadeStep = 5;          // amount to fade per loop iteration
+```
 
-#### Step 2: Setup other constants and variables
+#### Step 2: Attach PWM to the pin in `setup()`
 
-Then setup the other constants and variables. This is similar to other Arduino programs we've written.
+In v3.x, this is a single call—no separate channel setup required:
 
-{% highlight C %}
-// The pin numbering on the Huzzah32 is a bit strange so always helps to consult the pin diagram
-// See pin diagram here: https://makeabilitylab.github.io/physcomp/esp32/
-const int LED_OUTPUT_PIN = 21;
-
-const int DELAY_MS = 4;  // delay between fade increments
-int _ledFadeStep = 5;    // amount to fade per loop
-{% endhighlight C %}
-
-#### Step 3: The setup() function
-
-In `setup()`, we will setup a PWM channel and attach a pin to that channel.
-
-{% highlight C %}
+```cpp
 void setup() {
-
-  // Sets up a channel (0-15), a PWM duty cycle frequency, and a PWM resolution (1 - 16 bits) 
-  // ledcSetup(uint8_t channel, double freq, uint8_t resolution_bits);
-  ledcSetup(PWM_CHANNEL, PWM_FREQ, PWM_RESOLUTION);
-
-  // ledcAttachPin(uint8_t pin, uint8_t channel);
-  ledcAttachPin(LED_OUTPUT_PIN, PWM_CHANNEL);
+  // Attach a PWM channel to the pin with the specified frequency and resolution.
+  // The library automatically assigns an available hardware channel.
+  ledcAttach(LED_OUTPUT_PIN, PWM_FREQ, PWM_RESOLUTION);
 }
-{% endhighlight C %}
+```
 
-#### Step 4: Write the fade loop()
+Compare this to the v2.x approach, which required two separate calls:
+```cpp
+// v2.x (legacy) — DON'T use this with ESP32 Arduino core v3.x!
+// ledcSetup(PWM_CHANNEL, PWM_FREQ, PWM_RESOLUTION);
+// ledcAttachPin(LED_OUTPUT_PIN, PWM_CHANNEL);
+```
 
-And the fade `loop()` is almost the exact same as the original fade loop (from [here](../arduino/led-fade.md)); however, we are now using `ledcWrite` to change the duty cycle of a given channel rather than `analogWrite` to change the duty cycle on a given pin.
+#### Step 3: Write the fade `loop()`
 
-{% highlight C %}
+The fade loop is similar to the original Arduino [LED fade](../arduino/led-fade.md) lesson. Instead of `analogWrite(pin, value)`, we use `ledcWrite(pin, value)`:
+
+```cpp
 void loop() {
-
-  // fade up PWM on given channel
-  for(int dutyCycle = 0; dutyCycle <= MAX_DUTY_CYCLE; dutyCycle++){   
-    ledcWrite(PWM_CHANNEL, dutyCycle);
+  // Fade up
+  for (int dutyCycle = 0; dutyCycle <= MAX_DUTY_CYCLE; dutyCycle++) {
+    ledcWrite(LED_OUTPUT_PIN, dutyCycle);
     delay(DELAY_MS);
   }
 
-  // fade down PWM on given channel
-  for(int dutyCycle = MAX_DUTY_CYCLE; dutyCycle >= 0; dutyCycle--){
-    ledcWrite(PWM_CHANNEL, dutyCycle);   
+  // Fade down
+  for (int dutyCycle = MAX_DUTY_CYCLE; dutyCycle >= 0; dutyCycle--) {
+    ledcWrite(LED_OUTPUT_PIN, dutyCycle);
     delay(DELAY_MS);
   }
 }
-{% endhighlight C %}
+```
 
-#### Step 5: We did it!
+{: .note }
+> In v3.x, `ledcWrite` takes a **pin** number. In the old v2.x API, it took a **channel** number. If you're following older tutorials online and your LED doesn't fade, this is probably why!
 
-That's it, you can run the program! Try experimenting with different frequency and resolution values, what happens?
+#### Step 4: Run it!
 
-![Animation of Fade on the ESP32](assets/movies/Huzzah32_Fade-optimized.gif)
+That's it—upload and run! You should see your LED smoothly fade on and off. Try experimenting with different `PWM_FREQ` and `PWM_RESOLUTION` values to see the tradeoff in action.
+
+<!-- TODO: Replace GIF with <video> showing fade on ESP32-S3 Feather -->
+<video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
+  <source src="assets/movies/Huzzah32_Fade-optimized.mp4" type="video/mp4">
+  <img src="assets/movies/Huzzah32_Fade-optimized.gif" alt="Animation of an LED fading on and off on an ESP32 board">
+</video>
+**Video.** LED fading on the Huzzah32 using the LEDC PWM library.
+{: .fs-1 }
 
 <!-- TODO: insert workbench video -->
 
 <!-- TODO: consider an example that uses multiple channels to flash different freqs -->
 
-### Our ESP32 fade code on github
+<!-- TODO: Add Wokwi simulation link for this circuit
+     > **Try it in the simulator!** [Open the Fade simulation in Wokwi →](URL) -->
 
-And here's our ESP32 fade code on [GitHub](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino).
+### Full source code
 
-<!-- gist-it is down, so now using emgithub -->
-<!-- <script src="https://gist-it.appspot.com/https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino?footer=minimal"></script> -->
+Here's the complete program. This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino) is also on GitHub (note: the GitHub version may still use the v2.x API).
 
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fmakeabilitylab%2Farduino%2Fblob%2Fmaster%2FESP32%2FBasics%2FFade%2FFade.ino&style=github&showCopy=on"></script>
+```cpp
+/**
+ * Fades an LED on and off using the ESP32 LEDC PWM library.
+ *
+ * Uses the v3.x LEDC API (ledcAttach / ledcWrite with pin numbers).
+ * If you're using ESP32 Arduino core v2.x, see the legacy API in the lesson.
+ *
+ * See: https://makeabilitylab.github.io/physcomp/esp32/led-fade
+ * Source: https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino
+ */
 
-This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino) is on GitHub.
-{: .fs-1 }
+const int LED_OUTPUT_PIN = 13;
+const int PWM_FREQ = 5000;
+const int PWM_RESOLUTION = 8;
+const int MAX_DUTY_CYCLE = (int)(pow(2, PWM_RESOLUTION) - 1);
+
+const int DELAY_MS = 4;
+int _ledFadeStep = 5;
+
+void setup() {
+  ledcAttach(LED_OUTPUT_PIN, PWM_FREQ, PWM_RESOLUTION);
+}
+
+void loop() {
+  // Fade up
+  for (int dutyCycle = 0; dutyCycle <= MAX_DUTY_CYCLE; dutyCycle++) {
+    ledcWrite(LED_OUTPUT_PIN, dutyCycle);
+    delay(DELAY_MS);
+  }
+
+  // Fade down
+  for (int dutyCycle = MAX_DUTY_CYCLE; dutyCycle >= 0; dutyCycle--) {
+    ledcWrite(LED_OUTPUT_PIN, dutyCycle);
+    delay(DELAY_MS);
+  }
+}
+```
+
+<details markdown="1">
+<summary><strong>Legacy v2.x version of this code</strong> (click to expand)</summary>
+
+If you're using ESP32 Arduino core v2.x, the code uses explicit channel management:
+
+```cpp
+const int PWM_CHANNEL = 0;     // ESP32 has 16 channels (0-15) for independent waveforms
+const int PWM_FREQ = 5000;
+const int PWM_RESOLUTION = 8;
+const int MAX_DUTY_CYCLE = (int)(pow(2, PWM_RESOLUTION) - 1);
+
+const int LED_OUTPUT_PIN = 21;  // GPIO 21 on Huzzah32
+const int DELAY_MS = 4;
+int _ledFadeStep = 5;
+
+void setup() {
+  // Step 1: Configure channel 0 with frequency and resolution
+  ledcSetup(PWM_CHANNEL, PWM_FREQ, PWM_RESOLUTION);
+
+  // Step 2: Attach pin to that channel
+  ledcAttachPin(LED_OUTPUT_PIN, PWM_CHANNEL);
+}
+
+void loop() {
+  // Note: ledcWrite takes a CHANNEL number in v2.x, not a pin!
+  for (int dutyCycle = 0; dutyCycle <= MAX_DUTY_CYCLE; dutyCycle++) {
+    ledcWrite(PWM_CHANNEL, dutyCycle);
+    delay(DELAY_MS);
+  }
+
+  for (int dutyCycle = MAX_DUTY_CYCLE; dutyCycle >= 0; dutyCycle--) {
+    ledcWrite(PWM_CHANNEL, dutyCycle);
+    delay(DELAY_MS);
+  }
+}
+```
+
+</details>
+
+## Summary
+
+In this lesson, you learned how to fade an LED on the ESP32 using the LEDC PWM library. The key takeaways:
+
+- The ESP32 uses the **LEDC** (LED Control) hardware peripheral for PWM, which offers more control than Arduino's `analogWrite` (though `analogWrite` is now supported on the ESP32 as a convenience wrapper in v3.x).
+- In v3.x, PWM setup is simple: `ledcAttach(pin, freq, resolution)` to configure, `ledcWrite(pin, duty)` to set the duty cycle.
+- PWM **frequency** and **resolution** are interdependent—higher resolution requires a proportionally faster clock. For LED fading, 5 kHz at 8-bit resolution is a good default.
+- The ESP32-S3 does **not** have a DAC for true analog output (the original ESP32 does). Use PWM or an external DAC.
+
+## Exercises
+
+{: .highlight }
+> **Exercise 1:** Change the PWM resolution to 12 bits. What is the new maximum duty cycle value? Update `MAX_DUTY_CYCLE` and verify the fade still works smoothly. Do you notice any difference in the smoothness of the fade compared to 8 bits?
+
+{: .highlight }
+> **Exercise 2:** Try setting the PWM frequency to 100 Hz with 8-bit resolution. Can you see the LED flickering? At what frequency does the flickering become invisible to your eye? (Hint: try 200 Hz, 500 Hz, 1000 Hz.)
+
+{: .highlight }
+> **Exercise 3:** Rewrite the fade program using `analogWrite()` instead of the LEDC API. Does it work on ESP32 Arduino core v3.x? What PWM frequency and resolution does `analogWrite` use by default? (Hint: check the [Arduino-ESP32 docs](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html).)
+
+{: .highlight }
+> **Exercise 4:** Connect two LEDs to different GPIO pins and make them fade in **opposite** directions—when one is bright, the other is dim, and vice versa.
 
 ## Next Lesson
 
-In the [next lesson](pot-fade.md), we will use a potentiometer to control an LED's brightness and learn about the ESP32's analog input.
+In the [next lesson](pot-fade.md), we'll use a potentiometer to control an LED's brightness and learn about the ESP32's analog input.
 
 <span class="fs-6">
 [Previous: Blinking an LED with ESP32](led-blink.md){: .btn .btn-outline }

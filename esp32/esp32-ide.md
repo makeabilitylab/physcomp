@@ -18,6 +18,12 @@ usetocbot: true
 {:toc}
 ---
 
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 being plugged in and runinng the RGB cross-fade">
+  <source src="assets/videos/PluggingInESP32-IMG_9319-TrimmedCroppedMuted.mp4" type="video/mp4">
+</video>
+**Video.** When you first power on the [Adafruit ESP32-S3](https://www.adafruit.com/product/5477), it runs a RGB cross-fade program that lights up the built-in NeoPixel LED on the ESP32-S3. Note: once you program the ESP32-S3 for the first time, you'll overwrite this program.
+{: .fs-1 }
+
 This page walks through setting up the Arduino IDE to program ESP32 boards. If you haven't already, make sure you've installed the [Arduino IDE 2](https://www.arduino.cc/en/software) and reviewed our [Arduino IDE setup page](../arduino/arduino-ide.md)—the basics of the IDE (editor layout, `setup()`/`loop()`, selecting ports) are the same.
 
 {: .note }

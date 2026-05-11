@@ -142,14 +142,13 @@ The ESP32-S3 Feather has a built-in LiPoly battery charger. When USB is plugged 
 
 ## ESP32-S3 Feather pin diagram
 
-<!-- TODO: Create a custom ESP32-S3 Feather pin diagram similar to the Huzzah32 one.
-     For now, link to Adafruit's official PrettyPins diagram. -->
+![A pin diagram for the Adafruit ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3Feather_PinDiagram.png)
+**Figure.** A pin diagram for the Adafruit ESP32-S3 Feather. See the [PDF on Adafruit's GitHub here](https://github.com/adafruit/Adafruit-Feather-ESP32-S3-PCB/blob/main/Adafruit%20Feather%20ESP32-S3%20Pinout.pdf).
+{: .fs-1 }
 
-The pin diagram for the ESP32-S3 Feather is available from Adafruit's official documentation. We recommend printing it out or keeping it open on a second monitor—you'll refer to it constantly!
+The pin diagram above is from [Adafruit's official ESP32-S3 documentation](https://learn.adafruit.com/adafruit-esp32-s3-feather/pinouts). We recommend printing it out or keeping it open on a second monitor—you'll refer to it constantly! See also the [PDF on GitHub](https://github.com/adafruit/Adafruit-Feather-ESP32-S3-PCB/blob/main/Adafruit%20Feather%20ESP32-S3%20Pinout.pdf) for full details.
 
-See the [Adafruit ESP32-S3 Feather pinouts documentation](https://learn.adafruit.com/adafruit-esp32-s3-feather/pinouts) and the [PrettyPins pinout diagram (PDF)](https://github.com/adafruit/Adafruit-Feather-ESP32-S3-PCB/blob/main/Adafruit%20Feather%20ESP32-S3%20Pinout.pdf) for full details.
-
-In our code, we reference pins by their **GPIO number** (an integer), their **analog input number** (prefixed by `A`, *e.g.,* `A0`), or their **touch number** (prefixed by `T`, *e.g.,* `T1`) for capacitive touch sensing. You can always use the GPIO number directly.
+In our code, we reference pins either by their **GPIO number** (an integer), their **analog input number** (prefixed by `A`, *e.g.,* `A0`), or their **touch number** (prefixed by `T`, *e.g.,* `T1`) for capacitive touch sensing. You can always use the GPIO number directly.
 
 ### Important notes for the ESP32-S3 Feather
 

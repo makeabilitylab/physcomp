@@ -76,10 +76,6 @@ These lessons are interactive and designed to be completed **in order**. All ESP
 
 Learn about the ESP32 platform, how it compares to the Arduino Uno and Leonardo, and how to set up your development environment. You'll get familiar with the pin diagram and important hardware differences like the 3.3V operating voltage.
 
-### [ESP32 Arduino IDE Setup](esp32-ide.md)
-
-How to install the ESP32 board support package, select your board, and troubleshoot common setup issues. Includes a comparison of the v2.x vs. v3.x API changes.
-
 ### [Lesson 2: Blinking an LED](led-blink.md)
 
 Write your first ESP32 program! The code is the same as the Arduino [Blink lesson](../arduino/led-blink.md)—the challenge here is getting comfortable with the new board and its pin layout.

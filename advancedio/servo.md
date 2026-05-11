@@ -128,7 +128,7 @@ An LED connected to `analogWrite()` at 50% duty cycle sees ~2.5V average and glo
 {: .fs-1 }
 
 {: .warning }
-> **Do not use `analogWrite()` to control servos!** The `analogWrite()` function produces PWM at 490 Hz or 980 Hz—much too fast for servos, which expect 50 Hz. Sending the wrong signal can cause erratic behavior or damage. Always use the Arduino `Servo` library, which generates the correct 50 Hz signal for you.
+> **Do not use `analogWrite()` to control servos!** The `analogWrite()` function produces PWM at 490 Hz or 980 Hz—much too fast for servos, which expect 50 Hz. Sending the wrong signal can cause erratic behavior or damage. Always use the [Arduino `Servo` library](https://docs.arduino.cc/libraries/servo/), which generates the correct 50 Hz signal for you.
 
 ## The Arduino Servo library
 
@@ -183,7 +183,7 @@ The Arduino Servo library maps 0-180° to 544-2400µs by default, which is sligh
 
 ### Under the hood: how the Servo library works
 
-If you visit the [GitHub source tree for the Servo library](https://github.com/arduino-libraries/Servo/tree/master/src), you'll notice it has many subfolders, including `avr`, `esp32`, `samd`, and more. This is because Arduino supports multiple hardware architectures—each subfolder contains separate source code for different chips. For the Arduino Uno and Leonardo (AVR architecture), the library uses [avr/Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/avr/Servo.cpp); for the Arduino Nano 33 IoT and Zero (SAMD architecture), it uses [samd/Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/samd/Servo.cpp).
+If you visit the [GitHub source tree for the Servo library](https://github.com/arduino-libraries/Servo/tree/master/src), you'll notice it has many subfolders, including `avr`, `esp32`, `samd`, and more. This is because Arduino supports multiple hardware architectures—each subfolder contains separate source code for different chips. For the Arduino Uno and Leonardo (AVR architecture), the library uses [avr/Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/avr/Servo.cpp); for the Arduino Nano 33 IoT and Zero (SAMD architecture), it uses [samd/Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/samd/Servo.cpp), *etc.*.
 
 If you look at [Servo.h](https://github.com/arduino-libraries/Servo/blob/master/src/Servo.h), you'll see how the library selects the right implementation:
 
@@ -290,9 +290,10 @@ void loop() {
 
 <!-- TODO: Record a video of the servo sweeping back and forth and embed here. The Tinkercad version is here: https://www.tinkercad.com/things/hNVrJEXGKrT-simple-servo-sweep -->
 
-The `delay(15)` gives the servo time to reach each position before advancing to the next degree. Try changing the delay—a shorter delay means faster sweeping, but if it's too short, the servo can't keep up and will jitter. What happens if you change `delay(15)` to `delay(1)`? (Hint: the servo may not have time to reach each position before the next command arrives.) What about changing the range to `for (int angle = 30; angle <= 150; ...)`?
+{: .highlight }
+> If you **compile this code** and it gives an error similar to `Compilation error: Servo.h: No such file or directory`, then you need to install the official Arduino servo library authored by Michael Margolis. Open the Library Manager (or go to Sketch > Include Library > Manage Libraries...), search for "Servo", and scroll to find the Servo library. Then click "Install."
 
-If you **compile this code** and it gives an error similar to `Compilation error: Servo.h: No such file or directory`, then you need to install the official Arduino servo library authored by Michael Margolis. Open the Library Manager (or go to Sketch > Include Library > Manage Libraries...), search for "Servo", and scroll to find the Servo library. Then click "Install."
+The `delay(15)` gives the servo time to reach each position before advancing to the next degree. Try changing the delay—a shorter delay means faster sweeping, but if it's too short, the servo can't keep up and will jitter. What happens if you change `delay(15)` to `delay(1)`? (Hint: the servo may not have time to reach each position before the next command arrives.) What about changing the range to `for (int angle = 30; angle <= 150; ...)`?
 
 {: .warning }
 > **Avoid driving to the mechanical limits.** If your servo makes a grinding or buzzing sound at 0° or 180°, it's hitting its mechanical stops and stalling. This draws high current and can strip the plastic gears over time. Try reducing your range to 10-170° or experiment to find your servo's actual safe limits.
@@ -351,7 +352,7 @@ This is essentially the Arduino's built-in ["Knob" example](https://www.arduino.
 {: .note }
 > **Is your servo jittering?** If the servo twitches or vibrates even when you're not touching the potentiometer, you're seeing the effect of noisy analog readings. Each time `analogRead()` returns a slightly different value, the servo moves to a slightly different angle—fast enough to appear as jitter. A [decoupling capacitor](#power-considerations) can help with power-related jitter, but for signal noise, the real fix is **smoothing your input data**. In the [Smoothing Input lesson](smoothing-input.md), you'll learn filters like moving average and exponential smoothing that solve exactly this problem. For now, you can also try calling `detach()` when the servo doesn't need to move—this stops the control signal entirely and lets the servo go limp, eliminating jitter at the cost of no longer holding position.
 
-You can hook up an oscilloscope to examine the underlying PWM signal, which we've done in [Tinkercad here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope):
+You can hook up an oscilloscope to examine the underlying PWM signal changing with the potentiometer input, which we've done in [Tinkercad here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope):
 
 <video autoplay loop muted playsinline style="margin:0px" aria-label="A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal">
   <source src="assets/videos/Tinkercad_ServoPotWithOscilliscope_50msWindow_optimized_720p_muted.mp4" type="video/mp4" />
@@ -359,7 +360,7 @@ You can hook up an oscilloscope to examine the underlying PWM signal, which we'v
 **Video.** A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal. Play with the [circuit directly here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope)!
 {: .fs-1 }
 
-The Engineering Mindset YouTube channel did this for real with an oscilloscope, nicely matching the above simulation:
+The Engineering Mindset YouTube channel did this for real with an oscilloscope, nicely matching the above simulation. Notice how it's the **width of each HIGH pulse** that controls the servo's target angle.
 
 <video autoplay loop muted playsinline style="margin:0px" aria-label="A video snippet from Engineering Mindset showing a potentiometer-controlled PWM waveform driving a servo motor with an Arduino. Notice how the pulse width controls the servo's target angle.">
   <source src="assets/videos/EngineeringMindset_DrivingServoMotorWithArduinoPotPWM_Oscilliscope_optimized_720p_muted.mp4" type="video/mp4" />

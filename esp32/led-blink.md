@@ -38,12 +38,14 @@ The ESP32-S3 Feather (and the Huzzah32) have a small **red LED** on the board co
 
 ### The code
 
-This is the exact same Blink sketch you wrote for the Arduino. It transfers directly to the ESP32 with zero changes:
+This is (almost) the same Blink sketch you wrote for the Arduino. It transfers directly to the ESP32 with zero changes:
 
 ```cpp
 /**
  * Blink the onboard LED.
- * This code is identical for Arduino Uno, Leonardo, Huzzah32, and ESP32-S3 Feather.
+ *
+ * This code is identical for Arduino Uno, Leonardo, 
+ * Huzzah32, ESP32-S3 Feather, and more! That's the beauty of Arduino!
  *
  * See: https://makeabilitylab.github.io/physcomp/esp32/led-blink
  */
@@ -73,11 +75,6 @@ Upload this sketch and open the **Serial Monitor** at **115200 baud**. You shoul
 {: .warning }
 > **Native USB gotcha (ESP32-S3):** Because the ESP32-S3 uses native USB (not a separate USB-to-UART chip like the Uno's ATmega16U2 or the Huzzah32's CP2104), the serial port will **temporarily disappear** if the board crashes, resets, or enters deep sleep. If your Serial Monitor disconnects unexpectedly, just press the **Reset** button and reopen it. This is normal behavior for native USB—it's the same with the Arduino Leonardo.
 
-<!-- TODO: Add Wokwi simulation link
-     > **Try it in the simulator!** You can run this circuit in [Wokwi](https://wokwi.com/projects/new/esp32)
-     > without any hardware. [Open the Blink simulation →](URL)
-     Also save the Wokwi project JSON in the GitHub repo as a backup. -->
-
 ## Part 2: Blink an external LED
 
 Now let's connect an external LED—this is where you'll practice reading the pin diagram and wiring up a real circuit.
@@ -86,10 +83,8 @@ Now let's connect an external LED—this is where you'll practice reading the pi
 
 | Breadboard | ESP32 | LED | Resistor |
 | ---------- |:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather]({{ site.baseurl }}/assets/images/ESP32S3Feather_Adafruit_vertical_h200.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Breadboard | ESP32-S3 Feather | Red LED | 220Ω Resistor |
-
-<!-- TODO: Update the materials table image to show the ESP32-S3 Feather if we don't have one yet. -->
 
 ### Picking a pin
 
@@ -171,7 +166,60 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/B
 **Video.** Blink running on the Huzzah32 with an external LED on GPIO 21.
 {: .fs-1 }
 
-## Part 3: Blink the onboard NeoPixel 🌈
+## Part 3: Try it in the Wokwi simulator
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing blinky running in the Wokwi simulator">
+  <source src="assets/videos/Wokwi_ESP32-S3-Blink_optimized.mp4" type="video/mp4" />
+</video>
+**Video.** This video shows the basic blinky program running on the ESP32-S3 DevKitC board. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
+{: .fs-1 }
+
+If you don't have hardware handy, you can build and run this circuit in **[Wokwi](https://wokwi.com/)**, a free browser-based microcontroller simulator. We'll link to Wokwi projects throughout these ESP32 lessons so you can experiment without hardware. You can start a fresh ESP32-S3 project by going here
+
+**[→ Open the external LED Blink simulation in Wokwi](https://wokwi.com/projects/463754140590397441)**
+
+### What is Wokwi?
+
+In our [Arduino lessons](../arduino/), we use [Autodesk Tinkercad](https://www.tinkercad.com/circuits) for circuit simulation—but unfortunately, Tinkercad does not support the ESP32. [Wokwi](https://wokwi.com/) is the best available alternative: it simulates the ESP32, ESP32-S3, and many other boards, and even supports WiFi simulation.
+
+A few things to be aware of:
+
+- **Wokwi does not simulate the Adafruit ESP32-S3 Feather specifically.** It uses a generic Espressif ESP32-S3 DevKitC board. The code you write is identical, but some board-specific pin definitions (like `LED_BUILTIN` or `PIN_NEOPIXEL`) may map to different GPIO numbers than on the Adafruit Feather. When in doubt, use explicit GPIO numbers (*e.g.,* `13` instead of `LED_BUILTIN`) in your Wokwi projects.
+
+- **Compile times are slower** than Tinkercad—you may wait 10–20 seconds for your code to compile on the free tier. The site will also occasionally prompt you to upgrade to a paid plan. The free tier is sufficient for everything in our lessons.
+
+- **Wokwi is a small company**, not backed by a large corporation like Autodesk. We always provide real hardware instructions as the primary path. The Woki simulations are a helpful complement.
+
+### Building blinky in Wokwi
+
+In less than 60 seconds, we build blinky on the ESP32-S3 in the Wokwi simulation environment.
+
+<video loop controls playsinline style="margin:0px" aria-label="Video showing us building blocky in the Wokwi simulation environment">
+  <source src="assets/videos/Wokwi_ESP32-S3-BuildingBlink_SpedUp_optimized_muted.mp4" type="video/mp4" />
+</video>
+**Video.** This video shows the basic blinky program running on the ESP32-S3 DevKitC board. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
+{: .fs-1 }
+
+### Quick tips for using Wokwi
+
+- **Adding components:** Click the blue **+** button above the simulation area to add LEDs, resistors, buttons, potentiometers, and more. Click on a component to edit its properties (like resistor value).
+- **Wiring:** Click on a pin to start a wire, then click on the destination pin to complete the connection. Wires snap to pins automatically.
+- **Serial Monitor:** Your `Serial.println` output appears in the **console pane** below the code editor—look for it after pressing ▶ play.
+- **Under the hood:** Wokwi circuits are defined by a `diagram.json` file (visible in the editor tabs), not a visual canvas like Tinkercad. You can edit this JSON directly to add or modify components, but the visual editor is easier for beginners.
+- **Saving projects:** You'll need a free Wokwi account to save your projects. You can also export the `diagram.json` and `.ino` files to keep a local backup.
+
+{: .warning }
+> **Why not simulate Part 1 (onboard LED)?** Wokwi's default ESP32-S3 board is the generic Espressif DevKitC, which does not have a standard red LED on GPIO 13 like the Adafruit Feather does. On the DevKitC, `LED_BUILTIN` maps to an internal NeoPixel hack (pin 97!) that doesn't respond to `digitalWrite`. That's why we start with an external LED in the simulator—it works the same regardless of which ESP32-S3 board Wokwi emulates.
+
+### Start your own Woki projects
+
+Here are the standard template URLs you'll want to bookmark to spin up fresh projects:
+
+* ESP32-S3 (Arduino): https://wokwi.com/projects/new/esp32-s3
+* Classic ESP32 (Arduino): https://wokwi.com/projects/new/esp32
+
+Once you open one of those, you can add components (like the NeoPixel ring or an OLED), write your code, and click Save. Wokwi will then generate a unique, permanent URL for that specific circuit and code that you can share.
+
+## Part 4: Blink the onboard NeoPixel 🌈
 
 The ESP32-S3 Feather has a built-in **NeoPixel** RGB LED—the same type of addressable LED we covered in the [Addressable LEDs lesson](../advancedio/addressable-leds.md)! Unlike the plain red `LED_BUILTIN`, the NeoPixel can display **any color**. Let's blink it!
 
@@ -194,6 +242,9 @@ The ESP32-S3 Feather has a built-in **NeoPixel** RGB LED—the same type of addr
 // One NeoPixel on the board, on the pin defined by PIN_NEOPIXEL
 Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 
+// Blink delay
+const int BLINK_DELAY_MS = 200;
+
 void setup() {
   // The NeoPixel on the ESP32-S3 Feather has a separate power pin
   // that must be set HIGH before the NeoPixel will light up
@@ -209,27 +260,27 @@ void setup() {
 void loop() {
   pixel.setPixelColor(0, pixel.Color(255, 0, 0));    // Red
   pixel.show();
-  delay(500);
+  delay(BLINK_DELAY_MS);
 
   pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
   pixel.show();
-  delay(500);
+  delay(BLINK_DELAY_MS);
 
   pixel.setPixelColor(0, pixel.Color(0, 255, 0));    // Green
   pixel.show();
-  delay(500);
+  delay(BLINK_DELAY_MS);
 
   pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
   pixel.show();
-  delay(500);
+  delay(BLINK_DELAY_MS);
 
   pixel.setPixelColor(0, pixel.Color(0, 0, 255));    // Blue
   pixel.show();
-  delay(500);
+  delay(BLINK_DELAY_MS);
 
   pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
   pixel.show();
-  delay(500);
+  delay(BLINK_DELAY_MS);
 }
 ```
 
@@ -257,17 +308,13 @@ The key takeaway: `pinMode`, `digitalWrite`, and `delay` work **identically** on
 
 ## Exercises
 
-{: .highlight }
-> **Exercise 1:** Modify the blink rate to create a pattern: blink fast three times (100ms on, 100ms off), then pause for one second. Repeat. Try this with both `LED_BUILTIN` and the NeoPixel.
+**Exercise 1:** Modify the blink rate to create a pattern: blink fast three times (100ms on, 100ms off), then pause for one second. Repeat. Try this with both `LED_BUILTIN` and the NeoPixel.
 
-{: .highlight }
-> **Exercise 2:** Make the onboard NeoPixel display a **rainbow cycle**. Use a `for` loop to step through hue values and convert to RGB. (Hint: the `Adafruit_NeoPixel` library has a `ColorHSV()` function that takes a hue value from 0–65535.)
+**Exercise 2:** Make the onboard NeoPixel display a **rainbow cycle**. Use a `for` loop to step through hue values and convert to RGB. (Hint: the `Adafruit_NeoPixel` library has a `ColorHSV()` function that takes a hue value from 0–65535.)
 
-{: .highlight }
-> **Exercise 3:** Connect a second LED to a different GPIO pin and make the two LEDs alternate: when one is on, the other is off. What happens if you use `delay(1)` instead of `delay(1000)`? Can you still see the alternation?
+**Exercise 3:** Connect a second LED to a different GPIO pin and make the two LEDs alternate: when one is on, the other is off. What happens if you use `delay(1)` instead of `delay(1000)`? Can you still see the alternation?
 
-{: .highlight }
-> **Exercise 4:** Write a program that blinks the NeoPixel in a different color every time the board resets. (Hint: use `random(256)` to pick random R, G, B values in `setup()`.)
+**Exercise 4:** Write a program that blinks the NeoPixel in a different color every time the board resets. (Hint: use `random(256)` to pick random R, G, B values in `setup()`.)
 
 ## Next Lesson
 

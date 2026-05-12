@@ -41,7 +41,7 @@ You'll need the same materials as the [last lesson](led-blink.md):
 
 | Breadboard | ESP32 | LED | Resistor |
 | ---------- |:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather]({{ site.baseurl }}/assets/images/ESP32S3Feather_Adafruit_vertical_h200.png) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
 | Breadboard | ESP32-S3 Feather | Red LED | 220Ω Resistor |
 
 ## PWM on the ESP32
@@ -136,16 +136,22 @@ try reducing freq_hz or duty_resolution.
 
 #### Why are frequency and resolution linked?
 
-So *why* and *how* are the PWM frequency and resolution interdependent? Here's the explanation.
+So *why* and *how* are the PWM frequency and resolution interdependent? To understand this, we need to look at how the LEDC hardware actually works.
 
-Imagine you have a clock running at some frequency (say 40 MHz), and you want to generate a PWM waveform at some frequency and resolution. The maximum PWM frequency is bounded by the clock—you can't produce a PWM wave faster than your clock.
+The ESP32's LEDC peripheral is driven by the **APB clock**, which runs at a fixed **80 MHz**. This clock is the heartbeat that drives all the PWM timing. When you set a PWM frequency, you're telling the LEDC hardware how long one period should be—and the clock determines how many **ticks** fit inside that period.
 
-But what about **resolution**? Resolution is about how finely you can slice up one period of the PWM wave into different duty cycles. And here's the key insight: slicing up the PWM wave requires a clock running at $$PWM_{freq} \times 2^{resolution}$$. Why? Because to generate those fine-grained duty cycles, the clock must be fast enough to create those time slices.
+For example, at a PWM frequency of 1 MHz, each period lasts 1 µs. At 80 MHz, the clock produces 80 ticks per microsecond, so you get **80 clock ticks per period** ($$80\text{ MHz} \div 1\text{ MHz} = 80$$).
 
-Here's a visual example. The clock runs at 40 MHz, the PWM frequency is set to 1 MHz, and we show how increasing the resolution requires finer and finer time slices—which in turn demand a faster clock:
+Now here's the key: **resolution** is about how finely you can slice up that period into distinct duty cycle levels. An $$n$$-bit resolution means $$2^n$$ time slices. Each slice needs at least one clock tick. So the rule is:
+
+$$2^{resolution} \leq \frac{APB\_clock}{PWM\_freq}$$
+
+If you need more slices than you have ticks, the hardware simply can't produce them—and `ledcAttach` will fail.
+
+Here's a visual example. The clock runs at 80 MHz, the PWM frequency is set to 1 MHz, and we show how increasing the resolution requires finer and finer time slices—which in turn demand more clock ticks:
 
 ![A figure showing the relationship between frequency and duty cycle resolution for PWM](assets/images/PWM_FrequencyAndDutyCycleRelationship.png)
-**Figure.** As PWM resolution increases, the clock must be fast enough to support the finer time slices. At 1 MHz with 5-bit resolution, we need a clock of at least 32 MHz. At 6 bits, we'd exceed our 40 MHz clock. See this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pdf) for more examples.
+**Figure.** As PWM resolution increases, the number of required time slices grows exponentially. This diagram uses a simplified 40 MHz clock example—on the real ESP32 the APB clock is 80 MHz, giving you twice as many ticks to work with (and one extra bit of resolution headroom). See this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pdf) for a printable version.
 {: .fs-1 }
 
 <!-- some discussion of max pwm freq on esp32:
@@ -165,6 +171,19 @@ This datasheet has a PWM resolution vs PWM frequency graph
 https://electrosome.com/pwm-pulse-width-modulation/
 http://inst.eecs.berkeley.edu/~ee40/calbot/pdf/ChapterFive/ChapterFive.pdf
 -->
+
+#### Interactive: explore the tradeoff yourself
+
+To really internalize this relationship, try the interactive visualization below. It shows a single PWM period with the 80 MHz clock ticks drawn along the top—you can literally see how many ticks you have to work with. Adjust the **PWM Frequency** slider and watch the ticks shrink (higher frequency → shorter period → fewer ticks). Then adjust the **Resolution** slider and watch the time slices multiply until they exceed the available ticks and the waveform turns red.
+
+The insight box at the top makes the math visible: *clock ticks available* vs. *slices needed*. When slices exceed ticks, you'll see ✗ Can't fit—that's the hardware telling you this combination is impossible.
+
+<iframe src="assets/p5js/pwm-freq-resolution/index.html" style="width: 100%; max-width: 800px; height: 650px; border: 1px solid #ddd; border-radius: 4px;" scrolling="no" aria-label="Interactive PWM frequency and resolution tradeoff visualization"></iframe>
+**Interactive.** Explore how PWM frequency, resolution, and duty cycle interact on the ESP32. The LEDC peripheral's 80 MHz APB clock determines how many clock ticks fit in each PWM period. Try it: start at 1 MHz / 3 bits, then increase resolution until it breaks. Then lower the frequency and watch it become achievable again. ([Open in the p5.js editor →](https://editor.p5js.org/jonfroehlich/sketches/_NLZiLjtL))
+{: .fs-1 }
+
+{: .note }
+> **Why 80 MHz?** The ESP32's LEDC timers are clocked by the APB (Advanced Peripheral Bus) clock, which runs at 80 MHz. This is separate from the CPU clock (240 MHz on the ESP32-S3). The 80 MHz APB clock sets the *theoretical* maximum PWM frequency at 40 MHz (with 1-bit resolution: $$80 \div 2^1 = 40$$). In practice, the ESP32's GPIO pins can't toggle faster than about 40 MHz due to electrical switching limits, so **40 MHz at 1-bit resolution is the highest usable PWM frequency**. The interactive includes 80 MHz to show the theoretical floor of the clock divider math (1 tick = 1 bit = 50% duty cycle), but you'd never use that on a real pin.
 
 #### What frequency and resolution should I use?
 
@@ -265,8 +284,7 @@ That's it—upload and run! You should see your LED smoothly fade on and off. Tr
 
 ### Workbench video
 
-<!-- TODO: Record a workbench video showing the fade circuit on the ESP32-S3 Feather.
-     Use <video> with aria-label. -->
+<!-- TODO: Record a workbench video showing the fade circuit on the ESP32-S3 Feather. -->
 
 <video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
   <source src="assets/movies/Huzzah32_Fade-optimized.mp4" type="video/mp4">

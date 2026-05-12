@@ -34,6 +34,8 @@ In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/P
 > - The relationship between PWM frequency and duty cycle resolution
 > - How to use the ESP32 Arduino LEDC API to fade an LED
 > - The difference between the v2.x and v3.x LEDC APIs
+> - How to use `analogWrite()` as a simpler alternative on ESP32 Arduino core v3.x
+> - How to fade the onboard NeoPixel through the HSV color wheel
 
 ## Materials
 
@@ -191,7 +193,7 @@ The insight box at the top makes the math visible: *clock ticks available* vs. *
 {: .fs-1 }
 
 {: .note }
-> **Why 80 MHz?** The ESP32's LEDC timers are clocked by the APB (Advanced Peripheral Bus) clock, which runs at 80 MHz. This is separate from the CPU clock (240 MHz on the ESP32-S3). The 80 MHz APB clock sets the *theoretical* maximum PWM frequency at 40 MHz (with 1-bit resolution: $$80 \div 2^1 = 40$$). In practice, the ESP32's GPIO pins can't toggle faster than about 40 MHz due to electrical switching limits, so **40 MHz at 1-bit resolution is the highest usable PWM frequency**. The interactive includes 80 MHz to show the theoretical floor of the clock divider math (1 tick = 1 bit = 50% duty cycle), but you'd never use that on a real pin.
+> **Why 80 MHz?** The ESP32's LEDC timers are clocked by the APB (Advanced Peripheral Bus) clock, which runs at 80 MHz. This is separate from the CPU clock (240 MHz on the ESP32-S3). The 80 MHz APB clock sets the *theoretical* maximum PWM frequency at 40 MHz (with 1-bit resolution: $$80 \div 2^1 = 40$$). In practice, the ESP32's GPIO pins can't toggle faster than about 40 MHz due to electrical switching limits, so **40 MHz at 1-bit resolution is the highest usable PWM frequency**. The interactive includes 80 MHz to show the theoretical limit of the clock divider math (1 tick = 1 bit = 50% duty cycle), but you'd never use that on a real pin.
 
 #### What frequency and resolution should I use?
 
@@ -400,6 +402,125 @@ void loop() {
 
 </details>
 
+### Using `analogWrite` instead
+
+Since ESP32 Arduino core v3.x supports `analogWrite` as a wrapper around the LEDC library, you can write the same fade with much less code. Under the hood, `analogWrite` calls `ledcAttach` and `ledcWrite` for you, using defaults of **1 kHz** and **8-bit resolution**.
+
+```cpp
+/**
+ * Fades an LED on and off using analogWrite().
+ *
+ * On ESP32 Arduino core v3.x, analogWrite() is a convenience wrapper
+ * around the LEDC library. It defaults to 1 kHz PWM at 8-bit resolution.
+ * This is the simplest way to fade an LED—identical to Arduino Uno code!
+ *
+ * See: https://makeabilitylab.github.io/physcomp/esp32/led-fade
+ */
+
+const int LED_OUTPUT_PIN = 13;  // GPIO 13 = LED_BUILTIN on ESP32-S3 Feather
+const int DELAY_MS = 4;         // Small delay between steps for a smooth fade
+
+void setup() {
+  // Set the LED output pin
+  pinMode(LED_OUTPUT_PIN, OUTPUT);
+}
+
+void loop() {
+  // Fade up: ramp from 0 (off) to 255 (full brightness)
+  for (int brightness = 0; brightness <= 255; brightness++) {
+    analogWrite(LED_OUTPUT_PIN, brightness);
+    delay(DELAY_MS);
+  }
+
+  // Fade down: ramp from 255 back to 0
+  for (int brightness = 255; brightness >= 0; brightness--) {
+    analogWrite(LED_OUTPUT_PIN, brightness);
+    delay(DELAY_MS);
+  }
+}
+```
+
+Look familiar? This code is *identical* to what you'd write on an Arduino Uno—that's the whole point of the `analogWrite` wrapper. The tradeoff is that you lose control over PWM frequency and resolution (stuck at 1 kHz / 8-bit defaults). You can change these defaults with `analogWriteFrequency(pin, freq)` and `analogWriteResolution(pin, bits)`, but at that point you might as well use the LEDC API directly.
+
+You can play with the above LED fade `analogWrite` example on [Wokwi here](https://wokwi.com/projects/463817926218345473).
+
+{: .note }
+> Now that you know about both the LEDC and the `analogWrite` approch to driving PWM signals on the ESP32 GPIO pins, you should decide which is better for you and your program!
+
+## Bonus: Fade the NeoPixel through the rainbow 🌈
+
+In [Lesson 2](led-blink.md#part-4-blink-the-onboard-neopixel-), we blinked the onboard NeoPixel in discrete colors. Now let's smoothly *fade* through the entire color wheel using the **HSV color space**—the same approach we used in the [Addressable LEDs lesson](../advancedio/addressable-leds.md#activity-2-rainbow-animation).
+
+The Adafruit NeoPixel library's `ColorHSV()` function takes a 16-bit hue (0–65535 maps to 0°–360°), a saturation (0–255), and a value/brightness (0–255). By incrementing the hue each frame, we get a smooth rainbow cross-fade:
+
+```cpp
+/**
+ * Smoothly fades the onboard NeoPixel through the full HSV color wheel.
+ * Works on the Adafruit ESP32-S3 Feather (and in Wokwi with the DevKitC).
+ *
+ * Requires the Adafruit NeoPixel library:
+ *   Sketch -> Include Library -> Manage Libraries -> search "Adafruit NeoPixel"
+ *
+ * See: https://makeabilitylab.github.io/physcomp/esp32/led-fade
+ */
+#include <Adafruit_NeoPixel.h>
+
+// One NeoPixel on the board, on the pin defined by PIN_NEOPIXEL
+Adafruit_NeoPixel _pixel(1, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
+
+const int HUE_STEP = 256;             // How much to advance the hue each frame
+const uint32_t MAX_HUE = 65536;       // Full color wheel (360°) in 16-bit hue
+const int DELAY_MS = 20;              // ~50 fps for smooth animation
+
+uint32_t _hue = 0;                    // Current position on the color wheel
+
+void setup() {
+  // The NeoPixel on the ESP32-S3 Feather has a separate power pin
+  // that must be set HIGH before the NeoPixel will light up
+  #if defined(NEOPIXEL_POWER)
+    pinMode(NEOPIXEL_POWER, OUTPUT);
+    digitalWrite(NEOPIXEL_POWER, HIGH);
+  #endif
+
+  _pixel.begin();
+  _pixel.setBrightness(30);  // 0-255; keep it low to avoid blinding yourself!
+  _pixel.show();
+}
+
+void loop() {
+  // ColorHSV takes: hue (0-65535), saturation (0-255), value/brightness (0-255)
+  // gamma32 applies perceptual brightness correction for smoother color transitions
+  uint32_t color = _pixel.gamma32(_pixel.ColorHSV(_hue, 255, 255));
+  _pixel.setPixelColor(0, color);
+  _pixel.show();
+
+  // Advance the hue and wrap around at 65536 (back to red)
+  _hue = (_hue + HUE_STEP) % MAX_HUE;
+
+  delay(DELAY_MS);
+}
+```
+
+Upload this and watch your NeoPixel smoothly cycle through the rainbow and back to red! Try changing `HUE_STEP` to `64` (slower, more gradual) or `1024` (faster cycling).
+
+We also built a version on Wokwi, which you can [simulate here](https://wokwi.com/projects/463818340414358529).
+
+{: .note }
+> **What is `gamma32()`?** Human eyes don't perceive brightness linearly—we're much more sensitive to changes in dark tones than bright ones. The `gamma32()` function applies a correction curve so that the color transitions *look* smooth and even, rather than appearing to jump through the midrange. Compare the output with and without `gamma32()` to see the difference! We cover this in more detail in the [Addressable LEDs lesson](../advancedio/addressable-leds.md).
+
+{: .note }
+> **HSV vs. RGB:** In the RGB color model, creating a smooth rainbow requires manually calculating red, green, and blue values for each hue—which is tedious and error-prone. The HSV (Hue, Saturation, Value) model separates *color* from *brightness*, so sweeping through all colors is just a matter of incrementing one number (the hue). We use HSV extensively in the [Addressable LEDs lesson](../advancedio/addressable-leds.md) and also talk about it in the [RGB LED lesson](../arduino/rgb-led-fade.md).
+
+<!-- TODO: Record a workbench video showing the NeoPixel rainbow fade on the ESP32-S3 Feather.
+     Use <video> with aria-label. -->
+
+<details markdown="1">
+<summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>
+
+The original Huzzah32 **does not** have an onboard NeoPixel. If you want to try this, you'll need to connect an external NeoPixel (or NeoPixel strip) to a GPIO pin and update `PIN_NEOPIXEL` to match your wiring. See our [Addressable LEDs lesson](../advancedio/addressable-leds.md) for details on wiring external NeoPixels.
+
+</details>
+
 ## Summary
 
 In this lesson, you learned how to fade an LED on the ESP32 using the LEDC PWM library. The key takeaways:
@@ -408,6 +529,8 @@ In this lesson, you learned how to fade an LED on the ESP32 using the LEDC PWM l
 - In v3.x, PWM setup is simple: `ledcAttach(pin, freq, resolution)` to configure, `ledcWrite(pin, duty)` to set the duty cycle.
 - PWM **frequency** and **resolution** are interdependent—higher resolution requires a proportionally faster clock. For LED fading, 5 kHz at 8-bit resolution is a good default.
 - The ESP32-S3 does **not** have a DAC for true analog output (the original ESP32 does). Use PWM or an external DAC.
+- For simple fades, `analogWrite()` works on the ESP32 in v3.x with no setup—but you give up control over frequency and resolution.
+- The onboard NeoPixel can be smoothly faded through the color wheel using **HSV color** and `gamma32()` for perceptually smooth transitions.
 
 ## Exercises
 
@@ -415,7 +538,7 @@ In this lesson, you learned how to fade an LED on the ESP32 using the LEDC PWM l
 
 **Exercise 2:** Try setting the PWM frequency to 100 Hz with 8-bit resolution. Can you see the LED flickering? At what frequency does the flickering become invisible to your eye? (Hint: try 200 Hz, 500 Hz, 1000 Hz.)
 
-**Exercise 3:** Rewrite the fade program using `analogWrite()` instead of the LEDC API. Does it work on ESP32 Arduino core v3.x? What PWM frequency and resolution does `analogWrite` use by default? (Hint: check the [Arduino-ESP32 docs](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html).)
+**Exercise 3:** Compare the `analogWrite` version (shown [above](#using-analogwrite-instead)) to the LEDC version. What PWM frequency and resolution does `analogWrite` use by default? Can you change them? (Hint: check the [Arduino-ESP32 docs](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html) for `analogWriteFrequency` and `analogWriteResolution`.)
 
 **Exercise 4:** Connect two LEDs to different GPIO pins and make them fade in **opposite** directions—when one is bright, the other is dim, and vice versa.
 

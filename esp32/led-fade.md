@@ -37,12 +37,12 @@ In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/P
 
 ## Materials
 
-You'll need the same materials as the [last lesson](led-blink.md):
+You'll need the same materials as the [last lesson](led-blink.md). We use **[Adafruit's ESP32-S3 Feather](https://www.adafruit.com/product/5477)** but any ESP32-S3 board will work!
 
 | Breadboard | ESP32 | LED | Resistor |
 | ---------- |:-----:|:-----:|:-----:|
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
-| Breadboard | ESP32-S3 Feather | Red LED | 220Ω Resistor |
+| Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Red LED | 220Ω Resistor |
 
 ## PWM on the ESP32
 
@@ -62,7 +62,7 @@ The [LEDC library](https://docs.espressif.com/projects/arduino-esp32/en/latest/a
 
 #### Understanding channels (the hardware)
 
-Under the hood, the LEDC module works on **channels** rather than individual **pins**. The ESP32-S3 has **8 independent PWM channels**, which means you can generate up to **8 different PWM waveforms simultaneously** (each with its own frequency, resolution, and duty cycle). To apply a PWM wave to a pin, you configure a channel and then attach a pin to it. You can attach *multiple* pins to the exact same channel—they will all share that identical waveform—but you are limited to 8 unique waveforms running at the same time.
+Under the hood, the LEDC module works on **channels** rather than individual **pins**. The ESP32-S3 has **8 independent PWM channels**, which means you can generate up to **8 different PWM waveforms simultaneously** (each with its own frequency, resolution, and duty cycle). To apply a PWM wave to a pin, you configure a channel and then attach a pin to it. You can attach *multiple* pins to the exact same channel—they will all share that identical waveform—but you are **limited to 8 unique waveforms** running at the same time (*i.e.,* because there are 8 independent PWM channels).
 
 {: .note }
 > In **ESP32 Arduino core v3.x**, the channel abstraction was removed from the public API—you attach PWM directly to a pin with `ledcAttach(pin, freq, resolution)`, and the library assigns a channel automatically behind the scenes. The channels still exist in hardware, but you don't need to manage them yourself. This is much simpler! We'll show both the v3.x and legacy v2.x APIs below.
@@ -120,7 +120,7 @@ The key difference: in v2.x, `ledcWrite` takes a **channel** number. In v3.x, `l
 
 The [LEDC library](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html) lets you choose both the PWM frequency and the duty cycle resolution (in bits). But these two parameters are **interdependent**—you can't max out both simultaneously. The Espressif [docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#supported-range-of-frequency-and-duty-resolutions) provide some examples:
 
-- A PWM frequency of **5 kHz** can have a maximum duty resolution of **13 bits** ($$2^{13}=8192$$ discrete brightness levels)
+- A PWM frequency of **5 kHz** can have a maximum duty resolution of **13 bits** ($$2^{13}=8192$$ discrete brightness levels, so `ledcWrite` values range from 0 to 8191)
 - A PWM frequency of **20 MHz** can have a maximum duty resolution of **2 bits** (only $$2^2=4$$ discrete levels)
 - A PWM frequency of **40 MHz** can have a duty resolution of 1 bit—meaning the duty cycle is fixed at 50% and cannot be adjusted!
 
@@ -149,7 +149,7 @@ Now here's the key: **resolution** is about how finely you can slice up that per
 
 Therefore, the fundamental rule is:
 
-$$2^{resolution} \leq \frac{APB\_clock}{PWM\_freq}$$
+$$2^{\text{resolution}} \leq \frac{\text{APB}_{\text{clock}}}{\text{PWM}_{\text{freq}}}$$
 
 If you need more slices than you have ticks, the hardware simply can't produce them—and `ledcAttach` will fail.
 
@@ -179,11 +179,14 @@ http://inst.eecs.berkeley.edu/~ee40/calbot/pdf/ChapterFive/ChapterFive.pdf
 
 #### Interactive: explore the tradeoff yourself
 
-To really internalize this relationship, try the interactive visualization below. It shows a single PWM period with the 80 MHz clock ticks drawn along the top—you can literally see how many ticks you have to work with. Adjust the **PWM Frequency** slider and watch the ticks shrink (higher frequency → shorter period → fewer ticks). Then adjust the **Resolution** slider and watch the time slices multiply until they exceed the available ticks and the waveform turns red.
+To advance your understanding, try the interactive visualization below. It shows a single PWM period with the 80 MHz clock ticks drawn along the top—you can literally see how many ticks you have to work with. 
+
+- Adjust the **PWM Frequency** slider and watch the ticks shrink (higher frequency → shorter period → fewer ticks).
+- Then adjust the **Resolution** slider and watch the time slices multiply until they exceed the available ticks and the waveform turns red.
 
 The insight box at the top makes the math visible: *clock ticks available* vs. *slices needed*. When slices exceed ticks, you'll see ✗ Can't fit—that's the hardware telling you this combination is impossible.
 
-<iframe src="https://editor.p5js.org/jonfroehlich/embed/_NLZiLjtL" width="100%" height="620" style="border: none;"></iframe>
+<iframe src="https://editor.p5js.org/jonfroehlich/embed/_NLZiLjtL" width="100%" height="680" style="border: none;"></iframe>
 **Interactive Figure.** Explore how PWM frequency, resolution, and duty cycle interact on the ESP32. The LEDC peripheral's 80 MHz APB clock determines how many clock ticks fit in each PWM period. Try it: start at 1 MHz / 3 bits, then increase resolution until it breaks. Then lower the frequency and watch it become achievable again. ([Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/_NLZiLjtL))
 {: .fs-1 }
 
@@ -213,11 +216,9 @@ Let's put it all together and fade an LED.
 
 We can use the same circuit as the [Blink lesson](led-blink.md):
 
-![Circuit showing LED connected to a GPIO pin via a current limiting resistor](assets/images/Huzzah32_Blink_CircuitDiagramAndSchematic_Fritzing.png)
-**Figure.** Same circuit as the Blink lesson. If you're using the ESP32-S3 Feather, use GPIO 13 (or any output-capable pin).
+![Circuit showing LED connected to a GPIO pin via a current limiting resistor](assets/images/Adafruit_ESP32-S3-Feather_LedFade_CircuitDiagram.png)
+**Figure.** Same circuit as the [Blink lesson](led-blink.md). On the ESP32-S3 Feather, we're using GPIO 13 (but you can use any output-capable pin, just change the `LED_OUTPUT_PIN` in the code).
 {: .fs-1 }
-
-<!-- TODO: Create an ESP32-S3 Feather version of this Fritzing diagram -->
 
 ### The code (v3.x API)
 
@@ -230,8 +231,8 @@ const int LED_OUTPUT_PIN = 13;  // GPIO 13 = LED_BUILTIN on ESP32-S3 Feather and
                                 // Change to match your wiring if using a different pin
 
 const int PWM_FREQ = 5000;     // 5 kHz PWM frequency (Arduino Uno uses ~490 Hz)
-const int PWM_RESOLUTION = 8;  // 8-bit resolution (0-255), same as Arduino Uno
-                                // ESP32-S3 supports up to 14-bit resolution
+const int PWM_RESOLUTION = 8;  // Set to 8-bit resolution (0-255), same as Arduino Uno
+                               // ESP32-S3 supports up to 14-bit resolution
 
 // The max duty cycle value based on PWM resolution (255 for 8 bits)
 const int MAX_DUTY_CYCLE = (1 << PWM_RESOLUTION) - 1;
@@ -266,13 +267,13 @@ The fade loop is similar to the original Arduino [LED fade](../arduino/led-fade.
 
 ```cpp
 void loop() {
-  // Fade up
+  // Fade up: ramp duty cycle from 0% (off) to 100% (full brightness)
   for (int dutyCycle = 0; dutyCycle <= MAX_DUTY_CYCLE; dutyCycle++) {
     ledcWrite(LED_OUTPUT_PIN, dutyCycle);
     delay(DELAY_MS);
   }
 
-  // Fade down
+  // Fade down: ramp duty cycle from 100% back to 0% (off)
   for (int dutyCycle = MAX_DUTY_CYCLE; dutyCycle >= 0; dutyCycle--) {
     ledcWrite(LED_OUTPUT_PIN, dutyCycle);
     delay(DELAY_MS);
@@ -302,10 +303,13 @@ That's it—upload and run! You should see your LED smoothly fade on and off. Tr
 
 ### Try it in Wokwi
 
-You can also run this circuit in the [Wokwi simulator](https://wokwi.com/) (introduced in the [Blink lesson](led-blink.md#part-3-try-it-in-the-wokwi-simulator)). Since the LEDC library works the same on any ESP32-S3 board, the fade code runs identically in the simulator.
+You can also run this circuit in the [Wokwi simulator](https://wokwi.com/) (introduced in the [Blink lesson](led-blink.md#part-3-try-it-in-the-wokwi-simulator)). Wokwi uses the ESP32-S3 DevKitC board but since the LEDC library works the same on any ESP32-S3 board, the fade code runs identically in the simulator as it would on the ESP32-S3 Feather.
 
-<!-- TODO: Create a Wokwi project for the fade circuit and replace the URL below.
-     Use the same ESP32-S3 DevKitC + external LED on GPIO 13 setup as the blink project. -->
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing LED fade running in the Wokwi simulator">
+  <source src="assets/videos/Wokwi_ESP32-S3-LedFade_optimized_muted.mp4" type="video/mp4" />
+</video>
+**Video.** LED fade running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463782700188143617).
+{: .fs-1 }
 
 **[→ Open the Fade simulation in Wokwi](https://wokwi.com/projects/463782700188143617)**
 

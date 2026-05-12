@@ -81,10 +81,12 @@ Now let's connect an external LED—this is where you'll practice reading the pi
 
 ### Materials
 
+We use **[Adafruit's ESP32-S3 Feather](https://www.adafruit.com/product/5477)** but any ESP32-S3 board will work!
+
 | Breadboard | ESP32 | LED | Resistor |
 | ---------- |:-----:|:-----:|:-----:|
 | ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
-| Breadboard | ESP32-S3 Feather | Red LED | 220Ω Resistor |
+| Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477)| Red LED | 220Ω Resistor |
 
 ### Picking a pin
 
@@ -175,7 +177,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/B
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing blinky running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-Blink_optimized.mp4" type="video/mp4" />
 </video>
-**Video.** Blinky running in the **Wokwi simulator** on the ESP32-S3 DevKitC . Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
+**Video.** Blinky running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
 {: .fs-1 }
 
 ### What is Wokwi?

@@ -152,7 +152,7 @@ The ESP32-S3 Feather has a built-in LiPoly battery charger. When USB is plugged 
 ## ESP32-S3 Feather pin diagram
 
 ![A pin diagram for the Adafruit ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3Feather_PinDiagram.png)
-**Figure.** A pin diagram for the Adafruit ESP32-S3 Feather. See the [PDF on Adafruit's GitHub here](https://github.com/adafruit/Adafruit-Feather-ESP32-S3-PCB/blob/main/Adafruit%20Feather%20ESP32-S3%20Pinout.pdf).
+**Figure.** A pin diagram for the Adafruit ESP32-S3 Feather. You may want to right click and select "Open image in new tab" to see a full-size version. See also the [PDF on Adafruit's GitHub here](https://github.com/adafruit/Adafruit-Feather-ESP32-S3-PCB/blob/main/Adafruit%20Feather%20ESP32-S3%20Pinout.pdf).
 {: .fs-1 }
 
 The pin diagram above is from [Adafruit's official ESP32-S3 documentation](https://learn.adafruit.com/adafruit-esp32-s3-feather/pinouts). We recommend printing it out or keeping it open on a second monitor—you'll refer to it constantly! See also the [PDF on GitHub](https://github.com/adafruit/Adafruit-Feather-ESP32-S3-PCB/blob/main/Adafruit%20Feather%20ESP32-S3%20Pinout.pdf) for full details.

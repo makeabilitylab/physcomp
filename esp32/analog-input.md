@@ -48,7 +48,7 @@ You'll need the same materials as the [last lesson](led-fade.md) plus a potentio
 | Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Red LED | 220Ω Resistor | 10kΩ Trimpot |
 
 {: .note }
-> If you haven't used a potentiometer before, see our [Potentiometers lesson](../arduino/potentiometers.md) in the Intro to Arduino series. It covers how potentiometers work as voltage dividers, how to wire them, and how `analogRead()` converts a voltage into a number.
+> If you haven't used a potentiometer before, see our [Potentiometers lesson](../arduino/potentiometers.md) in the [Intro to Arduino](../arduino/index.md) series. It covers how potentiometers work as voltage dividers, how to wire them, and how `analogRead()` converts a voltage into a number.
 
 ## Analog input on the ESP32
 
@@ -102,8 +102,7 @@ Why does the ADC1 vs. ADC2 distinction matter? Because **ADC2 is unavailable whe
 
 ### ADC nonlinearity
 
-{: .note }
-> The ESP32's ADC is known to be somewhat **nonlinear** at the extremes of its range—readings below ~100mV and above ~3.2V can be inaccurate. You may notice that your potentiometer doesn't quite reach 0 or 4095 at the endpoints. In practice, this can feel like a small "dead zone" at the physical extremes of the knob—the LED stops changing brightness slightly before the knob reaches its endpoint. The ESP32-S3 is significantly better than the original ESP32 in this regard, thanks to a built-in hardware calibration circuit. For most interactive projects (like our LED fader), this nonlinearity is negligible. For precision measurement, Espressif provides [ADC calibration APIs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/adc_calibration.html) in the ESP-IDF.
+The ESP32's ADC is known to be somewhat **nonlinear** at the extremes of its range—readings below ~100mV and above ~3.2V can be inaccurate. You may notice that your potentiometer doesn't quite reach 0 or 4095 at the endpoints. In practice, this can feel like a small "dead zone" at the physical extremes of the knob—the LED stops changing brightness slightly before the knob reaches its endpoint. The ESP32-S3 is significantly better than the original ESP32 in this regard, thanks to a built-in hardware calibration circuit. For most interactive projects (like our LED fader), this nonlinearity is negligible. For precision measurement, Espressif provides [ADC calibration APIs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/adc_calibration.html) in the ESP-IDF.
 
 ### Changing the ADC resolution
 
@@ -215,18 +214,18 @@ The core idea is simple: read the potentiometer → convert the value → write 
  * See: https://makeabilitylab.github.io/physcomp/esp32/pot-fade
  */
 
-// --- Preprocessor defines for cross-platform portability ---
+// Preprocessor defines for cross-platform portability ---
 #if defined(ESP32)
-  const int MAX_ANALOG_VAL = 4095;       // ESP32 has a 12-bit ADC (0-4095)
+  const int MAX_ANALOG_VAL = 4095;  // ESP32 has a 12-bit ADC (0-4095)
 #else
-  const int MAX_ANALOG_VAL = 1023;       // AVR Arduinos have a 10-bit ADC (0-1023)
+  const int MAX_ANALOG_VAL = 1023;  // AVR Arduinos have a 10-bit ADC (0-1023)
 #endif
 
-const int LED_OUTPUT_PIN = 13;           // GPIO 13 = LED_BUILTIN on ESP32-S3 Feather
-const int POT_INPUT_PIN = A5;            // A5 is on ADC1 — works even when WiFi is active
+const int LED_OUTPUT_PIN = 13;      // GPIO 13 = LED_BUILTIN on ESP32-S3 Feather
+const int POT_INPUT_PIN = A5;       // A5 is on ADC1 — works even when WiFi is active
 
-const int PWM_FREQ = 5000;              // 5 kHz PWM frequency
-const int PWM_RESOLUTION = 8;           // 8-bit resolution: duty cycle 0-255
+const int PWM_FREQ = 5000;          // 5 kHz PWM frequency
+const int PWM_RESOLUTION = 8;       // 8-bit resolution: duty cycle 0-255
 const int MAX_DUTY_CYCLE = (1 << PWM_RESOLUTION) - 1;  // 2^8 - 1 = 255
 
 void setup() {
@@ -267,8 +266,8 @@ At the top, we use `#if defined(ESP32)` to set `MAX_ANALOG_VAL` to the correct v
 The potentiometer gives us a value from 0 to 4095 (12-bit ADC), but `ledcWrite` expects 0 to 255 (8-bit PWM). The [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/) function performs this linear conversion for us:
 
 ```cpp
+//                  value, fromLow, fromHigh, toLow, toHigh
 int dutyCycle = map(potVal, 0, MAX_ANALOG_VAL, 0, MAX_DUTY_CYCLE);
-//                  value   fromLow  fromHigh    toLow  toHigh
 ```
 
 So `map(2048, 0, 4095, 0, 255)` returns ~127 (approximately half brightness). You could also do this with integer math (`potVal * 255 / 4095`), but `map()` is more readable and generalizes to any range conversion.
@@ -329,7 +328,8 @@ const int LED_OUTPUT_PIN = 13;
 const int POT_INPUT_PIN = A5;
 
 void setup() {
-  // No PWM setup needed — analogWrite handles it automatically
+  // Set the LED output pin
+  pinMode(LED_OUTPUT_PIN, OUTPUT);
 }
 
 void loop() {

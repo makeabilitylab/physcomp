@@ -84,7 +84,7 @@ Write your first ESP32 program! The code is the same as the Arduino [Blink lesso
 
 Learn how to use PWM output on the ESP32 to fade an LED. This is where things start to diverge from Arduino: instead of `analogWrite`, the ESP32 uses the LEDC (LED Control) library, which gives you more control over PWM channels, frequencies, and resolutions.
 
-### [Lesson 4: Analog Input](pot-fade.md)
+### [Lesson 4: Analog Input](analog-input.md)
 
 Use the ESP32's 12-bit ADC to read a potentiometer and control an LED's brightness—combining analog input with PWM output.
 

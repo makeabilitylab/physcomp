@@ -62,7 +62,7 @@ For our lessons, we focus on two boards:
 Here's a side-by-side comparison of the Arduino Uno Rev3, the original ESP32, and the ESP32-S3. Data derived from [Espressif's official documentation](https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32s3/hw-reference/chip-series-comparison.html).
 
 {: .warning }
-> A major difference: the ESP32 runs at **3.3V**, not 5V like the Arduino Uno and Leonardo. This affects how you interface with electronic components via the GPIO pins. **Do not apply 5V to an ESP32 GPIO pin**—you can permanently damage the chip!
+> A major difference: the ESP32 runs at **3.3V**, **not 5V** like the Arduino Uno and Leonardo. This affects how you interface with electronic components via the GPIO pins. **Do not apply 5V to an ESP32 GPIO pin**—you can permanently damage the chip!
 
 ### General features
 
@@ -77,8 +77,8 @@ Here's a side-by-side comparison of the Arduino Uno Rev3, the original ESP32, an
 | Native USB | ✖️ | ✖️ | ✅ (USB OTG) |
 | SRAM | 2 KB | 520 KB | 512 KB |
 | Flash | 32 KB | Up to 4 MB | Up to 8 MB |
-| PSRAM | ✖️ | ✖️ (optional external) | Up to 2 MB |
-| Datasheet | [Uno (PDF)](https://www.arduino.cc/en/uploads/Main/Arduino_Uno_Rev3.pdf) | [ESP32 (PDF)](https://espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) | [ESP32-S3 (PDF)](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf) |
+| PSRAM | ✖️ | ✖️ (optional external) | Up to 8 MB (2 MB on Feather) |
+| Datasheet | [ATmega328P (PDF)](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) | [ESP32 (PDF)](https://espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) | [ESP32-S3 (PDF)](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf) |
 
 ### Key peripherals
 
@@ -95,11 +95,20 @@ Here's a side-by-side comparison of the Arduino Uno Rev3, the original ESP32, an
 
 A few things to note from these tables:
 
+- **ADC (Analog-to-Digital Converter):** Converts an analog voltage to a digital number. The ESP32's ADCs are **12-bit** (values range from 0–4095) compared to the Uno's 10-bit ADCs (0–1023). Make sure you use the correct maximum value in functions like [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/). You'll use the ADC in [Lesson 4](pot-fade.md).
+- **DAC (Digital-to-Analog Converter):** Outputs a true analog voltage (not PWM). The original ESP32 has two **DAC** channels for true analog output; the ESP32-S3 does **not** have a DAC. If you need analog output on the S3, use PWM with a low-pass filter or an external DAC like the [MCP4725](https://learn.adafruit.com/mcp4725-12-bit-dac-tutorial/using-with-arduino).
+- **Touch sensor:** Built-in capacitive touch sensing hardware—no external components needed. The ESP32-S3 has **14 capacitive touch** sensing pins—we'll use these in [Lesson 6](capacitive-touch-sensing.md).
+- **LED PWM (LEDC):** The ESP32's dedicated PWM peripheral for dimming LEDs, driving motors, and generating tones. Unlike the Uno (which has 6 PWM pins), **all** ESP32 GPIO pins can do PWM, though there are a limited number of independent PWM channels. You'll learn the LEDC API in [Lesson 3](led-fade.md).
+- **SPI / I2C / UART:** Standard communication buses for connecting to sensors, displays, and other devices. SPI is fast (displays, SD cards), I2C is simple (sensors, OLEDs), and UART is serial communication (`Serial.print()` uses UART). The ESP32 has more of each than the Uno.
+- **FPU (Floating Point Unit):** The ESP32 has a hardware floating point unit for fast math. On the ESP32-S3, the FPU supports both single and double precision—the Arduino Uno has no FPU and must emulate floating point in software, which is much slower.
+
+<!-- A few things to note from these tables:
+
 - The ESP32's ADCs are **12-bit** (values range from 0–4095) compared to the Uno's 10-bit ADCs (0–1023). Make sure you use the correct maximum value in functions like [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/).
 - The original ESP32 has two **DAC** channels for true analog output; the ESP32-S3 does **not** have a DAC.
 - The ESP32-S3 has **14 capacitive touch** sensing pins—we'll use these in [Lesson 6](capacitive-touch-sensing.md).
 - Unlike the Uno (which has 6 PWM pins), **all** ESP32 GPIO pins can do PWM, though there are a limited number of independent PWM channels.
-- The ESP32 has a hardware **floating point unit** (FPU). On the ESP32-S3, the FPU supports both single and double precision.
+- The ESP32 has a hardware **floating point unit** (FPU). On the ESP32-S3, the FPU supports both single and double precision. -->
 
 <!-- The ESP32 is far more powerful than the ESP8266 as well as the 16-bit microcontrollers in the Arduino Uno or Leonardo—which we used in our [introductory lessons](../arduino/). -->
 
@@ -271,14 +280,11 @@ You set up the Arduino IDE with the ESP32 board support package and verified you
 
 ## Exercises
 
-{: .highlight }
-> **Exercise 1:** Look up the pin diagram for your ESP32 board (ESP32-S3 Feather or Huzzah32). Identify: (a) which pins support analog input, (b) which pin is `LED_BUILTIN`, and (c) where the I2C (SDA/SCL) and SPI (MOSI/MISO/SCK) pins are located.
+**Exercise 1:** Look up the pin diagram for your ESP32 board (ESP32-S3 Feather or Huzzah32). Identify: (a) which pins support analog input, (b) which pin is `LED_BUILTIN`, and (c) where the I2C (SDA/SCL) and SPI (MOSI/MISO/SCK) pins are located.
 
-{: .highlight }
-> **Exercise 2:** Upload the built-in Blink example to your ESP32. Modify it to blink at a different rate—say, 100ms on and 900ms off. Verify that it works.
+**Exercise 2:** Upload the built-in Blink example to your ESP32. Modify it to blink at a different rate—say, 100ms on and 900ms off. Verify that it works.
 
-{: .highlight }
-> **Exercise 3:** Open **Tools → Board Info** (or look at the Serial Monitor output on boot) to find out which version of the ESP32 Arduino core you have installed. Is it version 2.x or 3.x? This matters because the PWM and tone APIs changed between versions—we'll discuss this in [Lesson 3](led-fade.md).
+**Exercise 3:** Open **Tools → Board Info** (or look at the Serial Monitor output on boot) to find out which version of the ESP32 Arduino core you have installed. Is it version 2.x or 3.x? This matters because the PWM and tone APIs changed between versions—we'll discuss this in [Lesson 3](led-fade.md).
 
 ## Next Lesson
 

@@ -6,7 +6,7 @@ has_toc: true # (on by default)
 usemathjax: true
 comments: true
 usetocbot: true
-nav_order: 3
+nav_order: 2
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
@@ -110,7 +110,7 @@ On the Huzzah32, our original code examples and Fritzing diagrams use **GPIO 21*
 
 Our circuit is about as simple as they come: an LED connected to a GPIO pin through a current-limiting resistor.
 
-![Circuit showing LED connected to a GPIO pin via a current limiting resistor](assets/images/Adaruit_ESP32-S3-Feather_Blinky_CircuitDiagram.png)
+![Circuit showing LED connected to a GPIO pin via a current limiting resistor](assets/images/Adafruit_ESP32-S3-Feather_Blinky_CircuitDiagram.png)
 **Figure.** Circuit diagram showing a red LED connected to GPIO 13 on the ESP32 via a 220Ω current-limiting resistor.
 {: .fs-1 }
 
@@ -175,7 +175,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/B
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing blinky running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-Blink_optimized.mp4" type="video/mp4" />
 </video>
-**Video.** Blinky running on the ESP32-S3 DevKitC in the Wokwi simulator. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
+**Video.** Blinky running in the **Wokwi simulator** on the ESP32-S3 DevKitC . Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
 {: .fs-1 }
 
 ### What is Wokwi?
@@ -194,7 +194,7 @@ A few things to be aware of:
 
 ### Building blinky in Wokwi
 
-In less than 60 seconds, we built blinky on the ESP32-S3 in the Wokwi simulation environment. See below. The video also shows the long compile times in Wokwi. This is because Wokwi actually compiles the C++ Arduino code using a real compiler toolchain and compiling the ESP32 takes longer than just compiling the traditional Arduino libraries.
+The video below shows a full build out—both wiring and coding—of blinky in the Wokwi simulation environment using the ESP32-S3 DevKitC board. The video also shows the long compile times in Wokwi. This is because Wokwi actually compiles the C++ Arduino code using a real compiler toolchain and compiling the ESP32 takes longer than just compiling the traditional Arduino libraries.
 
 <video loop controls playsinline style="margin:0px" aria-label="Video showing us building blinky in the Wokwi simulation environment">
   <source src="assets/videos/Wokwi_ESP32-S3-BuildingBlink_SpedUp_optimized_muted.mp4" type="video/mp4" />

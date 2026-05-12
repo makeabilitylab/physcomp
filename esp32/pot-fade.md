@@ -95,7 +95,7 @@ On the **Adafruit ESP32-S3 Feather**, **15 ADC-capable pins** are available. Whi
 
 ### ADC2 and WiFi
 
-Why does the ADC1 vs. ADC2 distinction matter? Because **ADC2 is unavailable when WiFi is active**—this is a hardware limitation on all ESP32 variants. If your project uses WiFi and analog input simultaneously, you must use an ADC1 pin.
+Why does the ADC1 vs. ADC2 distinction matter? Because **ADC2 is unavailable when WiFi is active**—this is a hardware limitation on all ESP32 variants (on the ESP32-S3, a hardware arbiter allows limited sharing, but WiFi takes priority and ADC2 reads will intermittently fail). If your project uses WiFi and analog input simultaneously, you must use an ADC1 pin.
 
 {: .important }
 > For this lesson, we'll use **A5** for our potentiometer input. A5 is on **ADC1**, which means it works whether WiFi is on or off—a good habit to build for when you add WiFi in [Lesson 7](iot.md). If you need more WiFi-compatible analog inputs, D5, D6, D9, and D10 are also on ADC1 (though SDA and SCL are typically reserved for I2C).
@@ -103,7 +103,7 @@ Why does the ADC1 vs. ADC2 distinction matter? Because **ADC2 is unavailable whe
 ### ADC nonlinearity
 
 {: .note }
-> The ESP32's ADC is known to be somewhat **nonlinear** at the extremes of its range—readings below ~100mV and above ~3.2V can be inaccurate. You may notice that your potentiometer doesn't quite reach 0 or 4095 at the endpoints. The ESP32-S3 is significantly better than the original ESP32 in this regard, thanks to a built-in hardware calibration circuit. For most interactive projects (like our LED fader), this nonlinearity is negligible. For precision measurement, Espressif provides [ADC calibration APIs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/adc_calibration.html) in the ESP-IDF.
+> The ESP32's ADC is known to be somewhat **nonlinear** at the extremes of its range—readings below ~100mV and above ~3.2V can be inaccurate. You may notice that your potentiometer doesn't quite reach 0 or 4095 at the endpoints. In practice, this can feel like a small "dead zone" at the physical extremes of the knob—the LED stops changing brightness slightly before the knob reaches its endpoint. The ESP32-S3 is significantly better than the original ESP32 in this regard, thanks to a built-in hardware calibration circuit. For most interactive projects (like our LED fader), this nonlinearity is negligible. For precision measurement, Espressif provides [ADC calibration APIs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/adc_calibration.html) in the ESP-IDF.
 
 ### Changing the ADC resolution
 
@@ -432,7 +432,7 @@ In this lesson, you combined analog input with PWM output to build a physical LE
 
 ## Exercises
 
-**Exercise 1:** Modify the pot-fade code to print the potentiometer reading as a **voltage** instead of a raw ADC value. The formula is: $$V = \frac{analogRead \times 3.3}{4095}$$. Compare your Serial Monitor output to a multimeter reading on the potentiometer's wiper pin.
+**Exercise 1:** Modify the pot-fade code to print the potentiometer reading as a **voltage** instead of a raw ADC value. The formula is: $$V = \frac{analogRead \times 3.3}{4095}$$. Make sure to store the result in a `float` (not an `int`), or you'll only see whole numbers! Compare your Serial Monitor output to a multimeter reading on the potentiometer's wiper pin.
 
 **Exercise 2:** Instead of controlling brightness, use the potentiometer to control the **blink rate** of the LED. Map the pot value to a delay between 50ms (fast blinking) and 1000ms (slow blinking). Use `digitalWrite` for the blinking—no PWM needed.
 

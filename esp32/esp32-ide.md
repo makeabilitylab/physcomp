@@ -18,6 +18,14 @@ usetocbot: true
 {:toc}
 ---
 
+{: .note }
+> **In this guide, you will learn:**
+> - How to add the ESP32 board support package to the Arduino IDE
+> - How to select the correct board and port for your ESP32
+> - How to upload a test sketch and verify your setup
+> - How to troubleshoot common connection and upload issues
+> - The key API differences between ESP32 Arduino core v2.x and v3.x
+
 <video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 being plugged in and runinng the RGB cross-fade">
   <source src="assets/videos/PluggingInESP32-IMG_9319-TrimmedCroppedMuted.mp4" type="video/mp4">
 </video>
@@ -158,3 +166,17 @@ In v3.x, the **channel abstraction was removed** from the public API. You now at
 
 {: .note }
 > To check which version you have installed, go to **Tools → Board → Boards Manager**, search for `esp32`, and look at the version number next to "esp32 by Espressif Systems."
+
+## Summary
+
+In this guide, you installed the ESP32 board support package in the Arduino IDE, selected your board and port, uploaded a test sketch, and verified everything works. You also learned the key differences between the v2.x and v3.x ESP32 Arduino core APIs—particularly the simplified PWM and tone functions in v3.x. If you ran into issues, the troubleshooting section above covers the most common problems.
+
+With your IDE set up, you're ready to start building ESP32 projects!
+
+## Next Step
+
+Head back to [Lesson 1: Introduction to the ESP32](esp32.md) to learn about the hardware, or jump straight to [Lesson 2: Blinking an LED](led-blink.md) if you're ready to write code.
+
+<span class="fs-6">
+[Back to: Introduction to the ESP32](esp32.md){: .btn .btn-outline }
+</span>

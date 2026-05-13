@@ -139,8 +139,8 @@ The ESP32-S3 chip has **14** capacitive touch pins (T1–T14), a significant upg
 
 <!-- TODO: Create or update the ESP32-S3 Feather pin diagram highlighting touch-capable pins -->
 
-![ESP32-S3 Feather pin diagram](assets/images/AdafruitESP32S3FeatherPinDiagram.png)
-See the Adafruit ESP32-S3 Feather [pinouts](https://learn.adafruit.com/adafruit-esp32-s3-feather/pinouts) for full details. Right-click and open image in a new tab to zoom in.
+![ESP32-S3 Feather pin diagram highlighting touch-capable pins](assets/images/AdafruitESP32S3FeatherPinDiagram.png)
+**Figure.** Pin diagram for the Adafruit ESP32-S3 Feather. See the Adafruit [pinouts guide](https://learn.adafruit.com/adafruit-esp32-s3-feather/pinouts) for full details. Right-click and open image in a new tab to zoom in.
 {: .fs-1 }
 
 {: .note }

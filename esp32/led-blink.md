@@ -136,7 +136,7 @@ $$I = \frac{V_{cc} - V_f}{R} = \frac{3.3V - 2V}{220Ω} = 5.9mA$$
 Compare this to the ~13.6mA we'd get on a 5V Arduino Uno ($$\frac{5V - 2V}{220Ω} = 13.6mA$$). Your LED will be slightly dimmer—but still clearly visible. If you want to match the Arduino brightness, use a smaller resistor like 100Ω ($$\frac{3.3V - 2V}{100Ω} = 13mA$$).
 
 {: .warning }
-> The ESP32-S3's GPIO pins can source up to **20mA** per pin (the original ESP32 could do ~40mA). Our 5.9mA is well within the safe range!
+> The ESP32-S3's GPIO pins default to a drive strength of ~**20mA** per pin, except for GPIO17 and 18 (default to 10mA) and GPIO19 and 20 (default to 40mA)—see Section 2.2 of the [ESP32-S3 datasheet (PDF)](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf). The original ESP32 defaults to ~20mA as well, with a recommended max of 40mA per pin. Our 5.9mA is well within the safe range!
 
 ### The code
 

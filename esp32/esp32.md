@@ -102,16 +102,6 @@ A few things to note from these tables:
 - **SPI / I2C / UART:** Standard communication buses for connecting to sensors, displays, and other devices. SPI is fast (displays, SD cards), I2C is simple (sensors, OLEDs), and UART is serial communication (`Serial.print()` uses UART). The ESP32 has more of each than the Uno.
 - **FPU (Floating Point Unit):** The ESP32 has a hardware floating point unit for fast math. On the ESP32-S3, the FPU supports both single and double precision—the Arduino Uno has no FPU and must emulate floating point in software, which is much slower.
 
-<!-- A few things to note from these tables:
-
-- The ESP32's ADCs are **12-bit** (values range from 0–4095) compared to the Uno's 10-bit ADCs (0–1023). Make sure you use the correct maximum value in functions like [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/).
-- The original ESP32 has two **DAC** channels for true analog output; the ESP32-S3 does **not** have a DAC.
-- The ESP32-S3 has **14 capacitive touch** sensing pins—we'll use these in [Lesson 6](capacitive-touch-sensing.md).
-- Unlike the Uno (which has 6 PWM pins), **all** ESP32 GPIO pins can do PWM, though there are a limited number of independent PWM channels.
-- The ESP32 has a hardware **floating point unit** (FPU). On the ESP32-S3, the FPU supports both single and double precision. -->
-
-<!-- The ESP32 is far more powerful than the ESP8266 as well as the 16-bit microcontrollers in the Arduino Uno or Leonardo—which we used in our [introductory lessons](../arduino/). -->
-
 ## The Adafruit ESP32-S3 Feather
 
 For our course, we use the [Adafruit ESP32-S3 Feather](https://www.adafruit.com/product/5477) with 4MB Flash and 2MB PSRAM. Here's how it compares to the Arduino Uno and the legacy Huzzah32:

@@ -97,6 +97,11 @@ If you used the unified dropdown in Step 2, the port may already be selected. Ot
 - **Linux:** `/dev/ttyACM#` (ESP32-S3) or `/dev/ttyUSB#` (Huzzah32)
 
 {: .note }
+> **macOS users (Ventura 13+):** The first time you plug in your ESP32, macOS will show an **"Allow accessory to connect?"** dialog identifying the board as an "Espressif USB JTAG/serial debug unit." Click **Allow**—otherwise the board won't appear as a serial port. This is a macOS security feature for USB data accessories and only appears once per device.
+>
+> <!-- TODO: Add screenshot of the macOS "Allow accessory to connect?" dialog -->
+
+{: .note }
 > **ESP32-S3 Feather:** This board has **native USB**, so it should appear as a serial port automatically—no driver installation needed on any operating system.
 >
 > **Huzzah32:** This board uses a **CP2104 USB-to-UART bridge** chip. On **macOS 11 (Big Sur) and later**, Apple includes a native driver via DriverKit, so the board should work without installing anything. On **older macOS versions or Windows**, you may need to install the [Silicon Labs CP210x driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers). Linux typically includes the driver by default.
@@ -123,6 +128,16 @@ To verify everything works, upload the built-in **Blink** example:
 - **ESP32-S3:** Try pressing the **Reset** button. If that doesn't work, enter the ROM bootloader manually: hold **BOOT**, press and release **Reset**, then release **BOOT**. The board should now appear as a port. (If the board isn't plugged in yet, you can also hold BOOT while plugging in the USB cable, then release BOOT.)
 - **Huzzah32:** Make sure you've installed the [CP210x driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers).
 - **Linux users:** You may need to add your user to the `dialout` group: `sudo usermod -aG dialout $USER` (then log out and back in). On Arch/Manjaro, use the `uucp` group instead.
+
+### "bad CPU type in executable" on Apple Silicon Macs
+
+If you see a compilation error like `fork/exec .../ctags: bad CPU type in executable` or similar for `avr-g++`, the Arduino toolchain includes x86-only binaries that can't run natively on Apple Silicon (M1–M4). This affects **all boards**, not just ESP32. Install Apple's Rosetta 2 translation layer by opening Terminal and running:
+
+```
+softwareupdate --install-rosetta
+```
+
+This is a one-time install (~150 MB) and takes under a minute. Newer Apple Silicon Macs may not have Rosetta preinstalled since fewer apps require it now—so this error is especially common on fresh machines.
 
 ### Upload fails with timeout or connection error
 

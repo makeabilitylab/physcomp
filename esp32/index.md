@@ -30,11 +30,11 @@ Welcome 👋 to the **ESP32** module! The [ESP32](https://www.espressif.com/en/p
 
 ## Which boards do we use?
 
-For our tutorial series, we use **Adafruit's ESP32 boards** in the [Feather](https://learn.adafruit.com/adafruit-feather) form factor:
+For our tutorial series, we use **Adafruit's ESP32 boards** in the [Feather](https://learn.adafruit.com/adafruit-feather) form factor; however, you should be able to use almost any ESP32 board on the market and follow along (you might need to change pin numbers). Specifically, our lessons use:
 
-- **Primary board (Spring 2026):** The [Adafruit ESP32-S3 Feather](https://www.adafruit.com/product/5477) with 4MB Flash and 2MB PSRAM. This board features a dual-core 240 MHz Tensilica LX7 processor, native USB-C, WiFi, Bluetooth LE, a STEMMA QT connector, an onboard NeoPixel, and a LiPoly battery monitor. It runs on **3.3V logic**.
+- The [**Adafruit ESP32-S3 Feather**](https://www.adafruit.com/product/5477) with 4MB Flash and 2MB PSRAM. This board features a dual-core 240 MHz Tensilica LX7 processor, native USB-C, WiFi, Bluetooth LE, a STEMMA QT connector, an onboard NeoPixel, and a LiPoly battery monitor.
 
-- **Legacy board:** The [Adafruit Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591), which uses the original ESP32 (dual-core Tensilica LX6). Our earlier code examples and Fritzing diagrams reference this board, but the concepts and code translate directly to the ESP32-S3.
+- The [**Adafruit Huzzah32 ESP32 Feather**](https://www.adafruit.com/product/3591), which uses the original ESP32 (dual-core Tensilica LX6). Our earlier code examples and Fritzing diagrams reference this board, but the concepts and code translate directly to the ESP32-S3.
 
 Because both boards share the **Feather form factor** and use the same [ESP32 Arduino core](https://github.com/espressif/arduino-esp32), the lessons work with either board—you'll just need to consult the correct pin diagram. We'll note specific differences where they arise.
 

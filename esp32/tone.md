@@ -158,7 +158,7 @@ A few important details:
 - `tone()` is **non-blocking**. The ESP32 will immediately move to the next line of code while the sound plays in the background (using an internal FreeRTOS task). If you want the program to wait until the note finishes, add a `delay(duration)` after the call.
 - `tone()` can work on **any GPIO pin**—not just PWM pins. Under the hood, it uses the LEDC peripheral to generate the square wave.
 - Only **one tone** can play at a time. If you call `tone()` on a different pin while a tone is already playing, the first tone stops. This is a hardware limitation.
-- The `tone()` implementation on the ESP32 uses the LEDC library internally (see [Tone.cpp](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/Tone.cpp) in the [arduino-esp32](https://github.com/espressif/arduino-esp32) repo), so it may **conflict with PWM output** on other pins if all LEDC channels are in use. In practice this is rarely a problem—the ESP32-S3 has 8 channels.
+- The `tone()` implementation on the ESP32 calls `ledcAttach()` internally to claim an available LEDC channel automatically (see [Tone.cpp](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/Tone.cpp) in the [arduino-esp32](https://github.com/espressif/arduino-esp32) repo). This means it may **conflict with PWM output** on other pins if all LEDC channels are in use. In practice this is rarely a problem—the ESP32-S3 has 8 channels. But it also means you should **not mix `tone()` and LEDC functions** (like `ledcWriteTone`) on the same pin—they will both try to manage the same underlying channel and interfere with each other. Pick one approach and stick with it.
 
 {: .warning }
 > **Timer conflict on the Arduino Uno:** On the Uno, `tone()` uses Timer2, which disables PWM on specific pins (3 and 11). On the ESP32, the LEDC peripheral handles this differently—`tone()` simply claims one of the available PWM channels. If you're also using `ledcAttach` for LED fading, just make sure you don't run out of channels (8 on the ESP32-S3, 16 on the original ESP32).
@@ -256,7 +256,7 @@ void loop() {
 Notice that we use the `duration` parameter of `tone()`, so we don't need to call `noTone()` manually—the tone stops automatically after `NOTE_DURATION_MS` milliseconds. One subtlety: `tone()` is **non-blocking**, meaning the sketch continues executing immediately even while the tone is still playing. That's why we still need the `delay()` call—without it, the loop would race ahead to the next note before the current one finishes.
 
 {: .note }
-> **Behind the scenes:** On the Arduino Uno, `tone()` uses Timer2 and a hardware interrupt to track note duration. On the ESP32, `tone()` uses a FreeRTOS task with a message queue to manage timing in the background. The result is the same—the tone plays asynchronously—but the mechanism is different. See [Tone.cpp](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/Tone.cpp) for the implementation.
+> **Behind the scenes:** On the Arduino Uno, `tone()` uses Timer2 and a hardware interrupt to track note duration. On the ESP32, `tone()` uses a [FreeRTOS](https://www.freertos.org/) task with a message queue to manage timing in the background. FreeRTOS is a real-time operating system that runs on the ESP32 and handles multitasking—it's why `tone()` can play a note asynchronously while your `loop()` code keeps running. This is fundamentally different from the bare-metal timer interrupts on the Uno, and it's a glimpse into why the ESP32 is so much more capable: it can run multiple concurrent tasks, manage WiFi and Bluetooth stacks, and still toggle a GPIO pin at precise frequencies—all at the same time. See [Tone.cpp](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/Tone.cpp) for the implementation, and the [FreeRTOS documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/freertos.html) if you want to learn more about ESP32 multitasking.
 
 <!-- TODO: Record a video of the C scale playing on a piezo buzzer with the ESP32-S3 Feather -->
 
@@ -525,6 +525,9 @@ The nice thing about `ledcWriteNote` is that you don't need `pitches.h`—the fr
 ### Stopping the tone with LEDC
 
 To stop a tone with the LEDC functions, call `ledcWriteTone(pin, 0)` to silence the pin while keeping the channel attached, or `ledcDetach(pin)` to fully release the channel.
+
+{: .warning }
+> **Don't mix `tone()` and LEDC on the same pin.** If you start a sound with `tone()`, stop it with `noTone()`. If you start a sound with `ledcWriteTone()` or `ledcWriteNote()`, stop it with `ledcWriteTone(pin, 0)` or `ledcDetach(pin)`. Mixing the two APIs on the same pin will cause them to fight over the underlying LEDC channel, leading to unpredictable behavior. Pick one approach per pin and stick with it.
 
 <details markdown="1">
 <summary><strong>Legacy v2.x LEDC API</strong> (click to expand)</summary>

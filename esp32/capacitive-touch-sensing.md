@@ -99,6 +99,9 @@ The ESP32 doesn't measure capacitance directly in farads. Instead, it uses an el
 The exact way this measurement is reported differs between ESP32 variants—and this leads to an important gotcha we'll cover next.
 
 {: .note }
+> **Behind the scenes:** The charge/discharge process is managed by a hardware **finite state machine (FSM)** inside the ESP32's RTC (Real-Time Clock) low-power subsystem—it runs independently of the main CPU cores. When you call `touchRead()`, the Arduino wrapper triggers a measurement cycle, waits for the FSM to complete, and returns the result. This means `touchRead()` is a **blocking** call (it takes ~0.5ms by default), which is fine for simple polling but worth knowing if you're writing time-critical code. The interrupt-based approach (`touchAttachInterrupt`) is more efficient: the FSM continuously monitors the pin in hardware, and only interrupts the CPU when the threshold is crossed—your `loop()` runs unblocked. On the ESP32-S3, the touch FSM can even run during light sleep, enabling wake-on-touch with minimal power draw. For the full hardware details, see the [ESP32-S3 Technical Reference Manual](https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf), Chapter "On-Chip Sensors."
+
+{: .note }
 > **Fun fact:** Capacitive touch sensing is the same technology used in your smartphone's touchscreen! Smartphone screens use a grid of transparent conductive traces (made from indium tin oxide, or ITO) embedded in the glass. When your finger touches the screen, it changes the capacitance at that grid intersection, and the touch controller triangulates the position. The ESP32's touch sensing is a simpler, single-point version of the same principle.
 
 ### Real-world capacitive touch examples
@@ -113,7 +116,7 @@ Espressif sells the "[ESP32-Sense Kit](https://github.com/espressif/esp-iot-solu
 > The simple capacitive touch sensing we use in this lesson detects a binary state: touched or not touched. But what if you could distinguish *how* something is being touched? Researchers Chris Harrison, Munehiko Sato, and Ivan Poupyrev at Disney Research and Carnegie Mellon developed [**Touché**](https://chrisharrison.net/index.php/Research/Touche), a swept-frequency capacitive sensing technique that measures impedance across a range of frequencies rather than at a single frequency. This lets a single sensor distinguish between different touch gestures—fingertip *vs.* palm *vs.* full grasp *vs.* pinch—on the same object. In their [CHI 2012 paper](https://dl.acm.org/doi/10.1145/2207676.2207743), they demonstrated touch sensing on doorknobs, tables, the human body, and even *liquids*. It's a brilliant example of how the basic capacitive sensing principles in this lesson can be extended through creative engineering and signal processing!
 
 {: .warning }
-> **Accessibility consideration:** While capacitive touch interfaces look sleek, the lack of physical buttons can reduce accessibility—especially for blind or low-vision users who rely on tactile feedback to locate and confirm button presses. When designing touch-based interfaces, consider adding haptic feedback (vibration), audio feedback (tones—like we learned in [Lesson 5](tone.md)!), or raised tactile landmarks so users can orient themselves by feel. The best designs combine multiple modalities.
+> **Accessibility consideration:** While capacitive touch interfaces look sleek, the lack of physical buttons can reduce accessibility—especially for blind or low-vision users who rely on tactile feedback to locate and confirm button presses. Capacitive sensing also inherently depends on the electrical properties of human skin: users interacting via prosthetics, thick gloves, or non-conductive styluses may not trigger detection at all, and even heavy calluses can reduce the capacitive coupling enough to cause unreliable readings. When designing touch-based interfaces, consider adding haptic feedback (vibration), audio feedback (tones—like we learned in [Lesson 5](tone.md)!), or raised tactile landmarks so users can orient themselves by feel. The best designs combine multiple modalities and don't rely on capacitive touch as the *only* input method.
 
 ## ESP32 vs. ESP32-S3: the touch value inversion
 
@@ -267,6 +270,37 @@ Now let's use the touch sensor to control something. We'll turn on an LED whenev
 
 Based on your Serial Monitor observations from Part 1, pick a threshold value between the "untouched" and "touched" ranges. For example, if your untouched values are around 30,000 and touched values are around 80,000, a threshold of 50,000 would work well. Give yourself a comfortable margin—you don't want the LED flickering on and off from noise.
 
+Hardcoding a threshold works for learning, but in practice the baseline varies with wire length, ambient humidity, and even the surface your breadboard is sitting on. A more robust approach is to **auto-calibrate at startup** by sampling the untouched baseline in `setup()` and computing the threshold as an offset:
+
+```cpp
+const int TOUCH_PIN = 5;
+const int NUM_CALIBRATION_SAMPLES = 50;
+int touchThreshold = 0;
+
+void setup() {
+  Serial.begin(115200);
+
+  // Calibrate: average N readings while the pad is NOT being touched
+  long total = 0;
+  for (int i = 0; i < NUM_CALIBRATION_SAMPLES; i++) {
+    total += touchRead(TOUCH_PIN);
+    delay(10);
+  }
+  int baseline = total / NUM_CALIBRATION_SAMPLES;
+
+  // Set threshold 50% above baseline (adjust the multiplier to taste)
+  touchThreshold = baseline * 1.5;
+
+  Serial.print("Baseline: ");
+  Serial.print(baseline);
+  Serial.print(" -> Threshold: ");
+  Serial.println(touchThreshold);
+}
+```
+
+{: .note }
+> **Don't touch during calibration!** Make sure nobody is touching the pad during the first second after reset, or the baseline will be wrong. Some production systems solve this by periodically recalibrating during known-idle periods, or by using the ESP32-S3's hardware benchmark feature at the ESP-IDF level.
+
 ### The circuit
 
 Add an LED and 220Ω resistor to the touch circuit from Part 1. Connect the LED to any output-capable GPIO pin—we'll use **GPIO 13** (which is also `LED_BUILTIN` on the ESP32-S3 Feather, so you can see the onboard LED respond even without an external one).
@@ -374,7 +408,7 @@ int smoothedTouchRead(int pin) {
 
 $$\text{smoothed} = \alpha \cdot \text{newReading} + (1 - \alpha) \cdot \text{smoothed}$$
 
-A small $$\alpha$$ (like 0.1) produces heavy smoothing with more lag; a large $$\alpha$$ (like 0.5) responds quickly but smooths less. The beauty of EMA is that it requires **no array, no buffer, just a single variable**—which makes it ideal when you're smoothing multiple touch pins at once (like our 5-key piano!):
+A small $$\alpha$$ (like 0.1) produces heavy smoothing with more lag; a large $$\alpha$$ (like 0.5) responds quickly but smooths less. The beauty of EMA is that it requires **no array, no buffer, just a single variable**—which makes it ideal when you're smoothing multiple touch pins at once (like our 5-key piano!). The tradeoff is explicit: a moving average with window size 10 costs 10 × 4 = 40 bytes of SRAM per channel (precious on microcontrollers) but uses only integer arithmetic; EMA costs just 4 bytes (one `float`) but requires floating-point math on every sample. On the ESP32-S3, which has a hardware FPU, the floating-point cost is negligible—making EMA the clear winner here:
 
 ```cpp
 float smoothedValue = 0;
@@ -444,7 +478,7 @@ So far, we've been **polling** the touch sensor—calling `touchRead()` in `loop
 
 ### Touch interrupt example
 
-Here's an example that uses `touchAttachInterrupt` to detect a touch and turn on an LED for a brief period:
+Here's an example that uses `touchAttachInterrupt` to detect a touch and turn on an LED for a brief period. Notice that we include **debouncing** in `loop()`—without it, a single physical touch can trigger the interrupt dozens of times as the capacitance fluctuates while your finger approaches the pad (especially with DIY conductors like foil or fruit):
 
 ```cpp
 /**
@@ -452,6 +486,8 @@ Here's an example that uses `touchAttachInterrupt` to detect a touch and turn on
  * 
  * The LED turns on for 500ms after each touch is detected.
  * Uses touchAttachInterrupt() for responsive, non-polling detection.
+ * Includes millis()-based debouncing to prevent multiple triggers
+ * from a single physical touch.
  *
  * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch-sensing
  */
@@ -461,13 +497,21 @@ const int LED_PIN = LED_BUILTIN;
 // On ESP32-S3: interrupt fires when value rises ABOVE threshold
 const int TOUCH_THRESHOLD = 50000;
 
-// Volatile because this variable is modified inside an ISR
+// Debounce: ignore interrupts within this window of the last one
+const unsigned long DEBOUNCE_MS = 200;
+
+// Volatile because these variables are modified inside an ISR
 volatile bool touchDetected = false;
+volatile unsigned long lastTouchTime = 0;
 
 // The interrupt callback function (ISR)
-// Keep ISRs short—just set a flag!
-void onTouchDetected() {
-  touchDetected = true;
+// Keep ISRs short—just set a flag and timestamp!
+void IRAM_ATTR onTouchDetected() {
+  unsigned long now = millis();
+  if (now - lastTouchTime > DEBOUNCE_MS) {
+    touchDetected = true;
+    lastTouchTime = now;
+  }
 }
 
 void setup() {
@@ -495,7 +539,10 @@ void loop() {
 ```
 
 {: .warning }
-> **ISR rules:** Interrupt Service Routines (ISRs) must be fast. Don't use `Serial.print()`, `delay()`, or any blocking calls inside an ISR. Instead, set a `volatile` flag and handle the work in `loop()`. The `volatile` keyword tells the compiler not to optimize away reads of this variable, since it can change at any time from the interrupt.
+> **ISR rules:** Interrupt Service Routines (ISRs) must be fast. Don't use `Serial.print()`, `delay()`, or any blocking calls inside an ISR. Instead, set a `volatile` flag and handle the work in `loop()`. The `volatile` keyword tells the compiler not to optimize away reads of this variable, since it can change at any time from the interrupt. The `IRAM_ATTR` attribute ensures the ISR code stays in fast internal RAM rather than being paged from flash—required for reliable interrupts on the ESP32.
+
+{: .note }
+> **Why debounce in the ISR?** Unlike mechanical buttons, capacitive touch doesn't have physical contact bounce—but it has its own version of the problem. As your finger approaches a DIY touch pad, the capacitance rises gradually, crossing the threshold multiple times if the signal is noisy. Without debouncing, a single touch can fire the interrupt 5–10+ times in rapid succession. The `millis()` check inside the ISR is a lightweight way to suppress these spurious re-triggers. For more on debouncing concepts, see our [Debouncing](../arduino/debouncing.md) lesson in the Intro to Arduino series.
 
 {: .note }
 > On the ESP32-S3, the threshold for `touchAttachInterrupt` works in the *opposite direction* from the original ESP32. On the ESP32-S3, the interrupt fires when the touch value rises **above** the threshold. On the original ESP32, it fires when the value falls **below** the threshold. The code example above is written for the ESP32-S3.
@@ -567,6 +614,9 @@ const int NOTE_FREQS[NUM_KEYS] = {NOTE_C4, NOTE_D4, NOTE_E4, NOTE_G4, NOTE_A4};
 // Use the Serial Monitor/Plotter to find good values.
 const int TOUCH_THRESHOLD = 50000;
 
+// Track which key is currently playing (-1 = none)
+int currentKey = -1;
+
 void setup() {
   pinMode(LED_PIN, OUTPUT);
   Serial.begin(115200);
@@ -576,32 +626,33 @@ void setup() {
 }
 
 void loop() {
-  bool anyTouched = false;
+  int activeKey = -1;
 
+  // Find the first touched key
   for (int i = 0; i < NUM_KEYS; i++) {
     int touchValue = touchRead(TOUCH_PINS[i]);
 
     // On ESP32-S3, values INCREASE when touched
     if (touchValue > TOUCH_THRESHOLD) {
-      tone(BUZZER_PIN, NOTE_FREQS[i]);
-      anyTouched = true;
-
-      Serial.print("Key ");
-      Serial.print(i);
-      Serial.print(" (GPIO ");
-      Serial.print(TOUCH_PINS[i]);
-      Serial.print("): ");
-      Serial.println(touchValue);
-      
+      activeKey = i;
       break;  // Play only the first touched key (no polyphony!)
     }
   }
 
-  if (anyTouched) {
-    digitalWrite(LED_PIN, HIGH);
-  } else {
-    noTone(BUZZER_PIN);
-    digitalWrite(LED_PIN, LOW);
+  // Only update tone output when the state changes.
+  // This avoids calling tone() every loop iteration, which
+  // would reset the PWM timer and cause audible clicking.
+  if (activeKey != currentKey) {
+    if (activeKey >= 0) {
+      tone(BUZZER_PIN, NOTE_FREQS[activeKey]);
+      digitalWrite(LED_PIN, HIGH);
+      Serial.print("Playing key ");
+      Serial.println(activeKey);
+    } else {
+      noTone(BUZZER_PIN);
+      digitalWrite(LED_PIN, LOW);
+    }
+    currentKey = activeKey;
   }
 
   delay(20);  // Small delay to debounce and reduce CPU usage
@@ -609,6 +660,9 @@ void loop() {
 ```
 
 Upload this sketch, connect your conductive objects to the touch pins, and start playing! Each object you touch should produce a different note. If notes aren't triggering or are triggering without touch, adjust `TOUCH_THRESHOLD`.
+
+{: .note }
+> **Why track `currentKey`?** Without state tracking, the code would call `tone()` on *every* loop iteration while a key is held. This resets the ESP32's internal PWM timer each time, which can cause an audible clicking or stuttering artifact. By only calling `tone()` when the active key *changes* (and `noTone()` only on release), we get clean, steady tones. This is the same "edge detection" pattern used in [button debouncing](../arduino/debouncing.md)—react to *transitions*, not states.
 
 {: .note }
 > **Why `break` after the first touch?** The piezo buzzer can only play one tone at a time (just like in [Lesson 5](tone.md)). If you touched two pads simultaneously, we'd need to pick one—`break` ensures we play the first detected touch. For polyphonic output, you'd need multiple buzzers or an I2S audio output (a topic for a future lesson!).

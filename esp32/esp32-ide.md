@@ -120,6 +120,15 @@ To verify everything works, upload the built-in **Blink** example:
 {: .important }
 > On some ESP32-S3 boards, you may need to **press the Reset button** after uploading for the code to start running. This is a [known issue](https://github.com/espressif/arduino-esp32/issues) in the ESP32 Arduino core.
 
+### ESP32 blink built-in RGB LED
+
+You could also try to blink the built-in RGB LED that is available on some ESP32-S3 boards, including the Adafruit ESP32-S3 Feather.
+
+1. Open **File → Examples → ESP32 → GPIO → BlinkRGB** 
+2. Click the **Upload** button (→ arrow)
+3. Wait for "Done uploading" in the status bar
+4. The built-in RGB LED will flash white, off, red, green, blue, off and cycle.
+
 ## Troubleshooting
 
 ### Board doesn't appear in the port list

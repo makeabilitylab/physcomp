@@ -263,27 +263,27 @@ void setup() {
 }
 
 void loop() {
-  _pixel.setPixelColor(0, pixel.Color(255, 0, 0));    // Red
+  _pixel.setPixelColor(0, _pixel.Color(255, 0, 0));    // Red
   _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  _pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
+  _pixel.setPixelColor(0, _pixel.Color(0, 0, 0));      // Off
   _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  _pixel.setPixelColor(0, pixel.Color(0, 255, 0));    // Green
+  _pixel.setPixelColor(0, _pixel.Color(0, 255, 0));    // Green
   _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  _pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
+  _pixel.setPixelColor(0, _pixel.Color(0, 0, 0));      // Off
   _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  _pixel.setPixelColor(0, pixel.Color(0, 0, 255));    // Blue
+  _pixel.setPixelColor(0, _pixel.Color(0, 0, 255));    // Blue
   _pixel.show();
   delay(BLINK_DELAY_MS);
 
-  _pixel.setPixelColor(0, pixel.Color(0, 0, 0));      // Off
+  _pixel.setPixelColor(0, _pixel.Color(0, 0, 0));      // Off
   _pixel.show();
   delay(BLINK_DELAY_MS);
 }

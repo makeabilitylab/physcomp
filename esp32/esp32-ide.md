@@ -34,9 +34,6 @@ usetocbot: true
 
 This page walks through setting up the Arduino IDE to program ESP32 boards. If you haven't already, make sure you've installed the [Arduino IDE 2](https://www.arduino.cc/en/software) and reviewed our [Arduino IDE setup page](../arduino/arduino-ide.md)—the basics of the IDE (editor layout, `setup()`/`loop()`, selecting ports) are the same.
 
-{: .note }
-> Already comfortable with the Arduino IDE and just need the ESP32 board support URL? Here it is: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json`. Add it in **File → Preferences → Additional Board Manager URLs**, then install **esp32 by Espressif Systems** from the Boards Manager.
-
 ## Step 1: Add the ESP32 board support package
 
 The Arduino IDE doesn't include ESP32 support by default—you need to add Espressif's board support package.
@@ -44,9 +41,12 @@ The Arduino IDE doesn't include ESP32 support by default—you need to add Espre
 1. Open the Arduino IDE
 2. Go to **File → Preferences** (or **Arduino → Settings** on macOS)
 3. In the **Additional Board Manager URLs** field, add:
+   
    ```
    https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
    ```
+   {: .fs-1 }
+
    If you already have other URLs (such as the Adafruit AVR boards URL), separate them with commas.
 4. Click **OK**
 5. Open **Tools → Board → Boards Manager** (or click the Boards Manager icon in the left sidebar)

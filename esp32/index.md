@@ -32,23 +32,33 @@ Welcome 👋 to the **ESP32** module! The [ESP32](https://www.espressif.com/en/p
 
 For our tutorial series, we use **Adafruit's ESP32 boards** in the [Feather](https://learn.adafruit.com/adafruit-feather) form factor; however, you should be able to use almost any ESP32 board on the market and follow along (you might need to change pin numbers). Specifically, our lessons use:
 
-- The [**Adafruit ESP32-S3 Feather**](https://www.adafruit.com/product/5477) with 4MB Flash and 2MB PSRAM. This board features a dual-core 240 MHz Tensilica LX7 processor, native USB-C, WiFi, Bluetooth LE, a STEMMA QT connector, an onboard NeoPixel, and a LiPoly battery monitor.
+- The [**Adafruit ESP32-S3 Feather**](https://www.adafruit.com/product/5477) (4MB Flash, 2MB PSRAM) — our **primary board** for Spring 2026. Features native USB-C, WiFi, BLE 5.0, and an onboard NeoPixel.
 
-- The [**Adafruit Huzzah32 ESP32 Feather**](https://www.adafruit.com/product/3591), which uses the original ESP32 (dual-core Tensilica LX6). Our earlier code examples and Fritzing diagrams reference this board, but the concepts and code translate directly to the ESP32-S3.
+- The [**Adafruit Huzzah32 ESP32 Feather**](https://www.adafruit.com/product/3591) — uses the original ESP32. Our earlier videos and Fritzing diagrams reference this board, but all code transfers directly to the S3.
 
-Because both boards share the **Feather form factor** and use the same [ESP32 Arduino core](https://github.com/espressif/arduino-esp32), the lessons work with either board—you'll just need to consult the correct pin diagram. We'll note specific differences where they arise.
+Because both boards share the **Feather form factor** and use the same [ESP32 Arduino core](https://github.com/espressif/arduino-esp32), the lessons work with either board—you'll just need to consult the correct pin diagram. We'll note specific differences where they arise. See [Lesson 1](esp32.md) for detailed specs, pin diagrams, and a side-by-side comparison with the Arduino Uno.
 
 {: .highlight }
-> You can find far cheaper ESP32 boards on [AliExpress](https://www.aliexpress.com/w/wholesale-esp32.html) or [Amazon](https://www.amazon.com/s?k=esp+32+board)—sometimes just a few dollars—and our lessons should work with them too. Adafruit boards cost more but offer reliable quality, great documentation, and the [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings) of stackable expansion boards ("FeatherWings").
+> You can find far cheaper ESP32 boards on [AliExpress](https://www.aliexpress.com/w/wholesale-esp32.html) or [Amazon](https://www.amazon.com/s?k=esp+32+board)—sometimes just a few dollars—and our lessons should work with them too. Adafruit boards cost more but offer reliable build quality, thorough documentation, and the [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings) of stackable expansion boards ("FeatherWings").
 
-## The big differences from Arduino
+### Chips, modules, and development boards
+
+It's worth clarifying the supply chain—and differences between **chips**, **modules**, and **development boards**—since the terminology can be confusing and the layering actually explains the price differences you'll see online.
+
+- **The chip:** **Espressif** designs the ESP32-S3 *chip* (the bare SoC). Working with bare silicon is difficult: it requires custom printed circuit boards (PCBs), complex surface-mount soldering, and precise RF antenna tuning.
+- **The module:** To simplify manufacturing, Espressif packages the chip into *modules* (like the [ESP32-S3-WROOM-1](https://documentation.espressif.com/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)). Modules add flash memory, an integrated antenna, and metal RF shielding. Crucially, they are pre-certified by the FCC, saving hardware designers from expensive regulatory testing. However, you still can't easily plug a module into a laptop or a breadboard.
+- **The development board:** This is where the maker companies come in. They bridge the gap between industrial components and human-usable prototyping tools. They take the Espressif module and build a *development board* around it, adding the missing essentials: a USB connector, a USB interface for programming and serial communication, a 3.3V voltage regulator (since USB provides 5V), battery charging circuitry, and breadboard-friendly header pins.
+
+That's why an Adafruit Feather costs ~$18 while a bare Espressif module costs a few dollars. You're paying for the hardware that makes the chip accessible, standard form factors (like the plug-and-play [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings)), and high-quality documentation. Because your code targets the underlying ESP32-S3 chip, it runs identically across all these boards—only the pin layout and onboard peripherals differ. We discuss the specific pin diagrams for our boards in [Lesson 1](esp32.md).
+
+## How does the Arduino Uno or Leonardo differ from ESP32?
 
 If you're coming from the [Intro to Arduino](../arduino/index.md) series, here are the key things to know upfront:
 
 {: .warning }
 > The ESP32 runs on **3.3V power and logic**, not 5V like the Arduino Uno and Leonardo. This affects how you interface with sensors and LEDs—and you can damage your board by applying 5V to a GPIO pin! We'll cover this in detail in [Lesson 1](esp32.md).
 
-- **Way more power**: The ESP32 runs at up to 240 MHz with a 32-bit dual-core processor—15x faster than the 16 MHz, 8-bit ATmega chips in the Uno and Leonardo, with vastly more memory.
+- **Way more computational power**: The ESP32 runs at up to 240 MHz with a 32-bit dual-core processor—15x faster than the 16 MHz, 8-bit ATmega chips in the Uno and Leonardo, with vastly more memory.
 - **WiFi and Bluetooth built in**: No shields needed! This is what makes the ESP32 ideal for IoT projects.
 - **More pins, more PWM**: The ESP32 has more GPIO pins, and *all* of them can do PWM (not just 6 like the Uno).
 - **12-bit ADC**: The ESP32's analog-to-digital converter has 12-bit resolution (0–4095) compared to the Uno's 10-bit (0–1023).
@@ -90,7 +100,7 @@ Use the ESP32's 12-bit ADC to read a potentiometer and control an LED's brightne
 
 ### [Lesson 5: Playing Tones](tone.md)
 
-Learn how to play tones and melodies on the ESP32 using the LEDC PWM library. We'll also introduce our [Tone32.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Tone32.hpp) class, which adds play-duration support.
+Learn how to play tones and melodies on the ESP32 using the `tone()` function (now supported in ESP32 Arduino core v3.x!) and the LEDC PWM library.
 
 ### [Lesson 6: Capacitive Touch Sensing](capacitive-touch-sensing.md)
 
@@ -150,20 +160,6 @@ The ESP32-S3 Feather can get down to ~100µA in deep sleep. Cover:
 - mDNS for friendly hostnames (e.g., http://mydevice.local)
 - Compare to the IoT lesson: local control vs. cloud-based dashboards
 - Could use ESPAsyncWebServer library
-
-## Rewrite: Internet of Things (iot.md) [PLANNED]
-- Current lesson relies entirely on Adafruit IO, which is a paid service with
-  restrictive free-tier limits (30 data points/min, 30 day storage)
-- Rewrite to foreground fully open/free alternatives:
-  * MQTT with a self-hosted broker (Mosquitto) — teaches the actual protocol
-  * InfluxDB + Grafana for data storage and dashboards (free, self-hosted)
-  * Home Assistant integration (popular, open-source)
-  * ThingsBoard (open-source IoT platform)
-- Keep Adafruit IO as ONE example option (it IS convenient for quick demos)
-  but don't make it the only path
-- Teach MQTT concepts (publish/subscribe, topics, QoS) since these are
-  fundamental to IoT regardless of platform
-- Consider a progression: local web server (lesson above) → MQTT → cloud dashboard
 
 ## Lesson: ESP-NOW (Peer-to-Peer Communication)
 - What ESP-NOW is and how it differs from WiFi and BLE

@@ -57,6 +57,13 @@ For our lessons, we focus on two boards:
 
 <!-- There are literally dozens of ESP32 boards on the market, including Adafruit's [ESP32 series](https://www.adafruit.com/product/3405) and Sparkfun's [ESP32 series](https://www.sparkfun.com/products/13907). Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)). -->
 
+{: .note }
+> **What does "system-on-a-chip" mean?** 
+> A **system-on-a-chip (SoC)** integrates the essential components of a computer system—processing, memory, input/output, and often wireless communication—onto a single silicon microchip. The ESP32 packs a 32-bit dual-core processor, RAM, WiFi and Bluetooth radios, and advanced peripherals (like touch sensors and cryptographic hardware) into one tiny package. Consolidating these features drastically reduces the Bill of Materials (BOM) and manufacturing complexity. Instead of wiring separate computing and networking chips together, device makers just need the ESP32. This high integration, combined with massive economies of scale, is why powerful ESP32 development boards cost only a few dollars.
+> 
+> **How does this compare to the Arduino Uno?** 
+> The Uno's brain—the [ATmega328P](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)—is a traditional **microcontroller (MCU)**. While it also integrates a CPU, memory, and basic I/O on one chip, the scale and intent are entirely different. The 8-bit ATmega328P is designed for simple, single-threaded control tasks, such as reading a sensor, toggling a relay, controlling a short LED strip, or driving a small display. To add WiFi to an Uno, you have to attach a separate, comparatively expensive networking chip or "shield." By contrast, the ESP32 represents a significant architectural leap: a 32-bit SoC powerful enough to concurrently run a real-time operating system (FreeRTOS), manage complex network stacks, and control hardware natively.
+
 ## ESP32 vs. Arduino: comparison table
 
 Here's a side-by-side comparison of the Arduino Uno Rev3, the original ESP32, and the ESP32-S3. Data derived from [Espressif's official documentation](https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32s3/hw-reference/chip-series-comparison.html).
@@ -130,7 +137,7 @@ For our course, we use the [Adafruit ESP32-S3 Feather](https://www.adafruit.com/
 
 <!-- The ESP32 also has 2xI2S Audio, 2xDAC, 2xI2C (only one configured by default in the Feather Arduino IDE support), 3xSPI (only one configured by default in Feather IDE support). See [Adafruit overview](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview). -->
 
-While you can find far cheaper ESP32 boards on [AliExpress](https://www.aliexpress.com/w/wholesale-esp32.html) or [Amazon](https://www.amazon.com/s?k=esp+32+board), Adafruit produces reliable, well-documented products with the [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings) of stackable expansion boards ("FeatherWings"). For example, you can add an [MP3 Player FeatherWing](https://www.adafruit.com/product/3357), [a GPS FeatherWing](https://www.adafruit.com/product/3133), or a [DC Motor FeatherWing](https://www.adafruit.com/product/2927). Regardless of which ESP32 board you use, our lessons should help—just consult your board's specific pin diagram.
+As we discuss in the [module overview](index.md#chips-modules-and-development-boards), you can find far cheaper ESP32 boards online—our lessons work with any of them. We use Adafruit's Feather boards for their reliable build quality, thorough documentation, and the [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings) of stackable expansion boards ("FeatherWings") like the [MP3 Player](https://www.adafruit.com/product/3357), [GPS](https://www.adafruit.com/product/3133), and [DC Motor](https://www.adafruit.com/product/2927) FeatherWings.
 
 ### Powering the ESP32-S3 Feather
 

@@ -445,7 +445,7 @@ Look familiar? This code is *identical* to what you'd write on an Arduino Uno—
 You can play with the above LED fade `analogWrite` example on [Wokwi here](https://wokwi.com/projects/463817926218345473).
 
 {: .note }
-> Now that you know about both the LEDC and the `analogWrite` approch to driving PWM signals on the ESP32 GPIO pins, you should decide which is better for you and your program!
+> Now that you know about both the LEDC and the `analogWrite` approach to driving PWM signals on the ESP32 GPIO pins, you should decide which is better for you and your program!
 
 ## Bonus: Fade the NeoPixel through the rainbow 🌈
 

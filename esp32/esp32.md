@@ -58,18 +58,17 @@ For our lessons, we focus on two boards:
 <!-- There are literally dozens of ESP32 boards on the market, including Adafruit's [ESP32 series](https://www.adafruit.com/product/3405) and Sparkfun's [ESP32 series](https://www.sparkfun.com/products/13907). Search online for comparisons (*e.g.,* [link](https://makeradvisor.com/esp32-development-boards-review-comparison/)). -->
 
 {: .note }
-> **What does "system-on-a-chip" mean?** 
-> A **system-on-a-chip (SoC)** integrates the essential components of a computer system—processing, memory, input/output, and often wireless communication—onto a single silicon microchip. The ESP32 packs a 32-bit dual-core processor, RAM, WiFi and Bluetooth radios, and advanced peripherals (like touch sensors and cryptographic hardware) into one tiny package. Consolidating these features drastically reduces the Bill of Materials (BOM) and manufacturing complexity. Instead of wiring separate computing and networking chips together, device makers just need the ESP32. This high integration, combined with massive economies of scale, is why powerful ESP32 development boards cost only a few dollars.
+> **What does "system-on-a-chip" mean?** A **system-on-a-chip (SoC)** integrates the essential components of a computer system—processor, memory, I/O, and often wireless radios—onto a single silicon chip. The ESP32 packs a dual-core 32-bit processor, RAM, WiFi and Bluetooth radios, and advanced peripherals (like touch sensors and cryptographic hardware) into one tiny package. This high integration drastically reduces manufacturing complexity, which is why a complete ESP32 module can cost just a few dollars and full development boards are typically under $20. For more on how chips, modules, and development boards relate, see the [module overview](index.md#chips-modules-and-development-boards).
 > 
 > **How does this compare to the Arduino Uno?** 
-> The Uno's brain—the [ATmega328P](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)—is a traditional **microcontroller (MCU)**. While it also integrates a CPU, memory, and basic I/O on one chip, the scale and intent are entirely different. The 8-bit ATmega328P is designed for simple, single-threaded control tasks, such as reading a sensor, toggling a relay, controlling a short LED strip, or driving a small display. To add WiFi to an Uno, you have to attach a separate, comparatively expensive networking chip or "shield." By contrast, the ESP32 represents a significant architectural leap: a 32-bit SoC powerful enough to concurrently run a real-time operating system (FreeRTOS), manage complex network stacks, and control hardware natively.
+> In contrast, the Uno's brain—the [ATmega328P](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)—is a traditional **microcontroller (MCU)**. While it also integrates a CPU, memory, and basic I/O on one chip, it lacks WiFi, Bluetooth, and advanced peripherals. The 8-bit ATmega328P MCU is designed for simple, single-threaded control tasks, such as reading a sensor, toggling a relay, controlling a short LED strip, or driving a small display. To add WiFi to an Uno, you have to attach a separate, comparatively expensive networking chip or "shield."
 
 ## ESP32 vs. Arduino: comparison table
 
 Here's a side-by-side comparison of the Arduino Uno Rev3, the original ESP32, and the ESP32-S3. Data derived from [Espressif's official documentation](https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32s3/hw-reference/chip-series-comparison.html).
 
 {: .warning }
-> A major difference: the ESP32 runs at **3.3V**, **not 5V** like the Arduino Uno and Leonardo. This affects how you interface with electronic components via the GPIO pins. **Do not apply 5V to an ESP32 GPIO pin**—you can permanently damage the chip!
+> **The ESP32 runs at 3.3V, not 5V** like the Arduino Uno and Leonardo. This means GPIO pins output 3.3V when HIGH and expect no more than 3.3V as input. You can accidentally apply 5V to a GPIO pin in several ways: connecting a 5V sensor or module directly (many Arduino-oriented breakout boards output 5V logic), wiring a pin to the USB 5V rail (like the USB pin on your Feather), or using a voltage divider that doesn't step down far enough. **Applying 5V to a GPIO pin can permanently damage the chip.** If you need to interface with 5V devices, use a [level shifter](https://learn.adafruit.com/working-with-i2c-devices/the-i2c-level-shifter) or a voltage divider to bring the signal down to 3.3V. The good news: most common components we use in this course (LEDs, potentiometers, piezo buzzers, basic resistive sensors) work fine at 3.3V with no extra hardware.
 
 ### General features
 
@@ -131,12 +130,6 @@ For our course, we use the [Adafruit ESP32-S3 Feather](https://www.adafruit.com/
 | NeoPixel | ✖️ | ✖️ | ✅ (1 onboard) |
 | STEMMA QT | ✖️ | ✖️ | ✅ |
 
-<!-- This board is built on Espressif's [ESP32 WROOM](https://www.espressif.com/en/products/modules/esp-wroom-32/overview) module.  -->
-
-<!-- Recall that flash memory is where your compiled program is stored and SRAM is where your microcontroller creates and manipulates variables when it runs. -->
-
-<!-- The ESP32 also has 2xI2S Audio, 2xDAC, 2xI2C (only one configured by default in the Feather Arduino IDE support), 3xSPI (only one configured by default in Feather IDE support). See [Adafruit overview](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview). -->
-
 As we discuss in the [module overview](index.md#chips-modules-and-development-boards), you can find far cheaper ESP32 boards online—our lessons work with any of them. We use Adafruit's Feather boards for their reliable build quality, thorough documentation, and the [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings) of stackable expansion boards ("FeatherWings") like the [MP3 Player](https://www.adafruit.com/product/3357), [GPS](https://www.adafruit.com/product/3133), and [DC Motor](https://www.adafruit.com/product/2927) FeatherWings.
 
 ### Powering the ESP32-S3 Feather
@@ -144,7 +137,7 @@ As we discuss in the [module overview](index.md#chips-modules-and-development-bo
 {: .warning }
 > The ESP32-S3 Feather is **not** designed for external power supplies. Power it only via **USB-C** (5V) or a **LiPoly battery** (3.7/4.2V) connected to the JST port. **Do not** use a 9V battery—you will damage your board!
 
-The ESP32-S3 Feather has a built-in LiPoly battery charger. When USB is plugged in, the battery charges automatically. The onboard MAX17048 battery monitor reports voltage and charge percentage over I2C. The charge LED (yellow) lights when charging and turns off when complete. If no battery is plugged in, the charge LED may blink rapidly—this is harmless.
+The ESP32-S3 Feather has a built-in LiPoly battery charger. When USB is plugged in, the battery charges automatically. The onboard [MAX17048](https://www.analog.com/media/en/technical-documentation/data-sheets/max17048-max17049.pdf) battery monitor—added by Adafruit on the Feather board, not part of the ESP32-S3 chip—reports voltage and charge percentage over I2C. The charge LED (yellow) lights when charging and turns off when complete. If no battery is plugged in, the charge LED may blink rapidly—this is harmless.
 
 ## ESP32-S3 Feather pin diagram
 

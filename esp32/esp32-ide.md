@@ -52,14 +52,10 @@ The Arduino IDE doesn't include ESP32 support by default—you need to add Espre
 5. Open **Tools → Board → Boards Manager** (or click the Boards Manager icon in the left sidebar)
 6. Search for `esp32` and install the **esp32 by Espressif Systems** package. This may take a few minutes—it's a large download.
 
-<!-- TODO: Add Arduino IDE 2.x screenshots for each step. The existing screenshots are from IDE 1.x. -->
-
-![Screenshot showing how to add the ESP32 board URL in Arduino IDE Preferences](assets/images/ArduinoIDE_ESP32_PreferencesURLScreenshot.png)
-**Figure.** Adding the ESP32 board support URL in Arduino IDE Preferences. Note: this screenshot may show the older Arduino IDE 1.x layout—the preference location is the same in IDE 2.x.
-{: .fs-1 }
-
-![Screenshot of the Boards Manager showing the ESP32 package by Espressif](assets/images/ArduinoIDE_BoardsManagerESP32Screenshot.png)
-**Figure.** Installing the ESP32 board package from the Boards Manager.
+<video loop controls playsinline style="margin:0px" aria-label="Video showing how to install the ESP32 with the Arduino IDE board manager">
+  <source src="assets/videos/MacOS_ArduinoIDE_InstallingESP32Library_EditedAndCropped.mp4" type="video/mp4" />
+</video>
+**Video.** A screen recording of installing the ESP32 board in the Arduino IDE.
 {: .fs-1 }
 
 {: .important }
@@ -67,9 +63,6 @@ The Arduino IDE doesn't include ESP32 support by default—you need to add Espre
 
 {: .warning }
 > You may notice **two** ESP32 packages in the Boards Manager: **"Arduino ESP32 Boards" by Arduino** and **"esp32" by Espressif Systems**. These are different! The "Arduino ESP32 Boards" package only supports official Arduino-manufactured ESP32 boards (like the Arduino Nano ESP32). For the Adafruit ESP32-S3 Feather, Huzzah32, and most third-party ESP32 boards, you need **"esp32" by Espressif Systems**.
-
-<!-- TODO: Replace with an up-to-date screenshot. The current screenshot below shows
-     Arduino IDE 2.3.8 with esp32 3.3.8 installed and Arduino ESP32 Boards 2.0.18 available. -->
 
 ![Screenshot of Boards Manager in Arduino IDE 2.3.8 showing both ESP32 packages](assets/images/ArduinoIDE2_BoardsManager_ESP32Packages.png)
 **Figure.** The Arduino IDE Boards Manager showing two ESP32 packages. Install **"esp32" by Espressif Systems** (v3.x)—not "Arduino ESP32 Boards," which only supports official Arduino-branded ESP32 boards.
@@ -82,8 +75,8 @@ Plug in your ESP32 board via USB. In Arduino IDE 2.x, you can select both the bo
 - **ESP32-S3 Feather** (4MB Flash, 2MB PSRAM, PID 5477): select **"Adafruit Feather ESP32-S3 2MB PSRAM"**
 - **Huzzah32** (original ESP32): select **"Adafruit ESP32 Feather"**
 
-![Screenshot showing how to select the Adafruit ESP32 in the Board Manager menu](assets/images/ArduinoIDE_SelectAdafruitESP32Board.png)
-**Figure.** Selecting an Adafruit ESP32 board in the Arduino IDE board menu. Note: this screenshot is from the older Arduino IDE 1.x; the layout differs in IDE 2.x but the board names are the same.
+![Screenshot showing how to select the Adafruit ESP32 in the Board Manager menu](assets/images/MacOS_ArduinoIDE_SelectBoardFromDropDown.png)
+**Figure.** Selecting an Adafruit ESP32 board in the Arduino IDE board menu.
 {: .fs-1 }
 
 {: .warning }
@@ -96,10 +89,16 @@ If you used the unified dropdown in Step 2, the port may already be selected. Ot
 - **macOS:** `/dev/cu.usbmodem#` (ESP32-S3) or `/dev/cu.SLAB_USBtoUART` (Huzzah32)
 - **Linux:** `/dev/ttyACM#` (ESP32-S3) or `/dev/ttyUSB#` (Huzzah32)
 
+![Screenshot showing how to select the Adafruit ESP32 port tools menu](assets/images/MacOS_ArduinoIDE_SelectBoardAndPort.png)
+**Figure.** To explicitly select both the board and port, click on "Select other board and port..." in the board menu drop down.
+{: .fs-1 }
+
 {: .note }
-> **macOS users (Ventura 13+):** The first time you plug in your ESP32, macOS will show an **"Allow accessory to connect?"** dialog identifying the board as an "Espressif USB JTAG/serial debug unit." Click **Allow**—otherwise the board won't appear as a serial port. This is a macOS security feature for USB data accessories and only appears once per device.
+> **macOS users (Ventura 13+):** The first time you plug in your ESP32, macOS will show an **"Allow accessory to connect?"** dialog identifying the board and asking to connect. Click **Allow**—otherwise the board won't appear as a serial port. This is a macOS security feature for USB data accessories and only appears once per device.
 >
-> <!-- TODO: Add screenshot of the macOS "Allow accessory to connect?" dialog -->
+> ![Screenshot showing the "Allow accessory to connect?" warning](assets/images/MacOS_AllowAccesoryToConnect_ESP32-S3.png)
+> **Figure.** On the Mac, you might get a security dialog asking "Allow accessory to connect?". Select "yes."
+> {: .fs-1 }
 
 {: .note }
 > **ESP32-S3 Feather:** This board has **native USB**, so it should appear as a serial port automatically—no driver installation needed on any operating system.
@@ -165,14 +164,11 @@ This is a one-time install (~150 MB) and takes under a minute. Newer Apple Silic
 
 This usually means the board is stuck or the bootloader can't be reached. Try the BOOT-button method described above. If that doesn't work, try a different USB port or cable.
 
-<!-- TODO: Add information about Arduino IDE 2.x specific issues, such as the board
-     auto-detection feature and how it interacts with ESP32 native USB -->
-
 ### Decoding crash errors in Serial Monitor
 
 If your ESP32 crashes, you'll see a "Guru Meditation Error" followed by a register dump and hex backtrace in the Serial Monitor. This looks alarming but is actually useful—it contains the exact location of the crash. To decode it into human-readable file names and line numbers, you can use an exception decoder tool. Unfortunately, the tooling situation is fragmented as of 2026: the [original EspExceptionDecoder](https://github.com/me-no-dev/EspExceptionDecoder) only works with the legacy Arduino IDE 1.x, and the [dankeboy36 fork](https://github.com/dankeboy36/esp-exception-decoder) has shifted its focus to VS Code. If you use VS Code with PlatformIO or the Arduino extension, the dankeboy36 decoder works well. For Arduino IDE 2.x users, you may need to [manually install a 1.x VSIX release](https://github.com/dankeboy36/esp-exception-decoder/tree/1.1.1). Alternatively, if you have [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html) installed, the [`idf.py monitor`](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/tools/idf-monitor.html) command automatically decodes backtraces in real time.
 
-<!-- TODO: revisit this when Arduino IDE 2.x or 3.x improves plugin support -->
+<!-- TODO: potentially revisit this when Arduino IDE 2.x or 3.x improves plugin support -->
 
 ## ESP32 Arduino core version: v2 vs. v3
 

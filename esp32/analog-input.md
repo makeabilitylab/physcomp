@@ -58,16 +58,16 @@ The key differences are in the hardware.
 
 ### 12-bit ADC (0–4095)
 
-The Arduino Uno has a **10-bit** ADC, so `analogRead()` returns values from 0 to $$2^{10}-1 = 1023$$. The ESP32 has a **12-bit** ADC, so `analogRead()` returns values from 0 to $$2^{12}-1 = 4095$$. This means the ESP32 can distinguish finer voltage differences—each step represents about 0.8mV ($$3.3\text{V} \div 4096 \approx 0.0008\text{V}$$) compared to the Uno's ~4.9mV per step ($$5\text{V} \div 1024 \approx 0.0049\text{V}$$).
+The Arduino Uno has a **10-bit** ADC, so `analogRead()` returns values from 0 to $$2^{10}-1 = 1023$$. The ESP32 has a **12-bit** ADC, so `analogRead()` returns values from 0 to $$2^{12}-1 = 4095$$. This means the ESP32 can distinguish finer voltage differences—each step represents about 0.8mV (that is, $$3.3\text{V} \div 4096 \approx 0.0008\text{V}$$) compared to the Uno's ~4.9mV per step ($$5\text{V} \div 1024 \approx 0.0049\text{V}$$).
 
 {: .warning }
 > **Don't forget:** The ESP32 operates at **3.3V**, not 5V. So `analogRead()` returns 4095 at 3.3V, not at 5V. If you're porting Arduino Uno code that assumes a 0–1023 range or a 5V reference, you'll need to update those values!
 
 ### ADC pins: chip vs. board
 
-The **ESP32-S3 chip** integrates two 12-bit SAR ADCs supporting **20 channels** total: ADC1 has 10 channels (GPIO1–GPIO10) and ADC2 has 10 channels (GPIO11–GPIO20). However, not all 20 are broken out on every development board—the board manufacturer chooses which GPIOs to expose on the header pins.
+The **ESP32-S3 chip** integrates two 12-bit SAR (Successive Approximation Register) ADCs supporting **20 channels** total: ADC1 has 10 channels (GPIO1–GPIO10) and ADC2 has 10 channels (GPIO11–GPIO20). However, not all 20 are broken out on every development board—the board manufacturer chooses which GPIOs to expose on the header pins.
 
-On the **Adafruit ESP32-S3 Feather**, **15 ADC-capable pins** are available. While only six are labeled A0–A5, many of the digital pins also support analog input:
+On the **Adafruit ESP32-S3 Feather**, **15 ADC-capable pins** are available. Six carry the conventional Arduino "A" prefix (A0–A5), but this labeling is just an Arduino ecosystem convention for discoverability—it doesn't indicate special hardware. Electrically, `analogRead(A5)` and `analogRead(9)` use the exact same 12-bit SAR ADC, and any ADC-capable GPIO works identically with `analogRead()`:
 
 | Pin label | GPIO | ADC | Channel |
 |---|---|---|---|
@@ -87,15 +87,16 @@ On the **Adafruit ESP32-S3 Feather**, **15 ADC-capable pins** are available. Whi
 | SDA | GPIO3 | ADC1 | CH2 |
 | SCL | GPIO4 | ADC1 | CH3 |
 
-<!-- TODO: Consider creating an annotated version of the pin diagram that specifically highlights ADC pins -->
+{: .warning }
+> **Pin names in code:** The `A0`–`A5` labels are defined as macros in the ESP32 Arduino core (*e.g.*, `A5` maps to GPIO8), so `analogRead(A5)` works as expected. However, the "D" prefix on the silkscreen (*e.g.*, D5, D9) is **not** defined in code—`analogRead(D5)` won't compile. For those pins, use the GPIO number directly: `analogRead(5)` for the pin labeled D5, `analogRead(9)` for D9, and so on.
 
-![ESP32-S3 Feather pin diagram](assets/images/AdafruitESP32-S3FeatherPinDiagram.png)
-**Figure.** Pin diagram for the Adafruit ESP32-S3 Feather. ADC-capable pins are highlighted in teal. Note that ADC1 pins (including A5, D5, D6, D9, D10, SDA, and SCL) work even when WiFi is active, while ADC2 pins (A0–A4, D11–D13) do not. See the Adafruit [pinouts guide](https://learn.adafruit.com/adafruit-esp32-s3-feather/pinouts) for details.
+![ESP32-S3 Feather pin diagram with analog inputs highlighted](assets/images/Adafruit-ESP32-S3-Feather_PinDiagram_AnalogInputsHighlighted.png)
+**Figure.** Pin diagram for the Adafruit ESP32-S3 Feather highlighting the 15 ADC-capable pins. The "A0–A5" labels are an Arduino convention; the nine other ADC pins (D5, D6, D9–D13, SDA, SCL) are functionally identical for analog input. Note that ADC1 pins (A5, D5, D6, D9, D10, SDA, SCL) work even when WiFi is active, while ADC2 pins (A0–A4, D11–D13) do not. See the Adafruit [pinouts guide](https://learn.adafruit.com/adafruit-esp32-s3-feather/pinouts) for details.
 {: .fs-1 }
 
 ### ADC2 and WiFi
 
-Why does the ADC1 vs. ADC2 distinction matter? Because **ADC2 is unavailable when WiFi is active**—this is a hardware limitation on all ESP32 variants (on the ESP32-S3, a hardware arbiter allows limited sharing, but WiFi takes priority and ADC2 reads will intermittently fail). If your project uses WiFi and analog input simultaneously, you must use an ADC1 pin.
+Why does the ADC1 vs. ADC2 distinction matter? Because **ADC2 is shared with the WiFi radio**—a hardware limitation on all ESP32 variants. On the original ESP32, ADC2 reads fail outright when WiFi is active (returning `ESP_ERR_TIMEOUT`). The ESP32-S3 improves on this with a hardware arbiter that allows ADC2 and WiFi to share access, but WiFi has higher priority—so ADC2 reads will intermittently return invalid data under WiFi traffic. The practical advice is the same: if your project uses WiFi and analog input simultaneously, use an ADC1 pin.
 
 {: .important }
 > For this lesson, we'll use **A5** for our potentiometer input. A5 is on **ADC1**, which means it works whether WiFi is on or off—a good habit to build for when you add WiFi in [Lesson 7](iot.md). If you need more WiFi-compatible analog inputs, D5, D6, D9, and D10 are also on ADC1 (though SDA and SCL are typically reserved for I2C).
@@ -221,11 +222,11 @@ The core idea is simple: read the potentiometer → convert the value → write 
   const int MAX_ANALOG_VAL = 1023;  // AVR Arduinos have a 10-bit ADC (0-1023)
 #endif
 
-const int LED_OUTPUT_PIN = 13;      // GPIO 13 = LED_BUILTIN on ESP32-S3 Feather
-const int POT_INPUT_PIN = A5;       // A5 is on ADC1 — works even when WiFi is active
+const int LED_OUTPUT_PIN = 13; // GPIO 13 = LED_BUILTIN on ESP32-S3 Feather
+const int POT_INPUT_PIN = A5;  // A5 is on ADC1; works even when WiFi is active
 
-const int PWM_FREQ = 5000;          // 5 kHz PWM frequency
-const int PWM_RESOLUTION = 8;       // 8-bit resolution: duty cycle 0-255
+const int PWM_FREQ = 5000;     // 5 kHz PWM frequency
+const int PWM_RESOLUTION = 8;  // 8-bit resolution: duty cycle 0-255
 const int MAX_DUTY_CYCLE = (1 << PWM_RESOLUTION) - 1;  // 2^8 - 1 = 255
 
 void setup() {
@@ -266,7 +267,7 @@ At the top, we use `#if defined(ESP32)` to set `MAX_ANALOG_VAL` to the correct v
 The potentiometer gives us a value from 0 to 4095 (12-bit ADC), but `ledcWrite` expects 0 to 255 (8-bit PWM). The [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/) function performs this linear conversion for us:
 
 ```cpp
-//                  value, fromLow, fromHigh, toLow, toHigh
+// The map function takes (value, fromLow, fromHigh, toLow, toHigh)
 int dutyCycle = map(potVal, 0, MAX_ANALOG_VAL, 0, MAX_DUTY_CYCLE);
 ```
 
@@ -424,7 +425,7 @@ The original Huzzah32 does not have an onboard NeoPixel. You can connect an exte
 In this lesson, you combined analog input with PWM output to build a physical LED dimmer—and controlled the NeoPixel's color with a knob! The key takeaways:
 
 - `analogRead()` works the same on the ESP32 as on the Arduino Uno—but the ESP32's **12-bit ADC** returns values from 0 to 4095 (compared to the Uno's 10-bit range of 0–1023). Don't forget to update your constants when porting code!
-- The **ESP32-S3 chip** has 20 ADC channels total (10 on ADC1, 10 on ADC2). The Adafruit ESP32-S3 Feather exposes **15** of these. Only **A5** among the "A"-labeled pins is on ADC1; but D5, D6, D9, and D10 are also on ADC1.
+- The **ESP32-S3 chip** has 20 ADC channels total (10 on ADC1, 10 on ADC2). The Adafruit ESP32-S3 Feather exposes **15** of these. The "A0–A5" labels are an Arduino convention—pins like D5, D6, D9, and D10 are equally capable analog inputs using the same ADC hardware. Only **A5** among the "A"-labeled pins is on ADC1. In code, use `analogRead(A5)` for "A"-prefixed pins, but `analogRead(5)` (the GPIO number) for "D"-prefixed pins like D5.
 - **ADC2 is unavailable when WiFi is active**—a hardware limitation on all ESP32 variants. Use ADC1 pins if your project needs both WiFi and analog input.
 - The [`map()`](https://www.arduino.cc/reference/en/language/functions/math/map/) function is essential for converting between different value ranges—in this case, mapping 12-bit ADC input (0–4095) to 8-bit PWM output (0–255).
 - **Preprocessor defines** (`#if defined(ESP32)`) let you write a single codebase that compiles correctly on both ESP32 and Arduino boards—the preprocessor swaps in the right constants before compilation.

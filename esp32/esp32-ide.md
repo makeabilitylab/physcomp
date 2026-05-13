@@ -93,12 +93,12 @@ If you used the unified dropdown in Step 2, the port may already be selected. Ot
 **Figure.** To explicitly select both the board and port, click on "Select other board and port..." in the board menu drop down.
 {: .fs-1 }
 
-{: .note }
-> **macOS users (Ventura 13+):** The first time you plug in your ESP32, macOS will show an **"Allow accessory to connect?"** dialog identifying the board and asking to connect. Click **Allow**—otherwise the board won't appear as a serial port. This is a macOS security feature for USB data accessories and only appears once per device.
->
-> ![Screenshot showing the "Allow accessory to connect?" warning](assets/images/MacOS_AllowAccesoryToConnect_ESP32-S3.png)
-> **Figure.** On the Mac, you might get a security dialog asking "Allow accessory to connect?". Select "yes."
-> {: .fs-1 }
+
+If you are a **MacOS user (Ventura 13+),** the first time you plug in your ESP32, macOS will show an **"Allow accessory to connect?"** dialog identifying the board and asking to connect. Click **Allow**—otherwise the board won't appear as a serial port. This is a macOS security feature for USB data accessories and only appears once per device.
+
+![Screenshot showing the "Allow accessory to connect?" warning](assets/images/MacOS_AllowAccesoryToConnect_ESP32-S3.png)
+**Figure.** On the Mac, you might get a security dialog asking "Allow accessory to connect?". Select "yes."
+{: .fs-1 }
 
 {: .note }
 > **ESP32-S3 Feather:** This board has **native USB**, so it should appear as a serial port automatically—no driver installation needed on any operating system.

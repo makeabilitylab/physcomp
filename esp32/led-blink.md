@@ -388,7 +388,7 @@ void rgbLedWriteWithBrightness(uint8_t pin, uint8_t r, uint8_t g, uint8_t b, uin
 ### Workbench video of rgbLedWriteWithBrightness
 
 <video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 blinking the onboard NeoPixel RGB LED using the built-in rgbLedWrite() function with adjustable brightness">
-  <source src="assets/videos/ESP32-S3-BlinkingBuiltInNeoPixelUsingRgbLedWrite_optimized_muted.mp4" type="video/mp4">
+  <source src="assets/videos/ESP32-S3-BlinkingBuiltInNeoPixelUsingRgbLedWrite2_optimized_muted.mp4" type="video/mp4">
 </video>
 **Video.** A workbench video of blinking internal RGB LED on the Adafruit ESP32-S3.
 {: .fs-1 }

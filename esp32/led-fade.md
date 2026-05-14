@@ -20,12 +20,10 @@ nav_order: 3
 
 In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/PWM) output on the ESP32 to smoothly fade an LED on and off. This is where our ESP32 lessons begin to diverge from our Arduino [Intro to Output](../arduino/intro-output.md) series—the ESP32 uses a different, more powerful PWM system than the Arduino Uno or Leonardo.
 
-<!-- TODO: Replace with <video> showing fade on ESP32-S3 Feather -->
-<video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
-  <source src="assets/movies/Huzzah32_Fade-optimized.mp4" type="video/mp4">
-  <img src="assets/movies/Huzzah32_Fade-optimized.gif" alt="Animation of an LED fading on and off on an ESP32 board">
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 cross fading an external red LED">
+  <source src="assets/videos/ESP32-S3-FadingExternalLed_optimized_muted.mp4" type="video/mp4">
 </video>
-**Video.** An LED smoothly fading on and off using PWM on the ESP32.
+**Video.** A workbench video of fading an external LED on the Adafruit ESP32-S3.
 {: .fs-1 }
 
 {: .note }
@@ -381,13 +379,10 @@ void loop() {
 
 ### Workbench video
 
-<!-- TODO: Record a workbench video showing the fade circuit on the ESP32-S3 Feather. -->
-
-<video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
-  <source src="assets/movies/Huzzah32_Fade-optimized.mp4" type="video/mp4">
-  <img src="assets/movies/Huzzah32_Fade-optimized.gif" alt="Animation of an LED fading on and off on an ESP32 board">
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 cross fading an external red LED">
+  <source src="assets/videos/ESP32-S3-FadingExternalLed_optimized_muted.mp4" type="video/mp4">
 </video>
-**Video.** LED fading on the Huzzah32 using the LEDC PWM library.
+**Video.** A workbench video of fading an external LED on the Adafruit ESP32-S3.
 {: .fs-1 }
 
 <!-- TODO: consider an example that uses multiple channels to flash different freqs -->

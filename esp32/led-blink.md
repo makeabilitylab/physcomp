@@ -167,7 +167,7 @@ Compare this to the ~13.6mA we'd get on a 5V Arduino Uno ($$\frac{5V - 2V}{220Ω
 
 ### The code
 
-The code is identical to Part 1. If you used `LED_BUILTIN` (which maps to GPIO 13), your external LED on GPIO 13 is already blinking! If you wired your LED to a different pin, just change the constant. We're keeping ours on `LED_BUILTIN` (GPIO 13), so we'll wire up the external LED to GPIO 13 as well—then the internal and external LEDs will blink in sync.
+The code is identical to Part 1. If you used `LED_BUILTIN` (which maps to GPIO 13 on the Adafruit ESP32-S3), your external LED on GPIO 13 is already blinking! If you wired your LED to a different pin, just change the constant. We're keeping ours on `LED_BUILTIN` (GPIO 13), so we'll wire up the external LED to GPIO 13 as well—then the internal and external LEDs will blink in sync.
 
 ```cpp
 const int LED_OUTPUT_PIN = LED_BUILTIN;  // change to whatever GPIO pin you used
@@ -307,13 +307,17 @@ Upload this and watch your NeoPixel cycle through red, green, and blue! Try chan
 
 #### Add brightness control
 
-If you ran this program on your own ESP32-S3, you may have noticed that the RGB LED is **very bright** 😎 (yikes!). With `rgbLedWrite()`, you control brightness by scaling down the R, G, B values themselves—there's no separate brightness parameter. For example, `rgbLedWrite(RGB_BUILTIN, 128, 0, 0)` gives you a dimmer red than `(255, 0, 0)`.
+If you ran this program on your own ESP32-S3, you may have noticed that the RGB LED is **very bright** 😎 (yikes!). With `rgbLedWrite()`, you can control brightness by scaling down the R, G, B values themselves—there's no separate brightness parameter. For example, `rgbLedWrite(RGB_BUILTIN, 128, 0, 0)` gives you a dimmer red than `(255, 0, 0)`.
 
 We can thus create a small utility function to help us provide brightness control:
 
 ```cpp
-void rgbLedWriteWithBrightness(uint8_t pin, uint8_t r, uint8_t g, uint8_t b, uint8_t brightness) {
-  rgbLedWrite(pin, (r * brightness) / 255, (g * brightness) / 255, (b * brightness) / 255);
+void rgbLedWriteWithBrightness(uint8_t pin, uint8_t r, uint8_t g, uint8_t b, 
+                               uint8_t brightness) {
+  rgbLedWrite(pin, 
+             (r * brightness) / 255, 
+             (g * brightness) / 255, 
+             (b * brightness) / 255);
 }
 ```
 

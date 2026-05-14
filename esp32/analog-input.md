@@ -115,7 +115,7 @@ If you're porting Arduino Uno code and don't want to change all your 0–1023 co
 analogReadResolution(10);  // Now analogRead() returns 0-1023, like the Uno
 ```
 
-We won't use this in our lesson (we'll embrace the full 12-bit range), but it's a handy trick when migrating existing code.
+We won't use this in our lesson (we'll embrace the full 12-bit range), but it can be useful when migrating existing code.
 
 ### Writing portable code with preprocessor defines
 
@@ -136,7 +136,7 @@ Here's a pattern you'll see in many of our examples:
 When you compile for the ESP32-S3, the preprocessor sees that `ESP32` is defined and includes `4095`. When you compile for the Arduino Uno, `ESP32` is *not* defined, so it falls through to the `#else` block and uses `1023`. The rest of your code just uses `MAX_ANALOG_VAL` and works on both boards without any changes.
 
 {: .note }
-> You've already seen this mechanism in action! The `#if defined(NEOPIXEL_POWER)` guard we used in the [NeoPixel sections](led-blink.md#part-4-blink-the-onboard-neopixel-) works the same way—the board support package defines `NEOPIXEL_POWER` only for boards that have a NeoPixel power pin. If the symbol isn't defined, the code inside the block is silently skipped.
+> You've already seen this mechanism in action! The `#if defined(NEOPIXEL_POWER)` guard we used in blinking on the on-board [NeoPixel](led-blink.md#part-4-blink-the-onboard-neopixel-) in the [LED blink lesson](led-blink.md) works the same way. The board support package defines `NEOPIXEL_POWER` only for boards that have a NeoPixel power pin. If the symbol isn't defined, the code inside the block is silently skipped.
 
 We'll use this pattern in our pot-fade code below.
 
@@ -177,7 +177,7 @@ In the following video, we test all 13 analog input pins (`A0`–`A12`) using a 
 
 ## Let's build a potentiometer-controlled LED fader!
 
-Now let's put analog input and PWM output together. We'll read the potentiometer's position with `analogRead()` and use that value to control the LED's brightness with `ledcWrite()`.
+Now let's put analog input and PWM output together. We'll read the potentiometer's position with `analogRead()` and use that value to control the LED's brightness with `ledcWrite()`. This is exactly what we did in the [potentiometers lesson](../arduino/potentiometers.md) in the ["Intro to Arduino" series](../arduino/index.md).
 
 ### The circuit
 
@@ -185,9 +185,7 @@ We're combining two simple circuits:
 1. **Input:** A 10kΩ potentiometer connected to **A5** (the ADC1 pin). Wire the outer legs to 3.3V and GND, and the center wiper to A5.
 2. **Output:** An LED on **GPIO 13** through a 220Ω resistor (same as the [Blink](led-blink.md) and [Fade](led-fade.md) lessons)
 
-<!-- TODO: Create an ESP32-S3 Feather Fritzing diagram showing:
-     - Potentiometer: outer legs to 3.3V and GND, wiper to A5
-     - LED: GPIO 13 → 220Ω resistor → LED anode, LED cathode → GND -->
+Here's the circuit diagram showing a no breadboard version (perhaps wired with alligator clips), a breadboarded version, and a schematic.
 
 ![Circuit diagram for potentiometer-controlled LED fader](assets/images/Adafruit_ESP32-S3-Feather_PotFade_CircuitDiagram.png)
 **Figure.** Circuit diagram showing a potentiometer on A5 (analog input) and an LED on GPIO 13 (PWM output) on the ESP32-S3 Feather.
@@ -301,7 +299,7 @@ Here's a workbench video showing the pot-fade circuit on the Huzzah32, with the 
 
 </details>
 
-### Try it in Wokwi
+### Try pot-fade in Wokwi
 
 <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the pot-controlled LED fade running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-PotFade_optimized_muted.mp4" type="video/mp4" />
@@ -309,13 +307,13 @@ Here's a workbench video showing the pot-fade circuit on the Huzzah32, with the 
 **Video.** The potentiometer-controlled LED brightness circuit and sketch running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463962426121286657).
 {: .fs-1 }
 
-You can also build this circuit in the [Wokwi simulator](https://wokwi.com/). Add a potentiometer and an LED to the ESP32-S3 DevKitC, and use the same code above.
+You can also build this circuit yourself in the [Wokwi simulator](https://wokwi.com/projects/new/esp32). Add a potentiometer and an LED to the ESP32-S3 DevKitC, and use the same code above. Or, you can start with [our version](https://wokwi.com/projects/463962426121286657) and modify it.
 
 **[→ Open the Pot Fade simulation in Wokwi](https://wokwi.com/projects/463962426121286657)**
 
 ### Using `analogWrite` instead
 
-Just like in the [LED fade lesson](led-fade.md#using-analogwrite-instead), you can simplify the output side by using `analogWrite()` instead of the LEDC API:
+Just like in the [LED fade lesson](led-fade.md#using-analogwrite-instead), you can simplify the output side by using `analogWrite()` instead of the LEDC API, which defaults to 1kHz PWM waveforms at 8-bit resolution.
 
 ```cpp
 /**
@@ -423,8 +421,19 @@ Turn the potentiometer slowly and watch the NeoPixel sweep through the entire ra
 <summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>
 
 The original Huzzah32 does not have an onboard NeoPixel. You can connect an external NeoPixel to a GPIO pin and update `PIN_NEOPIXEL` accordingly. See the [Addressable LEDs lesson](../advancedio/addressable-leds.md) for wiring details.
-
 </details>
+
+### Try Pot-controlled RGB crossfade in Wokwi
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the pot-controlled RGB LED crossfade running in the Wokwi simulator">
+  <source src="assets/videos/Wokwi_ESP32-S3-PotCrossFade_RGBLED_optimized_muted.mp4" type="video/mp4" />
+</video>
+**Video.** The potentiometer-controlled RGB cross-fade circuit and sketch running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463996193959530497).
+{: .fs-1 }
+
+You can also build this circuit yourself in the [Wokwi simulator](https://wokwi.com/projects/new/esp32) or you can start with [our version](https://wokwi.com/projects/463996193959530497) and modify it.
+
+**[→ Open the Pot RGB cross fade simulation in Wokwi](https://wokwi.com/projects/463996193959530497)**
 
 ## Summary
 

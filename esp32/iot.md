@@ -53,7 +53,7 @@ That's the promise of the **Internet of Things (IoT)**: connecting physical devi
 
 ## What is IoT?
 
-The term "Internet of Things" refers to the network of physical objects—sensors, appliances, wearables, vehicles—that are connected to the internet and can exchange data. Your Fitbit tracking your steps, a Nest thermostat adjusting your home's temperature, a city's air quality sensors feeding a public dashboard—these are all IoT systems.
+The term **"Internet of Things"** (IoT) refers to the network of physical objects—sensors, appliances, wearables, vehicles—that are connected to the internet and can exchange data. Your Fitbit tracking your steps, a Nest thermostat adjusting your home's temperature, a city's air quality sensors feeding a public dashboard—these are all IoT systems.
 
 At its core, every IoT system has the same basic architecture:
 
@@ -66,17 +66,17 @@ In this lesson, we'll build all four layers: the ESP32 reads a photoresistor (de
 
 ## How IoT communication works
 
-IoT devices communicate with cloud platforms using standard internet protocols. The two most common are **REST** (HTTP) and **MQTT**. Understanding the difference will help you choose the right approach for your projects.
+IoT devices communicate with cloud platforms using standard internet protocols. The two most common are [**REST**](https://developer.mozilla.org/en-US/docs/Glossary/REST) (HTTP) and [**MQTT**](https://mqtt.org/). Understanding the difference will help you choose the right approach for your projects.
 
 ### REST APIs (HTTP)
 
-If you've done any web development, you're already familiar with REST. Your device makes standard HTTP requests—`GET` to read data, `POST` to send data—to a cloud server's API endpoints. It's the same technology your web browser uses to load a webpage.
+If you've done any web development, you're already familiar with [**REST**](https://developer.mozilla.org/en-US/docs/Glossary/REST). Your device makes standard HTTP requests—[`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/GET) to read data, [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/POST) to send data—to a cloud server's API endpoints. It's the same technology your web browser uses to load a webpage.
 
 REST is simple and widely supported, but it has a drawback for IoT: every communication requires the device to initiate a new HTTP connection. This is fine for periodic uploads ("send the temperature every 30 seconds") but inefficient for real-time, bidirectional communication.
 
 ### MQTT protocol
 
-[MQTT](https://mqtt.org/) (Message Queuing Telemetry Transport) is a lightweight messaging protocol designed specifically for IoT. It uses a **publish/subscribe** model:
+In contrast, [**MQTT**](https://mqtt.org/) (Message Queuing Telemetry Transport) is a lightweight messaging protocol designed specifically for IoT. It uses a **publish/subscribe** model:
 
 - Devices **publish** data to named **topics** (like `sensors/temperature`)
 - Other devices or dashboards **subscribe** to those topics to receive updates
@@ -92,7 +92,7 @@ MQTT is designed for constrained devices and unreliable networks—it has very l
 
 ## IoT platforms overview
 
-There are many IoT platforms available that handle the cloud infrastructure for you—data storage, dashboards, alerts, and APIs—so you can focus on the hardware and firmware. Here are the most popular options for makers and students:
+There are many IoT platforms available that handle the cloud infrastructure for you—data storage, dashboards, alerts, and APIs—so you can focus on your circuits and software. Here are the most popular options for makers and students:
 
 | Platform | Free Tier | Protocol | Best For |
 |---|---|---|---|
@@ -164,7 +164,7 @@ You'll need the following components. We use **[Adafruit's ESP32-S3 Feather](htt
 
 | Breadboard | ESP32 | LED | Resistors | Photoresistor |
 | ---------- |:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![Resistors]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Photoresistor]({{ site.baseurl }}/assets/images/Photoresistor_100h.png) |
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![Resistors]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Photoresistor](assets/images/PhotosensitiveResistor_200h.jpg) |
 | Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Red LED | 220Ω + 10kΩ Resistors | Photoresistor |
 
 {: .note }
@@ -248,12 +248,12 @@ Here's the full sketch. It reads the photoresistor, maps the value to LED bright
  * http://makeabilitylab.io
  */
 
-/************************** Configuration ***********************************/
+/*** Configuration ***/
 // Edit the config.h tab and enter your Adafruit IO credentials
 // and WiFi network name/password
 #include "config.h"
 
-/******************** Photoresistor + LED Pins *****************************/
+/*** Photoresistor + LED Pins ***/
 const int PHOTOCELL_INPUT_PIN = A5;   // Must be an ADC1 pin (WiFi uses ADC2)
 const int LED_OUTPUT_PIN = 13;        // GPIO 13 (also LED_BUILTIN)
 
@@ -267,11 +267,11 @@ const int MAX_PHOTOCELL_VAL = 3500;   // analogRead value in brightest condition
 // set to false. See: https://makeabilitylab.github.io/physcomp/sensors/photoresistors.html
 const boolean PHOTOCELL_IS_R2_IN_VOLTAGE_DIVIDER = false;
 
-/************************** Adafruit IO Feed ********************************/
+/*** Adafruit IO Feed ***/
 // This feed name will appear at: https://io.adafruit.com/<username>/feeds
 AdafruitIO_Feed *_adafruitIoFeed = io.feed("lightlevel");
 
-/************************** Timing (non-blocking) ***************************/
+/*** Timing (non-blocking) ***/
 unsigned long _lastSensorReadMs = 0;
 unsigned long _lastUploadMs = 0;
 int _lastUploadedVal = -1;
@@ -312,13 +312,13 @@ void loop() {
 
   unsigned long now = millis();
 
-  // --- Read sensor on a schedule (non-blocking) ---
+  // Read sensor on a schedule (non-blocking)
   if (now - _lastSensorReadMs >= SENSOR_READ_INTERVAL_MS) {
     _lastSensorReadMs = now;
 
     int photocellVal = analogRead(PHOTOCELL_INPUT_PIN);
 
-    // --- Upload to Adafruit IO (with rate limiting) ---
+    // Upload to Adafruit IO (with rate limiting)
     bool valueChanged = (photocellVal != _lastUploadedVal);
     unsigned long elapsed = now - _lastUploadMs;
 
@@ -335,7 +335,7 @@ void loop() {
       _lastUploadMs = millis();
     }
 
-    // --- Map photoresistor value to LED brightness ---
+    // Map photoresistor value to LED brightness
     int ledBrightness = map(photocellVal, MIN_PHOTOCELL_VAL, MAX_PHOTOCELL_VAL, 0, 255);
     ledBrightness = constrain(ledBrightness, 0, 255);
 

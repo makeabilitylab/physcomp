@@ -55,12 +55,12 @@ If you completed our [Intro to Arduino tone lesson](../arduino/tone.md), you'll 
 
 ## Materials
 
-You'll need the same materials as the [last lesson](analog-input.md) plus a piezo buzzer. We use **[Adafruit's ESP32-S3 Feather](https://www.adafruit.com/product/5477)** but any ESP32-S3 board will work!
+To start, you just need a piezo buzzer, a breadboard, and an ESP32. We use **[Adafruit's ESP32-S3 Feather](https://www.adafruit.com/product/5477)** but any ESP32-S3 board will work! Later, we'll also incorporate a potentiometer and RED led with a current-limiting resistor.
 
-| Breadboard | ESP32 | Piezo Buzzer | Resistor | Trimpot |
-| ---------- |:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Piezo Buzzer](assets/images/PiezoBuzzer_TDK_200w.jpg) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Image of 10KOhm trimpot]({{ site.baseurl }}/assets/images/Trimpot_100h.png) |
-| Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Passive Piezo Buzzer | 220Ω Resistor (for LED) | 10kΩ Trimpot (later) |
+| Breadboard | ESP32 | Piezo Buzzer |
+| ---------- |:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Piezo Buzzer](../arduino/assets/images/PiezoBuzzer_TDK_200w.jpg) |
+| Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Passive Piezo Buzzer |
 
 We'll be using a passive piezo buzzer such as the [TDK PS1240](https://www.mouser.com/ProductDetail/810-PS1240P02BT) (~$0.40 from Mouser or ~$1.35 at [Adafruit](https://www.adafruit.com/product/160)). These buzzers work with both 3.3V and 5V signals, and their resonant frequency (loudest tone) is around 4 kHz—but they can produce a wide range of audible frequencies. We've tested from 32 Hz up to 10 kHz, at which point the sound is ear piercing! Piezo buzzers are **non-polarized** (like resistors), so they can be connected in either orientation.
 
@@ -74,7 +74,7 @@ We'll be using a passive piezo buzzer such as the [TDK PS1240](https://www.mouse
 {: .highlight }
 If you've searched online for "ESP32 tone," you've probably encountered blog posts and forum threads declaring that `tone()` is "famously unsupported" on the ESP32. **This is no longer true!** Espressif added `tone()` and `noTone()` support in [PR #6402](https://github.com/espressif/arduino-esp32/pull/6402) (merged March 2022), and it shipped with ESP32 Arduino core v2.0.3+. If you're using **v3.x** (which we use in this course), `tone()` works out of the box.
 
-The original version of this lesson was written when `tone()` was still unsupported and relied entirely on the LEDC PWM workaround. We used a custom library called [Tone32.hpp](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/Tone32.hpp) to add `duration` support to the LEDC tone functions. Now that `tone(pin, freq, duration)` works natively, Tone32.hpp is no longer needed—and you can write ESP32 tone code that's nearly identical to Arduino Uno code. 🎉
+The original version of this lesson was written when `tone()` was **not** part of the ESP32 Arduino package and relied entirely on using LEDC PWM to drive different frequency waveforms. To simplify things, we used a custom library that we built called [Tone32.hpp](https://github.com/makeabilitylab/arduino/blob/3c4c3e412cf6b8b27c4faf419a6f3aabd3a15f6d/MakeabilityLab_Arduino_Library/src/Tone32.hpp) to add `duration` support to the LEDC tone functions. Now that `tone(pin, freq, duration)` works natively, our custom [Tone32.hpp](https://github.com/makeabilitylab/arduino/blob/3c4c3e412cf6b8b27c4faf419a6f3aabd3a15f6d/MakeabilityLab_Arduino_Library/src/Tone32.hpp) is no longer needed—and you can write ESP32 tone code that's nearly identical to Arduino Uno code. 🎉
 
 The YouTube demo videos throughout this lesson were recorded with the old Huzzah32 board and the legacy v2.x LEDC API. The concepts are the same—only the code has gotten simpler!
 
@@ -86,9 +86,7 @@ Before we start making sounds, it's important to understand how `tone()` differs
 
 - **`tone(pin, frequency)`** varies the **frequency** (how many cycles per second) while keeping the duty cycle **fixed** at 50%. This is what controls pitch—the frequency of the sound wave determines whether you hear a low rumble or a high squeal.
 
-<!-- TODO: Create a side-by-side diagram or animation showing: (1) analogWrite with varying duty cycles at fixed frequency, (2) tone() with varying frequencies at fixed 50% duty cycle -->
-
-Here's a fun experiment to make this concrete: try connecting a piezo buzzer to a GPIO pin and running `analogWrite(pin, 127)`. You'll hear a steady buzz at the ESP32's default PWM frequency of 1 kHz. Now try `tone(pin, 440)`. You'll hear concert A—a completely different pitch. With `analogWrite`, you can change the duty cycle, which alters the harshness of the buzz, but you can't cleanly change the pitch.
+We dive more deeply into these differences in the [tone lesson](../arduino/tone.md) as part of the [Intro to Arduino series](../arduino/index.md). We encourage you to check that out!
 
 {: .warning }
 > Don't try running both `tone()` and `analogWrite()` on the same pin simultaneously—they both use the LEDC hardware under the hood, and they'll conflict. Use separate pins if you want to fade an LED while playing a tone.
@@ -97,9 +95,7 @@ Here's a fun experiment to make this concrete: try connecting a piezo buzzer to 
 
 The circuit couldn't be simpler. Connect one leg of the piezo buzzer to a GPIO pin (we'll use **GPIO 13**, which is also `LED_BUILTIN`) and the other leg to **GND**. No resistor is needed—the piezo buzzer draws very little current.
 
-<!-- TODO: Create an updated Fritzing wiring diagram for the ESP32-S3 Feather with a piezo buzzer on GPIO 13 -->
-
-![Circuit diagram showing a piezo buzzer connected to a GPIO pin on the ESP32](assets/images/ESP32_Tone_PiezoBuzzerCircuit.png)
+![Circuit diagram showing a piezo buzzer connected to a GPIO pin on the ESP32-S3](assets/images/Adafruit_ESP32-S3-Feather_Tone_PiezoBuzzerCircuit.png)
 **Figure.** A simple circuit connecting a passive piezo buzzer to a GPIO pin and GND. No current-limiting resistor is required. Image made in Fritzing and PowerPoint.
 {: .fs-1 }
 
@@ -107,6 +103,10 @@ The circuit couldn't be simpler. Connect one leg of the piezo buzzer to a GPIO p
 <summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>
 
 On the Huzzah32, our original code examples and Fritzing diagrams use **GPIO 26**. You can use any output-capable GPIO pin—just update the pin number in your code. Avoid pins 34, 39, and 36, which are input-only.
+
+![Circuit diagram showing a piezo buzzer connected to a GPIO pin on the ESP32](assets/images/ESP32_Tone_PiezoBuzzerCircuit.png)
+**Figure.** A simple circuit connecting a passive piezo buzzer to a GPIO pin and GND. No current-limiting resistor is required. Image made in Fritzing and PowerPoint.
+{: .fs-1 }
 
 </details>
 
@@ -116,7 +116,7 @@ We'll use this basic circuit for most of the lesson—the real fun is in the cod
 
 In our previous lessons, we stressed the importance of using a current-limiting resistor with every LED. So why are we wiring the piezo buzzer directly to a GPIO pin without one?
 
-Unlike LEDs, passive piezo buzzers draw very little current. They behave more like a small capacitor than a simple resistive load. The internal piezoceramic disk flexes when voltage is applied, and this process only requires a tiny amount of current—typically under 5 mA. Since the ESP32's GPIO pins can safely source up to 20 mA, connecting the piezo buzzer directly is perfectly safe.
+Unlike LEDs, passive piezo buzzers draw very little current. They behave more like a small capacitor than a simple resistive load. The internal piezoceramic disk flexes when voltage is applied, and this process only requires a tiny amount of current—typically under 5 mA (see the interactive visualization below). Since the ESP32's GPIO pins can safely source up to 20 mA, connecting the piezo buzzer directly is perfectly safe.
 
 {: .note }
 > **Piezo buzzers vs. electromagnetic speakers**
@@ -129,8 +129,9 @@ Unlike LEDs, passive piezo buzzers draw very little current. They behave more li
 
 The word "piezoelectric" comes from the Greek word *piezein*, meaning to press or squeeze. Piezoelectric materials have a fascinating property: when you apply a voltage, they physically change shape. Inside your passive buzzer is a thin metal plate with a piezoceramic disk glued to it. When the ESP32 rapidly pulses voltage `HIGH` and `LOW` via the `tone()` function, the ceramic disk quickly bends back and forth. This rapid flexing pushes the surrounding air back and forth, generating the physical sound waves that reach your ears. The frequency of the electrical pulses directly dictates how fast the disk vibrates, which determines the pitch.
 
-<!-- TODO: Port the interactive p5.js piezo buzzer simulation from the Arduino tone lesson:
-     https://editor.p5js.org/jonfroehlich/sketches/mU7YwoUol -->
+<iframe src="https://editor.p5js.org/jonfroehlich/embed/mU7YwoUol" width="100%" height="620" style="border: none;"></iframe>
+**Figure.** An interactive simulation of piezoelectric buzzer mechanics. In Pulse (Tone) mode, a square wave drives the ceramic disk to flex rapidly, producing sound waves. In Manual mode, you can apply a static voltage to see that a constant signal bends the disk but produces no sound. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/mU7YwoUol).
+{: .fs-1 }
 
 ### Why do they sound so... buzzy?
 
@@ -145,7 +146,7 @@ If you've been playing tones, you've probably noticed they sound harsh and remin
 
 ## The `tone()` function
 
-Arduino provides three functions for generating tones:
+The [ESP32 Arduino library](https://github.com/espressif/arduino-esp32) provides three functions for generating tones. Because it's an Arduino library, the implementors tried to maintain the same function signatures as `tone()` for the Arduino Uno, Leonardo, etc. See the [ESP32 Tone.cpp on GitHub](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/Tone.cpp) for the implementation. 
 
 ```cpp
 tone(pin, frequency)              // play continuously until noTone() is called
@@ -192,12 +193,12 @@ void loop() {
 Try changing the frequency: 262 is middle C, 523 is one octave higher (C5), and 1000 produces a high-pitched tone. What's the lowest frequency you can hear? The highest? Most humans can hear roughly 20 Hz to 20 kHz, but this varies with age.
 
 {: .note }
-> **Pro Tip: How do I make it quieter?**
+> **How do I make it quieter?**
 > Once you get your buzzer working, your first question will probably be: *"How do I turn the volume down?"* Because `tone()` always outputs a fixed 50% duty cycle square wave, you **cannot** control the volume via code. Instead, we use a classic physical computing hack: **put a piece of tape over it!** A small piece of masking tape or painter's tape directly over the hole on the piezo buzzer will significantly muffle the sound. As we discussed [above](#why-no-series-resistor), adding a series resistor doesn't work well here because the piezo's capacitive nature causes different frequencies to be muffled unevenly.
 
 ## Playing a scale
 
-Now let's play something more musical. The Arduino IDE ships with a helpful file called `pitches.h` that defines frequency constants for musical notes. You can find it in the [toneMelody example](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/toneMelody/pitches.h) or access it via `File -> Examples -> 02.Digital -> toneMelody` in the IDE. You can also find musical note frequencies in this [Piano Key Frequencies article](https://en.wikipedia.org/wiki/Piano_key_frequencies) on Wikipedia.
+Now let's play something **more musical**. The Arduino IDE ships with a helpful file called `pitches.h` that defines frequency constants for musical notes. You can find it in the [toneMelody example](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/toneMelody/pitches.h) or access it via `File -> Examples -> 02.Digital -> toneMelody` in the IDE. You can also find musical note frequencies in this [Piano Key Frequencies article](https://en.wikipedia.org/wiki/Piano_key_frequencies) on Wikipedia.
 
 Here are a few of the note definitions from [`pitches.h`](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/toneMelody/pitches.h):
 
@@ -228,7 +229,8 @@ const int BUZZER_PIN = 13;
 const int NOTE_DURATION_MS = 400;
 const int PAUSE_BETWEEN_NOTES_MS = 100;
 
-int scale[] = {NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5};
+int scale[] = {NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, 
+               NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5};
 int numNotes = 8;
 
 void setup() {
@@ -269,7 +271,7 @@ Here's an earlier video demo using the Huzzah32 (the code concepts are the same,
 
 ## Playing a melody
 
-Now for the fun part—let's play a real melody! We store the melody as two arrays: one for the notes and one for the note durations.
+Now for the fun part—let's play a **real melody**! We store the melody as two arrays: one for the notes and one for the note durations.
 
 The Arduino IDE includes a built-in example that plays a short melody. You can access it via `File -> Examples -> 02.Digital -> toneMelody`. Instead, we've written our own version using the Imperial March from Star Wars:
 
@@ -361,6 +363,13 @@ To represent a rest (silence), use a note value of `0` in the melody array. The 
 
 Now let's bring together what we've learned. Since we already know how to control LEDs from lessons [L2](led-blink.md) through [L4](analog-input.md), we can add **visual feedback** synchronized with our audio output. This kind of **multimodal feedback**—combining sound and light—makes the output more engaging and is a common pattern in interactive projects.
 
+### Red siren tone materials
+
+| Breadboard | ESP32 | Piezo Buzzer | Red LED | Resistor |
+| ---------- |:-----:|:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Piezo Buzzer](../arduino/assets/images/PiezoBuzzer_TDK_200w.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) |
+| Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Passive Piezo Buzzer | Red LED | 220Ω Resistor |
+
 ### Flashing an LED with each note
 
 The simplest approach is to turn an LED on while a note plays and off during the pause. Here's a simple two-tone siren that alternates an LED with each pitch change:
@@ -396,15 +405,27 @@ You can also check out our Imperial March code, which turns on `LED_BUILTIN` whe
 
 Let's make things interactive! By combining `analogRead()` (from [Lesson 4](analog-input.md)) with `tone()`, we can build a simple instrument where a potentiometer controls the pitch. This is the same `analogRead()` → `map()` → output pattern we used in [Lesson 4](analog-input.md) to control LED brightness—but now we're driving a completely different output modality!
 
+### Pot-controlled pitch materials
+
+| Breadboard | ESP32 | Piezo Buzzer | Trimpot |
+| ---------- |:-----:|:-----:|:-----:|
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Piezo Buzzer](../arduino/assets/images/PiezoBuzzer_TDK_200w.jpg) | ![Image of 10KOhm trimpot]({{ site.baseurl }}/assets/images/Trimpot_100h.png) |
+| Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Passive Piezo Buzzer | 10kΩ Trimpot |
+
 ### The circuit
 
 Add a potentiometer to the buzzer circuit. Connect the potentiometer's wiper (middle pin) to an analog input pin—we'll use **A5** since it's on ADC1 (works even with WiFi active, as we discussed in [Lesson 4](analog-input.md)).
 
-<!-- TODO: Create an updated Fritzing diagram for ESP32-S3 + buzzer + potentiometer -->
+![Circuit diagram showing a pot hooked up to A5 and piezo buzzer connected to GPIO pin 13 on the ESP32-S3](assets/images/Adafruit_ESP32-S3-Feather_PotControlledTone_PiezoBuzzerCircuit.png)
+**Figure.** The circuit diagram for the pot-controlled pitch piezo buzzer. No current-limiting resistor is required. Image made in Fritzing and PowerPoint.
+{: .fs-1 }
 
+<details markdown="1">
+<summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>
 ![Circuit diagram showing piezo buzzer and potentiometer connected to the ESP32](assets/images/ESP32_Tone_PiezoBuzzerWithPotentiometerCircuit.png)
 **Figure.** Circuit diagram with a piezo buzzer and potentiometer connected to the ESP32. Image made in Fritzing and PowerPoint.
 {: .fs-1 }
+</details>
 
 ### Sweeping through frequencies
 

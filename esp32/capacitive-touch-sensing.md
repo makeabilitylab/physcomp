@@ -57,7 +57,7 @@ You'll need the same materials as the [last lesson](tone.md). We use **[Adafruit
 
 | Breadboard | ESP32 | LED | Resistor | Piezo Buzzer | Conductive objects |
 | ---------- |:-----:|:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Piezo Buzzer](assets/images/PiezoBuzzer_TDK_200w.jpg) | 🍌🥝🍎 |
+| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220 Ohm Resistor]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Piezo Buzzer](../arduino/assets/images/PiezoBuzzer_TDK_200w.jpg) | 🍌🥝🍎 |
 | Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Red LED | 220Ω Resistor | Passive Piezo Buzzer | Wires, foil, fruit, *etc.* |
 
 For the touch piano project, you'll need conductive objects to use as touch pads. Jumper wires work, but the real fun is in using aluminum foil strips, copper tape, conductive fabric, or even fruit—bananas, apples, and kiwis all work because they contain enough water and electrolytes to conduct! 🍌

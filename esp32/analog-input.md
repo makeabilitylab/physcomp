@@ -18,7 +18,9 @@ nav_order: 4
 {:toc}
 ---
 
-In the [last lesson](led-fade.md), we used the LEDC library to control an LED's brightness with PWM—but the brightness was hardcoded in a `for` loop. Wouldn't it be more fun to control the brightness with a physical knob? In this lesson, we'll combine **analog input** (reading a potentiometer) with **analog output** (PWM) to build a hands-on LED fader. Along the way, you'll learn how the ESP32's ADC differs from the Arduino Uno's and why it matters.
+In the [last lesson](led-fade.md), we used the LEDC library to control an LED's brightness with PWM—but the brightness was hardcoded in a `for` loop. Wouldn't it be more fun to control the brightness with a physical knob? In this lesson, we'll combine **analog input** (reading a potentiometer) with **analog output** (PWM) to build a hands-on LED fader. Along the way, you'll learn how the ESP32's ADC differs from the Arduino Uno's and why it matters. 
+
+This lesson mirrors the [potentiometers lesson](../arduino/potentiometers.md) in the ["Intro to Arduino" series](../arduino/index.md). If you've forgotten how potentiometers work, we recommend consulting that lesson first as a refresh.
 
 <!-- TODO: Replace with <video> showing pot-fade on ESP32-S3 Feather -->
 <video autoplay loop muted playsinline aria-label="Animation showing a potentiometer controlling the brightness of an LED on an ESP32 board">
@@ -110,7 +112,7 @@ The ESP32's ADC is known to be somewhat **nonlinear** at the extremes of its ran
 If you're porting Arduino Uno code and don't want to change all your 0–1023 constants, you can tell the ESP32 to use 10-bit resolution instead:
 
 ```cpp
-analogReadResolution(10);  // Now analogRead() returns 0-1023, like the Arduino Uno
+analogReadResolution(10);  // Now analogRead() returns 0-1023, like the Uno
 ```
 
 We won't use this in our lesson (we'll embrace the full 12-bit range), but it's a handy trick when migrating existing code.
@@ -301,11 +303,15 @@ Here's a workbench video showing the pot-fade circuit on the Huzzah32, with the 
 
 ### Try it in Wokwi
 
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the pot-controlled LED fade running in the Wokwi simulator">
+  <source src="assets/videos/Wokwi_ESP32-S3-PotFade_optimized_muted.mp4" type="video/mp4" />
+</video>
+**Video.** The potentiometer-controlled LED brightness circuit and sketch running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463962426121286657).
+{: .fs-1 }
+
 You can also build this circuit in the [Wokwi simulator](https://wokwi.com/). Add a potentiometer and an LED to the ESP32-S3 DevKitC, and use the same code above.
 
-<!-- TODO: Create a Wokwi project for the pot-fade circuit and replace the URL below. -->
-
-**[→ Open the Pot Fade simulation in Wokwi](https://wokwi.com/projects/new/esp32-s3)**
+**[→ Open the Pot Fade simulation in Wokwi](https://wokwi.com/projects/463962426121286657)**
 
 ### Using `analogWrite` instead
 

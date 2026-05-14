@@ -75,7 +75,13 @@ Upload this sketch and open the **Serial Monitor** at **115200 baud**. You shoul
 {: .warning }
 > **Native USB gotcha (ESP32-S3):** Because the ESP32-S3 uses native USB (not a separate USB-to-UART chip like the Uno's ATmega16U2 or the Huzzah32's CP2104), the serial port will **temporarily disappear** if the board crashes, resets, or enters deep sleep. If your Serial Monitor disconnects unexpectedly, just press the **Reset** button and reopen it. This is normal behavior for native USB—it's the same with the Arduino Leonardo.
 
-<!-- TODO insert a workbench video of this working -->
+### Workbench video blinking built-in LED
+
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 blinking the internal LED on GPIO 13">
+  <source src="assets/videos/ESP32-S3-BlinkyBuiltInLED-IMG_9348-Trimmed_optimized_muted.mp4" type="video/mp4">
+</video>
+**Video.** A workbench video of blinking the built-in LED on the Adafruit ESP32-S3.
+{: .fs-1 }
 
 ## Part 2: Blink an external LED
 
@@ -114,7 +120,9 @@ Most of the 20 pins are completely free to use, but a few have secondary roles:
 
 For this lesson, we'll use **GPIO 13**. Since GPIO 13 is also `LED_BUILTIN`, your external LED and the onboard red LED will blink together—a nice visual confirmation that everything is connected correctly. You can use any other output-capable GPIO pin; just update the pin number in your code.
 
-<!-- TODO: use Sparkfun LEDs with resistors built in to connect one LED per GPIO pin on a breadboard and write a program to show them all sequentially blink. See https://www.sparkfun.com/led-blue-with-resistor-5mm-25-pack.html -->
+<!-- TODO: use Sparkfun LEDs with resistors built in to connect one LED per GPIO pin on a breadboard and write a program to show them all sequentially blink. Then take a video.
+
+See https://www.sparkfun.com/led-blue-with-resistor-5mm-25-pack.html -->
 
 <details markdown="1">
 <summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>
@@ -159,10 +167,10 @@ Compare this to the ~13.6mA we'd get on a 5V Arduino Uno ($$\frac{5V - 2V}{220Ω
 
 ### The code
 
-The code is identical to Part 1. If you used `LED_BUILTIN` (which maps to GPIO 13), your external LED on GPIO 13 is already blinking! If you wired your LED to a different pin, just change the constant:
+The code is identical to Part 1. If you used `LED_BUILTIN` (which maps to GPIO 13), your external LED on GPIO 13 is already blinking! If you wired your LED to a different pin, just change the constant. We're keeping ours on `LED_BUILTIN` (GPIO 13), so we'll wire up the external LED to GPIO 13 as well—then the internal and external LEDs will blink in sync.
 
 ```cpp
-const int LED_OUTPUT_PIN = 5;  // change to whatever GPIO pin you used
+const int LED_OUTPUT_PIN = LED_BUILTIN;  // change to whatever GPIO pin you used
 
 void setup() {
   pinMode(LED_OUTPUT_PIN, OUTPUT);
@@ -179,16 +187,12 @@ void loop() {
 This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Blink/Blink.ino) is on GitHub.
 {: .fs-1 }
 
-### Workbench video
+### Workbench video of blinking the external LED
 
-<!-- TODO: Record a workbench video showing the blink circuit on the ESP32-S3 Feather.
-     Use <video> with aria-label.-->
-
-<video autoplay loop muted playsinline aria-label="Animation showing an LED blinking on and off, connected to an ESP32 Huzzah32 on a breadboard">
-  <source src="assets/movies/Huzzah32_Blink-optimized.mp4" type="video/mp4">
-  <img src="assets/movies/Huzzah32_Blink-optimized.gif" alt="Animation of an LED blinking on and off on an ESP32 board">
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 blinking the external LED hooked up to GPIO 13">
+  <source src="assets/videos/ESP32-S3-BlinkyExternalLED-IMG_9350-Trimmed_optimized_muted.mp4" type="video/mp4">
 </video>
-**Video.** Blink running on the Huzzah32 with an external LED on GPIO 21.
+**Video.** A workbench video of blinking the external LED hooked up to GPIO 13 on the Adafruit ESP32-S3. Because GPIO 13 is also tied to the `LED_BUILTIN`, the built-in LED on the board blinks in sync!
 {: .fs-1 }
 
 ## Part 3: Try it in the Wokwi simulator
@@ -236,7 +240,7 @@ As this is our first time introducing Wokwi, the video below shows a full build 
 
 Here are the standard template URLs you'll want to bookmark to spin up fresh projects:
 
-- **ESP32-S3 **(Arduino): [https://wokwi.com/projects/new/esp32-s3](https://wokwi.com/projects/new/esp32-s3)
+- **ESP32-S3** (Arduino): [https://wokwi.com/projects/new/esp32-s3](https://wokwi.com/projects/new/esp32-s3)
 - **Classic ESP32** (Arduino): [https://wokwi.com/projects/new/esp32](https://wokwi.com/projects/new/esp32)
 
 Once you open one of those, you can add components (like the NeoPixel ring or an OLED), write your code, and click Save. Wokwi will then generate a unique, permanent URL for that specific circuit and code that you can share.
@@ -296,10 +300,94 @@ Upload this and watch your NeoPixel cycle through red, green, and blue! Try chan
 `RGB_BUILTIN` is a special *virtual* pin constant defined by the board variant file—you don't need to know the actual GPIO number. When you pass `RGB_BUILTIN` to `rgbLedWrite()` or even `digitalWrite()`, the Arduino core automatically routes the call through the RMT-based NeoPixel driver and handles the NeoPixel power pin for you.
 
 {: .note }
-> You can also use `digitalWrite(RGB_BUILTIN, HIGH)` to turn the NeoPixel on (white at default brightness) and `LOW` to turn it off. This is the simplest possible approach but gives you no color control. The default brightness is set by `RGB_BRIGHTNESS` (64 out of 255).
+> You can also use `digitalWrite(RGB_BUILTIN, HIGH)` to turn the NeoPixel on (white at default brightness) and `LOW` to turn it off. This is the simplest possible approach but gives you no color control. The default brightness is set by `#define RGB_BRIGHTNESS` (64 out of 255) but that `#define` must come before any includes or usage and only works for `digitalWrite`.
 
 {: .warning }
 > `RGB_BUILTIN` is a virtual pin number—it won't work with third-party NeoPixel libraries like `Adafruit_NeoPixel` or `FastLED`. Those libraries need the real GPIO pin number (use `PIN_NEOPIXEL` instead). See Option 2 below.
+
+#### Add brightness control
+
+If you ran this program on your own ESP32-S3, you may have noticed that the RGB LED is **very bright** 😎 (yikes!). With `rgbLedWrite()`, you control brightness by scaling down the R, G, B values themselves—there's no separate brightness parameter. For example, `rgbLedWrite(RGB_BUILTIN, 128, 0, 0)` gives you a dimmer red than `(255, 0, 0)`.
+
+We can thus create a small utility function to help us provide brightness control:
+
+```cpp
+void rgbLedWriteWithBrightness(uint8_t pin, uint8_t r, uint8_t g, uint8_t b, uint8_t brightness) {
+  rgbLedWrite(pin, (r * brightness) / 255, (g * brightness) / 255, (b * brightness) / 255);
+}
+```
+
+Integrating that into the full sketch looks like:
+
+```cpp
+/**
+ * Blink the onboard NeoPixel RGB LED using the built-in rgbLedWrite() function
+ * with adjustable brightness. No library installation needed—this function is
+ * part of the ESP32 Arduino core.
+ *
+ * The rgbLedWrite() function has no brightness parameter, so we scale each
+ * color channel manually in rgbLedWriteWithBrightness().
+ *
+ * See: File -> Examples -> ESP32 -> GPIO -> BlinkRGB
+ * 
+ * By Jon E. Froehlich
+ * @jonfroehlich | https://jonfroehlich.github.io/
+ * https://makeabilitylab.github.io/physcomp/esp32/led-blink
+ */
+
+const uint8_t BRIGHTNESS = 64; // 0-255, where 255 is full brightness
+
+void setup() {
+  // No setup needed! The Arduino core handles the NeoPixel power pin
+  // and RMT peripheral initialization automatically when you use RGB_BUILTIN.
+}
+
+void loop() {
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 255, 0, 0, BRIGHTNESS);    // Red
+  delay(500);
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 0, 0, 0, BRIGHTNESS);      // Off
+  delay(500);
+
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 0, 255, 0, BRIGHTNESS);    // Green
+  delay(500);
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 0, 0, 0, BRIGHTNESS);      // Off
+  delay(500);
+
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 0, 0, 255, BRIGHTNESS);    // Blue
+  delay(500);
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 0, 0, 0, BRIGHTNESS);      // Off
+  delay(500);
+
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 255, 0, 255, BRIGHTNESS);  // Purple (Go UW Huskies!)
+  delay(500);
+  rgbLedWriteWithBrightness(RGB_BUILTIN, 0, 0, 0, BRIGHTNESS);      // Off
+  delay(500);
+}
+
+/**
+ * Writes an RGB color to a NeoPixel pin, scaled by a brightness value.
+ * 
+ * Since rgbLedWrite() has no built-in brightness control, this function
+ * scales each color channel proportionally: output = (channel * brightness) / 255.
+ *
+ * @param pin        The NeoPixel pin (e.g., RGB_BUILTIN)
+ * @param r          Red channel (0-255, before brightness scaling)
+ * @param g          Green channel (0-255, before brightness scaling)
+ * @param b          Blue channel (0-255, before brightness scaling)
+ * @param brightness Overall brightness (0-255, where 255 = no dimming)
+ */
+void rgbLedWriteWithBrightness(uint8_t pin, uint8_t r, uint8_t g, uint8_t b, uint8_t brightness) {
+  rgbLedWrite(pin, (r * brightness) / 255, (g * brightness) / 255, (b * brightness) / 255);
+}
+```
+
+### Workbench video of rgbLedWriteWithBrightness
+
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 blinking the onboard NeoPixel RGB LED using the built-in rgbLedWrite() function with adjustable brightness">
+  <source src="assets/videos/ESP32-S3-BlinkingBuiltInNeoPixelUsingRgbLedWrite_optimized_muted.mp4" type="video/mp4">
+</video>
+**Video.** A workbench video of blinking internal RGB LED on the Adafruit ESP32-S3.
+{: .fs-1 }
 
 ### Option 2: Adafruit NeoPixel library
 
@@ -384,7 +472,7 @@ We also built a version on Wokwi, which you can [simulate here](https://wokwi.co
      Use <video> with aria-label.-->
 
 {: .note }
-> **Which approach should I use?** For the onboard NeoPixel, `rgbLedWrite()` is simpler—zero setup, zero dependencies. Use the Adafruit NeoPixel library when you need to drive external NeoPixel strips, want brightness control via `setBrightness()`, or need color utilities like `ColorHSV()` and `gamma32()`.
+> **Which approach should I use?** For the onboard NeoPixel, `rgbLedWrite()` is simpler—zero setup, zero dependencies. Use the Adafruit NeoPixel library when you need to drive external NeoPixel strips, need color utilities like `ColorHSV()` and `gamma32()`, or just because you're already familiar with the NeoPixel library!
 
 <details markdown="1">
 <summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>

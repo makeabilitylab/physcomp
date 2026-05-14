@@ -110,7 +110,7 @@ A few things to note from these tables:
 
 ## The Adafruit ESP32-S3 Feather
 
-For our course, we use the [Adafruit ESP32-S3 Feather](https://www.adafruit.com/product/5477) with 4MB Flash and 2MB PSRAM. Here's how it compares to the Arduino Uno and the legacy Huzzah32:
+For our course, we use the [Adafruit ESP32-S3 Feather](https://www.adafruit.com/product/5477) with 4MB Flash and 2MB PSRAM. Here's how it compares to the Arduino Uno and the older ESP32 ([Adafruit Huzzah32](https://www.adafruit.com/product/3405)):
 
 | | Arduino Uno | Huzzah32 (ESP32) | **ESP32-S3 Feather** |
 | ---- | ----------- | -------- | ----------------- |

@@ -18,7 +18,7 @@ nav_order: 3
 {:toc}
 ---
 
-In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/PWM) output on the ESP32 to smoothly fade an LED on and off. This is where our ESP32 lessons begin to diverge from the [Intro to Output](../arduino/intro-output.md) series—the ESP32 uses a different, more powerful PWM system than the Arduino Uno.
+In this lesson, we'll show how to use [PWM](https://www.arduino.cc/en/Tutorial/PWM) output on the ESP32 to smoothly fade an LED on and off. This is where our ESP32 lessons begin to diverge from our Arduino [Intro to Output](../arduino/intro-output.md) series—the ESP32 uses a different, more powerful PWM system than the Arduino Uno or Leonardo.
 
 <!-- TODO: Replace with <video> showing fade on ESP32-S3 Feather -->
 <video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
@@ -48,7 +48,9 @@ You'll need the same materials as the [last lesson](led-blink.md). We use **[Ada
 
 ## PWM on the ESP32
 
-To fade an LED on an Arduino Uno, you use [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). As we know by now, `analogWrite` doesn't actually drive an analog voltage to the pin—it uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers that precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 ≈ 50%) on Pin 3. The Arduino Uno and Leonardo only have **six** PWM outputs because they have three timers, each of which can control two PWM pins.
+To fade an LED on an Arduino Uno, you use [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) as we did in our [LED fade lesson](../arduino/led-fade.md) in our [Intro to Arduino series](../arduino/led-fade.md). 
+
+Recall that `analogWrite` doesn't actually drive an analog voltage to the pin. Instead, it uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers that precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 ≈ 50%) on Pin 3. The Arduino Uno and Leonardo only have **six** PWM outputs because they have three timers, each of which can control two PWM pins.
 
 On the ESP32, **all** GPIO pins support PWM, but the programming approach is different. The ESP32 uses a dedicated hardware peripheral called **LEDC** (LED Control) for PWM generation. The [LEDC module](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html) was designed primarily for LED dimming but can also drive motors, generate tones, and produce any PWM waveform.
 
@@ -155,7 +157,7 @@ $$2^{\text{resolution}} \leq \frac{\text{APB}_{\text{clock}}}{\text{PWM}_{\text{
 
 If you need more slices than you have ticks, the hardware simply can't produce them—and `ledcAttach` will fail.
 
-Here's a visual example. The clock runs at 80 MHz, the PWM frequency is set to 1 MHz, and we show how increasing the resolution requires finer and finer time slices—which in turn demand more clock ticks:
+Here's a visual example. The clock runs at 40 MHz, the PWM frequency is set to 1 MHz, and we show how increasing the resolution requires finer and finer time slices—which in turn demand more clock ticks:
 
 ![A figure showing the relationship between frequency and duty cycle resolution for PWM](assets/images/PWM_FrequencyAndDutyCycleRelationship.png)
 **Figure.** As PWM resolution increases, the number of required time slices grows exponentially. This diagram uses a simplified 40 MHz clock example—on the real ESP32 the APB clock is 80 MHz, giving you twice as many ticks to work with (and one extra bit of resolution headroom). See this [PDF](assets/images/PWM_FrequencyAndDutyCycle.pdf) for a printable version.
@@ -181,7 +183,7 @@ http://inst.eecs.berkeley.edu/~ee40/calbot/pdf/ChapterFive/ChapterFive.pdf
 
 #### Interactive: explore the tradeoff yourself
 
-To advance your understanding, try the interactive visualization below. It shows a single PWM period with the 80 MHz clock ticks drawn along the top—you can literally see how many ticks you have to work with. 
+To advance your understanding, try the interactive visualization below. It shows a single PWM period with the 80 MHz clock ticks drawn along the top.
 
 - Adjust the **PWM Frequency** slider and watch the ticks shrink (higher frequency → shorter period → fewer ticks).
 - Then adjust the **Resolution** slider and watch the time slices multiply until they exceed the available ticks and the waveform turns red.
@@ -290,31 +292,6 @@ void loop() {
 
 That's it—upload and run! You should see your LED smoothly fade on and off. Try experimenting with different `PWM_FREQ` and `PWM_RESOLUTION` values to see the tradeoff in action.
 
-### Workbench video
-
-<!-- TODO: Record a workbench video showing the fade circuit on the ESP32-S3 Feather. -->
-
-<video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
-  <source src="assets/movies/Huzzah32_Fade-optimized.mp4" type="video/mp4">
-  <img src="assets/movies/Huzzah32_Fade-optimized.gif" alt="Animation of an LED fading on and off on an ESP32 board">
-</video>
-**Video.** LED fading on the Huzzah32 using the LEDC PWM library.
-{: .fs-1 }
-
-<!-- TODO: consider an example that uses multiple channels to flash different freqs -->
-
-### Try it in Wokwi
-
-You can also run this circuit in the [Wokwi simulator](https://wokwi.com/) (introduced in the [Blink lesson](led-blink.md#part-3-try-it-in-the-wokwi-simulator)). Wokwi uses the ESP32-S3 DevKitC board but since the LEDC library works the same on any ESP32-S3 board, the fade code runs identically in the simulator as it would on the ESP32-S3 Feather.
-
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing LED fade running in the Wokwi simulator">
-  <source src="assets/videos/Wokwi_ESP32-S3-LedFade_optimized_muted.mp4" type="video/mp4" />
-</video>
-**Video.** LED fade running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463782700188143617).
-{: .fs-1 }
-
-**[→ Open the Fade simulation in Wokwi](https://wokwi.com/projects/463782700188143617)**
-
 ### Full source code
 
 Here's the complete program. This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/Fade/Fade.ino) is also on GitHub (note: the GitHub version may still use the v2.x API).
@@ -401,6 +378,31 @@ void loop() {
 ```
 
 </details>
+
+### Workbench video
+
+<!-- TODO: Record a workbench video showing the fade circuit on the ESP32-S3 Feather. -->
+
+<video autoplay loop muted playsinline aria-label="Animation showing an LED smoothly fading in and out on an ESP32 board">
+  <source src="assets/movies/Huzzah32_Fade-optimized.mp4" type="video/mp4">
+  <img src="assets/movies/Huzzah32_Fade-optimized.gif" alt="Animation of an LED fading on and off on an ESP32 board">
+</video>
+**Video.** LED fading on the Huzzah32 using the LEDC PWM library.
+{: .fs-1 }
+
+<!-- TODO: consider an example that uses multiple channels to flash different freqs -->
+
+### Try it in Wokwi
+
+You can also run this circuit in the [Wokwi simulator](https://wokwi.com/) (introduced in the [Blink lesson](led-blink.md#part-3-try-it-in-the-wokwi-simulator)). Wokwi uses the ESP32-S3 DevKitC board but since the LEDC library works the same on any ESP32-S3 board, the fade code runs identically in the simulator as it would on the ESP32-S3 Feather.
+
+<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing LED fade running in the Wokwi simulator">
+  <source src="assets/videos/Wokwi_ESP32-S3-LedFade_optimized_muted.mp4" type="video/mp4" />
+</video>
+**Video.** LED fade running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463782700188143617).
+{: .fs-1 }
+
+**[→ Open the Fade simulation in Wokwi](https://wokwi.com/projects/463782700188143617)**
 
 ### Using `analogWrite` instead
 
@@ -489,7 +491,8 @@ void setup() {
 
 void loop() {
   // ColorHSV takes: hue (0-65535), saturation (0-255), value/brightness (0-255)
-  // gamma32 applies perceptual brightness correction for smoother color transitions
+  // gamma32 applies perceptual brightness correction for 
+  // smoother color transitions
   uint32_t color = _pixel.gamma32(_pixel.ColorHSV(_hue, 255, 255));
   _pixel.setPixelColor(0, color);
   _pixel.show();

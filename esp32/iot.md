@@ -18,6 +18,9 @@ nav_order: 7
 {:toc}
 ---
 
+{: .warning }
+> This lesson is in draft form. There is missing circuit diagrams, images, videos, and other content.
+
 <!-- Content TODOs:
 1. Create an updated Fritzing wiring diagram for the ESP32-S3 Feather with the photoresistor + LED circuit
 2. Record a workbench video of the IoT photoresistor demo with the ESP32-S3 Feather

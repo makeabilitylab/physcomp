@@ -18,6 +18,9 @@ nav_order: 6
 {:toc}
 ---
 
+{: .warning }
+> This lesson is in draft form. There is missing circuit diagrams, images, videos, and other content.
+
 <!-- Content TODOs:
 1. Create updated Fritzing diagrams for ESP32-S3 Feather (currently using Huzzah32 diagrams)
 2. Build an interactive p5.js simulation showing how capacitance changes when a finger approaches a touch pad

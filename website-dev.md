@@ -262,6 +262,26 @@ And here's the code that **does** work with the single line comments replaced wi
 </div>
 {% endhighlight HTML %}
 
+## Troubleshooting video playback locally
+
+Jekyll's built-in WEBrick server doesn't support HTTP range requests, 
+which browsers need to stream `<video>` elements. If videos fail to 
+load or play, try serving the built site with a different local server:
+
+    bundle exec jekyll build
+    python3 -m http.server 4000 --directory _site
+
+Alternatively, `npx serve _site` works well. Both support range 
+requests and handle large media files reliably.
+
+If videos are still slow, check file sizes. Compress large `.mp4` 
+files with ffmpeg:
+
+    ffmpeg -i input.mp4 -crf 28 -preset fast -movflags +faststart output.mp4
+
+The `-movflags +faststart` flag moves metadata to the front of the 
+file so browsers can begin playback before the full download completes.
+
 ## Tools
 
 ### Making animated gifs

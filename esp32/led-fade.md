@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L3&#58; Fading an LED with PWM
+title: L3&#58; LED Fading with PWM
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
@@ -48,16 +48,16 @@ You'll need the same materials as the [last lesson](led-blink.md). We use **[Ada
 
 To fade an LED on an Arduino Uno, you use [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) as we did in our [LED fade lesson](../arduino/led-fade.md) in our [Intro to Arduino series](../arduino/led-fade.md). 
 
-Recall that `analogWrite` doesn't actually drive an analog voltage to the pin. Instead, it uses pulse-width modulation (PWM). These PWM waves are produced by hardware timers that precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 ≈ 50%) on Pin 3. The Arduino Uno and Leonardo only have **six** PWM outputs because they have three timers, each of which can control two PWM pins.
+Recall that `analogWrite` doesn't actually drive an analog voltage to the pin. Instead, it uses **pulse-width modulation (PWM)**. These PWM waves are produced by hardware timers that precisely drive a pin `HIGH` and `LOW` based on the set duty cycle. So, on the Arduino Uno, `analogWrite(3, 127)` would output a 5V value for half the period (because 127/255 ≈ 50%) on Pin 3. The Arduino Uno and Leonardo only have **six** PWM outputs because they have three timers, each of which can control two PWM pins.
 
 On the ESP32, **all** GPIO pins support PWM, but the programming approach is different. The ESP32 uses a dedicated hardware peripheral called **LEDC** (LED Control) for PWM generation. The [LEDC module](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html) was designed primarily for LED dimming but can also drive motors, generate tones, and produce any PWM waveform.
 
 {: .note }
-> **What about `analogWrite` on the ESP32?** In **ESP32 Arduino core v3.x**, `analogWrite()` is now supported as a convenience wrapper around the LEDC library. So you *can* use `analogWrite()` on the ESP32, and it will work! However, we teach the LEDC API directly because it gives you more control over PWM frequency, resolution, and channel management—things you'll need for more advanced projects. And understanding the LEDC library helps you understand what `analogWrite` is doing under the hood.
+> **What about `analogWrite` on the ESP32?** In **ESP32 Arduino core v3.x**, `analogWrite()` is now supported as a convenience wrapper around the LEDC library (search for `analogWrite()` in the [esp32-hal-ledc.c source code](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c)). So you *can* use `analogWrite()` on the ESP32, and it will work! However, we also teach the underlying LEDC API because it gives you more control over PWM frequency, resolution, and channel management—things you may for more advanced projects. And understanding the LEDC library helps you understand what `analogWrite` is doing under the hood.
 
 ### The LEDC PWM library
 
-The [LEDC library](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html) provides fine-grained control over PWM output. Unlike the Arduino `analogWrite` (which defaults to ~490 Hz, 8-bit resolution), the LEDC library lets you choose your own PWM frequency (up to 40 MHz) and resolution (1 to 14 bits on the ESP32-S3, or up to 16 bits on the original ESP32). The Arduino version of this library is part of the core ESP32 Arduino library, so you don't need any `#include` statements to use it.
+The [LEDC library](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html) provides fine-grained control over PWM output. Unlike the Arduino `analogWrite` (which defaults to ~490 Hz, 8-bit resolution), the LEDC library lets you choose your **own PWM frequency** (up to 40 MHz) and **resolution** (1 to 14 bits on the ESP32-S3, or up to 16 bits on the original ESP32). The Arduino version of this library is part of the core ESP32 Arduino library ([esp32-hal-ledc.c](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c)), so you don't need any `#include` statements to use it.
 
 {: .note }
 > If you want to dive deeper, check out [EspressIf's LEDC guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html) and the [LEDC source code on GitHub](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c).
@@ -446,9 +446,9 @@ You can play with the above LED fade `analogWrite` example on [Wokwi here](https
 
 ## Bonus: Fade the NeoPixel through the rainbow 🌈
 
-In [Lesson 2](led-blink.md#part-4-blink-the-onboard-neopixel-), we blinked the onboard NeoPixel in discrete colors. Now let's smoothly *fade* through the entire color wheel using the **HSV color space**—the same approach we used in the [Addressable LEDs lesson](../advancedio/addressable-leds.md#activity-2-rainbow-animation).
+In [Lesson 2](led-blink.md), we blinked the onboard NeoPixel in discrete colors using both the built-in `rgbLedWrite()` function as well as via the external `Adafruit_NeoPixel.h` library. Now let's smoothly *fade* through the entire color wheel using the **HSV color space**—the same approach we used in the [Addressable LEDs lesson](../advancedio/addressable-leds.md#activity-2-rainbow-animation).
 
-The Adafruit NeoPixel library's `ColorHSV()` function takes a 16-bit hue (0–65535 maps to 0°–360°), a saturation (0–255), and a value/brightness (0–255). By incrementing the hue each frame, we get a smooth rainbow cross-fade:
+Because the Adafruit NeoPixel library supports `ColorHSV()`, which makes it easier to cross-fade across colors, we'll use that library again here. The `ColorHSV()` function takes a 16-bit hue (0–65535 maps to 0°–360°), a saturation (0–255), and a value/brightness (0–255). By incrementing the hue each frame, we get a smooth rainbow cross-fade:
 
 ```cpp
 /**
@@ -509,15 +509,19 @@ We also built a version on Wokwi, which you can [simulate here](https://wokwi.co
 {: .note }
 > **HSV vs. RGB:** In the RGB color model, creating a smooth rainbow requires manually calculating red, green, and blue values for each hue—which is tedious and error-prone. The HSV (Hue, Saturation, Value) model separates *color* from *brightness*, so sweeping through all colors is just a matter of incrementing one number (the hue). We use HSV extensively in the [Addressable LEDs lesson](../advancedio/addressable-leds.md) and also talk about it in the [RGB LED lesson](../arduino/rgb-led-fade.md).
 
-<!-- TODO: Record a workbench video showing the NeoPixel rainbow fade on the ESP32-S3 Feather.
-     Use <video> with aria-label. -->
-
 <details markdown="1">
 <summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>
 
 The original Huzzah32 **does not** have an onboard NeoPixel. If you want to try this, you'll need to connect an external NeoPixel (or NeoPixel strip) to a GPIO pin and update `PIN_NEOPIXEL` to match your wiring. See our [Addressable LEDs lesson](../advancedio/addressable-leds.md) for details on wiring external NeoPixels.
-
 </details>
+
+### Workbench video of RGB crossfade
+
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 cross fading the built-in NeoPixel between colors.">
+  <source src="assets/videos/ESP32-S3-CrossFadeBuiltInNeoPixel_optimized_720p_muted.mp4" type="video/mp4">
+</video>
+**Video.** A workbench video cross fading the built-in RGB LED on the Adafruit ESP32-S3 across colors.
+{: .fs-1 }
 
 ## Summary
 

@@ -485,7 +485,7 @@ table tr:nth-child(even) th {
 video {
   max-width: 100%;
   height: auto;
-  margin-bottom: 16px;
+  margin-bottom: 0px;
 }
 
 /*

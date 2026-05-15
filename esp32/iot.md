@@ -473,7 +473,7 @@ Now, clicking the toggle on your Adafruit IO dashboard will turn the onboard LED
 
 ### The HCI of IoT: latency and feedback
 
-Try clicking the toggle and watching how long it takes for the LED to respond. You'll notice a perceptible delay—typically 200ms to 1 second, depending on network conditions. Compare this to the **instantaneous** response of a hardware button (like the capacitive touch input from [Lesson 6](capacitive-touch-sensing.md)) and you can *feel* the difference that network latency makes.
+Try clicking the toggle and watching how long it takes for the LED to respond. You'll notice a perceptible delay—typically 200ms to 1 second, depending on network conditions. Compare this to the **instantaneous** response of a hardware button (like the capacitive touch input from [Lesson 6](capacitive-touch.md)) and you can *feel* the difference that network latency makes.
 
 This latency is inherent to any cloud-mediated interaction: your click travels from your browser to the Adafruit IO server, gets published as an MQTT message, is relayed to your ESP32, which processes it in the next `io.run()` cycle, and finally toggles the pin. Every hop adds delay.
 
@@ -562,5 +562,5 @@ In this lesson, you connected your ESP32 to the internet and built your first Io
 - [Random Nerd Tutorials: ESP32 with ThingSpeak](https://randomnerdtutorials.com/esp32-thingspeak-publish-arduino/) — step-by-step guide for ThingSpeak with ESP32
 
 <span class="fs-6">
-[Previous: Capacitive Touch Sensing](capacitive-touch-sensing.md){: .btn .btn-outline }
+[Previous: Capacitive Touch Sensing](capacitive-touch.md){: .btn .btn-outline }
 </span>

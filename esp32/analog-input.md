@@ -22,12 +22,10 @@ In the [last lesson](led-fade.md), we used the LEDC library to control an LED's 
 
 This lesson mirrors the [potentiometers lesson](../arduino/potentiometers.md) in the ["Intro to Arduino" series](../arduino/index.md). If you've forgotten how potentiometers work, we recommend consulting that lesson first as a refresh.
 
-<!-- TODO: Replace with <video> showing pot-fade on ESP32-S3 Feather -->
-<video autoplay loop muted playsinline aria-label="Animation showing a potentiometer controlling the brightness of an LED on an ESP32 board">
-  <source src="assets/movies/Huzzah32_PotFade-optimized.mp4" type="video/mp4">
-  <img src="assets/movies/Huzzah32_PotFade-optimized.gif" alt="Animation of a potentiometer controlling LED brightness on an ESP32 board">
+<video autoplay loop muted playsinline aria-label="Workbench video showing a pot-controlled LED with the Adafruit ESP32-S3.">
+  <source src="assets/videos/ESP32-S3-PotFadeExternalLEDAnalogWrite_optimized_720p_muted.mp4" type="video/mp4">
 </video>
-**Video.** Using a potentiometer to control LED brightness on the ESP32 via analog input and PWM output.
+**Video.** Using a potentiometer to control the LED brightness on the Adafruit ESP32-S3.
 {: .fs-1 }
 
 {: .note }
@@ -67,7 +65,7 @@ The Arduino Uno has a **10-bit** ADC, so `analogRead()` returns values from 0 to
 
 ### ADC pins: chip vs. board
 
-The **ESP32-S3 chip** integrates two 12-bit SAR (Successive Approximation Register) ADCs supporting **20 channels** total: ADC1 has 10 channels (GPIO1–GPIO10) and ADC2 has 10 channels (GPIO11–GPIO20). However, not all 20 are broken out on every development board—the board manufacturer chooses which GPIOs to expose on the header pins.
+The **ESP32-S3 chip** integrates two 12-bit SAR ([Successive Approximation Register](https://en.wikipedia.org/wiki/Successive-approximation_ADC)) ADCs supporting **20 channels** total: ADC1 has 10 channels (GPIO1–GPIO10) and ADC2 has 10 channels (GPIO11–GPIO20). However, not all 20 are broken out on every development board—the board manufacturer chooses which GPIOs to expose on the header pins.
 
 On the **Adafruit ESP32-S3 Feather**, **15 ADC-capable pins** are available. Six carry the conventional Arduino "A" prefix (A0–A5), but this labeling is just an Arduino ecosystem convention for discoverability—it doesn't indicate special hardware. Electrically, `analogRead(A5)` and `analogRead(9)` use the exact same 12-bit SAR ADC, and any ADC-capable GPIO works identically with `analogRead()`:
 
@@ -283,10 +281,13 @@ We chose A5 because it's on **ADC1** on the ESP32-S3 Feather. While A0–A4 woul
 {: .note }
 > **Serial Plotter tip:** The `Serial.print` format used above (`"PotVal:"` followed by the value, then a comma separator) is designed for the Arduino IDE's **Serial Plotter**. Open it with **Tools → Serial Plotter** to see a real-time graph of both the potentiometer input and the duty cycle output. It's a great way to visualize what your code is doing!
 
-### Workbench video
+### Workbench video of pot-controlled LED with `ledcWrite()`
 
-<!-- TODO: Record a workbench video showing the pot-fade circuit on the ESP32-S3 Feather.
-     Use <video> with aria-label. -->
+<video autoplay loop muted playsinline aria-label="Workbench video showing a pot-controlled LED with ledcWrite() and the Adafruit ESP32-S3.">
+  <source src="assets/videos/ESP32-S3-PotFadeExternalLEDWithLedC_optimized_720p_muted.mp4" type="video/mp4">
+</video>
+**Video.** Using a potentiometer to control the LED brightness on the Adafruit ESP32-S3 with `ledcWrite()`.
+{: .fs-1 }
 
 <details markdown="1">
 <summary><strong>Huzzah32 workbench video</strong> (click to expand)</summary>
@@ -349,6 +350,14 @@ void loop() {
 ```
 
 This is even simpler—no `ledcAttach`, no frequency or resolution constants. The tradeoff is the same as in the [fade lesson](led-fade.md#using-analogwrite-instead): you're stuck with `analogWrite`'s default 1 kHz / 8-bit PWM unless you explicitly override it.
+
+### Workbench video of pot-controlled LED with `analogWrite()`
+
+<video autoplay loop muted playsinline aria-label="Workbench video showing a pot-controlled LED with analogWrite() and the Adafruit ESP32-S3.">
+  <source src="assets/videos/ESP32-S3-PotFadeExternalLEDAnalogWrite_optimized_720p_muted.mp4" type="video/mp4">
+</video>
+**Video.** Using a potentiometer to control the LED brightness on the Adafruit ESP32-S3 with `analogWrite()`. The behavior is indistinguishable from the `ledcWrite()` version.
+{: .fs-1 }
 
 ## Bonus: Potentiometer-controlled NeoPixel hue 🌈
 
@@ -422,6 +431,14 @@ Turn the potentiometer slowly and watch the NeoPixel sweep through the entire ra
 
 The original Huzzah32 does not have an onboard NeoPixel. You can connect an external NeoPixel to a GPIO pin and update `PIN_NEOPIXEL` accordingly. See the [Addressable LEDs lesson](../advancedio/addressable-leds.md) for wiring details.
 </details>
+
+### Workbench video of pot-controlled LED with `analogWrite()`
+
+<video autoplay loop muted playsinline aria-label="Using a potentiometer to control the hue of the built-in NeoPixel on the Adafruit ESP32-S3.">
+  <source src="assets/videos/ESP32-S3-PotCrossFadeBuiltInNeoPixel_optimized_720p_muted.mp4" type="video/mp4">
+</video>
+**Video.** Using a potentiometer to control the hue of the built-in NeoPixel on the Adafruit ESP32-S3.
+{: .fs-1 }
 
 ### Try Pot-controlled RGB crossfade in Wokwi
 

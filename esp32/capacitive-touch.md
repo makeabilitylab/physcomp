@@ -1,6 +1,6 @@
 ---
 layout: default
-title: L6&#58; Capacitive Touch Sensing
+title: L6&#58; Capacitive Touch
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
@@ -223,7 +223,7 @@ Connect a jumper wire (or any piece of conductive material) to a touch-capable G
  * On ESP32-S3: values INCREASE when touched.
  * On original ESP32: values DECREASE when touched.
  *
- * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch-sensing
+ * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch
  */
 const int TOUCH_PIN = 5;  // Use any touch-capable GPIO
 
@@ -324,7 +324,7 @@ Add an LED and 220Ω resistor to the touch circuit from Part 1. Connect the LED 
  * On ESP32-S3, touchRead() values INCREASE on touch,
  * so we check if the value is ABOVE the threshold.
  *
- * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch-sensing
+ * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch
  */
 const int TOUCH_PIN = 5;
 const int LED_PIN = LED_BUILTIN;  // GPIO 13 on the ESP32-S3 Feather
@@ -492,7 +492,7 @@ Here's an example that uses `touchAttachInterrupt` to detect a touch and turn on
  * Includes millis()-based debouncing to prevent multiple triggers
  * from a single physical touch.
  *
- * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch-sensing
+ * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch
  */
 const int TOUCH_PIN = 5;
 const int LED_PIN = LED_BUILTIN;
@@ -595,7 +595,7 @@ We'll use five touch pins for a pentatonic scale (C, D, E, G, A—a scale that s
  * On ESP32-S3: touchRead() values INCREASE on touch.
  * Adjust TOUCH_THRESHOLD based on your Serial Monitor readings.
  *
- * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch-sensing
+ * See: https://makeabilitylab.github.io/physcomp/esp32/capacitive-touch
  */
 
 // Note frequencies (from pitches.h)

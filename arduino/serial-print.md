@@ -368,7 +368,13 @@ Now that we know a bit about debugging with [`Serial.print()`](https://www.ardui
 
 <!-- In the [next lesson](led-fade.md), we will learn how to control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). -->
 
-<span class="fs-6">
-[Previous: Blinking an LED with Arduino](led-blink.md){: .btn .btn-outline }
-[Next: Fading an LED with Arduino](led-fade.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-blink.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Blinking an LED with Arduino</div>
+  </a>
+  <a href="led-fade.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Fading an LED with Arduino</div>
+  </a>
+</nav>

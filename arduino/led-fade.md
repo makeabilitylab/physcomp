@@ -287,9 +287,13 @@ In the [next lesson](tone.md), we'll learn how to play sounds on a piezo buzzer!
 
 <!-- In the [next lesson](led-blink2.md), we will learn about the difference between **current sources** and **current sinks** to help reinforce our understanding of how microcontrollers can control output. -->
 
-<span class="fs-6">
-<!-- [Previous: LED Blink](led-blink.md){: .btn .btn-outline } -->
-[Previous: Serial Debugging](serial-print.md){: .btn .btn-outline }
-[Next: Playing Tones](tone.md){: .btn .btn-outline }
-<!-- [Next: LED Blink 2](led-blink2.md){: .btn .btn-outline } -->
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-blink.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">LED Blink</div>
+  </a>
+  <a href="tone.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Playing Tones</div>
+  </a>
+</nav>

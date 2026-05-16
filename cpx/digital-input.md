@@ -108,6 +108,9 @@ Here are some additional resources:
 
 ## Previous Lesson
 
-<span class="fs-6">
-[Previous: Analog Input](analog-input.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="analog-input.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Analog Input</div>
+  </a>
+</nav>

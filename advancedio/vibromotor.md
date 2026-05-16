@@ -608,6 +608,9 @@ In this lesson, you learned about vibration motors and how to safely control the
 
 In the [next lesson](../smoothing-input.md), we will switch from output to input and learn how to smooth noisy sensor data using digital signal processing techniques.
 
-<span class="fs-6">
-[Previous: Servo Motors](servo.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="servo.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Servo Motors</div>
+  </a>
+</nav>

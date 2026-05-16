@@ -452,7 +452,13 @@ This lesson introduced **analog input** — one of the most important concepts i
 
 In the [next lesson](force-sensitive-resistors.md), we'll learn how to use **two-leg variable resistors** like force-sensitive resistors and photocells with microcontrollers. Since these components only have two legs (unlike a potentiometer's three), we'll need to add a fixed resistor to create a voltage divider — a technique that unlocks a whole world of analog sensors!
 
-<span class="fs-6">
-[Previous: Debouncing](debouncing.md){: .btn .btn-outline }
-[Next: Using force-sensitive resistors](force-sensitive-resistors.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="debouncing.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Debouncing</div>
+  </a>
+  <a href="force-sensitive-resistors.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Using force-sensitive resistors</div>
+  </a>
+</nav>

@@ -332,7 +332,13 @@ In this lesson, you learned about contact bouncing — a fundamental challenge w
 
 In the [next lesson](potentiometers.md), we'll move beyond digital input to the far more exciting and flexible world of analog input!
 
-<span class="fs-6">
-[Previous: A simple piano](piano.md){: .btn .btn-outline }
-[Next: Using potentiometers](potentiometers.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="piano.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">A simple piano</div>
+  </a>
+  <a href="potentiometers.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Using potentiometers</div>
+  </a>
+</nav>

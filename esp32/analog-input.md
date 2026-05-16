@@ -478,7 +478,13 @@ In this lesson, you combined analog input with PWM output to build a physical LE
 
 In the [next lesson](tone.md), we'll learn how to play tones and melodies on the ESP32 using the LEDC PWM library—the same hardware we used for LED fading, but now driving a speaker instead of an LED!
 
-<span class="fs-6">
-[Previous: Fading an LED with PWM](led-fade.md){: .btn .btn-outline }
-[Next: Playing tones](tone.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-fade.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Fading an LED with PWM</div>
+  </a>
+  <a href="tone.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Playing tones</div>
+  </a>
+</nav>

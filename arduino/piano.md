@@ -250,7 +250,13 @@ In this lesson, you built your first truly interactive Arduino project — a fiv
 
 In the [next lesson](debouncing.md), we'll introduce the problem of "contact bouncing" and talk about solutions. You may have already noticed some odd behavior with your piano — occasionally a note might "stutter" or play twice from a single press. That's contact bounce in action!
 
-<span class="fs-6">
-[Previous: Using buttons](buttons.md){: .btn .btn-outline }
-[Next: Debouncing](debouncing.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="buttons.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Using buttons</div>
+  </a>
+  <a href="debouncing.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Debouncing</div>
+  </a>
+</nav>

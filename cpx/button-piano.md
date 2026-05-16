@@ -68,7 +68,13 @@ To ensure that our volume is properly set, we initialize it to 255 (the highest 
 
 In the [next lesson](sensor-instrument.md), we'll create a light-responsive instrument!
 
-<span class="fs-6">
-[Previous: How to use MakeCode](makecode.md){: .btn .btn-outline }
-[Next: Light-Responsive Instrument](sensor-instrument.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="makecode.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">How to use MakeCode</div>
+  </a>
+  <a href="sensor-instrument.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Light-Responsive Instrument</div>
+  </a>
+</nav>

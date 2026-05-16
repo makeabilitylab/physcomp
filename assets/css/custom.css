@@ -521,7 +521,7 @@ video {
 
 .lesson-nav a {
   flex: 1;
-  padding: 0.6rem 0.8rem;          /* was 1rem */
+  padding: 0.6rem 0.8rem;
   border: 1px solid #e1e4e8;
   border-radius: 6px;
   text-decoration: none;
@@ -530,35 +530,36 @@ video {
 
 .lesson-nav a:hover {
   border-color: #7253ed;
-  background-color: #f0edf9;       /* light purple tint on hover */
+  background-color: #f0edf9;
 }
 
-.lesson-nav a:first-child {
+.lesson-nav .nav-prev {
   text-align: left;
   background-color: #fcfbff;       /* very light purple */
 }
 
-.lesson-nav a:last-child {
+.lesson-nav .nav-next {
   text-align: right;
+  margin-left: auto;
   background-color: #f5f2ff;       /* light purple */
 }
 
-.lesson-nav a:first-child:hover {
+.lesson-nav .nav-prev:hover {
   background-color: #ecedf0;
 }
 
-.lesson-nav a:last-child:hover {
+.lesson-nav .nav-next:hover {
   background-color: #e6e0f5;
 }
 
-.lesson-nav a:only-child {
+.lesson-nav .nav-prev:only-child,
+.lesson-nav .nav-next:only-child {
   flex: 0 1 auto;
-  margin-left: auto;
 }
 
 .nav-label {
   font-size: 0.95em;
-  opacity: 0.6;
+  color: #656d76;
 }
 
 .nav-title {

@@ -299,6 +299,9 @@ You've come a long way — from blinking an LED to building force-controlled ins
 - **[Advanced I/O](../advancedio/index.md):** Explore OLED displays, vibromotors, servo motors, and input smoothing techniques.
 - **[Sensors](../sensors/index.md):** Dive deeper into analog and digital sensors, signal conditioning, and sensor fusion.
 
-<span class="fs-6">
-[Previous: Potentiometers](potentiometers.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="potentiometers.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Potentiometers</div>
+  </a>
+</nav>

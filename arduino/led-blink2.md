@@ -153,8 +153,13 @@ In this lesson, you explored two fundamental output configurations. You learned:
 
 In the [next lesson](rgb-led.md), we will use a new component—an RGB LED—to output a variety of colors beyond just red, and we will apply our new knowledge of sourcing and sinking to understand Common Anode *vs.* Common Cathode RGB LED designs!
 
-<span class="fs-6">
-<!-- [Previous: LED Fade](led-fade.md){: .btn .btn-outline } -->
-[Previous: Playing Tones](tone.md){: .btn .btn-outline }
-[Next: RGB LEDs](rgb-led.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-fade.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">LED Fade</div>
+  </a>
+  <a href="rgb-led.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">RGB LEDs</div>
+  </a>
+</nav>

@@ -224,7 +224,13 @@ For your learning activity, pick out three different resistors from your kits. I
 
 In the [next lesson](leds.md), we will learn about light-emitting diodes and how to use them.
 
-<span class="fs-6">
-[Previous: Series and Parallel Resistors](series-parallel.md){: .btn .btn-outline }
-[Next: LEDs](leds.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="series-parallel.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Series and Parallel Resistors</div>
+  </a>
+  <a href="leds.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">LEDs</div>
+  </a>
+</nav>

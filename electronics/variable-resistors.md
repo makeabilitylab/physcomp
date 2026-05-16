@@ -334,7 +334,13 @@ Congratulations — you've completed the **[Intro to Electronics](index.md)** tu
 
 You're now ready to start our **[Intro to Arduino](../arduino/index.md)** series, where you'll combine everything you've learned with a programmable microcontroller to build truly interactive devices!
 
-<span class="fs-6">
-[Previous: Breadboards](breadboards.md){: .btn .btn-outline }
-[Next: Intro to Arduino](../arduino/index.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="breadboards.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Breadboards</div>
+  </a>
+  <a href="../arduino/index.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Intro to Arduino</div>
+  </a>
+</nav>

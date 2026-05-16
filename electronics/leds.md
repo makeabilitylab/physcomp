@@ -509,7 +509,13 @@ Outline:
 
 In the [next lesson](breadboards.md), we will learn about **breadboards**—a prototyping tool that makes it easy to rapidly build, test, and modify circuits without soldering.
 
-<span class="fs-6">
-[Previous: Resistors](resistors.md){: .btn .btn-outline }
-[Next: Breadboards](breadboards.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="resistors.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Resistors</div>
+  </a>
+  <a href="breadboards.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Breadboards</div>
+  </a>
+</nav>

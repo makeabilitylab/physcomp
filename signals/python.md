@@ -23,7 +23,13 @@ Additionally, for quick interactive access to editable versions, you can use:
 
 In the [next lesson](numpy.md), you will learn about and use the [NumPy](https://numpy.org/) scientific computing library for Python. NumPy provides a suite of methods to help process and analyze time-series data.
 
-<span class="fs-6">
-[Previous: Introduction to Jupyter Notebook](jupyter-notebook.md){: .btn .btn-outline }
-[Next: Introduction to Numpy](numpy.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="jupyter-notebook.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Introduction to Jupyter Notebook</div>
+  </a>
+  <a href="numpy.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Introduction to Numpy</div>
+  </a>
+</nav>

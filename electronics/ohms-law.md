@@ -243,8 +243,13 @@ In the [next lesson](series-parallel.md), we will apply Ohm's Law to more comple
 
 <!-- In the [next lesson](resistors.md), we will expand what we know about [resistors](resistors.md)—specially designed electrical components that *resist* the flow of current—before showing how they are useful with [LEDs](leds.md).  -->
 
-<span class="fs-6">
-[Previous: Schematics](schematics.md){: .btn .btn-outline }
-[Next: Resistors in Series and Parallel](series-parallel.md){: .btn .btn-outline }
-<!-- [Next: Resistors](resistors.md){: .btn .btn-outline } -->
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="schematics.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Schematics</div>
+  </a>
+  <a href="series-parallel.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Resistors in Series and Parallel</div>
+  </a>
+</nav>

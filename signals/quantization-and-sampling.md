@@ -20,6 +20,9 @@ You can view the Notebook in [html here](QuantizationAndSampling/index.html) but
 
 In the [next lesson](comparing-signals.md), you'll learn techniques to compare signals in the time domain, including Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW).
 
-<span class="fs-6">
-[Next: Comparing Signals in the Time Domain](comparing-signals.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="comparing-signals.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Comparing Signals in the Time Domain</div>
+  </a>
+</nav>

@@ -494,10 +494,16 @@ In this lesson, you learned how to use buttons for digital input with Arduino. T
 
 In the [next lesson](piano.md), we'll get to apply our newfound digital input skills to build a simple interactive piano with tactile buttons and a piezo buzzer.
 
-<span class="fs-6">
-[Previous: Intro to Input](intro-input.md){: .btn .btn-outline }
-[Next: Make a simple piano](piano.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="intro-input.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Intro to Input</div>
+  </a>
+  <a href="piano.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Make a simple piano</div>
+  </a>
+</nav>
 
 <!-- ## TODO/Outline
 - The button is funky: why four legs? what's connected. Maybe show multimeter?

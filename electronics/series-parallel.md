@@ -360,7 +360,13 @@ In your prototyping journals, include a sketch of the circuit (can be a smartpho
 
 In the [next lesson](resistors.md), we will learn more about resistors, how they're made, how to use them, how they're characterized, and how to calculate their power dissipation.
 
-<span class="fs-6">
-[Previous: Ohm's Law](ohms-law.md){: .btn .btn-outline }
-[Next: Resistors](resistors.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="ohms-law.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Ohm's Law</div>
+  </a>
+  <a href="resistors.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Resistors</div>
+  </a>
+</nav>

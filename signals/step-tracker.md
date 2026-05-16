@@ -37,6 +37,9 @@ Once you've done this, you can save the project to your Google Drive and then in
 
 In the [next lesson](gesturerec-shape-based.md), you'll learn how to build a shape-based gesture recognizer for 3D accelerometer signals.
 
-<span class="fs-6">
-[Next: Shape-Based Gesture Recognition](gesturerec-shape-based.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="gesturerec-shape-based.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Shape-Based Gesture Recognition</div>
+  </a>
+</nav>

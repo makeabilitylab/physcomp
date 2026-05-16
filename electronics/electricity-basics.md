@@ -497,6 +497,9 @@ MIT 8.02x lecture on electric charges, forces, and coulomb's law (polarization) 
 
 In the [next lesson](schematics.md), we will learn about visual representations of circuits—called [circuit schematics](schematics.md), which will prepare us for some basic circuit analysis and [Ohm's Law](ohms-law.md).
 
-<span class="fs-6">
-[Next: Circuit Schematics](schematics.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="schematics.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Circuit Schematics</div>
+  </a>
+</nav>

@@ -332,6 +332,9 @@ In this lesson, we established our first physical connections to the Arduino. Yo
 
 In the next lesson, we will learn how to programmatically control the output voltage of a digital I/O pin to switch between `LOW` (0V) or `HIGH` (5V) using [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/).
 
-<span class="fs-6">
-[Next: Blinking an LED with Arduino](led-blink.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-blink.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Blinking an LED with Arduino</div>
+  </a>
+</nav>

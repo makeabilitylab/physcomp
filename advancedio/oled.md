@@ -908,6 +908,9 @@ In the [next lesson](vibromotor.md), we will learn about vibration motors, their
 
 <!-- In the [next lesson](resistors.md), we will expand what we know about [resistors](resistors.md)—specially designed electrical components that *resist* the flow of current—before showing how they are useful with [LEDs](leds.md).  -->
 
-<span class="fs-6">
-[Next: Addressable LEDs](addressable-leds.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="addressable-leds.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Addressable LEDs</div>
+  </a>
+</nav>

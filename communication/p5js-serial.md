@@ -615,10 +615,16 @@ For your prototyping journals, create a simple p5.js app that reads in one or mo
 
 In the [next lesson](p5js-serial-io.md), we'll show more complicated examples where Arduino and p5.js bidirectionally communicate (Computer ↔ Arduino). It should be fun!
 
-<span class="fs-6">
-[Previous: Intro to Web Serial](web-serial.md){: .btn .btn-outline }
-[Next: Serial I/O with p5.js](p5js-serial-io.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="web-serial.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Intro to Web Serial</div>
+  </a>
+  <a href="p5js-serial-io.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Serial I/O with p5.js</div>
+  </a>
+</nav>
 
 <!-- TODO: consider showing one of our earlier p5.js videos we made for HCID with a controller? -->
 

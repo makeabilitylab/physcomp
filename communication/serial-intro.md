@@ -556,9 +556,12 @@ For your prototyping journals, run [SimpleSerialIn.ino](https://github.com/makea
 
 In the [next lesson](web-serial), we'll apply our newfound serial knowledge to communicating with our Arduino via our web browsers using the [Web Serial API](https://web.dev/serial/).
 
-<span class="fs-6">
-[Next: Web Serial](web-serial.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="web-serial.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Web Serial</div>
+  </a>
+</nav>
 
 <!-- #### DisplayTextSerialIn
 

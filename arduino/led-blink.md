@@ -399,7 +399,13 @@ In this lesson, you wrote your very first Arduino program! You learned:
 
 In the next lesson, we are going to learn about a few basic debugging strategies using [`Serial.print()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) before moving on to [analog output](led-fade.md), which lets us control the output voltage not just at two levels, `LOW` (0V) or `HIGH` (5V), but at finer levels between 0 and 5V using [`analogWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/).
 
-<span class="fs-6">
-[Previous: Turning on an LED with Arduino](led-on.md){: .btn .btn-outline }
-[Next: Debugging Arduino code with Serial.print](serial-print.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-on.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Turning on an LED with Arduino</div>
+  </a>
+  <a href="serial-print.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Debugging Arduino code with Serial.print</div>
+  </a>
+</nav>

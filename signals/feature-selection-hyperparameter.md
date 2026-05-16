@@ -18,6 +18,9 @@ You can view the Notebook in [html here](FeatureSelectionAndHyperparameterTuning
 
 ## Previous Lesson
 
-<span class="fs-6">
-[Previous: Feature-Based Gesture Recognizer](gesturerec-feature-based.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="gesturerec-feature-based.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Feature-Based Gesture Recognizer</div>
+  </a>
+</nav>

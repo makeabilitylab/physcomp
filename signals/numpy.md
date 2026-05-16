@@ -23,7 +23,13 @@ Additionally, for quick interactive access to editable versions, you can use:
 
 In the [next lesson](matplotlib.md), you will learn about and use the [Matplotlib](http://matplotlib.org/) visualization library for Python. Matplotlib will help us visualize and analyze our data.
 
-<span class="fs-6">
-[Previous: Introduction to NumPy](numpy.md){: .btn .btn-outline }
-[Next: Introduction to Matplotlib](matplotlib.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="numpy.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Introduction to NumPy</div>
+  </a>
+  <a href="matplotlib.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Introduction to Matplotlib</div>
+  </a>
+</nav>

@@ -400,7 +400,13 @@ UIUC Analog Input: https://courses.engr.illinois.edu/ece110/sp2021/content/labs/
 
 In the next lesson, we'll learn how to add a fixed resistor to a two-leg variable resistor like a force-sensitive resistor or photocell to create a voltage divider that can be read by a microcontroller.
 
-<span class="fs-6">
-[Previous: Make a simple piano](piano.md){: .btn .btn-outline }
-[Next: Using force-sensitive resistors](force-sensitive-resistors.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="piano.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Make a simple piano</div>
+  </a>
+  <a href="force-sensitive-resistors.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Using force-sensitive resistors</div>
+  </a>
+</nav>

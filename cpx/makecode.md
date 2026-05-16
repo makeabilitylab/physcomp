@@ -275,10 +275,16 @@ For this lesson's design challenge, try seeing how many different ways you can b
 
 In the [next lesson](button-piano.md), we'll make our first interactive program: a button piano!
 
-<span class="fs-6">
-[Previous: Intro the CPX](cpx.md){: .btn .btn-outline }
-[Next: Button Piano](button-piano.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="cpx.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Intro the CPX</div>
+  </a>
+  <a href="button-piano.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Button Piano</div>
+  </a>
+</nav>
 
 <!-- TODO:
 - Add in saving and sharing projects 

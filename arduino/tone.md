@@ -549,7 +549,13 @@ In the [Intro to Input](intro-input.md) lessons, you'll learn how to read button
 
 In the [next lesson](led-blink2.md), we will learn about the difference between **current sources** and **current sinks** by building two LED circuits that behave in opposite ways when their pins are driven `HIGH` and `LOW`.
 
-<span class="fs-6">
-[Previous: Fading an LED](led-fade.md){: .btn .btn-outline }
-[Next: Blinking Two LEDs](led-blink2.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-fade.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Fading an LED</div>
+  </a>
+  <a href="led-blink2.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Blinking Two LEDs</div>
+  </a>
+</nav>

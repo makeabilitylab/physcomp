@@ -130,9 +130,12 @@ If you want to learn more about how capacitive and resistive touchscreens work, 
 
 <!-- ## Previous Lesson
 
-<span class="fs-6">
-[Previous: Light-Responsive Instrument](sensor-instrument.md){: .btn .btn-outline }
-</span> -->
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="sensor-instrument.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Light-Responsive Instrument</div>
+  </a>
+</nav> -->
 
 ## Next Lesson
 

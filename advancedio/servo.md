@@ -523,7 +523,13 @@ In this lesson, you learned how to control servo motors for precise angular posi
 
 In the [next lesson](vibromotor.md), we will shift from components with built-in intelligence to a raw DC motor—the vibromotor. You'll learn why transistors, flyback diodes, and resistor calculations become necessary when a component doesn't have its own driver circuit.
 
-<span class="fs-6">
-[Previous: Addressable LEDs](addressable-leds.md){: .btn .btn-outline }
-[Next: Vibromotors](vibromotor.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="addressable-leds.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Addressable LEDs</div>
+  </a>
+  <a href="vibromotor.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Vibromotors</div>
+  </a>
+</nav>

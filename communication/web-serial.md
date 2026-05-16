@@ -765,8 +765,13 @@ For your prototyping journals, either modify or create your own lil web app to c
 
 In the [next lesson](p5js-serial.md), we'll show how to use [p5js](https://p5js.org/) with Web Serial. It's gonna be great fun!
 
-<span class="fs-6">
-[Previous: Intro to Serial](serial-intro.md){: .btn .btn-outline }
-[Next: Using p5js with Web Serial](p5js-serial.md){: .btn .btn-outline }
-<!-- [Next: Using potentiometers](potentiometers.md){: .btn .btn-outline } -->
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="serial-intro.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Intro to Serial</div>
+  </a>
+  <a href="p5js-serial.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Using p5js with Web Serial</div>
+  </a>
+</nav>

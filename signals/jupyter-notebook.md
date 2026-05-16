@@ -114,6 +114,9 @@ For more tips, see this [dataquest](https://www.dataquest.io/blog/jupyter-notebo
 
 In the [next lesson](python.md), you will learn about the Python programming language and gain practical experience using Jupyter Notebook.
 
-<span class="fs-6">
-[Next: Introduction to Python](python.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="python.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Introduction to Python</div>
+  </a>
+</nav>

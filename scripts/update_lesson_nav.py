@@ -11,11 +11,14 @@ Scans all .md files under DOCS_DIR for the old-style lesson nav pattern:
 and replaces it with the new card-style navigation:
 
     <nav class="lesson-nav" aria-label="Lesson navigation">
-      <a href="file.html">
+      <a href="file.html" class="nav-prev">
         <div class="nav-label">&larr; Previous Lesson</div>
         <div class="nav-title">Title</div>
       </a>
-      ...
+      <a href="file.html" class="nav-next">
+        <div class="nav-label">Next Lesson &rarr;</div>
+        <div class="nav-title">Title</div>
+      </a>
     </nav>
 
 Handles three cases: prev+next, next-only, and prev-only.
@@ -77,14 +80,14 @@ def build_nav(prev, next_):
     links = []
     if prev:
         links.append(
-            f'  <a href="{prev[1]}.html">\n'
+            f'  <a href="{prev[1]}.html" class="nav-prev">\n'
             f'    <div class="nav-label">&larr; Previous Lesson</div>\n'
             f'    <div class="nav-title">{prev[0]}</div>\n'
             f'  </a>'
         )
     if next_:
         links.append(
-            f'  <a href="{next_[1]}.html">\n'
+            f'  <a href="{next_[1]}.html" class="nav-next">\n'
             f'    <div class="nav-label">Next Lesson &rarr;</div>\n'
             f'    <div class="nav-title">{next_[0]}</div>\n'
             f'  </a>'

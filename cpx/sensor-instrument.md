@@ -99,7 +99,13 @@ Similarly, [here's a version](https://makecode.com/_RCK2f5KhHLby) that maps the 
 
 In the [next lesson](capacitive-touch), we'll introduce a multi-part series on using capacitive sensing to interact with everyday objects and more!
 
-<span class="fs-6">
-[Previous: Button Piano](button-piano.md){: .btn .btn-outline }
-[Next: Capacitive Sensing](capacitive-touch.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="button-piano.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Button Piano</div>
+  </a>
+  <a href="capacitive-touch.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Capacitive Sensing</div>
+  </a>
+</nav>

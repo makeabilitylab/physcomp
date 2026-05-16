@@ -158,7 +158,13 @@ Series 10 could be getting sensor data into computer (the hacky way)
 
 In the next lesson, we'll learn how to use **digital input** like buttons!
 
-<span class="fs-6">
-[Previous: CPX as a Mouse](cpx-mouse.md){: .btn .btn-outline }
-[Next: Digital Input](digital-input.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="cpx-mouse.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">CPX as a Mouse</div>
+  </a>
+  <a href="digital-input.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Digital Input</div>
+  </a>
+</nav>

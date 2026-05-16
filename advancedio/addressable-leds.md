@@ -712,7 +712,13 @@ In this lesson, you learned about addressable RGB LEDs and how to create colorfu
 
 In the [next lesson](servo.md), we will learn about servo motors—another output device with a built-in control circuit—and how to precisely control angular position with the Arduino Servo library.
 
-<span class="fs-6">
-[Previous: OLED Displays](oled.md){: .btn .btn-outline }
-[Next: Servo Motors](servo.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="oled.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">OLED Displays</div>
+  </a>
+  <a href="servo.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Servo Motors</div>
+  </a>
+</nav>

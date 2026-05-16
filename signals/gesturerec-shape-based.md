@@ -20,7 +20,13 @@ You can view the Notebook in [html here](gesturerec/shapebased/index.html) but w
 
 In the [next lesson](gesturerec-feature-based.md), you'll learn how to build a feature-based gesture recognizer for 3D accelerometer signals using a Support Vector Machine (SVM) and other classification models.
 
-<span class="fs-6">
-[Previous: Heuristic-Based Step Tracker](step-tracker.md){: .btn .btn-outline }
-[Next: Feature-Based Gesture Recognition](gesturerec-feature-based.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="step-tracker.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Heuristic-Based Step Tracker</div>
+  </a>
+  <a href="gesturerec-feature-based.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Feature-Based Gesture Recognition</div>
+  </a>
+</nav>

@@ -21,6 +21,9 @@ Additionally, for quick interactive access to editable versions, you can use:
 
 ## Previous Lesson
 
-<span class="fs-6">
-[Previous: Introduction to NumPy](numpy.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="numpy.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Introduction to NumPy</div>
+  </a>
+</nav>

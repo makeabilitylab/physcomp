@@ -20,7 +20,13 @@ You can view the Notebook in [html here](ComparingSignals/index.html) but we als
 
 In the [next lesson](frequency-analysis.md), you'll learn about frequency analysis, including Discrete Fourier Transforms (DFTs) and the intuition for how they work, Fast Fourier Transforms and spectral frequency plots, and Short-time Fourier Transforms (STFTs) and spectrograms.
 
-<span class="fs-6">
-[Previous: Quantization and Sampling](quantization-and-sampling.md){: .btn .btn-outline }
-[Next: Frequency Analysis](frequency-analysis.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="quantization-and-sampling.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Quantization and Sampling</div>
+  </a>
+  <a href="frequency-analysis.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Frequency Analysis</div>
+  </a>
+</nav>

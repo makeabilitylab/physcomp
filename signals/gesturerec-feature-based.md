@@ -20,7 +20,13 @@ You can view the Notebook in [html here](gesturerec/featurebased/index.html) but
 
 In the [next lesson](feature-selection-hyperparameter.md), you'll learn how to use [Scikit-learn](https://scikit-learn.org/) for automatic feature selection and hyperparameter tuning.
 
-<span class="fs-6">
-[Previous: Shape-Based Step Tracker](gesturerec-shape-based.md){: .btn .btn-outline }
-[Next: Feature Selection and Hyperparameter Tuning](feature-selection-hyperparameter.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="gesturerec-shape-based.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Shape-Based Step Tracker</div>
+  </a>
+  <a href="feature-selection-hyperparameter.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Feature Selection and Hyperparameter Tuning</div>
+  </a>
+</nav>

@@ -510,7 +510,13 @@ The key takeaway: `pinMode`, `digitalWrite`, and `delay` work **identically** on
 
 In the [next lesson](led-fade.md), we'll learn how to use "analog output" on the ESP32 to smoothly fade an LED's brightness up and down. This is where things start to diverge from Arduino: instead of `analogWrite`, the ESP32 uses the **LEDC** (LED Control) PWM library!
 
-<span class="fs-6">
-[Previous: Introduction to the ESP32](esp32.md){: .btn .btn-outline }
-[Next: Fading an LED with PWM](led-fade.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="esp32.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Introduction to the ESP32</div>
+  </a>
+  <a href="led-fade.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Fading an LED with PWM</div>
+  </a>
+</nav>

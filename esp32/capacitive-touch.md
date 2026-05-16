@@ -747,7 +747,13 @@ In this lesson, you added a completely new input modality to your toolkit—one 
 
 In the [next lesson](iot.md), we'll connect our ESP32 to the cloud over WiFi and use an IoT dashboard to view our data. This is where the ESP32 truly shines! ✨
 
-<span class="fs-6">
-[Previous: Playing tones](tone.md){: .btn .btn-outline }
-[Next: Making an IoT device](iot.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="tone.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Playing tones</div>
+  </a>
+  <a href="iot.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Making an IoT device</div>
+  </a>
+</nav>

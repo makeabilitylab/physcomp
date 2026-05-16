@@ -280,6 +280,9 @@ You set up the Arduino IDE with the ESP32 board support package and verified you
 
 In the [next lesson](led-blink.md), you will write your first ESP32 program to blink an LED using the ESP32 Arduino library.
 
-<span class="fs-6">
-[Next: Blink an LED with ESP32](led-blink.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-blink.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Blink an LED with ESP32</div>
+  </a>
+</nav>

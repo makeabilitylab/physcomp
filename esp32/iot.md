@@ -561,6 +561,9 @@ In this lesson, you connected your ESP32 to the internet and built your first Io
 - [ThingSpeak Arduino library](https://github.com/mathworks/thingspeak-arduino) — for connecting Arduino and ESP32 boards to ThingSpeak
 - [Random Nerd Tutorials: ESP32 with ThingSpeak](https://randomnerdtutorials.com/esp32-thingspeak-publish-arduino/) — step-by-step guide for ThingSpeak with ESP32
 
-<span class="fs-6">
-[Previous: Capacitive Touch Sensing](capacitive-touch.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="capacitive-touch.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Capacitive Touch Sensing</div>
+  </a>
+</nav>

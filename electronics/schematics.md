@@ -195,7 +195,13 @@ Have fun!
 
 In the [next lesson](ohms-law.md), we will learn about [Ohm's Law](ohms-law.md), one of the most important and fundamental empirical laws in electrical circuits that relates voltage, current, and resistance together in a rather simple equation: $$I = \frac{V}{R}$$.
 
-<span class="fs-6">
-[Previous: Voltage, current, and resistance](electricity-basics.md){: .btn .btn-outline }
-[Next: Ohm's Law](ohms-law.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="electricity-basics.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Voltage, current, and resistance</div>
+  </a>
+  <a href="ohms-law.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Ohm's Law</div>
+  </a>
+</nav>

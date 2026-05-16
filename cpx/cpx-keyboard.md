@@ -113,7 +113,13 @@ All project examples below provide tutorials with example MakeCode code.
 
 In the [next lesson](cpx-mouse.md), we'll extend our work to build a custom interactive mouse.
 
-<span class="fs-6">
-[Previous: Capacitive Sensing](capacitive-touch.md){: .btn .btn-outline }
-[Next: CPX as a Mouse](cpx-mouse.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="capacitive-touch.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Capacitive Sensing</div>
+  </a>
+  <a href="cpx-mouse.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">CPX as a Mouse</div>
+  </a>
+</nav>

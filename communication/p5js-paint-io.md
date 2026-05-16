@@ -865,7 +865,13 @@ You could (and should) design your own paintbrush controller too! Think about ho
 
 In the [next lesson](ml5js-serial.md), we'll introduce machine learning (ML) frameworks and use one in particular, called [ml5.js](https://ml5js.org/), to create interactive ML-based applications with Arduino.
 
-<span class="fs-6">
-[Previous: p5.js Serial I/O](p5js-serial-io.md){: .btn .btn-outline }
-[Next: ml5.js Serial](ml5js-serial.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="p5js-serial-io.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">p5.js Serial I/O</div>
+  </a>
+  <a href="ml5js-serial.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">ml5.js Serial</div>
+  </a>
+</nav>

@@ -356,7 +356,13 @@ We did it! This completes our [Intro to Output](intro-output.md) series. Let's n
 
 <!-- In the next lesson, we'll learn about making sound with passive piezoelectric buzzers and the [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/).
 
-<span class="fs-6">
-[Previous: LED Blink 2](led-blink2.md){: .btn .btn-outline }
-[Next: Cross-fading RGB LEDs](rgb-led-fade.md){: .btn .btn-outline }
-</span> -->
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-blink2.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">LED Blink 2</div>
+  </a>
+  <a href="rgb-led-fade.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Cross-fading RGB LEDs</div>
+  </a>
+</nav> -->

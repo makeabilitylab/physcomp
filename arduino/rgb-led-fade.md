@@ -276,7 +276,13 @@ In this lesson, you explored advanced color control and multi-file programming. 
 
 For our next and final [Intro to Output](intro-output.md) lesson, we are going to learn how to blink multiple LEDs at different frequencies, which is one of the most common questions on Arduino forums—perhaps because of the way the [official Arduino Blink tutorial](https://www.arduino.cc/en/tutorial/blink) uses `delay()` to control blinking rates (which is fine for one LED but doesn't scale). Before starting the lesson, it's worth thinking about how *you* would blink multiple frequencies at different rates. :)
 
-<span class="fs-6">
-[Previous: RGB LEDs](rgb-led.md){: .btn .btn-outline }
-[Next: Blinking Multiple LEDs at Different Rates](led-blink3.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="rgb-led.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">RGB LEDs</div>
+  </a>
+  <a href="led-blink3.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Blinking Multiple LEDs at Different Rates</div>
+  </a>
+</nav>

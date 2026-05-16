@@ -550,7 +550,13 @@ In this lesson, you learned how to fade an LED on the ESP32 using the LEDC PWM l
 
 In the [next lesson](analog-input.md), we'll use a potentiometer to control an LED's brightness and learn about the ESP32's analog input.
 
-<span class="fs-6">
-[Previous: Blinking an LED with ESP32](led-blink.md){: .btn .btn-outline }
-[Next: Analog input with the ESP32](analog-input.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="led-blink.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Blinking an LED with ESP32</div>
+  </a>
+  <a href="analog-input.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Analog input with the ESP32</div>
+  </a>
+</nav>

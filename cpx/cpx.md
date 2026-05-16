@@ -244,9 +244,12 @@ To learn more, Adafruit and MakeCode have published a series of thoughtful, easy
 
 In the [next lesson](makecode.md), we will make our first MakeCode+CPX program—called Blinky. As we build, we will learn about the MakeCode programming environment, the simulator, and how to load our program on to the CPX.
 
-<span class="fs-6">
-[Next: Programming the CPX with MakeCode](makecode.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="makecode.html" class="nav-next">
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Programming the CPX with MakeCode</div>
+  </a>
+</nav>
 
 ## Educational reflections
 

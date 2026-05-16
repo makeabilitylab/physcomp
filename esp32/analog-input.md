@@ -166,7 +166,9 @@ The same ADC2/WiFi restriction applies: ADC2 pins are unavailable when WiFi is a
 
 In the following video, we test all 13 analog input pins (`A0`–`A12`) using a trim potentiometer for input and the Serial Plotter for output:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/8BBY-5n4e5A" title="Testing all 13 analog input pins on the Huzzah32 ESP32 using a potentiometer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/8BBY-5n4e5A" title="Testing all 13 analog input pins on the Huzzah32 ESP32 using a potentiometer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** Testing all 13 analog input pins on the Adafruit ESP32 Huzzah32 with a potentiometer and the Serial Plotter.
 {: .fs-1 }
 
@@ -293,7 +295,9 @@ We chose A5 because it's on **ADC1** on the ESP32-S3 Feather. While A0–A4 woul
 
 Here's a workbench video showing the pot-fade circuit on the Huzzah32, with the Serial Plotter graphing the analog input value and the converted duty cycle:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/E5YFtm0CLFY" title="Potentiometer-controlled LED fader on the Huzzah32 ESP32" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/E5YFtm0CLFY" title="Potentiometer-controlled LED fader on the Huzzah32 ESP32" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** Potentiometer-controlled LED fader on the Huzzah32 with Serial Plotter output.
 {: .fs-1 }
 
@@ -301,7 +305,7 @@ Here's a workbench video showing the pot-fade circuit on the Huzzah32, with the 
 
 ### Try pot-fade in Wokwi
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the pot-controlled LED fade running in the Wokwi simulator">
+<video autoplay loop muted playsinline aria-label="Video showing the pot-controlled LED fade running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-PotFade_optimized_muted.mp4" type="video/mp4" />
 </video>
 **Video.** The potentiometer-controlled LED brightness circuit and sketch running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463962426121286657).
@@ -441,7 +445,7 @@ The original Huzzah32 does not have an onboard NeoPixel. You can connect an exte
 
 ### Try Pot-controlled RGB crossfade in Wokwi
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the pot-controlled RGB LED crossfade running in the Wokwi simulator">
+<video autoplay loop muted playsinline aria-label="Video showing the pot-controlled RGB LED crossfade running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-PotCrossFade_RGBLED_optimized_muted.mp4" type="video/mp4" />
 </video>
 **Video.** The potentiometer-controlled RGB cross-fade circuit and sketch running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463996193959530497).

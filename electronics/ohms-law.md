@@ -103,7 +103,9 @@ In addition, it's helpful to have a way to check our work, which we can do in a 
 
 Before we begin, let's watch this video of me building a simple resistive circuit in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) and calculating its current, given a voltage source and resistor.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ZxNHcUp-CFY" title="Building a simple resistive circuit in CircuitJS and calculating current using Ohm's Law" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/ZxNHcUp-CFY" title="Building a simple resistive circuit in CircuitJS and calculating current using Ohm's Law" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Video.** The video was created using the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulator. Direct link is [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cDQkbNbrxQ0qo2lSRiYCNgAdBIYVSWKR4KFDkL+ytTvWi2AdwUqwPcMRSaT53mCt9INS9cjGnLh9dwuV7+V9VKmxCPGCDG20BOz4wqNjQ8KCk8A8U+JSBAM8+AVT9CEMAJ1yVLLEweDYgA).
 {: .fs-1 }

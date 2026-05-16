@@ -166,7 +166,9 @@ Adafruit maintains an [open-source repository on GitHub](https://github.com/adaf
 
 Once you've downloaded and unzipped the Fritzing release, open it and follow this tutorial video. Together, we will make a simple LED-based circuit with a 9V battery, a switch, a resistor, and an LED. To complement the video, we also have this [simple Fritzing PDF guide](assets/pdfs/RapidIntroduction_HowToUseFritizing_ByJonFroehlich.pdf).
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/x1aN9LwhIAQ" title="Fritzing tutorial: building a simple LED circuit with a 9V battery, switch, resistor, and LED" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/x1aN9LwhIAQ" title="Fritzing tutorial: building a simple LED circuit with a 9V battery, switch, resistor, and LED" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Figure.** A video tutorial of using [Fritzing](https://fritzing.org/) to build a simple LED-based circuit.
 {: .fs-1 }

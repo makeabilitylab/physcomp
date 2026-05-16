@@ -28,7 +28,7 @@ To begin, we'll build a simple p5.js demo app that draws and resizes a selected 
 
 Here's a small sneak preview of what the final interactive experience will look like.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplayShapeIn.ino-DisplayShapeOut-Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the p5.js app [DisplayShapeOut](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut) and Arduino sketch [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino). The p5.js app sends a `shapeType` and a `shapeSize` as a comma-separated text string to Arduino via web serial. The [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino) program parses this text and draws a shape with the appropriate size to the OLED. I did not use my regular recording setup for this because OBS Studio + my document camera have a noticeable lag. You can view, edit, play with the DisplayShapeOut code in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/TfE1BjOX6) or from our GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut))
@@ -442,7 +442,7 @@ void loop() {
 
 Here's a video demonstration of what we have so far: the full DisplayShapeOut p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)) running with an intermediate version of [DisplayShapeSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino), which simply echos back received data and displays some debugging output to the OLED screen.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplayShapeIn.ino-EchoBack-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** Testing the C++ echo-back code for Arduino with the the p5.js app DisplayShapeOut ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)). You can view this intermediate version of DisplayShapeSerialIn.ino [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino).
@@ -490,7 +490,7 @@ if(indexOfComma != -1){
 
 Great, now let's upload this to the Arduino and test our two apps thus far. Does the parsing work?
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplayShapeIn.ino-TestParsing-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** Testing the C++ parsing code for Arduino with the the p5.js app DisplayShapeOut ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)). You can view this intermediate version of DisplayShapeSerialIn.ino [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate2/DisplayShapeSerialIn-Intermediate2.ino). 
@@ -502,7 +502,7 @@ Our Arduino program does **not** know where the incoming data from its serial po
 
 Let's close our p5.js tab in our web browser to ensure it's disconnected from the Arduino. Now, open up the Serial Monitor and input data into the Serial Monitor. When testing, it's a good idea to enter both properly formed and malformed data. Make sure to test edge cases too! See video below.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplayShapeIn.ino-SerialMonitor-TrimmedOptimized1200w.mp4" type="video/mp4" />
 </video>
 **Video.** Using the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) to test our parsing code. Using the Serial Monitor is an easy, convenient way to test your serial input and parsing code on the Arduino. 
@@ -619,7 +619,7 @@ That's it! You can see our full implementation on GitHub as [DisplayShapeSerialI
 
 We did it! Here's the full end-to-end demo.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplaySerialIn-EndToEndDemo-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the p5.js app [DisplayShapeOut](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut) and Arduino sketch [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino). You can view, edit, play with the DisplayShapeOut code in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/TfE1BjOX6) or from our GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut))
@@ -633,7 +633,7 @@ Again, there are many possibilities but let's keep things simple. We'll add two 
 
 Here's a quick sneak peek at what the two apps will look like:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplayShapeBidirectional_ShortenedAndOptimized1200w.mp4" type="video/mp4" />
 </video>
 **Video.** A brief end-to-end demo of the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
@@ -901,7 +901,7 @@ void checkButtonPresses(){
 
 We can test our new button and drawing code regardless of serial input. So, let's do that now:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplayShapeBidirectionalIntermediate-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** Testing an intermediate version of our Arduino code (in GitHub [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional-Intermediate1/DisplayShapeSerialBidirectional-Intermediate1.ino)).
@@ -979,7 +979,7 @@ We did it! Below, we provide the full code links and a video demonstration.
 
 Here's a video demo of DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplayShapeBidirectional_TrimmedAndOptimized900w.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).

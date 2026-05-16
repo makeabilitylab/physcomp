@@ -144,11 +144,15 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Here are two videos showing the code running on an Arduino Uno. First, in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ZyfHRQFwmeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/ZyfHRQFwmeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 Second, a workbench video of the code running on an Arduino Uno:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/zL7xIWHqVaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/zL7xIWHqVaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 <!--TODO: add in a p5js that demonstrates how this works? And maybe let's reader play with different color values? -->
 
@@ -162,7 +166,9 @@ RGB and HSL color space visualizations from [Wikipedia](https://en.wikipedia.org
 
 Here's a video of various hues, saturations, and lightness levels using Hunor Marton's HSL Color Picker. Play around with it yourself on [codepen.io](https://codepen.io/HunorMarton/pen/dvXVvQ/). You can also open up almost any painting or graphics application to play with and switch between colorspaces from MSPaint to Adobe Photoshop and Illustrator to [GIMP](https://www.gimp.org/) and [Inkscape](https://inkscape.org/).
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/a0j8qyBJE2E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/a0j8qyBJE2E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 A screen recording of [Hunor Marton's HSL Color Picker](https://codepen.io/HunorMarton/pen/dvXVvQ/).
 {: .fs-1 }
 
@@ -216,7 +222,9 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Here's a workbench video of [CrossFadeHue.ino](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue) with a common cathode RGB LED.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ROfJge7bsfI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/ROfJge7bsfI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 <!-- TODO look up what the minimum step value that makes sense with our quantization -->
 

@@ -33,7 +33,7 @@ If you built the [button piano](piano.md) in the previous lesson, you may have a
 > - How to choose an appropriate debounce window for your application
 > - Hardware debouncing solutions using capacitors and Schmitt Triggers
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Slow-motion video of a hammer bouncing off a table, illustrating how switch contacts bounce before settling">
+<video autoplay loop muted playsinline aria-label="Slow-motion video of a hammer bouncing off a table, illustrating how switch contacts bounce before settling">
   <source src="assets/movies/DebouncingHammer_CurrentSource_720p-Optimized.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a hammer bouncing off a table to help illustrate how switch contacts bounce before entering a steady state. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
@@ -47,7 +47,7 @@ So, what can you do? The solution is to "debounce" your switches, which can be d
 
 [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) recorded slow motion videos of switches bouncing during activations and deactivations. Just like the hammer, this electrical contact visibly bounces when first activated, creating a noisy contact signal.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Slow-motion video of a switch mechanically bouncing off its contacts before settling">
+<video autoplay loop muted playsinline aria-label="Slow-motion video of a switch mechanically bouncing off its contacts before settling">
   <source src="assets/movies/DebouncingButton_CurrentSource_720p-Optimized-WithLabels.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a switch mechanically bouncing off its contacts. Buttons are mechanical devices. When a button is pressed or a contact switch moved, it creates a rapid oscillation of open- and closed-circuits before settling to its final state. In comparison to computation, mechanical motion is slow. Microcontrollers—even old, slow ones like the ATmega328—work so fast that they will read these rapid oscillations as `HIGH` and `LOW` input state changes. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
@@ -90,7 +90,9 @@ We made a [small test program](https://github.com/makeabilitylab/arduino/blob/ma
 
 We are tracking both **non-debounced button presses** ("raw" button presses) and **debounced button presses**. In the video, you'll observe how errant the non-debounced button press count gets (shown with the blue, rapidly-increasing line) compared to the accurate debounced count (the red staircase line)!
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/tw-pndJQFqw" title="Video demonstrating the importance of debouncing buttons with raw vs debounced press counts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/tw-pndJQFqw" title="Video demonstrating the importance of debouncing buttons with raw vs debounced press counts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Video.** A video demonstrating the importance of debouncing your buttons. We track the number of "raw" button presses (blue, rapidly increasing) and the number of debounced button presses (red, clean staircase) and plot the values in Serial Plotter.
 {: .fs-1 }
@@ -103,7 +105,9 @@ Like with many problems involving microcontrollers and circuits, there are multi
 
 Although in physical computing, we often emphasize software solutions, hardware solutions can be just as functionally good (though it does complicate the build and require more components). For example, in this Texas Instruments video, the instructor shows how to use a capacitor and a [Schmitt Trigger](https://en.wikipedia.org/wiki/Schmitt_trigger) to debounce a switch. The capacitor smooths out the rising and falling edges of a button state transition and the Schmitt Trigger converts this smoothed signal back into digital output.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/e1-kc04jSE4" title="Texas Instruments video on hardware debouncing with a capacitor and Schmitt Trigger" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/e1-kc04jSE4" title="Texas Instruments video on hardware debouncing with a capacitor and Schmitt Trigger" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** This [Texas Instruments video](https://youtu.be/e1-kc04jSE4) shows how to use a capacitor and a Schmitt Trigger to debounce a switch.
 {: .fs-1 }
 

@@ -286,7 +286,7 @@ We're going to build a simple webpage with a slider that transmits a value betwe
 
 The full app experience should look like this:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-Snippet720p.mp4" type="video/mp4" />
 </video>
 **Video.** Running the SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
@@ -443,7 +443,7 @@ async function onConnectButtonClick() {
 
 Now save and reload. With your Arduino plugged into your computer, try clicking the `Connect via Serial Port` button. Once the button is clicked, the web browswer will enumerate all available serial devices and ask for user permission. It should look something like this:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/SliderOutScreenRecording_ButtonJustHookedUp-Optimized.mp4" type="video/mp4" />
 </video>
 
@@ -470,7 +470,7 @@ async function onSliderValueChanged(src, event) {
 
 And that's it! A fully working Web Serial demo, which should look something like this:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/SliderOutSuperBasic-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Did I just tape my Arduino + breadboard to my computer screen to make this video? Yes I did!
@@ -539,7 +539,7 @@ function onSerialConnectionOpened(eventSender) {
 
 Here's a full video demo of what it should look like:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
 </video>
 **Video.** Running the SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
@@ -549,7 +549,7 @@ Here's a full video demo of what it should look like:
 
 For our second and final example, we will build a simple webpage that sends and receives text data via Web Serial. As you type in the provided textbox, the data is immediately transmitted over serial and displayed on the Arduino-connected OLED display. The Arduino echos back received data to the web app, which shows this text in the "Received from Arduino" block. The app looks like this:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplaySerialTextIn-QuickSnippet-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Running the DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
@@ -745,7 +745,7 @@ You did it! Now, play and experiment!
 
 #### Full DisplayText video demo
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DisplaySerialTextIn-FullSpedUp-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** The full DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.

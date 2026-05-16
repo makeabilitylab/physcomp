@@ -206,7 +206,9 @@ We empirically tested analog input with and without WiFi active. Check out our t
 
 In the following video, we test all 13 analog input pins (`A0`–`A12`) using a potentiometer for input and the Serial Plotter for output:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/8BBY-5n4e5A" title="Testing all 13 analog input pins on the Huzzah32 ESP32 using a potentiometer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/8BBY-5n4e5A" title="Testing all 13 analog input pins on the Huzzah32 ESP32 using a potentiometer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** Testing all analog input pins on the Huzzah32 with a potentiometer and the Serial Plotter.
 {: .fs-1 }
 

@@ -134,7 +134,9 @@ Once you've made the circuit, have fun playing with the FSR. Get a sense of its 
 
 Here's a workbench video of our completed circuit (this is the same video as the one in the [potentiometers](potentiometers.md) lesson, so there is a backup resistor):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/YMCqDcnwMYo" title="Workbench video of an FSR-based LED dimmer circuit" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/YMCqDcnwMYo" title="Workbench video of an FSR-based LED dimmer circuit" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 Workbench video of the FSR LED dimmer circuit
 {: .fs-1 }
 
@@ -222,7 +224,9 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Here's a workbench video with a corresponding Serial Plotter screen recording. The `analogRead` FSR values are in blue (the taller, more dynamic trace), and the `analogWrite` LED PWM values are in orange (the shorter, scaled-down trace). We're using the built-in LED, so the LED brightness changes may be difficult to see in the video.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/MTpmVaVi92o" title="Workbench video of FSR-based LED fading with Serial Plotter showing analogRead and analogWrite values" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/MTpmVaVi92o" title="Workbench video of FSR-based LED fading with Serial Plotter showing analogRead and analogWrite values" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Jedi force instrument
 
@@ -249,7 +253,9 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Here's our take on it! Make sure to have your sound on (or not) if you want to hear the piezo buzzer! 
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/OuEABPQV9_k" title="Workbench video of the Jedi force instrument playing tones controlled by FSR pressure" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/OuEABPQV9_k" title="Workbench video of the Jedi force instrument playing tones controlled by FSR pressure" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Exercises
 

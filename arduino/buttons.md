@@ -81,7 +81,7 @@ The key thing to remember is that the two legs closest together (on the same sid
 
 <!-- ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif) -->
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing which two sides of a four-legged tactile button are disconnected until pressed">
+<video autoplay loop muted playsinline aria-label="Animation showing which two sides of a four-legged tactile button are disconnected until pressed">
   <source src="assets/movies/FourLeggedTactileButtons_Animation.mp4" type="video/mp4" />
 </video>
 **Video.** Animation shows which two sides of a four-legged tactile button are disconnected until the button is pressed, creating a connection between all four legs.
@@ -111,7 +111,7 @@ That's it! Once you've created the circuit, give it a try by pushing the button 
 
 <!-- ![Animation showing both the 9V battery and Arduino 5V power LED circuits with four-legged button working](assets/movies/FourLeggedTactileButton_LEDCircuitBreadboard_Animation.gif) -->
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing two button LED circuits with different voltage sources turning on when pressed">
+<video autoplay loop muted playsinline aria-label="Animation showing two button LED circuits with different voltage sources turning on when pressed">
   <source src="assets/movies/Button_LEDCircuit_Breadboard_Animation-Edited-Cropped_Trim.mp4" type="video/mp4" />
 </video>
 **Video.** Animation showing two different voltage sources for a basic LED-based circuit with a four-legged button to control "on" and "off." When no button is pressed, there is no current flow and the LED is off.
@@ -199,7 +199,7 @@ void loop()
 
 Here's a quick video demonstration of what happens—the floating pin problem! Note: we are using a slightly modified version of this code where an LED is turned on if the button is pressed (*i.e.,* if `buttonVal == 1`). This just makes it easier to see the fluctuating button state.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video demonstrating a floating pin problem where button state oscillates erratically">
+<video autoplay loop muted playsinline aria-label="Video demonstrating a floating pin problem where button state oscillates erratically">
   <source src="assets/movies/Arduino_Button_FloatingPinProblem720p.mp4" type="video/mp4" />
 </video>
 **Video.** Floating pins are digital input pins that are not tied to a specific input voltage (either 0V or 5V) and thus, are subject to electromagnetic interference. Here, the button state is oscillating between `HIGH` and `LOW` simply due to the electromagnetic interference from my body. Makes me feel like Dumbledore! The source code is [here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/ButtonPressedFloatingPin/ButtonPressedFloatingPin.ino).
@@ -243,7 +243,9 @@ Here's an animation showing how a pull-down resistor configuration works. Notice
 
 And here's a video demonstrating the floating pin problem and fix:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/4qgyICqIVFA" title="Video demonstrating the floating pin problem and pull-down resistor fix" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/4qgyICqIVFA" title="Video demonstrating the floating pin problem and pull-down resistor fix" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ### Pull-up resistors
 
@@ -463,7 +465,9 @@ Wire up three buttons — one with a pull-down resistor, one with an external pu
 
 Still feeling confused or want to learn more about pull-up and pull-down resistors? Try watching this [video](https://youtu.be/wxjerCHCEMg) by AddOhms: 
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/wxjerCHCEMg" title="AddOhms video on floating pins and pull-up resistors" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/wxjerCHCEMg" title="AddOhms video on floating pins and pull-up resistors" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 [Video](https://youtu.be/wxjerCHCEMg) by AddOhms demonstrating floating pins and why pull-up resistors are necessary for digital input with microcontrollers.
 {: .fs-1 }
 

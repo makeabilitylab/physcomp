@@ -62,7 +62,7 @@ Just as a wider water pipe can carry more water, so too can a thicker conductive
 | Potential  | Voltage, *volts*               | Pressure, *psi (pound per square inch)*  |
 | Resistance | Resistance, *ohm (volts/amp)*  | Resistance, *psi/gpm*                    |
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation of a water tank analogy for electrical circuits. As the water level rises, more water flows out of a hole at the bottom, illustrating how higher voltage produces more current.">
+<video autoplay loop muted playsinline aria-label="Animation of a water tank analogy for electrical circuits. As the water level rises, more water flows out of a hole at the bottom, illustrating how higher voltage produces more current.">
   <source src="assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Figure.** Here's a slightly different hydraulic analogy than the water plumbing system one described above. Here, we have a water tank filled with water with a hole at the bottom: as the water level increases, the pressure (voltage) on the water at the bottom of the tank also increases, which commensurately increases the amount of water flowing out of the hole. If we increase the hole size (decreasing resistance), more water (current) will flow. Note: the animation direction is showing *conventional current*. The water diagram based on an illustration in [Platt's *Make: Electronics* book](https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/).
@@ -122,7 +122,7 @@ Another way to think about current flow is like that of a tube filled end-to-end
 
 ### What's conventional current vs. electron flow?
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Side-by-side comparison of two identical circuits: one showing electron flow from negative to positive, the other showing conventional current from positive to negative.">
+<video autoplay loop muted playsinline aria-label="Side-by-side comparison of two identical circuits: one showing electron flow from negative to positive, the other showing conventional current from positive to negative.">
   <source src="assets/videos/ElectronFlowVsConventionalCurrent_PhetSimulation_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Figure.** In the animation above, we are showing the **same** two electrical circuits but the difference between *electron flow* and *current flow*. In circuits, negatively charged particles (electrons) move from the negative terminals of a battery (or voltage source) to the positive—this is called *electron flow*; however, when we model circuits (and use circuit formulas), we use *conventional current*, which moves in the opposite direction.
@@ -154,7 +154,7 @@ Some electrical components, like [motors](https://itp.nyu.edu/physcomp/labs/moto
 
 ## What is voltage?
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing voltage as a force that pushes electrons through a circuit, similar to water pressure in a pipe.">
+<video autoplay loop muted playsinline aria-label="Animation showing voltage as a force that pushes electrons through a circuit, similar to water pressure in a pipe.">
   <source src="assets/videos/VoltageElectromotiveForce_EngineeringMindset.mp4" type="video/mp4" />
 </video>
 **Figure.** You can think of *voltage* as what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
@@ -187,7 +187,7 @@ $$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
 
 As joule is a unit of *energy*, voltage introduces a very important and necessary concept: the potential to do *work* (*e.g.,* to power a light bulb, spin a motor)!
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Split-screen animation comparing an electrical circuit to a water wheel circuit, showing how charges gain potential energy in a battery and lose it performing work, just as water gains potential energy when pumped uphill.">
+<video autoplay loop muted playsinline aria-label="Split-screen animation comparing an electrical circuit to a water wheel circuit, showing how charges gain potential energy in a battery and lose it performing work, just as water gains potential energy when pumped uphill.">
   <source src="assets/videos/VoltagePotentialWaterWheelCircuitAnalogy_TrimmedAndCropped_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Figure.** An animation showing an analogy between an electrical circuit and a "water" circuit. In a battery, the electric potential of charges increase as they move to the positive terminal (higher voltage)—this potential drops as work is performed (*e.g.,* flowing through a resistor). Similarly, water molecules being pumped to higher elevations have *higher potential* to do work; this potential decreases as the water flows to lower elevations or is used to perform work (*e.g.,* spin a turbine). Note that no charges (or water molecules) are lost in these systems—but the potential energy of these particles is transformed to other forms (*e.g.,* kinetic, heat).
@@ -267,7 +267,7 @@ A battery has an imbalanced electric charge built up between its positive and ne
 
 If you connect two batteries in series (*i.e.,* stack them), you increase their ability to "push" electrons—indeed, you sum the battery voltages together. So, two standard alkaline 1.5V AA batteries in series will have a 3V potential difference, which can "push" more electrons around a circuit—see the animation below.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing two 1.5V batteries connected in series to produce 3V total, with increased electron flow through the circuit.">
+<video autoplay loop muted playsinline aria-label="Animation showing two 1.5V batteries connected in series to produce 3V total, with increased electron flow through the circuit.">
   <source src="assets/videos/VoltageBatteriesInSeries_CroppedAndTrimmed2_EngineeringMindset.mp4" type="video/mp4" />
 </video>
 **Figure.** When you connect batteries in series, you increase the "pushing" force—indeed, you sum the battery voltages together (so, 1.5V + 1.5V = 3V in total). More voltage, more pressure. More pressure, more electrons are "pushed" through the circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8?t=183) video by The Engineering Mindset.
@@ -282,7 +282,7 @@ If you connect two batteries in series (*i.e.,* stack them), you increase their 
 
 ## What is electrical resistance?
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation comparing electron flow through copper wire versus iron wire, showing more collisions and heat generation in the higher-resistance iron wire.">
+<video autoplay loop muted playsinline aria-label="Animation comparing electron flow through copper wire versus iron wire, showing more collisions and heat generation in the higher-resistance iron wire.">
   <source src="assets/videos/CopperVsIronWireResistanceElectronFlow_EngineeringMindset.mp4" type="video/mp4" />
 </video>
 **Figure.** As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a resistance. In the animation above, notice how the iron wire has more collisions than the copper wire. Iron is ~17% as conductive as copper. At 20°C, iron has an electrical resistivity of 96.1 nanoohm-meters while copper has a resistivity of 16.8 nanoohm-meters. Notice the halo around the iron wire: this is to illustrate how some of the "kinetic" or movement energy of electrons gets converted into heat or light through those collisions. Indeed, this is how incandescent lightbulbs, toaster ovens, and electric space heaters work! Animation from the [How Electricity Works](https://youtu.be/mc979OhitAg?t=322) video by The Engineering Mindset.
@@ -371,7 +371,7 @@ Counterintuitively, *increasing* AWG numbers denote *decreasing* wire diameters 
 
 If we pass more current through a wire than its capacity, it will start to heat up and eventually burn. Indeed, this is how fuses are *designed* to work! Fuses contain thin wires that protect your circuit from damagingly high current and "burn up" to instantly disconnect your circuit (creating an "open circuit") if a high current is applied. You can then replace the fuse, which is far cheaper and easier than replacing your electrical device or appliance. There are lots of great videos of this online, including [here](https://youtu.be/V-lhVTDWjwY?t=120) and [here](https://youtu.be/qgz1lskyYDU?t=70).
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Slow-motion video of automotive fuses burning out when excessive current is applied, demonstrating how fuses protect circuits by breaking the connection.">
+<video autoplay loop muted playsinline aria-label="Slow-motion video of automotive fuses burning out when excessive current is applied, demonstrating how fuses protect circuits by breaking the connection.">
   <source src="assets/videos/BlowingFuses_RobinsonsAuto.mp4" type="video/mp4" />
 </video>
 **Figure.** If we attempt to push large amounts of current through a wire and exceed its carrying capacity (by hooking up a large voltage supply, for example), then the wire will heat up and could start a fire. This can happen almost instantly, which is the operating principle behind a fuse (shown above). A fuse is *designed* to burn up thereby disconnecting your circuit when a damagingly large current is supplied. Video from [Robinson Auto](https://youtu.be/V-lhVTDWjwY).
@@ -406,7 +406,7 @@ Before moving on to the next lesson, let's cover some common questions.
 
 ### What's a short circuit?
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation of a short circuit in a simulation environment, showing a wire bypassing a light bulb and creating a zero-resistance path that causes excessive current.">
+<video autoplay loop muted playsinline aria-label="Animation of a short circuit in a simulation environment, showing a wire bypassing a light bulb and creating a zero-resistance path that causes excessive current.">
   <source src="assets/videos/ShortCircuitExample_PhetScreenRecording-Cropped2_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Figure.** A **short circuit** is when there is a zero-resistance path back to your power source. It's never good! Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
@@ -426,7 +426,7 @@ When a circuit breaker triggers, it creates an *open circuit*, which we describe
 
 While a **closed** circuit is a complete circuit (a "circle" for current flow), an **open** circuit is an *incomplete* circuit. For example, when there is no path from the positive terminal of a battery to the negative. This might happen intentionally (*e.g.,* due to a switch opening) or unintentionally (*e.g.,* circuit shuts off due to a fuse blowing).
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation toggling between a closed circuit with current flowing and an open circuit where the wire is disconnected and no current flows.">
+<video autoplay loop muted playsinline aria-label="Animation toggling between a closed circuit with current flowing and an open circuit where the wire is disconnected and no current flows.">
   <source src="assets/videos/ClosedVsOpenCircuit-Cropped_PhetRecording_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Figure.** An **open circuit** is when **no path** exists between the positive and negative terminals of your power source. It is an incomplete circuit. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).

@@ -19,7 +19,7 @@ usetocbot: true
 {:toc}
 ---
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing an LED stick with 8 RGB LEDs being controlled by two potentiometers: one for hue and one for brightness.">
+<video autoplay loop muted playsinline aria-label="Video showing an LED stick with 8 RGB LEDs being controlled by two potentiometers: one for hue and one for brightness.">
   <source src="assets/videos/LEDStickOverview_optimized_720p.mp4" type="video/mp4" />
 </video>
 **Video.** Setting the hue and brightness on a WS2812B LED stick with 8 RGB LEDs. The first part of the video is running the [ManualRainbowHueBriPotNeoPixelOLEDGraph sketch](https://github.com/makeabilitylab/arduino/tree/master/AddressableLEDs/NeoPixel/ManualRainbowHueBriPotNeoPixelOLEDGraph) and the second is running [HueBrightnessPotNeoPixelOLEDSimple](https://github.com/makeabilitylab/arduino/tree/master/AddressableLEDs/NeoPixel/HueBrightnessPotNeoPixelOLEDSimple). The OLED is, of course, unnecessary but used to show underlying operation.
@@ -95,7 +95,7 @@ Because there is no clock line, the timing must be extremely precise—accurate 
 
 ### Form factors
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a grid of NeoPixel form factors from matrices to strips">
+<video autoplay loop muted playsinline aria-label="Video showing a grid of NeoPixel form factors from matrices to strips">
   <source src="assets/videos/Adafruit_NeoPixel_VideoMontageGrid_optimized_720p.mp4" type="video/mp4" />
 </video>
 **Video.** A video highlighting the diverse form factors of addressable LEDs from sticks and strips to rings and matrices. All of these videos are from [Adafruit](https://www.adafruit.com/search?q=neopixel).
@@ -460,13 +460,13 @@ Try changing the `HUE_STEP` constant to `64` (slower rainbow) or `512` (faster r
 
 Below, we have two versions: [RainbowAnimationUnidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationUnidirectional/RainbowAnimationUnidirectional.ino), which shows a one-way rainbow, and [RainbowAnimationBidrectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationBidirectional/RainbowAnimationBidirectional.ino), which oscillates the rainbow back-and-forth. 
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the RainbowAnimationUnidirectional.ino sketch.">
+<video autoplay loop muted playsinline aria-label="Video showing the RainbowAnimationUnidirectional.ino sketch.">
   <source src="assets/videos/RainbowAnimationUnidirectional_IMG_8991_optimized_720p.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the unidirectional rainbow animation (see [RainbowAnimationUnidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationUnidirectional/RainbowAnimationUnidirectional.ino) on GitHub).
 {: .fs-1 }
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the RainbowAnimationBidirectional.ino sketch.">
+<video autoplay loop muted playsinline aria-label="Video showing the RainbowAnimationBidirectional.ino sketch.">
   <source src="assets/videos/RainbowAnimationBidrectional_IMG_8992_optimized_720p.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the bidirectional rainbow animation (see [RainbowAnimationBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowAnimationBidirectional/RainbowAnimationBidirectional.ino) on GitHub).
@@ -480,7 +480,7 @@ Now let's add **analog input** to control the LED colors. We'll use a potentiome
 
 Use the same LED wiring as before, and add a 10KΩ potentiometer with its wiper connected to `A0`.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A circuit diagram for the potentiometer-controlled color example.">
+<video autoplay loop muted playsinline aria-label="A circuit diagram for the potentiometer-controlled color example.">
   <source src="assets/videos/HuePotNeoPixel-NoOLED-Tinkercad-WiringDiagram.mp4" type="video/mp4" />
 </video>
 **Video.** A circuit diagram for the potentiometer-controlled hue example. You can play with this example directly in [Tinkercad](https://www.tinkercad.com/things/3Z4eWd23kGU-neopixel-strip-8-pot-controlled-hue).
@@ -531,7 +531,7 @@ As you turn the potentiometer, you should see all 8 LEDs smoothly cycle through 
 
 I also made a version with the OLED to make the controls more clear. 
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback.">
+<video autoplay loop muted playsinline aria-label="A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback.">
   <source src="assets/videos/HuePotNeoPixelOLED_IMG_8994_optimized_720p.mp4" type="video/mp4" />
 </video>
 **Video.** A version of the potentiometer-controlled hue example with an OLED screen for improved user feedback. To be clear, you do **not need an OLED** to use the addressable RGB LEDs. I've added this only for additional feedback and clarity on how this example works.
@@ -541,7 +541,7 @@ I also made a version with the OLED to make the controls more clear.
 
 Now let's add a **second potentiometer** on `A1` to independently control brightness while the first pot controls hue. This gives you two physical knobs—one for color, one for intensity—which is a nice introduction to **multi-input control**. It also demonstrates why the HSV color space is so useful: hue and brightness are independent parameters, so two knobs map naturally to two HSV axes.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A circuit diagram for the potentiometer-controlled hue and brightness example.">
+<video autoplay loop muted playsinline aria-label="A circuit diagram for the potentiometer-controlled hue and brightness example.">
   <source src="assets/videos/HueBrightnessPotNeoPixel-NoOLED-Tinkercad-WiringDiagram.mp4" type="video/mp4" />
 </video>
 **Video.** A circuit diagram for the potentiometer-controlled hue and brightness example. You can view and play with this example on [Tinkercad](https://www.tinkercad.com/things/53EaKIvUCsX-neopixel-strip-8-pot-controlled-hue-and-brightness).
@@ -594,7 +594,7 @@ Try turning each knob independently—you can dial in any color at any brightnes
 
 Similar to above, I also made a version with the OLED to make the controls and resulting output more clear.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback.">
+<video autoplay loop muted playsinline aria-label="A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback.">
   <source src="assets/videos/HueBrightnessPotNeoPixelOLEDSimple_IMG_8979_LightsOn_optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A version of the potentiometer-controlled hue and brightness example with an OLED screen for improved user feedback. As noted previously, you do **not need an OLED** to use the addressable RGB LEDs. I've added this only for additional feedback and clarity on how this example works.

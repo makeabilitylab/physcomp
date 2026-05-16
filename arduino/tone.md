@@ -57,7 +57,7 @@ We can even hook up an oscilloscope to examine the `analogWrite()` (which varies
 
 This video shows the **`analogWrite(pin, value)`** waveform, which varies the **duty cycle** but keeps the frequency **fixed** at either 490Hz or 980Hz, depending on the pin (you can see its 490Hz in this case by looking closely at the bottom-right of the oscilloscope screen).
 
-<video loop controls playsinline style="margin:0px" aria-label="Video showing the analogWrite waveform with an oscilliscope">
+<video loop controls playsinline aria-label="Video showing the analogWrite waveform with an oscilliscope">
   <source src="assets/videos/AnalogWrite_PiezoBuzzerDutyCycleStepWithOLED_WithOscilloscope_Trimmed_optimized_720p.mp4" type="video/mp4" />
 </video>
 **Video.** This video incrementally steps through output values sent to `analogWrite()` and shows the resulting effect on the output waveform—which does not change its frequency from 490Hz but does change its duty cycle. You can also hear how the overall pitch of the piezo buzzer doesn't change, because pitch is literally defined by the sound waveforms's frequency (which in this case is frozen at 490Hz). This oscilloscope nicely infers the waveform frequency and shows its on the bottom-right of the screen. Can you see that it reads 490Hz to 491Hz?
@@ -67,7 +67,7 @@ This video shows the **`analogWrite(pin, value)`** waveform, which varies the **
 
 This video shows the **`tone(pin, frequency)`** waveform, which varies the **frequency** while keeping the duty cycle **fixed** at 50%. We need to use the `tone()` function with our piezo buzzers and not `analogWrite()`.
 
-<video loop controls playsinline style="margin:0px" aria-label="Video showing the tone waveform with an oscilliscope">
+<video loop controls playsinline aria-label="Video showing the tone waveform with an oscilliscope">
   <source src="assets/videos/Tone_PiezoBuzzerPlayScaleWithOLED_WithOscilloscope_Trimmed_optimized_720p.mp4" type="video/mp4" />
 </video>
 **Video.** In contrast, this video shows the resulting output waveform when using `tone()` and stepping through the C major scale. Here, the duty cycle is frozen at 50% but the frequency changes.
@@ -79,7 +79,7 @@ To make this even more clear, we built an interactive [Tinkercad Circuit example
 
 As you turn the potentiometer, listen carefully: in the `analogWrite()` mode, the buzzer stays at the same pitch but the volume changes slightly while in the `tone()` mode, the buzzer changes pitch. Watch the oscilloscopes: one waveform gets wider/narrower (duty cycle), the other gets faster/slower (frequency). This is the core distinction between PWM brightness control and tone frequency control!
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing diff between the tone() function, which controls the waveform output frequency, and the analogWrite() function, which controls the waveform output duty cycle">
+<video autoplay loop muted playsinline aria-label="Video showing diff between the tone() function, which controls the waveform output frequency, and the analogWrite() function, which controls the waveform output duty cycle">
   <source src="assets/videos/analogWriteVersusToneWithPot_Tinkercad_web_muted.mp4" type="video/mp4" />
 </video>
 **Figure.** A [Tinkercad simulation](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input) video showing the difference between the `tone()` function, which controls the waveform output frequency (pitch) with a fixed 50% duty cycle, and the `analogWrite()` function, which controls the waveform output duty cycle at a fixed frequency. The version above is muted. To play a version with sound (warning: wear headphones but at lower volumes), [click here](assets/videos/analogWriteVersusToneWithPot_Tinkercad.mp4). To play with our simulation interactively on Tinkercad, [click here](https://www.tinkercad.com/things/5PaQ8YzlWdj-analogwrite-vs-tone-with-pot-input).
@@ -421,7 +421,7 @@ void loop() {
 
 To represent a rest (silence), use a note value of `0` in the melody array. The code checks for this and simply skips the `tone()` call, relying on the `delay()` to produce a silent pause. Avoid calling `tone(pin, 0)` directly—while it happens to produce silence on AVR boards, it causes crashes on other platforms (like SAMD) due to a division by zero in the timer math.
 
-<video controls playsinline style="margin:0px" aria-label="Star Wars Imperial March playing on an Arduino Leonardo">
+<video controls playsinline aria-label="Star Wars Imperial March playing on an Arduino Leonardo">
   <source src="assets/videos/Arduino_Tone-PlayImperialMarch_Handheld_web.mp4" type="video/mp4" />
 </video>
 **Figure.** A video of the Imperial March from Star Wars playing with the `tone()` function on the Arduino Leonardo. Note: the code executing here is slightly more complicated than above ([see full source on GitHub here](https://github.com/makeabilitylab/arduino/blob/master/Basics/tone/PlayImperialMarchAdvanced/PlayImperialMarchAdvanced.ino)). I've also mapped the `LED_BUILTIN` to turn on when a note is played.
@@ -469,7 +469,7 @@ void loop() {
 }
 {% endhighlight cpp %}
 
-<video controls playsinline style="margin:0px" aria-label="A simple siren video playing alternating tones with an LED flashing on and off">
+<video controls playsinline aria-label="A simple siren video playing alternating tones with an LED flashing on and off">
   <source src="assets/videos/Arduino_Tone-SimpleSirenWithLED_Handheld_web.mp4" type="video/mp4" />
 </video>
 **Figure.** A video of Simple Siren playing an alternating tone and correspondingly turning on/off an LED on Pin 2. See the [Tinkercad version here](https://www.tinkercad.com/things/frb7eeyVkKN-simple-siren-with-external-led-no-breadboard/).

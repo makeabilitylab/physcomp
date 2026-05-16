@@ -18,7 +18,7 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
-<!-- <video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing how blink LED program works">
+<!-- <video autoplay loop muted playsinline aria-label="Video showing how blink LED program works">
   <source src="assets/movies/Arduino_BlinkWithCode_Pin3_web_muted.mp4" type="video/mp4" />
 </video>
 **Figure.** In this lesson, we'll learn how to blink an LED programmatically with Arduino and how and why this works!
@@ -103,7 +103,7 @@ It's the same with the Arduino Leonardo (see [official pinout diagram here](http
 
 Finally, here's a [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) demonstrating the use of all 20 digital I/O pins as digital output.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Tinkercad simulation showing all 20 GPIO pins used as digital output on an Arduino Uno">
+<video autoplay loop muted playsinline aria-label="Tinkercad simulation showing all 20 GPIO pins used as digital output on an Arduino Uno">
   <source src="assets/movies/ArduinoUno_UsingAll20GPIOPinsAsDigitalOutput.mp4" type="video/mp4" />
 </video>
 **Figure.** A [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) showing how to use all 20 GPIO pins as digital output on the Arduino Uno. You can try the simulation yourself [here](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) and view the code on [GitHub here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkAll20Pins/BlinkAll20Pins.ino).
@@ -293,7 +293,7 @@ In your mind, imagine what the voltage out of Pin 3 looks like over time (the x-
 
 Using Tinkercad Circuits, we built the same LED-based circuit as above running the Blink program and hooked it up to an oscilloscope. Then, we recorded different `delay` values (400, 200, and 50) and created this movie. Is the graph what you expected? Why or why not? We suggest opening the video in its own tab or viewing it in fullscreen to see the details.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Tinkercad oscilloscope showing LED blink waveform at different delay values">
+<video autoplay loop muted playsinline aria-label="Tinkercad oscilloscope showing LED blink waveform at different delay values">
   <source src="assets/movies/LedBlinkOscilliscope_TinkercadCircuits_Trim.mp4" type="video/mp4" />
 </video>
 **Figure.** A video of this [Tinkercad project](https://www.tinkercad.com/things/17q2GFeYwP9) with three different `delay` values for both `HIGH` and `LOW`: 400, 200, and 50.
@@ -307,7 +307,9 @@ We encourage you to play with this [Tinkercad project](https://www.tinkercad.com
 
 We duplicated the above Tinkercad setup (circuit + oscilloscope) in our laboratory and recorded a video. Notably, we used slightly different [code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/SettableBlinkWithoutDelay/SettableBlinkWithoutDelay.ino) that allows us to set the blink frequency by rotating a [potentiometer](../electronics/variable-resistors.md).
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/_ByA8Q-hL8I" title="Video showing digital output voltage waveform at different blinking frequencies" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/_ByA8Q-hL8I" title="Video showing digital output voltage waveform at different blinking frequencies" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Figure.** A [video](https://youtu.be/_ByA8Q-hL8I) showing the digital output voltage waveform at different "blinking" frequencies.
 {: .fs-1 }

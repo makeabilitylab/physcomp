@@ -265,7 +265,9 @@ Notice that we use the `duration` parameter of `tone()`, so we don't need to cal
 
 Here's an earlier video demo using the Huzzah32 (the code concepts are the same, but the version shown uses the legacy LEDC API):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/H7MOhibjOO0" title="Playing the C scale on the ESP32 with a piezo buzzer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/H7MOhibjOO0" title="Playing the C scale on the ESP32 with a piezo buzzer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A video demonstration of a C major scale playing on the ESP32. The code shown uses the legacy v2.x LEDC API; the v3.x `tone()` version above produces identical output. Source: [PlayScale.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/PlayScale/PlayScale.ino) (legacy version). Make sure your sound is on.
 {: .fs-1 }
 
@@ -474,7 +476,9 @@ Turn the potentiometer slowly and listen to the pitch sweep from a low rumble to
 
 Here's an earlier video demo on the Huzzah32 (same concept, legacy LEDC API):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/xr_G_fkHcSo" title="Analog input controlling tone frequency on the ESP32" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/xr_G_fkHcSo" title="Analog input controlling tone frequency on the ESP32" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A video demonstration of potentiometer-controlled frequency output on the Huzzah32. The code shown uses the legacy v2.x LEDC API; the v3.x `tone()` version above produces identical output. Source: [AnalogInputTone.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone/AnalogInputTone.ino) (legacy version). The version shown in the video also displays the frequency on an OLED. Make sure your sound is on.
 {: .fs-1 }
 
@@ -588,13 +592,17 @@ Here are two additional demo videos from our earlier Huzzah32 work. These use th
 
 ### Potentiometer-controlled scale with OLED
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/zFg1fSFGL7o" title="Potentiometer controlling C scale with duration display on OLED" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/zFg1fSFGL7o" title="Potentiometer controlling C scale with duration display on OLED" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A potentiometer walks up and down the C scale, with each note playing for 500ms. The OLED shows the note name and remaining duration. Recorded on the Huzzah32 with the legacy v2.x API. Source: [AnalogInputTone32WithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/AnalogInputTone32WithOLED/AnalogInputTone32WithOLED.ino). Make sure your sound is on.
 {: .fs-1 }
 
 ### Ball bounce with sound effects
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/cy7Jeri7vOA" title="Ball bounce demo with sound effects on ESP32 with OLED" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/cy7Jeri7vOA" title="Ball bounce demo with sound effects on ESP32 with OLED" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A ball bouncing on an OLED display, playing a brief tone on each collision with the floor or ceiling. This demonstrates using tone durations for sound effects in a game-like application. Source: [BallBounceTone32WithOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Tone/BallBounceTone32WithOLED/BallBounceTone32WithOLED.ino). Make sure your sound is on.
 {: .fs-1 }
 

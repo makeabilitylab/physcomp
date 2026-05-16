@@ -14,7 +14,7 @@ permalink: /
 \- A [Haida](https://en.wikipedia.org/wiki/Haida_people) saying
 {: .fs-2 .mt-1 .text-right}
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A cardboard-crafted person waves its hand, controlled by a servo motor tracking a user's real hand via computer vision.">
+<video autoplay loop muted playsinline aria-label="A cardboard-crafted person waves its hand, controlled by a servo motor tracking a user's real hand via computer vision.">
   <source src="assets/videos/HenryTapeManWelcome_HandWaverDemo-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Welcome to our **Physical Computing virtual learning space**! In this video, we are using real-time computer vision to track the user's hand, which is then transmitted to Arduino to control a cardboard-crafted person with a servo motor. The cardboard person and mountain background scene was created in partnership with two of my favorite makers: a kindergartner and preschooler! You can learn how to make this in our [HandPose Serial](communication/handpose-serial.md) lesson.

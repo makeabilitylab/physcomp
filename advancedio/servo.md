@@ -121,7 +121,7 @@ An LED connected to `analogWrite()` at 50% duty cycle sees ~2.5V average and glo
      (2) Servo PWM at fixed 50Hz with varying pulse widths (1ms, 1.5ms, 2ms)
      Label the key differences clearly -->
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A video snippet from Engineering Mindset showing the PWM waveform driving a servo motor. Notice how the pulse width—the duration of the HIGH pulse within each period—controls the servo's target angle.">
+<video autoplay loop muted playsinline aria-label="A video snippet from Engineering Mindset showing the PWM waveform driving a servo motor. Notice how the pulse width—the duration of the HIGH pulse within each period—controls the servo's target angle.">
   <source src="assets/videos/EngineeringMindset_DrivingServoMotorWithPWM_Oscilliscope_optimized_720p_muted.mp4" type="video/mp4" />
 </video>
 **Video.** A video snippet from [Engineering Mindset](https://youtu.be/1WnGv-DPexc) showing the PWM waveform driving a servo motor. Notice how the pulse width—the duration of the HIGH pulse within each period—controls the servo's target angle.
@@ -249,7 +249,7 @@ The Arduino's USB power supply provides about 500mA total. A single SG90 moving 
 
 For projects with **multiple servos**, you will almost certainly need an external power supply. Two or more servos moving simultaneously can easily exceed 1A. For larger builds, consider a dedicated [servo driver board](https://www.adafruit.com/product/815) like the PCA9685, which provides its own power bus and can control up to 16 servos via I<sup>2</sup>C.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Example wiring diagram with multiple servos connected to Arduino with an external power supply">
+<video autoplay loop muted playsinline aria-label="Example wiring diagram with multiple servos connected to Arduino with an external power supply">
   <source src="assets/videos/Tinkercad_MultipleServosWithExternalPowerSupply_optimized_720p_muted.mp4" type="video/mp4" />
 </video>
 **Video.** Wiring multiple servo motors together with an external power supply. Importantly, both the Arduino GND and the external power supply GND must be connected. You can [play with this multi-servo circuit on Tinkercad here](https://www.tinkercad.com/things/9uPF2TKXYW3-simple-servo-with-external-power).
@@ -354,7 +354,7 @@ This is essentially the Arduino's built-in ["Knob" example](https://www.arduino.
 
 You can hook up an oscilloscope to examine the underlying PWM signal changing with the potentiometer input, which we've done in [Tinkercad here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope):
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal">
+<video autoplay loop muted playsinline aria-label="A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal">
   <source src="assets/videos/Tinkercad_ServoPotWithOscilliscope_50msWindow_optimized_720p_muted.mp4" type="video/mp4" />
 </video>
 **Video.** A video of the potentiometer-controlled servo in Tinkercad hooked up to an oscilloscope to show the PWM control signal. Play with the [circuit directly here](https://www.tinkercad.com/things/26AJEMw7hut-servo-pot-control-with-oscilliscope)!
@@ -362,7 +362,7 @@ You can hook up an oscilloscope to examine the underlying PWM signal changing wi
 
 The Engineering Mindset YouTube channel did this for real with an oscilloscope, nicely matching the above simulation. Notice how it's the **width of each HIGH pulse** that controls the servo's target angle.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A video snippet from Engineering Mindset showing a potentiometer-controlled PWM waveform driving a servo motor with an Arduino. Notice how the pulse width controls the servo's target angle.">
+<video autoplay loop muted playsinline aria-label="A video snippet from Engineering Mindset showing a potentiometer-controlled PWM waveform driving a servo motor with an Arduino. Notice how the pulse width controls the servo's target angle.">
   <source src="assets/videos/EngineeringMindset_DrivingServoMotorWithArduinoPotPWM_Oscilliscope_optimized_720p_muted.mp4" type="video/mp4" />
 </video>
 **Video.** A video snippet from [Engineering Mindset](https://youtu.be/1WnGv-DPexc) showing a potentiometer-controlled PWM waveform driving a servo motor with an Arduino. Notice how the pulse width—the duration of the HIGH pulse within each period—controls the servo's target angle.

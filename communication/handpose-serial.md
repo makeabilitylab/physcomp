@@ -24,7 +24,7 @@ In this lesson, we will introduce a new ml5 model, called [Handpose](https://lea
 
 <!-- which was ported from [Google's TensorFlow Handpose model](https://github.com/tensorflow/tfjs-models/tree/master/handpose), -->
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/HandPose_Optimized_1200w.mp4" type="video/mp4" />
 </video>
 **Video.** A quick demonstration of [ml5's Handpose](https://learn.ml5js.org/#/reference/handpose) as implemented in our example app called [HandWaveDetector](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandWaveDetector) ([code](https://github.com/makeabilitylab/p5js/tree/master/ml5js/HandPose/HandWaveDetector)).
@@ -34,7 +34,7 @@ In this lesson, we will introduce a new ml5 model, called [Handpose](https://lea
 
 In March 2020, the [Google TensorFlow.js team](https://blog.tensorflow.org/2020/03/face-and-hand-tracking-in-browser-with-mediapipe-and-tensorflowjs.html) released two incredible packages for web-based face and hand tracking, entitled [FaceMesh](https://www.npmjs.com/package/@tensorflow-models/facemesh) (now [face-landmarks-detection](https://github.com/tensorflow/tfjs-models/tree/master/face-landmarks-detection)) and [HandPose](https://github.com/tensorflow/tfjs-models/tree/master/handpose), respectively. Soon thereafter a user made a [new feature request](https://github.com/ml5js/ml5-library/issues/823) to support these new packages with ml5. By November 2020, it was implemented into ml5 by [Bomani Oseni McClendon](https://github.com/bomanimc) as part of the [ml5.js Fellows Program](https://medium.com/processing-foundation/announcing-our-2020-ml5-js-fellows-45f8f6ff378d)).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/HandPoseFaceMesh_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of TensorFlow.js' [FaceMesh](https://github.com/tensorflow/tfjs-models/tree/master/face-landmarks-detection) and [HandPose](https://github.com/tensorflow/tfjs-models/tree/master/handpose) both which are available in ml5 as [Facemesh](https://learn.ml5js.org/#/reference/facemesh) and [Handpose](https://learn.ml5js.org/#/reference/handpose). Video from the [TensorFlow.js blog](https://blog.tensorflow.org/2020/03/face-and-hand-tracking-in-browser-with-mediapipe-and-tensorflowjs.html).
@@ -159,7 +159,7 @@ To demonstrate the ml5.js HandPose API and how to step through the data structur
 
 This data structure is similar but not identical to [PoseNet](ml5js-serial.md#the-posenet-data-structure)—one key difference is that unlike PoseNet, the individual keypoints do not include specific confidence scores. Here's a quick video demo.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/HandPoseDemo-GrayBackdrop_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** The [HandPoseDemo](https://makeabilitylab.github.io/p5js/ml5js/HandPose/HandPoseDemo/) ([code](https://github.com/makeabilitylab/p5js/tree/master/ml5js/HandPose/HandPoseDemo) on GitHub). You can also view, edit, and play with the code in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/Nn4pXTpbu).
@@ -171,7 +171,7 @@ We put the HandPoseDemo up on the p5.js web editor ([link](https://editor.p5js.o
 
 To help highlight the potential of real-time ML plus Arduino, we will build a simple "robotic" hand waver. We will use ml5's HandPose API to sense the user's hand, which will then control a servo motor embedded on a cardboard-crafted figure. See sneak preview below.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/HenryBodySerial_HenryStanding_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A quick demo of "Henry, the Tape Man", which was designed and built by a kindergartner, a preschooler, and me. The JavaScript-based frontend is built with the p5+ml5 app called [HandWaver](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/HandWaver) and the Arduino sketch [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino). (The actual Arduino sketch running here is a slightly modified version called [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino))
@@ -480,7 +480,7 @@ void loop()
 
 Here's a video demonstration showing a slightly modified Arduino circuit and sketch (called [ServoPotOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPotOLED/ServoPotOLED.ino)). The only difference is that the OLED version outputs the current servo angle on the OLED display.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/ServoMotorWithStick_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the servo circuit with potentiometer. The video is showing [ServoPotOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPotOLED/ServoPotOLED.ino), which is functionally equivalent to the code above ([ServoPot.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPot/ServoPot.ino)) but includes OLED support. Here, the OLED displays the current servo angle.
@@ -543,7 +543,7 @@ void loop()
 **Code.** The full code is here [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
 {: .fs-1 }
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/ServoSerialInOLED-Pot-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of controlling the servo motor from serial input. This video is using a slightly modified sketch with OLED support called [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino) but is functionally equivalent to [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
@@ -551,7 +551,7 @@ void loop()
 
 We also made a slightly more sophisticated version that allows the user to choose between whether to use the potentiometer or serial input to control the servo motor: [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino) and [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino). You can toggle between potentiometer *vs.* serial input using the button.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/ServoPotWithSerialInOLED-SerialMonitor_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino). You can use the button to change between two input modes to control the servo motor: the potentiometer and serial input. In the video, note how we press the button to switch between potentiometer-based control and serial control. For the latter, we send new values using Serial Monitor. We also created a non-OLED version of the code called [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino).
@@ -617,7 +617,7 @@ function draw() {
 
 You can view, edit, and play with the [XMouseSerialOut](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/) app in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/iwbGN0wkj) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/XMouseSerialOut)).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/XMouseP5jsAppWithServoSerial_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of a small p5.js test app called [XMouseSerialOut](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/) ([code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/XMouseSerialOut)), which outputs a normalized mouse `x` position to serial. Code running on Arduino is [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino) but many other programs in our GitHub repo would work like [ServoSerialIn](https://github.com/makeabilitylab/arduino/tree/master/Serial/ServoSerialIn).
@@ -630,7 +630,7 @@ If the simple p5.js x-position web app works with your Arduino sketch, then the 
 - [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino) or the OLED version called [ServoSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialInOLED/ServoSerialInOLED.ino), which take in either an integer value between 0 - 180 or a float value between 0 - 1 and set the servo position accordingly.
 - [ServoPotWithSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialIn/ServoPotWithSerialIn.ino) or the OLED version called [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino), which work similarly to the previous Arduino programs but allow the user to switch between potentiometer control and serial-based control for the servo using button input.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/ServoPotWithSerialInOLED-HandWaver_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [HandWaver](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu) with [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino).
@@ -660,7 +660,7 @@ Then, we calculated an appropriate position to insert the servo motor for Henry'
 
 We attached a temporary "arm" to test our construction with the potentiometer and [HandWaver](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/HandWaver).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Henry_NoBody_TestingArmWithPot_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Testing the servo motor embedded into the cardboard with the potentiometer—the Arduino is running [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino).
@@ -668,7 +668,7 @@ We attached a temporary "arm" to test our construction with the potentiometer an
 
 Now testing with [HandWaver](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/HandWaver):
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Henry_NoBody_TestingArmWithHandWaver_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Testing the servo motor embedded into the cardboard with the [HandWaver](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/HandWaver) app. The Arduino is running [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino).
@@ -687,7 +687,7 @@ const int MAX_SERVO_ANGLE = 85;
 
 And here's the final construction running the p5+ml5 app HandWaver—available in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/HandWaver), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/HandWaver)). On the Arduino, we are running [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino) but something as simple as [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino) would work (if you don't have an OLED or don't need/want to switch between the potentiometer and serial input to control the servo).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Henry_FullHandWaver_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [HandWaver](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu) with [ServoPotWithSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoPotWithSerialInOLED/ServoPotWithSerialInOLED.ino).

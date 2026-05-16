@@ -57,7 +57,7 @@ You will also need jumper wires and a breadboard. A small ceramic capacitor (0.1
 
 There are two common types of vibration motors: **eccentric rotating mass (ERM)** motors that have a small unbalanced mass attached to the DC motor axle that creates a displacement force when rotating, and **linear resonant actuators (LRAs)** that contain a small internal mass attached to a spring, which vibrates in a reciprocating linear motion with an applied AC signal. ERMs vibrate along two axes while LRAs are single-axis vibrators. We will be using ERM motors in this lesson. The video excerpt below from [Precision Microdrives](https://vimeo.com/132533086) shows how ERMs and LRAs vibrate.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video comparing ERM and LRA vibration motors side by side, showing how the ERM spins an unbalanced mass while the LRA moves a mass linearly on a spring">
+<video autoplay loop muted playsinline aria-label="Video comparing ERM and LRA vibration motors side by side, showing how the ERM spins an unbalanced mass while the LRA moves a mass linearly on a spring">
   <source src="assets/videos/PrecisionMicrodrives_ERMvsLRAMotors_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A [video](https://vimeo.com/132533086) from Precision Microdrives showing the two most common types of vibration motors: eccentric rotating mass (ERM) motors and linear resonant actuators (LRA). ERM motors vibrate in two directions due to the centripetal force of the unbalanced mass attached to the DC motor axle. LRAs are similar in design to speakers: they use a magnetic voice coil to move a mass linearly against a spring.
@@ -79,7 +79,7 @@ If a vibromotor is fully enclosed in a shell, you cannot necessarily tell whethe
 
 Eccentric rotating mass (ERM) motors have an unbalanced mass attached to their axle. When the ERM motor spins, the rotating mass's centripetal force causes displacement. By attaching an ERM to an object—like a smartphone or game controller—the rotating irregular mass causes the motor and attached device to shake. The larger the object, the more force is needed to modulate the vibration onto the object. 
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video from Precision Microdrives demonstrating how an ERM motor works by spinning an asymmetric mass on its axle to create vibration">
+<video autoplay loop muted playsinline aria-label="Video from Precision Microdrives demonstrating how an ERM motor works by spinning an asymmetric mass on its axle to create vibration">
   <source src="assets/videos/PrecisionMicrodrives_HowDoVibrationMotorsWork_ERM-OverviewOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A [video](https://vimeo.com/128603396) from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/) demonstrating how eccentric rotating mass (ERM) motors work. The idea is quite simple: attach an asymmetric or unbalanced mass to the DC motor's axle. When it rotates, the weight shifts, causing a vibration.
@@ -112,7 +112,7 @@ Where $$F$$ is the centripetal force in Newtons (N), $$m$$ is the mass of the ec
 
 When attached to an object, the vibration amplitude is also affected by the size of that object. This should make intuitive sense. For example, the small ERM motor in your mobile phone (used for alerts and notifications) would not cause much displacement when attached to a larger object like a laptop or an office desk. If you know the size of the target object, you can use this to inform the size and operating characteristics of your ERM motor.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing how the same ERM motor vibrates more visibly when attached to a small mass versus a large mass">
+<video autoplay loop muted playsinline aria-label="Video showing how the same ERM motor vibrates more visibly when attached to a small mass versus a large mass">
   <source src="assets/videos/PrecisionMicrodrives_HowDoVibrationMotorsWork_ERM-VibrationAmplitudeOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** An ERM's vibration amplitude is not just a function of motor speed and eccentric mass size but also the size of the attached object. A larger object requires more force to vibrate. Notice how the vibration displacement is greater with the smaller attached mass compared to the larger attached mass. Video from [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/).
@@ -163,7 +163,7 @@ In our [teaching hardware kits](../index.md/#example-hardware-kits), we often su
 
 Coin vibration motors are ERMs and generally have the same operating and functional characteristics as their cylindrical counterparts; however, their construction is different. See the video below. You can read about their construction on the [Precision Microdrives](https://www.precisionmicrodrives.com/vibration-motors/coin-vibration-motors/) website.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the inside of a coin ERM motor with the cover removed, revealing the flat coil and eccentric weight mechanism">
+<video autoplay loop muted playsinline aria-label="Video showing the inside of a coin ERM motor with the cover removed, revealing the flat coil and eccentric weight mechanism">
   <source src="assets/videos/CoinVibromotor_HowAMobilePhoneVibrationMotorLooksAndWorks_TrimmedOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of an opened coin ERM from [Tech Vision](https://youtu.be/iwEGqBpYaqc). There is another [great video](https://youtu.be/lp7bwXXsVl8?t=537) looking at a coin ERM with a microscope by Marty Jopson.

@@ -21,7 +21,7 @@ In this lesson, we will make our first MakeCode+CPX program—called Blinky—wh
 
 ## The MakeCode Programming Environment
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Making_SimpleFastAnimationProgram_MakeCode_ScreenRecording.mp4" type="video/mp4" />
 </video>
 **Video.** Rapidly creating a full program with MakeCode: a simple rainbow animation. [Code link](https://makecode.com/_8uY3D8Fc8A5t).
@@ -47,7 +47,7 @@ The MakeCode editor has three primary user interface areas: (1) programming work
 
 Let's make our first program: Blinky! To start, we'll make Blinky flash all ten of the CPX's NeoPixel LEDs on and off. Then we'll add in a special "startup" sound to introduce other programmable elements.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Making_Blinky_MakeCode_FinalLoop.mp4" type="video/mp4" />
 </video>
 **Video.** The initial Blinky program: notice how the simulator's lights (the NeoPixels) are flashing red for 500ms then off for 500ms and repeating.
@@ -134,7 +134,7 @@ Our final program should look like this. Because our code sits within a [`foreve
 
 Here's a full walkthrough video of building Blinky from start-to-finish in MakeCode in only 30 seconds. This really demonstrates how quickly we can prototype electronic behaviors with MakeCode+CPX.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Making_Blinky_MakeCode_ScreenRecording.mp4" type="video/mp4" />
 </video>
 **Video.** A full walkthrough video of building Blinky from start-to-finish in only 30 seconds. Feel free to pause the video or open it in a new tab for full screen (right click on the video and select "Open video in new tab").
@@ -144,7 +144,7 @@ Here's a full walkthrough video of building Blinky from start-to-finish in MakeC
 
 Before downloading Blinky on to the physical CPX board, let's make one more addition: a "startup" sound, which plays when the CPX is first turned on (or reset).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Making_BlinkyWithPowerUp_ScreenRecording.mp4" type="video/mp4" />
 </video>
 **Video.** Adding a "startup" sound to Blinky. Now, when Blinky is turned on, it will play a sound.
@@ -205,7 +205,7 @@ We'll cover both below. We recommend at least trying the "direct download" appro
 
 ### Manual download
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/CopyingProgramToCPXFromMac_NoSound.mp4" type="video/mp4" />
 </video>
 **Video.** Downloading a MakeCode program and transferring it to the CPX using a Mac.
@@ -227,7 +227,7 @@ We will show you how to do this for both Windows and Mac.
 
 #### Manual download with Mac
 
-<video playsinline controls style="margin:0px">
+<video playsinline controls>
   <source src="assets/videos/CopyingProgramToCPXFromMac.mp4" type="video/mp4" />
 </video>
 **Video.** Downloading a MakeCode program and transferring it to the CPX using a Mac.
@@ -235,7 +235,9 @@ We will show you how to do this for both Windows and Mac.
 
 #### Manual download with Windows
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/Y_jkUylGe4E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/Y_jkUylGe4E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Video.** Manually downloading and transferring your MakeCode program onto the CPX using Windows ([YouTube link](https://youtu.be/Y_jkUylGe4E))
 {: .fs-1 }
@@ -244,7 +246,9 @@ We will show you how to do this for both Windows and Mac.
 
 In this video, we walk you through how to directly download your MakeCode program onto the CPX using WebUSB. This is a far more ideal and seamless way to program the MakeCode but doesn't always work reliably. You must use either Chrome or Microsoft Edge web browsers and should work for either Mac or Windows.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/7FjYEJhVeLY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/7FjYEJhVeLY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Video.** Directly downloading your MakeCode program to the CPX using WebUSB ([YouTube link](https://youtu.be/7FjYEJhVeLY))
 {: .fs-1 }
@@ -253,7 +257,7 @@ In this video, we walk you through how to directly download your MakeCode progra
 
 If you want to share your program with others, click on the Share button in the navbar and copy/paste the provided URL. See the video below.
 
-<video loop muted playsinline style="margin:0px" controls>
+<video loop muted playsinline controls>
   <source src="assets/videos/MakeCode_SharingYourProject2.mp4" type="video/mp4" />
 </video>
 **Video.** To share your MakeCode program with others, click on the Share button in the navbar and copy/paste the url link. [Code link](https://makecode.com/_JdPfj8VrmWV3).
@@ -265,7 +269,7 @@ We did it! We successfully built our first program in MakeCode, ran it in the si
 
 For this lesson's design challenge, try seeing how many different ways you can build interesting light patterns with MakeCode using commands such show animation, photon, and more! Below, we've included a simple example but you can do so much more!
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/MakeCode_SimpleNeoPixelFun_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A very simple playground of different NeoPixel animations built in to MakeCode [Code link](https://makecode.com/_AxFigA8KX82K). We are also using console out commands to help us reference the various animations.

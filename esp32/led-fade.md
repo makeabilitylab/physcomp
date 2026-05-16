@@ -391,7 +391,7 @@ void loop() {
 
 You can also run this circuit in the [Wokwi simulator](https://wokwi.com/) (introduced in the [Blink lesson](led-blink.md#part-3-try-it-in-the-wokwi-simulator)). Wokwi uses the ESP32-S3 DevKitC board but since the LEDC library works the same on any ESP32-S3 board, the fade code runs identically in the simulator as it would on the ESP32-S3 Feather.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing LED fade running in the Wokwi simulator">
+<video autoplay loop muted playsinline aria-label="Video showing LED fade running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-LedFade_optimized_muted.mp4" type="video/mp4" />
 </video>
 **Video.** LED fade running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463782700188143617).

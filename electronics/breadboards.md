@@ -161,7 +161,9 @@ As you start breadboarding, here are the most frequent errors to watch out for:
 
 If you're still feeling lost, we highly recommend this breadboard tutorial video by *Science Buddies*.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/6WReFkfrUIk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/6WReFkfrUIk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Video.** This video tutorial ["How to use a breadboard"](https://youtu.be/6WReFkfrUIk) by Science Buddies offers a great introduction to breadboards.
 {: .fs-1 }

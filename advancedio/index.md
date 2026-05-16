@@ -17,7 +17,7 @@ usetocbot: true
 {:toc}
 ---
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video montage showing OLED display games, addressable LED animations, servo motors moving, and vibromotor haptic feedback projects built with Arduino">
+<video autoplay loop muted playsinline aria-label="Video montage showing OLED display games, addressable LED animations, servo motors moving, and vibromotor haptic feedback projects built with Arduino">
   <source src="assets/videos/Arduino_OLED_Games_Overview_720p_optimized.mp4" type="video/mp4" />
 </video>
 **Video.** In this lesson series, you will learn about OLED displays, addressable RGB LEDs, servo motors, vibration motors, and more! You can combine your learning to create interactive projects like [Flappy Bird](https://github.com/makeabilitylab/arduino/tree/master/OLED/FlappyBird), [Pong](https://github.com/makeabilitylab/arduino/tree/master/OLED/Pong), rainbow LED animations, sensor-driven gauges, and haptic feedback systems.

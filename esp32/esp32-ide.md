@@ -52,7 +52,7 @@ The Arduino IDE doesn't include ESP32 support by default—you need to add Espre
 5. Open **Tools → Board → Boards Manager** (or click the Boards Manager icon in the left sidebar)
 6. Search for `esp32` and install the **esp32 by Espressif Systems** package. This may take a few minutes—it's a large download.
 
-<video loop controls playsinline style="margin:0px" aria-label="Video showing how to install the ESP32 with the Arduino IDE board manager">
+<video loop controls playsinline aria-label="Video showing how to install the ESP32 with the Arduino IDE board manager">
   <source src="assets/videos/MacOS_ArduinoIDE_InstallingESP32Library_EditedAndCropped.mp4" type="video/mp4" />
 </video>
 **Video.** A screen recording of installing the ESP32 board in the Arduino IDE.

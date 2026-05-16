@@ -37,7 +37,7 @@ TODO: in future compare i2c and SPI. Update: I've now added this.
 
 - -->
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a game of Pong running on a small monochrome OLED display controlled by a joystick and buttons">
+<video autoplay loop muted playsinline aria-label="Video showing a game of Pong running on a small monochrome OLED display controlled by a joystick and buttons">
   <source src="assets/videos/OLED_Pong720p.mp4" type="video/mp4" />
 </video>
 **Video.** Playing Pong on the Adafruit monochrome 1.3" 128x64 pixel [OLED display](https://www.adafruit.com/product/938) with the [Parallax 2-axis joystick](https://www.adafruit.com/product/245) and tactile buttons. The source code for Pong is [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/Pong/Pong.ino). Parts of this video are sped up 4x.
@@ -147,7 +147,7 @@ Both [SparkFun](https://www.sparkfun.com/categories/tags/qwiic-cables) and Adafr
 
 The video below shows the OLED display hooked up to a STEMMA QT [female-to-male jumper cable](https://www.adafruit.com/product/4209):
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the Adafruit SSD1306 demo running on an OLED display connected via a STEMMA QT cable">
+<video autoplay loop muted playsinline aria-label="Video showing the Adafruit SSD1306 demo running on an OLED display connected via a STEMMA QT cable">
   <source src="assets/videos/AdafruitSTEMMAQT_IMG_6163-TrimmedAndCropped720p.mp4" type="video/mp4" />
 </video>
 **Video.** Running the demo [`ssd1306_128x64_i2c`](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino) with a STEMMA QT cable.
@@ -177,7 +177,7 @@ Now, compile and upload the example.
 
 Once the code has compiled and uploaded, it should look something like this:
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the Adafruit SSD1306 official demo with various drawing primitives animating on the OLED display">
+<video autoplay loop muted playsinline aria-label="Video showing the Adafruit SSD1306 official demo with various drawing primitives animating on the OLED display">
   <source src="assets/videos/AdafruitOLEDOfficialDemo0x3D-IMG_6160-Rotated-TrimmedAndSpedUp720p-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Running the demo [`ssd1306_128x64_i2c`](https://github.com/adafruit/Adafruit_SSD1306/blob/master/examples/ssd1306_128x64_i2c/ssd1306_128x64_i2c.ino). Parts of this video are sped up 4x.
@@ -470,7 +470,7 @@ _display.write(charIndex);
 
 Here's an [example](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino) iterating through all of the glyphs individually, which demonstrates the code above. You can use either `drawChar` or `write`—we demonstrate both in [DrawChar.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino).
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing each embedded font glyph displayed one at a time in the center of the OLED screen, cycling through smiley faces, card suits, arrows, and other symbols">
+<video autoplay loop muted playsinline aria-label="Video showing each embedded font glyph displayed one at a time in the center of the OLED screen, cycling through smiley faces, card suits, arrows, and other symbols">
   <source src="assets/videos/OLED_DrawChar-IMG_6308-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [DrawChar.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino) showing how to draw the embedded graphics from the default font.
@@ -522,7 +522,7 @@ _display.display();
 
 We made a version called [SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino) that draws shapes of random sizes and locations on **each frame**, but you could do something even simpler (or more complex)!
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing random shapes being drawn to the OLED display on each frame, creating a rapidly changing abstract pattern">
+<video autoplay loop muted playsinline aria-label="Video showing random shapes being drawn to the OLED display on each frame, creating a rapidly changing abstract pattern">
   <source src="assets/videos/OLEDSimpleDrawingDemo-IMG_6188-TrimmedAndOptimized720p.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino).
@@ -558,7 +558,7 @@ Perhaps best article I've seen:
 
 Here's a [demo of a bouncing ball](https://makeabilitylab.github.io/p5js/Animation/BallBounce2D/) we made in [p5js](https://p5js.org/). Sometimes, it's useful to prototype a visualization or game idea in a rapid programming environment like [p5js](https://p5js.org/) or [Processing](https://processing.org/) before coding it up in C++ for Arduino (and it's easier to debug in those environments as well). You can edit and play with this demo in your browser [here](https://editor.p5js.org/jonfroehlich/sketches/KpUirYrAk) using the p5js online editor.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a 2D ball bouncing around the screen in a p5js sketch, reflecting off the edges">
+<video autoplay loop muted playsinline aria-label="Video showing a 2D ball bouncing around the screen in a p5js sketch, reflecting off the edges">
   <source src="assets/videos/BallBouncing_p5js.mp4" type="video/mp4" />
 </video>
 {: .mx-auto .align-center }
@@ -627,7 +627,7 @@ You can view the full code on GitHub as [BallBounce.ino](https://github.com/make
 
 We also have a similar "bounce" demo, called [BitmapBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino), that uses a bitmap rather than a graphic primitive. To create the bitmap byte dump, we used this [image2cpp](http://javl.github.io/image2cpp/) tool on this [Makeability Lab logo](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/logo_bw_no_text_600w.png).
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing the Makeability Lab logo bitmap bouncing around the OLED display, reflecting off the screen edges">
+<video autoplay loop muted playsinline aria-label="Video showing the Makeability Lab logo bitmap bouncing around the OLED display, reflecting off the screen edges">
   <source src="assets/videos/OLEDBouncingBitmap-IMG_6180-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A video of [BitmapBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BitmapBounce/BitmapBounce.ino).
@@ -688,7 +688,7 @@ void loop() {
 
 You can view the full code on GitHub as [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino).
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a filled circle on the OLED display growing and shrinking as the potentiometer is turned">
+<video autoplay loop muted playsinline aria-label="Video showing a filled circle on the OLED display growing and shrinking as the potentiometer is turned">
   <source src="assets/videos/OLEDAnalogBallSize-IMG_6189-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A video of [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino).
@@ -731,7 +731,7 @@ void loop() {
 
 You can view the full code on GitHub as [AnalogBallLocation.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallLocation/AnalogBallLocation.ino).
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a circle on the OLED display being moved around by turning two potentiometers that control the x and y position">
+<video autoplay loop muted playsinline aria-label="Video showing a circle on the OLED display being moved around by turning two potentiometers that control the x and y position">
   <source src="assets/videos/OLEDMoveBallTwoPots-IMG_6190-TrimmedAndOptimized720p.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [AnalogBallLocation.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallLocation/AnalogBallLocation.ino) using potentiometers on `A0` and `A1`.
@@ -775,7 +775,7 @@ void loop() {
 
 The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino). Here's a video demo:
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a real-time bar graph on the OLED display that sweeps across the screen as the potentiometer is turned, displaying the current analog value and frame rate">
+<video autoplay loop muted playsinline aria-label="Video showing a real-time bar graph on the OLED display that sweeps across the screen as the potentiometer is turned, displaying the current analog value and frame rate">
   <source src="assets/videos/OLEDAnalogGraph_TrimmedAndOptimized720p.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino) using a potentiometer for analog input on `A0`. We also show the currently sensed `A0` value in the upper-left corner and our frame rate (fps) in the upper-right corner.
@@ -829,7 +829,7 @@ void loop() {
 
 The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino). Here's a video demo. 
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing a scrolling real-time line graph on the OLED display that continuously moves data to the left as new sensor readings come in from the potentiometer">
+<video autoplay loop muted playsinline aria-label="Video showing a scrolling real-time line graph on the OLED display that continuously moves data to the left as new sensor readings come in from the potentiometer">
   <source src="assets/videos/OLED_ScrollingGraphDemo-IMG_6192-TrimmedAndOptimized720p.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino) using a potentiometer for analog input on `A0`. We also show the currently sensed `A0` value in the upper-left corner and our frame rate (fps) in the upper-right corner.

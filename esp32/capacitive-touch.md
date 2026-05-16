@@ -459,7 +459,9 @@ void loop() {
 
 Here's a workbench video demonstrating touch-controlled LED using both a wire and aluminum foil as conductors. This video was recorded on the Huzzah32 with the original ESP32—the concept is identical on the ESP32-S3, just with inverted threshold logic.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/RE2mH38e9RI" title="Capacitive touch sensing on the ESP32 with a wire and aluminum foil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/RE2mH38e9RI" title="Capacitive touch sensing on the ESP32 with a wire and aluminum foil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A demonstration of capacitive touch sensing using a wire and aluminum foil on the Huzzah32. The LED turns on when the conductive surface is touched. Note: the potentiometer visible in the circuit is leftover from the previous lesson and is not used here. Recorded with the legacy Huzzah32 and original ESP32 touch behavior. Source: [TouchRead.ino](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Sensors/TouchRead/TouchRead.ino) (legacy version).
 {: .fs-1 }
 

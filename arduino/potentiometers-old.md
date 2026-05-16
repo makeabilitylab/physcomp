@@ -27,7 +27,9 @@ TODO:
 
 In this lesson, we'll learn about potentiometers, analog input, voltage dividers, and, as a bonus, multimeters too! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/MJt9kSNlsU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/MJt9kSNlsU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 A [video](https://youtu.be/MJt9kSNlsU4) demonstration of a [trimpot](https://www.adafruit.com/product/356) hooked up to analog input A0 on the Arduino. The A0 value is graphed on an OLED display in real-time. The code is available [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino).
 {: .fs-1 }
@@ -69,7 +71,9 @@ For example, if we set Leg 1 to $$5V$$ and Leg 3 to $$GND$$, then as we change t
 
 The following video breaks down a potentiometer, shows how to think about ($$R_{1}$$) and ($$R_{2}$$) as the wiper moves, and demonstrates how the potentiometer functions in a circuit via a simulation:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ZAzX_pxuWps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/ZAzX_pxuWps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 Video shows how the voltage output at Leg 2 changes based on the wiper position, which splits the potentiometer into two "resistor" sub-parts, ($$R_{1}$$) and ($$R_{2}$$), which creates a voltage divider.
 {: .fs-1 }
 
@@ -217,7 +221,9 @@ We also made this circuit in another online simulator called [CircuitJS](https:/
 
 There are two differences in this circuit compared to the Tinkercad one above. First, we used a 1kΩ potentiometer in this circuit rather than a 10kΩ but the general effect is the same. Second, here we have Leg 1 hooked up towards the positive voltage source and Leg 2 as our "output", so resistance is minimized when the dial is all the way left (it was the opposite for our Tinkercad circuit).
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/F92_-MOqzM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/F92_-MOqzM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ### Let's build it for real
 
@@ -237,25 +243,33 @@ Here's a workbench video of my trimpot circuit:
 
 <!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 #### Replace trimpot with FSR and photocell
 
 As long as we have this circuit, let's have a bit of fun: try replacing the trimpot with the [force-sensitive resistor](https://www.adafruit.com/product/166):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/YMCqDcnwMYo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/YMCqDcnwMYo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 The same circuit as before but replace the trimpot with a force-sensitive resistor.
 {: .fs-1 }
 
 Or the [photocell](https://www.adafruit.com/product/161):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/Y0GOsocDCGU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/Y0GOsocDCGU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 #### Making your own lo-fi potentiometer
 
 Inspired by [Jeff's video](https://vimeo.com/76442431), we also made our own potentiometer using paper, a 12B pencil, and, for the wiper, cardboard and a paper clip. You should try something like this too!
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/NRlJbuj5jr4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/NRlJbuj5jr4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 The most exciting part is that these lo-fi constructions can be used to create novel and interesting sensors for microcontrollers!
 
@@ -356,7 +370,9 @@ Why don't these work?
 
 Because, remember, our input pins measure **voltage** and there is no voltage difference across our potentiometer (because no current is flowing!). Here's an illustrative video of what's happening (and not happening) in our circuit:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/gp379BG-aeE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/gp379BG-aeE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 2 (wiper leg) hooked to A0. The "inside the microcontroller" view is for illustrative purposes. The input pin circuitry does not actually look like this. Simulation made in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 {: .fs-1 }
 
@@ -374,7 +390,9 @@ Now $$V_{A0}=V_{CC} \cdot \frac{R_2}{R_1 + R_2}$$.
 
 And here's an illustrative video of what's happening in our circuit:
 
-<iframe width="736" height="414"  src="https://www.youtube.com/embed/rJr4TgoFZ2Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe  src="https://www.youtube.com/embed/rJr4TgoFZ2Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 This is a circuit simulation of the potentiometer correctly hooked up to a microcontroller with Leg 1 hooked to 5V, Leg 2 (wiper leg) hooked to analog input A0, and Leg 3 to GND. The "inside the microcontroller" view is for illustrative purposes. The input pin circuitry does not actually look like this. Simulation made in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 {: .fs-1 }
 

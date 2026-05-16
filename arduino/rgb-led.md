@@ -182,7 +182,9 @@ That's it. Now compile, upload, and run your code!
 
 In the video below, I'm running our [BlinkRGB](https://github.com/makeabilitylab/arduino/tree/master/Basics/digitalWrite/BlinkRGB) code, which is the same as above but includes some [`Serial.print`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) calls for debugging (see this [mini-tutorial](https://create.arduino.cc/projecthub/glowascii/serial-monitor-arduino-basics-399eb6) on using the Serial.print and the Arduino IDE's Serial Monitor for debugging)
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ASez28rPjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/ASez28rPjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 The yogurt container is used to diffuse the light. Kleenex, white paper, or a ping pong ball (with a hole in it for the LED) works well too!
 {: .fs-1 }
 

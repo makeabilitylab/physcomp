@@ -349,7 +349,7 @@ Let's begin by using our now familiar Arduino IDE [Serial Monitor](../arduino/se
 
 Here's a video demonstration of sending ASCII-encoded text via [Serial Monitor](../arduino/serial-print.md) to the Arduino running [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino). 
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/SimpleSerialIn-NoTalking-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
 </video>
 **Video.** A video demonstrating using the Arduino IDE [Serial Monitor](../arduino/serial-print.md) tool to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
@@ -426,7 +426,7 @@ PS> $port.Close()
 
 Here's a video demonstration:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/SimpleSerialIn-NoTalking-WindowsPowerShell-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
 </video>
 **Video.** A video demonstrating using [Windows PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview) to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
@@ -517,7 +517,7 @@ And that's it! This code is available as [serial_demo.py](https://github.com/mak
 
 #### Video demo using Python
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/SimpleSerialIn-Python-NoTalking2-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
 </video>
 **Video.** A video demonstrating using [Python3](https://www.python.org/downloads/) with [pySerial](https://pypi.org/project/pyserial/) to communicate with the Arduino running [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). For this video, we are using a slightly modified program called [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) along with an [OLED display](../advancedio/oled.md). This allows you to more easily see the received values.
@@ -527,7 +527,9 @@ And that's it! This code is available as [serial_demo.py](https://github.com/mak
 
 Of course, we can do significantly more interesting things using serial communication. In the video below, for example, we demonstrate a Python program that reads in real-time accelerometer data sent via the Arduino over serial and classifies gestures (using a template matching).
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/nnTyqCwYVbA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/nnTyqCwYVbA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 **Video.** A video demonstrating real-time gesture recognition using 3-axis accelerometer data sent via the Arduino over serial. We wrote the gesture recognizer in Python; however, we are not linking to the code because we use it as an assignment in some of our courses. You can learn more in our [Signal Classification](../signals/classification.md) lesson series.
 {: .fs-1 }

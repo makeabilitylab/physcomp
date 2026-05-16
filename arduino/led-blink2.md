@@ -43,7 +43,9 @@ Our materials are *almost* the same as before but this time, we are going to mak
 
 We will increasingly be using our breadboards in these lessons so now is a good opportunity to revisit how to use them. If you're unfamiliar please read our [breadboarding guide](../electronics/breadboards.md) and watch the following [video](https://youtu.be/6WReFkfrUIk):
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/6WReFkfrUIk" title="Video explaining how breadboards work" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/6WReFkfrUIk" title="Video explaining how breadboards work" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Making the circuit
 
@@ -117,7 +119,9 @@ We did it! Now compile and upload the code.
 
 And here's a top-down video with the code window:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/q6KcPYfum7c" title="Top-down workbench video showing two LEDs blinking with current sourcing and sinking" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/q6KcPYfum7c" title="Top-down workbench video showing two LEDs blinking with current sourcing and sinking" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 <!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
 

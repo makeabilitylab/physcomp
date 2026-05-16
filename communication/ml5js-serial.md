@@ -22,7 +22,7 @@ In this lesson, we will extend our learning on [web serial](web-serial.md) and [
 
 For example, with only a few lines of JavaScript code and some slight modifications to our [FlappyBird.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino) Arduino sketch (updated to [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino)), we can play FlappyBird with our nose using a real-time web camera stream and [ml5's PoseNet library](https://learn.ml5js.org/#/reference/posenet).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/FlappyBirdNoseTracker_Short_1000w.mp4" type="video/mp4" />
 </video>
 **Video.** Playing Flappy Bird on the Arduino Leonardo by using my nose using p5.js, [ml5.js](https://ml5js.org/), and [web serial](web-serial.md). The p5.js app is called Nose Tracker ([p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2), GitHub [live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), GitHub [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino).
@@ -32,7 +32,7 @@ In this lesson, we'll show how to do this and more. But first, let's start with 
 
 ## Machine learning frameworks
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/RealTimeGestureRecognizer-EditedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** In our MS course on *Ubiquitous Computing*, students build a real-time gesture recognizer from the "ground up" using an LIS3DH accelerometer, Arduino, and Python. We use the machine learning framework called [scikit-learn](https://scikit-learn.org/stable/). Full [YouTube video](https://youtu.be/nnTyqCwYVbA).
@@ -69,7 +69,7 @@ Though this lesson will not dive deeply into ML, our hope is that it will serve 
 
 ### Friendly machine learning on the web: ml5.js
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PoseNet_TensorFlow-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** ml5.js's [PoseNet](https://learn.ml5js.org/#/reference/posenet) is a machine learning model for real-time pose estimation built on [TensorFlow](https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5).
@@ -94,7 +94,9 @@ You can read more about ml5's history [here](https://medium.com/ml5js/ml5-friend
 
 To get started with [ml5.js](https://ml5js.org/), we recommend reading the official ml5.js ["Getting Started" page](https://learn.ml5js.org/#/) and watching some of Daniel Shiffman's Coding Train YouTube series on a ["Beginner's Guide to Machine Learning with ml5.js"](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y), which includes wonderful videos on [image classification](https://www.youtube.com/watch?v=yNkAuWz5lnY&list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y&index=3), [object detection](https://www.youtube.com/watch?v=QEzRxnuaZCk&list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y&index=5&t=211s), [sound classification](https://www.youtube.com/watch?v=cO4UP2dX944&list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y&index=19&t=766s), [doodle classification](https://www.youtube.com/watch?v=ABN_DWnM5GQ&list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y&index=30), and more! Shiffman also shows you how to train your own models, including for a JavaScript-based Snake game ([link](https://www.youtube.com/watch?v=kwcillcWOg0&list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y&index=13&t=66s)) or to [classify your own sounds](https://www.youtube.com/watch?v=TOrVsLklltM&list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y&index=20). The first video in the [Coding Train ml5js series](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y) is below.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/jmznx0Q1fP0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/jmznx0Q1fP0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** The first video in Shiffman's Coding Train YouTube series on ["Beginner's Guide to Machine Learning with ml5.js"](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y). We highly recommend all [Coding Train videos](https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw)!
 {: .fs-1 }
 
@@ -207,7 +209,7 @@ To demonstrate the [ml5.js PoseNet API](https://learn.ml5js.org/#/reference/pose
 
 Here's a video demonstration:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PoseNet_SkeletonDemo_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** This video demonstrates the ml5 PoseNet API via the [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) application. We are drawing each of the 17 recognized keypoints along with the x,y position and confidence scores. The code is available on GitHub [here](https://github.com/makeabilitylab/p5js/tree/master/ml5js/PoseNet/Skeleton).
@@ -223,7 +225,7 @@ For our first exercise, we will build a simple but fun toy application: tracking
 
 Here's a quick sneak preview. Play close attention to the OLED display, which is displaying a face icon based on my nose's position in the web camera frame!
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/NoseTracker_TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** This brief demo shows our p5.js + Arduino application that uses ml5's PoseNet to track the user's nose and eyes in real time with a web camera stream. This data is used to draw a cartoonish overlay at the nose and eye positions, to transmit a normalized x,y position of the nose to Arduino via web serial, and to draw a emoji-like face at the x,y position on the OLED display. The p5.js application is loosely based on this Coding Train "[Hour of Code with p5.js and PoseNet](https://youtu.be/EA3-k9mnLHs)" video. The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino code is on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino).
@@ -390,7 +392,7 @@ function draw() {
 
 Here's a video demo with links to the [example code](https://editor.p5js.org/jonfroehlich/sketches/khxRw8FI3) of where we are thus far:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/NoseTracker2-Nose_2x_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Video demonstration of using ml5 to track and draw on top of body part keypoints. Based on this Coding Train "[Hour of Code with p5.js and PoseNet](https://youtu.be/EA3-k9mnLHs)" by Daniel Shiffman. You can run and edit this code directly in your browser using the p5.js online editor ([link](https://editor.p5js.org/jonfroehlich/sketches/khxRw8FI3)).
@@ -435,7 +437,7 @@ function drawEye(x, y) {
 
 And another video demo to help show what we've created thus far! Notice how PoseNet will recognize *pictures* of humans as well as real, physical humans in the web cam stream (but not pictures of seals!).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/NoseTracker3-EyesAndNoseWithBook-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Video demonstration of turning oneself into Elmo using ml5 PoseNet. To demonstrate the multi-pose recognizer, I used a book cover with a human face (there was no one around me at the time to help demonstrate!). The video also shows how the book cover of a seal is not recognized. You can run and edit this code directly in your browser using the p5.js online editor ([link](https://editor.p5js.org/jonfroehlich/sketches/ZsvOFxZ0d)).
@@ -600,7 +602,7 @@ And that's it, the full code is available on GitHub as [NoseTrackerSerialIn.ino]
 
 Here's a longer video demonstration of the full p5.js + Arduino NoseTracker app:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/NoseTrackerFullDemo-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino code is on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino). You can ignore the two momentary buttons on the breadboard—we don't use them here.
@@ -612,7 +614,9 @@ Using the same p5+ml5 code, NoseTracker ([live page](https://makeabilitylab.gith
 
 In this case, we'll draw a menu screen that asks the user to select the "flapping" control—either serial or button. If serial is selected, the Arduino sketch expects a text-encoded comma separated line of x,y positions—just like what the [NoseTracker](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/) page transmits—however, we only use the y position in the game to set the "bird" position. See the video below.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/AktNXq-cflw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/AktNXq-cflw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A full demonstration of "FlappyNose". Watch me get a high score of 33 after a few tries. :) The p5.js app is available on the[p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or in GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino).
 {: .fs-1 }
 

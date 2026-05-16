@@ -197,7 +197,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/B
 
 ## Part 3: Try it in the Wokwi simulator
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing blinky running in the Wokwi simulator">
+<video autoplay loop muted playsinline aria-label="Video showing blinky running in the Wokwi simulator">
   <source src="assets/videos/Wokwi_ESP32-S3-Blink_optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Blinky running in the **Wokwi simulator** on the ESP32-S3 DevKitC. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).
@@ -219,7 +219,7 @@ A few things to be aware of:
 
 As this is our first time introducing Wokwi, the video below shows a full build out of blinky in the Wokwi simulation environment, including both wiring and coding. The video also shows the long compile times. This is because Wokwi actually compiles the C++ Arduino code using a real compiler toolchain and compiling the ESP32 takes longer than just compiling the traditional Arduino libraries.
 
-<video loop controls playsinline style="margin:0px" aria-label="Video showing us building blinky in the Wokwi simulation environment">
+<video loop controls playsinline aria-label="Video showing us building blinky in the Wokwi simulation environment">
   <source src="assets/videos/Wokwi_ESP32-S3-BuildingBlink_SpedUp_optimized_muted.mp4" type="video/mp4" />
 </video>
 **Video.** This video shows us building the basic blinky program on the ESP32-S3 DevKitC board in Wokwi. Run it yourself on [Wokwi here](https://wokwi.com/projects/463754140590397441).

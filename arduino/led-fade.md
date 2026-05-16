@@ -70,7 +70,9 @@ To understand PWM, let's first remind ourselves of the characteristics of a squa
 
 And then take a look at [this video](https://www.youtube.com/watch?v=YmPziPfaByw) by Afrotechmods:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/YmPziPfaByw?si=ECb8GM_a0wfC-8U3" title="Afrotechmods video explaining pulse-width modulation (PWM)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/YmPziPfaByw?si=ECb8GM_a0wfC-8U3" title="Afrotechmods video explaining pulse-width modulation (PWM)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
 
 So, what does the [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) function do, exactly? It simply varies the **duty cycle** of the output pin. That is, the 8-bit value (0-255) directly controls how long a 5V value is applied to the output pin during one "analog write" period. So, `analogWrite(<pin>, 127)` would output a 5V value for half the period (because 127/255 = ~50%) and `analogWrite(<pin>, 191)` would output a 5V for 75% of the period (because 191/255 = ~75%). This fraction of the time the signal is `HIGH` is called the duty cycle.
 
@@ -170,7 +172,9 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 
 Now, compile, upload, and run the code. After upload completes, the LED should immediately begin fading on then off. See video below.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/Y0mSFmW7G4U" title="Video demonstrating LED fading with analogWrite on an Arduino" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/Y0mSFmW7G4U" title="Video demonstrating LED fading with analogWrite on an Arduino" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Visualizing the voltage output
 
@@ -184,7 +188,9 @@ Other than the potentiometer, our circuit did not change (we still have an LED w
 
 Let's take a look:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/h-K0q18BRIE" title="Video showing PWM waveform on an oscilloscope with different analogWrite values" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/h-K0q18BRIE" title="Video showing PWM waveform on an oscilloscope with different analogWrite values" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 To create this [program](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogRead/TrimpotLEDSmoothed/TrimpotLEDSmoothed.ino), we had to use both `analogRead` and `analogWrite`. By the end of this lesson, you should have a strong understanding of `analogWrite` and PWM. But we won't learn more about `analogRead` until we get to the [Introduction to Input](intro-input.md) microcontroller lessons.
 

@@ -421,7 +421,9 @@ Once your ESP32 is uploading data, let's create a dashboard to visualize it:
 
 Here's a brief video demonstration showing the photoresistor + LED circuit paired with a live screen recording of the Adafruit IO dashboard.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/DgCFUHGSKSM" title="ESP32 IoT demo: photoresistor data uploading to Adafruit IO dashboard in real time" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/DgCFUHGSKSM" title="ESP32 IoT demo: photoresistor data uploading to Adafruit IO dashboard in real time" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** Workbench recording of the ESP32 reading a photoresistor and uploading the light level to Adafruit IO. The screen recording on the right shows the Adafruit IO dashboard updating in real time. Make sure your sound is on.
 {: .fs-1 }
 

@@ -21,7 +21,9 @@ usetocbot: true
 
 In this lesson, we'll refresh our memories about potentiometers, learn a bit about multimeters, and then introduce the concept of **analog input** and hook-up potentiometers as voltage dividers to Arduino! Similar to the [buttons lesson](buttons.md), we are going to use potentiometers on their own before learning how to use them with microcontrollers.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/MJt9kSNlsU4" title="Video demonstration of a trimpot controlling analog input A0, graphed on an OLED display" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/MJt9kSNlsU4" title="Video demonstration of a trimpot controlling analog input A0, graphed on an OLED display" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 A [video](https://youtu.be/MJt9kSNlsU4) demonstration of a [trimpot](https://www.adafruit.com/product/356) hooked up to analog input A0 on the Arduino. The A0 value is graphed on an OLED display in real-time. The code is available [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino).
 {: .fs-1 }
@@ -39,7 +41,7 @@ A [video](https://youtu.be/MJt9kSNlsU4) demonstration of a [trimpot](https://www
 
 In our [Intro to Electronics](../electronics/index.md) lessons, we learned about [potentiometers](../electronics/variable-resistors.md). Recall that a potentiometer (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing how the wiper varies resistance in a rotary potentiometer">
+<video autoplay loop muted playsinline aria-label="Animation showing how the wiper varies resistance in a rotary potentiometer">
   <source src="../electronics/assets/videos/Potentiometer_Overview_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** This animation shows how the wiper can be used to vary resistance in a rotary potentiometer. The figure on the right is the formal electrical symbol. Animation by Jon Froehlich. Created in PowerPoint.
@@ -59,7 +61,7 @@ The power of a potentiometer is in that middle leg (Leg 2) whose resistance vari
 
 <!-- As you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$. -->
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation showing two internal resistors R1 and R2 that change as the potentiometer wiper moves">
+<video autoplay loop muted playsinline aria-label="Animation showing two internal resistors R1 and R2 that change as the potentiometer wiper moves">
   <source src="../electronics/assets/videos/PotentiometerIntroduction_TrimmedAndCropped.mp4" type="video/mp4" />
 </video>
 **Video.** Animation by Jon Froehlich. Created in PowerPoint.
@@ -67,7 +69,7 @@ The power of a potentiometer is in that middle leg (Leg 2) whose resistance vari
 
 Using two multimeters set to **measure resistances** across both Legs 1-2 and 2-3, we can examine this behavior directly. Notice how as you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$. We are using a 10kΩ potentiometer so $$R_{total}=10kΩ$$
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Tinkercad simulation showing two multimeters measuring changing resistances as the potentiometer wiper moves">
+<video autoplay loop muted playsinline aria-label="Tinkercad simulation showing two multimeters measuring changing resistances as the potentiometer wiper moves">
   <source src="../electronics/assets/videos/Tinkercad_PotentiometerWithMultimeters.mp4" type="video/mp4" />
 </video>
 **Video.** Using two multimeters, we can examine how the resistances change between Legs 1-2 and 2-3. Note that the resistance between the outer legs (Legs 1-3) will always sum to the potentiometer's total value. In this case, we're using a 10kΩ, so it would sum to 10kΩ. Try it out on [Tinkercad here](https://www.tinkercad.com/things/4Aqy2AnmmMy-potentiometer-with-multimeters-measuring-resistance).
@@ -174,7 +176,9 @@ We also made this circuit in [CircuitJS](https://www.falstad.com/circuit/circuit
 
 There are two differences in this circuit compared to the Tinkercad one above. First, we used a 1kΩ potentiometer rather than a 10kΩ but the general effect is the same. Second, here we have Leg 1 hooked up towards the positive voltage source and Leg 2 as our "output", so resistance is minimized when the dial is all the way left (it was the opposite for our Tinkercad circuit).
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/F92_-MOqzM4" title="CircuitJS simulation of a potentiometer-based LED dimmer circuit" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/F92_-MOqzM4" title="CircuitJS simulation of a potentiometer-based LED dimmer circuit" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ### Let's build it for real
 
@@ -194,7 +198,9 @@ Here's a workbench video of our trimpot circuit where the potentiometer is simpl
 
 <!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/3LoxVFlc4r4" title="Workbench video of a trimpot-based LED dimmer using Arduino for power" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/3LoxVFlc4r4" title="Workbench video of a trimpot-based LED dimmer using Arduino for power" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 Whew, we did it! 
 
@@ -210,7 +216,7 @@ Analog input!
 
 More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, **analog input** enables us to **read voltages between 0V and 5V**. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Animation comparing digital input which is either HIGH or LOW versus analog input which can be any voltage in between">
+<video autoplay loop muted playsinline aria-label="Animation comparing digital input which is either HIGH or LOW versus analog input which can be any voltage in between">
   <source src="../electronics/assets/videos/AnalogVsDigital.mp4" type="video/mp4" />
 </video>
 **Video.** While digital input is simply HIGH (5V) or LOW (0V), analog can be anywhere in between. Our ability to sense gradations in the voltage signal is based on the resolution of the analog-to-digital converter. In the case of the Arduino Uno and Leonardo, this is 10 bits.
@@ -382,7 +388,9 @@ Why don't these work?
 
 Because, remember, our input pins measure **voltage** and there is no voltage difference across our potentiometer (because no current is flowing!). Here's an illustrative video of what's happening (and not happening) in our circuit:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/gp379BG-aeE" title="CircuitJS simulation showing why a two-leg potentiometer hookup does not work with a microcontroller" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/gp379BG-aeE" title="CircuitJS simulation showing why a two-leg potentiometer hookup does not work with a microcontroller" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 This is a circuit simulation of Leg 1 of the potentiometer hooked to 5V and Leg 2 (wiper leg) hooked to A0. The "inside the microcontroller" view is for illustrative purposes. The input pin circuitry does not actually look like this. Simulation made in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 {: .fs-1 }
 
@@ -400,7 +408,9 @@ Now $$V_{A0}=V_{CC} \cdot \frac{R_2}{R_1 + R_2}$$.
 
 And here's an illustrative video of what's happening in our circuit:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/rJr4TgoFZ2Q" title="CircuitJS simulation showing a potentiometer correctly wired as a voltage divider to a microcontroller" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/rJr4TgoFZ2Q" title="CircuitJS simulation showing a potentiometer correctly wired as a voltage divider to a microcontroller" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 This is a circuit simulation of the potentiometer correctly hooked up to a microcontroller with Leg 1 hooked to 5V, Leg 2 (wiper leg) hooked to analog input A0, and Leg 3 to GND. The "inside the microcontroller" view is for illustrative purposes. The input pin circuitry does not actually look like this. Simulation made in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 {: .fs-1 } 
 

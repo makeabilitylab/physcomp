@@ -20,7 +20,7 @@ usetocbot: true
 
 In the past few lessons, we've learned about [serial communication](serial-intro.md), [web serial](web-serial.md), and using serial to create [p5.js](https://p5js.org/) + Arduino applications ([first lesson](p5js-serial.md), [second lesson](p5js-serial-io.md)). In this lesson, we're going to build on our growing knowledge and existing code to create a full end-to-end p5.js + Arduino application, which we'll call **PaintIO**. PaintIO includes a custom "paintbrush" controller with OLED display that controls and bidirectionally communicates with a custom painting application in p5.js.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PaintIO2-JustAHeart-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A quick demonstration of one PaintIO controller using the LIS3DH 3-axis accelerometer to set the paintbrush location, the paintbrush's speed to set the color, the force-sensitive resistor to set the brush size, and three buttons for changing the brush shape, the brush fill *vs.* outline, and for clearing the drawing. The controller also displays current brush properties like size, shape, and location on the OLED. The Arduino code is in our GitHub as [PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino). The p5.js app is here: [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/PaintIO).
@@ -357,7 +357,7 @@ Continuing our simplicity and step-by-step construction themes: let's build an i
 
 We need to update our p5.js application to support serial and to parse incoming data from our "paintbrush" controller and design and build said "paintbrush" controller in Arduino. Let's do it!
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PaintIO-Grayscale-TwoPots-SayHi-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Here's a sneak peak of the initial p5.js + Arduino app, which we will further develop in this lesson. Yes, I'm trying to write "Hi!". It's like an etch-a-sketch. :) This p5.js code version is available as [Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT) and the Arduino code is [XYAnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOut/XYAnalogOut.ino) on GitHub.
@@ -524,7 +524,7 @@ void loop() {
 
 We did it! Now, it's time to test and play with it.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PaintIO-Grayscale-TwoPots-KeyboardCommands-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** An initial PaintIO p5.js + Arduino app. We are using the two potentiometers to set the brush's x,y location (the brush size is fixed) and the laptop keyboard to switch between brush types (`b` key) and fill modes (`f` key). The p5.js code is available as [Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT) and the Arduino code is [XYAnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOut/XYAnalogOut.ino) on GitHub.
@@ -578,7 +578,7 @@ void loop(){
 
 ### Video demonstration of initial PaintIO app
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PaintIO-Grayscale-TwoPots-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Here, we're using the same p5.js code as before ([Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT)) but with an updated Arduino circuit (with OLED) and code to show brush position. Notice how as we move the brush via the two potentiometers, the brush's position also shows on the OLED. We are also printing out the normalized x,y position on the OLED for debugging. The Arduino code is on GitHub as [XYAnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOutOLED/XYAnalogOutOLED.ino).
@@ -604,7 +604,7 @@ You could certainly add in more features like custom input hardware to control t
 
 Here's a sneak peek!
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PaintIO-FullPotController-PaintingWithShapes-1200w.mp4" type="video/mp4" />
 </video>
 **Video.** A sneak peek of the p5.js app [Paint I/O 3 - Bidirectional with Color](https://editor.p5js.org/jonfroehlich/sketches/GOvMjQr6y) with the Arduino sketch [PaintIO.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIO/PaintIO.ino).
@@ -782,7 +782,7 @@ Rather than walk through this code piece-by-piece, we will simply link to it on 
 
 And a quick video demonstration of everything working together!
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PaintIO-FullPotController-PaintingWithPotAndMouseSimultaneously2-StaticShapes-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A video demonstration of the p5.js app [Paint I/O 3 - Bidirectional with Color](https://editor.p5js.org/jonfroehlich/sketches/GOvMjQr6y) with the Arduino sketch [PaintIO.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIO/PaintIO.ino). 
@@ -818,7 +818,7 @@ And the schematic:
 
 Here's a sneak peek of me using this new controller followed by a YouTube video overview of the whole PaintIO application and controller experience.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PaintIO-HelloPlusTrianglePainting-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A quick video demonstration of our new accelerometer-based Arduino controller (called [PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino)) and the PaintIO p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/PaintIO)).
@@ -826,7 +826,9 @@ Here's a sneak peek of me using this new controller followed by a YouTube video 
 
 In the YouTube video below, we provide a full demonstration of PaintIO with the accelerometer-based paintbrush controller:
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/oTuMkisug2A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/oTuMkisug2A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A full video demonstration on [YouTube](https://youtu.be/oTuMkisug2A).
 {: .fs-1 }
 

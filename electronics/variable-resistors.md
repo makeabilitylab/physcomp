@@ -48,7 +48,7 @@ Potentiometers are probably the most common type of variable resistor and an imp
 
 A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance.  
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Potentiometer_Overview_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** This animation shows how the wiper can be used to vary resistance in a rotary potentiometer. The figure on the right is the formal electrical symbol. Animation by Jon Froehlich. Created in PowerPoint.
@@ -70,7 +70,7 @@ Potentiometers have three legs: the resistance between the outer two legs (Leg 1
 
 The power of a potentiometer is in that middle leg (Leg 2) whose resistance varies depending on the potentiometer's sliding or rotating contact (the wiper) position. It may help to think of a potentiometer as containing two interdependent resistors $$R_1$$ and $$R_2$$ that always sum to $$R_{Total}$$ (where $$R_{Total}$$ is the potentiometer's total value like 1kΩ or 10kΩ). As you move the slider contact, $$R_1$$'s resistance will increase as $$R_2$$'s resistance decreases. See animation below.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PotentiometerIntroduction_TrimmedAndCropped.mp4" type="video/mp4" />
 </video>
 **Video.** Animation by Jon Froehlich. Created in PowerPoint.
@@ -78,7 +78,7 @@ The power of a potentiometer is in that middle leg (Leg 2) whose resistance vari
 
 Using two multimeters set to **measure resistances** across both Legs 1-2 and 2-3, we can examine this behavior directly. Notice how as you move the wiper, the resistance across Legs 1 and 2 ($$R_{1}$$) and Legs 2 and 3 ($$R_{2}$$) proportionally change but always sum to $$R_{total}$$. We are using a 10kΩ potentiometer so $$R_{total}=10kΩ$$
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Tinkercad_PotentiometerWithMultimeters.mp4" type="video/mp4" />
 </video>
 **Video.** Using two multimeters, we can examine how the resistances change between Legs 1-2 and 2-3. Note that the resistance between the outer legs (Legs 1-3) will always sum to potentiometer's total value. In this case, we're using a 10kΩ, so it would sum to 10kΩ. Try it out on [Tinkercad here](https://www.tinkercad.com/things/4Aqy2AnmmMy-potentiometer-with-multimeters-measuring-resistance).
@@ -110,7 +110,9 @@ Potentiometers differ primarily in terms of:
 
 If you're curious about how a potentiometer is constructed, this video by John Cooper provides a wonderful deconstruction of rotary potentiometers and how they work.
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/rUkrpqEmXb8" title="Inside a potentiometer - deconstruction video by John Cooper" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/rUkrpqEmXb8" title="Inside a potentiometer - deconstruction video by John Cooper" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 **Video.** A [video](https://youtu.be/rUkrpqEmXb8) deconstruction of potentiometers and how they work by John Cooper (on YouTube).
 {: .fs-1 }
 
@@ -134,7 +136,7 @@ A fun introductory 3D-printing exercise is to design, model, and print your own 
 
 Even more fun is to combine your custom 3D prints with a microcontroller and to build custom applications that create new interactive experiences.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/3DPrintedTrimPotKnobDemo2_TrimmedAndOptimized_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** A short video demonstrating the custom 3D printed potentiometer knobs being used as custom game controllers with an Arduino Leonardo and custom [Processing](https://processing.org/) sketches. The code for the Arduino+Processing "Etch-a-sketch" is [here](https://github.com/makeabilitylab/arduino/tree/master/Processing/ArduinoEtchASketch) and the code for the Arduino+Processing "Pong" is [here](https://github.com/makeabilitylab/arduino/tree/master/Processing/ArduinoPong). All 3D CAD designs and code by Jon Froehlich.
@@ -150,7 +152,7 @@ Just as our 3D-printed designs hint at, potentiometers have a long history as ga
 
 By moving the analog joystick, you independently control the two potentiometers in a voltage divider configuration. There is a $$V_{Out}$$ for the "Up/Down" potentiometer and a $$V_{Out}$$ for the "Left/Right" potentiometer. See the circuit diagram above.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Parallax_2-AxisJoystick_TrimmedAndMuted.mp4" type="video/mp4" />
 </video>
 **Video.** A short snippet from this [official Parallax video](https://youtu.be/SXtPGAu4MMw) showing how physical movement of the joystick is translated into an electrical signal using two potentiometers.
@@ -172,7 +174,7 @@ As an example, let's hook up a potentiometer to 5V (Leg 1) and ground (Leg 3) an
 
 Now, let's see what happens as we change the wiper. Notice how $$V_{out}$$ changes according to $$V_{in} * \frac{R2}{(R1 + R2)}$$. In the video below, we are using a 1kΩ potentiometer but the function is the same.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PotentiometerIntroduction-VoltageDividerWithCircuitJS_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of how $$V_{out}$$ changes according to $$V_{in} * \frac{R2}{(R1 + R2)}$$. Animation made in PowerPoint and CircuitJS.
@@ -183,7 +185,9 @@ A 10kΩ potentiometer split into two constituent resistors ($$R_{1}$$) and ($$R_
 {: .fs-1 } -->
 
 <!-- My old YouTube video on this:
-<iframe width="736" height="414" src="https://www.youtube.com/embed/ZAzX_pxuWps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/ZAzX_pxuWps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 Video shows how the voltage output at Leg 2 changes based on the wiper position, which splits the potentiometer into two "resistor" sub-parts, ($$R_{1}$$) and ($$R_{2}$$), which creates a voltage divider.
 {: .fs-1 } -->
 
@@ -206,7 +210,7 @@ Because many potentiometers go from 0Ω to their max value, we must use a "backu
 {: .warning }
 > **Always use a backup resistor with variable resistors and LEDs.** This applies not just to potentiometers but to *all* variable resistors, including FSRs and photocells. A 220Ω or 330Ω backup resistor in series ensures the current never exceeds safe levels regardless of the variable resistor's position.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/PotentiometerWithBackupResistor_TinkercadCircuits_Cropped_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** Here's an example of what would happen if you rotated the potentiometer to low resistance without a backup resistor. Boom, another blown out LED. Video made with [Tinkercad](https://www.tinkercad.com/things/d6wWCmUhl7g) and Camtasia. 
@@ -228,7 +232,7 @@ For both Tinkercad Circuits, include a screenshot in your prototyping journals a
 
 After you've built and simulated the circuits in Tinkercad, we'd like you to physically build the breadboarded version with your hardware kits. Take a photo and a quick demo video of the circuit working and put them in your prototyping journals. Describe any challenges.
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/TrimPotentiometer-IMG_5685_Trim-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Here's one possible way to breadboard a trim potentiometer circuit with a backup resistor and red LED. What did you make? Please take a similar video for your prototyping journals.
@@ -252,7 +256,7 @@ The force-sensitive resistor (FSR) responds to force or pressure. As an applied 
 
 Here's a video demonstration:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/FSR-TopDown9VCircuit-IMG_5683_Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A video demonstration of an FSR-based LED circuit.
@@ -268,7 +272,7 @@ A light-dependent resistor (LDR)—sometimes called a photocell or photo-sensiti
 
 And the video demonstration:
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/Photocell-IMG_5686_Trim-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A video demonstration of an LDR-based LED circuit.
@@ -292,7 +296,7 @@ For your prototyping journals, sketch out the circuit diagram for the DIY potent
 
 Here is an example DIY rotary potentiometer I made out of some cardboard, paper, a paper clip and a thumb tack (for the wiper), and a 12B pencil sketch (for the resistive material).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DIY_Rotary_Pot-Reversed_AdobePremiere_720p_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** A lo-fi rotary potentiometer made out of some cardboard, paper, a paper clip and a thumb tack (for the wiper), and a 12B pencil sketch (for the resistive material).
@@ -302,7 +306,7 @@ Here is an example DIY rotary potentiometer I made out of some cardboard, paper,
 
 Here is an example DIY slider potentiometer I made out of similar materials: cardboard, paper, a cardboard wiper with copper tape, and some 12B pencil sketch (for the resistive track).
 
-<video autoplay loop muted playsinline style="margin:0px">
+<video autoplay loop muted playsinline>
   <source src="assets/videos/DIY_Slider_Pot-720p-Optimized-ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** A lo-fi slider potentiometer made out of some cardboard, paper, copper tape-wrapped cardboard (for the slider), and a 12B pencil sketch (for the resistive track).

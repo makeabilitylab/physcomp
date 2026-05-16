@@ -19,7 +19,7 @@ usetocbot: true
 {:toc}
 ---
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video showing Serial.println output in the Arduino IDE Serial Monitor while an LED blinks">
+<video autoplay loop muted playsinline aria-label="Video showing Serial.println output in the Arduino IDE Serial Monitor while an LED blinks">
   <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
 </video>
 **Figure.** A video showing how to use Serial.println() to debug code. For this, we modified the simple blink program to add serial prints ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
@@ -157,7 +157,7 @@ void loop() {
 
 Here's a video of my code running with the Serial Monitor in the background.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video of the blink program running with serial print output visible in the Serial Monitor">
+<video autoplay loop muted playsinline aria-label="Video of the blink program running with serial print output visible in the Serial Monitor">
   <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
 </video>
 **Figure.** A video of the blink program with serial prints showing in the Serial Monitor ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
@@ -238,7 +238,7 @@ void loop() {
 
 To open the Serial Plotter, go to `Tools -> Serial Plotter` or click on the "graph icon" in the Arduino IDE toolbar. Here's a video of this code running with the Serial Plotter showing a triangle wave.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video of the triangle wave program running with serial print output visible in the Serial Monitor and the Serial Plotter">
+<video autoplay loop muted playsinline aria-label="Video of the triangle wave program running with serial print output visible in the Serial Monitor and the Serial Plotter">
   <source src="assets/videos/SerialPlotterTriangleWave_web_muted.mp4" type="video/mp4" />
 </video>
 **Figure.** I first open Serial Monitor to see the raw values before opening the Serial Plotter to see a real-time graph.
@@ -293,7 +293,7 @@ void loop() {
 
 In the Serial Plotter, you'll see two colored lines with a legend: `Turn-on Threshold` as a solid line at the `TURN_ON_THRESHOLD` value and `Triangle` as a triangular ramp of `_triangleValue`. The IDE automatically assigns colors and generates the legend from your labels. You can click on the checkboxes to toggle which values are graphed.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video of the triangle wave program running with serial print output visible in the Serial Monitor and the Serial Plotter with the addition of the threshold value">
+<video autoplay loop muted playsinline aria-label="Video of the triangle wave program running with serial print output visible in the Serial Monitor and the Serial Plotter with the addition of the threshold value">
   <source src="assets/videos/SerialPlotterTriangleWaveWithThreshold_web_muted.mp4" type="video/mp4" />
 </video>
 **Figure.** Adding in a threshold value to Serial Plotter. Notice how each graphed value now has a color and label. Note: you can toggle the checkboxes on/off to select which values are graphed.
@@ -338,7 +338,7 @@ void loop() {
 
 The Serial Plotter shows the sensor value fluctuating in real time with a flat threshold line for comparison, and the built-in LED lights up whenever the value goes above the threshold—giving you both visual feedback on the board *and* a graph on screen. This combination of Serial Plotter + indicator LED is a technique you'll use frequently when calibrating sensors and tuning interactive projects.
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="Video graphing the analog input value and a threshold with the Arduino and LED visible">
+<video autoplay loop muted playsinline aria-label="Video graphing the analog input value and a threshold with the Arduino and LED visible">
   <source src="assets/videos/SerialPlotterAnalogInput-EditedBeginning_web_muted.mp4" type="video/mp4" />
 </video>
 **Figure.** Graphing the analog input value. Learn more about [analog input](potentiometers.md) in our []"Intro to Input" lessons](intro-input.md). 

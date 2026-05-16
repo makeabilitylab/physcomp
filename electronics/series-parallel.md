@@ -122,7 +122,7 @@ We can click on the wires to magically show how much current is traveling throug
 
 Well, remember how we've been emphasizing that voltages are *split* or *divided* across resistors in series. You can clearly see this as well! The voltage is at $$9V$$ at the top node but drops by $$5.4V$$ over the $$2.2kΩ$$ resistor to $$3.6V$$, which then drops by $$2.4V$$ over the $$1kΩ$$ resistor leaving just $$1.2V$$ of electric potential before finally dropping down to $$0V$$ or $$GND$$ across the $$470Ω$$ resistor. We'll talk more about this next!
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="CircuitJS simulation of a three-resistor series circuit with a 9V battery, showing animated current flow of 2.5 milliamps and voltage drops across each resistor.">
+<video autoplay loop muted playsinline aria-label="CircuitJS simulation of a three-resistor series circuit with a 9V battery, showing animated current flow of 2.5 milliamps and voltage drops across each resistor.">
   <source src="assets/videos/SeriesResistorThreeResistors9VBattery2.2k1k470_CircuitJSRecording.mp4" type="video/mp4" />
 </video>
 
@@ -322,7 +322,7 @@ We can also check our work in a circuit simulator. I built the same circuit in C
 
 Does the visualization match your expectation?
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="CircuitJS simulation of a two-resistor parallel circuit with a 9V battery, showing 90 milliamps through the 100 ohm resistor, 9 milliamps through the 1 kilohm resistor, and a total current of 99 milliamps.">
+<video autoplay loop muted playsinline aria-label="CircuitJS simulation of a two-resistor parallel circuit with a 9V battery, showing 90 milliamps through the 100 ohm resistor, 9 milliamps through the 1 kilohm resistor, and a total current of 99 milliamps.">
   <source src="assets/videos/SimpleParallelResistorCircuit_9VBattery100And1kOhmResistors_CircuitJSRecording.mp4" type="video/mp4" />
 </video>
 

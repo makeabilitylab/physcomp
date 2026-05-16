@@ -16,7 +16,7 @@ nav_exclude: false
 {:toc}
 ---
 
-<video autoplay loop muted playsinline style="margin:0px" aria-label="A force-sensitive resistor dimming and brightening an LED as pressure is applied and released.">
+<video autoplay loop muted playsinline aria-label="A force-sensitive resistor dimming and brightening an LED as pressure is applied and released.">
   <source src="assets/videos/FSR-TopDown9VCircuit-IMG_5683_Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of a force-sensitive resistor (aka a "pressure sensor") that varies its resistance in proportion to an applied force. This is just one of the many things you will learn about and build in this "Intro to Electronics" tutorial series. See more in [L8: Variable Resistors](variable-resistors.md).

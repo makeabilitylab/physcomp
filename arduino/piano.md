@@ -195,7 +195,9 @@ Now, compile, upload, and run your code. Let's hear it Beethoven!
 
 Here's a workbench video of us playing our piano. Make sure your sound is on (or not) to hear our beautiful music! :-D
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/FhfzZ4qpxZQ" title="Workbench video of the simple five-key Arduino piano being played" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container">
+  <iframe src="https://www.youtube.com/embed/FhfzZ4qpxZQ" title="Workbench video of the simple five-key Arduino piano being played" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 The sound and video stream seem a bit out of sync here, but you get the idea.
 {: .fs-1 }
 

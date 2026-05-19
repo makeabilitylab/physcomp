@@ -120,9 +120,25 @@ Most of the 20 pins are completely free to use, but a few have secondary roles:
 
 For this lesson, we'll use **GPIO 13**. Since GPIO 13 is also `LED_BUILTIN`, your external LED and the onboard red LED will blink together—a nice visual confirmation that everything is connected correctly. You can use any other output-capable GPIO pin; just update the pin number in your code.
 
-<!-- TODO: use Sparkfun LEDs with resistors built in to connect one LED per GPIO pin on a breadboard and write a program to show them all sequentially blink. Then take a video.
+### Testing all 20 GPIO pins
 
-See https://www.sparkfun.com/led-blue-with-resistor-5mm-25-pack.html -->
+To tangibly demonstrate that you can control all 20 GPIO pins on the ESP32-S3, we built this [BlinkAllPinsSequence](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/BlinkAllPinsSequence/BlinkAllPinsSequence.ino) program in Arduino, which sequentially blinks LEDs individually hooked up to all 20 pins. To simplify our circuit, we use LEDs with built-in resistors, purchased from [Sparkfun](https://www.sparkfun.com/led-assorted-with-resistor-5mm-20-pack.html).
+
+<video autoplay loop muted playsinline aria-label="Workbench video blinking all 20 GPIO pins on the Adafruit ESP32-S3 in sequence.">
+  <source src="assets/videos/ESP32-S3-BlinkAllPinsInSequence_Trimmed_IMG_9393_optimized_muted.mp4" type="video/mp4">
+</video>
+**Video.** To demonstrate that you can control 20 GPIO pins on the ESP32-S3, we are blinking LEDS individually hooked up to all 20 pins in sequence. To simplify our circuit, we are using LEDs with built-in resistors, purchased from [Sparkfun](https://www.sparkfun.com/led-assorted-with-resistor-5mm-20-pack.html). See the [BlinkAllPinsSequence code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/BlinkAllPinsSequence/BlinkAllPinsSequence.ino) on GitHub.
+{: .fs-1 }
+
+We also built a version that blinks all LEDs simultaneously (shield your eyes! 😎). Using an inline USB multimeter, we measured 150mA being drawn by the ESP32-S3 with all LEDs turned on.
+
+<video autoplay loop muted playsinline aria-label="Workbench video blinking all 20 GPIO pins on the Adafruit ESP32-S3 simultaneously.">
+  <source src="assets/videos/ESP32-S3-BlinkAllPins_IMG_9390_Trimmed_optimized_muted.mp4" type="video/mp4">
+</video>
+**Video.** Using LEDs with built-in resistors, we blink all 20 GPIO pins simultaneously. See [BlinkAllPins code](https://github.com/makeabilitylab/arduino/blob/master/ESP32/Basics/BlinkAllPins/BlinkAllPins.ino) on GitHub.
+{: .fs-1 }
+
+This was just for testing, however. Your circuits and code will be even easier (to start!). You'll only need a single LED and resistor.
 
 <details markdown="1">
 <summary><strong>Using the Huzzah32 instead?</strong> (click to expand)</summary>

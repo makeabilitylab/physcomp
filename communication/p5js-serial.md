@@ -140,7 +140,7 @@ Here's the official timeline:
 | April 2025 | p5.js 2.0 released, opt-in in the p5.js Editor |
 | August 2025 | Communication about 1.x end-of-life |
 | March 2026 | No further updates to 1.x |
-| **August 2026** | **p5.js 2.0 becomes the default in the p5.js Editor** |
+| **Summer 2026** | **p5.js 2.0 becomes the default in the p5.js Editor** |
 
 {: .warning }
 > **For this course (Spring 2026), we use p5.js 1.x.** The p5.js online editor still defaults to 1.x, and all of our 400+ example sketches are written for 1.x. When developing locally, we pin to a specific 1.x version in our `index.html` to avoid surprises (see the [template code](#starter-template-code) below).
@@ -181,6 +181,9 @@ We used [Visual Studio Code](https://code.visualstudio.com/) in our [previous le
 
 The easiest way to set up VSCode for p5.js is to install an extension like [p5.vscode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) by Sam Lavigne. This extension auto-creates a project folder with the required HTML/CSS/JavaScript files, hooks up autocompletion for p5.js functions, supplies a local copy of the p5.js library, and bundles Live Server. To create a new project, open the Command Palette (`Ctrl+Shift+P` on Windows, `Cmd+Shift+P` on Mac) and type `Create p5.js Project`, then select an empty folder.
 
+{: .note }
+> The p5.vscode extension scaffolds **p5.js 1.x** projects and has not been actively updated in some time, but it still works well for our purposes. If you later want to create p5.js 2.x projects in VSCode, see the newer [p5.js 2.x Project Generator](https://github.com/IrtizaNasar/p5-2.vscode) extension.
+
 If you're a VSCode or web dev novice, we recommend this solution!
 
 <video autoplay loop muted playsinline aria-label="Video showing VSCode autocomplete for p5.js functions and inline documentation">
@@ -191,7 +194,29 @@ If you're a VSCode or web dev novice, we recommend this solution!
 
 ##### Manually setting up VSCode for p5.js
 
-If you prefer to configure VSCode manually, the key challenge is getting autocompletion for p5.js keywords. p5.js is written in vanilla JavaScript rather than [TypeScript](https://www.typescriptlang.org/), so VSCode's [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) doesn't work out of the box. There are some [great blog posts](https://breaksome.tech/p5js-editor-how-to-set-up-visual-studio-code/) about how to get this working.
+If you prefer to configure VSCode manually, the key challenge is getting autocompletion for p5.js keywords. p5.js is written in vanilla JavaScript rather than [TypeScript](https://www.typescriptlang.org/), so VSCode's [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) doesn't work out of the box. The fix is to install the p5.js TypeScript type definitions so that VSCode knows about `setup()`, `draw()`, `createCanvas()`, and all other p5.js functions.
+
+First, open a terminal in your project folder and run:
+
+{% highlight Bash %}
+npm init -y
+npm install --save-dev @types/p5
+{% endhighlight Bash %}
+
+Then create a `jsconfig.json` file in your project root:
+
+{% highlight JSON %}
+{
+  "compilerOptions": {
+    "types": ["p5/global"]
+  }
+}
+{% endhighlight JSON %}
+
+That's it! VSCode will now provide autocomplete, hover documentation, and parameter hints for all p5.js functions. You'll still need [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) to serve your sketch in a browser.
+
+{: .note }
+> The `@types/p5` package provides type definitions for **p5.js 1.x**. When p5.js 2.x becomes the standard, you'll install the `p5` npm package directly instead—it ships its own type definitions.
 
 ## p5.js, Web Serial, and Arduino
 
@@ -647,7 +672,7 @@ And here's a demonstration with the Sharp IR distance sensor:
 In this lesson, you learned about Processing and p5.js—creative coding tools that make it easy to build interactive graphics—and how to use them with Web Serial to receive data from Arduino. Here are the key takeaways:
 
 - **Processing** (2001, Java) and **p5.js** (2013, JavaScript) are creative coding environments that make graphical programming accessible. The Arduino IDE is actually based on Processing!
-- **p5.js 2.0** is in transition (default in the editor by August 2026). Our serial communication code works on both 1.x and 2.0, but we pin to 1.x for stability.
+- **p5.js 2.0** is in transition (default in the editor by summer 2026). Our serial communication code works on both 1.x and 2.0, but we pin to 1.x for stability.
 - The **`setup()`/`draw()` pattern** in p5.js mirrors Arduino's `setup()`/`loop()`—familiar territory!
 - For serial input (`Arduino → Computer`), the Arduino sends normalized data (*e.g.,* a float between 0 and 1) via `Serial.println()`, and the p5.js app receives it via the `onSerialDataReceived` callback.
 - We use a **data queue** pattern to bridge the gap between serial events (which can fire at any time) and `draw()` (which runs at ~60fps). This prevents dropped data.

@@ -62,7 +62,7 @@ The [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial
 
 ### Does my web browser support Web Serial?
 
-Web Serial is supported by **Chrome** (89+), **Edge** (89+), and **Opera** (76+) on desktop. **Safari** does not support it, and **Firefox** added experimental support in Nightly 151 (April 2026) behind a flag, but it is not yet enabled by default in stable releases. For the latest browser compatibility, check Mozilla's [browser compatibility chart](https://developer.mozilla.org/en-US/docs/Web/API/Serial#browser_compatibility).
+Web Serial is supported by **Chrome** (89+), **Edge** (89+), and **Opera** (76+) on desktop. **Safari** does not support it. **Firefox** added experimental support in Nightly 151 (April 2026) behind a flag, but it is not yet enabled by default in stable releases and should not be relied on for coursework. For the latest browser compatibility, check Mozilla's [browser compatibility chart](https://developer.mozilla.org/en-US/docs/Web/API/Serial#browser_compatibility).
 
 {: .warning }
 > **We recommend using Chrome** for all Web Serial work in this course. If Web Serial is not available, your browser will silently fail—so always test with Chrome or Edge first.
@@ -392,8 +392,9 @@ Now let's add a slider to select and send values between 0 and 255. In HTML, sli
 
 {% highlight HTML %}
 <button id="connect-button" onclick="onConnectButtonClick()">Connect via Serial Port</button>
+<label for="slider">LED brightness:</label>
 <input id="slider" type="range" min="0" max="255"
-    value="128" onchange="onSliderValueChanged(this, event)" />
+  value="128" onchange="onSliderValueChanged(this, event)" />
 {% endhighlight HTML %}
 
 And add the `onSliderValueChanged()` function to the `<script>` block:
@@ -401,6 +402,9 @@ And add the `onSliderValueChanged()` function to the `<script>` block:
 {% highlight JavaScript %}
 async function onSliderValueChanged(src, event) {
   console.log("Writing to serial: ", src.value.toString());
+  // Note: we intentionally don't await writeLine() here because we don't
+  // need to wait for each write to finish before processing the next
+  // slider change. Awaiting would make the slider feel sluggish.
   serial.writeLine(src.value);
 }
 {% endhighlight JavaScript %}
@@ -422,8 +426,9 @@ Let's make a few UI improvements. First, **hide** the connect button after a suc
 
 <div id="interactive-controls" style="display:none">
   <h1>Slider value: <span id="slider-value">0</span></h1>
+  <label for="slider">LED brightness:</label>
   <input id="slider" type="range" min="0" max="255"
-      value="128" onchange="onSliderValueChanged(this, event)" />
+    value="128" onchange="onSliderValueChanged(this, event)" />
 </div>
 {% endhighlight HTML %}
 
@@ -497,8 +502,8 @@ Create a new folder called `DisplayText` with an `index.html` file. Start with t
       Connect via Serial Port
     </button>
     <div id="text-interface">
-      <h3>Enter text:</h3>
-      <input placeholder="Enter some text" name="input-text" />
+      <label for="input-text">Enter text:</label>
+      <input id="input-text" placeholder="Enter some text" name="input-text" />
 
       <h3>Display text:</h3>
       <p id="output-text"></p>
@@ -517,7 +522,7 @@ Add a `<script>` block at the end of the `<body>`. This code sets up the serial 
 
 {% highlight HTML %}
 <script>
-  const inputText = document.querySelector('input');
+  const inputText = document.getElementById('input-text');
   const outputText = document.getElementById('output-text');
   const rcvdText = document.getElementById('received-text');
 

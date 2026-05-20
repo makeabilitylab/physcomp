@@ -32,13 +32,6 @@ In this lesson, we'll dive into asynchronous serial communication and how we can
 > - How to send data to Arduino from the Serial Monitor, command line (PowerShell/screen), and Python
 > - How serial buffers, handshaking, and echo-based debugging work
 
-<!-- TODO:
-- In future add in parallel vs. serial overview
-- Add in some diagrams that show how serial works with voltage waveform
-- https://www.circuitbasics.com/basics-uart-communication/
-- https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter
-- https://www.analog.com/en/analog-dialogue/articles/uart-a-hardware-communication-protocol.html -->
-
 ## Serial communication with Arduino
 
 <!-- Arduino uses a standard [asynchronous serial communication protocol](https://learn.sparkfun.com/tutorials/serial-communication/all) for serial communication.  -->
@@ -96,16 +89,13 @@ The [data bits](https://en.wikipedia.org/wiki/Asynchronous_serial_communication)
 
 To help you visualize how a serial frame works at the bit level, try the interactive visualization below. Type any character and instantly see its complete 8N1 frame as a voltage waveform. Try changing the baud rate—notice how the frame stretches at 300 baud and compresses at 115200. Toggle between 5V (Uno) and 3.3V (ESP32) logic levels to reinforce that this is a real voltage signal on the wire. And pay attention to the bit order: data bits are transmitted **LSB (least significant bit) first**, not MSB first as you might expect!
 
-<!-- TODO: Once this sketch is published to the p5.js editor, replace the URL below.
-     p5.js source code: serial-frame-visualizer/sketch.js in the physcomp repo -->
-<iframe src="https://editor.p5js.org/jonfroehlich/embed/PLACEHOLDER_SERIAL_FRAME_VIZ" width="100%" height="500" style="border: none;"></iframe>
-**Interactive Figure.** A UART serial frame visualizer showing the voltage waveform for a single character. Type a character to see its 10-bit frame: 1 start bit (LOW), 8 data bits (LSB first), and 1 stop bit (HIGH). The line idles HIGH when no data is being sent. Change the baud rate to see how bit timing changes, and toggle between 5V and 3.3V logic levels. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/PLACEHOLDER_SERIAL_FRAME_VIZ).
+<iframe src="https://editor.p5js.org/jonfroehlich/full/brClr0Jfc" width="100%" height="510" style="border: none;"></iframe>
+**Interactive Figure.** A UART serial frame visualizer showing the voltage waveform for a single character. Type a character to see its 10-bit frame: 1 start bit (LOW), 8 data bits (LSB first), and 1 stop bit (HIGH). The line idles HIGH when no data is being sent. Change the baud rate to see how bit timing changes, and toggle between 5V and 3.3V logic levels. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/brClr0Jfc).
 {: .fs-1 }
 
 ### Only one program can open a serial port at a time
 
-{: .important }
-> Only one computer program can open a serial port at a time. This is a common source of confusion! If the Arduino IDE's Serial Monitor is open, you can't connect a Python script or web app to the same port—and vice versa. You'll see an error like `Port busy` or `Access denied`.
+Importantly, **only one computer program** can open a serial port at a time. This is a common source of confusion! If the Arduino IDE's Serial Monitor is open, you can't connect a Python script or web app to the same port—and vice versa. You'll see an error like `Port busy` or `Access denied`.
 
 For example, if you attempt to open Serial Monitor on the same COM port that has been opened by another program, you will receive an error like this: `Error opening serial port 'COM7'. (Port busy)`.
 
@@ -121,7 +111,7 @@ Similarly, if we attempt to access a previously opened serial port with [PowerSh
 
 ### Serial buffers
 
-Incoming serial data is stored in a **serial buffer**, which is read as a first-in, first-out queue (FIFO). On the Arduino Uno and Leonardo, this buffer is 64 bytes (defined in [USBAPI.h](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/USBAPI.h)) and is implemented as a circular or ring buffer. At 9600 baud, this 64-byte buffer will fill in about 53 milliseconds (9600 baud is ~1,200 bytes/second, or 1 byte every 0.83 ms).
+Incoming serial data is stored in a **serial buffer**, which is read as a first-in, first-out queue (FIFO). On the Arduino Uno and Leonardo, this buffer is 64 bytes (defined in [USBAPI.h](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/USBAPI.h)) and is implemented as a circular or ring buffer. At 9600 baud with 8N1 framing, each byte requires 10 bits on the wire, so the effective data rate is 960 bytes/second (~1.04 ms per byte). This 64-byte buffer will fill in about 67 milliseconds.
 
 {: .note }
 > The **ESP32** has a much larger default serial buffer of **256 bytes** (configurable up to 2KB+). Combined with the ESP32's faster processor, buffer overflows are far less likely—but you should still read serial data promptly in your `loop()` to avoid losing data.
@@ -211,6 +201,23 @@ Now if `getSignal()` returns 15, we need to transmit **four bytes** rather than 
 
 Similarly, if we wanted to transmit 127 or 255 using `Serial.println()`, we would need **five bytes** each. For example, with 127, we would transmit: '1' (0x31), '2' (0x32), '7' (0x37), '\r' (0x0D), '\n' (0x0A).
 
+#### Comparing binary vs. ASCII on the wire
+
+That byte-counting arithmetic gets tedious fast—so let's *see* it instead. The visualization below shows the same integer value transmitted two ways simultaneously: binary encoding on top (`Serial.write()`) and ASCII encoding on the bottom (`Serial.println()`). Drag the slider and watch the gap between them grow:
+
+- At value **7**, binary uses 2 bytes and ASCII uses 4 bytes (the digit `'7'` plus `'\r'` and `'\n'`). Not a huge difference.
+- At value **127**, binary still uses 2 bytes, but ASCII jumps to 5 bytes—each *digit* becomes its own frame.
+- At value **1023**, binary is still just 2 bytes. ASCII? **6 bytes.** Three times more data on the wire.
+
+Notice the key tradeoff shown in the comparison table: binary encoding uses a **fixed-length** protocol (the receiver must know to read exactly 2 bytes), while ASCII encoding is **self-delimiting** (the `'\n'` tells the receiver "this message is done"). This is why we use ASCII for most of our projects—the human readability and self-delimiting properties make debugging much easier, and the bandwidth cost is negligible for the small amounts of data we typically send.
+
+<iframe src="https://editor.p5js.org/jonfroehlich/full/fqey-ErqK" width="100%" height="650" style="border: none;"></iframe>
+**Interactive Figure.** A side-by-side comparison of binary vs. ASCII serial encoding. The top waveform shows `Serial.write()` (fixed 2-byte binary, big-endian) and the bottom shows `Serial.println()` (variable-length ASCII text with `\r\n` delimiter). Drag the value slider to see how the byte cost of ASCII grows with the number of digits, while binary stays constant. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/fqey-ErqK).
+{: .fs-1 }
+
+{: .warning }
+> When using binary encoding, the receiver **must know the exact protocol**: how many bytes to expect, what byte order (big-endian vs. little-endian), and how to interpret the raw bits. If the sender transmits 2 bytes but the receiver reads 3, the data will be corrupted—and there's no `'\n'` delimiter to recover from. This is why binary encoding requires more careful coordination between your Arduino code and your computer code.
+
 #### Visualizing a serial stream
 
 The single-frame visualizer above shows what happens for *one* character. But what does it look like when you send an entire string? The visualization below shows how multiple frames chain together on the wire. Try typing `"Hi"` and toggling the `println()` checkbox—you'll see two extra frames appear for `\r` and `\n`, the invisible characters that `Serial.println()` appends. This is why `println()` is so convenient for parsing on the receiving end: that `\n` acts as a delimiter that tells the receiver "this message is complete."
@@ -221,10 +228,8 @@ Try experimenting:
 - Hover over any frame to see its bit-level breakdown
 - Uncheck `println()` to see what `Serial.print()` sends (no `\r\n`!)
 
-<!-- TODO: Once this sketch is published to the p5.js editor, replace the URL below.
-     p5.js source code: serial-stream-visualizer/sketch.js in the physcomp repo -->
-<iframe src="https://editor.p5js.org/jonfroehlich/embed/PLACEHOLDER_SERIAL_STREAM_VIZ" width="100%" height="560" style="border: none;"></iframe>
-**Interactive Figure.** A UART serial stream visualizer showing how multiple characters are transmitted as a sequence of 8N1 frames. Each character becomes a separate frame on the wire, with short idle gaps in between. Toggle `println()` to see the `\r\n` overhead. Hover over any frame for bit-level detail. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/PLACEHOLDER_SERIAL_STREAM_VIZ).
+<iframe src="https://editor.p5js.org/jonfroehlich/full/oCTWfLgQN" width="100%" height="480" style="border: none;"></iframe>
+**Interactive Figure.** A UART serial stream visualizer showing how multiple characters are transmitted as a sequence of 8N1 frames. Each character becomes a separate frame on the wire, with short idle gaps in between. Toggle `println()` to see the `\r\n` overhead. Hover over any frame for bit-level detail. [Open in the p5.js editor](https://editor.p5js.org/jonfroehlich/sketches/oCTWfLgQN).
 {: .fs-1 }
 
 #### Both applications need to use the same encoding
@@ -528,7 +533,8 @@ Finally, read the response from the Arduino and print it out:
 # Read data back from Arduino
 echoLine = ser.readline()
 
-print(echoLine)
+# readline() returns raw bytes; decode to a UTF-8 string and strip whitespace
+print(echoLine.decode('utf-8').strip())
 print() # empty line
 {% endhighlight Python %}
 
@@ -576,10 +582,6 @@ In this lesson, you learned the fundamentals of asynchronous serial communicatio
 **Exercise 3:** Modify the Python example to send a **sequence** of values from 0 to 255 automatically (no user input), with a small delay between each. Observe the LED fading up on the Arduino. What happens if you decrease the delay? At what point do you start losing data?
 
 **Exercise 4:** Using the binary vs. ASCII analysis from this lesson, calculate how many bytes are needed to transmit the value `1023` using `Serial.write()` (hint: you'll need two bytes) versus `Serial.println()`. Then calculate the time each approach takes at 9600 baud, including the frame overhead (start bit + stop bit per byte).
-
-## Activity
-
-For your prototyping journals, run [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) or [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) with the appropriate circuit and choose one of the above approaches (or develop your own!) to communicate with the Arduino. Take a video and reflect on what you've learned in this lesson.
 
 ## Resources
 

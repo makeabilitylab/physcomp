@@ -18,7 +18,7 @@ usetocbot: true
 {:toc}
 ---
 
-In our [previous lesson](serial-intro.md), we learned about asynchronous serial communication, Arduino's [Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/), and how to write programs using [Serial Monitor](../arduino/serial-print.md), the command line, and [Python](https://www.python.org/) to send data to an Arduino.
+In our [previous lesson](serial-intro.md), we learned about asynchronous serial communication, Arduino's [Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/), and how to write programs—using [Serial Monitor](../arduino/serial-print.md), the command line, and [Python](https://www.python.org/)—to send data to an Arduino.
 
 In this lesson, we'll apply that knowledge to a new and exciting context: **the web browser!** Using the [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API), we'll build simple web apps that communicate directly with an Arduino over USB—no drivers, no native installs, just HTML, JavaScript, and a serial cable. 🌐
 
@@ -33,9 +33,22 @@ It may seem odd to use a web browser to talk to a locally connected device, but 
 > - How to build a bidirectional web app that sends and receives text data
 > - How the event-driven programming pattern works with serial callbacks
 
-<!-- TODO:
-- In future, add a section on debugging Web Serial issues
-- Consider adding a section on using Web Serial with ESP32 (native USB) -->
+## Background
+
+Web browsers have been steadily gaining the ability to interact with local hardware. The W3C [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices) gave websites regulated access to cameras and microphones—something we now take for granted in video chat apps. In late 2017, Chrome added support for [WebUSB](https://wicg.github.io/webusb/), which extended this idea to general-purpose USB devices. Just like with cameras, security and privacy are paramount: web pages must request explicit user permission before accessing any device, and the browser mediates the entire process.
+
+However, WebUSB did not include support for USB-to-serial devices like Arduino. The operating system's serial driver "claims" these devices before WebUSB can access them. To fill this gap, the [Web Serial API](https://wicg.github.io/serial/) was proposed and shipped in **Chrome 89 in March 2021**. It follows the same security model—your web page requests access, the browser shows a permission dialog, the user selects their device—but it specifically targets serial communication.
+
+Web Serial is already used in production tools like the [Arduino Cloud Editor](https://create.arduino.cc/editor), which lets you write and upload sketches entirely from your browser, and [Microsoft MakeCode](https://makecode.com/), which uses it to flash code to microcontrollers via a drag-and-drop visual programming interface.
+
+{: .note }
+> **A brief timeline of browser hardware APIs:**
+> - **2013:** [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices) — camera and microphone access (Chrome 21+)
+> - **2017:** [WebUSB](https://wicg.github.io/webusb/) — general USB device access (Chrome 61+)
+> - **2020:** [WebHID](https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API) — human interface devices like game controllers (Chrome 89+)
+> - **2021:** [Web Serial](https://wicg.github.io/serial/) — serial port access for microcontrollers, 3D printers, *etc.* (Chrome 89+)
+>
+> Each API follows the same pattern: the website requests access, the browser shows a permission dialog, and the user decides. This keeps you in control of which devices your browser can talk to.
 
 ## Why Web Serial?
 
@@ -45,9 +58,7 @@ Of course, if your board has built-in WiFi (like the [ESP32](../esp32/index.md))
 
 ## The Web Serial API
 
-The [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) bridges the web and the physical world by allowing websites to communicate with serial devices—like microcontrollers and 3D printers—directly from JavaScript.
-
-Web Serial is already used in production tools like the [Arduino Cloud Editor](https://create.arduino.cc/editor), which lets you write code and upload sketches directly from your browser.
+The [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) bridges the web and the physical world by allowing websites to communicate with serial devices—like microcontrollers and 3D printers—directly from JavaScript. Let's look at how to use it.
 
 ### Does my web browser support Web Serial?
 
@@ -264,6 +275,9 @@ Now that we understand the Web Serial API and our `serial.js` wrapper, let's bui
 ![Fritzing diagram showing an Arduino with a current-limiting resistor and LED connected to Pin 13](assets/images/SimpleSerialIn_LEDCircuit.png)
 **Figure.** The circuit for [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino). Made in Fritzing and PowerPoint.
 {: .fs-1 }
+
+{: .note }
+> **Using an ESP32?** All the code in this lesson works with the ESP32-S3 too—just change the baud rate to `115200` in both your Arduino sketch (`Serial.begin(115200)`) and your JavaScript (`serial.connectAndOpen(null, { baudRate: 115200 })`). The ESP32-S3 uses **native USB**, so the serial port may briefly disappear during board resets—this is normal. If your web app loses the connection after an upload, just click the connect button again.
 
 ### Web dev tools
 
@@ -598,6 +612,34 @@ That's it! You now have a bidirectional web serial app. Play and experiment!
 {: .fs-1 }
 
 <!-- TODO: verify that the live page and code links above are still active -->
+
+## Troubleshooting
+
+Web Serial is powerful but can be frustrating to debug, especially when things silently fail. Here are the most common issues and how to fix them.
+
+{: .warning }
+> **No serial ports appear in the browser dialog.**
+> Make sure your Arduino is plugged in via USB and that no other program (like the Arduino IDE's Serial Monitor) has the port open. Only one program can access a serial port at a time. On Mac/Linux, check that you have the correct USB drivers installed. Try a different USB cable—some cables are power-only and don't carry data.
+
+{: .warning }
+> **Garbled text or garbage characters in the console.**
+> This almost always means a **baud rate mismatch**. The baud rate in your JavaScript (`serial.connectAndOpen(null, { baudRate: 9600 })`) must exactly match the baud rate in your Arduino sketch (`Serial.begin(9600)`). Double-check both.
+
+{: .warning }
+> **`navigator.serial` is `undefined`.**
+> Your browser doesn't support Web Serial. Switch to **Chrome**, **Edge**, or **Opera**. Also make sure you're serving your page from a web server (`localhost` or `https://`)—Web Serial is blocked on `file://` URLs.
+
+{: .warning }
+> **The connect button does nothing (no permission dialog appears).**
+> The `connectAndOpen()` call must happen inside a **user gesture** event handler (like a button click). You cannot call it automatically on page load—the browser blocks this for security. Also check your dev console (`Ctrl+Shift+I`) for error messages.
+
+{: .warning }
+> **The connection works once but fails after re-uploading Arduino code.**
+> When you upload new code to the Arduino, the board resets and the serial port briefly disconnects. Your web app may need to reconnect. Click the connect button again after uploading. On the **ESP32-S3** with native USB, the port may disappear entirely during reset and reappear with a different name—this is normal.
+
+{: .warning }
+> **Data seems delayed or arrives in chunks.**
+> Serial data is buffered. Our `serial.js` library reads line-by-line (splitting on `\n`), so make sure your Arduino is sending data with `Serial.println()` (which appends `\r\n`) rather than `Serial.print()`. If you use `Serial.print()`, the data will accumulate in the buffer until a newline arrives.
 
 ## Lesson Summary
 

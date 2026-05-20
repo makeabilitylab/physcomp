@@ -91,7 +91,9 @@ And here's the same black-and-white drawing program we wrote in Processing above
 **Video.** A ten-line drawing program written in [p5.js](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO). View, edit, and play with the code via the [online editor](https://editor.p5js.org/jonfroehlich/sketches/fja8NHOKO).
 {: .fs-1 }
 
-p5.js also has a convenient [online editor](https://editor.p5js.org/), which makes it easy to rapidly write, test, iterate on, and share code. In the editor, go to `File → Share` and select one of the options.
+### p5.js's online editor
+
+You can write p5.js code right from your **web browser**! p5.js also has a convenient [online editor](https://editor.p5js.org/), which makes it easy to rapidly write, test, iterate on, and share code. In the editor, go to `File → Share` and select one of the options.
 
 ![Screenshot of the p5.js editor's Share dialog showing options for linking and embedding sketches](assets/images/p5jsSharingSketch.png)
 **Figure.** Sharing options in the p5.js [online editor](https://editor.p5js.org/).
@@ -124,9 +126,9 @@ Here are some examples we've written directly in the p5.js editor. Click any lin
 
 ### p5.js 2.0
 
-p5.js is currently undergoing a major transition from version 1.x to **version 2.0**. This is the biggest change to p5.js since Lauren McCarthy created it in 2013, and it's worth understanding what's happening—even though it **does not significantly affect our serial communication code**.
+Note that p5.js is currently undergoing a major transition from version 1.x to [**version 2.0**](https://medium.com/processing-foundation/p5-js-2-0-you-are-here-f827f40519a7). This is the biggest change to p5.js since Lauren McCarthy created it in 2013, and it's worth understanding what's happening—even though it **does not significantly affect our serial communication code**. (Indeed, we do not even need p5.js to write JavaScript-based apps with WebSerial).
 
-The p5.js 2.0 project, led by [Kit Kuksenok](https://medium.com/processing-foundation/p5-js-2-0-you-are-here-f827f40519a7) at the Processing Foundation, modernizes p5.js to align with how JavaScript has evolved over the past decade. The key changes include:
+The p5.js 2.0 project modernizes p5.js to align with how JavaScript has evolved over the past decade. The key changes include:
 
 - **`preload()` removed in favor of `async`/`await`:** In 1.x, you loaded images and data in a special `preload()` function. In 2.0, loading functions return Promises and you use `async setup()` with `await`. This aligns p5.js with standard JavaScript patterns.
 - **Removed redundant functions:** Functions that p5.js provided but that JavaScript itself now handles natively (like array manipulation and some string functions) have been removed to keep the library lean.
@@ -143,7 +145,7 @@ Here's the official timeline:
 | **Summer 2026** | **p5.js 2.0 becomes the default in the p5.js Editor** |
 
 {: .warning }
-> **For this course (Spring 2026), we use p5.js 1.x.** The p5.js online editor still defaults to 1.x, and all of our 400+ example sketches are written for 1.x. When developing locally, we pin to a specific 1.x version in our `index.html` to avoid surprises (see the [template code](#starter-template-code) below).
+> **For this course (Spring 2026), we use p5.js 1.x.** The p5.js online editor still defaults to 1.x, and our [100s of example sketches](https://editor.p5js.org/jonfroehlich/sketches) are written for 1.x. When developing locally, we pin to a specific 1.x version in our `index.html` to avoid surprises (see the [template code](#starter-template-code) below).
 >
 > The good news: **our serial communication code works identically on both 1.x and 2.0.** The `setup()`, `draw()`, `createCanvas()`, and all the graphics functions we use are unchanged. The breaking changes (`preload()` removal, data structure functions) don't affect serial sketches.
 >
@@ -153,21 +155,13 @@ Here's the official timeline:
 
 After conquering the [OLED display](../advancedio/oled.md) and graphics rendering, p5.js will feel both familiar and infinitely more expressive. [Processing](https://processing.org/) (for Java) and [p5.js](https://p5js.org/) (for JavaScript) are some of our favorite programming environments, and we can't wait to share p5.js with you!
 
-There are some **amazing** learning resources on the web. Rather than replicate them, we'll share them here:
+There are some **amazing** learning resources on the web. Rather than replicate them, we share them here:
 
-- Johannes Preis' [Introduction to p5.js](https://medium.com/comsystoreply/introduction-to-p5-js-9a7da09f20aa) — an excellent introduction to the coding editor, basic graphic rendering, and interactivity.
+- Johannes Preis' [Introduction to p5.js 1.0](https://medium.com/comsystoreply/introduction-to-p5-js-9a7da09f20aa) — an excellent introduction to the coding editor, basic graphic rendering, and interactivity but focused on p5.js 1.0.
 
-- The official p5.js [Getting Started](https://p5js.org/get-started/) guide.
+- The official p5.js [Tutorials](https://p5js.org/tutorials/) and plethora of official [p5.js examples](https://p5js.org/examples/).
 
-- The plethora of official [p5.js examples](https://p5js.org/examples/).
-
-- The Coding Train's [Programming with p5.js](https://thecodingtrain.com/beginners/p5.js/) by Daniel Shiffman — probably the best, most interesting, fun, and accessible creative coding videos on the web.
-
-- Lauren McCarthy's book [Getting started with p5.js](https://alliance-primo.hosted.exlibrisgroup.com/permalink/f/kjtuig/CP71274969160001451), available as an e-book via the UW library.
-
-We will also cover parts of p5.js in lecture, but we assume you've read at least Preis' [Introduction to p5.js](https://medium.com/comsystoreply/introduction-to-p5-js-9a7da09f20aa) and the official [Getting Started](https://p5js.org/get-started/) guide.
-
-<!-- TODO: verify all learning resource links above are still active -->
+- The Coding Train's [Programming with p5.js](https://thecodingtrain.com/tracks/code-programming-with-p5-js) by Daniel Shiffman — probably the best, most interesting, fun, and accessible creative coding videos on the web.
 
 ### Developing p5.js
 
@@ -179,7 +173,7 @@ We used [Visual Studio Code](https://code.visualstudio.com/) in our [previous le
 
 ##### Using a p5.js VSCode extension
 
-The easiest way to set up VSCode for p5.js is to install an extension like [p5.vscode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) by Sam Lavigne. This extension auto-creates a project folder with the required HTML/CSS/JavaScript files, hooks up autocompletion for p5.js functions, supplies a local copy of the p5.js library, and bundles Live Server. To create a new project, open the Command Palette (`Ctrl+Shift+P` on Windows, `Cmd+Shift+P` on Mac) and type `Create p5.js Project`, then select an empty folder.
+The **easiest way **to set up VSCode for p5.js is to install an extension like [p5.vscode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) by Sam Lavigne. This extension auto-creates a project folder with the required HTML/CSS/JavaScript files, hooks up autocompletion for p5.js functions, supplies a local copy of the p5.js library, and bundles Live Server. To create a new project, open the Command Palette (`Ctrl+Shift+P` on Windows, `Cmd+Shift+P` on Mac) and type `Create p5.js Project`, then select an empty folder.
 
 {: .note }
 > The p5.vscode extension scaffolds **p5.js 1.x** projects and has not been actively updated in some time, but it still works well for our purposes. If you later want to create p5.js 2.x projects in VSCode, see the newer [p5.js 2.x Project Generator](https://github.com/IrtizaNasar/p5-2.vscode) extension.
@@ -194,7 +188,7 @@ If you're a VSCode or web dev novice, we recommend this solution!
 
 ##### Manually setting up VSCode for p5.js
 
-If you prefer to configure VSCode manually, the key challenge is getting autocompletion for p5.js keywords. p5.js is written in vanilla JavaScript rather than [TypeScript](https://www.typescriptlang.org/), so VSCode's [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) doesn't work out of the box. The fix is to install the p5.js TypeScript type definitions so that VSCode knows about `setup()`, `draw()`, `createCanvas()`, and all other p5.js functions.
+If you prefer to **configure VSCode manually**, the key challenge is getting autocompletion for p5.js keywords. p5.js is written in vanilla JavaScript rather than [TypeScript](https://www.typescriptlang.org/), so VSCode's [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) doesn't work out of the box. The fix is to install the p5.js TypeScript type definitions so that VSCode knows about `setup()`, `draw()`, `createCanvas()`, and all other p5.js functions.
 
 First, open a terminal in your project folder and run:
 

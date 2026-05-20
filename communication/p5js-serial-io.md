@@ -5,10 +5,10 @@ nav_order: 4
 parent: Communication
 has_toc: true # (on by default)
 comments: true
-usemathjax: true
+usemathjax: false
 usetocbot: true
 ---
-# {{ page.title }}
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents
@@ -18,9 +18,18 @@ usetocbot: true
 {:toc}
 ---
 
-OK, now we're really rolling! We learned about [serial communication](serial-intro.md), then how to use serial in our browsers ([web serial!](web-serial.md)), and then how to do this with [p5.js](p5js-serial.md). And we've already made some cool proof-of-concept demos.
+OK, now we're really rolling! We learned about [serial communication](serial-intro.md), then how to use serial in our browsers ([Web Serial!](web-serial.md)), and then how to do this with [p5.js](p5js-serial.md). And we've already made some cool proof-of-concept demos.
 
-Let's take this growing knowledge and momentum to create slightly more sophisticated programs. First, we'll cover the case of using p5.js to control something on our Arduino (`Computer → Arduino`) then we'll introduce bidirectional communication (`Computer ↔ Arduino`) where the computer + Arduino work together to create a holistic interactive experience.
+Let's take this growing knowledge and momentum to create slightly more sophisticated programs. First, we'll cover the case of using p5.js to control something on our Arduino (`Computer → Arduino`). Then we'll introduce bidirectional communication (`Computer ↔ Arduino`) where the computer and Arduino work together to create a holistic interactive experience. 🎮
+
+{: .note }
+> **In this lesson, you will learn:**
+> - How to send data from a p5.js web app to Arduino (`Computer → Arduino`)
+> - How to design a text-based serial protocol with comma-separated values
+> - How to parse incoming serial data on the Arduino side
+> - Essential debugging strategies for serial communication (echo-back, OLED debug output)
+> - How to build bidirectional communication (`Computer ↔ Arduino`) with shared state
+> - How to handle state synchronization between two devices
 
 ## DisplayShapeOut: p5.js to Arduino
 
@@ -28,7 +37,7 @@ To begin, we'll build a simple p5.js demo app that draws and resizes a selected 
 
 Here's a small sneak preview of what the final interactive experience will look like.
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video demonstrating the DisplayShapeOut p5.js app sending shape type and size data to an Arduino OLED display">
   <source src="assets/videos/DisplayShapeIn.ino-DisplayShapeOut-Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the p5.js app [DisplayShapeOut](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut) and Arduino sketch [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino). The p5.js app sends a `shapeType` and a `shapeSize` as a comma-separated text string to Arduino via web serial. The [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino) program parses this text and draws a shape with the appropriate size to the OLED. I did not use my regular recording setup for this because OBS Studio + my document camera have a noticeable lag. You can view, edit, play with the DisplayShapeOut code in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/TfE1BjOX6) or from our GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut))
@@ -102,9 +111,9 @@ function mouseMoved(){
 
 That's it! We made an initial interactive shape app. Save your work and try it out with VSCode's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) or simply hit the `play` button in the p5.js editor.
 
-Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR) from the p5.js online editor. Move your mouse over the canvas below to watch the circle change in size proportionall to the mouse's x position.
+Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR) from the p5.js online editor. Move your mouse over the canvas below to watch the circle change in size proportionally to the mouse's x position.
 
-<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/qh-E0BRaR"></iframe>
+<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/qh-E0BRaR" title="Embedded p5.js sketch showing a circle that resizes based on mouse x position"></iframe>
 **Code.** The initial code skeleton for interactively sizing a shape based on the mouse's x position. You can view, edit, and play with the code [here](https://editor.p5js.org/jonfroehlich/sketches/qh-E0BRaR).
 {: .fs-1 }
 
@@ -196,7 +205,7 @@ function draw() {
 
 Alright, we did it! Now check out your work by loading it with Live Server or in the p5.js online editor. Here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/v3xWP3Np1):
 
-<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/v3xWP3Np1"></iframe>
+<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/v3xWP3Np1" title="Embedded p5.js sketch showing shape selection by mouse clicking"></iframe>
 **Code.** Changing shapes by mouse clicking. Code [here](https://editor.p5js.org/jonfroehlich/sketches/v3xWP3Np1).
 {: .fs-1 }
 
@@ -296,7 +305,10 @@ The key is to start simply and build up your app step-by-step, testing increment
 
 Let's begin our Arduino app simply by echo'ing the incoming data back on serial. Remember, you **cannot** use the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) once your p5.js app connects with your Arduino over serial. See error message in the figure below.
 
-![](assets/images/OnlyOneProgramCanReadFromASerialPortAtATime_CannotOpenArduinoIDESerialMonitor.png)
+{: .warning }
+> **Only one program can access a serial port at a time.** Once your p5.js app connects to the Arduino via Web Serial, the Arduino IDE's Serial Monitor cannot open the same port. You'll see a "Port busy" error. Close the browser tab (or disconnect serial in your web app) before trying to use Serial Monitor.
+
+![Screenshot showing that the Arduino IDE Serial Monitor cannot open when a p5.js web app is already connected to the same serial port, displaying a Port busy error](assets/images/OnlyOneProgramCanReadFromASerialPortAtATime_CannotOpenArduinoIDESerialMonitor.png)
 **Figure.** This figures shows the p5.js app [DisplayShapeOut](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut) running and connected to the Arduino via web serial. Consequently, we cannot open and use the Arduino IDE's Serial Monitor tool (`Tools -> Serial Monitor`) because only one program can connect to a serial port at a time. When we try, we get an error printed in the Arduino IDE console (right image) that says "Error opening serial port 'COM5'. (Port busy)"
 {: .fs-1 }
 
@@ -322,6 +334,9 @@ void setup() {
 void loop() {
   // Check to see if there is any incoming serial data
   if(Serial.available() > 0){
+    // Read data off the serial port until we get to the endline delimiter ('\n')
+    String rcvdSerialData = Serial.readStringUntil('\n');
+
     // Echo the data back on serial (for debugging purposes)
     Serial.print("Arduino Received: '");
     Serial.print(rcvdSerialData);
@@ -337,7 +352,10 @@ void loop() {
 
 TODO: need video -->
 
-This echo technique is a crucial debugging tool. So, make sure you understand it! We can also use the OLED display to show debugging output, which we need for this app anyway. So, let's do that next!
+This echo technique is a crucial debugging tool. So, make sure you understand it!
+
+{: .note }
+> **The echo-back technique** is one of the most useful serial debugging strategies. By having the Arduino send back what it received, you can verify that (1) data is being transmitted successfully, (2) the data arrives in the expected format, and (3) parsing works correctly. We also recommend using the OLED display for intermediate debug output—it's like having a mini serial monitor right on your breadboard!
 
 <!-- Another useful debugging strategy is to use our [OLED](../advancedio/oled.md) displays for debugging output. We can change these debug printouts as our app progresses (and remove them, of course, once we're confident things are working the way we intend). -->
 
@@ -359,15 +377,18 @@ We'll wire up the OLED using I<sup>2</sup>C as we did in our [OLED](../advancedi
 
 ##### The Arduino Leonardo Wiring
 
-![](../advancedio/assets/images/ArduinoLeonardo_OLEDWiring_FritzingSchematics.png)
+![Fritzing wiring diagram and schematic showing the Arduino Leonardo connected to an OLED display via I2C with SDA on pin 2 and SCL on pin 3](../advancedio/assets/images/ArduinoLeonardo_OLEDWiring_FritzingSchematics.png)
 **Figure** Wiring the Adafruit OLED display with I<sup>2</sup>C requires only four wires. For my wire colors, I used the standard STEMMA QT color coding: blue for data (SDA), yellow for clock (SCL), black for ground (GND), and red for the voltage supply (5V). Note that the I<sup>2</sup>C pins will differ depending on your board. For example, on the Arduino Uno, they are A4 (SDA) and A5 (SCL) rather than digital pins 2 (SDA) and 3 (SCL) as they are for the Leonardo.
 {: .fs-1 }
 
 ##### The ESP32 Wiring
 
-![](../advancedio/assets/images/Huzzah32_OLEDWiring_FritzingSchematics.png)
+![Fritzing wiring diagram for the Adafruit Huzzah32 ESP32 board connected to an OLED display via I2C](../advancedio/assets/images/Huzzah32_OLEDWiring_FritzingSchematics.png)
 **Figure.** Wiring diagram for the [Adafruit Huzzah32](../esp32/index.md) ESP32 board with OLED. Note that the ESP32 has silk-printed SCL and SDA pins at the top-right corner.
 {: .fs-1 }
+
+{: .note }
+> **Using an ESP32-S3?** The I2C pin locations may differ from the Huzzah32 shown above. Check your board's pinout diagram. Also remember to use `Serial.begin(115200)` and set `baudRate: 115200` in your p5.js code.
 
 #### Add in OLED and debug printlns
 
@@ -419,7 +440,7 @@ void loop() {
   // Check to see if there is any incoming serial data
   if(Serial.available() > 0){
     // If we're here, then serial data has been received
-    // Read data off the serial port until we get to the endline delimeter ('\n')
+    // Read data off the serial port until we get to the endline delimiter ('\n')
     // Store all of this data into a string
     String rcvdSerialData = Serial.readStringUntil('\n'); 
 
@@ -442,10 +463,10 @@ void loop() {
 
 Here's a video demonstration of what we have so far: the full DisplayShapeOut p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)) running with an intermediate version of [DisplayShapeSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino), which simply echos back received data and displays some debugging output to the OLED screen.
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video testing the Arduino echo-back code with the DisplayShapeOut p5.js app">
   <source src="assets/videos/DisplayShapeIn.ino-EchoBack-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** Testing the C++ echo-back code for Arduino with the the p5.js app DisplayShapeOut ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)). You can view this intermediate version of DisplayShapeSerialIn.ino [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino).
+**Video.** Testing the C++ echo-back code for Arduino with the p5.js app DisplayShapeOut ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)). You can view this intermediate version of DisplayShapeSerialIn.ino [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate1/DisplayShapeSerialIn-Intermediate1.ino).
 {: .fs-1 }
 
 #### Parse serial data and update OLED debug output
@@ -490,10 +511,10 @@ if(indexOfComma != -1){
 
 Great, now let's upload this to the Arduino and test our two apps thus far. Does the parsing work?
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video testing the Arduino serial parsing code with DisplayShapeOut p5.js app">
   <source src="assets/videos/DisplayShapeIn.ino-TestParsing-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** Testing the C++ parsing code for Arduino with the the p5.js app DisplayShapeOut ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)). You can view this intermediate version of DisplayShapeSerialIn.ino [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate2/DisplayShapeSerialIn-Intermediate2.ino). 
+**Video.** Testing the C++ parsing code for Arduino with the p5.js app DisplayShapeOut ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut)). You can view this intermediate version of DisplayShapeSerialIn.ino [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn-Intermediate2/DisplayShapeSerialIn-Intermediate2.ino).
 {: .fs-1 }
 
 #### Test parsing code via Serial Monitor
@@ -502,7 +523,7 @@ Our Arduino program does **not** know where the incoming data from its serial po
 
 Let's close our p5.js tab in our web browser to ensure it's disconnected from the Arduino. Now, open up the Serial Monitor and input data into the Serial Monitor. When testing, it's a good idea to enter both properly formed and malformed data. Make sure to test edge cases too! See video below.
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video demonstrating how to use Arduino Serial Monitor to test serial parsing code">
   <source src="assets/videos/DisplayShapeIn.ino-SerialMonitor-TrimmedOptimized1200w.mp4" type="video/mp4" />
 </video>
 **Video.** Using the Arduino IDE's [Serial Monitor](../arduino/serial-print.md) to test our parsing code. Using the Serial Monitor is an easy, convenient way to test your serial input and parsing code on the Arduino. 
@@ -522,6 +543,7 @@ enum ShapeType {
   CIRCLE,
   SQUARE,
   TRIANGLE,
+  NUM_SHAPE_TYPES
 };
 
 ShapeType _curShapeType = CIRCLE; // tracks current shape type
@@ -619,7 +641,7 @@ That's it! You can see our full implementation on GitHub as [DisplayShapeSerialI
 
 We did it! Here's the full end-to-end demo.
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video showing the full end-to-end demo of DisplayShapeOut p5.js app with DisplayShapeSerialIn Arduino sketch">
   <source src="assets/videos/DisplaySerialIn-EndToEndDemo-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the p5.js app [DisplayShapeOut](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut) and Arduino sketch [DisplayShapeIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialIn/DisplayShapeSerialIn.ino). You can view, edit, play with the DisplayShapeOut code in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/TfE1BjOX6) or from our GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeOut/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeOut))
@@ -633,7 +655,7 @@ Again, there are many possibilities but let's keep things simple. We'll add two 
 
 Here's a quick sneak peek at what the two apps will look like:
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video showing a brief preview of the DisplayShapeBidirectional demo with p5.js and Arduino communicating in both directions">
   <source src="assets/videos/DisplayShapeBidirectional_ShortenedAndOptimized1200w.mp4" type="video/mp4" />
 </video>
 **Video.** A brief end-to-end demo of the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
@@ -650,7 +672,7 @@ To begin, make a copy of the `DisplayShapeOut` p5.js folder and rename it to som
 For the fill *vs.* outline draw mode, we'll add in an additional state tracking variable called `curShapeDrawMode`:
 
 {% highlight JavaScript %}
-let mapShapeDrawMode = {
+const mapShapeDrawMode = {
   0: "Fill",
   1: "Outline",
 };
@@ -731,7 +753,7 @@ async function serialWriteShapeData(shapeType, shapeSize, shapeDrawMode) {
 And make sure to also update the `serialWriteShapeData()` call in `mouseMoved()` to use three parameters as well:
 
 {% highlight JavaScript %}
-function mouseMoved() { {
+function mouseMoved() {
   ...
   serialWriteShapeData(curShapeType, curShapeSize, curShapeDrawMode);
   ...
@@ -790,7 +812,7 @@ And that's it! Here's our full implementation as [DisplayShapeBidirectional](htt
 
 Shifting now to the Arduino side. Let's add in two buttons to our Arduino circuit: one button to iterate through shape type and another to iterate through draw modes. We'll hook them up to GPIO pins 4 and 5 respectively with internal pull-up resistors.
 
-![](assets/images/ArduinoLeonardo_OLED_TwoButtons.png)
+![Fritzing diagram showing an Arduino Leonardo with an OLED display and two buttons connected to pins 4 and 5 using internal pull-up resistors](assets/images/ArduinoLeonardo_OLED_TwoButtons.png)
 **Figure.** The Arduino Leonardo circuit with two buttons hooked up to pins 4 and 5 using the Arduino's internal pull-up resistors. So, by default, they are in a `HIGH` state and will be pulled `LOW` upon button press.
 {: .fs-1 }
 
@@ -901,7 +923,7 @@ void checkButtonPresses(){
 
 We can test our new button and drawing code regardless of serial input. So, let's do that now:
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video testing the intermediate Arduino button and drawing code for DisplayShapeBidirectional">
   <source src="assets/videos/DisplayShapeBidirectionalIntermediate-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video.** Testing an intermediate version of our Arduino code (in GitHub [here](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional-Intermediate1/DisplayShapeSerialBidirectional-Intermediate1.ino)).
@@ -916,7 +938,7 @@ void checkAndParseSerial(){
   // Check to see if there is any incoming serial data
   if(Serial.available() > 0){
     // If we're here, then serial data has been received
-    // Read data off the serial port until we get to the endline delimeter ('\n')
+    // Read data off the serial port until we get to the endline delimiter ('\n')
     // Store all of this data into a string
     String rcvdSerialData = Serial.readStringUntil('\n'); 
 
@@ -979,21 +1001,39 @@ We did it! Below, we provide the full code links and a video demonstration.
 
 Here's a video demo of DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video demonstrating the full DisplayShapeBidirectional demo with p5.js buttons and Arduino buttons controlling shapes">
   <source src="assets/videos/DisplayShapeBidirectional_TrimmedAndOptimized900w.mp4" type="video/mp4" />
 </video>
 **Video.** A demonstration of the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino).
 {: .fs-1 }
 
-## Activity
+## Lesson Summary
 
-For your prototyping journals, create a simple bidirectional app in p5.js and Arduino. Ideally, this app would correspond to an idea you have for MP3 allowing you to rapidly prototype a concept. In your journal, describe the app, link to the code (for both p5.js and Arduino), and include a brief video.
+In this lesson, you learned how to build p5.js + Arduino applications that communicate in both directions over serial. Here are the key takeaways:
+
+- For `Computer → Arduino` communication, the p5.js app sends **text-encoded, comma-separated values** (*e.g.,* `"shapeType, shapeSizeFraction"`) over serial using `serial.writeLine()`.
+- On the Arduino side, we use `Serial.readStringUntil('\n')` to read incoming text and `String.indexOf()` / `String.substring()` to parse comma-separated values.
+- **The echo-back technique** is essential for debugging: have the Arduino echo received data back over serial so you can verify correct transmission and parsing in your p5.js console.
+- The **OLED display** is a powerful debugging tool when Serial Monitor is unavailable (because your p5.js app is using the serial port).
+- You can also test your Arduino parsing code using the **Serial Monitor** directly—the Arduino doesn't know or care where the serial data comes from.
+- For **bidirectional communication**, both devices send and receive data. Using a **prefix convention** (*e.g.,* lines starting with `#` are debug output) helps separate useful data from debugging messages.
+- When both sides can change shared state (*e.g.,* shape type), use **momentary inputs** (buttons) rather than stateful inputs (potentiometers) to avoid synchronization issues.
+
+## Exercises
+
+**Exercise 1:** Modify the DisplayShapeOut example to add a **fourth shape** (a star or a diamond). You'll need to update both the p5.js drawing code and the Arduino OLED drawing code, as well as the `mapShapeTypeToShapeName` object.
+
+**Exercise 2:** Add a **color mode** to DisplayShapeBidirectional. Instead of fill/outline, make the third parameter control the color (white or inverted). On p5.js, map this to different fill colors. On the OLED, use `SSD1306_WHITE` vs `SSD1306_INVERSE`.
+
+**Exercise 3:** Build a **simple text chat** between p5.js and Arduino. The p5.js app has a text input field where the user types a message, which gets sent to the Arduino and displayed on the OLED. The Arduino has a button that sends a pre-set response (like "OK" or "Hello!") back to p5.js for display.
+
+**Exercise 4:** Create a **remote LED controller**: the p5.js app has sliders for red, green, and blue values that are sent as CSV to the Arduino. The Arduino drives an RGB LED. Add a photoresistor on the Arduino that sends the ambient light level back to p5.js for display as a brightness bar.
 
 <!-- extend the p5.js app DisplayShapeBidirectional ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional)) and the Arduino sketch [DisplayShapeSerialBidirectional.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayShapeSerialBidirectional/DisplayShapeSerialBidirectional.ino)  -->
 
 ## Next Lesson
 
-In the [next lesson](p5js-paint-io.md), we'll bring everything together and build a fully functional paint application.
+In the [next lesson](p5js-paint-io.md), we'll bring everything together and build a fully functional painting application with an accelerometer-based controller, force-sensitive brush sizing, and bimanual interaction. It's going to be awesome! 🎨
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="p5js-serial.html" class="nav-prev">

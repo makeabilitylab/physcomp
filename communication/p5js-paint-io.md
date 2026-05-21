@@ -2,13 +2,13 @@
 layout: default
 title: L5&#58; PaintIO Example
 nav_order: 5
-parent: Communication
+parent: Serial Communication
 has_toc: true # (on by default)
 comments: true
-usemathjax: true
+usemathjax: false
 usetocbot: true
 ---
-# {{ page.title }}
+# {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
 ## Table of Contents
@@ -18,23 +18,32 @@ usetocbot: true
 {:toc}
 ---
 
-In the past few lessons, we've learned about [serial communication](serial-intro.md), [web serial](web-serial.md), and using serial to create [p5.js](https://p5js.org/) + Arduino applications ([first lesson](p5js-serial.md), [second lesson](p5js-serial-io.md)). In this lesson, we're going to build on our growing knowledge and existing code to create a full end-to-end p5.js + Arduino application, which we'll call **PaintIO**. PaintIO includes a custom "paintbrush" controller with OLED display that controls and bidirectionally communicates with a custom painting application in p5.js.
+In the past few lessons, we've learned about [serial communication](serial-intro.md), [Web Serial](web-serial.md), and using serial to create [p5.js](https://p5js.org/) + Arduino applications ([first lesson](p5js-serial.md), [second lesson](p5js-serial-io.md)). In this lesson, we're going to build on our growing knowledge and existing code to create a full end-to-end p5.js + Arduino application, which we'll call **PaintIO**. PaintIO includes a custom "paintbrush" controller with OLED display that controls and bidirectionally communicates with a custom painting application in p5.js. 🎨
 
-<video autoplay loop muted playsinline>
+{: .note }
+> **In this lesson, you will learn:**
+> - How to design and build a full end-to-end p5.js + Arduino application with bidirectional serial communication
+> - How to use [offscreen graphics buffers](https://p5js.org/reference/#/p5/createGraphics) for efficient rendering in p5.js
+> - How to design application-level serial communication protocols
+> - How to use keyboard input alongside serial for multi-modal interaction
+> - How to map sensor data to creative properties like brush size, color, and position
+> - How bimanual interaction works and why it matters in HCI
+
+<video autoplay loop muted playsinline aria-label="Video demonstrating the PaintIO application drawing a heart shape using an accelerometer-based controller">
   <source src="assets/videos/PaintIO2-JustAHeart-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** A quick demonstration of one PaintIO controller using the LIS3DH 3-axis accelerometer to set the paintbrush location, the paintbrush's speed to set the color, the force-sensitive resistor to set the brush size, and three buttons for changing the brush shape, the brush fill *vs.* outline, and for clearing the drawing. The controller also displays current brush properties like size, shape, and location on the OLED. The Arduino code is in our GitHub as [PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino). The p5.js app is here: [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/PaintIO).
+**Video.** A quick demonstration of one PaintIO controller using the LIS3DH 3-axis accelerometer to set the paintbrush location, the paintbrush's speed to set the color, the force-sensitive resistor to set the brush size, and three buttons for changing the brush shape, the brush fill *vs.* outline, and for clearing the drawing. The controller also displays current brush properties like size, shape, and location on the OLED. The Arduino code is in our GitHub as [PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino). The p5.js app is here: [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/PaintIO).
 {: .fs-1 }
 
 A painting app is a wonderfully fertile Physical Computing example and helps culminate our learning thus far because:
 - There are many **different paint properties to control** such as paint brush size, speed, color, shape
 - We can **explore** and **play** with different types of **sensors** and **hardware** **input** to control these properties
-- Painting is an **openly creative** and **rich practice**—there are very few rules! And our custom hardware-based paintbrush" can directly influence *how* we paint and *what* we paint. From an interaction design perspective, this is exciting and fun!
+- Painting is an **openly creative** and **rich practice**—there are very few rules! And our custom hardware-based paintbrush can directly influence *how* we paint and *what* we paint. From an interaction design perspective, this is exciting and fun!
 - Finally, as we've already experienced, making a painting application in p5.js is **fairly easy** (and fun)! But how can we make it even more interesting with Arduino and custom input?
 
 Previously, we created this [simple painting application](https://editor.p5js.org/jonfroehlich/embed/MSGdVYUle) in only ~20 lines of code (Impressive! Demonstrates the power of p5.js). In this app, the brush size is changed proportionally via mouse speed, the color is mapped to the mouse's x location, and you can mouse click to switch between fill *vs.* outline. Play with it below!
 
-<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/MSGdVYUle"></iframe>
+<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/MSGdVYUle" title="Embedded p5.js simple painting application"></iframe>
 **Code.** A simple p5.js painting application in ~20 lines of code. You can view, edit, and play with it [here](https://editor.p5js.org/jonfroehlich/sketches/MSGdVYUle) via the p5.js online editor. In this lesson, we'll extend this example to include [web serial](web-serial.md) and a custom "paintbrush" controller.
 {: .fs-1 }
 
@@ -67,7 +76,7 @@ We will also "echo back" received data for debugging purposes. We will prefix th
 
 #### From p5.js to Arduino
 
-As our app will be bidirectional, we will also communicate information from p5.js to Arduino. For this, we'll build off the [DisplayShapeBidirectionl](p5js-serial-io.md#displayshapebidirectional-p5js-to-arduino-and-arduino-to-p5js) example from the previous lesson and transmit a comma-separated string of `brushType, brushFillMode` where, again:
+As our app will be bidirectional, we will also communicate information from p5.js to Arduino. For this, we'll build off the [DisplayShapeBidirectional](p5js-serial-io.md#displayshapebidirectional-p5js-to-arduino-and-arduino-to-p5js) example from the previous lesson and transmit a comma-separated string of `brushType, brushFillMode` where, again:
 - `brushType` is either 0, 1, 2 corresponding to CIRCLE, SQUARE, TRIANGLE
 - `brushFillMode` is either 0, 1 corresponding to FILL, OUTLINE
 
@@ -77,7 +86,7 @@ As usual, let's start with a basic prototype and build outwardly. First, let's m
 
 ### Copy SerialTemplate and create initial PaintIO structure
 
-Begin by copying [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate). If you're using VSCode, copy [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) and rename the folder to `PaintIO`. If you're using the p5.js online editor, simply open this project, [Serial Template](https://editor.p5js.org/jonfroehlich/sketches/vPfUvLze_C), and rename your project to `PaintIO`.
+Begin by copying [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate). If you're using VSCode, copy [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate) and rename the folder to `PaintIO`. If you're using the p5.js online editor, simply open this project, [Serial Template](https://editor.p5js.org/jonfroehlich/sketches/vPfUvLze_C), and rename your project to `PaintIO`.
 
 In `sketch.js`, scroll down and remove the following. We will use a different approach to connect to serial.
 
@@ -99,18 +108,18 @@ We want to ignore anything serial related for now.
 
 ### Add in and initialize painting variables
 
-For the painting code, we will use similar variables and drawing code from [DisplayShapeBidirectional](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/DisplayShapeBidirectional) in our [previous lesson](p5js-serial-io.md#displayshapebidirectional-p5js-to-arduino-and-arduino-to-p5js). But we'll build this anew.
+For the painting code, we will use similar variables and drawing code from [DisplayShapeBidirectional](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/DisplayShapeBidirectional) in our [previous lesson](p5js-serial-io.md#displayshapebidirectional-p5js-to-arduino-and-arduino-to-p5js). But we'll build this anew.
 
 Add in the following global variables, which include the current `brushType`, `brushSize`, `brushFillMode`, `brushColor`, and brush location (`brushX`, `brushY`). Additionally, rather than paint directly to the canvas, we'll use an off-screen graphics buffer called `offscreenGfxBuffer`—so declare that too. We'll talk more about that next.  
 
 {% highlight JavaScript %}
-let mapBrushTypeToShapeName = {
+const mapBrushTypeToShapeName = {
   0: "Circle",
   1: "Square",
   2: "Triangle"
 };
 
-let mapBrushFillMode = {
+const mapBrushFillMode = {
   0: "Fill",
   1: "Outline",
 };
@@ -124,7 +133,7 @@ let brushX = 0;         // Current brush x location (in pixel coordinates)
 let brushY = 0;         // Current brush y location (in pixel coordinates)
 let brushColor;         // Current brush color
  
-let lastBrushX = 0;     // Last brush y position (similar to pmouseX but for the brush)
+let lastBrushX = 0;     // Last brush x position (similar to pmouseX but for the brush)
 let lastBrushY = 0;     // Last brush y position (similar to pmouseY but for the brush)
 
 let showInstructions = true; // If true, shows the app instructions on the screen
@@ -147,7 +156,7 @@ Did you just try to use p5.js's color() function? If so, you may want to move it
 For more details, see: https://github.com/processing/p5.js/wiki/p5.js-overview#why-cant-i-assign-variables-using-p5-functions-and-variables-before-setup 
 ```
 
-![](assets/images/p5jsOnlineEditor_TryingToUseP5jsFunctionsBeforeSetup.png)
+![Screenshot of the p5.js online editor showing an error when trying to use the color function before setup has been called](assets/images/p5jsOnlineEditor_TryingToUseP5jsFunctionsBeforeSetup.png)
 **Figure.** You cannot use any p5.js functions or classes before `setup()` has been called. If you do, you'll likely receive an error like the above where we tried to use [`color()`](https://p5js.org/reference/#/p5/color) during a global variable declaration. The specific error says: "Did you just try to use p5.js's color() function? If so, you may want to move it into your sketch's setup() function. For more details, see the [p5.js wiki](https://github.com/processing/p5.js/wiki/p5.js-overview#why-cant-i-assign-variables-using-p5-functions-and-variables-before-setup)"
 {: .fs-1 }
 
@@ -168,7 +177,7 @@ function setup() {
 }
 {% endhighlight JavaScript %}
 
-The [`createGraphics()`](https://p5js.org/reference/#/p5/createGraphics) function let's us create a new offscreen graphics buffer. The function returns a new [p5.Renderer](https://p5js.org/reference/#/p5.Renderer) object, which has the same drawing API as core p5.js. So, if we want to set the background of the offscreen buffer, we would write `offscreenGfxBuffer.background(100);`. If we want to draw a red circle at pixel coordinate `10, 10` with a diameter of 50 on the offscreen buffer, we would write: 
+The [`createGraphics()`](https://p5js.org/reference/#/p5/createGraphics) function lets us create a new offscreen graphics buffer. The function returns a new [p5.Renderer](https://p5js.org/reference/#/p5.Renderer) object, which has the same drawing API as core p5.js. So, if we want to set the background of the offscreen buffer, we would write `offscreenGfxBuffer.background(100);`. If we want to draw a red circle at pixel coordinate `10, 10` with a diameter of 50 on the offscreen buffer, we would write: 
 
 {% highlight JavaScript %}
 offscreenGfxBuffer.fill(255, 0, 0);    // set fill color in offscreen graphics context to red
@@ -200,7 +209,7 @@ function drawBrushStroke(xBrush, yBrush){
   if (brushFillMode == 0) { // brushFillMode 0 is fill
     offscreenGfxBuffer.fill(brushColor);
     offscreenGfxBuffer.noStroke();
-  } else { // brushFillMode 0 is outline
+  } else { // brushFillMode 1 is outline
     offscreenGfxBuffer.stroke(brushColor);
     offscreenGfxBuffer.noFill();
   }
@@ -237,11 +246,11 @@ function drawBrushStroke(xBrush, yBrush){
 
 But **why** are we using an offscreen buffer? For simplicity and rendering speed!
 
-In short, using an offscreen buffer let's us render individual paint strokes once and only once and still draw stuff over it, like onscreen instructions, a crosshair cursor, *etc.*
+In short, using an offscreen buffer lets us render individual paint strokes once and only once and still draw stuff over it, like onscreen instructions, a crosshair cursor, *etc.*
 
 <!-- We are going to put all "painting" related rendering into the offscreen buffer and then we can still draw stuff over it, like onscreen instructions or a crosshair cursor, *etc.* -->
 
-It's common to use offscreen graphics (or frame) buffers in gaming and visualization code because it let's us draw computationally complex objects once—to a buffer—and then simply render this buffer whenever we need that object drawn again. As one example, this [sound visualizer](https://editor.p5js.org/jonfroehlich/sketches/d2euV09i) computes real-time sound processing on incoming microphone data and draws a variety of real-time visualizations, including scrolling waveforms and spectrograms—both which render sound data for a given sound sample buffer once and only once to an offscreen graphics buffer and then simply add new graphics to that buffer over time. 
+It's common to use offscreen graphics (or frame) buffers in gaming and visualization code because it lets us draw computationally complex objects once—to a buffer—and then simply render this buffer whenever we need that object drawn again. As one example, this [sound visualizer](https://editor.p5js.org/jonfroehlich/sketches/d2euV09i) computes real-time sound processing on incoming microphone data and draws a variety of real-time visualizations, including scrolling waveforms and spectrograms—both which render sound data for a given sound sample buffer once and only once to an offscreen graphics buffer and then simply add new graphics to that buffer over time. 
 
 In our case, we could create a data structure—say a `PaintStroke` class that takes in a x,y position, brush color, and all of the other brush-related properties—to store individual paint strokes in an array. For each new paint operation (*i.e.,* each new circle, square, or triangle drawn), we would create a corresponding `PaintStroke` object and store it in this array. And then, on each new `draw()` call, we would iterate through these `PaintStroke` objects and perform the appropriate p5.js draw operations. However, as the number of paint strokes grow, our rendering speed would decrease! And it's inefficient to keep redrawing the same paint stroke over-and-over. So, instead, we draw each paint operation once and only once to the offscreen buffer!
 
@@ -345,7 +354,7 @@ To clear the screen, notice how we simply overwrite the current graphics buffer 
 
 Here's what we have so far. A grayscale drawing app that has a fixed brush size but multiple brush types (circle, square, triangle)—selectable by the `b` key—and fill types (fill, outline)—selectable by the `f` key. You can also clear the screen with the `l` key and show/hide the instructions with `i`. Try it out below or open the code in the p5.js online editor [here](https://editor.p5js.org/jonfroehlich/sketches/bl5o1BeZd) to view, edit, and play with the code yourself!
 
-<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/bl5o1BeZd"></iframe>
+<iframe width="736" height="400" scrolling="no" src="https://editor.p5js.org/jonfroehlich/embed/bl5o1BeZd" title="Embedded p5.js grayscale drawing application with keyboard commands for brush type and fill mode"></iframe>
 **Code.** You need to click on the gray canvas to give it "focus" in order for the keyboard commands to work. You can view, edit, and play with the code in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/bl5o1BeZd).
 {: .fs-1 }
 
@@ -357,10 +366,10 @@ Continuing our simplicity and step-by-step construction themes: let's build an i
 
 We need to update our p5.js application to support serial and to parse incoming data from our "paintbrush" controller and design and build said "paintbrush" controller in Arduino. Let's do it!
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video showing the initial PaintIO app using two potentiometers to draw like an etch-a-sketch">
   <source src="assets/videos/PaintIO-Grayscale-TwoPots-SayHi-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** Here's a sneak peak of the initial p5.js + Arduino app, which we will further develop in this lesson. Yes, I'm trying to write "Hi!". It's like an etch-a-sketch. :) This p5.js code version is available as [Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT) and the Arduino code is [XYAnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOut/XYAnalogOut.ino) on GitHub.
+**Video.** Here's a sneak peek of the initial p5.js + Arduino app, which we will further develop in this lesson. Yes, I'm trying to write "Hi!". It's like an etch-a-sketch. :) This p5.js code version is available as [Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT) and the Arduino code is [XYAnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOut/XYAnalogOut.ino) on GitHub.
 {: .fs-1 }
 
 ### Updating PaintIO on the p5.js side to support serial
@@ -381,7 +390,11 @@ function keyPressed(){
   ...
   }else if(key == 'o'){
     if (!serial.isOpen()) {
-      serial.connectAndOpen(null, serialOptions);
+      try {
+        serial.connectAndOpen(null, serialOptions);
+      } catch (error) {
+        console.error("Serial connection failed:", error);
+      }
     }
   }
 }
@@ -445,7 +458,7 @@ function onSerialDataReceived(eventSender, newData) {
 
 Currently, we are only drawing brush strokes at the current `mouseX` and `mouseY` position. Let's also now draw brush strokes at the current `brushX` and `brushY` position, which are set by the Arduino-based paintbrush controller. 
 
-A keen reader will note that we are now calling `drawBrushStroke()` **twice**: once for mouse input and once for our Arduino-based controller input. Yes, that's true. But bimanuel interaction with two controllers has a long history in HCI (see Engelbart's [Mother of All Demos](https://youtu.be/yJDv-zdhzMY?t=2115) from 1968) and opens up many fruitful interaction possibilities! Later, we'll make the mouse as a paintbrush toggleable. 
+A keen reader will note that we are now calling `drawBrushStroke()` **twice**: once for mouse input and once for our Arduino-based controller input. Yes, that's true. But bimanual interaction with two controllers has a long history in HCI—going all the way back to Douglas Engelbart's [Mother of All Demos](https://youtu.be/B6rKUf9DWRI?si=XJNd-tspEE9IR9AU) in 1968 ([Wikipedia](https://en.wikipedia.org/wiki/The_Mother_of_All_Demos), [Computer History Museum](https://www.computerhistory.org/revolution/input-output/14/350))—and opens up many fruitful interaction possibilities! Later, we'll make the mouse as a paintbrush toggleable.
 
 {% highlight JavaScript %}
 function draw() {
@@ -477,7 +490,7 @@ Now that we completed an initial PaintIO app with serial input support, it's tim
 
 #### The initial paintbrush controller circuit
 
-![](assets/images/ArduinoLeonardo_2Pots_WithBreadboard.png)
+![Fritzing diagram showing an Arduino Leonardo with two potentiometers on A0 and A1 controlling brush x and y position](assets/images/ArduinoLeonardo_2Pots_WithBreadboard.png)
 **Figure.** The initial paint brush controller with two potentiometers controlling the x- and y-location of the brush, respectively.
 {: .fs-1 }
 
@@ -505,8 +518,8 @@ void loop() {
   int yAnalogVal = analogRead(Y_ANALOG_INPUT_PIN);
 
   // Calculate normalized x,y location
-  _x = xAnalogVal / (float)MAX_ANALOG_VAL;
-  _y = yAnalogVal / (float)MAX_ANALOG_VAL;
+  float _x = xAnalogVal / (float)MAX_ANALOG_VAL;
+  float _y = yAnalogVal / (float)MAX_ANALOG_VAL;
 
   // Transmit over serial as comma-separated string
   Serial.print(_x, 4);
@@ -524,7 +537,7 @@ void loop() {
 
 We did it! Now, it's time to test and play with it.
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video showing the PaintIO app with keyboard commands for changing brush type and fill mode">
   <source src="assets/videos/PaintIO-Grayscale-TwoPots-KeyboardCommands-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** An initial PaintIO p5.js + Arduino app. We are using the two potentiometers to set the brush's x,y location (the brush size is fixed) and the laptop keyboard to switch between brush types (`b` key) and fill modes (`f` key). The p5.js code is available as [Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT) and the Arduino code is [XYAnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOut/XYAnalogOut.ino) on GitHub.
@@ -536,7 +549,7 @@ As we're interested in exploring dual-screen interaction, let's add in an [OLED]
 
 #### Basic paintbrush controller with OLED
 
-![](assets/images/ArduinoLeonardo_TwoPots_WithOLED.png)
+![Fritzing diagram showing an Arduino Leonardo with two potentiometers and an OLED display](assets/images/ArduinoLeonardo_TwoPots_WithOLED.png)
 **Figure.** Same two-pot circuit as before but with an OLED display.
 {: .fs-1 }
 
@@ -549,8 +562,8 @@ void loop(){
   ...
 
   // Calculate normalized x,y location
-  _x = xAnalogVal / (float)MAX_ANALOG_VAL;
-  _y = yAnalogValal2 / (float)MAX_ANALOG_VAL;
+  float _x = xAnalogVal / (float)MAX_ANALOG_VAL;
+  float _y = yAnalogVal / (float)MAX_ANALOG_VAL;
 
   // Set new circle location based on accel
   int xBall = _radius + _x * _display.width() - 2 * _radius;
@@ -578,7 +591,7 @@ void loop(){
 
 ### Video demonstration of initial PaintIO app
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video demonstrating the PaintIO app with OLED display showing brush position">
   <source src="assets/videos/PaintIO-Grayscale-TwoPots-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Here, we're using the same p5.js code as before ([Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT)) but with an updated Arduino circuit (with OLED) and code to show brush position. Notice how as we move the brush via the two potentiometers, the brush's position also shows on the OLED. We are also printing out the normalized x,y position on the OLED for debugging. The Arduino code is on GitHub as [XYAnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOutOLED/XYAnalogOutOLED.ino).
@@ -604,7 +617,7 @@ You could certainly add in more features like custom input hardware to control t
 
 Here's a sneak peek!
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video showing the full bidirectional PaintIO app with three potentiometers and color support">
   <source src="assets/videos/PaintIO-FullPotController-PaintingWithShapes-1200w.mp4" type="video/mp4" />
 </video>
 **Video.** A sneak peek of the p5.js app [Paint I/O 3 - Bidirectional with Color](https://editor.p5js.org/jonfroehlich/sketches/GOvMjQr6y) with the Arduino sketch [PaintIO.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIO/PaintIO.ino).
@@ -612,7 +625,7 @@ Here's a sneak peek!
 
 ### Updating the p5.js application
 
-As noted above, our p5.js PaintIO app should now support four incoming brush properties: `xPosFrac, yPosFrac, sizeFrac, brushType, brushFillMode`, which are described in [detail here](p5js-paint-io.md#from-arduino-to-p5js). Additionally, when the user hits the `b` key (to change the brush type) or the `f` key (to change the fill mode), we want to communicate that information back to the Arduino so our paintbrush controller and OLED screen stays in sync.
+As noted above, our p5.js PaintIO app should now support four incoming brush properties: `xPosFrac, yPosFrac, sizeFrac, brushType, brushFillMode`, which are described in [detail above](#from-arduino-to-p5js). Additionally, when the user hits the `b` key (to change the brush type) or the `f` key (to change the fill mode), we want to communicate that information back to the Arduino so our paintbrush controller and OLED screen stays in sync.
 
 #### Parsing additional brush properties and clear screen
 
@@ -715,7 +728,7 @@ function keyPressed() {
 
 #### Adding color
 
-Now, let's add some color. We'll explore a few different color mappings in a bit. For now, let's simply map the hue to the brush size. The easiest way to control hue is to switch the `colorMode` from the default, which is RGB, to [HSB](https://en.wikipedia.org/wiki/HSL_and_HSV) (or sometimes called HSB, for hue saturation, value). We can do this via the [`colorMode(HSB)`](https://p5js.org/reference/#/p5/colorMode) function, which also let's us specify a max value for hue (H), saturation (S), brightness (B), and alpha (A). By default, this range is 360, 100, 100, 1, respectively, for HSB and 255, 255, 255, 255 for RGBA. For simplicity, we'll make the max value 1 for HSBA. For more on HSB and its benefits, read this [Wikipedia article](https://en.wikipedia.org/wiki/HSL_and_HSV).
+Now, let's add some color. We'll explore a few different color mappings in a bit. For now, let's simply map the hue to the brush size. The easiest way to control hue is to switch the `colorMode` from the default, which is RGB, to [HSB](https://en.wikipedia.org/wiki/HSL_and_HSV) (hue, saturation, brightness). We can do this via the [`colorMode(HSB)`](https://p5js.org/reference/#/p5/colorMode) function, which also lets us specify a max value for hue (H), saturation (S), brightness (B), and alpha (A). By default, this range is 360, 100, 100, 1, respectively, for HSB and 255, 255, 255, 255 for RGBA. For simplicity, we'll make the max value 1 for HSBA. For more on HSB and its relationship to HSV (hue, saturation, value), read this [Wikipedia article](https://en.wikipedia.org/wiki/HSL_and_HSV).
 
 But, in short, we're using HSB to more easily control hue.
 
@@ -760,7 +773,7 @@ For the hardware controls themselves, we again can use anything we want! To keep
 - A potentiometer on A2 to control the brush's size
 - Three buttons for changing the brush shape, fill mode, and to clear the screen
 
-![](assets/images/PaintIO_ArduinoLeonardo_ThreePotsThreeButtons.png)
+![Fritzing diagram showing the full paintbrush controller with three potentiometers on A0 A1 A2 and three buttons for shape selection fill mode and clear screen](assets/images/PaintIO_ArduinoLeonardo_ThreePotsThreeButtons.png)
 **Figure.** A wiring diagram for the full paintbrush controller with three potentiometers on A0, A1, and A2 to control the brush's location (x,y) and size, respectively and three buttons for changing the brush shape, fill mode, and to clear the screen. Image made in Fritzing and PowerPoint.
 {: .fs-1 }
 
@@ -772,7 +785,7 @@ For the code, we need to update our paintbrush controller to:
 - Read GPIO pins 4, 5, 6 to iterate brush shape and fill mode and to clear the screen
 - Transmit these values over serial
 - Read the serial input stream and parse out the brush shape and fill mode
-- Draw brush-related info toe the OLED, including the brush's location and size
+- Draw brush-related info to the OLED, including the brush's location and size
 
 Rather than walk through this code piece-by-piece, we will simply link to it on GitHub as [PaintIO.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIO/PaintIO.ino). The code itself is essentially a culmination of the last few serial lessons—so it should be relatively straightforward (even if a bit lengthy). Feel free to ask questions!
 
@@ -782,7 +795,7 @@ Rather than walk through this code piece-by-piece, we will simply link to it on 
 
 And a quick video demonstration of everything working together!
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video demonstrating the bidirectional PaintIO app with simultaneous mouse and potentiometer painting">
   <source src="assets/videos/PaintIO-FullPotController-PaintingWithPotAndMouseSimultaneously2-StaticShapes-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** A video demonstration of the p5.js app [Paint I/O 3 - Bidirectional with Color](https://editor.p5js.org/jonfroehlich/sketches/GOvMjQr6y) with the Arduino sketch [PaintIO.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIO/PaintIO.ino). 
@@ -796,21 +809,24 @@ We made a few small updates to PaintIO to create a final prototype application, 
 - And setting various color modes by hitting the `c` key, including coloring by the brush size, brush speed, brush location, and mouse location.
 - Adding in an on-screen cursor in p5.js about where the paintbrush location is
 
-The final application is on GitHub (p5.js [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/PaintIO)) and Arduino sketch ([PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino)).
+The final application is on GitHub (p5.js [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/PaintIO)) and Arduino sketch ([PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino)).
 
 ### Accelerometer-based paintbrush controller
 
-We also designed a far more fluid and interesting paintbrush controller using a 3-axis accelerometer to control the brush's x,y location and a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) to control brush size. We also switched to the ESP32 because the OLED + LIS3DH accelerometer libraries took up more memory than the Leonardo had available. 
+We also designed a far more fluid and interesting paintbrush controller using a 3-axis accelerometer to control the brush's x,y location and a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) to control brush size. We also switched to the ESP32 because the OLED + LIS3DH accelerometer libraries took up more memory than the Leonardo had available.
+
+{: .note }
+> **Why switch to ESP32?** The Arduino Leonardo has only 2.5KB of SRAM. The OLED display buffer alone requires ~1KB (128×64 pixels ÷ 8 bits/byte = 1,024 bytes), and the LIS3DH accelerometer library needs additional memory for I2C communication buffers. Combined with the serial buffers and our application variables, the Leonardo simply ran out of RAM. The ESP32 has 520KB of SRAM—over 200× more—so memory constraints are rarely an issue. This is a common real-world consideration when choosing microcontrollers for projects with multiple peripherals.
 
 The pictorial and schematic wiring diagrams are below.
 
-![](assets/images/PaintIO_ESP32_AccelAndFSR_PictorialDiagram.png)
+![Fritzing pictorial diagram of the accelerometer-based paintbrush controller with ESP32 LIS3DH accelerometer and force-sensitive resistor](assets/images/PaintIO_ESP32_AccelAndFSR_PictorialDiagram.png)
 **Figure.** A pictorial diagram of the accelerometer-based paintbrush controller with ESP32. Made with Fritzing.
 {: .fs-1 }
 
 And the schematic:
 
-![](assets/images/PaintIO_ESP32_AccelAndFSR_SchematicDiagram.png)
+![Fritzing schematic diagram of the accelerometer-based paintbrush controller with ESP32 LIS3DH accelerometer and force-sensitive resistor](assets/images/PaintIO_ESP32_AccelAndFSR_SchematicDiagram.png)
 **Figure.** A schematic diagram of the accelerometer-based paintbrush controller with ESP32. Made with Fritzing.
 {: .fs-1 }
 
@@ -818,10 +834,10 @@ And the schematic:
 
 Here's a sneak peek of me using this new controller followed by a YouTube video overview of the whole PaintIO application and controller experience.
 
-<video autoplay loop muted playsinline>
+<video autoplay loop muted playsinline aria-label="Video demonstrating the accelerometer-based PaintIO controller painting with triangles and writing hello">
   <source src="assets/videos/PaintIO-HelloPlusTrianglePainting-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** A quick video demonstration of our new accelerometer-based Arduino controller (called [PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino)) and the PaintIO p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/PaintIO)).
+**Video.** A quick video demonstration of our new accelerometer-based Arduino controller (called [PaintIOAccel.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/PaintIOAccel/PaintIOAccel.ino)) and the PaintIO p5.js app ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/PaintIO), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/PaintIO)).
 {: .fs-1 }
 
 In the YouTube video below, we provide a full demonstration of PaintIO with the accelerometer-based paintbrush controller:
@@ -838,7 +854,7 @@ You could (and should) design your own paintbrush controller too! Think about ho
 - Set the brush size or color based on microphone input—louder sounds correspond to larger brush sizes or different hues. Now, you can whistle, shout, and sing to paint!
 - Set the brush color using a color sensor like [this one from Adafruit](https://www.adafruit.com/product/1334)
 - Allow your painter to "paint over" an existing picture or video input stream (sort of [like this](https://youtu.be/QfpFX4NBhJw))
-- How to create a new paintbrush form that supports the artist, complements the onboard esnsors, better fits within their hands
+- How to create a new paintbrush form that supports the artist, complements the onboard sensors, better fits within their hands
 
 <!-- ### Video demonstration of bidirectional Paint I/O -->
 
@@ -851,11 +867,11 @@ You could (and should) design your own paintbrush controller too! Think about ho
 
 ## Some example images
 
-![](assets/images/PaintIO_Image1.png)
+![Example artwork created with the PaintIO application showing colorful overlapping shapes](assets/images/PaintIO_Image1.png)
 
-![](assets/images/PaintIO_Image3-Accel.png)
+![Example artwork created with the accelerometer-based PaintIO controller showing flowing brush strokes](assets/images/PaintIO_Image3-Accel.png)
 
-![](assets/images/PaintIO_Image4-Accel2.png)
+![Another example artwork created with the accelerometer-based PaintIO controller](assets/images/PaintIO_Image4-Accel2.png)
 
 <!-- - Impressionist?
 - Live video impressionist?
@@ -863,9 +879,30 @@ You could (and should) design your own paintbrush controller too! Think about ho
 - If we use color sensor version, can link to one of our favorite all time examples: I/O Brush from Ishii and Ryokai.
 - Use joystick for input rather than two pots? -->
 
+## Lesson Summary
+
+In this lesson, you built PaintIO—a full end-to-end p5.js + Arduino painting application with bidirectional serial communication. Here are the key takeaways:
+
+- Building a complex interactive system is best done **incrementally**: start with a basic prototype (mouse-only painting), add serial support, then add bidirectional communication, then add sensors.
+- **Offscreen graphics buffers** (`createGraphics()`) let you paint to a persistent canvas without redrawing every stroke on every frame. This is a common technique in games and visualizations.
+- **Application-level protocols** define what data your devices send and how it's formatted. For PaintIO, we used comma-separated normalized values (*e.g.,* `"xPosFrac, yPosFrac, sizeFrac, brushType, brushFillMode"`). Prefixing debug lines with `#` separates debugging from real data.
+- **Bimanual interaction**—using both the mouse and Arduino controller simultaneously—opens up rich creative possibilities that go back to Engelbart's 1968 [Mother of All Demos](https://youtu.be/B6rKUf9DWRI?si=XJNd-tspEE9IR9AU).
+- **Sensor-to-property mappings** are a creative design decision. Mapping accelerometer tilt to brush position feels very different from mapping potentiometer rotation. The choice of mapping shapes the painting experience.
+- The **OLED display** on the controller creates a dual-screen interaction paradigm, similar to what Nintendo explored with the Wii U.
+
+## Exercises
+
+**Exercise 1:** Add a **new brush shape** to PaintIO (like a star, diamond, or heart). Update both the p5.js drawing code and the Arduino OLED drawing code. Make sure the new shape works with both fill and outline modes.
+
+**Exercise 2:** Add **brush opacity control** to PaintIO. Use an additional potentiometer (or the existing brush size sensor) to control the alpha transparency of the brush. Send the opacity as an additional comma-separated value and update the `brushColor` alpha accordingly.
+
+**Exercise 3:** Replace the potentiometers with a **joystick module** for brush position control. How does the painting experience change? Write a brief reflection on how the input hardware affects the creative output.
+
+**Exercise 4:** Design and build your own **custom paintbrush controller** that uses at least two different sensor types. Think creatively about the sensor-to-property mappings—for example, using a light sensor to control hue, or blowing on a microphone to control brush size. Document your design with photos and a short video.
+
 ## Next Lesson
 
-In the [next lesson](ml5js-serial.md), we'll introduce machine learning (ML) frameworks and use one in particular, called [ml5.js](https://ml5js.org/), to create interactive ML-based applications with Arduino.
+In the [next lesson](ml5js-serial.md), we'll introduce machine learning (ML) frameworks and use one in particular, called [ml5.js](https://ml5js.org/), to create interactive ML-based applications with Arduino. We'll use body tracking to control physical outputs—get ready to wave your hands! 🤖
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="p5js-serial-io.html" class="nav-prev">

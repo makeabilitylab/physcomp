@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Communication
+title: Serial Communication
 nav_order: 4
 has_toc: false # on by default
 has_children: true
@@ -17,15 +17,23 @@ usetocbot: true
 {:toc}
 ---
 
-In this lesson series, we will learn about computer-to-Arduino interaction. More specifically, serial communication, web serial, and using [p5js](https://p5js.org/) to communicate with Arduino.
+In this lesson series, we will learn about Arduino-to-Computer interaction. More specifically, serial communication, web serial, and using [p5.js](https://p5js.org/) to communicate bidirectionally with Arduino. By the end of this module, you'll be able to build full end-to-end interactive systems that combine the power of web-based tools—including machine learning—with the physical interactivity of Arduino. 🔌
+
+{: .note }
+> **What you'll learn in this module:**
+> - How asynchronous serial communication works and how to use it for bidirectional `Computer ↔ Arduino` communication
+> - How to use the Web Serial API to build browser-based apps that talk to Arduino
+> - How to use p5.js for creative coding with serial input and output
+> - How to build complete interactive systems with bidirectional communication
+> - How to integrate machine learning (ml5.js) with Arduino for gesture- and pose-controlled physical computing
 
 ## [L1: Intro to Serial](serial-intro.md)
 
-In [this lesson](serial-intro.md), we’ll dive into asynchronous serial communication and how we can use it for bidrectional `Computer ↔ Arduino` communication. We'll show example serial communication clients using terminal programs and Python.
+In [this lesson](serial-intro.md), we'll dive into asynchronous serial communication and how we can use it for bidirectional `Computer ↔ Arduino` communication. We'll show example serial communication clients using terminal programs and Python.
 
 ## [L2: Web Serial](web-serial.md)
 
-In [this lesson](web-serial.md), you'll learn about the new [Web Serial API](https://wicg.github.io/serial/) and how to build simple web apps that communicate with Arduino.
+In [this lesson](web-serial.md), you'll learn about the [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) and how to build simple web apps that communicate with Arduino directly from your browser.
 
 ## [L3: p5.js Serial](p5js-serial.md)
 
@@ -41,9 +49,11 @@ In [this lesson](p5js-paint-io.md), we will bring everything together thus far t
 
 ## [L6: ml5.js Serial](ml5js-serial.md)
 
-In [this lesson](ml5js-serial.md), we'll introduce machine learning frameworks like [Runway ML](https://runwayml.com/) and [ml5js](https://ml5js.org/) and show how to use them with Arduino.
+In [this lesson](ml5js-serial.md), we'll introduce machine learning frameworks like [ml5.js](https://ml5js.org/) and show how to use them with Arduino. Specifically, we'll use ml5's [BodyPose](https://docs.ml5js.org/#/reference/bodypose) model for real-time pose estimation and send body keypoint data to Arduino via Web Serial.
 
+## [L7: HandPose Serial](handpose-serial.md)
 
+In [this lesson](handpose-serial.md), we'll explore ml5's [HandPose](https://docs.ml5js.org/#/reference/handpose) model for real-time hand tracking and use it to control a servo motor on Arduino. We'll also build a fun physical construction (a cardboard figure that waves back at you!) to demonstrate the connection between ML-based input and physical output.
 
 <!-- 
 Question to self: Should serial communication be its own top-level header on website?

@@ -38,7 +38,7 @@ In the past few lessons, we've learned about [serial communication](serial-intro
 A painting app is a wonderfully fertile Physical Computing example and helps culminate our learning thus far because:
 - There are many **different paint properties to control** such as paint brush size, speed, color, shape
 - We can **explore** and **play** with different types of **sensors** and **hardware** **input** to control these properties
-- Painting is an **openly creative** and **rich practice**—there are very few rules! And our custom hardware-based paintbrush" can directly influence *how* we paint and *what* we paint. From an interaction design perspective, this is exciting and fun!
+- Painting is an **openly creative** and **rich practice**—there are very few rules! And our custom hardware-based paintbrush can directly influence *how* we paint and *what* we paint. From an interaction design perspective, this is exciting and fun!
 - Finally, as we've already experienced, making a painting application in p5.js is **fairly easy** (and fun)! But how can we make it even more interesting with Arduino and custom input?
 
 Previously, we created this [simple painting application](https://editor.p5js.org/jonfroehlich/embed/MSGdVYUle) in only ~20 lines of code (Impressive! Demonstrates the power of p5.js). In this app, the brush size is changed proportionally via mouse speed, the color is mapped to the mouse's x location, and you can mouse click to switch between fill *vs.* outline. Play with it below!
@@ -133,7 +133,7 @@ let brushX = 0;         // Current brush x location (in pixel coordinates)
 let brushY = 0;         // Current brush y location (in pixel coordinates)
 let brushColor;         // Current brush color
  
-let lastBrushX = 0;     // Last brush y position (similar to pmouseX but for the brush)
+let lastBrushX = 0;     // Last brush x position (similar to pmouseX but for the brush)
 let lastBrushY = 0;     // Last brush y position (similar to pmouseY but for the brush)
 
 let showInstructions = true; // If true, shows the app instructions on the screen
@@ -209,7 +209,7 @@ function drawBrushStroke(xBrush, yBrush){
   if (brushFillMode == 0) { // brushFillMode 0 is fill
     offscreenGfxBuffer.fill(brushColor);
     offscreenGfxBuffer.noStroke();
-  } else { // brushFillMode 0 is outline
+  } else { // brushFillMode 1 is outline
     offscreenGfxBuffer.stroke(brushColor);
     offscreenGfxBuffer.noFill();
   }
@@ -390,7 +390,11 @@ function keyPressed(){
   ...
   }else if(key == 'o'){
     if (!serial.isOpen()) {
-      serial.connectAndOpen(null, serialOptions);
+      try {
+        serial.connectAndOpen(null, serialOptions);
+      } catch (error) {
+        console.error("Serial connection failed:", error);
+      }
     }
   }
 }
@@ -514,8 +518,8 @@ void loop() {
   int yAnalogVal = analogRead(Y_ANALOG_INPUT_PIN);
 
   // Calculate normalized x,y location
-  _x = xAnalogVal / (float)MAX_ANALOG_VAL;
-  _y = yAnalogVal / (float)MAX_ANALOG_VAL;
+  float _x = xAnalogVal / (float)MAX_ANALOG_VAL;
+  float _y = yAnalogVal / (float)MAX_ANALOG_VAL;
 
   // Transmit over serial as comma-separated string
   Serial.print(_x, 4);
@@ -558,8 +562,8 @@ void loop(){
   ...
 
   // Calculate normalized x,y location
-  _x = xAnalogVal / (float)MAX_ANALOG_VAL;
-  _y = yAnalogVal / (float)MAX_ANALOG_VAL;
+  float _x = xAnalogVal / (float)MAX_ANALOG_VAL;
+  float _y = yAnalogVal / (float)MAX_ANALOG_VAL;
 
   // Set new circle location based on accel
   int xBall = _radius + _x * _display.width() - 2 * _radius;
@@ -621,7 +625,7 @@ Here's a sneak peek!
 
 ### Updating the p5.js application
 
-As noted above, our p5.js PaintIO app should now support four incoming brush properties: `xPosFrac, yPosFrac, sizeFrac, brushType, brushFillMode`, which are described in [detail here](p5js-paint-io.md#from-arduino-to-p5js). Additionally, when the user hits the `b` key (to change the brush type) or the `f` key (to change the fill mode), we want to communicate that information back to the Arduino so our paintbrush controller and OLED screen stays in sync.
+As noted above, our p5.js PaintIO app should now support four incoming brush properties: `xPosFrac, yPosFrac, sizeFrac, brushType, brushFillMode`, which are described in [detail above](#from-arduino-to-p5js). Additionally, when the user hits the `b` key (to change the brush type) or the `f` key (to change the fill mode), we want to communicate that information back to the Arduino so our paintbrush controller and OLED screen stays in sync.
 
 #### Parsing additional brush properties and clear screen
 
@@ -724,7 +728,7 @@ function keyPressed() {
 
 #### Adding color
 
-Now, let's add some color. We'll explore a few different color mappings in a bit. For now, let's simply map the hue to the brush size. The easiest way to control hue is to switch the `colorMode` from the default, which is RGB, to [HSB](https://en.wikipedia.org/wiki/HSL_and_HSV) (or sometimes called HSB, for hue saturation, value). We can do this via the [`colorMode(HSB)`](https://p5js.org/reference/#/p5/colorMode) function, which also lets us specify a max value for hue (H), saturation (S), brightness (B), and alpha (A). By default, this range is 360, 100, 100, 1, respectively, for HSB and 255, 255, 255, 255 for RGBA. For simplicity, we'll make the max value 1 for HSBA. For more on HSB and its benefits, read this [Wikipedia article](https://en.wikipedia.org/wiki/HSL_and_HSV).
+Now, let's add some color. We'll explore a few different color mappings in a bit. For now, let's simply map the hue to the brush size. The easiest way to control hue is to switch the `colorMode` from the default, which is RGB, to [HSB](https://en.wikipedia.org/wiki/HSL_and_HSV) (hue, saturation, brightness). We can do this via the [`colorMode(HSB)`](https://p5js.org/reference/#/p5/colorMode) function, which also lets us specify a max value for hue (H), saturation (S), brightness (B), and alpha (A). By default, this range is 360, 100, 100, 1, respectively, for HSB and 255, 255, 255, 255 for RGBA. For simplicity, we'll make the max value 1 for HSBA. For more on HSB and its relationship to HSV (hue, saturation, value), read this [Wikipedia article](https://en.wikipedia.org/wiki/HSL_and_HSV).
 
 But, in short, we're using HSB to more easily control hue.
 

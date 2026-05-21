@@ -2,7 +2,7 @@
 layout: default
 title: L7&#58; HandPose Serial
 nav_order: 7
-parent: Communication
+parent: Serial Communication
 has_toc: true # (on by default)
 comments: true
 usemathjax: false
@@ -414,6 +414,16 @@ And that's it! Because our [`SerialTemplate`](https://github.com/makeabilitylab/
 
 <!-- TODO: update HandWaver p5.js editor and GitHub links to use ml5 v1.x HandPose API -->
 
+<!-- TODO: Sync GitHub source for HandWaver/sketch.js to match lesson changes:
+     - Ensure code uses ml5 v1.x HandPose API (ml5.handPose(), detectStart, hand.wrist)
+     - Add try/catch around connectAndOpen() in mouseClicked() (from SerialTemplate)
+     GitHub: https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/HandWaver
+     p5.js editor: https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu -->
+
+<!-- TODO: Also update HandPoseDemo source to use ml5 v1.x API:
+     GitHub: https://github.com/makeabilitylab/p5js/tree/master/ml5js/HandPose/HandPoseDemo
+     p5.js editor: https://editor.p5js.org/jonfroehlich/sketches/Nn4pXTpbu -->
+
 ![Screenshot of HandWaver running in the p5.js online editor showing hand keypoints overlaid on a webcam feed with the wrist position normalized value displayed](assets/images/ScreenshotOfHandWaverFullRunningInP5OnlineEditor.png)
 **Figure.** A screenshot of HandWaver running in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu). The code is also on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/HandWaver/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/HandWaver)). *Note: this screenshot was taken with ml5 v0.x; the v1.x version looks and works the same.*
 {: .fs-1 }
@@ -434,7 +444,7 @@ We're going to build up the Arduino side step-by-step. There are five main steps
 
 #### Initial servo motor circuit and Arduino test program
 
-As a quick introduction to servo motors, please read this [Adafruit lesson](https://learn.adafruit.com/adafruit-arduino-lesson-14-servo-motors) by Simon Monk. Building on that lesson, we'll create a basic circuit that allows a user to control the servo motor position with a potentiometer. More specifically, we'll read in the potentiometer value on Pin `A0` using [`analogRead()`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/), convert it to an angle between 0 - 180, and then write out the angle to the servo motor.
+As a quick introduction to servo motors, please read this [Adafruit lesson](https://learn.adafruit.com/adafruit-arduino-lesson-14-servo-motors) by Simon Monk. Building on that lesson, we'll create a basic circuit that allows a user to control the servo motor position with a potentiometer. More specifically, we'll read in the potentiometer value on Pin `A0` using [`analogRead()`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogRead/), convert it to an angle between 0 - 180, and then write out the angle to the servo motor.
 
 ![Fritzing diagram showing a basic servo motor circuit with the servo pulse pin connected to Arduino Pin 9 and a potentiometer connected to Pin A0](assets/images/BasicServoPlusPotCircuit_ArduinoLeonardo.png)
 **Figure.** Basic servo motor circuit with servo pulse pin hooked to Arduino's Pin 9 and the potentiometer hooked to Pin `A0`. Diagram made in Fritzing and PowerPoint.

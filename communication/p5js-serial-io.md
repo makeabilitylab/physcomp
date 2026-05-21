@@ -2,7 +2,7 @@
 layout: default
 title: L4&#58; p5.js Serial I/O
 nav_order: 4
-parent: Communication
+parent: Serial Communication
 has_toc: true # (on by default)
 comments: true
 usemathjax: false
@@ -33,7 +33,7 @@ Let's take this growing knowledge and momentum to create slightly more sophistic
 
 ## DisplayShapeOut: p5.js to Arduino
 
-To begin, we'll build a simple p5.js demo app that draws and resizes a selected shape (a circle, triangle, or rectangle) based on the mouse's x position and sends this shape data as a text-encoded comma-separated string over web serial: (`"shapeType, shapeSize"`). On the Arduino side, we'll parse this string and draw the current shape and size on the OLED. Because the p5.js canvas size and the OLED screen size do not match, we'll use a normalized size value between [0,1] where 0 is the smallest size and 1 is the maximum size. Shape type is encoded as 0 for circle, 1 for square, and 2 for rectangle.
+To begin, we'll build a simple p5.js demo app that draws and resizes a selected shape (a circle, square, or triangle) based on the mouse's x position and sends this shape data as a text-encoded comma-separated string over web serial: (`"shapeType, shapeSize"`). On the Arduino side, we'll parse this string and draw the current shape and size on the OLED. Because the p5.js canvas size and the OLED screen size do not match, we'll use a normalized size value between [0,1] where 0 is the smallest size and 1 is the maximum size. Shape type is encoded as 0 for circle, 1 for square, and 2 for triangle.
 
 Here's a small sneak preview of what the final interactive experience will look like.
 
@@ -55,7 +55,7 @@ Let's go over some of DisplayShapeOut's primary functionality. We want the user 
 
 - **Change the size of the shape**. We'll do this by tracking the mouse's x position and mapping it to size
 
-- **Send shape data over serial.** Each time either the current shape or size changes, we need to send an update over serial. We'll do this using [our web serial class](web-serial.md#our-web-serial-class)
+- **Send shape data over serial.** Each time either the current shape or size changes, we need to send an update over serial. We'll do this using [our serial.js library](web-serial.md#our-serialjs-library)
 
 #### Draw and dynamically resize shape
 
@@ -237,7 +237,11 @@ Now, let's update the `mouseClicked()` function to handle opening and connecting
 function mouseClicked() {
   if (!serial.isOpen()) {
     // If the serial connection is not opened, begin open/connect sequence
-    serial.connectAndOpen(null, serialOptions);
+    try {
+      serial.connectAndOpen(null, serialOptions);
+    } catch (error) {
+      console.error("Serial connection failed:", error);
+    }
   }else{
     // Otherwise, increment shape type
     curShapeType++;
@@ -357,6 +361,9 @@ This echo technique is a crucial debugging tool. So, make sure you understand it
 {: .note }
 > **The echo-back technique** is one of the most useful serial debugging strategies. By having the Arduino send back what it received, you can verify that (1) data is being transmitted successfully, (2) the data arrives in the expected format, and (3) parsing works correctly. We also recommend using the OLED display for intermediate debug output—it's like having a mini serial monitor right on your breadboard!
 
+{: .note }
+> **Watch out for `readStringUntil()` timeouts.** `Serial.readStringUntil('\n')` is a *blocking* function—if no newline arrives, it waits for the default timeout of **1000 ms** before returning. In interactive apps, a missing or malformed newline means your entire `loop()` stalls for a full second. If you notice lag, consider adding `Serial.setTimeout(50);` in `setup()` to reduce the timeout to 50ms. This way, a dropped packet causes only a brief hiccup instead of a one-second freeze.
+
 <!-- Another useful debugging strategy is to use our [OLED](../advancedio/oled.md) displays for debugging output. We can change these debug printouts as our app progresses (and remove them, of course, once we're confident things are working the way we intend). -->
 
 <!-- So, let's add in our OLED—which we need for this app anyway. -->
@@ -475,7 +482,7 @@ So far, so good!
 
 But now we actually need to **parse** the incoming serial text data into useful typed variables. Let's do that and update our OLED-based debug output. Again, it's useful to construct our program step-by-step testing along the way.
 
-Update the code inside of `if(Serial.available() > 0)` in `loop()` to include parsing. There are many possible parsing approaches; however, we are going to take advantage of Arduino's [String](https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/) object and functions like [`indexOf()`](https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/indexof) and [`substring()`](https://www.arduino.cc/reference/en/language/variables/data-types/string/functions/substring) to look for commas and parse out our data. We showed a similar technique in our [Intro to Serial](serial-intro.md#formatting-messages) lesson.
+Update the code inside of `if(Serial.available() > 0)` in `loop()` to include parsing. There are many possible parsing approaches; however, we are going to take advantage of Arduino's [String](https://docs.arduino.cc/language-reference/en/variables/data-types/stringObject/) object and functions like [`indexOf()`](https://docs.arduino.cc/language-reference/en/variables/data-types/stringObject/) and [`substring()`](https://docs.arduino.cc/language-reference/en/variables/data-types/stringObject/) to look for commas and parse out our data. We showed a similar technique in our [Intro to Serial](serial-intro.md#formatting-messages) lesson.
 
 For now, we'll display both the raw data received over serial as well as the parsed data. Once we're confident we have this working, we'll remove this debug output.
 

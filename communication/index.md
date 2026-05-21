@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Communication
+title: Serial Communication
 nav_order: 4
 has_toc: false # on by default
 has_children: true
@@ -17,7 +17,7 @@ usetocbot: true
 {:toc}
 ---
 
-In this lesson series, we will learn about computer-to-Arduino interaction. More specifically, serial communication, web serial, and using [p5.js](https://p5js.org/) to communicate with Arduino. By the end of this module, you'll be able to build full end-to-end interactive systems that combine the power of web-based tools—including machine learning—with the physical interactivity of Arduino. 🔌
+In this lesson series, we will learn about Arduino-to-Computer interaction. More specifically, serial communication, web serial, and using [p5.js](https://p5js.org/) to communicate bidirectionally with Arduino. By the end of this module, you'll be able to build full end-to-end interactive systems that combine the power of web-based tools—including machine learning—with the physical interactivity of Arduino. 🔌
 
 {: .note }
 > **What you'll learn in this module:**

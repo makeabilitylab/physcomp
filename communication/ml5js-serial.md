@@ -65,7 +65,7 @@ And what if we don't need (or want) to train our own classifiers or deeply engag
 
 ### Making machine learning accessible
 
-Since its inception, researchers have worked to make machine learning more accessible to creators such as musicians, artists, designers, and hobbyists. For example, in 2009, Fiebrink and colleagues created the *[Wekinator](https://ualresearchonline.arts.ac.uk/id/eprint/16687/1/FiebrinkTruemanCook_NIME2009.pdf)* to allow "*musicians, composers, and new instrument designers to interactively train and modify many standard machine learning algorithms in real-time.*" Six years prior, Jerry Fails and Dan Olsen Jr. introduced [*Crayons*](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.14.8362&rep=rep1&type=pdf), an interactive machine-learning model that enabled users to train, classify, and correct pixel-based classifications via sketching (see Figure below).
+Since its inception, researchers have worked to make machine learning more accessible to creators such as musicians, artists, designers, and hobbyists. For example, in 2009, Fiebrink and colleagues created the *[Wekinator](https://ualresearchonline.arts.ac.uk/id/eprint/16687/1/FiebrinkTruemanCook_NIME2009.pdf)* to allow "*musicians, composers, and new instrument designers to interactively train and modify many standard machine learning algorithms in real-time.*" Six years prior, Jerry Fails and Dan Olsen Jr. introduced [*Crayons*](https://dl.acm.org/doi/10.1145/604045.604056), an interactive machine-learning model that enabled users to train, classify, and correct pixel-based classifications via sketching (see Figure below).
 
 ![Screenshot of the Crayons interactive machine learning tool showing users sketching over pixels to segment a human hand](assets/images/CrayonsScreenShot_ByJerrFailsAndDanOlsenJr.png)
 **Figure.** The Crayons' interactive machine learning process for auto-segmenting pixel "blobs" in images. Users rapidly sketch over pixels to include and exclude from classification—in this case, segmenting a human hand—immediately see the ML model's response (highlighted pixels) and then make corrections. See full [video demo here](https://youtu.be/GtW-7YsiQdI).
@@ -378,7 +378,11 @@ First, if you've never connected to a particular web serial device before, you c
 {% highlight JavaScript %}
 function mouseClicked() {
   if (!serial.isOpen()) {
-    serial.connectAndOpen(null, serialOptions);
+    try {
+      serial.connectAndOpen(null, serialOptions);
+    } catch (error) {
+      console.error("Serial connection failed:", error);
+    }
   }
 }
 {% endhighlight JavaScript %}
@@ -394,6 +398,12 @@ serial.autoConnectAndOpenPreviouslyApprovedPort(serialOptions);
 That's it for the p5.js app. The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)).
 
 <!-- TODO: update p5.js online editor and GitHub links to use ml5 v1.x BodyPose API -->
+
+<!-- TODO: Sync GitHub source for NoseTracker/sketch.js to match lesson changes:
+     - Add try/catch around connectAndOpen() in mouseClicked()
+     - Ensure code uses ml5 v1.x BodyPose API (detectStart, named keypoints)
+     GitHub: https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker
+     p5.js editor: https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2 -->
 
 ### Building the Arduino side
 
@@ -418,7 +428,7 @@ The NoseTracker Arduino code is similar to [previous lessons](p5js-serial-io.md#
 - **Draw a face** at the x,y pixel positions
 - **Echo data back** to our p5.js app for debugging purposes
 
-For the face, rather than drawing one using shape primitives (*e.g.,* [`drawCircle`](oled.md#drawing-shapes) calls), we're going to use the built-in face icon from the default font set (which is char index `2`):
+For the face, rather than drawing one using shape primitives (*e.g.,* [`drawCircle`](../advancedio/oled.md#drawing-shapes) calls), we're going to use the built-in face icon from the default font set (which is char index `2`):
 
 {% highlight C++ %}
 _display.drawChar(x, y, (unsigned char)2, SSD1306_WHITE, SSD1306_BLACK, CHAR_SIZE);
@@ -434,7 +444,7 @@ First, declare some global variables related to face drawing.
 {% highlight C++ %}
 const int CHAR_SIZE = 3;           // set font size to 3
 const int DEFAULT_CHAR_WIDTH = 5;  // default font is 5 pixels wide at size 1
-const int DEFAULT_CHAR_HEIGHT = 8; // default font is 8 pixels wide at size 1
+const int DEFAULT_CHAR_HEIGHT = 8; // default font is 8 pixels tall at size 1
 
 int _charWidth = DEFAULT_CHAR_WIDTH * CHAR_SIZE;   // calculate char width at char size
 int _charHeight = DEFAULT_CHAR_HEIGHT * CHAR_SIZE;  // calculate char height at char size

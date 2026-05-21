@@ -220,7 +220,7 @@ OK, let's get started making stuff! We'll begin with Arduino sending data to p5.
 
 ### Starter template code
 
-To make it easier to build p5.js web apps with Web Serial, we've created a basic p5.js serial template. You can view it and duplicate it via the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/vPfUvLze_C) or from our GitHub repo ([SerialTemplate](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate)).
+To make it easier to build p5.js web apps with Web Serial, we've created a basic p5.js serial template. You can view it and duplicate it via the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/vPfUvLze_C) or from our GitHub repo ([SerialTemplate](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate)).
 
 <!-- TODO: verify template links above are still active -->
 
@@ -232,14 +232,14 @@ To make it easier to build p5.js web apps with Web Serial, we've created a basic
 
 ### Circle size app
 
-Let's build a simple `Arduino → Computer` p5.js web app that reads in a single floating point number between [0, 1] (as text-encoded data) and draws an appropriately sized circle. We'll use the Arduino program [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) and the web app called [CircleSizeIn](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo) ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo)). The full app experience looks like this:
+Let's build a simple `Arduino → Computer` p5.js web app that reads in a single floating point number between [0, 1] (as text-encoded data) and draws an appropriately sized circle. We'll use the Arduino program [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) and the web app called [CircleSizeIn](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo) ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo)). The full app experience looks like this:
 
 <!-- TODO: verify CircleSizeIn live page and code links are still active -->
 
 <video autoplay loop muted playsinline aria-label="Video demonstrating the CircleSizeIn p5.js app where a potentiometer controls circle size">
   <source src="assets/videos/AnalogInputOut.ino-CircleSizeIn-POT-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** The p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a potentiometer on Pin A0 as analog input.
+**Video.** The p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a potentiometer on Pin A0 as analog input.
 {: .fs-1 }
 
 Let's get building!
@@ -351,7 +351,7 @@ Now save and load the page with Live Server. It should look like this:
 **Figure.** An initial template for web development with p5.js and Web Serial.
 {: .fs-1 }
 
-If your page does not load or does not look like this, study our blank template here ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/BlankTemplate/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/BlankTemplate)).
+If your page does not load or does not look like this, study our blank template here ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/BlankTemplate/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/BlankTemplate)).
 
 <!-- TODO: verify blank template links above are still active -->
 
@@ -526,7 +526,7 @@ function draw() {
 }
 {% endhighlight JavaScript %}
 
-And that's it! We did it! You can view, edit, and run CircleSizeIn in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) or via GitHub ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)).
+And that's it! We did it! You can view, edit, and run CircleSizeIn in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) or via GitHub ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo)).
 
 <!-- TODO: verify CircleSizeIn editor, live page, and code links are still active -->
 
@@ -537,7 +537,7 @@ Here's a video demonstration:
 <video autoplay loop muted playsinline aria-label="Video demonstrating the CircleSizeIn p5.js app with a potentiometer controlling circle size via serial">
   <source src="assets/videos/AnalogInputOut.ino-CircleSizeIn-POT-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
-**Video.** The p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a potentiometer on Pin A0. Note: in this video, we use [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to also show the data on the OLED.
+**Video.** The p5.js app CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo)), which receives serial input from the Arduino running [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino). We use a potentiometer on Pin A0. Note: in this video, we use [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) to also show the data on the OLED.
 {: .fs-1 }
 
 #### Other sensors as input
@@ -551,7 +551,7 @@ Of course, we can hook up whatever sensor we want as input. Below are demonstrat
 <video autoplay loop muted playsinline aria-label="Video demonstrating CircleSizeIn with a force-sensitive resistor controlling circle size">
   <source src="assets/videos/AnalogOut-CircleSizeIn-FSR-Trimmed2-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/CircleSizeInDemo)) with a [force-sensitive resistor (FSR)](../arduino/force-sensitive-resistors.md) on Pin A0 and Arduino running [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino).
+**Video.** CircleSizeIn ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo)) with a [force-sensitive resistor (FSR)](../arduino/force-sensitive-resistors.md) on Pin A0 and Arduino running [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino).
 {: .fs-1 }
 
 ##### CircleSizeIn with IR distance sensor
@@ -572,7 +572,7 @@ On the Arduino side, we use the exact same code ([AnalogOut.ino](https://github.
 
 #### Writing GraphIn in p5.js
 
-Begin with the same p5.js serial template: copy [SerialTemplate](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) and rename the folder to `GraphIn`.
+Begin with the same p5.js serial template: copy [SerialTemplate](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate) and rename the folder to `GraphIn`.
 
 We're going to use a **queue** to temporarily store data coming off serial, then read from and empty that queue in `draw()`. For each new value, we draw a representative line at an ever-increasing x-pixel position (`xPos`). When we reach the canvas width, we reset `xPos` and start over.
 
@@ -639,7 +639,7 @@ function mouseClicked() {
 }
 {% endhighlight JavaScript %}
 
-That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn).
+That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn).
 
 <!-- TODO: verify GraphIn live page and code links are still active -->
 
@@ -650,7 +650,7 @@ Here are two video demonstrations: one with a potentiometer and the other with t
 <video autoplay loop muted playsinline aria-label="Video demonstrating the GraphIn p5.js app with a potentiometer showing real-time sensor data as colored bars">
   <source src="assets/videos/AnalogOut.ino-GraphIn-POT-Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** GraphIn ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn)) with a potentiometer on Pin A0. The Arduino is running [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) but something simpler like [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) would work too!
+**Video.** GraphIn ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn)) with a potentiometer on Pin A0. The Arduino is running [AnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOutOLED/AnalogOutOLED.ino) but something simpler like [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) would work too!
 {: .fs-1 }
 
 And here's a demonstration with the Sharp IR distance sensor:
@@ -658,7 +658,7 @@ And here's a demonstration with the Sharp IR distance sensor:
 <video autoplay loop muted playsinline aria-label="Video demonstrating the GraphIn p5.js app with an infrared distance sensor showing real-time proximity data">
   <source src="assets/videos/SharpIRDistanceOutOLED-GraphIn-Trimmed-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** GraphIn ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/GraphIn)) with the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) infrared distance sensor. We used [SharpIRDistanceOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOutOLED/SharpIRDistanceOutOLED.ino), which uses a moving average filter to smooth the noisy IR signal.
+**Video.** GraphIn ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn)) with the [Sharp GP2Y0A21YK](https://www.sparkfun.com/products/242) infrared distance sensor. We used [SharpIRDistanceOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SharpIRDistanceOutOLED/SharpIRDistanceOutOLED.ino), which uses a moving average filter to smooth the noisy IR signal.
 {: .fs-1 }
 
 ## Lesson Summary

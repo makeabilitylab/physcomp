@@ -59,7 +59,7 @@ The baud rate specifies how fast data is sent over serial, expressed in bits per
 {: .warning }
 > If your Serial Monitor shows garbled text or garbage characters, the most common cause is a **baud rate mismatch**. Double-check that the baud rate in `Serial.begin(<baud>)` matches the setting in your Serial Monitor dropdown.
 
-Thus far, speed hasn't been a major concern. We've typically used 9600 bps (9.6 kbps) for transmitting debugging info. At 9600 bps, the transmitter sends one new voltage pulse (*e.g.,* HIGH corresponding to +5V and LOW corresponding to 0V) every 1/9600th of a second, which is interpreted as a bit (a 1 or 0) by the receiver. Arduino supports up to 115200 bps (115.2 kbps), which is 12x faster than 9600—but still slow by today's networking standards.
+Thus far, speed hasn't been a major concern. We've typically used 9600 bps (9.6 kbps) for transmitting debugging info. At 9600 bps, the transmitter sends one new voltage pulse—HIGH corresponding to the logic-level voltage (+5V on Uno, +3.3V on ESP32) and LOW corresponding to 0V—every 1/9600th of a second, which is interpreted as a bit (a 1 or 0) by the receiver. Arduino supports up to 115200 bps (115.2 kbps), which is 12x faster than 9600—but still slow by today's networking standards.
 
 {: .note }
 > In our [ESP32 lessons](../esp32/index.md), we use **115200 baud** as the default because the ESP32 is much faster than the Uno and defaults to this rate. If you're using an ESP32, use `Serial.begin(115200)` and make sure your Serial Monitor matches!
@@ -631,7 +631,7 @@ void loop(){
   // Check to see if there is any incoming serial data
   if(Serial.available() > 0){
     // If we're here, then serial data has been received
-    // Read data off the serial port until we get to the endline delimeter ('\n')
+    // Read data off the serial port until we get to the endline delimiter ('\n')
     // Store all of this data into a string
     String rcvdSerialData = Serial.readStringUntil('\n'); 
 

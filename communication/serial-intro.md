@@ -2,7 +2,7 @@
 layout: default
 title: L1&#58; Intro to Serial
 nav_order: 1
-parent: Communication
+parent: Serial Communication
 has_toc: true # (on by default)
 comments: true
 usemathjax: true
@@ -578,12 +578,6 @@ The `finally` block ensures `ser.close()` is called whether the loop ends normal
 See the video below.
 
 #### Video demo using Python
-
-<!-- TODO: Consider re-recording this video. The code was updated to append '\n' to ser.write()
-     and to wrap the loop in try/except/finally. The old video may show noticeably slower
-     response times (due to the 1-second readStringUntil timeout) and no graceful exit. 
-     Not strictly necessary since the video still demonstrates the concept correctly,
-     but the timing difference could confuse students comparing their experience to the video. -->
 
 <video autoplay loop muted playsinline aria-label="Video demonstrating a Python script using pySerial to send numeric values to the Arduino and receive echoed responses, with values displayed on an OLED.">
   <source src="assets/videos/SimpleSerialIn-Python-NoTalking2-TrimmedAndSpedUp720p.mp4" type="video/mp4" />

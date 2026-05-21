@@ -2,7 +2,7 @@
 layout: default
 title: L6&#58; ml5.js Serial
 nav_order: 6
-parent: Communication
+parent: Serial Communication
 has_toc: true # (on by default)
 comments: true
 usemathjax: false
@@ -25,7 +25,7 @@ For example, with only a few lines of JavaScript code and some slight modificati
 <video autoplay loop muted playsinline aria-label="Video demonstrating playing Flappy Bird on Arduino by tracking nose position using ml5.js pose detection">
   <source src="assets/videos/FlappyBirdNoseTracker_Short_1000w.mp4" type="video/mp4" />
 </video>
-**Video.** Playing Flappy Bird on the Arduino Leonardo by tracking my nose position using p5.js, [ml5.js](https://ml5js.org/), and [Web Serial](web-serial.md). The p5.js app is called NoseTracker ([p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2), GitHub [live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), GitHub [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino). *Note: this video was created using ml5.js v0.12 with PoseNet; the current lesson uses ml5.js v1.x with BodyPose, but the behavior is the same.*
+**Video.** Playing Flappy Bird on the Arduino Leonardo by tracking my nose position using p5.js, [ml5.js](https://ml5js.org/), and [Web Serial](web-serial.md). The p5.js app is called NoseTracker ([p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2), GitHub [live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), GitHub [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino). *Note: this video was created using ml5.js v0.12 with PoseNet; the current lesson uses ml5.js v1.x with BodyPose, but the behavior is the same.*
 {: .fs-1 }
 
 In this lesson, we'll show how to do this and more. But first, let's start with some background on machine learning frameworks before diving into [ml5.js](https://ml5js.org/) and ml5+Arduino more specifically.
@@ -209,7 +209,7 @@ Here's a video demonstration:
 <video autoplay loop muted playsinline aria-label="Video demonstrating the Skeleton app with ml5 pose detection showing keypoints and skeleton overlay">
   <source src="assets/videos/PoseNet_SkeletonDemo_Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** This video demonstrates ml5 pose estimation via the [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) application. We are drawing each of the 17 recognized keypoints along with the x,y position and confidence scores. The code is available on GitHub [here](https://github.com/makeabilitylab/p5js/tree/master/ml5js/PoseNet/Skeleton). *Note: this video was created using ml5 v0.x with PoseNet; the current BodyPose API produces the same keypoints with improved accuracy.*
+**Video.** This video demonstrates ml5 pose estimation via the [Skeleton](https://makeabilitylab.github.io/p5js/ml5js/PoseNet/Skeleton/) application. We are drawing each of the 17 recognized keypoints along with the x,y position and confidence scores. The code is available on GitHub [here](https://github.com/makeabilitylab/p5js/tree/main/ml5js/PoseNet/Skeleton). *Note: this video was created using ml5 v0.x with PoseNet; the current BodyPose API produces the same keypoints with improved accuracy.*
 {: .fs-1 }
 
 <!-- TODO: update Skeleton p5.js editor link to use v1.x BodyPose API -->
@@ -220,7 +220,7 @@ OK, now we're ready to start building an ml5.js + Arduino application together!
 
 Let's build a p5.js + ml5.js application that tracks the nose position of a human and sends that position over serial to an Arduino. As always, we'll build this up step-by-step.
 
-Start by copying our [SerialTemplate](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate) and rename the folder to `NoseTracker`.
+Start by copying our [SerialTemplate](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate) and rename the folder to `NoseTracker`.
 
 #### Add in ml5.js
 
@@ -371,7 +371,7 @@ function onPosesDetected(results) {
 
 #### Connect to web serial device
 
-Our template code, [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/p5js/SerialTemplate), provides two different connection mechanisms—both are already coded so you need not do anything here. But, to review, the two different connection approaches are:
+Our template code, [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate), provides two different connection mechanisms—both are already coded so you need not do anything here. But, to review, the two different connection approaches are:
 
 First, if you've never connected to a particular web serial device before, you can click on the canvas where you'll be greeted by a connection dialog:
 
@@ -395,14 +395,14 @@ serial.autoConnectAndOpenPreviouslyApprovedPort(serialOptions);
 
 #### We're done with the JavaScript app
 
-That's it for the p5.js app. The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)).
+That's it for the p5.js app. The full code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/ml5js/NoseTracker)).
 
 <!-- TODO: update p5.js online editor and GitHub links to use ml5 v1.x BodyPose API -->
 
 <!-- TODO: Sync GitHub source for NoseTracker/sketch.js to match lesson changes:
      - Add try/catch around connectAndOpen() in mouseClicked()
      - Ensure code uses ml5 v1.x BodyPose API (detectStart, named keypoints)
-     GitHub: https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker
+     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/ml5js/NoseTracker
      p5.js editor: https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2 -->
 
 ### Building the Arduino side
@@ -508,21 +508,21 @@ Here's a longer video demonstration of the full p5.js + Arduino NoseTracker app:
 <video autoplay loop muted playsinline aria-label="Video demonstrating the full NoseTracker app with nose position controlling a face icon on the Arduino OLED display">
   <source src="assets/videos/NoseTrackerFullDemo-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** The full NoseTracker demo. The p5.js code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino code is on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino). You can ignore the two momentary buttons on the breadboard—we don't use them here. *Note: this video was created with ml5 v0.x PoseNet; the behavior with BodyPose v1.x is the same.*
+**Video.** The full NoseTracker demo. The p5.js code is available in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/ml5js/NoseTracker)). The Arduino code is on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino). You can ignore the two momentary buttons on the breadboard—we don't use them here. *Note: this video was created with ml5 v0.x PoseNet; the behavior with BodyPose v1.x is the same.*
 {: .fs-1 }
 
 <!-- TODO: update p5.js online editor and GitHub links to use ml5 v1.x BodyPose API -->
 
 ## Introducing FlappyNose
 
-Using the same p5+ml5 code, NoseTracker ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)), we can build lots of interesting physical computing experiences. As one example, we can modify the [FlappyBird.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino) code we introduced in our [OLED Lesson](../advancedio/oled.md) to use **serial input** rather than **digital input** (a button press) to control flapping. We'll call this new incarnation: FlappyNose! 🐦
+Using the same p5+ml5 code, NoseTracker ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/ml5js/NoseTracker)), we can build lots of interesting physical computing experiences. As one example, we can modify the [FlappyBird.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/FlappyBird/FlappyBird.ino) code we introduced in our [OLED Lesson](../advancedio/oled.md) to use **serial input** rather than **digital input** (a button press) to control flapping. We'll call this new incarnation: FlappyNose! 🐦
 
 In this case, we draw a menu screen that asks the user to select the "flapping" control—either serial or button. If serial is selected, the Arduino sketch expects a text-encoded comma-separated line of x,y positions—just like what the NoseTracker page transmits—however, we only use the y position in the game to set the "bird" position. See the video below.
 
 <div class="iframe-container">
   <iframe src="https://www.youtube.com/embed/AktNXq-cflw" title="YouTube video: Full demonstration of FlappyNose, playing Flappy Bird with nose tracking" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-**Video.** A full demonstration of "FlappyNose". Watch me get a high score of 33 after a few tries. :) The p5.js app is available on the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or in GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino). *Note: this video was created with ml5 v0.x PoseNet; the behavior with BodyPose v1.x is the same.*
+**Video.** A full demonstration of "FlappyNose". Watch me get a high score of 33 after a few tries. :) The p5.js app is available on the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/QgPPEU5o2) or in GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/ml5js/NoseTracker), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/ml5js/NoseTracker)). The Arduino sketch is [FlappyBirdSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/FlappyBirdSerialIn/FlappyBirdSerialIn.ino). *Note: this video was created with ml5 v0.x PoseNet; the behavior with BodyPose v1.x is the same.*
 {: .fs-1 }
 
 <!-- TODO: update p5.js online editor and GitHub NoseTracker links to use ml5 v1.x BodyPose API -->

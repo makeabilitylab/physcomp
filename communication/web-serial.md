@@ -2,7 +2,7 @@
 layout: default
 title: L2&#58; Web Serial
 nav_order: 2
-parent: Communication
+parent: Serial Communication
 has_toc: true # (on by default)
 comments: true
 usemathjax: false
@@ -301,14 +301,14 @@ The full experience looks like this:
 <video autoplay loop muted playsinline aria-label="Video demonstrating the SliderOut web serial demo controlling an LED brightness via a slider">
   <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-Snippet720p.mp4" type="video/mp4" />
 </video>
-**Video.** The SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
+**Video.** The SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
 
 <!-- TODO: verify that the live page and code links above are still active -->
 
 <!-- TODO: Sync GitHub source for SliderOut/index.html to match lesson changes:
      - Add try/catch around connectAndOpen() in onConnectButtonClick()
-     GitHub: https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut -->
+     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/SliderOut -->
 
 #### Create folder and initial index.html page
 
@@ -471,7 +471,7 @@ Here's the polished version in action:
 <video autoplay loop muted playsinline aria-label="Video demonstrating the full SliderOut demo with a polished interface controlling an LED via Web Serial">
   <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
 </video>
-**Video.** The completed SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
+**Video.** The completed SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
 
 <!-- TODO: verify that the live page and code links above are still active -->
@@ -483,7 +483,7 @@ For our second example, we'll build a webpage that **sends and receives** text d
 <video autoplay loop muted playsinline aria-label="Video showing bidirectional text communication between a web app and an Arduino with OLED display">
   <source src="assets/videos/DisplaySerialTextIn-QuickSnippet-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** The DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
+**Video.** The DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
 
 <!-- TODO: verify that the live page and code links above are still active -->
@@ -491,7 +491,7 @@ For our second example, we'll build a webpage that **sends and receives** text d
 <!-- TODO: Sync GitHub source for DisplayText/index.html to match lesson changes:
      - Add try/catch around connectAndOpen() in onButtonConnectToSerialDevice()
      - Add aria-live="polite" to the received-text <p> element
-     GitHub: https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText -->
+     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/DisplayText -->
 
 For the circuit, we need an Arduino and an [OLED display](../advancedio/oled.md):
 
@@ -630,7 +630,7 @@ That's it! You now have a bidirectional web serial app. Play and experiment!
 <video autoplay loop muted playsinline aria-label="Video showing the completed DisplayText web serial demo with bidirectional text communication">
   <source src="assets/videos/DisplaySerialTextIn-FullSpedUp-Optimized.mp4" type="video/mp4" />
 </video>
-**Video.** The completed DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
+**Video.** The completed DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
 
 <!-- TODO: verify that the live page and code links above are still active -->

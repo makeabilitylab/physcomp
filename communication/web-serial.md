@@ -306,6 +306,10 @@ The full experience looks like this:
 
 <!-- TODO: verify that the live page and code links above are still active -->
 
+<!-- TODO: Sync GitHub source for SliderOut/index.html to match lesson changes:
+     - Add try/catch around connectAndOpen() in onConnectButtonClick()
+     GitHub: https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/SliderOut -->
+
 #### Create folder and initial index.html page
 
 Create a folder called `SliderOut` with an empty `index.html` file. Open the folder in VSCode (`File → Open Folder`). Start with this minimal HTML:
@@ -370,7 +374,11 @@ Now let's add our serial library, a heading, and a connect button. Because Web S
     async function onConnectButtonClick() {
       console.log("Connect button clicked!");
       if (!serial.isOpen()) {
-        await serial.connectAndOpen();
+        try {
+          await serial.connectAndOpen();
+        } catch (error) {
+          console.error("Serial connection failed:", error);
+        }
       } else {
         console.log("Serial connection is already open");
       }
@@ -480,6 +488,11 @@ For our second example, we'll build a webpage that **sends and receives** text d
 
 <!-- TODO: verify that the live page and code links above are still active -->
 
+<!-- TODO: Sync GitHub source for DisplayText/index.html to match lesson changes:
+     - Add try/catch around connectAndOpen() in onButtonConnectToSerialDevice()
+     - Add aria-live="polite" to the received-text <p> element
+     GitHub: https://github.com/makeabilitylab/p5js/tree/master/WebSerial/Basic/DisplayText -->
+
 For the circuit, we need an Arduino and an [OLED display](../advancedio/oled.md):
 
 ![Fritzing diagram showing an Arduino Leonardo connected to an OLED display via I2C](assets/images/ArduinoLeonardo_OLEDDisplayWiring.png)
@@ -509,7 +522,7 @@ Create a new folder called `DisplayText` with an `index.html` file. Start with t
       <p id="output-text"></p>
 
       <h3>Received from Arduino:</h3>
-      <p id="received-text"></p>
+      <p id="received-text" aria-live="polite"></p>
     </div>
   </div>
 </body>
@@ -537,7 +550,11 @@ Add a `<script>` block at the end of the `<body>`. This code sets up the serial 
 
   async function onButtonConnectToSerialDevice() {
     if (!serial.isOpen()) {
-      await serial.connectAndOpen();
+      try {
+        await serial.connectAndOpen();
+      } catch (error) {
+        console.error("Serial connection failed:", error);
+      }
     }
   }
 
@@ -622,29 +639,17 @@ That's it! You now have a bidirectional web serial app. Play and experiment!
 
 Web Serial is powerful but can be frustrating to debug, especially when things silently fail. Here are the most common issues and how to fix them.
 
-{: .warning }
-> **No serial ports appear in the browser dialog.**
-> Make sure your Arduino is plugged in via USB and that no other program (like the Arduino IDE's Serial Monitor) has the port open. Only one program can access a serial port at a time. On Mac/Linux, check that you have the correct USB drivers installed. Try a different USB cable—some cables are power-only and don't carry data.
+**No serial ports appear in the browser dialog.** Make sure your Arduino is plugged in via USB and that no other program (like the Arduino IDE's Serial Monitor) has the port open. Only one program can access a serial port at a time. On Mac/Linux, check that you have the correct USB drivers installed. Try a different USB cable—some cables are power-only and don't carry data.
 
-{: .warning }
-> **Garbled text or garbage characters in the console.**
-> This almost always means a **baud rate mismatch**. The baud rate in your JavaScript (`serial.connectAndOpen(null, { baudRate: 9600 })`) must exactly match the baud rate in your Arduino sketch (`Serial.begin(9600)`). Double-check both.
+**Garbled text or garbage characters in the console.** This almost always means a **baud rate mismatch**. The baud rate in your JavaScript (`serial.connectAndOpen(null, { baudRate: 9600 })`) must exactly match the baud rate in your Arduino sketch (`Serial.begin(9600)`). Double-check both.
 
-{: .warning }
-> **`navigator.serial` is `undefined`.**
-> Your browser doesn't support Web Serial. Switch to **Chrome**, **Edge**, or **Opera**. Also make sure you're serving your page from a web server (`localhost` or `https://`)—Web Serial is blocked on `file://` URLs.
+**`navigator.serial` is `undefined`.** Your browser doesn't support Web Serial. Switch to **Chrome**, **Edge**, or **Opera**. Also make sure you're serving your page from a web server (`localhost` or `https://`)—Web Serial is blocked on `file://` URLs.
 
-{: .warning }
-> **The connect button does nothing (no permission dialog appears).**
-> The `connectAndOpen()` call must happen inside a **user gesture** event handler (like a button click). You cannot call it automatically on page load—the browser blocks this for security. Also check your dev console (`Ctrl+Shift+I`) for error messages.
+**The connect button does nothing (no permission dialog appears).** The `connectAndOpen()` call must happen inside a **user gesture** event handler (like a button click). You cannot call it automatically on page load—the browser blocks this for security. Also check your dev console (`Ctrl+Shift+I`) for error messages.
 
-{: .warning }
-> **The connection works once but fails after re-uploading Arduino code.**
-> When you upload new code to the Arduino, the board resets and the serial port briefly disconnects. Your web app may need to reconnect. Click the connect button again after uploading. On the **ESP32-S3** with native USB, the port may disappear entirely during reset and reappear with a different name—this is normal.
+**The connection works once but fails after re-uploading Arduino code.** When you upload new code to the Arduino, the board resets and the serial port briefly disconnects. Your web app may need to reconnect. Click the connect button again after uploading. On the **ESP32-S3** with native USB, the port may disappear entirely during reset and reappear with a different name—this is normal.
 
-{: .warning }
-> **Data seems delayed or arrives in chunks.**
-> Serial data is buffered. Our `serial.js` library reads line-by-line (splitting on `\n`), so make sure your Arduino is sending data with `Serial.println()` (which appends `\r\n`) rather than `Serial.print()`. If you use `Serial.print()`, the data will accumulate in the buffer until a newline arrives.
+**Data seems delayed or arrives in chunks.** Serial data is buffered. Our `serial.js` library reads line-by-line (splitting on `\n`), so make sure your Arduino is sending data with `Serial.println()` (which appends `\r\n`) rather than `Serial.print()`. If you use `Serial.print()`, the data will accumulate in the buffer until a newline arrives.
 
 ## Lesson Summary
 
@@ -663,7 +668,8 @@ In this lesson, you learned how to use the Web Serial API to communicate between
 
 **Exercise 2:** Add a **status indicator** to the SliderOut page that shows whether the serial connection is open, closed, or in an error state. Use the `onSerialConnectionOpened`, `onSerialConnectionClosed`, and `onSerialErrorOccurred` callbacks to update a `<span>` element with the current status and change its color (green for connected, red for disconnected/error).
 
-**Exercise 3:** Build a **color picker** web app that sends an RGB value to the Arduino. Use three sliders (one each for red, green, blue) and send the values as a CSV string (*e.g.,* `"128,0,255\n"`). On the Arduino, parse the three values and use them to control an RGB LED.
+**Exercise 3:** Build a **color picker** web app that sends an RGB value to the Arduino. Use three sliders (one each for red, green, blue) and send the values as a CSV string (*e.g.,* `"128,0,255\n"`). 
+On the Arduino, parse the three values and use them to control an RGB LED. See the Makeability Lab's [SerialColorTest example](https://makeabilitylab.github.io/js/src/apps/serial/SerialColorTest/).
 
 **Exercise 4:** Extend the DisplayText example to keep a **scrolling log** of all received serial data instead of showing only the most recent line. Display the last 20 lines in a `<textarea>` or `<div>` element.
 

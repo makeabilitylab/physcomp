@@ -44,7 +44,7 @@ Processing includes both an IDE and a Java-based library that lets designers, ar
 Processing simplifies graphical programming and abstracts away complexity. In fact, when you write code in Processing, you don't even need to know that you're using Java! This design philosophy may feel familiar—the Arduino framework similarly abstracts away C/C++ complexity. This is not by accident: **the Arduino IDE and programming paradigm is based on Processing!**
 
 ![Screenshot comparing the Processing IDE and Arduino IDE side by side, showing their similar layout and structure](assets/images/ProcessingVsArduino.png)
-**Figure.** The Arduino IDE is based on Processing ([source](https://www.arduino.cc/en/guide/introduction)). Right-click on image and select "Open Image in New Tab" to zoom in.
+**Figure.** The Arduino IDE is based on Processing ([source](https://docs.arduino.cc/learn/starting-guide/getting-started-arduino/)). Right-click on image and select "Open Image in New Tab" to zoom in.
 {: .fs-1 }
 
 Creating interactive graphics in Processing requires only a few lines of code. For example, here we've created a small painting program in ~10 lines:
@@ -142,7 +142,7 @@ Here's the official timeline:
 | April 2025 | p5.js 2.0 released, opt-in in the p5.js Editor |
 | August 2025 | Communication about 1.x end-of-life |
 | March 2026 | No further updates to 1.x |
-| **Summer 2026** | **p5.js 2.0 becomes the default in the p5.js Editor** |
+| **July–August 2026** | **p5.js 2.0 becomes the default in the p5.js Editor** |
 
 {: .warning }
 > **For this course (Spring 2026), we use p5.js 1.x.** The p5.js online editor still defaults to 1.x, and our [100s of example sketches](https://editor.p5js.org/jonfroehlich/sketches) are written for 1.x. When developing locally, we pin to a specific 1.x version in our `index.html` to avoid surprises (see the [template code](#starter-template-code) below).
@@ -248,7 +248,7 @@ Let's get building!
 
 The Arduino program is simple: read an analog value and transmit it via serial as a normalized fraction between [0, 1].
 
-We use [`analogRead()`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) on Pin A0 and divide the reading by the maximum analog input value (1023 on the Arduino Uno and Leonardo with 10-bit ADCs, or 4095 on ESP32 boards with 12-bit ADCs). We set the baud rate to 115200.
+We use [`analogRead()`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogRead/) on Pin A0 and divide the reading by the maximum analog input value (1023 on the Arduino Uno and Leonardo with 10-bit ADCs, or 4095 on ESP32 boards with 12-bit ADCs). We set the baud rate to 115200.
 
 {% highlight C %}
 const int DELAY_MS = 5;
@@ -482,7 +482,11 @@ Finally, add `mouseClicked()` to let the user connect to serial by clicking anyw
 {% highlight JavaScript %}
 function mouseClicked() {
   if (!serial.isOpen()) {
-    serial.connectAndOpen(null, serialOptions);
+    try {
+      serial.connectAndOpen(null, serialOptions);
+    } catch (error) {
+      console.error("Serial connection failed:", error);
+    }
   }
 }
 {% endhighlight JavaScript %}
@@ -530,6 +534,10 @@ And that's it! We did it! You can view, edit, and run CircleSizeIn in the [p5.js
 
 <!-- TODO: verify CircleSizeIn editor, live page, and code links are still active -->
 
+<!-- TODO: Sync GitHub source for CircleSizeInDemo/sketch.js to match lesson changes:
+     - Add try/catch around connectAndOpen() in mouseClicked()
+     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo -->
+
 #### CircleSizeIn video demonstration
 
 Here's a video demonstration:
@@ -566,7 +574,7 @@ Of course, we can hook up whatever sensor we want as input. Below are demonstrat
 
 Once we get the data into p5.js, we can really do *anything* we want: use the input to change colors, play a game, make a visualization, and more!
 
-Recall in our [OLED lesson](../advancedio/oled.md) that we built a [real-time analog graph](../advancedio/oled.md#demo-4-real-time-scrolling-analog-graph). During that lesson, we alluded to how that graph replicated a [famous Processing example](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Graph) but self-contained on the Arduino. Now we can build that Processing example in p5.js!
+Recall in our [OLED lesson](../advancedio/oled.md) that we built a [real-time analog graph](../advancedio/oled.md#demo-4-real-time-scrolling-analog-graph). During that lesson, we alluded to how that graph replicated a [famous Processing example](https://docs.arduino.cc/built-in-examples/communication/Graph) but self-contained on the Arduino. Now we can build that Processing example in p5.js!
 
 On the Arduino side, we use the exact same code ([AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino)) as before—the Arduino simply reads analog data and transmits it via serial. We just need a new p5.js app. Let's call it `GraphIn`.
 
@@ -583,6 +591,7 @@ let serial; // the Serial object
 let serialOptions = { baudRate: 115200 };
 let queue = [];
 let xPos = 0;
+let pHtmlMsg; // optional <p> element for status messages
 
 function setup() {
   createCanvas(750, 420);
@@ -634,7 +643,11 @@ function onSerialDataReceived(eventSender, newData) {
 
 function mouseClicked() {
   if (!serial.isOpen()) {
-    serial.connectAndOpen(null, serialOptions);
+    try {
+      serial.connectAndOpen(null, serialOptions);
+    } catch (error) {
+      console.error("Serial connection failed:", error);
+    }
   }
 }
 {% endhighlight JavaScript %}
@@ -642,6 +655,11 @@ function mouseClicked() {
 That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn).
 
 <!-- TODO: verify GraphIn live page and code links are still active -->
+
+<!-- TODO: Sync GitHub source for GraphIn/sketch.js to match lesson changes:
+     - Add let pHtmlMsg; declaration
+     - Add try/catch around connectAndOpen() in mouseClicked()
+     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn -->
 
 ##### GraphIn video demonstration
 

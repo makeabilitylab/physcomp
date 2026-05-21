@@ -213,7 +213,7 @@ First, add the ml5.js library to your `index.html`, just like we did in the [pre
 {% endhighlight HTML %}
 
 {: .note }
-> We're pinning to **ml5.js v1.3.1** to ensure the API doesn't change unexpectedly. Always pin your library versions in course projects!
+> We're pinning to **ml5.js v1.3.1** via the `ml5@1.3.1` in the `<script src>` link to ensure the API doesn't change unexpectedly. Always pin your library versions in course projects!
 
 #### Initialize ml5's HandPose
 

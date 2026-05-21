@@ -304,12 +304,6 @@ The full experience looks like this:
 **Video.** The SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
 
-<!-- TODO: verify that the live page and code links above are still active -->
-
-<!-- TODO: Sync GitHub source for SliderOut/index.html to match lesson changes:
-     - Add try/catch around connectAndOpen() in onConnectButtonClick()
-     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/SliderOut -->
-
 #### Create folder and initial index.html page
 
 Create a folder called `SliderOut` with an empty `index.html` file. Open the folder in VSCode (`File → Open Folder`). Start with this minimal HTML:
@@ -462,8 +456,6 @@ async function onSliderValueChanged(src, event) {
 }
 {% endhighlight JavaScript %}
 
-<!-- TODO: add in the debug html-message stuff? -->
-
 #### Full slider video demo
 
 Here's the polished version in action:
@@ -474,8 +466,6 @@ Here's the polished version in action:
 **Video.** The completed SliderOut demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/SliderOut)) with [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
 
-<!-- TODO: verify that the live page and code links above are still active -->
-
 ### Example 2: Bidirectional text webpage
 
 For our second example, we'll build a webpage that **sends and receives** text data via Web Serial. As you type in a textbox, the data is immediately transmitted over serial and displayed on the Arduino-connected OLED display. The Arduino echoes back what it received, and the web app displays the echo.
@@ -485,13 +475,6 @@ For our second example, we'll build a webpage that **sends and receives** text d
 </video>
 **Video.** The DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
-
-<!-- TODO: verify that the live page and code links above are still active -->
-
-<!-- TODO: Sync GitHub source for DisplayText/index.html to match lesson changes:
-     - Add try/catch around connectAndOpen() in onButtonConnectToSerialDevice()
-     - Add aria-live="polite" to the received-text <p> element
-     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/DisplayText -->
 
 For the circuit, we need an Arduino and an [OLED display](../advancedio/oled.md):
 
@@ -633,7 +616,6 @@ That's it! You now have a bidirectional web serial app. Play and experiment!
 **Video.** The completed DisplayText demo ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/DisplayText/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/DisplayText)) with [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) on the Arduino Leonardo.
 {: .fs-1 }
 
-<!-- TODO: verify that the live page and code links above are still active -->
 
 ## Troubleshooting
 

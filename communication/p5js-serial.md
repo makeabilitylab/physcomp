@@ -2,7 +2,7 @@
 layout: default
 title: L3&#58; p5.js Serial In
 nav_order: 3
-parent: Communication
+parent: Serial Communication
 has_toc: true # (on by default)
 comments: true
 usemathjax: false
@@ -122,8 +122,6 @@ Here are some examples we've written directly in the p5.js editor. Click any lin
 - [Falling Star FFT Game](https://editor.p5js.org/jonfroehlich/sketches/UvFAcoUgu)
 - [Flappy Bird](https://editor.p5js.org/jonfroehlich/sketches/shtF6XFeY)
 
-<!-- TODO: verify all p5.js editor links above are still active -->
-
 ### p5.js 2.0
 
 Note that p5.js is currently undergoing a major transition from version 1.x to [**version 2.0**](https://medium.com/processing-foundation/p5-js-2-0-you-are-here-f827f40519a7). This is the biggest change to p5.js since Lauren McCarthy created it in 2013, and it's worth understanding what's happening—even though it **does not significantly affect our serial communication code**. (Indeed, we do not even need p5.js to write JavaScript-based apps with WebSerial).
@@ -216,13 +214,9 @@ That's it! VSCode will now provide autocomplete, hover documentation, and parame
 
 OK, let's get started making stuff! We'll begin with Arduino sending data to p5.js via serial (`Arduino → Computer`).
 
-<!-- TODO: make circuit diagram -->
-
 ### Starter template code
 
 To make it easier to build p5.js web apps with Web Serial, we've created a basic p5.js serial template. You can view it and duplicate it via the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/vPfUvLze_C) or from our GitHub repo ([SerialTemplate](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate)).
-
-<!-- TODO: verify template links above are still active -->
 
 {: .warning }
 > The baud rate in your JavaScript program and your Arduino program **must match**. In JavaScript, set this with `let serialOptions = { baudRate: 115200 };`. In Arduino, use `Serial.begin(115200)`. If they don't match, you'll get garbled data or nothing at all. See our [Intro to Serial lesson](serial-intro.md) for details.
@@ -233,8 +227,6 @@ To make it easier to build p5.js web apps with Web Serial, we've created a basic
 ### Circle size app
 
 Let's build a simple `Arduino → Computer` p5.js web app that reads in a single floating point number between [0, 1] (as text-encoded data) and draws an appropriately sized circle. We'll use the Arduino program [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) and the web app called [CircleSizeIn](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo) ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo)). The full app experience looks like this:
-
-<!-- TODO: verify CircleSizeIn live page and code links are still active -->
 
 <video autoplay loop muted playsinline aria-label="Video demonstrating the CircleSizeIn p5.js app where a potentiometer controls circle size">
   <source src="assets/videos/AnalogInputOut.ino-CircleSizeIn-POT-TrimmedAndOptimized.mp4" type="video/mp4" />
@@ -352,8 +344,6 @@ Now save and load the page with Live Server. It should look like this:
 {: .fs-1 }
 
 If your page does not load or does not look like this, study our blank template here ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/BlankTemplate/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/BlankTemplate)).
-
-<!-- TODO: verify blank template links above are still active -->
 
 ##### Draw a circle
 
@@ -532,12 +522,6 @@ function draw() {
 
 And that's it! We did it! You can view, edit, and run CircleSizeIn in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) or via GitHub ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo)).
 
-<!-- TODO: verify CircleSizeIn editor, live page, and code links are still active -->
-
-<!-- TODO: Sync GitHub source for CircleSizeInDemo/sketch.js to match lesson changes:
-     - Add try/catch around connectAndOpen() in mouseClicked()
-     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo -->
-
 #### CircleSizeIn video demonstration
 
 Here's a video demonstration:
@@ -653,13 +637,6 @@ function mouseClicked() {
 {% endhighlight JavaScript %}
 
 That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn).
-
-<!-- TODO: verify GraphIn live page and code links are still active -->
-
-<!-- TODO: Sync GitHub source for GraphIn/sketch.js to match lesson changes:
-     - Add let pHtmlMsg; declaration
-     - Add try/catch around connectAndOpen() in mouseClicked()
-     GitHub: https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn -->
 
 ##### GraphIn video demonstration
 

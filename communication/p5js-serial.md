@@ -163,7 +163,7 @@ There are some **amazing** learning resources on the web. Rather than replicate 
 
 - The Coding Train's [Programming with p5.js](https://thecodingtrain.com/tracks/code-programming-with-p5-js) by Daniel Shiffman — probably the best, most interesting, fun, and accessible creative coding videos on the web.
 
-### Developing p5.js
+### Developing in p5.js
 
 You can develop p5.js projects either in the [online editor](https://editor.p5js.org/) or in your favorite web dev environment. For local development, we strongly recommend [VS Code](https://code.visualstudio.com). We often switch between the [online editor](https://editor.p5js.org/)—for quick sketches and easy sharing—and VSCode for larger or more complicated projects.
 
@@ -173,7 +173,7 @@ We used [Visual Studio Code](https://code.visualstudio.com/) in our [previous le
 
 ##### Using a p5.js VSCode extension
 
-The **easiest way **to set up VSCode for p5.js is to install an extension like [p5.vscode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) by Sam Lavigne. This extension auto-creates a project folder with the required HTML/CSS/JavaScript files, hooks up autocompletion for p5.js functions, supplies a local copy of the p5.js library, and bundles Live Server. To create a new project, open the Command Palette (`Ctrl+Shift+P` on Windows, `Cmd+Shift+P` on Mac) and type `Create p5.js Project`, then select an empty folder.
+The **easiest way** to set up VSCode for p5.js is to install an extension like [p5.vscode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) by Sam Lavigne. This extension auto-creates a project folder with the required HTML/CSS/JavaScript files, hooks up autocompletion for p5.js functions, supplies a local copy of the p5.js library, and bundles Live Server. To create a new project, open the Command Palette (`Ctrl+Shift+P` on Windows, `Cmd+Shift+P` on Mac) and type `Create p5.js Project`, then select an empty folder.
 
 {: .note }
 > The p5.vscode extension scaffolds **p5.js 1.x** projects and has not been actively updated in some time, but it still works well for our purposes. If you later want to create p5.js 2.x projects in VSCode, see the newer [p5.js 2.x Project Generator](https://github.com/IrtizaNasar/p5-2.vscode) extension.

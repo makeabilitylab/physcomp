@@ -67,6 +67,9 @@ BLE is more complex than Bluetooth Classic. Instead of a simple serial byte stre
 {: .note }
 > **Did you skip Lesson 8?** No problem. This lesson is self-contained—you don't need Bluetooth Classic experience to follow along. We'll briefly cover how BLE differs from Classic in the first section. If you want the full comparison, see [Lesson 8](bluetooth-serial.md).
 
+{: .note }
+> **This lesson works with both iPhones and Android phones.** Unlike Bluetooth Classic ([Lesson 8](bluetooth-serial.md)), which is blocked on iOS, BLE works with every modern smartphone. We'll start on your computer (Mac or Windows) using Python for the smoothest debugging experience, then move to phone apps that work on both platforms.
+
 ## What is BLE?
 
 **Bluetooth Low Energy** (BLE) is a wireless communication protocol introduced in Bluetooth 4.0 (2010). Despite sharing the "Bluetooth" name with Bluetooth Classic, BLE is a completely different protocol stack designed from the ground up for **low-power, intermittent data exchange**. Where Bluetooth Classic was built for continuous streaming (music, file transfers, serial bridges), BLE was built for devices that send small amounts of data infrequently—a heart rate monitor broadcasting a reading every second, a door sensor reporting open/closed, a fitness tracker uploading step counts.
@@ -199,7 +202,8 @@ You'll need the following components. We use **[Adafruit's ESP32-S3 Feather](htt
 
 You will also need:
 
-- A **smartphone** (Android or iOS!) with the free [nRF Connect](https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile) app by Nordic Semiconductor. Unlike Bluetooth Classic, **BLE works with iPhones** — so everyone can participate! 📱
+- **Python 3** with the [bleak](https://pypi.org/project/bleak/) library installed (`pip3 install bleak`). Bleak is a cross-platform BLE library for Python—it works on macOS, Windows, and Linux.
+- A **smartphone** (iPhone or Android) with the free [nRF Connect](https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile) app by Nordic Semiconductor. Unlike Bluetooth Classic, **BLE works with iPhones**—so everyone can participate! Available on [iOS](https://apps.apple.com/app/nrf-connect-for-mobile/id1054362403) and [Android](https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp).
 
 {: .note }
 > [nRF Connect](https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile) is a professional-grade BLE debugging tool made by Nordic Semiconductor (a major BLE chip manufacturer). It lets you scan for BLE devices, inspect their services and characteristics, read values, write data, and subscribe to notifications. It's free, available on [iOS](https://apps.apple.com/app/nrf-connect-for-mobile/id1054362403) and [Android](https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp), and is the tool we'll use throughout this lesson. Alternatives include [LightBlue](https://punchthrough.com/lightblue/) (iOS/Android) and [BLE Scanner](https://play.google.com/store/apps/details?id=com.macdom.ble.blescanner) (Android).
@@ -310,21 +314,85 @@ Let's walk through the key steps:
 
 **The `onDisconnect` callback.** This is a critical gotcha: when a central disconnects, the ESP32 **stops advertising by default**. If you don't restart advertising in `onDisconnect()`, the ESP32 goes silent and no new centrals can find it. Always restart advertising after disconnection.
 
-### Discovering the ESP32 from your phone
+### Discovering the ESP32 from your computer (Python)
 
-1. Upload the sketch and open Serial Monitor at 115200 baud. You should see `"BLE server is advertising."`.
+Let's start on the computer, where debugging is easiest. We'll use [bleak](https://pypi.org/project/bleak/)—a cross-platform BLE client library for Python. If you haven't installed it yet:
 
-2. On your phone, open the **nRF Connect** app. Tap **Scan** (top right). You should see `"ESP32-BLE"` in the list of discovered devices.
+```
+pip3 install bleak
+```
 
-<!-- TODO: Add screenshot of nRF Connect scan results showing ESP32-BLE -->
+Here's a script that scans for BLE devices, connects to the ESP32, and reads our characteristic:
+
+```python
+"""
+ble_discover.py: Scans for BLE devices, connects to the ESP32,
+and reads the greeting characteristic.
+
+Requires: bleak (pip3 install bleak)
+
+By Jon E. Froehlich
+@jonfroehlich
+http://makeabilitylab.io
+"""
+
+import asyncio
+from bleak import BleakScanner, BleakClient
+
+SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+CHARACTERISTIC_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+
+async def main():
+    print("Scanning for BLE devices...")
+    devices = await BleakScanner.discover(timeout=5.0)
+
+    target = None
+    for d in devices:
+        print(f"  Found: {d.name} ({d.address})")
+        if d.name and "ESP32" in d.name:
+            target = d
+
+    if target is None:
+        print("Could not find ESP32 BLE device. Is the sketch running?")
+        return
+
+    print(f"\nConnecting to {target.name} ({target.address})...")
+    async with BleakClient(target.address) as client:
+        print(f"Connected: {client.is_connected}")
+
+        # Read the greeting characteristic
+        value = await client.read_gatt_char(CHARACTERISTIC_UUID)
+        text = value.decode("utf-8")
+        print(f"Read from characteristic: {text}")
+
+asyncio.run(main())
+```
+
+Run it:
+
+```
+python3 ble_discover.py
+```
+
+You should see the ESP32 in the scan results and then read `"Hello from ESP32!"` from the characteristic. 🎉
+
+{: .note }
+> **Compare with pySerial from [Lesson 8](bluetooth-serial.md).** With Bluetooth Classic, you used `serial.Serial()` to open a virtual COM port—the same API as USB serial. With BLE, there's no virtual COM port; you use `bleak`'s `BleakClient` to connect directly to the device and read structured characteristics. This is the fundamental difference between the two Bluetooth flavors.
+
+### Discovering the ESP32 from your phone (iPhone and Android)
+
+Once you've confirmed the ESP32 is working from your computer, let's try it from your phone. **This works on both iPhones and Android phones**—unlike Bluetooth Classic, which was Android-only.
+
+1. On your **iPhone** or **Android phone**, open the **nRF Connect** app ([iOS](https://apps.apple.com/app/nrf-connect-for-mobile/id1054362403) / [Android](https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp)).
+2. Tap **Scan** (top right). You should see `"ESP32-BLE"` in the list of discovered devices.
+
+<!-- TODO: Add side-by-side screenshots of nRF Connect scan results on iOS and Android -->
 
 3. Tap **Connect** next to `"ESP32-BLE"`. The app will connect and display the GATT server structure. You should see your custom service (listed by its UUID) with one characteristic underneath.
 
 <!-- TODO: Add screenshot of nRF Connect showing the service and characteristic tree -->
 
-4. Tap the **read arrow** (↓) next to the characteristic. You should see `"Hello from ESP32!"` appear as the value. You just read data from a BLE peripheral! 🎉
-
-<!-- TODO: Add screenshot of nRF Connect showing the read value -->
+4. Tap the **read arrow** (↓) next to the characteristic. You should see `"Hello from ESP32!"` appear as the value. You just read data from a BLE peripheral on your phone!
 
 {: .note }
 > **What you're seeing in nRF Connect** is the GATT structure we built in code: one service containing one characteristic. nRF Connect shows the UUIDs for each. Since we used custom 128-bit UUIDs (not standard Bluetooth SIG UUIDs), nRF Connect displays them as "Unknown Service" and "Unknown Characteristic"—it doesn't know what our custom UUIDs mean. If we'd used a standard UUID like `0x181A` (Environmental Sensing), nRF Connect would display the name automatically.
@@ -333,9 +401,9 @@ Let's walk through the key steps:
 
 <!-- TODO: Record and embed a workbench video showing:
      1. Uploading the sketch to the ESP32-S3 Feather
-     2. Opening nRF Connect, scanning, finding ESP32-BLE
-     3. Connecting, expanding the service tree
-     4. Reading the "Hello from ESP32!" value
+     2. Running the Python ble_discover.py script
+     3. Opening nRF Connect on a phone, scanning, finding ESP32-BLE
+     4. Connecting, expanding the service tree, reading the value
 -->
 
 ## Part 2: Streaming sensor data with notifications
@@ -474,10 +542,86 @@ There are two new elements here compared to Part 1:
 
 **`_pSensorCharacteristic->notify()`** pushes the current value to all subscribed centrals. We call this after updating the value with `setValue()`. If no central is subscribed, `notify()` does nothing.
 
-### Try it out
+### Reading notifications from your computer (Python)
 
-1. Upload the sketch and open Serial Monitor. You should see potentiometer values scrolling by.
-2. Open nRF Connect, scan, and connect to `"ESP32-BLE-Sensor"`.
+Here's a Python script that subscribes to the potentiometer notifications and displays them in real time:
+
+```python
+"""
+ble_sensor_reader.py: Connects to the ESP32 BLE sensor and subscribes
+to potentiometer notifications. Displays values with a live ASCII bar.
+
+Requires: bleak (pip3 install bleak)
+
+By Jon E. Froehlich
+@jonfroehlich
+http://makeabilitylab.io
+"""
+
+import asyncio
+from bleak import BleakScanner, BleakClient
+
+SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+SENSOR_CHAR_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+
+def on_notification(sender, data):
+    """Called each time the ESP32 sends a notification."""
+    text = data.decode("utf-8").strip()
+    try:
+        value = int(text)
+        bar_length = int(value / 4095 * 50)
+        bar = '█' * bar_length + '░' * (50 - bar_length)
+        print(f"\r{bar} {value:4d}", end='', flush=True)
+    except ValueError:
+        print(f"\r{text}", end='', flush=True)
+
+async def main():
+    print("Scanning for ESP32-BLE-Sensor...")
+    devices = await BleakScanner.discover(timeout=5.0)
+
+    target = None
+    for d in devices:
+        if d.name and "ESP32" in d.name:
+            target = d
+            break
+
+    if target is None:
+        print("Could not find ESP32. Is the sketch running?")
+        return
+
+    print(f"Connecting to {target.name}...")
+    async with BleakClient(target.address) as client:
+        print(f"Connected! Turn the potentiometer.\n")
+
+        # Subscribe to notifications
+        await client.start_notify(SENSOR_CHAR_UUID, on_notification)
+
+        # Keep running until Ctrl+C
+        try:
+            while True:
+                await asyncio.sleep(1.0)
+        except KeyboardInterrupt:
+            print("\nStopping...")
+            await client.stop_notify(SENSOR_CHAR_UUID)
+
+asyncio.run(main())
+```
+
+Run it and turn the potentiometer—you'll see a live bar chart updating in your terminal, with data arriving wirelessly over BLE:
+
+```
+python3 ble_sensor_reader.py
+```
+
+{: .note }
+> **Compare with the Python Bluetooth Classic script from [Lesson 8](bluetooth-serial.md).** In L8, you used `pyserial`'s `ser.readline()` to read data from a virtual COM port—a byte stream, just like USB serial. Here, you use `bleak`'s `start_notify()` to subscribe to a specific BLE characteristic—a callback fires each time the ESP32 pushes a new value. The data arrives structured and event-driven rather than as a continuous byte stream.
+
+### Reading notifications from your phone (iPhone and Android)
+
+Now try it from your phone:
+
+1. Open **nRF Connect** on your **iPhone** or **Android phone**.
+2. Scan and connect to `"ESP32-BLE-Sensor"`.
 3. Expand the service and find the sensor characteristic.
 4. Tap the **triple-down-arrow** icon (⇊) to **subscribe to notifications**.
 5. Turn the potentiometer—you should see the value updating in real time on your phone!
@@ -669,16 +813,68 @@ The key new element is the `LedCallbacks` class. When the central writes to the 
 
 Notice the pattern: we don't poll for incoming data in `loop()` (like we do with `Serial.available()`). Instead, BLE uses a **callback model**—the library calls our `onWrite()` function when data arrives. This is fundamentally different from the serial polling pattern you're used to.
 
-### Try it out
+### Try it out from your computer (Python)
+
+Here's a quick Python script that writes RGB values to the NeoPixel characteristic:
+
+```python
+"""
+ble_neopixel.py: Connects to the ESP32 and sets the NeoPixel color.
+
+Usage: python3 ble_neopixel.py
+Then enter RGB values like: 255 0 128
+
+Requires: bleak (pip3 install bleak)
+
+By Jon E. Froehlich
+@jonfroehlich
+http://makeabilitylab.io
+"""
+
+import asyncio
+from bleak import BleakScanner, BleakClient
+
+LED_CHAR_UUID = "a3c87500-8ed3-4bdf-8a39-a01bebede295"
+
+async def main():
+    print("Scanning for ESP32-BLE-NeoPixel...")
+    devices = await BleakScanner.discover(timeout=5.0)
+
+    target = None
+    for d in devices:
+        if d.name and "ESP32" in d.name:
+            target = d
+            break
+
+    if not target:
+        print("ESP32 not found.")
+        return
+
+    async with BleakClient(target.address) as client:
+        print(f"Connected to {target.name}!")
+        while True:
+            rgb = input("Enter R G B (0-255 each, or 'quit'): ")
+            if rgb.lower() == 'quit':
+                break
+            parts = rgb.split()
+            if len(parts) == 3:
+                r, g, b = int(parts[0]), int(parts[1]), int(parts[2])
+                await client.write_gatt_char(LED_CHAR_UUID, bytes([r, g, b]))
+                print(f"  Sent RGB: ({r}, {g}, {b})")
+
+asyncio.run(main())
+```
+
+### Try it out from your phone (iPhone and Android)
 
 1. Upload the sketch. The NeoPixel should be off initially.
-2. Open nRF Connect, scan, and connect to `"ESP32-BLE-NeoPixel"`.
+2. Open **nRF Connect** on your **iPhone or Android phone**. Scan and connect to `"ESP32-BLE-NeoPixel"`.
 3. Expand the service. You should see **two** characteristics now.
 4. Find the LED characteristic (the one with `a3c87500...` UUID).
 5. Tap the **write arrow** (↑). In the write dialog, select **ByteArray** as the type, then enter `FF0000` (red), `00FF00` (green), or `0000FF` (blue). Tap **Send**.
 6. Watch the NeoPixel change color! 🌈
 
-<!-- TODO: Add screenshot of nRF Connect write dialog with hex values -->
+<!-- TODO: Add screenshot of nRF Connect write dialog with hex values, showing both iOS and Android -->
 
 {: .note }
 > **nRF Connect write format:** When writing raw bytes in nRF Connect, select "ByteArray" (not "Text") and enter hex values without spaces or `0x` prefixes. `FF0000` = red, `00FF00` = green, `0000FF` = blue, `FF00FF` = magenta, `FFFFFF` = white. Each pair of hex digits is one byte (0–255).

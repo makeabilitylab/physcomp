@@ -32,7 +32,7 @@ By following along with our lessons and guides, you will explore:
 
 * ⚡**[Intro to Electronics](./electronics/index.md):** The fundamentals of electricity (voltage, current, resistance), circuit schematics, and safely building circuits with LEDs and resistors.
 * 🤖 **[Intro to Arduino](./arduino/index.md):** Programming microcontrollers in `C/C++` to read analog/digital inputs, control actuators, and build your first interactive devices.
-* 📡 **[Sensors](./sensors/index.md) & [Advanced I/O](./advanced-io/index.md):** Deep dives into how sensors capture the world (force, light, distance, motion) and how to control advanced outputs like OLED displays and haptic vibromotors.
+* 📡 **[Sensors](./sensors/index.md) & [Advanced I/O](./advancedio/index.md):** Deep dives into how sensors capture the world (force, light, distance, motion) and how to control advanced outputs like OLED displays and haptic vibromotors.
 * 💻 **[Computer Communication](./communication/index.md):** Bridging hardware and software using Web Serial, [p5.js](https://p5js.org/), and [ml5.js](https://ml5js.org/) for browser-based interactions and applied machine learning.
 * ☁️ **[Internet of Things (IoT) with ESP32](./esp32/index.md):** Building wireless, internet-connected projects using the powerful ESP32 microcontroller.
 * 📈 **[Signals & Data Science](./signals/index.md):** Using Python and Jupyter Notebooks for digital signal processing, frequency analysis, and building machine-learning gesture recognizers.

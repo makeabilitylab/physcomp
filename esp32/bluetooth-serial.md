@@ -640,7 +640,7 @@ void loop() {
 ```
 
 {: .note }
-> **`analogWrite()` on the ESP32:** The `analogWrite()` function was added to the ESP32 Arduino core in v3.x as a compatibility wrapper around the LEDC PWM library. Older tutorials (and our [Lesson 3: LED Fade](led-fade.md)) may use the LEDC API directly (`ledcAttach`, `ledcWrite`). Both approaches work—`analogWrite()` is simpler for basic PWM output like this.
+> **`analogWrite()` on the ESP32:** If you're wondering why we use `analogWrite()` here when [Lesson 3: LED Fading with PWM](led-fade.md) taught the LEDC API (`ledcAttach`, `ledcWrite`)—both work! As we discussed in that lesson, `analogWrite()` was added in ESP32 Arduino core v3.x as a [convenience wrapper around LEDC](https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-ledc.c). For simple PWM output like dimming an LED, `analogWrite()` is the simpler choice. Use the LEDC API directly when you need control over PWM frequency or resolution.
 
 ### The p5.js sketch with bidirectional communication
 

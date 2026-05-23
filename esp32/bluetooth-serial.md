@@ -155,6 +155,22 @@ The ESP32 Arduino core includes a built-in library called [`BluetoothSerial`](ht
 
 The library's API was **intentionally designed to mirror** Arduino's built-in `Serial` class. It provides the same `.begin()`, `.available()`, `.read()`, `.write()`, `.print()`, and `.println()` methods you already know. This means converting a wired serial sketch to Bluetooth is as simple as creating a `BluetoothSerial` object and using it alongside (or instead of) `Serial`. The rest of your code stays identical.
 
+| Method | `Serial` (USB) | `SerialBT` (Bluetooth) | Notes |
+|---|---|---|---|
+| Initialize | `Serial.begin(115200)` | `SerialBT.begin("ESP32-BT")` | Serial takes a baud rate; SerialBT takes a device name (baud rate is negotiated by the Bluetooth stack) |
+| Check for data | `Serial.available()` | `SerialBT.available()` | Identical — returns number of bytes waiting |
+| Read a byte | `Serial.read()` | `SerialBT.read()` | Identical |
+| Read until delimiter | `Serial.readStringUntil('\n')` | `SerialBT.readStringUntil('\n')` | Identical |
+| Write bytes | `Serial.write(buf, len)` | `SerialBT.write(buf, len)` | Identical |
+| Print text | `Serial.println("hello")` | `SerialBT.println("hello")` | Identical — also `.print()`, `.printf()` |
+| Check connection | *(always connected)* | `SerialBT.connected()` | Returns `true` if a device is currently paired and connected |
+| Connection events | *(n/a)* | `SerialBT.register_callback(cb)` | Optional callback for connect/disconnect events — no Serial equivalent |
+
+**Table.** Key API comparison between Arduino's built-in `Serial` and the `BluetoothSerial` library. Every read/write method is identical — only initialization and connection management differ.
+{: .fs-1 }
+
+The key difference is in `.begin()`: `Serial.begin()` takes a baud rate because it configures a physical UART, while `SerialBT.begin()` takes a *device name* because the Bluetooth stack handles data rates internally. The other difference is that Bluetooth connections can come and go — unlike a USB cable, a Bluetooth device might walk out of range — so `BluetoothSerial` adds `connected()` and `register_callback()` for connection state management. We'll use these in [Part 4](#part-4-bidirectional-control) when we discuss what happens when a connection drops.
+
 {: .warning }
 > `BluetoothSerial` is **only available on the original ESP32 chip**. If you try to include it on an ESP32-S3 (or C3, S2, *etc.*), the sketch will not compile. The compile-time guards in our sketches below produce a clear error message when this happens.
 
@@ -227,7 +243,7 @@ void loop() {
 }
 ```
 
-Notice how similar the `SerialBT` calls are to `Serial`. `SerialBT.begin("ESP32-Bluetooth")` initializes the Bluetooth radio and starts advertising with the name `"ESP32-Bluetooth"`—this is the name you'll see when scanning for Bluetooth devices on your computer. From there, `SerialBT.available()`, `SerialBT.read()`, `SerialBT.write()`, and `SerialBT.println()` all work exactly like their `Serial` counterparts. This mirroring is by design—it makes converting wired serial code to Bluetooth trivially easy.
+Notice how the code reads like a standard serial sketch — compare the `SerialBT` calls with the `Serial` calls and you'll see the API mirroring from the [table above](#the-bluetoothserial-library) in action. The one difference is `SerialBT.begin("ESP32-Bluetooth")`: instead of a baud rate, it takes a device name that will appear when you scan for Bluetooth devices on your computer.
 
 The `#if !defined(...)` compile-time guards at the top produce a clear error if you accidentally build this on an ESP32-S3 or other unsupported chip.
 

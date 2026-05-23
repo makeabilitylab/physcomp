@@ -17,7 +17,7 @@ usetocbot: true
 {:toc}
 ---
 
-Welcome 👋 to the **ESP32** module! The [ESP32](https://www.espressif.com/en/products/socs/esp32) is a fast, low-cost, WiFi- and Bluetooth-enabled microcontroller that has become **the** platform for Internet of Things (IoT) projects. And the best part? You can program it with Arduino—so everything you learned in the [Intro to Arduino](../arduino/index.md) series carries over! In this module, you'll learn how the ESP32 differs from the Arduino boards you've used before, and you'll build projects that blink LEDs, fade lights with PWM, play tones, sense capacitive touch, and connect to the cloud ☁️. Let's go! 🚀
+Welcome 👋 to the **ESP32** module! The [ESP32](https://www.espressif.com/en/products/socs/esp32) is a fast, low-cost, WiFi- and Bluetooth-enabled microcontroller that has become **the** platform for Internet of Things (IoT) projects. And the best part? You can program it with Arduino—so everything you learned in the [Intro to Arduino](../arduino/index.md) series carries over! In this module, you'll learn how the ESP32 differs from the Arduino boards you've used before, and you'll build projects that blink LEDs, fade lights with PWM, play tones, sense capacitive touch, connect to the cloud ☁️, and communicate wirelessly over Bluetooth 📡. Let's go! 🚀
 
 ![A collage of ESP32 boards including the original ESP32, ESP32-S2, and ESP32-S3](assets/images/ESP32Variants_FromS1-S3.png)
 **Figure.** The ESP32 family includes dozens of variants from Espressif and third-party manufacturers. They are fast (up to 240 MHz dual-core), have built-in WiFi and Bluetooth, and many development boards cost around $10 USD!
@@ -110,6 +110,18 @@ The ESP32 has built-in capacitive touch sensing hardware—no external component
 
 Connect your ESP32 to WiFi and upload sensor data to the cloud using [Adafruit IO](https://learn.adafruit.com/welcome-to-adafruit-io). This is where the ESP32 truly shines! ✨
 
+### [Lesson 8: Bluetooth Serial](bluetooth-serial.md)
+
+Cut the wire! Use Bluetooth Classic's Serial Port Profile (SPP) to communicate with the ESP32 wirelessly—using the same Python scripts, p5.js sketches, and [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) library from the [Communication module](../communication/index.md). The `BluetoothSerial` library intentionally mirrors Arduino's `Serial` API, so converting wired code to wireless is trivially easy. Requires the original ESP32 (Huzzah32).
+
+### [Lesson 9: Introduction to BLE](ble-intro.md)
+
+Learn **Bluetooth Low Energy (BLE)**—the protocol behind fitness trackers, smart home devices, and billions of IoT sensors. You'll learn the peripheral/central model, the GATT data hierarchy of services and characteristics, and how to stream live sensor data to your phone and computer using notifications. Works with the ESP32-S3 and iPhones!
+
+### [Lesson 10: Bidirectional BLE](ble-bidirectional.md)
+
+Send data in *both* directions over BLE. Control the onboard NeoPixel by writing to a BLE characteristic from your phone, build a **Web Bluetooth** interface with sliders and a color picker that runs entirely in the browser, and learn the **Nordic UART Service (NUS)** for serial-like text communication over BLE.
+
 <!-- ============================================================
      TODO: FUTURE LESSONS TO ADD
      ============================================================
@@ -127,19 +139,6 @@ Similar to inside-arduino.md, a "deep dives for the curious" page covering:
 - Power domains and why deep sleep current is so low
 Only create this page when there are at least 3-4 solid sections to fill it.
 Thin reference pages feel incomplete and unmaintained.
-
-## Lesson: Bluetooth Low Energy (BLE) [HIGH PRIORITY]
-The ESP32-S3 has BLE 5.0 support. A BLE lesson would cover:
-- What BLE is and how it differs from Bluetooth Classic (which the S3 does NOT support)
-- BLE concepts: peripherals vs. centrals, services, characteristics, UUIDs
-- Using the ESP32 as a BLE peripheral (e.g., broadcasting sensor data)
-- Connecting to a BLE peripheral from a smartphone app (e.g., nRF Connect, LightBlue)
-- Building a BLE-controlled LED or servo
-- BLE notifications and subscriptions
-- This is probably the single most impactful lesson to add, since BLE is used
-  in wearables, accessibility devices, game controllers, and IoT projects.
-- Consider using the NimBLE library for smaller footprint vs. the default BLE stack.
-- Could build a BLE piano or BLE-controlled NeoPixel as the culminating project.
 
 ## Lesson: Deep Sleep and Power Management [HIGH PRIORITY]
 The ESP32-S3 Feather can get down to ~100µA in deep sleep. Cover:
@@ -207,4 +206,4 @@ The ESP32-S3 Feather can get down to ~100µA in deep sleep. Cover:
 
 ## What's next?
 
-Once you've completed the ESP32 lessons, you'll have a solid foundation for building WiFi-connected, sensor-driven projects. Consider exploring more advanced topics like Bluetooth Low Energy (BLE), deep sleep for battery-powered projects, or building your own web server directly on the ESP32!
+Once you've completed the ESP32 lessons, you'll have a solid foundation for building WiFi-connected, Bluetooth-enabled, sensor-driven projects. Consider exploring more advanced topics like BLE HID devices (making your ESP32 act as a wireless keyboard or game controller), deep sleep for battery-powered projects, or building your own web server directly on the ESP32!

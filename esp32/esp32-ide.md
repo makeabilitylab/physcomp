@@ -3,7 +3,7 @@ layout: default
 title: ESP32 IDE Setup
 parent: ESP32
 has_toc: true # (on by default)
-nav_order: 9
+nav_order: 11
 nav_exclude: false
 comments: true
 usetocbot: true

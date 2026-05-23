@@ -849,15 +849,15 @@ In this lesson, you cut the wire! Here's what you learned:
 
 ## Next Lesson
 
-In the [next lesson](ble.md), we'll learn **Bluetooth Low Energy (BLE)**—the protocol that powers fitness trackers, smart home devices, and billions of IoT sensors. BLE works on the ESP32-S3, works with iPhones *and* Android phones, and introduces a structured data model that's more powerful than serial. The code is more complex, but the capabilities—and the universal device compatibility—are worth it. Let's go! 🚀
+In the [next lesson](ble-intro.md), we'll learn **Bluetooth Low Energy (BLE)**—the protocol that powers fitness trackers, smart home devices, and billions of IoT sensors. BLE works on the ESP32-S3, works with iPhones *and* Android phones, and introduces a structured data model that's more powerful than serial. The code is more complex, but the capabilities—and the universal device compatibility—are worth it. Let's go! 🚀
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="iot.html" class="nav-prev">
     <div class="nav-label">&larr; Previous Lesson</div>
     <div class="nav-title">Internet of Things</div>
   </a>
-  <a href="ble.html" class="nav-next">
+  <a href="ble-intro.html" class="nav-next">
     <div class="nav-label">Next Lesson &rarr;</div>
-    <div class="nav-title">Bluetooth Low Energy</div>
+    <div class="nav-title">Introduction to BLE</div>
   </a>
 </nav>

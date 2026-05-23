@@ -48,7 +48,7 @@ nav_order: 8
 
 In the [last lesson](iot.md), you sent sensor data halfway around the world—through WiFi, across the internet, and up to a cloud dashboard. But what if you just want to talk to the laptop sitting right in front of you—without a USB cable? What if you could run the same Python scripts and p5.js sketches from the [Communication module](../communication/serial-intro.md), but wirelessly?
 
-In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun part: the code on your computer is going to be *identical*. Bluetooth Classic's Serial Port Profile (SPP) creates a **virtual serial port** on your computer that looks and behaves exactly like a USB serial connection. Your Python scripts, your p5.js sketches, your [serial.js](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) library—they all work unchanged. The only difference is which port you select. ✨
+In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun part: the code on your computer is going to be *identical*. Bluetooth Classic's Serial Port Profile (SPP) creates a **virtual serial port** on your computer that looks and behaves exactly like a USB serial connection. Your Python scripts, your p5.js sketches, your [serial.js](https://github.com/makeabilitylab/js) library—they all work unchanged. The only difference is which port you select. ✨
 
 {: .note }
 > **In this lesson, you will learn:**
@@ -56,7 +56,7 @@ In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun pa
 > - How the Serial Port Profile (SPP) creates a virtual serial port on your computer—making Bluetooth look exactly like a USB serial connection
 > - How to pair the ESP32 with your Mac or Windows computer and find the Bluetooth serial port
 > - How to use Python and [pySerial](https://pyserial.readthedocs.io/) to communicate with the ESP32 over Bluetooth—using the same code patterns from the [serial introduction](../communication/serial-intro.md)
-> - How to use [p5.js](https://p5js.org/) with [serial.js](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) and [Web Serial](../communication/web-serial.md) to visualize Bluetooth sensor data in a web browser
+> - How to use [p5.js](https://p5js.org/) with [serial.js](https://github.com/makeabilitylab/js) and [Web Serial](../communication/web-serial.md) to visualize Bluetooth sensor data in a web browser
 > - Why Bluetooth Classic does **not** work on the ESP32-S3 and does **not** work with iPhones
 > - When to use Bluetooth Classic *vs.* BLE—and why we'll learn BLE next
 
@@ -111,7 +111,7 @@ Despite sharing the "Bluetooth" name, Classic and BLE are **not compatible with 
 
 So how does Bluetooth Classic act like a serial cable? Through something called the **Serial Port Profile (SPP)**. SPP emulates a wired RS-232 serial port—exactly the kind of serial communication we've been doing over USB.
 
-When you pair the ESP32 with your computer over Bluetooth Classic, your operating system creates a **virtual serial port**—a COM port on Windows (*e.g.,* `COM8`) or a `/dev/tty.*` device on macOS (*e.g.,* `/dev/tty.ESP32-Bluetooth`). This virtual port behaves *identically* to the USB serial port you've been using all along. Any software that can open a serial port—the Arduino Serial Monitor, a Python script with [pySerial](https://pyserial.readthedocs.io/), a web browser using the [Web Serial API](../communication/web-serial.md), your [serial.js](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) library—can communicate over Bluetooth without any code changes. Just select the Bluetooth port instead of the USB port.
+When you pair the ESP32 with your computer over Bluetooth Classic, your operating system creates a **virtual serial port**—a COM port on Windows (*e.g.,* `COM8`) or a `/dev/tty.*` device on macOS (*e.g.,* `/dev/tty.ESP32-Bluetooth`). This virtual port behaves *identically* to the USB serial port you've been using all along. Any software that can open a serial port—the Arduino Serial Monitor, a Python script with [pySerial](https://pyserial.readthedocs.io/), a web browser using the [Web Serial API](../communication/web-serial.md), your [serial.js](https://github.com/makeabilitylab/js) library—can communicate over Bluetooth without any code changes. Just select the Bluetooth port instead of the USB port.
 
 <!-- TODO: Create a diagram showing the parallel:
      USB Serial:       ESP32 → USB Cable → Computer → COM3 → pySerial / serial.js
@@ -258,86 +258,31 @@ Now let's connect to the Bluetooth serial port from Python—using the same [pyS
 pip3 install pyserial
 ```
 
-Here's a simple script that connects to the ESP32 over Bluetooth, reads incoming data, and lets you send messages back:
+You already have a Python serial demo from the [Communication module](../communication/serial-intro.md): [`serial_demo.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py). Let's use it over Bluetooth—the only change is the port name.
+
+Open `serial_demo.py` and change the port to your Bluetooth serial port:
 
 ```python
-"""
-bt_serial_demo.py: Connects to the ESP32 over Bluetooth Serial (SPP)
-and demonstrates bidirectional text communication.
+# In serial_demo.py, change this line:
+ser = serial.Serial(port='COM13', baudrate=9600, timeout=1)
 
-Replace BLUETOOTH_PORT below with your Bluetooth serial port:
-  - macOS:   '/dev/tty.ESP32-Bluetooth' (or similar — run ls /dev/tty.*Bluetooth*)
-  - Windows: 'COM8' (or whatever port number Device Manager shows)
-
-Usage:
-  python3 bt_serial_demo.py
-
-Requires: pyserial (pip3 install pyserial)
-
-By Jon E. Froehlich
-@jonfroehlich
-http://makeabilitylab.io
-"""
-
-import serial
-import time
-
-# --- CHANGE THIS to match your Bluetooth serial port ---
-# macOS example:   '/dev/tty.ESP32-Bluetooth'
-# Windows example: 'COM8'
-BLUETOOTH_PORT = '/dev/tty.ESP32-Bluetooth'
-BAUD_RATE = 115200
-
-print(f"Connecting to {BLUETOOTH_PORT} at {BAUD_RATE} baud...")
-ser = serial.Serial(port=BLUETOOTH_PORT, baudrate=BAUD_RATE, timeout=1)
-print("Connected!")
-
-# Give the connection a moment to stabilize
-time.sleep(2)
-
-try:
-    while True:
-        # Read any incoming data from the ESP32
-        if ser.in_waiting > 0:
-            line = ser.readline().decode('utf-8', errors='replace').strip()
-            if line:
-                print(f"Received: {line}")
-
-        # Ask the user for input and send it over Bluetooth
-        user_input = input("Type a message (or 'quit' to exit): ")
-        if user_input.lower() == 'quit':
-            break
-
-        ser.write((user_input + '\n').encode('utf-8'))
-        print(f"Sent: {user_input}")
-
-        # Brief pause to allow the ESP32 to respond
-        time.sleep(0.1)
-
-        # Read the response
-        if ser.in_waiting > 0:
-            response = ser.readline().decode('utf-8', errors='replace').strip()
-            if response:
-                print(f"Received: {response}")
-
-except KeyboardInterrupt:
-    print("\nExiting...")
-
-finally:
-    ser.close()
-    print("Serial port closed.")
+# To your Bluetooth port:
+# macOS:
+ser = serial.Serial(port='/dev/tty.ESP32-Bluetooth', baudrate=115200, timeout=1)
+# Windows:
+ser = serial.Serial(port='COM8', baudrate=115200, timeout=1)
 ```
+
+That's it—one line change. The rest of the script (reading, writing, encoding, decoding) is identical. Run it:
+
+```
+python3 serial_demo.py
+```
+
+You should see `"Hello from ESP32!"` messages arriving every 2 seconds. Type a number and press Enter—it will be sent to the ESP32 and forwarded to USB Serial Monitor. You're communicating wirelessly! 🎉
 
 {: .note }
-> **This is almost identical to the [serial_demo.py](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py) from the Communication module.** The only difference is the port name: instead of `'COM3'` or `'/dev/tty.usbmodem14101'` (a USB port), you use `'COM8'` or `'/dev/tty.ESP32-Bluetooth'` (a Bluetooth port). The pySerial API, the `readline()` calls, the `write()` calls—everything else is the same. That's the power of SPP: your computer's operating system makes Bluetooth look like a wired serial connection.
-
-Run the script:
-
-```
-python3 bt_serial_demo.py
-```
-
-You should see `"Hello from ESP32!"` messages arriving every 2 seconds. Type a message and press Enter—it will be sent to the ESP32 and forwarded to USB Serial Monitor. You're communicating wirelessly! 🎉
+> **This is the point of SPP.** Your [serial_demo.py](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py) was written for USB serial. It works over Bluetooth with only a port name change. The pySerial API, the `readline()` calls, the `write()` calls—everything is the same. Your operating system makes Bluetooth look like a wired serial connection.
 
 {: .warning }
 > **Only one program can open a serial port at a time.** If you have Arduino's Serial Monitor open on the Bluetooth COM port, your Python script won't be able to connect (and vice versa). Close Serial Monitor before running Python—or use Serial Monitor on the *USB* port and Python on the *Bluetooth* port. This is the same constraint from the [serial introduction](../communication/serial-intro.md#only-one-computer-program-can-open-a-serial-port-at-a-time), just with two ports to manage.
@@ -411,53 +356,35 @@ void loop() {
 
 ### Reading the data in Python
 
-Here's a Python script that reads the streaming potentiometer data and prints it with a simple ASCII bar visualization:
+You already have two Python visualization scripts from the [Communication module](../communication/serial-intro.md) that work perfectly here:
 
-```python
-"""
-bt_sensor_reader.py: Reads streaming sensor data from the ESP32 over
-Bluetooth Serial and displays a live ASCII bar chart in the terminal.
+**Terminal bar graph:** [`serial_bar_graph.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/SerialBarGraph/serial_bar_graph.py) reads a float value per line (0.0–1.0) and renders a live ASCII bar chart in the terminal. To use it over Bluetooth, just pass the Bluetooth port as an argument:
 
-Replace BLUETOOTH_PORT with your Bluetooth serial port.
+```
+# macOS
+python3 serial_bar_graph.py /dev/tty.ESP32-PotSensor 115200
 
-By Jon E. Froehlich
-@jonfroehlich
-http://makeabilitylab.io
-"""
-
-import serial
-import time
-
-BLUETOOTH_PORT = '/dev/tty.ESP32-PotSensor'  # macOS — change for your system
-BAUD_RATE = 115200
-
-print(f"Connecting to {BLUETOOTH_PORT}...")
-ser = serial.Serial(port=BLUETOOTH_PORT, baudrate=BAUD_RATE, timeout=1)
-print("Connected! Turn the potentiometer to see values.\n")
-time.sleep(2)
-
-try:
-    while True:
-        if ser.in_waiting > 0:
-            line = ser.readline().decode('utf-8', errors='replace').strip()
-            if line:
-                try:
-                    value = int(line)
-                    # Scale to a 50-character bar (ESP32 ADC is 12-bit: 0-4095)
-                    bar_length = int(value / 4095 * 50)
-                    bar = '█' * bar_length + '░' * (50 - bar_length)
-                    print(f"\r{bar} {value:4d}", end='', flush=True)
-                except ValueError:
-                    print(f"\r{line}", end='', flush=True)
-
-except KeyboardInterrupt:
-    print("\nExiting...")
-
-finally:
-    ser.close()
+# Windows
+python3 serial_bar_graph.py COM8 115200
 ```
 
-Run this script, then turn the potentiometer—you'll see a live bar chart updating in your terminal, with data arriving wirelessly. Compare this with the wired Serial Plotter experience: same data, no cable.
+**Matplotlib circle:** [`serial_draw_circle.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/SerialCircle/serial_draw_circle.py) reads a float value per line and draws a circle whose radius is proportional to the value. Same idea—just pass the Bluetooth port:
+
+```
+# macOS
+python3 serial_draw_circle.py /dev/tty.ESP32-PotSensor 115200
+
+# Windows
+python3 serial_draw_circle.py COM8 115200
+```
+
+{: .note }
+> **Both scripts expect float values in the range 0.0–1.0.** To use them, modify the Arduino sketch to send normalized values: `SerialBT.println(potVal / 4095.0, 4);` instead of `SerialBT.println(potVal);`. Alternatively, you could modify the Python scripts to accept raw integers—but normalizing on the Arduino side is the cleaner approach and matches the [AnalogOut](https://github.com/makeabilitylab/arduino/tree/master/Serial/AnalogOut) sketch the scripts were designed to work with.
+
+{: .note }
+> **Same scripts, different port.** These Python scripts were written for USB serial. They work over Bluetooth with no code changes—only the port argument differs. This is SPP's core value: your computer's operating system makes the Bluetooth connection look like a regular serial port.
+
+Turn the potentiometer—you'll see the bar chart or circle updating in real time, with data arriving wirelessly. Compare this with the wired experience: same visualization, no cable.
 
 ### Workbench demo
 
@@ -469,7 +396,7 @@ Run this script, then turn the potentiometer—you'll see a live bar chart updat
 
 ## Part 3: p5.js over Bluetooth with serial.js
 
-Here's where things get really satisfying. Because your computer's Bluetooth serial port looks just like a USB serial port, the [Web Serial API](../communication/web-serial.md) works with it—and so does your [serial.js](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) library. You can build the same [p5.js](https://p5js.org/) interactive sketches from the [Communication module](../communication/p5js-serial.md), but with data arriving wirelessly over Bluetooth.
+Here's where things get really satisfying. Because your computer's Bluetooth serial port looks just like a USB serial port, the [Web Serial API](../communication/web-serial.md) works with it—and so does [serial.js](https://github.com/makeabilitylab/js) from the Makeability Lab library. You can build the same [p5.js](https://p5js.org/) interactive sketches from the [Communication module](../communication/p5js-serial.md), but with data arriving wirelessly over Bluetooth.
 
 {: .note }
 > **No changes to serial.js needed!** When you click "Connect" in a Web Serial dialog, Chrome shows *all* available serial ports—including the Bluetooth virtual COM port. Select the Bluetooth port instead of the USB port, and your existing serial.js code works unchanged. This is the entire point of SPP: the operating system abstracts away the wireless transport.
@@ -487,7 +414,7 @@ Make sure the Part 2 sketch (`BluetoothPotentiometer`) is running on your ESP32.
   <meta charset="utf-8">
   <title>Bluetooth Potentiometer Visualizer</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.min.js"></script>
 </head>
 <body>
   <script>
@@ -672,7 +599,7 @@ Extend the Part 3 sketch with a brightness slider that sends values to the ESP32
   <meta charset="utf-8">
   <title>Bluetooth Bidirectional Control</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.min.js"></script>
 </head>
 <body>
   <script>
@@ -852,7 +779,7 @@ In this lesson, you cut the wire! Here's what you learned:
 - [BluetoothSerial library source and examples](https://github.com/espressif/arduino-esp32/tree/master/libraries/BluetoothSerial) — the official library in the ESP32 Arduino core
 - [ESP32 Arduino Bluetooth API docs](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/bluetooth.html) — Espressif's API reference
 - [pySerial documentation](https://pyserial.readthedocs.io/en/latest/) — the Python serial library used throughout our lessons
-- [serial.js](https://github.com/makeabilitylab/p5js/blob/master/_libraries/serial.js) — our Web Serial helper library for p5.js
+- [Makeability Lab JS Library](https://github.com/makeabilitylab/js) — includes serial.js (Web Serial wrapper) and other utilities
 - [Web Serial lesson](../communication/web-serial.md) — our introduction to Web Serial (the same API that works with Bluetooth COM ports)
 - [Serial Bluetooth Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal) — our recommended Android app for Bluetooth serial (free, by Kai Morich)
 - [Bluetooth SIG: Learn About Bluetooth](https://www.bluetooth.com/learn-about-bluetooth/tech-overview/) — official overview of Bluetooth technology

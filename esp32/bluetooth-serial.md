@@ -56,19 +56,16 @@ In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun pa
 
 Apple does not allow third-party apps to use Bluetooth Classic SPP on iOS, so **iPhones cannot connect to the ESP32 over Bluetooth Classic**. This lesson is entirely computer-based (Mac and Windows), so your phone type doesn't matter for Parts 1–4. If you have an **Android** phone, there's an optional bonus activity at the end. In [Lesson 9: BLE](ble.md), we'll use a protocol that works with *everyone's* phone—including iPhones.
 
-<details markdown="1">
-<summary><strong>In this lesson, you will learn:</strong></summary>
-
-- What Bluetooth is, its origin story, and why there are two very different flavors: Bluetooth Classic and Bluetooth Low Energy (BLE)
-- How the Serial Port Profile (SPP) creates a virtual serial port on your computer—making Bluetooth look exactly like a USB serial connection
-- How to use the `BluetoothSerial` library and why its API intentionally mirrors Arduino's built-in `Serial`
-- How to pair the ESP32 with your Mac or Windows computer and find the Bluetooth serial port
-- How to use Python and [pySerial](https://pyserial.readthedocs.io/) to communicate with the ESP32 over Bluetooth—using the same code patterns from the [serial introduction](../communication/serial-intro.md)
-- How to use [p5.js](https://p5js.org/) with [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) and [Web Serial](../communication/web-serial.md) to visualize Bluetooth sensor data in a web browser
-- Why Bluetooth Classic does **not** work on the ESP32-S3 and does **not** work with iPhones
-- When to use Bluetooth Classic *vs.* BLE—and why we'll learn BLE next
-
-</details>
+{: .note }
+> **In this lesson, you will learn:**
+> - What Bluetooth is, its origin story, and why there are two very different flavors: Bluetooth Classic and Bluetooth Low Energy (BLE)
+> - How the Serial Port Profile (SPP) creates a virtual serial port on your computer—making Bluetooth look exactly like a USB serial connection
+> - How to use the `BluetoothSerial` library and why its API intentionally mirrors Arduino's built-in `Serial`
+> - How to pair the ESP32 with your Mac or Windows computer and find the Bluetooth serial port
+> - How to use Python and [pySerial](https://pyserial.readthedocs.io/) to communicate with the ESP32 over Bluetooth—using the same code patterns from the [serial introduction](../communication/serial-intro.md)
+> - How to use [p5.js](https://p5js.org/) with [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) and [Web Serial](../communication/web-serial.md) to visualize Bluetooth sensor data in a web browser
+> - Why Bluetooth Classic does **not** work on the ESP32-S3 and does **not** work with iPhones
+> - When to use Bluetooth Classic *vs.* BLE—and why we'll learn BLE next
 
 ## What is Bluetooth?
 
@@ -795,19 +792,21 @@ If you have an **Android** phone, you can also communicate with the ESP32 using 
 
 ## Exercises
 
-**Exercise 1: Multi-sensor dashboard.** 🟢 Modify the Arduino code to send comma-separated values from *two* sensors (potentiometer + photoresistor). Update the p5.js sketch to parse the CSV data and visualize both streams—one as circle size, one as background color. This is the same parsing pattern from [p5.js Serial I/O](../communication/p5js-serial-io.md).
+Want to go further? Here are some challenges to reinforce what you've learned:
 
-**Exercise 2: Compare wired vs. wireless.** 🟢 Open Arduino's Serial Plotter on the USB port while simultaneously running the Python sensor reader on the Bluetooth port. Both show the same data—one wired, one wireless. Can you see any latency difference? Try it with `delay(10)` vs. `delay(100)` in the Arduino sketch.
+**Exercise 1: Multi-sensor dashboard.** Modify the Arduino code to send comma-separated values from *two* sensors (potentiometer + photoresistor). Update the p5.js sketch to parse the CSV data and visualize both streams—one as circle size, one as background color. This is the same parsing pattern from [p5.js Serial I/O](../communication/p5js-serial-io.md).
 
-**Exercise 3: Chat between two ESP32s.** 🟡 Flash one ESP32 with the [`SerialToSerialBT`](https://github.com/espressif/arduino-esp32/blob/master/libraries/BluetoothSerial/examples/SerialToSerialBT/SerialToSerialBT.ino) example (peripheral) and another with [`SerialToSerialBTM`](https://github.com/espressif/arduino-esp32/blob/master/libraries/BluetoothSerial/examples/SerialToSerialBTM/SerialToSerialBTM.ino) (central). Build a two-way text chat.
+**Exercise 2: Compare wired vs. wireless.** Open Arduino's Serial Plotter on the USB port while simultaneously running the Python sensor reader on the Bluetooth port. Both show the same data—one wired, one wireless. Can you see any latency difference? Try it with `delay(10)` vs. `delay(100)` in the Arduino sketch.
 
-**Exercise 4: Range test.** 🟢 With the sensor streaming sketch running, carry your laptop away from the ESP32. At what distance does the data start dropping out? When does the connection drop entirely? Test with and without walls between you and the ESP32.
+**Exercise 3: Chat between two ESP32s.** Flash one ESP32 with the [`SerialToSerialBT`](https://github.com/espressif/arduino-esp32/blob/master/libraries/BluetoothSerial/examples/SerialToSerialBT/SerialToSerialBT.ino) example (peripheral) and another with [`SerialToSerialBTM`](https://github.com/espressif/arduino-esp32/blob/master/libraries/BluetoothSerial/examples/SerialToSerialBTM/SerialToSerialBTM.ino) (central). Build a two-way text chat.
 
-**Exercise 5: Servo control.** 🟡 Send angle values (0–180) from a p5.js slider over Bluetooth. Parse the value on the ESP32 and control a servo motor wirelessly. Compare the feel with a directly-wired potentiometer control—can you notice the latency?
+**Exercise 4: Range test.** With the sensor streaming sketch running, carry your laptop away from the ESP32. At what distance does the data start dropping out? When does the connection drop entirely? Test with and without walls between you and the ESP32.
 
-**Exercise 6: Replicate a Communication module project.** 🟢 Pick any project from the [Communication module](../communication/index.md) (the paint app, the shape drawer, *etc.*) and run it over Bluetooth instead of USB. How much code did you have to change? (The answer should be: none—just a different port selection.)
+**Exercise 5: Servo control.** Send angle values (0–180) from a p5.js slider over Bluetooth. Parse the value on the ESP32 and control a servo motor wirelessly. Compare the feel with a directly-wired potentiometer control—can you notice the latency?
 
-## Summary
+**Exercise 6: Replicate a Communication module project.** Pick any project from the [Communication module](../communication/index.md) (the paint app, the shape drawer, *etc.*) and run it over Bluetooth instead of USB. How much code did you have to change? (The answer should be: none—just a different port selection.)
+
+## Lesson Summary
 
 In this lesson, you cut the wire! Here's what you learned:
 

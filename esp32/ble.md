@@ -23,17 +23,20 @@ nav_order: 9
 
 <!-- Content TODOs:
 1. Create Fritzing wiring diagrams for the ESP32-S3 Feather with potentiometer + LED circuit
-2. Record workbench video of nRF Connect discovering the ESP32 and reading a characteristic
-3. Record workbench video of sensor data streaming via notifications
-4. Record workbench video of NeoPixel color control from nRF Connect
-5. Record screencast of the Web Bluetooth demo page controlling the NeoPixel
-6. Get screenshots of nRF Connect: scanning, service/characteristic tree, reading values, subscribing
+2. Record workbench video of nRF Connect discovering the ESP32 and reading a characteristic (include captions/transcript)
+3. Record workbench video of sensor data streaming via notifications (include captions/transcript)
+4. Record workbench video of NeoPixel color control from nRF Connect (include captions/transcript)
+5. Record screencast of the Web Bluetooth demo page controlling the NeoPixel (include captions/transcript)
+6. Get screenshots of nRF Connect: scanning, service/characteristic tree, reading values, subscribing (include descriptive alt text)
 7. Create a GATT hierarchy diagram (Server → Service → Characteristic → Value/Properties)
 8. Create a diagram showing the BLE advertising and connection lifecycle
 9. Create a side-by-side diagram comparing USB serial flow vs. BLE characteristic flow
 10. Build and host the Web Bluetooth demo pages on GitHub Pages
 11. Write and test all Arduino sketches; push to makeabilitylab/arduino GitHub repo under ESP32/Bluetooth/
 12. Test all code on both ESP32-S3 Feather and Huzzah32
+13. Once ble.js is tested and merged, link to https://github.com/makeabilitylab/js/blob/main/src/lib/ble/ble.js
+    and add a Part 4b showing the same NeoPixel controller using ble.js (parallels how L8 uses serial.js)
+14. Verify Bluedroid vs. NimBLE default for Arduino core v3.x — update "The ESP32 BLE library" section accordingly
 -->
 
 <!-- See also:
@@ -64,11 +67,7 @@ BLE is more complex than Bluetooth Classic. Instead of a simple serial byte stre
 > - How to build a **Web Bluetooth** web page that communicates with the ESP32 from a browser—paralleling the [Web Serial](../communication/web-serial.md) approach but wireless
 > - The Nordic UART Service (NUS) as a "serial-like" bridge for BLE
 
-{: .note }
-> **Did you skip Lesson 8?** No problem. This lesson is self-contained—you don't need Bluetooth Classic experience to follow along. We'll briefly cover how BLE differs from Classic in the first section. If you want the full comparison, see [Lesson 8](bluetooth-serial.md).
-
-{: .note }
-> **This lesson works with both iPhones and Android phones.** Unlike Bluetooth Classic ([Lesson 8](bluetooth-serial.md)), which is blocked on iOS, BLE works with every modern smartphone. We'll start on your computer (Mac or Windows) using Python for the smoothest debugging experience, then move to phone apps that work on both platforms.
+**Did you skip Lesson 8?** No problem. This lesson is self-contained—you don't need Bluetooth Classic experience to follow along. We'll briefly cover how BLE differs from Classic in the first section. If you want the full comparison, see [Lesson 8](bluetooth-serial.md). And unlike Bluetooth Classic, which is blocked on iOS and only works on the original ESP32, **BLE works with iPhones, Android phones, and the ESP32-S3**—so everyone can participate.
 
 ## What is BLE?
 
@@ -76,7 +75,7 @@ BLE is more complex than Bluetooth Classic. Instead of a simple serial byte stre
 
 This design priority—**extreme power efficiency**—is what makes BLE transformative for physical computing. A BLE sensor can run for months or even years on a coin cell battery. That's not possible with Bluetooth Classic or WiFi.
 
-{: .note }
+{: .important }
 > **BLE is not "wireless serial."** This is the single most important conceptual shift in this lesson. If you've used `Serial.println()` over USB or `SerialBT.println()` over Bluetooth Classic, you're used to a continuous byte stream—data flows like water through a pipe. BLE doesn't work that way. Instead, BLE organizes data into discrete, named **characteristics** that can be read, written, or subscribed to. Think less "serial port" and more "structured data API."
 
 If you completed [Lesson 8](bluetooth-serial.md), here's a quick comparison:
@@ -89,7 +88,7 @@ If you completed [Lesson 8](bluetooth-serial.md), here's a quick comparison:
 | iOS support | ❌ (Apple blocks SPP) | ✅ |
 | ESP32-S3 | ❌ | ✅ |
 | Typical range | ~10m | ~10m |
-| Max throughput | ~3 Mbps | ~1 Mbps (typically much less) |
+| Max throughput | ~3 Mbps | Up to 2 Mbps (BLE 5.0 PHY), but practical throughput is much lower |
 | Complexity | Very simple | More setup, more concepts |
 
 **Table.** Key differences between Bluetooth Classic (Lesson 8) and BLE (this lesson). BLE trades simplicity for universality, power efficiency, and structured data.
@@ -173,7 +172,12 @@ You can browse the full list in the [Bluetooth SIG Assigned Numbers](https://www
 
 ## The ESP32 BLE library
 
-The ESP32 Arduino core includes a built-in BLE library based on the [Bluedroid](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/index.html) Bluetooth stack. No installation is needed—just `#include` the headers and go. The key classes you'll use are:
+The ESP32 Arduino core includes a built-in BLE library. No installation is needed—just `#include` the headers and go. The key classes you'll use are:
+
+<!-- NOTE: Verify which BLE stack ships by default in your Arduino core version.
+     In Arduino-ESP32 v2.x, the default was Bluedroid. In some v3.x releases,
+     the default may have switched to NimBLE. The BLEDevice.h API is the same
+     either way, but this affects the NimBLE-Arduino note below. -->
 
 | Class | Purpose |
 |---|---|
@@ -197,7 +201,7 @@ You'll need the following components. We use **[Adafruit's ESP32-S3 Feather](htt
 
 | Breadboard | ESP32 | LED | Resistor | Potentiometer |
 | ---------- |:-----:|:-----:|:-----:|:-----:|
-| ![Breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![ESP32-S3 Feather](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![Resistors]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![Potentiometer]({{ site.baseurl }}/assets/images/Potentiometer_100h.png) |
+| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit ESP32-S3 Feather board, top view](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red 5mm LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220-ohm resistor, striped red-red-brown-gold]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/Potentiometer_100h.png) |
 | Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Red LED | 220Ω Resistor | 10kΩ Potentiometer |
 
 You will also need:
@@ -212,7 +216,11 @@ You will also need:
 
 Let's start with the BLE equivalent of "Hello World": create a GATT server on the ESP32 with a single readable characteristic, advertise it, and see it on your phone.
 
-### The code
+### The Arduino code
+
+<!-- TODO: Push BLEHelloWorld.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
+
+The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BLEHelloWorld).
 
 ```cpp
 /**
@@ -386,11 +394,11 @@ Once you've confirmed the ESP32 is working from your computer, let's try it from
 1. On your **iPhone** or **Android phone**, open the **nRF Connect** app ([iOS](https://apps.apple.com/app/nrf-connect-for-mobile/id1054362403) / [Android](https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp)).
 2. Tap **Scan** (top right). You should see `"ESP32-BLE"` in the list of discovered devices.
 
-<!-- TODO: Add side-by-side screenshots of nRF Connect scan results on iOS and Android -->
+<!-- TODO: Add side-by-side screenshots of nRF Connect scan results on iOS and Android (include descriptive alt text) -->
 
 3. Tap **Connect** next to `"ESP32-BLE"`. The app will connect and display the GATT server structure. You should see your custom service (listed by its UUID) with one characteristic underneath.
 
-<!-- TODO: Add screenshot of nRF Connect showing the service and characteristic tree -->
+<!-- TODO: Add screenshot of nRF Connect showing the service and characteristic tree (include descriptive alt text) -->
 
 4. Tap the **read arrow** (↓) next to the characteristic. You should see `"Hello from ESP32!"` appear as the value. You just read data from a BLE peripheral on your phone!
 
@@ -404,6 +412,7 @@ Once you've confirmed the ESP32 is working from your computer, let's try it from
      2. Running the Python ble_discover.py script
      3. Opening nRF Connect on a phone, scanning, finding ESP32-BLE
      4. Connecting, expanding the service tree, reading the value
+     Include captions/transcript
 -->
 
 ## Part 2: Streaming sensor data with notifications
@@ -423,7 +432,11 @@ On the Huzzah32, use pin **A7** (GPIO 32), which is an ADC1 pin. ADC2 pins confl
 
 </details>
 
-### The code
+### The Arduino code
+
+<!-- TODO: Push BLENotifySensor.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
+
+The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BLENotifySensor).
 
 ```cpp
 /**
@@ -626,7 +639,7 @@ Now try it from your phone:
 4. Tap the **triple-down-arrow** icon (⇊) to **subscribe to notifications**.
 5. Turn the potentiometer—you should see the value updating in real time on your phone!
 
-<!-- TODO: Add screenshot of nRF Connect showing live notification values updating -->
+<!-- TODO: Add screenshot of nRF Connect showing live notification values updating (include descriptive alt text) -->
 
 {: .note }
 > **Comparing with serial:** In the [Communication module](../communication/serial-intro.md), you call `Serial.println(sensorValue)` and bytes flow continuously through the USB cable at 115,200 bps. With BLE, you update a characteristic value and call `notify()`—the BLE stack delivers it at the negotiated connection interval (typically 7.5ms–4 seconds). BLE trades raw throughput for structured data, power efficiency, and wireless convenience.
@@ -639,7 +652,7 @@ By default, BLE's ATT (Attribute Protocol) layer has a Maximum Transmission Unit
 
 You can negotiate a larger MTU (up to 512 bytes) if both sides support it, but 20 bytes is the safe baseline that works with all BLE devices. For sensor data, this is rarely a problem—an integer like `"2847"` is only 4 bytes as a string (or 2 bytes as a raw `uint16_t`). But if you try to send long formatted strings, you'll hit this limit.
 
-{: .warning }
+{: .caution }
 > **Keep your BLE payloads compact.** Send numbers as short strings or raw bytes, not verbose text. If you need to send more than 20 bytes, either negotiate a larger MTU (call `BLEDevice::setMTU(185)` in `setup()`; both sides must agree), split the data across multiple characteristics, or send it in chunks.
 
 ### Workbench demo
@@ -648,17 +661,20 @@ You can negotiate a larger MTU (up to 512 bytes) if both sides support it, but 2
      1. The potentiometer circuit on the ESP32-S3 Feather
      2. Subscribing to notifications in nRF Connect
      3. Turning the pot and watching values update on the phone
+     Include captions/transcript
 -->
 
 ## Part 3: Controlling the NeoPixel over BLE
 
 Now let's go the other direction: send data *from* your phone *to* the ESP32 to control hardware. We'll create a **writable** characteristic that accepts RGB color values and sets the onboard NeoPixel.
 
-The ESP32-S3 Feather has a built-in NeoPixel (WS2812B) RGB LED on `PIN_NEOPIXEL`, powered by `NEOPIXEL_POWER`. We used it in [Lesson 2: Blink](led-blink.md#part-4-blink-the-onboard-neopixel-), so the NeoPixel setup should be familiar.
+The ESP32-S3 Feather has a built-in NeoPixel (WS2812B) RGB LED on `PIN_NEOPIXEL`, powered by `NEOPIXEL_POWER`. We used it in [Lesson 2: Blink](led-blink.md) and [Lesson 3: LED Fading](led-fade.md), so the NeoPixel setup should be familiar.
 
-### The code
+### The Arduino code
 
-We'll extend the Part 2 sketch to add a second characteristic for LED control—so the ESP32 simultaneously streams sensor data *and* accepts LED commands. This is the same bidirectional pattern from [Lesson 8](bluetooth-serial.md#part-3-controlling-an-led-from-your-phone), but over BLE with structured characteristics instead of a serial byte stream.
+<!-- TODO: Push BLENeoPixelControl.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
+
+We'll extend the Part 2 sketch to add a second characteristic for LED control—so the ESP32 simultaneously streams sensor data *and* accepts LED commands. This is the same bidirectional pattern from [Lesson 8](bluetooth-serial.md#part-4-bidirectional-control), but over BLE with structured characteristics instead of a serial byte stream. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BLENeoPixelControl).
 
 ```cpp
 /**
@@ -811,7 +827,8 @@ void loop() {
 
 The key new element is the `LedCallbacks` class. When the central writes to the LED characteristic, `onWrite()` fires automatically. We interpret the first three bytes of the written value as R, G, B and set the NeoPixel color accordingly.
 
-Notice the pattern: we don't poll for incoming data in `loop()` (like we do with `Serial.available()`). Instead, BLE uses a **callback model**—the library calls our `onWrite()` function when data arrives. This is fundamentally different from the serial polling pattern you're used to.
+{: .highlight }
+> **Callbacks vs. polling:** Notice the pattern: we don't poll for incoming data in `loop()` (like we do with `Serial.available()` or `SerialBT.available()` in [Lesson 8](bluetooth-serial.md)). Instead, BLE uses a **callback model**—the library calls our `onWrite()` function when data arrives. This is fundamentally different from the serial polling pattern you're used to, and it's one of the biggest code-level differences between Bluetooth Classic and BLE.
 
 ### Try it out from your computer (Python)
 
@@ -874,7 +891,7 @@ asyncio.run(main())
 5. Tap the **write arrow** (↑). In the write dialog, select **ByteArray** as the type, then enter `FF0000` (red), `00FF00` (green), or `0000FF` (blue). Tap **Send**.
 6. Watch the NeoPixel change color! 🌈
 
-<!-- TODO: Add screenshot of nRF Connect write dialog with hex values, showing both iOS and Android -->
+<!-- TODO: Add screenshot of nRF Connect write dialog with hex values, showing both iOS and Android (include descriptive alt text) -->
 
 {: .note }
 > **nRF Connect write format:** When writing raw bytes in nRF Connect, select "ByteArray" (not "Text") and enter hex values without spaces or `0x` prefixes. `FF0000` = red, `00FF00` = green, `0000FF` = blue, `FF00FF` = magenta, `FFFFFF` = white. Each pair of hex digits is one byte (0–255).
@@ -885,6 +902,7 @@ asyncio.run(main())
      1. Connecting from nRF Connect
      2. Writing different RGB hex values
      3. The onboard NeoPixel changing color with each write
+     Include captions/transcript
 -->
 
 ## Part 4: Web Bluetooth
@@ -1146,7 +1164,7 @@ Let's walk through the JavaScript, step by step:
 4. The sensor value should appear and update in real time.
 5. Drag the R, G, B sliders—the NeoPixel changes color as you move them!
 
-<!-- TODO: Add a screenshot or screencast showing the web page in Chrome with sliders and live sensor data -->
+<!-- TODO: Add a screenshot or screencast showing the web page in Chrome with sliders and live sensor data (include descriptive alt text) -->
 
 {: .note }
 > **Throttling writes.** If you drag a slider quickly, `sendColor()` fires on every pixel of movement—potentially dozens of times per second. BLE can handle this, but rapid writes may occasionally fail with a "GATT operation already in progress" error. For a more robust implementation, you could debounce the slider input or use `requestAnimationFrame()` to batch writes. For this lesson, occasional errors are harmless.
@@ -1158,6 +1176,7 @@ Let's walk through the JavaScript, step by step:
      2. Potentiometer values appearing in real time
      3. Sliding the RGB sliders and the NeoPixel changing color wirelessly
      4. The "magic moment" of browser → BLE → physical hardware
+     Include captions/transcript
 -->
 
 ## Part 5: Nordic UART Service (NUS)
@@ -1175,6 +1194,9 @@ The naming is from the **peripheral's perspective**: RX = data coming *in* to th
 > NUS is not an official Bluetooth SIG standard—it's a convention created by Nordic Semiconductor that has become a de facto standard because so many apps support it. Apps like nRF Connect, nRF Toolbox, and many Bluetooth terminal apps automatically recognize the NUS UUIDs and provide a serial terminal interface.
 
 Here's a simple NUS example:
+
+<!-- TODO: Push BLEUartService.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
+<!-- TODO: Push Python scripts (ble_discover.py, ble_sensor_reader.py, ble_neopixel.py) to https://github.com/makeabilitylab/arduino/tree/master/Python/BLE/ -->
 
 ```cpp
 /**
@@ -1274,15 +1296,44 @@ void loop() {
 }
 ```
 
-To test: connect with nRF Connect, navigate to the NUS service, subscribe to TX notifications, and write text to the RX characteristic. Or, in newer versions of nRF Connect, use the built-in **UART** mode which provides a chat-like interface that works with any device implementing NUS.
+### Try it out
+
+1. Upload the sketch and open Serial Monitor at 115200 baud.
+2. Open **nRF Connect** on your phone. Scan and connect to `"ESP32-BLE-UART"`.
+3. In newer versions of nRF Connect, tap the **UART** icon (or navigate to the NUS service manually). You should see a chat-like interface.
+4. Type a message in nRF Connect and tap **Send**. It should appear in Serial Monitor.
+5. Type a message in Serial Monitor and press Enter. It should appear in nRF Connect's UART view.
+
+If your version of nRF Connect doesn't have the UART shortcut, you can do it manually: expand the NUS service, subscribe to notifications on the TX characteristic (`6E400003...`), and write text to the RX characteristic (`6E400002...`).
 
 {: .note }
 > **NUS is "serial over BLE."** It gives you the familiar send/receive text experience of Bluetooth Classic's `SerialBT`, but running over BLE—so it works on the ESP32-S3, works with iPhones, and coexists with custom GATT services. Under the hood, it's still GATT: the NUS service has two characteristics, and data flows as writes and notifications. Understanding the GATT layer (Parts 1–4) will help you debug NUS when things go wrong.
 
+If you want a `Serial`-like API over BLE without manually managing NUS characteristics, check out the [NuS-NimBLE-Serial](https://www.arduino.cc/reference/en/libraries/nus-nimble-serial/) library, which wraps NUS in familiar `.read()` and `.write()` methods. It requires the [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino) stack.
+
+## Comparing ESP32 wireless options
+
+Now that you've seen WiFi ([Lesson 7](iot.md)), Bluetooth Classic ([Lesson 8](bluetooth-serial.md)), and BLE (this lesson), here's how the three compare at a glance:
+
+| | WiFi (L7) | Bluetooth Classic (L8) | BLE (this lesson) |
+|---|---|---|---|
+| Best for | Cloud/internet connectivity | Wireless serial replacement | Low-power sensors, phones, web apps |
+| Range | Depends on router | ~10m | ~10m |
+| Power | High | Medium | Very low |
+| iPhone support | ✅ (via web) | ❌ | ✅ |
+| ESP32-S3 | ✅ | ❌ | ✅ |
+| Complexity | Medium (needs WiFi credentials) | Very simple | Higher (GATT model) |
+| Browser API | Fetch / WebSocket | Web Serial (via virtual COM port) | Web Bluetooth |
+
+**Table.** Comparison of the three wireless technologies available on the ESP32. For most new projects, BLE is the default choice unless you need internet connectivity (WiFi) or a drop-in serial replacement (Bluetooth Classic).
+{: .fs-1 }
+
 {: .note }
-> **Library alternative:** If you want a `Serial`-like API over BLE without manually managing NUS characteristics, check out the [NuS-NimBLE-Serial](https://www.arduino.cc/reference/en/libraries/nus-nimble-serial/) library, which wraps NUS in familiar `.read()` and `.write()` methods. It requires the [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino) stack.
+> **A note on BLE security.** In this lesson, we use BLE's "Just Works" pairing mode, which requires no PIN and provides no protection against eavesdropping. This is fine for learning and for projects where the data isn't sensitive (potentiometer readings, LED colors). For production IoT devices that handle sensitive data—door locks, health monitors, payment systems—you'd want to explore passkey pairing or out-of-band (OOB) authentication. See the [Bluetooth SIG security overview](https://www.bluetooth.com/learn-about-bluetooth/key-attributes/bluetooth-security/) for more.
 
 ## Exercises
+
+Want to go further? Here are some challenges to reinforce what you've learned:
 
 **Exercise 1: NeoPixel strip control.** Modify Part 3 to control the 5-LED NeoPixel stick from your kit instead of (or in addition to) the onboard NeoPixel. You could either send 15 bytes (5 × RGB) in a single write to set all LEDs at once, or add a fourth byte for the LED index (0–4) and set one LED per write. Build a Web Bluetooth page with five color pickers—one per LED.
 
@@ -1292,13 +1343,15 @@ To test: connect with nRF Connect, navigate to the NUS service, subscribe to TX 
 
 **Exercise 4: BLE servo control.** Create a writable characteristic that accepts a single byte (0–180) representing a servo angle. When the central writes a value, the ESP32 moves a servo motor to that position (using the [Servo library](../advancedio/servo.md)). Build a Web Bluetooth page with a slider to control the servo wirelessly.
 
-**Exercise 5: Connection status NeoPixel.** Use the onboard NeoPixel to display BLE connection status: **blue** while advertising (waiting for a connection), **green** when a central is connected, and **red** briefly on disconnection before returning to blue. This is a common pattern in commercial BLE products. Implement it using the `onConnect()` and `onDisconnect()` callbacks.
+**Exercise 5: Connection status NeoPixel.** Use the onboard NeoPixel to display BLE connection status: **blue** while advertising (waiting for a connection), **green** when a central is connected, and **red** briefly on disconnection before returning to blue. This is a common pattern in commercial BLE products. Implement it using the `onConnect()` and `onDisconnect()` callbacks. (Accessibility note: for colorblind users, consider also adding a blink pattern—*e.g.,* slow pulse for advertising, solid for connected, fast blink for disconnection.)
 
 **Exercise 6: Power comparison (research).** The ESP32-S3 Feather has a LiPoly battery connector and a MAX17048 battery monitor chip. Connect the 350mAh LiPoly battery from your kit and run a BLE sketch. How long does the battery last? Compare with a WiFi sketch (from the [IoT lesson](iot.md)). Which protocol consumes more power? For bonus points, use `BLEDevice::setPower()` to experiment with different transmit power levels and measure the effect on both range and battery life.
 
 **Exercise 7: Web Bluetooth + p5.js.** Port the Web Bluetooth sensor display from Part 4 into [p5.js](https://p5js.org/). Use `createCanvas()` to draw a real-time visualization (bar chart, oscilloscope, *etc.*) of the incoming BLE sensor data. If you completed the [p5.js Serial lessons](../communication/p5js-serial.md), compare the code structure—how much carries over? (Hint: also check out [p5.ble.js](https://itpnyu.github.io/p5.ble.js/), a p5.js library specifically for Web Bluetooth.)
 
-## Summary
+**Exercise 8: Port a Bluetooth Classic project to BLE.** If you completed any project from [Lesson 8](bluetooth-serial.md) (the potentiometer visualizer, the bidirectional LED control, *etc.*), rebuild it using BLE. Replace `BluetoothSerial` with the BLE library, design your GATT service and characteristics, and update the computer-side code to use `bleak` instead of `pySerial`. What changed? What stayed the same? This is a great exercise in understanding the conceptual differences between the two Bluetooth flavors.
+
+## Lesson Summary
 
 In this lesson, you learned Bluetooth Low Energy—a fundamentally different approach to wireless communication than the serial-style Bluetooth Classic from [Lesson 8](bluetooth-serial.md). Here's what you covered:
 

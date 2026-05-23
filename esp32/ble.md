@@ -170,14 +170,43 @@ You can browse the full list in the [Bluetooth SIG Assigned Numbers](https://www
 {: .note }
 > **Don't be intimidated by UUIDs.** A 128-bit UUID is just a unique label—think of it like a URL or a barcode. You generate one, paste it into your code, and use the same one in your phone app or web page so both sides agree on which characteristic is which. You don't need to memorize them or understand their internal structure.
 
+## Choosing between WiFi, Bluetooth Classic, and BLE
+
+Now that you understand the BLE concepts — peripherals, centrals, GATT, services, characteristics, and UUIDs — you have enough context to see where BLE fits alongside the other wireless technologies you've learned. If you've completed [Lesson 7 (WiFi/IoT)](iot.md) and [Lesson 8 (Bluetooth Classic)](bluetooth-serial.md), here's how all three compare:
+
+| | WiFi (L7) | Bluetooth Classic (L8) | BLE (this lesson) |
+|---|---|---|---|
+| Best for | Cloud/internet connectivity | Wireless serial replacement | Low-power sensors, phones, web apps |
+| Range | Depends on router | ~10m | ~10m |
+| Power | High | Medium | Very low |
+| iPhone support | ✅ (via web) | ❌ | ✅ |
+| ESP32 (original) | ✅ | ✅ | ✅ |
+| ESP32-S3 | ✅ | ❌ | ✅ |
+| Complexity | Medium (needs WiFi credentials) | Very simple | Higher (GATT model) |
+| Browser API | Fetch / WebSocket | Web Serial (via virtual COM port) | Web Bluetooth |
+
+**Table.** Comparison of the three wireless technologies available on the ESP32. For most new projects, BLE is the default choice unless you need internet connectivity (WiFi) or a drop-in serial replacement (Bluetooth Classic). The original ESP32 supports all three; the ESP32-S3 supports WiFi and BLE but not Bluetooth Classic.
+{: .fs-1 }
+
 ## The ESP32 BLE library
 
-The ESP32 Arduino core includes a built-in BLE library. No installation is needed—just `#include` the headers and go. The key classes you'll use are:
+The ESP32 Arduino core includes a built-in BLE library ([source on GitHub](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE), [API docs](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ble.html)). No installation is needed—just `#include` the headers and go.
 
 <!-- NOTE: Verify which BLE stack ships by default in your Arduino core version.
      In Arduino-ESP32 v2.x, the default was Bluedroid. In some v3.x releases,
      the default may have switched to NimBLE. The BLEDevice.h API is the same
      either way, but this affects the NimBLE-Arduino note below. -->
+
+The library is split across several header files, each providing a specific piece of the BLE puzzle:
+
+| Header | What it provides |
+|---|---|
+| `BLEDevice.h` | Top-level entry point. Initializes the BLE stack (call `BLEDevice::init()` once in `setup()`). |
+| `BLEServer.h` | Creates a GATT server on the ESP32 and manages connections. |
+| `BLEUtils.h` | Utility functions used internally by the library. Include it alongside the others. |
+| `BLE2902.h` | The Client Characteristic Configuration Descriptor (CCCD). Required for any characteristic that supports **notifications** — without it, centrals cannot subscribe. You only need this header when using `PROPERTY_NOTIFY`. |
+
+You'll typically `#include` all four at the top of your sketch. The key *classes* you'll work with are:
 
 | Class | Purpose |
 |---|---|
@@ -185,10 +214,9 @@ The ESP32 Arduino core includes a built-in BLE library. No installation is neede
 | `BLEServer` | Creates a GATT server on the ESP32 |
 | `BLEService` | A service within the server (identified by UUID) |
 | `BLECharacteristic` | A data point within a service (identified by UUID, has value + properties) |
-| `BLE2902` | A descriptor that enables/disables notifications (required for Notify) |
 | `BLEAdvertising` | Controls what the ESP32 broadcasts during advertising |
-| `BLEServerCallbacks` | Event handler for connection/disconnection events |
-| `BLECharacteristicCallbacks` | Event handler for read/write events on a characteristic |
+| `BLEServerCallbacks` | Callback class for connection/disconnection events |
+| `BLECharacteristicCallbacks` | Callback class for read/write events on a characteristic |
 
 Don't worry about memorizing these—we'll introduce each one as we use it in the activities below.
 
@@ -214,7 +242,7 @@ You will also need:
 
 ## Part 1: Advertising and discovery
 
-Let's start with the BLE equivalent of "Hello World": create a GATT server on the ESP32 with a single readable characteristic, advertise it, and see it on your phone.
+Let's start with the BLE equivalent of "Hello World": create a GATT server on the ESP32 with a single readable characteristic, advertise it, and discover it from both your computer and your phone. By the end of this part, you'll understand the full BLE setup lifecycle — initializing the stack, creating the GATT hierarchy, advertising, and handling connections — and you'll have read your first BLE characteristic from nRF Connect.
 
 ### The Arduino code
 
@@ -314,17 +342,19 @@ Let's walk through the key steps:
 
 **Step 1: `BLEDevice::init("ESP32-BLE")`** initializes the Bluetooth stack and sets the device name that appears during scanning. This is analogous to `SerialBT.begin("ESP32-Bluetooth")` from [Lesson 8](bluetooth-serial.md), but the similarity ends here—BLE has no `println()` or `read()` on the device object.
 
-**Steps 2–4: Creating the GATT hierarchy.** We create a **server** (the ESP32 as a whole), a **service** within it (identified by `SERVICE_UUID`), and a **characteristic** within that service (identified by `CHARACTERISTIC_UUID`). The characteristic has `PROPERTY_READ`, meaning a central can request its value. This is the GATT structure we discussed earlier, built in code.
+**Step 2: Creating the server and registering callbacks.** `BLEDevice::createServer()` creates a GATT server, and `pServer->setCallbacks(new MyServerCallbacks())` registers a **callback** — a function (or in this case, a class with methods) that the BLE library will call automatically when specific events happen, like a central connecting or disconnecting. If you've used event listeners in JavaScript or interrupt handlers on Arduino, callbacks are the same idea: instead of polling for events in `loop()`, you tell the library "call *this* function when *that* happens." We define `MyServerCallbacks` above `setup()` with two methods: `onConnect()` and `onDisconnect()`.
+
+**Steps 3–4: Creating the GATT hierarchy.** We create a **service** within the server (identified by `SERVICE_UUID`) and a **characteristic** within that service (identified by `CHARACTERISTIC_UUID`). The characteristic has `PROPERTY_READ`, meaning a central can request its value. This is the GATT structure we discussed earlier, built in code.
 
 **Step 5: Setting the value.** `pCharacteristic->setValue("Hello from ESP32!")` stores a string in the characteristic. When a central reads this characteristic, it receives this string.
 
-**Step 6–7: Starting the service and advertising.** `pService->start()` activates the service so connected centrals can see it. `pAdvertising->start()` begins broadcasting advertisement packets. We include our service UUID in the advertisement (`addServiceUUID`) so centrals filtering by service can find us.
+**Steps 6–7: Starting the service and advertising.** `pService->start()` activates the service so connected centrals can see it. `pAdvertising->start()` begins broadcasting advertisement packets. We include our service UUID in the advertisement (`addServiceUUID`) so centrals filtering by service can find us.
 
-**The `onDisconnect` callback.** This is a critical gotcha: when a central disconnects, the ESP32 **stops advertising by default**. If you don't restart advertising in `onDisconnect()`, the ESP32 goes silent and no new centrals can find it. Always restart advertising after disconnection.
+**The `onDisconnect` callback revisited.** Look back at the `MyServerCallbacks` class we registered in Step 2. The `onDisconnect()` method contains a critical line: `pServer->getAdvertising()->start()`. This is because when a central disconnects, the ESP32 **stops advertising by default**. If you don't restart advertising in `onDisconnect()`, the ESP32 goes silent and no new centrals can find it. Always restart advertising after disconnection.
 
 ### Discovering the ESP32 from your computer (Python)
 
-Let's start on the computer, where debugging is easiest. We'll use [bleak](https://pypi.org/project/bleak/)—a cross-platform BLE client library for Python. If you haven't installed it yet:
+Let's start on the computer, where debugging is easiest. We'll use [bleak](https://pypi.org/project/bleak/) — a cross-platform BLE client library for Python that works on macOS, Windows, and Linux. Unlike [pySerial](https://pyserial.readthedocs.io/) (which we used for Bluetooth Classic in [Lesson 8](bluetooth-serial.md)), bleak speaks BLE natively — it connects directly to BLE peripherals, discovers their GATT services, and reads/writes characteristics using Python's `asyncio` for non-blocking I/O. If you haven't installed it yet:
 
 ```
 pip3 install bleak
@@ -417,7 +447,7 @@ Once you've confirmed the ESP32 is working from your computer, let's try it from
 
 ## Part 2: Streaming sensor data with notifications
 
-Reading a static string is a good start, but the real power of BLE comes with **notifications**—the peripheral automatically pushes updates to the central whenever a value changes. Let's wire up a potentiometer and stream its value to your phone in real time.
+Reading a static string is a good start, but the real power of BLE comes with **notifications** — the peripheral automatically pushes updates to the central whenever a value changes. In this part, you'll wire up a potentiometer, learn how to add `PROPERTY_NOTIFY` and the `BLE2902` descriptor, and stream live sensor data to both nRF Connect and a Python script. This is the BLE equivalent of `Serial.println(sensorValue)` — but structured and wireless.
 
 ### The circuit
 
@@ -652,7 +682,7 @@ By default, BLE's ATT (Attribute Protocol) layer has a Maximum Transmission Unit
 
 You can negotiate a larger MTU (up to 512 bytes) if both sides support it, but 20 bytes is the safe baseline that works with all BLE devices. For sensor data, this is rarely a problem—an integer like `"2847"` is only 4 bytes as a string (or 2 bytes as a raw `uint16_t`). But if you try to send long formatted strings, you'll hit this limit.
 
-{: .caution }
+{: .note }
 > **Keep your BLE payloads compact.** Send numbers as short strings or raw bytes, not verbose text. If you need to send more than 20 bytes, either negotiate a larger MTU (call `BLEDevice::setMTU(185)` in `setup()`; both sides must agree), split the data across multiple characteristics, or send it in chunks.
 
 ### Workbench demo
@@ -666,7 +696,7 @@ You can negotiate a larger MTU (up to 512 bytes) if both sides support it, but 2
 
 ## Part 3: Controlling the NeoPixel over BLE
 
-Now let's go the other direction: send data *from* your phone *to* the ESP32 to control hardware. We'll create a **writable** characteristic that accepts RGB color values and sets the onboard NeoPixel.
+So far, data has flowed in one direction: from the ESP32 to the central. Now let's go the other direction — send data *from* your phone *to* the ESP32 to control hardware. In this part, you'll create a **writable** characteristic that accepts RGB color values and sets the onboard NeoPixel. You'll also learn the BLE **callback model** for handling incoming writes, which is fundamentally different from the `Serial.available()` polling pattern.
 
 The ESP32-S3 Feather has a built-in NeoPixel (WS2812B) RGB LED on `PIN_NEOPIXEL`, powered by `NEOPIXEL_POWER`. We used it in [Lesson 2: Blink](led-blink.md) and [Lesson 3: LED Fading](led-fade.md), so the NeoPixel setup should be familiar.
 
@@ -907,9 +937,7 @@ asyncio.run(main())
 
 ## Part 4: Web Bluetooth
 
-So far we've used nRF Connect as our BLE central—it's great for debugging, but it doesn't give us a custom UI. What if you could control the NeoPixel from a **web page** with sliders and a color picker? What if you could plot sensor data in a live chart—all in the browser, all wireless?
-
-That's exactly what the [Web Bluetooth API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API) provides. If you completed the [Web Serial lessons](../communication/web-serial.md), this will feel familiar—it's the same idea (browser talks to hardware) with a different transport (BLE instead of USB serial).
+So far we've used nRF Connect as our BLE central — it's great for debugging, but it doesn't give us a custom UI. What if you could control the NeoPixel from a **web page** with sliders and a color picker? What if you could plot sensor data in a live chart — all in the browser, all wireless? In this part, you'll build a single-page HTML/JavaScript app using the [Web Bluetooth API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API) that connects to your ESP32, subscribes to sensor notifications, and writes RGB values to the NeoPixel — paralleling the [Web Serial](../communication/web-serial.md) approach from the Communication module but over BLE.
 
 ### Web Serial vs. Web Bluetooth
 
@@ -1181,7 +1209,7 @@ Let's walk through the JavaScript, step by step:
 
 ## Part 5: Nordic UART Service (NUS)
 
-Throughout this lesson, we've worked directly with custom GATT services and characteristics—the fundamental BLE building blocks. But what if you just want to send text back and forth, like the serial bridge from [Lesson 8](bluetooth-serial.md)? This is where the **Nordic UART Service (NUS)** comes in.
+Throughout this lesson, we've worked directly with custom GATT services and characteristics — the fundamental BLE building blocks. But what if you just want to send text back and forth, like the serial bridge from [Lesson 8](bluetooth-serial.md)? In this part, you'll learn the **Nordic UART Service (NUS)** — a widely adopted convention that emulates serial communication over BLE using two characteristics. NUS bridges the gap between BLE's structured model and the simplicity of serial, and it's supported by most BLE terminal apps out of the box.
 
 NUS is a widely adopted convention (created by Nordic Semiconductor) that uses two BLE characteristics to emulate serial communication:
 
@@ -1310,23 +1338,6 @@ If your version of nRF Connect doesn't have the UART shortcut, you can do it man
 > **NUS is "serial over BLE."** It gives you the familiar send/receive text experience of Bluetooth Classic's `SerialBT`, but running over BLE—so it works on the ESP32-S3, works with iPhones, and coexists with custom GATT services. Under the hood, it's still GATT: the NUS service has two characteristics, and data flows as writes and notifications. Understanding the GATT layer (Parts 1–4) will help you debug NUS when things go wrong.
 
 If you want a `Serial`-like API over BLE without manually managing NUS characteristics, check out the [NuS-NimBLE-Serial](https://www.arduino.cc/reference/en/libraries/nus-nimble-serial/) library, which wraps NUS in familiar `.read()` and `.write()` methods. It requires the [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino) stack.
-
-## Comparing ESP32 wireless options
-
-Now that you've seen WiFi ([Lesson 7](iot.md)), Bluetooth Classic ([Lesson 8](bluetooth-serial.md)), and BLE (this lesson), here's how the three compare at a glance:
-
-| | WiFi (L7) | Bluetooth Classic (L8) | BLE (this lesson) |
-|---|---|---|---|
-| Best for | Cloud/internet connectivity | Wireless serial replacement | Low-power sensors, phones, web apps |
-| Range | Depends on router | ~10m | ~10m |
-| Power | High | Medium | Very low |
-| iPhone support | ✅ (via web) | ❌ | ✅ |
-| ESP32-S3 | ✅ | ❌ | ✅ |
-| Complexity | Medium (needs WiFi credentials) | Very simple | Higher (GATT model) |
-| Browser API | Fetch / WebSocket | Web Serial (via virtual COM port) | Web Bluetooth |
-
-**Table.** Comparison of the three wireless technologies available on the ESP32. For most new projects, BLE is the default choice unless you need internet connectivity (WiFi) or a drop-in serial replacement (Bluetooth Classic).
-{: .fs-1 }
 
 {: .note }
 > **A note on BLE security.** In this lesson, we use BLE's "Just Works" pairing mode, which requires no PIN and provides no protection against eavesdropping. This is fine for learning and for projects where the data isn't sensitive (potentiometer readings, LED colors). For production IoT devices that handle sensitive data—door locks, health monitors, payment systems—you'd want to explore passkey pairing or out-of-band (OOB) authentication. See the [Bluetooth SIG security overview](https://www.bluetooth.com/learn-about-bluetooth/key-attributes/bluetooth-security/) for more.

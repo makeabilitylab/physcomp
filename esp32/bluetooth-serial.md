@@ -156,7 +156,7 @@ You will also need:
 
 ## Part 1: Hello Bluetooth
 
-Let's cut the wire! In this first activity, we'll upload a Bluetooth serial sketch to the ESP32, pair it with your computer, and communicate with it using a short Python script—the same approach you learned in the [serial introduction lesson](../communication/serial-intro.md), just wireless.
+Let's cut the wire! In this first activity, we'll upload a Bluetooth serial sketch to the ESP32, pair it with your computer, and verify the connection using built-in OS tools—no Python, no dependencies, just your terminal. This way, if anything goes wrong, you'll know immediately whether it's a Bluetooth issue or a software issue.
 
 ### The BluetoothSerial library
 
@@ -178,7 +178,7 @@ The library's API was **intentionally designed to mirror** Arduino's built-in `S
 **Table.** Key API comparison between Arduino's built-in `Serial` and the `BluetoothSerial` library. Every read/write method is identical — only initialization and connection management differ.
 {: .fs-1 }
 
-The key difference is in `.begin()`: while the traditional `Serial.begin()` takes a baud rate because it configures a physical UART, `SerialBT.begin()` takes a *device name* because the Bluetooth stack handles data rates internally. The other difference is that Bluetooth connections can come and go—unlike a USB cable, a Bluetooth device might walk out of range—so `BluetoothSerial` adds `connected()` and `register_callback()` for connection state management. We'll use these in [Part 4](#part-4-bidirectional-control) when we discuss what happens when a connection drops.
+The key difference is in `.begin()`: while the traditional `Serial.begin()` takes a baud rate because it configures a physical UART, `SerialBT.begin()` takes a *device name* because the Bluetooth stack handles data rates internally. The other difference is that Bluetooth connections can come and go—unlike a USB cable, a Bluetooth device might walk out of range—so `BluetoothSerial` adds `connected()` and `register_callback()` for connection state management. We'll use these in [Part 5](#part-5-bidirectional-control) when we discuss what happens when a connection drops.
 
 {: .warning }
 > Reminder: `BluetoothSerial` is **only available on the original ESP32 chip**. If you try to include it on an ESP32-S3 (or C3, S2, *etc.*), the sketch will not compile. The compile-time guards in our sketches below produce a clear error message when this happens.
@@ -187,7 +187,7 @@ The key difference is in `.begin()`: while the traditional `Serial.begin()` take
 
 <!-- TODO: Push HelloBluetooth.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
 
-This sketch creates a bidirectional bridge between the USB serial connection (to your computer via USB) and a Bluetooth serial connection (to your computer via Bluetooth). Anything sent over Bluetooth arrives on USB serial and vice versa. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetooth).
+This sketch creates a bidirectional bridge between the USB serial connection (to your computer via USB) and a Bluetooth serial connection (to your computer via Bluetooth). Anything sent over Bluetooth arrives on USB serial and vice versa. It also sends a periodic greeting so you can immediately see that data is flowing. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetooth).
 
 ```cpp
 #include "BluetoothSerial.h"
@@ -219,16 +219,16 @@ void loop() {
     _lastGreetingMs = now;
     _greetingCount++;
 
-    String msg = "Hello from ESP32! [Msg #" + String(_greetingCount)
-               + " | Uptime: " + String(now / 1000.0, 1) + "s]";
+    String msgBase = "Msg #" + String(_greetingCount)
+                   + " | Uptime: " + String(now / 1000.0, 1) + "s";
 
     SerialBT.println("[Bluetooth] " + msgBase);  // Send over Bluetooth
     Serial.println("[USB Serial] " + msgBase);   // Echo to USB Serial
   }
 
-  // Forward everything received from Serial (e.g., typed in Serial Monitor) 
-  // to the Bluetooth peer. We use read()/write() (byte-at-a-time) rather than 
-  // readStringUntil() because it's non-blocking — the loop keeps running without 
+  // Forward everything received from Serial (e.g., typed in Serial Monitor)
+  // to the Bluetooth peer. We use read()/write() (byte-at-a-time) rather than
+  // readStringUntil() because it's non-blocking — the loop keeps running without
   // waiting for a newline or timeout.
   while (Serial.available()) {
     SerialBT.write(Serial.read());
@@ -245,7 +245,15 @@ Notice how the code reads like a standard serial sketch — compare the `SerialB
 
 You can choose any name you like—"ESP32-Bluetooth", "MyPotentiometer", "Jon's ESP32", or even "Chewbacca". This is the friendly name that will appear in your computer's or phone's Bluetooth settings when scanning for nearby devices, so pick something recognizable (especially in a classroom full of ESP32s!).
 
-Upload this sketch to your ESP32 and open Serial Monitor at 115200 baud. You should see `"Bluetooth device started!"`.
+Upload this sketch to your ESP32 and open Serial Monitor at 115200 baud. You should see greeting messages appearing every 2 seconds, prefixed with `[USB Serial]`:
+
+```
+[USB Serial] Msg #1 | Uptime: 2.0s
+[USB Serial] Msg #2 | Uptime: 4.0s
+[USB Serial] Msg #3 | Uptime: 6.0s
+```
+
+This confirms the sketch is running. Now let's pair and see those messages arrive wirelessly.
 
 ### Pairing with your computer
 
@@ -262,7 +270,7 @@ Before you can communicate over Bluetooth, you need to **pair** your computer wi
 ls /dev/tty.*Bluetooth*
 ```
 
-You should see something like `/dev/tty.ESP32-Bluetooth` or `/dev/tty.ESP32-BluetoothSPP`. This is your Bluetooth serial port—you'll use it in the Python script below.
+You should see something like `/dev/tty.ESP32-Bluetooth` or `/dev/tty.ESP32-BluetoothSPP`. This is your Bluetooth serial port.
 
 <!-- TODO: Add screenshot of macOS System Settings showing ESP32-Bluetooth paired (include descriptive alt text) -->
 
@@ -279,84 +287,233 @@ You should see something like `/dev/tty.ESP32-Bluetooth` or `/dev/tty.ESP32-Blue
 <!-- TODO: Add screenshot of Windows Device Manager showing the Bluetooth COM port (include descriptive alt text) -->
 
 {: .note }
-> **Windows creates two COM ports** for Bluetooth serial: one for outgoing and one for incoming connections. You typically want the **outgoing** port. If one doesn't work, try the other. You can see which is which in **Control Panel → Devices and Printers → right-click ESP32-Bluetooth → Properties → Services**.
+> **Windows creates two COM ports** for each Bluetooth SPP pairing: one for outgoing and one for incoming connections. You want the **outgoing** port—this is the one that actually initiates the SPP data channel. If one connects but shows no data, try the other. You can check which is which in **Control Panel → Devices and Printers → right-click ESP32-Bluetooth → Properties → Services**.
 
-### Connecting with Python
+### Verifying the connection
 
-Now let's connect to the Bluetooth serial port from Python—using the same [pySerial](https://pyserial.readthedocs.io/) library you used in the [serial introduction lesson](../communication/serial-intro.md). If you don't have it installed yet:
+Now let's verify that data is actually flowing over Bluetooth. We'll use built-in OS tools—no Python, no installs—so if something goes wrong, you'll know immediately that it's a Bluetooth issue, not a software setup issue.
+
+#### macOS / Linux
+
+Open **Terminal** and run:
+
+```bash
+cat /dev/tty.ESP32-Bluetooth
+```
+
+Replace the port name with whatever `ls /dev/tty.*Bluetooth*` showed you. You should immediately see greetings streaming in:
 
 ```
-pip3 install pyserial
+[Bluetooth] Msg #1 | Uptime: 2.0s
+[Bluetooth] Msg #2 | Uptime: 4.0s
+[Bluetooth] Msg #3 | Uptime: 6.0s
 ```
 
-You already have a Python serial demo from the [Communication module](../communication/serial-intro.md): [`serial_demo.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py). Let's use it over Bluetooth—the only change is the port name.
-
-First, if you're not sure which serial ports are available, you can list them:
-
-~~~
-python3 serial_demo.py --list
-~~~
-
-Then run the script with your Bluetooth serial port:
-
-~~~
-# macOS
-python3 serial_demo.py /dev/tty.ESP32-Bluetooth 115200
-
-# Windows (Note use `python` instead of `python3` on Windows)
-python serial_demo.py COM8 115200
-~~~
-
-For example, on my Windows computer, if I run ``-list`, I get:
-
-~~~
-python serial_demo.py --list
-Available serial ports:
-  COM1 - Communications Port (COM1)
-  COM4 - Silicon Labs CP210x USB to UART Bridge (COM4)
-~~~
-
-After pairing with `"ESP32-Bluetooth"` (see [Pairing with your computer](#pairing-with-your-computer)), I ran `--list` again and see new ports:
-
-~~~
-python serial_demo.py --list
-Available serial ports:
-  COM1 - Communications Port (COM1)
-  COM4 - Silicon Labs CP210x USB to UART Bridge (COM4)
-  COM16 - Standard Serial over Bluetooth link (COM16)
-  COM17 - Standard Serial over Bluetooth link (COM17)
-~~~
-
-COM4 is your **tethered USB serial connection** (the CP210x chip on the Huzzah32). COM16 and COM17 are Bluetooth serial ports—Windows creates two for each Bluetooth SPP pairing: one for outgoing and one for incoming connections. You typically want the first one listed, but if it doesn't work, try the other. Now connect:
-
-~~~
-python serial_demo.py COM16 115200
-~~~
-
-That's it—same script, different port. The rest of the code (reading, writing, encoding, decoding) is identical. You should see `"[Bluetooth] Msg #1 | Uptime: 2.00s"` messages arriving every 2 seconds. Type a number and press Enter—it will be sent to the ESP32 and forwarded to USB Serial Monitor. You're communicating wirelessly! 🎉
+Press **Ctrl+C** to stop.
 
 {: .note }
-> **The baud rate parameter is ignored for Bluetooth virtual COM ports** on most operating systems. SPP negotiates its own data rate at the Bluetooth protocol level, so the `baudrate=115200` argument is passed to pySerial for API compatibility but doesn't actually set a baud rate the way it does for USB serial. You can pass any value and it will work—but we use `115200` to match our `Serial.begin(115200)` for consistency.
+> You can also use `screen`, which provides a more interactive serial terminal:
+> ```bash
+> screen /dev/tty.ESP32-Bluetooth 115200
+> ```
+> In `screen`, you can type characters that will be forwarded to the ESP32. To exit `screen`, press **Ctrl+A** then **K**, then confirm with **y**.
+
+#### Windows
+
+We provide a PowerShell script called [`serial_reader.ps1`](https://github.com/makeabilitylab/arduino/blob/master/PowerShell/serial_reader.ps1) that reads from a COM port with zero dependencies. Download it and run:
+
+```powershell
+# List available COM ports
+.\serial_reader.ps1
+
+# Connect to the Bluetooth COM port
+.\serial_reader.ps1 -Port COM16
+```
 
 {: .note }
-> **This is the point of SPP.** Your [serial_demo.py](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py) was written for USB serial. It works over Bluetooth with only a port name change. The pySerial API, the `readline()` calls, the `write()` calls—everything is the same. Your operating system makes Bluetooth look like a wired serial connection.
+> If you get an execution policy error, run this once first:
+> ```powershell
+> Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+> ```
+
+You should see messages streaming in:
+
+```
+Connected! Listening for data...
+
+[Bluetooth] Msg #1 | Uptime: 2.0s
+[Bluetooth] Msg #2 | Uptime: 4.0s
+[Bluetooth] Msg #3 | Uptime: 6.0s
+```
+
+Press **Ctrl+C** to stop.
+
+**If you see messages, congratulations—you're communicating wirelessly! 🎉** The ESP32 is sending data over Bluetooth, your computer is receiving it through a virtual serial port, and no USB cable was involved. This is the core magic of SPP.
 
 {: .warning }
-> **Only one program can open a serial port at a time.** If you have Arduino's Serial Monitor open on the Bluetooth COM port, your Python script won't be able to connect (and vice versa). Close Serial Monitor before running Python—or use Serial Monitor on the *USB* port and Python on the *Bluetooth* port. This is the same constraint from the [serial introduction](../communication/serial-intro.md#only-one-computer-program-can-open-a-serial-port-at-a-time), just with two ports to manage.
+> **Only one program can open a serial port at a time.** If you have Arduino's Serial Monitor open on the Bluetooth COM port, `cat`/`screen`/PowerShell won't be able to connect (and vice versa). Close Serial Monitor before trying the terminal commands—or keep Serial Monitor on the *USB* port (COM4) and use the terminal on the *Bluetooth* port. This is the same constraint from the [serial introduction](../communication/serial-intro.md#only-one-computer-program-can-open-a-serial-port-at-a-time), just with two ports to manage.
 
-### Workbench demo
+**If you don't see any data**, see the [Troubleshooting Bluetooth connections](#troubleshooting-bluetooth-connections) section below before moving on.
+
+### Workbench demo of Bluetooth terminal programs
 
 <!-- TODO: Record and embed a workbench video showing:
      1. Uploading the sketch to the ESP32
-     2. Pairing from macOS (and/or Windows)
-     3. Running the Python script and exchanging messages
-     4. The "aha moment": same pySerial code, wireless connection
+     2. Serial Monitor showing [USB Serial] greetings
+     3. Pairing from macOS (and/or Windows)
+     4. Verifying with cat (macOS) or serial_reader.ps1 (Windows)
+     5. The "aha moment": same data, no cable
      Include captions/transcript
 -->
 
 <!-- I think we should actually make two videos. One where the system is tethered. The other where it is not! -->
 
-## Part 2: Streaming sensor data
+## Part 2: Connecting with Python
+
+Now that you've verified Bluetooth is working, let's connect from Python—using the same [pySerial](https://pyserial.readthedocs.io/) library you used in the [serial introduction lesson](../communication/serial-intro.md). This is where SPP really shines: your existing Python serial code works over Bluetooth with only a port name change.
+
+### Setting up pySerial
+
+If you don't already have pySerial installed, you'll need to install it. The recommended approach is to use a **virtual environment**, which keeps your project's dependencies isolated from your system Python:
+
+```bash
+# Create a virtual environment (one-time setup)
+python3 -m venv venv
+
+# Activate it
+# macOS / Linux:
+source venv/bin/activate
+# Windows:
+venv\Scripts\activate
+
+# Install pySerial
+pip install pyserial
+```
+
+Once activated, you'll see `(venv)` at the beginning of your terminal prompt. You'll need to run the `activate` command each time you open a new terminal window to work on this project.
+
+{: .note }
+> **Why a virtual environment?** Modern macOS (via Homebrew) and some Linux distributions block global `pip install` commands to protect system Python ([PEP 668](https://peps.python.org/pep-0668/)). You'll see an `externally-managed-environment` error if you try `pip install pyserial` without a venv. A virtual environment solves this cleanly and is good practice for any Python project.
+
+{: .note }
+> **Windows users:** Use `python` instead of `python3` throughout this lesson. On Windows, the `python3` command often triggers a misleading Microsoft Store redirect instead of running Python. On macOS and Linux, either `python` or `python3` works, but `python3` is the safer choice to avoid accidentally invoking Python 2 on older systems.
+
+### Reading Bluetooth data with serial_reader.py
+
+We provide a simple Python script called [`serial_reader.py`](https://github.com/makeabilitylab/arduino/tree/master/Python/SerialReader) that connects to a serial port and prints whatever data arrives. It's the Python equivalent of the `cat` or PowerShell commands you just used—but now you're using pySerial, the same library you'll use for more sophisticated projects.
+
+First, list available ports to find your Bluetooth serial port:
+
+```
+# macOS / Linux
+python3 serial_reader.py --list
+
+# Windows
+python serial_reader.py --list
+```
+
+On Windows, you should see something like:
+
+```
+Available serial ports:
+  COM1 - Communications Port (COM1)
+  COM4 - Silicon Labs CP210x USB to UART Bridge (COM4)
+  COM16 - Standard Serial over Bluetooth link (COM16)
+  COM17 - Standard Serial over Bluetooth link (COM17)
+```
+
+COM4 is your **tethered USB serial connection** (the CP210x chip on the Huzzah32). COM16 and COM17 are Bluetooth serial ports—Windows creates two for each Bluetooth SPP pairing: one for outgoing and one for incoming connections. You typically want the first one listed, but if it doesn't work, try the other.
+
+Now connect:
+
+```
+# macOS / Linux
+python3 serial_reader.py /dev/tty.ESP32-Bluetooth 115200
+
+# Windows
+python serial_reader.py COM16 115200
+```
+
+You should see the same greetings you saw in Part 1:
+
+```
+Connected! Listening for data...
+
+[Bluetooth] Msg #42 | Uptime: 84.0s
+[Bluetooth] Msg #43 | Uptime: 86.0s
+[Bluetooth] Msg #44 | Uptime: 88.0s
+```
+
+Press **Ctrl+C** to stop.
+
+{: .note }
+> **The baud rate parameter is ignored for Bluetooth virtual COM ports** on most operating systems. SPP negotiates its own data rate at the Bluetooth protocol level, so the `baudrate=115200` argument is passed to pySerial for API compatibility but doesn't actually set a baud rate the way it does for USB serial. You can pass any value and it will work—but we use `115200` to match our `Serial.begin(115200)` for consistency.
+
+### Sending data with serial_demo.py
+
+The `serial_reader.py` script only listens. To test bidirectional communication, use [`serial_demo.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py)—the interactive send-and-receive script from the [Communication module](../communication/serial-intro.md). It lets you type a number, sends it to the ESP32, and prints the echoed response:
+
+```
+# macOS / Linux
+python3 serial_demo.py /dev/tty.ESP32-Bluetooth 115200
+
+# Windows
+python serial_demo.py COM16 115200
+```
+
+Type a number and press Enter—it will be sent to the ESP32 over Bluetooth, forwarded to USB Serial Monitor, and you can see it arrive wirelessly. You're communicating bidirectionally! 🎉
+
+{: .note }
+> **This is the point of SPP.** Both `serial_reader.py` and `serial_demo.py` were written for USB serial. They work over Bluetooth with only a port name change. The pySerial API, the `readline()` calls, the `write()` calls—everything is the same. Your operating system makes Bluetooth look like a wired serial connection.
+
+### Workbench demo of Python Bluetooth
+
+<!-- TODO: Record and embed a workbench video showing:
+     1. Setting up pySerial in a virtual environment
+     2. Running serial_reader.py and seeing greetings arrive
+     3. Running serial_demo.py and sending data bidirectionally
+     4. The "aha moment": same pySerial code, wireless connection
+     Include captions/transcript
+-->
+
+## Troubleshooting Bluetooth connections
+
+Bluetooth Classic SPP is straightforward once it works, but the initial setup can be finicky—especially on Windows. Here are the most common issues and how to resolve them.
+
+### General issues
+
+**"Only one program can open a serial port at a time."** If Arduino's Serial Monitor, PuTTY, a Python script, or any other program has the Bluetooth COM port open, nothing else can use it. Close all other serial programs before trying a new one. You *can* have Serial Monitor open on the USB port (COM4) while using Python on the Bluetooth port (COM16)—they're separate ports.
+
+**"No data, but no error either."** The connection opened successfully but nothing appears. Make sure the Arduino sketch is actually running—check Serial Monitor on the USB port for `[USB Serial]` messages. If USB Serial is working but Bluetooth isn't, the issue is on the Bluetooth/OS side, not the Arduino side.
+
+**"Bluetooth connection drops frequently."** Bluetooth Classic SPP has a practical range of about 5–10 meters indoors. Walls, furniture, and other 2.4 GHz devices (WiFi routers, microwaves) reduce range and can cause interference. Move closer to the ESP32 and away from other wireless devices.
+
+### macOS-specific issues
+
+**Port doesn't appear after pairing.** Try unpairing and re-pairing the device. Run `ls /dev/tty.*` before and after pairing to spot the new port. The port name varies by macOS version but typically contains the device name (e.g., `/dev/tty.ESP32-Bluetooth`).
+
+**`externally-managed-environment` error when installing pySerial.** Modern macOS (via Homebrew) blocks global `pip install` to protect system Python. Use a virtual environment as described in [Part 2](#setting-up-pyserial). This is the correct fix—avoid using `--break-system-packages` as it can cause problems with future Homebrew updates.
+
+**`python3: command not found`.** Install Python 3 from [python.org](https://www.python.org/downloads/) or via Homebrew (`brew install python`).
+
+### Windows-specific issues
+
+**Two COM ports appear.** Windows creates two COM ports for each Bluetooth SPP pairing: one for outgoing and one for incoming. You want the **outgoing** port. If one connects but shows no data, try the other. Check which is which in **Control Panel → Devices and Printers → right-click ESP32-Bluetooth → Properties → Services**.
+
+**COM port hangs when connecting.** Some USB Bluetooth adapters—especially those with Realtek chipsets, such as the TP-Link UB500—have driver issues with Bluetooth Classic SPP on Windows. Symptoms include: pairing succeeds, COM ports appear, but the connection hangs or no data flows. If you experience this, try updating your adapter's drivers from the manufacturer's website, using your laptop's built-in Bluetooth adapter instead (if available), or testing with a different Bluetooth adapter.
+
+{: .note }
+> **Isolating adapter issues.** If you're not sure whether the problem is your code or your Bluetooth adapter, use the [`serial_reader.ps1`](https://github.com/makeabilitylab/arduino/tree/master/PowerShell) PowerShell script—it has zero dependencies and uses Windows' built-in .NET serial classes. If the PowerShell script also can't receive data, the problem is your adapter or driver, not your Python code. You can also try [PuTTY](https://www.putty.org/) (Connection type: Serial, your COM port, 115200 baud, Flow control: None) as a third independent test.
+
+**`python` is not recognized / Microsoft Store redirect.** On Windows, use `python` instead of `python3`. If `python` isn't recognized, reinstall Python from [python.org](https://www.python.org/downloads/) and make sure **"Add Python to PATH"** is checked during installation. You can also disable the Microsoft Store redirect in **Settings → Apps → Advanced app settings → App execution aliases** by toggling off the `python.exe` and `python3.exe` aliases.
+
+**ESP32 shows "Not connected" in Bluetooth settings.** This is normal for Bluetooth Classic SPP on Windows. The "Connected" status only appears during an active data session, not just from pairing. The device is paired and ready—it will show "Connected" once you open the COM port.
+
+### Still stuck?
+
+If the tips above don't resolve your issue, try describing your problem to an AI assistant like [Claude](https://claude.ai) or [Gemini](https://gemini.google.com). Include the specific error messages you're seeing, your operating system, your Bluetooth adapter (built-in or external), and what you've already tried. These tools are especially helpful for debugging driver issues and platform-specific quirks. You can also ask on the course discussion board—chances are another student has hit the same issue.
+
+## Part 3: Streaming sensor data
 
 Now let's stream live sensor data. We'll read a potentiometer and send its value over Bluetooth—then visualize it in Python.
 
@@ -460,7 +617,7 @@ Turn the potentiometer—you'll see the bar chart or circle updating in real tim
      Include captions/transcript
 -->
 
-## Part 3: p5.js over Bluetooth with serial.js
+## Part 4: p5.js over Bluetooth with serial.js
 
 So far we've sent data in one direction—from ESP32 to computer—and visualized it in Python. Now let's bring it into the browser. Because your computer's Bluetooth serial port looks just like a USB serial port, the [Web Serial API](../communication/web-serial.md) works with it—and so does [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) from the Makeability Lab library. You can build the same [p5.js](https://p5js.org/) interactive sketches from the [Communication module](../communication/p5js-serial.md), but with data arriving wirelessly over Bluetooth.
 
@@ -577,7 +734,7 @@ Make sure the Part 2 sketch (`BluetoothPotentiometer`) is running on your ESP32.
      Include captions/transcript
 -->
 
-## Part 4: Bidirectional control
+## Part 5: Bidirectional control
 
 Now let's close the loop: stream sensor data *from* the ESP32 *and* send LED control commands *to* the ESP32. We'll extend the p5.js sketch to include a slider that controls LED brightness.
 
@@ -783,7 +940,7 @@ If you carry your laptop out of Bluetooth range (or the ESP32 loses power), the 
      Include captions/transcript
 -->
 
-## Part 5: Android phone (optional bonus)
+## Part 6: Android phone (optional bonus)
 
 If you have an **Android** phone, you can also communicate with the ESP32 using a Bluetooth terminal app. This is a quick bonus activity—the main lesson is computer-based.
 

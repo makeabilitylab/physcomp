@@ -47,14 +47,9 @@ nav_order: 8
 - Serial Bluetooth Terminal app (Android): https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal
 -->
 
-In the [last lesson](iot.md), you sent sensor data halfway around the world—through WiFi, across the internet, and up to a cloud dashboard. But what if you just want to talk to the laptop sitting right in front of you—without a USB cable? What if you could run the same Python scripts and p5.js sketches from the [Communication module](../communication/serial-intro.md), but wirelessly?
+In the [last lesson](iot.md), you transmitted sensor data through WiFi, across the internet, and up to a cloud dashboard. But what if you just want to communicate with the laptop sitting right in front of you—**without a USB cable**? What if you could run the same Python scripts and p5.js sketches from the [Communication module](../communication/serial-intro.md), but wirelessly?
 
-In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun part: the code on your computer is going to be *identical*. Bluetooth Classic's Serial Port Profile (SPP) creates a **virtual serial port** on your computer that looks and behaves exactly like a USB serial connection. Your Python scripts, your p5.js sketches, your [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) library—they all work unchanged. The only difference is which port you select. ✨
-
-{: .warning }
-> **This lesson requires the original ESP32** (like the Adafruit Huzzah32), **not** the ESP32-S3. The ESP32-S3 does not have the hardware for Bluetooth Classic—the `BluetoothSerial` library will not compile on it. If you only have an ESP32-S3, you can borrow a Huzzah32 from the equipment cart, or skip ahead to [Lesson 9: Bluetooth Low Energy](ble.md), which works with both boards. We'll explain why this limitation exists in the [next section](#what-is-bluetooth).
-
-Apple does not allow third-party apps to use Bluetooth Classic SPP on iOS, so **iPhones cannot connect to the ESP32 over Bluetooth Classic**. This lesson is entirely computer-based (Mac and Windows), so your phone type doesn't matter for Parts 1–4. If you have an **Android** phone, there's an optional bonus activity at the end. In [Lesson 9: BLE](ble.md), we'll use a protocol that works with *everyone's* phone—including iPhones.
+In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun part: the code on your computer is going to be *identical*. Bluetooth Classic's Serial Port Profile (SPP) creates a **virtual serial port** on your computer that looks and behaves exactly like a tethered USB serial connection. Your Python scripts, your p5.js sketches, your [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) library—they all work unchanged. The only difference is which port you select. ✨
 
 {: .note }
 > **In this lesson, you will learn:**
@@ -69,11 +64,11 @@ Apple does not allow third-party apps to use Bluetooth Classic SPP on iOS, so **
 
 ## What is Bluetooth?
 
-Bluetooth is a short-range wireless communication standard for exchanging data between devices over radio waves. It operates in the 2.4 GHz ISM band (the same frequency range as WiFi and your microwave oven) and is designed for low-power, close-range connections—typically within about 10 meters indoors.
+**Bluetooth is a short-range wireless communication** standard for exchanging data between devices over radio waves. It operates in the 2.4 GHz ISM band (the same frequency range as WiFi and your microwave oven) and is designed for low-power, close-range connections—typically within about 10 meters indoors.
 
 ### A brief history
 
-Bluetooth was developed in the 1990s by [Ericsson](https://en.wikipedia.org/wiki/Ericsson) as a wireless replacement for RS-232 serial cables (the same serial communication we studied in [Lesson 1 of the Communication module](../communication/serial-intro.md)!). The name comes from [Harald Bluetooth](https://en.wikipedia.org/wiki/Harald_Bluetooth), a 10th-century Danish king who united warring Scandinavian tribes—a fitting metaphor for a technology designed to unite different devices. The Bluetooth logo is a [bind rune](https://en.wikipedia.org/wiki/Bind_rune) merging Harald's initials in [Younger Futhark](https://en.wikipedia.org/wiki/Younger_Futhark): ᚼ (Hagall, "H") and ᛒ (Bjarkan, "B").
+Bluetooth was developed in the 1990s by [Ericsson](https://en.wikipedia.org/wiki/Ericsson) as a wireless replacement for RS-232 serial cables (the same serial communication we studied in [Lesson 1 of the Communication module](../communication/serial-intro.md)!). The name comes from [Harald Bluetooth](https://en.wikipedia.org/wiki/Harald_Bluetooth), a 10th-century Danish king who united warring Scandinavian tribes—a fitting metaphor for a technology designed to unite different devices. The Bluetooth logo is a [bind rune](https://en.wikipedia.org/wiki/Bind_rune) merging Harald's initials in a runic alphabet called [Younger Futhark](https://en.wikipedia.org/wiki/Younger_Futhark): ᚼ (Hagall, "H") and ᛒ (Bjarkan, "B").
 
 <!-- TODO: Add an image showing the Bluetooth logo and the two runic initials side by side -->
 
@@ -81,9 +76,9 @@ Bluetooth was developed in the 1990s by [Ericsson](https://en.wikipedia.org/wiki
 
 When people say "Bluetooth," they might mean one of **two fundamentally different protocols** that happen to share a name:
 
-**Bluetooth Classic** (also called BR/EDR, for "Basic Rate / Enhanced Data Rate") is the original Bluetooth. It was designed for **continuous data streaming**—wireless headphones, file transfers, or serial port emulation. It establishes a persistent connection and can push data at up to 3 Mbps at the radio level, though practical throughput for the Serial Port Profile is much lower (typically a few hundred kbps). This is the flavor we'll use in this lesson.
+- **Bluetooth Classic** (also called BR/EDR, for "Basic Rate / Enhanced Data Rate") is the original Bluetooth. It was designed for **continuous data streaming**—wireless headphones, file transfers, or serial port emulation. It establishes a persistent connection and can push data at up to 3 Mbps at the radio level, though practical throughput for the Serial Port Profile is much lower (typically a few hundred kbps). This is the flavor we'll use in this lesson.
 
-**Bluetooth Low Energy** (BLE, introduced in Bluetooth 4.0 in 2010) is a completely different protocol stack designed for **low-power, intermittent data exchange**—fitness trackers that run for months on a coin cell, sensors broadcasting a reading every few seconds. We'll cover BLE in [Lesson 9](ble.md).
+- **Bluetooth Low Energy** (BLE, introduced in Bluetooth 4.0 in 2010) is a completely different protocol stack designed for **low-power, intermittent data exchange**—fitness trackers that run for months on a coin cell, sensors broadcasting a reading every few seconds. We'll cover BLE in [Lesson 9](ble.md).
 
 Despite sharing the "Bluetooth" name, Classic and BLE are **not compatible with each other**. A BLE-only device cannot talk to a Bluetooth Classic device and vice versa. The original ESP32 supports **both**; the ESP32-S3 supports **BLE only**.
 
@@ -105,12 +100,18 @@ Despite sharing the "Bluetooth" name, Classic and BLE are **not compatible with 
 **Table.** Comparison of Bluetooth Classic and Bluetooth Low Energy. The original ESP32 supports both, but the ESP32-S3 only supports BLE.
 {: .fs-1 }
 
+## Is Bluetooth Classic Still Used?
+
+Yes! Despite being over two decades old, Bluetooth Classic remains the dominant wireless audio protocol today. Every pair of wireless headphones you've likely used—Apple AirPods, Sony WH-1000XM series, Bose QuietComfort, JBL speakers—streams music over [A2DP](https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Advanced_Audio_Distribution_Profile_(A2DP)), a Bluetooth Classic profile. Moreover, Bluetooth keyboards, mice, and game controllers also typically use [Classic's HID profile](https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Human_Interface_Device_Profile_(HID)). Many modern devices are actually "dual-mode": AirPods, for example, stream audio over Bluetooth Classic while simultaneously using BLE for Apple's Find My network and proximity pairing. 
+
+That said, Bluetooth Classic's expected replacement is underway—LE Audio (introduced in Bluetooth 5.2) brings a new, more efficient audio codec (LC3) and features like [Auracast broadcast audio](https://www.bluetooth.com/auracast/), and most new devices now ship as dual-mode during the transition.
+
 {: .note }
-> **Why doesn't the ESP32-S3 support Bluetooth Classic?** Espressif designed the ESP32-S3 for IoT and edge AI workloads where BLE's low power consumption matters more than Classic's streaming capabilities. Dropping the Classic radio reduces die area, power consumption, and cost. If you try to compile a `BluetoothSerial` sketch on the ESP32-S3, you'll get the error: `Serial Bluetooth not available or not enabled. It is only available for the ESP32 chip.` This is a chip-level limitation, not a software bug.
+> **Why doesn't the ESP32-S3 support Bluetooth Classic?** Espressif designed the ESP32-S3 for IoT and edge AI workloads where BLE's low power consumption matters more than Classic's streaming capabilities. Dropping the Classic radio reduces the hardware die area, power consumption, and cost. If you try to compile a `BluetoothSerial` sketch on the ESP32-S3, you'll get the error: `Serial Bluetooth not available or not enabled. It is only available for the ESP32 chip.` This is a chip-level limitation, not a software bug.
 
 ## The Serial Port Profile (SPP)
 
-So how does Bluetooth Classic act like a serial cable? Through something called the **Serial Port Profile (SPP)**. SPP emulates a wired RS-232 serial port—exactly the kind of serial communication we've been doing over USB.
+One very cool and useful aspect of Bluetooth Classic is that we can make it act just like a serial cable, so all of our [Serial Communication lessons](../communication/) are relevant. This is done via the **[Serial Port Profile (SPP)](https://www.bluetooth.com/specifications/specs/html/?src=SPP_v1.2/out/en/index-en.html)**, which emulates a wired RS-232 serial port—exactly the kind of serial communication we've been doing over USB.
 
 When you pair the ESP32 with your computer over Bluetooth Classic, your operating system creates a **virtual serial port**—a COM port on Windows (*e.g.,* `COM8`) or a `/dev/tty.*` device on macOS (*e.g.,* `/dev/tty.ESP32-Bluetooth`). This virtual port behaves *identically* to the USB serial port you've been using all along. Any software that can open a serial port—the Arduino Serial Monitor, a Python script with [pySerial](https://pyserial.readthedocs.io/), a web browser using the [Web Serial API](../communication/web-serial.md), your [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) library—can communicate over Bluetooth without any code changes. Just select the Bluetooth port instead of the USB port.
 
@@ -119,7 +120,7 @@ When you pair the ESP32 with your computer over Bluetooth Classic, your operatin
      Bluetooth Serial: ESP32 → [radio] → Computer → COM8 → pySerial / serial.js
      Emphasize: same code, same libraries, different port -->
 
-This is the key insight of this lesson: **Bluetooth Classic SPP is a wireless serial cable.** Everything you learned in the [Communication module](../communication/serial-intro.md)—data framing, parsing comma-separated values, serial.js—works unchanged. The only difference is the transport: radio waves instead of copper wire.
+This is a key insight of this lesson: **Bluetooth Classic SPP is a wireless serial cable.** So, everything you learned in the [Communication module](../communication/serial-intro.md)—data framing, parsing comma-separated values, serial.js—works unchanged. The only difference is the transport: radio waves instead of copper wire.
 
 <details markdown="1">
 <summary><strong>How SPP works under the hood</strong> (click to expand)</summary>
@@ -128,22 +129,30 @@ SPP sits on top of several Bluetooth Classic protocol layers. At the bottom, the
 
 </details>
 
+## Two Important Notes Before We Build
+
+Two important notes before we get started building:
+
+**This lesson requires the original ESP32** (like the [Adafruit Huzzah32](https://www.adafruit.com/product/3405) or [Espressif ESP32-DevKitC V4](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html)), **not** the ESP32-S3. The ESP32-S3 does not have the hardware for Bluetooth Classic—the `BluetoothSerial` library will not compile on it. If you're taking one of our classes, you can borrow an ESP32 board from us. If you only have access to an ESP32-S3, skip ahead to [Lesson 9: Bluetooth Low Energy](ble.md), which works with both boards. We'll explain why this limitation exists in the [next section](#what-is-bluetooth).
+
+**Apple iPhones will not work. 😢** Apple does not allow third-party apps to use Bluetooth Classic SPP on iOS, so **iPhones cannot connect to the ESP32 over Bluetooth Classic**. This lesson is entirely computer-based (Mac and Windows), so your phone type doesn't matter for Parts 1–4. If you have an **Android** phone, there's an optional bonus activity at the end. In [Lesson 9: BLE](ble.md), we'll use a protocol that works with *everyone's* phone—including iPhones.
+
 ## Materials
 
 You'll need the following components. This lesson uses the **original ESP32** ([Adafruit Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591)), not the ESP32-S3.
 
 | Breadboard | ESP32 | LED | Resistor | Potentiometer |
 | ---------- |:-----:|:-----:|:-----:|:-----:|
-| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit Huzzah32 ESP32 Feather board, top view](assets/images/AdafruitHuzzah32_200h.png) | ![Red 5mm LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220-ohm resistor, striped red-red-brown-gold]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/Potentiometer_100h.png) |
+| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit Huzzah32 ESP32 Feather board, top view](/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png) | ![Red 5mm LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220-ohm resistor, striped red-red-brown-gold]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/PanelMountPotentiometer_NoCap_150h.png) |
 | Breadboard | [Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591) | Red LED | 220Ω Resistor | 10kΩ Potentiometer |
 
 You will also need:
 - A **Mac or Windows computer** with Bluetooth (most modern laptops have Bluetooth built in)
 - **Python 3** with [pySerial](https://pyserial.readthedocs.io/) installed (`pip3 install pyserial`)
-- **Google Chrome** or **Microsoft Edge** (for the Web Serial / p5.js activity)
+- **Google Chrome** or **Microsoft Edge** (for the Web Serial / p5.js activity) similar to the [Web Serial lesson](../communication/web-serial.md)
 
 {: .note }
-> If you only have an ESP32-S3, you can borrow a Huzzah32 from the equipment cart for this lesson, or skip ahead to [Lesson 9: Bluetooth Low Energy](ble.md), which works with the ESP32-S3.
+> If you only have an ESP32-S3, you can skip ahead to [Lesson 9: Bluetooth Low Energy](ble.md).
 
 ## Part 1: Hello Bluetooth
 
@@ -153,7 +162,7 @@ Let's cut the wire! In this first activity, we'll upload a Bluetooth serial sket
 
 The ESP32 Arduino core includes a built-in library called [`BluetoothSerial`](https://github.com/espressif/arduino-esp32/tree/master/libraries/BluetoothSerial) that handles all the Bluetooth Classic SPP complexity for you. No library installation is needed—just `#include "BluetoothSerial.h"` and you're ready to go.
 
-The library's API was **intentionally designed to mirror** Arduino's built-in `Serial` class. It provides the same `.begin()`, `.available()`, `.read()`, `.write()`, `.print()`, and `.println()` methods you already know. This means converting a wired serial sketch to Bluetooth is as simple as creating a `BluetoothSerial` object and using it alongside (or instead of) `Serial`. The rest of your code stays identical.
+The library's API was **intentionally designed to mirror** Arduino's built-in `Serial` class. It provides the same `.begin()`, `.available()`, `.read()`, `.write()`, `.print()`, and `.println()` methods you already know. This means converting a wired serial sketch to Bluetooth is as simple as creating a `BluetoothSerial` object and using it alongside (or instead of) `Serial`. The rest of your code stays identical! 🎉
 
 | Method | `Serial` (USB) | `SerialBT` (Bluetooth) | Notes |
 |---|---|---|---|
@@ -169,10 +178,10 @@ The library's API was **intentionally designed to mirror** Arduino's built-in `S
 **Table.** Key API comparison between Arduino's built-in `Serial` and the `BluetoothSerial` library. Every read/write method is identical — only initialization and connection management differ.
 {: .fs-1 }
 
-The key difference is in `.begin()`: `Serial.begin()` takes a baud rate because it configures a physical UART, while `SerialBT.begin()` takes a *device name* because the Bluetooth stack handles data rates internally. The other difference is that Bluetooth connections can come and go — unlike a USB cable, a Bluetooth device might walk out of range — so `BluetoothSerial` adds `connected()` and `register_callback()` for connection state management. We'll use these in [Part 4](#part-4-bidirectional-control) when we discuss what happens when a connection drops.
+The key difference is in `.begin()`: while the traditional `Serial.begin()` takes a baud rate because it configures a physical UART, `SerialBT.begin()` takes a *device name* because the Bluetooth stack handles data rates internally. The other difference is that Bluetooth connections can come and go—unlike a USB cable, a Bluetooth device might walk out of range—so `BluetoothSerial` adds `connected()` and `register_callback()` for connection state management. We'll use these in [Part 4](#part-4-bidirectional-control) when we discuss what happens when a connection drops.
 
 {: .warning }
-> `BluetoothSerial` is **only available on the original ESP32 chip**. If you try to include it on an ESP32-S3 (or C3, S2, *etc.*), the sketch will not compile. The compile-time guards in our sketches below produce a clear error message when this happens.
+> Reminder: `BluetoothSerial` is **only available on the original ESP32 chip**. If you try to include it on an ESP32-S3 (or C3, S2, *etc.*), the sketch will not compile. The compile-time guards in our sketches below produce a clear error message when this happens.
 
 ### The Arduino code
 
@@ -181,63 +190,52 @@ The key difference is in `.begin()`: `Serial.begin()` takes a baud rate because 
 This sketch creates a bidirectional bridge between the USB serial connection (to your computer via USB) and a Bluetooth serial connection (to your computer via Bluetooth). Anything sent over Bluetooth arrives on USB serial and vice versa. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetooth).
 
 ```cpp
-/**
- * HelloBluetooth: creates a bidirectional bridge between USB Serial
- * and Bluetooth Serial (SPP). Sends a greeting over Bluetooth every
- * 2 seconds. Data received over Bluetooth is echoed to USB Serial
- * and vice versa.
- *
- * Requires: Original ESP32 (e.g., Huzzah32). Will NOT compile on ESP32-S3.
- *
- * See: https://makeabilitylab.github.io/physcomp/esp32/bluetooth-serial
- *
- * By Jon E. Froehlich
- * @jonfroehlich
- * http://makeabilitylab.io
- */
-
 #include "BluetoothSerial.h"
-
-// These compile-time checks ensure we're running on a chip that
-// supports Bluetooth Classic. On the ESP32-S3 (or C3, S2, etc.),
-// these #error lines will trigger and the sketch won't compile.
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth Classic is not enabled. This sketch requires the original ESP32.
-#endif
-
-#if !defined(CONFIG_BT_SPP_ENABLED)
-#error Serial Bluetooth (SPP) is not available. It is only supported on the original ESP32 chip.
-#endif
 
 BluetoothSerial SerialBT;
 
 unsigned long _lastGreetingMs = 0;
+unsigned long _greetingCount = 0;
 const unsigned long GREETING_INTERVAL_MS = 2000;
 
 void setup() {
   Serial.begin(115200);
 
-  // Initialize Bluetooth with a device name.
-  // This is the name that appears when you scan for devices on your computer.
+  // Initialize Bluetooth with a device name. You can choose any name you
+  // like — "ESP32-Bluetooth", "Jon's ESP32", "Chewbacca", etc. This is the
+  // friendly name that appears when you scan for Bluetooth devices on your
+  // computer (pick something recognizable in a classroom full of ESP32s!).
   SerialBT.begin("ESP32-Bluetooth");
-  Serial.println("Bluetooth device started! You can now pair with 'ESP32-Bluetooth'.");
+
+  Serial.println("Bluetooth started! You can now pair with 'ESP32-Bluetooth'.");
+  Serial.println("Open a Bluetooth serial connection to see greetings.");
+  Serial.println("Anything you type here will be forwarded over Bluetooth (and vice versa).\n");
 }
 
 void loop() {
-  // Periodically send a greeting over Bluetooth
+  // Periodic greeting
   unsigned long now = millis();
   if (now - _lastGreetingMs >= GREETING_INTERVAL_MS) {
     _lastGreetingMs = now;
-    SerialBT.println("Hello from ESP32!");
+    _greetingCount++;
+
+    String msg = "Hello from ESP32! [Msg #" + String(_greetingCount)
+               + " | Uptime: " + String(now / 1000.0, 1) + "s]";
+
+    SerialBT.println("[Bluetooth] " + msgBase);  // Send over Bluetooth
+    Serial.println("[USB Serial] " + msgBase);   // Echo to USB Serial
   }
 
-  // Forward USB Serial → Bluetooth Serial
-  if (Serial.available()) {
+  // Forward everything received from Serial (e.g., typed in Serial Monitor) 
+  // to the Bluetooth peer. We use read()/write() (byte-at-a-time) rather than 
+  // readStringUntil() because it's non-blocking — the loop keeps running without 
+  // waiting for a newline or timeout.
+  while (Serial.available()) {
     SerialBT.write(Serial.read());
   }
 
-  // Forward Bluetooth Serial → USB Serial
-  if (SerialBT.available()) {
+  // Forward everything received over Bluetooth to Serial Monitor
+  while (SerialBT.available()) {
     Serial.write(SerialBT.read());
   }
 }
@@ -245,7 +243,7 @@ void loop() {
 
 Notice how the code reads like a standard serial sketch — compare the `SerialBT` calls with the `Serial` calls and you'll see the API mirroring from the [table above](#the-bluetoothserial-library) in action. The one difference is `SerialBT.begin("ESP32-Bluetooth")`: instead of a baud rate, it takes a device name that will appear when you scan for Bluetooth devices on your computer.
 
-The `#if !defined(...)` compile-time guards at the top produce a clear error if you accidentally build this on an ESP32-S3 or other unsupported chip.
+You can choose any name you like—"ESP32-Bluetooth", "MyPotentiometer", "Jon's ESP32", or even "Chewbacca". This is the friendly name that will appear in your computer's or phone's Bluetooth settings when scanning for nearby devices, so pick something recognizable (especially in a classroom full of ESP32s!).
 
 Upload this sketch to your ESP32 and open Serial Monitor at 115200 baud. You should see `"Bluetooth device started!"`.
 
@@ -293,26 +291,49 @@ pip3 install pyserial
 
 You already have a Python serial demo from the [Communication module](../communication/serial-intro.md): [`serial_demo.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py). Let's use it over Bluetooth—the only change is the port name.
 
-Open `serial_demo.py` and change the port to your Bluetooth serial port:
+First, if you're not sure which serial ports are available, you can list them:
 
-```python
-# In serial_demo.py, change this line:
-ser = serial.Serial(port='COM13', baudrate=115200, timeout=1)
+~~~
+python3 serial_demo.py --list
+~~~
 
-# To your Bluetooth port:
-# macOS:
-ser = serial.Serial(port='/dev/tty.ESP32-Bluetooth', baudrate=115200, timeout=1)
-# Windows:
-ser = serial.Serial(port='COM8', baudrate=115200, timeout=1)
-```
+Then run the script with your Bluetooth serial port:
 
-That's it—one line change. The rest of the script (reading, writing, encoding, decoding) is identical. Run it:
+~~~
+# macOS
+python3 serial_demo.py /dev/tty.ESP32-Bluetooth 115200
 
-```
-python3 serial_demo.py
-```
+# Windows (Note use `python` instead of `python3` on Windows)
+python serial_demo.py COM8 115200
+~~~
 
-You should see `"Hello from ESP32!"` messages arriving every 2 seconds. Type a number and press Enter—it will be sent to the ESP32 and forwarded to USB Serial Monitor. You're communicating wirelessly! 🎉
+For example, on my Windows computer, if I run ``-list`, I get:
+
+~~~
+python serial_demo.py --list
+Available serial ports:
+  COM1 - Communications Port (COM1)
+  COM4 - Silicon Labs CP210x USB to UART Bridge (COM4)
+~~~
+
+After pairing with `"ESP32-Bluetooth"` (see [Pairing with your computer](#pairing-with-your-computer)), I ran `--list` again and see new ports:
+
+~~~
+python serial_demo.py --list
+Available serial ports:
+  COM1 - Communications Port (COM1)
+  COM4 - Silicon Labs CP210x USB to UART Bridge (COM4)
+  COM16 - Standard Serial over Bluetooth link (COM16)
+  COM17 - Standard Serial over Bluetooth link (COM17)
+~~~
+
+COM4 is your **tethered USB serial connection** (the CP210x chip on the Huzzah32). COM16 and COM17 are Bluetooth serial ports—Windows creates two for each Bluetooth SPP pairing: one for outgoing and one for incoming connections. You typically want the first one listed, but if it doesn't work, try the other. Now connect:
+
+~~~
+python serial_demo.py COM16 115200
+~~~
+
+That's it—same script, different port. The rest of the code (reading, writing, encoding, decoding) is identical. You should see `"[Bluetooth] Msg #1 | Uptime: 2.00s"` messages arriving every 2 seconds. Type a number and press Enter—it will be sent to the ESP32 and forwarded to USB Serial Monitor. You're communicating wirelessly! 🎉
 
 {: .note }
 > **The baud rate parameter is ignored for Bluetooth virtual COM ports** on most operating systems. SPP negotiates its own data rate at the Bluetooth protocol level, so the `baudrate=115200` argument is passed to pySerial for API compatibility but doesn't actually set a baud rate the way it does for USB serial. You can pass any value and it will work—but we use `115200` to match our `Serial.begin(115200)` for consistency.
@@ -332,6 +353,8 @@ You should see `"Hello from ESP32!"` messages arriving every 2 seconds. Type a n
      4. The "aha moment": same pySerial code, wireless connection
      Include captions/transcript
 -->
+
+<!-- I think we should actually make two videos. One where the system is tethered. The other where it is not! -->
 
 ## Part 2: Streaming sensor data
 

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: L1&#58; Intro to the ESP32
-parent: ESP32
+parent: Fundamentals
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true

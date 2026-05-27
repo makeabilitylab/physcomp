@@ -1,12 +1,13 @@
 ---
 layout: default
-title: L10&#58; Bidirectional BLE
-parent: ESP32
+title: L5&#58; Bidirectional BLE
+parent: Wireless
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: false
 comments: true
 usetocbot: true
-nav_order: 10
+nav_order: 5
 ---
 # {{ page.title | replace_first:'L','Lesson ' }}
 {: .no_toc }
@@ -55,7 +56,7 @@ In this lesson, we'll close the loop. You'll learn how to send data in the *othe
 > - The **Nordic UART Service (NUS)** — a widely adopted convention for serial-like text communication over BLE
 
 {: .note }
-> **Prerequisites:** This lesson builds directly on [Lesson 9: Introduction to BLE](ble-intro.md). You should be comfortable with BLE concepts (peripherals, centrals, GATT, services, characteristics, UUIDs, notifications) and have successfully completed Parts 1 and 2 from that lesson.
+> **Prerequisites:** This lesson builds directly on [Lesson 4: Introduction to BLE](ble-intro.md). You should be comfortable with BLE concepts (peripherals, centrals, GATT, services, characteristics, UUIDs, notifications) and have successfully completed Parts 1 and 2 from that lesson.
 
 ## Part 1: Controlling the NeoPixel over BLE
 
@@ -67,7 +68,7 @@ The ESP32-S3 Feather has a built-in NeoPixel (WS2812B) RGB LED on `PIN_NEOPIXEL`
 
 <!-- TODO: Push BLENeoPixelControl.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
 
-We'll extend the [Lesson 9](ble-intro.md) sensor streaming sketch to add a second characteristic for LED control—so the ESP32 simultaneously streams sensor data *and* accepts LED commands. This is the same bidirectional pattern from [Lesson 8](bluetooth-serial.md#part-4-bidirectional-control), but over BLE with structured characteristics instead of a serial byte stream. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BLENeoPixelControl).
+We'll extend the [Lesson 4](ble-intro.md) sensor streaming sketch to add a second characteristic for LED control—so the ESP32 simultaneously streams sensor data *and* accepts LED commands. This is the same bidirectional pattern from [Lesson 3, Part 3](bluetooth-web-serial.md#part-3-bidirectional-control), but over BLE with structured characteristics instead of a serial byte stream. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BLENeoPixelControl).
 
 ```cpp
 /**
@@ -221,7 +222,7 @@ void loop() {
 The key new element is the `LedCallbacks` class. When the central writes to the LED characteristic, `onWrite()` fires automatically. We interpret the first three bytes of the written value as R, G, B and set the NeoPixel color accordingly.
 
 {: .highlight }
-> **Callbacks vs. polling:** Notice the pattern: we don't poll for incoming data in `loop()` (like we do with `Serial.available()` or `SerialBT.available()` in [Lesson 8](bluetooth-serial.md)). Instead, BLE uses a **callback model**—the library calls our `onWrite()` function when data arrives. This is fundamentally different from the serial polling pattern you're used to, and it's one of the biggest code-level differences between Bluetooth Classic and BLE.
+> **Callbacks vs. polling:** Notice the pattern: we don't poll for incoming data in `loop()` (like we do with `Serial.available()` or `SerialBT.available()` in [Lessons 2–3](bluetooth-serial.md)). Instead, BLE uses a **callback model**—the library calls our `onWrite()` function when data arrives. This is fundamentally different from the serial polling pattern you're used to, and it's one of the biggest code-level differences between Bluetooth Classic and BLE.
 
 ### Try it out from your computer (Python)
 
@@ -572,7 +573,7 @@ Let's walk through the JavaScript, step by step:
 
 ## Part 3: Nordic UART Service (NUS)
 
-Throughout this lesson, we've worked directly with custom GATT services and characteristics — the fundamental BLE building blocks. But what if you just want to send text back and forth, like the serial bridge from [Lesson 8](bluetooth-serial.md)? In this part, you'll learn the **Nordic UART Service (NUS)** — a widely adopted convention that emulates serial communication over BLE using two characteristics. NUS bridges the gap between BLE's structured model and the simplicity of serial, and it's supported by most BLE terminal apps out of the box.
+Throughout this lesson, we've worked directly with custom GATT services and characteristics — the fundamental BLE building blocks. But what if you just want to send text back and forth, like the serial bridge from [Lesson 2](bluetooth-serial.md)? In this part, you'll learn the **Nordic UART Service (NUS)** — a widely adopted convention that emulates serial communication over BLE using two characteristics. NUS bridges the gap between BLE's structured model and the simplicity of serial, and it's supported by most BLE terminal apps out of the box.
 
 NUS is a widely adopted convention (created by Nordic Semiconductor) that uses two BLE characteristics to emulate serial communication:
 
@@ -717,7 +718,7 @@ Want to go further? Here are some challenges to reinforce what you've learned:
 
 **Exercise 4: Web Bluetooth + p5.js.** Port the Web Bluetooth sensor display from Part 2 into [p5.js](https://p5js.org/). Use `createCanvas()` to draw a real-time visualization (bar chart, oscilloscope, *etc.*) of the incoming BLE sensor data. If you completed the [p5.js Serial lessons](../communication/p5js-serial.md), compare the code structure—how much carries over? (Hint: also check out [p5.ble.js](https://itpnyu.github.io/p5.ble.js/), a p5.js library specifically for Web Bluetooth.)
 
-**Exercise 5: Port a Bluetooth Classic bidirectional project to BLE.** If you completed the bidirectional LED control from [Lesson 8, Part 4](bluetooth-serial.md#part-4-bidirectional-control), rebuild it using BLE with writable and notify characteristics. Update the computer-side code to use Web Bluetooth instead of Web Serial. What changed? What stayed the same?
+**Exercise 5: Port a Bluetooth Classic bidirectional project to BLE.** If you completed the bidirectional LED control from [Lesson 3, Part 3](bluetooth-web-serial.md#part-3-bidirectional-control), rebuild it using BLE with writable and notify characteristics. Update the computer-side code to use Web Bluetooth instead of Web Serial. What changed? What stayed the same?
 
 ## Lesson Summary
 
@@ -742,7 +743,7 @@ In this lesson, you learned how to send data *to* the ESP32 over BLE and build b
 
 ## Next Lesson
 
-With BLE under your belt, you've now covered all three major wireless communication technologies available on the ESP32: **WiFi** (cloud connectivity via [IoT](iot.md)), **Bluetooth Classic** (wireless serial via [Lesson 8](bluetooth-serial.md)), and **BLE** (structured low-power wireless in [Lesson 9](ble-intro.md) and this lesson). From here, you might explore BLE HID (making your ESP32 act as a wireless keyboard, mouse, or game controller), deep sleep with BLE wake-up for battery-powered projects, or combining BLE with sensors like the ADXL343 accelerometer for motion-controlled wireless devices. The wireless world is yours! 🚀
+With BLE under your belt, you've now covered all three major wireless communication technologies available on the ESP32: **WiFi** (cloud connectivity via [Lesson 1: IoT](iot.md)), **Bluetooth Classic** (wireless serial via [Lessons 2–3](bluetooth-serial.md)), and **BLE** (structured low-power wireless in [Lesson 4](ble-intro.md) and this lesson). From here, you might explore BLE HID (making your ESP32 act as a wireless keyboard, mouse, or game controller), deep sleep with BLE wake-up for battery-powered projects, or combining BLE with sensors like the ADXL343 accelerometer for motion-controlled wireless devices. The wireless world is yours! 🚀
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="ble-intro.html" class="nav-prev">

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: L3&#58; LED Fading with PWM
-parent: ESP32
+parent: Fundamentals
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: L5&#58; Playing Tones
-parent: ESP32
+parent: Fundamentals
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true

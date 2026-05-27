@@ -1,7 +1,8 @@
 ---
 layout: default
 title: L2&#58; Blinking an LED
-parent: ESP32
+parent: Fundamentals
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true

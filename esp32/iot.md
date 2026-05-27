@@ -1,7 +1,8 @@
 ---
 layout: default
-title: L7&#58; Internet of Things
-parent: ESP32
+title: L1&#58; Internet of Things
+parent: Wireless
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true

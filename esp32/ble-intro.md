@@ -1,12 +1,13 @@
 ---
 layout: default
-title: L9&#58; Introduction to BLE
-parent: ESP32
+title: L4&#58; Introduction to BLE
+parent: Wireless
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: false
 comments: true
 usetocbot: true
-nav_order: 9
+nav_order: 4
 ---
 # {{ page.title | replace_first:'L','Lesson ' }}
 {: .no_toc }
@@ -41,7 +42,7 @@ nav_order: 9
 - Random Nerd Tutorials BLE: https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/
 -->
 
-In the [last lesson](bluetooth-serial.md), we used Bluetooth Classic to create a wireless serial connection—simple, fast, and satisfying. But it came with real limitations: no iPhone support, no ESP32-S3 support, higher power consumption, and only one device at a time. In this lesson, we'll learn **Bluetooth Low Energy (BLE)**—the protocol that powers your Fitbit, your AirPods' pairing process, your smart thermostat, and billions of IoT devices worldwide.
+In the [last two lessons](bluetooth-serial.md), we used Bluetooth Classic to create a wireless serial connection—simple, fast, and satisfying. But it came with real limitations: no iPhone support, no ESP32-S3 support, higher power consumption, and only one device at a time. In this lesson, we'll learn **Bluetooth Low Energy (BLE)**—the protocol that powers your Fitbit, your AirPods' pairing process, your smart thermostat, and billions of IoT devices worldwide.
 
 BLE is more complex than Bluetooth Classic. Instead of a simple serial byte stream, BLE organizes data into a structured model of **services** and **characteristics**. This takes some getting used to—but that structure is exactly what makes BLE so powerful and ubiquitous. And unlike Bluetooth Classic, BLE works on the ESP32-S3, works with iPhones, and—as we'll see—even works directly from a web browser.
 
@@ -55,7 +56,7 @@ BLE is more complex than Bluetooth Classic. Instead of a simple serial byte stre
 > - How to stream real-time sensor data using BLE **notifications**
 > - The 20-byte MTU payload limit and how to work within it
 
-**Did you skip Lesson 8?** No problem. This lesson is self-contained—you don't need Bluetooth Classic experience to follow along. We'll briefly cover how BLE differs from Classic in the first section. If you want the full comparison, see [Lesson 8](bluetooth-serial.md). And unlike Bluetooth Classic, which is blocked on iOS and only works on the original ESP32, **BLE works with iPhones, Android phones, and the ESP32-S3**—so everyone can participate.
+**Did you skip the Bluetooth Classic lessons?** No problem. This lesson is self-contained—you don't need Bluetooth Classic experience to follow along. We'll briefly cover how BLE differs from Classic in the first section. If you want the full comparison, see [Lesson 2: Bluetooth Serial](bluetooth-serial.md) and [Lesson 3: Bluetooth Web Serial](bluetooth-web-serial.md). And unlike Bluetooth Classic, which is blocked on iOS and only works on the original ESP32, **BLE works with iPhones, Android phones, and the ESP32-S3**—so everyone can participate.
 
 ## What is BLE?
 
@@ -66,9 +67,9 @@ This design priority—**extreme power efficiency**—is what makes BLE transfor
 {: .important }
 > **BLE is not "wireless serial."** This is the single most important conceptual shift in this lesson. If you've used `Serial.println()` over USB or `SerialBT.println()` over Bluetooth Classic, you're used to a continuous byte stream—data flows like water through a pipe. BLE doesn't work that way. Instead, BLE organizes data into discrete, named **characteristics** that can be read, written, or subscribed to. Think less "serial port" and more "structured data API."
 
-If you completed [Lesson 8](bluetooth-serial.md), here's a quick comparison:
+If you completed [Lessons 2 and 3](bluetooth-serial.md), here's a quick comparison:
 
-| Feature | Bluetooth Classic (L8) | BLE (this lesson) |
+| Feature | Bluetooth Classic (L2–L3) | BLE (this lesson) |
 |---|---|---|
 | Data model | Continuous byte stream | Structured characteristics |
 | API feel | Like `Serial` | Like a REST API |
@@ -79,7 +80,7 @@ If you completed [Lesson 8](bluetooth-serial.md), here's a quick comparison:
 | Max throughput | ~3 Mbps | Up to 2 Mbps (BLE 5.0 PHY), but practical throughput is much lower |
 | Complexity | Very simple | More setup, more concepts |
 
-**Table.** Key differences between Bluetooth Classic (Lesson 8) and BLE (this lesson). BLE trades simplicity for universality, power efficiency, and structured data.
+**Table.** Key differences between Bluetooth Classic (Lessons 2–3) and BLE (this lesson). BLE trades simplicity for universality, power efficiency, and structured data.
 {: .fs-1 }
 
 ## How BLE works
@@ -164,7 +165,7 @@ In this lesson, we use BLE's "Just Works" pairing mode, which requires no PIN an
 
 ## Choosing between WiFi, Bluetooth Classic, and BLE
 
-Now that you understand the BLE concepts — peripherals, centrals, GATT, services, characteristics, and UUIDs — you have enough context to see where BLE fits alongside the other wireless technologies you've learned. If you've completed [Lesson 7 (WiFi/IoT)](iot.md) and [Lesson 8 (Bluetooth Classic)](bluetooth-serial.md), here's how all three compare:
+Now that you understand the BLE concepts — peripherals, centrals, GATT, services, characteristics, and UUIDs — you have enough context to see where BLE fits alongside the other wireless technologies you've learned. If you've completed [Lesson 1 (WiFi/IoT)](iot.md) and [Lessons 2–3 (Bluetooth Classic)](bluetooth-serial.md), here's how all three compare:
 
 | | WiFi (L7) | Bluetooth Classic (L8) | BLE (this lesson) |
 |---|---|---|---|
@@ -332,7 +333,7 @@ void loop() {
 
 Let's walk through the key steps:
 
-**Step 1: `BLEDevice::init("ESP32-BLE")`** initializes the Bluetooth stack and sets the device name that appears during scanning. This is analogous to `SerialBT.begin("ESP32-Bluetooth")` from [Lesson 8](bluetooth-serial.md), but the similarity ends here—BLE has no `println()` or `read()` on the device object.
+**Step 1: `BLEDevice::init("ESP32-BLE")`** initializes the Bluetooth stack and sets the device name that appears during scanning. This is analogous to `SerialBT.begin("ESP32-Bluetooth")` from [Lesson 2](bluetooth-serial.md), but the similarity ends here—BLE has no `println()` or `read()` on the device object.
 
 **Step 2: Creating the server and registering callbacks.** `BLEDevice::createServer()` creates a GATT server, and `pServer->setCallbacks(new MyServerCallbacks())` registers a **callback** — a function (or in this case, a class with methods) that the BLE library will call automatically when specific events happen, like a central connecting or disconnecting. If you've used event listeners in JavaScript or interrupt handlers on Arduino, callbacks are the same idea: instead of polling for events in `loop()`, you tell the library "call *this* function when *that* happens." We define `MyServerCallbacks` above `setup()` with two methods: `onConnect()` and `onDisconnect()`.
 
@@ -346,7 +347,7 @@ Let's walk through the key steps:
 
 ### Discovering the ESP32 from your computer (Python)
 
-Let's start on the computer, where debugging is easiest. We'll use [bleak](https://pypi.org/project/bleak/) — a cross-platform BLE client library for Python that works on macOS, Windows, and Linux. Unlike [pySerial](https://pyserial.readthedocs.io/) (which we used for Bluetooth Classic in [Lesson 8](bluetooth-serial.md)), bleak speaks BLE natively — it connects directly to BLE peripherals, discovers their GATT services, and reads/writes characteristics using Python's `asyncio` for non-blocking I/O. If you haven't installed it yet:
+Let's start on the computer, where debugging is easiest. We'll use [bleak](https://pypi.org/project/bleak/) — a cross-platform BLE client library for Python that works on macOS, Windows, and Linux. Unlike [pySerial](https://pyserial.readthedocs.io/) (which we used for Bluetooth Classic in [Lesson 2](bluetooth-serial.md)), bleak speaks BLE natively — it connects directly to BLE peripherals, discovers their GATT services, and reads/writes characteristics using Python's `asyncio` for non-blocking I/O. If you haven't installed it yet:
 
 ```
 pip3 install bleak
@@ -407,7 +408,7 @@ python3 ble_discover.py
 You should see the ESP32 in the scan results and then read `"Hello from ESP32!"` from the characteristic. 🎉
 
 {: .note }
-> **Compare with pySerial from [Lesson 8](bluetooth-serial.md).** With Bluetooth Classic, you used `serial.Serial()` to open a virtual COM port—the same API as USB serial. With BLE, there's no virtual COM port; you use `bleak`'s `BleakClient` to connect directly to the device and read structured characteristics. This is the fundamental difference between the two Bluetooth flavors.
+> **Compare with pySerial from [Lesson 2](bluetooth-serial.md).** With Bluetooth Classic, you used `serial.Serial()` to open a virtual COM port—the same API as USB serial. With BLE, there's no virtual COM port; you use `bleak`'s `BleakClient` to connect directly to the device and read structured characteristics. This is the fundamental difference between the two Bluetooth flavors.
 
 ### Discovering the ESP32 from your phone (iPhone and Android)
 
@@ -649,7 +650,7 @@ python3 ble_sensor_reader.py
 ```
 
 {: .note }
-> **Compare with the Python Bluetooth Classic script from [Lesson 8](bluetooth-serial.md).** In L8, you used `pyserial`'s `ser.readline()` to read data from a virtual COM port—a byte stream, just like USB serial. Here, you use `bleak`'s `start_notify()` to subscribe to a specific BLE characteristic—a callback fires each time the ESP32 pushes a new value. The data arrives structured and event-driven rather than as a continuous byte stream.
+> **Compare with the Python Bluetooth Classic script from [Lesson 2](bluetooth-serial.md).** In L2, you used `pyserial`'s `ser.readline()` to read data from a virtual COM port—a byte stream, just like USB serial. Here, you use `bleak`'s `start_notify()` to subscribe to a specific BLE characteristic—a callback fires each time the ESP32 pushes a new value. The data arrives structured and event-driven rather than as a continuous byte stream.
 
 ### Reading notifications from your phone (iPhone and Android)
 
@@ -690,7 +691,7 @@ You can negotiate a larger MTU (up to 512 bytes) if both sides support it, but 2
 
 Want to go further? Here are some challenges to reinforce what you've learned:
 
-**Exercise 1: BLE range test.** With the notification sketch from Part 2 running, walk away from your ESP32 with nRF Connect open. At what distance do notifications stop arriving? How do walls and obstacles affect range? If you did the Bluetooth Classic range test in [Lesson 8, Exercise 4](bluetooth-serial.md#exercises), compare the two. Are they similar?
+**Exercise 1: BLE range test.** With the notification sketch from Part 2 running, walk away from your ESP32 with nRF Connect open. At what distance do notifications stop arriving? How do walls and obstacles affect range? If you did the Bluetooth Classic range test in [Lesson 3, Exercise 4](bluetooth-web-serial.md#exercises), compare the two. Are they similar?
 
 **Exercise 2: Multiple sensor characteristics.** Create a service with *two* notify characteristics: one for a potentiometer and one for a photoresistor. Subscribe to both in nRF Connect and observe both values updating simultaneously. This is good practice for structuring your GATT services.
 
@@ -698,11 +699,11 @@ Want to go further? Here are some challenges to reinforce what you've learned:
 
 **Exercise 4: Power comparison (research).** The ESP32-S3 Feather has a LiPoly battery connector and a MAX17048 battery monitor chip. Connect the 350mAh LiPoly battery from your kit and run a BLE sketch. How long does the battery last? Compare with a WiFi sketch (from the [IoT lesson](iot.md)). Which protocol consumes more power? For bonus points, use `BLEDevice::setPower()` to experiment with different transmit power levels and measure the effect on both range and battery life.
 
-**Exercise 5: Port a Bluetooth Classic project to BLE.** If you completed the potentiometer streaming project from [Lesson 8](bluetooth-serial.md), rebuild it using BLE. Replace `BluetoothSerial` with the BLE library, design your GATT service and characteristic, and update the computer-side code to use `bleak` instead of `pySerial`. What changed? What stayed the same?
+**Exercise 5: Port a Bluetooth Classic project to BLE.** If you completed the potentiometer streaming project from [Lesson 3](bluetooth-web-serial.md), rebuild it using BLE. Replace `BluetoothSerial` with the BLE library, design your GATT service and characteristic, and update the computer-side code to use `bleak` instead of `pySerial`. What changed? What stayed the same?
 
 ## Lesson Summary
 
-In this lesson, you learned the fundamentals of Bluetooth Low Energy — a structured, low-power wireless protocol that's fundamentally different from the serial-style Bluetooth Classic in [Lesson 8](bluetooth-serial.md). Here's what you covered:
+In this lesson, you learned the fundamentals of Bluetooth Low Energy — a structured, low-power wireless protocol that's fundamentally different from the serial-style Bluetooth Classic in [Lessons 2–3](bluetooth-serial.md). Here's what you covered:
 
 - **BLE is not wireless serial.** Instead of a continuous byte stream, BLE organizes data into structured **services** and **characteristics** with defined properties (read, write, notify). This structure enables interoperability across devices and applications.
 - **BLE uses a peripheral/central model.** The ESP32 acts as a **peripheral** (advertising and hosting data), while your phone or laptop acts as a **central** (scanning, connecting, reading, and writing). Once connected, data flows in both directions.
@@ -730,9 +731,9 @@ In this lesson, you learned the fundamentals of Bluetooth Low Energy — a struc
 In the [next lesson](ble-bidirectional.md), you'll learn how to send data in the *other* direction — from your phone or browser *to* the ESP32. You'll control the onboard NeoPixel over BLE, build a Web Bluetooth interface with sliders and a color picker, and learn about the Nordic UART Service (NUS) for serial-like text communication over BLE. Let's go! 🚀
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
-  <a href="bluetooth-serial.html" class="nav-prev">
+  <a href="bluetooth-web-serial.html" class="nav-prev">
     <div class="nav-label">&larr; Previous Lesson</div>
-    <div class="nav-title">Bluetooth Serial</div>
+    <div class="nav-title">Bluetooth Web Serial</div>
   </a>
   <a href="ble-bidirectional.html" class="nav-next">
     <div class="nav-label">Next Lesson &rarr;</div>

@@ -30,6 +30,32 @@ The lessons are interactive and designed to be completed **in order**. All ESP32
 {: .warning }
 > **A note on boards:** Lessons 2 and 3 (Bluetooth Classic) require the **original ESP32** (Huzzah32) since the ESP32-S3 lacks Bluetooth Classic hardware. All other lessons in this series work on both the original ESP32 and the ESP32-S3. If you only have an S3, you can skim or skip Lessons 2 and 3 and jump straight to Lesson 4 (BLE).
 
+## Lessons
+
+### [Lesson 1: Internet of Things](iot.md)
+
+Connect your ESP32 to WiFi and upload sensor data to the cloud using [Adafruit IO](https://learn.adafruit.com/welcome-to-adafruit-io). This is where the ESP32 truly shines! ✨
+
+### [Lesson 2: Bluetooth Serial](bluetooth-serial.md)
+
+Cut the wire! Pair your ESP32 with your Mac or Windows computer using Bluetooth Classic's Serial Port Profile (SPP), which creates a virtual serial port that behaves exactly like a USB cable. Verify the wireless link with built-in OS tools (`cat`, `screen`, PowerShell) and Python's [pySerial](https://pyserial.readthedocs.io/)—the same library from the [Communication module](../communication/index.md). **Requires the original ESP32** (*e.g.,* [Adafruit Huzzah32](https://www.adafruit.com/product/3405?srsltid=AfmBOopMLfaARdO_FA2CcUqo7YmyJdwVWYZksdyQ8eakXbFqg3IALDRs), [SparkFun ESP32 Thing](https://www.sparkfun.com/sparkfun-esp32-thing.html), [Espressif ESP32-DevKitC](https://www.amazon.com/Espressif-ESP32-DevKitC-32E-Development-Board/dp/B09MQJWQN2?th=1)).
+
+### [Lesson 3: Bluetooth Web Serial](bluetooth-web-serial.md)
+
+Stream live sensor data over Bluetooth and visualize it in the browser. Build interactive [p5.js](https://p5js.org/) sketches using [Web Serial](../communication/web-serial.md) and the [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) library—the same tools from the Communication module, but wireless. Close the loop with bidirectional control: a browser slider that dims an LED on your breadboard wirelessly. **Requires the original ESP32**.
+
+### [Lesson 4: Introduction to BLE](ble-intro.md)
+
+Learn **Bluetooth Low Energy (BLE)**—the protocol behind fitness trackers, smart home devices, and billions of IoT sensors. You'll learn the peripheral/central model, the GATT data hierarchy of services and characteristics, and how to stream live sensor data to your phone and computer using notifications. Works with the ESP32-S3 and iPhones!
+
+### [Lesson 5: Bidirectional BLE](ble-bidirectional.md)
+
+Send data in *both* directions over BLE. Control the onboard NeoPixel by writing to a BLE characteristic from your phone, build a **Web Bluetooth** interface with sliders and a color picker that runs entirely in the browser, and learn the **Nordic UART Service (NUS)** for serial-like text communication over BLE.
+
+## What's next?
+
+Once you've completed the Wireless lessons, you'll have a solid foundation for building WiFi-connected, Bluetooth-enabled, sensor-driven projects. Consider exploring more advanced topics like BLE HID devices (making your ESP32 act as a wireless keyboard or game controller), deep sleep for battery-powered projects, or building your own web server directly on the ESP32!
+
 <!-- TODO: FUTURE WIRELESS LESSONS TO ADD
 ============================================================
 
@@ -76,29 +102,3 @@ The ESP32-S3 Feather can get down to ~100µA in deep sleep. Cover:
 - Compare: USB HID = wired, lower latency, plug-and-play on any OS, no pairing needed;
   BLE HID = wireless, needs pairing, slight latency, great for mobile/wearable
 -->
-
-## Lessons
-
-### [Lesson 1: Internet of Things](iot.md)
-
-Connect your ESP32 to WiFi and upload sensor data to the cloud using [Adafruit IO](https://learn.adafruit.com/welcome-to-adafruit-io). This is where the ESP32 truly shines! ✨
-
-### [Lesson 2: Bluetooth Serial](bluetooth-serial.md)
-
-Cut the wire! Pair your ESP32 with your Mac or Windows computer using Bluetooth Classic's Serial Port Profile (SPP), which creates a virtual serial port that behaves exactly like a USB cable. Verify the wireless link with built-in OS tools (`cat`, `screen`, PowerShell) and Python's [pySerial](https://pyserial.readthedocs.io/)—the same library from the [Communication module](../communication/index.md). **Requires the original ESP32** (Huzzah32).
-
-### [Lesson 3: Bluetooth Web Serial](bluetooth-web-serial.md)
-
-Stream live sensor data over Bluetooth and visualize it in the browser. Build interactive [p5.js](https://p5js.org/) sketches using [Web Serial](../communication/web-serial.md) and the [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) library—the same tools from the Communication module, but wireless. Close the loop with bidirectional control: a browser slider that dims an LED on your breadboard wirelessly. **Requires the original ESP32** (Huzzah32).
-
-### [Lesson 4: Introduction to BLE](ble-intro.md)
-
-Learn **Bluetooth Low Energy (BLE)**—the protocol behind fitness trackers, smart home devices, and billions of IoT sensors. You'll learn the peripheral/central model, the GATT data hierarchy of services and characteristics, and how to stream live sensor data to your phone and computer using notifications. Works with the ESP32-S3 and iPhones!
-
-### [Lesson 5: Bidirectional BLE](ble-bidirectional.md)
-
-Send data in *both* directions over BLE. Control the onboard NeoPixel by writing to a BLE characteristic from your phone, build a **Web Bluetooth** interface with sliders and a color picker that runs entirely in the browser, and learn the **Nordic UART Service (NUS)** for serial-like text communication over BLE.
-
-## What's next?
-
-Once you've completed the Wireless lessons, you'll have a solid foundation for building WiFi-connected, Bluetooth-enabled, sensor-driven projects. Consider exploring more advanced topics like BLE HID devices (making your ESP32 act as a wireless keyboard or game controller), deep sleep for battery-powered projects, or building your own web server directly on the ESP32!

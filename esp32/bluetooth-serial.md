@@ -44,7 +44,7 @@ nav_order: 2
 
 In the [last lesson](iot.md), you transmitted sensor data through WiFi, across the internet, and up to a cloud dashboard. But what if you just want to communicate with the laptop sitting right in front of you—**without a USB cable**? What if you could run the same Python scripts and terminal tools from the [Communication module](../communication/serial-intro.md), but wirelessly?
 
-In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun part: the code on your computer is going to be *identical*. Bluetooth Classic's Serial Port Profile (SPP) creates a **virtual serial port** on your computer that looks and behaves exactly like a tethered USB serial connection. Your Python scripts, your terminal commands, your `cat` and `screen` invocations—they all work unchanged. The only difference is which port you select. ✨
+In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun part: the code on your computer is going to be *identical*. Bluetooth Classic's Serial Port Profile (SPP) creates a **virtual serial port** on your computer that looks and behaves exactly like a tethered USB serial connection. Your Python scripts, your terminal commands, your p5.js programs—they all work unchanged. The only difference is which port you select. ✨
 
 {: .note }
 > **In this lesson, you will learn:**
@@ -180,52 +180,72 @@ The library's API was **intentionally designed to mirror** Arduino's built-in `S
 The key difference is in `.begin()`: while the traditional `Serial.begin()` takes a baud rate because it configures a physical UART, `SerialBT.begin()` takes a *device name* because the Bluetooth stack handles data rates internally. The other difference is that Bluetooth connections can come and go—unlike a USB cable, a Bluetooth device might walk out of range—so `BluetoothSerial` adds `connected()` and `register_callback()` for connection state management. We'll explore these in the [next lesson](bluetooth-web-serial.md) when we discuss what happens when a connection drops.
 
 {: .warning }
-> Reminder: `BluetoothSerial` is **only available on the original ESP32 chip**. If you try to include it on an ESP32-S3 (or C3, S2, *etc.*), the sketch will not compile. The compile-time guards in our sketches below produce a clear error message when this happens.
+> Reminder: `BluetoothSerial` is **only available on the original ESP32 chip**. If you try to include it on an ESP32-S3 (or C3, S2, *etc.*), the sketch will not compile.
 
 ### The Arduino code
 
 <!-- TODO: Push HelloBluetooth.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
 
-This sketch creates a bidirectional bridge between the USB serial connection (to your computer via USB) and a Bluetooth serial connection (to your computer via Bluetooth). Anything sent over Bluetooth arrives on USB serial and vice versa. It also sends a periodic greeting so you can immediately see that data is flowing. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetooth).
+This sketch creates a bidirectional bridge between the USB serial connection (to your computer via USB) and a Bluetooth serial connection (to your computer via Bluetooth). Anything sent over Bluetooth arrives on USB serial and vice versa. It also sends a periodic message so you can immediately see that data is flowing. When data is sent or received over Bluetooth, the built-in red LED (pin 13) flashes briefly as a visual heartbeat.
+
+The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetooth).
+
+{: .note }
+**What about the flickering orange LED?** On the Adafruit Huzzah32, you may notice an orange LED near the USB jack that flickers constantly. This is the CHG (charge) LED. It's hardwired to the LiPo battery charging circuit and is not controllable in code. It flickers when no battery is connected. You can safely ignore it.
 
 ```cpp
 #include "BluetoothSerial.h"
 
+// LED_BUILTIN is defined by the board package (e.g., pin 13 on the Huzzah32).
+// We alias it here so you can easily swap in a different pin if needed.
+const int LED_PIN = LED_BUILTIN;
+const unsigned long LED_FLASH_MS = 60;  // How long a single flash cycle takes
+const unsigned int NUM_FLASHES = 3;
+
 BluetoothSerial SerialBT;
 
-unsigned long _lastGreetingMs = 0;
-unsigned long _greetingCount = 0;
+unsigned long _lastMsgMs = 0;
+unsigned long _msgCount = 0;
 const unsigned long GREETING_INTERVAL_MS = 2000;
 
 void setup() {
   Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
 
   // Initialize Bluetooth with a device name. You can choose any name you
-  // like — "ESP32-Bluetooth", "Jon's ESP32", "Chewbacca", etc. This is the
+  // like — "ESP32-Bluetooth", "Jon's ESP32", "Pikachu", etc. This is the
   // friendly name that appears when you scan for Bluetooth devices on your
   // computer (pick something recognizable in a classroom full of ESP32s!).
   SerialBT.begin("ESP32-Bluetooth");
 
   Serial.println("Bluetooth started! You can now pair with 'ESP32-Bluetooth'.");
-  Serial.println("Open a Bluetooth serial connection to see greetings.");
+  Serial.println("Open a Bluetooth serial connection to see messages.");
   Serial.println("Anything you type here will be forwarded over Bluetooth (and vice versa).\n");
 }
 
 void loop() {
-  // Periodic greeting
+  // Periodically send message updates
   unsigned long now = millis();
-  if (now - _lastGreetingMs >= GREETING_INTERVAL_MS) {
-    _lastGreetingMs = now;
-    _greetingCount++;
+  if (now - _lastMsgMs >= GREETING_INTERVAL_MS) {
+    _lastMsgMs = now;
+    _msgCount++;
 
-    String msgBase = "Msg #" + String(_greetingCount)
-                   + " | Uptime: " + String(now / 1000.0, 1) + "s";
+    String msg = "Hello from ESP32! [Msg #" + String(_msgCount)
+               + " | Uptime: " + String(now / 1000.0, 1) + "s]";
 
-    SerialBT.println("[Bluetooth] " + msgBase);  // Send over Bluetooth
-    Serial.println("[USB Serial] " + msgBase);   // Echo to USB Serial
+    // Check if Bluetooth Serial is connected
+    if (SerialBT.connected()) {
+      // Send Bluetooth message
+      SerialBT.println("[Bluetooth] " + msg);
+      flashLED();  // Visual confirmation: data sent over Bluetooth
+    } else {
+      // Send USB Serial message
+      Serial.println("[USB Serial] Waiting for Bluetooth connection...");
+    }
+    Serial.println("[USB Serial] " + msg);
   }
 
-  // Forward everything received from Serial (e.g., typed in Serial Monitor)
+  // Forward everything received from USB Serial (e.g., typed in Serial Monitor)
   // to the Bluetooth peer. We use read()/write() (byte-at-a-time) rather than
   // readStringUntil() because it's non-blocking — the loop keeps running without
   // waiting for a newline or timeout.
@@ -233,9 +253,28 @@ void loop() {
     SerialBT.write(Serial.read());
   }
 
-  // Forward everything received over Bluetooth to Serial Monitor
-  while (SerialBT.available()) {
-    Serial.write(SerialBT.read());
+  // Forward everything received over Bluetooth to USB Serial.
+  // The outer `if` avoids flashing when there's nothing to read, and
+  // ensures we flash once per burst of data rather than once per byte.
+  if (SerialBT.available()) {
+    while (SerialBT.available()) {
+      Serial.write(SerialBT.read());
+    }
+    flashLED();  // Visual confirmation: data received over Bluetooth
+  }
+}
+
+/**
+ * Briefly flashes the built-in LED. Uses a blocking delay, which is
+ * fine for a simple example — the ~180 ms pause won't noticeably affect
+ * the 2-second greeting interval or byte-at-a-time forwarding.
+ */
+void flashLED() {
+  for(int i=0; i< NUM_FLASHES; i++){
+    digitalWrite(LED_PIN, HIGH);
+    delay(LED_FLASH_MS / 2);
+    digitalWrite(LED_PIN, LOW);
+    delay(LED_FLASH_MS / 2);
   }
 }
 ```
@@ -253,6 +292,9 @@ Upload this sketch to your ESP32 and open Serial Monitor at 115200 baud. You sho
 ```
 
 This confirms the sketch is running. Now let's pair and see those messages arrive wirelessly.
+
+{: .note }
+**Have an ESP32 with a built-in NeoPixel?** If you're using the [Adafruit ESP32 Feather V2](https://www.adafruit.com/product/5400) (or have an external NeoPixel wired up), check out [HelloBluetoothRGB](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetoothRGB) — it flashes blue for Bluetooth send and green for Bluetooth receive, making it easy to distinguish data direction.
 
 ### Pairing with your computer
 
@@ -290,7 +332,7 @@ You should see something like `/dev/tty.ESP32-Bluetooth` or `/dev/tty.ESP32-Blue
 
 ### Verifying the connection
 
-Now let's verify that data is actually flowing over Bluetooth. We'll use built-in OS tools—no Python, no installs—so if something goes wrong, you'll know immediately that it's a Bluetooth issue, not a software setup issue.
+Now let's verify that data is actually flowing over Bluetooth. We'll **use built-in OS tools**—no Python, no additional installs—so if something goes wrong, you'll know immediately that it's a Bluetooth issue, not a software setup issue.
 
 #### macOS / Linux
 
@@ -310,16 +352,19 @@ Replace the port name with whatever `ls /dev/tty.*Bluetooth*` showed you. You sh
 
 Press **Ctrl+C** to stop.
 
-{: .note }
-> You can also use `screen`, which provides a more interactive serial terminal:
-> ```bash
-> screen /dev/tty.ESP32-Bluetooth 115200
-> ```
-> In `screen`, you can type characters that will be forwarded to the ESP32. To exit `screen`, press **Ctrl+A** then **K**, then confirm with **y**.
+Now try `screen`, which provides a more interactive serial terminal:
+
+```bash
+screen /dev/tty.ESP32-Bluetooth 115200
+```
+
+In `screen`, you can type characters that will be forwarded to the ESP32. To exit `screen`, press **Ctrl+A** then **K**, then confirm with **y**. On Mac, use the `control` key — labeled `⌃` — not `⌘ Command`.
 
 #### Windows
 
-We provide a PowerShell script called [`serial_reader.ps1`](https://github.com/makeabilitylab/arduino/blob/master/PowerShell/serial_reader.ps1) that reads from a COM port with zero dependencies. Download it and run:
+If you use Windows, we've made a [PowerShell script](https://learn.microsoft.com/en-us/powershell/scripting/overview) called [`serial_reader.ps1`](https://github.com/makeabilitylab/arduino/blob/master/PowerShell/serial_reader.ps1) that reads from a COM port with zero dependencies. 
+
+Download it and run from your PowerShell terminal:
 
 ```powershell
 # List available COM ports

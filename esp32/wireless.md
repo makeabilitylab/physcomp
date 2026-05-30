@@ -28,7 +28,7 @@ The lessons are interactive and designed to be completed **in order**. All ESP32
 > Before starting, we recommend completing the [Fundamentals](fundamentals.md) series first. You should be comfortable with the ESP32 board layout, 3.3V logic, the LEDC PWM API, and `analogRead` on the 12-bit ADC. Several lessons here also reference the [Communication module](../communication/index.md)—particularly [Web Serial](../communication/web-serial.md), [p5.js + Serial](../communication/p5js-serial.md), and [p5.js + Serial I/O](../communication/p5js-serial-io.md).
 
 {: .warning }
-> **A note on boards:** Lessons 2 and 3 (Bluetooth Classic) require the **original ESP32** (Huzzah32) since the ESP32-S3 lacks Bluetooth Classic hardware. All other lessons in this series work on both the original ESP32 and the ESP32-S3. If you only have an S3, you can skim or skip Lessons 2 and 3 and jump straight to Lesson 4 (BLE).
+> **A note on boards:** Lessons 2 and 3 (Bluetooth Classic) require the **original ESP32** since the ESP32-S3 lacks Bluetooth Classic hardware. All other lessons in this series work on both the original ESP32 and the ESP32-S3. If you only have an S3, you can skim or skip Lessons 2 and 3 and jump straight to Lesson 4 (BLE).
 
 ## Lessons
 

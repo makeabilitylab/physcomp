@@ -17,7 +17,9 @@ usetocbot: true
 {:toc}
 ---
 
-Welcome 👋 to the **ESP32** module! The [ESP32](https://www.espressif.com/en/products/socs/esp32) is a fast, low-cost, WiFi- and Bluetooth-enabled microcontroller that has become **the** platform for Internet of Things (IoT) projects. And the best part? You can program it with Arduino—so everything you learned in the [Intro to Arduino](../arduino/index.md) series carries over! In this module, you'll learn how the ESP32 differs from the Arduino boards you've used before, and you'll build projects that blink LEDs, fade lights with PWM, play tones, sense capacitive touch, connect to the cloud ☁️, and communicate wirelessly over Bluetooth 📡. Let's go! 🚀
+Welcome 👋 to the **ESP32** module! The [ESP32](https://www.espressif.com/en/products/socs/esp32) is a fast, low-cost, WiFi- and Bluetooth-enabled microcontroller that has become **the** platform for Internet of Things (IoT) projects. And the best part? You can program it with Arduino—so everything you learned in the [Intro to Arduino](../arduino/index.md) series carries over! 
+
+In this module, you'll learn how the ESP32 differs from the Arduino boards you've used before, and you'll build projects that blink LEDs, fade lights with PWM, play tones, sense capacitive touch, connect to the cloud ☁️, and communicate wirelessly over Bluetooth 📡. Let's go! 🚀
 
 ![A collage of ESP32 boards including the original ESP32, ESP32-S2, and ESP32-S3](assets/images/ESP32Variants_FromS1-S3.png)
 **Figure.** The ESP32 family includes dozens of variants from Espressif and third-party manufacturers. They are fast (up to 240 MHz dual-core), have built-in WiFi and Bluetooth, and many development boards cost around $10 USD!
@@ -48,13 +50,15 @@ Because both boards share the **Feather form factor** and use the same [ESP32 Ar
 
 ### Chips, modules, and development boards
 
-It's worth clarifying the supply chain—and differences between **chips**, **modules**, and **development boards**—since the terminology can be confusing and the layering actually explains the price differences you'll see online.
+Before we begin, it's worth clarifying the differences between **chips**, **modules**, and **development boards**—since the terminology can be confusing and the layering actually explains the price differences you'll see online.
 
 - **The chip:** **Espressif** designs the ESP32-S3 *chip* (the bare SoC). Working with bare silicon is difficult: it requires custom printed circuit boards (PCBs), complex surface-mount soldering, and precise RF antenna tuning.
 - **The module:** To simplify manufacturing, Espressif packages the chip into *modules* (like the [ESP32-S3-WROOM-1](https://documentation.espressif.com/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)). Modules add flash memory, an integrated antenna, and metal RF shielding. Crucially, they are pre-certified by the FCC, saving hardware designers from expensive regulatory testing. However, you still can't easily plug a module into a laptop or a breadboard.
-- **The development board:** This is where the maker companies come in. They bridge the gap between industrial components and human-usable prototyping tools. They take the Espressif module and build a *development board* around it, adding the missing essentials: a USB connector, a USB interface for programming and serial communication, a 3.3V voltage regulator (since USB provides 5V), battery charging circuitry, and breadboard-friendly header pins.
+- **The development board:** This is where the maker companies like Adafruit and Sparkfun come in. They bridge the gap between industrial components and human-usable prototyping tools. They take the Espressif module and build a *development board* around it, adding the missing essentials: a USB connector, a USB interface for programming and serial communication, a 3.3V voltage regulator (since USB provides 5V), battery charging circuitry, and breadboard-friendly header pins.
 
-That's why an Adafruit Feather costs ~$18 while a bare Espressif module costs a few dollars. You're paying for the hardware that makes the chip accessible, standard form factors (like the plug-and-play [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings)), and high-quality documentation. Because your code targets the underlying ESP32-S3 chip, it runs identically across all these boards—only the pin layout and onboard peripherals differ. We discuss the specific pin diagrams for our boards in [Lesson 1](esp32.md).
+That's why an [Adafruit ESP32-S3 Feather](https://www.adafruit.com/product/5477) costs ~$18 while a bare Espressif module costs a few dollars. You're paying for the hardware that makes the chip accessible, standard form factors (like the plug-and-play [Feather ecosystem](https://learn.adafruit.com/adafruit-feather/featherwings)), and high-quality documentation.
+
+Because your code targets the underlying ESP32 or ESP32-S3 chip, it runs identically across all these boards—only the pin layout and onboard peripherals differ. We discuss the specific pin diagrams for our boards in [Lesson 1](esp32.md).
 
 ## How does the Arduino Uno or Leonardo differ from ESP32?
 
@@ -75,7 +79,7 @@ If you're coming from the [Intro to Arduino](../arduino/index.md) series, here a
 
 For our learning series, we program the ESP32 using **Arduino (C/C++)**—specifically, Espressif's [open-source Arduino core](https://github.com/espressif/arduino-esp32) for the ESP32 family. This means most of your [prior Arduino learning](../arduino/) transfers directly (woohoo! 🎉). You can use the same Arduino IDE, the same `setup()`/`loop()` structure, and many of the same functions like `digitalRead`, `analogRead`, and `Serial.print`.
 
-The tradeoff is that the Arduino core is a **convenience layer** on top of the ESP32's native SDK. It doesn't expose all of the chip's features—you can see the [supported libraries here](https://docs.espressif.com/projects/arduino-esp32/en/latest/libraries.html)—and it adds some overhead compared to programming the chip directly. For our purposes, though, Arduino is a good choice: it lets us focus on learning physical computing concepts rather than wrestling with a new toolchain.
+The tradeoff is that the Arduino core is a **convenience layer** on top of the [ESP32's native SDK](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html). It doesn't expose all of the chip's features—you can see the [supported libraries here](https://docs.espressif.com/projects/arduino-esp32/en/latest/libraries.html)—and it adds some overhead compared to programming the chip directly. For our purposes, though, Arduino is a good choice: it lets us focus on learning physical computing concepts rather than wrestling with a new toolchain.
 
 That said, the ESP32 is completely **independent** of the Arduino ecosystem—just as you don't *have* to use Arduino to program the ATmega328P (used in the Uno) or the ATmega32u4 (used in the Leonardo), you don't have to use Arduino to program the ESP32. Here are some alternatives you may want to explore in the future:
 
@@ -86,7 +90,6 @@ That said, the ESP32 is completely **independent** of the Arduino ecosystem—ju
 ## ESP32 Fundamentals
 
 🚦 **Start Here!** Begin with the [Fundamentals series](fundamentals.md) to get comfortable with the ESP32 board, its 3.3V logic, and its differences from the Arduino Uno/Leonardo. You'll blink LEDs, fade with PWM (using the new LEDC API), read analog input with the 12-bit ADC, play tones, and use the ESP32's built-in capacitive touch sensing—all foundational skills before moving on to wireless.
-{: .important }
 
 **[Start the Fundamentals lessons →](fundamentals.md)**
 

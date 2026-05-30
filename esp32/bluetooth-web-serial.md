@@ -29,12 +29,12 @@ nav_order: 3
 4. Record workbench video of Android phone bidirectional demo (include captions/transcript)
 5. Get screenshots of the p5.js sketch receiving Bluetooth serial data (include descriptive alt text)
 6. Get screenshot of Chrome's port selection dialog showing both USB and Bluetooth ports (include descriptive alt text)
-7. Write and test Arduino sketches (BluetoothPotentiometer, BluetoothLedControl); push to makeabilitylab/arduino under ESP32/Bluetooth/
+7. Write and test Arduino sketches (BluetoothPot, BluetoothLedControl); push to makeabilitylab/arduino under ESP32/Bluetooth/
 8. Build and host the p5.js Bluetooth demo on GitHub Pages
 9. Verify CDN URL: https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.min.js
 -->
 
-In the [last lesson](bluetooth-serial.md), you established a wireless serial connection between the ESP32 and your computer using Bluetooth Classic's Serial Port Profile (SPP). You verified the link with terminal tools and Python—but you weren't actually sending real sensor data yet, and you weren't visualizing anything. Now we'll fix that.
+In the [last lesson](bluetooth-serial.md), you established a wireless serial connection between the ESP32 and your computer using Bluetooth Classic's Serial Port Profile (SPP). You verified the wireless communication link with terminal tools and Python but we didn't actually sending real sensor data yet.
 
 In this lesson, we'll add a **potentiometer** and an **LED** to the circuit, stream live sensor readings over Bluetooth, and build interactive [p5.js](https://p5js.org/) sketches using [Web Serial](../communication/web-serial.md) and the [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) library—exactly the same tools from the [Communication module](../communication/index.md), but wireless. Then we'll close the loop with bidirectional control: a slider in your browser that dims an LED on your breadboard wirelessly.
 
@@ -55,7 +55,7 @@ In addition to the materials from [Lesson 2](bluetooth-serial.md#materials), you
 
 | Breadboard | ESP32 | LED | Resistor | Potentiometer |
 | ---------- |:-----:|:-----:|:-----:|:-----:|
-| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit Huzzah32 ESP32 Feather board, top view](/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png) | ![Red 5mm LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220-ohm resistor, striped red-red-brown-gold]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/PanelMountPotentiometer_NoCap_150h.png) |
+| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit Huzzah32 ESP32 Feather board, top view]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png) | ![Red 5mm LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220-ohm resistor, striped red-red-brown-gold]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/PanelMountPotentiometer_NoCap_150h.jpg) |
 | Breadboard | [Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591) | Red LED | 220Ω Resistor | 10kΩ Potentiometer |
 
 You will also need:
@@ -74,57 +74,55 @@ Connect a 10kΩ potentiometer to the ESP32 on pin **A7** (GPIO 32), which is an 
 
 ### The Arduino code
 
-<!-- TODO: Push BluetoothPotentiometer.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
+<!-- TODO: Push BluetoothPot.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
 
-The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BluetoothPotentiometer).
+The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BluetoothPot).
 
 ```cpp
-/**
- * BluetoothPotentiometer: reads a potentiometer and streams the value
- * over both USB Serial and Bluetooth Serial.
- *
- * Circuit:
- * - 10kΩ potentiometer on A7 (GPIO 32) — must be an ADC1 pin
- *
- * Requires: Original ESP32 (e.g., Huzzah32). Will NOT compile on ESP32-S3.
- *
- * See: https://makeabilitylab.github.io/physcomp/esp32/bluetooth-web-serial
- *
- * By Jon E. Froehlich
- * @jonfroehlich
- * http://makeabilitylab.io
- */
-
 #include "BluetoothSerial.h"
-
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth Classic is not enabled. This sketch requires the original ESP32.
-#endif
-
-#if !defined(CONFIG_BT_SPP_ENABLED)
-#error Serial Bluetooth (SPP) is not available. It is only supported on the original ESP32 chip.
-#endif
 
 BluetoothSerial SerialBT;
 
-const int POT_INPUT_PIN = A7; // GPIO 32, an ADC1 pin on the Huzzah32
+const int POT_INPUT_PIN = A7;           // GPIO 32, an ADC1 pin on the Huzzah32
+const int LED_PIN = LED_BUILTIN;        // Pin 13 on the Huzzah32; aliased for clarity
+const int ADC_MAX = 4095;               // ESP32 ADC is 12-bit (0..4095)
+const int PWM_MAX = 255;                // analogWrite() expects 0..255 by default
+const bool MIRROR_DATA_TO_USB = false;  // if on, transmits data over Serial.println as well.
 
 void setup() {
   Serial.begin(115200);
   SerialBT.begin("ESP32-PotSensor");
   Serial.println("Bluetooth started! Pair with 'ESP32-PotSensor' to see live data.");
+  Serial.println("The built-in LED brightness tracks the pot position.\n");
 }
 
 void loop() {
-  int potVal = analogRead(POT_INPUT_PIN);
+  int potVal = analogRead(POT_INPUT_PIN);   // 0..4095 (12-bit ADC on ESP32)
 
-  // Send to USB Serial (for Serial Monitor / Serial Plotter)
-  Serial.println(potVal);
+  // Normalize to 0.0–1.0 before sending
+  float normalized = potVal / (float)ADC_MAX;
 
-  // Send to Bluetooth Serial (to your computer via Bluetooth)
-  SerialBT.println(potVal);
+  // Drive the built-in LED. analogWrite on the ESP32 wraps LEDC and expects 0..255.
+  int brightness = (int)(normalized * PWM_MAX);
+  analogWrite(LED_PIN, brightness);
 
-  delay(50); // ~20 readings per second
+  // Track Bluetooth connection state changes and report them over USB Serial.
+  static bool wasConnected = false;
+  bool isConnected = SerialBT.connected();
+  if (isConnected != wasConnected) {
+    Serial.println(isConnected ? "[BT] Client connected." : "[BT] Client disconnected.");
+    wasConnected = isConnected;
+  }
+
+  // Send the normalized value over Bluetooth — but only if a client is paired
+  if (isConnected) {
+    SerialBT.println(normalized, 4);
+  }
+
+  // Also send data via USB serial for debugging
+  if(MIRROR_DATA_TO_USB){
+    Serial.println(normalized, 4);
+  }
 }
 ```
 
@@ -169,115 +167,29 @@ Turn the potentiometer—you'll see the bar chart or circle updating in real tim
      Include captions/transcript
 -->
 
-## Part 2: p5.js over Bluetooth with serial.js
+## Part 2: Bluetooth with serial.js
 
-So far we've sent data in one direction—from ESP32 to computer—and visualized it in Python. Now let's bring it into the browser. Because your computer's Bluetooth serial port looks just like a USB serial port, the [Web Serial API](../communication/web-serial.md) works with it—and so does [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) from the Makeability Lab library. You can build the same [p5.js](https://p5js.org/) interactive sketches from the [Communication module](../communication/p5js-serial.md), but with data arriving wirelessly over Bluetooth.
+So far we've sent data in one direction—from ESP32 to computer—and visualized it in Python. Now let's bring it into the browser. Because your computer's Bluetooth serial port looks just like a USB serial port, the [Web Serial API](../communication/web-serial.md) works with it—and so does [serial.js](https://github.com/makeabilitylab/js/blob/main/src/lib/serial/serial.js) from the Makeability Lab library. 
 
-When you click "Connect" in a Web Serial dialog, Chrome shows *all* available serial ports—including the Bluetooth virtual COM port. Select the Bluetooth port instead of the USB port, and your existing serial.js code works unchanged. This is the entire point of SPP: the operating system abstracts away the wireless transport.
+In fact, we can use all of our previous p5.js Web Serial sketches from before, including:
+* [p5.js Circle Visualization with Web Serial](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d)
+* [p5.js Sensor Graph with Web Serial](https://editor.p5js.org/jonfroehlich/sketches/Szs_sh4qI)
 
-### The web page
-
-This p5.js sketch reads the potentiometer value over Bluetooth and draws a dynamic circle whose size and color respond to the sensor data. The code structure is identical to the [p5.js Serial lesson](../communication/p5js-serial.md)—only the port selection differs.
-
-Make sure the Part 1 sketch (`BluetoothPotentiometer`) is running on your ESP32.
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Bluetooth Potentiometer Visualizer</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.min.js"></script>
-</head>
-<body>
-  <script>
-    // Setup Web Serial using serial.js — same as the Communication module!
-    const serial = new Serial();
-    serial.on(SerialEvents.CONNECTION_OPENED, onSerialConnectionOpened);
-    serial.on(SerialEvents.CONNECTION_CLOSED, onSerialConnectionClosed);
-    serial.on(SerialEvents.DATA_RECEIVED, onSerialDataReceived);
-    serial.on(SerialEvents.ERROR_OCCURRED, onSerialErrorOccurred);
-
-    let sensorValue = 0;
-
-    function setup() {
-      createCanvas(600, 400);
-      textAlign(CENTER, CENTER);
-      textSize(14);
-    }
-
-    function draw() {
-      background(30);
-
-      if (!serial.isOpen()) {
-        fill(200);
-        text("Click anywhere to connect via Bluetooth Serial", width / 2, height / 2);
-        return;
-      }
-
-      // Map the 12-bit ADC value (0–4095) to circle size and color
-      let circleSize = map(sensorValue, 0, 4095, 20, 300);
-      let hue = map(sensorValue, 0, 4095, 0, 360);
-
-      colorMode(HSB, 360, 100, 100);
-      fill(hue, 80, 90);
-      noStroke();
-      circle(width / 2, height / 2, circleSize);
-
-      // Display the value
-      fill(255);
-      colorMode(RGB);
-      text(`Pot: ${sensorValue}`, width / 2, height - 30);
-    }
-
-    function mousePressed() {
-      if (!serial.isOpen()) {
-        serial.connectAndOpen();
-      }
-    }
-
-    function onSerialConnectionOpened(eventSender) {
-      console.log("Serial connection opened (Bluetooth)!");
-    }
-
-    function onSerialConnectionClosed(eventSender) {
-      console.log("Serial connection closed.");
-    }
-
-    function onSerialDataReceived(eventSender, newData) {
-      let trimmed = newData.trim();
-      if (trimmed.length > 0) {
-        let parsed = parseInt(trimmed);
-        if (!isNaN(parsed)) {
-          sensorValue = parsed;
-        }
-      }
-    }
-
-    function onSerialErrorOccurred(eventSender, error) {
-      console.error("Serial error:", error);
-    }
-  </script>
-</body>
-</html>
-```
-
-### Try it out
-
-1. Make sure the `BluetoothPotentiometer` sketch is running on your ESP32.
-2. Open this HTML file using a local server (VS Code Live Server or `python3 -m http.server`). Open it in **Chrome**.
-3. Click anywhere on the canvas. Chrome will show the serial port selection dialog.
-4. **Select the Bluetooth serial port** (not the USB port). On macOS, it will be named something like `tty.ESP32-PotSensor`. On Windows, it will be the Bluetooth COM port you noted earlier.
-5. Turn the potentiometer—the circle changes size and color in real time, with data arriving wirelessly! 🎉
-
-<!-- TODO: Add screenshot of Chrome's port selection dialog showing both USB and Bluetooth ports (include descriptive alt text) -->
-<!-- TODO: Add screenshot of the p5.js visualization responding to the potentiometer (include descriptive alt text) -->
+When you click "Connect" in a Web Serial dialog, Chrome shows *all* available serial ports—including the Bluetooth virtual COM port. Crucially, select **the Bluetooth port** instead of the USB port, and your existing serial.js code works unchanged. This is the entire point of SPP: the operating system abstracts away the wireless transport.
 
 {: .note }
 > **Compare this with the [p5.js Serial lesson](../communication/p5js-serial.md).** The code is *identical*—same `serial.js` import, same event callbacks, same `connectAndOpen()` call. The only difference is which port you select in the browser dialog. This is SPP's superpower: your existing Web Serial code works wirelessly without any modifications.
 
-### Workbench demo
+### Workbench demo of circle visualization
+
+<!-- TODO: Record and embed a workbench video showing:
+     1. Opening the p5.js sketch in Chrome
+     2. Selecting the Bluetooth serial port in the dialog
+     3. Turning the pot and watching the visualization respond wirelessly
+     Include captions/transcript
+-->
+
+### Workbench demo of graph visualization
 
 <!-- TODO: Record and embed a workbench video showing:
      1. Opening the p5.js sketch in Chrome

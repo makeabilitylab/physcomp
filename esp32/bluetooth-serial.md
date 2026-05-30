@@ -53,7 +53,7 @@ In this lesson, we'll do exactly that using **Bluetooth**. And here's the fun pa
 > - How to use the `BluetoothSerial` library and why its API intentionally mirrors Arduino's built-in `Serial`
 > - How to pair the ESP32 with your Mac or Windows computer and find the Bluetooth serial port
 > - How to verify the connection using built-in OS tools (`cat`, `screen`, PowerShell)—no Python required
-> - How to use Python and [pySerial](https://pyserial.readthedocs.io/) to communicate with the ESP32 over Bluetooth—using the same code patterns from the [serial introduction](../communication/serial-intro.md)
+> - How to use Python and [pySerial](https://pyserial.readthedocs.io/) to communicate with the ESP32 over Bluetooth—using the same code patterns from the [Intro to Serial Communication lesson](../communication/serial-intro.md)
 > - How to troubleshoot common Bluetooth Classic issues on macOS and Windows
 > - Why Bluetooth Classic does **not** work on the ESP32-S3 and does **not** work with iPhones
 
@@ -136,12 +136,12 @@ Two important notes before we get started building:
 
 ## Materials
 
-You'll need the following components. This lesson uses the **original ESP32** ([Adafruit Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591)), not the ESP32-S3.
+You'll need the following components. This lesson uses the **original ESP32** (in our case, the [Adafruit Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591)), not the ESP32-S3.
 
-| Breadboard | ESP32 |
-| ---------- |:-----:|
-| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit Huzzah32 ESP32 Feather board, top view](/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png) |
-| Breadboard | [Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591) |
+| ESP32 |
+| :-----:|
+| ![Adafruit Huzzah32 ESP32 Feather board, top view]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png) |
+| [Huzzah32 ESP32 Feather](https://www.adafruit.com/product/3591) |
 
 You will also need:
 - A **Mac or Windows computer** with Bluetooth (most modern laptops have Bluetooth built in)
@@ -155,7 +155,9 @@ You will also need:
 
 ## Part 1: Hello Bluetooth
 
-Let's cut the wire! In this first activity, we'll upload a Bluetooth serial sketch to the ESP32, pair it with your computer, and verify the connection using built-in OS tools—no Python, no dependencies, just your terminal. This way, if anything goes wrong, you'll know immediately whether it's a Bluetooth issue or a software issue.
+Let's cut the wire! ✂️🔌
+
+In this first activity, we'll upload a Bluetooth serial sketch to the ESP32, pair it with your computer, and verify the connection using built-in OS tools—no Python or external dependencies. We'll just use your OS's built-in terminal. This way, if anything goes wrong, you'll know immediately whether it's a Bluetooth issue or a software issue.
 
 ### The BluetoothSerial library
 
@@ -184,14 +186,9 @@ The key difference is in `.begin()`: while the traditional `Serial.begin()` take
 
 ### The Arduino code
 
-<!-- TODO: Push HelloBluetooth.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
-
-This sketch creates a bidirectional bridge between the USB serial connection (to your computer via USB) and a Bluetooth serial connection (to your computer via Bluetooth). Anything sent over Bluetooth arrives on USB serial and vice versa. It also sends a periodic message so you can immediately see that data is flowing. When data is sent or received over Bluetooth, the built-in red LED (pin 13) flashes briefly as a visual heartbeat.
+Let's start with the Arduino code. The following sketch creates a bidirectional bridge between the USB serial connection (to your computer via USB) and a Bluetooth serial connection (to your computer via Bluetooth). Anything sent over Bluetooth arrives on USB serial and vice versa. It also sends a periodic message so you can immediately see that data is flowing. When data is sent or received over Bluetooth, the built-in red LED (pin 13) flashes briefly as a visual heartbeat.
 
 The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetooth).
-
-{: .note }
-**What about the flickering orange LED?** On the Adafruit Huzzah32, you may notice an orange LED near the USB jack that flickers constantly. This is the CHG (charge) LED. It's hardwired to the LiPo battery charging circuit and is not controllable in code. It flickers when no battery is connected. You can safely ignore it.
 
 ```cpp
 #include "BluetoothSerial.h"
@@ -292,6 +289,9 @@ Upload this sketch to your ESP32 and open Serial Monitor at 115200 baud. You sho
 ```
 
 This confirms the sketch is running. Now let's pair and see those messages arrive wirelessly.
+
+{: .note }
+**What about the flickering orange LED?** On the Adafruit Huzzah32, you may notice an orange LED near the USB jack that flickers constantly. This is the CHG (charge) LED. It's hardwired to the LiPo battery charging circuit and is not controllable in code. It flickers when no battery is connected. You can safely ignore it.
 
 {: .note }
 **Have an ESP32 with a built-in NeoPixel?** If you're using the [Adafruit ESP32 Feather V2](https://www.adafruit.com/product/5400) (or have an external NeoPixel wired up), check out [HelloBluetoothRGB](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/HelloBluetoothRGB) — it flashes blue for Bluetooth send and green for Bluetooth receive, making it easy to distinguish data direction.
@@ -532,7 +532,7 @@ If you have an **Android** phone, you can also communicate with the ESP32 using 
 3. Open the Serial Bluetooth Terminal app → **Devices** → select `"ESP32-Bluetooth"` → **Connect**.
 4. You should see the periodic `[Bluetooth] Msg #N | Uptime: ...` greetings streaming in—just like in your terminal. Type a message and tap Send; it will be forwarded to the ESP32 and echoed back over USB Serial Monitor.
 
-<!-- TODO: Add a screenshot or photo of the Android app showing greetings from the ESP32 (include descriptive alt text) -->
+<!-- TODO: Add a screenshot or photo or video of the Android app showing greetings from the ESP32 (include descriptive alt text) -->
 
 {: .note }
 > **This is the same SPP magic, but from your phone.** The Android app speaks Bluetooth Classic SPP the same way `cat` and pySerial do—byte stream over a virtual serial channel. We'll do more interesting things with this in the [next lesson](bluetooth-web-serial.md) once we've added a potentiometer and an LED to the circuit.

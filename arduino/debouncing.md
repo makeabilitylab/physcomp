@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; Debouncing
+description: "Mechanical switches bounce. Learn why contact bounce happens and how to fix it on Arduino with software debouncing and hardware solutions like capacitors and Schmitt triggers."
+image: /arduino/assets/og/debouncing.jpg
 nav_order: 3
 parent: Input
 grand_parent: Intro to Arduino

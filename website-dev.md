@@ -59,6 +59,58 @@ Including other markdown pages: https://stackoverflow.com/a/41966993/388117.
 
 <!-- {percent sign include_relative tutorials/index.md percent sign} -->
 
+## SEO and social cards (per-page front matter)
+
+The site uses [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) (pulled in
+via the `github-pages` gem) to emit `<meta>` description, [Open Graph](https://ogp.me/),
+and Twitter-card tags. **Every lesson page should set two front-matter keys** so search
+results and link previews (Slack, iMessage, Discord, X, LinkedIn, Facebook) are
+page-specific instead of falling back to the generic site description and card.
+
+```yaml
+---
+layout: default
+title: L4&#58; Fading an LED
+description: "Smoothly fade an LED on and off with Arduino's analogWrite() and pulse-width modulation (PWM), controlling output voltage at fine gradations beyond just HIGH/LOW."
+image: /arduino/assets/movies/Arduino_LEDFade_Pin3.gif
+nav_order: 4
+parent: Output
+---
+```
+
+**`description:`** — a 1–2 sentence summary, ideally **≤ 160 characters** (search engines
+truncate the visible snippet around there). Write it for a human skimming search results:
+lead with the concrete thing they'll learn/build. Wrap it in double quotes so `:` and `()`
+don't break the YAML.
+
+**`image:`** — the social-card preview. Use a **root-absolute path** (leading `/`, no
+`{{ site.baseurl }}` — `jekyll-seo-tag` prepends `site.url` + `baseurl` automatically), or
+a full external URL. It **must be a static image** — social crawlers never render video as
+the card. Pick, in order of preference:
+
+1. The page's own hero image, if it's a `.png`/`.jpg` (or a `.gif` whose **first frame**
+   reads well — platforms show GIFs as a static first frame).
+2. For pages whose hero is an **MP4 `<video>`**: run `scripts/generate_og_posters.py`, which
+   uses `ffmpeg`'s `thumbnail` filter to extract a representative still into
+   `<module>/assets/og/<lesson>.jpg` and sets `image:` for you (dry run by default; pass
+   `--run`, or a list of `.md` files to limit scope). Requires `ffmpeg` on PATH.
+3. For pages whose hero is a **YouTube embed**: the thumbnail
+   `https://img.youtube.com/vi/<VIDEO_ID>/hqdefault.jpg` (`hqdefault` always exists;
+   `maxresdefault` does not).
+4. If there's no good static image (e.g. a section index page), **omit `image:`** — the
+   generic site card (`/assets/images/physcomp-og-card.jpg`, set in `_config.yml` `defaults`)
+   is used automatically.
+
+The ideal OG image is 1200×630 (1.91:1); existing figures rarely match this exactly, which is
+fine for now. A future improvement (once we're off the `github-pages` gem) is auto-generating
+branded 1200×630 cards with the page title overlaid.
+
+To verify after a build, grep the output, e.g.:
+
+```bash
+grep -oiE '<meta (name|property)="(og:image|og:description|description)" content="[^"]*"' _site/arduino/led-fade.html
+```
+
 ## Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
 

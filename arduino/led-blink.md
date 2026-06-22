@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Blinking an LED
+description: "Write your first Arduino sketch to blink an LED by programmatically toggling a GPIO pin HIGH and LOW with digitalWrite()—your entrée into combining circuits and code."
+image: /arduino/assets/movies/Arduino_LEDBlink_Pin3.gif
 nav_order: 2
 parent: Output
 grand_parent: Intro to Arduino

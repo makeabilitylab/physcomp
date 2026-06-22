@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L6&#58; Blinking Two LEDs
+description: "Understand current sourcing vs. current sinking by blinking two LEDs on a breadboard—one circuit where the Arduino pin sources current and one where it sinks it."
+image: /arduino/assets/movies/Arduino_Blink2Animation_Pins3And4-NoSchematic-Optimized.gif
 nav_order: 6
 parent: Output
 grand_parent: Intro to Arduino

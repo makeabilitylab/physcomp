@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; Force-Sensitive Resistors
+description: "Use force-sensitive resistors (FSRs) and other two-legged variable resistors with Arduino via a voltage divider, then build a force-controlled musical instrument with map() and tone()."
+image: /arduino/assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif
 nav_order: 5
 parent: Input
 grand_parent: Intro to Arduino

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L8&#58; Crossfading RGB LEDs
+description: "Smoothly crossfade an RGB LED through the color wheel using analogWrite() and the HSL color space, and learn how to load and use local C/C++ libraries."
+image: /arduino/assets/images/RGBVsHSLColorSpace_Wikipedia.png
 nav_order: 8
 parent: Output
 grand_parent: Intro to Arduino

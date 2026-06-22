@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Turning on an LED
+description: "Your first Arduino activity: wire an LED to the 5V and GND pins to light it up—no code required—and build familiarity with Arduino hardware and current flow."
+image: /arduino/assets/movies/Arduino_LEDOn_5VFixed_USBPower.gif
 nav_order: 1
 parent: Output
 grand_parent: Intro to Arduino

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; Playing Tones
+description: "Add sound to your Arduino projects: use a piezo buzzer and the tone() function to play notes, scales, and melodies, and learn how frequency differs from analogWrite's duty cycle."
+image: /arduino/assets/images/Arduino_ToneCircuit_Pin9_TinkercadDiagram.png
 nav_order: 5
 parent: Output
 grand_parent: Intro to Arduino

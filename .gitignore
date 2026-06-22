@@ -19,6 +19,10 @@ codekit-config.json
 # macOS
 .DS_Store
 
+# Generated at build time by the Actions deploy (Stamp build version step);
+# never commit it. version.json renders from it. See .github/workflows/jekyll.yml.
+_data/version.yml
+
 # Jekyll generated files
 .jekyll-cache
 .jekyll-metadata

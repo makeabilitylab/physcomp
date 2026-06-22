@@ -42,6 +42,13 @@ url: "https://makeabilitylab.github.io" # the base hostname & protocol for your 
 # For copy button on code
 enable_copy_code_button: true
 
+# Jekyll plugins. jekyll-sitemap generates /sitemap.xml (submittable to search
+# engines) to help indexing. It ships with the github-pages gem and is on the
+# GitHub Pages plugin whitelist, so it works under both the legacy build and the
+# GitHub Actions build (#98).
+plugins:
+  - jekyll-sitemap
+
 # custom site variables
 arduino_github_baseurl: "https://makeabilitylab.github.io/physcomp/"
 comments: false

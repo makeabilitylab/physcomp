@@ -204,7 +204,7 @@ $$
 S_{i} =
 \begin{cases}
     X_{1} & \text{if i = 1}\\
-    \alpha \cdot X_{i} + (1 - \alpha) \cdot S_{i-1} & \text{if i $>$ 1}
+    \alpha \cdot X_{i} + (1 - \alpha) \cdot S_{i-1} & \text{if i > 1}
 \end{cases}
 $$
 

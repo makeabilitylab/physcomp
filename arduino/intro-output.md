@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Output
+description: "Learn to control Arduino's GPIO pins to drive LEDs, fade them with PWM (analogWrite), play tones on a piezo buzzer, debug with Serial, and write your first C++ class."
 parent: Intro to Arduino
 nav_order: 1
 has_toc: false # on by default

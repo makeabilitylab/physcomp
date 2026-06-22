@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Input
+description: "Read digital and analog input on Arduino using buttons, potentiometers, and force-sensitive resistors, while learning pull-up resistors, debouncing, and voltage dividers."
 parent: Intro to Arduino
 nav_order: 2
 has_toc: false # on by default

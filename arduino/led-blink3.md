@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L9&#58; Rate Blinking LEDs
+description: "Blink multiple LEDs at different rates without delay() and write your first C++ class to eliminate redundant code and shrink your Arduino sketch."
+image: /arduino/assets/movies/ArduinoUno_BlinkMultiple_Workbench.gif
 nav_order: 9
 parent: Output
 grand_parent: Intro to Arduino

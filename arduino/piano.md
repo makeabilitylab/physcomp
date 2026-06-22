@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; A simple piano
+description: "Combine buttons and a piezo buzzer to build a fun five-key Arduino piano, wiring tactile buttons with internal pull-up resistors and mapping presses to musical notes."
+image: /arduino/assets/images/ArduinoUno_SimplePiano_WorkbenchPhoto1.png
 parent: Input
 grand_parent: Intro to Arduino
 nav_order: 2

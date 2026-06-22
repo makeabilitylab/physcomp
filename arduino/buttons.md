@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Using buttons
+description: "Build your first interactive Arduino circuit: read a push button with digitalRead() and learn why pull-up and pull-down resistors solve the floating-pin problem."
+image: /arduino/assets/movies/Arduino_Button_InternalLED_Animation_Edited.gif
 nav_order: 1
 parent: Input
 grand_parent: Intro to Arduino

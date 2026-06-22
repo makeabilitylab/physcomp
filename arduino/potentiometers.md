@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Potentiometers
+description: "Discover analog input on Arduino: wire a potentiometer as a voltage divider, read it with analogRead(), and learn how potentiometers and multimeters work."
+image: https://img.youtube.com/vi/MJt9kSNlsU4/hqdefault.jpg
 nav_order: 4
 parent: Input
 grand_parent: Intro to Arduino

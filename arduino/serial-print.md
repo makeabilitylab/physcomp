@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; Debugging with Serial
+description: "Learn essential Arduino debugging with Serial.print() and the Serial Monitor: stream variable values over USB to diagnose problems in your code and circuits."
+image: /arduino/assets/og/serial-print.jpg
 nav_order: 3
 parent: Output
 grand_parent: Intro to Arduino

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L7&#58; RGB LEDs
+description: "Drive an RGB LED through a sequence of colors with Arduino and learn the difference between common anode and common cathode RGB LED wiring."
+image: /arduino/assets/movies/Arduino_RGBLED_CommonCathode-Optimized.gif
 nav_order: 7
 parent: Output
 grand_parent: Intro to Arduino

@@ -196,6 +196,9 @@ With your IDE set up, you're ready to start building ESP32 projects!
 
 Head back to [Lesson 1: Introduction to the ESP32](esp32.md) to learn about the hardware, or jump straight to [Lesson 2: Blinking an LED](led-blink.md) if you're ready to write code.
 
-<span class="fs-6">
-[Back to: Introduction to the ESP32](esp32.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="esp32.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Introduction to the ESP32</div>
+  </a>
+</nav>

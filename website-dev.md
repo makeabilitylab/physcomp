@@ -24,6 +24,25 @@ Assuming you have the prerequisite libraries and software infrastructure (e.g., 
 > bundle exec jekyll serve 
 ```
 
+## Deployment (GitHub Actions)
+
+The live site at <https://makeabilitylab.github.io/physcomp/> is built and
+published by the GitHub Actions workflow in
+[`.github/workflows/jekyll.yml`](.github/workflows/jekyll.yml). On every push to
+`main` (and on manual runs from the **Actions** tab), the workflow runs
+`bundle exec jekyll build` on a clean Ubuntu runner and deploys the resulting
+`_site/` to GitHub Pages with `actions/deploy-pages`.
+
+This replaced the older "Deploy from a branch" GitHub Pages build, which only
+ran whitelisted plugins and no custom build steps. Building in Actions lets us
+run custom Jekyll plugins, inline source code at build time, and add content
+lint/test gates. See [issue #98](https://github.com/makeabilitylab/physcomp/issues/98).
+
+For the Actions deploy to publish, the repo's **Settings → Pages → Build and
+deployment → Source** must be set to **GitHub Actions** (not "Deploy from a
+branch"). The workflow still installs the same `github-pages` gem from the
+`Gemfile`, so the built output matches the previous branch-based build.
+
 ## VS Code
 I've been using [VS Code](https://code.visualstudio.com/) with some popular markdown extensions to develop the website. 
 

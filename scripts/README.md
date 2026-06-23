@@ -22,12 +22,26 @@ Python utilities that bulk-edit or generate content across the textbook. They ar
 
 | Script | Purpose | Apply flag |
 |---|---|---|
+| [`check_seo_frontmatter.py`](check_seo_frontmatter.py) | **CI gate** — fail if any published page is missing `description:` front matter (reminds about MP4-hero pages lacking a poster). Read-only. | _(none)_ |
 | [`generate_og_posters.py`](generate_og_posters.py) | Generate static OG/social-card poster images from a page's hero `<video>` (MP4) via ffmpeg, and set `image:` front matter. | `--run` |
 | [`fix_embedded_media.py`](fix_embedded_media.py) | Normalize `<video>` inline styles and wrap bare YouTube iframes responsively. | `--run` |
 | [`update_lesson_nav.py`](update_lesson_nav.py) | Migrate old `.btn` lesson nav to card-style `<nav class="lesson-nav">` (rewrites `.md`→`.html`). | `--run` |
 | [`fix_arduino_urls.py`](fix_arduino_urls.py) | Migrate old `arduino.cc` URLs to `docs.arduino.cc`. **Untested/brittle — use with care.** | `--apply` |
 
 ## Details
+
+### `check_seo_frontmatter.py`
+
+Enforces the per-page SEO convention: every published page must set `description:`.
+Run by the **Content lint** GitHub Actions workflow (`.github/workflows/content-lint.yml`)
+on every pull request — it exits non-zero (failing the PR check, but never the deploy) if
+any page is missing it. Pages marked `nav_exclude: true`/`search_exclude: true`, plus the
+contributor docs and deprecated pages, are exempt. `image:` is advisory: the script only
+prints a reminder when an MP4-hero page has no poster yet. Read-only; takes no flags.
+
+```bash
+python scripts/check_seo_frontmatter.py    # exit 0 = all good, 1 = a page is missing description:
+```
 
 ### `generate_og_posters.py`
 

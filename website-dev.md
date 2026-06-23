@@ -111,6 +111,34 @@ To verify after a build, grep the output, e.g.:
 grep -oiE '<meta (name|property)="(og:image|og:description|description)" content="[^"]*"' _site/arduino/led-fade.html
 ```
 
+### New pages and enforcement
+
+This is **required**, not optional. A CI check (`scripts/check_seo_frontmatter.py`, run by
+the **Content lint** workflow on every pull request) fails the PR if any published page is
+missing `description:`. So when you author a new lesson, start from this minimal front matter:
+
+```yaml
+---
+layout: default
+title: "Your Lesson Title"
+description: "One or two sentences (≤160 chars) on what the reader learns or builds."
+# image:  ← add per the rules above; for an MP4 hero, run the poster script (below) instead
+parent: Your Section
+nav_order: 1
+---
+```
+
+If a page isn't ready to publish, mark it `nav_exclude: true` (or `search_exclude: true`) and
+the check skips it until you publish it. The `image:` key is advisory — the check only *reminds*
+you when an MP4-hero page has no poster yet.
+
+For a new page whose hero is an **MP4 `<video>`**, generate its social poster (and have `image:`
+set for you) with:
+
+```bash
+python scripts/generate_og_posters.py --run <module>/<your-page>.md
+```
+
 ## Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
 

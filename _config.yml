@@ -8,7 +8,10 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 # remote_theme: pmarsceill/just-the-docs
-remote_theme: just-the-docs/just-the-docs@v0.12.0
+# Use the locally-installed just-the-docs gem (0.12.0, see Gemfile) instead of
+# remote_theme: same theme version, but no network fetch / theme resolution at
+# build time. Part of the Jekyll 4 build-speed work (issue #81).
+theme: just-the-docs
 
 # Fixed at 0.2.8 because of: https://github.com/makeabilitylab/physcomp/issues/9
 # remote_theme: pmarsceill/just-the-docs@v0.2.8
@@ -24,13 +27,16 @@ tagline: Learn Arduino, ESP32, sensors, and more with this open-source interacti
 # See: https://jekyllrb.com/docs/configuration/incremental-regeneration/
 incremental: true
 
-# Google Gemini suggested I try this to reduce build time, which is often 20 secs
-# or longer on my desktop (AMD Ryzen 7 3800X 8-Core Processor 3.90 GHz with 32 GB RAM)
-cache: true 
-
-# Gemini also suggested I disable search for local builds
-# Note: Search is enabled by default (and this follows just-the-docs defaults)
+# Search is enabled by default (follows just-the-docs defaults).
 search_enabled: true
+
+# Sass (jekyll-sass-converter 3.x / dart-sass under Jekyll 4):
+#   quiet_deps: silence the @import / darken() deprecation warnings emitted by
+#               the just-the-docs theme's own SCSS (not our code).
+#   sourcemap:  don't emit .css.map files into _site.
+sass:
+  quiet_deps: true
+  sourcemap: never
 
 # site.url: https://jonfroehlich.github.io/physcomp
 # Make absolute paths work with GitHub pages
@@ -42,12 +48,18 @@ url: "https://makeabilitylab.github.io" # the base hostname & protocol for your 
 # For copy button on code
 enable_copy_code_button: true
 
-# Jekyll plugins. jekyll-sitemap generates /sitemap.xml (submittable to search
-# engines) to help indexing. It ships with the github-pages gem and is on the
-# GitHub Pages plugin whitelist, so it works under both the legacy build and the
-# GitHub Actions build (#98).
+# Jekyll plugins. These were previously auto-enabled by the github-pages gem;
+# after moving to Jekyll 4 (issue #81) they are declared explicitly here and in
+# the Gemfile's :jekyll_plugins group.
+#   jekyll-sitemap         -> /sitemap.xml (submittable to search engines)
+#   jekyll-relative-links  -> rewrites internal .md links to .html
+#   jekyll-include-cache   -> just-the-docs uses {% include_cached %}
+#   jekyll-seo-tag         -> just-the-docs head dependency
 plugins:
   - jekyll-sitemap
+  - jekyll-relative-links
+  - jekyll-include-cache
+  - jekyll-seo-tag
 
 # custom site variables
 arduino_github_baseurl: "https://makeabilitylab.github.io/physcomp/"

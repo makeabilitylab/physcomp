@@ -40,9 +40,8 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          # Matches .ruby-version. bundler-cache installs the Gemfile (still
-          # the github-pages gem, so the build is byte-for-byte the current
-          # one) and caches gems between runs.
+          # Matches .ruby-version. bundler-cache installs the Gemfile (Jekyll 4
+          # toolchain since issue #81) and caches gems between runs.
           ruby-version: "3.3.11"
           bundler-cache: true
           cache-version: 0

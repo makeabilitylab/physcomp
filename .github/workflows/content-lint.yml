@@ -78,9 +78,12 @@ jobs:
         #   * /arduino/accel.html     -> WIP draft, missing screenshot      (issue #115)
         #   * /esp32/capacitive-touch.html -> WIP lesson, missing diagrams  (issue #114)
         # Remove an entry once its issue is resolved so the gate covers that page.
+        # Each --ignore-files pattern must be wrapped in /slashes/ to be treated
+        # as a regex (a bare string is an exact-path match); internal slashes are
+        # escaped as \/.
         run: |
           htmlproofer ./_site \
             --disable-external \
             --swap-urls "^/physcomp:" \
             --no-enforce-https \
-            --ignore-files "/signals/.+/index\.html$,/arduino/accel\.html$,/esp32/capacitive-touch\.html$"
+            --ignore-files "/\/signals\/[^\/]+\/index\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"

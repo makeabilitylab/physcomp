@@ -139,6 +139,49 @@ set for you) with:
 python scripts/generate_og_posters.py --run <module>/<your-page>.md
 ```
 
+## Accessibility and content QA
+
+Two CI checks in the **Content lint** workflow guard accessibility and link health.
+They are complementary — neither subsumes the other:
+
+| Check (job) | Tool | Runs against | Catches |
+|---|---|---|---|
+| `media-a11y` | `scripts/check_a11y.py` | Markdown **source** | YouTube `<iframe>` without `title=`, `<video>` without `aria-label`, image with empty/missing alt |
+| `link-check` | [`html-proofer`](https://github.com/gjtorikian/html-proofer) | built **`_site/`** | broken internal links, broken `#anchors`, missing `alt` attribute, malformed HTML |
+
+We use the off-the-shelf `html-proofer` for the commodity problem (links/HTML);
+`check_a11y.py` only covers the source conventions html-proofer can't see (it permits
+empty `alt=""` as "decorative" and has no notion of iframe titles or video labels).
+
+**Authoring rules** (all enforced):
+
+- **YouTube embeds** — give the `<iframe>` a `title=` describing the video, e.g.
+  `<iframe title="An RGB LED fading between colors" src="https://www.youtube.com/embed/…" …>`.
+- **`<video>` heroes/demos** — add an `aria-label=` describing the clip.
+- **Images** — informative images need descriptive alt: `![what it shows](path.png)`.
+  Don't start with "Image of"; don't dump the filename. A genuinely *decorative* image
+  may use empty `alt=""`, but `check_a11y` flags `![](…)` in source, so make alt explicit.
+- **Drafts / WIP** — a page that intentionally references not-yet-created assets should be
+  `nav_exclude: true` (the `media-a11y` check skips drafts). If a published page must keep a
+  not-yet-added asset, add its built path to the `--ignore-files` list in
+  `content-lint.yml` **with a tracking issue** (don't ignore silently).
+
+**Running html-proofer locally.** It needs `libcurl` (via `typhoeus`/`ethon`), which isn't
+present on stock Windows — so it runs in CI (Ubuntu) but may fail to even load on native
+Win11 (`Could not open library 'libcurl'`). Options: rely on CI; run it under **WSL2 or
+macOS** (libcurl present, matches CI); or on native Win11 install it once with
+`ridk exec pacman -S mingw-w64-ucrt-x86_64-curl`. To run it (after a build):
+
+```bash
+bundle exec jekyll build --baseurl "/physcomp"
+gem install html-proofer -v 5.0.9
+htmlproofer ./_site --disable-external --swap-urls "^/physcomp:" \
+  --ignore-files "/\/signals\/[^\/]+\/index\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"
+```
+
+`check_a11y.py` is pure Python (no libcurl) and runs anywhere:
+`python scripts/check_a11y.py` (add `--summary` for counts, `--ci` to fail on any issue).
+
 ## Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
 

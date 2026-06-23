@@ -56,7 +56,7 @@ It's OK if you don't understand all of the terminology used below. In fact, if t
 
 ### Built-in Input
 
-<video autoplay loop muted playsinline>
+<video aria-label="Using the CPX's on-board accelerometer as a motion mouse to paint on a computer screen" autoplay loop muted playsinline>
   <source src="assets/videos/CPX_PaintingWithCPXAccelerometerAsAMouse.mp4" type="video/mp4" />
 </video>
 
@@ -126,7 +126,7 @@ Each pad can provide up to ~20mA of current so **do not connect a motor** or oth
 For more information, see [Adafruit's CPX Pinouts Guide](https://learn.adafruit.com/adafruit-circuit-playground-express/pinouts#each-pin-2906289).
 
 ### Analog Input
-<video autoplay loop muted playsinline>
+<video aria-label="Reading a potentiometer as analog input on the CPX, changing values as the knob is turned" autoplay loop muted playsinline>
   <source src="assets/videos/CPX_AnalogInput_PotentiometerOverview_Optimized.mp4" type="video/mp4" />
 </video>
 
@@ -143,7 +143,7 @@ You'll learn more about analog input in [L8: Analog Input](analog-input.md)!
 
 ### Capacitive Touch Sensor Pads
 
-<video autoplay loop muted playsinline>
+<video aria-label="Using the CPX with a soda can and capacitive touch sensing to build a hand proximity detector" autoplay loop muted playsinline>
   <source src="assets/videos/CPX_CapacitiveSensing_SodaCanProximityDetector_MakeCode_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** Pins A1-A7 on the CPX can be used for capacitive touch sensing. Here, I'm showing how we can use a soda can to build a simple hand proximity detector. [Learn more here!](capacitive-touch.md)
@@ -172,7 +172,7 @@ The CPX also has a powerful embedded microcontroller—the ATSAMD21 ARM Cortex M
 
 ## Using the CPX as Computer Input
 
-<video playsinline controls>
+<video aria-label="Playing a banana piano made with the CPX acting as a capacitive-touch keyboard input to a computer" playsinline controls>
   <source src="assets/videos/CPX_BananaPiano_OptimizedTrimmed.mp4" type="video/mp4" />
 </video>
 **Video.** The CPX can be used as an input controller to your computer. You can make your own keyboard, mouse, joystick, and more! This example is from [Lesson 5.3: Making a Capacitive Keyboard](capacitive-touch.md#lesson-53-making-a-capacitive-touch-keyboard).
@@ -207,7 +207,7 @@ This is the old Adafruit video we used to have here
     Your browser does not support the video tag.
 </video> -->
 
-<video autoplay loop muted playsinline>
+<video aria-label="Rapidly building the Blinky program in MakeCode that flashes all the CPX NeoPixels red on and off" autoplay loop muted playsinline>
   <source src="assets/videos/Making_Blinky_MakeCode_Annotated.mp4" type="video/mp4" />
 </video>
 **Video.** Rapidly creating a full program with MakeCode called "Blinky." We will turn on all the NeoPixels (by setting them red) then pause then turn them off (by setting them black) and repeat "forever." [Code link](https://makecode.com/_JdPfj8VrmWV3).

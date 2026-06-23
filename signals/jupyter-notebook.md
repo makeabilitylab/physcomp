@@ -69,7 +69,7 @@ To install the `nbextensions`, open your terminal (on linux or Mac) or the Anaco
 
 Restart Jupyter Notebook and you should see a tab called `Nbextensions` on the home screen. Click on that tab and then you should see all nbextensions. Click on `Table of Contents (2)` to configure and Enable it. See screenshots below.
 
-![](assets/images/JupyterNotebook_TOC2_ConfigurableNbextensions_TOC2.png)
+![Jupyter Notebook Nbextensions configuration tab with the Table of Contents (2) extension enabled](assets/images/JupyterNotebook_TOC2_ConfigurableNbextensions_TOC2.png)
 
 #### Step 3: Try out TOC
 

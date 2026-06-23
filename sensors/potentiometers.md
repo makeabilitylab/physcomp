@@ -14,7 +14,7 @@ Please see our [Potentiometers lesson](../arduino/potentiometers.md) as part of 
 Are Potentiometers even sensors? Well, they are a type of variable resistor and often used to sense human input, so I would say yes! :)
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/5qxQheanSkQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Demonstration of a trimpot on Arduino analog input A0 with its changing value graphed in real time on an OLED display" src="https://www.youtube.com/embed/5qxQheanSkQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 A [video](https://youtu.be/5qxQheanSkQ) demonstration of a [trimpot](https://www.adafruit.com/product/356) hooked up to analog input A0 on the Arduino and its value graphed on an OLED display in real-time. The code is available [here](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino).

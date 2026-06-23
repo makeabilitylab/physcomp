@@ -308,7 +308,7 @@ The wiring for addressable LEDs is simple—just three connections:
 
 ### Preparing the LED stick
 
-![](assets/images/RGBLEDStick_8LEDs_SolderPadsAndLEDS.png)
+![Back and front views of an 8-LED WS2812B stick, showing the solder pads and the row of addressable RGB LEDs](assets/images/RGBLEDStick_8LEDs_SolderPadsAndLEDS.png)
 **Figure.** The back and front sides of an 8-LED WS2812B stick. We will need to solder either jumper wires or header pins to the pads.
 {: .fs-1 }
 
@@ -413,7 +413,7 @@ void loop() {
 
 If your colors look wrong (*e.g.,* you asked for red but got green), try changing `NEO_GRB` to `NEO_RGB` in the strip constructor. This is the most common issue students encounter!
 
-![](assets/images/AddressableLEDs_RainbowStatic8.png)
+![An 8-LED addressable RGB stick lit up in a static rainbow gradient from red through green to blue](assets/images/AddressableLEDs_RainbowStatic8.png)
 **Figure.** An image of the RGB LED stick running the above code. You can also view and play with this on [Tinkercad](https://www.tinkercad.com/things/lSqArYGju94-neopixel-strip-8-static-rainbow). See our [RainbowStatic8.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic8/RainbowStatic8.ino) and [RainbowStatic.ino](https://github.com/makeabilitylab/arduino/blob/master/AddressableLEDs/NeoPixel/RainbowStatic/RainbowStatic.ino) sketches in GitHub.
 {: .fs-1 }
 

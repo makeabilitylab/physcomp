@@ -645,14 +645,14 @@ In this lesson, you added sound to your ESP32 repertoire! Here's what you learne
 
 ## Next Lesson
 
-In the [next lesson](capacitive-touch-sensing.md), we'll learn about the ESP32's built-in capacitive touch sensing hardware—no external components needed! You'll use touch inputs to trigger tones and build a simple touch piano.
+In the [next lesson](capacitive-touch.md), we'll learn about the ESP32's built-in capacitive touch sensing hardware—no external components needed! You'll use touch inputs to trigger tones and build a simple touch piano.
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="analog-input.html" class="nav-prev">
     <div class="nav-label">&larr; Previous Lesson</div>
     <div class="nav-title">Analog input</div>
   </a>
-  <a href="capacitive-touch-sensing.html" class="nav-next">
+  <a href="capacitive-touch.html" class="nav-next">
     <div class="nav-label">Next Lesson &rarr;</div>
     <div class="nav-title">Capacitive touch sensing</div>
   </a>

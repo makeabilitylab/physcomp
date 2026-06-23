@@ -28,7 +28,7 @@ Assuming you have the prerequisite libraries and software infrastructure (e.g., 
 
 The live site at <https://makeabilitylab.github.io/physcomp/> is built and
 published by the GitHub Actions workflow in
-[`.github/workflows/jekyll.yml`](.github/workflows/jekyll.yml). On every push to
+[`.github/workflows/jekyll.yml`](https://github.com/makeabilitylab/physcomp/blob/main/.github/workflows/jekyll.yml). On every push to
 `main` (and on manual runs from the **Actions** tab), the workflow runs
 `bundle exec jekyll build` on a clean Ubuntu runner and deploys the resulting
 `_site/` to GitHub Pages with `actions/deploy-pages`.

@@ -104,7 +104,7 @@ Use the ESP32's 12-bit ADC to read a potentiometer and control an LED's brightne
 
 Learn how to play tones and melodies on the ESP32 using the `tone()` function (now supported in ESP32 Arduino core v3.x!) and the LEDC PWM library.
 
-### [Lesson 6: Capacitive Touch Sensing](capacitive-touch-sensing.md)
+### [Lesson 6: Capacitive Touch Sensing](capacitive-touch.md)
 
 The ESP32 has built-in capacitive touch sensing hardware—no external components needed! In this lesson, you'll use a bare wire (or aluminum foil) as a touch sensor to control an LED.
 

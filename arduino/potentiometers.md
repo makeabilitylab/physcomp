@@ -219,7 +219,7 @@ Analog input!
 More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, **analog input** enables us to **read voltages between 0V and 5V**. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
 <video autoplay loop muted playsinline aria-label="Animation comparing digital input which is either HIGH or LOW versus analog input which can be any voltage in between">
-  <source src="../electronics/assets/videos/AnalogVsDigital.mp4" type="video/mp4" />
+  <source src="assets/movies/AnalogVsDigital.mp4" type="video/mp4" />
 </video>
 **Video.** While digital input is simply HIGH (5V) or LOW (0V), analog can be anywhere in between. Our ability to sense gradations in the voltage signal is based on the resolution of the analog-to-digital converter. In the case of the Arduino Uno and Leonardo, this is 10 bits.
 {: .fs-1 }

@@ -27,7 +27,7 @@ Python utilities that bulk-edit or generate content across the textbook. They ar
 | [`fix_embedded_media.py`](fix_embedded_media.py) | Normalize `<video>` inline styles and wrap bare YouTube iframes responsively. | `--run` |
 | [`update_lesson_nav.py`](update_lesson_nav.py) | Migrate old `.btn` lesson nav to card-style `<nav class="lesson-nav">` (rewrites `.md`→`.html`). | `--run` |
 | [`fix_arduino_urls.py`](fix_arduino_urls.py) | Migrate old `arduino.cc` URLs to `docs.arduino.cc`. **Untested/brittle — use with care.** | `--apply` |
-| [`check_a11y.py`](check_a11y.py) | **Deprecated** local-only a11y spot-check (iframe `title`, video `aria-label`, image alt). **Not a CI gate** — superseded by html-proofer. Read-only. | _(none)_ |
+| [`check_a11y.py`](check_a11y.py) | **CI gate** — fail if a published page has a YouTube `<iframe>` w/o `title=`, a `<video>` w/o `aria-label`, or an image with empty/missing alt. Complements html-proofer (which can't see these). Read-only. | _(none)_ |
 
 ## Details
 
@@ -89,23 +89,26 @@ python scripts/update_lesson_nav.py           # dry run
 python scripts/update_lesson_nav.py --run      # apply
 ```
 
-### `check_a11y.py` (deprecated)
+### `check_a11y.py`
 
-A fast, dependency-free local spot-check for three source-level a11y patterns:
-YouTube `<iframe>`s missing `title=`, `<video>`s missing `aria-label`, and images
-with empty alt (`![](...)`). Same published-page scope and draft/contributor
-exemptions as `check_seo_frontmatter.py`.
+Enforces three source-level accessibility conventions on published pages: YouTube
+`<iframe>`s must have a `title=`, `<video>`s must have an `aria-label`, and images
+must have non-empty alt text (`![](...)` is flagged). Same published-page scope and
+draft/contributor exemptions as `check_seo_frontmatter.py`; prints ASCII only.
 
-> **Not a CI gate.** Content QA is moving to the off-the-shelf, Jekyll-native
-> [`html-proofer`](https://github.com/gjtorikian/html-proofer) gem (checks missing
-> image alt, broken links, and malformed HTML against the built `_site/`, with no
-> new toolchain). Do **not** wire this script into `content-lint.yml`; once
-> html-proofer is in place it can be deleted (see issue #110).
+Run by the **Content lint** workflow (`media-a11y` job) via `--ci`. It is the a11y
+analogue of the SEO gate — a small policy check for conventions with **no
+off-the-shelf equivalent**, and deliberately **complementary** to html-proofer
+(the `link-check` job): html-proofer validates the *built* site (broken
+links/anchors, missing-alt, HTML) but permits empty `alt=""` and has no concept of
+iframe titles or video aria-labels, so it cannot enforce these three. Scanning the
+markdown *source* (not rendered HTML) also avoids false positives on the theme's
+decorative images.
 
 ```bash
 python scripts/check_a11y.py            # full report, grouped by module
 python scripts/check_a11y.py --summary  # per-module counts only
-python scripts/check_a11y.py --ci       # exit 1 if any issue (local spot-check)
+python scripts/check_a11y.py --ci       # exit 1 if any issue (CI gate)
 ```
 
 ### `fix_arduino_urls.py`

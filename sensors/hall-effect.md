@@ -190,7 +190,7 @@ My vocal narration is quite soft as I recorded the video early in the morning an
 ### Improving the circuit
 
 What if we wanted to supply more than 1mA through our LED? We have have two choices: 
-1. Just like with our [photoresistor](photoresistors.md#An-improved-auto-on-nightlight-circuit) circuit, we could change our circuit to use a **transistor**. In this case, the Hall effect sensor output would be connected to a transistor, which would control the current through our LED. If you have a transistor, feel free to try this!
+1. Just like with our [photoresistor](photoresistors.md#an-improved-auto-on-nightlight-circuit) circuit, we could change our circuit to use a **transistor**. In this case, the Hall effect sensor output would be connected to a transistor, which would control the current through our LED. If you have a transistor, feel free to try this!
 2. We could move on to using a microcontroller, which is what we're going to do!
 
 ## Make an Arduino-based magical magnetic LED brightener

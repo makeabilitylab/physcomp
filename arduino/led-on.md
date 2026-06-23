@@ -20,7 +20,7 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
-For our first learning activity, we are going to use Arduino to turn on an [LED]({{ site.baseurl }}/pages/electronics/leds.md). We're **not** going to write any code. Instead, our goal is to build some initial familiarity with Arduino hardware and connecting components to Arduino pins before we introduce programming, which we do in the [next lesson](led-blink.md).
+For our first learning activity, we are going to use Arduino to turn on an [LED](../electronics/leds.md). We're **not** going to write any code. Instead, our goal is to build some initial familiarity with Arduino hardware and connecting components to Arduino pins before we introduce programming, which we do in the [next lesson](led-blink.md).
 
 ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower.gif)
 **Figure.** The movement of **current** in the circuit is illustrated by the animated yellow circles. This visualization is a coarse abstraction designed to emphasize the direction of current flow. A more accurate visualization would show that electrons are already distributed throughout a wire before a voltage is applied. See our [Introduction to Electronics](../electronics/index.md) series, specifically the lesson on [Voltage, Current, and Resistance](../electronics/electricity-basics.md).

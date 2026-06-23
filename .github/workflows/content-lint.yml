@@ -27,3 +27,64 @@ jobs:
 
       - name: Check per-page SEO front matter (description:)
         run: python scripts/check_seo_frontmatter.py
+
+  media-a11y:
+    # Source-level a11y conventions that html-proofer does NOT cover: YouTube
+    # iframe title=, <video> aria-label, and lazy empty alt (alt=""). See
+    # scripts/check_a11y.py. Complements the link-check job below.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check media a11y (iframe title, video aria-label, image alt)
+        run: python scripts/check_a11y.py --ci
+
+  link-check:
+    # Validate the BUILT site with html-proofer: broken internal links, broken
+    # anchors, missing image alt, and malformed HTML. External links are NOT
+    # checked here (slow/flaky); a separate non-blocking job can cover those.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.11"
+          bundler-cache: true
+          cache-version: 0
+
+      - name: Build site (production baseurl)
+        run: bundle exec jekyll build --baseurl "/physcomp"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Install html-proofer
+        run: gem install html-proofer -v 5.0.9
+
+      - name: Proof built site (internal links, anchors, image alt, HTML)
+        # --swap-urls strips the /physcomp baseurl so absolute internal links
+        # resolve against _site/. External link checking is disabled (slow/flaky).
+        #
+        # --ignore-files: each entry is tracked debt, not a silent skip:
+        #   * signals .+/index.html + IntroTo*.html -> stale generated nbconvert
+        #                                              notebooks               (issue #115)
+        #   * /arduino/accel.html          -> WIP draft, missing screenshot    (issue #115)
+        #   * /esp32/capacitive-touch.html -> WIP lesson, missing diagrams      (issue #114)
+        # Remove an entry once its issue is resolved so the gate covers that page.
+        # Each --ignore-files pattern must be wrapped in /slashes/ to be treated
+        # as a regex (a bare string is an exact-path match); internal slashes are
+        # escaped as \/.
+        run: |
+          htmlproofer ./_site \
+            --disable-external \
+            --swap-urls "^/physcomp:" \
+            --no-enforce-https \
+            --ignore-files "/\/signals\/.+\/index\.html/,/\/signals\/IntroTo[A-Za-z]+\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"

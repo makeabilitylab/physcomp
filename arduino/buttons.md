@@ -181,7 +181,7 @@ However, if you do this, what will the digital input pin read when the switch is
 **Figure.** Animation of what happens when you press a button with the simple circuit configuration.
 {: .fs-1 }
 
-In fact, try wiring up this configuration yourself and running the following program with the [Serial Monitor](../electronics/serial-print#step-3-open-serial-monitor-in-the-arduino-ide) open. What happens when you press the button? Try touching the button legs with your fingers but not actually pressing the button—what happens to the `digitalRead` value? Are you reliably tracking the button state?
+In fact, try wiring up this configuration yourself and running the following program with the [Serial Monitor](serial-print.md#step-3-open-serial-monitor-in-the-arduino-ide) open. What happens when you press the button? Try touching the button legs with your fingers but not actually pressing the button—what happens to the `digitalRead` value? Are you reliably tracking the button state?
 
 {% highlight cpp %}
 const int INPUT_BUTTON_PIN = 2;

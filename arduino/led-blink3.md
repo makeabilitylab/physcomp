@@ -126,7 +126,7 @@ On the Arduino, the `unsigned long` data type is 32 bits (4 bytes), which ranges
 
 #### Blinking without delays logic
 
-We then use the same general logic as the "blinking without delays" [covered previously](led-blink#blink-without-using-delays) for each LED:
+We then use the same general logic as the "blinking without delays" [covered previously](led-blink.md#blink-without-using-delay) for each LED:
 
 {% highlight C %}
 unsigned long currentTimestampMs = millis();

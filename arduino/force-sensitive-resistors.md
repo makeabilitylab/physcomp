@@ -104,7 +104,7 @@ For more details, see the Interlink [FSR 402 datasheet]({{ site.baseurl }}/asset
 
 Let's make something!
 
-To begin, just like we did with the [buttons](buttons.md) and [potentiometers](potentiometers.md) lessons, we'll make a simple LED circuit without a microcontroller. In fact, this circuit will be the exact same as the "rheostat" potentiometer circuit [here](potentiometers.md#build-the-potentiometer-based-led-dimmer) (but we'll replace the rheostat with an FSR).
+To begin, just like we did with the [buttons](buttons.md) and [potentiometers](potentiometers.md) lessons, we'll make a simple LED circuit without a microcontroller. In fact, this circuit will be the exact same as the "rheostat" potentiometer circuit [here](potentiometers.md#step-1-build-the-potentiometer-based-led-dimmer) (but we'll replace the rheostat with an FSR).
 
 Below, we show two possible wiring diagrams: the first (preferred) shows the FSR circuit powered by a 9V battery while the second shows power derived from the 5V and GND pins on the Arduino. (Again, we prefer the former just to further emphasize that at this point, we're not using microcontrollers!)
 

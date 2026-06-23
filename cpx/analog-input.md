@@ -69,7 +69,7 @@ It's OK if you don't understand exactly how voltage dividers work. The key is in
 
 In the above examples, we showed how to read 3.3V and GND (0V) with the CPX by touching the yellow wire to the red and black respectively and graphing the result. But analog input is far more interesting than just two numbers: 0 and 1023. How can we play with everything in between?
 
-We can do this by dividing the input voltage using resistors, which we cover in great detail in our [Electronics L4: Voltage Divider lesson](series-parallel.md#voltage-dividers) and touch on it a bit in the above video. We need not repeat ourselves here; however, if you want to experiment with manually controlling different input voltages on A1, try adding different resistor combinations like the following.
+We can do this by dividing the input voltage using resistors, which we cover in great detail in our [Electronics L4: Voltage Divider lesson](../electronics/series-parallel.md#voltage-dividers) and touch on it a bit in the above video. We need not repeat ourselves here; however, if you want to experiment with manually controlling different input voltages on A1, try adding different resistor combinations like the following.
 
 ![Intro to using a voltage divider with two resistors to control the input voltage on CPX pin A1](assets/images/CPX_IntroToVoltageDivider.png)
 

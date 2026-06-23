@@ -1,13 +1,13 @@
 """
 check_a11y.py — quick local accessibility audit for embedded media and images.
 
-    DEPRECATED — NOT a CI gate. We are standardizing on off-the-shelf pa11y-ci
-    (axe-core, run against the built site) for accessibility enforcement, since
-    it covers far more of WCAG (contrast, heading order, ARIA, ...) and matches
-    the Makeability Lab website's tooling. This bespoke checker is kept only as a
-    fast, dependency-free local spot-check for the three source-level patterns
-    below. Do NOT wire it back into `.github/workflows/content-lint.yml`; once
-    pa11y-ci is in place and proven, this script can be deleted. See issue #110.
+    DEPRECATED — NOT a CI gate. We are standardizing on the off-the-shelf,
+    Jekyll-native html-proofer gem (run against the built _site/) for content
+    QA — it checks missing image alt, broken links, and malformed HTML, with no
+    new toolchain. This bespoke checker is kept only as a fast, dependency-free
+    local spot-check for the three source-level patterns below. Do NOT wire it
+    back into `.github/workflows/content-lint.yml`; once html-proofer is in place
+    and proven, this script can be deleted. See issue #110.
 
 Scans published .md pages for three common, mechanically-detectable a11y gaps:
 

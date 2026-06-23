@@ -27,7 +27,7 @@ Python utilities that bulk-edit or generate content across the textbook. They ar
 | [`fix_embedded_media.py`](fix_embedded_media.py) | Normalize `<video>` inline styles and wrap bare YouTube iframes responsively. | `--run` |
 | [`update_lesson_nav.py`](update_lesson_nav.py) | Migrate old `.btn` lesson nav to card-style `<nav class="lesson-nav">` (rewrites `.md`→`.html`). | `--run` |
 | [`fix_arduino_urls.py`](fix_arduino_urls.py) | Migrate old `arduino.cc` URLs to `docs.arduino.cc`. **Untested/brittle — use with care.** | `--apply` |
-| [`check_a11y.py`](check_a11y.py) | **Deprecated** local-only a11y spot-check (iframe `title`, video `aria-label`, image alt). **Not a CI gate** — superseded by pa11y-ci. Read-only. | _(none)_ |
+| [`check_a11y.py`](check_a11y.py) | **Deprecated** local-only a11y spot-check (iframe `title`, video `aria-label`, image alt). **Not a CI gate** — superseded by html-proofer. Read-only. | _(none)_ |
 
 ## Details
 
@@ -96,10 +96,11 @@ YouTube `<iframe>`s missing `title=`, `<video>`s missing `aria-label`, and image
 with empty alt (`![](...)`). Same published-page scope and draft/contributor
 exemptions as `check_seo_frontmatter.py`.
 
-> **Not a CI gate.** Accessibility enforcement is moving to off-the-shelf
-> [`pa11y-ci`](https://github.com/pa11y/pa11y-ci) (axe-core, run against the built
-> site), which covers far more of WCAG. Do **not** wire this script into
-> `content-lint.yml`; once pa11y-ci is in place it can be deleted (see issue #110).
+> **Not a CI gate.** Content QA is moving to the off-the-shelf, Jekyll-native
+> [`html-proofer`](https://github.com/gjtorikian/html-proofer) gem (checks missing
+> image alt, broken links, and malformed HTML against the built `_site/`, with no
+> new toolchain). Do **not** wire this script into `content-lint.yml`; once
+> html-proofer is in place it can be deleted (see issue #110).
 
 ```bash
 python scripts/check_a11y.py            # full report, grouped by module

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L9&#58; Digital Input
+description: "Read ON/OFF signals on the CPX with digital input. Wire up external buttons, tackle the floating-pin problem with pull-up and pull-down resistors, and use internal resistors in MakeCode."
+image: https://img.youtube.com/vi/raIc-EuHfmc/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

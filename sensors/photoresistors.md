@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Photoresistors
+description: "Sense light with photoresistors (LDRs), inexpensive light-dependent resistors made of Cadmium-Sulfide. Learn how they work and how to use them with and without microcontrollers."
+image: /sensors/assets/images/Photoresistors_Wikipedia.png
 parent: Sensors
 has_toc: true # (on by default)
 comments: true

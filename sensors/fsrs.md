@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Force-Sensitive Resistors
+description: "Sense pressure and touch with force-sensitive resistors (FSRs), variable resistors whose resistance drops as you press harder, read as analog input on Arduino."
 parent: Sensors
 has_toc: false # (on by default)
 comments: false

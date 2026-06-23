@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L5&#58; Playing Tones
+description: "Make sound on the ESP32 with a passive piezo buzzer: play notes, scales, and melodies using tone() and the LEDC tone functions, and control pitch with a potentiometer."
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

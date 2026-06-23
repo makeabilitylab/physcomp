@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; Button Piano
+description: "Build your first interactive CPX program in MakeCode: a simple button piano that plays tones and lights NeoPixels using the board's built-in A and B buttons, speaker, and button events."
+image: https://img.youtube.com/vi/wCSWP6PhNvY/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

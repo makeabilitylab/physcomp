@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Wires
+description: "Reference notes on wires, cables, and connectors used in electronics prototyping, with curated reading from Make: Electronics and Practical Electronics for Inventors."
 nav_order: 2
 parent: Electronics
 has_toc: false # on by default

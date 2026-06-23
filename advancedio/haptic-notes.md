@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Haptics
+description: "Working notes on haptic technology: an overview of tactile actuators, comparing eccentric rotating mass (ERM) motors with linear resonant actuators (LRAs), drivers, and example projects."
 # nav_order: 1
 # parent: Output
 # grand_parent: Advanced I/O

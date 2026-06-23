@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; p5.js Serial I/O
+image: /communication/assets/og/p5js-serial-io.jpg
+description: "Build bidirectional p5.js and Arduino apps (Computer to Arduino and back). Design comma-separated serial protocols, parse data on both sides, and synchronize shared state."
 nav_order: 4
 parent: Serial Communication
 has_toc: true # (on by default)

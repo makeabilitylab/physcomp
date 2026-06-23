@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L7&#58; CPX as a Mouse
+description: "Use the CPX as a programmable USB mouse with MakeCode. Start with discrete cursor moves from button presses, then build a smooth, continuous mouse driven by the built-in accelerometer."
+image: https://img.youtube.com/vi/bOm1qXTDi-o/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

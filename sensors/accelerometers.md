@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Accelerometers
+description: "Measure motion, tilt, and orientation with accelerometers on the Arduino, including the analog ADXL335 and the triple-axis LIS3DH breakout boards from Adafruit."
 parent: Sensors
 has_toc: true # (on by default)
 comments: false

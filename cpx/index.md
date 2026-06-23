@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Circuit Playground Express
+image: /cpx/assets/og/index.jpg
+description: "A beginner tutorial series for Adafruit's Circuit Playground Express (CPX): program with drag-and-drop MakeCode to build button pianos, capacitive-touch sensors, keyboards, and more."
 has_toc: false # (on by default)
 usemathjax: true
 comments: false

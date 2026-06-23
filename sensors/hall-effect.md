@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Hall Effect Sensors
+description: "Detect magnetic fields with Hall effect sensors and reed switches. Build an auto-brightening LED circuit with a DRV5055 sensor, first without and then with a microcontroller."
+image: /sensors/assets/images/MagneticBikeTachometers2.png
 parent: Sensors
 has_toc: true # (on by default)
 comments: true

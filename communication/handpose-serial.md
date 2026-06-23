@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L7&#58; HandPose Serial
+image: /communication/assets/og/handpose-serial.jpg
+description: "Track 21 hand keypoints in real time with ml5's HandPose model and use them to drive a servo motor on Arduino, building a cardboard figure that waves back at you."
 nav_order: 7
 parent: Serial Communication
 has_toc: true # (on by default)

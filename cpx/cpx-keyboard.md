@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L6&#58; CPX as a Keyboard
+description: "Turn the CPX into a programmable USB keyboard with MakeCode. Map buttons to key presses, build a media controller for Spotify and YouTube, and create an accelerometer-based keyboard."
+image: https://img.youtube.com/vi/2ehFfhHLcNQ/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; p5.js Serial In
+description: "Bring Arduino sensor data to life in the browser with p5.js. Receive and parse incoming serial data (Arduino to Computer) and build a real-time interactive sensor graph."
+image: /communication/assets/images/ProcessingSketches_CollatzVariations.png
 nav_order: 3
 parent: Serial Communication
 has_toc: true # (on by default)

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L6&#58; LEDs
+description: "Explore LEDs and the diodes behind them: why they conduct in only one direction, what 'non-ohmic' means, forward voltage, and how to size a current-limiting resistor."
+image: /electronics/assets/images/Verschiedene_LEDs_FromWikipedia.jpg
 nav_order: 6
 parent: Intro to Electronics
 has_toc: false # on by default

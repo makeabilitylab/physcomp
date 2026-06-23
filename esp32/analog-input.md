@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Analog input
+image: /esp32/assets/og/analog-input.jpg
+description: "Read a potentiometer on the ESP32 with analogRead() and build a knob-controlled LED dimmer. Explore the 12-bit ADC (0-4095), map() ranges, and which ADC pins to use."
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

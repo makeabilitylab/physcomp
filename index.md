@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+image: /assets/og/index.jpg
 nav_order: 0
 usemathjax: true
 description: "An open-source interactive textbook for learning physical computing, including Arduino, ESP32, sensors, and signal processing. Created by Professor Jon E. Froehlich at the University of Washington."

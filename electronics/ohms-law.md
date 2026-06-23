@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; Ohm's Law
+description: "Understand Ohm's Law (I = V/R) and its three forms for solving current, voltage, and resistance, with a water-flow analogy and a hands-on CircuitJS activity."
+image: /electronics/assets/images/PoseuillesLawAndOhmsLaw_FigureByJonFroehlich.png
 nav_order: 3
 parent: Intro to Electronics
 has_toc: false # on by default

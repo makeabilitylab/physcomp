@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L3&#58; Feature-Based Classification
+description: "Train a feature-based supervised gesture recognizer for 3D accelerometer signals using scikit-learn classifiers, with scaffolding for the A4 assignment."
 parent: Classification
 grand_parent: Signals
 has_toc: false # (on by default)

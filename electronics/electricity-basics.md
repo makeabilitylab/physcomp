@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Voltage, Current, and Resistance
+description: "Master the three foundational concepts behind every circuit—voltage, current, and resistance—using an intuitive water (hydraulic) analogy, SI units, and a circuit simulator."
+image: /electronics/assets/images/OhmsLawCartoon_ShowingRelationshipBetweenVoltsAmpsAndResistance.png
 nav_order: 1
 parent: Intro to Electronics
 has_toc: false # on by default

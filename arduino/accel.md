@@ -2,6 +2,7 @@
 layout: default
 parent: Intro to Arduino
 title: 3-Axis Accelerometer
+description: "Read motion and orientation with an Adafruit LIS3DH 3-axis accelerometer on Arduino, installing the LIS3DH library and its dependencies through the Library Manager."
 nav_order: 1
 has_children: false
 has_toc: false # on by default

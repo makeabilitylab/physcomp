@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; LED Fading with PWM
+image: /esp32/assets/og/led-fade.jpg
+description: "Smoothly fade an LED on the ESP32 using its powerful LEDC PWM peripheral, understand frequency vs. duty-cycle resolution, and use analogWrite() on Arduino core v3.x."
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

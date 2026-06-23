@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L8&#58; Analog Input
+description: "Connect external sensors to the CPX with analog input. Read potentiometers, FSRs, and flex sensors, learn voltage dividers, and even build a lo-fi slide pot from paper and pencil."
+image: https://img.youtube.com/vi/S6X4Y5gfekc/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

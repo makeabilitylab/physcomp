@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Web Serial
+description: "Talk to Arduino straight from your browser with the Web Serial API. Build event-driven web apps using the serial.js wrapper, VSCode, and Live Server, no native installs."
+image: /communication/assets/images/WebBrowserSerialDevicePermissionPrompt.png
 nav_order: 2
 parent: Serial Communication
 has_toc: true # (on by default)

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; Capacitive Touch
+description: "Explore capacitive touch sensing on the CPX with MakeCode. Build a proximity sensor and a fruit piano from bananas and soda cans, then turn everyday objects into keyboard keys."
+image: https://img.youtube.com/vi/HKwtXrTdocE/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Signals
+description: "Process and classify sensor data in Python with Jupyter, NumPy, SciPy, matplotlib, and scikit-learn: sampling, frequency analysis, gesture recognition, and step tracking."
+image: /signals/assets/images/JupyterNotebook_Screenshot.png
 nav_order: 8
 has_toc: true # on by default
 has_children: true

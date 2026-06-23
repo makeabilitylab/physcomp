@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L1&#58; i2c
+description: "Connect I2C devices to your Arduino, scan the bus for device addresses, and drive an SSD1306 OLED display, with library options for low-RAM boards."
 nav_order: 1
 parent: Advanced I/O
 usemathjax: true

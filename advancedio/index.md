@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Advanced I/O
+image: /advancedio/assets/og/index.jpg
+description: "Move beyond basic LEDs and buttons: build with OLED displays, addressable RGB LEDs (NeoPixels), servo motors, vibromotors for haptics, and signal smoothing for noisy sensors."
 nav_order: 3
 has_toc: false # on by default
 has_children: true

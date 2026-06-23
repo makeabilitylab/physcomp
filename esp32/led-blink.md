@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Blinking an LED
+image: /esp32/assets/og/led-blink.jpg
+description: "Write your first ESP32 sketch: blink the onboard LED with digitalWrite() and LED_BUILTIN, wire an external LED, try the Wokwi simulator, and light the onboard NeoPixel."
 parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true

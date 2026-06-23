@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Circuit Schematics
+description: "Read and draw circuit schematics—the visual lingua franca of electronics: common component symbols, pictorial vs. schematic diagrams, and a hands-on Fritzing activity."
+image: /electronics/assets/images/BasicElectronicSymbols_ByJonFroehlich.png
 nav_order: 2
 parent: Intro to Electronics
 has_toc: false # on by default

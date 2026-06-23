@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Serial Communication
+description: "Build end-to-end interactive systems connecting Arduino with the web: serial communication, Web Serial, p5.js, and machine learning with ml5.js, BodyPose, and HandPose."
 nav_order: 4
 has_toc: false # on by default
 has_children: true

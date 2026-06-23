@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Vibromotors
+description: "Add haptic feedback with vibration motors. Drive a raw DC ERM motor using an NPN transistor, flyback diode, and base resistor, then shape buzz intensity and patterns with PWM."
+image: /advancedio/assets/images/VibrationMotorExamplesInMobilePhonesAndWatches.png
 nav_order: 4
 parent: Output
 grand_parent: Advanced I/O

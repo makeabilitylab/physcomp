@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Smoothing Input
+image: /advancedio/assets/og/smoothing-input.jpg
+description: "Tame noisy analog sensor data with digital signal processing. Learn why analogRead() readings jitter and how a moving average filter smooths the signal, plus its tradeoffs."
 nav_order: 1
 parent: Input
 grand_parent: Advanced I/O

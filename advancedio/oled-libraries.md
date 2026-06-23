@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Installing Adafruit OLED libraries
+description: "Step-by-step guide to installing the Adafruit SSD1306 display driver and Adafruit GFX graphics libraries through the Arduino IDE Library Manager, including all required dependencies."
+image: /advancedio/assets/images/ArduinoIDE_ManageLibrariesScreenshot.png
 # nav_order: 1
 # parent: Output
 # grand_parent: Advanced I/O

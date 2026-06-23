@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L4&#58; Feature Selection and Hyperparameter Tuning
+description: "Improve classifier accuracy with scikit-learn's tools for automatic feature selection and hyperparameter tuning, applied to gesture recognition in a Python notebook."
 parent: Classification
 grand_parent: Signals
 has_toc: false # (on by default)

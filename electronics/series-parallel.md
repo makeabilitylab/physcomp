@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Series and Parallel Resistors
+description: "Extend Ohm's Law to series and parallel resistor circuits: series resistors divide voltage, parallel resistors divide current, with equivalent-resistance formulas and CircuitJS."
+image: /electronics/assets/images/OhmsLaw_IntroToSeriesVsParallelResistorCircuits_ByJonFroehlich.png
 nav_order: 4
 parent: Intro to Electronics
 has_toc: false # on by default

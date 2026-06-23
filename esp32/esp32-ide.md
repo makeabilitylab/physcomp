@@ -1,6 +1,8 @@
 ---
 layout: default
 title: ESP32 IDE Setup
+image: /esp32/assets/og/esp32-ide.jpg
+description: "Set up the Arduino IDE to program ESP32 boards: add Espressif's board package, select the board and port, upload a test sketch, and troubleshoot common upload issues."
 parent: ESP32
 has_toc: true # (on by default)
 nav_order: 9

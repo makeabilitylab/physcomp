@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L6&#58; ml5.js Serial
+image: /communication/assets/og/ml5js-serial.jpg
+description: "Add machine learning to Arduino with ml5.js. Use the BodyPose model for real-time pose estimation, extract keypoints, and play Flappy Bird with your nose over Web Serial."
 nav_order: 6
 parent: Serial Communication
 has_toc: true # (on by default)

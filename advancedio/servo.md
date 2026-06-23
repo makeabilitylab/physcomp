@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L3&#58; Servo Motors
+description: "Make things move with servo motors. Understand the internal feedback loop, how servo PWM differs from analogWrite(), and use the Arduino Servo library to drive precise angular positions."
 nav_order: 3
 parent: Output
 grand_parent: Advanced I/O

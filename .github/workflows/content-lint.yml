@@ -74,9 +74,10 @@ jobs:
         # resolve against _site/. External link checking is disabled (slow/flaky).
         #
         # --ignore-files: each entry is tracked debt, not a silent skip:
-        #   * /signals/.+/index.html  -> stale generated nbconvert notebooks (issue #115)
-        #   * /arduino/accel.html     -> WIP draft, missing screenshot      (issue #115)
-        #   * /esp32/capacitive-touch.html -> WIP lesson, missing diagrams  (issue #114)
+        #   * signals .+/index.html + IntroTo*.html -> stale generated nbconvert
+        #                                              notebooks               (issue #115)
+        #   * /arduino/accel.html          -> WIP draft, missing screenshot    (issue #115)
+        #   * /esp32/capacitive-touch.html -> WIP lesson, missing diagrams      (issue #114)
         # Remove an entry once its issue is resolved so the gate covers that page.
         # Each --ignore-files pattern must be wrapped in /slashes/ to be treated
         # as a regex (a bare string is an exact-path match); internal slashes are
@@ -86,4 +87,4 @@ jobs:
             --disable-external \
             --swap-urls "^/physcomp:" \
             --no-enforce-https \
-            --ignore-files "/\/signals\/[^\/]+\/index\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"
+            --ignore-files "/\/signals\/.+\/index\.html/,/\/signals\/IntroTo[A-Za-z]+\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"

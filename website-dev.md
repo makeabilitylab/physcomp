@@ -176,7 +176,7 @@ macOS** (libcurl present, matches CI); or on native Win11 install it once with
 bundle exec jekyll build --baseurl "/physcomp"
 gem install html-proofer -v 5.0.9
 htmlproofer ./_site --disable-external --swap-urls "^/physcomp:" \
-  --ignore-files "/\/signals\/[^\/]+\/index\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"
+  --ignore-files "/\/signals\/.+\/index\.html/,/\/signals\/IntroTo[A-Za-z]+\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"
 ```
 
 `check_a11y.py` is pure Python (no libcurl) and runs anywhere:

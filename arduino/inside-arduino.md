@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Inside Arduino
+description: "Go under the hood of Arduino: how Serial.println handles multiple variables, what actually calls loop(), how delay() works, and how the ADC digitizes analog signals."
 parent: Intro to Arduino
 has_toc: true # on by default
 nav_exclude: false

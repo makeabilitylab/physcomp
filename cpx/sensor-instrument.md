@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Light-Level Instrument
+description: "Build an interactive CPX instrument in MakeCode that turns light levels into sound and color, using the onboard light sensor, speaker, and NeoPixels to make a playful light theremin."
+image: https://img.youtube.com/vi/RlEPQqyQGEk/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

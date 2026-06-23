@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L8&#58; Variable Resistors
+description: "Meet variable resistors—potentiometers, photocells, thermistors, and force-sensitive resistors—that change resistance with input, turning physical stimuli into sensors."
+image: /electronics/assets/images/VariableResistors_ExampleGallery.png
 nav_order: 8
 parent: Intro to Electronics
 has_toc: false # on by default

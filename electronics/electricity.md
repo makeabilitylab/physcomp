@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Electricity
+description: "How electricity flows through a circuit: voltage as electrical pressure, current as electron flow, and how a battery's EMF pushes free electrons through a conductor."
+image: /electronics/assets/images/MechanismsOfVoltage_ScherzAndMonk.png
 nav_order: 1
 parent: Electronics
 has_toc: false # on by default

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: LX&#58; Interrupts
+description: "Understand hardware interrupts on the Arduino Uno: how interrupt pins work, how many a board supports, and when to reach for them instead of polling in loop()."
 nav_order: 1
 # parent: Input
 # grand_parent: Intro to Arduino

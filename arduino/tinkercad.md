@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Tinkercad
+description: "Prototype and simulate Arduino circuits in your browser with Tinkercad Circuits, including its built-in multimeter, oscilloscope, serial monitor, and code editor."
+image: /arduino/assets/images/Tinkercad_RegistrationPage.png
 nav_order: 4
 parent: Resources
 has_toc: true # (on by default)

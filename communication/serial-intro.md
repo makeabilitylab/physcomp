@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Intro to Serial
+description: "Understand asynchronous TTL serial communication on Arduino: baud rate, data frames, ASCII vs binary encoding, and sending data from the Serial Monitor, terminal, and Python."
+image: /communication/assets/images/SerialMonitorShowingBaudRate.png
 nav_order: 1
 parent: Serial Communication
 has_toc: true # (on by default)

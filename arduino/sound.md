@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Sound
+description: "Make sound with Arduino: drive a piezo or speaker with square waves, compare digitalWrite, analogWrite, and the interrupt-driven tone() function, and play musical scales."
 parent: Intro to Arduino
 nav_order: 3
 has_toc: true # on by default

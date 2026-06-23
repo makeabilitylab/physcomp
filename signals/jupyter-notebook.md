@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Jupyter Notebook
+description: "Install and configure Jupyter Notebook with Anaconda for data science, plus the Table of Contents (2) nbextension that auto-generates clickable navigation."
+image: /signals/assets/images/JupyterNotebook_Screenshot.png
 parent: Tools
 grand_parent: Signals
 has_toc: true # on by default

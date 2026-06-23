@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Intro to Arduino
+description: "Start programming microcontrollers with the Arduino Uno and Leonardo: digital and analog output, digital and analog input, and fun builds like a button piano and Jedi-force instrument."
 nav_order: 2
 has_toc: false # on by default
 has_children: true

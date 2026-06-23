@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L3&#58; Numpy
+description: "Work with NumPy arrays as your core data structure for time-series sensor data through a hands-on notebook covering how np.array objects are built and manipulated."
 parent: Tools
 grand_parent: Signals
 has_toc: false # (on by default)

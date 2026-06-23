@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L1&#58; Heuristic-Based Classification
+description: "Infer steps from accelerometer data with a heuristic step tracker in Python, using NumPy and SciPy for filtering and detrending before porting to the ESP32."
 parent: Classification
 grand_parent: Signals
 has_toc: false # (on by default)

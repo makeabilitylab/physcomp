@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Fast Analog Read
+description: "Push the ATmega328 ADC beyond Arduino's default ~9.6 kHz: adjust the ADC prescaler, use free-running mode, and apply direct port manipulation for faster analogRead and digitalWrite."
 parent: Advanced Arduino
 has_toc: false # on by default
 nav_exclude: true

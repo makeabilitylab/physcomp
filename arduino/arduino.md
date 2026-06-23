@@ -1,6 +1,7 @@
 ---
 layout: default
 title: LX&#58; Arduino
+description: "Working notes and reference links for an introductory Arduino lesson, including external course material on getting started with the Arduino platform."
 nav_order: 1
 # parent: Input
 # grand_parent: Intro to Arduino

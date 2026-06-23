@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; OLED Displays
+image: /advancedio/assets/og/oled.jpg
+description: "Drive a monochrome OLED display with Arduino: wire it over I2C, draw shapes, text, and bitmaps with the Adafruit GFX library, and build animations and sensor-driven visualizations."
 nav_order: 1
 parent: Output
 grand_parent: Advanced I/O

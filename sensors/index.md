@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Sensors
+description: "Explore how electronic sensors let computers perceive the world. This section characterizes sensors by function, sensing method (passive vs. active), and output type."
 nav_order: 7
 has_toc: false # on by default
 usemathjax: true

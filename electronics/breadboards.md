@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L7&#58; Breadboards
+description: "Prototype circuits without soldering: how a solderless breadboard's power rails and internal column connections work, plus building LED circuits in Tinkercad Circuits."
+image: /electronics/assets/images/Breadboarding_FromLiteralBreadboardingToWireWrappingToSolderlessBreadboards_FromSparkfun.png
 nav_order: 7
 parent: Intro to Electronics
 has_toc: false # on by default

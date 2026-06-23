@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Addressable LEDs
+image: /advancedio/assets/og/addressable-leds.jpg
+description: "Control hundreds of WS2812B/SK6812 NeoPixels from a single Arduino pin. Learn the single-wire protocol, set colors with RGB and HSV, calculate power needs, and animate the strip."
 nav_order: 2
 parent: Output
 grand_parent: Advanced I/O

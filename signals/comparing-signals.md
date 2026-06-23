@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L2&#58; Comparing Signals (Time Domain)
+description: "Measure how similar two signals are in the time domain using Euclidean distance, cross-correlation, and Dynamic Time Warping (DTW) in an interactive Python notebook."
 parent: Signal Processing
 grand_parent: Signals
 has_toc: false # (on by default)

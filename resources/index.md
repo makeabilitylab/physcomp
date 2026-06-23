@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Resources
+description: "A curated collection of physical computing resources: online and video tutorials, recommended electronics and microcontroller books, and lo-fi DIY methods for making your own components."
 nav_order: 8
 has_children: true
 has_toc: true # (on by default)

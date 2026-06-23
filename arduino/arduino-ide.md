@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Arduino IDE
+description: "Download, install, and configure the Arduino IDE 2, then learn the setup() and loop() code structure and how to select your board and serial port before uploading."
 parent: Intro to Arduino
 nav_order: 3
 has_toc: true # (on by default)

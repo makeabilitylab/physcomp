@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; Using Resistors
+description: "Go deeper on resistors: how they resist current and convert electrical energy to heat, what determines resistivity, power ratings, and how to read resistor color bands."
+image: /electronics/assets/images/OverviewOfResistorsPicture.png
 nav_order: 5
 parent: Intro to Electronics
 has_toc: false # on by default

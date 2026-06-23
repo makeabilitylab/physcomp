@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; PaintIO Example
+image: /communication/assets/og/p5js-paint-io.jpg
+description: "Build PaintIO, a full p5.js and Arduino painting app with bidirectional serial, an accelerometer and force-sensor paintbrush controller, offscreen buffers, and bimanual input."
 nav_order: 5
 parent: Serial Communication
 has_toc: true # (on by default)

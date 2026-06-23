@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L3&#58; Sensing sound
+description: "Detect and measure sound with Arduino using a microphone sensor, reading audio signals through the analog input as a first step toward sound-reactive projects."
 parent: Sound
 usemathjax: false
 has_toc: true # (on by default)

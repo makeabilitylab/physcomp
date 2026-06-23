@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Inspirations
+description: "Find inspiration for your physical computing projects through maker project hubs like Instructables and Hackaday, plus the academic courses that shaped this textbook's approach."
 nav_order: 1
 parent: Resources
 has_toc: true # (on by default)

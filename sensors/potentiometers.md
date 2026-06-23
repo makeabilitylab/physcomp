@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Potentiometers
+description: "Use a potentiometer as a sensor: this variable resistor converts knob rotation into an analog voltage you can read on Arduino to capture human input."
+image: https://img.youtube.com/vi/5qxQheanSkQ/hqdefault.jpg
 parent: Sensors
 has_toc: false # (on by default)
 comments: false

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: LX&#58; NeoPixels
+description: "Dig into the CPX's built-in NeoPixel RGB LEDs with MakeCode, from rainbow animations to project ideas like glowing swords, lanterns, and capacitive-touch pulsing hearts."
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

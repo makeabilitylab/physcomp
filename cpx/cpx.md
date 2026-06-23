@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Intro to the CPX
+description: "Meet Adafruit's Circuit Playground Express (CPX), the beginner-friendly board with built-in NeoPixels, sensors, buttons, and speaker, programmable with drag-and-drop MakeCode."
+image: /cpx/assets/images/CircuitExpressPlaygroundHandModelShot_Adafruit_Edited.png
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

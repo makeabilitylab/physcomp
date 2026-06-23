@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Microcontrollers
+description: "An introduction to microcontrollers for physical computing: how to choose the right board, plus core concepts like digital and analog I/O, PWM, interrupts, and communication interfaces."
 nav_order: 2
 has_children: true
 # has_toc: false (on by default)

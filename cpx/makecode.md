@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Making with MakeCode
+image: /cpx/assets/og/makecode.jpg
+description: "Write your first CPX program, Blinky, using MakeCode's visual block editor. Learn the workspace, toolbox, and simulator, then flash NeoPixels and play a startup sound."
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

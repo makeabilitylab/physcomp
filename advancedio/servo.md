@@ -372,7 +372,7 @@ The Engineering Mindset YouTube channel did this for real with an oscilloscope, 
 
 ### Activity 3: Sensor-driven servo gauge
 
-For our final activity, let's build a **physical gauge**—a servo-powered pointer that displays sensor data in the real world, like an analog speedometer or a VU meter needle. This is the physical output equivalent of the [OLED analog graph](oled.md#demo-3-basic-real-time-analog-graph) and the [NeoPixel level meter](addressable-leds.md#activity-4-led-level-meter). Where the OLED drew data on screen and the NeoPixels lit up LEDs proportionally, here we'll sweep a physical pointer across a scale.
+For our final activity, let's build a **physical gauge**—a servo-powered pointer that displays sensor data in the real world, like an analog speedometer or a VU meter needle. This is the physical output equivalent of the [OLED analog graph](oled.md#demo-3-basic-real-time-analog-graph) and the [NeoPixel level meter](addressable-leds.md). Where the OLED drew data on screen and the NeoPixels lit up LEDs proportionally, here we'll sweep a physical pointer across a scale.
 
 We'll read an analog sensor on `A0` and map it to the servo's range. To make it more interesting, we'll add two buttons: one to "freeze" the gauge at its current reading (like a max-hold feature on a multimeter), and one to reset it.
 

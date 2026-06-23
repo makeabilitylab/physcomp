@@ -1,13 +1,15 @@
 """
-check_a11y.py — quick local accessibility audit for embedded media and images.
+check_a11y.py — CI gate for source-level media accessibility conventions.
 
-    DEPRECATED — NOT a CI gate. We are standardizing on the off-the-shelf,
-    Jekyll-native html-proofer gem (run against the built _site/) for content
-    QA — it checks missing image alt, broken links, and malformed HTML, with no
-    new toolchain. This bespoke checker is kept only as a fast, dependency-free
-    local spot-check for the three source-level patterns below. Do NOT wire it
-    back into `.github/workflows/content-lint.yml`; once html-proofer is in place
-    and proven, this script can be deleted. See issue #110.
+Complements html-proofer (the Content lint "link-check" job). html-proofer
+validates the BUILT site (broken links/anchors, missing-alt, HTML validity) but
+deliberately does NOT enforce the authoring conventions below: it permits empty
+`alt=""` (spec-correct "decorative" default, `ignore_empty_alt: true`) and has no
+concept of iframe titles or video aria-labels. This script gates those three
+markdown-SOURCE conventions, scanning published .md pages only (so it never
+false-positives on theme/decorative images). It is the a11y analogue of
+check_seo_frontmatter.py: a small policy check for conventions that have no
+off-the-shelf equivalent.
 
 Scans published .md pages for three common, mechanically-detectable a11y gaps:
 
@@ -25,9 +27,9 @@ contributor/deprecated docs are exempt, mirroring the SEO gate.
 Modes:
     python scripts/check_a11y.py            # full report, grouped by module (exit 0)
     python scripts/check_a11y.py --summary  # per-module counts only
-    python scripts/check_a11y.py --ci       # exit 1 if any issue found (local spot-check only)
+    python scripts/check_a11y.py --ci       # exit 1 if any issue found (CI gate)
 
-Prints ASCII only (avoids cp1252 crashes on Windows consoles).
+Prints ASCII only (avoids cp1252 crashes in CI logs / Windows consoles).
 """
 
 import re

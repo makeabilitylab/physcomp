@@ -10,7 +10,7 @@ usetocbot: true
 
 ## Speeding up the Arduino
 
-The Arduino `C` library attempts to provide an easy-to-understand and accessible API to program and use microcontrollers. However, this comes at a cost. There are a number of interesting online discussions and blog posts analyzing Arduino code and providing faster techniques for I/O. Importantly, as Willem Maes—a faculty of engineering in Belgium—notes in his [Speeding Up the Arduino]((http://www.optiloading.be/willem/Arduino/speeding.pdf)) document: 
+The Arduino `C` library attempts to provide an easy-to-understand and accessible API to program and use microcontrollers. However, this comes at a cost. There are a number of interesting online discussions and blog posts analyzing Arduino code and providing faster techniques for I/O. Importantly, as Willem Maes—a faculty of engineering in Belgium—notes in his [Speeding Up the Arduino](http://www.optiloading.be/willem/Arduino/speeding.pdf) document: 
 >the programmers who developed  Arduino weren't just lousy coders who couldn't write fast code, they consciously made the decision to add validations and safety checks since it benefits their target customers.
 
 ## How fast can we read data using analogRead and ATmega328? 

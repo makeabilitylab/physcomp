@@ -608,7 +608,7 @@ In this lesson, you learned about vibration motors and how to safely control the
 
 ## Next Lesson
 
-In the [next lesson](../smoothing-input.md), we will switch from output to input and learn how to smooth noisy sensor data using digital signal processing techniques.
+In the [next lesson](smoothing-input.md), we will switch from output to input and learn how to smooth noisy sensor data using digital signal processing techniques.
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="servo.html" class="nav-prev">

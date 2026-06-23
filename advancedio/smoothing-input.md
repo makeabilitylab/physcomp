@@ -157,7 +157,7 @@ You can find our full implementation on GitHub as [MovingAverageFilter.ino](http
 
 #### Simple C++ class
 
-Signal filtering is a perfect opportunity to create a class to hide complexity, avoid code redundancy, and handle data processing. In our [Makeability Lab Arduino Library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library/src), we created the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp) class, which simplifies using a moving average filter. But you could make your own, of course, or use [other libraries](#arduino-filtering-libraries.)
+Signal filtering is a perfect opportunity to create a class to hide complexity, avoid code redundancy, and handle data processing. In our [Makeability Lab Arduino Library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library/src), we created the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp) class, which simplifies using a moving average filter. But you could make your own, of course, or use [other libraries](#arduino-filtering-libraries)
 
 Here's a demonstration of how to use [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp):
 

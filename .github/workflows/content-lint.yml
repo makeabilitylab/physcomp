@@ -1,0 +1,29 @@
+# Content lint: gate pull requests on textbook authoring conventions.
+#
+# Runs lightweight checks on the Markdown content. Separate from the deploy
+# workflow (jekyll.yml) on purpose: a content-convention miss should block a
+# MERGE, but never take down the live site. This is also the home for future
+# content gates (e.g. the #99 code-block standardization lint).
+name: Content lint
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  seo-frontmatter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check per-page SEO front matter (description:)
+        run: python scripts/check_seo_frontmatter.py

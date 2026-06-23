@@ -38,7 +38,7 @@ A [video](https://youtu.be/MJt9kSNlsU4) demonstration of a [trimpot](https://www
 
 A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance. 
 
-![Animation showing how a potentiometer works](/assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
+![Animation showing how a potentiometer works](assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
 Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
 {: .fs-1 }
 

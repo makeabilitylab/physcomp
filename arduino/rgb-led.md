@@ -185,14 +185,14 @@ That's it. Now compile, upload, and run your code!
 In the video below, I'm running our [BlinkRGB](https://github.com/makeabilitylab/arduino/tree/master/Basics/digitalWrite/BlinkRGB) code, which is the same as above but includes some [`Serial.print`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) calls for debugging (see this [mini-tutorial](https://create.arduino.cc/projecthub/glowascii/serial-monitor-arduino-basics-399eb6) on using the Serial.print and the Arduino IDE's Serial Monitor for debugging)
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/ASez28rPjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of the BlinkRGB code cycling a common cathode RGB LED through colors, diffused by a yogurt container" src="https://www.youtube.com/embed/ASez28rPjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 The yogurt container is used to diffuse the light. Kleenex, white paper, or a ping pong ball (with a hole in it for the LED) works well too!
 {: .fs-1 }
 
 Below, we show a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current—it will flow in the opposite direction with the Common Anode design (covered next).
 
-<video controls="controls">
+<video aria-label="Animation of a common cathode RGB LED circuit executing, showing the direction of current flow" controls="controls">
   <source src="assets/movies/Arduino_RGBLED_CommonCathode_Animation.mp4" type="video/mp4">
 </video>
 
@@ -249,7 +249,7 @@ We will flash the same sequence as before but again our `HIGH`s and `LOW`s are f
 
 Here's an animation. Pay close attention to the current direction—it flows from 5V down through the LED, the current limiting resistors, and into the digital I/O pins.
 
-<video controls="controls">
+<video aria-label="Animation of a common anode RGB LED circuit with current flowing from 5V down through the LED and resistors into the digital I/O pins" controls="controls">
   <source src="assets/movies/Arduino_RGBLED_CommonAnode_Animation.mp4" type="video/mp4">
 </video>
 

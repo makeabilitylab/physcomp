@@ -211,7 +211,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 #### Workbench video
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/8DHhmXr3mC8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of an Arduino blinking multiple LEDs at different rates without using delay()" src="https://www.youtube.com/embed/8DHhmXr3mC8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### Multi-rate blinking: an object-oriented approach
@@ -326,7 +326,7 @@ See the [code in our GitHub repository](https://github.com/makeabilitylab/arduin
 #### Workbench video
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/vb5l8Tncedo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of multi-rate LED blinking using the Blinker class in external .h and .cpp files" src="https://www.youtube.com/embed/vb5l8Tncedo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Exercises

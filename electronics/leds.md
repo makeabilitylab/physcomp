@@ -44,7 +44,7 @@ So, while LEDs are now pervasive, they're relatively new technology with active 
 
 To better understand light-emitting diodes, it's first useful to learn a bit about regular **diodes** and how to use them. As noted, diodes are a special type of [semiconductor device](https://en.wikipedia.org/wiki/Semiconductor_device) that, ideally, conduct current in **only one direction**. See animation below.
 
-<video autoplay loop muted playsinline>
+<video aria-label="Circuit simulation showing current flowing through a diode from anode to cathode, then stopping when the diode's orientation is reversed" autoplay loop muted playsinline>
   <source src="assets/videos/DiodeOnlyWorksInOneDirection_CircuitJS_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 
@@ -148,7 +148,7 @@ Now that we know $$V_R=8.3V$$, we can use Ohm's Law to solve for the current $$I
 
 We can also use our trusty [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) tool to simulate this circuit and check our answer. As the simulation shows below, our calculation of $$83mA$$ was spot on (even though we simplified the diode's true current-voltage operation).
 
-<video autoplay loop muted playsinline>
+<video aria-label="CircuitJS simulation of a basic resistor-diode circuit with a 9V battery, 100 ohm resistor, and 1N4001 diode, showing 83mA of current" autoplay loop muted playsinline>
   <source src="assets/videos/DiodeResistorCircuitBasic_CircuitJS_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 
@@ -372,7 +372,7 @@ We could, of course, also use our resistor equivalence rules to combine a resist
 
 We can also check our work in a circuit simulator like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html), which is good practice in general before investing time in physically building something.
 
-<video autoplay loop muted playsinline>
+<video aria-label="CircuitJS simulation comparing three LED circuits using 330 ohm, 350 ohm, and 470 ohm current-limiting resistors" autoplay loop muted playsinline>
   <source src="assets/videos/ThreeLEDCircuitsWithDifferentCurrentLimitingResistors_CircuitJS.mp4" type="video/mp4" />
 </video>
 **Video.** This is a screen recording of the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of the 330Ω, 350Ω, and 470Ω LED-based circuits. Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YXypCVbAE7LwGQlpQJdVbLjkKa-c1UvhT11VrA6QKW-327rKPHmeujCFC1PNgAPEGxeIgkEekxAwV1iADU2IXi3by1sAOcQABMGADMAQwBXABsAFyZyhjzwKShYdjTwGnNnTLB2-0DAgpKK6tr6iFEYSHYwsEgMSJJkYliMeMVxFPlujuzAvas3Uz3nAzaOrx8XTZ7FFWvHXUvwGd47a7sNU5UnI-dJGgxIIdnjdPiD2FxWJAXvxIQlxmIJONoDIAOZmfg8WhCKRsNGwhzAmjYkS4ijEdJUBDkrGGKCcMkUhkg0QdRFSZGmKm7JTknz2diaXnaRJeY607KA+RcrRC97yIX2BVOR5C36qzIq0U7cSi4JhAx9BYIPAQOK0NbJVKEQLqnxC7X9IplKo1OoNJGTNhAA) in CircuitJS.
@@ -396,7 +396,7 @@ No. A resistor limits the current *throughout* a circuit loop. We know this from
 
 Don't believe me? Try performing the same circuit analysis we stepped through above but with the LED before the resistor. What changes? Nothing, right? $$V_f$$ is still 2V and thus $$V_R$$ is still 7V. Here's a simulation demonstrating that nothing changes! 
 
-<video autoplay loop muted playsinline>
+<video aria-label="CircuitJS simulation showing that placing the 350 ohm current-limiting resistor before or after the LED produces identical behavior" autoplay loop muted playsinline>
   <source src="assets/videos/ResistorBeforeOrAfterTheLED_CircuitJS.mp4" type="video/mp4" />
 </video>
 **Video.** [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a LED-based circuit with the 350Ω current-limiting resistor either before or after the LED. Do you observe any differences? Play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3EQm2ub3mEJURfEMSiSYCNgHcB4YRRR5FVdgCdlqsBkLaQKBPvVw5CmvwQq+689Z1KH4PYfs2j+5ytUp3q7GsDSyo-AA9FXiIJMDwITF4aRXEANTYAEwMfA0CokHSGADMAQwBXABsAFzYgA).
@@ -408,7 +408,7 @@ In short: Heat. Possible spark or small fire. Burn out. Open circuit.
 
 There are lots of fun YouTube videos of supplying too much current to LEDs and observing the effect. Here's a snippet of a good one from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
 
-<video autoplay loop muted playsinline>
+<video aria-label="An LED burning out when too much current is applied with no current-limiting resistor, exceeding its forward voltage" autoplay loop muted playsinline>
   <source src="assets/videos/LEDBurnOut_Afrotechmods_Trimmed.mp4" type="video/mp4" />
 </video>
 **Video.** This video shows what happens when the applied voltage significantly exceeds the LED's forward voltage $$V_f$$ with no current limiting resistor. Video from [Afrotechmods](https://youtu.be/Yo6JI_bzUzo).
@@ -428,7 +428,7 @@ For each circuit, first sketch out the idea on paper using a circuit schematic r
 
 To wire wrap your components, simply twist the legs together like this:
 
-<video autoplay loop muted playsinline>
+<video aria-label="Wire wrapping an LED by twisting the component legs together to make a connection" autoplay loop muted playsinline>
   <source src="assets/videos/WireWrapAnLED_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** An example of wire wrapping.
@@ -442,7 +442,7 @@ Here's an example picture of a simple LED circuit with alligator clips and wire 
 
 We'd also like you to begin experimenting with light diffusion and ideas for enclosures. For one of your LED designs, rapidly prototype a diffusive cover or case. As an example, here are simple light sabers my children and I made out of toilet paper rolls (for the hilt), paper (for the "plasma energy" blade), a 9V battery, a resistor, and some LEDs.
 
-<video autoplay loop muted playsinline>
+<video aria-label="Light sabers made from toilet paper rolls, paper, a 9V battery, a resistor, and LEDs glowing in a simple LED circuit" autoplay loop muted playsinline>
   <source src="assets/videos/StarWars_SimpleToiletRollLightSabers_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** Example light sabers made out of toilet paper cardboard rolls, paper, and a simple LED circuit.

@@ -37,7 +37,7 @@ As one example use case in consumer toys, this Melissa and Doug wooden fire truc
 ![Picture showing the Melissa and Doug puzzle with embedded photoresistors](assets/images/Photoresistor_MelissaAndDougPuzzle.png)
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/ySJw510mVgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Melissa and Doug wooden fire truck puzzle using embedded photoresistors to detect placed pieces and play a siren when complete" src="https://www.youtube.com/embed/ySJw510mVgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 Each puzzle piece location has a respective embedded photoresistor, which is used to track whether a piece has been placed or not. When the puzzle is completed (and all photoresistors have been covered), the puzzle plays a fire truck siren. There are a few limitations to this sensing technique: while cheap, the "fire truck" siren can be triggered when the photoresistors are covered (either accidentally via an errant puzzle piece or hand or on purpose), occassionally the siren will be triggered before the puzzle is actually completed (just when the last puzzle piece is hovering over the remaining location), and, of course, the sensing method cannot tell whether a puzzle piece is in the correct position (which is fine if one just needs to infer when the puzzle is completed and not, for example, to help guide a child in completing the puzzle).
 {: .fs-1 }
@@ -45,7 +45,7 @@ Each puzzle piece location has a respective embedded photoresistor, which is use
 Another example use case from inexpensive consumer electronics: an auto-brightening nightlight from General Electric, which gets brighter as the ambient light gets darker.
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/EkBDjZZ3v00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="A General Electric auto-brightening nightlight that gets brighter as the ambient light gets darker" src="https://www.youtube.com/embed/EkBDjZZ3v00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 An auto-brightness fading night light from General Electric.
 {: .fs-1 }
@@ -124,7 +124,7 @@ Here's the results of our own informal experiments:
 And a video:
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/imbN0PtUQg0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Measuring photoresistor resistance with a multimeter as lighting changes, ranging from 1.6 kilohms to over 10 megohms" src="https://www.youtube.com/embed/imbN0PtUQg0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 Our photoresistor ranges from 1.6kΩ with our desk lamp to 10kΩ with the lights off to over ~10MΩ when covered by a coffee cup.
 {: .fs-1 }
@@ -148,7 +148,7 @@ Try making this circuit. What happens?
 Because the photoresistor resistance **decreases** with light levels, the LED gets brighter as the ambient light gets brighter. This is the opposite behavior of what we want! See video below.
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/tNOG2tYaBQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Photoresistor wired in series with an LED, so the LED gets brighter as ambient light increases (the opposite of a nightlight)" src="https://www.youtube.com/embed/tNOG2tYaBQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 In this video, the photoresistor is in series with the LED. As the ambient light level increases, the photoresistor resistance decreases, and the LED gets brighter. But we want the opposite effect? Remember, we are using the Arduino only for power here. Note: this video has no audio.
 {: .fs-1 }
@@ -161,7 +161,7 @@ Let's try it.
 
 We are going to create an inverse relationship between ambient light levels and LED brightness by placing the LED in parallel with the photoresistor wired in a voltage divider configuration. Now, as the photoresistor resistance drops, the LED will get brighter. The key is in selecting an appropriate fixed resistor $$R$$. 
 
-![](assets/images/Photoresistor_WiringDiagramAndSchematicVoltageDivider_NoArduino_Fritzing.png)
+![Wiring diagram and schematic of a photoresistor in a voltage divider with an LED in parallel, no Arduino](assets/images/Photoresistor_WiringDiagramAndSchematicVoltageDivider_NoArduino_Fritzing.png)
 
 If $$R$$ is too small, the LED will still turn on even in ambient light. Through experimentation, we determined that $$R=4.7kΩ$$ resulted in the best performance: a 1.72V drop and 0.10mA through the LED with a **desk lamp off** and a 0.8V drop and 0mA through the LED with the **lamp on**. 
 
@@ -175,7 +175,7 @@ If $$R$$ is too small, the LED will still turn on even in ambient light. Through
 So, while this circuit works, it doesn't work well. We are not able to sufficiently control the current through the LED based on lighting conditions. Yes, we have the general LED behavior we want but 0.10mA is a very small current, so the LED is not very bright (even in the darkest conditions). See video below.
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/ZYVQLw-7HU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Photoresistor wired in parallel with an LED in a voltage divider to dim the LED as ambient light increases" src="https://www.youtube.com/embed/ZYVQLw-7HU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 This video shows a photoresistor wired in parallel with an LED in a voltage divider to inverse the relationship between ambient light levels and LED brightness. Again, the Arduino is used solely for power. Note: this video has no audio.
 {: .fs-1 }
@@ -308,7 +308,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Sensors
 ### Workbench video
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/CIhCJCBrOYU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench demo of the Arduino auto-on nightlight that brightens an LED as the room gets darker using a photoresistor" src="https://www.youtube.com/embed/CIhCJCBrOYU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Exercises

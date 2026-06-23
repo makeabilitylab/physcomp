@@ -52,7 +52,7 @@ Confused? That's ok!
 To better understand the Hall effect, watch this 5-minute video from Professor Bowley at the University of Nottingham. He provides a wonderful set of visual experiments and explanations (the best we've seen) that should clarify things:
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/AcRCgyComEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Professor Bowley of the University of Nottingham explains the physics of the Hall effect with visual experiments" src="https://www.youtube.com/embed/AcRCgyComEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of Notthingham, Professor Bowley explains the physics of the Hall Effect.
 {: .fs-1 }
@@ -121,7 +121,7 @@ With a Hall effect sensor, the magnetic flux density through the sensor is maxim
 Here's a [video](https://youtu.be/hnCEQYO-i_E) demonstrating a reed switch functioning with three different magnets from K&J Magnetics:
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/hnCEQYO-i_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Demonstration of a reed switch closing in response to three different magnets, from K&amp;J Magnetics" src="https://www.youtube.com/embed/hnCEQYO-i_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 
@@ -182,7 +182,7 @@ We've included two wiring diagrams: on the left, the suggested wiring by the DRV
 And here's a workbench video demonstrating the circuit (without a capacitor). The second half of the video includes two multimeters: one to measure the current through the circuit and the other to measure the voltage output from the Hall effect sensor. 
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/RLNx7tHCxC0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench demo of the Hall effect LED brightener circuit with multimeters measuring current and sensor output voltage" src="https://www.youtube.com/embed/RLNx7tHCxC0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 My vocal narration is quite soft as I recorded the video early in the morning and did not want to disturb my house! :D
 {: .fs-1 }
@@ -219,7 +219,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Sensors
 ### Workbench video
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/MvVfq6AAEQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench demo of the Arduino-based magnetic LED brightener that adjusts LED brightness from the Hall effect sensor" src="https://www.youtube.com/embed/MvVfq6AAEQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <!-- ## Reed switches

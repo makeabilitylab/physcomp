@@ -3,7 +3,8 @@
 # Runs lightweight checks on the Markdown content. Separate from the deploy
 # workflow (jekyll.yml) on purpose: a content-convention miss should block a
 # MERGE, but never take down the live site. This is also the home for future
-# content gates (e.g. the #99 code-block standardization lint).
+# content gates. Current gates: SEO front matter, media a11y, code-block
+# standardization (#99), and html-proofer link/anchor/HTML validation.
 name: Content lint
 
 on:
@@ -44,6 +45,27 @@ jobs:
 
       - name: Check media a11y (iframe title, video aria-label, image alt)
         run: python scripts/check_a11y.py --ci
+
+  code-blocks:
+    # Enforce #99 code-block standardization on the Markdown SOURCE: every fenced
+    # block declares a language (MD040), blocks are fenced not indented (MD046),
+    # and fences use backticks (MD048). Uses markdownlint-cli (NOT cli2) with -c
+    # so the scoped .markdownlint-code.jsonc fully replaces config instead of
+    # merging the editor .markdownlint.jsonc back in. House style: ```cpp for all
+    # Arduino/ESP32 sketches. Deliberate indented demos opt out inline with
+    # <!-- markdownlint-disable MD046 -->.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Lint code-block conventions (MD040/MD046/MD048)
+        run: npx --yes markdownlint-cli@0.48.0 -c .markdownlint-code.jsonc "**/*.md" --ignore "_site" --ignore "node_modules"
 
   link-check:
     # Validate the BUILT site with html-proofer: broken internal links, broken

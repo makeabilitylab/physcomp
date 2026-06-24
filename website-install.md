@@ -40,7 +40,7 @@ Below, we will walk you through dev environment setup on both Mac and Windows.
 
 Regardless of which platform you're using, the first step is to clone the [physcomp repo](https://github.com/makeabilitylab/physcomp). Open your command prompt and run:
 
-```
+```text
 > git clone https://github.com/makeabilitylab/physcomp.git
 ```
 
@@ -60,7 +60,7 @@ Follow the installation guide closely. I did each step except for I skipped the 
 
 Once Ruby is installed, run:
 
-```
+```text
 > gem install jekyll
 ```
 
@@ -72,7 +72,7 @@ As of Jekyll 4.4+, this also installs `webrick` automatically, so you do **not**
 
 Change into the `physcomp` directory and run `bundle install`:
 
-```
+```text
 > cd physcomp
 > bundle install
 ```
@@ -82,7 +82,7 @@ Note: I typically do this from within VSCode's Terminal.
 #### Run 'bundle exec jekyll serve' in physcomp dir
 Finally, from within the `physcomp` folder, type:
 
-```
+```text
 > bundle exec jekyll serve
 ```
 
@@ -94,14 +94,14 @@ And that's it! Hopefully the server will be running at [http://127.0.0.1:4000/ph
 
 If you see an error like the following when running `bundle exec jekyll serve`:
 
-```
+```text
 /usr/local/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve/servlet.rb:3:in
   `require': cannot load such file -- webrick (LoadError)
 ```
 
 This means webrick isn't in your bundle. Fix it by running (from inside `physcomp`!):
 
-```
+```text
 > bundle add webrick
 > bundle exec jekyll serve
 ```
@@ -110,7 +110,7 @@ This was required for Ruby 3.0+ with older versions of Jekyll. With Jekyll 4.4+,
 
 **"Could not locate Gemfile" error**
 
-```
+```text
 Could not locate Gemfile
 ```
 
@@ -120,7 +120,7 @@ This means you ran a `bundle` command from the wrong directory. Make sure you `c
 
 If the remote theme (just-the-docs) isn't updating, try stopping the server (Ctrl-C) and running with `--incremental` disabled:
 
-```
+```text
 > bundle exec jekyll serve --no-incremental
 ```
 
@@ -155,7 +155,7 @@ When the Ruby Installer finishes, it just disappears. So, on to the next step!
 #### Run 'gem install jekyll'
 **Second**, I then opened `Windows Powershell` and typed `gem install jekyll`:
 
-```
+```text
 gem install jekyll
 Fetching jekyll-4.1.1.gem
 Fetching mercenary-0.4.0.gem
@@ -178,7 +178,7 @@ Here's a screenshot:
 #### Run 'gem install github-pages'
 **Third**, I then tried to install `github-pages` via: `gem install github-pages`. So, run:
 
-```
+```text
 > gem install github-pages
 ```
 
@@ -189,7 +189,7 @@ This worked well on some of our Windows systems but others failed. If this succe
 
 When running `gem install github-pages`, you may encounter an error about Nokogiri versions:
 
-```
+```text
 ERROR:  Error installing github-pages:
         The last version of nokogiri (>= 1.10.4, < 2.0) to support your Ruby & RubyGems was 1.10.9. Try installing it with `gem install nokogiri -v 1.10.9` and then running the current command again
         nokogiri requires Ruby version >= 2.3, < 2.7.dev. The current ruby version is 2.7.0.0.
@@ -197,7 +197,7 @@ ERROR:  Error installing github-pages:
 
 So, I tried:
 
-```
+```text
 > gem install nokogiri -v 1.10.9
 ERROR:  Error installing nokogiri:
         The last version of nokogiri (= 1.10.9) to support your Ruby & RubyGems was 1.10.9. Try installing it with `gem install nokogiri -v 1.10.9`
@@ -206,7 +206,7 @@ ERROR:  Error installing nokogiri:
 
 But this also failed. And given that I have no idea how hard it would be to downgrade Ruby and whether that would wreck other dependences, I searched the Internet and found this [Issue](https://github.com/sparklemotion/nokogiri/issues/1961) on the Nokogiri GitHub. So, then I tried [this](https://github.com/sparklemotion/nokogiri/issues/1961#issuecomment-581851368):
 
-```
+```text
 > gem inst nokogiri --pre
 Fetching nokogiri-1.11.0.rc2-x64-mingw32.gem
 Nokogiri is built with the packaged libraries: libxml2-2.9.10, libxslt-1.1.34, zlib-1.2.11, libiconv-1.15.
@@ -221,7 +221,7 @@ This worked. Yay!
 
 But I still couldn't install github pages, boo!
 
-```
+```text
 gem install github-pages
 ERROR:  Error installing github-pages:
         The last version of nokogiri (>= 1.10.4, < 2.0) to support your Ruby & RubyGems was 1.10.9. Try installing it with `gem install nokogiri -v 1.10.9` and then running the current command again
@@ -241,13 +241,13 @@ So, then I just skipped to the final step and ran `bundle install` and things wo
 
 From the shell, change directories to `physcomp`. On my machine:
 
-```
+```text
 > cd c:\git\physcomp
 ```
 
 And then run `bundle install`:
 
-```
+```text
 C:\git\physcomp> bundle install
 Fetching gem metadata from https://rubygems.org/...........
 Fetching gem metadata from https://rubygems.org/.
@@ -270,7 +270,7 @@ You've done it!
 
 Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll), you can open terminal in VSCode and type:
 
-```
+```text
 > bundle exec jekyll serve 
 ```
 
@@ -282,7 +282,7 @@ If you receive an error like the following, you may need to *restart* your compu
 
 ![](assets/images/BundleExecJekyllServeFailsInVSCodeScreenshot.png)
 
-```
+```text
 Try the new cross-platform PowerShell https://aka.ms/pscore6
 
 PS D:\Git\physcomp> bundle exec jekyll serve 

@@ -210,7 +210,7 @@ Either wiring will work. They are functionally equivalent but have opposite beha
 
 And, of course, we could inverse the relationship in software (rather than hardware). So, for example, if we wanted to make an LED brighter as light levels decrease with the left wiring configuration, we could do the following:
 
-{% highlight C %}
+```cpp
 
 // In this code, we brighten an LED inversely proportional to light level (as measured by 
 // a photoresistor). We assume the photoresistor is R1 and fixed resistor is R2 in the 
@@ -220,17 +220,17 @@ int ledVal = map(photoresistorVal, 0, 1023, 0, 255); // convert to 8-bit range (
 ledVal = 255 - ledVal; // invert so that LED gets brighter as photoresistor gets darker
 analogWrite(OUTPUT_LED_PIN, ledVal);
 
-{% endhighlight C %}
+```
 
 And I often like to simplify this even more by relying on `map` for the inversion (notice how I flip the order of `255` and `0`), so the code becomes:
 
-{% highlight C %}
+```cpp
 
 int photoresistorVal = analogRead(INPUT_PHOTORESISTOR_PIN); // read in photoresistor val
 int ledVal = map(photoresistorVal, 0, 1023, 255, 0); // inverse relationship
 analogWrite(OUTPUT_LED_PIN, ledVal);
 
-{% endhighlight C %}
+```
 
 ### What value should we make our fixed resistor?
 

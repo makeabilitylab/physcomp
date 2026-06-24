@@ -159,24 +159,24 @@ Start a new sketch in the Arduino IDE:
 
 Because the 20 digital I/O pins can be used for **either** **input** or **output**, we need to specify that Pin 3 should be used for *output*. That is, we want the Arduino to **output** a 5V signal on Pin 3 to turn on our LED. We configure pins in the  `setup()` block and use the [`pinMode(int pin, int mode)`](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/) command, which takes in a pin as the first parameter and a mode (`INPUT` or `OUTPUT`) as the second.
 
-{% highlight C %}
+```cpp
 void setup() {
   // put your setup code here, to run once:
   pinMode(3, OUTPUT);
 }
-{% endhighlight C %}
+```
 
 ### Step 3: Set Pin 3 HIGH
 
 Lastly, we need to actually set the Pin 3 signal to `HIGH`. For this, we use the  [`digitalWrite(int pin, int value)`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) command, which takes in a pin as the first parameter and a value (`HIGH` or `LOW`) as the second. We could do this either in `setup()` or in `loop()` but since we're not currently changing the output signal, there is no reason to put it in `loop()`, so let's put it in `setup()` along with the `pinMode` code.
 
-{% highlight C %}
+```cpp
 void setup() {
   // put your setup code here, to run once:
   pinMode(3, OUTPUT);
   digitalWrite(3, HIGH); // turn LED on (output 5V)
 }
-{% endhighlight C %}
+```
 
 ### Step 4: Compile the code
 
@@ -212,7 +212,7 @@ Now, let's modify our code to turn on *and* off the LED programmatically. More s
 
 First, move the digitalWrite code from `setup()` to `loop()`:
 
-{% highlight C %}
+```cpp
 void setup() {
   // set Pin 3 to output
   pinMode(3, OUTPUT);
@@ -221,13 +221,13 @@ void setup() {
 void loop() {
   digitalWrite(3, HIGH);  // turn LED on (output 5V)
 }
-{% endhighlight C %}
+```
 
 ### Step 2: Add in delays and code to turn off LED
 
 Now, add in code to pause (for one second) and then turn off the LED (for one second) using `delay()`. Remember, when `loop()` completes, it is automatically called again (making the LED blink continuously).
 
-{% highlight C %}
+```cpp
 void setup() {
   // set Pin 3 to output
   pinMode(3, OUTPUT);
@@ -239,7 +239,7 @@ void loop() {
   digitalWrite(3, LOW);   // turn LED off (output 0V)
   delay(1000);            // wait another second
 }
-{% endhighlight C %}
+```
 
 ### Step 3: Compile and upload
 
@@ -253,7 +253,7 @@ We're done! Now, compile and upload the code and see it run!
 
 Typically, we want to limit the use of *literal constants* in our code and replace them by variables. In this case, let's replace `3` with `LED_OUTPUT_PIN` defined as a global variable at the top of our program (`const int LED_OUTPUT_PIN = 3;`). This will make our code more maintainable, more readable, and less prone to accidental mistakes. Try to do this for all literals in the future.
 
-{% highlight C %}
+```cpp
 const int LED_OUTPUT_PIN = 3;
 void setup() {
   // set Pin 3 to output
@@ -266,7 +266,7 @@ void loop() {
   digitalWrite(LED_OUTPUT_PIN, LOW);   // turn LED off (output 0V)
   delay(1000);                         // wait another second
 }
-{% endhighlight C %}
+```
 
 ### Walking through the code
 
@@ -347,7 +347,7 @@ Because `delay()` usage can be so troublesome, as part of their introductory tut
 
 To avoid `delay()` calls, the code tracks **time**, **LED state changes** (when the LED switches from `HIGH` to `LOW` or `LOW` to `HIGH`), and **when** these state changes occur. The [BlinkWithoutDelay](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay) main loop is below. Notice that there are no `delay()` calls!
 
-{% highlight C %}
+```cpp
 void loop() {
   // check to see if it's time to blink the LED; that is, if the difference
   // between the current time and last time you blinked the LED is bigger than
@@ -369,7 +369,7 @@ void loop() {
     digitalWrite(ledPin, ledState);
   }
 }
-{% endhighlight C %}
+```
 
 We've also made our own [BlinkWithoutDelay](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino) version, which is available on [GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithoutDelay/BlinkWithoutDelay.ino) and shown below. This version is functionally equivalent to Arduino's official example but uses our own coding style and is, in our opinion, more understandable.
 

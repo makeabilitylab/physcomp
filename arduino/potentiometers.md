@@ -250,9 +250,9 @@ In fact, if you flip over the Leonardo, you'll discover additional white silkscr
 
 You can access these by specifying `A6` - `A11` in your code. For example:
 
-{% highlight cpp %}
+```cpp
 int analogVal = analogRead(A6); // A6 is same as D4
-{% endhighlight cpp %}
+```
 
 Another view of the back of the Arduino Leonardo board showing the additional analog input pins. 
 
@@ -360,7 +360,7 @@ Just like with our [button](buttons.md) lesson, let's walk through how one might
 
 Let's first introduce a simple program to read and print analog input values to Serial. This will provide a convenient way to test our input circuits.
 
-{% highlight cpp %}
+```cpp
 void setup()
 {
   Serial.begin(9600); // for printing values to console
@@ -372,7 +372,7 @@ void loop()
   Serial.println(potVal);      // print value to Serial
   delay(50);                   // Reading new values at ~20Hz
 }
-{% endhighlight cpp %}
+```
 
 ### Building an initial circuit
 

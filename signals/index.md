@@ -39,7 +39,7 @@ These lessons are intended to be interactive. You should modify, run, iterate, a
 
 There are three ways to view the lessons: **first**, you can click on the exported HTML versions; however, these are not interactive; **second**, you can clone our [Signals repo](https://github.com/makeabilitylab/signals) and open the `ipynb` files locally on your computer (this is our recommended approach):
 
-```
+```bash
 git clone https://github.com/makeabilitylab/signals.git
 ```
 

@@ -38,7 +38,7 @@ This [blog post ](http://yaab-arduino.blogspot.com/2015/02/fast-sampling-from-an
 
 Inspired by the discussion on this [Sparkfun blog post](https://learn.sparkfun.com/blog/1687#comments), I looked up the source code directly to investigate. The entire `int main(void)` function in [main.cpp](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/main.cpp) is:
 
-```C
+```cpp
 int main(void)
 {
     init();
@@ -64,7 +64,7 @@ From this [Arduino forum post](https://forum.arduino.cc/index.php?topic=4324.msg
 
 You can also manipulate the ports directly rather than via the Arduino libraries (which incur lots of overhead). From the same forum post:
 
-```C
+```cpp
 cli();
  while (1) {
    PORTD |= B1000;

@@ -20,7 +20,7 @@ usetocbot: true
 ## Running the website
 Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll)—see our [website development setup guide here](website-install.md)—you can open terminal in VSCode and type:
 
-```
+```text
 > bundle exec jekyll serve 
 ```
 
@@ -185,27 +185,51 @@ htmlproofer ./_site --disable-external --swap-urls "^/physcomp:" \
 ## Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
 
-### Using Jekyll's `highlight` functionality
-This is a test.
-{% highlight C %}
-void loop() {
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);               // wait for a second
-}
-{% endhighlight C %}
+**Standard:** write code in fenced blocks (triple backticks) with a **required
+language token** on the opening fence. Use `cpp` for **all** Arduino/ESP32
+sketches (our house style), and a real token for everything else — `javascript`,
+`html`, `css`, `json`, `python`, `bash`, etc. For terminal sessions, program
+output, file trees, or other non-source text, use `text` (highlighters render it
+verbatim, and it still satisfies the language requirement).
 
-### Using Markdown's tickmarks
-
-```
+````markdown
+```cpp
 void loop() {
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);               // wait for a second
+  digitalWrite(led, HIGH);   // turn the LED on
+  delay(1000);               // wait a second
 }
 ```
+````
+
+Do **not** use Jekyll's `{% raw %}{% highlight %}{% endraw %}` Liquid tags. They
+were fine historically, but the whole site was migrated to fenced blocks (issue
+#99) for portability, tooling, and to de-risk a future framework move where
+Liquid tags would all need rewriting.
+
+**This is enforced in CI.** The `code-blocks` job in
+`.github/workflows/content-lint.yml` runs `markdownlint` with the scoped config
+`.markdownlint-code.jsonc`:
+
+- **MD040** — every fenced block must declare a language token.
+- **MD046** — code must be *fenced*, never indented (an indented block can't
+  carry a language, so it would silently dodge MD040). For a deliberate indented
+  demo, opt out inline with `<!-- markdownlint-disable MD046 -->` … `<!-- markdownlint-enable MD046 -->`.
+- **MD048** — fences use backticks (` ``` `), not tildes.
+
+The config is intentionally separate from the editor's `.markdownlint.jsonc` so
+the gate only checks these three rules (not the many unrelated style nits the
+older content predates). Run it locally with:
+
+```bash
+npx markdownlint-cli@0.48.0 -c .markdownlint-code.jsonc "**/*.md" --ignore "_site" --ignore "node_modules"
+```
+
+**Liquid inside a code block.** Fenced blocks do *not* stop Jekyll from
+executing Liquid, so if a block must *show* literal Liquid (e.g. an
+`if page.usemathjax` conditional), wrap it in `raw`/`endraw` tags and Jekyll
+prints it verbatim instead of running it — see the
+[Adding LaTeX support](#adding-latex-support) example below, which does exactly
+this.
 
 ### Using `gist-it.appspot.com` to embed code directly from GitHub
 <!-- <script src="http://gist-it.appspot.com/http://github.com/$file"></script> -->
@@ -264,12 +288,17 @@ It works with almost all markdown flavours (the below blank line matters). This 
 ### Option 3: Use tabs
 This version is using tabs:
 
+<!-- markdownlint-disable MD046 -->
+<!-- Intentionally indented: this block demonstrates the tab/indent code-block syntax itself. -->
+
     Start on a fresh line
     Hit tab twice, type up the content
     Your content should appear in a box. However, doesn't appear to now support markdown. For example, **this** should be bold. However, I can still use html it appears? For example, <b>this</b> is bold? Or maybe not! So, perhaps this is treated as a code block or something...
 
+<!-- markdownlint-enable MD046 -->
+
 This version is using tick marks (rather than tabs) but it should render in the same way:
-```
+```text
 Use tickmarks
 ```
 
@@ -301,7 +330,7 @@ This paragraph is now using the `.test-css` style. We do this by using this synt
 
 So, the markdown looks like this:
 
-```
+```markdown
 This paragraph is now using the `.test-css` style. We do this by using this syntax `{: .test-css}` below the element we want styled.
 {: .test-css}
 ```
@@ -314,13 +343,15 @@ After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll te
 2. Since I'm currently using `remote_theme: pmarsceill/just-the-docs`, I was a bit confused about how to make local configuration changes since most online blogs, forum posts talk about editing content in the `_includes` folder; however, I didn't have this in my local dev environment. So, what to do?
 3. I manually made a `_includes` folder with the filename `head_custom.html` and put in there:
 
-{% highlight html %}{% raw %}
+{% raw %}
+```html
 {% if page.usemathjax %}
 <script type="text/javascript" async
  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 {% endif %}
-{% endraw %}{% endhighlight %}
+```
+{% endraw %}
 
 ### Using LaTeX on markdown pages
 On pages where you want to use LaTeX, then add `usemathjax: true` to the header content
@@ -335,20 +366,20 @@ Because I'm forever a LaTeX n00b, I found this online [WYSIWYG LaTeX math editor
 
 I tried to get Disqus working with Jekyll by following their official instructions; however, it *just* wouldn't work and I didn't have significant time to try and troubleshoot/debug. I kept getting the non-help error printed out in Chrome's dev tool console:
 
-```
+```text
 Uncaught SyntaxError: Unexpected end of input   led-on.html:1
 ```
 
 And in FireFox:
 
-```
+```text
 SyntaxError: missing } after function body led-on.html:1:754
 note: { opened at line 1, column 287  led-on.html:1:287
 ```
 
 But I thought I'd try once more and I came across a [blog posting](https://disqus.com/home/discussion/channel-discussdisqus/why_does_the_disqus_not_work_in_jekyll/) that had the solution The "Universal Code" that Disqus has you embed on your website includes `// single line` comments and `/* multi-line */` comments. However, when Jekyll builds the website, it places the entire produced html on one line (read: not beautified), so the single-line comments disrupt the code. Here's the code that **doesn't work**.
 
-{% highlight HTML %}
+```html
 <div id="disqus_thread"></div>
 <script>
     /**
@@ -373,11 +404,11 @@ But I thought I'd try once more and I came across a [blog posting](https://disqu
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
         Disqus.</a></noscript>
 </div>
-{% endhighlight HTML %}
+```
 
 And here's the code that **does** work with the single line comments replaced with multi-line comments:
 
-{% highlight HTML %}
+```html
 <div id="disqus_thread"></div>
 <script>
     /**
@@ -402,7 +433,7 @@ And here's the code that **does** work with the single line comments replaced wi
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
         Disqus.</a></noscript>
 </div>
-{% endhighlight HTML %}
+```
 
 ## Troubleshooting video playback locally
 
@@ -410,8 +441,10 @@ Jekyll's built-in WEBrick server doesn't support HTTP range requests,
 which browsers need to stream `<video>` elements. If videos fail to 
 load or play, try serving the built site with a different local server:
 
-    bundle exec jekyll build
-    python3 -m http.server 4000 --directory _site
+```bash
+bundle exec jekyll build
+python3 -m http.server 4000 --directory _site
+```
 
 Alternatively, `npx serve _site` works well. Both support range 
 requests and handle large media files reliably.
@@ -419,7 +452,9 @@ requests and handle large media files reliably.
 If videos are still slow, check file sizes. Compress large `.mp4` 
 files with ffmpeg:
 
-    ffmpeg -i input.mp4 -crf 28 -preset fast -movflags +faststart output.mp4
+```bash
+ffmpeg -i input.mp4 -crf 28 -preset fast -movflags +faststart output.mp4
+```
 
 The `-movflags +faststart` flag moves metadata to the front of the 
 file so browsers can begin playback before the full download completes.

@@ -129,7 +129,7 @@ Start a new sketch in the Arduino IDE:
 
 Our initialization code is the same as for [LED blink](led-blink.md) except for the addition of `const int MAX_ANALOG_OUT = 255;` and a constant for the delay amount of 5 milliseconds (`const int DELAY_MS = 5;`).
 
-{% highlight C %}
+```cpp
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
 const int DELAY_MS = 5;
@@ -138,13 +138,13 @@ void setup() {
   // set Pin 3 to output
   pinMode(LED_OUTPUT_PIN, OUTPUT);
 }
-{% endhighlight C %}
+```
 
 ### Step 3: Write fade loop
 
 Now, write code that outputs steadily increasing values for [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) (to fade on) followed by steadily decreasing values (to fade off).
 
-{% highlight C %}
+```cpp
 void loop(){
   // fade on
   for(int i = 0; i <= MAX_ANALOG_OUT; i += 1){
@@ -158,7 +158,7 @@ void loop(){
     delay(DELAY_MS);
   }
 }
-{% endhighlight C %}
+```
 
 The full code is embedded below:
 
@@ -234,7 +234,7 @@ So, let's rewrite the fade example but without for loops and, instead, rely on t
 {: .note }
 > I have a habit of prefixing my global variables by `_` but this is just my own convention and helps me easily discern between local variables and global variables. You need not do this, of course! 😊
 
-{% highlight C %}
+```cpp
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
 const int DELAY_MS = 5;
@@ -266,7 +266,7 @@ void loop() {
   // wait for some milliseconds to see the dimming effect
   delay(DELAY_MS);
 }
-{% endhighlight C %}
+```
 
 You can find [this code in GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOff/FadeOnAndOff.ino).
 

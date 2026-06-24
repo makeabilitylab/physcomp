@@ -192,20 +192,20 @@ If you prefer to **configure VSCode manually**, the key challenge is getting aut
 
 First, open a terminal in your project folder and run:
 
-{% highlight Bash %}
+```bash
 npm init -y
 npm install --save-dev @types/p5
-{% endhighlight Bash %}
+```
 
 Then create a `jsconfig.json` file in your project root:
 
-{% highlight JSON %}
+```json
 {
   "compilerOptions": {
     "types": ["p5/global"]
   }
 }
-{% endhighlight JSON %}
+```
 
 That's it! VSCode will now provide autocomplete, hover documentation, and parameter hints for all p5.js functions. You'll still need [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) to serve your sketch in a browser.
 
@@ -244,7 +244,7 @@ The Arduino program is simple: read an analog value and transmit it via serial a
 
 We use [`analogRead()`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogRead/) on Pin A0 and divide the reading by the maximum analog input value (1023 on the Arduino Uno and Leonardo with 10-bit ADCs, or 4095 on ESP32 boards with 12-bit ADCs). We set the baud rate to 115200.
 
-{% highlight C %}
+```cpp
 const int DELAY_MS = 5;
 
 const int ANALOG_INPUT_PIN = A0;
@@ -270,7 +270,7 @@ void loop() {
   _lastAnalogVal = analogVal;
   delay(DELAY_MS);
 }
-{% endhighlight C %}
+```
 
 **Code.** The full code is [AnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/AnalogOut/AnalogOut.ino) in our GitHub.
 {: .fs-1 }
@@ -287,13 +287,13 @@ Start with a brand new blank project with `index.html`, `css/style.css`, and `sk
 
 If you have [p5.vscode](https://marketplace.visualstudio.com/items?itemName=samplavigne.p5-vscode) installed, you can create a new project from the Command Palette (`Ctrl+Shift+P` → `Create p5.js Project`). If you do this, make sure you add our serial library to the `<head>` in `index.html`:
 
-{% highlight HTML %}
+```html
 <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.js"></script>
-{% endhighlight HTML %}
+```
 
 Or you can build up the required files manually. The `index.html` should look like:
 
-{% highlight HTML %}
+```html
 <!DOCTYPE html>
 <html>
 
@@ -309,14 +309,14 @@ Or you can build up the required files manually. The `index.html` should look li
 </body>
 
 </html>
-{% endhighlight HTML %}
+```
 
 {: .note }
 > Notice that we're pinning to **p5.js version 1.11.13** (`p5@1.11.13`) rather than using the latest version. This ensures your sketch continues to work even after the p5.js Editor [defaults to 2.0 in August 2026](#p5js-20). You can also use `p5@1` to always get the latest 1.x release.
 
 The `css/style.css` file:
 
-{% highlight CSS %}
+```css
 html, body {
   margin: 0;
   padding: 0;
@@ -325,11 +325,11 @@ html, body {
 canvas {
   display: block;
 }
-{% endhighlight CSS %}
+```
 
 And the `sketch.js` file:
 
-{% highlight JavaScript %}
+```javascript
 function setup() {
   createCanvas(400, 400);
 }
@@ -337,7 +337,7 @@ function setup() {
 function draw() {
   background(100);
 }
-{% endhighlight JavaScript %}
+```
 
 Now save and load the page with Live Server. It should look like this:
 
@@ -351,7 +351,7 @@ If your page does not load or does not look like this, study our blank template 
 
 Let's update `sketch.js` to draw a white circle of diameter 50 in the canvas center. We'll use [`fill()`](https://p5js.org/reference/#/p5/fill) to set the fill color and [`noStroke()`](https://p5js.org/reference/#/p5/noStroke) to turn off outlining.
 
-{% highlight JavaScript %}
+```javascript
 function setup() {
   createCanvas(400, 400);
 }
@@ -368,7 +368,7 @@ function draw() {
   let circleDiameter = 50;
   circle(xCenter, yCenter, circleDiameter);
 }
-{% endhighlight JavaScript %}
+```
 
 It should look like this:
 
@@ -382,7 +382,7 @@ Or here's [a live demo](https://editor.p5js.org/jonfroehlich/sketches/aPoybLEdC)
 
 Now let's make this sketch interactive! We'll set the circle's size based on the mouse's x position. Later, we'll replace the mouse input with **incoming serial data**.
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   background(100);
   
@@ -399,7 +399,7 @@ function draw() {
   let circleDiameter = maxDiameter * shapeFraction;
   circle(xCenter, yCenter, circleDiameter);
 }
-{% endhighlight JavaScript %}
+```
 
 It should look something like this:
 
@@ -417,16 +417,16 @@ Now we can add serial functionality. This is very similar to the [previous lesso
 
 First, add global variables to the top of `sketch.js`:
 
-{% highlight JavaScript %}
+```javascript
 let shapeFraction = 0; // tracks the new shape fraction off serial
 let serial;            // the Serial object
 let serialOptions = { baudRate: 115200 };
 let pHtmlMsg;          // used for displaying messages via html (optional)
-{% endhighlight JavaScript %}
+```
 
 Then create the Serial object in `setup()`, set up callbacks, and attempt to auto-connect to previously approved ports:
 
-{% highlight JavaScript %}
+```javascript
 function setup() {
   createCanvas(400, 400);
 
@@ -443,11 +443,11 @@ function setup() {
   // Add in a lil <p> element to provide messages. This is optional
   pHtmlMsg = createP("Click anywhere on this page to open the serial connection dialog");
 }
-{% endhighlight JavaScript %}
+```
 
 Next, add the callback functions:
 
-{% highlight JavaScript %}
+```javascript
 function onSerialErrorOccurred(eventSender, error) {
   console.log("onSerialErrorOccurred", error);
   pHtmlMsg.html(error);
@@ -467,11 +467,11 @@ function onSerialDataReceived(eventSender, newData) {
   console.log("onSerialDataReceived", newData);
   pHtmlMsg.html("onSerialDataReceived: " + newData);
 }
-{% endhighlight JavaScript %}
+```
 
 Finally, add `mouseClicked()` to let the user connect to serial by clicking anywhere on the canvas:
 
-{% highlight JavaScript %}
+```javascript
 function mouseClicked() {
   if (!serial.isOpen()) {
     try {
@@ -481,7 +481,7 @@ function mouseClicked() {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 Save and run. The page should look the same except for the new `<p>` element at the bottom saying "Click anywhere on this page to open the serial connection dialog."
 
@@ -491,7 +491,7 @@ Save and run. The page should look the same except for the new `<p>` element at 
 
 Finally, we need to parse the incoming serial data and use it to control the circle size. Update `onSerialDataReceived()` to store the incoming value:
 
-{% highlight JavaScript %}
+```javascript
 function onSerialDataReceived(eventSender, newData) {
   console.log("onSerialDataReceived", newData);
   pHtmlMsg.html("onSerialDataReceived: " + newData);
@@ -499,11 +499,11 @@ function onSerialDataReceived(eventSender, newData) {
   // Parse the incoming value as a float
   shapeFraction = parseFloat(newData);
 }
-{% endhighlight JavaScript %}
+```
 
 And in `draw()`, simply comment out the mouse-based line since `shapeFraction` is now set by serial:
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   background(100);
   
@@ -520,7 +520,7 @@ function draw() {
   let circleDiameter = maxDiameter * shapeFraction;
   circle(xCenter, yCenter, circleDiameter);
 }
-{% endhighlight JavaScript %}
+```
 
 And that's it! We did it! You can view, edit, and run CircleSizeIn in the [p5.js online editor](https://editor.p5js.org/jonfroehlich/sketches/5Knw4tN1d) or via GitHub ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/CircleSizeInDemo), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/CircleSizeInDemo)).
 
@@ -572,7 +572,7 @@ We're going to use a **queue** to temporarily store data coming off serial, then
 
 The full code is ~50 lines:
 
-{% highlight JavaScript %}
+```javascript
 let serial; // the Serial object
 let serialOptions = { baudRate: 115200 };
 let queue = [];
@@ -636,7 +636,7 @@ function mouseClicked() {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 That's it! Pretty amazing, huh?! You can view our implementation as a [live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/) or [on GitHub](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn).
 

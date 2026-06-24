@@ -183,7 +183,7 @@ However, if you do this, what will the digital input pin read when the switch is
 
 In fact, try wiring up this configuration yourself and running the following program with the [Serial Monitor](serial-print.md#step-3-open-serial-monitor-in-the-arduino-ide) open. What happens when you press the button? Try touching the button legs with your fingers but not actually pressing the button—what happens to the `digitalRead` value? Are you reliably tracking the button state?
 
-{% highlight cpp %}
+```cpp
 const int INPUT_BUTTON_PIN = 2;
 void setup()
 {
@@ -197,7 +197,7 @@ void loop()
   Serial.println(buttonVal);                     // print value to Serial
   delay(5);                                      // small delay
 }
-{% endhighlight cpp %}
+```
 
 Here's a quick video demonstration of what happens—the floating pin problem! Note: we are using a slightly modified version of this code where an LED is turned on if the button is pressed (*i.e.,* if `buttonVal == 1`). This just makes it easier to see the fluctuating button state.
 
@@ -374,7 +374,7 @@ To zoom in on this image, right-click and select 'Open image in a new tab.'
 
 ### Code to turn on LED with button press
 
-{% highlight cpp %}
+```cpp
 const int INPUT_BUTTON_PIN = 2;
 const int OUTPUT_LED_PIN = LED_BUILTIN;
 
@@ -391,7 +391,7 @@ void loop()
   digitalWrite(OUTPUT_LED_PIN, buttonState);
   delay(30);
 }
-{% endhighlight cpp %}
+```
 
 ### Tinkercad version with no breadboard
 

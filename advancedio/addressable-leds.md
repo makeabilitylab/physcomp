@@ -203,7 +203,7 @@ The Adafruit NeoPixel library can be installed directly from the Arduino Library
 
 The NeoPixel library API will feel familiar if you've completed the [OLED lesson](oled.md)—it follows the same **buffer → display** pattern:
 
-{% highlight C++ %}
+```cpp
 #include <Adafruit_NeoPixel.h>
 
 const int LED_PIN = 2;       // Any digital pin works — no PWM required!
@@ -219,7 +219,7 @@ void setup() {
   strip.setBrightness(50);   // Set brightness (0-255). 50 is ~20% bright
   strip.show();              // Initialize all pixels to 'off'
 }
-{% endhighlight C++ %}
+```
 
 {: .note }
 > Notice the same **buffer → show** pattern from the [OLED lesson](oled.md): `setPixelColor()` writes to a buffer in RAM, and `show()` pushes the data to the LEDs. If you forget to call `show()`, nothing will change on the LEDs—just like forgetting `_display.display()` on the OLED!
@@ -247,7 +247,7 @@ Here are the most commonly used functions from the [Adafruit NeoPixel library](h
 
 Each pixel's color is specified using RGB values from an 8-bit value—0-255 per channel—just like the [RGB LED lesson](../arduino/rgb-led.md). Some examples:
 
-{% highlight C++ %}
+```cpp
 // Named colors using strip.Color(R, G, B)
 uint32_t red    = strip.Color(255, 0, 0);
 uint32_t green  = strip.Color(0, 255, 0);
@@ -255,11 +255,11 @@ uint32_t blue   = strip.Color(0, 0, 255);
 uint32_t white  = strip.Color(255, 255, 255);
 uint32_t purple = strip.Color(128, 0, 255);
 uint32_t off    = strip.Color(0, 0, 0);
-{% endhighlight C++ %}
+```
 
 For animations that cycle through colors, the **HSV** (hue, saturation, value) color space is much more useful than RGB. Remember the [HSL crossfading lesson](../arduino/rgb-led-fade.md)? The same principle applies here. The `ColorHSV()` function lets you smoothly sweep through the entire rainbow by varying just the hue value:
 
-{% highlight C++ %}
+```cpp
 // Hue ranges from 0 to 65535 (full color wheel)
 // 0 = red, ~10922 = yellow, ~21845 = green, ~32768 = cyan,
 // ~43690 = blue, ~54613 = magenta, 65535 wraps back to red
@@ -269,7 +269,7 @@ uint32_t color = strip.ColorHSV(hue, 255, 255); // Full sat, full brightness
 // Note: ColorHSV returns a value that should be passed through strip.gamma32()
 // for perceptually accurate colors:
 strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(hue, 255, 255)));
-{% endhighlight C++ %}
+```
 
 {: .note }
 > **What is `gamma32()`?** Human eyes perceive brightness non-linearly—the difference between 0 and 50 looks much bigger than the difference between 200 and 250. The `gamma32()` function applies a correction curve so that color transitions look smooth and natural to our eyes. It's optional but makes a noticeable difference in gradients and fades.
@@ -381,7 +381,7 @@ Now that we understand how addressable LEDs work and have our stick wired up, le
 
 Let's start by simply setting each LED to a different color. This confirms that your wiring is correct and that the library is communicating with all 8 LEDs. This is our equivalent of the [shape drawing activity](oled.md#activity-draw-shapes-and-text) from the OLED lesson—the simplest possible test.
 
-{% highlight C++ %}
+```cpp
 #include <Adafruit_NeoPixel.h>
 
 const int LED_PIN = 2;
@@ -409,7 +409,7 @@ void setup() {
 void loop() {
   // Nothing to do — the colors persist until changed
 }
-{% endhighlight C++ %}
+```
 
 If your colors look wrong (*e.g.,* you asked for red but got green), try changing `NEO_GRB` to `NEO_RGB` in the strip constructor. This is the most common issue students encounter!
 
@@ -423,7 +423,7 @@ Try playing with the colors by changing the RGB values above. Our code for this 
 
 Now let's create a classic rainbow animation that cycles smoothly across all 8 LEDs. This introduces the concept of **animation on LED strips**: update pixel colors, call `show()`, wait a bit, repeat. It's the same pattern we used for the [bouncing ball](oled.md#activity-draw-a-bouncing-ball) on the OLED.
 
-{% highlight C++ %}
+```cpp
 #include <Adafruit_NeoPixel.h>
 
 const int LED_PIN = 2;
@@ -456,7 +456,7 @@ void loop() {
 
   delay(20); // ~50 fps
 }
-{% endhighlight C++ %}
+```
 
 Try changing the `HUE_STEP` constant to `64` (slower rainbow) or `512` (faster rainbow). What happens if you change `setBrightness()` to 255? (Shield your eyes!).
 
@@ -490,7 +490,7 @@ Use the same LED wiring as before, and add a 10KΩ potentiometer with its wiper 
 
 #### The code
 
-{% highlight C++ %}
+```cpp
 #include <Adafruit_NeoPixel.h>
 
 const int LED_PIN = 2;
@@ -527,7 +527,7 @@ void loop() {
 
   delay(20);
 }
-{% endhighlight C++ %}
+```
 
 As you turn the potentiometer, you should see all 8 LEDs smoothly cycle through the rainbow together.
 
@@ -549,7 +549,7 @@ Now let's add a **second potentiometer** on `A1` to independently control bright
 **Video.** A circuit diagram for the potentiometer-controlled hue and brightness example. You can view and play with this example on [Tinkercad](https://www.tinkercad.com/things/53EaKIvUCsX-neopixel-strip-8-pot-controlled-hue-and-brightness).
 {: .fs-1 }
 
-{% highlight C++ %}
+```cpp
 #include <Adafruit_NeoPixel.h>
 
 const int LED_PIN = 2;
@@ -590,7 +590,7 @@ void loop() {
 
   delay(20);
 }
-{% endhighlight C++ %}
+```
 
 Try turning each knob independently—you can dial in any color at any brightness level. Notice how the `ColorHSV()` function's three parameters (hue, saturation, value) map perfectly to physical controls. What would you use a *third* potentiometer for? (Hint: saturation controls how vivid *vs.* pastel the color looks!)
 
@@ -608,7 +608,7 @@ For our final activity, let's build a **level meter** (or VU meter)—a bar-grap
 
 We'll color the LEDs from green (low) through yellow (mid) to red (high), like a classic audio level meter.
 
-{% highlight C++ %}
+```cpp
 #include <Adafruit_NeoPixel.h>
 
 const int LED_PIN = 2;
@@ -653,7 +653,7 @@ void loop() {
 
   delay(30);
 }
-{% endhighlight C++ %}
+```
 
 Turn the potentiometer and watch the LEDs fill up like a progress bar! This is a simple but satisfying example of mapping data to a physical display. Try replacing the potentiometer with a [force-sensitive resistor](../arduino/force-sensitive-resistors.md) or a [photoresistor](../sensors/photoresistors.md) for a more interactive experience.
 

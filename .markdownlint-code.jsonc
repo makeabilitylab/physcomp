@@ -1,0 +1,24 @@
+{
+  // Scoped markdownlint config for the CI "code-blocks" gate (issue #99).
+  //
+  // This is INTENTIONALLY separate from the editor config (.markdownlint.jsonc):
+  // it checks ONLY the code-block standardization rules so the gate can't fail
+  // on the many unrelated style nits (MD009/MD022/MD032/...) that the content
+  // predates. The CI job runs it via `markdownlint-cli -c` (which fully replaces
+  // config, rather than markdownlint-cli2 which merges the discovered editor
+  // config back in). Filename is non-standard on purpose so no tool auto-loads
+  // it for editing.
+  "default": false,
+
+  // MD040: every fenced code block must declare a language token (e.g. ```cpp,
+  // ```bash, ```text). cpp is the house style for all Arduino/ESP32 sketches.
+  "MD040": true,
+
+  // MD046: code blocks must be fenced, never indented (an indented block can't
+  // carry a language token, so it would silently evade MD040). Deliberate
+  // indented demos opt out inline with <!-- markdownlint-disable MD046 -->.
+  "MD046": { "style": "fenced" },
+
+  // MD048: fences use backticks (```), not tildes (~~~), for consistency.
+  "MD048": { "style": "backtick" }
+}

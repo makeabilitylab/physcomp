@@ -38,7 +38,7 @@ Download and install [Anaconda](https://www.anaconda.com/download) (latest Pytho
 
 Open your terminal (on linux or Mac) or the Anaconda Prompt (on Windows) and type:
 
-```
+```text
 > jupyter notebook
 ```
 
@@ -61,7 +61,7 @@ Feel free to follow the official installation instructions [here](https://jupyte
 
 To install the `nbextensions`, open your terminal (on linux or Mac) or the Anaconda Prompt (on Windows) and type:
 
-```
+```text
 > conda install -c conda-forge jupyter_contrib_nbextensions
 ```
 

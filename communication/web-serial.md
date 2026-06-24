@@ -71,10 +71,10 @@ Web Serial is supported by **Chrome** (89+), **Edge** (89+), and **Opera** (76+)
 
 To quickly check whether your browser supports Web Serial, open the developer console (`Ctrl+Shift+I` on Windows/Linux, `Cmd+Option+I` on Mac) and type:
 
-{% highlight JavaScript %}
+```javascript
 > "serial" in navigator
 true
-{% endhighlight JavaScript %}
+```
 
 If the result is `true`, your browser supports Web Serial. If `false`, switch to Chrome.
 
@@ -88,18 +88,18 @@ Here's a quick overview of the key steps:
 
 For security, the browser requires the user to explicitly select and grant permission to a serial port. This is triggered by calling `navigator.serial.requestPort()`:
 
-{% highlight JavaScript %}
+```javascript
 // Prompt user to select any serial port.
 const port = await navigator.serial.requestPort();
-{% endhighlight JavaScript %}
+```
 
 The [`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) keyword pauses execution until the user selects a port from the browser's permission dialog.
 
 You can try this yourself! Open the dev console on any page served over HTTPS or localhost and type:
 
-{% highlight JavaScript %}
+```javascript
 > await navigator.serial.requestPort();
-{% endhighlight JavaScript %}
+```
 
 If your Arduino is plugged in, you should see a dialog like this:
 
@@ -111,13 +111,13 @@ If your Arduino is plugged in, you should see a dialog like this:
 
 To open the port, call `port.open()` with a [SerialOptions](https://wicg.github.io/serial/#dom-serialoptions) dictionary. The only required option is `baudRate`:
 
-{% highlight JavaScript %}
+```javascript
 // Prompt user to select a serial port
 const port = await navigator.serial.requestPort();
 
 // Open the port at 9600 baud
 await port.open({ baudRate: 9600 });
-{% endhighlight JavaScript %}
+```
 
 The other options (`dataBits`, `stopBits`, `parity`, `bufferSize`, `flowControl`) default to the standard 8N1 configuration we discussed in the [previous lesson](serial-intro.md#the-asynchronous-serial-communication-frame). You typically don't need to change them.
 
@@ -125,7 +125,7 @@ The other options (`dataBits`, `stopBits`, `parity`, `bufferSize`, `flowControl`
 
 To write text data, use a `TextEncoderStream` piped to the port's writable stream:
 
-{% highlight JavaScript %}
+```javascript
 const textEncoder = new TextEncoderStream();
 const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
 
@@ -134,13 +134,13 @@ await writer.write("hello");
 
 // Release the lock so the port can be closed later
 writer.releaseLock();
-{% endhighlight JavaScript %}
+```
 
 #### Reading data
 
 Reading works similarly, using a `TextDecoderStream` and a read loop:
 
-{% highlight JavaScript %}
+```javascript
 const textDecoder = new TextDecoderStream();
 const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
 const reader = textDecoder.readable.getReader();
@@ -155,7 +155,7 @@ while (true) {
   // value is a string
   console.log(value);
 }
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > The raw Web Serial API works, but it's verbose—especially for the stream setup, line buffering, and error handling. That's why we built a wrapper library called `serial.js` to simplify things. Let's look at that next!
@@ -166,9 +166,9 @@ To make it easier to work with Web Serial, we wrote a JavaScript library called 
 
 To use it, add this `<script>` tag in the `<head>` or `<body>` of your HTML file:
 
-{% highlight HTML %}
+```html
 <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.js"></script>
-{% endhighlight HTML %}
+```
 
 This loads our serial library from the [jsDelivr CDN](https://www.jsdelivr.com/). After loading, the `Serial`, `SerialEvents`, and `SerialState` classes are available as global variables—no `import` statements needed!
 
@@ -182,18 +182,18 @@ This loads our serial library from the [jsDelivr CDN](https://www.jsdelivr.com/)
 
 [`serial.js`](https://github.com/makeabilitylab/js) uses an **event-based architecture** with callback functions, which is a common pattern in web and UI programming (see: Mozilla's [Introduction to Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)). The `Serial` class fires four events:
 
-{% highlight JavaScript %}
+```javascript
 const SerialEvents = Object.freeze({
   CONNECTION_OPENED: "CONNECTION_OPENED",  // Serial port successfully opened
   CONNECTION_CLOSED: "CONNECTION_CLOSED",  // Serial port closed
   DATA_RECEIVED:     "DATA_RECEIVED",      // New line of text received
   ERROR_OCCURRED:    "ERROR_OCCURRED",      // Error during connection or I/O
 });
-{% endhighlight JavaScript %}
+```
 
 To create a `Serial` object and subscribe to events:
 
-{% highlight JavaScript %}
+```javascript
 // Setup Web Serial using serial.js
 const serial = new Serial();
 
@@ -222,7 +222,7 @@ function onSerialDataReceived(eventSender, newData) {
 function onSerialErrorOccurred(eventSender, error) {
   console.log("Serial error:", error);
 }
-{% endhighlight JavaScript %}
+```
 
 You don't need to subscribe to *all* events—just the ones you need. But subscribing to `ERROR_OCCURRED` is helpful for debugging when things go wrong.
 
@@ -230,45 +230,45 @@ You don't need to subscribe to *all* events—just the ones you need. But subscr
 
 The simplest way to open a connection is with `connectAndOpen()`, which prompts the user for a port and opens it in one step:
 
-{% highlight JavaScript %}
+```javascript
 // Prompt user to select a port and open it at 9600 baud (default)
 await serial.connectAndOpen();
 
 // Or specify a baud rate (e.g., for ESP32)
 await serial.connectAndOpen(null, { baudRate: 115200 });
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > Because `connectAndOpen()` triggers a browser permission dialog, it **must be called from a user gesture** like a button click. You can't call it automatically when the page loads.
 
 There is also `autoConnectAndOpenPreviouslyApprovedPort()`, which reconnects to a port the user has previously approved—without showing the permission dialog again. This is useful for web apps where you don't want to ask the user to re-select their Arduino every time the page reloads:
 
-{% highlight JavaScript %}
+```javascript
 // Automatically reconnect to a previously approved port
 await serial.autoConnectAndOpenPreviouslyApprovedPort({ baudRate: 9600 });
-{% endhighlight JavaScript %}
+```
 
 ### Writing data
 
 To send data to the Arduino, use `writeLine()` (which appends a newline character) or `write()`:
 
-{% highlight JavaScript %}
+```javascript
 // Send "Hello" followed by a newline (\n)
 await serial.writeLine("Hello");
 
 // Send text without a newline
 await serial.write("data");
-{% endhighlight JavaScript %}
+```
 
 ### Checking connection state
 
-{% highlight JavaScript %}
+```javascript
 serial.isOpen();  // returns true or false
 serial.state;     // returns "closed", "opening", "open", or "closing"
 
 // Check browser support (static method)
 Serial.isWebSerialSupported(); // returns true or false
-{% endhighlight JavaScript %}
+```
 
 ## Let's make stuff!
 
@@ -310,7 +310,7 @@ The full experience looks like this:
 
 Create a folder called `SliderOut` with an empty `index.html` file. Open the folder in VSCode (`File → Open Folder`). Start with this minimal HTML:
 
-{% highlight HTML %}
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -321,7 +321,7 @@ Create a folder called `SliderOut` with an empty `index.html` file. Open the fol
   Content will go here!
 </body>
 </html>
-{% endhighlight HTML %}
+```
 
 Save (`Ctrl+S`) and launch it with Live Server to verify everything is working. You should see a blank page with "Content will go here!" at `127.0.0.1:5500`.
 
@@ -329,7 +329,7 @@ Save (`Ctrl+S`) and launch it with Live Server to verify everything is working. 
 
 Now let's add our serial library, a heading, and a connect button. Because Web Serial requires explicit user permission, we need a button the user can click to initiate the connection.
 
-{% highlight HTML %}
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -382,7 +382,7 @@ Now let's add our serial library, a heading, and a connect button. Because Web S
   </script>
 </body>
 </html>
-{% endhighlight HTML %}
+```
 
 Save, reload, and try clicking the button with your Arduino plugged in. The browser will show a permission dialog listing available serial ports. Select your Arduino and click "Connect." You should see `onSerialConnectionOpened` in the dev console.
 
@@ -394,16 +394,16 @@ Save, reload, and try clicking the button with your Arduino plugged in. The brow
 
 Now let's add a slider to select and send values between 0 and 255. In HTML, sliders are [`<input type="range">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range) elements. Add this below the button:
 
-{% highlight HTML %}
+```html
 <button id="connect-button" onclick="onConnectButtonClick()">Connect via Serial Port</button>
 <label for="slider">LED brightness:</label>
 <input id="slider" type="range" min="0" max="255"
   value="128" onchange="onSliderValueChanged(this, event)" />
-{% endhighlight HTML %}
+```
 
 And add the `onSliderValueChanged()` function to the `<script>` block:
 
-{% highlight JavaScript %}
+```javascript
 async function onSliderValueChanged(src, event) {
   console.log("Writing to serial: ", src.value.toString());
   // Note: we intentionally don't await writeLine() here because we don't
@@ -411,7 +411,7 @@ async function onSliderValueChanged(src, event) {
   // slider change. Awaiting would make the slider feel sluggish.
   serial.writeLine(src.value);
 }
-{% endhighlight JavaScript %}
+```
 
 That's it! Save and try it. Move the slider and watch the LED brightness change on your Arduino:
 
@@ -425,7 +425,7 @@ That's it! Save and try it. Move the slider and watch the LED brightness change 
 
 Let's make a few UI improvements. First, **hide** the connect button after a successful connection and **show** the slider controls only after connecting:
 
-{% highlight HTML %}
+```html
 <button id="connect-button" onclick="onConnectButtonClick()">Connect via Serial Port</button>
 
 <div id="interactive-controls" style="display:none">
@@ -434,11 +434,11 @@ Let's make a few UI improvements. First, **hide** the connect button after a suc
   <input id="slider" type="range" min="0" max="255"
     value="128" onchange="onSliderValueChanged(this, event)" />
 </div>
-{% endhighlight HTML %}
+```
 
 Then update the JavaScript to toggle visibility and display the current slider value:
 
-{% highlight JavaScript %}
+```javascript
 // Initialize slider display on page load
 let sliderVal = document.getElementById('slider').value;
 document.getElementById('slider-value').textContent = sliderVal;
@@ -456,7 +456,7 @@ async function onSliderValueChanged(src, event) {
   // Update the slider value text on the page
   document.getElementById('slider-value').textContent = src.value;
 }
-{% endhighlight JavaScript %}
+```
 
 #### Full slider video demo
 
@@ -486,7 +486,7 @@ For the circuit, we need an Arduino and an [OLED display](../advancedio/oled.md)
 
 Create a new folder called `DisplayText` with an `index.html` file. Start with this HTML:
 
-{% highlight HTML %}
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -512,13 +512,13 @@ Create a new folder called `DisplayText` with an `index.html` file. Start with t
   </div>
 </body>
 </html>
-{% endhighlight HTML %}
+```
 
 #### Add the JavaScript
 
 Add a `<script>` block at the end of the `<body>`. This code sets up the serial connection, sends text as the user types, and displays the Arduino's echo response:
 
-{% highlight HTML %}
+```html
 <script>
   const inputText = document.getElementById('input-text');
   const outputText = document.getElementById('output-text');
@@ -576,13 +576,13 @@ Add a `<script>` block at the end of the `<body>`. This code sets up the serial 
     }
   }
 </script>
-{% endhighlight HTML %}
+```
 
 #### Add CSS
 
 Create a `css/styles.css` file to clean up the interface:
 
-{% highlight CSS %}
+```css
 #main-content {
   margin: auto;
   width: 800px;
@@ -597,16 +597,16 @@ input {
 #text-interface {
   display: none;
 }
-{% endhighlight CSS %}
+```
 
 Link it in the `<head>`:
 
-{% highlight HTML %}
+```html
 <head>
   ...
   <link rel="stylesheet" href="css/styles.css">
 </head>
-{% endhighlight HTML %}
+```
 
 That's it! You now have a bidirectional web serial app. Play and experiment!
 

@@ -167,7 +167,7 @@ ml5's BodyPose returns an array of detected poses—one per human detected in a 
 
 The data structure looks like this:
 
-{% highlight JavaScript %}
+```javascript
 // poses is an array of detected people
 [
   {
@@ -186,7 +186,7 @@ The data structure looks like this:
   },
   // Additional detected people...
 ]
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > **v0.x vs v1.x data structure:** If you're looking at older tutorials, note that the old PoseNet API returned `poses[0].pose.nose.x` (nested under a `pose` property). The new BodyPose API is flatter: `poses[0].nose.x`. The keypoint names also changed slightly (*e.g.,* `leftEye` → `left_eye`).
@@ -228,7 +228,7 @@ Start by copying our [SerialTemplate](https://github.com/makeabilitylab/p5js/tre
 
 To use ml5.js, we need to add the library to our `index.html`. Add the following `<script>` tag in the `<head>`, alongside the p5.js and serial.js libraries we already have:
 
-{% highlight HTML %}
+```html
 <head>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/p5.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.js"></script>
@@ -236,7 +236,7 @@ To use ml5.js, we need to add the library to our `index.html`. Add the following
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <meta charset="utf-8">
 </head>
-{% endhighlight HTML %}
+```
 
 {: .note }
 > We're pinning to **ml5.js v1.3.1** to ensure the API doesn't change unexpectedly. This is especially important for ml5.js, which underwent a major breaking change from v0.x to v1.x. Always pin your library versions in course projects!
@@ -245,7 +245,7 @@ To use ml5.js, we need to add the library to our `index.html`. Add the following
 
 Next, let's set up the webcam and ml5's BodyPose model. In the v1.x API, we initialize BodyPose in `preload()` (so the model is ready before `setup()` runs), then start continuous detection with `detectStart()` in `setup()`:
 
-{% highlight JavaScript %}
+```javascript
 let video;
 let bodyPose;
 let poses = [];
@@ -267,7 +267,7 @@ function setup() {
 function onPosesDetected(results) {
   poses = results;
 }
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > **`detectStart()` vs the old `.on('pose')` pattern:** In ml5 v0.x, you subscribed to pose events with `poseNet.on('pose', callback)`. In v1.x, you call `bodyPose.detectStart(video, callback)`, which internally manages the detection loop. This is simpler and prevents accidental recursive loop issues.
@@ -276,7 +276,7 @@ function onPosesDetected(results) {
 
 Now, let's have some fun! Let's draw a red "nose" at the `nose` keypoint.
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   background(100);
   image(video, 0, 0); // draw the video to the canvas
@@ -290,7 +290,7 @@ function draw() {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 Here's a video demo:
 
@@ -304,7 +304,7 @@ Here's a video demo:
 
 To make this a bit more fun, we can [muppetify](https://en.wikipedia.org/wiki/The_Muppets) ourselves by adding in some eyes. This is like making a basic Snapchat or Instagram face filter! We'll also modularize our code by creating `drawNose` and `drawEye` functions.
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   image(video, 0, 0); // draw the video to the canvas
   for (let human of poses) {
@@ -337,7 +337,7 @@ function drawEye(x, y) {
   fill(0); // black pupils
   circle(x, y, pupilWidth);
 }
-{% endhighlight JavaScript %}
+```
 
 And another video demo to show what we've created thus far! Notice how the pose model will recognize *pictures* of humans as well as real, physical humans in the webcam stream (but not pictures of seals!).
 
@@ -351,7 +351,7 @@ And another video demo to show what we've created thus far! Notice how the pose 
 
 Finally, let's add code to transmit the nose's location over Web Serial. Just as we've done in previous lessons, rather than transmit the raw x,y pixel location, we will transmit a normalized version between [0, 1] inclusive for both x and y. We do this in the `onPosesDetected` callback:
 
-{% highlight JavaScript %}
+```javascript
 function onPosesDetected(results) {
   poses = results;
 
@@ -369,7 +369,7 @@ function onPosesDetected(results) {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 #### Connect to web serial device
 
@@ -377,7 +377,7 @@ Our template code, [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tre
 
 First, if you've never connected to a particular web serial device before, you can click on the canvas where you'll be greeted by a connection dialog:
 
-{% highlight JavaScript %}
+```javascript
 function mouseClicked() {
   if (!serial.isOpen()) {
     try {
@@ -387,13 +387,13 @@ function mouseClicked() {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 Second, if you've previously approved the web serial device, it will auto-connect as soon as you run the app. This is done in `setup()`:
 
-{% highlight JavaScript %}
+```javascript
 serial.autoConnectAndOpenPreviouslyApprovedPort(serialOptions);
-{% endhighlight JavaScript %}
+```
 
 #### We're done with the JavaScript app
 
@@ -432,9 +432,9 @@ The NoseTracker Arduino code is similar to [previous lessons](p5js-serial-io.md#
 
 For the face, rather than drawing one using shape primitives (*e.g.,* [`drawCircle`](../advancedio/oled.md#drawing-shapes) calls), we're going to use the built-in face icon from the default font set (which is char index `2`):
 
-{% highlight C++ %}
+```cpp
 _display.drawChar(x, y, (unsigned char)2, SSD1306_WHITE, SSD1306_BLACK, CHAR_SIZE);
-{% endhighlight C++ %}
+```
 
 ![Close-up photo of the OLED display showing the smiley face character from the default font set](assets/images/FaceCharacter2_DefaultFontSet_OLED.png)
 **Figure.** A close-up image of the face icon we'll use from the default character set.
@@ -443,7 +443,7 @@ _display.drawChar(x, y, (unsigned char)2, SSD1306_WHITE, SSD1306_BLACK, CHAR_SIZ
 ##### Parsing the incoming serial data
 First, declare some global variables related to face drawing.
 
-{% highlight C++ %}
+```cpp
 const int CHAR_SIZE = 3;           // set font size to 3
 const int DEFAULT_CHAR_WIDTH = 5;  // default font is 5 pixels wide at size 1
 const int DEFAULT_CHAR_HEIGHT = 8; // default font is 8 pixels tall at size 1
@@ -453,11 +453,11 @@ int _charHeight = DEFAULT_CHAR_HEIGHT * CHAR_SIZE;  // calculate char height at 
 
 float _faceX = 0; // normalized x position of face
 float _faceY = 0; // normalized y position of face
-{% endhighlight C++ %}
+```
 
 Now, in `loop()` look for incoming serial data. If serial data exists, read and parse it into x,y floats.
 
-{% highlight C++ %}
+```cpp
 void loop() {
   // Check to see if there is any incoming serial data
   if(Serial.available() > 0){
@@ -486,20 +486,20 @@ void loop() {
   _display.display();
   delay(DELAY_MS);
 }
-{% endhighlight C++ %}
+```
 
 ##### Drawing the face
 
 We could really draw anything we want at the received x,y position—an animated sprite, a shape, *etc.* In this example, we'll simply draw a face.
 
-{% highlight C++ %}
+```cpp
 void drawFace(float xFrac, float yFrac){
   int x = xFrac * (_display.width() - _charWidth);
   int y = yFrac * (_display.height() - _charHeight);
 
   _display.drawChar(x, y, (unsigned char)2, SSD1306_WHITE, SSD1306_BLACK, CHAR_SIZE);
 }
-{% endhighlight C++ %}
+```
 
 And that's it, the full code is available on GitHub as [NoseTrackerSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/NoseTrackerSerialIn/NoseTrackerSerialIn.ino).
 

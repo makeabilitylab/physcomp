@@ -150,7 +150,7 @@ For our first and most basic solution, we will read the button state, wait a giv
 
 We're going to use [`delay`](https://www.arduino.cc/reference/en/language/functions/time/delay/) here to wait for the "debouncing window" time period, which we already know should generally be avoided but is sometimes helpful and appropriate (if it's not negatively impacting the responsiveness of your program, for example).
 
-{% highlight cpp %}
+```cpp
 
 const int BUTTON_INPUT_PIN = 2;
 const int LED_OUTPUT_PIN = 3;
@@ -186,7 +186,7 @@ void loop() {
   // Write out HIGH or LOW
   digitalWrite(LED_OUTPUT_PIN, _savedButtonVal);
 }
-{% endhighlight cpp %}
+```
 
 This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithDelays/DebounceWithDelays.ino) is on GitHub.
 {: .fs-1 }
@@ -235,7 +235,7 @@ This solution is nicely captured by user [cdvma](https://www.reddit.com/r/embedd
 
 Here's a quick implementation:
 
-{% highlight cpp %}
+```cpp
 
 const int BUTTON_INPUT_PIN = 2;
 const int LED_OUTPUT_PIN = 3;
@@ -267,7 +267,7 @@ void loop() {
   // Write out HIGH or LOW
   digitalWrite(LED_OUTPUT_PIN, _savedButtonVal);
 }
-{% endhighlight cpp %}
+```
 
 This solution is less robust but works well for human input in environments with limited electrical noise (see this [Reddit discussion](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fprrygg?utm_source=share&utm_medium=web2x&context=3)). However, as is pointed out in the Reddit thread ([link](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fpw7xpf?utm_source=share&utm_medium=web2x&context=3)), this simple solution does not protect against electrostatic discharge (ESD) and thus fails regulatory requirements (which require the two state reads like we did in Solutions 1 and 2).
 

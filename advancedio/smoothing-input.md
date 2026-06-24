@@ -119,7 +119,7 @@ Below, we compute three different moving average filter window sizes: 5, 10, and
 
 The official Arduino [signal smoothing tutorial](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Smoothing) uses a moving average filter. Cleverly, their code uses an optimization (which we borrow below) to avoid iterating over the entire window to compute each new average. Instead, we simply subtract the least recent reading in our sliding window from a running total. The code also uses a [circular buffer](https://en.wikipedia.org/wiki/Circular_buffer) to eliminate needless memory allocations, which is important on constrained systems like microcontrollers.
 
-{% highlight C %}
+```cpp
 
 // read the sensor value
 int sensorVal = analogRead(SENSOR_INPUT_PIN);
@@ -144,7 +144,7 @@ if (_curReadIndex >= SMOOTHING_WINDOW_SIZE) {
   // ...wrap around to the beginning:
   _curReadIndex = 0;
 }
-{% endhighlight C %}
+```
 
 #### Arduino code
 
@@ -227,7 +227,7 @@ The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha
 
 If you're not used to reading equations, then perhaps the Arduino code below is more clear. The algorithm is quite straightforward and, again, unlike the traditional moving average algorithm, does not require a window buffer!
 
-{% highlight C %}
+```cpp
 const int SENSOR_INPUT_PIN = A0;
 
 float _ewmaAlpha = 0.1;  // the EWMA alpha value (α)
@@ -251,7 +251,7 @@ void loop()
   Serial.println(_ewma);  
   delay(50); // Reading new values at ~20Hz
 }
-{% endhighlight C %}
+```
 
 **Code.** [This code](https://github.com/makeabilitylab/arduino/blob/master/Filters/ExponentialWeightedMovingAverageFilter/ExponentialWeightedMovingAverageFilter.ino) is on GitHub.
 {: .fs-1 }

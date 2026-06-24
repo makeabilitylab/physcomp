@@ -99,7 +99,7 @@ As you turn the potentiometer, listen carefully: in the `analogWrite()` mode, th
 **Figure.** A Tinkercad Circuits simulation demonstrating that `analogWrite` changes the duty cycle (visible on the oscilloscope) but not the frequency—so the buzzer pitch remains constant.
 {: .fs-1 } -->
 
-<!-- {% highlight cpp %}
+<!-- ```cpp
 // Uses a PWM sweep to demonstrate that analogWrite has a fixed frequency
 // but different duty cycle; so the speaker pitch is always the same!
 // This is why we need tone(), which has a fixed 50% duty cycle
@@ -134,7 +134,7 @@ void loop() {
 
   delay(DELAY_BETWEEN_STEPS);
 }
-{% endhighlight cpp %}
+```
 
 Compare this with `tone()`, where the duty cycle is always 50% but you control the frequency (pitch) directly. This is the fundamental distinction! -->
 
@@ -142,11 +142,11 @@ Compare this with `tone()`, where the duty cycle is always 50% but you control t
 
 Arduino provides three functions for generating tones:
 
-{% highlight cpp %}
+```cpp
 tone(pin, frequency)              // play continuously until noTone() is called
 tone(pin, frequency, duration)    // play for 'duration' milliseconds, then stop
 noTone(pin)                       // stop playing
-{% endhighlight cpp %}
+```
 
 A few important details:
 
@@ -239,7 +239,7 @@ To let you interactively explore the difference, we built this p5js sound visual
 
 Let's start by playing a single tone. The following code plays concert A (440 Hz) for one second, pauses for half a second, then repeats. You can [play with it interactively on Tinkercad](https://www.tinkercad.com/things/aqUoDUiMU7x-simple-tone) or copy/paste it into the Arduino IDE and run it for real!
 
-{% highlight cpp %}
+```cpp
 const int BUZZER_PIN = 9;
 
 void setup() {
@@ -252,7 +252,7 @@ void loop() {
   noTone(BUZZER_PIN);        // Stop tone
   delay(500);                // Pause for half a second
 }
-{% endhighlight cpp %}
+```
 
 Try changing the frequency: 262 is middle C, 523 is one octave higher (C5), and 1000 produces a high-pitched tone. What's the lowest frequency you can hear? The highest? (Most humans can hear roughly 20 Hz to 20 kHz, but this varies with age.) Note: The standard Arduino `tone()` function has a minimum frequency of 31 Hz due to hardware timer limitations, so you won't be able to test the absolute bottom of human hearing (20 Hz).
 
@@ -269,7 +269,7 @@ Now let's play something more musical. The Arduino IDE ships with a helpful file
 
 Here are a few of the note definitions from [`pitches.h`](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/toneMelody/pitches.h). You can also find musical note frequencies in this [Piano Key Frequencies article](https://en.wikipedia.org/wiki/Piano_key_frequencies) on Wikipedia.
 
-{% highlight cpp %}
+```cpp
 #define NOTE_C4  262   // Middle C
 #define NOTE_D4  294
 #define NOTE_E4  330
@@ -278,11 +278,11 @@ Here are a few of the note definitions from [`pitches.h`](https://github.com/ard
 #define NOTE_A4  440   // Concert A
 #define NOTE_B4  494
 #define NOTE_C5  523   // C one octave above middle C
-{% endhighlight cpp %}
+```
 
 Using these constants, we can play a C major scale:
 
-{% highlight cpp %}
+```cpp
 #define NOTE_C4  262   // Middle C
 #define NOTE_D4  294
 #define NOTE_E4  330
@@ -323,7 +323,7 @@ void loop() {
   
   delay(1000); // pause before repeating
 }
-{% endhighlight cpp %}
+```
 
 Notice that we use the `duration` parameter of `tone()` here, so we don't need to call `noTone()` manually—the tone stops automatically after `NOTE_DURATION_MS` milliseconds. One subtlety: `tone()` is **non-blocking**, meaning the sketch continues executing immediately even while the tone is still playing. That's why we still need the `delay()` call—without it, the loop would race ahead to the next note before the current one finishes.
 
@@ -346,7 +346,7 @@ The Arduino IDE includes a built-in example that plays a short melody. You can a
 
 Instead, we've written our own version using the Imperial March from Star Wars. You can [try it on Tinkercad here](https://www.tinkercad.com/things/l2d7xFFuWFY/).
 
-{% highlight cpp %}
+```cpp
 #define NOTE_C4  262
 #define NOTE_D4  294
 #define NOTE_E4  330
@@ -419,7 +419,7 @@ void setup() {
 void loop() {
   // Melody plays once in setup(), nothing to do here
 }
-{% endhighlight cpp %}
+```
 
 To represent a rest (silence), use a note value of `0` in the melody array. The code checks for this and simply skips the `tone()` call, relying on the `delay()` to produce a silent pause. Avoid calling `tone(pin, 0)` directly—while it happens to produce silence on AVR boards, it causes crashes on other platforms (like SAMD) due to a division by zero in the timer math.
 
@@ -448,7 +448,7 @@ The simplest approach is to turn an LED on while a note plays and off during the
 **Figure.** A Tinkercad Circuits simulation of a simple siren with an LED that toggles with each tone change. Try it yourself in [Tinkercad](https://www.tinkercad.com/things/frb7eeyVkKN-simple-siren-with-external-led-no-breadboard/)!
 {: .fs-1 }
 
-{% highlight cpp %}
+```cpp
 const int BUZZER_PIN = 9;
 const int LED_PIN = 2;
 const int SOUND_DURATION_MS = 500;
@@ -469,7 +469,7 @@ void loop() {
   digitalWrite(LED_PIN, LOW);      // LED off for low tone
   delay(SOUND_DURATION_MS);
 }
-{% endhighlight cpp %}
+```
 
 <video controls playsinline aria-label="A simple siren video playing alternating tones with an LED flashing on and off">
   <source src="assets/videos/Arduino_Tone-SimpleSirenWithLED_Handheld_web.mp4" type="video/mp4" />
@@ -487,7 +487,7 @@ You can also check out our Imperial March code, which also turns on the `BUILTIN
 
 For a more sophisticated effect, we can use `analogWrite` to map the note frequency to LED brightness—higher notes produce a brighter LED:
 
-{% highlight cpp %}
+```cpp
 #include "pitches.h"
 
 const int BUZZER_PIN = 9;
@@ -517,7 +517,7 @@ void loop() {
 
   delay(1000);
 }
-{% endhighlight cpp %}
+```
 
 As the scale ascends, the LED gets brighter. As it descends, the LED dims. This is a simple example of **data-driven multimodal output**—the same data (the note being played) drives two different output channels (sound and light). -->
 

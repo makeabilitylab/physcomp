@@ -32,7 +32,7 @@ Here are some common answers. Note: I have not stress tested them all and I'm su
 
 **First**, perhaps the simplest way is to cast everything as a String and use string concatenation:
 
-``` C
+```cpp
 Serial.println((String)"Var 1:" + var1 + " Var 2:" + var2 + " Var 3:" + var3);
 ```
 [Source](https://arduino.stackexchange.com/a/69566)
@@ -42,11 +42,11 @@ Note: you should only do this for rapid prototypes because of memory inefficienc
 
 **Second**, use `snprintf` to format into a character buffer. This is the standard C/C++ approach and avoids the memory fragmentation problems of the `String` class:
 
-{% highlight cpp %}
+```cpp
 char buffer[64]; // make sure this is large enough for your formatted string
 snprintf(buffer, sizeof(buffer), "Var 1: %d  Var 2: %d  Var 3: %d", var1, var2, var3);
 Serial.println(buffer);
-{% endhighlight cpp %}
+```
 
 {: .note }
 > On standard Arduino AVR boards, `snprintf` does **not** support floating-point format specifiers (`%f`) out of the box—this is disabled to save memory. To format floats, use [`dtostrf()`](https://www.nongnu.org/avr-libc/user-manual/group__avr__stdlib.html#ga060c998e77fb5fc0d3168b3ce8571571) to convert the float to a string first, then include it in your `snprintf` call.
@@ -55,7 +55,7 @@ Serial.println(buffer);
 
 **Fourth**, you could redirect `printf` to Serial output:
 
-{% highlight cpp %}
+```cpp
 // Function that printf and related will use to print
 int serial_putchar(char c, FILE* f) {
     if (c == '\n') serial_putchar('\r', f);
@@ -81,7 +81,7 @@ void loop() {
     delay(1);    
   }
 }
-{% endhighlight cpp %}
+```
 [Source](https://arduino.stackexchange.com/a/480) and [discussion](https://forum.arduino.cc/index.php/topic,120440.0.html)
 
 ## What's calling loop() and how fast?
@@ -90,7 +90,7 @@ Because Arduino is [open source](https://github.com/arduino), we can look up the
 
 In short, `loop()` is called within an infinite `for` (or `while` loop). The only overhead is checking for whether there is data available on the serial port and then reading the serial buffers. The entire `int main(void)` function in [main.cpp](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/main.cpp) is:
 
-{% highlight cpp %}
+```cpp
 int main(void)
 {
     init();
@@ -108,11 +108,11 @@ int main(void)
     }
     return 0;
 }
-{% endhighlight cpp %}
+```
 
 Interestingly, this [Arduino forum post](https://forum.arduino.cc/index.php?topic=615714.0) suggests that because `serialEventRun()` is weakly defined in the core, you can define it locally in your sketch to override the default definition, which, according to the OP, will "save a little memory and makes the loop() run a little faster too!" You can do this if you don't need to use serial communication.
 
-{% highlight cpp %}
+```cpp
 void serialEventRun() {}
 
 void setup() {
@@ -120,7 +120,7 @@ void setup() {
 
 void loop() {
 }
-{% endhighlight cpp %}
+```
 
 ## Converting analogRead to voltages
 
@@ -161,7 +161,7 @@ As you might expect—given our warnings about avoiding overuse of [`delay(unsig
 
 The [`delay(unsigned long ms)`](https://www.arduino.cc/reference/en/language/functions/time/delay/) function is found in [wiring.c](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/wiring.c) and is, in its entirety, copied below:
 
-{% highlight cpp %}
+```cpp
 void delay(unsigned long ms)
 {
   uint32_t start = micros();
@@ -174,7 +174,7 @@ void delay(unsigned long ms)
     }
   }
 }
-{% endhighlight cpp %}
+```
 
 ## How does `digitalWrite()` work internally?
 
@@ -228,7 +228,7 @@ If you bypass the Arduino framework entirely, you can write code directly for th
 
 Here is what a standard "Blinky" sketch looks like in bare-metal C for the **Arduino Uno** (ATmega328P). On the Uno, the built-in LED (Pin 13) is hardwired to bit 5 of Port B (`PB5`). According to Section 13.2.1 of the ATmega328P datasheet, the `DDxn` bit in the Data Direction Register (`DDRx`) selects the pin's direction, and the `PORTxn` bit in the Data Register sets the output logic level.
 
-{% highlight cpp %}
+```cpp
 #ifndef F_CPU
 #define F_CPU 16000000UL // 16 MHz clock speed
 #endif
@@ -252,11 +252,11 @@ int main(void) {
     // never reached
     return 0; 
 }
-{% endhighlight cpp %}
+```
 
 If we want to run this exact same bare-metal Blinky on an **Arduino Leonardo** (ATmega32U4), the code has to change. Because of the Leonardo's internal USB hardware, the built-in LED (Pin 13) is wired to bit 7 of Port C (`PC7`). 
 
-{% highlight cpp %}
+```cpp
 #ifndef F_CPU
 #define F_CPU 16000000UL
 #endif
@@ -278,7 +278,7 @@ int main(void) {
     // never reached
     return 0;
 }
-{% endhighlight cpp %}
+```
 
 ### The Takeaway: Hardware Abstraction
 

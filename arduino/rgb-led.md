@@ -82,18 +82,18 @@ And here's the wiring with a breadboard (the schematic on the right is the same 
 We are going to write code that flashes through a sequence of colors. Recall that the embedded red LED is hooked up to Pin 6, the blue LED to Pin 5, and the green LED to Pin 3. We will control the RGB LED color by outputting `HIGH` (5V) or `LOW` (0V) using [`digitalWrite` ](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) to these pins.
 
 For example, to make the RGB LED turn red, we would write:
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, HIGH);
 digitalWrite(RGB_GREEN_LED_PIN, LOW);
 digitalWrite(RGB_BLUE_LED_PIN, LOW);
-{% endhighlight C %}
+```
 
 Similarly, to make the RGB LED turn green, we would write:
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, LOW);
 digitalWrite(RGB_GREEN_LED_PIN, HIGH);
 digitalWrite(RGB_BLUE_LED_PIN, LOW);
-{% endhighlight C %}
+```
 
 In this example, we will flash the following sequence:
 
@@ -117,7 +117,7 @@ blue by <span style="background-color:#0000FF; color:white">#0000FF</span>, and 
 
 As usual, we introduce some constants for our literal assignments and then setup our pins as `OUTPUT`.
 
-{% highlight C %}
+```cpp
 const int DELAY_MS = 1000;       // delay between color changes in ms
 const int RGB_RED_LED_PIN = 6;   // indicated by orange wire
 const int RGB_GREEN_LED_PIN = 5; // indicated by green wire
@@ -130,26 +130,26 @@ void setup()
   pinMode(RGB_BLUE_LED_PIN, OUTPUT);
   pinMode(RGB_GREEN_LED_PIN, OUTPUT);
 }
-{% endhighlight C %}
+```
 
 #### Step 2: Write a new helper function called setRgbLedColor
 
 To help set RGB LED colors, we are going to write a new function called `setRgbLedColor(int red, int green, int blue)`, which takes in either a `HIGH` or `LOW` for the red, green, and blue int parameters.
 
-{% highlight C %}
+```cpp
 // Function expects either HIGH or LOW for each parameter
 void setRgbLedColor(int red, int green, int blue){
   digitalWrite(RGB_RED_LED_PIN, red);
   digitalWrite(RGB_GREEN_LED_PIN, green);
   digitalWrite(RGB_BLUE_LED_PIN, blue);
 }
-{% endhighlight C %}
+```
 
 #### Step 3: Write the color sequence
 
 Now, in `loop()`, we'll write the specific color sequence that we want:
 
-{% highlight C %}
+```cpp
 void loop()
 {
   // red
@@ -176,7 +176,7 @@ void loop()
   setRgbLedColor(HIGH, HIGH, HIGH);
   delay(DELAY_MS);
 }
-{% endhighlight C %}
+```
 
 #### Step 4: Compile, upload, and run
 
@@ -223,18 +223,18 @@ And here's the more practical breadboarded version (again, the circuit diagram i
 
 The Common Anode RGB LED works **opposite** to the Common Cathode version—to turn on a particular color, we write out `LOW` rather than `HIGH`. For example, to make the RGB LED turn red, we would write:
 
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, LOW);
 digitalWrite(RGB_GREEN_LED_PIN, HIGH);
 digitalWrite(RGB_BLUE_LED_PIN, HIGH);
-{% endhighlight C %}
+```
   
 Similarly, to make the RGB LED turn green, we would write:
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, HIGH);
 digitalWrite(RGB_GREEN_LED_PIN, LOW);
 digitalWrite(RGB_BLUE_LED_PIN, HIGH);
-{% endhighlight C %}
+```
 
 We will flash the same sequence as before but again our `HIGH`s and `LOW`s are flipped:
 

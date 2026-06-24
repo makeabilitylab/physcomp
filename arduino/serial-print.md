@@ -66,19 +66,19 @@ To use the serial port, we must first initialize it with [`Serial.begin(BAUD_RAT
 
 Typically, we initialize the serial port in `setup()`, as it only needs to run one time.
 
-{% highlight C %}
+```cpp
 void setup() {
   Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
 }
 
 void loop() {}
-{% endhighlight C %}
+```
 
 #### Step 2: Use Serial.print and Serial.println to write data
 
 Here's a complete program that writes "Hello world!" once every 500 ms.
 
-{% highlight C %}
+```cpp
 void setup() {
   Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
 }
@@ -87,7 +87,7 @@ void loop() {
   Serial.println("Hello world!");
   delay(500);
 }
-{% endhighlight C %}
+```
 
 #### Step 3: Open 'Serial Monitor' in the Arduino IDE
 
@@ -109,7 +109,7 @@ The simple answer is to use multiple `Serial.print` and `Serial.println` stateme
 
 Below, we've written a simple program to print out the current time (in milliseconds) since the Arduino was turned on and our program began to run:
 
-{% highlight C %}
+```cpp
 void setup() {
   Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
 }
@@ -123,7 +123,7 @@ void loop() {
   Serial.println(" ms");
   delay(500);
 }
-{% endhighlight C %}
+```
 
 ![Serial Monitor showing timestamp output from the Arduino](assets/images/SerialPrintTimeStamp_ArduinoSerialMonitorScreenshot.png)
 
@@ -135,7 +135,7 @@ This code is also on GitHub [here](https://github.com/makeabilitylab/arduino/blo
 
 Now, let's return to our [blink code](led-blink.md) and modify it to use `Serial.print` to print out when the LED is on and off. 
 
-{% highlight C++ %}
+```cpp
 const int LED_OUTPUT_PIN = 3;
 
 void setup() {
@@ -155,7 +155,7 @@ void loop() {
   Serial.println("Pin 3 is LOW (0V)");  // print status
   delay(500);                           // delay is in milliseconds
 }
-{% endhighlight C++ %}
+```
 
 Here's a video of my code running with the Serial Monitor in the background.
 
@@ -175,7 +175,7 @@ On the Arduino Uno and Leonardo, the built-in LED is on Pin 13. So, if you write
 
 In fact, the official [Arduino Blink example](https://www.arduino.cc/en/Tutorial/Blink) uses the built-in LED and the constant `LED_BUILTIN` to demonstrate blinking. This is also the program that ships with your Arduino and runs when you first power it up.
 
-{% highlight C %}
+```cpp
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
@@ -189,7 +189,7 @@ void loop() {
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   delay(1000);                       // wait for a second
 }
-{% endhighlight C %}
+```
 
 You can access this example directly in the Arduino IDE:
 
@@ -205,7 +205,7 @@ A third approach, which also uses serial, is called [**Serial Plotter**](https:/
 
 Let's make a new program that steadily increases a state value called `_triangleValue`. Once it passes a certain threshold `TURN_ON_THRESHOLD`, we turn on the LED at `LED_BUILTIN`.
 
-{% highlight C %}
+```cpp
 const int LED_OUTPUT_PIN = LED_BUILTIN;
 const int MAX_THRESHOLD = 255;
 const int MIN_THRESHOLD = 0;
@@ -236,7 +236,7 @@ void loop() {
 
   delay(30);
 }
-{% endhighlight C %}
+```
 
 To open the Serial Plotter, go to `Tools -> Serial Plotter` or click on the "graph icon" in the Arduino IDE toolbar. Here's a video of this code running with the Serial Plotter showing a triangle wave.
 
@@ -250,13 +250,13 @@ To open the Serial Plotter, go to `Tools -> Serial Plotter` or click on the "gra
 
 The Arduino IDE 2 Serial Plotter supports **multiple named data lines** with auto-generated legends and distinct colors. To use this feature, format your output as comma-separated `Label:value` pairs, ending with a newline. For example:
 
-```
+```text
 Label1:value1,Label2:value2\n
 ```
 
 Let's modify our previous program but graph the `TURN_ON_THRESHOLD`.
 
-{% highlight C %}
+```cpp
 const int LED_OUTPUT_PIN = LED_BUILTIN;
 const int MAX_THRESHOLD = 255;
 const int MIN_THRESHOLD = 0;
@@ -291,7 +291,7 @@ void loop() {
 
   delay(30);
 }
-{% endhighlight C %}
+```
 
 In the Serial Plotter, you'll see two colored lines with a legend: `Turn-on Threshold` as a solid line at the `TURN_ON_THRESHOLD` value and `Triangle` as a triangular ramp of `_triangleValue`. The IDE automatically assigns colors and generates the legend from your labels. You can click on the checkboxes to toggle which values are graphed.
 
@@ -308,7 +308,7 @@ In the Serial Plotter, you'll see two colored lines with a legend: `Turn-on Thre
 
 Once you learn [`analogRead`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/) in a [future lesson](potentiometers.md), the Serial Plotter becomes especially powerful for visualizing real sensor data. For example, you could plot a sensor reading alongside a threshold value and use the built-in LED to indicate when the threshold is crossed:
 
-{% highlight C %}
+```cpp
 const int SENSOR_PIN = A0;
 const int THRESHOLD = 800;
 
@@ -336,7 +336,7 @@ void loop() {
 
   delay(50);
 }
-{% endhighlight C %}
+```
 
 The Serial Plotter shows the sensor value fluctuating in real time with a flat threshold line for comparison, and the built-in LED lights up whenever the value goes above the threshold—giving you both visual feedback on the board *and* a graph on screen. This combination of Serial Plotter + indicator LED is a technique you'll use frequently when calibrating sensors and tuning interactive projects.
 

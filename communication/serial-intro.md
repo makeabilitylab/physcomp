@@ -42,10 +42,10 @@ We've been using [Arduino's serial](https://www.arduino.cc/reference/en/language
 
 On Arduino, we initialize the serial port using [`Serial.begin()`](https://docs.arduino.cc/language-reference/en/functions/communication/serial/begin/). The [`Serial.begin()`](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/HardwareSerial.cpp) function has two overloaded options:
 
-{% highlight C %}
+```cpp
 begin(unsigned long baud)
 begin(unsigned long baud, byte config)
-{% endhighlight C %}
+```
 
 Thus far, in our lessons, we have been using the first function—`begin(unsigned long baud)`—which sets the data rate in bits per second (baud). But what about the second function with `byte config` and what does this parameter mean? We'll dig into both below.
 
@@ -143,20 +143,20 @@ With serial communication, we can either transmit/receive data as a series of bi
 
 To read binary data with Arduino, use [`readBytes()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readBytes/) or [`readBytesUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readBytesUntil/):
 
-{% highlight C %}
+```cpp
 size_t readBytes(byte *buffer, size_t length)
 size_t readBytesUntil(byte terminator, byte *buffer, size_t length)
-{% endhighlight C %}
+```
 
 [`Serial.readBytes()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readBytes/) reads bytes from the serial port into a buffer and terminates if the determined length has been read or it times out (see [`Serial.setTimeout()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/setTimeout/)). [`Serial.readBytesUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readBytesUntil/) is similar but also accepts a terminator parameter—if the terminator byte is detected, the function returns all bytes up to (but not including) the terminator. Both functions return the number of bytes read.
 
 To write binary data, use [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/), which is an overloaded function:
 
-{% highlight C %}
+```cpp
 size_t write(byte val);                  // value to send as a single byte
 size_t write(String str);                // string to send as a series of bytes
 size_t write(byte *buffer, size_t length); // an array and number of bytes in buffer
-{% endhighlight C %}
+```
 
 All three [`Serial.write()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/write/) functions return the number of bytes written.
 
@@ -166,10 +166,10 @@ Reading and writing ASCII-encoded data should feel more familiar. For [serial-ba
 
 To read ASCII data, use [`Serial.readString()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readString/) and [`Serial.readStringUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readStringUntil/):
 
-{% highlight C %}
+```cpp
 String readString();
 String readStringUntil(char terminator)
-{% endhighlight C %}
+```
 
 Both functions read characters from the serial buffer and store them in a String. [`Serial.readString()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readString/) terminates when it times out (see [`Serial.setTimeout()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/setTimeout/)). [`Serial.readStringUntil()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/readStringUntil/) terminates either on timeout or when a terminator character is found.
 
@@ -185,19 +185,19 @@ Why might we want to use **binary** vs. **text** encodings? If we are transmitti
 
 Let's look at a concrete example. Say we want to transmit a value that ranges between 0 and 255 from our Arduino to our computer. Because the value only ranges from 0 to 255, we can encode this in 8 bits—a single byte (`0000 0000` to `1111 1111`, or `0x00` to `0xFF` in hexadecimal). Sending via binary:
 
-{% highlight C %}
+```cpp
 byte signalVal = getSignal();
 Serial.write(signalVal);
-{% endhighlight C %}
+```
 
 So, if `getSignal()` returns 15, we transmit `0000 1111` (`0x0F`)—just one byte. If it returns 127, we transmit `0111 1111` (`0x7F`). If 255, then `1111 1111` (`0xFF`).
 
 However, we could also transmit this using ASCII-encoded data with [`Serial.println()`](https://www.arduino.cc/reference/en/language/functions/communication/serial/println/):
 
-{% highlight C %}
+```cpp
 byte signalVal = getSignal();
 Serial.println(signalVal);
-{% endhighlight C %}
+```
 
 Now if `getSignal()` returns 15, we need to transmit **four bytes** rather than just one. Using the [ASCII chart](https://www.asciichart.com/), the ASCII encoding for '1' is 49 (`0x31`) and '5' is 53 (`0x35`). Then, `Serial.println()` adds a carriage return '\r' (ASCII 13, `0x0D`) and a newline '\n' (ASCII 10, `0x0A`).
 
@@ -248,7 +248,7 @@ Again, it's completely up to you! If you're using ASCII-encoded data, you could 
 
 As you'll commonly see in our demo code, we use a simple CSV format like this:
 
-{% highlight C %}
+```cpp
 int sensorVal1 = analogRead(SENSOR1_INPUT_PIN);
 int sensorVal2 = analogRead(SENSOR2_INPUT_PIN);
 int sensorVal3 = analogRead(SENSOR3_INPUT_PIN);
@@ -257,13 +257,13 @@ Serial.print(",");
 Serial.print(sensorVal2);
 Serial.print(",");
 Serial.println(sensorVal3);
-{% endhighlight C %}
+```
 
 For example, if `sensorVal1` is 896, `sensorVal2` is 943, and `sensorVal3` is 349, then the above code would send a text string that looks like `896,943,349\r\n`.
 
 On the receiving end, we can write our own parsing code like this:
 
-{% highlight C %}
+```cpp
 if(Serial.available() > 0){
     // If we're here, then serial data has been received
     // Read data off the serial port until we get to the endline delimiter ('\n')
@@ -293,7 +293,7 @@ if(Serial.available() > 0){
         // Do stuff with sensor values
     } 
 }
-{% endhighlight C %}
+```
 
 This example assumes that data arrives in the order `sensorVal1, sensorVal2, sensorVal3` and that each received line follows the same format. To make this communication scheme more flexible, you could transmit key-value pairs like `sensorVal1=896,sensorVal2=943,sensorVal3=349`. The receiver would then parse both the variable names and their values. You could even use JSON for more complex data structures.
 
@@ -317,7 +317,7 @@ In all of our serial lessons—including this one—we'll have the Arduino trans
 
 For our examples below, we will run a simple program on the Arduino that reads ASCII-encoded data off of the serial port, parses it into an integer, and uses `analogWrite` to output that integer to an output pin. We have an LED with a current-limiting resistor connected to `OUTPUT_PIN`, which is set to `LED_BUILTIN` (Pin 13 on the Arduino Uno and Leonardo). The entire program:
 
-{% highlight C %}
+```cpp
 const int DELAY_MS = 5;
 const int OUTPUT_PIN = LED_BUILTIN;
 
@@ -352,7 +352,7 @@ void loop() {
 
   delay(DELAY_MS);
 }
-{% endhighlight C %}
+```
 
 **Code.** This code is available as [SimpleSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialIn/SimpleSerialIn.ino) on GitHub. We will actually be using [SimpleSerialInOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/SimpleSerialInOLED/SimpleSerialInOLED.ino) in our videos.
 {: .fs-1}
@@ -391,12 +391,12 @@ Here's a video demonstration of sending ASCII-encoded text via [Serial Monitor](
 
 Notice how we are able to see what the Arduino receives because the Arduino code echoes the received data back over serial using `Serial.print`. This is optional but helpful!
 
-{% highlight C %}
+```cpp
 // Just for debugging, echo the data back on serial
 Serial.print("Arduino received: '");
 Serial.print(rcvdSerialData);
 Serial.println("'");
-{% endhighlight C %}
+```
 
 ### Command line tools
 
@@ -411,44 +411,44 @@ On Windows, we can use the [PowerShell](https://docs.microsoft.com/en-us/powersh
 
 First, to find the available serial ports, we can use `getportnames()`:
 
-```
+```text
 PS> [System.IO.Ports.SerialPort]::getportnames()
 COM7
 ```
 
 Then, create a `SerialPort` object, which takes the COM port, the baud rate, and serial configuration parameters (parity, data bit length, and stop bit):
 
-```
+```text
 PS> $port= new-Object System.IO.Ports.SerialPort COM7,9600,None,8,one
 ```
 
 Now open this port:
 
-```
+```text
 PS> $port.open()
 ```
 
 Write to the port using ASCII-encoded text with `WriteLine(<str>)`:
 
-```
+```text
 PS> $port.WriteLine("Hello!")
 ```
 
 Similarly, to read from the port, use `ReadLine()`:
 
-```
+```text
 PS> $port.ReadLine()
 Arduino received: 'Hello!'
 ```
 Finally, to close the port, use `Close()`:
 
-```
+```text
 PS> $port.Close()
 ```
 
 Thus, the full program is simply:
 
-```
+```text
 $port= new-Object System.IO.Ports.SerialPort COM7,9600,None,8,one
 $port.open()
 $port.WriteLine("Hello!")
@@ -470,7 +470,7 @@ On Mac and Linux, we can use the `screen` command as described by this [Sparkfun
 
 First, we need to enumerate the available ports. Type:
 
-```
+```text
 > ls /dev/tty.*
 
 /dev/tty.Bluetooth-Incoming-Port /dev/tty.SLAB_USBtoUART
@@ -479,7 +479,7 @@ First, we need to enumerate the available ports. Type:
 
 In this case, the Arduino is listed as `/dev/tty.SLAB_USBtoUART`. We can connect to it via screen by typing `screen <port_name> <baud_rate>`:
 
-```
+```text
 > screen /dev/tty.SLAB_USBtoUART 9600
 ```
 
@@ -493,7 +493,7 @@ Finally, let's write a simple program in [Python](https://www.python.org/) to co
 
 For serial communication with Python, we'll use the [pySerial](https://pyserial.readthedocs.io/en/latest/) library. With Python 3 installed, open your terminal and type:
 
-```
+```text
 > pip3 install pyserial
 ```
 
@@ -503,55 +503,55 @@ Let's write a quick Python program to communicate with [SimpleSerialIn.ino](http
 
 First, import the required libraries and create a pySerial `Serial` object:
 
-{% highlight Python %}
+```python
 import serial # from https://pyserial.readthedocs.io
 import time
 
 # Create serial object on COM13 with 9600 baud and a read timeout
 # of one second (can be a float value, so 1.5 would be 1.5s)
 ser = serial.Serial(port='COM13', baudrate=9600, timeout=1)
-{% endhighlight Python %}
+```
 
 Now, ask the user to input a number between 0 and 255:
 
-{% highlight Python %}
+```python
 # Ask user for number between 0 and 255 and store in num
 num = input("Enter a number (0 - 255): ")
-{% endhighlight Python %}
+```
 
 Encode this data as a string. You can force ASCII encoding via `num.encode("ascii", "ignore")`:
 
-{% highlight Python %}
+```python
 # Encode numeric value as a string
 strNum = str.encode(num)
-{% endhighlight Python %}
+```
 
 Now send the data using pySerial's [`write(<data>)`](https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial.write) function. We append a newline (`\n`) so the Arduino's `Serial.readStringUntil('\n')` returns immediately rather than waiting for its 1-second timeout:
 
-{% highlight Python %}
+```python
 # Send the data using pyserial write method
 # We append '\n' so the Arduino's readStringUntil('\n') returns immediately
 print("Sending...", strNum)
 ser.write(strNum + b'\n')
 time.sleep(0.05) # sleep for 0.05s
-{% endhighlight Python %}
+```
 
 Finally, read the response from the Arduino and print it out:
 
-{% highlight Python %}
+```python
 # Read data back from Arduino
 echoLine = ser.readline()
 
 # readline() returns raw bytes; decode to a UTF-8 string and strip whitespace
 print(echoLine.decode('utf-8').strip())
 print() # empty line
-{% endhighlight Python %}
+```
 
 And that's it! This code is available as [serial_demo.py](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py) in our GitHub. Note that after creating the `Serial` object, we wrap everything in a `while True:` loop to continuously ask for new user data.
 
 One important detail: if you exit the script with `Ctrl+C` without closing the serial port, the OS may keep the port locked—which means you won't be able to upload new Arduino code or open Serial Monitor until you kill the Python process. To handle this gracefully, wrap your loop in a `try`/`except`/`finally` block:
 
-{% highlight Python %}
+```python
 import serial
 import time
 
@@ -573,7 +573,7 @@ except KeyboardInterrupt:
 finally:
     ser.close()
     print("Serial port closed.")
-{% endhighlight Python %}
+```
 
 The `finally` block ensures `ser.close()` is called whether the loop ends normally or via `Ctrl+C`. This is a good habit for any program that opens hardware resources.
 
@@ -655,7 +655,7 @@ For each, we will be running [DisplayTextSerialIn.ino](https://github.com/makeab
 
 Essentially, [DisplayTextSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/DisplayTextSerialIn/DisplayTextSerialIn.ino) does this:
 
-{% highlight C %}
+```cpp
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
@@ -684,4 +684,5 @@ void loop(){
     Serial.print(rcvdSerialData);
     Serial.println("'");
 }
-{% endhighlight C %} -->
+```
+-->

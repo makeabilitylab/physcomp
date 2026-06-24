@@ -340,7 +340,7 @@ Just like with our [button](buttons.md) lesson, let's walk through how one might
 
 Let's first introduce a simple program to read and print analog input values to Serial. This will provide a convenient way to test our input circuits.
 
-{% highlight C %}
+```cpp
 void setup()
 {
   Serial.begin(9600); // for printing values to console
@@ -352,7 +352,7 @@ void loop()
   Serial.println(potVal);      // print value to Serial
   delay(50);                   // Reading new values at ~20Hz
 }
-{% endhighlight C %}
+```
 
 ### Building an initial circuit
 

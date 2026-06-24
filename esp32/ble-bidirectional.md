@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L5&#58; Bidirectional BLE
+description: "Control ESP32 hardware wirelessly from a phone or web browser over BLE: write characteristics to set NeoPixel color, stream sensor data back, and exchange text with the Nordic UART Service."
 parent: Wireless
 grand_parent: ESP32
 has_toc: true # (on by default)

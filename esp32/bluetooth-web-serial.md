@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L3&#58; Bluetooth Web Serial
+description: "Stream ESP32 sensor data over Bluetooth and visualize it in Python and the browser, then build a bidirectional color mixer where the web page and a potentiometer share control of a NeoPixel."
 parent: Wireless
 grand_parent: ESP32
 has_toc: true # (on by default)

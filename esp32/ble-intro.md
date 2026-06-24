@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L4&#58; Introduction to BLE
+description: "Learn Bluetooth Low Energy on the ESP32: the peripheral/central model, GATT services and characteristics, and streaming live sensor data to your phone via BLE notifications."
 parent: Wireless
 grand_parent: ESP32
 has_toc: true # (on by default)

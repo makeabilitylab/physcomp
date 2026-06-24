@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L2&#58; Bluetooth Serial
+description: "Send data wirelessly from the ESP32 with Bluetooth Classic's Serial Port Profile (SPP): pair on macOS or Windows to get a virtual COM port and reuse your existing pySerial and serial.js code."
 parent: Wireless
 grand_parent: ESP32
 has_toc: true # (on by default)

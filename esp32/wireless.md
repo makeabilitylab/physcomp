@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Wireless
+description: "The ESP32 Wireless series: connect to the cloud over WiFi with Adafruit IO, stream data over Bluetooth Classic serial, and build phone- and browser-friendly projects with Bluetooth Low Energy (BLE)."
 parent: ESP32
 nav_order: 2
 has_toc: false # on by default

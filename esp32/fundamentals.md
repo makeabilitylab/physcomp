@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Fundamentals
+description: "The ESP32 Fundamentals series: set up the board, blink and fade LEDs with the LEDC PWM peripheral, read the 12-bit ADC, play tones, and use built-in capacitive touch before going wireless."
 parent: ESP32
 nav_order: 1
 has_toc: false # on by default

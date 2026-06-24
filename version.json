@@ -1,0 +1,11 @@
+---
+sitemap: false
+---
+{
+  "short_sha": "{{ site.data.version.short_sha }}",
+  "sha": "{{ site.data.version.sha }}",
+  "ref": "{{ site.data.version.ref }}",
+  "run_number": "{{ site.data.version.run_number }}",
+  "run_id": "{{ site.data.version.run_id }}",
+  "built_at": "{{ site.data.version.built_at }}"
+}

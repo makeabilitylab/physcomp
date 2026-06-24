@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L2&#58; Shape-Based Classification
+description: "Build a shape-based (template-matching) gesture recognizer for 3D accelerometer signals in Python, with scaffolding for the A3 assignment in a hands-on notebook."
 parent: Classification
 grand_parent: Signals
 has_toc: false # (on by default)

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L1&#58; IMUs
+description: "Track motion and orientation with inertial measurement units (IMUs) like the MPU-6050, which combine an accelerometer and gyroscope to sense tilt, rotation, and movement with Arduino."
 # nav_order: 1
 # parent: Output
 # grand_parent: Advanced I/O

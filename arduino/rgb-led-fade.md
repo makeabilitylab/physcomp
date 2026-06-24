@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L8&#58; Crossfading RGB LEDs
+description: "Smoothly crossfade an RGB LED through the color wheel using analogWrite() and the HSL color space, and learn how to load and use local C/C++ libraries."
+image: /arduino/assets/images/RGBVsHSLColorSpace_Wikipedia.png
 nav_order: 8
 parent: Output
 grand_parent: Intro to Arduino
@@ -18,6 +20,12 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/zL7xIWHqVaY" title="Workbench video of an RGB LED smoothly crossfading through the color wheel on an Arduino Uno" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** Where we're headed: an RGB LED smoothly crossfading through the color wheel, driven by `analogWrite()` and the HSL color space on an Arduino Uno.
+{: .fs-1 }
 
 In this lesson, you will learn how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), how to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and how to use and load local `C/C++` libraries.
 
@@ -64,20 +72,20 @@ Our particular crossfade method works by **increasing** one LED color value (fro
 
 More specifically, we have an array `int _rgbLedValues[3]` that stores our `{int red, int green, int blue}` values. We initialize the array to `{255, 0, 0}`—so `red=255`, `green=0`, and `blue=0`. So, our RGB LED will start red. 
 
-{% highlight C %}
+```cpp
 int _rgbLedValues[] = {255, 0, 0}; // Red, Green, Blue
-{% endhighlight C %}
+```
 
 To help index into this array and track state, we create the following `enum`:
 
-{% highlight C %}
+```cpp
 enum RGB{
   RED,
   GREEN,
   BLUE,
   NUM_COLORS
 };
-{% endhighlight C %}
+```
 
 This enum allows us to access our RGB LED values by writing `_rgbLedValues[RED]`, `_rgbLedValues[GREEN]`, and `_rgbLedValues[BLUE]` rather than `_rgbLedValues[0]`, `_rgbLedValues[1]`, and `_rgbLedValues[2]`. The enum doesn't just improve code readability and help avoid needless array index errors, it's also used to track state with two state-tracking variables: `_curFadingUpColor` and `_curFadingDownColor`.  
 
@@ -87,7 +95,7 @@ Once we reach our maximum color value of `255` for the current `_curFadingUpColo
 
 The full fade algorithm is captured in `loop()`:
 
-{% highlight C %}
+```cpp
 // Code based on https://gist.github.com/jamesotron/766994 (no longer available)
 void loop() {
 
@@ -124,7 +132,7 @@ void loop() {
   setColor(_rgbLedValues[RED], _rgbLedValues[GREEN], _rgbLedValues[BLUE]);
   delay(DELAY_MS);
 }
-{% endhighlight C %}
+```
 
 We control the fade step—the *amount* to fade on each `loop()` iteration—with `const int FADE_STEP`. With `FADE_STEP=1`, we fade between 768 color combinations (`3*256`). By default, `FADE_STEP=5`, which results in 156 color combinations.
 
@@ -145,13 +153,13 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 Here are two videos showing the code running on an Arduino Uno. First, in the Tinkercad simulator. You can see the crossfade colors and a plot of the corresponding `analogWrite` values.
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/ZyfHRQFwmeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Tinkercad simulation of the RGB crossfader code with a plot of the corresponding analogWrite values" src="https://www.youtube.com/embed/ZyfHRQFwmeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 Second, a workbench video of the code running on an Arduino Uno:
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/zL7xIWHqVaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of the RGB crossfader code running on an Arduino Uno" src="https://www.youtube.com/embed/zL7xIWHqVaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <!--TODO: add in a p5js that demonstrates how this works? And maybe let's reader play with different color values? -->
@@ -167,14 +175,14 @@ RGB and HSL color space visualizations from [Wikipedia](https://en.wikipedia.org
 Here's a video of various hues, saturations, and lightness levels using Hunor Marton's HSL Color Picker. Play around with it yourself on [codepen.io](https://codepen.io/HunorMarton/pen/dvXVvQ/). You can also open up almost any painting or graphics application to play with and switch between colorspaces from MSPaint to Adobe Photoshop and Illustrator to [GIMP](https://www.gimp.org/) and [Inkscape](https://inkscape.org/).
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/a0j8qyBJE2E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Screen recording of Hunor Marton's HSL Color Picker showing various hues, saturations, and lightness levels" src="https://www.youtube.com/embed/a0j8qyBJE2E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 A screen recording of [Hunor Marton's HSL Color Picker](https://codepen.io/HunorMarton/pen/dvXVvQ/).
 {: .fs-1 }
 
 In our case, we perform this HSL-to-RGB conversion using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. With this HSL approach, our code is comparatively much simpler, something like the following pseudocode:
 
-{% highlight C %}
+```cpp
 // Basic overview of our approach (pseudocode)
 float hue = 0, saturation = 0.8, lightness = 1.0;
 float hueStepValue = 0.1f; // increment hue but keep saturation and lightness fixed
@@ -187,7 +195,7 @@ loop(){
         hue = 0;
     }
 }
-{% endhighlight C %}
+```
 
 The downside of this implementation is that we must use [`floats`](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float) because the [RGBConverter](https://github.com/ratkins/RGBConverter) library uses floating point functions. Why are floats bad? Two reasons: with the ATmega328 microcontroller, floating point arithmetic is **slow** (`float` division can be 2-4 times slower than `integer` division) and **[imprecise](https://www.arduino.cc/en/pmwiki.php?n=Reference/Float)** (floats can appear infinitely precise given their use of decimals but on the ATmega328, floats have ~6-7 decimal digits of precision).
 
@@ -223,7 +231,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 Here's a workbench video of [CrossFadeHue.ino](https://github.com/makeabilitylab/arduino/tree/master/Basics/analogWrite/CrossFadeHue) with a common cathode RGB LED.
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/ROfJge7bsfI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of the HSL-based RGB crossfader (CrossFadeHue.ino) running on a common cathode RGB LED" src="https://www.youtube.com/embed/ROfJge7bsfI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <!-- TODO look up what the minimum step value that makes sense with our quantization -->
@@ -238,7 +246,7 @@ Well, it turns out this fundamental feature has a long, sordid history in the Ar
 
 **First** and easiest, place all `.h` and `.cpp` files in your root sketch folder (where your `.ino` file resides):
 
-```
+```text
 CrossFadeHue
 |-CrossFadeHue.ino
 |-RGBConverter.cpp
@@ -247,7 +255,7 @@ CrossFadeHue
 
 **Second**, place all `.h` and `.cpp` files in a sub-folder off or your root sketch folder with a dir name of your choosing (*e.g.,* `lib`):
 
-```
+```text
 CrossFadeHue
 |-CrossFadeHue.ino
 |-lib
@@ -257,7 +265,7 @@ CrossFadeHue
 
 **Third**, if you have lots of `.h` and `.cpp` files and want to organize them into their own individual sub-folders, then... this can be frustrating! But there is a solution since the ~Arduino 1.6 release: you must put these sub-folders into a sub-folder called `src` ([link](https://github.com/arduino/Arduino/issues/4936#issuecomment-312953260)) within your root sketch directory. Indeed, this is exactly our setup for using the [RGBConverter](https://github.com/ratkins/RGBConverter) library. It's in `CrossFadeHue\src\RGBConverter`. So, your directory structure should look like:
 
-```
+```text
 CrossFadeHue
 |-CrossFadeHue.ino
 |-src

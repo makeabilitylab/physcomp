@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; Force-Sensitive Resistors
+description: "Use force-sensitive resistors (FSRs) and other two-legged variable resistors with Arduino via a voltage divider, then build a force-controlled musical instrument with map() and tone()."
+image: /arduino/assets/og/force-sensitive-resistors.jpg
 nav_order: 5
 parent: Input
 grand_parent: Intro to Arduino
@@ -31,7 +33,9 @@ This lesson directly builds on the prior one ([potentiometers](potentiometers.md
 > - How to use `map()` to convert between different value ranges
 > - How to build a force-controlled musical instrument combining `analogRead` and `tone()`
 
-![Animation showing an FSR pressing down and an LED getting brighter as resistance drops](assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing an FSR pressing down and an LED getting brighter as resistance drops">
+  <source src="assets/videos/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.mp4" type="video/mp4" />
+</video>
 
 **Figure.** Animation shows how the resistance of the FSR drops with applied pressure (higher pressure, lower resistance, brighter LED).
 {: .fs-1 }
@@ -102,7 +106,7 @@ For more details, see the Interlink [FSR 402 datasheet]({{ site.baseurl }}/asset
 
 Let's make something!
 
-To begin, just like we did with the [buttons](buttons.md) and [potentiometers](potentiometers.md) lessons, we'll make a simple LED circuit without a microcontroller. In fact, this circuit will be the exact same as the "rheostat" potentiometer circuit [here](potentiometers.md#build-the-potentiometer-based-led-dimmer) (but we'll replace the rheostat with an FSR).
+To begin, just like we did with the [buttons](buttons.md) and [potentiometers](potentiometers.md) lessons, we'll make a simple LED circuit without a microcontroller. In fact, this circuit will be the exact same as the "rheostat" potentiometer circuit [here](potentiometers.md#step-1-build-the-potentiometer-based-led-dimmer) (but we'll replace the rheostat with an FSR).
 
 Below, we show two possible wiring diagrams: the first (preferred) shows the FSR circuit powered by a 9V battery while the second shows power derived from the 5V and GND pins on the Arduino. (Again, we prefer the former just to further emphasize that at this point, we're not using microcontrollers!)
 
@@ -201,11 +205,11 @@ If, instead, we can't assume that both ranges start at zero, the more general co
 
 This type of range conversion is so common that Arduino (and Processing and many other programming libraries) have a built-in function for it called [`map`](https://www.arduino.cc/reference/en/language/functions/math/map/). It's called "map" because we want to re-map a number from one range to another. Indeed, here's the entire `map` function from the Arduino source code—notice it also multiplies before dividing:
 
-{% highlight cpp %}
+```cpp
 long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-{% endhighlight cpp %}
+```
 
 Importantly, as the [docs](https://www.arduino.cc/reference/en/language/functions/math/map/) make abundantly clear, notice that this built-in method uses **integer** math and so will not return fractions (floats). If you need more precise conversions, implement your own mapping function (which also provides the opportunity to implement non-linear conversions like logarithmic mappings). 
 

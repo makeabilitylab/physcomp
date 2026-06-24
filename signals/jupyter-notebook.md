@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Jupyter Notebook
+description: "Install and configure Jupyter Notebook with Anaconda for data science, plus the Table of Contents (2) nbextension that auto-generates clickable navigation."
+image: /signals/assets/images/JupyterNotebook_Screenshot.png
 parent: Tools
 grand_parent: Signals
 has_toc: true # on by default
@@ -36,7 +38,7 @@ Download and install [Anaconda](https://www.anaconda.com/download) (latest Pytho
 
 Open your terminal (on linux or Mac) or the Anaconda Prompt (on Windows) and type:
 
-```
+```text
 > jupyter notebook
 ```
 
@@ -59,7 +61,7 @@ Feel free to follow the official installation instructions [here](https://jupyte
 
 To install the `nbextensions`, open your terminal (on linux or Mac) or the Anaconda Prompt (on Windows) and type:
 
-```
+```text
 > conda install -c conda-forge jupyter_contrib_nbextensions
 ```
 
@@ -67,7 +69,7 @@ To install the `nbextensions`, open your terminal (on linux or Mac) or the Anaco
 
 Restart Jupyter Notebook and you should see a tab called `Nbextensions` on the home screen. Click on that tab and then you should see all nbextensions. Click on `Table of Contents (2)` to configure and Enable it. See screenshots below.
 
-![](assets/images/JupyterNotebook_TOC2_ConfigurableNbextensions_TOC2.png)
+![Jupyter Notebook Nbextensions configuration tab with the Table of Contents (2) extension enabled](assets/images/JupyterNotebook_TOC2_ConfigurableNbextensions_TOC2.png)
 
 #### Step 3: Try out TOC
 

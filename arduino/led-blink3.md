@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L9&#58; Rate Blinking LEDs
+description: "Blink multiple LEDs at different rates without delay() and write your first C++ class to eliminate redundant code and shrink your Arduino sketch."
+image: /arduino/assets/og/led-blink3.jpg
 nav_order: 9
 parent: Output
 grand_parent: Intro to Arduino
@@ -23,13 +25,15 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 As with our previous lesson on [crossfading RGB LEDs](rgb-led-fade.md), this lesson involves **simple circuits** but comparatively **complex code**. Often, when using microcontrollers, our code is the magic sauce—the circuits are straightforward but the code can be complicated.
 
-![Animated gif of a workbench video recording showing BlinkMultiple.ino](assets/movies/ArduinoUno_BlinkMultiple_Workbench.gif)
+<video autoplay loop muted playsinline aria-label="Animated gif of a workbench video recording showing BlinkMultiple.ino">
+  <source src="assets/videos/ArduinoUno_BlinkMultiple_Workbench.mp4" type="video/mp4" />
+</video>
 
 ## Background
 
 The canonical and beloved **first Arduino sketch**, [Blink](https://www.arduino.cc/en/tutorial/blink), enables beginners to quickly build and write code for a circuit. The code looks something like this, which we covered in our own [Blink lesson](led-blink.md):
 
-{% highlight C %}
+```cpp
 void setup() {
   // set Pin 3 to output
   pinMode(3, OUTPUT);
@@ -41,7 +45,7 @@ void loop() {
   digitalWrite(3, LOW);   // turn LED off (output 0V)
   delay(1000);            // wait another second
 }
-{% endhighlight C %}
+```
 
 Blink is easy. It's gratifying. But... it sets up a flawed mental model about how to structure programs and when/how to use [`delay()`](https://www.arduino.cc/reference/en/language/functions/time/delay/).
 
@@ -92,7 +96,7 @@ For our initial approach, we need four things for each LED:
 
 For the **blink interval**, we'll use `const` variables like `LED1_BLINK_INTERVAL_MS`, `LED2_BLINK_INTERVAL_MS`, and `LED3_BLINK_INTERVAL_MS`
 
-{% highlight C %}
+```cpp
 const int LED1_OUTPUT_PIN = 2;
 const int LED1_BLINK_INTERVAL_MS = 200; // interval at which to blink LED1 (in milliseconds)
 
@@ -101,13 +105,13 @@ const int LED2_BLINK_INTERVAL_MS = 333; // interval at which to blink LED2 (in m
 
 const int LED3_OUTPUT_PIN = 9;
 const int LED3_BLINK_INTERVAL_MS = 1111; // interval at which to blink LED3 (in milliseconds)
-{% endhighlight C %}
+```
 
 #### Toggle timestamps and LED states
 
 For the **toggle timestamps** and **LED states**, we'll use variables like `_led1LastToggledTimestampMs` and `_led1State`. We can toggle `ledState` simply by: `ledState = !ledState`.
 
-{% highlight C %}
+```cpp
 unsigned long _led1LastToggledTimestampMs = 0; // tracks the last time LED1 was updated
 int _led1State = LOW; // will toggle between LOW and HIGH
 
@@ -116,7 +120,7 @@ int _led2State = LOW; // will toggle between LOW and HIGH
 
 unsigned long _led3LastToggledTimestampMs = 0; // tracks the last time LED3 was updated
 int _led3State = LOW; // will toggle between LOW and HIGH
-{% endhighlight C %}
+```
 
 To capture timestamps, we'll use Arduino's [`millis()` ](https://www.arduino.cc/reference/en/language/functions/time/millis/) function, which returns "*the number of **milliseconds** passed since the Arduino board began running the current program*" as an `unsigned long`. 
 
@@ -124,9 +128,9 @@ On the Arduino, the `unsigned long` data type is 32 bits (4 bytes), which ranges
 
 #### Blinking without delays logic
 
-We then use the same general logic as the "blinking without delays" [covered previously](led-blink#blink-without-using-delays) for each LED:
+We then use the same general logic as the "blinking without delays" [covered previously](led-blink.md#blink-without-using-delay) for each LED:
 
-{% highlight C %}
+```cpp
 unsigned long currentTimestampMs = millis();
 
 // Check to see if we reached the toggle state interval for LED1 
@@ -144,7 +148,7 @@ if (currentTimestampMs - _led2LastToggledTimestampMs >= LED2_BLINK_INTERVAL_MS) 
 }
 
 ... // and so on, copy the above block of code for each LED you're trying to blink
-{% endhighlight C %}
+```
 
 #### Tracking timestamps and overflow
 
@@ -156,7 +160,7 @@ Great question! And yes, it will still work! And the reason is because we are us
 
 For example, imagine that `_lastToggledTimestampMs` is `4,294,967,290` or `0xFFFFFFFA` in hexadecimal (32 bits), which is 5 milliseconds from overflow. And then imagine that `millis()` overflows (returns back to 0) and `currentTimestampMs` becomes, say, `1` or `0x00000001`. So, our subtraction is then: `0x00000001 - 0xFFFFFFFA`. There is `7` milliseconds difference between these two numbers, so we'd like the subtraction to result in `7`:
 
-```
+```text
 1. 0xFFFFFFFA
 2. 0xFFFFFFFB
 3. 0xFFFFFFFC
@@ -169,7 +173,7 @@ For example, imagine that `_lastToggledTimestampMs` is `4,294,967,290` or `0xFFF
 
 And this is what we get! Feel free to experiment with this yourself by running the code below on you Arduino. We also suggest [this article](https://www.baldengineer.com/arduino-millis-plus-addition-does-not-add-up.html) by James Lewis about `millis()`, overflow, and arithmetic for more background.  
 
-{% highlight C %}
+```cpp
 unsigned long _lastToggledTimestampMs = 4294967290; // change this to experiment with overflow
 
 void setup() {
@@ -192,7 +196,7 @@ void loop() {
 
   _lastToggledTimestampMs++;
 }
-{% endhighlight C %}
+```
 
 #### The full code for multi-rate blinking
 
@@ -209,7 +213,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/
 #### Workbench video
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/8DHhmXr3mC8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of an Arduino blinking multiple LEDs at different rates without using delay()" src="https://www.youtube.com/embed/8DHhmXr3mC8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### Multi-rate blinking: an object-oriented approach
@@ -220,7 +224,7 @@ We're going to define a new class, called `Blinker`, which will greatly simplify
 
 Once we've made the `Blinker` class, our main code reduces to:
 
-{% highlight C++ %}
+```cpp
 Blinker _led1Blinker(2, 200);  // specify pin and blink interval (200ms)
 Blinker _led2Blinker(5, 333);  // specify pin and blink interval (333ms)
 Blinker _led3Blinker(9, 1111); // specify pin and blink interval (1111ms)
@@ -236,7 +240,7 @@ void loop() {
   _led2Blinker.update();
   _led3Blinker.update();
 }
-{% endhighlight C++ %}
+```
 
 But we have to make the `Blinker` class first, which we do below!
 
@@ -252,7 +256,7 @@ To build our Blinker class, recall that we need four things per LED:
 
 For the `Blinker` class, we are simply going to convert these four things into member variables:
 
-{% highlight C++ %}
+```cpp
 class Blinker{
 
   private:
@@ -263,11 +267,11 @@ class Blinker{
     unsigned long _lastToggledTimestamp; // last state toggle in ms
 
   ... // more here
-{% endhighlight C++ %}
+```
 
 Finally, we need two functions: a `constructor` and `update()`—the latter which handles our core logic and toggling code and is intended to be called once per `loop()` iteration. We are going to declare these in the class definition itself:
 
-{% highlight C++ %}
+```cpp
   public: 
     // Constructor
     Blinker(int pin, unsigned long blinkInterval) :
@@ -291,7 +295,7 @@ Finally, we need two functions: a `constructor` and `update()`—the latter whic
         digitalWrite(_pin, _state);
       }
     }
-{% endhighlight C++ %}
+```
 
 In order to use the `Blinker` class (as shown above), it needs to be defined within your `.ino` sketch at the top of the file (before you try to instantiate a Blinker object). Later, we'll also show how to create a class that exists in its own `.h` and `.cpp` files.
 
@@ -324,7 +328,7 @@ See the [code in our GitHub repository](https://github.com/makeabilitylab/arduin
 #### Workbench video
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/vb5l8Tncedo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of multi-rate LED blinking using the Blinker class in external .h and .cpp files" src="https://www.youtube.com/embed/vb5l8Tncedo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Exercises

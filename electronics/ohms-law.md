@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; Ohm's Law
+description: "Understand Ohm's Law (I = V/R) and its three forms for solving current, voltage, and resistance, with a water-flow analogy and a hands-on CircuitJS activity."
+image: /electronics/assets/images/PoseuillesLawAndOhmsLaw_FigureByJonFroehlich.png
 nav_order: 3
 parent: Intro to Electronics
 has_toc: false # on by default
@@ -17,6 +19,10 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+
+![An image showing that for laminar (smooth) flow of water in pipes, the equation for determining the water flow rate (called Poiseuille's Law) is an equivalent to determining the current flow in a circuit using Ohm's Law.](assets/images/PoseuillesLawAndOhmsLaw_FigureByJonFroehlich.png)
+**Figure.** Coming up: Ohm's Law ($$I = \frac{V}{R}$$) ties voltage, current, and resistance together—and, as we'll see, it's the electrical twin of Poiseuille's Law for water flowing through a pipe.
+{: .fs-1 }
 
 In this lesson, we will learn about **Ohm's Law**, one of the most important empirical laws in electrical circuits that describes how *current*, *voltage*, and *resistance* relate together. While Ohm's Law is incredibly useful in analyzing and understanding how circuits work, like many "laws", it is not always obeyed (particularly for what are called "non-ohmic" devices like LEDs or other diodes—which we will explore in [Lesson 6: LEDs](leds.md)).
 

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: LX&#58; CPX and Servo Motors
+description: "Add motion to your CPX projects by driving servo motors with MakeCode. Browse buildable examples like inchworm robots, robotic fish, paper airplane launchers, and tilt mazes."
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L7&#58; HandPose Serial
+image: /communication/assets/og/handpose-serial.jpg
+description: "Track 21 hand keypoints in real time with ml5's HandPose model and use them to drive a servo motor on Arduino, building a cardboard figure that waves back at you."
 nav_order: 7
 parent: Serial Communication
 has_toc: true # (on by default)
@@ -90,7 +92,7 @@ The 21 keypoints include four each for the `thumb`, `index_finger`, `middle_fing
 
 In ml5.js v1.x, each keypoint is an object with `x`, `y`, `z` coordinates and a `name` property. The keypoint names are:
 
-{% highlight JavaScript %}
+```javascript
 // The 21 HandPose keypoint names in ml5 v1.x
 // Index 0: "wrist"
 // Thumb:  "thumb_cmc", "thumb_mcp", "thumb_ip", "thumb_tip"
@@ -98,7 +100,7 @@ In ml5.js v1.x, each keypoint is an object with `x`, `y`, `z` coordinates and a 
 // Middle: "middle_finger_mcp", "middle_finger_pip", "middle_finger_dip", "middle_finger_tip"
 // Ring:   "ring_finger_mcp", "ring_finger_pip", "ring_finger_dip", "ring_finger_tip"
 // Pinky:  "pinky_finger_mcp", "pinky_finger_pip", "pinky_finger_dip", "pinky_finger_tip"
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > **v0.x vs v1.x keypoint naming:** The old ml5 v0.x API used `landmarks` (raw `[x,y,z]` arrays) and `annotations` (grouped by finger name like `thumb`, `indexFinger`). The new v1.x API uses `keypoints` (objects with `{x, y, z, name}`) and provides named shortcuts like `hand.wrist`, `hand.index_finger_tip`, *etc.* The keypoint indices are the same, but accessing them is more intuitive in v1.x.
@@ -130,7 +132,7 @@ In ml5 v1.x, the HandPose model returns an array of detected hand objects. Each 
 
 The array structure looks like this:
 
-{% highlight JavaScript %}
+```javascript
 // hands is an array of detected hands (ml5 v1.x supports multiple)
 [
   {
@@ -150,7 +152,7 @@ The array structure looks like this:
     // ... shortcuts for all 21 keypoints
   }
 ]
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > **v0.x vs v1.x data structure:** If you're looking at older tutorials, note that the old HandPose API returned `predictions[0].landmarks[j]` as raw `[x, y, z]` arrays and used `handInViewConfidence`. The new v1.x API returns `hands[0].keypoints[j]` as objects with `{x, y, z, name}` and uses `confidence`. The named shortcuts (*e.g.,* `hand.wrist`) are new in v1.x.
@@ -202,7 +204,7 @@ We'll begin by building the web app in [p5.js](https://p5js.org/) and [ml5](http
 
 First, add the ml5.js library to your `index.html`, just like we did in the [previous lesson](ml5js-serial.md#add-in-ml5js):
 
-{% highlight HTML %}
+```html
 <head>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/p5.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/js@main/dist/makelab.serial.iife.js"></script>
@@ -210,7 +212,7 @@ First, add the ml5.js library to your `index.html`, just like we did in the [pre
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <meta charset="utf-8">
 </head>
-{% endhighlight HTML %}
+```
 
 {: .note }
 > We're pinning to **ml5.js v1.3.1** via the `ml5@1.3.1` in the `<script src>` link to ensure the API doesn't change unexpectedly. Always pin your library versions in course projects!
@@ -219,7 +221,7 @@ First, add the ml5.js library to your `index.html`, just like we did in the [pre
 
 The ml5 library aims to create consistency across its APIs. Thus, the ml5 HandPose API should feel familiar if you followed our previous [BodyPose lesson](ml5js-serial.md). Just like with BodyPose, we initialize the model in `preload()` and start continuous detection with `detectStart()` in `setup()`:
 
-{% highlight JavaScript %}
+```javascript
 let handPose;                   // the ml5 HandPose model
 let video;                      // the webcam video stream
 let hands = [];                 // array of detected hands
@@ -241,7 +243,7 @@ function setup() {
 function onHandsDetected(results) {
   hands = results;
 }
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > **`detectStart()` vs the old `.on('predict')` pattern:** In ml5 v0.x, you subscribed to hand pose events with `handPoseModel.on('predict', callback)`. In v1.x, you call `handPose.detectStart(video, callback)`, which internally manages the detection loop. This is simpler, more consistent with other ml5 models, and prevents accidental recursive loop issues.
@@ -257,7 +259,7 @@ Now, the fun part! Let's add drawing code to render three things:
 
 First, let's update the `draw()` function to show the webcam video and draw detected hands:
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   image(video, 0, 0, width, height);
 
@@ -277,7 +279,7 @@ function draw() {
     drawBoundingBox(hand);
   }
 }
-{% endhighlight JavaScript %}
+```
 
 It should look something like this before a hand is detected:
 
@@ -287,7 +289,7 @@ It should look something like this before a hand is detected:
 
 Now, let's add the `drawHand(hand)` function. We will iterate through all 21 keypoints and draw a green circle at their x,y position. In v1.x, each keypoint is an object with `.x` and `.y` properties:
 
-{% highlight JavaScript %}
+```javascript
 function drawHand(hand) {
   // Draw keypoints. Each keypoint has x, y, z and name properties.
   for (let keypoint of hand.keypoints) {
@@ -296,7 +298,7 @@ function drawHand(hand) {
     circle(keypoint.x, keypoint.y, 10);
   }
 }
-{% endhighlight JavaScript %}
+```
 
 Your hand should now have green circles drawn on the keypoints like this:
 
@@ -306,7 +308,7 @@ Your hand should now have green circles drawn on the keypoints like this:
 
 Lastly, let's add a `drawBoundingBox(hand)` function. In v1.x, there is no built-in bounding box property, so we calculate one from the keypoints. We'll also display the `confidence` score:
 
-{% highlight JavaScript %}
+```javascript
 function drawBoundingBox(hand) {
   // Calculate bounding box from keypoints
   let minX = Infinity, minY = Infinity;
@@ -331,7 +333,7 @@ function drawBoundingBox(hand) {
   textSize(20);
   text(nfc(hand.confidence, 2), minX, minY);
 }
-{% endhighlight JavaScript %}
+```
 
 Here's a screenshot with the keypoints, bounding box, and confidence:
 
@@ -348,15 +350,15 @@ You can view, edit, and play with [this code](https://editor.p5js.org/jonfroehli
 For the final step, we'll add code to transmit the `wrist` keypoint's normalized x position [0, 1] via web serial. To avoid saturating web serial with data, we will also limit our transmission rate to ~20Hz (one transmission every 50ms). Lastly, let's also add drawing code to show `wrist` information on screen (useful for debugging!).
 
 First, add some global variables:
-{% highlight JavaScript %}
+```javascript
 let wristXNormalized = 0;
 let timestampLastTransmit = 0;
 const MIN_TIME_BETWEEN_TRANSMISSIONS_MS = 50; // 50 ms is ~20 Hz
-{% endhighlight JavaScript %}
+```
 
 Then update the `onHandsDetected` callback to calculate and transmit `wristXNormalized`:
 
-{% highlight JavaScript %}
+```javascript
 function onHandsDetected(results) {
   hands = results;
 
@@ -383,14 +385,14 @@ function onHandsDetected(results) {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 {: .note }
 > **`wrist` vs `palmBase`:** In the old v0.x API, the base of the palm was accessed as `landmarks[0]` or `annotations.palmBase`. In v1.x, the same keypoint is called `wrist` and can be accessed as `hand.wrist` or `hand.keypoints[0]`. The position data is the same—only the naming changed.
 
 Finally, update the `draw()` function to draw wrist info on screen:
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   ...
   if (hands.length > 0) {
@@ -408,7 +410,7 @@ function draw() {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 And that's it! Because our [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/SerialTemplate) already supports connecting to a serial device by clicking on the canvas (by default) and/or auto-connecting to previously approved web serial devices, we are all set. Feel free to add your own connection code (*e.g.,* a specific "Connect Button" for web serial). The full code is [here](https://editor.p5js.org/jonfroehlich/sketches/vMbPOkdzu).
 
@@ -452,7 +454,7 @@ As a quick introduction to servo motors, please read this [Adafruit lesson](http
 
 The code, in full, is:
 
-{% highlight C++ %}
+```cpp
 #include <Servo.h> 
 
 const int POTENTIOMETER_INPUT_PIN = A0;  
@@ -476,7 +478,7 @@ void loop()
   // Set servo angle
   _servo.write(servoAngle);  
 }
-{% endhighlight C++ %}
+```
 
 **Code.** This code is in our GitHub as [ServoPot.ino](https://github.com/makeabilitylab/arduino/blob/master/Basics/servo/ServoPot/ServoPot.ino).
 {: .fs-1 }
@@ -495,7 +497,7 @@ Let's update our code to set the servo motor angle based on **serial input** rat
 
 The full code:
 
-{% highlight C++ %}
+```cpp
 #include <Servo.h> 
 
 const int SERVO_OUTPUT_PIN = 9;
@@ -541,7 +543,7 @@ void loop()
     _servo.write(_serialServoAngle);
   }
 } 
-{% endhighlight C++ %}
+```
 
 **Code.** The full code is here [ServoSerialIn.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/ServoSerialIn/ServoSerialIn.ino).
 {: .fs-1 }
@@ -577,14 +579,14 @@ The p5.js function [`mouseMoved()`](https://p5js.org/reference/#/p5/mouseMoved) 
 
 First, create two global variables for mouse tracking:
 
-{% highlight JavaScript %}
+```javascript
 let xMouseConstrained = 0;
 let xMouseNormalized = 0;
-{% endhighlight JavaScript %}
+```
 
 Now, implement the `mouseMoved()` function:
 
-{% highlight JavaScript %}
+```javascript
 function mouseMoved(){
   xMouseConstrained = constrain(mouseX, 0, width); // get current x mouse pos
   xMouseNormalized = xMouseConstrained / width; // normalize x position
@@ -593,13 +595,13 @@ function mouseMoved(){
     serial.writeLine(nf(xMouseNormalized, 0, 4)); // write out normalized value, if serial is connected/open
   }
 }
-{% endhighlight JavaScript %}
+```
 
 ##### Add in draw code for x mouse position
 
 Finally, add drawing code to display a gray line for the current x mouse position and large text for the normalized value:
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   background(100);
   
@@ -616,7 +618,7 @@ function draw() {
   textAlign(CENTER, CENTER);
   text(nf(xMouseNormalized, 0, 4), width / 2, height / 2);
 }
-{% endhighlight JavaScript %}
+```
 
 You can view, edit, and play with the [XMouseSerialOut](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/) app in the [p5.js web editor](https://editor.p5js.org/jonfroehlich/sketches/iwbGN0wkj) or on GitHub ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/XMouseSerialOut/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/XMouseSerialOut)).
 
@@ -681,10 +683,10 @@ Now testing with [HandWaver](https://makeabilitylab.github.io/p5js/WebSerial/ml5
 
 From these tests, we determined that a good range of motion for Henry's arm is 40 - 85 degrees, so we updated our Arduino sketch:
 
-{% highlight C++ %}
+```cpp
 const int MIN_SERVO_ANGLE = 40;
 const int MAX_SERVO_ANGLE = 85;
-{% endhighlight C++ %}
+```
 
 <!-- TODO: then we made a stand -->
 

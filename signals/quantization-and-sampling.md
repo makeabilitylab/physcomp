@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L1&#58; Quantization and Sampling
+description: "Digitize analog signals by exploring quantization levels and sampling rates on real audio, plus the Nyquist theorem and aliasing through hands-on Python plots."
 parent: Signal Processing
 grand_parent: Signals
 has_toc: false # (on by default)

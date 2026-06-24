@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L2&#58; Programming the CPX with MakeCode
+description: "Working brainstorm and planning notes for the Circuit Playground Express tutorial series, sketching out lessons on sensors, capacitive touch, keyboards, NeoPixels, and servos."
 parent: Circuit Express (CPX)
 has_toc: true # (on by default)
 comments: true

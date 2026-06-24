@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L3&#58; Servo Motors
+description: "Make things move with servo motors. Understand the internal feedback loop, how servo PWM differs from analogWrite(), and use the Arduino Servo library to drive precise angular positions."
 nav_order: 3
 parent: Output
 grand_parent: Advanced I/O
@@ -136,7 +137,7 @@ The [Arduino Servo library](https://github.com/arduino-libraries/Servo/blob/mast
 
 ### Key API
 
-{% highlight C++ %}
+```cpp
 #include <Servo.h>
 
 Servo myServo;              // Create a Servo object
@@ -145,7 +146,7 @@ void setup() {
   myServo.attach(3);        // Attach to pin 3 (any digital pin works)
   myServo.write(90);        // Move to 90° (center position)
 }
-{% endhighlight C++ %}
+```
 
 Here are the most commonly used functions:
 
@@ -187,7 +188,7 @@ If you visit the [GitHub source tree for the Servo library](https://github.com/a
 
 If you look at [Servo.h](https://github.com/arduino-libraries/Servo/blob/master/src/Servo.h), you'll see how the library selects the right implementation:
 
-{% highlight C++ %}
+```cpp
 #if defined(ARDUINO_ARCH_AVR)
 #include "avr/ServoTimers.h"
 #elif defined(ARDUINO_ARCH_SAM)
@@ -199,7 +200,7 @@ If you look at [Servo.h](https://github.com/arduino-libraries/Servo/blob/master/
 #else
 #error "This library only supports boards with an AVR, SAM, SAMD, NRF52..."
 #endif
-{% endhighlight C++ %}
+```
 
 Servo libraries rely heavily on hardware timers. Since an Arduino Uno (AVR) and a Nano 33 IoT (SAMD) have completely different timer hardware, the library must maintain separate codebases for each. If you look inside the `avr` folder, you'll find custom [Servo.cpp](https://github.com/arduino-libraries/Servo/blob/master/src/avr/Servo.cpp) and [ServoTimers.h](https://github.com/arduino-libraries/Servo/blob/master/src/avr/ServoTimers.h) code specifically written to manipulate ATmega registers—this is why the Servo library "claims" Timer1 and disables `analogWrite()` on certain pins, as noted above.
 
@@ -263,7 +264,7 @@ Now that we understand how servos work and have one wired up, let's build some p
 
 Just as we started with [blinking an LED](../arduino/led-blink.md) and [lighting up NeoPixels](addressable-leds.md#activity-1-light-em-up), let's start with the simplest possible servo program: sweeping back and forth between 0° and 180°. This confirms your wiring is correct and that the library is communicating with the servo.
 
-{% highlight C++ %}
+```cpp
 #include <Servo.h>
 
 const int SERVO_PIN = 3;
@@ -286,7 +287,7 @@ void loop() {
     delay(15);
   }
 }
-{% endhighlight C++ %}
+```
 
 <!-- TODO: Record a video of the servo sweeping back and forth and embed here. The Tinkercad version is here: https://www.tinkercad.com/things/hNVrJEXGKrT-simple-servo-sweep -->
 
@@ -312,7 +313,7 @@ Use the same servo wiring as before, and add a 10KΩ potentiometer with its wipe
 
 #### The code
 
-{% highlight C++ %}
+```cpp
 #include <Servo.h>
 
 const int SERVO_PIN = 3;
@@ -343,7 +344,7 @@ void loop() {
 
   delay(15);
 }
-{% endhighlight C++ %}
+```
 
 <!-- TODO: Record a video of the potentiometer controlling the servo and embed here -->
 
@@ -371,7 +372,7 @@ The Engineering Mindset YouTube channel did this for real with an oscilloscope, 
 
 ### Activity 3: Sensor-driven servo gauge
 
-For our final activity, let's build a **physical gauge**—a servo-powered pointer that displays sensor data in the real world, like an analog speedometer or a VU meter needle. This is the physical output equivalent of the [OLED analog graph](oled.md#demo-3-basic-real-time-analog-graph) and the [NeoPixel level meter](addressable-leds.md#activity-4-led-level-meter). Where the OLED drew data on screen and the NeoPixels lit up LEDs proportionally, here we'll sweep a physical pointer across a scale.
+For our final activity, let's build a **physical gauge**—a servo-powered pointer that displays sensor data in the real world, like an analog speedometer or a VU meter needle. This is the physical output equivalent of the [OLED analog graph](oled.md#demo-3-basic-real-time-analog-graph) and the [NeoPixel level meter](addressable-leds.md). Where the OLED drew data on screen and the NeoPixels lit up LEDs proportionally, here we'll sweep a physical pointer across a scale.
 
 We'll read an analog sensor on `A0` and map it to the servo's range. To make it more interesting, we'll add two buttons: one to "freeze" the gauge at its current reading (like a max-hold feature on a multimeter), and one to reset it.
 
@@ -383,7 +384,7 @@ Use the same servo + potentiometer wiring, and add two tactile buttons on Pins 8
 
 #### The code
 
-{% highlight C++ %}
+```cpp
 #include <Servo.h>
 
 const int SERVO_PIN = 3;
@@ -451,7 +452,7 @@ void loop() {
 
   delay(15);
 }
-{% endhighlight C++ %}
+```
 
 <!-- TODO: Record a video of the gauge in action and embed here. Consider 3D printing or crafting a simple gauge face/backing to make the servo look like an analog meter. -->
 

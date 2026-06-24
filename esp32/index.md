@@ -1,6 +1,8 @@
 ---
 layout: default
 title: ESP32
+description: "Program the WiFi- and Bluetooth-enabled ESP32 with Arduino: blink and fade LEDs with PWM, play tones, read analog input, sense capacitive touch, and build IoT and wireless projects."
+image: /esp32/assets/images/ESP32Variants_FromS1-S3.png
 nav_order: 6
 has_toc: false # on by default
 has_children: true

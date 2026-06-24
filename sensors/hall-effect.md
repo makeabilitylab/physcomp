@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Hall Effect Sensors
+description: "Detect magnetic fields with Hall effect sensors and reed switches. Build an auto-brightening LED circuit with a DRV5055 sensor, first without and then with a microcontroller."
+image: /sensors/assets/images/MagneticBikeTachometers2.png
 parent: Sensors
 has_toc: true # (on by default)
 comments: true
@@ -16,6 +18,12 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/MvVfq6AAEQU" title="Arduino-based magnetic LED brightener adjusting LED brightness in response to a moving magnet sensed by a Hall effect sensor" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** Where we're headed: an Arduino-driven "magical magnetic LED brightener" that smoothly fades an LED up and down as you move a magnet past a DRV5055 Hall effect sensor.
+{: .fs-1 }
 
 In this lesson, you will learn about two types of magnetic sensors: Hall effect sensors and reed switches. You will then use a [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor to build a simple auto-brightening LED circuit first without and then with a microcontroller.
 
@@ -39,7 +47,9 @@ Electricity and magnetism have long captured human interest but were considered 
 
 Enter Edwin Hall. As a PhD student at Johns Hopkins in 1879, Hall discovered the "Hall effect", which is the production of a small voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied ([Wikipedia](https://en.wikipedia.org/wiki/Hall_effect#Discovery)). This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect. When a magnet is introduced, it repels negative charges to one side of the conductor creating an asymmetric distribution of charge (perpendicular to the flow of current) on the conductor. This separation of charge establishes a new electric field with a small electric potential (often in the millivolts), which can be measured by a multimeter or similar device.
 
-![Animation of Hall Effect](/assets/movies/HallEffectAnimation_HowToMechatronics-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation of Hall Effect">
+  <source src="assets/videos/HallEffectAnimation_HowToMechatronics-Optimized.mp4" type="video/mp4" />
+</video>
 Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
 {: .fs-1 }
 
@@ -50,7 +60,7 @@ Confused? That's ok!
 To better understand the Hall effect, watch this 5-minute video from Professor Bowley at the University of Nottingham. He provides a wonderful set of visual experiments and explanations (the best we've seen) that should clarify things:
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/AcRCgyComEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Professor Bowley of the University of Nottingham explains the physics of the Hall effect with visual experiments" src="https://www.youtube.com/embed/AcRCgyComEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 In this [wonderful video](https://youtu.be/AcRCgyComEw) from the University of Notthingham, Professor Bowley explains the physics of the Hall Effect.
 {: .fs-1 }
@@ -105,7 +115,7 @@ While some Hall effect sensors produce binary output (`HIGH` or `LOW`) and thus,
 
 | Reed Switch Animation | Slow Motion Activation Video |
 | ---------- | ----------- |
-| ![Reed switch slow-mo video](/assets/movies/ReedSwitchAnimation-Optimized.gif) | ![Reed switch animation](/assets/movies/HowAReedSwitchWorks_Wikipedia.gif) |
+| <video src="assets/videos/ReedSwitchAnimation-Optimized.mp4" autoplay loop muted playsinline aria-label="Reed switch slow-mo video"></video> | <video src="assets/videos/HowAReedSwitchWorks_Wikipedia.mp4" autoplay loop muted playsinline aria-label="Reed switch animation"></video> |
 
 The slow-motion activation video is from [Wikipedia](https://en.wikipedia.org/wiki/Reed_switch).
 {: .fs-1 }
@@ -119,7 +129,7 @@ With a Hall effect sensor, the magnetic flux density through the sensor is maxim
 Here's a [video](https://youtu.be/hnCEQYO-i_E) demonstrating a reed switch functioning with three different magnets from K&J Magnetics:
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/hnCEQYO-i_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Demonstration of a reed switch closing in response to three different magnets, from K&amp;J Magnetics" src="https://www.youtube.com/embed/hnCEQYO-i_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 
@@ -180,7 +190,7 @@ We've included two wiring diagrams: on the left, the suggested wiring by the DRV
 And here's a workbench video demonstrating the circuit (without a capacitor). The second half of the video includes two multimeters: one to measure the current through the circuit and the other to measure the voltage output from the Hall effect sensor. 
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/RLNx7tHCxC0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench demo of the Hall effect LED brightener circuit with multimeters measuring current and sensor output voltage" src="https://www.youtube.com/embed/RLNx7tHCxC0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 My vocal narration is quite soft as I recorded the video early in the morning and did not want to disturb my house! :D
 {: .fs-1 }
@@ -188,7 +198,7 @@ My vocal narration is quite soft as I recorded the video early in the morning an
 ### Improving the circuit
 
 What if we wanted to supply more than 1mA through our LED? We have have two choices: 
-1. Just like with our [photoresistor](photoresistors.md#An-improved-auto-on-nightlight-circuit) circuit, we could change our circuit to use a **transistor**. In this case, the Hall effect sensor output would be connected to a transistor, which would control the current through our LED. If you have a transistor, feel free to try this!
+1. Just like with our [photoresistor](photoresistors.md#an-improved-auto-on-nightlight-circuit) circuit, we could change our circuit to use a **transistor**. In this case, the Hall effect sensor output would be connected to a transistor, which would control the current through our LED. If you have a transistor, feel free to try this!
 2. We could move on to using a microcontroller, which is what we're going to do!
 
 ## Make an Arduino-based magical magnetic LED brightener
@@ -217,7 +227,7 @@ This [source code](https://github.com/makeabilitylab/arduino/blob/master/Sensors
 ### Workbench video
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/MvVfq6AAEQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench demo of the Arduino-based magnetic LED brightener that adjusts LED brightness from the Hall effect sensor" src="https://www.youtube.com/embed/MvVfq6AAEQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <!-- ## Reed switches

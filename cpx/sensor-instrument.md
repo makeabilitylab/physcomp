@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Light-Level Instrument
+description: "Build an interactive CPX instrument in MakeCode that turns light levels into sound and color, using the onboard light sensor, speaker, and NeoPixels to make a playful light theremin."
+image: https://img.youtube.com/vi/RlEPQqyQGEk/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
@@ -17,18 +19,15 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/RlEPQqyQGEk" title="Building a light-level instrument on the Circuit Playground Express in MakeCode" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** Where we're headed: a light-level instrument that turns light readings into sound and color using the CPX's onboard light sensor, speaker, and NeoPixels. [Full code](https://makecode.com/_drYKXH5UeV1r).
+{: .fs-1 }
+
 In this lesson, we will build on our last lesson—the [Button Piano](button-piano.md)—to make an interactive instrument that translates light levels into sound and light. It won't sound great but it will sound fun!
 
 <!-- TODO consider adding in a lil video of a theremin? -->
-
-## Video Tutorial
-
-<div class="iframe-container">
-  <iframe width="100%" src="https://www.youtube.com/embed/RlEPQqyQGEk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
-
-**Video.** Creating a light sensor instrument. Here's [the full code](https://makecode.com/_drYKXH5UeV1r) and a [link to the video on YouTube](https://youtu.be/RlEPQqyQGEk).
-{: .fs-1 }
 
 ## Code
 

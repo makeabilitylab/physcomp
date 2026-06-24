@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Circuit Playground Express
+image: /cpx/assets/og/index.jpg
+description: "A beginner tutorial series for Adafruit's Circuit Playground Express (CPX): program with drag-and-drop MakeCode to build button pianos, capacitive-touch sensors, keyboards, and more."
 has_toc: false # (on by default)
 usemathjax: true
 comments: false
@@ -18,7 +20,7 @@ nav_order: 5
 {:toc}
 ---
 
-<video autoplay loop muted playsinline>
+<video aria-label="Using the CPX and capacitive sensing to measure a hand's distance from a soda can as a proximity detector" autoplay loop muted playsinline>
   <source src="assets/videos/CPX_CapacitiveSensing_SodaCanProximityDetector_MakeCode_Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** In the video above, we are using the CPX and capacitive sensing to measure the hand's distance from the soda can. See more in [Lesson 5: Capacitive Sensing](capacitive-touch.md). Join us in this tutorial series to learn about the amazing [Circuit Playground Express (CPX)](https://www.adafruit.com/product/3333) microcontroller platform and drag-and-drop visual programming called [MakeCode](https://www.microsoft.com/en-us/makecode).

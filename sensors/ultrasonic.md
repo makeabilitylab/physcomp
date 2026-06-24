@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Ultrasonic Distance
+description: "Measure distance with the HC-SR04 ultrasonic sensor on Arduino, using sound pulses and echo timing to detect how far away nearby objects are."
 parent: Sensors
 has_toc: true # (on by default)
 comments: false

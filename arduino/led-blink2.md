@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L6&#58; Blinking Two LEDs
+description: "Understand current sourcing vs. current sinking by blinking two LEDs on a breadboard—one circuit where the Arduino pin sources current and one where it sinks it."
+image: /arduino/assets/og/led-blink2.jpg
 nav_order: 6
 parent: Output
 grand_parent: Intro to Arduino
@@ -28,7 +30,9 @@ We are going to build two simple LED circuits:
 
 Yes, this can be a bit confusing at first ("*wait, the LED turns off when Pin 4 is `HIGH`?!?!*"). But you'll gain understanding by completing this lesson. In the animation below, pay attention to the current direction in each circuit. Notice how they're opposite!
 
-![Animation showing how driving Pin 3 and 4 HIGH will turn on LED Circuit 1 and off LED Circuit 2 and driving those pins LOW will turn off LED Circuit 1 and on LED Circuit 2](assets/movies/Arduino_Blink2Animation_Pins3And4-NoSchematic-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing how driving Pin 3 and 4 HIGH will turn on LED Circuit 1 and off LED Circuit 2 and driving those pins LOW will turn off LED Circuit 1 and on LED Circuit 2">
+  <source src="assets/videos/Arduino_Blink2Animation_Pins3And4-NoSchematic-Optimized.mp4" type="video/mp4" />
+</video>
 
 ## Materials
 
@@ -74,14 +78,14 @@ Importantly, the Pin 3 circuit (**LED Circuit 1**) will turn ***on*** with `digi
 When Pin 3 is `HIGH` (5V), there is a voltage difference between Pin 3 and `GND` so current flows from Pin 3 to ground. When Pin 4 is `HIGH` (5V), however, there is no voltage difference across the circuit (from Pin 4 to 5V) and thus, no current. This behavior is illustrated in the animation below.
 
 <video controls="controls" aria-label="Animation showing current flow in both LED circuits when pins are driven HIGH and LOW">
-  <source src="assets/movies/Arduino_Blink2Animation_Pins3And4.mp4" type="video/mp4">
+  <source src="assets/videos/Arduino_Blink2Animation_Pins3And4.mp4" type="video/mp4">
 </video>
 
 Let's write the code!
 
 ### Step 1: Write the setup and initialization code
 
-{% highlight C %}
+```cpp
 const int LED1_OUTPUT_PIN = 3; // Anode faces Pin 3 (cathode connected to 0V)
 const int LED2_OUTPUT_PIN = 4; // Cathode faces Pin 4 (anode connected to 5V)
 const int DELAY_MS = 1000; // delay for 1 sec between blinks
@@ -92,11 +96,11 @@ void setup() {
   pinMode(LED1_OUTPUT_PIN, OUTPUT);
   pinMode(LED2_OUTPUT_PIN, OUTPUT);
 }
-{% endhighlight C %}
+```
 
 ### Step 2: Write the blink code in loop()
 
-{% highlight C %}
+```cpp
 // The loop function runs over and over again forever
 void loop() {
   // Below, you're going to see that driving Pin 3 HIGH will turn on LED1
@@ -109,13 +113,15 @@ void loop() {
   digitalWrite(LED2_OUTPUT_PIN, LOW);   // turns ON LED2 (Pin 4 is now 0V and other leg of LED is 5V)
   delay(DELAY_MS);                      // wait for a second
 }
-{% endhighlight C %}
+```
 
 ### Step 3: Compile, upload, and run the code!
 
 We did it! Now compile and upload the code.
 
-![Top-down workbench animated gif of the circuit working with Arduino](assets/movies/ArduinoUno_Blink2_Workbench.gif)
+<video autoplay loop muted playsinline aria-label="Top-down workbench animated gif of the circuit working with Arduino">
+  <source src="assets/videos/ArduinoUno_Blink2_Workbench.mp4" type="video/mp4" />
+</video>
 
 And here's a top-down video with the code window:
 
@@ -123,7 +129,7 @@ And here's a top-down video with the code window:
   <iframe src="https://www.youtube.com/embed/q6KcPYfum7c" title="Top-down workbench video showing two LEDs blinking with current sourcing and sinking" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-<!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/movies/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
+<!-- ![Animation showing LED Circuit 1 (hooked up to Pin 3) turning with HIGH output and LED Circuit 2 (hooked up to Pin 4) turning off and then the opposite when the pins are driven LOW (LED Circuit 1 turns off and LED Circuit 2 turns on)](assets/videos/Arduino_Blink2Animation_Pins3And4-Trimmed.gif) -->
 
 ## Our Blink2 code on GitHub
 

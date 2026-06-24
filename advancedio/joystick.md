@@ -1,6 +1,7 @@
 ---
 layout: default
 title: LX&#58; Joystick
+description: "Read a 2-axis analog joystick with Arduino, like the thumbsticks on PlayStation and Xbox controllers, including wiring, calibration, and interpreting the X and Y analog values."
 nav_order: 1
 # parent: Input
 # grand_parent: Advanced I/O

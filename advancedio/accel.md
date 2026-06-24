@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L2&#58; Accelerometers
+description: "Sense motion and orientation with accelerometers. Understand how MEMS sensors work, compare the ADXL335 and LIS3DH, and read acceleration data to detect tilt and movement with Arduino."
 nav_order: 2
 # parent: Input
 # grand_parent: Advanced I/O

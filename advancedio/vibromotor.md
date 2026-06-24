@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Vibromotors
+description: "Add haptic feedback with vibration motors. Drive a raw DC ERM motor using an NPN transistor, flyback diode, and base resistor, then shape buzz intensity and patterns with PWM."
+image: /advancedio/assets/images/VibrationMotorExamplesInMobilePhonesAndWatches.png
 nav_order: 4
 parent: Output
 grand_parent: Advanced I/O
@@ -376,7 +378,7 @@ Now that we understand the theory and have our circuit wired up, let's build thr
 
 Just as we started our Arduino journey by [blinking an LED](../arduino/led-blink.md), let's start here by "blinking" a vibration motor—turning it on and off at a regular interval. This is the simplest possible vibromotor program and confirms that your circuit is working.
 
-{% highlight C++ %}
+```cpp
 const int VIBRO_PIN = 3; // Connect to the transistor base (via 1K resistor)
 
 void setup() {
@@ -389,7 +391,7 @@ void loop() {
   digitalWrite(VIBRO_PIN, LOW);   // Motor off
   delay(500);                     // Pause for 500ms
 }
-{% endhighlight C++ %}
+```
 
 Try experimenting with different on/off durations. What happens with very short pulses (*e.g.,* 50ms on, 200ms off)? Can you feel the difference between a 100ms buzz and a 500ms buzz? This is the foundation of haptic pattern design!
 
@@ -405,7 +407,7 @@ Use the same transistor circuit as before, and add a 10KΩ potentiometer with it
 
 #### The code
 
-{% highlight C++ %}
+```cpp
 const int VIBRO_PIN = 3;           // PWM pin connected to transistor base
 const int POT_PIN = A0;            // Potentiometer wiper
 const int MAX_ANALOG_INPUT = 1023; // 10-bit ADC
@@ -433,7 +435,7 @@ void loop() {
 
   delay(50);
 }
-{% endhighlight C++ %}
+```
 
 As you turn the potentiometer, you should feel the vibration intensity change smoothly from off (fully counter-clockwise) to maximum (fully clockwise). Open the Serial Monitor to see the mapping from analog input to PWM output. Can you feel differences at low PWM values (*e.g.,* between 20 and 50)? At what PWM value does the motor stop vibrating entirely?
 
@@ -451,7 +453,7 @@ Use the same transistor + vibromotor circuit, and add three tactile buttons conn
 
 #### The code
 
-{% highlight C++ %}
+```cpp
 const int VIBRO_PIN = 3;
 const int BTN_TAP = 8;
 const int BTN_ALERT = 9;
@@ -504,7 +506,7 @@ void playAlarm() {
   }
   delay(300);
 }
-{% endhighlight C++ %}
+```
 
 Try pressing each button and feeling the difference. Can you tell the three patterns apart with your eyes closed? Try designing your own patterns—a heartbeat (*thump-thump... thump-thump...*), a countdown, or a rhythmic pattern. Haptic design is all about creating distinct, recognizable tactile signatures.
 
@@ -606,7 +608,7 @@ In this lesson, you learned about vibration motors and how to safely control the
 
 ## Next Lesson
 
-In the [next lesson](../smoothing-input.md), we will switch from output to input and learn how to smooth noisy sensor data using digital signal processing techniques.
+In the [next lesson](smoothing-input.md), we will switch from output to input and learn how to smooth noisy sensor data using digital signal processing techniques.
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="servo.html" class="nav-prev">

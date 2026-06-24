@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L8&#58; Analog Input
+description: "Connect external sensors to the CPX with analog input. Read potentiometers, FSRs, and flex sensors, learn voltage dividers, and even build a lo-fi slide pot from paper and pencil."
+image: https://img.youtube.com/vi/S6X4Y5gfekc/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
@@ -17,15 +19,17 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/S6X4Y5gfekc?si=RysXDQ5unRU7n79H" title="Overview of analog input on the Circuit Playground Express" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** In this lesson, we'll connect *external* analog sensors to the CPX—potentiometers, FSRs, flex sensors, and even a lo-fi slide potentiometer made from paper and a pencil.
+{: .fs-1 }
+
 In Lesson 8, we move beyond working with internal sensors on the CPX (light 💡, microphone 🔊, accelerometer 🍎) and show how to connect external sensors using **analog input**.
 
 ## Lesson 8.1: Overview of Analog Input
 
 In this lesson, we introduce **analog input** on the Circuit Playground Express (CPX) primarily focusing on variable resistive sensors like rotary potentiometers, slide potentiometers, force-sensitive resistors (FSRs), flex sensors (Nintendo Power Glove!), softpot position sensors, and more!
-
-<div class="iframe-container">
-  <iframe width="100%" src="https://www.youtube.com/embed/S6X4Y5gfekc?si=RysXDQ5unRU7n79H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
 
 ### Code
 
@@ -67,21 +71,21 @@ It's OK if you don't understand exactly how voltage dividers work. The key is in
 
 In the above examples, we showed how to read 3.3V and GND (0V) with the CPX by touching the yellow wire to the red and black respectively and graphing the result. But analog input is far more interesting than just two numbers: 0 and 1023. How can we play with everything in between?
 
-We can do this by dividing the input voltage using resistors, which we cover in great detail in our [Electronics L4: Voltage Divider lesson](series-parallel.md#voltage-dividers) and touch on it a bit in the above video. We need not repeat ourselves here; however, if you want to experiment with manually controlling different input voltages on A1, try adding different resistor combinations like the following.
+We can do this by dividing the input voltage using resistors, which we cover in great detail in our [Electronics L4: Voltage Divider lesson](../electronics/series-parallel.md#voltage-dividers) and touch on it a bit in the above video. We need not repeat ourselves here; however, if you want to experiment with manually controlling different input voltages on A1, try adding different resistor combinations like the following.
 
-![](assets/images/CPX_IntroToVoltageDivider.png)
+![Intro to using a voltage divider with two resistors to control the input voltage on CPX pin A1](assets/images/CPX_IntroToVoltageDivider.png)
 
 The key is not the raw resistor values themselves but rather the ratio between them. With equal resistors—in this case 330Ω—the 3.3V will be divided equally to 1.65V (and converted to 512 by the CPX).
 
-![](assets/images/CPX_VoltageDividerEqual330Ohm.png)
+![Voltage divider on the CPX with two equal 330-ohm resistors splitting 3.3V to 1.65V on A1](assets/images/CPX_VoltageDividerEqual330Ohm.png)
 
 Similarly, if we add a pair of 470 resistors, the 3.3V will again be divided equally to 1.65V (and again converted to 512 by the CPX)
 
-![](assets/images/CPX_VoltageDividerEqual470Ohm.png)
+![Voltage divider on the CPX with two equal 470-ohm resistors splitting 3.3V to 1.65V on A1](assets/images/CPX_VoltageDividerEqual470Ohm.png)
 
 But if we change that ratio, we can get different input voltages on A1.
 
-![](assets/images/CPX_VoltageDivider1kAnd2kResistors.png)
+![Voltage divider on the CPX with unequal 1k and 2k resistors producing a different input voltage on A1](assets/images/CPX_VoltageDivider1kAnd2kResistors.png)
 
 <!-- Well, the answer is: sensors vary their output voltages to convey data to microcontrollers. One common class of sensors is called "resistive sensors" such as potentiometers, pressure sensors, thermistors, and more, which vary their resistance based on some human or environmental interaction. -->
 
@@ -103,33 +107,33 @@ You can test any of these circuits using [this basic MakeCode](https://makecode.
 
 Hooking up a rotary potentiometer
 
-![](assets/images/CPX_RotaryPotentiometer_CircuitDiagram.png)
+![Circuit diagram for wiring a single rotary potentiometer to analog pin A1 on the CPX](assets/images/CPX_RotaryPotentiometer_CircuitDiagram.png)
 
 Hooking up two rotary potentiometers ([try out this code!](https://makecode.com/_CLJ8U8F2d7sT)):
 
-![](assets/images/CPX_2RotaryPotentiometers_CircuitDiagram.png)
+![Circuit diagram for wiring two rotary potentiometers to analog pins A1 and A2 on the CPX](assets/images/CPX_2RotaryPotentiometers_CircuitDiagram.png)
 
 #### Slide Potentiometer
 
-![](assets/images/CPX_SlidePotentiometer_CircuitDiagram.png)
+![Circuit diagram for wiring a slide potentiometer to analog pin A1 on the CPX](assets/images/CPX_SlidePotentiometer_CircuitDiagram.png)
 
 #### Pressure Sensor
 
 You might be compelled to hook up your two-legged resistive sensors like pressure sensors, flex sensors, photosensitive resistors like this... but don't do this! It's wrong!
 
-![](assets/images/CPX_PressureSensor_IncorrectCircuitDiagram.png)
+![Incorrect circuit diagram wiring a two-legged pressure sensor directly to A1 without a divider resistor](assets/images/CPX_PressureSensor_IncorrectCircuitDiagram.png)
 
 Instead, you need to add in an additional resistor to turn the circuit into a voltage divider where one of the resistors is your sensor, which dynamically changes its resistance.
 
-![](assets/images/CPX_PressureSensor_CircuitDiagram.png)
+![Correct circuit diagram wiring a pressure sensor with a fixed resistor as a voltage divider into A1](assets/images/CPX_PressureSensor_CircuitDiagram.png)
 
 #### Photosensitive Resistor
 
-![](assets/images/CPX_PhotosensitiveResistor_CircuitDiagram.png)
+![Circuit diagram wiring a photosensitive resistor with a fixed resistor as a voltage divider into A1](assets/images/CPX_PhotosensitiveResistor_CircuitDiagram.png)
 
 #### Flex Sensor
 
-![](assets/images/CPX_FlexSensor_CircuitDiagram.png)
+![Circuit diagram wiring a flex sensor with a fixed resistor as a voltage divider into A1 on the CPX](assets/images/CPX_FlexSensor_CircuitDiagram.png)
 
 ### Code
 

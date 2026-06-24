@@ -20,9 +20,28 @@ usetocbot: true
 ## Running the website
 Assuming you have the prerequisite libraries and software infrastructure (e.g., Jekyll)—see our [website development setup guide here](website-install.md)—you can open terminal in VSCode and type:
 
-```
+```text
 > bundle exec jekyll serve 
 ```
+
+## Deployment (GitHub Actions)
+
+The live site at <https://makeabilitylab.github.io/physcomp/> is built and
+published by the GitHub Actions workflow in
+[`.github/workflows/jekyll.yml`](https://github.com/makeabilitylab/physcomp/blob/main/.github/workflows/jekyll.yml). On every push to
+`main` (and on manual runs from the **Actions** tab), the workflow runs
+`bundle exec jekyll build` on a clean Ubuntu runner and deploys the resulting
+`_site/` to GitHub Pages with `actions/deploy-pages`.
+
+This replaced the older "Deploy from a branch" GitHub Pages build, which only
+ran whitelisted plugins and no custom build steps. Building in Actions lets us
+run custom Jekyll plugins, inline source code at build time, and add content
+lint/test gates. See [issue #98](https://github.com/makeabilitylab/physcomp/issues/98).
+
+For the Actions deploy to publish, the repo's **Settings → Pages → Build and
+deployment → Source** must be set to **GitHub Actions** (not "Deploy from a
+branch"). The workflow still installs the same `github-pages` gem from the
+`Gemfile`, so the built output matches the previous branch-based build.
 
 ## VS Code
 I've been using [VS Code](https://code.visualstudio.com/) with some popular markdown extensions to develop the website. 
@@ -40,30 +59,177 @@ Including other markdown pages: https://stackoverflow.com/a/41966993/388117.
 
 <!-- {percent sign include_relative tutorials/index.md percent sign} -->
 
+## SEO and social cards (per-page front matter)
+
+The site uses [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) (pulled in
+via the `github-pages` gem) to emit `<meta>` description, [Open Graph](https://ogp.me/),
+and Twitter-card tags. **Every lesson page should set two front-matter keys** so search
+results and link previews (Slack, iMessage, Discord, X, LinkedIn, Facebook) are
+page-specific instead of falling back to the generic site description and card.
+
+```yaml
+---
+layout: default
+title: L4&#58; Fading an LED
+description: "Smoothly fade an LED on and off with Arduino's analogWrite() and pulse-width modulation (PWM), controlling output voltage at fine gradations beyond just HIGH/LOW."
+image: /arduino/assets/og/led-fade.jpg
+nav_order: 4
+parent: Output
+---
+```
+
+**`description:`** — a 1–2 sentence summary, ideally **≤ 160 characters** (search engines
+truncate the visible snippet around there). Write it for a human skimming search results:
+lead with the concrete thing they'll learn/build. Wrap it in double quotes so `:` and `()`
+don't break the YAML.
+
+**`image:`** — the social-card preview. Use a **root-absolute path** (leading `/`, no
+`{{ site.baseurl }}` — `jekyll-seo-tag` prepends `site.url` + `baseurl` automatically), or
+a full external URL. It **must be a static image** — social crawlers never render video as
+the card. Pick, in order of preference:
+
+1. The page's own hero image, if it's a `.png`/`.jpg` (or a `.gif` whose **first frame**
+   reads well — platforms show GIFs as a static first frame).
+2. For pages whose hero is an **MP4 `<video>`**: run `scripts/generate_og_posters.py`, which
+   uses `ffmpeg`'s `thumbnail` filter to extract a representative still into
+   `<module>/assets/og/<lesson>.jpg` and sets `image:` for you (dry run by default; pass
+   `--run`, or a list of `.md` files to limit scope). Requires `ffmpeg` on PATH.
+3. For pages whose hero is a **YouTube embed**: the thumbnail
+   `https://img.youtube.com/vi/<VIDEO_ID>/hqdefault.jpg` (`hqdefault` always exists;
+   `maxresdefault` does not).
+4. If there's no good static image (e.g. a section index page), **omit `image:`** — the
+   generic site card (`/assets/images/physcomp-og-card.jpg`, set in `_config.yml` `defaults`)
+   is used automatically.
+
+The ideal OG image is 1200×630 (1.91:1); existing figures rarely match this exactly, which is
+fine for now. A future improvement (once we're off the `github-pages` gem) is auto-generating
+branded 1200×630 cards with the page title overlaid.
+
+To verify after a build, grep the output, e.g.:
+
+```bash
+grep -oiE '<meta (name|property)="(og:image|og:description|description)" content="[^"]*"' _site/arduino/led-fade.html
+```
+
+### New pages and enforcement
+
+This is **required**, not optional. A CI check (`scripts/check_seo_frontmatter.py`, run by
+the **Content lint** workflow on every pull request) fails the PR if any published page is
+missing `description:`. So when you author a new lesson, start from this minimal front matter:
+
+```yaml
+---
+layout: default
+title: "Your Lesson Title"
+description: "One or two sentences (≤160 chars) on what the reader learns or builds."
+# image:  ← add per the rules above; for an MP4 hero, run the poster script (below) instead
+parent: Your Section
+nav_order: 1
+---
+```
+
+If a page isn't ready to publish, mark it `nav_exclude: true` (or `search_exclude: true`) and
+the check skips it until you publish it. The `image:` key is advisory — the check only *reminds*
+you when an MP4-hero page has no poster yet.
+
+For a new page whose hero is an **MP4 `<video>`**, generate its social poster (and have `image:`
+set for you) with:
+
+```bash
+python scripts/generate_og_posters.py --run <module>/<your-page>.md
+```
+
+## Accessibility and content QA
+
+Two CI checks in the **Content lint** workflow guard accessibility and link health.
+They are complementary — neither subsumes the other:
+
+| Check (job) | Tool | Runs against | Catches |
+|---|---|---|---|
+| `media-a11y` | `scripts/check_a11y.py` | Markdown **source** | YouTube `<iframe>` without `title=`, `<video>` without `aria-label`, image with empty/missing alt |
+| `link-check` | [`html-proofer`](https://github.com/gjtorikian/html-proofer) | built **`_site/`** | broken internal links, broken `#anchors`, missing `alt` attribute, malformed HTML |
+
+We use the off-the-shelf `html-proofer` for the commodity problem (links/HTML);
+`check_a11y.py` only covers the source conventions html-proofer can't see (it permits
+empty `alt=""` as "decorative" and has no notion of iframe titles or video labels).
+
+**Authoring rules** (all enforced):
+
+- **YouTube embeds** — give the `<iframe>` a `title=` describing the video, e.g.
+  `<iframe title="An RGB LED fading between colors" src="https://www.youtube.com/embed/…" …>`.
+- **`<video>` heroes/demos** — add an `aria-label=` describing the clip.
+- **Images** — informative images need descriptive alt: `![what it shows](path.png)`.
+  Don't start with "Image of"; don't dump the filename. A genuinely *decorative* image
+  may use empty `alt=""`, but `check_a11y` flags `![](…)` in source, so make alt explicit.
+- **Drafts / WIP** — a page that intentionally references not-yet-created assets should be
+  `nav_exclude: true` (the `media-a11y` check skips drafts). If a published page must keep a
+  not-yet-added asset, add its built path to the `--ignore-files` list in
+  `content-lint.yml` **with a tracking issue** (don't ignore silently).
+
+**Running html-proofer locally.** It needs `libcurl` (via `typhoeus`/`ethon`), which isn't
+present on stock Windows — so it runs in CI (Ubuntu) but may fail to even load on native
+Win11 (`Could not open library 'libcurl'`). Options: rely on CI; run it under **WSL2 or
+macOS** (libcurl present, matches CI); or on native Win11 install it once with
+`ridk exec pacman -S mingw-w64-ucrt-x86_64-curl`. To run it (after a build):
+
+```bash
+bundle exec jekyll build --baseurl "/physcomp"
+gem install html-proofer -v 5.0.9
+htmlproofer ./_site --disable-external --swap-urls "^/physcomp:" \
+  --ignore-files "/\/signals\/.+\/index\.html/,/\/signals\/IntroTo[A-Za-z]+\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"
+```
+
+`check_a11y.py` is pure Python (no libcurl) and runs anywhere:
+`python scripts/check_a11y.py` (add `--summary` for counts, `--ci` to fail on any issue).
+
 ## Code highlighting
 <!-- Code snippet highlighting: https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting -->
 
-### Using Jekyll's `highlight` functionality
-This is a test.
-{% highlight C %}
-void loop() {
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);               // wait for a second
-}
-{% endhighlight C %}
+**Standard:** write code in fenced blocks (triple backticks) with a **required
+language token** on the opening fence. Use `cpp` for **all** Arduino/ESP32
+sketches (our house style), and a real token for everything else — `javascript`,
+`html`, `css`, `json`, `python`, `bash`, etc. For terminal sessions, program
+output, file trees, or other non-source text, use `text` (highlighters render it
+verbatim, and it still satisfies the language requirement).
 
-### Using Markdown's tickmarks
-
-```
+````markdown
+```cpp
 void loop() {
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);               // wait for a second
+  digitalWrite(led, HIGH);   // turn the LED on
+  delay(1000);               // wait a second
 }
 ```
+````
+
+Do **not** use Jekyll's `{% raw %}{% highlight %}{% endraw %}` Liquid tags. They
+were fine historically, but the whole site was migrated to fenced blocks (issue
+#99) for portability, tooling, and to de-risk a future framework move where
+Liquid tags would all need rewriting.
+
+**This is enforced in CI.** The `code-blocks` job in
+`.github/workflows/content-lint.yml` runs `markdownlint` with the scoped config
+`.markdownlint-code.jsonc`:
+
+- **MD040** — every fenced block must declare a language token.
+- **MD046** — code must be *fenced*, never indented (an indented block can't
+  carry a language, so it would silently dodge MD040). For a deliberate indented
+  demo, opt out inline with `<!-- markdownlint-disable MD046 -->` … `<!-- markdownlint-enable MD046 -->`.
+- **MD048** — fences use backticks (` ``` `), not tildes.
+
+The config is intentionally separate from the editor's `.markdownlint.jsonc` so
+the gate only checks these three rules (not the many unrelated style nits the
+older content predates). Run it locally with:
+
+```bash
+npx markdownlint-cli@0.48.0 -c .markdownlint-code.jsonc "**/*.md" --ignore "_site" --ignore "node_modules"
+```
+
+**Liquid inside a code block.** Fenced blocks do *not* stop Jekyll from
+executing Liquid, so if a block must *show* literal Liquid (e.g. an
+`if page.usemathjax` conditional), wrap it in `raw`/`endraw` tags and Jekyll
+prints it verbatim instead of running it — see the
+[Adding LaTeX support](#adding-latex-support) example below, which does exactly
+this.
 
 ### Using `gist-it.appspot.com` to embed code directly from GitHub
 <!-- <script src="http://gist-it.appspot.com/http://github.com/$file"></script> -->
@@ -122,12 +288,17 @@ It works with almost all markdown flavours (the below blank line matters). This 
 ### Option 3: Use tabs
 This version is using tabs:
 
+<!-- markdownlint-disable MD046 -->
+<!-- Intentionally indented: this block demonstrates the tab/indent code-block syntax itself. -->
+
     Start on a fresh line
     Hit tab twice, type up the content
     Your content should appear in a box. However, doesn't appear to now support markdown. For example, **this** should be bold. However, I can still use html it appears? For example, <b>this</b> is bold? Or maybe not! So, perhaps this is treated as a code block or something...
 
+<!-- markdownlint-enable MD046 -->
+
 This version is using tick marks (rather than tabs) but it should render in the same way:
-```
+```text
 Use tickmarks
 ```
 
@@ -159,7 +330,7 @@ This paragraph is now using the `.test-css` style. We do this by using this synt
 
 So, the markdown looks like this:
 
-```
+```markdown
 This paragraph is now using the `.test-css` style. We do this by using this syntax `{: .test-css}` below the element we want styled.
 {: .test-css}
 ```
@@ -172,13 +343,15 @@ After a bit of experimentation, I got LaTeX to work using a **remote** Jekyll te
 2. Since I'm currently using `remote_theme: pmarsceill/just-the-docs`, I was a bit confused about how to make local configuration changes since most online blogs, forum posts talk about editing content in the `_includes` folder; however, I didn't have this in my local dev environment. So, what to do?
 3. I manually made a `_includes` folder with the filename `head_custom.html` and put in there:
 
-{% highlight html %}{% raw %}
+{% raw %}
+```html
 {% if page.usemathjax %}
 <script type="text/javascript" async
  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 {% endif %}
-{% endraw %}{% endhighlight %}
+```
+{% endraw %}
 
 ### Using LaTeX on markdown pages
 On pages where you want to use LaTeX, then add `usemathjax: true` to the header content
@@ -193,20 +366,20 @@ Because I'm forever a LaTeX n00b, I found this online [WYSIWYG LaTeX math editor
 
 I tried to get Disqus working with Jekyll by following their official instructions; however, it *just* wouldn't work and I didn't have significant time to try and troubleshoot/debug. I kept getting the non-help error printed out in Chrome's dev tool console:
 
-```
+```text
 Uncaught SyntaxError: Unexpected end of input   led-on.html:1
 ```
 
 And in FireFox:
 
-```
+```text
 SyntaxError: missing } after function body led-on.html:1:754
 note: { opened at line 1, column 287  led-on.html:1:287
 ```
 
 But I thought I'd try once more and I came across a [blog posting](https://disqus.com/home/discussion/channel-discussdisqus/why_does_the_disqus_not_work_in_jekyll/) that had the solution The "Universal Code" that Disqus has you embed on your website includes `// single line` comments and `/* multi-line */` comments. However, when Jekyll builds the website, it places the entire produced html on one line (read: not beautified), so the single-line comments disrupt the code. Here's the code that **doesn't work**.
 
-{% highlight HTML %}
+```html
 <div id="disqus_thread"></div>
 <script>
     /**
@@ -231,11 +404,11 @@ But I thought I'd try once more and I came across a [blog posting](https://disqu
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
         Disqus.</a></noscript>
 </div>
-{% endhighlight HTML %}
+```
 
 And here's the code that **does** work with the single line comments replaced with multi-line comments:
 
-{% highlight HTML %}
+```html
 <div id="disqus_thread"></div>
 <script>
     /**
@@ -260,7 +433,7 @@ And here's the code that **does** work with the single line comments replaced wi
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
         Disqus.</a></noscript>
 </div>
-{% endhighlight HTML %}
+```
 
 ## Troubleshooting video playback locally
 
@@ -268,8 +441,10 @@ Jekyll's built-in WEBrick server doesn't support HTTP range requests,
 which browsers need to stream `<video>` elements. If videos fail to 
 load or play, try serving the built site with a different local server:
 
-    bundle exec jekyll build
-    python3 -m http.server 4000 --directory _site
+```bash
+bundle exec jekyll build
+python3 -m http.server 4000 --directory _site
+```
 
 Alternatively, `npx serve _site` works well. Both support range 
 requests and handle large media files reliably.
@@ -277,7 +452,9 @@ requests and handle large media files reliably.
 If videos are still slow, check file sizes. Compress large `.mp4` 
 files with ffmpeg:
 
-    ffmpeg -i input.mp4 -crf 28 -preset fast -movflags +faststart output.mp4
+```bash
+ffmpeg -i input.mp4 -crf 28 -preset fast -movflags +faststart output.mp4
+```
 
 The `-movflags +faststart` flag moves metadata to the front of the 
 file so browsers can begin playback before the full download completes.

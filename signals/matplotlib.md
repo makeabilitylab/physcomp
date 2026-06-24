@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L4&#58; Matplotlib
+description: "Visualize and analyze sensor data with matplotlib, the powerful Python charting library, building basic plots in an interactive notebook you can run yourself."
 parent: Tools
 grand_parent: Signals
 has_toc: false # (on by default)

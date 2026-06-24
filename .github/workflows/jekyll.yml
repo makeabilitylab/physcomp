@@ -1,0 +1,85 @@
+# Build the Jekyll site with GitHub Actions and deploy it to GitHub Pages.
+#
+# This replaces the default "deploy from a branch" GitHub Pages build (which
+# only runs whitelisted plugins and no custom build steps) with a full
+# `bundle exec jekyll build` running in CI. That unlocks custom plugins,
+# build-time code inlining, and content lint/test gates. See issue #98.
+#
+# IMPORTANT: this workflow only takes over publishing once the repo's
+# Pages "Source" is switched from "Deploy from a branch" to "GitHub Actions"
+# (Settings -> Pages -> Build and deployment -> Source). Until then it builds
+# but the deploy step will not publish.
+name: Build and deploy Jekyll site to Pages
+
+on:
+  # Run on every push to the live branch.
+  push:
+    branches: ["main"]
+  # Allow manual runs from the Actions tab.
+  workflow_dispatch:
+
+# Minimum permissions the deploy job needs to publish to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress production
+# deploy if another push lands while it's running.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Matches .ruby-version. bundler-cache installs the Gemfile (Jekyll 4
+          # toolchain since issue #81) and caches gems between runs.
+          ruby-version: "3.3.11"
+          bundler-cache: true
+          cache-version: 0
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Stamp build version
+        # Write build metadata consumed by version.json so we can see exactly
+        # which commit/run is live (https://makeabilitylab.github.io/physcomp/version.json).
+        run: |
+          mkdir -p _data
+          cat > _data/version.yml <<EOF
+          short_sha: $(git rev-parse --short HEAD)
+          sha: ${{ github.sha }}
+          ref: ${{ github.ref_name }}
+          run_number: "${{ github.run_number }}"
+          run_id: "${{ github.run_id }}"
+          built_at: "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          EOF
+
+      - name: Build with Jekyll
+        # base_path comes out as "/physcomp", matching baseurl in _config.yml.
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

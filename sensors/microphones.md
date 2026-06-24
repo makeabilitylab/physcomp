@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Microphones
+description: "Get started sensing sound with microphones on the Arduino, including amplifier breakout boards and example code for reading audio-level signals."
 parent: Sensors
 has_toc: true # (on by default)
 comments: false

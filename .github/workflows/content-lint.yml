@@ -1,0 +1,112 @@
+# Content lint: gate pull requests on textbook authoring conventions.
+#
+# Runs lightweight checks on the Markdown content. Separate from the deploy
+# workflow (jekyll.yml) on purpose: a content-convention miss should block a
+# MERGE, but never take down the live site. This is also the home for future
+# content gates. Current gates: SEO front matter, media a11y, code-block
+# standardization (#99), and html-proofer link/anchor/HTML validation.
+name: Content lint
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  seo-frontmatter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check per-page SEO front matter (description:)
+        run: python scripts/check_seo_frontmatter.py
+
+  media-a11y:
+    # Source-level a11y conventions that html-proofer does NOT cover: YouTube
+    # iframe title=, <video> aria-label, and lazy empty alt (alt=""). See
+    # scripts/check_a11y.py. Complements the link-check job below.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check media a11y (iframe title, video aria-label, image alt)
+        run: python scripts/check_a11y.py --ci
+
+  code-blocks:
+    # Enforce #99 code-block standardization on the Markdown SOURCE: every fenced
+    # block declares a language (MD040), blocks are fenced not indented (MD046),
+    # and fences use backticks (MD048). Uses markdownlint-cli (NOT cli2) with -c
+    # so the scoped .markdownlint-code.jsonc fully replaces config instead of
+    # merging the editor .markdownlint.jsonc back in. House style: ```cpp for all
+    # Arduino/ESP32 sketches. Deliberate indented demos opt out inline with
+    # <!-- markdownlint-disable MD046 -->.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Lint code-block conventions (MD040/MD046/MD048)
+        run: npx --yes markdownlint-cli@0.48.0 -c .markdownlint-code.jsonc "**/*.md" --ignore "_site" --ignore "node_modules"
+
+  link-check:
+    # Validate the BUILT site with html-proofer: broken internal links, broken
+    # anchors, missing image alt, and malformed HTML. External links are NOT
+    # checked here (slow/flaky); a separate non-blocking job can cover those.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.11"
+          bundler-cache: true
+          cache-version: 0
+
+      - name: Build site (production baseurl)
+        run: bundle exec jekyll build --baseurl "/physcomp"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Install html-proofer
+        run: gem install html-proofer -v 5.0.9
+
+      - name: Proof built site (internal links, anchors, image alt, HTML)
+        # --swap-urls strips the /physcomp baseurl so absolute internal links
+        # resolve against _site/. External link checking is disabled (slow/flaky).
+        #
+        # --ignore-files: each entry is tracked debt, not a silent skip:
+        #   * signals .+/index.html + IntroTo*.html -> stale generated nbconvert
+        #                                              notebooks               (issue #115)
+        #   * /arduino/accel.html          -> WIP draft, missing screenshot    (issue #115)
+        #   * /esp32/capacitive-touch.html -> WIP lesson, missing diagrams      (issue #114)
+        # Remove an entry once its issue is resolved so the gate covers that page.
+        # Each --ignore-files pattern must be wrapped in /slashes/ to be treated
+        # as a regex (a bare string is an exact-path match); internal slashes are
+        # escaped as \/.
+        run: |
+          htmlproofer ./_site \
+            --disable-external \
+            --swap-urls "^/physcomp:" \
+            --no-enforce-https \
+            --ignore-files "/\/signals\/.+\/index\.html/,/\/signals\/IntroTo[A-Za-z]+\.html/,/\/arduino\/accel\.html/,/\/esp32\/capacitive-touch\.html/"

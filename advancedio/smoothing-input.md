@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Smoothing Input
+image: /advancedio/assets/og/smoothing-input.jpg
+description: "Tame noisy analog sensor data with digital signal processing. Learn why analogRead() readings jitter and how a moving average filter smooths the signal, plus its tradeoffs."
 nav_order: 1
 parent: Input
 grand_parent: Advanced I/O
@@ -21,7 +23,7 @@ usetocbot: true
 
 By now, you may have noticed that your analog input data can be noisy. How can we smooth our input and what factors should we consider?
 
-<video autoplay loop muted playsinline>
+<video aria-label="A noisy analog input signal (blue) being smoothed in real time by a moving average filter with a window size of 10 (red), graphed in the Arduino Serial Plotter" autoplay loop muted playsinline>
   <source src="assets/videos/MovingAverageFilterWindowSize10-Optimized.mp4" type="video/mp4" />
 </video>
 
@@ -50,7 +52,7 @@ When reading sensor data using analog input pins on a microcontroller (*e.g.,* v
 
 Even with a simple potentiometer, we can observe noise on our input pin. In the video below, we are **not** touching the potentiometer and yet the analog input is oscillating between 142 and 143 (0.694V and 0.699V)—shown as the blue line. You may have experienced this too in your own potentiometer-based projects or in the [Arduino potentiometer lesson](../arduino/potentiometers.md). In this case, we fixed this "input noise" by smoothing the signal using a moving average filter—shown in red—which we will describe in this lesson.
 
-<video autoplay loop muted playsinline>
+<video aria-label="A potentiometer's raw analog input (blue) oscillating between 142 and 143 while untouched, with the noise removed by a moving average filter of window size 10 (red)" autoplay loop muted playsinline>
   <source src="assets/videos/PotentiometerOscillatingWithNoInputButFixedWithMovingAverage-Optimized.mp4" type="video/mp4" />
 </video>
 **Video.** In this video, we're graphing the raw analog input (blue line) from a potentiometer along with a "smoothed" version (red line). Although we're not touching or using the potentiometer, the analog input is oscillating between 142 and 143 (0.694V and 0.699V). We smooth this noise using a moving average filter (window size = 10)—shown in red. Note that, depending on the oscillation pattern, a different window size or smoothing approach may be necessary. Read more about potentiometer noise [here](https://passive-components.eu/resistors-potentiometers-basic-principles/). Graph made with the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
@@ -90,7 +92,7 @@ This filter is a type of **low-pass** filter because it smooths out (eliminates)
 
 You can control the filter's performance by tweaking the size of the sliding window. The animation below demonstrates a sliding window of size 3. The blue line corresponds to the raw input signal; the orange line, the smoothed filter output. For illustrative purposes, we only show the sliding window applied to a subset of data.
 
-<video autoplay loop muted playsinline>
+<video aria-label="An animation illustrating a moving average filter with a window size of 3 sliding over a raw input signal (blue) to produce the smoothed output (orange)" autoplay loop muted playsinline>
   <source src="assets/videos/MovingAverageFilter_PowerPointAnimation_TrimmedAndCropped.mp4" type="video/mp4" />
 </video>
 **Video** This video illustrates a moving average filter of window size 3 over a subset of data. Animation made in PowerPoint.
@@ -107,7 +109,7 @@ Below, we compute three different moving average filter window sizes: 5, 10, and
 
 <!-- The object-oriented filtering approach makes it easy to test and compare the effect of different window sizes on the filtered output. -->
 
-<video autoplay loop muted playsinline>
+<video aria-label="Raw analog input (blue) graphed alongside moving average filter output for three window sizes: 5 (red), 10 (green), and 20 (yellow), in the Arduino Serial Plotter" autoplay loop muted playsinline>
   <source src="assets/videos/MovingAverageWithThreeWindowSizes-Optimized.mp4" type="video/mp4" />
 </video>
 **Video** This video graphs raw analog input (blue) and filtered output from three different moving average window sizes: 5 (red line), 10 (green), and 20 (yellow). To produce this video, we used [this code](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWindowSizeDemo/MovingAverageFilterWindowSizeDemo.ino) and the [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/). You should [try it](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingAverageFilterWindowSizeDemo/MovingAverageFilterWindowSizeDemo.ino) yourself!
@@ -117,7 +119,7 @@ Below, we compute three different moving average filter window sizes: 5, 10, and
 
 The official Arduino [signal smoothing tutorial](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Smoothing) uses a moving average filter. Cleverly, their code uses an optimization (which we borrow below) to avoid iterating over the entire window to compute each new average. Instead, we simply subtract the least recent reading in our sliding window from a running total. The code also uses a [circular buffer](https://en.wikipedia.org/wiki/Circular_buffer) to eliminate needless memory allocations, which is important on constrained systems like microcontrollers.
 
-{% highlight C %}
+```cpp
 
 // read the sensor value
 int sensorVal = analogRead(SENSOR_INPUT_PIN);
@@ -142,7 +144,7 @@ if (_curReadIndex >= SMOOTHING_WINDOW_SIZE) {
   // ...wrap around to the beginning:
   _curReadIndex = 0;
 }
-{% endhighlight C %}
+```
 
 #### Arduino code
 
@@ -155,7 +157,7 @@ You can find our full implementation on GitHub as [MovingAverageFilter.ino](http
 
 #### Simple C++ class
 
-Signal filtering is a perfect opportunity to create a class to hide complexity, avoid code redundancy, and handle data processing. In our [Makeability Lab Arduino Library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library/src), we created the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp) class, which simplifies using a moving average filter. But you could make your own, of course, or use [other libraries](#arduino-filtering-libraries.)
+Signal filtering is a perfect opportunity to create a class to hide complexity, avoid code redundancy, and handle data processing. In our [Makeability Lab Arduino Library](https://github.com/makeabilitylab/arduino/tree/master/MakeabilityLab_Arduino_Library/src), we created the [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp) class, which simplifies using a moving average filter. But you could make your own, of course, or use [other libraries](#arduino-filtering-libraries)
 
 Here's a demonstration of how to use [`MovingAveragefilter.hpp`](https://github.com/makeabilitylab/arduino/blob/master/MakeabilityLab_Arduino_Library/src/MovingAverageFilter.hpp):
 
@@ -188,7 +190,7 @@ Below, we've included sample weights for both linear and exponential weighting s
 
 | Linear Weights | Exponential Weights |
 |:----------------:|:-------------:|
-| ![](assets/images/WeightedMovingAverage_WindowSize15_Wikipedia.png) |  ![](assets/images/ExponentialMovingAverageWeights_WindowSize15_Wikipedia.png)  |
+| ![Bar chart of linearly decreasing weights across a moving average window of size 15](assets/images/WeightedMovingAverage_WindowSize15_Wikipedia.png) |  ![Bar chart of exponentially decreasing weights across a moving average window of size 15](assets/images/ExponentialMovingAverageWeights_WindowSize15_Wikipedia.png)  |
 | Linearly decreasing weights for window size 15 | Exponentially decreasing weights for window size 15|
 
 **Figure.** Images from [Wikipedia](https://en.wikipedia.org/wiki/Moving_average).
@@ -204,7 +206,7 @@ $$
 S_{i} =
 \begin{cases}
     X_{1} & \text{if i = 1}\\
-    \alpha \cdot X_{i} + (1 - \alpha) \cdot S_{i-1} & \text{if i $>$ 1}
+    \alpha \cdot X_{i} + (1 - \alpha) \cdot S_{i-1} & \text{if i > 1}
 \end{cases}
 $$
 
@@ -215,7 +217,7 @@ Where:
 
 The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha$$ weights more recent data more. For example, the video below shows EWMA performance with $$\alpha$$ equal to 0.5 (red line), 0.1 (green line), and 0.01 (yellow line). Notice how closely the $$\alpha=0.5$$ EWMA filter tracks the underlying raw signal whereas the $$\alpha=0.01$$ filter is quite distorted and lagged. The $$\alpha=0.1$$ filter may still be appropriate, depending on your needs. Again, it's up to you to experiment!
 
-<video autoplay loop muted playsinline>
+<video aria-label="Exponentially weighted moving average filter output for three alpha values: 0.5 (red) tracking the raw signal closely, 0.1 (green), and 0.01 (yellow) heavily distorted and lagged" autoplay loop muted playsinline>
   <source src="assets/videos/ExponentialMovingAverageFilter-ThreeAlphaValues-Optimized.mp4" type="video/mp4" />
 </video>
 **Video** This video shows EWMA performance with $$\alpha$$ equal to 0.5 (red line), 0.1 (green line), and 0.01 (yellow line). The code used to produce this video is [here](https://github.com/makeabilitylab/arduino/blob/master/Filters/EwmaFilterAlphaDemo/EwmaFilterAlphaDemo.ino). Graph made with the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
@@ -225,7 +227,7 @@ The coefficient $$\alpha$$ determines the exponential dropoff. A higher $$\alpha
 
 If you're not used to reading equations, then perhaps the Arduino code below is more clear. The algorithm is quite straightforward and, again, unlike the traditional moving average algorithm, does not require a window buffer!
 
-{% highlight C %}
+```cpp
 const int SENSOR_INPUT_PIN = A0;
 
 float _ewmaAlpha = 0.1;  // the EWMA alpha value (α)
@@ -249,7 +251,7 @@ void loop()
   Serial.println(_ewma);  
   delay(50); // Reading new values at ~20Hz
 }
-{% endhighlight C %}
+```
 
 **Code.** [This code](https://github.com/makeabilitylab/arduino/blob/master/Filters/ExponentialWeightedMovingAverageFilter/ExponentialWeightedMovingAverageFilter.ino) is on GitHub.
 {: .fs-1 }
@@ -262,7 +264,7 @@ void loop()
 
 A **moving median filter** is almost the exact same as a [moving average filter](#moving-average-filter) but takes the **median** over the sliding window rather than the average. 
 
-<video autoplay loop muted playsinline>
+<video aria-label="An animation illustrating a moving median filter with a window size of three sliding over a signal to produce the smoothed output" autoplay loop muted playsinline>
   <source src="assets/videos/MovingMedianFilter_PowerPointAnimation_TrimmedAndCropped.mp4" type="video/mp4" />
 </video>
 **Video** This video shows a moving median filter with a window size of three. Animation made in PowerPoint.
@@ -293,7 +295,7 @@ But how can we obtain this "middle" value efficiently? We know that re-sorting a
 
 Similar to the moving average filter, we can tweak the moving median filter's performance by modifying the filter window size. Below, we show a moving median filter with window sizes 5, 11, and 21. For this video, we used our test code [MovingMedianFilterWindowSizeDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingMedianFilterWindowSizeDemo/MovingMedianFilterWindowSizeDemo.ino), which relies on Luis Llama's [Arduino Median Filter 2](https://github.com/warhog/Arduino-MedianFilter) library based on Phil Ekstrom's "[Better Than Average](https://www.embedded.com/better-than-average/)" article.
 
-<video autoplay loop muted playsinline>
+<video aria-label="Moving median filter output for window sizes 5, 11, and 21, showing how the median filter flattens peaks in the signal, graphed in the Arduino Serial Plotter" autoplay loop muted playsinline>
   <source src="assets/videos/MovingMedianFilter-ThreeWindowSizes-TrimmedAndOptimized.mp4" type="video/mp4" />
 </video>
 **Video** This video shows moving median filter performance with window sizes 5, 11, and 21. Notice how a median filter tends to flatten "peaks" in the signal, which is unlike the other filters we've examined. To make this video, we used [this code](https://github.com/makeabilitylab/arduino/blob/master/Filters/MovingMedianFilterWindowSizeDemo/MovingMedianFilterWindowSizeDemo.ino) and the built-in [Arduino Serial Plotter](https://diyrobocars.com/2020/05/04/arduino-serial-plotter-the-missing-manual/).
@@ -303,7 +305,7 @@ Similar to the moving average filter, we can tweak the moving median filter's pe
 
 Median filters are widely used in image processing to remove noise from images (image processing is its own subfield of signal processing focusing on 2D DSP techniques). Unlike mean (or average) filters, median filters remove noise while preserving edges—and edges are often a crucial part of other image processing algorithms like the [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector).
 
-![](assets/images/Medianfilterp_Wikipedia.png)
+![A noisy image with salt-and-pepper speckle on the left and the same image after median filtering removes the noise while preserving edges on the right](assets/images/Medianfilterp_Wikipedia.png)
 {: .mx-auto .align-center }
 
 **Figure**. Median filtering is widely used in image processing where it is particularly effective at removing "speckle" or "salt-and-pepper" noise while preserving edges. Image from [Wikipedia](https://en.wikipedia.org/wiki/Median_filter).
@@ -313,7 +315,7 @@ In the case of 1-dimensional signal processing, which we've focused on in this l
 
 | Moving Average Filter | Moving Median Filter |
 |:----------------:|:-------------:|
-| ![](assets/images/SignalSmoothingExample_13-OriginalMovingAverageAndSavitzkyGolay_MathWorks.png) |  ![](assets/images/SignalSmoothingExample_14-OriginalVsMedianFilter.png)  |
+| ![Graph of a clock signal whose sharp rising and falling edges are distorted and rounded by a moving average filter](assets/images/SignalSmoothingExample_13-OriginalMovingAverageAndSavitzkyGolay_MathWorks.png) |  ![Graph of a clock signal smoothed by a median filter that preserves and crispens the sharp transition edges](assets/images/SignalSmoothingExample_14-OriginalVsMedianFilter.png)  |
 | The moving average filter distorts the rising and falling edges of the clock signal | The median filter both smooths the signal and crispens the clock transition edges |
 
 **Figure.** Images from [MathWorks](https://www.mathworks.com/help/signal/ug/signal-smoothing.html).

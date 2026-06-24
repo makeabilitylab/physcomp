@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Fast Analog Read
+description: "Push the ATmega328 ADC beyond Arduino's default ~9.6 kHz: adjust the ADC prescaler, use free-running mode, and apply direct port manipulation for faster analogRead and digitalWrite."
 parent: Advanced Arduino
 has_toc: false # on by default
 nav_exclude: true
@@ -9,7 +10,7 @@ usetocbot: true
 
 ## Speeding up the Arduino
 
-The Arduino `C` library attempts to provide an easy-to-understand and accessible API to program and use microcontrollers. However, this comes at a cost. There are a number of interesting online discussions and blog posts analyzing Arduino code and providing faster techniques for I/O. Importantly, as Willem Maes—a faculty of engineering in Belgium—notes in his [Speeding Up the Arduino]((http://www.optiloading.be/willem/Arduino/speeding.pdf)) document: 
+The Arduino `C` library attempts to provide an easy-to-understand and accessible API to program and use microcontrollers. However, this comes at a cost. There are a number of interesting online discussions and blog posts analyzing Arduino code and providing faster techniques for I/O. Importantly, as Willem Maes—a faculty of engineering in Belgium—notes in his [Speeding Up the Arduino](http://www.optiloading.be/willem/Arduino/speeding.pdf) document: 
 >the programmers who developed  Arduino weren't just lousy coders who couldn't write fast code, they consciously made the decision to add validations and safety checks since it benefits their target customers.
 
 ## How fast can we read data using analogRead and ATmega328? 
@@ -37,7 +38,7 @@ This [blog post ](http://yaab-arduino.blogspot.com/2015/02/fast-sampling-from-an
 
 Inspired by the discussion on this [Sparkfun blog post](https://learn.sparkfun.com/blog/1687#comments), I looked up the source code directly to investigate. The entire `int main(void)` function in [main.cpp](https://github.com/arduino/ArduinoCore-avr/blob/2f67c916f6ab6193c404eebe22efe901e0f9542d/cores/arduino/main.cpp) is:
 
-```C
+```cpp
 int main(void)
 {
     init();
@@ -63,7 +64,7 @@ From this [Arduino forum post](https://forum.arduino.cc/index.php?topic=4324.msg
 
 You can also manipulate the ports directly rather than via the Arduino libraries (which incur lots of overhead). From the same forum post:
 
-```C
+```cpp
 cli();
  while (1) {
    PORTD |= B1000;

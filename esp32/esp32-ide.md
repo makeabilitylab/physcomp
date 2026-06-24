@@ -1,6 +1,8 @@
 ---
 layout: default
 title: ESP32 IDE Setup
+image: /esp32/assets/og/esp32-ide.jpg
+description: "Set up the Arduino IDE to program ESP32 boards: add Espressif's board package, select the board and port, upload a test sketch, and troubleshoot common upload issues."
 parent: ESP32
 has_toc: true # (on by default)
 nav_order: 11
@@ -42,7 +44,7 @@ The Arduino IDE doesn't include ESP32 support by default—you need to add Espre
 2. Go to **File → Preferences** (or **Arduino → Settings** on macOS)
 3. In the **Additional Board Manager URLs** field, add:
    
-   ```
+   ```text
    https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
    ```
    {: .fs-1 }
@@ -140,7 +142,7 @@ You could also try to blink the built-in RGB LED that is available on some ESP32
 
 If you see a compilation error like `fork/exec .../ctags: bad CPU type in executable` or similar for `avr-g++`, the Arduino toolchain includes x86-only binaries that can't run natively on Apple Silicon (M1–M4). This affects **all boards**, not just ESP32. Install Apple's Rosetta 2 translation layer by opening Terminal and running:
 
-```
+```bash
 softwareupdate --install-rosetta
 ```
 
@@ -196,6 +198,9 @@ With your IDE set up, you're ready to start building ESP32 projects!
 
 Head back to [Lesson 1: Introduction to the ESP32](esp32.md) to learn about the hardware, or jump straight to [Lesson 2: Blinking an LED](led-blink.md) if you're ready to write code.
 
-<span class="fs-6">
-[Back to: Introduction to the ESP32](esp32.md){: .btn .btn-outline }
-</span>
+<nav class="lesson-nav" aria-label="Lesson navigation">
+  <a href="esp32.html" class="nav-prev">
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Introduction to the ESP32</div>
+  </a>
+</nav>

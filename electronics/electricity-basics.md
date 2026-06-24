@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; Voltage, Current, and Resistance
+description: "Master the three foundational concepts behind every circuit—voltage, current, and resistance—using an intuitive water (hydraulic) analogy, SI units, and a circuit simulator."
+image: /electronics/assets/images/OhmsLawCartoon_ShowingRelationshipBetweenVoltsAmpsAndResistance.png
 nav_order: 1
 parent: Intro to Electronics
 has_toc: false # on by default
@@ -17,6 +19,12 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+
+<video autoplay loop muted playsinline aria-label="Animation of a water tank analogy for electrical circuits. As the water level rises, more water flows out of a hole at the bottom, illustrating how higher voltage produces more current.">
+  <source src="assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** Where we're headed: this lesson uses intuitive water analogies—like this water tank, where a higher water level (voltage) pushes more water (current) out the bottom—to build up the three foundational concepts of voltage, current, and resistance.
+{: .fs-1 }
 
 In this lesson, we are going to learn about three key electricity concepts, **current**, **voltage**, and **resistance**, which form the foundation of electronics and circuits. We will also use an online circuit simulator to play with basic components and advance understanding.
 
@@ -72,7 +80,9 @@ Let's dive into each of these concepts more deeply, starting with current.
 
 ## What is current?
 
-![An animated gif showing current flowing in a simple circuit out of the positive terminal of a 9V battery through an LED and resistor and then back to the negative terminal of the 9V battery](assets/gifs/CurrentFlow_EngineeringMindset.gif)
+<video autoplay loop muted playsinline aria-label="An animated gif showing current flowing in a simple circuit out of the positive terminal of a 9V battery through an LED and resistor and then back to the negative terminal of the 9V battery">
+  <source src="assets/videos/CurrentFlow_EngineeringMindset.mp4" type="video/mp4" />
+</video>
 **Figure.** **[Current](https://en.wikipedia.org/wiki/Electric_current)** is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Note that this is actually opposite from *conventional current* flow, but we'll get to that below. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
 {: .fs-1 }
 
@@ -104,7 +114,9 @@ Importantly, just like your home plumbing system, where water flows instantly ou
 
 This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B (see [video](https://youtu.be/OGa_b26eK2c?t=472)).
 
-![An animated gif showing electrons hopping from atom to atom propelled by an applied voltage](assets/gifs/ElectronsFlowingFromAtomToAtomToMakeCurrent.gif)
+<video autoplay loop muted playsinline aria-label="An animated gif showing electrons hopping from atom to atom propelled by an applied voltage">
+  <source src="assets/videos/ElectronsFlowingFromAtomToAtomToMakeCurrent.mp4" type="video/mp4" />
+</video>
 {: .mx-auto .align-center }
 
 **Figure.** An animation of charges (electrons) hopping from atom-to-atom propelled by an applied voltage. This is a simplified model showing a wire (conductor) that is only a single atom thick but helps illustrate the cascading movement of electrons in current flow. Image from [What is Electricity?](https://learn.sparkfun.com/tutorials/what-is-electricity) by [Sparkfun.com](https://www.sparkfun.com/).
@@ -387,7 +399,9 @@ Could have posille's law here? -->
 
 ### What are resistors?
 
-![An animated gif showing how resistors can be placed in a circuit to resist current flow.](assets/gifs/ResistorCurrentFlow_EngineeringMindset-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="An animated gif showing how resistors can be placed in a circuit to resist current flow.">
+  <source src="assets/videos/ResistorCurrentFlow_EngineeringMindset-Optimized.mp4" type="video/mp4" />
+</video>
 **Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons "collide" with other atoms and themselves, which restricts electron flow (and also transforms some energy as heat). Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
 {: .fs-1 }
 

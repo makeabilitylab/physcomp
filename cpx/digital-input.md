@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L9&#58; Digital Input
+description: "Read ON/OFF signals on the CPX with digital input. Wire up external buttons, tackle the floating-pin problem with pull-up and pull-down resistors, and use internal resistors in MakeCode."
+image: https://img.youtube.com/vi/raIc-EuHfmc/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
@@ -17,15 +19,17 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/raIc-EuHfmc?si=-KCgO3ypF9kPKBVd" title="Overview of digital input on the Circuit Playground Express" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** By the end of this lesson, you'll wire external buttons to the CPX—and understand the floating-pin problem and how pull-up and pull-down resistors solve it.
+{: .fs-1 }
+
 In Lesson 9, we continue exploring how to hook up and use external electronics with our CPX. In Lesson 8, we worked with analog input—which converts voltage signals from 0 - 3.3V to 0 - 1023. In Lesson 9, we'll work with **digital input**, which converts voltage input signals to either ON (1) or OFF (0). This is useful for components like buttons.
 
 ## Lesson 8.1: Overview of Digital Input
 
 In this lesson, we learn about _what_ is **digital input** and _how_ to use it on the Circuit Playground Express (CPX). We begin similarly to our [analog input lessons](analog-input.md): introducing the 3.3V, GND, and A1 CPX connection pads and showing how the **digital read** function responds to different input voltages (e.g., 3.3V, GND).
-
-<div class="iframe-container">
-  <iframe width="100%" src="https://www.youtube.com/embed/raIc-EuHfmc?si=-KCgO3ypF9kPKBVd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
 
 ## Lesson 8.2: Hooking up Buttons to the CPX & Why Pull-down Resistors?
 
@@ -40,7 +44,7 @@ If you want to skip all the theory about why pull-down resistors and just "follo
 
 ### Circuit Diagrams
 
-![](assets/images/CPX_ExternalPullDownAndPullUpResistors.png)
+![Circuit diagrams showing a button wired with an external pull-down resistor and with an external pull-up resistor on the CPX](assets/images/CPX_ExternalPullDownAndPullUpResistors.png)
 
 ### Code
 
@@ -58,9 +62,9 @@ In this video, we introduce external pull-up resistors and then using internal p
 
 ### Circuit Diagrams
 
-![](assets/images/CPX_InternalPullUpResistorConfiguration.png)
+![Circuit diagram for a button using the CPX's internal pull-up resistor configuration](assets/images/CPX_InternalPullUpResistorConfiguration.png)
 
-![](assets/images/CPX_InternalPullDownResistorConfiguration.png)
+![Circuit diagram for a button using the CPX's internal pull-down resistor configuration](assets/images/CPX_InternalPullDownResistorConfiguration.png)
 
 ## Lesson 8.4: Hooking up Arcade Buttons to the CPX
 
@@ -74,15 +78,15 @@ In this video, we show how to hook up arcade buttons to the CPX, which have cool
 
 Using an external pull-down resistor with the arcade button.
 
-![](assets/images/CPX_ArcadeButtonExternalPullDown.png)
+![Circuit diagram wiring an arcade button to the CPX using an external pull-down resistor](assets/images/CPX_ArcadeButtonExternalPullDown.png)
 
 Using an internal pull-down resistor with the arcade button (but not hooking up the internal LED).
 
-![](assets/images/CPX_ArcadeButtonInternalPullDown.png)
+![Circuit diagram wiring an arcade button to the CPX using an internal pull-down resistor, without the embedded LED](assets/images/CPX_ArcadeButtonInternalPullDown.png)
 
 Hooking up internal LED. Here's [example code](https://makecode.com/_0oVYVmYK5gYt) that turns on the internal LED when the button is pressed.
 
-![](assets/images/CPX_ArcadeButtonInternalPullDown_WithInternalLED.png)
+![Circuit diagram wiring an arcade button with its embedded LED to the CPX using an internal pull-down resistor](assets/images/CPX_ArcadeButtonInternalPullDown_WithInternalLED.png)
 
 <!-- TODO: add in circuit diagrams and code links 
 Post advance code for debouncing

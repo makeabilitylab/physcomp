@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; Debouncing
+description: "Mechanical switches bounce. Learn why contact bounce happens and how to fix it on Arduino with software debouncing and hardware solutions like capacitors and Schmitt triggers."
+image: /arduino/assets/og/debouncing.jpg
 nav_order: 3
 parent: Input
 grand_parent: Intro to Arduino
@@ -34,12 +36,12 @@ If you built the [button piano](piano.md) in the previous lesson, you may have a
 > - Hardware debouncing solutions using capacitors and Schmitt Triggers
 
 <video autoplay loop muted playsinline aria-label="Slow-motion video of a hammer bouncing off a table, illustrating how switch contacts bounce before settling">
-  <source src="assets/movies/DebouncingHammer_CurrentSource_720p-Optimized.mp4" type="video/mp4" />
+  <source src="assets/videos/DebouncingHammer_CurrentSource_720p-Optimized.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a hammer bouncing off a table to help illustrate how switch contacts bounce before entering a steady state. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
 {: .fs-1 }
 
-<!-- ![Animated gif from the YouTube channel "The Current Source" episode 37 called 'Contact and Bounce' which shows a slow motion video of two contact points oscillating back-and-forth](assets/movies/ContactBounce_TheCurrentSource-Optimized.gif) -->
+<!-- ![Animated gif from the YouTube channel "The Current Source" episode 37 called 'Contact and Bounce' which shows a slow motion video of two contact points oscillating back-and-forth](assets/videos/ContactBounce_TheCurrentSource-Optimized.gif) -->
 
 So, what can you do? The solution is to "debounce" your switches, which can be done via software or [pure hardware solutions](#pure-hardware-solutions), which we'll address below. But first, let's learn a bit more about the problem before discussing solutions. We're going to use the term 'switch' to refer to any class of electromechanical device that has electrical contact points that can mechanically move to open or close an electrical circuit.
 
@@ -48,7 +50,7 @@ So, what can you do? The solution is to "debounce" your switches, which can be d
 [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) recorded slow motion videos of switches bouncing during activations and deactivations. Just like the hammer, this electrical contact visibly bounces when first activated, creating a noisy contact signal.
 
 <video autoplay loop muted playsinline aria-label="Slow-motion video of a switch mechanically bouncing off its contacts before settling">
-  <source src="assets/movies/DebouncingButton_CurrentSource_720p-Optimized-WithLabels.mp4" type="video/mp4" />
+  <source src="assets/videos/DebouncingButton_CurrentSource_720p-Optimized-WithLabels.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a switch mechanically bouncing off its contacts. Buttons are mechanical devices. When a button is pressed or a contact switch moved, it creates a rapid oscillation of open- and closed-circuits before settling to its final state. In comparison to computation, mechanical motion is slow. Microcontrollers—even old, slow ones like the ATmega328—work so fast that they will read these rapid oscillations as `HIGH` and `LOW` input state changes. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
 {: .fs-1 }
@@ -148,7 +150,7 @@ For our first and most basic solution, we will read the button state, wait a giv
 
 We're going to use [`delay`](https://www.arduino.cc/reference/en/language/functions/time/delay/) here to wait for the "debouncing window" time period, which we already know should generally be avoided but is sometimes helpful and appropriate (if it's not negatively impacting the responsiveness of your program, for example).
 
-{% highlight cpp %}
+```cpp
 
 const int BUTTON_INPUT_PIN = 2;
 const int LED_OUTPUT_PIN = 3;
@@ -184,7 +186,7 @@ void loop() {
   // Write out HIGH or LOW
   digitalWrite(LED_OUTPUT_PIN, _savedButtonVal);
 }
-{% endhighlight cpp %}
+```
 
 This [source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/DebounceWithDelays/DebounceWithDelays.ino) is on GitHub.
 {: .fs-1 }
@@ -233,7 +235,7 @@ This solution is nicely captured by user [cdvma](https://www.reddit.com/r/embedd
 
 Here's a quick implementation:
 
-{% highlight cpp %}
+```cpp
 
 const int BUTTON_INPUT_PIN = 2;
 const int LED_OUTPUT_PIN = 3;
@@ -265,7 +267,7 @@ void loop() {
   // Write out HIGH or LOW
   digitalWrite(LED_OUTPUT_PIN, _savedButtonVal);
 }
-{% endhighlight cpp %}
+```
 
 This solution is less robust but works well for human input in environments with limited electrical noise (see this [Reddit discussion](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fprrygg?utm_source=share&utm_medium=web2x&context=3)). However, as is pointed out in the Reddit thread ([link](https://www.reddit.com/r/embedded/comments/gf74p8/reliable_user_input_with_unreliable_physical/fpw7xpf?utm_source=share&utm_medium=web2x&context=3)), this simple solution does not protect against electrostatic discharge (ESD) and thus fails regulatory requirements (which require the two state reads like we did in Solutions 1 and 2).
 

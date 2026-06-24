@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Circuit Schematics
+description: "Read and draw circuit schematics—the visual lingua franca of electronics: common component symbols, pictorial vs. schematic diagrams, and a hands-on Fritzing activity."
+image: /electronics/assets/images/BasicElectronicSymbols_ByJonFroehlich.png
 nav_order: 2
 parent: Intro to Electronics
 has_toc: false # on by default
@@ -17,6 +19,10 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+
+![A reference chart of common electronic symbols including voltage source, current source, battery, resistive lamp, resistor, switch, diode, and LED. Each symbol is labeled with its name.](assets/images/BasicElectronicSymbols_ByJonFroehlich.png)
+**Figure.** A preview of what we'll build: by the end of this lesson, you'll be able to read and draw circuit schematics using standardized component symbols like these—the visual language of electronics.
+{: .fs-1 }
 
 Before going any further, it's useful to introduce [**circuit schematics**](https://en.wikipedia.org/wiki/Circuit_diagram), which are diagrammatic abstractions of circuits—this will allow us to "speak" about and describe circuits **visually**.
 

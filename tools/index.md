@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Tools
+description: "A guide to the essential tools for physical computing and electronics work, including multimeters, oscilloscopes, benchtop power supplies, breadboards, soldering gear, and connectors."
 nav_order: 4
 has_children: true
 has_toc: true # (on by default)

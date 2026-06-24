@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; A simple piano
+description: "Combine buttons and a piezo buzzer to build a fun five-key Arduino piano, wiring tactile buttons with internal pull-up resistors and mapping presses to musical notes."
+image: /arduino/assets/images/ArduinoUno_SimplePiano_WorkbenchPhoto1.png
 parent: Input
 grand_parent: Intro to Arduino
 nav_order: 2
@@ -88,7 +90,7 @@ The code is fairly straightforward.
 
 First, let's declare the waveform frequencies of our notes.
 
-{% highlight cpp %}
+```cpp
 // Frequencies (in Hz) of our piano keys
 // From: https://en.wikipedia.org/wiki/Piano_key_frequencies
 #define KEY_C 262  // 261.6256 Hz (middle C)
@@ -96,7 +98,7 @@ First, let's declare the waveform frequencies of our notes.
 #define KEY_E 330  // 329.6276 Hz
 #define KEY_F 349  // 349.2282 Hz
 #define KEY_G 392  // 391.9954 Hz
-{% endhighlight cpp %}
+```
 
 #### Step 2: Declare our pin constants
 
@@ -104,7 +106,7 @@ Our piano has **five** buttons, so we need five input pins. We also need an outp
 
 Finally, we'll add in a boolean constant `_buttonsAreActiveLow` that simply lets us handle pull-up *vs.* pull-down logic in software. The boolean defaults to `true` because we assume a pull-up resistor configuration. Switch this to `false` if you decide to design your button circuits with pull-down resistors.
 
-{% highlight cpp %}
+```cpp
 // I lay out my buttons like piano keys. So, lower frequencies on left
 // and increasingly higher frequencies to the right
 // Change this depending on how you've laid out your keys
@@ -121,13 +123,13 @@ const int OUTPUT_LED_PIN = LED_BUILTIN; // visual feedback on button press
 // Switch the following to false and change INPUT_PULLUP belows
 // to INPUT
 const boolean _buttonsAreActiveLow = true; 
-{% endhighlight cpp %}
+```
 
 #### Step 3: Setup our I/O pins in setup()
 
 In setup(), we simply initialize our **five inputs** and **two outputs** as inputs and outputs accordingly. Note the `INPUT_PULLUP` flag for each button input.
 
-{% highlight cpp %}
+```cpp
 void setup() {
   pinMode(INPUT_BUTTON_C_PIN, INPUT_PULLUP);
   pinMode(INPUT_BUTTON_D_PIN, INPUT_PULLUP);
@@ -137,7 +139,7 @@ void setup() {
   pinMode(OUTPUT_PIEZO_PIN, OUTPUT);
   pinMode(OUTPUT_LED_PIN, OUTPUT);
 }
-{% endhighlight cpp %}
+```
 
 #### Step 4: Write core piano logic in loop()
 
@@ -145,7 +147,7 @@ Because tone() can only play one frequency at a time (darn, no rockin' chords), 
 
 To more easily handle both pull-up and pull-down circuit configurations, we wrote a convenience function called `isButtonPressed(int btnPin)`, which abstracts the "isPressed" logic. (Though one might criticize the use of a global variable—tis common for these rapid prototypes, I'm afraid. You could pass the global var as a parameter into `isButtonPressed` if this makes you feel better about code modularity). 
 
-{% highlight cpp %}
+```cpp
 void loop() {
 
   // tone() generates a square wave of the specified frequency (and 50% duty cycle) on a pin. 
@@ -187,7 +189,7 @@ boolean isButtonPressed(int btnPin){
   // button is not pressed
   return false;
 }
-{% endhighlight cpp %}
+```
 
 #### Step 5: Compile, upload, and run the code
 

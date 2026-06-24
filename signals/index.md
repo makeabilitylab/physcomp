@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Signals
+description: "Process and classify sensor data in Python with Jupyter, NumPy, SciPy, matplotlib, and scikit-learn: sampling, frequency analysis, gesture recognition, and step tracking."
+image: /signals/assets/images/JupyterNotebook_Screenshot.png
 nav_order: 8
 has_toc: true # on by default
 has_children: true
@@ -37,7 +39,7 @@ These lessons are intended to be interactive. You should modify, run, iterate, a
 
 There are three ways to view the lessons: **first**, you can click on the exported HTML versions; however, these are not interactive; **second**, you can clone our [Signals repo](https://github.com/makeabilitylab/signals) and open the `ipynb` files locally on your computer (this is our recommended approach):
 
-```
+```bash
 git clone https://github.com/makeabilitylab/signals.git
 ```
 

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Arduino IDE
+description: "Download, install, and configure the Arduino IDE 2, then learn the setup() and loop() code structure and how to select your board and serial port before uploading."
 parent: Intro to Arduino
 nav_order: 3
 has_toc: true # (on by default)
@@ -17,6 +18,10 @@ usetocbot: true
 1. TOC
 {:toc}
 ---
+
+![Screenshot of the Arduino IDE with an empty sketch showing setup() and loop() functions](assets/images/ArduinoIDE_BlankAndAnnotated.png)
+**Figure.** Coming up: by the end of this lesson, you'll have the Arduino IDE installed and configured, with a new sketch open showing the `setup()` and `loop()` functions ready to program your board.
+{: .fs-1 }
 
 The Arduino IDE (Integrated Development Environment) is where you'll write, compile, and upload code to your Arduino board. This page walks through downloading, installing, and configuring the IDE so you're ready to start programming.
 

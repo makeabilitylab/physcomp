@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L7&#58; RGB LEDs
+description: "Drive an RGB LED through a sequence of colors with Arduino and learn the difference between common anode and common cathode RGB LED wiring."
+image: /arduino/assets/og/rgb-led.jpg
 nav_order: 7
 parent: Output
 grand_parent: Intro to Arduino
@@ -21,7 +23,9 @@ usetocbot: true
 
 In this tutorial, we will use an RGB LED (RGB stands for Red, Green, Blue) to flash through a sequence of colors and learn about the difference between a Common Anode and Common Cathode RGB LED design.
 
-![Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6](assets/movies/Arduino_RGBLED_CommonCathode-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6">
+  <source src="assets/videos/Arduino_RGBLED_CommonCathode-Optimized.mp4" type="video/mp4" />
+</video>
 
 ## Materials
 
@@ -80,18 +84,18 @@ And here's the wiring with a breadboard (the schematic on the right is the same 
 We are going to write code that flashes through a sequence of colors. Recall that the embedded red LED is hooked up to Pin 6, the blue LED to Pin 5, and the green LED to Pin 3. We will control the RGB LED color by outputting `HIGH` (5V) or `LOW` (0V) using [`digitalWrite` ](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/) to these pins.
 
 For example, to make the RGB LED turn red, we would write:
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, HIGH);
 digitalWrite(RGB_GREEN_LED_PIN, LOW);
 digitalWrite(RGB_BLUE_LED_PIN, LOW);
-{% endhighlight C %}
+```
 
 Similarly, to make the RGB LED turn green, we would write:
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, LOW);
 digitalWrite(RGB_GREEN_LED_PIN, HIGH);
 digitalWrite(RGB_BLUE_LED_PIN, LOW);
-{% endhighlight C %}
+```
 
 In this example, we will flash the following sequence:
 
@@ -115,7 +119,7 @@ blue by <span style="background-color:#0000FF; color:white">#0000FF</span>, and 
 
 As usual, we introduce some constants for our literal assignments and then setup our pins as `OUTPUT`.
 
-{% highlight C %}
+```cpp
 const int DELAY_MS = 1000;       // delay between color changes in ms
 const int RGB_RED_LED_PIN = 6;   // indicated by orange wire
 const int RGB_GREEN_LED_PIN = 5; // indicated by green wire
@@ -128,26 +132,26 @@ void setup()
   pinMode(RGB_BLUE_LED_PIN, OUTPUT);
   pinMode(RGB_GREEN_LED_PIN, OUTPUT);
 }
-{% endhighlight C %}
+```
 
 #### Step 2: Write a new helper function called setRgbLedColor
 
 To help set RGB LED colors, we are going to write a new function called `setRgbLedColor(int red, int green, int blue)`, which takes in either a `HIGH` or `LOW` for the red, green, and blue int parameters.
 
-{% highlight C %}
+```cpp
 // Function expects either HIGH or LOW for each parameter
 void setRgbLedColor(int red, int green, int blue){
   digitalWrite(RGB_RED_LED_PIN, red);
   digitalWrite(RGB_GREEN_LED_PIN, green);
   digitalWrite(RGB_BLUE_LED_PIN, blue);
 }
-{% endhighlight C %}
+```
 
 #### Step 3: Write the color sequence
 
 Now, in `loop()`, we'll write the specific color sequence that we want:
 
-{% highlight C %}
+```cpp
 void loop()
 {
   // red
@@ -174,7 +178,7 @@ void loop()
   setRgbLedColor(HIGH, HIGH, HIGH);
   delay(DELAY_MS);
 }
-{% endhighlight C %}
+```
 
 #### Step 4: Compile, upload, and run
 
@@ -183,15 +187,15 @@ That's it. Now compile, upload, and run your code!
 In the video below, I'm running our [BlinkRGB](https://github.com/makeabilitylab/arduino/tree/master/Basics/digitalWrite/BlinkRGB) code, which is the same as above but includes some [`Serial.print`](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) calls for debugging (see this [mini-tutorial](https://create.arduino.cc/projecthub/glowascii/serial-monitor-arduino-basics-399eb6) on using the Serial.print and the Arduino IDE's Serial Monitor for debugging)
 
 <div class="iframe-container">
-  <iframe src="https://www.youtube.com/embed/ASez28rPjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="Workbench video of the BlinkRGB code cycling a common cathode RGB LED through colors, diffused by a yogurt container" src="https://www.youtube.com/embed/ASez28rPjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 The yogurt container is used to diffuse the light. Kleenex, white paper, or a ping pong ball (with a hole in it for the LED) works well too!
 {: .fs-1 }
 
 Below, we show a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current—it will flow in the opposite direction with the Common Anode design (covered next).
 
-<video controls="controls">
-  <source src="assets/movies/Arduino_RGBLED_CommonCathode_Animation.mp4" type="video/mp4">
+<video aria-label="Animation of a common cathode RGB LED circuit executing, showing the direction of current flow" controls="controls">
+  <source src="assets/videos/Arduino_RGBLED_CommonCathode_Animation.mp4" type="video/mp4">
 </video>
 
 ## Common Anode
@@ -221,18 +225,18 @@ And here's the more practical breadboarded version (again, the circuit diagram i
 
 The Common Anode RGB LED works **opposite** to the Common Cathode version—to turn on a particular color, we write out `LOW` rather than `HIGH`. For example, to make the RGB LED turn red, we would write:
 
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, LOW);
 digitalWrite(RGB_GREEN_LED_PIN, HIGH);
 digitalWrite(RGB_BLUE_LED_PIN, HIGH);
-{% endhighlight C %}
+```
   
 Similarly, to make the RGB LED turn green, we would write:
-{% highlight C %}
+```cpp
 digitalWrite(RGB_RED_LED_PIN, HIGH);
 digitalWrite(RGB_GREEN_LED_PIN, LOW);
 digitalWrite(RGB_BLUE_LED_PIN, HIGH);
-{% endhighlight C %}
+```
 
 We will flash the same sequence as before but again our `HIGH`s and `LOW`s are flipped:
 
@@ -247,8 +251,8 @@ We will flash the same sequence as before but again our `HIGH`s and `LOW`s are f
 
 Here's an animation. Pay close attention to the current direction—it flows from 5V down through the LED, the current limiting resistors, and into the digital I/O pins.
 
-<video controls="controls">
-  <source src="assets/movies/Arduino_RGBLED_CommonAnode_Animation.mp4" type="video/mp4">
+<video aria-label="Animation of a common anode RGB LED circuit with current flowing from 5V down through the LED and resistors into the digital I/O pins" controls="controls">
+  <source src="assets/videos/Arduino_RGBLED_CommonAnode_Animation.mp4" type="video/mp4">
 </video>
 
 We're not going to include code specifically for the Common Anode RGB LED. Instead, we'll show how to adapt our previous Common Cathode code with only a few additional lines.

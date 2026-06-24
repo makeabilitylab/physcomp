@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; Capacitive Touch
+description: "Explore capacitive touch sensing on the CPX with MakeCode. Build a proximity sensor and a fruit piano from bananas and soda cans, then turn everyday objects into keyboard keys."
+image: https://img.youtube.com/vi/HKwtXrTdocE/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
@@ -17,15 +19,17 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/HKwtXrTdocE" title="Introduction to capacitive touch sensing on the Circuit Playground Express" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** In this lesson, we'll explore capacitive touch sensing on the CPX—building a touch "piano," visualizing raw capacitance and touch-threshold values, and calibrating touch sensitivity.
+{: .fs-1 }
+
 In Lesson 5 in our CPX series, we will learn how to use capacitive touch sensing. This is a multi-part series starting with an introduction to capacitive sensing.
 
 ## Lesson 5.1: Intro to Capacitive Touch on the CPX
 
 In this lesson, we will first introduce the concept of capacitive sensing before building a simple capacitive touch "piano." We will then show how to visualize the raw capacitance values and capacitance touch threshold values, which are used to trigger capacitance events. Third, we cover how to use both auto-calibration and manual calibration to change the capacitance touch threshold before building a capacitive-responsive instrument (similar to [Lesson 4: Light-Responsive Instrument](sensor-instrument.md)). 
-
-<div class="iframe-container">
-  <iframe width="100%" src="https://www.youtube.com/embed/HKwtXrTdocE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
 
 ### Lesson 5.1 Code
 

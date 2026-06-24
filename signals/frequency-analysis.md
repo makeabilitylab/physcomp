@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L3&#58; Frequency Analysis
+description: "Analyze signals in the frequency domain with Discrete and Fast Fourier Transforms (DFT/FFT), spectral plots, and Short-time Fourier Transforms (STFT) and spectrograms."
 parent: Signal Processing
 grand_parent: Signals
 has_toc: false # (on by default)

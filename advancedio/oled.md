@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L1&#58; OLED Displays
+image: /advancedio/assets/og/oled.jpg
+description: "Drive a monochrome OLED display with Arduino: wire it over I2C, draw shapes, text, and bitmaps with the Adafruit GFX library, and build animations and sensor-driven visualizations."
 nav_order: 1
 parent: Output
 grand_parent: Advanced I/O
@@ -216,7 +218,7 @@ Below, we describe how to draw shapes, text, and bitmaps. Importantly, when you 
 
 Let's begin by drawing a circle at `x,y` location of `50,20` with a radius of `10`. We'll start first with pseudocode to understand the drawing pipeline, then show actual C++.
 
-```
+```text
 // One-time initialization
 Adafruit_SSD1306 _disp(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 _disp.begin(SSD1306_SWITCHCAPVCC, 0x3D); // Allocate RAM for image buffer, set VCC, and I2C address
@@ -229,7 +231,7 @@ _disp.display();                             // Render offscreen buffer to displ
 
 And here's the actual C++ implementation (the full code is on GitHub as [DrawCircle.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawCircle/DrawCircle.ino)).
 
-{% highlight C++ %}
+```cpp
 // Instantiate SSD1306 driver display object
 Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
@@ -257,11 +259,11 @@ void loop(){
   // Render graphics buffer to screen
   _display.display();
 }
-{% endhighlight C++ %}
+```
 
 Now, because we are drawing the exact same thing on every `loop()` call, we could just as well put this drawing code into `setup()` and have it draw once and only once (the graphic content will persist).
 
-{% highlight C++ %}
+```cpp
 // Instantiate SSD1306 driver display object
 Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
@@ -289,7 +291,7 @@ void loop(){
   // Empty on purpose to make a point about how graphic content persists
   // on screen
 }
-{% endhighlight C++ %}
+```
 
 However, for practical purposes, we always want to put our drawing methods in `loop()` because we want to support **dynamic graphics**, which are animated (*e.g.,* graphics that change over time) and/or responsive (*e.g.,* graphics that change in response to input).
 
@@ -346,21 +348,21 @@ Rather than call `Serial.print("Hello World")`, however, with the OLED display a
 
 To use the OLED's print functionality, you can first set optional parameters such as the text color, size, and wrapping:
 
-{% highlight C++ %}
+```cpp
 void setTextColor(uint16_t color);
 void setTextColor(uint16_t color, uint16_t backgroundcolor);
 void setTextSize(uint8_t size);
 void setTextWrap(boolean w);
-{% endhighlight C++ %}
+```
 
 Then, to position the text, you set the print cursor with:
-{% highlight C++ %}
+```cpp
 void setCursor(uint16_t x0, uint16_t y0);
-{% endhighlight C++ %}
+```
 
 Finally, to print the text at that cursor position, you can call any of the standard [`Serial.print`](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) methods, including this subset:
 
-{% highlight C++ %}
+```cpp
 size_t print(const String &);
 size_t print(const char[]);
 size_t print(char);
@@ -368,7 +370,7 @@ size_t print(char);
 size_t println(const String &s);
 size_t println(const char[]);
 size_t println(char);
-{% endhighlight C++ %}
+```
 
 See the [Serial.print() docs](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/) or the [Print.h](https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Print.h) library for more on the `print` API, or read on for an example.
 
@@ -376,7 +378,7 @@ See the [Serial.print() docs](https://www.arduino.cc/reference/en/language/funct
 
 In creative coding, visualization, and game dev, we often want to center or otherwise align text. To do so, we need to **measure** it. Fortunately, the [Adafruit GFX](https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h) library has a method called `getTextBounds` that does just that!
 
-{% highlight C++ %}
+```cpp
 /**************************************************************************/
 /*!
     @brief  Helper to determine size of a string with current font/size.
@@ -391,11 +393,11 @@ In creative coding, visualization, and game dev, we often want to center or othe
 */
 /**************************************************************************/
 void getTextBounds(String &str, int16_t x, int16_t y, int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h);
-{% endhighlight C++ %}
+```
 
 For example, in our [HelloWorld.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/HelloWorld/HelloWorld.ino) example, we center the text "Hello Makers!" both vertically and horizontally on the OLED screen. The key excerpt is here:
 
-{% highlight C++ %}
+```cpp
 int16_t x, y;
 uint16_t textWidth, textHeight;
 const char strHello[] = "Hello Makers!";
@@ -416,7 +418,7 @@ _display.print(strHello);
 
 // Render the graphics buffer to screen
 _display.display(); 
-{% endhighlight C++ %}
+```
 
 ##### Inverting text
 
@@ -438,7 +440,7 @@ While you can use either `drawChar` or `write`, the latter uses the currently se
 
 To draw a happy face—which is char index `2`—in the middle of the screen, for example, we could use `drawChar`:
 
-{% highlight C++ %}
+```cpp
 const int CHAR_WIDTH = 5;
 const int CHAR_HEIGHT = 8;
 
@@ -451,11 +453,11 @@ uint16_t yText = _display.height() / 2 - charHeight / 2;
 uint16_t xText = _display.width() / 2 - charWidth / 2;
 
 _display.drawChar(xText, yText, (char)charIndex, SSD1306_WHITE, SSD1306_BLACK, charSize);
-{% endhighlight C++ %}
+```
 
 Or we could also use the `write()` method:
 
-{% highlight C++ %}
+```cpp
 int16_t x1, y1;
 uint16_t textWidth, textHeight;
 int charIndex = 2; // for smiley face
@@ -466,7 +468,7 @@ uint16_t yText = _display.height() / 2 - textHeight / 2;
 uint16_t xText = _display.width() / 2 - textWidth / 2;
 _display.setCursor(xText, yText);
 _display.write(charIndex);
-{% endhighlight C++ %}
+```
 
 Here's an [example](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino) iterating through all of the glyphs individually, which demonstrates the code above. You can use either `drawChar` or `write`—we demonstrate both in [DrawChar.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/DrawChar/DrawChar.ino).
 
@@ -508,7 +510,7 @@ First, to get a feel for the Adafruit GFX API and the coordinate system, let's s
 
 Remember, in `loop()`, you need to:
 
-{% highlight C++ %}
+```cpp
 // Clear the display. If we don't do this, we'll simply be drawing over our
 // previous renderings (which you may sometimes want but generally not)
 _display.clearDisplay();
@@ -518,7 +520,7 @@ drawStuff();
 
 // Render graphics buffer to screen
 _display.display();
-{% endhighlight C++ %}
+```
 
 We made a version called [SimpleDrawingDemo.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/SimpleDrawingDemo/SimpleDrawingDemo.ino) that draws shapes of random sizes and locations on **each frame**, but you could do something even simpler (or more complex)!
 
@@ -572,7 +574,7 @@ For the C++ implementation using the Adafruit GFX library and Arduino, the key b
 
 Again, rather than, say, "miles per hour" or "pixels per second", we've defined speed as "pixels per frame"—that is, how many pixels does the object move per frame. If we set `_xSpeed` to 5 and `_ySpeed` to 0, then the ball would move 5 pixels in x per frame (and simply bounce back and forth from the left side of the screen to the right and back again).
 
-{% highlight C++ %}
+```cpp
 // Create the display object
 Adafruit_SSD1306 _display(128, 64, &Wire, 4);
 
@@ -617,7 +619,7 @@ void loop() {
   // Render buffer to screen
   _display.display();
 }
-{% endhighlight C++ %}
+```
 
 You can view the full code on GitHub as [BallBounce.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/BallBounce/BallBounce.ino). 
 
@@ -657,7 +659,7 @@ Here's the circuit. Same as before but we've added a 10K potentiometer.
 
 The code is simple: read the analog input and use it to set the circle's radius.
 
-{% highlight C++ %}
+```cpp
 void loop() {
   // On each loop, we'll want to clear the display so we're not writing over
   // previously drawn data
@@ -684,7 +686,7 @@ void loop() {
 
   delay(50);
 }
-{% endhighlight C++ %}
+```
 
 You can view the full code on GitHub as [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino).
 
@@ -704,7 +706,7 @@ Now let's hook up **two** analog inputs to control the x,y location of the circl
 
 For the code, it's very similar to [AnalogBallSize.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallSize/AnalogBallSize.ino), but we translate the `analogRead` values to x and y locations: 
 
-{% highlight C++ %}
+```cpp
 void loop() {
   // On each loop, we'll want to clear the display so we're not writing over
   // previously drawn data
@@ -727,7 +729,7 @@ void loop() {
 
   delay(50);
 }
-{% endhighlight C++ %}
+```
 
 You can view the full code on GitHub as [AnalogBallLocation.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogBallLocation/AnalogBallLocation.ino).
 
@@ -747,7 +749,7 @@ The idea is simple: read in a sensor value as `sensorVal`, draw a vertical line 
 
 Notably, this code takes advantage of **selectively** calling `_display.clearDisplay()`. Unlike the other examples we've shared thus far—which clear the display on each frame—here, we take advantage of graphics persisting across `_display.display()` calls to "build up" our graph over time. That is, we only draw **one** new line per new sensor input, which persists on the screen until `_xPos >= _display.width()`, at which point we call `_display.clearDisplay()`.
 
-{% highlight C++ %}
+```cpp
 void loop() {
 
   // Read the analog voltage value
@@ -771,7 +773,7 @@ void loop() {
 
   delay(10);
 }
-{% endhighlight C++ %}
+```
 
 The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraph.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraph/AnalogGraph.ino). Here's a video demo:
 
@@ -787,7 +789,7 @@ A slightly improved but more complicated version of the analog graph is a **scro
 
 Look over the code. Does it make sense? 
 
-{% highlight C++ %}
+```cpp
 int _circularBuffer[SCREEN_WIDTH]; //fast way to store values 
 int _curWriteIndex = 0; // tracks where we are in the circular buffer
 
@@ -825,7 +827,7 @@ void loop() {
   
   delay(10);
 }
-{% endhighlight C++ %}
+```
 
 The full source code is available in our [OLED GitHub](https://github.com/makeabilitylab/arduino/tree/master/OLED) as [AnalogGraphScrolling.ino](https://github.com/makeabilitylab/arduino/blob/master/OLED/AnalogGraphScrolling/AnalogGraphScrolling.ino). Here's a video demo. 
 

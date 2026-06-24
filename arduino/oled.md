@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L1&#58; Turning on an OLED
+description: "Wire up and program an Adafruit 128x64 monochrome OLED display on Arduino, installing the Adafruit SSD1306 and GFX libraries and running the example sketch."
 nav_order: 1
 parent: Advanced Output
 grand_parent: Intro to Arduino

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Intro to Electronics
+image: /electronics/assets/og/index.jpg
+description: "A beginner-friendly intro to electronics: voltage, current, resistance, Ohm's Law, series and parallel circuits, resistors, LEDs, breadboards, and building real circuits."
 nav_order: 1
 has_children: true
 has_toc: false # on by default

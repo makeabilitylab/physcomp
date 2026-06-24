@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; Using Resistors
+description: "Go deeper on resistors: how they resist current and convert electrical energy to heat, what determines resistivity, power ratings, and how to read resistor color bands."
+image: /electronics/assets/images/OverviewOfResistorsPicture.png
 nav_order: 5
 parent: Intro to Electronics
 has_toc: false # on by default
@@ -31,7 +33,9 @@ In previous lessons, you learned about the [concept of resistance](electricity-b
 
 ## How do resistors work?
 
-![An animated gif showing how resistors can be placed in a circuit to resist current flow.](assets/gifs/ResistorCurrentFlow_EngineeringMindset-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="An animated gif showing how resistors can be placed in a circuit to resist current flow.">
+  <source src="assets/videos/ResistorCurrentFlow_EngineeringMindset-Optimized.mp4" type="video/mp4" />
+</video>
 **Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons "collide" with other atoms and themselves, which transforms the electrical energy to thermal energy and induces a voltage drop. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
 {: .fs-1 }
 

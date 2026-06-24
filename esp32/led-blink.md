@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L2&#58; Blinking an LED
+image: /esp32/assets/og/led-blink.jpg
+description: "Write your first ESP32 sketch: blink the onboard LED with digitalWrite() and LED_BUILTIN, wire an external LED, try the Wokwi simulator, and light the onboard NeoPixel."
 parent: Fundamentals
 grand_parent: ESP32
 has_toc: true # (on by default)
@@ -18,6 +20,12 @@ nav_order: 2
 1. TOC
 {:toc}
 ---
+
+<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 blinking the internal LED on GPIO 13">
+  <source src="assets/videos/ESP32-S3-BlinkyBuiltInLED-IMG_9348-Trimmed_optimized_muted.mp4" type="video/mp4">
+</video>
+**Video.** By the end of this lesson, you'll have your ESP32 blinking on its own—starting with the onboard red LED shown here, then an external LED, the Wokwi simulator, and the colorful onboard NeoPixel.
+{: .fs-1 }
 
 In this lesson, we'll write our first ESP32 program: blinking an LED! If you've completed the Arduino [Blink lesson](../arduino/led-blink.md), you'll find that the code is *identical*—the beauty of the Arduino ecosystem. The challenge here is getting comfortable with the new board's pin layout and the 3.3V operating voltage.
 
@@ -75,14 +83,6 @@ Upload this sketch and open the **Serial Monitor** at **115200 baud**. You shoul
 
 {: .warning }
 > **Native USB gotcha (ESP32-S3):** Because the ESP32-S3 uses native USB (not a separate USB-to-UART chip like the Uno's ATmega16U2 or the Huzzah32's CP2104), the serial port will **temporarily disappear** if the board crashes, resets, or enters deep sleep. If your Serial Monitor disconnects unexpectedly, just press the **Reset** button and reopen it. This is normal behavior for native USB—it's the same with the Arduino Leonardo.
-
-### Workbench video blinking built-in LED
-
-<video autoplay loop muted playsinline aria-label="Workbench video showing the Adafruit ESP32-S3 blinking the internal LED on GPIO 13">
-  <source src="assets/videos/ESP32-S3-BlinkyBuiltInLED-IMG_9348-Trimmed_optimized_muted.mp4" type="video/mp4">
-</video>
-**Video.** A workbench video of blinking the built-in LED on the Adafruit ESP32-S3.
-{: .fs-1 }
 
 ## Part 2: Blink an external LED
 

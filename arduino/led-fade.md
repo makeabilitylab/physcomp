@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L4&#58; Fading an LED
+description: "Smoothly fade an LED on and off with Arduino's analogWrite() and pulse-width modulation (PWM), controlling output voltage at fine gradations beyond just HIGH/LOW."
+image: /arduino/assets/og/led-fade.jpg
 nav_order: 4
 parent: Output
 grand_parent: Intro to Arduino
@@ -21,7 +23,9 @@ usetocbot: true
 
 In the [previous lesson](led-blink.md), we learned how to turn on and off an LED using [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)—which worked by alternately setting Pin 3 to 5V (`HIGH`) and 0V (`LOW`). In this lesson, we'll learn how to programmatically control the output voltage at finer gradations using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). More specifically, we will gradually fade an LED on and off like the animation below illustrates.
 
-![Animation showing the LED on Pin 3 gradually fading on and off](assets/movies/Arduino_LEDFade_Pin3.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing the LED on Pin 3 gradually fading on and off">
+  <source src="assets/videos/Arduino_LEDFade_Pin3.mp4" type="video/mp4" />
+</video>
 **Figure.** This illustrative animation doesn't show current (the yellow circles) only due to my limited animation skills. But hopefully you can visualize (in your mind) how the LED varies in brightness with current just the same. :)
 {: .fs-1 }
 
@@ -127,7 +131,7 @@ Start a new sketch in the Arduino IDE:
 
 Our initialization code is the same as for [LED blink](led-blink.md) except for the addition of `const int MAX_ANALOG_OUT = 255;` and a constant for the delay amount of 5 milliseconds (`const int DELAY_MS = 5;`).
 
-{% highlight C %}
+```cpp
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
 const int DELAY_MS = 5;
@@ -136,13 +140,13 @@ void setup() {
   // set Pin 3 to output
   pinMode(LED_OUTPUT_PIN, OUTPUT);
 }
-{% endhighlight C %}
+```
 
 ### Step 3: Write fade loop
 
 Now, write code that outputs steadily increasing values for [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) (to fade on) followed by steadily decreasing values (to fade off).
 
-{% highlight C %}
+```cpp
 void loop(){
   // fade on
   for(int i = 0; i <= MAX_ANALOG_OUT; i += 1){
@@ -156,7 +160,7 @@ void loop(){
     delay(DELAY_MS);
   }
 }
-{% endhighlight C %}
+```
 
 The full code is embedded below:
 
@@ -201,7 +205,7 @@ In addition to visualizing the **actual** voltage output from `analogWrite` (the
 In the video below, we see a simulation of our [fade code](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOffForLoop/FadeOnAndOffForLoop.ino) + circuit running in Tinkercad. On the right side, in the [Serial Monitor](https://www.programmingelectronics.com/using-the-print-function-with-arduino-part-1/) window, we are printing and graphing out the real-time effective voltages output on Pin 3.
 
 <video controls="controls" aria-label="Tinkercad simulation showing LED fading with a real-time voltage graph on the Serial Plotter">
-  <source src="assets/movies/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
+  <source src="assets/videos/Arduino_LEDFadeWithGraph_Pin3.mp4" type="video/mp4">
 </video>
 
 ## Calculating the current through our LED
@@ -232,7 +236,7 @@ So, let's rewrite the fade example but without for loops and, instead, rely on t
 {: .note }
 > I have a habit of prefixing my global variables by `_` but this is just my own convention and helps me easily discern between local variables and global variables. You need not do this, of course! 😊
 
-{% highlight C %}
+```cpp
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
 const int DELAY_MS = 5;
@@ -264,7 +268,7 @@ void loop() {
   // wait for some milliseconds to see the dimming effect
   delay(DELAY_MS);
 }
-{% endhighlight C %}
+```
 
 You can find [this code in GitHub](https://github.com/makeabilitylab/arduino/blob/master/Basics/analogWrite/FadeOnAndOff/FadeOnAndOff.ino).
 

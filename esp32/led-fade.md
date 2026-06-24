@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L3&#58; LED Fading with PWM
+image: /esp32/assets/og/led-fade.jpg
+description: "Smoothly fade an LED on the ESP32 using its powerful LEDC PWM peripheral, understand frequency vs. duty-cycle resolution, and use analogWrite() on Arduino core v3.x."
 parent: Fundamentals
 grand_parent: ESP32
 has_toc: true # (on by default)
@@ -129,7 +131,7 @@ The [LEDC library](https://docs.espressif.com/projects/arduino-esp32/en/latest/a
 
 If you attempt to set incompatible frequency and resolution combinations, you'll see an error on the Serial Monitor:
 
-```
+```text
 E (196) ledc: requested frequency and duty resolution cannot be achieved,
 try reducing freq_hz or duty_resolution.
 ```

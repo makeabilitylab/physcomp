@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L2&#58; Python
+description: "Get up to speed with Python 3 inside Jupyter Notebook through an interactive intro you can edit and run via Binder or Google Colab in your browser."
 parent: Tools
 grand_parent: Signals
 has_toc: false # (on by default)

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L5&#58; PaintIO Example
+image: /communication/assets/og/p5js-paint-io.jpg
+description: "Build PaintIO, a full p5.js and Arduino painting app with bidirectional serial, an accelerometer and force-sensor paintbrush controller, offscreen buffers, and bimanual input."
 nav_order: 5
 parent: Serial Communication
 has_toc: true # (on by default)
@@ -90,19 +92,19 @@ Begin by copying [`SerialTemplate`](https://github.com/makeabilitylab/p5js/tree/
 
 In `sketch.js`, scroll down and remove the following. We will use a different approach to connect to serial.
 
-{% highlight JavaScript %}
+```javascript
 function mouseClicked() {
   if (!serial.isOpen()) {
     serial.connectAndOpen(null, serialOptions);
   }
 }
-{% endhighlight JavaScript %}
+```
 
 Also comment out this line of code in `setup()`, which attempts to automatically connect with previously approved serial devices:
 
-{% highlight JavaScript %}
+```javascript
 // serial.autoConnectAndOpenPreviouslyApprovedPort(serialOptions);
-{% endhighlight JavaScript %}
+```
 
 We want to ignore anything serial related for now.
 
@@ -112,7 +114,7 @@ For the painting code, we will use similar variables and drawing code from [Disp
 
 Add in the following global variables, which include the current `brushType`, `brushSize`, `brushFillMode`, `brushColor`, and brush location (`brushX`, `brushY`). Additionally, rather than paint directly to the canvas, we'll use an off-screen graphics buffer called `offscreenGfxBuffer`—so declare that too. We'll talk more about that next.  
 
-{% highlight JavaScript %}
+```javascript
 const mapBrushTypeToShapeName = {
   0: "Circle",
   1: "Square",
@@ -141,11 +143,11 @@ let showInstructions = true; // If true, shows the app instructions on the scree
 // We will paint to an offscreen graphics buffer
 // See: https://p5js.org/reference/#/p5/createGraphics
 let offscreenGfxBuffer;
-{% endhighlight JavaScript %}
+```
 
 Because we cannot use any p5.js constructs or functions until `setup()` is called, we need to initialize `brushColor` and `offscreenGfxBuffer` in `setup()`. If we try to initialize them at declaration, the p5.js online editor is smart enough to catch this and hint at the problem:
 
-```
+```text
 🌸 p5.js says: There's an error due to "color" not being defined in the current scope (on line 116 in about:srcdoc [about:srcdoc:116:18]).
 
 If you have defined it in your code, you should check its scope, spelling, and letter-casing (JavaScript is case-sensitive). For more:
@@ -162,7 +164,7 @@ For more details, see: https://github.com/processing/p5.js/wiki/p5.js-overview#w
 
 So, instead, initialize them in `setup()`:
 
-{% highlight JavaScript %}
+```javascript
 function setup() {
   ...
   // Initialize the brush color to a ~white with a ~20% opacity (50/255 is 19.6%)
@@ -175,14 +177,14 @@ function setup() {
   offscreenGfxBuffer = createGraphics(width, height);
   offscreenGfxBuffer.background(100); 
 }
-{% endhighlight JavaScript %}
+```
 
 The [`createGraphics()`](https://p5js.org/reference/#/p5/createGraphics) function lets us create a new offscreen graphics buffer. The function returns a new [p5.Renderer](https://p5js.org/reference/#/p5.Renderer) object, which has the same drawing API as core p5.js. So, if we want to set the background of the offscreen buffer, we would write `offscreenGfxBuffer.background(100);`. If we want to draw a red circle at pixel coordinate `10, 10` with a diameter of 50 on the offscreen buffer, we would write: 
 
-{% highlight JavaScript %}
+```javascript
 offscreenGfxBuffer.fill(255, 0, 0);    // set fill color in offscreen graphics context to red
 offscreenGfxBuffer.circle(10, 10, 50); // draw the circle to the offscreen buffer.
-{% endhighlight JavaScript %}
+```
 
 And so on. We can make the offscreen buffer any size but, in this case, we want it the same size as our canvas, so we pass the canvas  `width` and `height` in the `createGraphics()` call.
 
@@ -190,7 +192,7 @@ And so on. We can make the offscreen buffer any size but, in this case, we want 
 
 In the `draw()` method, we will draw brush strokes to the offscreen buffer and then draw this buffer to canvas.
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   // Draw the current brush stroke at the given x, y position
   // But we don't draw to canvas, we draw to the offscreenGfxBuffer
@@ -199,11 +201,11 @@ function draw() {
   // Draw the offscreen buffer to the screen
   image(offscreenGfxBuffer, 0, 0);
 }
-{% endhighlight JavaScript %}
+```
 
 Obviously, we also need to add the `drawBrushStroke()` method, which should feel familiar and understandable from [previous lessons](p5js-serial-io.md). The only difference is that we are drawing to the offscreen buffer object `offscreenGfxBuffer`. 
 
-{% highlight JavaScript %}
+```javascript
 function drawBrushStroke(xBrush, yBrush){
   // set the fill and outline brush settings
   if (brushFillMode == 0) { // brushFillMode 0 is fill
@@ -240,7 +242,7 @@ function drawBrushStroke(xBrush, yBrush){
       offscreenGfxBuffer.triangle(x1, y1, x2, y2, x3, y3)
   }
 }
-{% endhighlight JavaScript %}
+```
 
 ### Why use an offscreen buffer?
 
@@ -266,7 +268,7 @@ It's simply an easy approach for us to "store" all of the painting operations th
 
 Because we're using this offscreen graphics buffer, it's easy to draw a "layer" on top of the user's painting with other graphics—in this case, user instructions. Crucially, unlike the paint strokes, we are **not** drawing these instructions to the offscreen buffer but rather directly onto the canvas.
 
-{% highlight JavaScript %}
+```javascript
 function drawInstructions(){
   // Some instructions to the user
   noStroke();
@@ -292,11 +294,11 @@ function drawInstructions(){
   let strToggleFillMode = "'f' : Toggle fill mode (" + mapBrushFillMode[brushFillMode] + ")";
   text(strToggleFillMode, xText, yText + tSize);
 }
-{% endhighlight JavaScript %}
+```
 
 Let's go back to our `draw()` function and add in the call to `drawInstructions()` but only if `showInstructions` is enabled. And note how this `drawInstructions()` call must come after drawing the offscreen buffer to the screen. That way, it will be "layered" on top.
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   // Draw the current brush stroke at the given x, y position
   // But we don't draw to canvas, we draw to the offscreenGfxBuffer
@@ -310,7 +312,7 @@ function draw() {
     drawInstructions();
   }
 }
-{% endhighlight JavaScript %}
+```
 
 ### Hook up keyboard commands
 
@@ -323,7 +325,7 @@ If you carefully read the instruction code above, you may have noticed that we a
 
 We'll implement keyboard support via the [`keyPressed()`](https://p5js.org/reference/#/p5/keyPressed) method, which is called once every time a key is pressed.
 
-{% highlight JavaScript %}
+```javascript
 function keyPressed() {
   let lastFillMode = brushFillMode;
   let lastBrushType = brushType;
@@ -346,7 +348,7 @@ function keyPressed() {
     offscreenGfxBuffer.background(100);
   }
 }
-{% endhighlight JavaScript %}
+```
 
 To clear the screen, notice how we simply overwrite the current graphics buffer with a solid background of a given color (grayscale 100 in this case): the `offscreenGfxBuffer.background(100)` call.
 
@@ -385,7 +387,7 @@ To update our p5.js PaintIO application to support web serial, we need to accomp
 
 In previous lessons we were capturing mouse clicks to initiate serial connections. Here, we will use the keyboard—specifically, the `o` key. So, let's update the `keyPressed()` function to look for the `o` key and then call `serial.connectAndOpen()`.
 
-{% highlight JavaScript %}
+```javascript
 function keyPressed(){
   ...
   }else if(key == 'o'){
@@ -398,13 +400,13 @@ function keyPressed(){
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 #### Update on-screen instructions
 
 And add in the corresponding instructions:
 
-{% highlight JavaScript %}
+```javascript
 function drawInstructions(){
   ...
   yText += tSize + yBuffer;
@@ -418,13 +420,13 @@ function drawInstructions(){
   text(strConnectToSerial, xText, yText + tSize);
   ...
 }
-{% endhighlight JavaScript %}
+```
 
 #### Parse serial data
 
 Update the `onSerialDataReceived()` function to parse incoming data and set the variables `brushX` and `brushY`, which hold the brush's x,y coordinates in pixels as well as `lastBrushX` and `lastBrushY`, which track the previous x,y locations (similar to p5.js's [`pmouseX`](https://p5js.org/reference/#/p5/pmouseX) and [`pmouseY`](https://p5js.org/reference/#/p5/pmouseY)):
 
-{% highlight JavaScript %}
+```javascript
 function onSerialDataReceived(eventSender, newData) {
   //console.log("onSerialDataReceived", newData);
   pHtmlMsg.html("onSerialDataReceived: " + newData);
@@ -452,7 +454,7 @@ function onSerialDataReceived(eventSender, newData) {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 #### Update drawing code to use brush x,y
 
@@ -460,7 +462,7 @@ Currently, we are only drawing brush strokes at the current `mouseX` and `mouseY
 
 A keen reader will note that we are now calling `drawBrushStroke()` **twice**: once for mouse input and once for our Arduino-based controller input. Yes, that's true. But bimanual interaction with two controllers has a long history in HCI—going all the way back to Douglas Engelbart's [Mother of All Demos](https://youtu.be/B6rKUf9DWRI?si=XJNd-tspEE9IR9AU) in 1968 ([Wikipedia](https://en.wikipedia.org/wiki/The_Mother_of_All_Demos), [Computer History Museum](https://www.computerhistory.org/revolution/input-output/14/350))—and opens up many fruitful interaction possibilities! Later, we'll make the mouse as a paintbrush toggleable.
 
-{% highlight JavaScript %}
+```javascript
 function draw() {
   
   // Draw the current brush stroke at the given mouse x, y position
@@ -480,7 +482,7 @@ function draw() {
     drawInstructions();
   }
 }
-{% endhighlight JavaScript %}
+```
 
 And that's it. The full code is available in the p5.js online editor as [Paint I/O 2 - Web Serial](https://editor.p5js.org/jonfroehlich/sketches/NxUaI2hnT).
 
@@ -498,7 +500,7 @@ Now that we completed an initial PaintIO app with serial input support, it's tim
 
 The Arduino code is simple: read from the two analog input pins, normalize these readings between [0, 1] (inclusive), and transmit them over serial as a comma-separated string.
 
-{% highlight C++ %}
+```cpp
 const int X_ANALOG_INPUT_PIN = A0;
 const int Y_ANALOG_INPUT_PIN = A1;
 
@@ -528,7 +530,7 @@ void loop() {
   
   delay(10);
 }
-{% endhighlight C++ %}
+```
 
 **Code.** This code is available in our GitHub as [XYAnalogOut.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOut/XYAnalogOut.ino). You can also see the OLED-based variant as [XYAnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOutOLED/XYAnalogOutOLED.ino).
 {: .fs-1 }
@@ -557,7 +559,7 @@ As we're interested in exploring dual-screen interaction, let's add in an [OLED]
 
 Now, let's update our Arduino code to show the x,y location of the brush on the OLED. This will prove useful when we add in dynamic brush sizes and our brush is small in the p5.js app. The full code is in GitHub as [XYAnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOutOLED/XYAnalogOutOLED.ino); however, the relevant bit is simply:
 
-{% highlight C++ %}
+```cpp
 void loop(){
   ...
 
@@ -584,7 +586,7 @@ void loop(){
 
   ...
 }
-{% endhighlight C++ %}
+```
 
 **Code.** The full code is in our GitHub as [XYAnalogOutOLED.ino](https://github.com/makeabilitylab/arduino/blob/master/Serial/XYAnalogOutOLED/XYAnalogOutOLED.ino).
 {: .fs-1 }
@@ -633,7 +635,7 @@ Let's begin by updating our parsing code to support the four incoming brush prop
 
 Update the `onSerialDataReceived()` function:
 
-{% highlight JavaScript %}
+```javascript
 function onSerialDataReceived(eventSender, newData) {
   pHtmlMsg.html("onSerialDataReceived: " + newData);
 
@@ -645,11 +647,11 @@ function onSerialDataReceived(eventSender, newData) {
     }
   }
 }
-{% endhighlight JavaScript %}
+```
 
 And then add in the `parseBrushData()` function to parse `xPosFrac` as a float between [0, 1], `yPosFrac` as a float between [0, 1], `sizeFrac` as a float between [0, 1], `brushType` as a 0, 1, 2 corresponding to CIRCLE, SQUARE, TRIANGLE, and `brushFillMode` corresponding to FILL *vs.* OUTLINE.
 
-{% highlight JavaScript %}
+```javascript
 function parseBrushData(newData){
   // The format is xPosFrac, yPosFrac, sizeFrac, brushType, brushFillMode
   let startIndex = 0;
@@ -698,7 +700,7 @@ function parseBrushData(newData){
     brushSize = MAX_BRUSH_SIZE * brushSizeFraction;
   }
 }
-{% endhighlight JavaScript %}
+```
 
 #### Transmit brush type and fill mode
 
@@ -706,25 +708,25 @@ We support changing the brush type and fill mode both through keyboard commands 
 
 Add in a method called `serialWriteShapeData`, which is similar to what we had in [our previous lesson](p5js-serial-io.md) on bidirectional serial communication.
 
-{% highlight JavaScript %}
+```javascript
 async function serialWriteShapeData(shapeType, shapeDrawMode) {
   if (serial.isOpen()) {
     let strData = shapeType + "," + shapeDrawMode;
     serial.writeLine(strData);
   }
 }
-{% endhighlight JavaScript %}
+```
 
 And then call this function from `keyPressed()`, when necessary:
 
-{% highlight JavaScript %}
+```javascript
 function keyPressed() {
   ...
   if(lastFillMode != brushFillMode || lastBrushType != brushType){
     serialWriteShapeData(brushType, brushFillMode);
   }
 }
-{% endhighlight JavaScript %}
+```
 
 #### Adding color
 
@@ -734,7 +736,7 @@ But, in short, we're using HSB to more easily control hue.
 
 In `setup()`, add the following:
 
-{% highlight JavaScript %}
+```javascript
 function setup(){
   ...
   // Set color mode to HSB with each value ranging from 0 to 1
@@ -744,10 +746,10 @@ function setup(){
   brushColor = color(1, 0, 1, 0.18);
   ...
 }
-{% endhighlight JavaScript %}
+```
 
 Then, in draw, dynamically set the hue based on brush size:
-{% highlight JavaScript %}
+```javascript
 function draw() {
   
   // Set brush color
@@ -756,7 +758,7 @@ function draw() {
 
   ...
 }
-{% endhighlight JavaScript %}
+```
 
 That's it. You can view, edit, and play with this new version of our PaintIO app [here](https://editor.p5js.org/jonfroehlich/sketches/GOvMjQr6y).
 

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: UW Courses
+description: "A sampling of physical computing courses at the University of Washington spanning Art, Design, HCDE, DXARTS, and CSE, covering both undergraduate and graduate offerings."
 nav_order: 2
 parent: Resources
 has_toc: true # (on by default)

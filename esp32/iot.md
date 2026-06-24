@@ -1,6 +1,7 @@
 ---
 layout: default
 title: L1&#58; Internet of Things
+description: "Connect the ESP32 to the cloud: stream sensor data over WiFi to an Adafruit IO dashboard, compare REST and MQTT, control an LED remotely, and write non-blocking IoT code."
 parent: Wireless
 grand_parent: ESP32
 has_toc: true # (on by default)
@@ -18,6 +19,12 @@ nav_order: 1
 1. TOC
 {:toc}
 ---
+
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/DgCFUHGSKSM" title="ESP32 IoT demo: photoresistor data uploading to Adafruit IO dashboard in real time" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** A preview of what we'll build: an ESP32 reading a photoresistor and streaming the light level to an Adafruit IO dashboard that updates live over WiFi. Make sure your sound is on.
+{: .fs-1 }
 
 {: .warning }
 > This lesson is in draft form. There is missing circuit diagrams, images, videos, and other content.
@@ -183,7 +190,7 @@ Let's build our first IoT project! We'll read a photoresistor (light sensor), dr
 We have a photoresistor in a voltage divider with a 10kΩ resistor. The analog input voltage changes with the ambient light level. We also drive an LED via PWM, making it brighter as the room gets darker.
 
 {: .warning }
-> **ADC2 + WiFi conflict!** As we covered in the [Analog Input lesson](analog-input.md), the ESP32's ADC2 pins **cannot be used when WiFi is active**—this is a hardware limitation on all ESP32 variants. You must use **ADC1 pins** for any analog input in IoT projects. On the ESP32-S3 Feather, **A5** is the only "A"-labeled pin on ADC1. Pins labeled D5, D6, D9, and D10 are also ADC1 pins and can be used with `analogRead()` by passing their GPIO number. See the [Analog Input lesson](analog-input.md#which-pins-can-i-use) for full details.
+> **ADC2 + WiFi conflict!** As we covered in the [Analog Input lesson](analog-input.md), the ESP32's ADC2 pins **cannot be used when WiFi is active**—this is a hardware limitation on all ESP32 variants. You must use **ADC1 pins** for any analog input in IoT projects. On the ESP32-S3 Feather, **A5** is the only "A"-labeled pin on ADC1. Pins labeled D5, D6, D9, and D10 are also ADC1 pins and can be used with `analogRead()` by passing their GPIO number. See the [Analog Input lesson](analog-input.md#adc-pins-chip-vs-board) for full details.
 
 <!-- TODO: Create an updated Fritzing wiring diagram for the ESP32-S3 Feather with photoresistor + LED -->
 

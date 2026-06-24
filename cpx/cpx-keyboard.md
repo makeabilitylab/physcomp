@@ -1,6 +1,8 @@
 ---
 layout: default
 title: L6&#58; CPX as a Keyboard
+description: "Turn the CPX into a programmable USB keyboard with MakeCode. Map buttons to key presses, build a media controller for Spotify and YouTube, and create an accelerometer-based keyboard."
+image: https://img.youtube.com/vi/2ehFfhHLcNQ/hqdefault.jpg
 parent: Circuit Playground Express
 has_toc: true # (on by default)
 comments: true
@@ -17,6 +19,12 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/2ehFfhHLcNQ" title="Using the Circuit Playground Express as a programmable USB keyboard in MakeCode" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** Coming up: the CPX as a programmable USB keyboard built in MakeCode—from simple A and B button presses to a media-controller keyboard and even an accelerometer keyboard.
+{: .fs-1 }
+
 In Lesson 6 of our CPX series, we will learn how to use the CPX as a programmable keyboard. We'll begin by making the A and B buttons into keyboard presses and then create increasingly fun and interesting keyboards, including a media controller keyboard (Lesson 6.2) and an accelerometer-based keyboard (Lesson 6.3).
 
 {: .note }
@@ -25,10 +33,6 @@ Note: there is some overlapping content with [Lesson 5.3: Making a Capacitive Ke
 ## Lesson 6.1: Making a Programmable Keyboard
 
 In this lesson, we will show how to use the CPX as a programmable keyboard
-
-<div class="iframe-container">
-  <iframe width="100%" src="https://www.youtube.com/embed/2ehFfhHLcNQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
 
 ### Lesson 6.1 Code
 

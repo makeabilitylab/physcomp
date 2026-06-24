@@ -19,6 +19,10 @@ usetocbot: true
 {:toc}
 ---
 
+![Screenshot of the Arduino IDE with an empty sketch showing setup() and loop() functions](assets/images/ArduinoIDE_BlankAndAnnotated.png)
+**Figure.** Coming up: by the end of this lesson, you'll have the Arduino IDE installed and configured, with a new sketch open showing the `setup()` and `loop()` functions ready to program your board.
+{: .fs-1 }
+
 The Arduino IDE (Integrated Development Environment) is where you'll write, compile, and upload code to your Arduino board. This page walks through downloading, installing, and configuring the IDE so you're ready to start programming.
 
 ## Download and install the Arduino IDE

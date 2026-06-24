@@ -19,15 +19,15 @@ usetocbot: true
 {:toc}
 ---
 
-In this lesson, we will make our first MakeCode+CPX program—called Blinky—which will play a sound effect at the start and then repeatedly flash lights. As we build, we will learn about the MakeCode programming environment, the simulator, and how to load our program on to the CPX.
-
-## The MakeCode Programming Environment
-
 <video aria-label="Rapidly building a simple rainbow NeoPixel animation program by dragging blocks in MakeCode" autoplay loop muted playsinline>
   <source src="assets/videos/Making_SimpleFastAnimationProgram_MakeCode_ScreenRecording.mp4" type="video/mp4" />
 </video>
-**Video.** Rapidly creating a full program with MakeCode: a simple rainbow animation. [Code link](https://makecode.com/_8uY3D8Fc8A5t).
+**Video.** A taste of MakeCode—the block editor we'll use all lesson—here building a quick rainbow NeoPixel animation just by dragging blocks. [Code link](https://makecode.com/_8uY3D8Fc8A5t).
 {: .fs-1 }
+
+In this lesson, we will make our first MakeCode+CPX program—called Blinky—which will play a sound effect at the start and then repeatedly flash lights. As we build, we will learn about the MakeCode programming environment, the simulator, and how to load our program on to the CPX.
+
+## The MakeCode Programming Environment
 
 MakeCode is a visual programming language—like [Scratch](https://scratch.mit.edu/)—built on [Blockly](https://developers.google.com/blockly). As the video above shows, to program the CPX, you simply drag-and-drop "puzzle pieces." We call these pieces *blocks.* As you fit blocks together, you can create interactive programs!
 

@@ -19,6 +19,12 @@ nav_order: 7
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/DgCFUHGSKSM" title="ESP32 IoT demo: photoresistor data uploading to Adafruit IO dashboard in real time" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** A preview of what we'll build: an ESP32 reading a photoresistor and streaming the light level to an Adafruit IO dashboard that updates live over WiFi. Make sure your sound is on.
+{: .fs-1 }
+
 {: .warning }
 > This lesson is in draft form. There is missing circuit diagrams, images, videos, and other content.
 

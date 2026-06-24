@@ -19,6 +19,12 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/CIhCJCBrOYU" title="Arduino auto-on nightlight brightening an LED as the room gets darker using a photoresistor" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** By the end of this lesson, you'll have built an Arduino auto-on nightlight that brightens an LED as the room around it gets darker, all driven by a humble photoresistor.
+{: .fs-1 }
+
 In this lesson, you'll learn about [photoresistors](https://en.wikipedia.org/wiki/Photoresistor) and how to use them with and without microcontrollers.
 
 ## Photoresistors 

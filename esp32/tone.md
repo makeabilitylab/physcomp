@@ -19,6 +19,12 @@ nav_order: 5
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/H7MOhibjOO0" title="Playing the C scale on the ESP32 with a piezo buzzer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** A taste of what's ahead: an ESP32 playing a C major scale on a passive piezo buzzer. By the end of this lesson you'll be playing scales, melodies, and even the Imperial March. Make sure your sound is on.
+{: .fs-1 }
+
 <!-- Content TODOs:
 1. Record a workbench video of the scale/melody playing on a piezo buzzer with an ESP32-S3 Feather
 2. Record a video of the potentiometer-controlled tone with the ESP32-S3 Feather
@@ -36,9 +42,6 @@ nav_order: 5
 - https://github.com/espressif/arduino-esp32/pull/6402 (PR that added tone/noTone)
 - Our Arduino tone lesson: ../arduino/tone.md
 -->
-
-<!-- TODO: Add a hero video or animated GIF showing something fun built with the ESP32 and a piezo buzzer
-     (e.g., the potentiometer-controlled pitch demo, or the Imperial March playing) -->
 
 So far, every output we've produced in the ESP32 module has been visual—turning LEDs on, off, fading, and reading analog input. In this lesson, we'll add a completely new output modality: **sound!** Using a piezo buzzer and the `tone()` function, we'll learn how to play individual notes, scales, and even melodies on the ESP32.
 

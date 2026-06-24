@@ -20,6 +20,12 @@ usetocbot: true
 {:toc}
 ---
 
+<video autoplay loop muted playsinline aria-label="Video demonstrating the Arduino IDE Serial Monitor sending numeric text to the Arduino, which receives it, displays it on an OLED, and echoes it back.">
+  <source src="assets/videos/SimpleSerialIn-NoTalking-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
+</video>
+**Video.** Serial communication in action—the focus of this lesson: text typed into the Arduino IDE [Serial Monitor](../arduino/serial-print.md) is sent to an Arduino, shown on an [OLED](../advancedio/oled.md), and echoed back.
+{: .fs-1 }
+
 Devices need to communicate. Sensors talk to microcontrollers. Microcontrollers talk to computers. Computers talk to the Internet. And beyond! Many different protocols have been created to support device-to-device communication—from [Ethernet](https://en.wikipedia.org/wiki/Ethernet) and [Zigbee](https://en.wikipedia.org/wiki/Zigbee) to WiFi and Bluetooth. In this lesson, we will focus on **asynchronous serial communication**, specifically TTL serial (Transistor-Transistor Logic Serial)—an enduring standard that has prevailed since the beginning of personal computers and is what the [Arduino Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/) uses.
 
 Unlike other popular serial communication protocols like [I<sup>2</sup>C](https://learn.sparkfun.com/tutorials/i2c/all) and [SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi/all), TTL serial is *asynchronous*, which means it does not rely on a shared clock signal (precisely timed voltage pulses) paired with its data lines. This has the benefit of fewer wires but does result in a bit of communication overhead for each transmitted "packet" or data frame.

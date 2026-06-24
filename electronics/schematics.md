@@ -20,6 +20,10 @@ usetocbot: true
 {:toc}
 ---
 
+![A reference chart of common electronic symbols including voltage source, current source, battery, resistive lamp, resistor, switch, diode, and LED. Each symbol is labeled with its name.](assets/images/BasicElectronicSymbols_ByJonFroehlich.png)
+**Figure.** A preview of what we'll build: by the end of this lesson, you'll be able to read and draw circuit schematics using standardized component symbols like these—the visual language of electronics.
+{: .fs-1 }
+
 Before going any further, it's useful to introduce [**circuit schematics**](https://en.wikipedia.org/wiki/Circuit_diagram), which are diagrammatic abstractions of circuits—this will allow us to "speak" about and describe circuits **visually**.
 
 Unlike the more realistic pictorials that we have used thus far (*e.g.,* like [this](assets/videos/ElectronFlowVsConventionalCurrent_PhetSimulation_ByJonFroehlich.mp4) or [this](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4)), circuit schematics are the [*lingua franca*](https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/app02.html) of electronics—they are compact, standardized, visual representations of circuits. You'll find them in electronic datasheets, CAD layout software, and circuit analysis.

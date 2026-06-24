@@ -20,6 +20,12 @@ usetocbot: true
 {:toc}
 ---
 
+<video autoplay loop muted playsinline aria-label="Video demonstrating the full DisplayShapeBidirectional demo with p5.js buttons and Arduino buttons controlling shapes">
+  <source src="assets/videos/DisplayShapeBidirectional_TrimmedAndOptimized900w.mp4" type="video/mp4" />
+</video>
+**Video.** A preview of what we'll build: **DisplayShapeBidirectional**, where p5.js buttons *and* physical Arduino buttons control a shape shared between the browser canvas and the OLED display. ([live page](http://makeabilitylab.github.io/p5js/WebSerial/p5js/DisplayShapeBidirectional), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/DisplayShapeBidirectional))
+{: .fs-1 }
+
 OK, now we're really rolling! We learned about [serial communication](serial-intro.md), then how to use serial in our browsers ([Web Serial!](web-serial.md)), and then how to do this with [p5.js](p5js-serial.md). And we've already made some cool proof-of-concept demos.
 
 Let's take this growing knowledge and momentum to create slightly more sophisticated programs. First, we'll cover the case of using p5.js to control something on our Arduino (`Computer → Arduino`). Then we'll introduce bidirectional communication (`Computer ↔ Arduino`) where the computer and Arduino work together to create a holistic interactive experience. 🎮

@@ -2,7 +2,7 @@
 layout: default
 title: L1&#58; Using buttons
 description: "Build your first interactive Arduino circuit: read a push button with digitalRead() and learn why pull-up and pull-down resistors solve the floating-pin problem."
-image: /arduino/assets/videos/Arduino_Button_InternalLED_Animation_Edited.gif
+image: /arduino/assets/og/buttons.jpg
 nav_order: 1
 parent: Input
 grand_parent: Intro to Arduino
@@ -37,7 +37,9 @@ For example, in the animation below, we show a button circuit with a pull-down r
 > - How to use `digitalRead()` and `pinMode()` for digital input
 > - How to select appropriate pull-up/pull-down resistor values
 
-![Animation showing an Arduino Uno and a button hooked up to Pin 2 with a pull-down resistor configuration. When the button is pressed, the animation shows the current going from Vcc through the button and down through the pull-down resistor](assets/videos/Arduino_Button_InternalLED_Animation_Edited.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing an Arduino Uno and a button hooked up to Pin 2 with a pull-down resistor configuration. When the button is pressed, the animation shows the current going from Vcc through the button and down through the pull-down resistor">
+  <source src="assets/videos/Arduino_Button_InternalLED_Animation_Edited.mp4" type="video/mp4" />
+</video>
 Animation shows the Arduino's built-in LED illuminating when the button on Pin 2 is pressed. When the button is pressed, current flows from $$V_{CC}$$ through the pull-down resistor to GND. We'll learn more about this circuit in this lesson.
 {: .fs-1 }
 
@@ -177,7 +179,9 @@ Given how we built button-based circuits above—without a microcontroller—you
 
 However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed)? Well, this is called a "floating pin" and it's not good. Because the input pin has extremely high impedance, it effectively acts like a tiny antenna—even minuscule charge transfers from nearby electric fields, your body's capacitance, or crosstalk between wires can swing the voltage. A floating pin is susceptible to picking up this stray electromagnetic interference, causing it to randomly oscillate between `HIGH` and `LOW`. See the animation below.
 
-![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor">
+  <source src="assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.mp4" type="video/mp4" />
+</video>
 **Figure.** Animation of what happens when you press a button with the simple circuit configuration.
 {: .fs-1 }
 
@@ -223,7 +227,9 @@ And you're on the right track. Now, when the switch is open, the digital input p
 
 <!-- TODO: expand on why short circuits are bad? -->
 
-![Animation showing a button circuit without a pull-down resistor causing a short when the button is pressed](assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-ShortCircuit-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing a button circuit without a pull-down resistor causing a short when the button is pressed">
+  <source src="assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-ShortCircuit-Optimized.mp4" type="video/mp4" />
+</video>
 **Figure.** Animation showing the effect of connecting `GND` without a resistor. A short circuit!
 {: .fs-1 }
 
@@ -241,7 +247,9 @@ The pull-down resistor is quite large: 10,000Ω (10kΩ)
 
 Here's an animation showing how a pull-down resistor configuration works. Notice how (almost) none of the current goes into Pin 2. This is because, as stated above, the digital input pins “*are in a high-impedance state*” equivalent to a 100,000,000Ω (100MΩ) resistor (see [Arduino docs](https://docs.arduino.cc/learn/microcontrollers/digital-pins/)). And remember, microcontrollers read voltage, not current (so we don't need current into our input pin)!
 
-![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing the correct operation of digital input with a pull-down resistor configuration">
+  <source src="assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.mp4" type="video/mp4" />
+</video>
 
 And here's a video demonstrating the floating pin problem and fix:
 

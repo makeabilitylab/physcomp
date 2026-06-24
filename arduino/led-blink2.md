@@ -2,7 +2,7 @@
 layout: default
 title: L6&#58; Blinking Two LEDs
 description: "Understand current sourcing vs. current sinking by blinking two LEDs on a breadboard—one circuit where the Arduino pin sources current and one where it sinks it."
-image: /arduino/assets/videos/Arduino_Blink2Animation_Pins3And4-NoSchematic-Optimized.gif
+image: /arduino/assets/og/led-blink2.jpg
 nav_order: 6
 parent: Output
 grand_parent: Intro to Arduino
@@ -30,7 +30,9 @@ We are going to build two simple LED circuits:
 
 Yes, this can be a bit confusing at first ("*wait, the LED turns off when Pin 4 is `HIGH`?!?!*"). But you'll gain understanding by completing this lesson. In the animation below, pay attention to the current direction in each circuit. Notice how they're opposite!
 
-![Animation showing how driving Pin 3 and 4 HIGH will turn on LED Circuit 1 and off LED Circuit 2 and driving those pins LOW will turn off LED Circuit 1 and on LED Circuit 2](assets/videos/Arduino_Blink2Animation_Pins3And4-NoSchematic-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing how driving Pin 3 and 4 HIGH will turn on LED Circuit 1 and off LED Circuit 2 and driving those pins LOW will turn off LED Circuit 1 and on LED Circuit 2">
+  <source src="assets/videos/Arduino_Blink2Animation_Pins3And4-NoSchematic-Optimized.mp4" type="video/mp4" />
+</video>
 
 ## Materials
 
@@ -117,7 +119,9 @@ void loop() {
 
 We did it! Now compile and upload the code.
 
-![Top-down workbench animated gif of the circuit working with Arduino](assets/videos/ArduinoUno_Blink2_Workbench.gif)
+<video autoplay loop muted playsinline aria-label="Top-down workbench animated gif of the circuit working with Arduino">
+  <source src="assets/videos/ArduinoUno_Blink2_Workbench.mp4" type="video/mp4" />
+</video>
 
 And here's a top-down video with the code window:
 

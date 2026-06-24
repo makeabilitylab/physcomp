@@ -47,7 +47,9 @@ Electricity and magnetism have long captured human interest but were considered 
 
 Enter Edwin Hall. As a PhD student at Johns Hopkins in 1879, Hall discovered the "Hall effect", which is the production of a small voltage difference across an electrical conductor **transverse** to the electric current when a magnetic field is applied ([Wikipedia](https://en.wikipedia.org/wiki/Hall_effect#Discovery)). This [animation](https://youtu.be/wpAA3qeOYiI) by "How to Mechatronics" helps demonstrate the effect. When a magnet is introduced, it repels negative charges to one side of the conductor creating an asymmetric distribution of charge (perpendicular to the flow of current) on the conductor. This separation of charge establishes a new electric field with a small electric potential (often in the millivolts), which can be measured by a multimeter or similar device.
 
-![Animation of Hall Effect](assets/videos/HallEffectAnimation_HowToMechatronics-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation of Hall Effect">
+  <source src="assets/videos/HallEffectAnimation_HowToMechatronics-Optimized.mp4" type="video/mp4" />
+</video>
 Animation from ["How to Mechatronics"](https://youtu.be/wpAA3qeOYiI)
 {: .fs-1 }
 
@@ -113,7 +115,7 @@ While some Hall effect sensors produce binary output (`HIGH` or `LOW`) and thus,
 
 | Reed Switch Animation | Slow Motion Activation Video |
 | ---------- | ----------- |
-| ![Reed switch slow-mo video](assets/videos/ReedSwitchAnimation-Optimized.gif) | ![Reed switch animation](assets/videos/HowAReedSwitchWorks_Wikipedia.gif) |
+| <video src="assets/videos/ReedSwitchAnimation-Optimized.mp4" autoplay loop muted playsinline aria-label="Reed switch slow-mo video"></video> | <video src="assets/videos/HowAReedSwitchWorks_Wikipedia.mp4" autoplay loop muted playsinline aria-label="Reed switch animation"></video> |
 
 The slow-motion activation video is from [Wikipedia](https://en.wikipedia.org/wiki/Reed_switch).
 {: .fs-1 }

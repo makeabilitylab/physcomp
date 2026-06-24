@@ -126,7 +126,9 @@ Here's one possible wiring for a potentiometer-based LED fading circuit:
 
 Once you're done, try simulating your circuit. Click the "Start Simulation" button (see animation below):
 
-![Animation of the LED-based circuit with potentiometer working in the Tinkercad simulator](assets/videos/Potentiometer_LEDCircuitWithBackupResistor_Tinkercad2-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation of the LED-based circuit with potentiometer working in the Tinkercad simulator">
+  <source src="assets/videos/Potentiometer_LEDCircuitWithBackupResistor_Tinkercad2-Optimized.mp4" type="video/mp4" />
+</video>
 
 In the circuit above, we hooked up legs 2 and 3 of the potentiometer. What happens if you, instead, hook up legs 1 and 3 or 1 and 2? Try it!
 
@@ -164,7 +166,9 @@ Note: when you drag over a multimeter, make sure you click on it and change the 
 
 Here's our circuit with the ammeter running in the simulator. Does the simulation match your expectations? 
 
-![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/videos/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
+<video autoplay loop muted playsinline aria-label="Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator">
+  <source src="assets/videos/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.mp4" type="video/mp4" />
+</video>
 
 Because we have Leg 2 hooked to the positive voltage source and Leg 3 as our "output", as we move the wiper from left-to-right, there is a smaller amount of resistance and an increase in current. You'll notice a jump in current when the $$V_f$$ condition of the LED is met (recall the [LED IV curves](../electronics/leds.md#the-iv-graph-for-leds) from our [LED lesson](../electronics/leds.md)).
 

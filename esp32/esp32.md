@@ -188,7 +188,9 @@ The Huzzah32 uses the original ESP32 chip. The pin layout differs from the ESP32
 - The charge LED will blink rapidly when no LiPoly battery is plugged in—this is harmless.
 - Power via USB (max 5V, 1A) or LiPoly battery (3.7/4.2V) only. **Do not** use a 9V battery!
 
-![Animation of all 18 GPIO output pins fading in and out on the Huzzah32](assets/videos/Huzzah32_GPIOFadeTestAllPinsSimultaneously-Optimized3.gif)
+<video autoplay loop muted playsinline aria-label="Animation of all 18 GPIO output pins fading in and out on the Huzzah32">
+  <source src="assets/videos/Huzzah32_GPIOFadeTestAllPinsSimultaneously-Optimized3.mp4" type="video/mp4" />
+</video>
 **Figure.** The Huzzah32 has 21 GPIO pins, but pins 34, 39, and 36 are input-only. Here, all 21 GPIO pins are set to fade—only 18 produce output.
 {: .fs-1 }
 

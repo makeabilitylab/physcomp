@@ -2,7 +2,7 @@
 layout: default
 title: L9&#58; Rate Blinking LEDs
 description: "Blink multiple LEDs at different rates without delay() and write your first C++ class to eliminate redundant code and shrink your Arduino sketch."
-image: /arduino/assets/videos/ArduinoUno_BlinkMultiple_Workbench.gif
+image: /arduino/assets/og/led-blink3.jpg
 nav_order: 9
 parent: Output
 grand_parent: Intro to Arduino
@@ -25,7 +25,9 @@ In this lesson, we will learn how to blink multiple LEDs at different rates and 
 
 As with our previous lesson on [crossfading RGB LEDs](rgb-led-fade.md), this lesson involves **simple circuits** but comparatively **complex code**. Often, when using microcontrollers, our code is the magic sauce—the circuits are straightforward but the code can be complicated.
 
-![Animated gif of a workbench video recording showing BlinkMultiple.ino](assets/videos/ArduinoUno_BlinkMultiple_Workbench.gif)
+<video autoplay loop muted playsinline aria-label="Animated gif of a workbench video recording showing BlinkMultiple.ino">
+  <source src="assets/videos/ArduinoUno_BlinkMultiple_Workbench.mp4" type="video/mp4" />
+</video>
 
 ## Background
 

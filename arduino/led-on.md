@@ -2,7 +2,7 @@
 layout: default
 title: L1&#58; Turning on an LED
 description: "Your first Arduino activity: wire an LED to the 5V and GND pins to light it up—no code required—and build familiarity with Arduino hardware and current flow."
-image: /arduino/assets/videos/Arduino_LEDOn_5VFixed_USBPower.gif
+image: /arduino/assets/og/led-on.jpg
 nav_order: 1
 parent: Output
 grand_parent: Intro to Arduino
@@ -22,7 +22,9 @@ usetocbot: true
 ---
 For our first learning activity, we are going to use Arduino to turn on an [LED](../electronics/leds.md). We're **not** going to write any code. Instead, our goal is to build some initial familiarity with Arduino hardware and connecting components to Arduino pins before we introduce programming, which we do in the [next lesson](led-blink.md).
 
-![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/videos/Arduino_LEDOn_5VFixed_USBPower.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND">
+  <source src="assets/videos/Arduino_LEDOn_5VFixed_USBPower.mp4" type="video/mp4" />
+</video>
 **Figure.** The movement of **current** in the circuit is illustrated by the animated yellow circles. This visualization is a coarse abstraction designed to emphasize the direction of current flow. A more accurate visualization would show that electrons are already distributed throughout a wire before a voltage is applied. See our [Introduction to Electronics](../electronics/index.md) series, specifically the lesson on [Voltage, Current, and Resistance](../electronics/electricity-basics.md).
 {: .fs-1 }
 
@@ -62,7 +64,9 @@ Insert the LED + resistor into the Arduino:
 
 Make sure to push the legs down so they are well seated inside the Arduino's female headers.
 
-![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/videos/Arduino_LEDOn_5VFixed_InsertLED.gif)
+<video autoplay loop muted playsinline aria-label="Animation of LED + resistor being connected to Arduino's GND and 5V ports">
+  <source src="assets/videos/Arduino_LEDOn_5VFixed_InsertLED.mp4" type="video/mp4" />
+</video>
 
 ### Step 3: Connect your Arduino to power
 
@@ -76,7 +80,7 @@ For power, you can use a USB cable (which supplies 5V) or a 9V battery (which su
 
 | USB Power        | 9V Power          |
 |:-------------|:------------------|
-| ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/videos/Arduino_LEDOn_5VFixed_USBPower-Cropped.gif) | ![Animation showing a 9V battery plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/videos/Arduino_LEDOn_5VFixed_9VBattery-Cropped.gif) |
+| <video src="assets/videos/Arduino_LEDOn_5VFixed_USBPower-Cropped.mp4" autoplay loop muted playsinline aria-label="Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND"></video> | <video src="assets/videos/Arduino_LEDOn_5VFixed_9VBattery-Cropped.mp4" autoplay loop muted playsinline aria-label="Animation showing a 9V battery plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND"></video> |
 | With USB power, the 5V pin supplies 5V | Using the Arduino's barrel jack, we can connect an external power supply like a 7-12V wall adapter or a 9V battery. The Arduino's internal voltage regulator reduces these higher voltages to output a clean 5V |
 
 {: .warning }

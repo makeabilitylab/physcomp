@@ -2,7 +2,7 @@
 layout: default
 title: L7&#58; RGB LEDs
 description: "Drive an RGB LED through a sequence of colors with Arduino and learn the difference between common anode and common cathode RGB LED wiring."
-image: /arduino/assets/videos/Arduino_RGBLED_CommonCathode-Optimized.gif
+image: /arduino/assets/og/rgb-led.jpg
 nav_order: 7
 parent: Output
 grand_parent: Intro to Arduino
@@ -23,7 +23,9 @@ usetocbot: true
 
 In this tutorial, we will use an RGB LED (RGB stands for Red, Green, Blue) to flash through a sequence of colors and learn about the difference between a Common Anode and Common Cathode RGB LED design.
 
-![Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6](assets/videos/Arduino_RGBLED_CommonCathode-Optimized.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6">
+  <source src="assets/videos/Arduino_RGBLED_CommonCathode-Optimized.mp4" type="video/mp4" />
+</video>
 
 ## Materials
 

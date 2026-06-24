@@ -2,7 +2,7 @@
 layout: default
 title: L4&#58; Fading an LED
 description: "Smoothly fade an LED on and off with Arduino's analogWrite() and pulse-width modulation (PWM), controlling output voltage at fine gradations beyond just HIGH/LOW."
-image: /arduino/assets/videos/Arduino_LEDFade_Pin3.gif
+image: /arduino/assets/og/led-fade.jpg
 nav_order: 4
 parent: Output
 grand_parent: Intro to Arduino
@@ -23,7 +23,9 @@ usetocbot: true
 
 In the [previous lesson](led-blink.md), we learned how to turn on and off an LED using [`digitalWrite`](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)—which worked by alternately setting Pin 3 to 5V (`HIGH`) and 0V (`LOW`). In this lesson, we'll learn how to programmatically control the output voltage at finer gradations using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/). More specifically, we will gradually fade an LED on and off like the animation below illustrates.
 
-![Animation showing the LED on Pin 3 gradually fading on and off](assets/videos/Arduino_LEDFade_Pin3.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing the LED on Pin 3 gradually fading on and off">
+  <source src="assets/videos/Arduino_LEDFade_Pin3.mp4" type="video/mp4" />
+</video>
 **Figure.** This illustrative animation doesn't show current (the yellow circles) only due to my limited animation skills. But hopefully you can visualize (in your mind) how the LED varies in brightness with current just the same. :)
 {: .fs-1 }
 

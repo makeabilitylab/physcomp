@@ -2,7 +2,7 @@
 layout: default
 title: L2&#58; Blinking an LED
 description: "Write your first Arduino sketch to blink an LED by programmatically toggling a GPIO pin HIGH and LOW with digitalWrite()—your entrée into combining circuits and code."
-image: /arduino/assets/videos/Arduino_LEDBlink_Pin3.gif
+image: /arduino/assets/og/led-blink.jpg
 nav_order: 2
 parent: Output
 grand_parent: Intro to Arduino
@@ -30,7 +30,9 @@ In our [first lesson](led-on.md), we directly hooked up an LED circuit to the Ar
 
 In this lesson, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programmatically* controlling the output voltage on one of Arduino's GPIO pins. This begins our entrée into the two key aspects of working with microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
 
-![Animation showing an LED connected to Pin 3 on the Arduino blinking on and off](assets/videos/Arduino_LEDBlink_Pin3.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing an LED connected to Pin 3 on the Arduino blinking on and off">
+  <source src="assets/videos/Arduino_LEDBlink_Pin3.mp4" type="video/mp4" />
+</video>
 
 <!-- TODO: Add in a version that makes a tone for accessibility reasons? 
      See: https://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/digital-input-and-output-with-an-arduino/ -->
@@ -184,7 +186,9 @@ We did it! Now it's time to compile and upload the code to Arduino.
 
 Compile the code by clicking on the "verify" checkmark button in the upper-left corner of the Arduino IDE. If you haven't already, the Arduino IDE will also ask you to save your sketch. If there are any syntax or other identifiable errors in the code, the Arduino IDE will print them out in the console window at the bottom.
 
-![Animation showing how to compile and save a sketch in the Arduino IDE](assets/videos/ArduinoIDE_Compile.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing how to compile and save a sketch in the Arduino IDE">
+  <source src="assets/videos/ArduinoIDE_Compile.mp4" type="video/mp4" />
+</video>
 
 ### Step 5: Upload the code to Arduino
 
@@ -202,7 +206,9 @@ Once uploading is complete, the code automatically runs on the Arduino and the L
 
 Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`—hopefully, this matches your conceptual understanding as well:
 
-![Animation showing the LED on Pin 3 turning on](assets/videos/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
+<video autoplay loop muted playsinline aria-label="Animation showing the LED on Pin 3 turning on">
+  <source src="assets/videos/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.mp4" type="video/mp4" />
+</video>
 
 ## Turn on and off the LED programmatically via Pin 3
 

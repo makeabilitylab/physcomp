@@ -69,7 +69,7 @@ In addition to the materials from [Lesson 2](bluetooth-serial.md#materials), you
 
 | Breadboard | ESP32 | Potentiometer | NeoPixel |
 | ---------- |:-----:|:-----:|:-----:|
-| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit ESP32 Feather, top view]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/PanelMountPotentiometer_NoCap_150h.jpg) | <img src="{{ site.baseurl }}/assets/images/WS2812_RGB_Stick_8_LEDs.jpg" alt="WS2812B 8-LED stick" style="height: 175px !important;"> |
+| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit ESP32 Feather, top view]({{ site.baseurl }}/assets/images/ESP32Huzzah32_Adafruit_vertical_h200.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/PanelMountPotentiometer_NoCap_150h.jpg) | <img src="{{ site.baseurl }}/advancedio/assets/images/WS2812_RGB_Stick_8_LEDs.jpg" alt="WS2812B 8-LED stick" style="height: 175px !important;"> |
 | Breadboard | ESP32 with BT Classic (see below) | 10kΩ Potentiometer | NeoPixel (onboard or external) |
 
 **Choose one ESP32 board with Bluetooth Classic:**
@@ -79,7 +79,7 @@ In addition to the materials from [Lesson 2](bluetooth-serial.md#materials), you
 
 **NeoPixel options for Part 5:**
 - If your board has an onboard NeoPixel (Feather V2), you're done—no extra parts.
-- Otherwise, use any external WS2812B/SK6812 addressable LED: the **8-LED stick** in our course kits is perfect. You can also use a single NeoPixel, a strip, a ring, or a matrix—the code is the same, only the LED count changes. See the [Addressable LEDs lesson](../led/addressable-leds.md) for background on the hardware and wiring conventions.
+- Otherwise, use any external WS2812B/SK6812 addressable LED: the **8-LED stick** in our course kits is perfect. You can also use a single NeoPixel, a strip, a ring, or a matrix—the code is the same, only the LED count changes. See the [Addressable LEDs lesson](../advancedio/addressable-leds.md) for background on the hardware and wiring conventions.
 
 You will also need:
 - **Google Chrome** or **Microsoft Edge** (for the Web Serial activities in Parts 3–5)—same browser requirement as the [Web Serial lesson](../communication/web-serial.md)
@@ -158,7 +158,7 @@ You already have two Python visualization scripts from the [Communication module
 
 {: .note }
 > **Reminder: activate your venv first.** The scripts below assume you've activated the virtual environment you set up in [Lesson 2, Part 2](bluetooth-serial.md#setting-up-pyserial). Each time you open a new terminal:
-> ```
+> ```bash
 > # macOS / Linux
 > source venv/bin/activate
 > # Windows
@@ -168,7 +168,7 @@ You already have two Python visualization scripts from the [Communication module
 
 **Terminal bar graph:** [`serial_bar_graph.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/SerialBarGraph/serial_bar_graph.py) reads a float value per line (0.0–1.0) and renders a live ASCII bar chart in the terminal. To use it over Bluetooth, just pass the Bluetooth port as an argument:
 
-```
+```bash
 # macOS / Linux — with your venv active
 python3 serial_bar_graph.py /dev/tty.ESP32-PotSensor 115200
 
@@ -178,7 +178,7 @@ python3 serial_bar_graph.py COM8 115200
 
 **Matplotlib circle:** [`serial_draw_circle.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/SerialCircle/serial_draw_circle.py) reads a float value per line and draws a circle whose radius is proportional to the value. Same idea—just pass the Bluetooth port:
 
-```
+```bash
 # macOS / Linux — with your venv active
 python3 serial_draw_circle.py /dev/tty.ESP32-PotSensor 115200
 
@@ -311,7 +311,7 @@ Keep the pot from Part 1 on A7. For the NeoPixel, you have two paths:
 - VCC → **USB** pin (5V from USB) for sticks/strips, or **3V** for a single NeoPixel
 - GND → **GND**
 
-See the [Addressable LEDs lesson](../led/addressable-leds.md) for more on power, signal levels, and wiring conventions.
+See the [Addressable LEDs lesson](../advancedio/addressable-leds.md) for more on power, signal levels, and wiring conventions.
 
 <!-- TODO: Two Fritzing diagrams:
      A. Feather V2 with pot on A7 (onboard NeoPixel — no extra wiring)
@@ -560,7 +560,7 @@ In this lesson, you went beyond Hello World to build real interactive Bluetooth 
 - [BluetoothColorMixer.ino](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BluetoothColorMixer) — the Part 5 Arduino sketch
 - [Web Serial lesson](../communication/web-serial.md) — our introduction to Web Serial (the same API that works with Bluetooth COM ports)
 - [p5.js Serial](../communication/p5js-serial.md) and [p5.js Serial I/O](../communication/p5js-serial-io.md) — the Communication module foundations this lesson builds on
-- [Addressable LEDs lesson](../led/addressable-leds.md) — background on NeoPixel hardware and wiring
+- [Addressable LEDs lesson](../advancedio/addressable-leds.md) — background on NeoPixel hardware and wiring
 - [Serial Bluetooth Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal) — recommended Android app for Bluetooth serial (free, by Kai Morich)
 
 ## Next Lesson

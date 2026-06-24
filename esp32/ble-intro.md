@@ -117,7 +117,7 @@ Think of GATT as a structured bulletin board. The peripheral (ESP32) maintains a
 
 Here's the hierarchy:
 
-```
+```text
 BLE Peripheral (GATT Server)
   └── Service (e.g., "Sensor Data")                    ← a category of related data
        ├── Characteristic (e.g., "Potentiometer")       ← a single data point
@@ -223,7 +223,7 @@ You'll need the following components. We use **[Adafruit's ESP32-S3 Feather](htt
 
 | Breadboard | ESP32 | LED | Resistor | Potentiometer |
 | ---------- |:-----:|:-----:|:-----:|:-----:|
-| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit ESP32-S3 Feather board, top view](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red 5mm LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220-ohm resistor, striped red-red-brown-gold]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/Potentiometer_100h.png) |
+| ![Half-sized solderless breadboard]({{ site.baseurl }}/assets/images/Breadboard_Half.png) | ![Adafruit ESP32-S3 Feather board, top view](assets/images/Adafruit_ESP32-S3-5477-11-vertical-cropped.jpg) | ![Red 5mm LED]({{ site.baseurl }}/assets/images/RedLED_Fritzing.png) | ![220-ohm resistor, striped red-red-brown-gold]({{ site.baseurl }}/assets/images/Resistor220_Fritzing.png) | ![10kΩ rotary potentiometer]({{ site.baseurl }}/assets/images/PanelMountPotentiometer_NoCap_150h.jpg) |
 | Breadboard | [ESP32-S3 Feather](https://www.adafruit.com/product/5477) | Red LED | 220Ω Resistor | 10kΩ Potentiometer |
 
 You will also need:
@@ -350,7 +350,7 @@ Let's walk through the key steps:
 
 Let's start on the computer, where debugging is easiest. We'll use [bleak](https://pypi.org/project/bleak/) — a cross-platform BLE client library for Python that works on macOS, Windows, and Linux. Unlike [pySerial](https://pyserial.readthedocs.io/) (which we used for Bluetooth Classic in [Lesson 2](bluetooth-serial.md)), bleak speaks BLE natively — it connects directly to BLE peripherals, discovers their GATT services, and reads/writes characteristics using Python's `asyncio` for non-blocking I/O. If you haven't installed it yet:
 
-```
+```bash
 pip3 install bleak
 ```
 
@@ -402,7 +402,7 @@ asyncio.run(main())
 
 Run it:
 
-```
+```bash
 python3 ble_discover.py
 ```
 
@@ -646,7 +646,7 @@ asyncio.run(main())
 
 Run it and turn the potentiometer—you'll see a live bar chart updating in your terminal, with data arriving wirelessly over BLE:
 
-```
+```bash
 python3 ble_sensor_reader.py
 ```
 

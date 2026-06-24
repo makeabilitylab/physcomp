@@ -283,7 +283,7 @@ You can choose any name you like—"ESP32-Bluetooth", "MyPotentiometer", "Jon's 
 
 Upload this sketch to your ESP32 and open Serial Monitor at 115200 baud. You should see greeting messages appearing every 2 seconds, prefixed with `[USB Serial]`:
 
-```
+```text
 [USB Serial] Msg #1 | Uptime: 2.0s
 [USB Serial] Msg #2 | Uptime: 4.0s
 [USB Serial] Msg #3 | Uptime: 6.0s
@@ -308,7 +308,7 @@ Before you can communicate over Bluetooth, you need to **pair** your computer wi
 3. Click **Connect** next to `"ESP32-Bluetooth"`. macOS will pair with the device.
 4. Once paired, macOS creates a virtual serial port. To find it, open **Terminal** and run:
 
-```
+```bash
 ls /dev/tty.*Bluetooth*
 ```
 
@@ -345,7 +345,7 @@ cat /dev/tty.ESP32-Bluetooth
 
 Replace the port name with whatever `ls /dev/tty.*Bluetooth*` showed you. You should immediately see greetings streaming in:
 
-```
+```text
 [Bluetooth] Msg #1 | Uptime: 2.0s
 [Bluetooth] Msg #2 | Uptime: 4.0s
 [Bluetooth] Msg #3 | Uptime: 6.0s
@@ -383,7 +383,7 @@ Download it and run from your PowerShell terminal:
 
 You should see messages streaming in:
 
-```
+```text
 Connected! Listening for data...
 
 [Bluetooth] Msg #1 | Uptime: 2.0s
@@ -396,7 +396,7 @@ Press **Ctrl+C** to stop.
 **If you see messages, congratulations—you're communicating wirelessly! 🎉** The ESP32 is sending data over Bluetooth, your computer is receiving it through a virtual serial port, and no USB cable was involved. This is the core magic of SPP.
 
 {: .warning }
-> **Only one program can open a serial port at a time.** If you have Arduino's Serial Monitor open on the Bluetooth COM port, `cat`/`screen`/PowerShell won't be able to connect (and vice versa). Close Serial Monitor before trying the terminal commands—or keep Serial Monitor on the *USB* port (COM4) and use the terminal on the *Bluetooth* port. This is the same constraint from the [serial introduction](../communication/serial-intro.md#only-one-computer-program-can-open-a-serial-port-at-a-time), just with two ports to manage.
+> **Only one program can open a serial port at a time.** If you have Arduino's Serial Monitor open on the Bluetooth COM port, `cat`/`screen`/PowerShell won't be able to connect (and vice versa). Close Serial Monitor before trying the terminal commands—or keep Serial Monitor on the *USB* port (COM4) and use the terminal on the *Bluetooth* port. This is the same constraint from the [serial introduction](../communication/serial-intro.md#only-one-program-can-open-a-serial-port-at-a-time), just with two ports to manage.
 
 **If you don't see any data**, see the [Troubleshooting Bluetooth connections](#troubleshooting-bluetooth-connections) section below before moving on.
 
@@ -449,7 +449,7 @@ We provide a simple Python script called [`serial_reader.py`](https://github.com
 
 First, list available ports to find your Bluetooth serial port:
 
-```
+```bash
 # macOS / Linux
 python3 serial_reader.py --list
 
@@ -459,7 +459,7 @@ python serial_reader.py --list
 
 On Windows, you should see something like:
 
-```
+```text
 Available serial ports:
   COM1 - Communications Port (COM1)
   COM4 - Silicon Labs CP210x USB to UART Bridge (COM4)
@@ -471,7 +471,7 @@ COM4 is your **tethered USB serial connection** (the CP210x chip on the Huzzah32
 
 Now connect:
 
-```
+```bash
 # macOS / Linux
 python3 serial_reader.py /dev/tty.ESP32-Bluetooth 115200
 
@@ -481,7 +481,7 @@ python serial_reader.py COM16 115200
 
 You should see the same greetings you saw in Part 1:
 
-```
+```text
 Connected! Listening for data...
 
 [Bluetooth] Msg #42 | Uptime: 84.0s
@@ -498,7 +498,7 @@ Press **Ctrl+C** to stop.
 
 The `serial_reader.py` script only listens. To test bidirectional communication, use [`serial_demo.py`](https://github.com/makeabilitylab/arduino/blob/master/Python/Serial/serial_demo.py)—the interactive send-and-receive script from the [Communication module](../communication/serial-intro.md). It lets you type a number, sends it to the ESP32, and prints the echoed response:
 
-```
+```bash
 # macOS / Linux
 python3 serial_demo.py /dev/tty.ESP32-Bluetooth 115200
 

@@ -69,7 +69,7 @@ The ESP32-S3 Feather has a built-in NeoPixel (WS2812B) RGB LED on `PIN_NEOPIXEL`
 
 <!-- TODO: Push BLENeoPixelControl.ino to https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/ -->
 
-We'll extend the [Lesson 4](ble-intro.md) sensor streaming sketch to add a second characteristic for LED control—so the ESP32 simultaneously streams sensor data *and* accepts LED commands. This is the same bidirectional pattern from [Lesson 3, Part 3](bluetooth-web-serial.md#part-3-bidirectional-control), but over BLE with structured characteristics instead of a serial byte stream. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BLENeoPixelControl).
+We'll extend the [Lesson 4](ble-intro.md) sensor streaming sketch to add a second characteristic for LED control—so the ESP32 simultaneously streams sensor data *and* accepts LED commands. This is the same bidirectional pattern from [Lesson 3, Part 5](bluetooth-web-serial.md#part-5-bidirectional-control--wireless-color-mixer), but over BLE with structured characteristics instead of a serial byte stream. The full source is available in our [Arduino GitHub repo](https://github.com/makeabilitylab/arduino/tree/master/ESP32/Bluetooth/BLENeoPixelControl).
 
 ```cpp
 /**
@@ -719,7 +719,7 @@ Want to go further? Here are some challenges to reinforce what you've learned:
 
 **Exercise 4: Web Bluetooth + p5.js.** Port the Web Bluetooth sensor display from Part 2 into [p5.js](https://p5js.org/). Use `createCanvas()` to draw a real-time visualization (bar chart, oscilloscope, *etc.*) of the incoming BLE sensor data. If you completed the [p5.js Serial lessons](../communication/p5js-serial.md), compare the code structure—how much carries over? (Hint: also check out [p5.ble.js](https://itpnyu.github.io/p5.ble.js/), a p5.js library specifically for Web Bluetooth.)
 
-**Exercise 5: Port a Bluetooth Classic bidirectional project to BLE.** If you completed the bidirectional LED control from [Lesson 3, Part 3](bluetooth-web-serial.md#part-3-bidirectional-control), rebuild it using BLE with writable and notify characteristics. Update the computer-side code to use Web Bluetooth instead of Web Serial. What changed? What stayed the same?
+**Exercise 5: Port a Bluetooth Classic bidirectional project to BLE.** If you completed the bidirectional LED control from [Lesson 3, Part 5](bluetooth-web-serial.md#part-5-bidirectional-control--wireless-color-mixer), rebuild it using BLE with writable and notify characteristics. Update the computer-side code to use Web Bluetooth instead of Web Serial. What changed? What stayed the same?
 
 ## Lesson Summary
 

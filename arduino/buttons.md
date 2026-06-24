@@ -2,7 +2,7 @@
 layout: default
 title: L1&#58; Using buttons
 description: "Build your first interactive Arduino circuit: read a push button with digitalRead() and learn why pull-up and pull-down resistors solve the floating-pin problem."
-image: /arduino/assets/movies/Arduino_Button_InternalLED_Animation_Edited.gif
+image: /arduino/assets/videos/Arduino_Button_InternalLED_Animation_Edited.gif
 nav_order: 1
 parent: Input
 grand_parent: Intro to Arduino
@@ -37,7 +37,7 @@ For example, in the animation below, we show a button circuit with a pull-down r
 > - How to use `digitalRead()` and `pinMode()` for digital input
 > - How to select appropriate pull-up/pull-down resistor values
 
-![Animation showing an Arduino Uno and a button hooked up to Pin 2 with a pull-down resistor configuration. When the button is pressed, the animation shows the current going from Vcc through the button and down through the pull-down resistor](assets/movies/Arduino_Button_InternalLED_Animation_Edited.gif)
+![Animation showing an Arduino Uno and a button hooked up to Pin 2 with a pull-down resistor configuration. When the button is pressed, the animation shows the current going from Vcc through the button and down through the pull-down resistor](assets/videos/Arduino_Button_InternalLED_Animation_Edited.gif)
 Animation shows the Arduino's built-in LED illuminating when the button on Pin 2 is pressed. When the button is pressed, current flows from $$V_{CC}$$ through the pull-down resistor to GND. We'll learn more about this circuit in this lesson.
 {: .fs-1 }
 
@@ -81,10 +81,10 @@ The four-leg push button is one of the most common button types for breadboardin
 
 The key thing to remember is that the two legs closest together (on the same side) are, somewhat unintuitively, **not** connected until you press the button. Upon button press, all four legs become connected (*i.e.,* the same node). We created the following animation to help explain further. Observe the *orientation* of the button and how the legs are connected.
 
-<!-- ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/movies/FourLeggedTactileButtons_Animation.gif) -->
+<!-- ![Animation showing how two sides of the button are disconnected until the button is pressed, creating a connection](assets/videos/FourLeggedTactileButtons_Animation.gif) -->
 
 <video autoplay loop muted playsinline aria-label="Animation showing which two sides of a four-legged tactile button are disconnected until pressed">
-  <source src="assets/movies/FourLeggedTactileButtons_Animation.mp4" type="video/mp4" />
+  <source src="assets/videos/FourLeggedTactileButtons_Animation.mp4" type="video/mp4" />
 </video>
 **Video.** Animation shows which two sides of a four-legged tactile button are disconnected until the button is pressed, creating a connection between all four legs.
 {: .fs-1 }
@@ -111,10 +111,10 @@ If you build the 9V battery circuit, then we suggest a 680Ω or 1kΩ resistor ra
 
 That's it! Once you've created the circuit, give it a try by pushing the button and the LED should turn on. See the animation below.
 
-<!-- ![Animation showing both the 9V battery and Arduino 5V power LED circuits with four-legged button working](assets/movies/FourLeggedTactileButton_LEDCircuitBreadboard_Animation.gif) -->
+<!-- ![Animation showing both the 9V battery and Arduino 5V power LED circuits with four-legged button working](assets/videos/FourLeggedTactileButton_LEDCircuitBreadboard_Animation.gif) -->
 
 <video autoplay loop muted playsinline aria-label="Animation showing two button LED circuits with different voltage sources turning on when pressed">
-  <source src="assets/movies/Button_LEDCircuit_Breadboard_Animation-Edited-Cropped_Trim.mp4" type="video/mp4" />
+  <source src="assets/videos/Button_LEDCircuit_Breadboard_Animation-Edited-Cropped_Trim.mp4" type="video/mp4" />
 </video>
 **Video.** Animation showing two different voltage sources for a basic LED-based circuit with a four-legged button to control "on" and "off." When no button is pressed, there is no current flow and the LED is off.
 {: .fs-1 }
@@ -177,7 +177,7 @@ Given how we built button-based circuits above—without a microcontroller—you
 
 However, if you do this, what will the digital input pin read when the switch is **open** (that is, when the button is **not** pressed)? Well, this is called a "floating pin" and it's not good. Because the input pin has extremely high impedance, it effectively acts like a tiny antenna—even minuscule charge transfers from nearby electric fields, your body's capacitance, or crosstalk between wires can swing the voltage. A floating pin is susceptible to picking up this stray electromagnetic interference, causing it to randomly oscillate between `HIGH` and `LOW`. See the animation below.
 
-![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
+![Animation showing a floating pin condition when a button is just hooked up to 5V without a pull-down resistor](assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-FloatingPin-Optimized.gif)
 **Figure.** Animation of what happens when you press a button with the simple circuit configuration.
 {: .fs-1 }
 
@@ -202,7 +202,7 @@ void loop()
 Here's a quick video demonstration of what happens—the floating pin problem! Note: we are using a slightly modified version of this code where an LED is turned on if the button is pressed (*i.e.,* if `buttonVal == 1`). This just makes it easier to see the fluctuating button state.
 
 <video autoplay loop muted playsinline aria-label="Video demonstrating a floating pin problem where button state oscillates erratically">
-  <source src="assets/movies/Arduino_Button_FloatingPinProblem720p.mp4" type="video/mp4" />
+  <source src="assets/videos/Arduino_Button_FloatingPinProblem720p.mp4" type="video/mp4" />
 </video>
 **Video.** Floating pins are digital input pins that are not tied to a specific input voltage (either 0V or 5V) and thus, are subject to electromagnetic interference. Here, the button state is oscillating between `HIGH` and `LOW` simply due to the electromagnetic interference from my body. Makes me feel like Dumbledore! The source code is [here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalRead/ButtonPressedFloatingPin/ButtonPressedFloatingPin.ino).
 {: .fs-1 }
@@ -223,7 +223,7 @@ And you're on the right track. Now, when the switch is open, the digital input p
 
 <!-- TODO: expand on why short circuits are bad? -->
 
-![Animation showing a button circuit without a pull-down resistor causing a short when the button is pressed](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-ShortCircuit-Optimized.gif)
+![Animation showing a button circuit without a pull-down resistor causing a short when the button is pressed](assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-ShortCircuit-Optimized.gif)
 **Figure.** Animation showing the effect of connecting `GND` without a resistor. A short circuit!
 {: .fs-1 }
 
@@ -241,7 +241,7 @@ The pull-down resistor is quite large: 10,000Ω (10kΩ)
 
 Here's an animation showing how a pull-down resistor configuration works. Notice how (almost) none of the current goes into Pin 2. This is because, as stated above, the digital input pins “*are in a high-impedance state*” equivalent to a 100,000,000Ω (100MΩ) resistor (see [Arduino docs](https://docs.arduino.cc/learn/microcontrollers/digital-pins/)). And remember, microcontrollers read voltage, not current (so we don't need current into our input pin)!
 
-![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/movies/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
+![Animation showing the correct operation of digital input with a pull-down resistor configuration](assets/videos/Arduino_Button_SchematicsAndDiagrams_PullDownResistorWalkthrough_Animation-PullDownResistor-Optimized.gif)
 
 And here's a video demonstrating the floating pin problem and fix:
 

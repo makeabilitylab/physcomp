@@ -72,7 +72,7 @@ page-specific instead of falling back to the generic site description and card.
 layout: default
 title: L4&#58; Fading an LED
 description: "Smoothly fade an LED on and off with Arduino's analogWrite() and pulse-width modulation (PWM), controlling output voltage at fine gradations beyond just HIGH/LOW."
-image: /arduino/assets/movies/Arduino_LEDFade_Pin3.gif
+image: /arduino/assets/videos/Arduino_LEDFade_Pin3.gif
 nav_order: 4
 parent: Output
 ---

@@ -36,12 +36,12 @@ If you built the [button piano](piano.md) in the previous lesson, you may have a
 > - Hardware debouncing solutions using capacitors and Schmitt Triggers
 
 <video autoplay loop muted playsinline aria-label="Slow-motion video of a hammer bouncing off a table, illustrating how switch contacts bounce before settling">
-  <source src="assets/movies/DebouncingHammer_CurrentSource_720p-Optimized.mp4" type="video/mp4" />
+  <source src="assets/videos/DebouncingHammer_CurrentSource_720p-Optimized.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a hammer bouncing off a table to help illustrate how switch contacts bounce before entering a steady state. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
 {: .fs-1 }
 
-<!-- ![Animated gif from the YouTube channel "The Current Source" episode 37 called 'Contact and Bounce' which shows a slow motion video of two contact points oscillating back-and-forth](assets/movies/ContactBounce_TheCurrentSource-Optimized.gif) -->
+<!-- ![Animated gif from the YouTube channel "The Current Source" episode 37 called 'Contact and Bounce' which shows a slow motion video of two contact points oscillating back-and-forth](assets/videos/ContactBounce_TheCurrentSource-Optimized.gif) -->
 
 So, what can you do? The solution is to "debounce" your switches, which can be done via software or [pure hardware solutions](#pure-hardware-solutions), which we'll address below. But first, let's learn a bit more about the problem before discussing solutions. We're going to use the term 'switch' to refer to any class of electromechanical device that has electrical contact points that can mechanically move to open or close an electrical circuit.
 
@@ -50,7 +50,7 @@ So, what can you do? The solution is to "debounce" your switches, which can be d
 [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) recorded slow motion videos of switches bouncing during activations and deactivations. Just like the hammer, this electrical contact visibly bounces when first activated, creating a noisy contact signal.
 
 <video autoplay loop muted playsinline aria-label="Slow-motion video of a switch mechanically bouncing off its contacts before settling">
-  <source src="assets/movies/DebouncingButton_CurrentSource_720p-Optimized-WithLabels.mp4" type="video/mp4" />
+  <source src="assets/videos/DebouncingButton_CurrentSource_720p-Optimized-WithLabels.mp4" type="video/mp4" />
 </video>
 **Video**. A slow-motion video of a switch mechanically bouncing off its contacts. Buttons are mechanical devices. When a button is pressed or a contact switch moved, it creates a rapid oscillation of open- and closed-circuits before settling to its final state. In comparison to computation, mechanical motion is slow. Microcontrollers—even old, slow ones like the ATmega328—work so fast that they will read these rapid oscillations as `HIGH` and `LOW` input state changes. Video from Episode 37 ["Contact and Bounce"](https://youtu.be/jI-rC2FCKo4) of [The Current Source](https://www.youtube.com/channel/UCw0U6DtO0PHb3l37eKEAdSg) YouTube channel.
 {: .fs-1 }

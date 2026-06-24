@@ -126,7 +126,7 @@ Here's one possible wiring for a potentiometer-based LED fading circuit:
 
 Once you're done, try simulating your circuit. Click the "Start Simulation" button (see animation below):
 
-![Animation of the LED-based circuit with potentiometer working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_Tinkercad2-Optimized.gif)
+![Animation of the LED-based circuit with potentiometer working in the Tinkercad simulator](assets/videos/Potentiometer_LEDCircuitWithBackupResistor_Tinkercad2-Optimized.gif)
 
 In the circuit above, we hooked up legs 2 and 3 of the potentiometer. What happens if you, instead, hook up legs 1 and 3 or 1 and 2? Try it!
 
@@ -164,7 +164,7 @@ Note: when you drag over a multimeter, make sure you click on it and change the 
 
 Here's our circuit with the ammeter running in the simulator. Does the simulation match your expectations? 
 
-![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
+![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/videos/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
 
 Because we have Leg 2 hooked to the positive voltage source and Leg 3 as our "output", as we move the wiper from left-to-right, there is a smaller amount of resistance and an increase in current. You'll notice a jump in current when the $$V_f$$ condition of the LED is met (recall the [LED IV curves](../electronics/leds.md#the-iv-graph-for-leds) from our [LED lesson](../electronics/leds.md)).
 
@@ -198,7 +198,7 @@ You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things
 
 Here's a workbench video of our trimpot circuit where the potentiometer is simply a two-legged variable resistor and we're using the Arduino only as a 5V voltage source:
 
-<!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
+<!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/videos/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
 
 <div class="iframe-container">
   <iframe src="https://www.youtube.com/embed/3LoxVFlc4r4" title="Workbench video of a trimpot-based LED dimmer using Arduino for power" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -219,7 +219,7 @@ Analog input!
 More formally, just like **analog output** enabled us to write out voltages between 0V and 5V, **analog input** enables us to **read voltages between 0V and 5V**. How does this work? Via an [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter).
 
 <video autoplay loop muted playsinline aria-label="Animation comparing digital input which is either HIGH or LOW versus analog input which can be any voltage in between">
-  <source src="assets/movies/AnalogVsDigital.mp4" type="video/mp4" />
+  <source src="assets/videos/AnalogVsDigital.mp4" type="video/mp4" />
 </video>
 **Video.** While digital input is simply HIGH (5V) or LOW (0V), analog can be anywhere in between. Our ability to sense gradations in the voltage signal is based on the resolution of the analog-to-digital converter. In the case of the Arduino Uno and Leonardo, this is 10 bits.
 {: .fs-1 }

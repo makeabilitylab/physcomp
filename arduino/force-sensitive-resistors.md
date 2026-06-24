@@ -2,7 +2,7 @@
 layout: default
 title: L5&#58; Force-Sensitive Resistors
 description: "Use force-sensitive resistors (FSRs) and other two-legged variable resistors with Arduino via a voltage divider, then build a force-controlled musical instrument with map() and tone()."
-image: /arduino/assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif
+image: /arduino/assets/videos/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif
 nav_order: 5
 parent: Input
 grand_parent: Intro to Arduino
@@ -33,7 +33,7 @@ This lesson directly builds on the prior one ([potentiometers](potentiometers.md
 > - How to use `map()` to convert between different value ranges
 > - How to build a force-controlled musical instrument combining `analogRead` and `tone()`
 
-![Animation showing an FSR pressing down and an LED getting brighter as resistance drops](assets/movies/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif)
+![Animation showing an FSR pressing down and an LED getting brighter as resistance drops](assets/videos/FSR_LEDCircuit_ArduinoForPower_WorkbenchWithAmmeter.gif)
 
 **Figure.** Animation shows how the resistance of the FSR drops with applied pressure (higher pressure, lower resistance, brighter LED).
 {: .fs-1 }

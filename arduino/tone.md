@@ -21,7 +21,11 @@ usetocbot: true
 {:toc}
 ---
 
-<!-- TODO: Record a video of a melody playing on a piezo buzzer (with an LED flashing in sync) and embed here as the opening hook -->
+<video controls playsinline aria-label="Star Wars Imperial March playing on an Arduino Leonardo with the built-in LED flashing in sync">
+  <source src="assets/videos/Arduino_Tone-PlayImperialMarch_Handheld_web.mp4" type="video/mp4" />
+</video>
+**Video.** A preview of what we'll build: the Imperial March from Star Wars played on a piezo buzzer with the `tone()` function, with the built-in LED flashing in time with each note.
+{: .fs-1 }
 
 So far, every output we've produced has been visual—turning LEDs on, off, fading, and blinking. In this lesson, we'll add a completely new output modality: **sound!** Using a piezo buzzer and the Arduino [`tone()`](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/) function, we'll learn how to play individual notes, scales, and even melodies.
 

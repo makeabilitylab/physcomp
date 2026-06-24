@@ -19,6 +19,12 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/MvVfq6AAEQU" title="Arduino-based magnetic LED brightener adjusting LED brightness in response to a moving magnet sensed by a Hall effect sensor" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** Where we're headed: an Arduino-driven "magical magnetic LED brightener" that smoothly fades an LED up and down as you move a magnet past a DRV5055 Hall effect sensor.
+{: .fs-1 }
+
 In this lesson, you will learn about two types of magnetic sensors: Hall effect sensors and reed switches. You will then use a [DRV5055](http://www.ti.com/lit/ds/symlink/drv5055.pdf) Hall effect sensor to build a simple auto-brightening LED circuit first without and then with a microcontroller.
 
 ## Introduction

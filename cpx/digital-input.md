@@ -19,15 +19,17 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/raIc-EuHfmc?si=-KCgO3ypF9kPKBVd" title="Overview of digital input on the Circuit Playground Express" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** By the end of this lesson, you'll wire external buttons to the CPX—and understand the floating-pin problem and how pull-up and pull-down resistors solve it.
+{: .fs-1 }
+
 In Lesson 9, we continue exploring how to hook up and use external electronics with our CPX. In Lesson 8, we worked with analog input—which converts voltage signals from 0 - 3.3V to 0 - 1023. In Lesson 9, we'll work with **digital input**, which converts voltage input signals to either ON (1) or OFF (0). This is useful for components like buttons.
 
 ## Lesson 8.1: Overview of Digital Input
 
 In this lesson, we learn about _what_ is **digital input** and _how_ to use it on the Circuit Playground Express (CPX). We begin similarly to our [analog input lessons](analog-input.md): introducing the 3.3V, GND, and A1 CPX connection pads and showing how the **digital read** function responds to different input voltages (e.g., 3.3V, GND).
-
-<div class="iframe-container">
-  <iframe width="100%" src="https://www.youtube.com/embed/raIc-EuHfmc?si=-KCgO3ypF9kPKBVd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
 
 ## Lesson 8.2: Hooking up Buttons to the CPX & Why Pull-down Resistors?
 

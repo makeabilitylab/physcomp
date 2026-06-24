@@ -21,6 +21,12 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/zL7xIWHqVaY" title="Workbench video of an RGB LED smoothly crossfading through the color wheel on an Arduino Uno" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** Where we're headed: an RGB LED smoothly crossfading through the color wheel, driven by `analogWrite()` and the HSL color space on an Arduino Uno.
+{: .fs-1 }
+
 In this lesson, you will learn how to fade between RGB colors using [`analogWrite`](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/), how to use the [HSL colorspace](https://en.wikipedia.org/wiki/HSL_and_HSV) to more easily (and independently) control hue and brightness, and how to use and load local `C/C++` libraries.
 
 ---

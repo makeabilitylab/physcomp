@@ -20,6 +20,12 @@ usetocbot: true
 {:toc}
 ---
 
+<video autoplay loop muted playsinline aria-label="Video demonstrating the GraphIn p5.js app with a potentiometer showing real-time sensor data as colored bars">
+  <source src="assets/videos/AnalogOut.ino-GraphIn-POT-Trimmed-Optimized.mp4" type="video/mp4" />
+</video>
+**Video.** Where we're headed: **GraphIn**, a p5.js sketch that graphs live Arduino sensor data in the browser in real time (here, from a potentiometer). ([live page](https://makeabilitylab.github.io/p5js/WebSerial/p5js/GraphIn/), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/p5js/GraphIn))
+{: .fs-1 }
+
 We've only started to scratch the surface of what's possible when combining Arduino with computers. In this lesson (and the next), we're going to use a creative coding tool called [p5.js](https://p5js.org/) to help demonstrate this potential. It should be fun! 🎨
 
 {: .note }

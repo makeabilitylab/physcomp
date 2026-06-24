@@ -20,6 +20,12 @@ usetocbot: true
 {:toc}
 ---
 
+<video autoplay loop muted playsinline aria-label="Animation of a water tank analogy for electrical circuits. As the water level rises, more water flows out of a hole at the bottom, illustrating how higher voltage produces more current.">
+  <source src="assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4" type="video/mp4" />
+</video>
+**Video.** Where we're headed: this lesson uses intuitive water analogies—like this water tank, where a higher water level (voltage) pushes more water (current) out the bottom—to build up the three foundational concepts of voltage, current, and resistance.
+{: .fs-1 }
+
 In this lesson, we are going to learn about three key electricity concepts, **current**, **voltage**, and **resistance**, which form the foundation of electronics and circuits. We will also use an online circuit simulator to play with basic components and advance understanding.
 
 But first—what is a circuit? A **circuit** is a closed loop that provides a path for electric current to flow. At minimum, a circuit requires a voltage source (*e.g.,* a battery), a conductive path (*e.g.,* wires), and a load (*e.g.,* a light bulb or resistor) that does useful work. If the loop is broken at any point, current cannot flow and we call it an "open circuit" (more on this [later](#what-is-an-open-circuit)).

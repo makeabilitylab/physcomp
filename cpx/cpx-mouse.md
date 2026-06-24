@@ -19,15 +19,17 @@ usetocbot: true
 {:toc}
 ---
 
+<div class="iframe-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/bOm1qXTDi-o" title="Using the Circuit Playground Express as a programmable USB mouse in MakeCode" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+**Video.** The CPX working as a USB mouse, which we'll build in this lesson—first nudging the cursor with the A and B buttons, then steering it continuously by tilting the board.
+{: .fs-1 }
+
 In Lesson 7 of our CPX series, we will learn how to use the CPX as a programmable mouse. We'll begin by making a discrete mouse that shifts the mouse cursor by small amounts with button A and B presses before building a more complex accelerometer-based mouse with continuous input.
 
 ## Lesson 7.1: Making a Programmable Mouse
 
 In this lesson, we will show how to use the CPX as a programmable mouse.
-
-<div class="iframe-container">
-  <iframe width="100%" src="https://www.youtube.com/embed/bOm1qXTDi-o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
 
 ### Lesson 7.1 Code
 

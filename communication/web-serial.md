@@ -20,6 +20,12 @@ usetocbot: true
 {:toc}
 ---
 
+<video autoplay loop muted playsinline aria-label="Video demonstrating the full SliderOut demo with a polished interface controlling an LED via Web Serial">
+  <source src="assets/videos/SimpleSerialIn-JavaScript-SliderOut-TrimmedAndSpedUp720p.mp4" type="video/mp4" />
+</video>
+**Video.** By the end of this lesson, you'll build apps like **SliderOut**—dimming an Arduino's LED from a browser slider, straight over USB via the Web Serial API. ([live page](https://makeabilitylab.github.io/p5js/WebSerial/Basic/SliderOut), [code](https://github.com/makeabilitylab/p5js/tree/main/WebSerial/Basic/SliderOut))
+{: .fs-1 }
+
 In our [previous lesson](serial-intro.md), we learned about asynchronous serial communication, Arduino's [Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/), and how to write programs—using [Serial Monitor](../arduino/serial-print.md), the command line, and [Python](https://www.python.org/)—to send data to an Arduino.
 
 In this lesson, we'll apply that knowledge to a new and exciting context: **the web browser!** Using the [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API), we'll build simple web apps that communicate directly with an Arduino over USB—no drivers, no native installs, just HTML, JavaScript, and a serial cable. 🌐

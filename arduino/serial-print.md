@@ -22,7 +22,7 @@ usetocbot: true
 ---
 
 <video autoplay loop muted playsinline aria-label="Video showing Serial.println output in the Arduino IDE Serial Monitor while an LED blinks">
-  <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
+  <source src="assets/videos/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
 </video>
 **Figure.** A video showing how to use Serial.println() to debug code. For this, we modified the simple blink program to add serial prints ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
 {: .fs-1 }
@@ -160,7 +160,7 @@ void loop() {
 Here's a video of my code running with the Serial Monitor in the background.
 
 <video autoplay loop muted playsinline aria-label="Video of the blink program running with serial print output visible in the Serial Monitor">
-  <source src="assets/movies/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
+  <source src="assets/videos/BlinkWithSerialPrint-IMG_5777_Trim_720p.mp4" type="video/mp4" />
 </video>
 **Figure.** A video of the blink program with serial prints showing in the Serial Monitor ([source code](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkWithSerialPrint/BlinkWithSerialPrint.ino)).
 {: .fs-1 }

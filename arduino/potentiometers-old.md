@@ -38,7 +38,7 @@ A [video](https://youtu.be/MJt9kSNlsU4) demonstration of a [trimpot](https://www
 
 A [potentiometer](https://en.wikipedia.org/wiki/Potentiometer) (or pot) is a three-terminal resistor with a sliding or rotating contact that can be used to dynamically vary resistance. 
 
-![Animation showing how a potentiometer works](assets/movies/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
+![Animation showing how a potentiometer works](assets/videos/Potentiometer_Overview_Animation_TrimmedAndCropped.gif)
 Animation shows how the wiper can be used to vary resistance. The figure on the right is the formal electrical symbol.
 {: .fs-1 }
 
@@ -169,7 +169,7 @@ Here's one possible wiring for a potentiometer-based LED fading circuit:
 
 Once you're done, try simulating your circuit. Click the "Start Simulation" button (see animation below):
 
-![Animation of the LED-based circuit with potentiometer working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_Tinkercad2-Optimized.gif)
+![Animation of the LED-based circuit with potentiometer working in the Tinkercad simulator](assets/videos/Potentiometer_LEDCircuitWithBackupResistor_Tinkercad2-Optimized.gif)
 
 In the circuit above, we hooked up legs 2 and 3 of the potentiometer. What happens if you, instead, hook up legs 1 and 3 or 1 and 2? Try it!
 
@@ -207,7 +207,7 @@ Note: when you drag over a multimeter, make sure you click on it and change the 
 
 Here's our circuit with the ammeter running in the simulator. Does the simulation match your expectations? 
 
-![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/movies/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
+![Animation of the LED-based circuit with potentiometer and ammeter working in the Tinkercad simulator](assets/videos/Potentiometer_LEDCircuitWithBackupResistor_WithMultimeter_Tinkercad.gif)
 
 Because we have Leg 2 hooked to the positive voltage source and Leg 3 as our "output", as we move the wiper from left-to-right, there is a smaller amount of resistance and an increase in current. You'll notice a jump in current when the $$V_f$$ condition of the LED is met (recall the [LED IV curves](http://lednique.com/current-voltage-relationships/iv-curves/) from lecture).
 
@@ -241,7 +241,7 @@ You can play with this Tinkercad circuit [here](https://www.tinkercad.com/things
 
 Here's a workbench video of my trimpot circuit:
 
-<!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/movies/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
+<!-- ![Animation my potentiometer-based LED fade circuit hooked up to the Arduino for power](assets/videos/Potentiometer_LEDCircuit_ArduinoForPower_Workbench3_SpedUp1.5x.gif) -->
 
 <div class="iframe-container">
   <iframe src="https://www.youtube.com/embed/3LoxVFlc4r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

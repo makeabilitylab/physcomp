@@ -2,7 +2,7 @@
 layout: default
 title: L2&#58; Blinking an LED
 description: "Write your first Arduino sketch to blink an LED by programmatically toggling a GPIO pin HIGH and LOW with digitalWrite()—your entrée into combining circuits and code."
-image: /arduino/assets/movies/Arduino_LEDBlink_Pin3.gif
+image: /arduino/assets/videos/Arduino_LEDBlink_Pin3.gif
 nav_order: 2
 parent: Output
 grand_parent: Intro to Arduino
@@ -21,7 +21,7 @@ usetocbot: true
 {:toc}
 ---
 <!-- <video autoplay loop muted playsinline aria-label="Video showing how blink LED program works">
-  <source src="assets/movies/Arduino_BlinkWithCode_Pin3_web_muted.mp4" type="video/mp4" />
+  <source src="assets/videos/Arduino_BlinkWithCode_Pin3_web_muted.mp4" type="video/mp4" />
 </video>
 **Figure.** In this lesson, we'll learn how to blink an LED programmatically with Arduino and how and why this works!
 {: .fs-1 } -->
@@ -30,7 +30,7 @@ In our [first lesson](led-on.md), we directly hooked up an LED circuit to the Ar
 
 In this lesson, we are going to do something more exciting: use the Arduino to turn the LED on and off by *programmatically* controlling the output voltage on one of Arduino's GPIO pins. This begins our entrée into the two key aspects of working with microcontrollers: (1) building circuits and (2) writing code to interact with those circuits.
 
-![Animation showing an LED connected to Pin 3 on the Arduino blinking on and off](assets/movies/Arduino_LEDBlink_Pin3.gif)
+![Animation showing an LED connected to Pin 3 on the Arduino blinking on and off](assets/videos/Arduino_LEDBlink_Pin3.gif)
 
 <!-- TODO: Add in a version that makes a tone for accessibility reasons? 
      See: https://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/digital-input-and-output-with-an-arduino/ -->
@@ -106,7 +106,7 @@ It's the same with the Arduino Leonardo (see [official pinout diagram here](http
 Finally, here's a [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) demonstrating the use of all 20 digital I/O pins as digital output.
 
 <video autoplay loop muted playsinline aria-label="Tinkercad simulation showing all 20 GPIO pins used as digital output on an Arduino Uno">
-  <source src="assets/movies/ArduinoUno_UsingAll20GPIOPinsAsDigitalOutput.mp4" type="video/mp4" />
+  <source src="assets/videos/ArduinoUno_UsingAll20GPIOPinsAsDigitalOutput.mp4" type="video/mp4" />
 </video>
 **Figure.** A [Tinkercad Circuit simulation](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) showing how to use all 20 GPIO pins as digital output on the Arduino Uno. You can try the simulation yourself [here](https://www.tinkercad.com/things/djhZYuYyqOR-using-all-20-gpio-pins-as-digital-out) and view the code on [GitHub here](https://github.com/makeabilitylab/arduino/blob/master/Basics/digitalWrite/BlinkAll20Pins/BlinkAll20Pins.ino).
 {: .fs-1 }
@@ -184,7 +184,7 @@ We did it! Now it's time to compile and upload the code to Arduino.
 
 Compile the code by clicking on the "verify" checkmark button in the upper-left corner of the Arduino IDE. If you haven't already, the Arduino IDE will also ask you to save your sketch. If there are any syntax or other identifiable errors in the code, the Arduino IDE will print them out in the console window at the bottom.
 
-![Animation showing how to compile and save a sketch in the Arduino IDE](assets/movies/ArduinoIDE_Compile.gif)
+![Animation showing how to compile and save a sketch in the Arduino IDE](assets/videos/ArduinoIDE_Compile.gif)
 
 ### Step 5: Upload the code to Arduino
 
@@ -195,14 +195,14 @@ Finally, upload the code to the Arduino by clicking on the "right arrow" button 
 Once uploading is complete, the code automatically runs on the Arduino and the LED should immediately turn on!
 
 <video controls="controls" aria-label="Video showing the LED turning on after uploading code to the Arduino">
-  <source src="assets/movies/ArduinoUno_TurnOnLEDPin3_WorkbenchWithCode-Cropped.mov" type="video/mp4">
+  <source src="assets/videos/ArduinoUno_TurnOnLEDPin3_WorkbenchWithCode-Cropped.mov" type="video/mp4">
 </video>
 **Figure.** Uploading and running the LED-on code on an Arduino Uno. Note: on my Windows machine, I use a [dark theme](https://create.arduino.cc/projecthub/konradhtc/one-dark-arduino-modern-dark-theme-for-arduino-ide-2fca81) for the Arduino IDE. Since the 2.x version of the IDE, there are several pre-installed dark themes.
 {: .fs-1 }
 
 Here's an illustrative animation of what's happening in your circuit when the Arduino drives Pin 3 `HIGH`—hopefully, this matches your conceptual understanding as well:
 
-![Animation showing the LED on Pin 3 turning on](assets/movies/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
+![Animation showing the LED on Pin 3 turning on](assets/videos/Arduino_LEDTurnOn_Pin3ArduinoPluggedIn-Cropped.gif)
 
 ## Turn on and off the LED programmatically via Pin 3
 
@@ -246,7 +246,7 @@ void loop() {
 We're done! Now, compile and upload the code and see it run!
 
 <video controls="controls" aria-label="Video showing the LED blinking on and off with the Arduino code visible">
-  <source src="assets/movies/BlinkWithCodeAndWorkbenchCamera.mp4" type="video/mp4">
+  <source src="assets/videos/BlinkWithCodeAndWorkbenchCamera.mp4" type="video/mp4">
 </video>
 
 ### Step 4: Replace constants
@@ -273,7 +273,7 @@ void loop() {
 How does this work? See the code walkthrough video below. The key idea is that `setup()` runs once to configure Pin 3 as output, then `loop()` runs repeatedly: it sets Pin 3 `HIGH` (turning the LED on), waits one second, sets Pin 3 `LOW` (turning the LED off), waits another second, and then `loop()` is automatically called again—creating a continuous blink.
 
 <video controls="controls" aria-label="Animated walkthrough of the Blink code executing on an Arduino">
-  <source src="assets/movies/Arduino_BlinkWithCode_Pin3.mp4" type="video/mp4">
+  <source src="assets/videos/Arduino_BlinkWithCode_Pin3.mp4" type="video/mp4">
 </video>
 
 ### Our Blink code is in GitHub
@@ -296,7 +296,7 @@ In your mind, imagine what the voltage out of Pin 3 looks like over time (the x-
 Using Tinkercad Circuits, we built the same LED-based circuit as above running the Blink program and hooked it up to an oscilloscope. Then, we recorded different `delay` values (400, 200, and 50) and created this movie. Is the graph what you expected? Why or why not? We suggest opening the video in its own tab or viewing it in fullscreen to see the details.
 
 <video autoplay loop muted playsinline aria-label="Tinkercad oscilloscope showing LED blink waveform at different delay values">
-  <source src="assets/movies/LedBlinkOscilliscope_TinkercadCircuits_Trim.mp4" type="video/mp4" />
+  <source src="assets/videos/LedBlinkOscilliscope_TinkercadCircuits_Trim.mp4" type="video/mp4" />
 </video>
 **Figure.** A video of this [Tinkercad project](https://www.tinkercad.com/things/17q2GFeYwP9) with three different `delay` values for both `HIGH` and `LOW`: 400, 200, and 50.
 {: .fs-1 }
@@ -329,7 +329,7 @@ As a quick mental model check, it's worth emphasizing that once you upload the c
 Note: when you upload a *new* program, it replaces the previous one—only one program can be stored on the Arduino at a time. You don't need to manually erase the old program first.
 
 <video controls="controls" aria-label="Video showing the Arduino running the Blink program powered by a 9V battery">
-  <source src="assets/movies/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">
+  <source src="assets/videos/Arduino_LEDBlink_Pin3-9VPower.mp4" type="video/mp4">
 </video>
 
 ## Blink without using delay()

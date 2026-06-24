@@ -2,7 +2,7 @@
 layout: default
 title: L7&#58; RGB LEDs
 description: "Drive an RGB LED through a sequence of colors with Arduino and learn the difference between common anode and common cathode RGB LED wiring."
-image: /arduino/assets/movies/Arduino_RGBLED_CommonCathode-Optimized.gif
+image: /arduino/assets/videos/Arduino_RGBLED_CommonCathode-Optimized.gif
 nav_order: 7
 parent: Output
 grand_parent: Intro to Arduino
@@ -23,7 +23,7 @@ usetocbot: true
 
 In this tutorial, we will use an RGB LED (RGB stands for Red, Green, Blue) to flash through a sequence of colors and learn about the difference between a Common Anode and Common Cathode RGB LED design.
 
-![Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6](assets/movies/Arduino_RGBLED_CommonCathode-Optimized.gif)
+![Animation showing the RGB LED being set to various colors based on digital output on Pins 3, 5, and 6](assets/videos/Arduino_RGBLED_CommonCathode-Optimized.gif)
 
 ## Materials
 
@@ -193,7 +193,7 @@ The yogurt container is used to diffuse the light. Kleenex, white paper, or a pi
 Below, we show a video animation of the code executing and resulting circuit behavior. Pay close attention to the direction of current—it will flow in the opposite direction with the Common Anode design (covered next).
 
 <video aria-label="Animation of a common cathode RGB LED circuit executing, showing the direction of current flow" controls="controls">
-  <source src="assets/movies/Arduino_RGBLED_CommonCathode_Animation.mp4" type="video/mp4">
+  <source src="assets/videos/Arduino_RGBLED_CommonCathode_Animation.mp4" type="video/mp4">
 </video>
 
 ## Common Anode
@@ -250,7 +250,7 @@ We will flash the same sequence as before but again our `HIGH`s and `LOW`s are f
 Here's an animation. Pay close attention to the current direction—it flows from 5V down through the LED, the current limiting resistors, and into the digital I/O pins.
 
 <video aria-label="Animation of a common anode RGB LED circuit with current flowing from 5V down through the LED and resistors into the digital I/O pins" controls="controls">
-  <source src="assets/movies/Arduino_RGBLED_CommonAnode_Animation.mp4" type="video/mp4">
+  <source src="assets/videos/Arduino_RGBLED_CommonAnode_Animation.mp4" type="video/mp4">
 </video>
 
 We're not going to include code specifically for the Common Anode RGB LED. Instead, we'll show how to adapt our previous Common Cathode code with only a few additional lines.

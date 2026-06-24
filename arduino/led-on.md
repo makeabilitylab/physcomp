@@ -2,7 +2,7 @@
 layout: default
 title: L1&#58; Turning on an LED
 description: "Your first Arduino activity: wire an LED to the 5V and GND pins to light it up—no code required—and build familiarity with Arduino hardware and current flow."
-image: /arduino/assets/movies/Arduino_LEDOn_5VFixed_USBPower.gif
+image: /arduino/assets/videos/Arduino_LEDOn_5VFixed_USBPower.gif
 nav_order: 1
 parent: Output
 grand_parent: Intro to Arduino
@@ -22,7 +22,7 @@ usetocbot: true
 ---
 For our first learning activity, we are going to use Arduino to turn on an [LED](../electronics/leds.md). We're **not** going to write any code. Instead, our goal is to build some initial familiarity with Arduino hardware and connecting components to Arduino pins before we introduce programming, which we do in the [next lesson](led-blink.md).
 
-![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower.gif)
+![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/videos/Arduino_LEDOn_5VFixed_USBPower.gif)
 **Figure.** The movement of **current** in the circuit is illustrated by the animated yellow circles. This visualization is a coarse abstraction designed to emphasize the direction of current flow. A more accurate visualization would show that electrons are already distributed throughout a wire before a voltage is applied. See our [Introduction to Electronics](../electronics/index.md) series, specifically the lesson on [Voltage, Current, and Resistance](../electronics/electricity-basics.md).
 {: .fs-1 }
 
@@ -62,7 +62,7 @@ Insert the LED + resistor into the Arduino:
 
 Make sure to push the legs down so they are well seated inside the Arduino's female headers.
 
-![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/movies/Arduino_LEDOn_5VFixed_InsertLED.gif)
+![Animation of LED + resistor being connected to Arduino's GND and 5V ports](assets/videos/Arduino_LEDOn_5VFixed_InsertLED.gif)
 
 ### Step 3: Connect your Arduino to power
 
@@ -76,7 +76,7 @@ For power, you can use a USB cable (which supplies 5V) or a 9V battery (which su
 
 | USB Power        | 9V Power          |
 |:-------------|:------------------|
-| ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_USBPower-Cropped.gif) | ![Animation showing a 9V battery plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/movies/Arduino_LEDOn_5VFixed_9VBattery-Cropped.gif) |
+| ![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/videos/Arduino_LEDOn_5VFixed_USBPower-Cropped.gif) | ![Animation showing a 9V battery plugging into an Arduino Uno to power an LED + resistor hooked up to 5V and GND](assets/videos/Arduino_LEDOn_5VFixed_9VBattery-Cropped.gif) |
 | With USB power, the 5V pin supplies 5V | Using the Arduino's barrel jack, we can connect an external power supply like a 7-12V wall adapter or a 9V battery. The Arduino's internal voltage regulator reduces these higher voltages to output a clean 5V |
 
 {: .warning }
@@ -183,7 +183,7 @@ Here's a picture of the test setup and circuits for the measurements above:
 Finally, we can also examine this circuit in a simulator, which mirrors our empirical measurements:
 
 <video autoplay loop muted playsinline aria-label="CircuitJS simulation showing LEDs in series with a 5V supply">
-  <source src="assets/movies/LEDOn5V_Series_CircuitJS.mp4" type="video/mp4" />
+  <source src="assets/videos/LEDOn5V_Series_CircuitJS.mp4" type="video/mp4" />
 </video>
 **Figure.** A [CircuitJS simulation](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cQqhYlblTAZCUMTV5iqMBGwDugxTWKiwPcGwBOtFeBE7RKBKKpp5ivgOWjLGhdaW7hh8w6Oi3GASjYAPcEQg2BhCNEjB9DTcFABqbNhRAGZyACaaAPYADgA6AI4o0GBM9BDE0NgozKxQsDRWsNj8CTQ8LcpqUrCyala6mL2iFaYgyWlZeQVFJVI1kD49BkHYHrrYeFECoxk5+YXF4DMwc66raIvYyyA+CmpC6rd6JieD64sSpmwLDu9vNHhXI1S2wme2m0lm80IA1ohCiDgQYG8gLGO0m+wg4KO11+-2+sKuzwoiMWtmxFVofyCAlJnyhVNocHpNEpmyB412UwOmNgZIEayi5J+2OKkCiDxFYv0kHM5KG9IuLgWssusterJRIM5GM6xyV3i88rO6uBHPRhx5fhAxTWQRCVuwYGItsi0QQcQU5Pc9P6BI9Age5Ocvvtooo-HptnY2kD+k9xjEaGlCglikD904IaithTQfBEmo3NkAHNM2GBCmeP9pGwSw9I+pK1JLUwiOREVEW0hEeQxf8ACoAC00DAY2QAzgBlBiaACWDDH44AMgBRAAiC7HAAoYtOAJ7j1czgC2AEpLUQhIFmf6UE7eyAAGLpACumnHU9n86Xa43m4A8okiRnv4TCEBgXZGFaCDBAEuLgP2cjpO+05zhuK7rjWVoiP82bYSAjbVlwTB4bhhD-Lm4iSIW5jEWRihMHQ-rptoDExqIrHePGphwDRJHhhxZZ2FajH0SJQbCiJXoCT6PggXgcy2lQxF4PQES0K6cQLNJBoCXKxrsmiYI6pC5YiQqwmqhsyImoZXLGTRZlnLplzCnh4puVKDmWRZ1LhsKeCrJcTABTYfk0YiaZKRF-qecmIVUkp8XmSZVrxT6wWnMMWwGaCdnSBaIGIoQgx2iwKA0OQalijY7qpX08YZYYBr+U46iNY8wZleS2bxZGWh1ao+jtV63FJla0X0fFDzsERE3ZhNFFUPmSDUSWXW+eWE0EVAzasIy3bjXMqi4OpYD-H+AB2o5juhbBAA) of various LED series configurations with a 5V voltage supply.
 {: .fs-1 }
@@ -199,7 +199,7 @@ Well, in a parallel configuration, each resistor+LED branch is getting ~$$I=\fra
 {: .fs-1 }
 
 <!-- <video autoplay loop muted playsinline>
-  <source src="assets/movies/LEDOn5V_Parallel_CircuitJS.mp4" type="video/mp4" />
+  <source src="assets/videos/LEDOn5V_Parallel_CircuitJS.mp4" type="video/mp4" />
 </video>
 **Video.** A [CircuitJS simulation](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgB3EFlbFcGjW5he-MBkJQ22IQDMOAEwBOAewAOAHQCOKaGCb0IxaH2asosGvxqxsxXoMKQahGsTCSqMSAjYf+LGDOICgIkoHBuEL88srq2rr6hlAp3ihsAB7CREgomNkuIbi04JIIAGqcwkHRNFQR0WEhVQ0CQq0eVOlcPHwgfPWskWjgbErVwZ0TtV4hcC0ifWCC022jAG7ZfQNbYhKptFRIszC+PUNCUas73cJweP3BLPf9I7cdK8-4a+zjXw9Tf4hOopNCQBY1V6DF47djnF7LdpBb5Td7Ih4oEFA0KSdL+O7fHEEh5XGKKVSaHR6AzgA5pPyEALufhEpjMx7RECxCkJanJE6wd7szH1YVNIUiNZsyWohYwkbS-iwsbcdmA4UgrrzeEoz5qlZw1WSq6KqHNHp4Dwc7iWyQ3Fr69q2n4qpjOwHOkWg7VGpUK53Ki1WxE24NOc2h3FYz3ihkBGPhAPBMlxSmJGkQAWQPGM7gYN5NJj5qikrnk+JUpK0rPvYvA+p1om1kYhost8PvAMKuvKv51wGNzVzcFBySt-sGlo9p49t4tRmXJ4Ls3Nqit5ch37cDfhpjLr1akd5kY7PeYs2Gs9Cdfn2U9fdY-ex-FXkKF5el7kV9P81KCuPcAgKAYoWQEksmZapryVaZn+2YtGB9aAcBb64ghKGtohd7buep6Ib2yEAruiEHsO863p8WGTj0+FPPhc49HQSpPExK7oQCnysZurpcburGkWC7FmkwrGBtwXGcUsHYtPxWL8c+uYiX0rKiRBX5pny1ZwTmATYNguKFnpdpqeWGkwXS-49EZSEGPpqERrZY6fNZ2FKX69TWQRjmlB5dkCT6blSi51HcJ5TyeQx3Beia0WRd5rZetxfyJbuXr+Ue3mnrFa4tIlnwpV0uUgl6TBpQpARleE0UmVBlYZhZ8H4pVSGfqZ0H1TWVRpcVxWxlweUzD5EYhjcIIEQVSHpVUm4rANoz9WNyZjZFI2TCs9pcDQHHXgak7jJu4YhlNm0ki260ttNu07de0lcEdIJHeVaxEqtnLqe1v5eP++JbfZv2tbVP5aV98EnUhv1NlUv0htDt3iadVD-Rd4yw4jGJDoJjHbbQ2OGv9wRI4VWPWiJCMOTN7TQ3t8NDaTSGHgs531IT80062qMORDckgWhL4Q4W+NvW1dWfRYjWKY94SvSEkE8iLwNi2is1YpL5NXcIBpw6Vy2DEzox-AduuDQzPRzSw6uXtL5uXHOQA) of a parallel  with a 5V voltage supply.
 {: .fs-1 } -->
@@ -270,7 +270,7 @@ V_R = 3.3V - 2V\to1.3V$$
 
 With ($$V_R=1.3V$$), we can now use Ohm's Law to calculate $$I$$: $$I = \frac{V}{R}\to\frac{1.3V}{220}\to5.9mA$$
 
-![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/movies/Arduino_LEDOn_3.3VFixed_USBPower.gif) -->
+![Animation showing a USB cable plugging into an Arduino Uno to power an LED + resistor hooked up to 3.3V and GND](assets/videos/Arduino_LEDOn_3.3VFixed_USBPower.gif) -->
 
 <!-- TODO: in future Fix Ohm's Law animations to use Vr, Vf nomenclature -->
 

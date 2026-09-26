@@ -86,7 +86,7 @@ Our materials have been used in university courses and maker workshops **across 
 {: .block-quote--small }
 
 > "Insanely useful & highly relevant."
-> - *University of Queensland Professor*
+> — *University of Queensland Professor*
 {: .block-quote--small }
 
 > "I'd highly recommend taking this class; it was one of my favorites at UW. I don't come from too much of a tinkering, embedded, hardware background. This class helped me think about HCI in a really different way."

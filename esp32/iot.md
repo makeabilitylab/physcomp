@@ -1,13 +1,14 @@
 ---
 layout: default
-title: L7&#58; Internet of Things
+title: L1&#58; Internet of Things
 description: "Connect the ESP32 to the cloud: stream sensor data over WiFi to an Adafruit IO dashboard, compare REST and MQTT, control an LED remotely, and write non-blocking IoT code."
-parent: ESP32
+parent: Wireless
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true
 usetocbot: true
-nav_order: 7
+nav_order: 1
 ---
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }

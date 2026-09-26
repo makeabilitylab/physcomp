@@ -2,7 +2,8 @@
 layout: default
 title: L6&#58; Capacitive Touch
 description: "Use the ESP32's built-in capacitive touch hardware with touchRead() to sense a finger on a bare pin, calibrate a threshold, and build a touch piano from foil or fruit."
-parent: ESP32
+parent: Fundamentals
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true

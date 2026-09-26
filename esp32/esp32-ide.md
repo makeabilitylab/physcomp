@@ -5,7 +5,7 @@ image: /esp32/assets/og/esp32-ide.jpg
 description: "Set up the Arduino IDE to program ESP32 boards: add Espressif's board package, select the board and port, upload a test sketch, and troubleshoot common upload issues."
 parent: ESP32
 has_toc: true # (on by default)
-nav_order: 9
+nav_order: 11
 nav_exclude: false
 comments: true
 usetocbot: true

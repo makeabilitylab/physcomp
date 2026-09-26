@@ -3,7 +3,8 @@ layout: default
 title: L1&#58; Intro to the ESP32
 description: "Meet the ESP32 system-on-a-chip: how it compares to the Arduino Uno and Leonardo, why it runs at 3.3V, the ESP32 vs. ESP32-S3, and the Adafruit Feather pinout."
 image: /esp32/assets/images/ESP32Boards_MakerAdvisor.png
-parent: ESP32
+parent: Fundamentals
+grand_parent: ESP32
 has_toc: true # (on by default)
 usemathjax: true
 comments: true
